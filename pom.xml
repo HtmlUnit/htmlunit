@@ -29,7 +29,7 @@
         <htmlunitneko.version>2.52.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.52.0</htmlunitcorejs.version>
 
-        <httpcomponents.version>4.5.13</httpcomponents.version>
+        <httpcomponents.version>5.1</httpcomponents.version>
         <jetty.version>9.4.43.v20210629</jetty.version>
         <log4j.version>2.14.1</log4j.version>
         <selenium.version>3.141.59</selenium.version>
@@ -1197,10 +1197,9 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- this includes httpclient as depencency -->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpmime</artifactId>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
             <version>${httpcomponents.version}</version>
         </dependency>
         <dependency>
@@ -1301,8 +1300,14 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>${httpcomponents.version}</version>
+            <version>4.5.13</version>
             <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
             <scope>test</scope>
         </dependency>
 

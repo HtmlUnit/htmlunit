@@ -20,8 +20,8 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
 
-import org.apache.http.auth.BasicUserPrincipal;
-import org.apache.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.BasicUserPrincipal;
+import org.apache.hc.client5.http.auth.Credentials;
 import org.junit.Test;
 
 /**
@@ -116,7 +116,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
-        assertEquals("secret", credentials.getPassword());
+        assertEquals("secret", new String(credentials.getPassword()));
     }
 
     /**
@@ -129,7 +129,7 @@ public class WebRequestTest {
         final Credentials credentials = request.getUrlCredentials();
         assertNotNull("Credentials object is null", credentials);
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
-        assertEquals("secret", credentials.getPassword());
+        assertEquals("secret", new String(credentials.getPassword()));
     }
 
     /**
@@ -142,7 +142,7 @@ public class WebRequestTest {
         final Credentials credentials = request.getUrlCredentials();
         assertNotNull("Credentials object is null", credentials);
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
-        assertEquals("secret", credentials.getPassword());
+        assertEquals("secret", new String(credentials.getPassword()));
     }
 
     /**
@@ -155,7 +155,7 @@ public class WebRequestTest {
         final Credentials credentials = request.getUrlCredentials();
         assertNotNull("Credentials object is null", credentials);
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
-        assertEquals("secret", credentials.getPassword());
+        assertEquals("secret", new String(credentials.getPassword()));
     }
 
     /**
@@ -167,7 +167,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal("john.smith"), credentials.getUserPrincipal());
-        assertEquals("", credentials.getPassword());
+        assertEquals("", new String(credentials.getPassword()));
     }
 
     /**
@@ -179,7 +179,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
-        assertEquals("secret", credentials.getPassword());
+        assertEquals("secret", new String(credentials.getPassword()));
     }
 
     /**
@@ -191,7 +191,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         final Credentials credentials = request.getUrlCredentials();
         assertEquals(new BasicUserPrincipal(""), credentials.getUserPrincipal());
-        assertEquals("", credentials.getPassword());
+        assertEquals("", new String(credentials.getPassword()));
     }
 
     /**

@@ -18,14 +18,13 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieStore;
 
 import com.gargoylesoftware.htmlunit.CookieManager;
 
 /**
- * Implementation of {@link CookieStore} like {@link org.apache.http.impl.client.BasicCookieStore}
+ * Implementation of {@link CookieStore} like {@link org.apache.hc.client5.http.cookie.BasicCookieStore}
  * BUT using our own {@link CookieManager} as back end.
  *
  * @author Marc Guillemot
@@ -48,7 +47,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      */
     @Override
     public synchronized void addCookie(final Cookie cookie) {
-        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie((ClientCookie) cookie));
+        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie(cookie));
     }
 
     /**

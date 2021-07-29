@@ -62,16 +62,17 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookieSpec;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.utils.DateUtils;
+import org.apache.hc.core5.http.ConnectionClosedException;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.NoHttpResponseException;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.message.BufferedHeader;
+import org.apache.hc.core5.util.CharArrayBuffer;
 
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
@@ -166,7 +167,7 @@ public class WebClient implements Serializable, AutoCloseable {
             0, "No HTTP Response", Collections.<NameValuePair>emptyList());
 
     private transient WebConnection webConnection_;
-    private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
+    private CredentialsStore credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
     private transient AbstractJavaScriptEngine<?> scriptEngine_;
     private transient List<LoadJob> loadQueue_;
@@ -492,7 +493,7 @@ public class WebClient implements Serializable, AutoCloseable {
             try {
                 webResponse = loadWebResponse(webRequest);
             }
-            catch (final NoHttpResponseException e) {
+            catch (final ConnectionClosedException e) {
                 webResponse = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, webRequest, 0);
             }
         }
@@ -789,7 +790,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * or Digest authentication.
      * @param credentialsProvider the new credentials provider to use to authenticate
      */
-    public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
+    public void setCredentialsProvider(final CredentialsStore credentialsProvider) {
         WebAssert.notNull("credentialsProvider", credentialsProvider);
         credentialsProvider_ = credentialsProvider;
     }
@@ -799,7 +800,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * method returns an instance of {@link DefaultCredentialsProvider}.
      * @return the credentials provider for this client instance
      */
-    public CredentialsProvider getCredentialsProvider() {
+    public CredentialsStore getCredentialsProvider() {
         return credentialsProvider_;
     }
 
@@ -2453,7 +2454,7 @@ public class WebClient implements Serializable, AutoCloseable {
             try {
                 response = loadWebResponse(request);
             }
-            catch (final NoHttpResponseException e) {
+            catch (final ConnectionClosedException e) {
                 LOG.error("NoHttpResponseException while downloading; generating a NoHttpResponse", e);
                 response = new WebResponse(RESPONSE_DATA_NO_HTTP_RESPONSE, request, 0);
             }
@@ -2602,13 +2603,13 @@ public class WebClient implements Serializable, AutoCloseable {
         // discard expired cookies
         cookieManager.clearExpired(new Date());
 
-        final List<org.apache.http.cookie.Cookie> all = Cookie.toHttpClient(cookieManager.getCookies());
-        final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
+        final List<org.apache.hc.client5.http.cookie.Cookie> all = Cookie.toHttpClient(cookieManager.getCookies());
+        final List<org.apache.hc.client5.http.cookie.Cookie> matches = new ArrayList<>();
 
         if (all.size() > 0) {
             final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
-            for (final org.apache.http.cookie.Cookie cookie : all) {
+            for (final org.apache.hc.client5.http.cookie.Cookie cookie : all) {
                 if (cookieSpec.match(cookie, cookieOrigin)) {
                     matches.add(cookie);
                 }
@@ -2643,11 +2644,11 @@ public class WebClient implements Serializable, AutoCloseable {
         final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
 
         try {
-            final List<org.apache.http.cookie.Cookie> cookies =
+            final List<org.apache.hc.client5.http.cookie.Cookie> cookies =
                     cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
 
-            for (final org.apache.http.cookie.Cookie cookie : cookies) {
-                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
+            for (final org.apache.hc.client5.http.cookie.Cookie cookie : cookies) {
+                final Cookie htmlUnitCookie = new Cookie(cookie);
                 cookieManager.addCookie(htmlUnitCookie);
 
                 if (LOG.isDebugEnabled()) {
@@ -2655,7 +2656,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
             }
         }
-        catch (final MalformedCookieException e) {
+        catch (final MalformedCookieException | ParseException e) {
             if (LOG.isDebugEnabled()) {
                 LOG.warn("Adding cookie '" + cookieString + "' failed; reason: '" + e.getMessage() + "'.");
             }

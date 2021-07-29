@@ -21,10 +21,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.Header;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.cookie.DefaultCookieSpec;
-import org.apache.http.message.BasicHeader;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookieSpec;
+import org.apache.hc.client5.http.impl.cookie.RFC6265StrictSpec;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.message.BasicHeader;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -106,9 +107,11 @@ public class CookieManager3Test {
     @Test
     public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
         final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
-        final DefaultCookieSpec spec = new DefaultCookieSpec();
+        // TODO
+        //final DefaultCookieSpec spec = new DefaultCookieSpec();
+        final CookieSpec spec = new RFC6265StrictSpec();
         final CookieOrigin origin = new CookieOrigin("localhost", 80, "/", false);
-        final List<org.apache.http.cookie.Cookie> list = spec.parse(header, origin);
+        final List<org.apache.hc.client5.http.cookie.Cookie> list = spec.parse(header, origin);
         assertEquals(1, list.size());
         assertEquals("\"hello world\"", list.get(0).getValue());
     }

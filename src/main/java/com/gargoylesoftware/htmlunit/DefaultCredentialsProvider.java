@@ -21,11 +21,12 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.NTCredentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.auth.NTCredentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
@@ -38,7 +39,13 @@ import org.apache.http.client.CredentialsProvider;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  */
-public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
+public class DefaultCredentialsProvider implements CredentialsStore, Serializable {
+
+    public static final String ANY_PROTOCOL = null;
+    public static final String ANY_HOST = null;
+    public static final int ANY_PORT = -1;
+    public static final String ANY_REALM = null;
+    public static final String ANY_SCHEME = null;
 
     private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
@@ -51,8 +58,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param username the username for the new credentials
      * @param password the password for the new credentials
      */
-    public void addCredentials(final String username, final String password) {
-        addCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+    public void addCredentials(final String username, final char[] password) {
+        addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
     }
 
     /**
@@ -65,9 +72,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
      * @param realm the realm to which to the new credentials apply ({@code null} if applicable to any realm)
      */
-    public void addCredentials(final String username, final String password, final String host,
+    public void addCredentials(final String username, final char[] password, final String host,
             final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, AuthScope.ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(ANY_PROTOCOL, host, port, realm, ANY_SCHEME);
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
     }
@@ -83,9 +90,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
      */
-    public void addNTLMCredentials(final String username, final String password, final String host,
+    public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(ANY_PROTOCOL, host, port, ANY_REALM, ANY_SCHEME);
         final Credentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
@@ -138,7 +145,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * {@inheritDoc}
      */
     @Override
-    public synchronized Credentials getCredentials(final AuthScope authscope) {
+    public synchronized Credentials getCredentials(final AuthScope authscope, final HttpContext httpContext) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
@@ -199,18 +206,20 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         }
 
         private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(authScope_.getProtocol());
             stream.writeObject(authScope_.getHost());
             stream.writeInt(authScope_.getPort());
             stream.writeObject(authScope_.getRealm());
-            stream.writeObject(authScope_.getScheme());
+            stream.writeObject(authScope_.getSchemeName());
         }
 
         private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String protocol = (String) stream.readObject();
             final String host = (String) stream.readObject();
             final int port = stream.readInt();
             final String realm = (String) stream.readObject();
             final String scheme = (String) stream.readObject();
-            authScope_ = new AuthScope(host, port, realm, scheme);
+            authScope_ = new AuthScope(protocol, host, port, realm, scheme);
         }
 
         @Override

@@ -32,8 +32,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -165,12 +165,12 @@ public class WebRequest implements Serializable {
         if (userInfo != null) {
             final int splitPos = userInfo.indexOf(':');
             if (splitPos == -1) {
-                urlCredentials_ = new UsernamePasswordCredentials(userInfo, "");
+                urlCredentials_ = new UsernamePasswordCredentials(userInfo, "".toCharArray());
             }
             else {
                 final String username = userInfo.substring(0, splitPos);
                 final String password = userInfo.substring(splitPos + 1);
-                urlCredentials_ = new UsernamePasswordCredentials(username, password);
+                urlCredentials_ = new UsernamePasswordCredentials(username, password.toCharArray());
             }
         }
     }

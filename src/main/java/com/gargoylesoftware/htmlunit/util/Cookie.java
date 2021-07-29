@@ -23,8 +23,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -36,7 +35,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  */
 public class Cookie implements Serializable {
 
-    private ClientCookie httpClientCookie_;
+    private org.apache.hc.client5.http.cookie.Cookie httpClientCookie_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
@@ -85,7 +84,7 @@ public class Cookie implements Serializable {
 
         cookie.setDomain(domain);
         // BasicDomainHandler.match(Cookie, CookieOrigin) checks the attib also (see #333)
-        cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
+        cookie.setAttribute(BasicClientCookie.DOMAIN_ATTR, domain);
 
         cookie.setPath(path);
         cookie.setExpiryDate(expires);
@@ -101,7 +100,7 @@ public class Cookie implements Serializable {
      * Creates a new HtmlUnit cookie from the HttpClient cookie provided.
      * @param clientCookie the HttpClient cookie
      */
-    public Cookie(final ClientCookie clientCookie) {
+    public Cookie(final org.apache.hc.client5.http.cookie.Cookie clientCookie) {
         httpClientCookie_ = clientCookie;
     }
 
@@ -246,7 +245,7 @@ public class Cookie implements Serializable {
      * Converts this cookie to an HttpClient cookie.
      * @return an HttpClient version of this cookie
      */
-    public org.apache.http.cookie.Cookie toHttpClient() {
+    public org.apache.hc.client5.http.cookie.Cookie toHttpClient() {
         return httpClientCookie_;
     }
 
@@ -255,8 +254,8 @@ public class Cookie implements Serializable {
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
-    public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<Cookie> cookies) {
-        final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
+    public static List<org.apache.hc.client5.http.cookie.Cookie> toHttpClient(final Collection<Cookie> cookies) {
+        final ArrayList<org.apache.hc.client5.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
         final Iterator<Cookie> it = cookies.iterator();
         while (it.hasNext()) {
             array.add(it.next().toHttpClient());
@@ -269,10 +268,10 @@ public class Cookie implements Serializable {
      * @param cookies the cookies to be converted
      * @return the specified HttpClient cookies, as cookies
      */
-    public static List<Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
+    public static List<Cookie> fromHttpClient(final List<org.apache.hc.client5.http.cookie.Cookie> cookies) {
         final List<Cookie> list = new ArrayList<>(cookies.size());
-        for (final org.apache.http.cookie.Cookie c : cookies) {
-            list.add(new Cookie((ClientCookie) c));
+        for (final org.apache.hc.client5.http.cookie.Cookie c : cookies) {
+            list.add(new Cookie(c));
         }
         return list;
     }
