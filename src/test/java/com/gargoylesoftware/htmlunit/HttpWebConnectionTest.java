@@ -40,16 +40,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicHttpResponse;
-import org.apache.http.message.BasicStatusLine;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClientBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpResponse;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.ProtocolVersion;
+import org.apache.hc.core5.http.io.entity.StringEntity;
+import org.apache.hc.core5.http.message.BasicClassicHttpResponse;
+import org.apache.hc.core5.http.message.StatusLine;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.core.Logger;
@@ -187,8 +188,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final long loadTime = 500L;
 
         final ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 0);
-        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpStatus.SC_OK, null);
-        final HttpResponse httpResponse = new BasicHttpResponse(statusLine);
+        final StatusLine statusLine = new StatusLine(protocolVersion, HttpStatus.SC_OK, null);
+        final ClassicHttpResponse httpResponse = new BasicClassicHttpResponse(HttpStatus.SC_OK);
 
         final HttpEntity responseEntity = new StringEntity(content);
         httpResponse.setEntity(responseEntity);
@@ -237,10 +238,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final boolean[] tabCalled = {false};
         final WebConnection myWebConnection = new HttpWebConnection(webClient) {
             @Override
-            protected HttpClientBuilder createHttpClientBuilder() {
+            protected HttpAsyncClientBuilder createHttpClientBuilder() {
                 tabCalled[0] = true;
 
-                final HttpClientBuilder builder = HttpClientBuilder.create();
+                final HttpAsyncClientBuilder builder = HttpAsyncClientBuilder.create();
                 builder.setConnectionManagerShared(true);
                 return builder;
             }
@@ -594,7 +595,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void userAgent() throws Exception {
         final WebClient webClient = getWebClient();
         final HttpWebConnection connection = (HttpWebConnection) webClient.getWebConnection();
-        final HttpClientBuilder builder = connection.getHttpClientBuilder();
+        final HttpAsyncClientBuilder builder = connection.getHttpClientBuilder();
         final String userAgent = get(builder, "userAgent");
         assertEquals(webClient.getBrowserVersion().getUserAgent(), userAgent);
     }

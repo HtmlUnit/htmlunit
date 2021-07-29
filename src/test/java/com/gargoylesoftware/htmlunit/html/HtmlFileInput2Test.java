@@ -44,14 +44,15 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.entity.mime.FileBody;
+import org.apache.hc.client5.http.entity.mime.HttpMultipartMode;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.HttpEntityContainer;
+import org.apache.hc.core5.http.HttpResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -384,13 +385,13 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
 
         final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).setCharset(UTF_8);
+        builder.setMode(HttpMultipartMode.LEGACY).setCharset(UTF_8);
         builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
 
         filePost.setEntity(builder.build());
 
         final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
-        final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
+        final HttpEntityContainer httpResponse = clientBuilder.build().execute(filePost);
 
         try (InputStream content = httpResponse.getEntity().getContent()) {
             final String response = new String(IOUtils.toByteArray(content));

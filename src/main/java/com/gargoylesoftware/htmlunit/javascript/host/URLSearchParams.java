@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,7 +28,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.hc.core5.net.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -333,7 +334,7 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
-        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), StandardCharsets.UTF_8);
     }
 
     /**

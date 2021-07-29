@@ -23,30 +23,31 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.FormattedHeader;
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieAttributeHandler;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookiePathComparator;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SM;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.impl.cookie.BasicCommentHandler;
-import org.apache.http.impl.cookie.BasicMaxAgeHandler;
-import org.apache.http.impl.cookie.BasicSecureHandler;
-import org.apache.http.impl.cookie.CookieSpecBase;
-import org.apache.http.impl.cookie.NetscapeDraftHeaderParser;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.message.BasicHeaderElement;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.message.ParserCursor;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.CookiePathComparator;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicMaxAgeHandler;
+import org.apache.hc.client5.http.impl.cookie.BasicSecureHandler;
+import org.apache.hc.client5.http.impl.cookie.CookieSpecBase;
+import org.apache.hc.client5.http.utils.DateUtils;
+import org.apache.hc.core5.http.FormattedHeader;
+import org.apache.hc.core5.http.Header;
+import org.apache.hc.core5.http.HeaderElement;
+import org.apache.hc.core5.http.HttpHeaders;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.message.BasicHeader;
+import org.apache.hc.core5.http.message.BasicHeaderElement;
+import org.apache.hc.core5.http.message.BasicHeaderValueParser;
+import org.apache.hc.core5.http.message.BufferedHeader;
+import org.apache.hc.core5.http.message.ParserCursor;
+import org.apache.hc.core5.util.CharArrayBuffer;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.NetscapeDraftHeaderParser;
 
 /**
  * Customized BrowserCompatSpec for HtmlUnit.
@@ -96,12 +97,14 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
      * @param browserVersion the {@link BrowserVersion} to simulate
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
-        super(new HtmlUnitVersionAttributeHandler(),
+        super(// TODO
+              //new HtmlUnitVersionAttributeHandler(),
                 new HtmlUnitDomainHandler(browserVersion),
                 new HtmlUnitPathHandler(browserVersion),
                 new BasicMaxAgeHandler(),
                 new BasicSecureHandler(),
-                new BasicCommentHandler(),
+                // TODO
+                //new BasicCommentHandler(),
                 new HtmlUnitExpiresHandler(browserVersion),
                 new HtmlUnitHttpOnlyHandler(),
                 new HtmlUnitSameSiteHandler());
@@ -137,10 +140,12 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         final List<Cookie> cookies;
 
         final String headername = header.getName();
-        if (!headername.equalsIgnoreCase(SM.SET_COOKIE)) {
+        if (!headername.equalsIgnoreCase(HttpHeaders.SET_COOKIE)) {
             throw new MalformedCookieException("Unrecognized cookie header '" + header + "'");
         }
-        final HeaderElement[] helems = header.getElements();
+        final String headerValue = header.getValue();
+        final ParserCursor cursor2 = new ParserCursor(0, headerValue.length());
+        final HeaderElement[] helems = BasicHeaderValueParser.INSTANCE.parseElements(headerValue, cursor2);
         boolean versioned = false;
         boolean netscape = false;
         for (final HeaderElement helem: helems) {
@@ -151,6 +156,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 netscape = true;
             }
         }
+        // TODO
         if (netscape || !versioned) {
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
@@ -172,7 +178,13 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 buffer.append(s);
                 cursor = new ParserCursor(0, buffer.length());
             }
-            final HeaderElement elem = parser.parseHeader(buffer, cursor);
+            HeaderElement elem;
+            try {
+                elem = parser.parseHeader(buffer, cursor);
+            }
+            catch (ParseException e) {
+                throw new RuntimeException(e);
+            }
             final String name = elem.getName();
             final String value = elem.getValue();
             if (name == null || name.isEmpty()) {
@@ -195,7 +207,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
             // Override version for Netscape style cookies
             if (netscape) {
-                cookie.setVersion(0);
+                // TODO
+                //cookie.setVersion(0);
             }
             cookies = Collections.<Cookie>singletonList(cookie);
         }
@@ -217,7 +230,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         Collections.sort(cookies, COOKIE_COMPARATOR);
 
         final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
-        buffer.append(SM.COOKIE);
+        buffer.append(HttpHeaders.COOKIE);
         buffer.append(": ");
         for (int i = 0; i < cookies.size(); i++) {
             final Cookie cookie = cookies.get(i);
@@ -226,13 +239,16 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
             final String cookieName = cookie.getName();
             final String cookieValue = cookie.getValue();
-            if (cookie.getVersion() > 0 && !isQuoteEnclosed(cookieValue)) {
+            // TODO
+            //if (cookie.getVersion() > 0 && !isQuoteEnclosed(cookieValue)) {
+            if (!isQuoteEnclosed(cookieValue)) {
                 HtmlUnitBrowserCompatCookieHeaderValueFormatter.INSTANCE.formatHeaderElement(
                         buffer,
                         new BasicHeaderElement(cookieName, cookieValue),
                         false);
             }
             else {
+                // TODO
                 // Netscape style cookies do not support quoted values
                 buffer.append(cookieName);
                 buffer.append("=");
@@ -242,7 +258,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
         }
         final List<Header> headers = new ArrayList<>(1);
-        headers.add(new BufferedHeader(buffer));
+        headers.add(BufferedHeader.create(buffer));
         return headers;
     }
 
@@ -251,16 +267,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 && s.length() > 1
                 && '\"' == s.charAt(0)
                 && '\"' == s.charAt(s.length() - 1);
-    }
-
-    @Override
-    public int getVersion() {
-        return 0;
-    }
-
-    @Override
-    public Header getVersionHeader() {
-        return null;
     }
 
     @Override

@@ -21,7 +21,7 @@ import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;

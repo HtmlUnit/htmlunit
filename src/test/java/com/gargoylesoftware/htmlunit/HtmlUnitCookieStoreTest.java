@@ -21,8 +21,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,11 +68,11 @@ public class HtmlUnitCookieStoreTest {
         mgr_.addCookie(new Cookie("localhost", "myname", "myvalue"));
         mgr_.addCookie(new Cookie("localhost", "myname2", "myvalue2"));
 
-        final List<org.apache.http.cookie.Cookie> cookies = store_.getCookies();
+        final List<org.apache.hc.client5.http.cookie.Cookie> cookies = store_.getCookies();
         assertEquals(2, cookies.size());
-        assertTrue(cookies.contains(new MyCookie("myname", "myvalue")));
-        assertTrue(cookies.contains(new MyCookie("myname2", "myvalue2")));
-
+        assertTrue(containsCookie(cookies, "myname", "myvalue"));
+        assertTrue(containsCookie(cookies, "myname2", "myvalue2"));
+        
         mgr_.setCookiesEnabled(false);
         assertTrue(store_.getCookies().isEmpty());
     }
@@ -91,9 +90,9 @@ public class HtmlUnitCookieStoreTest {
         assertTrue(store_.clearExpired(new Date(System.currentTimeMillis() + 20_000)));
         assertFalse(store_.clearExpired(new Date(System.currentTimeMillis() + 20_000)));
 
-        final List<org.apache.http.cookie.Cookie> cookies = store_.getCookies();
+        final List<org.apache.hc.client5.http.cookie.Cookie> cookies = store_.getCookies();
         assertEquals(1, cookies.size());
-        assertTrue(cookies.contains(new MyCookie("myname", "myvalue")));
+        assertTrue(containsCookie(cookies, "myname", "myvalue"));
     }
 
     /**
@@ -110,23 +109,20 @@ public class HtmlUnitCookieStoreTest {
         assertTrue(store_.getCookies().isEmpty());
     }
 
-    private static final class MyCookie extends BasicClientCookie {
-        MyCookie(final String name, final String value) {
-            super(name, value);
+    /**
+     * Checks if the given list of cookies contains a cookie with the passed name and value.
+     * @param cookies the list of cookies to search
+     * @param name the cookie name
+     * @param value the cookie value
+     * @return <code>true</code> if such a cookie was found, <code>false</code> otherwise
+     */
+    private static boolean containsCookie(final List<org.apache.hc.client5.http.cookie.Cookie> cookies, 
+                                          final String name, final String value) {
+        for (org.apache.hc.client5.http.cookie.Cookie cookie : cookies) {
+            if (cookie.getName().equals(name) && cookie.getValue().equals(value)) {
+                return true;
+            }
         }
-
-        @Override
-        public boolean equals(final Object obj) {
-            return obj instanceof org.apache.http.cookie.Cookie
-                && new EqualsBuilder()
-                    .append(getName(), ((org.apache.http.cookie.Cookie) obj).getName())
-                    .append(getValue(), ((org.apache.http.cookie.Cookie) obj).getValue())
-                    .isEquals();
-        }
-
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
+        return false;
     }
 }

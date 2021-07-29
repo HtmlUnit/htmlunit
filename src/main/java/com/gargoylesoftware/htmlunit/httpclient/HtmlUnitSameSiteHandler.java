@@ -15,19 +15,18 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.hc.client5.http.cookie.CommonCookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
 
 /**
  * Customized CookieAttributeHandler for handling of the samesite attribute.
  *
  * @author Ronald Brill
  */
-import org.apache.http.cookie.CommonCookieAttributeHandler;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
-
 final class HtmlUnitSameSiteHandler implements CommonCookieAttributeHandler {
 
     private static final String SAMESITE_ATTR = "samesite";
