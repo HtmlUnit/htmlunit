@@ -1296,16 +1296,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- for our tests we need the httpclient test jar because we use
-            the LocalServerTestBase -->
-        <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>${httpcomponents.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
-        </dependency>
-
         <!-- make our test for rendering svg images on canvas run -->
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>

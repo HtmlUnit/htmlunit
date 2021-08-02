@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2">
+        
+            <action type="update" dev="rbri">
+                Dependency HttpClient test-jar no longer required for the test suite.
+            </action>
+        </release>
+
         <release version="2.52.0" date="July 25, 2021" description="Bugfixes, Firefox 90">
             <action type="add" dev="rbri">
                 More detailed tests and some fixes for HtmlArea processing.
