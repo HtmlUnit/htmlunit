@@ -477,6 +477,7 @@ public abstract class WebServerTestCase extends WebTestCase {
     protected boolean isHttps() {
         return false;
     }
+
     /**
      * @return SslConnectionFactory for https
      */

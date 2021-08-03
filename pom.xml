@@ -35,9 +35,9 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.44</checkstyle.version>
+        <checkstyle.version>8.45</checkstyle.version>
         <spotbugs.version>4.3.0</spotbugs.version>
-        <pmd.version>6.36.0</pmd.version>
+        <pmd.version>6.37.0</pmd.version>
         <archunit.version>0.20.1</archunit.version>
     </properties>
 
@@ -226,7 +226,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
+                <version>3.0.0</version>
                 <executions>
                     <execution>
                         <configuration>
