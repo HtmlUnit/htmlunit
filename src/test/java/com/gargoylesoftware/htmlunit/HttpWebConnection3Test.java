@@ -46,11 +46,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
-                       HttpHeader.USER_AGENT, HttpHeader.ACCEPT,
+    @Alerts(DEFAULT = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
+                       HttpHeader.UPGRADE_INSECURE_REQUESTS, HttpHeader.USER_AGENT, HttpHeader.ACCEPT,
                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
-                       HttpHeader.SEC_FETCH_DEST, HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
-                       HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
+                       HttpHeader.SEC_FETCH_DEST, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
             FF = {HttpHeader.HOST, HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE,
                   HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS,
                   HttpHeader.SEC_FETCH_DEST, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_SITE,
@@ -59,20 +58,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     HttpHeader.ACCEPT_ENCODING, HttpHeader.CONNECTION, HttpHeader.UPGRADE_INSECURE_REQUESTS},
             IE = {HttpHeader.ACCEPT, HttpHeader.ACCEPT_LANGUAGE, HttpHeader.USER_AGENT,
                   HttpHeader.ACCEPT_ENCODING, HttpHeader.HOST, HttpHeader.CONNECTION})
-    @HtmlUnitNYI(CHROME = {HttpHeader.HOST, HttpHeader.CONNECTION,
-                           HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
-                           HttpHeader.UPGRADE_INSECURE_REQUESTS,
-                           HttpHeader.USER_AGENT, HttpHeader.ACCEPT,
-                           HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
-                           HttpHeader.SEC_FETCH_DEST,
-                           HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
-            EDGE = {HttpHeader.HOST, HttpHeader.CONNECTION,
-                    HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
-                    HttpHeader.UPGRADE_INSECURE_REQUESTS,
-                    HttpHeader.USER_AGENT, HttpHeader.ACCEPT,
-                    HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
-                    HttpHeader.SEC_FETCH_DEST,
-                    HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE})
     public void headers() throws Exception {
         final String response = "HTTP/1.1 200 OK\r\n"
             + "Content-Length: 2\r\n"
@@ -80,6 +65,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + "Hi";
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
@@ -125,6 +111,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + htmlResponse;
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
@@ -165,6 +152,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             + "\r\n"
             + "Hi";
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
@@ -223,6 +211,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
@@ -261,6 +250,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
@@ -298,6 +288,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(new URL(url));
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, response2)) {
             final WebDriver driver = getWebDriver();
 
@@ -321,6 +312,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "Content-Length: 0\r\n"
                 + "\r\n";
 
+        shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, response, null)) {
             final WebDriver driver = getWebDriver();
 
@@ -338,7 +330,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                      "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
                       "sec-ch-ua-mobile: ?0",
                       "Upgrade-Insecure-Requests: 1",
                       "User-Agent: §§USER_AGENT§§",
@@ -353,7 +345,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Microsoft Edge\";v=\"91\", \"Chromium\";v=\"91\"",
+                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
                     "sec-ch-ua-mobile: ?0",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
@@ -398,7 +390,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                           "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
                            "sec-ch-ua-mobile: ?0",
                            "Upgrade-Insecure-Requests: 1",
                            "User-Agent: §§USER_AGENT§§",
@@ -413,7 +405,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Microsoft Edge\";v=\"91\", \"Chromium\";v=\"91\"",
+                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
                     "sec-ch-ua-mobile: ?0",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
@@ -495,7 +487,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Connection: keep-alive",
                       "Content-Length: 48",
                       "Cache-Control: max-age=0",
-                      "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                      "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
                       "sec-ch-ua-mobile: ?0",
                       "Upgrade-Insecure-Requests: 1",
                       "Origin: http://localhost:§§PORT§§",
@@ -516,7 +508,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Connection: keep-alive",
                     "Content-Length: 48",
                     "Cache-Control: max-age=0",
-                    "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Microsoft Edge\";v=\"91\", \"Chromium\";v=\"91\"",
+                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
                     "sec-ch-ua-mobile: ?0",
                     "Upgrade-Insecure-Requests: 1",
                     "Origin: http://localhost:§§PORT§§",
@@ -532,24 +524,24 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Language: en-US,en;q=0.9",
                     "",
                     "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"},
-                    FF = {"POST /foo HTTP/1.1",
-                          "Host: localhost:§§PORT§§",
-                          "User-Agent: §§USER_AGENT§§",
-                          "Accept: §§ACCEPT§§",
-                          "Accept-Language: en-US,en;q=0.5",
-                          "Accept-Encoding: gzip, deflate",
-                          "Content-Type: application/x-www-form-urlencoded",
-                          "Content-Length: 48",
-                          "Origin: http://localhost:§§PORT§§",
-                          "Connection: keep-alive",
-                          "Referer: http://localhost:§§PORT§§/",
-                          "Upgrade-Insecure-Requests: 1",
-                          "Sec-Fetch-Dest: document",
-                          "Sec-Fetch-Mode: navigate",
-                          "Sec-Fetch-Site: same-origin",
-                          "Sec-Fetch-User: ?1",
-                          "",
-                          "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"},
+            FF = {"POST /foo HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Content-Type: application/x-www-form-urlencoded",
+                  "Content-Length: 48",
+                  "Origin: http://localhost:§§PORT§§",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1",
+                  "",
+                  "text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21"},
             FF78 = {"POST /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "User-Agent: §§USER_AGENT§§",
@@ -580,7 +572,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"POST /foo HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Google Chrome\";v=\"91\", \"Chromium\";v=\"91\"",
+                           "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
                            "sec-ch-ua-mobile: ?0",
                            "Upgrade-Insecure-Requests: 1",
                            "User-Agent: §§USER_AGENT§§",
@@ -601,7 +593,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"POST /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \" Not;A Brand\";v=\"99\", \"Microsoft Edge\";v=\"91\", \"Chromium\";v=\"91\"",
+                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
                     "sec-ch-ua-mobile: ?0",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",

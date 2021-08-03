@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DataURLDecoderTest extends WebDriverTestCase {
@@ -36,7 +37,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
     @Test
     @Alerts({"one", "two", "three", "four", "five's"})
     public void dataProtocol() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + "var d1, d2, d3, d4, d5;\n"
             + "</script>\n"
@@ -47,16 +48,17 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "<script src=\"data:text/javascript;base64,%20ZD%20Qg%0D%0APS%20An%20Zm91cic%0D%0A%207%20\"></script>\n"
             + "<script src=\"data:text/javascript,d5%20%3D%20'five%5Cu0027s'%3B\"></script>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(d1);\n"
-            + "  alert(d2);\n"
-            + "  alert(d3);\n"
-            + "  alert(d4);\n"
-            + "  alert(d5);\n"
+            + "  log(d1);\n"
+            + "  log(d2);\n"
+            + "  log(d3);\n"
+            + "  log(d4);\n"
+            + "  log(d5);\n"
             + "}\n"
             + "</script></head><body onload='test()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -67,20 +69,21 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVQ4jWP4TyFgIFsjAwN5BjAwMMA1oxgAkyAGY/UCugQu"
                 + "m/G6gBhnE2UAhiJ8coQUYTOMKC/gDDS6GYBPjORYINoAchITAzbTB84AcgAA8YbvLfsmafwAAAAASUVORK5CYII=",
             CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8fjSERg4iIC1dgoE1BRFQeCrcA"
-                + "AIVvHwN4kUse7wBpZNRo1QMgssMecD9YAfTboYROtTqbYSzvGDAtRCYO5rRB7Xj6Az14DRCINTblQZSFL0Fyk2h17xI5BekL"
-                + "YHfV61ee8pnRMQN+rwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
+                + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
+                + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
             EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8fjSERg4iIC1dgoE1BRFQeCrcA"
-                + "AIVvHwN4kUse7wBpZNRo1QMgssMecD9YAfTboYROtTqbYSzvGDAtRCYO5rRB7Xj6Az14DRCINTblQZSFL0Fyk2h17xI5BekL"
-                + "YHfV61ee8pnRMQN+rwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
+                + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
+                + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
                 + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"
                 + "AbpF0Un5Gi1LAbpG7iBMsCsGvx4SoPhIkHHzaB9i8zuLXD7IOwUJXM3pAAAAAElFTkSuQmCC")
     public void base64WithPlus() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('canvas');\n"
             + "  var img = document.getElementById('image');\n"
@@ -88,7 +91,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "  canvas.height = img.height;\n"
             + "  var ctx = canvas.getContext('2d');\n"
             + "  ctx.drawImage(img, 0, 0);\n"
-            + "  alert(canvas.toDataURL());\n"
+            + "  log(canvas.toDataURL());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <img id='image' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU"
@@ -97,6 +100,6 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "  <canvas id='canvas'></canvas>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

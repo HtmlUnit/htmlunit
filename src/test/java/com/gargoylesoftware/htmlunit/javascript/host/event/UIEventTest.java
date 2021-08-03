@@ -165,6 +165,8 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "1", "[object MouseEvent]", "2"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "1", "[object MouseEvent]", "2"},
             IE = {"[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
     public void detail() throws Exception {
         final String html =
@@ -201,6 +203,8 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
             IE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
     public void view() throws Exception {
         final String html =

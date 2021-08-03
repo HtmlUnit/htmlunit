@@ -3033,6 +3033,9 @@ public final class StyleAttributes {
         /** The style property {@code size}. */
         SIZE("size", "size", chromeAndEdge("")),
 
+        /** The style property {@code sizeAdjust}. */
+        SIZE_ADJUST("sizeAdjust", "sizeAdjust", chromeAndEdge("")),
+
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chromeAndEdge("normal")),
 
