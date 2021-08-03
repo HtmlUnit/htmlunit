@@ -188,7 +188,7 @@ public enum BrowserVersionFeatures {
     EVENT_ONCLICK_FOR_SELECT_ONLY,
 
     /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
-    @BrowserFeature(IE)
+    @BrowserFeature({CHROME, EDGE, IE})
     EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */

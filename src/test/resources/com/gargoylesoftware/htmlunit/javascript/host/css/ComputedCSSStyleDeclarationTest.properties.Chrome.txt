@@ -341,6 +341,7 @@ shapeMargin=:0px
 shapeOutside=:none
 shapeRendering=:auto
 size=:
+sizeAdjust=:
 speak=:normal
 speakAs=:
 src=:

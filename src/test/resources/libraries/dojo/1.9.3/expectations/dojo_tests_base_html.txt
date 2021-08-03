@@ -186,7 +186,7 @@
   expected
   EQUAL
  but got
-  abs1.offsetLeft=620 control.offsetLeft=586
+  abs1.offsetLeft=619 control.offsetLeft=585
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
  ------------------------------------------------------------

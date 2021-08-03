@@ -341,6 +341,7 @@ shapeMargin
 shapeOutside
 shapeRendering
 size
+sizeAdjust
 speak
 speakAs
 src

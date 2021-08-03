@@ -7997,9 +7997,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SharedArrayBuffer() { [native code] }",
-            EDGE = "function SharedArrayBuffer() { [native code] }")
+    @Alerts("exception")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }

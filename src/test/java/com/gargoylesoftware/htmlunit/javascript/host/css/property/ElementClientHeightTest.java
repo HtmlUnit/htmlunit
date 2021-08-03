@@ -329,7 +329,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "636",
-            EDGE = "638",
+            EDGE = "637",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -692,7 +692,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "636",
-            EDGE = "638",
+            EDGE = "637",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -712,7 +712,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "636",
-            EDGE = "638",
+            EDGE = "637",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -831,7 +831,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "636",
-            EDGE = "638",
+            EDGE = "637",
             FF = "8",
             FF78 = "8",
             IE = "682")
