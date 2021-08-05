@@ -14,7 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_POINTEREVENT_DETAIL_0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONDOUBLECLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
 import java.io.IOException;
@@ -1002,9 +1004,16 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             MouseEvent event = null;
             if (page.getWebClient().isJavaScriptEnabled()) {
-                if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+                if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                    if (browser.hasFeature(EVENT_ONCLICK_POINTEREVENT_DETAIL_0)) {
+                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 0);
+                    }
+                    else {
+                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
+                    }
                 }
                 else {
                     event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
@@ -1201,9 +1210,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final Event event;
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+        final WebClient webClient = getPage().getWebClient();
+        if (webClient.getBrowserVersion().hasFeature(EVENT_ONDOUBLECLICK_USES_POINTEREVENT)) {
             event = new PointerEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
-                    MouseEvent.BUTTON_LEFT);
+                    MouseEvent.BUTTON_LEFT, 0);
         }
         else {
             event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
@@ -1213,7 +1223,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (scriptResult == null) {
             return clickPage;
         }
-        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
+        return (P) webClient.getCurrentWindow().getEnclosedPage();
     }
 
     /**
@@ -1413,7 +1423,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
                 && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
         }
         else {
             event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);

@@ -201,7 +201,7 @@ public class MouseEvent extends UIEvent {
         }
         button_ = button;
 
-        if (TYPE_DBL_CLICK.equals(type)) {
+        if (TYPE_DBL_CLICK.equals(type) || TYPE_CONTEXT_MENU.equals(type)) {
             setDetail(2);
         }
         else {

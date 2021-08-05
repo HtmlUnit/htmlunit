@@ -187,13 +187,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     EVENT_ONCLICK_FOR_SELECT_ONLY,
 
-    /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
+    /** <code>PointerEvent</code>has detail of 0. */
+    @BrowserFeature(IE)
+    EVENT_ONCLICK_POINTEREVENT_DETAIL_0,
+
+    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
     @BrowserFeature({CHROME, EDGE, IE})
     EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF78})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
+
+    /** Triggers 'ondblclick' event handler using <code>PointerEvent</code>. */
+    @BrowserFeature(IE)
+    EVENT_ONDOUBLECLICK_USES_POINTEREVENT,
 
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)

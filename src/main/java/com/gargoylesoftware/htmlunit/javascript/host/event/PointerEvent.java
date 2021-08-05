@@ -125,12 +125,13 @@ public class PointerEvent extends MouseEvent {
      * @param shiftKey true if SHIFT is pressed
      * @param ctrlKey true if CTRL is pressed
      * @param altKey true if ALT is pressed
+     * @param detail the detail value
      * @param button the button code, must be {@link #BUTTON_LEFT}, {@link #BUTTON_MIDDLE} or {@link #BUTTON_RIGHT}
      */
     public PointerEvent(final DomNode domNode, final String type, final boolean shiftKey,
-            final boolean ctrlKey, final boolean altKey, final int button) {
+            final boolean ctrlKey, final boolean altKey, final int button, final int detail) {
         super(domNode, type, shiftKey, ctrlKey, altKey, button);
-        setDetail(0);
+        setDetail(detail);
 
         pointerId_ = 1;
         width_ = 1;
