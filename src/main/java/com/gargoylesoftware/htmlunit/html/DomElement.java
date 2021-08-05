@@ -913,7 +913,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents) throws IOException {
-        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, false, false);
+        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, true, false, false);
     }
 
     /**
@@ -935,6 +935,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param ctrlKey {@code true} if CTRL is pressed during the click
      * @param altKey {@code true} if ALT is pressed during the click
      * @param triggerMouseEvents if true trigger the mouse events also
+     * @param handleFocus if true set the focus (and trigger the event)
      * @param ignoreVisibility whether to ignore visibility or not
      * @param disableProcessLabelAfterBubbling ignore label processing
      * @param <P> the page type
@@ -943,7 +944,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-            final boolean triggerMouseEvents, final boolean ignoreVisibility,
+            final boolean triggerMouseEvents, final boolean handleFocus, final boolean ignoreVisibility,
             final boolean disableProcessLabelAfterBubbling) throws IOException {
 
         // make enclosing window the current one
@@ -976,26 +977,28 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            // give focus to current element (if possible) or only remove it from previous one
-            DomElement elementToFocus = null;
-            if (this instanceof SubmittableElement
-                || this instanceof HtmlAnchor
-                    && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
-                || this instanceof HtmlArea
-                    && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
-                        || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
-                || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
-                elementToFocus = this;
-            }
-            else if (this instanceof HtmlOption) {
-                elementToFocus = ((HtmlOption) this).getEnclosingSelect();
-            }
+            if (handleFocus) {
+                // give focus to current element (if possible) or only remove it from previous one
+                DomElement elementToFocus = null;
+                if (this instanceof SubmittableElement
+                    || this instanceof HtmlAnchor
+                        && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                    || this instanceof HtmlArea
+                        && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                            || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+                    || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
+                    elementToFocus = this;
+                }
+                else if (this instanceof HtmlOption) {
+                    elementToFocus = ((HtmlOption) this).getEnclosingSelect();
+                }
 
-            if (elementToFocus == null) {
-                ((HtmlPage) page).setFocusedElement(null);
-            }
-            else {
-                elementToFocus.focus();
+                if (elementToFocus == null) {
+                    ((HtmlPage) page).setFocusedElement(null);
+                }
+                else {
+                    elementToFocus.focus();
+                }
             }
 
             if (triggerMouseEvents) {

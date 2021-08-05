@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
@@ -61,8 +60,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -739,14 +736,8 @@ public class HTMLInputElement extends HTMLElement {
     public void click() throws IOException {
         final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
-        final Event event;
-        if (getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
-        }
-        else {
-            event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
-        }
-        domNode.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
+
+        domNode.click(false, false, false, false, false, true, false);
 
         final boolean newState = domNode.isChecked();
 
