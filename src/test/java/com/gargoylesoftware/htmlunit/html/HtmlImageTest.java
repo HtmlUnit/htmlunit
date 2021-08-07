@@ -27,7 +27,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -131,33 +130,6 @@ public class HtmlImageTest extends SimpleWebTestCase {
         final Page page2 = img.click(x, y);
         final URL url = page2.getUrl();
         assertTrue(url.toExternalForm(), url.toExternalForm().endsWith(urlSuffix));
-    }
-
-    /**
-     * Tests circle radius of percentage value.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    public void useMapClick_CircleRadiusPercentage() throws Exception {
-        final URL urlImage = new URL(URL_FIRST, "img.jpg");
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        }
-
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
-            + "<map name='map1'>\n"
-            + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
-            + "<area href='b.html' shape='circle' coords='25,10,10%'>\n"
-            + "</map>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlImage img = page.getHtmlElementById("myImg");
-        img.click(0, 0);
     }
 
     /**
