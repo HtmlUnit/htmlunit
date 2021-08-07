@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import java.util.Collections;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -43,7 +41,9 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     public void asText() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<form id='form1'>\n"
             + "  <input type='hidden' name='foo' id='foo' value='bla'>\n"
             + "</form></body></html>";
@@ -61,10 +61,14 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
-              + "<head></head>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
+              + "</head>\n"
               + "<body>\n"
               + "  <input type='hidden' id='h' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+                    + " onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='document.getElementById(\"h\").value=\"HtmlUnit\"'>setValue</button>\n"
               + "</body></html>";
@@ -72,11 +76,11 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals("", driver.getTitle());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals("", driver.getTitle());
     }
 
     /**
@@ -86,10 +90,14 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     public void setDefaultValueOnChange() throws Exception {
         final String html =
               "<html>\n"
-              + "<head></head>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
+              + "</head>\n"
               + "<body>\n"
               + "  <input type='hidden' id='h' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+                    + " onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='document.getElementById(\"h\").defaultValue=\"HtmlUnit\"'>"
                       + "setValue</button>\n"
@@ -98,11 +106,11 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals("", driver.getTitle());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertEquals(Collections.emptyList(), getCollectedAlerts(driver));
+        assertEquals("", driver.getTitle());
     }
 
     /**
@@ -111,20 +119,21 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('hidden1');\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'hidden';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"hidden\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -133,7 +142,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,23 +151,24 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('hidden1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'hidden';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"hidden\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -167,7 +177,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -178,26 +188,27 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var hidden = document.getElementById('testId');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.value = 'newValue';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.defaultValue = 'newDefault';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -207,7 +218,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -218,26 +229,27 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var hidden = document.getElementById('testId');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.value = 'newValue';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.defaultValue = 'newDefault';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -246,7 +258,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -257,23 +269,24 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "attribValue-attribValue-attribValue",
                 "newDefault-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var hidden = document.getElementById('testId');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.defaultValue = 'default';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.value = 'newValue';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.setAttribute('value', 'attribValue');\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
 
             + "    hidden.defaultValue = 'newDefault';\n"
-            + "    alert(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
+            + "    log(hidden.value + '-' + hidden.defaultValue + '-' + hidden.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -282,7 +295,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -293,14 +306,15 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             FF = "7",
             FF78 = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
             + "    if(text.textLength) {\n"
-            + "      alert(text.textLength);\n"
+            + "      log(text.textLength);\n"
             + "    } else {\n"
-            + "      alert('textLength not available');\n"
+            + "      log('textLength not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -310,7 +324,7 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -322,9 +336,10 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -335,6 +350,6 @@ public class HtmlHiddenInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
