@@ -35,8 +35,8 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.45</checkstyle.version>
-        <spotbugs.version>4.3.0</spotbugs.version>
+        <checkstyle.version>8.45.1</checkstyle.version>
+        <spotbugs.version>4.4.0</spotbugs.version>
         <pmd.version>6.37.0</pmd.version>
         <archunit.version>0.20.1</archunit.version>
     </properties>
@@ -292,7 +292,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
-                <version>1.11.2</version>
+                <version>1.11.3</version>
                 <configuration>
                     <tag>${project.name}-${project.version}</tag>
                     <message>Release ${project.version}</message>
