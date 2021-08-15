@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,6 +28,7 @@ import org.apache.http.FormattedHeader;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.NameValuePair;
+import org.apache.http.ParseException;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieAttributeHandler;
@@ -39,11 +41,12 @@ import org.apache.http.impl.cookie.BasicCommentHandler;
 import org.apache.http.impl.cookie.BasicMaxAgeHandler;
 import org.apache.http.impl.cookie.BasicSecureHandler;
 import org.apache.http.impl.cookie.CookieSpecBase;
-import org.apache.http.impl.cookie.NetscapeDraftHeaderParser;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHeaderElement;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.message.ParserCursor;
+import org.apache.http.message.TokenParser;
 import org.apache.http.util.CharArrayBuffer;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -53,6 +56,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  *
  * Workaround for <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>:
  * quotes are wrongly removed in cookie's values.
+
+ * Implementation is based on the HttpClient code.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Noboru Sinohara
@@ -79,6 +84,9 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
      * - RFC2965 (#3.3.4) http://www.ietf.org/rfc/rfc2965.txt http://www.ietf.org/rfc/rfc2109.txt
      */
     private static final Comparator<Cookie> COOKIE_COMPARATOR = new CookiePathComparator();
+
+    private static final NetscapeDraftHeaderParser DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER
+                            = new NetscapeDraftHeaderParser();
 
     static final Date DATE_1_1_1970;
 
@@ -154,7 +162,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         if (netscape || !versioned) {
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
-            final NetscapeDraftHeaderParser parser = NetscapeDraftHeaderParser.DEFAULT;
+            final NetscapeDraftHeaderParser parser = DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER;
             final CharArrayBuffer buffer;
             final ParserCursor cursor;
             if (header instanceof FormattedHeader) {
@@ -266,5 +274,50 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
     @Override
     public String toString() {
         return "compatibility";
+    }
+
+    private static final class NetscapeDraftHeaderParser {
+
+        private static final char PARAM_DELIMITER = ';';
+
+        // IMPORTANT!
+        // These private static variables must be treated as immutable and never exposed outside this class
+        private static final BitSet TOKEN_DELIMS = TokenParser.INIT_BITSET('=', PARAM_DELIMITER);
+        private static final BitSet VALUE_DELIMS = TokenParser.INIT_BITSET(PARAM_DELIMITER);
+
+        private final TokenParser tokenParser_ = TokenParser.INSTANCE;
+
+        HeaderElement parseHeader(final CharArrayBuffer buffer, final ParserCursor cursor) throws ParseException {
+            final NameValuePair nvp = parseNameValuePair(buffer, cursor);
+            final List<NameValuePair> params = new ArrayList<NameValuePair>();
+            while (!cursor.atEnd()) {
+                final NameValuePair param = parseNameValuePair(buffer, cursor);
+                params.add(param);
+            }
+
+            return new BasicHeaderElement(nvp.getName(), nvp.getValue(),
+                    params.toArray(new NameValuePair[params.size()]));
+        }
+
+        private NameValuePair parseNameValuePair(final CharArrayBuffer buffer, final ParserCursor cursor) {
+            final String name = tokenParser_.parseToken(buffer, cursor, TOKEN_DELIMS);
+            if (cursor.atEnd()) {
+                return new BasicNameValuePair(name, null);
+            }
+
+            final int delim = buffer.charAt(cursor.getPos());
+            cursor.updatePos(cursor.getPos() + 1);
+            if (delim != '=') {
+                return new BasicNameValuePair(name, null);
+            }
+
+            final String value = tokenParser_.parseToken(buffer, cursor, VALUE_DELIMS);
+            if (!cursor.atEnd()) {
+                cursor.updatePos(cursor.getPos() + 1);
+            }
+
+            return new BasicNameValuePair(name, value);
+        }
+
     }
 }
