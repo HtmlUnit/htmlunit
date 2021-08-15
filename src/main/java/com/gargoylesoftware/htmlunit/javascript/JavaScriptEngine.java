@@ -946,7 +946,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     stack.pop();
                 }
 
-                cx.processMicrotasks();
+                // TODO NativePromise from Rhino
+                // cx.processMicrotasks();
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
