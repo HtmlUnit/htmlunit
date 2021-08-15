@@ -318,6 +318,5 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
             return new BasicNameValuePair(name, value);
         }
-
     }
 }
