@@ -229,6 +229,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
+        // TODO we have to migrate to Rhinos promise support
+        deleteProperties(window, "Promise");
+
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");
         }
@@ -942,6 +945,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 finally {
                     stack.pop();
                 }
+
+                cx.processMicrotasks();
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks
