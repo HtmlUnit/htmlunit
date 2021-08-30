@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.OS;
 import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -51,6 +53,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author cd alexndr
  */
 public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
 
@@ -275,6 +278,23 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
     }
 
     /**
+     * Returns true if current operating system is contained in the specific <tt>oses</tt>.
+     */
+    private boolean isDefinedIn(final OS[] oses) {
+        for (final OS os : oses) {
+            switch (os) {
+                case Linux:
+                    return SystemUtils.IS_OS_LINUX;
+                case Windows:
+                    return SystemUtils.IS_OS_WINDOWS;
+                default:
+                    break;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Returns true if current {@link #browserVersion_} is contained in the specific <tt>browsers</tt>.
      */
     private boolean isDefinedIn(final TestedBrowser[] browsers) {
@@ -404,7 +424,10 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
      */
     protected boolean isNotYetImplemented(final FrameworkMethod method) {
         final NotYetImplemented notYetImplementedBrowsers = method.getAnnotation(NotYetImplemented.class);
-        return notYetImplementedBrowsers != null && isDefinedIn(notYetImplementedBrowsers.value());
+        if (notYetImplementedBrowsers == null) {
+            return false;
+        }
+        return isDefinedIn(notYetImplementedBrowsers.value()) || isDefinedIn(notYetImplementedBrowsers.os());
     }
 
     private static int getTries(final FrameworkMethod method) {

@@ -21,7 +21,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -100,12 +99,6 @@ public class MSXMLScriptable extends SimpleScriptable {
             return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
-    }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter",
-                name, getClassName(), Context.toString(value));
     }
 
     /**

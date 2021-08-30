@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -136,7 +137,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         try (InputStream is = getClass().getResourceAsStream(png)) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -166,18 +167,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC60lEQVQ4T32TX2xTVRzHP/d27"
-                    + "V273i0twTUiMhQeUBJFwQ62dVxxbIglZGa6EPTZwFCUxOe9+yIhRDL24gMJ/6FZgU3dDSYEAglIJDLIiA5Ey0Yd7W7vXbvd"
-                    + "P+bepg3bA+fk5JzfOef3Sc75fb8CwMXxcanm8ZP9AUlqEEURUQTRPXi+2TCd1+5/1Kn8+Py24AYXRkYTG95d96tpWgiCgCC"
-                    + "A4Pbyojw7DqIocPXGzcPJrg/6KhAPcCKVVto3NqvzpoXoASqjnFwZAb8Py7K4fOXGd93Jzm/dXA9wJjWstG7aoM6bJqIgeg"
-                    + "mZgkm2VL4SkWBlRELXCxi6js/nc/589HB915Ytt6qAtpb3VPcJpg1X/y1RDMjItUEcHGQMzKLBW7EQdQEfAg7D6pVkb/f2d"
-                    + "BWQcAGWzbW/dTJWkHCdTLReIiZZBMxZcgWDh89K7HxzCf6aGlKXRhcBWuPqM2OOwds5/KEwK5bUs1SuJd4oMqWVmNE0JrIz"
-                    + "vLM8yutLw6Qu/rIQ0N4aV8cmC5y8lycUChEO1rEiItHRFCTss7mXyXHs9yk2r4zS9UYj5y/8vBCwuS2u/pHRuPnoPzpWRxj"
-                    + "5B/7SbCzb5uNVQbSCzvfXn/B1SxPb1sY4l14MSDSrmlHiwNAYfesaOHJ3jul5Acdx6HpVYiKrcXuqyOAnb/NaYwNnFwDSw4"
-                    + "rS0qzOFoucuj6OOlHgt6dz3meBg2BZnjp71kQ4sHUtcr1M6tJPyZ4d1SqkFaW9TbVMi2w2y9k7GU6P5ZieNbFth7Dko3tNl"
-                    + "M/Xv8Kyl2NIAYnzQyPJnkoZj51IKR92KqorG9u2MQyD6RmNB091bAdWvSQTi8rIskzA70cUfRw/nUru7u0u6+DQD0ff/2zX"
-                    + "p6OuCSpS9rTuOAiiQNlgYlWlricOHj6y45sv9w55gHgisXrfF3sHI5FIXdVp3knZkwucKUBuJj+7v++rPZOTj+941/r7+2v"
-                    + "y+bx/sYNfFOu6bg4MDMz/DxMpOiCCBtdCAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAutJREFUO"
+                    + "E99k19sU1Ucxz/3du1du94tLcE1IjIUHlASRcEOtnVccWyIJWRmuhD02cBQlMTnvfsiIUQy9uIDCf+hWYFN3Q0mBAIJSCQy"
+                    + "yIgORMtGHe1u71273T/m3qYN2wPn5OSc3znn90nO+X2/AsDF8XGp5vGT/QFJahBFEVEE0T14vtkwndfuf9Sp/Pj8tuAGF0Z"
+                    + "GExveXferaVoIgoAggOD28qI8Ow6iKHD1xs3Dya4P+ioQD3AilVbaNzar86aF6AEqo5xcGQG/D8uyuHzlxnfdyc5v3VwPcC"
+                    + "Y1rLRu2qDOmyaiIHoJmYJJtlS+EpFgZURC1wsYuo7P53P+fPRwfdeWLbeqgLaW91T3CaYNV/8tUQzIyLVBHBxkDMyiwVuxE"
+                    + "HUBHwIOw+qVZG/39nQVkHABls21v3UyVpBwnUy0XiImWQTMWXIFg4fPSux8cwn+mhpSl0YXAVrj6jNjjsHbOfyhMCuW1LNU"
+                    + "riXeKDKllZjRNCayM7yzPMrrS8OkLv6yENDeGlfHJgucvJcnFAoRDtaxIiLR0RQk7LO5l8lx7PcpNq+M0vVGI+cv/LwQsLk"
+                    + "trv6R0bj56D86VkcY+Qf+0mws2+bjVUG0gs7315/wdUsT29bGOJdeDEg0q5pR4sDQGH3rGjhyd47peQHHceh6VWIiq3F7qs"
+                    + "jgJ2/zWmMDZxcA0sOK0tKszhaLnLo+jjpR4Lenc95ngYNgWZ46e9ZEOLB1LXK9TOrST8meHdUqpBWlvU21TItsNsvZOxlOj"
+                    + "+WYnjWxbYew5KN7TZTP17/CspdjSAGJ80MjyZ5KGY+dSCkfdiqqKxvbtjEMg+kZjQdPdWwHVr0kE4vKyLJMwO9HFH0cP51K"
+                    + "7u7tLuvg0A9H3/9s16ejrgkqUva07jgIokDZYGJVpa4nDh4+suObL/cOeYB4IrF63xd7ByORSF3Vad5J2ZMLnClAbiY/u7/"
+                    + "vqz2Tk4/veNf6+/tr8vm8f7GDXxTrum4ODAzM/w8TKTogggbXQgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfw"
                     + "fKoLDgwcP23l0dGy3zcsOHj0LDtaLRTvaMlkPQztBBauwH3VOJSZt2oT8WKt+Eym2DekPutgkjbTNj+/vH/kmMc332/j0IG"
                     + "bEdB943T7vB6+XIAiCkM/nP44/TQ4lFlPjz1+kxp8vp8cXD0lkXjwnHPbCMbFf1U0qsoak6MiqjqIaqJqJqptohoWmmximx"
@@ -253,7 +254,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
         try (InputStream is = getClass().getResourceAsStream("invalid.png")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", "image/png", emptyList);
+            getMockWebConnection().setResponse(URL_SECOND, directBytes, 200, "ok", MimeType.IMAGE_PNG, emptyList);
             getMockWebConnection().setDefaultResponse("Test");
         }
 
@@ -281,7 +282,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQYV2P4z8DwHwAFAAH/plybXQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+M/A8B8ABQAB/6Zcm10A"
+                + "AAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             FF78 = "data:image/png;base64,"
@@ -305,7 +307,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQYV2P4z8DwHwAFAAH/plybXQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAA1JREFUGFdj+M/A8B8ABQAB/6Zcm10A"
+                + "AAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
             FF78 = "data:image/png;base64,"
@@ -324,8 +327,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
-                + "ASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABdJREFUGFdj/M/A8J+RgYGRAQrgDOI"
+                + "FAIPmAgWeg1g2AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
                 + "ggg==",
@@ -346,8 +349,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
-                + "AAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEADjFgF/jMw/GdkYABL"
+                + "YqgAADfmAgXboMAzAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
                 + "QmCC",
@@ -369,8 +372,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAALUlEQVQYVzXI0Q0AIBDCUBjFSWVTR6nhov1qnpEwS/jIkp2EnagN"
-                + "dAAG2oe3voowEQWmniBSAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAC1JREFUGFc1yNENACAQwlAYxUllU0ep4aL9"
+                + "ap6RMEv4yJKdhJ2oDXQABtqHt76KMBEFpp4gUgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
                 + "kskZi4OAPRUAAAAASUVORK5CYII=",
@@ -391,8 +394,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
-                + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAACpJREFUGFctyLERACAMxDD/KDTMGbbk0jC"
+                + "KKUClwlQ7RJANwaE5b1YV4buKVA5Xbm45TAAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
                 + "B04ARksgoEOwAAAAASUVORK5CYII=",
@@ -413,8 +416,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQYV2P8z8Dwn5GBgZEBCuAM4gUAg+YCBZ6DWDYAAAA"
-                + "ASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABdJREFUGFdj/M/A8J+RgYGRAQrgDOI"
+                + "FAIPmAgWeg1g2AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
                 + "ggg==",
@@ -435,8 +438,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQYV2NkQAOMWAX+MzD8Z2RgAEtiqAAAN+YCBdugwDMA"
-                + "AAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABpJREFUGFdjZEADjFgF/jMw/GdkYABL"
+                + "YqgAADfmAgXboMAzAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
                 + "QmCC",
@@ -457,8 +460,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJUlEQVQYV2P8f4PhP6MGAyMDFDD+Z2D4z8iAV+D///+MjIxwLQCf"
-                + "NQsFaCO3KAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAACVJREFUGFdj/H+D4T+jBgMjAxQw/mdg+M/I"
+                + "gFfg////jIyMcC0AnzULBWgjtygAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
                 + "TkSuQmCC",
@@ -479,8 +482,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQYV2P8z8DwnwEJMCJzQGzCAgCDawIDNDdv5wAAAABJR"
-                + "U5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAABZJREFUGFdj/M/A8J8BCTAic0BswgIAg"
+                + "2sCAzQ3b+cAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CY"
                 + "II=",
@@ -501,8 +504,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAKklEQVQYVy3IsREAIAzEMP8oNMwZtuTSMIopQKXCVDtEkA3BoTl"
-                + "vVhXhu4pUDldubjlMAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAACpJREFUGFctyLERACAMxDD/KDTMGbbk0jC"
+                + "KKUClwlQ7RJANwaE5b1YV4buKVA5Xbm45TAAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
                 + "B04ARksgoEOwAAAAASUVORK5CYII=",
@@ -523,9 +526,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAj0lEQVQoU42QwQlCQQxEJyWIDawXsYJ/NQXZw5IeLGjsZBuQf1N"
-                + "vkWyWj8I/bFgIs7wMkwgmSzp3dtcXUZ/WpR1r76H1TQggHfR4C4DbsL+PHnoB5DJA+MmVH1Rb07Ee0tFWxP+fYysFD9UOXEmU1r"
-                + "b0G/i7j7sHHSFzChFQMuMeSFLNDCSTnbxO5JyrafAL84cwC261IdQAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAI9JREFUKFONkMEJQkEMRCcliA2sF7GCfzU"
+                + "F2cOSHixo7GQbkH9Tb5Fslo/CP2xYCLO8DJMIJks6d3bXF1Gf1qUda++h9U0IIB30eAuA27C/jx56AeQyQPjJlR9UW9OxHtLRVs"
+                + "T/n2MrBQ/VDlxJlNa29Bv4u4+7Bx0hcwoRUDLjHkhSzQwkk528TuScq2nwC/OHMAtutSHUAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
                 + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
@@ -549,8 +552,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUUlEQVQoU2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFEYYP"
-                + "Af/sDBgwHHS4w1Dd8AKnCrhCm8/////8bGxsZGhoa8CvE51wMnbgUDwWFAM8UFQtlZuKEAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFFJREFUKFNjZCASMILUNQg3/K+PbGBoXN7"
+                + "AAKIZpzCAxZEBRGGDwH/7AwYMBx0uMNQ3fACpwq4QpvP/////GxsbGRoaGvArxOdcDJ24FA8FhQDPFBULZWbihAAAAABJRU5Erk"
+                + "Jggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
                 + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
@@ -571,8 +575,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQYVwEtANL/AQAm//9A9sAAAUAcv/8wB9AAAb8JQP8QJ/A"
-                + "AAb9ACP8QGP4AAUC/Gf8w3voAj4MRundMhZwAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAADhJREFUGFcBLQDS/wEAJv//QPbAAAFAHL/"
+                + "/MAfQAAG/CUD/ECfwAAG/QAj/EBj+AAFAvxn/MN76AI+DEbp3TIWcAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
                 + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
@@ -593,8 +597,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWklEQVQoU7XQQQqAMAxE0T9H6ab0lsZbihuPMmJQV610YzYD4ZHA"
-                + "iMnRpOMPWG3vQtVk0v8ig9mABleqDSAutg7kQubXxTWCJSILGMKnHttOKHWbeJcXvE0Xns6wHwst5jD0AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFpJREFUKFO10EEKgDAMRNE/R+mm9JbGW4ob"
+                + "jzJiUFetdGM2A+GRwIjJ0aTjD1ht70LVZNL/IoPZgAZXqg0gLrYO5ELm18U1giUiCxjCpx7bTih1m3iXF7xNF57OsB8LLeYw9AAA"
+                + "AABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
                 + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
@@ -617,8 +622,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAWUlEQVQoU8XOQQqAMAxE0T9H6ab0lsZbihuPMmJQKGLFnSFkNo8k"
-                + "4l7V9ipUTSZHn6O3BrMADY5UG0BcbG3Ihcy3jXMEU0QeGsLrDdtOKD3/2MPepP5SP8Idu74fCzQIyFMAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFlJREFUKFPFzkEKgDAMRNE/R+mm9JbGW4ob"
+                + "jzJiUChixZ0hZDaPJOJe1fYqVE0mR5+jtwazAA2OVBtAXGxtyIXMt41zBFNEHhrC6w3bTig9/9jD3qT+Uj/CHbu+Hws0CMhTAAAA"
+                + "AElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
                 + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
@@ -640,9 +646,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU6XQQQqAMAxE0T9H6ab0lsZbihuPMmJFKNRKwWxm8wiT"
-                + "iMnRpKOH2fYulE1NbtNBg9mAAleqDCBOtg7kRM2vjWsES0StP4TPcbZdofTesYWt+fGewWNPzSgfC+"
-                + "FFt4IAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFxJREFUKFOl0EEKgDAMRNE/R+mm9JbGW4ob"
+                + "jzJiRSjUSsFsZvMIk4jJ0aSjh9n2LpRNTW7TQYPZgAJXqgwgTrYO5ETNr41rBEtErT+Ez3G2XaH03rGFrfnxnsFjT80oHwvhRbeC"
+                + "AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
                 + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
@@ -664,9 +670,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAi0lEQVQoU2M8FcD+n4GBgWFaBB+IYlgQ8ZoRzEADjOsDTMAKHyi8"
-                + "YBD48IEhccEX7AoXJCRcYeXg4La/dk1U+u1bbsarV3EojI/XNo2IMFWRkMhiY2U1ZdTRwa4QZO3///8dGBgY6h88eOCgqKhIWOGB"
-                + "AwccHB0dcSvE5ksMXxOjCKQGqzVYw5FYEwEUwCcLsjvElwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAItJREFUKFNjPBXA/p+BgYFhWgQfiGJYEPGa"
+                + "EcxAA4zrA0zACh8ovGAQ+PCBIXHBF+wKFyQkXGHl4OC2v3ZNVPrtW27Gq1dxKIyP1zaNiDBVkZDIYmNlNWXU0cGuEGTt////HRgY"
+                + "GOofPHjgoKioSFjhgQMHHBwdHXErxOZLDF8TowikBqs1WMORWBMBFMAnC7I7xJcAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
                 + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
@@ -690,9 +696,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAXElEQVQoU2NkIBIwEqmOYegqVPv/P+HTAob6t40Mir8fgP2B1TPZ"
-                + "YlP+m0udZPBS2sYgsu4tboX7HTj+S6j+ZVAw/MPAmfUft0LRV3L/Q9b8ZCiY8I1B/dZnsEIAKFkcC2BUM+"
-                + "IAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAFxJREFUKFNjZCASMBKpjmHoKlT7/z/h0wK"
+                + "G+reNDIq/H4D9gdUz2WJT/ptLnWTwUtrGILLuLW6F+x04/kuo/mVQMPzDwJn1H7dC0Vdy/0PW/GQomPCNQf3WZ7BCAChZHAtgVD"
+                + "PiAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
                 + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
@@ -714,8 +720,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQoU2NkIBIwEqmOYVQh3pAiOngACmkAC5eMKzgAAAAASUV"
-                + "ORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAABdJREFUKFNjZCASMBKpjmFUId6QIjp4"
+                + "AAppAAuXjCs4AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
             FF78 = "data:image/png;base64,"
@@ -734,8 +740,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQoU2Ocr5nwn4GBgSHx+gJGEI0LMM6v5oEobP2CX+EBB4f9"
-                + "9gwMDowHDuBXCDJt/vz5/xMTEwkrxOc2mBxeU5ANGAoKAWtoEAsOuLTDAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAEhJREFUKFNjnK+Z8J+BgYEh8foCRhCNCzDO"
+                + "r+aBKGz9gl/hAQeH/fYMDA6MBw7gVwgybf78+f8TExMJK8TnNpgcXlOQDRgKCgFraBALDri0wwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
                 + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
@@ -756,9 +762,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAcElEQVQoU53QsQ2CUBQF0PNKYs0I7mDhBMbWNajsmMIV6FyG"
-                + "BJ1DFyDkGxIo9AdDePV59yY3rLxY6WQwsZ+ei+AxB33BxAkVSjTBbQm+sMOAZ3DIYOKI+5TWo8M5eI/4t7rGBS2uM8rgvwW2"
-                + "z7OU+gHU0xILszCyeAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAHBJREFUKFOd0LENglAUBdDzSmLNCO5g"
+                + "4QTG1jWo7JjCFehchgSdQxcg5BsSKPQHQ3j1efcmN6y8WOlkMLGfnovgMQd9wcQJFUo0wW0JvrDDgGdwyGDiiPuU1qPDOXiP"
+                + "+Le6xgUtrjPK4L8Fts+zlPoB1NMSC7MwsngAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUUlEQVQYlb3KsQ1FYABG0TODHbQmMIFl3gB2MYcJRCOxhFIp"
                 + "Ec2n0f665ya3O/y9UD83b6gLY1jC7w3u4QxHmEuoDVu4HjiFqoT7sIahiL7vBt20ISfDuXmqAAAAAElFTkSuQmCC",
@@ -804,10 +810,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAvUlEQVQ4T2NkQAWODAwM5lChkwwMDPvR5AlyGaEqeEUYGLYIM"
-                + "DDoBzAwcIPENjAwfP3AwHDxDQODDwMDw2eCJkEVgA0UYWA4mMDAYNXNwMCCrLGUgeHPAgaGY28YGOxJMdBRhYFh/W0GBn5sml"
-                + "QZGD7eYWAIJNb7IBdWlDAwNKO7DmY4yJU9DAy1DAwMHcS4kiYGUt3LVI8UUNBQN9kgBTbVEjYxEUiUGlhOIUoxMYpGDSQmlPC"
-                + "rGQ1DysMQAFq2MhXKNeEnAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAL1JREFUOE9jZEAFjgwMDOZQoZMMDAz7"
+                + "0eQJchmhKnhFGBi2CDAw6AcwMHCDxDYwMHz9wMBw8Q0Dgw8DA8NngiZBFYANFGFgOJjAwGDVzcDAgqyxlIHhzwIGhmNvGBjs"
+                + "STHQUYWBYf1tBgZ+bJpUGRg+3mFgCCTW+yAXVpQwMDSjuw5mOMiVPQwMtQwMDB3EuJImBlLdy1SPFFDQUDfZIAU21RI2MRFI"
+                + "lBpYTiFKMTGKRg0kJpTwqxkNQ8rDEABatjIVyjXhJwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjElEQVQ4je3SMQrCQBBA0dckZltLrxEkVxEUUudiqaw8l5VW"
                 + "wZXYRFSI4mrKPJj2M8Muryo0w1T+EAJtxmXDcccpIy7ZI6TXaEtiT/885SOapMpHYvfJiRLPb7ac3wVrutQNvwk2KcHJTxZo"
@@ -915,14 +921,13 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAABWEl"
-                + "EQVRYR+3UvUodURTF8d99BMkLiI12QlqtBI0INqawuLFWtArYiVWwE4QUgbSSFElhKViktLXWzhewtpU"
-                + "tc2Ey6P2AfbXZU82cM3udtf9nndPz/zOPDZy1hvvN+2+s4gYPnbru5wfs4xR7uMRd81PMneDoFZ12bfh"
-                + "5jNreBEYvcIgfUzbatvR10OQkRkPgF37iL9ax1qge4BifsIzbMYmGxia2G5127TX+4Qr9l4z+wWKH9Be"
-                + "0iS5gB9Hxx8ZkRCTGVxrq42x9GJ3DNywNq52EaNfoLCK3gwVisUHGzycgeo+gN7T2LYxutajFRrUbi12"
-                + "YitG4DYLkd8yMSTTMRd1uE6fnzDUHcpTROLyfI8NdoiNunfebLqPZ7ItoEc0mkK1XGS2i2QSy9SqjRTS"
-                + "bQLZeZbSIZhPI1quMFtFsAtl6ldEimk0gW68yWkSzCWTrVUaLaDaBbL0nX4NjZfKcb1cAAAAASUVORK5"
-                + "CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0IArs4c6QAAAVhJREFUWEft1L1KHVEUxfHffQTJC4iN"
+                + "dkJarQSNCDamsLixVrQK2IlVsBOEFIG0khRJYSlYpLS11s4XsLaVLXNhMuj9gH212VPNnDN7nbX/Z53T8/8zjw2ctYb7zftv"
+                + "rOIGD5267ucH7OMUe7jEXfNTzJ3g6BWddm34eYza3gRGL3CIH1M22rb0ddDkJEZD4Bd+4i/WsdaoHuAYn7CM2zGJhsYmthud"
+                + "du01/uEK/ZeM/sFih/QXtIkuYAfR8cfGZEQkxlca6uNsfRidwzcsDaudhGjX6Cwit4MFYrFBxs8nIHqPoDe09i2MbrWoxUa1"
+                + "G4tdmIrRuA2C5HfMjEk0zEXdbhOn58w1B3KU0Ti8nyPDXaIjbp33my6j2eyLaBHNJpCtVxktotkEsvUqo0U0m0C2XmW0iGYT"
+                + "yNarjBbRbALZepXRIppNIFuvMlpEswlk61VGi2g2gWy9J1+DY2XynG9XAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAqElEQVRYhe2SwQ3DIAxF/yzMwSCeJKN0lg6TXeihRHKNacIh"
                 + "6qHvSUgI8OclWPqkSnqGta0PSXroOubOn+We1Q98C8z27hSNXsPCLHCX1Prlh0Tro7q5LYpa3zvqt6R+z0RbMuIfNVfs59WF"
@@ -1071,12 +1076,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAMklEQVQ4T2NkoDJghJrXQCVzG2huILkuhenDcOHwNvA/AwND"
-                + "I80jhZLUg+JCSgxC0QsANbUOC0ZQs6cAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAMklEQVQ4T2NkoDJghJrXQCVzG2huILkuhenDcOHwNvA/AwND"
-                + "I80jhZLUg+JCSgxC0QsANbUOC0ZQs6cAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAADJJREFUOE9jZKAyYISa10AlcxtobiC5"
+                + "LoXpw3Dh8DbwPwMDQyPNI4WS1IPiQkoMQtELADW1DgtGULOnAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAOElEQVQokWNgoBFwYGBgaKAQOyAb2MDAwLCfAsNgelEMRBEg"
                 + "EWDoH6EGUjVSHCgwDIYdiPQNaQAAWucr/QQSzQIAAAAASUVORK5CYII=",
@@ -1096,12 +1098,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAKElEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TPV0CAA8pwYLxeyTOgAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAKElEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TPV0CAA8pwYLxeyTOgAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
+                + "WaMGUhSKtA9DipwH00z1dAgAPKcGC8XskzoAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVQokWNgGErgP4V41MChYODgBADEpF+hDnSEnAAAAABJ"
                 + "RU5ErkJggg==",
@@ -1120,12 +1119,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALElEQVQ4T2NkgID/UJpSipFx1MDRMCQ5BEaTDclBhqFhNAxH"
-                + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALElEQVQ4T2NkgID/UJpSipFx1MDRMCQ5BEaTDclBhqFhNAxH"
-                + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAACxJREFUOE9jZICA/1CaUoqRcdTA0TAk"
+                + "OQRGkw3JQYahYTQMR8OQjBCgfrIBABkEFBUHz6OrAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAHklEQVQ4jWNggID/VMJwMGrgqIGjBo4aOGrgiDMQAMu0Zqj6"
                 + "rPAwAAAAAElFTkSuQmCC",
@@ -1144,12 +1140,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
+                + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
                 + "AAAAAElFTkSuQmCC",
@@ -1168,16 +1161,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA10lEQVQ4T93UrU4DQRAA4K84XoCXqACDwjShGDAIRIOpbtIE"
-                + "D5rW4XAVJFVVgKgEharEVVVW4XgAzFxy2XB/zRnYZJNNZvbbmd1kO1oenZY9fxO8wHLXq0hbPsYKr5jEupGdgs+4zAmzgDd1"
-                + "1Tx4XtLqNODvKjgPfuCkZMNXoA9laAYO8VR1esTXuMf8t/wM3MNtzP2a8DtO09z0UQ4CvamB9vFWBWbxbsDXBfACg7KWiwrq"
-                + "BXyWJBzicxcw23OFOxzhEeOiCpp+DiO8YNsWWPlWTSv8B+APX48cFbtSb50AAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA10lEQVQ4T93UrU4DQRAA4K84XoCXqACDwjShGDAIRIOpbtIE"
-                + "D5rW4XAVJFVVgKgEharEVVVW4XgAzFxy2XB/zRnYZJNNZvbbmd1kO1oenZY9fxO8wHLXq0hbPsYKr5jEupGdgs+4zAmzgDd1"
-                + "1Tx4XtLqNODvKjgPfuCkZMNXoA9laAYO8VR1esTXuMf8t/wM3MNtzP2a8DtO09z0UQ4CvamB9vFWBWbxbsDXBfACg7KWiwrq"
-                + "BXyWJBzicxcw23OFOxzhEeOiCpp+DiO8YNsWWPlWTSv8B+APX48cFbtSb50AAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAANdJREFUOE/d1K1OA0EQAOCvOF6Al6gA"
+                + "g8I0oRgwCESDqW7SBA+a1uFwFSRVVYCoBIWqxFVVVuF4AMxcctlwf80Z2GSTTWb225ndZDtaHp2WPX8TvMBy16tIWz7GCq+Y"
+                + "xLqRnYLPuMwJs4A3ddU8eF7S6jTg7yo4D37gpGTDV6APZWgGDvFUdXrE17jH/Lf8DNzDbcz9mvA7TtPc9FEOAr2pgfbxVgVm"
+                + "8W7A1wXwAoOylosK6gV8liQc4nMXMNtzhTsc4RHjogqafg4jvGDbFlj5Vk0r/AfgD1+PHBW7Um+dAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkElEQVQ4je3MrRIBYQCF4ecCqLqgCJosaJKgqi5A1WVBEyQz"
                 + "GlmWZRchq6vsznyDWd/+aPvOnJmTHpr+Ua9ObIgE5/RX7pSC2XbolsUmb1i4NVpFwWsOmOCBZSw2/YGFu2Meg67wLADvY9AO"
@@ -1200,12 +1188,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
+                + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
                 + "AAAAAElFTkSuQmCC",
@@ -1224,12 +1209,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVQ4T2NkoDJgpLJ5DKMGUh6iuMLwP7lGjxoID7nBH4bk"
-                + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVQ4T2NkoDJgpLJ5DKMGUh6iuMLwP7lGjxoID7nBH4bk"
-                + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADFJREFUOE9jZKAyYKSyeQyjBlIeorjC"
+                + "8D+5Ro8aCA+5wR+G5EbyaNYjO+QQGkdg8QUAebwGD4ULeHoAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGAUjF/ynAI8aOFQMHAWjgJ4AABYtWaeYl32X"
                 + "AAAAAElFTkSuQmCC",
@@ -1248,16 +1230,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzElEQVQ4T+3UsQkCMRTG8f+BgpWNK1hZiU5g4wYKdg5h4Qpi"
-                + "7wg2jiA4gKCdpYJgIQiCG8iDPHiE4OVMGsFAuOPy8nv5UlxB5lFk9viD6Tf6W3c4Ag7AJSW4jXwCOsDDwUf3lCbX2CYKNoHX"
-                + "h013g2ujW6hewQGwiz2FqxPQpthLOgVnwLIiaMvPQFs+KLgGJgngBhhbcAX0gD5Q+wKeAwsLqiEnFlRxeZdZNobANgSGNta9"
-                + "BtKs6xW2gGcsGGrS8JJMbcSyOJXWs/8c3nSHHxVqGh2JAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzElEQVQ4T+3UsQkCMRTG8f+BgpWNK1hZiU5g4wYKdg5h4Qpi"
-                + "7wg2jiA4gKCdpYJgIQiCG8iDPHiE4OVMGsFAuOPy8nv5UlxB5lFk9viD6Tf6W3c4Ag7AJSW4jXwCOsDDwUf3lCbX2CYKNoHX"
-                + "h013g2ujW6hewQGwiz2FqxPQpthLOgVnwLIiaMvPQFs+KLgGJgngBhhbcAX0gD5Q+wKeAwsLqiEnFlRxeZdZNobANgSGNta9"
-                + "BtKs6xW2gGcsGGrS8JJMbcSyOJXWs/8c3nSHHxVqGh2JAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMxJREFUOE/t1LEJAjEUxvH/gYKVjStY"
+                + "WYlOYOMGCnYOYeEKYu8INo4gOICgnaWCYCEIghvIgzx4hODlTBrBQLjj8vJ7+VJcQeZRZPb4g+k3+lt3OAIOwCUluI18AjrA"
+                + "w8FH95Qm19gmCjaB14dNd4Nro1uoXsEBsIs9hasT0KbYSzoFZ8CyImjLz0BbPii4BiYJ4AYYW3AF9IA+UPsCngMLC6ohJxZU"
+                + "cXmXWTaGwDYEhjbWvQbSrOsVtoBnLBhq0vCSTG3EsjiV1rP/HN50hx8VahodiQAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoklEQVQ4je3QsQpBARiG4ceglDKYlTKalcFkMBmUizAom7IZ"
                 + "yOgCDFaDTRlcgkGZbDaDcgsGFsNJ54RDMnjrW5/+fv79+62KKHwS3OGCE1YYoYl8HCxzw6J2xBIDNJB7BFYfgGE7YIE+6kgH"
@@ -1282,16 +1259,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtklEQVQ4T+2SMQoCMRBF3x7BegsrbezWRnuP4hFsbey38zq2"
-                + "VirYLFgKXsJOBnaWIQwyblawMJAiJHlv5icFA49iYB5/YH6iX8twDNzz66N75TWwB87AxczrpxJtuQQezuVnC7eitxKb4RFY"
-                + "BipSiXSiok5igVtgFwB6R2pgIxsWOAdOPYENMEuBsr4B055QATbePxwBVTIjEmm5jn5slUgsKpsknRyAVRTopeBJFjlAN+rf"
-                + "B74A50UdJ5SgdwwAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtklEQVQ4T+2SMQoCMRBF3x7BegsrbezWRnuP4hFsbey38zq2"
-                + "VirYLFgKXsJOBnaWIQwyblawMJAiJHlv5icFA49iYB5/YH6iX8twDNzz66N75TWwB87AxczrpxJtuQQezuVnC7eitxKb4RFY"
-                + "BipSiXSiok5igVtgFwB6R2pgIxsWOAdOPYENMEuBsr4B055QATbePxwBVTIjEmm5jn5slUgsKpsknRyAVRTopeBJFjlAN+rf"
-                + "B74A50UdJ5SgdwwAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALZJREFUOE/tkjEKAjEQRd8ewXoLK23s"
+                + "1kZ7j+IRbG3st/M6tlYq2CxYCl7CTgZ2liEMMm5WsDCQIiR5b+YnBQOPYmAef2B+ol/LcAzc8+uje+U1sAfOwMXM66cSbbkE"
+                + "Hs7lZwu3orcSm+ERWAYqUol0oqJOYoFbYBcAekdqYCMbFjgHTj2BDTBLgbK+AdOeUAE23j8cAVUyIxJpuY5+bJVILCqbJJ0c"
+                + "gFUU6KXgSRY5QDfq3we+AOdFHSeUoHcMAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZUlEQVQ4jWNgGAWjgGwgQG0DExgYGP4zMDCsZ2Bg6IfyDSgx"
                 + "UABqIDZMtiX38RhKliUNJBiIjueT6m1C+D0uV+6nwFAFXIYyMDAwBECDYD0D8WFbgM9AcizZT6qBxFhC9QwyBAAApwtZ2OX4"
@@ -1314,12 +1286,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZdDEQVzAQ8gFOF44g"
-                + "AymMZIh2qqdDAD9SCgvGd82WAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZdDEQVzAQ8gFOF44g"
-                + "AymMZIh2qqdDAD9SCgvGd82WAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQzIBv6n0HCw"
+                + "WXQxEFcwEPIBTheOIAMpjGSIdqqnQwA/UgoLxnfNlgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGErgP4WYfgaS64NRAwcrAACGL0e5XiFXSgAA"
                 + "AABJRU5ErkJggg==",
@@ -1338,14 +1307,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXUlEQVQ4T2P878Lwn4GKgHHUQIpDcySHIeMeBkZYAFKSlOBh"
-                + "iGwgtpgh1hKiDSTWEpRYJuRKfGkK5oMhZiC6l0gJAqxeJibf4bMEZChVsh7MEqoZiOwzqriQpgYCAH2SSD3nlbP6AAAAAElF"
-                + "TkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXUlEQVQ4T2P878Lwn4GKgHHUQIpDcySHIeMeBkZYAFKSlOBh"
-                + "iGwgtpgh1hKiDSTWEpRYJuRKfGkK5oMhZiC6l0gJAqxeJibf4bMEZChVsh7MEqoZiOwzqriQpgYCAH2SSD3nlbP6AAAAAElF"
-                + "TkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAF1JREFUOE9j/O/C8J+BioBx1ECKQ3Mk"
+                + "hyHjHgZGWABSkpTgYYhsILaYIdYSog0k1hKUWCbkSnxpCuaDIWYgupdICQKsXiYm3+GzBGQoVbIezBKqGYjsM6q4kKYGAgB9"
+                + "kkg955Wz+gAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAi0lEQVQ4je2TwQ2DMAxF3wiMwCiRbKQeGYER2IAROgIjdBRG"
                 + "YARG+BwBQSgpuVStJV/fi51v5Chn8wf+EHDKCzR6ABm1nFZGL2e49UIilSpZdvigjEFTJOtP6a4Cd4KK5ggYHfstMFDEYhM+"
@@ -1371,14 +1336,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAdUlEQVQ4T2NkoDJgRDIvkYGBYRcDA8NTSuyAGajMwMDQwsDA"
-                + "4MbAwHAXajDI8EOkGo7sQpheO6jBIMNBFoEMhmGCrsdmILKjpJEMd2dgYLhDyPWEDET3Mcz1IMOVoIbXQIMJrJZUA7G5fj6y"
-                + "ICUGYo2vwW8gAH5+EgsNfvz9AAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAdUlEQVQ4T2NkoDJgRDIvkYGBYRcDA8NTSuyAGajMwMDQwsDA"
-                + "4MbAwHAXajDI8EOkGo7sQpheO6jBIMNBFoEMhmGCrsdmILKjpJEMd2dgYLhDyPWEDET3Mcz1IMOVoIbXQIMJrJZUA7G5fj6y"
-                + "ICUGYo2vwW8gAH5+EgsNfvz9AAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAHVJREFUOE9jZKAyYEQyL5GBgWEXAwPD"
+                + "U0rsgBmozMDA0MLAwODGwMBwF2owyPBDpBqO7EKYXjuowSDDQRaBDIZhgq7HZiCyo6SRDHdnYGC4Q8j1hAxE9zHM9SDDlaCG"
+                + "10CDCayWVAOxuX4+siAlBmKNr8FvIAB+fhILDX78/QAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAUklEQVQokdXQQRGAMBAEwfYRjMCDaMFLvAQtQUs88MhJOB6s"
                 + "gN6q4cMdKJngjYkHDWcWXAMccdBxYcvAt8B64CPOagbOytCsLNPKlLaCPRP86V4K4A4qOXwp8AAAAABJRU5ErkJggg==",
@@ -1398,16 +1359,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA40lEQVQ4T63TPUpDQRAA4C+l6TxAPEQIeAExHiCNEETQPtZi"
-                + "If4kYGdlIzaCjZ2NSjyJlRbWNoqFoLKyC6+Q8HyZbQZ2mW+HYaYl+LSCPQXcz3CJjf8p4AW+sdVYyolV8AvbUeABPnEYBR7h"
-                + "A8dRYILeMY4CL7GAQRTYxQ3W8YqXHP/tVwd7hFUsooM33OE+x1r4rE1JVa+hj2Vc4wq3s+S6q9fGJnbwiFNM/4LrgtXctE1p"
-                + "zFLPJ3iqPjYBS/4JNrCH83I5D5iMHs5yG3bxPC9YCksLMcRSFJjgFTxEgr/VhoM/OAYkFQrlOVoAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA40lEQVQ4T63TPUpDQRAA4C+l6TxAPEQIeAExHiCNEETQPtZi"
-                + "If4kYGdlIzaCjZ2NSjyJlRbWNoqFoLKyC6+Q8HyZbQZ2mW+HYaYl+LSCPQXcz3CJjf8p4AW+sdVYyolV8AvbUeABPnEYBR7h"
-                + "A8dRYILeMY4CL7GAQRTYxQ3W8YqXHP/tVwd7hFUsooM33OE+x1r4rE1JVa+hj2Vc4wq3s+S6q9fGJnbwiFNM/4LrgtXctE1p"
-                + "zFLPJ3iqPjYBS/4JNrCH83I5D5iMHs5yG3bxPC9YCksLMcRSFJjgFTxEgr/VhoM/OAYkFQrlOVoAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAONJREFUOE+t0z1KQ0EQAOAvpek8QDxE"
+                + "CHgBMR4gjRBE0D7WYiH+JGBnZSM2go2djUo8iZUW1jaKhaCysguvkPB8mW0Gdplvh2GmJfi0gj0F3M9wiY3/KeAFvrHVWMqJ"
+                + "VfAL21HgAT5xGAUe4QPHUWCC3jGOAi+xgEEU2MUN1vGKlxz/7VcHe4RVLKKDN9zhPsda+KxNSVWvoY9lXOMKt7PkuqvXxiZ2"
+                + "8IhTTP+C64LV3LRNacxSzyd4qj42AUv+CTawh/NyOQ+YjB7Ocht28TwvWApLCzHEUhSY4BU8RIK/1YaDPzgGJBUK5TlaAAAA"
+                + "AElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4jdXTqw0CURCG0ZOVrKADHNlsCxSARGLQiC2BkPAI"
                 + "aASGBEMLWJrAkWCgAgxBEBziUsII7lfAEX9myKUF5pHgMgtw9tfgFOtIsMEuEqzwxAg1WhHoGEdc8cYZGwwicOhhghMeP7yK"
@@ -1430,16 +1387,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA4klEQVQ4T83Ur0uEQRAG4Of+BLEZBBGLQTCbRNAih6Bgsgki"
-                + "NptJziYGwejFa4dBMIhRLGLQqsVwwWwyHjLiB8vByf2Y4MKUhfeZCbNbk3xqhXeId7z+1kitSvAcc5jHBB5xjzu8DKqXYJmZ"
-                + "xBJWsI5PtHCJr7/wfmBvZhm7WMMpzvqhg4JVfgHHmMIBnnvhYcEqv4cLbOO6REcFw1jFDTZwW6HjgGHU0cQiPuJiXDCME8xg"
-                + "JwsMp4MtPGVMGOARprGfBc7iIdYpC4wp37CZCV6hnQnG59LJBBvoZoI/j+X/g9+Lnx+HMnS2xgAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA4klEQVQ4T83Ur0uEQRAG4Of+BLEZBBGLQTCbRNAih6Bgsgki"
-                + "NptJziYGwejFa4dBMIhRLGLQqsVwwWwyHjLiB8vByf2Y4MKUhfeZCbNbk3xqhXeId7z+1kitSvAcc5jHBB5xjzu8DKqXYJmZ"
-                + "xBJWsI5PtHCJr7/wfmBvZhm7WMMpzvqhg4JVfgHHmMIBnnvhYcEqv4cLbOO6REcFw1jFDTZwW6HjgGHU0cQiPuJiXDCME8xg"
-                + "JwsMp4MtPGVMGOARprGfBc7iIdYpC4wp37CZCV6hnQnG59LJBBvoZoI/j+X/g9+Lnx+HMnS2xgAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAOJJREFUOE/N1K9LhEEQBuDn/gSxGQQR"
+                + "i0Ewm0TQIoegYLIJIjabSc4mBsHoxWuHQTCIUSxi0KrFcMFsMh4y4gfLwcn9mODClIX3mQmzW5N8aoV3iHe8/tZIrUrwHHOY"
+                + "xwQecY87vAyql2CZmcQSVrCOT7Rwia+/8H5gb2YZu1jDKc76oYOCVX4Bx5jCAZ574WHBKr+HC2zjukRHBcNYxQ02cFuh44Bh"
+                + "1NHEIj7iYlwwjBPMYCcLDKeDLTxlTBjgEaaxnwXO4iHWKQuMKd+wmQleoZ0JxufSyQQb6GaCP4/l/4Pfi58fhzJ0tsYAAAAA"
+                + "SUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmElEQVQ4jdXNoY4BAADG8d88g2BTKJJ8NlGxu3JdMU1QBEXw"
                 + "BBc0mSdQkFXbJVmwCUyx8wIKb/Bd8N+++vv4pwoYoIVSCpxhiyvOWKKPSuKgjA4WuOAXvQT86gsrHDBMwk2sn3g1CY9xQzuJ"
@@ -1462,12 +1415,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAANElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysM/1PoYbBvkb08Ag2k"
-                + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAANElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysM/1PoYbBvkb08Ag2k"
-                + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADRJREFUOE9jZKAyYKSyeQyjBlIeokMr"
+                + "DP9T6GGwb5G9PAINpDAIIdqHVrIZ9TJ5IUD1WAYAYokEFfnLcNAAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGklEQVQ4jWNgGAWjYHCB/xTiUQNHwSgYOAAAZ/s/wXgqXt0A"
                 + "AAAASUVORK5CYII=",
@@ -1486,16 +1436,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T+2SvQ3CQAyFv7RI1FCwAz89YgtoYYyUKUBsAQUN"
-                + "jMEAQCaAErZAlk7iiGzioKPDzRX39Pk92xmJK0vM4+fAFjABTsDjG/eawwvQB64BfA6vq4kGXAG54e4WwZeaRgOOgaMj7gAo"
-                + "qzprKXegUwOVFGsvcAPMa4CSQhb4VpbDKbB3xO5Wr8ECtoEdMAJ6H8ALYBv/ew5bgMMAlwZxkwMwawrUDMZNihRAcwqeyI7d"
-                + "vCR/YKNxqeLkM3wCcUQZFXL2p1wAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T+2SvQ3CQAyFv7RI1FCwAz89YgtoYYyUKUBsAQUN"
-                + "jMEAQCaAErZAlk7iiGzioKPDzRX39Pk92xmJK0vM4+fAFjABTsDjG/eawwvQB64BfA6vq4kGXAG54e4WwZeaRgOOgaMj7gAo"
-                + "qzprKXegUwOVFGsvcAPMa4CSQhb4VpbDKbB3xO5Wr8ECtoEdMAJ6H8ALYBv/ew5bgMMAlwZxkwMwawrUDMZNihRAcwqeyI7d"
-                + "vCR/YKNxqeLkM3wCcUQZFXL2p1wAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAL9JREFUOE/tkr0NwkAMhb+0SNRQsAM/"
+                + "PWILaGGMlClAbAEFDYzBAEAmgBK2QJZO4ohs4qCjw80V9/T5PdsZiStLzOPnwBYwAU7A4xv3msML0AeuAXwOr6uJBlwBueHu"
+                + "FsGXmkYDjoGjI+4AKKs6ayl3oFMDlRRrL3ADzGuAkkIW+FaWwymwd8TuVq/BAraBHTACeh/AC2Ab/3sOW4DDAJcGcZMDMGsK"
+                + "1AzGTYoUQHMKnsiO3bwkf2Cjcani5DN8AnFEGRVy9qdcAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4jWNgGAUMDAwO1DbwPgMDw38ovZ6BgaGBUkv6oQZi"
                 + "w8iWEA0M8BiIjBVIMRTmbXy4gBQD8Xkbhs+TYmAAEQaS5G0BBgaG/UQYSJK3YUAB6uIGLJasJ8dAfJaQ5cJRMArQAACZ8kHB"
@@ -1518,16 +1463,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T+2SvQ3CQAyFv7RI1FCwAz89YgtoYYyUKUBsAQUN"
-                + "jMEAQCaAErZAlk7iiGzioKPDzRX39Pk92xmJK0vM4+fAFjABTsDjG/eawwvQB64BfA6vq4kGXAG54e4WwZeaRgOOgaMj7gAo"
-                + "qzprKXegUwOVFGsvcAPMa4CSQhb4VpbDKbB3xO5Wr8ECtoEdMAJ6H8ALYBv/ew5bgMMAlwZxkwMwawrUDMZNihRAcwqeyI7d"
-                + "vCR/YKNxqeLkM3wCcUQZFXL2p1wAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAv0lEQVQ4T+2SvQ3CQAyFv7RI1FCwAz89YgtoYYyUKUBsAQUN"
-                + "jMEAQCaAErZAlk7iiGzioKPDzRX39Pk92xmJK0vM4+fAFjABTsDjG/eawwvQB64BfA6vq4kGXAG54e4WwZeaRgOOgaMj7gAo"
-                + "qzprKXegUwOVFGsvcAPMa4CSQhb4VpbDKbB3xO5Wr8ECtoEdMAJ6H8ALYBv/ew5bgMMAlwZxkwMwawrUDMZNihRAcwqeyI7d"
-                + "vCR/YKNxqeLkM3wCcUQZFXL2p1wAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAL9JREFUOE/tkr0NwkAMhb+0SNRQsAM/"
+                + "PWILaGGMlClAbAEFDYzBAEAmgBK2QJZO4ohs4qCjw80V9/T5PdsZiStLzOPnwBYwAU7A4xv3msML0AeuAXwOr6uJBlwBueHu"
+                + "FsGXmkYDjoGjI+4AKKs6ayl3oFMDlRRrL3ADzGuAkkIW+FaWwymwd8TuVq/BAraBHTACeh/AC2Ab/3sOW4DDAJcGcZMDMGsK"
+                + "1AzGTYoUQHMKnsiO3bwkf2Cjcani5DN8AnFEGRVy9qdcAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4jWNgGAUMDAwO1DbwPgMDw38ovZ6BgaGBUkv6oQZi"
                 + "w8iWEA0M8BiIjBVIMRTmbXy4gBQD8Xkbhs+TYmAAEQaS5G0BBgaG/UQYSJK3YUAB6uIGLJasJ8dAfJaQ5cJRMArQAACZ8kHB"
@@ -1550,12 +1490,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4T2NkoDJgpLJ5DKMGUh6iIzgMFRgYGJJICME6XGqR"
-                + "w7CJBAPnMTAwPMCmfgRHCgnBh1/paBhSHpRUD0MAmf0DFZFZTHcAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQUlEQVQ4T2NkoDJgpLJ5DKMGUh6iIzgMFRgYGJJICME6XGqR"
-                + "w7CJBAPnMTAwPMCmfgRHCgnBh1/paBhSHpRUD0MAmf0DFZFZTHcAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAEFJREFUOE9jZKAyYKSyeQyjBlIeoiM4"
+                + "DBUYGBiSSAjBOlxqkcOwiQQD5zEwMDzApn4ERwoJwYdf6WgYUh6UVA9DAJn9AxWRWUx3AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAIUlEQVQ4jWNgGAWjYJiDBhIw0Qb2E4kFKHD4KBgFQw8AACnP"
                 + "C6czPZCAAAAAAElFTkSuQmCC",
@@ -1575,14 +1512,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2NkoDJgpLJ5DKMGUh6io2EIDkMWBgaGP+SGJq4w"
-                + "fMDAwHCbgYHhAhK+Sowl+CJFm4GBwQANI1sAYmNYQmoso1uiysDAoIDsclINxOZrlDCnhoEolowaSExKw6+G6mEIAEtuDRVn"
-                + "zxh2AAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2NkoDJgpLJ5DKMGUh6io2EIDkMWBgaGP+SGJq4w"
-                + "fMDAwHCbgYHhAhK+Sowl+CJFm4GBwQANI1sAYmNYQmoso1uiysDAoIDsclINxOZrlDCnhoEolowaSExKw6+G6mEIAEtuDRVn"
-                + "zxh2AAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAGZJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
+                + "CA5DFgYGhj/khiauMHzAwMBwm4GB4QISvkqMJfgiRZuBgcEADSNbAGJjWEJqLKNbosrAwKCA7HJSDcTma5Qwp4aBKJaMGkhM"
+                + "SsOvhuphCABLbg0VZ88YdgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVQ4jWNgGAWjYIQAAVoY+p6BgWE9AwNDPwMDQwADA4MC"
                 + "NQx1YGBgSIAaup+BgeE/PSx5Tw1D0QFNwnwUDGYAAER6Cjb+yQ7RAAAAAElFTkSuQmCC",
@@ -1603,12 +1536,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAM0lEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMGygMQbB+5DCkuoEU"
-                + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAM0lEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMGygMQbB+5DCkuoEU"
-                + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADNJREFUOE9jZKAyYKSyeQyjBlIeoiM8"
+                + "DBsoDEGwfuQwpLqBFDoQon2Ex/JoGJIXAlRPNgCWIAIVwMrcFwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGklEQVQ4jWNgGAWjYJiDBgox7Q0cBaNg2AAAkUIQAVuzCpUA"
                 + "AAAASUVORK5CYII=",
@@ -1627,16 +1557,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRCF4f9ysQYRTC+zCQNLsAkNROMztwnR"
-                + "GmxCLEEswEwEAxl4Ixucy+5qYHATz/sYHlMBNXDmR1MBe+AGbIDLt66BPWAFLIFG8L0UNtBnAKyBqdBtCRqCnh/r4pHgXQ7c"
-                + "Bnp+IvipKo4pcAz0/ExV2CdYx6cYnAJ6fq6LD6ri2gbngJbvC10EH/EI4VzQs0PB1qtd/J5S8GONHZjyuvGdrsM/7PAFTW0Z"
-                + "FZFBvS8AAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAsElEQVQ4T+3SsQkCQRCF4f9ysQYRTC+zCQNLsAkNROMztwnR"
-                + "GmxCLEEswEwEAxl4Ixucy+5qYHATz/sYHlMBNXDmR1MBe+AGbIDLt66BPWAFLIFG8L0UNtBnAKyBqdBtCRqCnh/r4pHgXQ7c"
-                + "Bnp+IvipKo4pcAz0/ExV2CdYx6cYnAJ6fq6LD6ri2gbngJbvC10EH/EI4VzQs0PB1qtd/J5S8GONHZjyuvGdrsM/7PAFTW0Z"
-                + "FZFBvS8AAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALBJREFUOE/t0rEJAkEQheH/crEGEUwv"
+                + "swkDS7AJDUTjM7cJ0RpsQixBLMBMBAMZeCMbnMvuamBwE8/7GB5TATVw5kdTAXvgBmyAy7eugT1gBSyBRvC9FDbQZwCsganQ"
+                + "bQkagp4f6+KR4F0O3AZ6fiL4qSqOKXAM9PxMVdgnWMenGJwCen6uiw+q4toG54CW7wtdBB/xCOFc0LNDwdarXfyeUvBjjR2Y"
+                + "8rrxna7DP+zwBU1tGRWRQb0vAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdklEQVQ4je3MsQ0BAQAF0NdKxAQicRtco1YpjKAxgsIGl4tY"
                 + "4HISuQk0RlAYQXMjaEwgYomvcm+Axw80OGGWCsc44IMao1Q8xxlP7FIpLHDFA5tkvMYdN6yS8RY9LiiT8R4vtJim0gmOeKNK"
@@ -1659,12 +1584,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
-                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAADdJREFUOE9jZKAyYKSyeQzIBv6n0HCw"
+                + "WaMGUhSKtA9DipwH00zTdDjqQvJCYDRSyAs3ZF2DPwwBbfkGFYXESWwAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
                 + "AAAAAElFTkSuQmCC",
@@ -1683,18 +1605,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA90lEQVQ4T8XTwSoFcRQH4O8+hPIAkuRulSXqLiyUPMFlYyMW"
-                + "srUXi5uNEkrd7uJ2ywvYsLCyEEmegKw8AR2N0mTMf24Ts5w635wzv3Maan4aNXv+BNzg80NtPOECA7ymTJPvMLA57GXYDFYw"
-                + "mb07LEPz4CZucJUrbOIYj9jGcxGcB2/RwktBwQGmMJsK9tHFedloqeAaFrBYFziCayzhbhj0pz2MLiPZ6brAcM7whvWqaNGl"
-                + "jKKHS+xUQX87vTEc4b5Kp2W3HJ3uYgKrKUGVgV/TRlBbeMBJtgnjWXD7339JKhg1sVLLmEdgp3hHZ1gwKZsqHf4P+AEXuSUV"
-                + "Nt04AAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA90lEQVQ4T8XTwSoFcRQH4O8+hPIAkuRulSXqLiyUPMFlYyMW"
-                + "srUXi5uNEkrd7uJ2ywvYsLCyEEmegKw8AR2N0mTMf24Ts5w635wzv3Maan4aNXv+BNzg80NtPOECA7ymTJPvMLA57GXYDFYw"
-                + "mb07LEPz4CZucJUrbOIYj9jGcxGcB2/RwktBwQGmMJsK9tHFedloqeAaFrBYFziCayzhbhj0pz2MLiPZ6brAcM7whvWqaNGl"
-                + "jKKHS+xUQX87vTEc4b5Kp2W3HJ3uYgKrKUGVgV/TRlBbeMBJtgnjWXD7339JKhg1sVLLmEdgp3hHZ1gwKZsqHf4P+AEXuSUV"
-                + "Nt04AAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAPdJREFUOE/F08EqBXEUB+DvPoTyAJLk"
+                + "bpUl6i4slDzBZWMjFrK1F4ubjRJK3e7idssL2LCwshBJnoCsPAEdjdJkzH9uE7OcOt+cM79zGmp+GjV7/gTc4PNDbTzhAgO8"
+                + "pkyT7zCwOexl2AxWMJm9OyxD8+AmbnCVK2ziGI/YxnMRnAdv0cJLQcEBpjCbCvbRxXnZaKngGhawWBc4gmss4W4Y9Kc9jC4j"
+                + "2em6wHDO8Ib1qmjRpYyih0vsVEF/O70xHOG+Sqdltxyd7mICqylBlYFf00ZQW3jASbYJ41lw+99/SSoYNbFSy5hHYKd4R2dY"
+                + "MCmbKh3+D/gBF7klFTbdOAAAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAm0lEQVQ4je3UsRWCMBRG4W8AqZ2JFg+sYOci2OkaqC0DoNbO"
                 + "wgAWL5VHPSLp9FZpcpP38r/wByU69NijnisbsU7rDQZc0Xwj7JLskQo3tFOFfbrZM4p04HGKcCfKfMdyirDGecqGT7hglVPY"
@@ -1714,16 +1630,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA50lEQVQ4T82UvQ4BURBGz5QKtVqLxBtorQdQKyU6T6JTqGi9"
-                + "ALUnIEKr1yqUI3ezkrX3V7IRU8+cO9/MN1eoOaRmHr8BqpIBTeAqwuUbFVaHquyBYQlyAhYibFLAH8Cis52n0Dw0E+EWAleB"
-                + "Y2AbKHgCmQgHX04V2APOEWl3EVpJQJOkyhHoR6AjkXzWVriWMgHWEeBKhGkSsOjSLMZYxxde2U5jq9KG3H+NANQp23spqgwg"
-                + "n5MP6pQdPL0I1Ck7esuF/KVnppbsKPA9Q1XM9ucVS1myk4ElcBfoAA+XF78Gxj6I/we+AL7COxV8h8fPAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA50lEQVQ4T82UvQ4BURBGz5QKtVqLxBtorQdQKyU6T6JTqGi9"
-                + "ALUnIEKr1yqUI3ezkrX3V7IRU8+cO9/MN1eoOaRmHr8BqpIBTeAqwuUbFVaHquyBYQlyAhYibFLAH8Cis52n0Dw0E+EWAleB"
-                + "Y2AbKHgCmQgHX04V2APOEWl3EVpJQJOkyhHoR6AjkXzWVriWMgHWEeBKhGkSsOjSLMZYxxde2U5jq9KG3H+NANQp23spqgwg"
-                + "n5MP6pQdPL0I1Ck7esuF/KVnppbsKPA9Q1XM9ucVS1myk4ElcBfoAA+XF78Gxj6I/we+AL7COxV8h8fPAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAOdJREFUOE/NlL0OAVEQRs+UCrVai8Qb"
+                + "aK0HUCslOk+iU6hovQC1JyBCq9cqlCN3s5K191eyEVPPnDvfzDdXqDmkZh6/AaqSAU3gKsLlGxVWh6rsgWEJcgIWImxSwB/A"
+                + "orOdp9A8NBPhFgJXgWNgGyh4ApkIB19OFdgDzhFpdxFaSUCTpMoR6EegI5F81la4ljIB1hHgSoRpErDo0izGWMcXXtlOY6vS"
+                + "htx/jQDUKdt7KaoMIJ+TD+qUHTy9CNQpO3rLhfylZ6aW7CjwPUNVzPbnFUtZspOBJXAX6AAPlxe/BsY+iP8HvgC+wjsVfIfH"
+                + "zwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAi0lEQVQ4je3TTQ2AMAyG4U/CJCBhEpCAJBwgAQlIQAISkICE"
                 + "l0tJduCnGzsRmvT6pF/TSn9JEqgBtbWwAbSBsJ5B3ZvJUiztqQSMF9jRCyjmgOEBBLTlTrk4UP9OHbEBjblTzrVjB0f0vFOy"
@@ -1744,16 +1656,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAwUlEQVQ4T+3UIW4CQRTG8d9WoRCk3ICkjjPUgaguCk1Jg8Sh"
-                + "UFyAEJI6VDkBkjPgUBygTQWqooJssiRku7PZTUYybjLf+7/5vry8ROSTROa5AwsTbeGnatZlGXYwxQmLGMAP/OGtKizVhX7Y"
-                + "wwQvdWBlwBkeMI8FfEcXowBwjQOW+feQ5QHGeA4A91jhsyow1e1wxmuuaIsm+kXNysamjQ0aOGbFT/jFEF91gVd9av8xu3wX"
-                + "2bwF35dD3TH+r4+e4QUSbhYV9wlfkwAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAwUlEQVQ4T+3UIW4CQRTG8d9WoRCk3ICkjjPUgaguCk1Jg8Sh"
-                + "UFyAEJI6VDkBkjPgUBygTQWqooJssiRku7PZTUYybjLf+7/5vry8ROSTROa5AwsTbeGnatZlGXYwxQmLGMAP/OGtKizVhX7Y"
-                + "wwQvdWBlwBkeMI8FfEcXowBwjQOW+feQ5QHGeA4A91jhsyow1e1wxmuuaIsm+kXNysamjQ0aOGbFT/jFEF91gVd9av8xu3wX"
-                + "2bwF35dD3TH+r4+e4QUSbhYV9wlfkwAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAMFJREFUOE/t1CFuAkEUxvHfVqEQpNyA"
+                + "pI4z1IGoLgpNSYPEoVBcgBCSOlQ5AZIz4FAcoE0FqqKCbLIkZLuz2U1GMm4y3/u/+b68vETkk0TmuQMLE23hp2rWZRl2MMUJ"
+                + "ixjAD/zhrSos1YV+2MMEL3VgZcAZHjCPBXxHF6MAcI0Dlvn3kOUBxngOAPdY4bMqMNXtcMZrrmiLJvpFzcrGpo0NGjhmxU/4"
+                + "xRBfdYFXfWr/Mbt8F9m8Bd+XQ90x/q+PnuEFEm4WFfcJX5MAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbklEQVQ4je3QsQ2AIBCF4b81LuAmzGNJ6xxuIAWtVs7BOBbU"
                 + "FpydIUKusLivIrzjJQcYswKLVtkBnMCoUTYBl0bRYwZ2zUIPhEq+ycxnDsiVPMtMkwikl/skWbNBHmbKikHOUbJujvJfno41"
@@ -1776,16 +1683,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApElEQVQ4T+3SLQoCURSG4WeCYLLoAmw2k4uwWjS5FifbRVyC"
-                + "FrfgAgTBJha7ZjEY5F4mCQMzzkzz5HNevp+TIFXjJBmwLmj6B1Zu559h5Qg1m+EMvUzkA9sfBEeFSwzRxiWDDPDCHPcS4Ai8"
-                + "4oTp1+EOHYzLAm/o5xwdsC5hfxEUHjHKAW5wxqqgymi5dmCdlpspJbzNBC2E/wvTxRt7PAvmF9c+ZTExFH4T/k4AAAAASUVO"
-                + "RK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApElEQVQ4T+3SLQoCURSG4WeCYLLoAmw2k4uwWjS5FifbRVyC"
-                + "FrfgAgTBJha7ZjEY5F4mCQMzzkzz5HNevp+TIFXjJBmwLmj6B1Zu559h5Qg1m+EMvUzkA9sfBEeFSwzRxiWDDPDCHPcS4Ai8"
-                + "4oTp1+EOHYzLAm/o5xwdsC5hfxEUHjHKAW5wxqqgymi5dmCdlpspJbzNBC2E/wvTxRt7PAvmF9c+ZTExFH4T/k4AAAAASUVO"
-                + "RK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAKRJREFUOE/t0i0KAlEUhuFngmCy6AJs"
+                + "NpOLsFo0uRYn20Vcgha34AIEwSYWu2YxGOReJgkDM85M8+RzXr6fkyBV4yQZsC5o+gdWbuefYeUINZvhDL1M5APbHwRHhUsM"
+                + "0cYlgwzwwhz3EuAIvOKE6dfhDh2MywJv6OccHbAuYX8RFB4xygFucMaqoMpouXZgnZabKSW8zQQthP8L08UbezwL5hfXPmUx"
+                + "MRR+E/5OAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAf0lEQVQ4je3SsQnDMBAF0NdmIs+ULVRkC7vwJiKtIfY2bty4"
                 + "0JEqCJSoChYcHOjz4HSCjNSpsmh6nXSBF/j34IB71PAL+MCMHRPG6GfcvgE3LB8ul0CbwaMS2LWNn+BVCUwN2BtcK4FRWVIT"
@@ -1808,14 +1710,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAd0lEQVQ4T+3UsQ3CMBBA0eeShpaGni4VQ2QJWjaKUEZIpmAG"
-                + "1oABUiK3loOs4CKF3fvp/C1dUPmEyp4GZote0eGAD6Zf3Usa3nHCGRcsuOGdg0vA9N6MI/paYHSeeOSev2XCCI54YUin3Aqu"
-                + "/ksD/18VreEOG34BnYcKFagjKwUAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAd0lEQVQ4T+3UsQ3CMBBA0eeShpaGni4VQ2QJWjaKUEZIpmAG"
-                + "1oABUiK3loOs4CKF3fvp/C1dUPmEyp4GZote0eGAD6Zf3Usa3nHCGRcsuOGdg0vA9N6MI/paYHSeeOSev2XCCI54YUin3Aqu"
-                + "/ksD/18VreEOG34BnYcKFagjKwUAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHdJREFUOE/t1LENwjAQQNHnkoaWhp4u"
+                + "FUNkCVo2ilBGSKZgBtaAAVIit5aDrOAihd376fwtXVD5hMqeBmaLXtHhgA+mX91LGt5xwhkXLLjhnYNLwPTejCP6WmB0nnjk"
+                + "nr9lwgiOeGFIp9wKrv5LA/9fFa3hDht+AZ2HChWoIysFAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAR0lEQVQ4je3QMQ2AMBRF0bNWBDqwVGbkAAl6KqgzA9RA8xeS"
                 + "fwTc5D3SLy2o2LBGBHdcONBxo0SEh/ZFQ3VB84fT+2lKacoDTsgIDIbBFacAAAAASUVORK5CYII=",
@@ -1835,14 +1733,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmklEQVQ4T+3UoQ0CQRBG4e8cCgU14KgBSQWg0IRcPYSgUVAB"
-                + "khpw1AAKhSSbHILL7iZcNqhbO5mXff9MplL4VYV5emA00SVGTeWBYy73XIZjHDDArYFM8MIK9xg4BzzjiUWr8YQh5r8Ag+YG"
-                + "s4TeBbuYfuqHNaZYJ4B7XLFt1/8GLK4cTIoOJQCLr80n72KL3ekQ9demU2xfTW+HmB4VAkhDzQAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmklEQVQ4T+3UoQ0CQRBG4e8cCgU14KgBSQWg0IRcPYSgUVAB"
-                + "khpw1AAKhSSbHILL7iZcNqhbO5mXff9MplL4VYV5emA00SVGTeWBYy73XIZjHDDArYFM8MIK9xg4BzzjiUWr8YQh5r8Ag+YG"
-                + "s4TeBbuYfuqHNaZYJ4B7XLFt1/8GLK4cTIoOJQCLr80n72KL3ekQ9demU2xfTW+HmB4VAkhDzQAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAJpJREFUOE/t1KENAkEQRuHvHAoFNeCo"
+                + "AUkFoNCEXD2EoFFQAZIacNQACoUkmxyCy+4mXDaoWzuZl33/TKZS+FWFeXpgNNElRk3lgWMu91yGYxwwwK2BTPDCCvcYOAc8"
+                + "44lFq/GEIea/AIPmBrOE3gW7mH7qhzWmWCeAe1yxbdf/BiyuHEyKDiUAi6/NJ+9ii93pEPXXplNsX01vh5geFQJIQ80AAAAA"
+                + "SUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAaUlEQVQ4je2SQQrAIAwE59oX5U2+yRzyHh/kuQfTQ6FSgoFS"
                 + "cEAIblhcXNj8EgGKH1kxOgADOqBA9dlcC2NAe7hvroUQf82MTjB+YUScob4TMtQXwxDpkSH5U+Bem8qIuVSbi7Ribz7iBHkE"
@@ -1865,14 +1760,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdklEQVQ4T+2UsQ2AMAwEzxPBVBQwBGEIKJgKJjIKBUIoThEM"
-                + "VdL73rm8IjgfceZRge+N5h0GepQOoTmjlB1hJbBY0TYwwmA2BgcLagNHtmuzJzVuOtGmwnIbatZoSFfuR+AHV3Z+lCjQtTaF"
-                + "Ha+fQ6G425i7wwPzuB4VlcqptAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdklEQVQ4T+2UsQ2AMAwEzxPBVBQwBGEIKJgKJjIKBUIoThEM"
-                + "VdL73rm8IjgfceZRge+N5h0GepQOoTmjlB1hJbBY0TYwwmA2BgcLagNHtmuzJzVuOtGmwnIbatZoSFfuR+AHV3Z+lCjQtTaF"
-                + "Ha+fQ6G425i7wwPzuB4VlcqptAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHZJREFUOE/tlLENgDAMBM8TwVQUMARh"
+                + "CCiYCiYyCgVCKE4RDFXS+965vCI4H3HmUYHvjeYdBnqUDqE5o5QdYSWwWNE2MMJgNgYHC2oDR7Zrsyc1bjrRpsJyG2rWaEhX"
+                + "7kfgB1d2fpQo0LU2hR2vn0OhuNuYu8MD87geFZXKqbQAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZElEQVQ4jWNgGAUjHTQwCDA0MPQzNDCcZ2hguM/QwDCfoYFB"
                 + "gRLD3jM0MPxHw+/JMxTiGnTDYHg+OQbex2Pg+0FhID4vryfHQAGcrmtgMCDdQISh86GGvGdoYNhPfrIZBcMHAABnQk69XCBV"
@@ -1896,18 +1787,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCElEQVQ4T83US0oDQRSF4a/FhSi6DgXRbQgq6C5MKe7BVjSI"
-                + "I2cuQMHHxAU4UiHZgyNBMWJXh7RtJ+k0QbxQUINTP6du3VOJKVcyZZ7hwH3LPq1jCXOYRRe3OBPcV5mpBgYn2Brj/liwU9b8"
-                + "BgZXWK3ZimvBWlH7ExgcYbsmrC9rC4PbDIAh69XdhLAoT6xouYnbfgVtbDQCxkfKzhaBHcw3BHYEC2VgryEsHgvRXNHhez5r"
-                + "k3IvzEjtxv4XgS9YrEl7Q+pD6sBT9dgEp9gcCUx09aTZ2vM6Oikxat+xqqqHzFFwPu4G5cEuR+5S4lArS0+tGha957zRj7Uo"
-                + "BdEffl+TWsv1/9/hF6I7OBXnPPH0AAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCElEQVQ4T83US0oDQRSF4a/FhSi6DgXRbQgq6C5MKe7BVjSI"
-                + "I2cuQMHHxAU4UiHZgyNBMWJXh7RtJ+k0QbxQUINTP6du3VOJKVcyZZ7hwH3LPq1jCXOYRRe3OBPcV5mpBgYn2Brj/liwU9b8"
-                + "BgZXWK3ZimvBWlH7ExgcYbsmrC9rC4PbDIAh69XdhLAoT6xouYnbfgVtbDQCxkfKzhaBHcw3BHYEC2VgryEsHgvRXNHhez5r"
-                + "k3IvzEjtxv4XgS9YrEl7Q+pD6sBT9dgEp9gcCUx09aTZ2vM6Oikxat+xqqqHzFFwPu4G5cEuR+5S4lArS0+tGha957zRj7Uo"
-                + "BdEffl+TWsv1/9/hF6I7OBXnPPH0AAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAQhJREFUOE/N1EtKA0EUheGvxYUoug4F"
+                + "0W0IKuguTCnuwVY0iCNnLkDBx8QFOFIh2YMjQTFiV4e0bSfpNEG8UFCDUz+nbt1TiSlXMmWe4cB9yz6tYwlzmEUXtzgT3FeZ"
+                + "qQYGJ9ga4/5YsFPW/AYGV1it2YprwVpR+xMYHGG7JqwvawuD2wyAIevV3YSwKE+saLmJ234FbWw0AsZHys4WgR3MNwR2BAtl"
+                + "YK8hLB4L0VzR4Xs+a5NyL8xI7cb+F4EvWKxJe0PqQ+rAU/XYBKfYHAlMdPWk2drzOjopMWrfsaqqh8xRcD7uBuXBLkfuUuJQ"
+                + "K0tPrRoWvee80Y+1KAXRH35fk1rL9f/f4ReiOzgV5zzx9AAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmUlEQVQ4je3TawnDMBSG4VdCJFRCJVRKJUTC52ASKqESIqUS"
                 + "ImH9kQ46dtJcGINBD5x/4eHcAv8bYkB4REBExIZYEQ+Ea8X8gTwv0tdADrEUoHOuNZXVYq+cr6ortZnLwQLViWXmmTbYCxqz"
@@ -1932,16 +1817,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAt0lEQVQ4T8WTsQ0CMQxF381CcTuwAAvQUt0EMAhMQEV7C7AA"
-                + "O1CwC7J0h6IQ+7uIIFWk2O9/Jz8DndfQmcdPgDfglXS+AQ5lbe1wD1yAaxI4AUdgXutbIz+Ac1nkwE38BGwjh3bWLGxAm8Le"
-                + "oyiXrqgHVC5dwSg2XlMoFgG9xvA6VLDrZnUV8qfUAPVYEmhpWSG2/8pdHSc1cplL28vAZ4AGei5ORvUls8DdArr3AirO5zzr"
-                + "8H/AN8CgIxU+kSAmAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAt0lEQVQ4T8WTsQ0CMQxF381CcTuwAAvQUt0EMAhMQEV7C7AA"
-                + "O1CwC7J0h6IQ+7uIIFWk2O9/Jz8DndfQmcdPgDfglXS+AQ5lbe1wD1yAaxI4AUdgXutbIz+Ac1nkwE38BGwjh3bWLGxAm8Le"
-                + "oyiXrqgHVC5dwSg2XlMoFgG9xvA6VLDrZnUV8qfUAPVYEmhpWSG2/8pdHSc1cplL28vAZ4AGei5ORvUls8DdArr3AirO5zzr"
-                + "8H/AN8CgIxU+kSAmAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALdJREFUOE/Fk7ENAjEMRd/NQnE7sAAL"
+                + "0FLdBDAITEBFewuwADtQsAuydIeiEPu7iCBVpNjvfyc/A53X0JnHT4A34JV0vgEOZW3tcA9cgGsSOAFHYF7rWyM/gHNZ5MBN"
+                + "/ARsI4d21ixsQJvC3qMol66oB1QuXcEoNl5TKBYBvcbwOlSw62Z1FfKn1AD1WBJoaVkhtv/KXR0nNXKZS9vLwGeABnouTkb1"
+                + "JbPA3QK69wIqzuc86/B/wDfAoCMVPpEgJgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVQ4je2PsREAIAgDM6QDOZ07WLuIDTR6aEA7/Tu6JL7A"
                 + "8+TgmSQAzTHUpLOkMCHJFCJHB9mHqTBtxxZcdruS225XDNlZ5bCdNXBkN44c2yk6dMVOqXLX0C9/ZjqpYSbR+dDHYAAAAABJ"
@@ -1964,12 +1844,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
+                + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
                 + "TkSuQmCC",
@@ -1988,12 +1865,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
+                + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
                 + "TkSuQmCC",
@@ -2012,12 +1886,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
-                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAChJREFUOE9jZKAyYKSyeQyjBlIeoqNh"
+                + "OBqGZITAaLIhI9DQtIzAMAQASMYAFTvklLAAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
                 + "TkSuQmCC",
@@ -2036,16 +1907,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAArklEQVQ4T+2TsRGCQBBFH7UY0AMN2ICpERVIIVIBkSkN2IA9"
-                + "GNiLs86tsywHh7OGXMTsn/9u+Xwq/nwqwzsCd8e3sxvwcvoBONuZAk9ABzTO8ACuadYDg9Nb4AKMOrcbqllFf0lJ/zAt8FeA"
-                + "v2AGlIF9xVIEOX2yoQB1S3mW7L7ZpIxK+gwovmcy1wuNWtVthuqXqsjxFdqk54Chqu/AUHzZYoeJ+0cJR5j9l0PUN96cIRWF"
-                + "sMoDAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAArklEQVQ4T+2TsRGCQBBFH7UY0AMN2ICpERVIIVIBkSkN2IA9"
-                + "GNiLs86tsywHh7OGXMTsn/9u+Xwq/nwqwzsCd8e3sxvwcvoBONuZAk9ABzTO8ACuadYDg9Nb4AKMOrcbqllFf0lJ/zAt8FeA"
-                + "v2AGlIF9xVIEOX2yoQB1S3mW7L7ZpIxK+gwovmcy1wuNWtVthuqXqsjxFdqk54Chqu/AUHzZYoeJ+0cJR5j9l0PUN96cIRWF"
-                + "sMoDAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAK5JREFUOE/tk7ERgkAQRR+1GNADDdiA"
+                + "qREVSCFSAZEpDdiAPRjYi7POrbMsB4ezhlzE7J//bvl8Kv58KsM7AnfHt7Mb8HL6ATjbmQJPQAc0zvAArmnWA4PTW+ACjDq3"
+                + "G6pZRX9JSf8wLfBXgL9gBpSBfcVSBDl9sqEAdUt5luy+2aSMSvoMKL5nMtcLjVrVbYbql6rI8RXapOeAoarvwFB82WKHiftH"
+                + "CUeY/ZdD1DfenCEVhbDKAwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAWElEQVQ4jWNgGCDQQABjAD4GBoZjWMSPQeVCGBgYHmMx6DFU"
                 + "Dis4hiYZgmYJIXkMQKoB6PJ4XYnLdkLyOF2Jy3ZC8ljBTSgmVx6rK/DZTkh+FIyCUUB/AADnCiBrRndbagAAAABJRU5ErkJg"
@@ -2069,14 +1935,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2Nk2Mf8nwEZOP1lROET4qDpZ6S6gfsYUF3oxECa"
-                + "C9H1M1LdQHgQURqWUIMQEUBtAyn1OsyncBdS3UBCyY1YedISMRGmjhpIRCARUDISwhCjPKQ02KhtIEZ5SLED0QpoADR/JhX5"
-                + "NimNAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2Nk2Mf8nwEZOP1lROET4qDpZ6S6gfsYUF3oxECa"
-                + "C9H1M1LdQHgQURqWUIMQEUBtAyn1OsyncBdS3UBCyY1YedISMRGmjhpIRCARUDISwhCjPKQ02KhtIEZ5SLED0QpoADR/JhX5"
-                + "NimNAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAGZJREFUOE9jZNjH/J8BGTj9ZUThE+Kg"
+                + "6WekuoH7GFBd6MRAmgvR9TNS3UB4EFEallCDEBFAbQMp9TrMp3AXUt1AQsmNWHnSEjERpo4aSEQgEVAyEsIQozykNNiobSBG"
+                + "eUixA9EKaAA0fyYV+TYpjQAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4jWNg2Mf8HwWTCjD0U9vAfQzM/5Exyeah66e6gTid"
                 + "TjGgtoGUep32Bo6CUTCkwWgZAADAuXABXILcxAAAAABJRU5ErkJggg==",
@@ -2106,14 +1968,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAa0lEQVQ4T2Nk2Mf8n4GBgWGfE4hEACeGv4yoIsTxGKlu4D4G"
-                + "iAvJdRG6uxmpbiDcBmhYwvlO5IYhzARqGwjzOsx8csMUnjSobiBxqYywKrISLz5jRw0kHOiEVIyGIaEQIixPvTCEFi5UNxAA"
-                + "QAsdlUr5XXwAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAa0lEQVQ4T2Nk2Mf8n4GBgWGfE4hEACeGv4yoIsTxGKlu4D4G"
-                + "iAvJdRG6uxmpbiDcBmhYwvlO5IYhzARqGwjzOsx8csMUnjSobiBxqYywKrISLz5jRw0kHOiEVIyGIaEQIixPvTCEFi5UNxAA"
-                + "QAsdlUr5XXwAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAGtJREFUOE9jZNjH/J+BgYFhnxOIRAAn"
+                + "hr+MqCLE8RipbuA+BogLyXURursZqW4g3AZoWML5TuSGIcwEahsI8zrMfHLDFJ40qG4gcamMsCqyEi8+Y0cNJBzohFSMhiGh"
+                + "ECIsT70whBYuVDcQAEALHZVK+V18AAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAOklEQVQ4jWNg2Mf8n2Ef8/99DKiYgWxAbQMpdxGtDUSYDPE6"
                 + "HA86A6kXy7QycBSMglFAF0C1UgrNQAAO0T8Blr60fgAAAABJRU5ErkJggg==",
@@ -2143,14 +2001,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXUlEQVQ4T+2SyQkAIAwEE+zMwtOZKNGPEGE99qnfwDAOq0J+"
-                + "SuVZqh1okmqW8gx3zjNk/iEd6HCq4RLo2n64bRoM6cAwIxvGkvdWgBvSgYfLx4YfiAr8hqgQvtMbNp+UFFXneC64AAAAAElF"
-                + "TkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXUlEQVQ4T+2SyQkAIAwEE+zMwtOZKNGPEGE99qnfwDAOq0J+"
-                + "SuVZqh1okmqW8gx3zjNk/iEd6HCq4RLo2n64bRoM6cAwIxvGkvdWgBvSgYfLx4YfiAr8hqgQvtMbNp+UFFXneC64AAAAAElF"
-                + "TkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAF1JREFUOE/tkskJACAMBBPszMLTmSjR"
+                + "jxBhPfap38AwDqtCfkrlWaodaJJqlvIMd84zZP4hHehwquES6Np+uG0aDOnAMCMbxpL3VoAb0oGHy8eGH4gK/IaoEL7TGzaf"
+                + "lBRV53guuAAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAOElEQVQ4jWNgGNRgH/N/CM0AZVBqHpXMoZ2B9AH7GJj/U9Xp"
                 + "VDcQ0wbm//DkMDgNHAWjYBQwMAAACd4VASBR1nMAAAAASUVORK5CYII=",
@@ -2180,22 +2034,14 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABfElEQVQ4T63Uv0uXURTH8ZdIk39AppMQNUXQGLZIGILQIgRF"
-                + "BC7+aFKcxEEcGnVoMCGKkGhpDLKmQNRNEMQQmiQQFwmVICOUA8+Vy9Pz1af0jvfe8z6/Puc0ueDTlPHu4VOJH3eX8KGu3wTs"
-                + "wyhulwy/oh238K0ONI9wGdN4j5sYRC8C2oFwunYWNAeGwRS+4waa8QUbeIQ2LGEGHxuBc+AkxjGLxYoSxN0WujCH+P/XScB4"
-                + "7C5gQ8WvlH4yuooVDGMEn6ugAezBK1zDPjYLwvWKAKKmr3EXC+gvpx/A8PQGbwtASCVOWUKJP4b7eIEnRWYnvgO4jStZNEdn"
-                + "dTJ7/1lI7aT7AZzH4/8EHuIpXib7AEZD8o79S4TBeYeHFwX8jWd5QOdNeQcT5ZTP05QDdOYjWSWbujWMDq/iTq6KKmHXBcYQ"
-                + "PKgSdjhIoxei3quhw108bzR6yT6gA2g9BRhp/inW3KnLITFirmPjxEKNlC7jF36gBevFimu4vo4BevlWFYnpLtIAAAAASUVO"
-                + "RK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABfElEQVQ4T63Uv0uXURTH8ZdIk39AppMQNUXQGLZIGILQIgRF"
-                + "BC7+aFKcxEEcGnVoMCGKkGhpDLKmQNRNEMQQmiQQFwmVICOUA8+Vy9Pz1af0jvfe8z6/Puc0ueDTlPHu4VOJH3eX8KGu3wTs"
-                + "wyhulwy/oh238K0ONI9wGdN4j5sYRC8C2oFwunYWNAeGwRS+4waa8QUbeIQ2LGEGHxuBc+AkxjGLxYoSxN0WujCH+P/XScB4"
-                + "7C5gQ8WvlH4yuooVDGMEn6ugAezBK1zDPjYLwvWKAKKmr3EXC+gvpx/A8PQGbwtASCVOWUKJP4b7eIEnRWYnvgO4jStZNEdn"
-                + "dTJ7/1lI7aT7AZzH4/8EHuIpXib7AEZD8o79S4TBeYeHFwX8jWd5QOdNeQcT5ZTP05QDdOYjWSWbujWMDq/iTq6KKmHXBcYQ"
-                + "PKgSdjhIoxei3quhw108bzR6yT6gA2g9BRhp/inW3KnLITFirmPjxEKNlC7jF36gBevFimu4vo4BevlWFYnpLtIAAAAASUVO"
-                + "RK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAXxJREFUOE+t1L9Ll1EUx/GXSJN/QKaT"
+                + "EDVF0Bi2SBiC0CIERQQu/mhSnMRBHBp1aDAhipBoaQyypkDUTRDEEJokEBcJlSAjlAPPlcvT89Wn9I733vM+vz7nNLng05Tx"
+                + "7uFTiR93l/Chrt8E7MMobpcMv6Idt/CtDjSPcBnTeI+bGEQvAtqBcLp2FjQHhsEUvuMGmvEFG3iENixhBh8bgXPgJMYxi8WK"
+                + "EsTdFrowh/j/10nAeOwuYEPFr5R+MrqKFQxjBJ+roAHswStcwz42C8L1igCipq9xFwvoL6cfwPD0Bm8LQEglTllCiT+G+3iB"
+                + "J0VmJ74DuI0rWTRHZ3Uye/9ZSO2k+wGcx+P/BB7iKV4m+wBGQ/KO/UuEwXmHhxcF/I1neUDnTXkHE+WUz9OUA3TmI1klm7o1"
+                + "jA6v4k6uiiph1wXGEDyoEnY4SKMXot6rocNdPG80esk+oANoPQUYaf4p1typyyExYq5j48RCjZQu4xd+oAXrxYpruL6OAXr5"
+                + "VhWJ6S7SAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCElEQVQ4jb3UP07DUAzH8c+AGLlCl54B1Dt0LBI7EwNbB8TA"
                 + "RXoBlhwAqROIbqBuiIETwFKCVP6pZcCRovS1JG3FT/Jgx/7mOX4O/6weuusU7mGUiD/gFe11oKM4EezgDE/IMI5YI/VwF4AZ"
@@ -2221,16 +2067,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAArUlEQVQ4T2NkoDJgpLJ5DDgN/C8yyZ7hP1Mc49ucZFIsxWPg"
-                + "5P8ggxjf5JLki1EDEcH/X2TYhyHMizBPw5ILujiuNAlTD082/0Um32VgYFAi08B7jG9ylcHpFmbAf+EpcxkY/yeRZeB/xnmw"
-                + "HIXkwkn2DAyMB8gykOG/A+ObvIMoLgRx/otMnsXAwJCKnOWICMPZjG9y0+AOwRXIQyEdUrn4IqUMRFZLUllHjCUA7nRdFSxw"
-                + "V1kAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAArUlEQVQ4T2NkoDJgpLJ5DDgN/C8yyZ7hP1Mc49ucZFIsxWPg"
-                + "5P8ggxjf5JLki1EDEcH/X2TYhyHMizBPw5ILujiuNAlTD082/0Um32VgYFAi08B7jG9ylcHpFmbAf+EpcxkY/yeRZeB/xnmw"
-                + "HIXkwkn2DAyMB8gykOG/A+ObvIMoLgRx/otMnsXAwJCKnOWICMPZjG9y0+AOwRXIQyEdUrn4IqUMRFZLUllHjCUA7nRdFSxw"
-                + "V1kAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAK1JREFUOE9jZKAyYKSyeQw4DfwvMsme"
+                + "4T9THOPbnGRSLMVj4OT/IIMY3+SS5ItRAxHB/19k2IchzIswT8OSC7o4rjQJUw9PNv9FJt9lYGBQItPAe4xvcpXB6RZmwH/h"
+                + "KXMZGP8nkWXgf8Z5sByF5MJJ9gwMjAfIMpDhvwPjm7yDKC4Ecf6LTJ7FwMCQipzliAjD2YxvctPgDsEVyEMhHVK5+CKlDERW"
+                + "S1JZR4wlAO50XRUscFdZAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbklEQVQ4jWNgGLLgv+hUg/8ikwqoZ6DI5Pf/RSb/p6aB/0cN"
                 + "HG4G/heech9mCLJByGJ48HtsBs6nwMD9WLw4sYF8A6f0Yxoo0K9ApoHv/4tMdsAejiKTCkg3cGID4RhiGIzJBsNA0akGRHtn"
@@ -2253,12 +2094,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7UlEQVQ4T+3Ur0pEQRTH8c/ULYIIg"
-                + "iAbFsEmGIXFJvoOBv+wBsEgGmQtIth8htXiKxiFfQKDyWQwb9VguDK7szhcYb1cjPeUA8OZ7/zmd8"
-                + "5MwBU2TWKYcu0U0s4IjTHNDbC6A5mHe8vcjbCFNewSHnJUMWneBbbT+mFgkNeUgV84RQs3uCTEQ8a"
-                + "RgEfooY0TnAc+pjVl4NOPqiKCHwmvJWAnqipYiDBczwJWUfgnMA32zhzHn6x3WFpkf8D9e+5Pj/Yq"
-                + "82c8r9C6ZeOA4YgoZBzxyhmw+0b/pXpPf1fO8LAetnl6zW9TY3L+fWy+AejsRJW3OyxAAAAAAElFT"
-                + "kSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAO1JREFUOE/t1K9KREEUx/HP1C2CCIIg"
+                + "GxbBJhiFxSb6Dgb/sAbBIBpkLSLYfIbV4isYhX0Cg8lkMG/VYLgyu7M4XGG9XIz3lAPDme/85nfOTMAVNk1imHLtFNLOCI0x"
+                + "zQ2wugOZh3vL3I2whTXsEh5yVDFp3gW20/phYJDXlIFfOEULN7gkxEPGkYBH6KGNE5wHPqY1ZeDTj6oigh8JryVgJ6oqWIgw"
+                + "XM8CVlH4JzAN9s4cx5+sd1haZH/A/XvuT4/2KvNnPK/QumXjgOGIKGQc8coZsPtG/6V6T39XzvCwHrZ5es1vU2Ny/n1svgHo"
+                + "7ESVtzssQAAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlklEQVQ4je2SsQnDMBBF30yezCOI1NlAC3gEdW5cuXYX0miB"
                 + "4Am+GyWWDwXFxKSJDz7ow7/H3SEAB/RJ7gCBNUfUfwJ9AHUgJbU2JGgFg9bQtQaMWbveAdO7EUSbKUz4ah9ATQHYZb4K/GTC"
@@ -2299,14 +2139,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkElEQVQ4T63UWw6AIAxE0WFzumZdnSkJBKSPoaE/hhAv56sF"
-                + "h6cc7mEMPgCu5AMvgFv+HYMSk2hmJCbRKSjnjLLrtGBG2XVacFc56azgjnLSWUFWuei8IKNcdF4wUqq6KOgpVV0UtJSmjglq"
-                + "SlPHBP9KV8cGR6WrY4NNKd+6Ubxh92Fba3WjnAhGnX7PCungBz2THhX/dvFdAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkElEQVQ4T63UWw6AIAxE0WFzumZdnSkJBKSPoaE/hhAv56sF"
-                + "h6cc7mEMPgCu5AMvgFv+HYMSk2hmJCbRKSjnjLLrtGBG2XVacFc56azgjnLSWUFWuei8IKNcdF4wUqq6KOgpVV0UtJSmjglq"
-                + "SlPHBP9KV8cGR6WrY4NNKd+6Ubxh92Fba3WjnAhGnX7PCungBz2THhX/dvFdAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAJBJREFUOE+t1FsOgCAMRNFhc7pmXZ0p"
+                + "CQSkj6GhP4YQL+erBYenHO5hDD4AruQDL4Bb/h2DEpNoZiQm0Sko54yy67RgRtl1WnBXOems4I5y0llBVrnovCCjXHReMFKq"
+                + "uijoKVVdFLSUpo4JakpTxwT/SlfHBkelq2ODTSnfulG8YfdhW2t1o5wIRp1+zwrp4Ac9kx4V/3bxXQAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZElEQVQ4jdXOwQkAIQxE0SnJEuzcEizJPUjAg2aTSUD8MNfh"
                 + "AS/VAQxybXdYAoc1U7nVRZRHHaNUdYzyV+dRmnQepVlnUbp0FqVbpykpnaakddKqDOmkVVkzDoGpTNFJBYm6u30fnn+BCcsO"
@@ -2332,18 +2168,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCklEQVQ4T7XUvytHURjH8df3P7FIJotQhJQyyCopUSxWShSD"
-                + "UvIPGBiIJJtBWUwMyh+hKMI/oVPfW8ft/ji3rrOcep5P7+c8v05Hy6fTMk8MfMZwYoALLBVpY+Au9hOAXxjCWx1wEC8JwHUc"
-                + "l+nyNXzEWAX0DrNVQfPALRwmvDIvOcdyMOaBoSmhOU1OqOUkXouAwfaAqQbENZxm+qI53MFBIvAKi7G2CDiKpwTgB0bwXgeM"
-                + "077HTAn8T6pVKQffHjYwgSNM56A3mK8b7Ng/jj6cYLV7Z/4fDOCzCTDW9mQj0TWu4Cx1U8p0t5jDNRaabEqZdhPb6Md3G8Cw"
-                + "Qb24rBunf/1g64In+X8BpH0mFSP8dhoAAAAASUVORK5CYII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCklEQVQ4T7XUvytHURjH8df3P7FIJotQhJQyyCopUSxWShSD"
-                + "UvIPGBiIJJtBWUwMyh+hKMI/oVPfW8ft/ji3rrOcep5P7+c8v05Hy6fTMk8MfMZwYoALLBVpY+Au9hOAXxjCWx1wEC8JwHUc"
-                + "l+nyNXzEWAX0DrNVQfPALRwmvDIvOcdyMOaBoSmhOU1OqOUkXouAwfaAqQbENZxm+qI53MFBIvAKi7G2CDiKpwTgB0bwXgeM"
-                + "077HTAn8T6pVKQffHjYwgSNM56A3mK8b7Ng/jj6cYLV7Z/4fDOCzCTDW9mQj0TWu4Cx1U8p0t5jDNRaabEqZdhPb6Md3G8Cw"
-                + "Qb24rBunf/1g64In+X8BpH0mFSP8dhoAAAAASUVORK5CYII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAQpJREFUOE+11L8rR1EYx/HX9z+xSCaL"
+                + "UISUMsgqKVEsVkoUg1LyDxgYiCSbQVlMDMofoSjCP6FT31vH7f44t66znHqeT+/nPL9OR8un0zJPDHzGcGKACywVaWPgLvYT"
+                + "gF8YwlsdcBAvCcB1HJfp8jV8xFgF9A6zVUHzwC0cJrwyLznHcjDmgaEpoTlNTqjlJF6LgMH2gKkGxDWcZvqiOdzBQSLwCoux"
+                + "tgg4iqcE4AdG8F4HjNO+x0wJ/E+qVSkH3x42MIEjTOegN5ivG+zYP44+nGC1e2f+Hwzgswkw1vZkI9E1ruAsdVPKdLeYwzUW"
+                + "mmxKmXYT2+jHdxvAsEG9uKwbp3/9YOuCJ/l/AaR9JhUj/HYaAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAeUlEQVQ4jdWSwQ2AMAwDPUJGZZOOwgiMwgiMAK+KCBE4Iz61"
                 + "1K+bu0QaKaukHb6ZFDZYtkkKUhiwcCJlPW/YCDWHYuOPKLbl1Nk2cupgI6cUG5+PdGIvD4XW+bQ0wZ1T+3wiTXB1aqFW5Z9R"
@@ -2377,18 +2207,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA6UlEQVQ4T62U0Q3CMAxEL/NUFUPwyQwswBIwTFfgC4boHgwR"
-                + "dCGNjOtgV9Q/lZL0cu/iJGHnSjvrQQrOAA7BDSYAZ2utFLwCuAUEXwAGAPyuSgrSHV16RWd0aJbO0MPuoi7qWrBhe8rK3pRq"
-                + "plqwYUcDrVkOqWZqtU0xFw2Up51EppbgFuyG2suQ41Hs0j4L6i9BzhXsI3B/AqdOh3yheoJs8AsdZOBh3KAVqidI7JENnAF9"
-                + "4CaqJ9gos8i0DpqoYUEuzDVTOl4aOHr1zHX582iUTPWp6h9C72HFHmUD/+XQe37kfMjhFsE3a3YyFbFVojMAAAAASUVORK5C"
-                + "YII=",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA6UlEQVQ4T62U0Q3CMAxEL/NUFUPwyQwswBIwTFfgC4boHgwR"
-                + "dCGNjOtgV9Q/lZL0cu/iJGHnSjvrQQrOAA7BDSYAZ2utFLwCuAUEXwAGAPyuSgrSHV16RWd0aJbO0MPuoi7qWrBhe8rK3pRq"
-                + "plqwYUcDrVkOqWZqtU0xFw2Up51EppbgFuyG2suQ41Hs0j4L6i9BzhXsI3B/AqdOh3yheoJs8AsdZOBh3KAVqidI7JENnAF9"
-                + "4CaqJ9gos8i0DpqoYUEuzDVTOl4aOHr1zHX582iUTPWp6h9C72HFHmUD/+XQe37kfMjhFsE3a3YyFbFVojMAAAAASUVORK5C"
-                + "YII=",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAOlJREFUOE+tlNENwjAMRC/zVBVD8MkM"
+                + "LMASMExX4AuG6B4MEXQhjYzrYFfUP5WS9HLv4iRh50o760EKzgAOwQ0mAGdrrRS8ArgFBF8ABgD8rkoK0h1dekVndGiWztDD"
+                + "7qIu6lqwYXvKyt6UaqZasGFHA61ZDqlmarVNMRcNlKedRKaW4BbshtrLkONR7NI+C+ovQc4V7CNwfwKnTod8oXqCbPALHWTg"
+                + "YdygFaonSOyRDZwBfeAmqifYKLPItA6aqGFBLsw1UzpeGjh69cx1+fNolEz1qeofQu9hxR5lA//l0Ht+5HzI4RbBN2t2MhWx"
+                + "VaIzAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAh0lEQVQ4jdXQyw2AIBBF0VvC7GzTTijFjf1MCZQwLvzEaAhP"
                 + "cKEvYXvhAH+aAyGeSQkmMZYBU4ImBkcltq/GlqjnHWyHCP0ULzrYSY/lqPypA2F6sPqnT9jSn6rsKvXGHmDuoV7ZGbAAb6We"
@@ -2425,14 +2249,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdUlEQVQ4T9WTwQ7AUAQE15/7cz2UNjSaEg59xyeZjAVh+NEw"
-                + "D38EMsTFwLUuni1vAYX9uAjfTFPDOaCKCc4sKUQK0OtmpMVx4J2g+Kl3DReBftoWhf3G6ZdPbw1IYU+hF9U2HANeicYT1ULZ"
-                + "cA9o5GDaN0yAB17KJBFC+xNmAAAAAElFTkSuQmCC",
-            EDGE = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdUlEQVQ4T9WTwQ7AUAQE15/7cz2UNjSaEg59xyeZjAVh+NEw"
-                + "D38EMsTFwLUuni1vAYX9uAjfTFPDOaCKCc4sKUQK0OtmpMVx4J2g+Kl3DReBftoWhf3G6ZdPbw1IYU+hF9U2HANeicYT1ULZ"
-                + "cA9o5GDaN0yAB17KJBFC+xNmAAAAAElFTkSuQmCC",
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHVJREFUOE/Vk8EOwFAEBNef+3M9lDY0"
+                + "mhIOfccnmYwFYfjRMA9/BDLExcC1Lp4tbwGF/bgI30xTwzmgignOLClECtDrZqTFceCdoPipdw0XgX7aFoX9xumXT28NSGFP"
+                + "oRfVNhwDXonGE9VC2XAPaORg2jdMgAdeyiQRQvsTZgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAARUlEQVQ4jWNgGAXUBw0M/1HwoDXwPwMqHkQGQgHCIHSzB4uB"
                 + "SEYPegPRjKdVZFE/9qmVAahuIBygG0ixwVQ3EJfB1DYQACh5i4ny3fVlAAAAAElFTkSuQmCC",
@@ -2471,10 +2291,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAvUlEQVQ4T2NkQAWODAwM5lChkwwMDPvR5AlyGaEqeEUYGLYIM"
-                + "DDoBzAwcIPENjAwfP3AwHDxDQODDwMDw2eCJkEVgA0UYWA4mMDAYNXNwMCCrLGUgeHPAgaGY28YGOxJMdBRhYFh/W0GBn5sml"
-                + "QZGD7eYWAIJNb7IBdWlDAwNKO7DmY4yJU9DAy1DAwMHcS4kiYGUt3LVI8UUNBQN9kgBTbVEjYxEUiUGlhOIUoxMYpGDSQmlPC"
-                + "rGQ1DysMQAFq2MhXKNeEnAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAL1JREFUOE9jZEAFjgwMDOZQoZMMDAz7"
+                + "0eQJchmhKnhFGBi2CDAw6AcwMHCDxDYwMHz9wMBw8Q0Dgw8DA8NngiZBFYANFGFgOJjAwGDVzcDAgqyxlIHhzwIGhmNvGBjs"
+                + "STHQUYWBYf1tBgZ+bJpUGRg+3mFgCCTW+yAXVpQwMDSjuw5mOMiVPQwMtQwMDB3EuJImBlLdy1SPFFDQUDfZIAU21RI2MRFI"
+                + "lBpYTiFKMTGKRg0kJpTwqxkNQ8rDEABatjIVyjXhJwAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjElEQVQ4je3SMQrCQBBA0dckZltLrxEkVxEUUudiqaw8l5VW"
                 + "wZXYRFSI4mrKPJj2M8Muryo0w1T+EAJtxmXDcccpIy7ZI6TXaEtiT/885SOapMpHYvfJiRLPb7ac3wVrutQNvwk2KcHJTxZo"

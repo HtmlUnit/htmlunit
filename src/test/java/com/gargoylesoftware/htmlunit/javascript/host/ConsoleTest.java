@@ -318,4 +318,42 @@ public class ConsoleTest extends WebDriverTestCase {
         assertTrue(logEntry.getMessage(), logEntry.getMessage()
                 .contains("Assertion failed: the word is foo"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @BuggyWebDriver
+    public void trace() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  function foo() {\n"
+            + "    function bar() {\n"
+            + "      console.trace();\n"
+            + "    }\n"
+            + "    bar();\n"
+            + "  }\n"
+            + "  foo();\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Logs logs = driver.manage().logs();
+        final LogEntries logEntries = logs.get(LogType.BROWSER);
+        final List<LogEntry> logEntryList = logEntries.getAll();
+
+        assertEquals(1, logEntryList.size());
+
+        final LogEntry logEntry = logEntryList.get(0);
+        final String logMsg = logEntry.getMessage();
+        System.out.println(logMsg);
+        assertTrue(logMsg, logMsg
+                .matches("bar\\(\\)@script in http.*:6\\n"
+                        + "foo\\(\\)@script in http.*:8\\n"
+                        + "@script in http.*:10\\n"
+                        + ".*"));
+    }
 }

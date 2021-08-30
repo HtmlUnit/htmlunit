@@ -42,14 +42,15 @@ public class CSSTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<style>@charset 'UTF-8';</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(CSS);"
-            + "    alert(CSS.prototype);"
-            + "  } catch (e) { alert('Exception'); }\n"
+            + "    log(CSS);"
+            + "    log(CSS.prototype);"
+            + "  } catch (e) { log('Exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,13 +63,57 @@ public class CSSTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<style>@charset 'UTF-8';</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var o = Object.create(CSS.prototype);\n"
-            + "    alert(o);"
-            + "  } catch (e) { alert('ctor Exception'); }\n"
+            + "    log(o);"
+            + "  } catch (e) { log('ctor Exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true"},
+            IE = "Exception")
+    public void supports() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(CSS.supports('display', 'flex'));"
+            + "    log(CSS.supports('display', 'grid'));"
+            + "    log(CSS.supports('color', 'red'));"
+            + "  } catch (e) { log('Exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true"},
+            IE = "Exception")
+    public void supportsCondition() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(CSS.supports('display: flex'));"
+            + "    log(CSS.supports('color: red'));"
+            + "  } catch (e) { log('Exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

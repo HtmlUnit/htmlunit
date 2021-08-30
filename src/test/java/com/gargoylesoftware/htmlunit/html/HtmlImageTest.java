@@ -26,7 +26,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageTest extends SimpleWebTestCase {
@@ -132,33 +133,6 @@ public class HtmlImageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Tests circle radius of percentage value.
-     * @throws Exception if the test fails
-     */
-    @Test
-    @NotYetImplemented
-    public void useMapClick_CircleRadiusPercentage() throws Exception {
-        final URL urlImage = new URL(URL_FIRST, "img.jpg");
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {
-            final byte[] directBytes = IOUtils.toByteArray(is);
-            final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
-        }
-
-        final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
-            + "<map name='map1'>\n"
-            + "<area href='a.html' shape='rect' coords='5,5,20,20'>\n"
-            + "<area href='b.html' shape='circle' coords='25,10,10%'>\n"
-            + "</map>\n"
-            + "</body></html>";
-        final HtmlPage page = loadPage(htmlContent);
-        final HtmlImage img = page.getHtmlElementById("myImg");
-        img.click(0, 0);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -223,7 +197,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void determineWidthHeigthFromImage() throws Exception {
+    public void determineWidthHeightFromImage() throws Exception {
         try (InputStream is = getClass().getClassLoader().
                 getResourceAsStream("testfiles/4x7.jpg")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -255,5 +229,52 @@ public class HtmlImageTest extends SimpleWebTestCase {
         img.setAttribute("src", "img.jpg");
         assertEquals(1, img.getWidth());
         assertEquals(1, img.getHeight());
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"16", "16", "2"},
+            FF = {"24", "24", "2"},
+            FF78 = {"24", "24", "2"},
+            IE = {"28", "30", "2"})
+    public void retrieveImagePerDefault() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <img id='myImage' src='4x7.jpg' >\n"
+                + "</body></html>";
+
+        final int count = getMockWebConnection().getRequestCount();
+
+        final HtmlPage page = loadPage(html);
+        final HtmlImage img = page.getHtmlElementById("myImage");
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), img.getWidthOrDefault());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[1]), img.getHeightOrDefault());
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount() - count);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"4x7.jpg", "§§URL§§4x7.jpg"})
+    public void src() throws Exception {
+        final String html =
+                "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <img id='myImage' src='4x7.jpg' >\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlImage img = page.getHtmlElementById("myImage");
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], img.getSrcAttribute());
+        assertEquals(getExpectedAlerts()[1], img.getSrc());
     }
 }

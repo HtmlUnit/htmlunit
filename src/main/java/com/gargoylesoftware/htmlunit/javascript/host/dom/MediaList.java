@@ -37,7 +37,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  * @author Daniel Gredler
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaList">MDN doc</a>
  */
+// FIXME according to MDN this is part of the CSSOM -> move to .host.css!
 @JsxClass
 public class MediaList extends SimpleScriptable {
 
@@ -97,14 +100,17 @@ public class MediaList extends SimpleScriptable {
 
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (getPrototype() != null) {
-            final BrowserVersion browserVersion = getBrowserVersion();
-            if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
-                return "";
+        if (getPrototype() != null && wrappedList_ != null) {
+            if (wrappedList_.getLength() == 0) {
+                final BrowserVersion browserVersion = getBrowserVersion();
+                if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
+                    return "";
+                }
+                if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
+                    return "all";
+                }
             }
-            if (browserVersion.hasFeature(JS_MEDIA_LIST_ALL)) {
-                return "all";
-            }
+            return wrappedList_.getMediaText();
         }
         return super.getDefaultValue(hint);
     }

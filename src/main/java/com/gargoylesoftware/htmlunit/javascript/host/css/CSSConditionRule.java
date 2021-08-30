@@ -23,12 +23,15 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * A JavaScript object for {@code CSSConditionRule}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSConditionRule">MDN doc</a>
  */
 @JsxClass({CHROME, EDGE, FF, FF78})
 @JsxClass(isJSObject = false, value = IE)
@@ -50,4 +53,20 @@ public class CSSConditionRule extends CSSGroupingRule {
         super(stylesheet, rule);
     }
 
+    /**
+     * Returns the text of the condition of the rule.
+     * @return the text of the condition of the rule
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF78})
+    public String getConditionText() {
+        return getConditionRule().getMediaList().getMediaText();
+    }
+
+    /**
+     * Returns the wrapped rule, as a media rule.
+     * @return the wrapped rule, as a media rule
+     */
+    private CSSMediaRuleImpl getConditionRule() {
+        return (CSSMediaRuleImpl) getRule();
+    }
 }

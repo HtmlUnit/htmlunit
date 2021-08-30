@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit.javascript.regexp;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -169,7 +169,7 @@ public class RegExpJsToJavaConverter {
         insideRepetition_ = false;
 
         parsingSubexpressions_ = new ArrayDeque<>();
-        subexpressions_ = new LinkedList<>();
+        subexpressions_ = new ArrayList<>();
 
         int current = tape_.read();
         while (current > -1) {

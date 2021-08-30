@@ -14,7 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
-import static org.junit.Assert.fail;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -35,6 +38,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.OS;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
@@ -45,6 +49,8 @@ import com.gargoylesoftware.htmlunit.util.ServletContentWrapper;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
+ * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
 public class GeolocationTest extends WebServerTestCase {
@@ -54,11 +60,9 @@ public class GeolocationTest extends WebServerTestCase {
      */
     @Test
     @Alerts("12.34567891 98.76543211")
-    @NotYetImplemented //since it runs on Windows only (for now)
+    @NotYetImplemented(value = {EDGE, FF78, FF, CHROME},
+            os = OS.Linux) //since it runs on Windows only (for now)
     public void getCurrentPosition_enabled() throws Exception {
-        if (getBrowserVersion().isFirefox() && GEOLOCATION_IGNORE) {
-            fail("To succeed!");
-        }
         getCurrentPosition(true);
     }
 

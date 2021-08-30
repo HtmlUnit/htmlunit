@@ -94,8 +94,8 @@ public class HTMLPreElement extends HTMLElement {
      * Sets the {@code width} property.
      * @param width the {@code width} property
      */
-    @JsxSetter
-    public void setWidth(final String width) {
+    @JsxSetter(propertyName = "width")
+    public void setWidth_js(final String width) {
         if (getBrowserVersion().hasFeature(JS_PRE_WIDTH_STRING)) {
             setWidthOrHeight("width", width, true);
         }

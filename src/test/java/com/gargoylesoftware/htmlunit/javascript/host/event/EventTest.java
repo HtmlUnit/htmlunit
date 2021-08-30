@@ -1586,4 +1586,26 @@ public class EventTest extends WebDriverTestCase {
         final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();
         assertEquals(String.join("\n", getExpectedAlerts()), text);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("OK")
+    public void domEventNameUsedAsFunctionName() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function onclick() {\n"
+            + "  log('OK');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='onclick()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

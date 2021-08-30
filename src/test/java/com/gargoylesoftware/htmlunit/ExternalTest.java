@@ -55,11 +55,10 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "90.0.4430.24";
-    static String CHROME_DRIVER_URL_ = "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_"
-                                            + BrowserVersion.CHROME.getBrowserVersionNumeric();
+    static String CHROME_DRIVER_ = "92.0.4515.107";
+    static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "90.0.818.46";
+    static String EDGE_DRIVER_ = "92.0.902.73";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -141,9 +140,23 @@ public class ExternalTest {
     @Test
     public void assertChromeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
-            final AbstractPage page = webClient.getPage(CHROME_DRIVER_URL_);
-            final String pageContent = page.getWebResponse().getContentAsString().trim();
-            assertEquals("Chrome Driver", pageContent, CHROME_DRIVER_);
+            final HtmlPage page = webClient.getPage(CHROME_DRIVER_URL_);
+            String content = page.asNormalizedText();
+            content = content.substring(content.indexOf("Current Releases"));
+            content = content.replace("\r\n", "");
+            String version = "0.0.0.0";
+            final Pattern regex =
+                    Pattern.compile("If you are using Chrome version "
+                            + BrowserVersion.CHROME.getBrowserVersionNumeric()
+                            + ", please download ChromeDriver (\\d*\\.\\d*\\.\\d*\\.\\d*)");
+            final Matcher matcher = regex.matcher(content);
+            while (matcher.find()) {
+                if (version.compareTo(matcher.group(1)) < 0) {
+                    version = matcher.group(1);
+                    break;
+                }
+            }
+            assertEquals("Chrome Driver", version, CHROME_DRIVER_);
         }
     }
 
@@ -305,6 +318,12 @@ public class ExternalTest {
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
         if (groupId.startsWith("org.eclipse.jetty")
                 && (version.startsWith("11.") || version.startsWith("10."))) {
+            return true;
+        }
+
+        // there is a serious bug
+        // https://issues.apache.org/jira/browse/IO-744
+        if ("commons-io".equals(artifactId) && (version.startsWith("2.11.0"))) {
             return true;
         }
 

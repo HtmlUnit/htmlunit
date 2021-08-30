@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURITY_POLICY_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
@@ -152,6 +153,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Joerg Werner
  * @author Anton Demydenko
+ * @author Sergio Moreno
  */
 public class WebClient implements Serializable, AutoCloseable {
 
@@ -1707,6 +1709,15 @@ public class WebClient implements Serializable, AutoCloseable {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
         }
 
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA, getBrowserVersion().getSecClientHintUserAgentHeader());
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE, "?0");
+        }
+
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
                 && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
             wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
@@ -2146,9 +2157,14 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // do this after closing the windows, otherwise some unload event might
         // start a new window that will start the thread again
+        ThreadDeath toThrow = null;
         if (scriptEngine_ != null) {
             try {
                 scriptEngine_.shutdown();
+            }
+            catch (final ThreadDeath td) {
+                // make sure the following cleanup is performed to avoid resource leaks
+                toThrow = td;
             }
             catch (final Exception e) {
                 LOG.error("Exception while shutdown the scriptEngine", e);
@@ -2174,6 +2190,9 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         cache_.clear();
+        if (toThrow != null) {
+            throw toThrow;
+        }
     }
 
     /**

@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * A JavaScript object for {@code AudioParam}.
@@ -60,6 +61,7 @@ public class AudioParam extends SimpleScriptable {
     /**
      * @param value the value
      */
+    @JsxSetter
     public void setValue(final double value) {
         value_ = value;
     }

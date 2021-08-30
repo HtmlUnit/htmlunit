@@ -27,6 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -855,6 +856,106 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"something", "Hello World"})
+    public void innerText() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    myTestDiv.innerText = 'Hello World';\n"
+            + "    checkChildren();\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      log('0');\n"
+            + "    else\n"
+            + "      log(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"something", "3", "Hello", "[object HTMLBRElement]", "World"})
+    public void innerText_LineBreak() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+
+            + "    myTestDiv.innerText = 'Hello\\nWorld';\n"
+            + "    log(myTestDiv.childNodes.length);\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+            + "    log(myTestDiv.childNodes.item(1));\n"
+            + "    log(myTestDiv.childNodes.item(2).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", " ", "0", "1", "undefined", "1", "[object Object]"},
+            IE = {"0", "1", "\u00A0", "1", "1", "undefined", "1", "[object Object]"})
+    @HtmlUnitNYI(IE = {"0", "1", " ", "1", "1", "undefined", "1", "[object Object]"})
+    public void innerText_Empty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    myTestDiv0.innerText = '';\n"
+            + "    log(myTestDiv0.childNodes.length);\n"
+
+            + "    myTestDiv1.innerText = ' ';\n"
+            + "    log(myTestDiv1.childNodes.length);\n"
+            + "    log(myTestDiv1.childNodes.item(0).data);\n"
+
+            + "    myTestDiv2.innerText = null;\n"
+            + "    log(myTestDiv2.childNodes.length);\n"
+
+            + "    myTestDiv3.innerText = undefined;\n"
+            + "    log(myTestDiv3.childNodes.length);\n"
+            + "    log(myTestDiv3.childNodes.item(0).data);\n"
+
+            + "    myTestDiv4.innerText = { a: 'b'};\n"
+            + "    log(myTestDiv4.childNodes.length);\n"
+            + "    log(myTestDiv4.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv0'>something</div>\n"
+            + "  <div id='myTestDiv1'>something</div>\n"
+            + "  <div id='myTestDiv2'>something</div>\n"
+            + "  <div id='myTestDiv3'>something</div>\n"
+            + "  <div id='myTestDiv4'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"something", "0"},
             IE = {"something", "null"})
     public void innerText_null() throws Exception {
@@ -863,12 +964,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = null;\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = null;\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
@@ -896,12 +993,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = '';\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = '';\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"

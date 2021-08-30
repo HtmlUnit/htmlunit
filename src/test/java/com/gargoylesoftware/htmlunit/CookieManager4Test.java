@@ -76,28 +76,28 @@ public class CookieManager4Test extends WebDriverTestCase {
             InetAddress.getByName(new URL(URL_HOST1).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST1 + "' are not present");
+            fail("Host configuration '" + URL_HOST1 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST2).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST2 + "' are not present");
+            fail("Host configuration '" + URL_HOST2 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST3).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST3 + "' are not present");
+            fail("Host configuration '" + URL_HOST3 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST4).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST4 + "' are not present");
+            fail("Host configuration '" + URL_HOST4 + "' is not present");
         }
     }
 

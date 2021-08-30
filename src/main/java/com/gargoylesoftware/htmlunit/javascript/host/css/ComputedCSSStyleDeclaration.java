@@ -17,8 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_17;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_INPUT_18;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHIGHT_RADIO_CHECKBOX_10;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.ACCELERATOR;
@@ -116,6 +119,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPasswordInput;
@@ -132,8 +136,17 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definit
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSlotElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -147,6 +160,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Alex Gorbatovsky
  */
 @JsxClass(isJSObject = false, value = {FF, FF78})
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
@@ -617,6 +631,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getHeight() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
         final Element elem = getElement();
         if (!elem.getDomNodeOrDie().isAttachedToPage()) {
             if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
@@ -988,8 +1006,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return 0;
         }
 
-        final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
-
         final int width;
         final String styleWidth = super.getWidth();
         final DomNode parent = node.getParentNode();
@@ -1009,6 +1025,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = node.getTextContent().length() * getBrowserVersion().getPixesPerChar();
             }
             else if (BLOCK.equals(display)) {
+                final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
                 if (element instanceof HTMLBodyElement) {
                     width = windowWidth - 16;
                 }
@@ -1040,10 +1057,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 width = 145; // FF
             }
             else if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                width = 13;
+                final BrowserVersion browserVersion = getBrowserVersion();
+                if (browserVersion.hasFeature(JS_CLIENTWIDTH_RADIO_CHECKBOX_10)) {
+                    width = 10;
+                }
+                else {
+                    width = 13;
+                }
             }
             else if (node instanceof HtmlTextArea) {
                 width = 100; // wild guess
+            }
+            else if (node instanceof HtmlImage) {
+                width = ((HtmlImage) node).getWidthOrDefault();
             }
             else {
                 // Inline elements take up however much space is required by their children.
@@ -1051,11 +1077,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         else if (AUTO.equals(styleWidth)) {
-            width = windowWidth;
+            width = element.getWindow().getWebWindow().getInnerWidth();
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = pixelValue(element, new CssValue(0, windowWidth) {
+            width = pixelValue(element, new CssValue(0, element.getWindow().getWebWindow().getInnerWidth()) {
                 @Override public String get(final ComputedCSSStyleDeclaration style) {
                     return style.getStyleAttribute(WIDTH, true);
                 }
@@ -1139,7 +1165,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height_.intValue();
         }
 
-        final boolean isInline = "inline".equals(getDisplay()) && !(getElement() instanceof HTMLIFrameElement);
+        final Element element = getElement();
+
+        if (element instanceof HTMLImageElement) {
+            height_ = ((HtmlImage) element.getDomNodeOrDie()).getHeightOrDefault();
+            return height_;
+        }
+
+        final boolean isInline = "inline".equals(getDisplay()) && !(element instanceof HTMLIFrameElement);
         // height is ignored for inline elements
         if (isInline || super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();
@@ -1190,12 +1223,27 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
         int defaultHeight;
-        if (node instanceof HtmlDivision && StringUtils.isBlank(node.getTextContent())) {
+        if ((elem.getClass() == HTMLElement.class
+                || elem instanceof HTMLDivElement
+                || elem instanceof HTMLUnknownElement
+                || elem instanceof HTMLMenuItemElement
+                || elem instanceof HTMLDataElement
+                || elem instanceof HTMLTimeElement
+                || elem instanceof HTMLOutputElement
+                || elem instanceof HTMLSlotElement
+                || elem instanceof HTMLLegendElement)
+                && StringUtils.isBlank(node.getTextContent())) {
             defaultHeight = 0;
         }
         else if (elem.getFirstChild() == null) {
             if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                defaultHeight = 13;
+                final BrowserVersion browser = getBrowserVersion();
+                if (browser.hasFeature(JS_CLIENTHIGHT_RADIO_CHECKBOX_10)) {
+                    defaultHeight = 10;
+                }
+                else {
+                    defaultHeight = 13;
+                }
             }
             else if (node instanceof HtmlButton) {
                 defaultHeight = 20;
@@ -1204,6 +1252,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final BrowserVersion browser = getBrowserVersion();
                 if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_17)) {
                     defaultHeight = 17;
+                }
+                else if (browser.hasFeature(JS_CLIENTHIGHT_INPUT_18)) {
+                    defaultHeight = 18;
                 }
                 else {
                     defaultHeight = 20;
@@ -1237,7 +1288,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     parent = parent.getParentElement();
                 }
                 final int pixelWidth = pixelValue(width);
-                final String content = node.asText();
+                final String content = node.asNormalizedText();
 
                 if (pixelWidth > 0
                         && !width.isEmpty()
@@ -1268,7 +1319,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     defaultHeight *= lineCount;
                 }
                 else {
-                    defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                    if (node instanceof HtmlSpan && StringUtils.isEmpty(content)) {
+                        defaultHeight = 0;
+                    }
+                    else {
+                        defaultHeight *= StringUtils.countMatches(content, '\n') + 1;
+                    }
                 }
             }
         }

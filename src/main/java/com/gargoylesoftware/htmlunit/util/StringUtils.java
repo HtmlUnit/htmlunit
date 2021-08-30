@@ -14,12 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import java.awt.Color;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
+
+import com.gargoylesoftware.htmlunit.html.impl.Color;
 
 /**
  * String utilities class for utility functions not covered by third party libraries.
@@ -283,11 +284,11 @@ public final class StringUtils {
     /**
      * Formats the specified color.
      *
-     * @param aColor the color to format
+     * @param color the color to format
      * @return the specified color, formatted
      */
-    public static String formatColor(final Color aColor) {
-        return "rgb(" + aColor.getRed() + ", " + aColor.getGreen() + ", " + aColor.getBlue() + ")";
+    public static String formatColor(final Color color) {
+        return "rgb(" + color.getRed() + ", " + color.getGreen() + ", " + color.getBlue() + ")";
     }
 
     /**

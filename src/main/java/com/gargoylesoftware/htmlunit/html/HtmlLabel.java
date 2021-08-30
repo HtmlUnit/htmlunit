@@ -156,7 +156,7 @@ public class HtmlLabel extends HtmlElement {
         }
 
         // not sure which page we should return
-        return element.click(false, false, false, false, true, true);
+        return element.click(false, false, false, false, true, true, true);
     }
 
     /**

@@ -206,9 +206,9 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                     if (id instanceof String) {
                         final String s = (String) id;
                         if (obj instanceof ScriptableObject) {
-                            Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, false);
+                            Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, thisObj, false);
                             if (o == null) {
-                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, true);
+                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, thisObj, true);
                                 if (o instanceof Callable) {
                                     return "__defineSetter__ " + s;
                                 }

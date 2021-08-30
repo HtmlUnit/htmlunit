@@ -19,10 +19,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_ALL_RESPO
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_FIRE_STATE_OPENED_AGAIN_IN_ASYNC_MODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_HANDLE_SYNC_NETWORK_ERRORS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LENGTH_COMPUTABLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_ALWAYS_AFTER_DONE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_START_ASYNC;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -54,6 +56,7 @@ import org.apache.http.NoHttpResponseException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -180,7 +183,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @param state the new state
      */
     private void setState(final int state) {
-        if (state == OPENED
+        if (state == UNSENT
+                || state == OPENED
                 || state == HEADERS_RECEIVED
                 || state == LOADING
                 || state == DONE) {
@@ -203,7 +207,10 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             return;
         }
+        fireJavascriptEventIgnoreAbort(eventName);
+    }
 
+    private void fireJavascriptEventIgnoreAbort(final String eventName) {
         if (LOG.isDebugEnabled()) {
             LOG.debug("Firing javascript XHR event: " + eventName);
         }
@@ -370,11 +377,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     public void abort() {
         getWindow().getWebWindow().getJobManager().stopJob(jobID_);
 
-        webResponse_ = null;
-        setState(DONE);
-        fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-        fireJavascriptEvent(Event.TYPE_ABORT);
-        fireJavascriptEvent(Event.TYPE_LOAD_END);
+        if (state_ == OPENED
+                || state_ == HEADERS_RECEIVED
+                || state_ == LOADING) {
+            setState(DONE);
+            webResponse_ = new NetworkErrorWebResponse(webRequest_, null);
+            fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
+            fireJavascriptEvent(Event.TYPE_ABORT);
+            fireJavascriptEvent(Event.TYPE_LOAD_END);
+        }
+
+        // ScriptRuntime.constructError("NetworkError",
+        //         "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
+
+        setState(UNSENT);
+        webResponse_ = new NetworkErrorWebResponse(webRequest_, null);
         aborted_ = true;
     }
 
@@ -667,7 +684,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @param context the current context
      */
     void doSend() {
-        if (async_ && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (async_ && browserVersion.hasFeature(XHR_LOAD_START_ASYNC)) {
             fireJavascriptEvent(Event.TYPE_LOAD_START);
         }
 
@@ -712,7 +730,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     || statusCode == HttpStatus.SC_NOT_MODIFIED;
                 if (!successful || !isPreflightAuthorized(preflightResponse)) {
                     setState(DONE);
-                    if (async_ || getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                    if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                         fireJavascriptEvent(Event.TYPE_ERROR);
                         fireJavascriptEvent(Event.TYPE_LOAD_END);
@@ -765,7 +783,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         @Override
                         public Charset getContentCharset() {
                             if (charsetNameFinal.isEmpty()
-                                    || (charsetFinal == null && getBrowserVersion()
+                                    || (charsetFinal == null && browserVersion
                                                 .hasFeature(XHR_USE_CONTENT_CHARSET))) {
                                 return super.getContentCharset();
                             }
@@ -794,8 +812,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             setState(DONE);
             fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
-            fireJavascriptEvent(Event.TYPE_LOAD);
-            fireJavascriptEvent(Event.TYPE_LOAD_END);
+
+            if (!async_ && aborted_
+                    && browserVersion.hasFeature(XHR_SEND_NETWORK_ERROR_IF_ABORTED)) {
+                throw ScriptRuntime.constructError("Error",
+                        "Failed to execute 'send' on 'XMLHttpRequest': Failed to load '" + webRequest_.getUrl() + "'");
+            }
+
+            if (browserVersion.hasFeature(XHR_LOAD_ALWAYS_AFTER_DONE)) {
+                fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD);
+                fireJavascriptEventIgnoreAbort(Event.TYPE_LOAD_END);
+            }
+            else {
+                fireJavascriptEvent(Event.TYPE_LOAD);
+                fireJavascriptEvent(Event.TYPE_LOAD_END);
+            }
         }
         catch (final IOException e) {
             if (LOG.isDebugEnabled()) {
@@ -804,7 +835,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
             if (async_) {
                 if (e instanceof SocketTimeoutException
-                        && getBrowserVersion().hasFeature(XHR_LOAD_START_ASYNC)) {
+                        && browserVersion.hasFeature(XHR_LOAD_START_ASYNC)) {
                     try {
                         webResponse_ = wc.loadWebResponse(WebRequest.newAboutBlankRequest());
                     }
@@ -817,7 +848,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
                 if (!preflighted
                         && e instanceof NoHttpResponseException
-                        && getBrowserVersion().hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
+                        && browserVersion.hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
                     fireJavascriptEvent(Event.TYPE_PROGRESS);
                 }
             }
@@ -836,7 +867,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             }
             else {
                 setState(DONE);
-                if (getBrowserVersion().hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
+                if (browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                     fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);
                     if (e instanceof SocketTimeoutException) {
                         fireJavascriptEvent(Event.TYPE_TIMEOUT);
@@ -1036,7 +1067,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return the {@code upload} property
      */
     @JsxGetter(value = IE, propertyName = "upload")
-    public XMLHttpRequestEventTarget getUploadIE() {
+    public XMLHttpRequestEventTarget getUploadIE_js() {
         final XMLHttpRequestEventTarget upload = new XMLHttpRequestEventTarget();
         upload.setParentScope(getParentScope());
         upload.setPrototype(getPrototype(upload.getClass()));

@@ -1,3 +1,4 @@
+additiveSymbols
 alignContent
 alignItems
 alignSelf
@@ -140,6 +141,7 @@ direction
 display
 dominantBaseline
 emptyCells
+fallback
 fill
 fillOpacity
 fillRule
@@ -247,6 +249,7 @@ minInlineSize
 minWidth
 minZoom
 mixBlendMode
+negative
 objectFit
 objectPosition
 offset
@@ -273,6 +276,7 @@ overscrollBehaviorBlock
 overscrollBehaviorInline
 overscrollBehaviorX
 overscrollBehaviorY
+pad
 padding
 paddingBlock
 paddingBlockEnd
@@ -297,8 +301,10 @@ placeItems
 placeSelf
 pointerEvents
 position
+prefix
 quotes
 r
+range
 resize
 right
 rowGap
@@ -336,7 +342,9 @@ shapeMargin
 shapeOutside
 shapeRendering
 size
+sizeAdjust
 speak
+speakAs
 src
 stopColor
 stopOpacity
@@ -348,7 +356,10 @@ strokeLinejoin
 strokeMiterlimit
 strokeOpacity
 strokeWidth
+suffix
+symbols
 syntax
+system
 tabSize
 tableLayout
 textAlign

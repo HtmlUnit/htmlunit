@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -674,6 +673,10 @@ public class Node extends EventTarget {
      */
     @JsxFunction({CHROME, EDGE, FF, FF78})
     public boolean contains(final Object element) {
+        if (element == null || Undefined.isUndefined(element)) {
+            return false;
+        }
+
         if (!(element instanceof Node)) {
             if (getBrowserVersion().hasFeature(JS_NODE_CONTAINS_RETURNS_FALSE_FOR_INVALID_ARG)) {
                 return false;
@@ -810,7 +813,7 @@ public class Node extends EventTarget {
         final HTMLCollection collection = new HTMLCollection(node, false) {
             @Override
             protected List<DomNode> computeElements() {
-                final List<DomNode> children = new LinkedList<>();
+                final List<DomNode> children = new ArrayList<>();
                 for (final DomNode domNode : node.getChildNodes()) {
                     if (domNode instanceof DomElement) {
                         children.add(domNode);

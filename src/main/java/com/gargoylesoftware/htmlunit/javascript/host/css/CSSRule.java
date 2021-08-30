@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,11 +46,15 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN doc</a>
  */
 @JsxClass
 public class CSSRule extends SimpleScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSRule.class);
+
+    /** RegEx to fix css text for IE. */
+    protected static final Pattern REPLACEMENT_IE = Pattern.compile("url\\(\"([^;]*)\"\\)");
 
     /**
      * The rule is a {@code CSSUnknownRule}.
@@ -113,7 +119,7 @@ public class CSSRule extends SimpleScriptable {
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant({FF, FF78})
+    @JsxConstant({CHROME, EDGE, FF, FF78})
     public static final short COUNTER_STYLE_RULE        = 11;
 
     /**
@@ -168,6 +174,9 @@ public class CSSRule extends SimpleScriptable {
         }
         if (rule instanceof CSSFontFaceRuleImpl) {
             return new CSSFontFaceRule(stylesheet, (CSSFontFaceRuleImpl) rule);
+        }
+        if (rule instanceof CSSPageRuleImpl) {
+            return new CSSPageRule(stylesheet, (CSSPageRuleImpl) rule);
         }
         if (rule instanceof CSSUnknownRuleImpl) {
             final CSSUnknownRuleImpl unknownRule = (CSSUnknownRuleImpl) rule;
@@ -242,12 +251,11 @@ public class CSSRule extends SimpleScriptable {
     }
 
     /**
-     * Sets the parsable textual representation of the rule.
-     * @param cssText the parsable textual representation of the rule
+     * See https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
+     * @param cssText ignored
      */
-    @JsxSetter({FF, FF78, IE})
+    @JsxSetter
     public void setCssText(final String cssText) {
-        rule_.setCssText(cssText);
     }
 
     /**

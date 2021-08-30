@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -61,5 +62,14 @@ public class CSS extends SimpleScriptable {
             return "[object Object]";
         }
         return super.getDefaultValue(hint);
+    }
+
+    /**
+     * @return a Boolean value indicating if the browser supports a given CSS feature, or not
+     */
+    @JsxStaticFunction
+    public static boolean supports() {
+        // for the moment we support everything :-)
+        return true;
     }
 }

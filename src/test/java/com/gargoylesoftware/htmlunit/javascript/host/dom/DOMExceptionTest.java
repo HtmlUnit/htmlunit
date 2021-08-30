@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  *
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class DOMExceptionTest extends WebDriverTestCase {
@@ -38,19 +39,20 @@ public class DOMExceptionTest extends WebDriverTestCase {
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var properties = ['INDEX_SIZE_ERR', 'DOMSTRING_SIZE_ERR', 'HIERARCHY_REQUEST_ERR',"
             + " 'WRONG_DOCUMENT_ERR', 'INVALID_CHARACTER_ERR', 'NO_DATA_ALLOWED_ERR', 'NO_MODIFICATION_ALLOWED_ERR',"
             + " 'NOT_FOUND_ERR', 'NOT_SUPPORTED_ERR', 'INUSE_ATTRIBUTE_ERR', 'INVALID_STATE_ERR', 'SYNTAX_ERR',"
             + " 'INVALID_MODIFICATION_ERR', 'NAMESPACE_ERR', 'INVALID_ACCESS_ERR'];\n"
             + "  try {\n"
             + "    for (var i = 0; i < properties.length; i++) {\n"
-            + "      alert(DOMException[properties[i]]);\n"
+            + "      log(DOMException[properties[i]]);\n"
             + "    }\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -61,16 +63,17 @@ public class DOMExceptionTest extends WebDriverTestCase {
     public void properties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(DOMException.code);\n"
-            + "    alert(DOMException.filename);\n"
-            + "    alert(DOMException.lineNumber);\n"
-            + "    alert(DOMException.message);\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "    log(DOMException.code);\n"
+            + "    log(DOMException.filename);\n"
+            + "    log(DOMException.lineNumber);\n"
+            + "    log(DOMException.message);\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -79,8 +82,8 @@ public class DOMExceptionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"3", "true", "undefined", "undefined", "HIERARCHY_REQUEST_ERR: 3", "1"},
-            FF = {"3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1"},
-            FF78 = {"3", "true", "6", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1"})
+            FF = {"3", "true", "8", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1"},
+            FF78 = {"3", "true", "8", "§§URL§§", "HIERARCHY_REQUEST_ERR: 3", "1"})
     /*
      * Messages:
      * CHROME: "A Node was inserted somewhere it doesn't belong."
@@ -88,24 +91,27 @@ public class DOMExceptionTest extends WebDriverTestCase {
      * IE: "HierarchyRequestError"
      */
     public void appendChild_illegal_node() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var htmlNode = document.documentElement;\n"
             + "  var body = document.body;\n"
             + "  try {\n"
             + "    body.appendChild(htmlNode);\n"
             + "  } catch(e) {\n"
-            + "    alert(e.code);\n"
-            + "    alert(e.message != null);\n"
-            + "    alert(e.lineNumber);\n"
-            + "    alert(e.filename);\n"
-            + "    alert('HIERARCHY_REQUEST_ERR: ' + e.HIERARCHY_REQUEST_ERR);\n"
+            + "    log(e.code);\n"
+            + "    log(e.message != null);\n"
+            + "    log(e.lineNumber);\n"
+            + "    log(e.filename);\n"
+            + "    log('HIERARCHY_REQUEST_ERR: ' + e.HIERARCHY_REQUEST_ERR);\n"
             + "  }\n"
-            + "  alert(body.childNodes.length);\n"
+            + "  log(body.childNodes.length);\n"
             + "}\n"
-            + "</script></head><body onload='test()'><span>hi</span></body></html>";
+            + "</script></head>\n"
+            + "<body onload='test()'><span>hi</span></body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

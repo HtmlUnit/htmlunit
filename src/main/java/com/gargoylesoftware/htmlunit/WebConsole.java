@@ -15,8 +15,8 @@
 package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -203,16 +203,6 @@ public class WebConsole implements Serializable {
     }
 
     /**
-     * Prints the passed objects using logger trace level.
-     * @param args the logging parameters
-     */
-    public void trace(final Object... args) {
-        if (logger_.isTraceEnabled()) {
-            logger_.trace(process(args));
-        }
-    }
-
-    /**
      * Prints the passed objects using logger debug level.
      * @param args the logging parameters
      */
@@ -267,7 +257,7 @@ public class WebConsole implements Serializable {
         }
 
         final StringBuilder sb = new StringBuilder();
-        final LinkedList<Object> args = new LinkedList<>(Arrays.asList(objs));
+        final List<Object> args = new ArrayList<>(Arrays.asList(objs));
 
         final Formatter formatter = getFormatter();
 

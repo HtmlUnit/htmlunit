@@ -14,18 +14,20 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_POINTEREVENT_DETAIL_0;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONDOUBLECLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_AREA_WITHOUT_HREF_FOCUSABLE;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -43,6 +45,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
@@ -273,26 +277,28 @@ public class DomElement extends DomNamespaceNode implements Element {
             return styleMap_;
         }
 
-        // TODO this should be done by using cssparser also
-        for (final String token : org.apache.commons.lang3.StringUtils.split(styleAttribute, ';')) {
-            final int index = token.indexOf(':');
-            if (index != -1) {
-                final String key = token.substring(0, index).trim().toLowerCase(Locale.ROOT);
-                String value = token.substring(index + 1).trim();
-                String priority = "";
-                if (org.apache.commons.lang3.StringUtils.endsWithIgnoreCase(value, "!important")) {
-                    priority = StyleElement.PRIORITY_IMPORTANT;
-                    value = value.substring(0, value.length() - 10);
-                    value = value.trim();
-                }
-                final StyleElement element = new StyleElement(key, value, priority,
-                                                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
-                styleMap.put(key, element);
+        final CSSStyleDeclarationImpl cssStyle = new CSSStyleDeclarationImpl(null);
+        try {
+            cssStyle.setCssText(styleAttribute);
+        }
+        catch (final Exception e) {
+            if (LOG.isErrorEnabled()) {
+                LOG.error("Error while parsing style value '" + styleAttribute + "'", e);
             }
+        }
+
+        for (final Property prop : cssStyle.getProperties()) {
+            final String key = prop.getName().toLowerCase(Locale.ROOT);
+            final StyleElement element = new StyleElement(key,
+                    prop.getValue().getCssText(),
+                    prop.isImportant() ? StyleElement.PRIORITY_IMPORTANT : "",
+                    SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
+            styleMap.put(key, element);
         }
 
         styleMap_ = styleMap;
         styleString_ = styleAttribute;
+        // styleString_ = cssStyle.getCssText();
         return styleMap_;
     }
 
@@ -605,7 +611,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             @Override
             @SuppressWarnings("unchecked")
             protected List<E> provideElements() {
-                final List<E> res = new LinkedList<>();
+                final List<E> res = new ArrayList<>();
                 for (final HtmlElement elem : getDomNode().getHtmlElementDescendants()) {
                     if (elem.getLocalName().equalsIgnoreCase(tagName)) {
                         res.add((E) elem);
@@ -907,7 +913,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
             final boolean triggerMouseEvents) throws IOException {
-        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, false, false);
+        return click(shiftKey, ctrlKey, altKey, triggerMouseEvents, true, false, false);
     }
 
     /**
@@ -929,6 +935,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param ctrlKey {@code true} if CTRL is pressed during the click
      * @param altKey {@code true} if ALT is pressed during the click
      * @param triggerMouseEvents if true trigger the mouse events also
+     * @param handleFocus if true set the focus (and trigger the event)
      * @param ignoreVisibility whether to ignore visibility or not
      * @param disableProcessLabelAfterBubbling ignore label processing
      * @param <P> the page type
@@ -937,7 +944,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     @SuppressWarnings("unchecked")
     public <P extends Page> P click(final boolean shiftKey, final boolean ctrlKey, final boolean altKey,
-            final boolean triggerMouseEvents, final boolean ignoreVisibility,
+            final boolean triggerMouseEvents, final boolean handleFocus, final boolean ignoreVisibility,
             final boolean disableProcessLabelAfterBubbling) throws IOException {
 
         // make enclosing window the current one
@@ -970,26 +977,28 @@ public class DomElement extends DomNamespaceNode implements Element {
                 mouseDown(shiftKey, ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
             }
 
-            // give focus to current element (if possible) or only remove it from previous one
-            DomElement elementToFocus = null;
-            if (this instanceof SubmittableElement
-                || this instanceof HtmlAnchor
-                    && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
-                || this instanceof HtmlArea
-                    && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
-                        || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
-                || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
-                elementToFocus = this;
-            }
-            else if (this instanceof HtmlOption) {
-                elementToFocus = ((HtmlOption) this).getEnclosingSelect();
-            }
+            if (handleFocus) {
+                // give focus to current element (if possible) or only remove it from previous one
+                DomElement elementToFocus = null;
+                if (this instanceof SubmittableElement
+                    || this instanceof HtmlAnchor
+                        && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                    || this instanceof HtmlArea
+                        && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                            || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
+                    || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
+                    elementToFocus = this;
+                }
+                else if (this instanceof HtmlOption) {
+                    elementToFocus = ((HtmlOption) this).getEnclosingSelect();
+                }
 
-            if (elementToFocus == null) {
-                ((HtmlPage) page).setFocusedElement(null);
-            }
-            else {
-                elementToFocus.focus();
+                if (elementToFocus == null) {
+                    ((HtmlPage) page).setFocusedElement(null);
+                }
+                else {
+                    elementToFocus.focus();
+                }
             }
 
             if (triggerMouseEvents) {
@@ -998,9 +1007,16 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             MouseEvent event = null;
             if (page.getWebClient().isJavaScriptEnabled()) {
-                if (page.getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-                    event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
-                            ctrlKey, altKey, MouseEvent.BUTTON_LEFT);
+                final BrowserVersion browser = page.getWebClient().getBrowserVersion();
+                if (browser.hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+                    if (browser.hasFeature(EVENT_ONCLICK_POINTEREVENT_DETAIL_0)) {
+                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 0);
+                    }
+                    else {
+                        event = new PointerEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
+                                ctrlKey, altKey, MouseEvent.BUTTON_LEFT, 1);
+                    }
                 }
                 else {
                     event = new MouseEvent(getEventTargetElement(), MouseEvent.TYPE_CLICK, shiftKey,
@@ -1197,9 +1213,10 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final Event event;
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
+        final WebClient webClient = getPage().getWebClient();
+        if (webClient.getBrowserVersion().hasFeature(EVENT_ONDOUBLECLICK_USES_POINTEREVENT)) {
             event = new PointerEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
-                    MouseEvent.BUTTON_LEFT);
+                    MouseEvent.BUTTON_LEFT, 0);
         }
         else {
             event = new MouseEvent(this, MouseEvent.TYPE_DBL_CLICK, shiftKey, ctrlKey, altKey,
@@ -1209,7 +1226,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (scriptResult == null) {
             return clickPage;
         }
-        return (P) getPage().getWebClient().getCurrentWindow().getEnclosedPage();
+        return (P) webClient.getCurrentWindow().getEnclosedPage();
     }
 
     /**
@@ -1409,7 +1426,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         final Event event;
         if (MouseEvent.TYPE_CONTEXT_MENU.equals(eventType)
                 && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button);
+            event = new PointerEvent(this, eventType, shiftKey, ctrlKey, altKey, button, 0);
         }
         else {
             event = new MouseEvent(this, eventType, shiftKey, ctrlKey, altKey, button);

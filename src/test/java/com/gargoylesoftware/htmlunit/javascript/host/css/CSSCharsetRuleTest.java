@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import java.net.URL;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -21,12 +23,14 @@ import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link CSSCharsetRuleImpl}.
  *
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
 public class CSSCharsetRuleTest extends WebDriverTestCase {
@@ -35,24 +39,46 @@ public class CSSCharsetRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"0", "undefined"})
-    public void simple() throws Exception {
+    @Alerts("0")
+    public void inStyle() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<style>@charset 'UTF-8';</style>\n"
+
+            + "<style>@charset \"UTF-8\";</style>\n"
+
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var rules = document.styleSheets[0].cssRules;\n"
-            + "  if (!rules) {\n"
-            + "    rules = document.styleSheets[0].rules;\n"
-            + "  }\n"
-            + "  alert(rules.length);\n"
-            + "  alert(rules[0]);\n"
-            + "  if (rules[0]) {\n"
-            + "    alert(rules[0].encoding);\n"
-            + "  }\n"
+            + "  log(rules.length);\n"
             + "</script>\n"
+
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0")
+    public void inLink() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<link rel='stylesheet' href='imp.css'>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var rules = document.styleSheets[0].cssRules;\n"
+            + "  log(rules.length);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "@charset \"UTF-8\";";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        loadPageVerifyTitle2(html);
     }
 }

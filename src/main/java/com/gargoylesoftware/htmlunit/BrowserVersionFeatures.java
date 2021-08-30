@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSGroupingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PopStateEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.DateTimeFormat;
 
@@ -62,6 +63,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     CSS_BACKGROUND_RGBA,
 
+    /** {@code CSSFontFaceRule.cssText} patches for FF78. */
+    @BrowserFeature(FF78)
+    CSS_CSSTEXT_FF78_STYLE,
+
+    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
+    @BrowserFeature(IE)
+    CSS_CSSTEXT_IE_STYLE,
+
     /** Is display style of HtmlDialog is 'none'. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_DIALOG_NONE,
@@ -73,14 +82,6 @@ public enum BrowserVersionFeatures {
     /** Is display style 'block'. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_DISPLAY_BLOCK2,
-
-    /** {@code CSSFontFaceRule.cssText} has no {@code \n}. */
-    @BrowserFeature({CHROME, EDGE, FF})
-    CSS_FONTFACERULE_CSSTEXT_CHROME_STYLE,
-
-    /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
-    @BrowserFeature(IE)
-    CSS_FONTFACERULE_CSSTEXT_IE_STYLE,
 
     /** 'initial' is a valid length value. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -134,12 +135,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
-    /** Internet Explorer versions 5 and later support the behavior property. The behavior property lets
-     * you use CSS to attach a script to a specific element in order to implement
-     * DHTML (Dynamic HTML) components.
-     */
-    @BrowserFeature(IE)
-    CSS_SUPPORTS_BEHAVIOR_PROPERTY,
+    /** Is display style 'block'. */
+    @BrowserFeature(FF78)
+    CSS_TEXTAREA_DISPLAY_BLOCK,
 
     /** 'auto' is supported when setting vertical-align style. */
     @BrowserFeature(IE)
@@ -189,13 +187,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     EVENT_ONCLICK_FOR_SELECT_ONLY,
 
-    /** Triggers 'onclick' and 'ondblclick' event handler using <code>PointerEvent</code>. */
+    /** <code>PointerEvent</code>has detail of 0. */
     @BrowserFeature(IE)
+    EVENT_ONCLICK_POINTEREVENT_DETAIL_0,
+
+    /** Triggers 'onclick' event handler using <code>PointerEvent</code>. */
+    @BrowserFeature({CHROME, EDGE, IE})
     EVENT_ONCLICK_USES_POINTEREVENT,
 
     /** <code>CloseEvent</code> can not be created by calling document.createEvent('CloseEvent'). */
     @BrowserFeature({FF, FF78})
     EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED,
+
+    /** Triggers 'ondblclick' event handler using <code>PointerEvent</code>. */
+    @BrowserFeature(IE)
+    EVENT_ONDOUBLECLICK_USES_POINTEREVENT,
 
     /** Triggers "onload" event if internal javascript loaded. */
     @BrowserFeature(IE)
@@ -560,8 +566,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     HTTP_COOKIE_START_DATE_1970,
 
-    /** Browser sends Sec-Fetch headers. */
+    /** Browser sends Sec-ch headers. */
     @BrowserFeature({CHROME, EDGE})
+    HTTP_HEADER_CH_UA,
+
+    /** Browser sends Sec-Fetch headers. */
+    @BrowserFeature({CHROME, EDGE, FF})
     HTTP_HEADER_SEC_FETCH,
 
     /** Browser sends Upgrade-Insecure-Requests header. */
@@ -590,6 +600,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ANCHORS_REQUIRES_NAME_OR_ID,
 
+    /** The anchor hostname setter ignores blank url's. */
+    @BrowserFeature({FF, FF78})
+    JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
+
     /** The anchor pathname detects url's starting with one letter as file url's. */
     @BrowserFeature({CHROME, EDGE, IE})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
@@ -607,7 +621,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
 
     /** The anchor protocol property converts drive letters to uppercase. */
@@ -617,6 +631,10 @@ public enum BrowserVersionFeatures {
     /** The anchor protocol property returns 'http' for broken http(s) url's. */
     @BrowserFeature({FF, FF78})
     JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL,
+
+    /** The anchor protocol property setter throws an error if the protocol is not valid. */
+    @BrowserFeature(IE)
+    JS_ANCHOR_PROTOCOL_INVALID_THROWS,
 
     /** An area element without a href attribute is focusable. */
     @BrowserFeature({FF, FF78})
@@ -674,6 +692,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTHIGHT_INPUT_17,
 
+    /** ClientHeight for input is 18. */
+    @BrowserFeature(FF)
+    JS_CLIENTHIGHT_INPUT_18,
+
+    /** ClientHeight for radio button and checkbox is 10. */
+    @BrowserFeature(FF)
+    JS_CLIENTHIGHT_RADIO_CHECKBOX_10,
+
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(IE)
     JS_CLIENTRECTLIST_THROWS_IF_ITEM_NOT_FOUND,
@@ -685,6 +711,10 @@ public enum BrowserVersionFeatures {
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
+
+    /** ClientWidth for radio button and checkbox is 10. */
+    @BrowserFeature(FF)
+    JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
 
     /** Is window can be used as Console. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -886,10 +916,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_CAPTURE_STACK_TRACE,
 
-    /** Javascript {@code Error.stack}. */
-    @BrowserFeature({CHROME, EDGE, FF, FF78})
-    JS_ERROR_STACK,
-
     /** Javascript {@code Error.stackTraceLimit}. */
     @BrowserFeature({CHROME, EDGE, IE})
     JS_ERROR_STACK_TRACE_LIMIT,
@@ -950,6 +976,14 @@ public enum BrowserVersionFeatures {
     /** contentDocument throws if the frame document access is denied. */
     @BrowserFeature(IE)
     JS_FRAME_CONTENT_DOCUMENT_ACCESS_DENIED_THROWS,
+
+    /** Supports globalThis. */
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
+    JS_GLOBAL_THIS,
+
+    /** The index parameter of {@link CSSGroupingRule#insertRule(String, Object)} is optional. */
+    @BrowserFeature({FF, FF78})
+    JS_GROUPINGRULE_INSERTRULE_INDEX_OPTIONAL,
 
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -1117,7 +1151,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_MEDIA_LIST_ALL,
 
-    /** Indicates that an empty media list is represented by the string 'all'. */
+    /** Indicates that an empty media list is represented by the string ''. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_MEDIA_LIST_EMPTY_STRING,
 
@@ -1172,6 +1206,10 @@ public enum BrowserVersionFeatures {
     /** element.outerHTML removes all children from detached node. */
     @BrowserFeature({CHROME, EDGE})
     JS_OUTER_HTML_THROWS_FOR_DETACHED,
+
+    /** Indicates that CSSPageRule.selectorText always returns an empty string. */
+    @BrowserFeature(IE)
+    JS_PAGERULE_SELECTORTEXT_EMPTY,
 
     /** Indicates that HTMLPhraseElements returning 'HTMLElement'
      * as class name. */
@@ -1428,7 +1466,7 @@ public enum BrowserVersionFeatures {
      * Difference of window.outer/inner height is 130.
      */
     @BrowserFeature(EDGE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_130,
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131,
 
     /**
      * Difference of window.outer/inner height is 132.
@@ -1439,7 +1477,7 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 80.
      */
-    @BrowserFeature({FF, FF78})
+    @BrowserFeature(FF78)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_80,
 
     /**
@@ -1447,6 +1485,12 @@ public enum BrowserVersionFeatures {
      */
     @BrowserFeature(IE)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_86,
+
+    /**
+     * Difference of window.outer/inner height is 91.
+     */
+    @BrowserFeature(FF)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
 
     /** Window.getSelection returns null, if the window is not visible. */
     @BrowserFeature({FF, FF78})
@@ -1561,7 +1605,6 @@ public enum BrowserVersionFeatures {
 
     /**
      * Method addRule returns the rule position instead of -1.
-     * (href empty) is null.
      */
     @BrowserFeature(IE)
     STYLESHEET_ADD_RULE_RETURNS_POS,
@@ -1633,6 +1676,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     XHR_LENGTH_COMPUTABLE,
 
+    /** XMLHttpRequest triggers the load events also if the abort was signaled. */
+    @BrowserFeature({FF, FF78})
+    XHR_LOAD_ALWAYS_AFTER_DONE,
+
     /** XMLHttpRequest triggers the load start event async. */
     @BrowserFeature(IE)
     XHR_LOAD_START_ASYNC,
@@ -1653,6 +1700,10 @@ public enum BrowserVersionFeatures {
     /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
     @BrowserFeature(IE)
     XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE,
+
+    /** Indicates if the XMLHttpRequest.send() method will throw if aborted. */
+    @BrowserFeature({CHROME, EDGE})
+    XHR_SEND_NETWORK_ERROR_IF_ABORTED,
 
     /** Indicates that the content charset is used for response parsing. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})

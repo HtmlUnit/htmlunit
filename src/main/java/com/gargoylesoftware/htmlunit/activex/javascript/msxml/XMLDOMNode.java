@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -160,6 +161,15 @@ public class XMLDOMNode extends MSXMLScriptable {
     }
 
     /**
+     * Overwritten to throw also in non strict mode.
+     * @param ignored ignored param
+     */
+    @JsxSetter
+    public void setFirstChild(final Object ignored) {
+        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
+    }
+
+    /**
      * Returns the last child node.
      * @return the last child node
      */
@@ -167,6 +177,15 @@ public class XMLDOMNode extends MSXMLScriptable {
     public XMLDOMNode getLastChild() {
         final DomNode domNode = getDomNodeOrDie();
         return getJavaScriptNode(domNode.getLastChild());
+    }
+
+    /**
+     * Overwritten to throw also in non strict mode.
+     * @param ignored ignored param
+     */
+    @JsxSetter
+    public void setLastChild(final Object ignored) {
+        throw ScriptRuntime.typeError("Wrong number of arguments or invalid property assignment");
     }
 
     /**

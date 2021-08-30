@@ -261,7 +261,8 @@ public class HTMLTableElement extends RowContainer {
     @Override
     protected boolean isContainedRow(final HtmlTableRow row) {
         final DomNode parent = row.getParentNode(); // the tbody, thead or tfoo
-        return (parent != null) && parent.getParentNode() == getDomNodeOrDie();
+        return parent != null
+                && parent.getParentNode() == getDomNodeOrDie();
     }
 
     /**
@@ -293,8 +294,8 @@ public class HTMLTableElement extends RowContainer {
      * Sets the {@code width} property.
      * @param width the {@code width} property
      */
-    @JsxSetter
-    public void setWidth(final String width) {
+    @JsxSetter(propertyName = "width")
+    public void setWidth_js(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 
@@ -425,14 +426,6 @@ public class HTMLTableElement extends RowContainer {
     @JsxSetter(IE)
     public void setBorderColorLight(final String borderColor) {
         setColorAttribute("borderColorLight", borderColor);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getInnerText() {
-        return getDomNodeOrDie().asText();
     }
 
     /**

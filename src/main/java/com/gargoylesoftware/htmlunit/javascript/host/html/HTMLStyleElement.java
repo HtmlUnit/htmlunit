@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -62,12 +63,13 @@ public class HTMLStyleElement extends HTMLElement {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         final String css = style.getTextContent();
 
-        final Cache cache = getWindow().getWebWindow().getWebClient().getCache();
+        final Window window = getWindow();
+        final Cache cache = window.getWebWindow().getWebClient().getCache();
         final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(css);
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                 .getUrl().toExternalForm();
         if (cached != null) {
-            sheet_ = new CSSStyleSheet(this, cached, uri);
+            sheet_ = new CSSStyleSheet(this, window, cached, uri);
         }
         else {
             sheet_ = new CSSStyleSheet(this, css, uri);
@@ -115,16 +117,6 @@ public class HTMLStyleElement extends HTMLElement {
     public void setMedia(final String media) {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         style.setAttribute("media", media);
-    }
-
-    /**
-     * Sets the scoped of this style.
-     * @param scoped the new scoped
-     */
-    @JsxSetter({FF, FF78})
-    public void setScoped(final boolean scoped) {
-        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        style.setAttribute("scoped", Boolean.toString(scoped));
     }
 
     /**

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
@@ -82,6 +83,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.StackStyle;
 import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
 
@@ -151,7 +153,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         initTransientFields();
 
         jsConfig_ = JavaScriptConfiguration.getInstance(webClient.getBrowserVersion());
-        RhinoException.useMozillaStackStyle(true);
+        RhinoException.setStackStyle(StackStyle.MOZILLA_LF);
     }
 
     /**
@@ -225,8 +227,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         // remove some objects, that Rhino defines in top scope but that we don't want
-        deleteProperties(window, "Continuation");
-        deleteProperties(window, "Iterator", "StopIteration");
+        deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
+
+        // TODO we have to migrate to Rhinos promise support
+        deleteProperties(window, "Promise");
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
             deleteProperties(window, "Symbol");
@@ -501,6 +505,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(scriptable, "isXMLName");
 
         NativeFunctionToStringFunction.installFix(scriptable, browserVersion);
+
+        if (!browserVersion.hasFeature(JS_GLOBAL_THIS)) {
+            deleteProperties(scriptable, "globalThis");
+        }
 
         datePrototype.defineFunctionProperties(new String[] {"toLocaleDateString", "toLocaleTimeString"},
                 DateCustom.class, ScriptableObject.DONTENUM);
@@ -937,6 +945,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 finally {
                     stack.pop();
                 }
+
+                // TODO NativePromise from Rhino
+                // cx.processMicrotasks();
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks

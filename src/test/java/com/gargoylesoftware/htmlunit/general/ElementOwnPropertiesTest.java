@@ -486,7 +486,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),elementTiming,firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
                 + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onfullscreenchange,onfullscreenerror,onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,"
@@ -509,7 +509,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "constructor(),elementTiming,firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
-                + "hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),hasPointerCapture(),id,innerHTML,"
                 + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onfullscreenchange,onfullscreenerror,onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,"
@@ -571,7 +571,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientLeft,clientTop,clientWidth,constructor(),firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
@@ -584,7 +585,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "clientLeft,clientTop,clientWidth,constructor(),firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),"
+                + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),id,"
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
@@ -642,11 +644,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "accelerator,backgroundAttachment,backgroundColor,backgroundImage,backgroundPosition,"
             + "backgroundRepeat,borderBottomColor,borderBottomStyle,borderBottomWidth,borderLeftColor,"
             + "borderLeftStyle,borderLeftWidth,borderRightColor,borderRightStyle,borderRightWidth,"
-            + "borderTopColor,borderTopStyle,borderTopWidth,bottom,color,constructor,cssFloat,cssText,"
+            + "borderTop,borderTopColor,borderTopStyle,borderTopWidth,bottom,color,constructor,cssFloat,cssText,"
             + "display,font,fontFamily,fontSize,getAttribute(),getPropertyPriority(),getPropertyValue(),"
-            + "height,left,length,letterSpacing,lineHeight,margin,marginBottom,marginLeft,marginRight,marginTop,"
-            + "maxHeight,maxWidth,minHeight,minWidth,opacity,orphans,outline,outlineWidth,padding,"
-            + "paddingBottom,paddingLeft,paddingRight,paddingTop,pixelBottom,pixelHeight,pixelLeft,"
+            + "height,item(),left,length,letterSpacing,lineHeight,margin,marginBottom,marginLeft,marginRight,marginTop,"
+            + "maxHeight,maxWidth,minHeight,minWidth,msImeAlign,opacity,orphans,outline,outlineWidth,padding,"
+            + "paddingBottom,paddingLeft,paddingRight,paddingTop,parentRule,pixelBottom,pixelHeight,pixelLeft,"
             + "pixelRight,pixelTop,pixelWidth,posBottom,posHeight,position,posLeft,posRight,posTop,"
             + "posWidth,removeAttribute(),removeProperty(),right,rubyAlign,setAttribute(),setProperty(),"
             + "textDecorationBlink,textDecorationLineThrough,textDecorationNone,textDecorationOverline,"
@@ -2561,7 +2563,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onunhandledrejection,onunload,text,"
                 + "vLink",
             FF = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
-                + "onhashchange,onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
+                + "ongamepadconnected,ongamepaddisconnected,onhashchange,"
+                + "onlanguagechange,onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
                 + "onpopstate,onrejectionhandled,onstorage,onunhandledrejection,onunload,text,"
                 + "vLink",
             FF78 = "aLink,background,bgColor,constructor(),link,onafterprint,onbeforeprint,onbeforeunload,"
@@ -4672,7 +4675,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onlanguagechange,onload(),onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,"
                 + "onpopstate,onrejectionhandled,onresize,onscroll,onstorage,onunhandledrejection,onunload,"
                 + "rows",
-            FF = "cols,constructor(),onafterprint,onbeforeprint,onbeforeunload,onhashchange,onlanguagechange,"
+            FF = "cols,constructor(),onafterprint,onbeforeprint,onbeforeunload,"
+                + "ongamepadconnected,ongamepaddisconnected,onhashchange,onlanguagechange,"
                 + "onmessage,onmessageerror,onoffline,ononline,onpagehide,onpageshow,onpopstate,onrejectionhandled,"
                 + "onstorage,onunhandledrejection,onunload,"
                 + "rows",
@@ -10408,8 +10412,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "constructor(),content",
+            CHROME = "constructor(),content,shadowRoot",
+            EDGE = "constructor(),content,shadowRoot",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(IE = "constructor")
+    @HtmlUnitNYI(CHROME = "constructor(),content",
+            EDGE = "constructor(),content",
+            IE = "constructor")
     public void template() throws Exception {
         test("template");
     }
@@ -10608,6 +10616,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URL}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            EDGE = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF78 = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            IE = "exception")
+    public void url() throws Exception {
+        testString("", "new URL('http://developer.mozilla.org')");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
      *
      * @throws Exception if the test fails
@@ -10640,7 +10667,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getPredictedEvents(),height,isPrimary,pointerId,pointerType,"
                 + "pressure,tangentialPressure,tiltX,tiltY,twist,"
                 + "width",
-            FF = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
+            FF = "constructor(),getCoalescedEvents(),getPredictedEvents(),"
+                + "height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",
             FF78 = "constructor(),getCoalescedEvents(),height,isPrimary,pointerId,pointerType,pressure,"
                 + "tangentialPressure,tiltX,tiltY,twist,width",

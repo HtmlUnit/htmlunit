@@ -46,8 +46,9 @@ public class SvgElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -56,7 +57,7 @@ public class SvgElementTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             if ("[object SVGElement]".equals(getExpectedAlerts()[0])) {
@@ -78,11 +79,11 @@ public class SvgElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var testNode = document.getElementById('myId');\n"
-            + "      alert('oninput' in document);\n"
+            + "      log('oninput' in document);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -93,7 +94,7 @@ public class SvgElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -106,16 +107,16 @@ public class SvgElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "<title>Test</title>\n"
             + "<style>\n"
             + "  .red   {color:#FF0000;}\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var testNode = document.getElementById('myId');\n"
             + "  var redTags = testNode.querySelectorAll('.red');\n"
-            + "  alert(redTags.length);\n"
-            + "  alert(redTags.item(0).id);\n"
+            + "  log(redTags.length);\n"
+            + "  log(redTags.item(0).id);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -127,7 +128,7 @@ public class SvgElementTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -140,14 +141,14 @@ public class SvgElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "<title>Test</title>\n"
             + "<style>\n"
             + "  .red   {color:#FF0000;}\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var testNode = document.getElementById('myId');\n"
-            + "  alert(testNode.querySelector('.red'));\n"
+            + "  log(testNode.querySelector('.red'));\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -159,7 +160,7 @@ public class SvgElementTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -173,9 +174,10 @@ public class SvgElementTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var testNode = document.getElementById('myId');\n"
-            + "  alert(testNode.getBBox());\n"
+            + "  log(testNode.getBBox());\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -187,6 +189,6 @@ public class SvgElementTest extends WebDriverTestCase {
             + "  </svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

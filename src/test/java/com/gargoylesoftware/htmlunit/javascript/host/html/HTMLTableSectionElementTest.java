@@ -66,23 +66,24 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t = document.getElementById('" + id + "');\n"
-            + "        alert(t.align);\n"
+            + "        log(t.align);\n"
             + "        set(t, 'hello');\n"
-            + "        alert(t.align);\n"
+            + "        log(t.align);\n"
             + "        set(t, 'left');\n"
-            + "        alert(t.align);\n"
+            + "        log(t.align);\n"
             + "        set(t, 'hi');\n"
-            + "        alert(t.align);\n"
+            + "        log(t.align);\n"
             + "        set(t, 'right');\n"
-            + "        alert(t.align);\n"
+            + "        log(t.align);\n"
             + "      }\n"
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.align = value;\n"
             + "        } catch (e) {\n"
-            + "          alert('error');\n"
+            + "          log('error');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -95,7 +96,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -133,25 +135,26 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t1 = document.getElementById('" + id + "1');\n"
             + "        var t2 = document.getElementById('" + id + "2');\n"
             + "        var t3 = document.getElementById('" + id + "3');\n"
-            + "        alert(t1.vAlign);\n"
-            + "        alert(t2.vAlign);\n"
-            + "        alert(t3.vAlign);\n"
+            + "        log(t1.vAlign);\n"
+            + "        log(t2.vAlign);\n"
+            + "        log(t3.vAlign);\n"
             + "        set(t1, 'middle');\n"
             + "        set(t2, 8);\n"
             + "        set(t3, 'BOTtom');\n"
-            + "        alert(t1.vAlign);\n"
-            + "        alert(t2.vAlign);\n"
-            + "        alert(t3.vAlign);\n"
+            + "        log(t1.vAlign);\n"
+            + "        log(t2.vAlign);\n"
+            + "        log(t3.vAlign);\n"
             + "      }\n"
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.vAlign = value;\n"
             + "        } catch (e) {\n"
-            + "          alert('error');\n"
+            + "          log('error');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -174,7 +177,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -209,25 +213,26 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t1 = document.getElementById('" + id + "1');\n"
             + "        var t2 = document.getElementById('" + id + "2');\n"
             + "        var t3 = document.getElementById('" + id + "3');\n"
-            + "        alert(t1.ch);\n"
-            + "        alert(t2.ch);\n"
-            + "        alert(t3.ch);\n"
+            + "        log(t1.ch);\n"
+            + "        log(t2.ch);\n"
+            + "        log(t3.ch);\n"
             + "        set(t1, 'u');\n"
             + "        set(t2, 8);\n"
             + "        set(t3, 'U8');\n"
-            + "        alert(t1.ch);\n"
-            + "        alert(t2.ch);\n"
-            + "        alert(t3.ch);\n"
+            + "        log(t1.ch);\n"
+            + "        log(t2.ch);\n"
+            + "        log(t3.ch);\n"
             + "      }\n"
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.ch = value;\n"
             + "        } catch (e) {\n"
-            + "          alert('error');\n"
+            + "          log('error');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -250,7 +255,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -285,25 +291,26 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t1 = document.getElementById('" + id + "1');\n"
             + "        var t2 = document.getElementById('" + id + "2');\n"
             + "        var t3 = document.getElementById('" + id + "3');\n"
-            + "        alert(t1.chOff);\n"
-            + "        alert(t2.chOff);\n"
-            + "        alert(t3.chOff);\n"
+            + "        log(t1.chOff);\n"
+            + "        log(t2.chOff);\n"
+            + "        log(t3.chOff);\n"
             + "        set(t1, '5.2');\n"
             + "        set(t2, -3);\n"
             + "        set(t3, 'abc');\n"
-            + "        alert(t1.chOff);\n"
-            + "        alert(t2.chOff);\n"
-            + "        alert(t3.chOff);\n"
+            + "        log(t1.chOff);\n"
+            + "        log(t2.chOff);\n"
+            + "        log(t3.chOff);\n"
             + "      }\n"
             + "      function set(e, value) {\n"
             + "        try {\n"
             + "          e.chOff = value;\n"
             + "        } catch (e) {\n"
-            + "          alert('error');\n"
+            + "          log('error');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -326,7 +333,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    </table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -337,12 +345,13 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
     public void TBODY_innerHTML() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var t = document.getElementById('myId');\n"
             + "    try {\n"
             + "      t.innerHTML = '<tr><td>world</td></tr>';\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(t.innerHTML.toLowerCase());\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(t.innerHTML.toLowerCase());\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -350,7 +359,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tbody id='myId'><tr><td>hello</td></tr></tbody>\n"
             + "  </table>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -365,18 +375,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
+            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -391,18 +403,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
+            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -417,18 +431,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.innerText = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.innerText = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.innerText);\n"
+            + "  try { node.innerText = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.innerText);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -443,18 +459,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tbody id='tab_row'><tr><td>cell1</td></tr></tbody>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
+            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -469,18 +487,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <thead id='tab_row'><tr><td>cell1</td></tr></thead>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
+            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -495,18 +515,20 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "    <tfoot id='tab_row'><tr><td>cell1</td></tr></tfoot>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var node = document.getElementById('tab_row');\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
+            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -520,13 +542,14 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var tfoot = document.getElementById('tfoot');\n"
-            + "        alert(tfoot.bgColor);\n"
+            + "        log(tfoot.bgColor);\n"
             + "        tfoot.bgColor = '#0000aa';\n"
-            + "        alert(tfoot.bgColor);\n"
+            + "        log(tfoot.bgColor);\n"
             + "        tfoot.bgColor = 'x';\n"
-            + "        alert(tfoot.bgColor);\n"
+            + "        log(tfoot.bgColor);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -534,7 +557,8 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  <table><tfoot id='tfoot'><tr><td>cell1</td></tr></tfoot></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -548,13 +572,14 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var thead = document.getElementById('thead');\n"
-            + "        alert(thead.bgColor);\n"
+            + "        log(thead.bgColor);\n"
             + "        thead.bgColor = '#0000aa';\n"
-            + "        alert(thead.bgColor);\n"
+            + "        log(thead.bgColor);\n"
             + "        thead.bgColor = 'x';\n"
-            + "        alert(thead.bgColor);\n"
+            + "        log(thead.bgColor);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -562,6 +587,33 @@ public class HTMLTableSectionElementTest extends WebDriverTestCase {
             + "  <table><thead id='thead'><tr><td>cell1</td></tr></thead></table>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"<thead id=\"thead\"><tr><td>cell1</td></tr></thead>", "new"})
+    public void outerHTML() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        log(document.getElementById('thead').outerHTML);\n"
+            + "        document.getElementById('thead').outerHTML = '<div id=\"new\">text<div>';\n"
+            + "        log(document.getElementById('new').id);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  <table><thead id='thead'><tr><td>cell1</td></tr></thead></table>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

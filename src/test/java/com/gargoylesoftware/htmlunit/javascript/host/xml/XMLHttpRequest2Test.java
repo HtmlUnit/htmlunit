@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.Writer;
@@ -34,10 +36,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -189,6 +193,73 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
         final Map<String, String> headers = lastRequest.getAdditionalHeaders();
         assertEquals("" + body.length(), headers.get(HttpHeader.CONTENT_LENGTH));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void requestHeaderSendBlob() throws Exception {
+        final String html = "<html><body><script>\n"
+            + "var xhr = new XMLHttpRequest();\n"
+            + "xhr.open('POST', 'second.html', false);\n"
+            + "xhr.setRequestHeader('Content-Type', 'text/plain');\n"
+            + "xhr.setRequestHeader('Content-length', 1234);\n"
+
+            + "var body = ['hello world'];\n"
+            + "var blob = new Blob(body);\n"
+            + "xhr.send(blob);\n"
+            + "</script></body></html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        loadPage2(html);
+
+        final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+        final Map<String, String> headers = lastRequest.getAdditionalHeaders();
+        assertEquals("11", headers.get(HttpHeader.CONTENT_LENGTH));
+        assertEquals("text/plain", headers.get(HttpHeader.CONTENT_TYPE));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void requestHeaderSendFile() throws Exception {
+        final String html = "<html><body>\n"
+
+            + "<input id='fileupload' type='file'/>"
+            + "<button id='testBtn' onclick='test()'>Tester</button>\n"
+
+            + "<script>\n"
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.open('POST', 'second.html', false);\n"
+            + "  xhr.setRequestHeader('Content-Type', 'text/csv');\n"
+
+            + "  var fileInput = document.getElementById('fileupload');"
+
+            + "  xhr.send(fileInput.files[0]);\n"
+            + "}\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final File tstFile = File.createTempFile("HtmlUnitUploadTest", ".txt");
+        try {
+            FileUtils.writeStringToFile(tstFile, "Hello HtmlUnit", ISO_8859_1);
+
+            final String path = tstFile.getCanonicalPath();
+            driver.findElement(By.id("fileupload")).sendKeys(path);
+
+            driver.findElement(By.id("testBtn")).click();
+
+            final WebRequest lastRequest = getMockWebConnection().getLastWebRequest();
+            final Map<String, String> headers = lastRequest.getAdditionalHeaders();
+            assertEquals("text/csv", headers.get(HttpHeader.CONTENT_TYPE));
+        }
+        finally {
+            FileUtils.deleteQuietly(tstFile);
+        }
     }
 
     /**

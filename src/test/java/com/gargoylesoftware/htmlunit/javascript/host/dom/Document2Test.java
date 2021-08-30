@@ -418,16 +418,34 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
-            FF = {"false", "false", "false", "false", "false"},
-            FF78 = {"false", "false", "false", "false", "false"})
-    @NotYetImplemented({FF, FF78})
+    @Alerts(DEFAULT = {"true", "true"},
+            FF78 = {"false", "false"})
+    @NotYetImplemented(FF78)
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
             + "function x() {\n"
             + "  var d = window.frames['f'].document;\n"
             + "  try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
             + "  try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
+            + "}\n"
+            + "</script></body></html>";
+
+        loadPageWithAlerts2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true"},
+            FF = {"false", "false", "false"},
+            FF78 = {"false", "false", "false"})
+    @NotYetImplemented({FF, FF78})
+    public void queryCommandEnabledDesignMode() throws Exception {
+        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
+            + "function x() {\n"
+            + "  var d = window.frames['f'].document;\n"
             + "  d.designMode = 'on';\n"
             + "  alert(d.queryCommandEnabled('SelectAll'));\n"
             + "  alert(d.queryCommandEnabled('selectall'));\n"

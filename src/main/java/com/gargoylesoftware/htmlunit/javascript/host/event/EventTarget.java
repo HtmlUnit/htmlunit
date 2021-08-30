@@ -209,7 +209,7 @@ public class EventTarget extends SimpleScriptable {
                 final HtmlElement element = label.getLabeledElement();
                 if (element != null && element != getDomNodeOrNull()) {
                     try {
-                        element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), false, true, true);
+                        element.click(event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), false, true, true, true);
                     }
                     catch (final IOException e) {
                         // ignore for now

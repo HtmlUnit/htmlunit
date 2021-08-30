@@ -234,7 +234,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         else if (MimeType.TEXT_XML.equals(contentType)) {
             return ".xml";
         }
-        else if ("image/gif".equals(contentType)) {
+        else if (MimeType.IMAGE_GIF.equals(contentType)) {
             return ".gif";
         }
         return ".txt";

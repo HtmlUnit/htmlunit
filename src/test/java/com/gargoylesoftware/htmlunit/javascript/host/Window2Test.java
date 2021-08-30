@@ -27,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -772,8 +773,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
-            EDGE = {"true", "true", "130", "true", "true", "16"},
-            FF = {"true", "true", "80", "true", "true", "12"},
+            EDGE = {"true", "true", "131", "true", "true", "16"},
+            FF = {"true", "true", "91", "true", "true", "12"},
             FF78 = {"true", "true", "80", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
@@ -883,8 +884,8 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"636", "1256", "619", "1239"},
-            EDGE = {"638", "1256", "621", "1239"},
-            FF = {"688", "1260", "671", "1243"},
+            EDGE = {"637", "1256", "620", "1239"},
+            FF = {"677", "1260", "660", "1243"},
             FF78 = {"688", "1260", "671", "1243"},
             IE = {"682", "1256", "665", "1239"})
     @NotYetImplemented
@@ -1014,7 +1015,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
-            FF = {"10", "79"},
+            FF = {"10", "89"},
             FF78 = {"10", "79"})
     public void mozInnerScreen() throws Exception {
         final String html
@@ -1315,7 +1316,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"string string 8 number object", "string string 1 number object"},
-            IE = {"string string 9 number object", "string string 8 number object"})
+            IE = {"string string 8 number object", "string string 9 number object"})
     @NotYetImplemented(IE)
     public void onErrorExceptionInstance2() throws Exception {
         final String html
@@ -2534,12 +2535,14 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
-            FF = {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
-                "[object Object]"},
             FF78 =  {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
                 "[object Object]"},
             IE = "exception")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            FF = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            FF78 = {"[object Window]", "[object EventTarget]", "[object Object]"},
+            IE = {"[object Window]", "[object EventTarget]", "[object Object]"})
     public void test__proto__() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2603,6 +2606,109 @@ public class Window2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <app:dIv xmlns='http://anotherURL'></app:dIv>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Window]", "true", "true"},
+            IE = "globalThis is undefined")
+    public void globalThis() throws Exception {
+        final String html
+            = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log(globalThis);\n"
+            + "    log(window === globalThis);\n"
+            + "    log(self === globalThis);\n"
+            + "  } catch(e) { log('globalThis is undefined'); }"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "function"})
+    public void defineGetterSetter() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(typeof window.__defineGetter__);\n"
+            + "    log(typeof window.__lookupGetter__);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function", "function"})
+    public void defineGetterSetter_standards() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(typeof window.__defineGetter__);\n"
+            + "    log(typeof window.__lookupGetter__);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("hello")
+    public void delegatorAnd__defineGetter__() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    window.__defineGetter__('foo', function() { return 'hello' });\n"
+                + "    log(window.foo);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("worldworld")
+    public void delegatorAnd__defineSetter__() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    window.__defineSetter__('foo', function(a) { document.title = a; });\n"
+                + "    window.foo = 'world';\n"
+                + "    log(document.title);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
 
         loadPageVerifyTitle2(html);
     }

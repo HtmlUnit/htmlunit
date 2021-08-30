@@ -14,19 +14,32 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PAGERULE_SELECTORTEXT_EMPTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * A JavaScript object for {@code CSSPageRule}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSPageRule">MDN doc</a>
  */
 @JsxClass
 public class CSSPageRule extends CSSRule {
@@ -36,5 +49,73 @@ public class CSSPageRule extends CSSRule {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF78})
     public CSSPageRule() {
+    }
+
+    /**
+     * Creates a new instance.
+     * @param stylesheet the Stylesheet of this rule.
+     * @param rule the wrapped rule
+     */
+    protected CSSPageRule(final CSSStyleSheet stylesheet, final CSSPageRuleImpl rule) {
+        super(stylesheet, rule);
+    }
+
+    /**
+     * Returns the textual representation of the selector for the rule set.
+     * @return the textual representation of the selector for the rule set
+     */
+    @JsxGetter({CHROME, EDGE, IE})
+    public String getSelectorText() {
+        if (getBrowserVersion().hasFeature(JS_PAGERULE_SELECTORTEXT_EMPTY)) {
+            return "";
+        }
+
+        final String selectorText = getPageRule().getSelectorText();
+        if (selectorText != null) {
+            return selectorText.toLowerCase(Locale.ROOT);
+        }
+        return null;
+    }
+
+    /**
+     * Sets the textual representation of the selector for the rule set.
+     * @param selectorText the textual representation of the selector for the rule set
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setSelectorText(final String selectorText) {
+        // FIXME [CSSPARSER] implement CSSPageRuleImpl.setSelectorText(String)
+        // getPageRule().setSelectorText(selectorText);
+    }
+
+    /**
+     * Returns the declaration-block of this rule set.
+     * @return the declaration-block of this rule set
+     */
+    @JsxGetter
+    public CSSStyleDeclaration getStyle() {
+        return new CSSStyleDeclaration(getParentScope(), getPageRule().getStyle());
+    }
+
+    /**
+     * Returns the wrapped rule, as a page rule.
+     * @return the wrapped rule, as a page rule
+     */
+    private CSSPageRuleImpl getPageRule() {
+        return (CSSPageRuleImpl) getRule();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getCssText() {
+        String cssText = super.getCssText();
+        final BrowserVersion browserVersion = getBrowserVersion();
+        if (browserVersion.hasFeature(CSS_CSSTEXT_IE_STYLE)) {
+            cssText = StringUtils.replace(cssText, " { }", "  {\n\t\n}");
+            cssText = StringUtils.replace(cssText, " { ", "  {\n\t");
+            cssText = StringUtils.replace(cssText, "; }", ";\n}");
+        }
+        return cssText;
     }
 }

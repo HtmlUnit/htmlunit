@@ -110,6 +110,12 @@ public final class HttpHeader {
     /** Sec-Fetch-User. */
     public static final String SEC_FETCH_USER = "Sec-Fetch-User";
 
+    /** sec-ch-ua. */
+    public static final String SEC_CH_UA = "sec-ch-ua";
+
+    /** sec-ch-ua-mobile. */
+    public static final String SEC_CH_UA_MOBILE = "sec-ch-ua-mobile";
+
     /** Access-Control-Request-Method. */
     public static final String ACCESS_CONTROL_REQUEST_METHOD = "Access-Control-Request-Method";
     /** Access-Control-Request-Headers. */

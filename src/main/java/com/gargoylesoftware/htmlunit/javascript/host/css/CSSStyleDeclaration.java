@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SUPPORTS_BEHAVIOR_PROPERTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
@@ -37,7 +36,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_POSITION;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BACKGROUND_REPEAT;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BEHAVIOR;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
@@ -98,9 +96,6 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.
 import static com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition.Z_INDEX_;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
-import java.awt.Color;
-import java.text.MessageFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -119,11 +114,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.impl.Color;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -133,7 +130,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -154,6 +150,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Dennis Duysak
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN doc</a>
  */
 @JsxClass
 public class CSSStyleDeclaration extends SimpleScriptable {
@@ -219,9 +216,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final Map<String, String> CamelizeCache_
             = Collections.synchronizedMap(new HashMap<String, String>());
 
-    /** Used to parse URLs. */
-    private static final MessageFormat URL_FORMAT = new MessageFormat("url({0})");
-
     /** The element to which this style belongs. */
     private Element jsElement_;
 
@@ -284,29 +278,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         WebAssert.notNull("htmlElement", element);
         jsElement_ = element;
         setDomNode(element.getDomNodeOrNull(), false);
-
-        // If an IE behavior was specified in the style, apply the behavior.
-        if (getBrowserVersion().hasFeature(CSS_SUPPORTS_BEHAVIOR_PROPERTY)
-            && element instanceof HTMLElement) {
-            final HTMLElement htmlElement = (HTMLElement) element;
-            final String behavior = getStyleAttribute(BEHAVIOR);
-            if (StringUtils.isNotBlank(behavior)) {
-                try {
-                    final Object[] url;
-                    synchronized (URL_FORMAT) {
-                        url = URL_FORMAT.parse(behavior);
-                    }
-                    if (url.length > 0) {
-                        htmlElement.addBehavior((String) url[0]);
-                    }
-                }
-                catch (final ParseException e) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("Invalid behavior: '" + behavior + "'.");
-                    }
-                }
-            }
-        }
     }
 
     /**
@@ -1100,6 +1071,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
+     * Gets the {@code borderTop} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter
+    public String getBorderTop() {
+        return getStyleAttribute(BORDER_TOP);
+    }
+
+    /**
      * Sets the {@code borderTop} style attribute.
      * @param borderTop the new attribute
      */
@@ -1259,11 +1239,16 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setCssText(final String value) {
+        String fixedValue = value;
+        if (fixedValue == null || "null".equals(fixedValue)) {
+            fixedValue = "";
+        }
+
         if (styleDeclaration_ != null) {
-            styleDeclaration_.setCssText(value);
+            styleDeclaration_.setCssText(fixedValue);
             return;
         }
-        jsElement_.getDomNodeOrDie().setAttribute("style", value);
+        jsElement_.getDomNodeOrDie().setAttribute("style", fixedValue);
     }
 
     /**
@@ -1437,7 +1422,25 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxGetter
     public int getLength() {
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().size();
+        }
+
         return getStyleMap().size();
+    }
+
+    /**
+     * Returns the item in the given index.
+     * @param index the index
+     * @return the item in the given index
+     */
+    @JsxFunction
+    public Object item(final int index) {
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().get(index);
+        }
+
+        return getStyleMap().get(index);
     }
 
     /**
@@ -1753,6 +1756,15 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     }
 
     /**
+     * Gets the {@code borderTop} style attribute.
+     * @return the style attribute
+     */
+    @JsxGetter(IE)
+    public String getMsImeAlign() {
+        return getStyleAttribute(Definition.MS_IME_ALIGN);
+    }
+
+    /**
      * Sets the {@code msImeAlign} style attribute.
      * @param msImeAlign the new attribute
      */
@@ -1950,6 +1962,31 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
         setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
+    }
+
+    /**
+     * Returns the CSSRule that is the parent of this style block or <code>null</code> if this CSSStyleDeclaration is
+     * not attached to a CSSRule.
+     * @return the CSSRule that is the parent of this style block or <code>null</code> if this CSSStyleDeclaration is
+     *      not attached to a CSSRule
+     */
+    @JsxGetter
+    public CSSRule getParentRule() {
+        if (null != styleDeclaration_ && getParentScope() instanceof CSSStyleSheet) {
+            final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
+            if (parentRule != null) {
+                return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Nothing.
+     * @param parentRule ignored
+     */
+    @JsxSetter
+    public void setParentRule(final CSSRule parentRule) {
     }
 
     /**
@@ -2960,14 +2997,6 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             i = i * 24;
         }
         return Math.round(i);
-    }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("length".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
     }
 
     /**

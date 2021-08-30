@@ -85,6 +85,10 @@ abstract class BrowserConfiguration {
         return new FFLatest(defaultValue);
     }
 
+    static BrowserConfiguration ff78(final String defaultValue) {
+        return new FF78(defaultValue);
+    }
+
     static BrowserConfiguration ie(final String defaultValue) {
         return new IE(defaultValue);
     }
@@ -168,6 +172,19 @@ abstract class BrowserConfiguration {
         @Override
         public boolean isIteratable() {
             return false;
+        }
+    }
+
+    private static class FF78 extends BrowserConfiguration {
+        FF78(final String defaultValue) {
+            super(defaultValue);
+        }
+
+        @Override
+        public boolean matches(final BrowserVersion browserVersion) {
+            return browserVersion.isFirefox()
+                    && browserVersion.getBrowserVersionNumeric()
+                        == BrowserVersion.FIREFOX_78.getBrowserVersionNumeric();
         }
     }
 

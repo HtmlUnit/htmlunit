@@ -17,12 +17,12 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
-import java.awt.Color;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.impl.Color;
 
 /**
  * Wrapper for the HTML element "input" where type is "color".
@@ -45,7 +45,7 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
         super(qualifiedName, page, attributes);
         if (getValueAttribute() == ATTRIBUTE_NOT_DEFINED
                 && !hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-            setValueAttribute("#" + Integer.toHexString(Color.black.getRGB()).substring(2));
+            setValueAttribute("#000000");
         }
     }
 

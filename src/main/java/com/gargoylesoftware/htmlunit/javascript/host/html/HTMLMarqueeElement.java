@@ -46,7 +46,6 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
-    @Override
     @JsxGetter({CHROME, EDGE, IE})
     public int getWidth() {
         final String value = getDomNodeOrDie().getAttributeDirect("width");
@@ -70,7 +69,6 @@ public class HTMLMarqueeElement extends HTMLElement {
      * Returns the {@code height} property.
      * @return the {@code height} property
      */
-    @Override
     @JsxGetter({CHROME, EDGE, IE})
     public int getHeight() {
         final String value = getDomNodeOrDie().getAttributeDirect("height");

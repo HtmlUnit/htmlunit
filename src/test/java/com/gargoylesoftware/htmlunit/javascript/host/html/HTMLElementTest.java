@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
@@ -30,6 +28,7 @@ import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -880,6 +879,36 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "<form id='myNode'></form>\n"
             + "</body>\n"
+            + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "<b>inner HTML</b>",
+            FF = "getInnerHTML() not available",
+            FF78 = "getInnerHTML() not available",
+            IE = "getInnerHTML() not available")
+    public void getGetInnerHTML() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function doTest() {\n"
+            + "    var myNode = document.getElementById('myNode');\n"
+            + "    if (myNode.getInnerHTML) {\n"
+            + "      log(myNode.getInnerHTML());\n"
+            + "    } else {\n"
+            + "      log('getInnerHTML() not available');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body>\n"
+            + "<p id='myNode'><b>inner HTML</b></p>\n"
             + "</html>";
         loadPageVerifyTitle2(html);
     }
@@ -1875,7 +1904,11 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"Old = Old\n\ninnerText", "New = New cell value"},
             IE = {"Old = Old \ninnerText", "New = New cell value"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
+            EDGE =  {"Old = Old\ninnerText", "New = New cell value"},
+            FF = {"Old = Old\ninnerText", "New = New cell value"},
+            FF78 = {"Old = Old\ninnerText", "New = New cell value"},
+            IE  = {"Old = Old\ninnerText", "New = New cell value"})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3267,14 +3300,24 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            IE = "false")
+    @Alerts(DEFAULT = {"exception[]", "false", "false"},
+            IE = {"false", "false", "false"})
     public void contains_invalid_argument() throws Exception {
         final String html = "<html><body><script>\n"
             + LOG_TITLE_FUNCTION
+
             + "try {\n"
             + "  log(document.body.contains([]));\n"
-            + "} catch(e) { log('exception'); }\n"
+            + "} catch(e) { log('exception[]'); }\n"
+
+            + "try {\n"
+            + "  log(document.body.contains(null));\n"
+            + "} catch(e) { log('exception null'); }\n"
+
+            + "try {\n"
+            + "  log(document.body.contains(undefined));\n"
+            + "} catch(e) { log('exception undefined'); }\n"
+
             + "</script></body></html>";
 
         loadPageVerifyTitle2(html);
@@ -4196,6 +4239,33 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  }\n"
             + "  function alerter() {\n"
             + "    log('declared');\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "  <div id='myNode'><div id='inner'></div></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "<!--some comment-->", "true", "false"},
+            IE = {"-", "<!--some comment-->", "-", "-"})
+    public void replaceChildAddNewChildToDocument() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var newnode = document.createComment('some comment');\n"
+            + "    log(document.contains ? document.contains(newnode) : '-');\n"
+
+            + "    var outernode = document.getElementById('myNode');\n"
+            + "    var oldnode = document.getElementById('inner');\n"
+            + "    outernode.replaceChild(newnode, oldnode);\n"
+            + "    log(outernode.innerHTML);\n"
+            + "    log(document.contains ? document.contains(newnode) : '-');\n"
+            + "    log(document.contains ? document.contains(oldnode) : '-');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myNode'><div id='inner'></div></div>\n"

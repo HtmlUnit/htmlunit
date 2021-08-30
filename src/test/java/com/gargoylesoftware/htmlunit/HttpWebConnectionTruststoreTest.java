@@ -14,19 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
+
 import java.net.URL;
-import java.security.KeyStore;
-import java.security.NoSuchAlgorithmException;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLHandshakeException;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.eclipse.jetty.server.SslConnectionFactory;
+import org.eclipse.jetty.util.ssl.SslContextFactory;
+import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -38,65 +34,7 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
-
-    private static LocalTestServer LOCAL_SERVER_;
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @BeforeClass
-    public static void setUp() throws Exception {
-        final URL url = HttpWebConnectionTruststoreTest.class.getClassLoader().getResource("self-signed-cert.keystore");
-        final KeyStore keystore = KeyStore.getInstance("jks");
-        final char[] pwd = "nopassword".toCharArray();
-        keystore.load(url.openStream(), pwd);
-
-        final TrustManagerFactory trustManagerFactory = createTrustManagerFactory();
-        trustManagerFactory.init(keystore);
-        final TrustManager[] trustManagers = trustManagerFactory.getTrustManagers();
-
-        final KeyManagerFactory keyManagerFactory = createKeyManagerFactory();
-        keyManagerFactory.init(keystore, pwd);
-        final KeyManager[] keyManagers = keyManagerFactory.getKeyManagers();
-
-        final SSLContext serverSSLContext = SSLContext.getInstance("TLS");
-        serverSSLContext.init(keyManagers, trustManagers, null);
-
-        LOCAL_SERVER_ = new LocalTestServer(serverSSLContext);
-        LOCAL_SERVER_.start();
-    }
-
-    private static KeyManagerFactory createKeyManagerFactory() throws NoSuchAlgorithmException {
-        final String algorithm = KeyManagerFactory.getDefaultAlgorithm();
-        try {
-            return KeyManagerFactory.getInstance(algorithm);
-        }
-        catch (final NoSuchAlgorithmException e) {
-            return KeyManagerFactory.getInstance("SunX509");
-        }
-    }
-
-    private static TrustManagerFactory createTrustManagerFactory() throws NoSuchAlgorithmException {
-        final String algorithm = TrustManagerFactory.getDefaultAlgorithm();
-        try {
-            return TrustManagerFactory.getInstance(algorithm);
-        }
-        catch (final NoSuchAlgorithmException e) {
-            return TrustManagerFactory.getInstance("SunX509");
-        }
-    }
-
-    /**
-     * @throws Exception if an error occurs
-     */
-    @AfterClass
-    public static void tearDown() throws Exception {
-        if (LOCAL_SERVER_ != null) {
-            LOCAL_SERVER_.shutDown();
-        }
-        LOCAL_SERVER_ = null;
-    }
+public class HttpWebConnectionTruststoreTest extends WebServerTestCase {
 
     /**
      * @throws Exception if an error occurs
@@ -107,9 +45,9 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
         webClient.getOptions().setSSLTrustStore(
                 getClass().getClassLoader().getResource("self-signed-cert.keystore"),
                 "nopassword", "jks");
-        webClient.getPage("https://" + "localhost"
-                + ':' + LOCAL_SERVER_.getServer().getLocalPort()
-                + "/random/100");
+
+        final URL https = new URL("https://localhost:" + PORT2 + "/");
+        loadPage("<div>test</div>", https);
     }
 
     /**
@@ -117,9 +55,24 @@ public class HttpWebConnectionTruststoreTest extends SimpleWebTestCase {
      */
     @Test(expected = SSLHandshakeException.class)
     public void selfSignedCertNotInTruststore() throws Exception {
-        final WebClient webClient = getWebClient();
-        webClient.getPage("https://" + "localhost"
-                + ':' + LOCAL_SERVER_.getServer().getLocalPort()
-                + "/random/100");
+        final URL https = new URL("https://localhost:" + PORT2 + "/");
+        loadPage("<div>test</div>", https);
+    }
+
+    @Override
+    protected boolean isHttps() {
+        return true;
+    }
+
+    @Override
+    public SslConnectionFactory getSslConnectionFactory() {
+        final URL url = HttpWebConnectionInsecureSSLWithClientCertificateTest.class
+                .getClassLoader().getResource("self-signed-cert.keystore");
+
+        final SslContextFactory contextFactory = new Server.Server();
+        contextFactory.setKeyStoreType("jks");
+        contextFactory.setKeyStorePath(url.toExternalForm());
+        contextFactory.setKeyStorePassword("nopassword");
+        return new SslConnectionFactory(contextFactory, HTTP_1_1.toString());
     }
 }

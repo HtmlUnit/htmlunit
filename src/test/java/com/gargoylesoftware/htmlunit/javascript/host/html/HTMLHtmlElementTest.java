@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
  * @author Daniel Gredler
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLHtmlElementTest extends WebDriverTestCase {
@@ -135,5 +137,31 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageWithAlerts2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Hello World")
+    public void innerText() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    document.documentElement.innerText = 'Hello World';\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        final String js =
+                "if (document.documentElement.childNodes.length == 0) { return '0'; }"
+                + " return document.documentElement.childNodes.item(0).data;";
+
+        final WebDriver driver = loadPage2(html);
+        final String text = (String) ((JavascriptExecutor) driver).executeScript(js);
+        assertEquals(getExpectedAlerts()[0], text);
     }
 }
