@@ -272,7 +272,10 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        return new URLSearchParams(url_.getQuery());
+        URLSearchParams searchParams = new URLSearchParams(url_.getQuery());
+        searchParams.setParentScope(getParentScope());
+        searchParams.setPrototype(getPrototype(searchParams.getClass()));
+        return searchParams;
     }
 
     /**
