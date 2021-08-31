@@ -21,8 +21,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.utils.URIBuilder;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -47,7 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 @JsxClass
 public class URL extends SimpleScriptable {
 
-    private java.net.URL url_;
+    private URIBuilder url_;
 
     /**
      * Creates an instance.
@@ -72,15 +75,16 @@ public class URL extends SimpleScriptable {
 
         try {
             if (StringUtils.isBlank(baseStr)) {
-                url_ = UrlUtils.toUrlUnsafe(url);
+                url_ = new URIBuilder(url);
             }
             else {
                 final java.net.URL baseUrl = UrlUtils.toUrlUnsafe(baseStr);
-                url_ = new java.net.URL(baseUrl, url);
+                url_ = new URIBuilder(new java.net.URL(baseUrl, url).toURI());
             }
             checkRemoveRedundantPort();
+            url_.build().toURL(); //validate
         }
-        catch (final MalformedURLException e) {
+        catch (final URISyntaxException | MalformedURLException e) {
             throw ScriptRuntime.typeError(e.toString());
         }
     }
@@ -120,7 +124,7 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        final String ref = url_.getRef();
+        final String ref = url_.getFragment();
         return ref == null ? "" : "#" + ref;
     }
 
@@ -129,7 +133,7 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewRef(url_, StringUtils.isEmpty(fragment) ? null : fragment);
+        url_.setFragment(StringUtils.isEmpty(fragment) ? null : fragment);
     }
 
     /**
@@ -178,29 +182,26 @@ public class URL extends SimpleScriptable {
             // back to string
         }
 
-        url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
+        url_.setHost(newHost);
 
         final String newPort = StringUtils.substringAfter(host, ':');
         if (StringUtils.isNotBlank(newHost)) {
             try {
-                url_ = UrlUtils.getUrlWithNewHostAndPort(url_, newHost, Integer.parseInt(newPort));
+                url_.setPort(Integer.parseInt(newPort));
             }
             catch (final Exception e) {
                 // back to string
             }
-        }
-        else {
-            url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
         }
 
         checkRemoveRedundantPort();
     }
 
     /** Removes port if it can be deduced from protocol */
-    private void checkRemoveRedundantPort() throws MalformedURLException {
-        if (("https".equals(url_.getProtocol()) && url_.getPort() == 443)
-                || ("http".equals(url_.getProtocol()) && url_.getPort() == 80)) {
-            url_ = UrlUtils.getUrlWithNewPort(url_, -1);
+    private void checkRemoveRedundantPort() {
+        if (("https".equals(url_.getScheme()) && url_.getPort() == 443)
+                || ("http".equals(url_.getScheme()) && url_.getPort() == 80)) {
+            url_.setPort(-1);
         }
     }
 
@@ -221,11 +222,11 @@ public class URL extends SimpleScriptable {
     public void setHostname(final String hostname) throws MalformedURLException {
         if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
             if (!StringUtils.isBlank(hostname)) {
-                url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+                url_.setHost(hostname);
             }
         }
         else if (!StringUtils.isEmpty(hostname)) {
-            url_ = UrlUtils.getUrlWithNewHost(url_, hostname);
+            url_.setHost(hostname);
         }
     }
 
@@ -242,12 +243,12 @@ public class URL extends SimpleScriptable {
     }
 
     @JsxSetter
-    public void setHref(final String href) throws MalformedURLException {
+    public void setHref(final String href) throws URISyntaxException {
         if (url_ == null) {
             return;
         }
 
-        url_ = UrlUtils.toUrlUnsafe(href);
+        url_ = new URIBuilder(href);
         checkRemoveRedundantPort();
     }
 
@@ -260,7 +261,7 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        return url_.getProtocol() + "://" + url_.getHost();
+        return url_.getScheme() + "://" + url_.getHost();
     }
 
     /**
@@ -272,7 +273,7 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        URLSearchParams searchParams = new URLSearchParams(url_.getQuery());
+        URLSearchParams searchParams = new URLSearchParams(url_);
         searchParams.setParentScope(getParentScope());
         searchParams.setPrototype(getPrototype(searchParams.getClass()));
         return searchParams;
@@ -297,8 +298,9 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return;
         }
-
-        url_ = UrlUtils.getUrlWithNewUserPassword(url_, password.isEmpty() ? null : password);
+        url_.setUserInfo(UrlUtils.getUserInfoWithNewUserPassword(
+                url_.getUserInfo(),
+                password.isEmpty() ? null : password));
     }
 
     /**
@@ -311,7 +313,7 @@ public class URL extends SimpleScriptable {
         }
 
         final String path = url_.getPath();
-        return path.isEmpty() ? "/" : path;
+        return StringUtils.isBlank(path) ? "/" : path;
     }
 
     @JsxSetter
@@ -320,7 +322,7 @@ public class URL extends SimpleScriptable {
             return;
         }
 
-        url_ = UrlUtils.getUrlWithNewPath(url_, path.startsWith("/") ? path : "/" + path);
+        url_.setPath(path.startsWith("/") ? path : "/" + path);
     }
 
     /**
@@ -343,7 +345,7 @@ public class URL extends SimpleScriptable {
             return;
         }
         final int portInt = port.isEmpty() ? -1 : Integer.parseInt(port);
-        url_ = UrlUtils.getUrlWithNewPort(url_, portInt);
+        url_.setPort(portInt);
         checkRemoveRedundantPort();
     }
 
@@ -355,7 +357,7 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        final String protocol = url_.getProtocol();
+        final String protocol = url_.getScheme();
         return protocol.isEmpty() ? "" : (protocol + ":");
     }
 
@@ -365,13 +367,8 @@ public class URL extends SimpleScriptable {
             return;
         }
 
-        try {
-            url_ = UrlUtils.getUrlWithNewProtocol(url_, protocol);
-            checkRemoveRedundantPort();
-        }
-        catch (final MalformedURLException e) {
-            // ignore
-        }
+        url_.setScheme(protocol.toLowerCase());
+        checkRemoveRedundantPort();
     }
 
     /**
@@ -382,8 +379,12 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return null;
         }
-        final String search = url_.getQuery();
-        return search == null ? "" : "?" + search;
+        final String search = url_.getQueryParams().stream()
+                .map(pair -> pair.getValue() != null
+                        ? String.format("%s=%s", pair.getName(), pair.getValue())
+                        : pair.getName())
+                .collect(Collectors.joining("&"));
+        return StringUtils.isBlank(search) ? "" : "?" + search;
     }
 
     @JsxSetter
@@ -403,7 +404,7 @@ public class URL extends SimpleScriptable {
             query = search;
         }
 
-        url_ = UrlUtils.getUrlWithNewQuery(url_, query);
+        url_.setQuery(query);
     }
 
     /**
@@ -428,7 +429,7 @@ public class URL extends SimpleScriptable {
         if (url_ == null) {
             return;
         }
-        url_ = UrlUtils.getUrlWithNewUserName(url_, username.isEmpty() ? null : username);
+        url_.setUserInfo(UrlUtils.getUserInfoWithNewUserName(url_.getUserInfo(), username));
     }
 
     /**
@@ -444,9 +445,9 @@ public class URL extends SimpleScriptable {
         }
 
         if (StringUtils.isEmpty(url_.getPath())) {
-            return url_.toExternalForm() + "/";
+            return url_.toString() + "/";
         }
-        return url_.toExternalForm();
+        return url_.toString();
     }
 
     /**
@@ -466,12 +467,11 @@ public class URL extends SimpleScriptable {
     public String jsToString() {
         if (StringUtils.isEmpty(url_.getPath())) {
             try {
-                return UrlUtils.getUrlWithNewPath(url_, "/").toExternalForm();
-            }
-            catch (final MalformedURLException e) {
-                return url_.toExternalForm();
+                return UrlUtils.getUrlWithNewPath(url_.build().toURL(), "/").toExternalForm();
+            } catch (final URISyntaxException | MalformedURLException e) {
+                return url_.toString();
             }
         }
-        return url_.toExternalForm();
+        return url_.toString();
     }
 }

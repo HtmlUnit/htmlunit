@@ -185,7 +185,7 @@ public class URLTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "a=u&x="},
+    @Alerts(DEFAULT = {"", "a=u&x=", "a=b&x=", "x=", "x=&b=c"},
             IE = {})
     public void searchParams() throws Exception {
         final String html =
@@ -199,6 +199,13 @@ public class URLTest extends WebDriverTestCase {
             + "        log(u.searchParams);\n"
             + "        u = new URL('http://developer.mozilla.org/en-US/docs?a=u&x');\n"
             + "        log(u.searchParams);\n"
+            + "        var params = u.searchParams;\n"
+            + "        params.set('a','b');\n"
+            + "        log(params);\n"
+            + "        params.delete('a');\n"
+            + "        log(params);\n"
+            + "        params.append('b', 'c');\n"
+            + "        log(params);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"

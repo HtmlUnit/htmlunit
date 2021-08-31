@@ -28,7 +28,7 @@ import org.apache.http.util.LangUtils;
  * @author Nicolas Belisle
  * @author Ronald Brill
  */
-public class NameValuePair implements Serializable {
+public class NameValuePair implements org.apache.http.NameValuePair, Serializable {
 
     /** The name. */
     private final String name_;
@@ -44,6 +44,11 @@ public class NameValuePair implements Serializable {
     public NameValuePair(final String name, final String value) {
         name_ = name;
         value_ = value;
+    }
+
+    public NameValuePair(final org.apache.http.NameValuePair httpPair) {
+        name_ = httpPair.getName();
+        value_ = httpPair.getValue();
     }
 
     /**

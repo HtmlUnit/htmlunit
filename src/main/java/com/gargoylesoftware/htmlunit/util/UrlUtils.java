@@ -529,18 +529,27 @@ public final class UrlUtils {
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithNewUserName(final URL u, final String newUserName) throws MalformedURLException {
+        String newUserInfo = getUserInfoWithNewUserName(u.getUserInfo(), newUserName);
+        return createNewUrl(u.getProtocol(), newUserInfo,
+                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
+     * Creates and returns a new UserInfo identical to the specified UserInfo but with a changed user name.
+     * @param userInfo the UserInfo on which to base the returned URL
+     * @param newUserName the new user name or null to remove it
+     * @return a new UserInfo identical to the specified UserInfo, only user name updated, or null if empty UserInfo
+     */
+    public static String getUserInfoWithNewUserName(final String userInfo, final String newUserName){
         String newUserInfo = newUserName == null ? "" : newUserName;
-        final String userInfo = u.getUserInfo();
         if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
                 newUserInfo = newUserInfo + userInfo.substring(colonIdx);
             }
         }
-        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo,
-                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+        return newUserInfo.isEmpty() ? null : newUserInfo;
     }
-
     /**
      * Creates and returns a new URL identical to the specified URL but with a changed user password.
      * @param u the URL on which to base the returned URL
@@ -550,8 +559,19 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewUserPassword(final URL u, final String newUserPassword)
             throws MalformedURLException {
+        String newUserInfo = getUserInfoWithNewUserPassword(u.getUserInfo(), newUserPassword);
+        return createNewUrl(u.getProtocol(), newUserInfo,
+                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+    }
+
+    /**
+     * Creates and returns a new UserInfo identical to the specified UserInfo but with a changed user password.
+     * @param userInfo the UserInfo on which to base the returned UserInfo
+     * @param newUserPassword the new user password or null to remove it
+     * @return a new UserInfo identical to the specified URL, only user name updated, or null if empty UserInfo
+     */
+    public static String getUserInfoWithNewUserPassword(final String userInfo, final String newUserPassword) {
         String newUserInfo = newUserPassword == null ? "" : (':' + newUserPassword);
-        final String userInfo = u.getUserInfo();
         if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
@@ -561,8 +581,7 @@ public final class UrlUtils {
                 newUserInfo = userInfo + newUserInfo;
             }
         }
-        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo,
-                u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
+        return newUserInfo.isEmpty() ? null : newUserInfo;
     }
 
     /**
