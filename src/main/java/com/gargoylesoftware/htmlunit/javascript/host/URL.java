@@ -46,6 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author cd alexndr
  */
 @JsxClass
 public class URL extends SimpleScriptable {
@@ -273,7 +274,7 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        URLSearchParams searchParams = new URLSearchParams(url_);
+        final URLSearchParams searchParams = new URLSearchParams(url_);
         searchParams.setParentScope(getParentScope());
         searchParams.setPrototype(getPrototype(searchParams.getClass()));
         return searchParams;
