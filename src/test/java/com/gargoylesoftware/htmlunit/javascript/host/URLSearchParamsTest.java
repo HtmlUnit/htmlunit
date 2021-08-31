@@ -353,6 +353,11 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                        "key1=new1&key2=val2&key2=val3&key4=val4",
                        "key1=new1&key2=new2&key4=val4",
                        "key1=new1&key2=new2&key4=val4&key3=undefined",
+                       "key1=new1&key2=new2&key4=null&key3=undefined",
+                       "key1=val1&key2=val2&key2=val3&key4=val4",
+                       "key1=new1&key2=val2&key2=val3&key4=val4",
+                       "key1=new1&key2=new2&key4=val4",
+                       "key1=new1&key2=new2&key4=val4&key3=undefined",
                        "key1=new1&key2=new2&key4=null&key3=undefined"},
             IE = {})
     public void set() throws Exception {
@@ -363,6 +368,17 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "    function test() {\n"
             + "      if (self.URLSearchParams) {\n"
             + "        var param = new URLSearchParams('key1=val1&key2=val2&key2=val3');\n"
+            + "        param.set('key4', 'val4');\n"
+            + "        alert(param);\n"
+            + "        param.set('key1', 'new1');\n"
+            + "        alert(param);\n"
+            + "        param.set('key2', 'new2');\n"
+            + "        alert(param);\n"
+            + "        param.set('key3', undefined);\n"
+            + "        alert(param);\n"
+            + "        param.set('key4', null);\n"
+            + "        alert(param);\n"
+            + "        param = new URL('http://test.com/p?key1=val1&key2=val2&key2=val3').searchParams;\n"
             + "        param.set('key4', 'val4');\n"
             + "        alert(param);\n"
             + "        param.set('key1', 'new1');\n"
