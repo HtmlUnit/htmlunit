@@ -9,6 +9,15 @@
     <body>
         <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2, Chrome/Edge 92">
             <action type="fix" dev="rbri">
+                Assigning URL.search has to encode the given string.
+            </action>
+            <action type="fix" dev="rbri" due-to="cdalexndr">
+                If an URLSearchParams object is constructed from an URL all the changes have to update the url also.
+            </action>
+            <action type="fix" dev="rbri" due-to="cdalexndr">
+                URLSearchParams js object misses initialization of parent and prototype.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix detail value for PointerEvents.
             </action>
             <action type="update" dev="rbri">

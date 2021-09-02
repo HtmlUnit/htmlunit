@@ -393,15 +393,18 @@ public class URL extends SimpleScriptable {
             return;
         }
 
-        final String query;
+        String query;
         if (search == null || "?".equals(search) || "".equals(search)) {
             query = null;
         }
-        else if (search.charAt(0) == '?') {
-            query = search.substring(1);
-        }
         else {
-            query = search;
+            if (search.charAt(0) == '?') {
+                query = search.substring(1);
+            }
+            else {
+                query = search;
+            }
+            query = UrlUtils.encodeQuery(query);
         }
 
         url_ = UrlUtils.getUrlWithNewQuery(url_, query);

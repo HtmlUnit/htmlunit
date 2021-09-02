@@ -333,6 +333,19 @@ public final class UrlUtils {
     }
 
     /**
+     * Encodes and escapes the specified URI hash string.
+     *
+     * @param query the query string to encode and escape
+     * @return the encoded and escaped hash string
+     */
+    public static String encodeQuery(final String query) {
+        if (query == null) {
+            return null;
+        }
+        return encode(query, QUERY_ALLOWED_CHARS, UTF_8);
+    }
+
+    /**
      * Unescapes and decodes the specified string.
      *
      * @param escaped the string to be unescaped and decoded
