@@ -6099,6 +6099,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "constructor(),content,httpEquiv,name,scheme",
+            CHROME = "constructor(),content,httpEquiv,media,name,scheme",
+            EDGE = "constructor(),content,httpEquiv,media,name,scheme",
             IE = "charset,constructor,content,httpEquiv,name,scheme,url")
     public void meta() throws Exception {
         test("meta");

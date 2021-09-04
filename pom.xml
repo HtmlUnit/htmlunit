@@ -35,10 +35,10 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>8.45.1</checkstyle.version>
+        <checkstyle.version>9.0</checkstyle.version>
         <spotbugs.version>4.4.0</spotbugs.version>
-        <pmd.version>6.37.0</pmd.version>
-        <archunit.version>0.20.1</archunit.version>
+        <pmd.version>6.38.0</pmd.version>
+        <archunit.version>0.21.0</archunit.version>
     </properties>
 
     <build>
@@ -210,7 +210,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>6.2.2</version>
+                <version>6.3.1</version>
                 <configuration>
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>

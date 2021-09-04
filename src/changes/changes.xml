@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2, Chrome/Edge 92">
+        <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2, Chrome/Edge 93">
             <action type="fix" dev="rbri">
                 Assigning URL.search has to encode the given string.
             </action>

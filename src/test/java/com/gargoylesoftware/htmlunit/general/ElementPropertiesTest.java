@@ -2497,6 +2497,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "content,httpEquiv,name,scheme",
+            CHROME = "content,httpEquiv,media,name,scheme",
+            EDGE = "content,httpEquiv,media,name,scheme",
             IE = "charset,content,httpEquiv,name,scheme,url")
     public void meta() throws Exception {
         test("meta");
