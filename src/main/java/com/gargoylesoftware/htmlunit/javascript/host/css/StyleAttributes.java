@@ -97,6 +97,9 @@ public final class StyleAttributes {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
+        /** The style property {@code accentColor}. */
+        ACCENT_COLOR("accentColor", "accent-color", chromeAndEdge("auto")),
+
         /** The style property {@code additiveSymbols}. */
         ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
 

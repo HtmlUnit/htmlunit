@@ -351,6 +351,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
