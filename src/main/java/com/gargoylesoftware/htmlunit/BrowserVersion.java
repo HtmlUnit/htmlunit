@@ -230,6 +230,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION,
             HttpHeader.SEC_CH_UA,
             HttpHeader.SEC_CH_UA_MOBILE,
+            HttpHeader.SEC_CH_UA_PLATFORM,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -275,6 +276,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.CONNECTION,
             HttpHeader.SEC_CH_UA,
             HttpHeader.SEC_CH_UA_MOBILE,
+            HttpHeader.SEC_CH_UA_PLATFORM,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -469,6 +471,7 @@ public final class BrowserVersion implements Serializable {
     private String cssAcceptHeader_;
     private String scriptAcceptHeader_;
     private String secClientHintUserAgentHeader_;
+    private String secClientHintUserAgentPlatformHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
     private int[] fontHeights_;
@@ -492,6 +495,7 @@ public final class BrowserVersion implements Serializable {
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
         secClientHintUserAgentHeader_ = "";
+        secClientHintUserAgentPlatformHeader_ = "\"Windows\"";
 
         plugins_ = new HashSet<>();
         features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
@@ -807,6 +811,14 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the value used by the browser for the {@code sec-ch-ua-platform} header.
+     * @return the sec-ch-ua-platform header string
+     */
+    public String getSecClientHintUserAgentPlatformHeader() {
+        return secClientHintUserAgentPlatformHeader_;
+    }
+
+    /**
      * Returns the available plugins. This makes only sense for Firefox as only this
      * browser makes this kind of information available via JavaScript.
      * @return the available plugins
@@ -944,6 +956,7 @@ public final class BrowserVersion implements Serializable {
                 .setScriptAcceptHeader(version.getScriptAcceptHeader())
                 .setXmlHttpRequestAcceptHeader(version.getXmlHttpRequestAcceptHeader())
                 .setSecClientHintUserAgentHeader(version.getSecClientHintUserAgentHeader())
+                .setSecClientHintUserAgentPlatformHeader(version.getSecClientHintUserAgentPlatformHeader())
                 .setHeaderNamesOrdered(version.getHeaderNamesOrdered())
                 .setFontHeights(version.fontHeights_);
 
@@ -1153,6 +1166,15 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setSecClientHintUserAgentHeader(final String secClientHintUserAgentHeader) {
             workPiece_.secClientHintUserAgentHeader_ = secClientHintUserAgentHeader;
+            return this;
+        }
+
+        /**
+         * @param secClientHintUserAgentPlatformHeader the {@code sec-ch-ua-platform} header value
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSecClientHintUserAgentPlatformHeader(final String secClientHintUserAgentPlatformHeader) {
+            workPiece_.secClientHintUserAgentPlatformHeader_ = secClientHintUserAgentPlatformHeader;
             return this;
         }
 

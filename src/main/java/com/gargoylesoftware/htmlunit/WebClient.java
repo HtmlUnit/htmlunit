@@ -1717,6 +1717,11 @@ public class WebClient implements Serializable, AutoCloseable {
                 && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE)) {
             wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE, "?0");
         }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM,
+                    getBrowserVersion().getSecClientHintUserAgentPlatformHeader());
+        }
 
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
                 && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
