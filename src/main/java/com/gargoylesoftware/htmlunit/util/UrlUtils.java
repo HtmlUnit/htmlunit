@@ -17,10 +17,12 @@ package com.gargoylesoftware.htmlunit.util;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.net.URLStreamHandler;
 import java.nio.charset.Charset;
 import java.util.BitSet;
@@ -1278,5 +1280,22 @@ public final class UrlUtils {
             buffer.append(query);
         }
         return new URI(buffer.toString());
+    }
+
+    /**
+     * @param part the part to encode
+     * @return the ecoded string
+     */
+    public static String encodeQueryPart(final String part) {
+        if (part == null || part.isEmpty()) {
+            return "";
+        }
+
+        try {
+            return URLEncoder.encode(part, "UTF-8");
+        }
+        catch (final UnsupportedEncodingException e) {
+            return part;
+        }
     }
 }

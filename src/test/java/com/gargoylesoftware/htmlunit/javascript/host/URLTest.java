@@ -721,6 +721,34 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
+    @Alerts(DEFAULT = {"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"},
+            IE = {})
+    @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 EDGE = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 FF78 = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
+    public void searchEncoding() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://developer.mozilla.org/search?q a=1 2 3');\n"
+                        + "        log(u);\n"
+                        + "        log(u.search);\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
     @Alerts(DEFAULT = {"anonymous",
                        "user", "https://user:flabada@developer.mozilla.org/",
                        "", "https://:flabada@developer.mozilla.org/",

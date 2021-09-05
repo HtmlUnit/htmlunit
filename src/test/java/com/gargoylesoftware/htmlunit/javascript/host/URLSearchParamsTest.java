@@ -241,6 +241,46 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
+                       "key=value&empty-key=undefined&key=overwrite",
+                       "key=value&empty-key=undefined&key=overwrite&key-null=null",
+                       "http://test.com/p?key=value&empty-key=undefined&key=overwrite&key-null=null"},
+            IE = {})
+    public void appendFromUrl() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var url = new URL('http://test.com/p');\n"
+            + "        var param = url.searchParams;\n"
+            + "        param.append('key', 'value');\n"
+            + "        log(param);\n"
+            + "        param.append('empty-key', undefined);\n"
+            + "        log(param);\n"
+            + "        param.append('key', 'overwrite');\n"
+            + "        log(param);\n"
+            + "        param.append('key-null', null);\n"
+            + "        log(param);\n"
+
+            + "        log(url);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"key2=val2&key2=val3", "", "", "", ""},
             IE = {})
     public void delete() throws Exception {
@@ -262,6 +302,86 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        log(param);\n"
             + "        param.delete(null);\n"
             + "        log(param);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"key2=val2&key2=val3", "", "", "", "", "http://test.com/p"},
+            IE = {})
+    public void deleteFromUrl() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var url = new URL('http://test.com/p?key1=val1&key2=val2&key2=val3');\n"
+            + "        var param = url.searchParams;\n"
+            + "        param.delete('key1');\n"
+            + "        log(param);\n"
+            + "        param.delete('key2');\n"
+            + "        log(param);\n"
+            + "        param.delete('key3');\n"
+            + "        log(param);\n"
+            + "        param.delete(undefined);\n"
+            + "        log(param);\n"
+            + "        param.delete(null);\n"
+            + "        log(param);\n"
+
+            + "        log(url);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"key+1=val1&key2=val2", "http://test.com/p?key%201=val1&key2=val2",
+                       "key2=val2", "http://test.com/p?key2=val2"},
+            IE = {})
+    @HtmlUnitNYI(CHROME = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                           "key2=val2", "http://test.com/p?key2=val2"},
+                 EDGE = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                         "key2=val2", "http://test.com/p?key2=val2"},
+                 FF = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                       "key2=val2", "http://test.com/p?key2=val2"},
+                 FF78 = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                         "key2=val2", "http://test.com/p?key2=val2"})
+    public void deleteFromUrlSpecialChars() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var url = new URL('http://test.com/p?key 1=val1&key2=val2');\n"
+            + "        var param = url.searchParams;\n"
+            + "        log(param);\n"
+            + "        log(url);\n"
+
+            + "        param.delete('key 1');\n"
+            + "        log(param);\n"
+            + "        log(url);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -415,7 +535,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                        "key1=new1&key2=val2&key2=val3&key4=val4",
                        "key1=new1&key2=new2&key4=val4",
                        "key1=new1&key2=new2&key4=val4&key3=undefined",
-                       "key1=new1&key2=new2&key4=null&key3=undefined"},
+                       "key1=new1&key2=new2&key4=null&key3=undefined",
+                       "http://test.com/p?key1=new1&key2=new2&key4=null&key3=undefined"},
             IE = {})
     public void setFromUrl() throws Exception {
         final String html =
@@ -437,6 +558,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             + "        log(param);\n"
             + "        param.set('key4', null);\n"
             + "        log(param);\n"
+
+            + "        log(url);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
