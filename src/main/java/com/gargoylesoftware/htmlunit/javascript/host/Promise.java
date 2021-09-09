@@ -137,7 +137,12 @@ public class Promise extends SimpleScriptable {
             }
             stack.push(window);
             try {
-                fun.call(cx, window, thisObj, new Object[] {resolve, reject});
+                if (cx.isStrictMode()) {
+                    fun.call(cx, window, Undefined.SCRIPTABLE_UNDEFINED, new Object[] {resolve, reject});
+                }
+                else {
+                    fun.call(cx, window, thisObj, new Object[] {resolve, reject});
+                }
             }
             finally {
                 stack.pop();

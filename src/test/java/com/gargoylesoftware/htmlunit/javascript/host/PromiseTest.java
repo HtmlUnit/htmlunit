@@ -21,6 +21,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -121,6 +122,73 @@ public class PromiseTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "  <script>\n"
+                + "    function test() {\n"
+                + "      if (window.Promise) {\n"
+                + "        var p = new Promise(function(resolve, reject) {\n"
+                + "          log(resolve);\n"
+                + "          log(reject);\n"
+                + "          log(this);\n"
+                + "          resolve('resolved value');\n"
+                + "        });\n"
+                + "        p.then(function(value) {log(value);});\n"
+                + "        log('done');\n"
+                + "      }\n"
+                + "    }\n"
+                + "\n"
+                + "    function log(x) {\n"
+                + "      document.getElementById('log').value += x + '\\n';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <textarea id='log' cols='80' rows='40'></textarea>\n"
+                + "</body>\n"
+                + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyAlerts(() -> driver.findElement(By.id("log"))
+                .getAttribute("value").trim().replaceAll("\r", ""), String.join("\n", getExpectedAlerts()));
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function () { [native code] }",
+                       "function () { [native code] }",
+                       "undefined",
+                       "done", "resolved value"},
+            FF = {"function () {\n    [native code]\n}",
+                  "function () {\n    [native code]\n}",
+                  "undefined",
+                  "done", "resolved value"},
+            FF78 = {"function () {\n    [native code]\n}",
+                    "function () {\n    [native code]\n}",
+                    "undefined",
+                    "done", "resolved value"},
+            IE = {})
+    @HtmlUnitNYI(CHROME = {"function () { [native code] }",
+                           "function () { [native code] }",
+                           "null",
+                           "done", "resolved value"},
+            EDGE = {"function () { [native code] }",
+                    "function () { [native code] }",
+                    "null",
+                    "done", "resolved value"},
+            FF = {"function () {\n    [native code]\n}",
+                  "function () {\n    [native code]\n}",
+                  "null",
+                  "done", "resolved value"},
+            FF78 = {"function () {\n    [native code]\n}",
+                    "function () {\n    [native code]\n}",
+                    "null",
+                    "done", "resolved value"})
+    public void constructorStrict() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + "    'use strict';"
                 + "    function test() {\n"
                 + "      if (window.Promise) {\n"
                 + "        var p = new Promise(function(resolve, reject) {\n"
