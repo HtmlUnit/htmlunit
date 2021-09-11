@@ -133,6 +133,21 @@ public class HTMLMetaElement extends HTMLElement {
     public void setScheme(final String scheme) {
         getDomNodeOrDie().setAttribute("scheme", scheme);
     }
+    /**
+     * @return the {@code meta} attribute
+     */
+    @JsxGetter({CHROME, EDGE})
+    public String getMeta() {
+        return getDomNodeOrDie().getAttribute("meta");
+    }
+
+    /**
+     * @param httpEquiv the meta attribute
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setMeta(final String httpEquiv) {
+        getDomNodeOrDie().setAttribute("meta", httpEquiv);
+    }
 
     /**
      * Returns the {@code url} attribute.
