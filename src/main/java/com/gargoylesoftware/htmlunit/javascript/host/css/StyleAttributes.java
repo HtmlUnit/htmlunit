@@ -100,6 +100,9 @@ public final class StyleAttributes {
         /** The style property {@code accentColor}. */
         ACCENT_COLOR("accentColor", "accent-color", chromeAndEdge("auto"), ffLatest("auto")),
 
+        /** The style property {@code accentColor}. */
+        ACCENT_COLOR_("accent-color", "accent-color", ffLatest("auto")),
+
         /** The style property {@code additiveSymbols}. */
         ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
 
@@ -3136,7 +3139,10 @@ public final class StyleAttributes {
         SYSTEM("system", "system", chromeAndEdge("")),
 
         /** The style property {@code tabSize}. */
-        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ff("8")),
+        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ffLatest("8")),
+
+        /** The style property {@code tabSize}. */
+        TAB_SIZE_("tab-size", "tab-size", ffLatest("8")),
 
         /** The style property {@code tableLayout}. */
         TABLE_LAYOUT("tableLayout", "table-layout", chromeAndEdge("auto"), ff("auto"), ie("auto")),
@@ -3148,7 +3154,7 @@ public final class StyleAttributes {
         TEXT_ALIGN("textAlign", "text-align", ie("left"), chromeAndEdge("start"), ff("start")),
 
         /** The style property {@code text-align}. */
-        TEXT_ALIGN_("text-align", "text-align", ffLatest("start")),
+        TEXT_ALIGN_("text-align", "text-align", ff("start")),
 
         /** The style property {@code textAlignLast}. */
         TEXT_ALIGN_LAST("textAlignLast", "text-align-last", ie("auto"), chromeAndEdge("auto"), ff("auto")),
