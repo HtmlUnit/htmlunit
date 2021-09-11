@@ -459,4 +459,44 @@ public class HtmlElement2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], div.getText());
     }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"bottom", "bottom", "bottom", "", "bottom", "bottom"})
+    public void setGetStyle() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.createElement('div');\n"
+            + "    d.style.verticalAlign = 'bottom';\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+
+            + "    d = document.getElementById('style-already-set');\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+            + "    document.body.removeChild(d);\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+
+            + "    d = document.getElementById('style-unset');\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+            + "    d.style.verticalAlign = 'bottom';\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+            + "    document.body.removeChild(d);\n"
+            + "    log(d.style.getPropertyValue('vertical-align'));\n"
+
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='style-already-set' style='vertical-align: bottom'></div>\n"
+            + "  <div id='style-unset'></div>"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
