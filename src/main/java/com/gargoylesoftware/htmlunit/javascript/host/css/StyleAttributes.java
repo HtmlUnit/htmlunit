@@ -100,7 +100,7 @@ public final class StyleAttributes {
         /** The style property {@code accentColor}. */
         ACCENT_COLOR("accentColor", "accent-color", chromeAndEdge("auto"), ffLatest("auto")),
 
-        /** The style property {@code accentColor}. */
+        /** The style property {@code accent-color}. */
         ACCENT_COLOR_("accent-color", "accent-color", ffLatest("auto")),
 
         /** The style property {@code additiveSymbols}. */
@@ -3141,7 +3141,7 @@ public final class StyleAttributes {
         /** The style property {@code tabSize}. */
         TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ffLatest("8")),
 
-        /** The style property {@code tabSize}. */
+        /** The style property {@code tab-size}. */
         TAB_SIZE_("tab-size", "tab-size", ffLatest("8")),
 
         /** The style property {@code tableLayout}. */

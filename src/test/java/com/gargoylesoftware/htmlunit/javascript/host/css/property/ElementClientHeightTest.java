@@ -476,6 +476,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "18",
             FF = "19",
             IE = "0")
+    @HtmlUnitNYI(FF = "18")
     public void details() throws Exception {
         loadPageVerifyTitle2(test("details"));
     }

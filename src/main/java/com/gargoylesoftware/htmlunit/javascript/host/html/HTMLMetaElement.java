@@ -133,6 +133,7 @@ public class HTMLMetaElement extends HTMLElement {
     public void setScheme(final String scheme) {
         getDomNodeOrDie().setAttribute("scheme", scheme);
     }
+
     /**
      * @return the {@code meta} attribute
      */

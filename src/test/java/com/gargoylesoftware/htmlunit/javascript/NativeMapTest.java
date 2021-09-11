@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class NativeMapTest extends WebDriverTestCase {
 
     /**
-     * see https://github.com/HtmlUnit/htmlunit-core-js/issues/4.
+     * See https://github.com/HtmlUnit/htmlunit-core-js/issues/4.
      * @throws Exception if the test fails
      */
     @Test
