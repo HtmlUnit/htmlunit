@@ -9,6 +9,13 @@
     <body>
         <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2, Chrome/Edge 93, Firefox 92">
             <action type="fix" dev="rbri">
+                Finally support getting and setting style properties via elem.style['property-name'] notation.
+            </action>
+            <action type="fix" dev="rbri" issue="380">
+                Style property vertical-align now accepts also "baseline", "sub", "super", "text-top", "text-bottom",
+                "middle", "top", "bottom", "inherit", "initial", "revert"and "unset".
+            </action>
+            <action type="fix" dev="rbri">
                 NativeMap's Map.entries() emulation no longer returns NativeMap.NULL_VALUE instead of actual null instance.
             </action>
             <action type="fix" dev="rbri" issue="378">
