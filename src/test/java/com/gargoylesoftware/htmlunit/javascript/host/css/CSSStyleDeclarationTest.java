@@ -1715,36 +1715,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
              "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"})
-    @HtmlUnitNYI(CHROME = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined"},
-            EDGE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined"},
-            FF = {"L:0px,R:0px,T:0px,B:0px",
-                  "L:3px,R:0px,T:0px,B:0px",
-                  "L:7px,R:0px,T:0px,B:0px",
-                  "L:,R:,T:,B:",
-                  "L:3px,R:,T:,B:",
-                  "L:7px,R:,T:,B:"},
-            FF78 = {"L:0px,R:0px,T:0px,B:0px",
-                    "L:3px,R:0px,T:0px,B:0px",
-                    "L:7px,R:0px,T:0px,B:0px",
-                    "L:,R:,T:,B:",
-                    "L:3px,R:,T:,B:",
-                    "L:7px,R:,T:,B:"},
-            IE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined",
-                  "L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined"})
     public void paddingAllvsPaddingSingle2() throws Exception {
         final String html =
               "<html>\n"
