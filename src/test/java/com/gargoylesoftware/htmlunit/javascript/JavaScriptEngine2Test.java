@@ -26,7 +26,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -102,10 +102,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "false", "true"})
     public void functionCaller() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function myFunc() {\n"
-            + "  alert(myFunc.caller == null);\n"
-            + "  alert(myFunc.caller == foo);\n"
+            + "  log(myFunc.caller == null);\n"
+            + "  log(myFunc.caller == foo);\n"
             + "}\n"
             + "myFunc()\n"
             + "function foo() { myFunc() }\n"
@@ -113,7 +115,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -124,22 +126,23 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void functionDeclaredForwardInBlock() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (true) {\n"
             + "    goo();\n"
-            + "    function hoo() { alert('in hoo'); }\n"
+            + "    function hoo() { log('in hoo'); }\n"
             + "    try {\n"
             + "      hoo();\n"
             + "      foo();\n"
             + "    } catch (e) {\n"
-            + "      alert('foo error');\n"
+            + "      log('foo error');\n"
             + "    }\n"
-            + "    function foo() { alert('in foo'); }\n"
+            + "    function foo() { log('in foo'); }\n"
             + "  }\n"
-            + "  function goo() { alert('in goo'); }\n"
+            + "  function goo() { log('in goo'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -148,23 +151,28 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "function foo() {}"},
             IE = {"function foo() {}", "function foo() {}"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"function foo() { }", "function foo() { }"},
+            EDGE = {"function foo() { }", "function foo() { }"},
+            FF = {"function foo() { }", "function foo() { }"},
+            FF78 = {"function foo() { }", "function foo() { }"},
+            IE = {"function foo() { }", "function foo() { }"})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "if (true) {\n"
             + "  try {\n"
-            + "    alert(window.foo);\n"
-            + "    alert(foo);\n"
+            + "    log(window.foo);\n"
+            + "    log(foo);\n"
             + "  } catch (e) {\n"
-            + "    alert('foo error');\n"
+            + "    log('foo error');\n"
             + "  }\n"
             + "  function foo() {}\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -174,39 +182,32 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"function Window() { [native code] }", "function Window() { [native code] }", "true",
                        "function HTMLDocument() { [native code] }", "function HTMLDocument() { [native code] }",
                        "true", "function"},
-            FF = {"function Window() {\n    [native code]\n}",
-                  "function Window() {\n    [native code]\n}", "true",
-                  "function HTMLDocument() {\n    [native code]\n}",
-                  "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
-            FF78 = {"function Window() {\n    [native code]\n}",
-                    "function Window() {\n    [native code]\n}", "true",
-                    "function HTMLDocument() {\n    [native code]\n}",
-                    "function HTMLDocument() {\n    [native code]\n}", "true", "function"},
             IE = {"[object Window]", "[object Window]", "true",
                   "[object HTMLDocument]", "[object HTMLDocument]", "true", "function"})
     public void constructor() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
-            + "  try { alert(Window); } catch (e) { alert('ex window'); }\n"
-            + "  alert(window.constructor);\n"
+            + LOG_TITLE_FUNCTION
+            + "  try { log(Window); } catch (e) { log('ex window'); }\n"
+            + "  log(window.constructor);\n"
             + "  try {\n"
-            + "    alert(window.constructor === Window);\n"
+            + "    log(window.constructor === Window);\n"
             + "  } catch (e) {\n"
-            + "    alert('ex win const');\n"
+            + "    log('ex win const');\n"
             + "  }\n"
 
-            + "  try { alert(HTMLDocument); } catch (e) { alert('ex doc'); }\n"
-            + "  alert(document.constructor);\n"
+            + "  try { log(HTMLDocument); } catch (e) { log('ex doc'); }\n"
+            + "  log(document.constructor);\n"
             + "  try {\n"
-            + "    alert(document.constructor === HTMLDocument);\n"
+            + "    log(document.constructor === HTMLDocument);\n"
             + "  } catch (e) {\n"
-            + "    alert('exception doc const');\n"
+            + "    log('exception doc const');\n"
             + "  }\n"
-            + "  alert(typeof new Object().constructor);\n"
+            + "  log(typeof new Object().constructor);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -239,15 +240,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     private void object(final String object) throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(" + object + ");\n"
+            + "  log(" + object + ");\n"
             + "} catch (e) {\n"
-            + "  alert('exception');\n"
+            + "  log('exception');\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -256,14 +258,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts({"function", "function"})
     public void inline() throws Exception {
-        final String html = "<html><head><script>\n"
-                + "alert(typeof Array.prototype.filter);\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "log(typeof Array.prototype.filter);\n"
                 + "  function test() {\n"
-                + "    alert(typeof Array.prototype.filter);\n"
+                + "    log(typeof Array.prototype.filter);\n"
                 + "  }\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -272,17 +277,19 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts("found")
     public void enumerateMethods() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    for (var x in document) {\n"
             + "      if (x == 'getElementById')\n"
-            + "        alert('found');\n"
+            + "        log('found');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -294,19 +301,21 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts("3")
     public void array_concat() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = [1, 2, 3];\n"
             + "    for (var i = 10; i < 20; i++)\n"
             + "      a[i] = 't' + i;\n"
             + "    var b = [1, 2, 3];\n"
             + "    b.concat(a);\n"
-            + "    alert(b.length);\n"
+            + "    log(b.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -314,17 +323,23 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("function f() {}")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "function f() { }",
+            EDGE = "function f() { }",
+            FF = "function f() { }",
+            FF78 = "function f() { }",
+            IE = "function f() { }")
     public void function_toStringValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function f() {}\n"
             + "  function test() {\n"
-            + "    alert(String(f));\n"
+            + "    log(String(f));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -337,12 +352,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  try {\n"
-                + "    alert('1');\n"
+                + "    log('1');\n"
                 + "    function document.onclick() {\n"
-                + "      alert('hi');\n"
+                + "      log('hi');\n"
                 + "    }\n"
-                + "    alert('2');\n"
-                + "  } catch(e) { alert(e); }\n"
+                + "    log('2');\n"
+                + "  } catch(e) { log(e); }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body>\n"
@@ -368,12 +383,14 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts("that's it")
     public void quoteAsUnicodeInString() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "alert('that\\x27s it');\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "log('that\\x27s it');\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -382,18 +399,20 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts("error")
     public void recursion() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
             + "  function recurse(c) {\n"
+            + LOG_TITLE_FUNCTION
             + "    try {\n"
             + "      recurse(c++);\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='recurse(1)'>\n"
+            + "</script></head>\n"
+            + "<body onload='recurse(1)'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -404,16 +423,18 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"0", "false", "0"},
             IE = {"1", "true", "1"})
     public void nativeFunction_toStringValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(String(window.alert).indexOf('function'));\n"
-            + "    alert(String(window.alert).charAt(0) == '\\n');\n"
-            + "    alert(String(document.getElementById).indexOf('function'));\n"
+            + "    log(String(window.alert).indexOf('function'));\n"
+            + "    log(String(window.alert).charAt(0) == '\\n');\n"
+            + "    log(String(document.getElementById).indexOf('function'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -421,16 +442,23 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @NotYetImplemented
+    @Alerts("0")
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1",
+            FF = "1",
+            FF78 = "1",
+            IE = "1")
     public void onloadJavascriptFunction() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
-            + "function onload() {alert('foo');}\n"
-            + "</script></head><body>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function onload() { alert('foo'); }\n"
+            + "</script></head>\n"
+            + "<body>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
-        assertEquals(getCollectedAlerts(driver, 1).size(), 0);
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getCollectedAlerts(driver, 1).size());
     }
 
     /**
@@ -449,6 +477,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "  <input type='text' name='textfield2' id='textfield2'/>\n"
             + "</form>\n"
             + "</body></html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -461,11 +490,13 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void scopeOfNewFunction() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "  var f = new Function('alert(\"foo\")');\n"
+            + LOG_TITLE_FUNCTION
+            + "  var f = new Function('log(\"foo\")');\n"
             + "  f();\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -476,14 +507,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void scopeOfNestedNewFunction() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var foo = 'foo';\n"
-            + "  var f1 = new Function('f = new Function(\"alert(foo)\"); f()');\n"
+            + "  var f1 = new Function('f = new Function(\"log(foo)\"); f()');\n"
             + "  f1();\n"
             + "</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -495,10 +528,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts("1")
     public void setValuesThatAreNotStrings() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  document.form1.textfield1.value = 1;\n"
-            + "  alert(document.form1.textfield1.value);\n"
+            + "  log(document.form1.textfield1.value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
@@ -508,7 +543,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -518,14 +553,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts("foo")
     public void javaScriptWrappedInHtmlComments() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script language='javascript'><!--\n"
+            = "<html><head>\n"
+            + "<script language='javascript'><!--\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert('foo');\n"
+            + "  log('foo');\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -536,14 +573,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void javaScriptWrappedInHtmlComments2() throws Exception {
         final String html =
             "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "<script><!--\n"
-            + " alert('1');\n"
+            + " log('1');\n"
             + "--></script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -553,14 +593,16 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts("1")
     public void javaScriptWrappedInHtmlComments_commentOnOpeningLine() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script language='javascript'><!-- Some comment here\n"
+            = "<html><head>\n"
+            + "<script language='javascript'><!-- Some comment here\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert('1');\n"
+            + "  log('1');\n"
             + "}\n"
             + "-->\n</script></head>\n"
             + "<body onload='doTest()'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -571,7 +613,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void javaScriptWrappedInHtmlComments_commentNotClosed() throws Exception {
         final String html
             = "<html><head><title>foo</title>\n"
-            + "<script language='javascript'><!-- alert(1);</script>\n"
+            + "<script language='javascript'><!-- log(1);</script>\n"
             + "<script language='javascript'><!-- </script>\n"
             + "</head>\n"
             + "<body></body></html>";
@@ -639,26 +681,26 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void regExpSupport() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
-            + "    <title>test</title>\n"
             + "    <script id='a'>\n"
+            + LOG_TITLE_FUNCTION
             + "       var s = new String('rstlne-rstlne-rstlne');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "       s = s.replace('e', 'o');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "       s = s.replace(/o/, 'a');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "       s = s.replace(new RegExp('a'), 'e');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "       s = s.replace(new RegExp('e', 'g'), 'i');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "       s = s.replace(/i/g, 'a');\n"
-            + "       alert(s);\n"
+            + "       log(s);\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body>abc</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -669,22 +711,27 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Alerts("123")
     public void ecmaReservedKeywords() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var o = {float: 123};\n"
-            + "  alert(o.float);\n"
+            + "  log(o.float);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object Window]")
+    @Alerts(DEFAULT = "[object Window]",
+            IE = {})
+    @HtmlUnitNYI(IE = "[object Window]")
     public void boundFunction() throws Exception {
         final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    if (focusMe.bind) {\n"
                 + "      var boundFunction = focusMe.bind(null);\n"
@@ -692,7 +739,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "    }\n"
                 + "  }\n"
                 + "  function focusMe() {\n"
-                + "    alert(this);\n"
+                + "    log(this);\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
@@ -703,7 +750,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
 
         driver.findElement(By.id("myId")).click();
-        verifyAlerts(driver, expectedAlerts);
+        verifyTitle2(driver, expectedAlerts);
     }
 
     /**
@@ -714,17 +761,18 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void functionHasNameOfVar() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert('t=' + t);\n"
+                + "    log('t=' + t);\n"
                 + "    var t = 42;\n"
-                + "    ! function t() { alert('inside'); } ();\n"
+                + "    ! function t() { log('inside'); } ();\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -736,16 +784,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
                 + "  var abc = 1;\n"
-                + "  var foo = function abc() { alert('inner abc = ' + typeof abc); }\n"
-                + "  alert('outer abc = ' + abc);\n"
+                + "  var foo = function abc() { log('inner abc = ' + typeof abc); }\n"
+                + "  log('outer abc = ' + abc);\n"
                 + "  foo()\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -756,13 +805,14 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void innerFunctionWithSameName() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  var a = function () {\n"
-                + "    var x = (function x () { alert('a') });\n"
+                + "    var x = (function x () { log('a') });\n"
                 + "    return function () { x() };\n"
                 + "  }();\n"
 
                 + "  var b = function () {\n"
-                + "    var x = (function x () { alert('b') });\n"
+                + "    var x = (function x () { log('b') });\n"
                 + "    return function () { x() };\n"
                 + "  }();\n"
 
@@ -770,10 +820,10 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                 + "  b();\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -785,45 +835,47 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
                 + "  var a = function () {\n"
-                + "    var x = (function x () { alert('a') });\n"
+                + "    var x = (function x () { log('a') });\n"
                 + "    return function () { x() };\n"
                 + "  }();\n"
 
-                + "  var x = function () { alert('x') };\n"
+                + "  var x = function () { log('x') };\n"
 
                 + "  a();\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"functionfunc(){alert(norm(func));}", "outer"})
+    @Alerts({"functionfunc(){log(norm(func));}", "outer"})
     public void secondFunctionWithSameNameStrict() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
                 + "  function norm(foo) { return ('' + foo).replace(/(\\s)/gm,'') }\n"
 
-                + "  function func () { alert('outer'); }\n"
+                + "  function func () { log('outer'); }\n"
 
-                + "  var x = function func() { alert(norm(func)); }\n"
+                + "  var x = function func() { log(norm(func)); }\n"
 
                 + "  x();\n"
                 + "  func();\n"
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -831,57 +883,62 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "!f10", "f11", "f12", "f13"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
+            EDGE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
+            FF = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
+            FF78 = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
+            IE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"})
     public void functioNamesExceptionsStrict() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
 
                 + "  function f1() {"
-                + "    alert('f1');"
-                + "    function f9() { alert('f9'); }"
+                + "    log('f1');"
+                + "    function f9() { log('f9'); }"
                 + "  }\n"
 
-                + "  var f2 = function () { alert('f2'); }\n"
-                + "  var f3 = function f4() { alert('f3'); }\n"
-                + "  var f5 = function f5() { alert('f5'); }\n"
+                + "  var f2 = function () { log('f2'); }\n"
+                + "  var f3 = function f4() { log('f3'); }\n"
+                + "  var f5 = function f5() { log('f5'); }\n"
 
-                + "  !function f6() { alert('f6'); };\n"
-                + "  (function f7() { alert('f7'); });\n"
+                + "  !function f6() { log('f6'); };\n"
+                + "  (function f7() { log('f7'); });\n"
 
-                + "  void function f8() { alert('f8'); }\n"
+                + "  void function f8() { log('f8'); }\n"
 
-                + "  try { f1() } catch (e) { alert('!f1'); }"
-                + "  try { f2() } catch (e) { alert('!f2'); }"
-                + "  try { f3() } catch (e) { alert('!f3'); }"
-                + "  try { f4() } catch (e) { alert('!f4'); }"
-                + "  try { f5() } catch (e) { alert('!f5'); }"
-                + "  try { f6() } catch (e) { alert('!f6'); }"
-                + "  try { f7() } catch (e) { alert('!f7'); }"
-                + "  try { f8() } catch (e) { alert('!f8'); }"
+                + "  try { f1() } catch (e) { log('!f1'); }"
+                + "  try { f2() } catch (e) { log('!f2'); }"
+                + "  try { f3() } catch (e) { log('!f3'); }"
+                + "  try { f4() } catch (e) { log('!f4'); }"
+                + "  try { f5() } catch (e) { log('!f5'); }"
+                + "  try { f6() } catch (e) { log('!f6'); }"
+                + "  try { f7() } catch (e) { log('!f7'); }"
+                + "  try { f8() } catch (e) { log('!f8'); }"
 
                 + "  {\n"
-                + "    function f10() { alert('f10'); }\n"
-                + "    var f11 = function () { alert('f11'); }\n"
-                + "    var f12 = function f12() { alert('f12'); }\n"
+                + "    function f10() { log('f10'); }\n"
+                + "    var f11 = function () { log('f11'); }\n"
+                + "    var f12 = function f12() { log('f12'); }\n"
                 + "    f10();\n"
                 + "    f11();\n"
                 + "    f12();\n"
                 + "  }\n"
 
-                + "  try { f10() } catch (e) { alert('!f10'); }"
-                + "  try { f11() } catch (e) { alert('!f11'); }"
-                + "  try { f12() } catch (e) { alert('!f12'); }"
+                + "  try { f10() } catch (e) { log('!f10'); }"
+                + "  try { f11() } catch (e) { log('!f11'); }"
+                + "  try { f12() } catch (e) { log('!f12'); }"
 
-                + "  function f13() { alert('f13') } + 1;"
-                + "  try { f13() } catch (e) { alert('!f13'); }"
+                + "  function f13() { log('f13') } + 1;"
+                + "  try { f13() } catch (e) { log('!f13'); }"
 
                 + "</script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -890,15 +947,17 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void ctorBooleanDocumentAll() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(Boolean(document.all))\n"
+            + "  log(Boolean(document.all))\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -909,17 +968,18 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void javaNotAccessable() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  try {\n"
-                + "    alert(java.lang.Math.PI);\n"
-                + "  } catch (e) { alert('exception'); }\n"
+                + "    log(java.lang.Math.PI);\n"
+                + "  } catch (e) { log('exception'); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -957,19 +1017,20 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void constInLoop() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var i;\n"
                 + "  for (i = 0; i < 2; i++) {\n"
                 + "    const x = '#' + i;\n"
-                + "    alert(x);\n"
+                + "    log(x);\n"
                 + "  }\n"
-                + "  alert(i);\n"
+                + "  log(i);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
