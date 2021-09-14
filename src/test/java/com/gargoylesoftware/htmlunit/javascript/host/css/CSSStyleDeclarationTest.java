@@ -3643,12 +3643,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='tester'></div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var myDiv = document.getElementById('tester');\n"
             + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
-            + "    alert(myDivStyle.width);\n"
+            + "    log(myDivStyle.width);\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

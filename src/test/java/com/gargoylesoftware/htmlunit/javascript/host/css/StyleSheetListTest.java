@@ -80,13 +80,14 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var div = document.getElementById('myDiv');\n"
             + "        try {\n"
-            + "          alert(window.getComputedStyle(div, null).color);\n"
+            + "          log(window.getComputedStyle(div, null).color);\n"
             + "          var div2 = document.getElementById('myDiv2');\n"
-            + "          alert(window.getComputedStyle(div2, null).color);\n"
-            + "        } catch(e) { alert('exception'); }\n"
+            + "          log(window.getComputedStyle(div2, null).color);\n"
+            + "        } catch(e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -99,7 +100,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "div {color:red}";
 
         getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -112,28 +113,29 @@ public class StyleSheetListTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.length);\n"
 
             + "        try {\n"
-            + "          alert(document.styleSheets[0]);\n"
+            + "          log(document.styleSheets[0]);\n"
             + "        }\n"
             + "        catch (e) {\n"
-            + "          alert('exception for 0');\n"
-            + "        }\n"
-
-            + "        try {\n"
-            + "          alert(document.styleSheets[46]);\n"
-            + "        }\n"
-            + "        catch (e) {\n"
-            + "          alert('exception for 46');\n"
+            + "          log('exception for 0');\n"
             + "        }\n"
 
             + "        try {\n"
-            + "          alert(document.styleSheets[-2]);\n"
+            + "          log(document.styleSheets[46]);\n"
             + "        }\n"
             + "        catch (e) {\n"
-            + "          alert('exception for -2');\n"
+            + "          log('exception for 46');\n"
+            + "        }\n"
+
+            + "        try {\n"
+            + "          log(document.styleSheets[-2]);\n"
+            + "        }\n"
+            + "        catch (e) {\n"
+            + "          log('exception for -2');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -142,7 +144,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -157,10 +159,11 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.styleSheets.length);\n"
-            + "        alert(document.styleSheets.item(0));\n"
-            + "        alert(document.styleSheets[0]);\n"
+            + "        log(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.item(0));\n"
+            + "        log(document.styleSheets[0]);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -168,7 +171,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setDefaultResponse("Not Found", 404, "Not Found", MimeType.TEXT_HTML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -183,10 +186,11 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.styleSheets.length);\n"
-            + "        alert(document.styleSheets.item(0));\n"
-            + "        alert(document.styleSheets[0]);\n"
+            + "        log(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.item(0));\n"
+            + "        log(document.styleSheets[0]);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -201,7 +205,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", MimeType.TEXT_CSS, headers);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -216,10 +220,11 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.styleSheets.length);\n"
-            + "        alert(document.styleSheets.item(0));\n"
-            + "        alert(document.styleSheets[0]);\n"
+            + "        log(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.item(0));\n"
+            + "        log(document.styleSheets[0]);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -233,7 +238,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
         getMockWebConnection().setDefaultResponse(css, 200, "OK", MimeType.TEXT_CSS, headers);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -250,8 +255,9 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='" + URL_SECOND + "'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.length);\n"
 
             + "        var linkTag = document.createElement ('link');\n"
             + "        linkTag.href = 'new.css';\n"
@@ -259,7 +265,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "        var head = document.getElementsByTagName ('head')[0];\n"
             + "        head.appendChild (linkTag);\n"
 
-            + "        alert(document.styleSheets.length);\n"
+            + "        log(document.styleSheets.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -272,7 +278,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "div {color:red}";
         getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -286,13 +292,14 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var sheets = document.styleSheets;\n"
-            + "        alert(sheets.length);\n"
-            + "        alert(-1 in sheets);\n"
-            + "        alert(0 in sheets);\n"
-            + "        alert(1 in sheets);\n"
-            + "        alert(42 in sheets);\n"
+            + "        log(sheets.length);\n"
+            + "        log(-1 in sheets);\n"
+            + "        log(0 in sheets);\n"
+            + "        log(1 in sheets);\n"
+            + "        log(42 in sheets);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -302,7 +309,7 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "div {color:red}";
         getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -316,11 +323,12 @@ public class StyleSheetListTest extends WebDriverTestCase {
               + "  <head>\n"
               + "    <link rel='stylesheet' type='text/css' href='foo.css'/>\n"
               + "    <script>\n"
+              + LOG_TITLE_FUNCTION
               + "      function test() {\n"
               + "        var sheets = document.styleSheets;\n"
-              + "        alert(sheets == document.styleSheets);\n"
-              + "        alert(sheets == null);\n"
-              + "        alert(null == sheets);\n"
+              + "        log(sheets == document.styleSheets);\n"
+              + "        log(sheets == null);\n"
+              + "        log(null == sheets);\n"
               + "      }\n"
               + "    </script>\n"
               + "  </head>\n"
@@ -330,6 +338,6 @@ public class StyleSheetListTest extends WebDriverTestCase {
         final String css = "div {color:red}";
         getMockWebConnection().setDefaultResponse(css, MimeType.TEXT_CSS);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
