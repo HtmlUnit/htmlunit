@@ -84,28 +84,30 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
             + "  </fieldset>\n"
             + "</form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function set(fs, value) {\n"
             + "    try {\n"
             + "      fs.align = value;\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
             + "  var fs1 = document.getElementById('fs1');\n"
             + "  var fs2 = document.getElementById('fs2');\n"
             + "  var fs3 = document.getElementById('fs3');\n"
-            + "  alert(fs1.align);\n"
-            + "  alert(fs2.align);\n"
-            + "  alert(fs3.align);\n"
+            + "  log(fs1.align);\n"
+            + "  log(fs2.align);\n"
+            + "  log(fs3.align);\n"
             + "  set(fs1, 'center');\n"
             + "  set(fs2, '8');\n"
             + "  set(fs3, 'foo');\n"
-            + "  alert(fs1.align);\n"
-            + "  alert(fs2.align);\n"
-            + "  alert(fs3.align);\n"
+            + "  log(fs1.align);\n"
+            + "  log(fs2.align);\n"
+            + "  log(fs3.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
 }
