@@ -392,10 +392,11 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     public void getText() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myAnchor').text);\n"
-            + "    alert(document.getElementById('myImgAnchor').text);\n"
-            + "    alert(document.getElementById('myImgTxtAnchor').text);\n"
+            + "    log(document.getElementById('myAnchor').text);\n"
+            + "    log(document.getElementById('myImgAnchor').text);\n"
+            + "    log(document.getElementById('myImgTxtAnchor').text);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload=test()>\n"
@@ -405,7 +406,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "</body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -416,23 +417,24 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     public void setText() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var anchor = document.getElementById('myAnchor');\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
             + "      anchor.text = 'Hello';\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
 
             + "      anchor = document.getElementById('myImgAnchor');\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
             + "      anchor.text = 'Hello';\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
 
             + "      anchor = document.getElementById('myImgTxtAnchor');\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
             + "      anchor.text = 'Hello';\n"
-            + "      alert(anchor.text + ' ' + anchor.children.length);\n"
-            + "    } catch (e) { alert('exception' + e) }\n"
+            + "      log(anchor.text + ' ' + anchor.children.length);\n"
+            + "    } catch (e) { log('exception' + e) }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload=test()>\n"
@@ -442,7 +444,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
             + "</body></html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

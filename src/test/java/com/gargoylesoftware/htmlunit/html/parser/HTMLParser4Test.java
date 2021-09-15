@@ -621,18 +621,19 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('titles');\n"
+            + "      log('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        alert(titles[i].parentNode.nodeName);\n"
-            + "        alert(titles[i].text);\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
             + "      }\n"
-            + "      alert('misc');\n"
-            + "      alert(document.body != null);\n"
+            + "      log('misc');\n"
+            + "      log(document.body != null);\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
             + "      if (innerDiv != null) {\n"
-            + "        alert(innerDiv.parentNode.nodeName);\n"
+            + "        log(innerDiv.parentNode.nodeName);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -646,12 +647,12 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "      document.getElementsByTagName('html')[0].innerHTML ="
             + "        '<html><head><title>Inner Html</title></head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
-            + "    } catch(e) { alert('exception') }\n"
+            + "    } catch(e) { log('exception') }\n"
             + "  </script>\n"
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -711,12 +712,12 @@ public class HTMLParser4Test extends WebDriverTestCase {
     public void specialComments2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
-                + "  <title>Outer Html</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
                 + "      var body = document.getElementById('tester');\n"
                 + "      var text = body.innerText;"
-                + "      alert(text);\n"
+                + "      log(text);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -736,6 +737,6 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
