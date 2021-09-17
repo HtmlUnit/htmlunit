@@ -89,6 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
@@ -684,7 +685,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                     webRequest_.setRequestBody(body);
                     if (setEncodingType) {
-                        webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "application/xml;charset=UTF-8");
+                        webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE,
+                                        MimeType.APPLICATION_XML + ";charset=UTF-8");
                     }
                 }
                 catch (final Exception e) {

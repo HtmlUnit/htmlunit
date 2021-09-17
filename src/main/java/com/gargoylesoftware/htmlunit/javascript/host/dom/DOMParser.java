@@ -71,7 +71,7 @@ public class DOMParser extends SimpleScriptable {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
         if (MimeType.TEXT_XML.equals(type)
-                || "application/xml".equals(type)
+                || MimeType.APPLICATION_XML.equals(type)
                 || MimeType.APPLICATION_XHTML.equals(type)
                 || "image/svg+xml".equals(type)) {
             final XMLDocument document = new XMLDocument();
