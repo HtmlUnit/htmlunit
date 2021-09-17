@@ -1724,7 +1724,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     @Alerts({"", "a", "b"})
     public void cookie_write_valueOnly() throws Exception {
         final String html =

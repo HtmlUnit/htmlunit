@@ -35,6 +35,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
@@ -48,6 +49,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,6 +87,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -646,7 +654,44 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             && !Undefined.isUndefined(content)) {
 
             final boolean setEncodingType = webRequest_.getAdditionalHeader(HttpHeader.CONTENT_TYPE) == null;
-            if (content instanceof FormData) {
+
+            if (content instanceof HTMLDocument) {
+                // final String body = ((HTMLDocument) content).getDomNodeOrDie().asXml();
+                final String body = new XMLSerializer().serializeToString((HTMLDocument) content);
+                if (LOG.isDebugEnabled()) {
+                    LOG.debug("Setting request body to: " + body);
+                }
+                webRequest_.setRequestBody(body);
+                if (setEncodingType) {
+                    webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "text/html;charset=UTF-8");
+                }
+            }
+            else if (content instanceof XMLDocument) {
+                // this output differs from real browsers but it seems to be a good starting point
+                try (StringWriter writer = new StringWriter()) {
+                    final XMLDocument xmlDocument = (XMLDocument) content;
+
+                    final Transformer transformer = TransformerFactory.newInstance().newTransformer();
+                    transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+                    transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+                    transformer.setOutputProperty(OutputKeys.INDENT, "no");
+                    transformer.transform(
+                            new DOMSource(xmlDocument.getDomNodeOrDie().getFirstChild()), new StreamResult(writer));
+
+                    final String body = writer.toString();
+                    if (LOG.isDebugEnabled()) {
+                        LOG.debug("Setting request body to: " + body);
+                    }
+                    webRequest_.setRequestBody(body);
+                    if (setEncodingType) {
+                        webRequest_.setAdditionalHeader(HttpHeader.CONTENT_TYPE, "application/xml;charset=UTF-8");
+                    }
+                }
+                catch (final Exception e) {
+                    Context.throwAsScriptRuntimeEx(e);
+                }
+            }
+            else if (content instanceof FormData) {
                 ((FormData) content).fillRequest(webRequest_);
             }
             else if (content instanceof NativeArrayBufferView) {
