@@ -889,8 +889,6 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  if (document.frames) {\n"
             + "    log(document.frames == window.frames);\n"
             + "    log(document.frames.length);\n"
-            + "    log(document.frames(0).location);\n"
-            + "    log(document.frames('foo').location);\n"
             + "  } else\n"
             + "    log('not defined');\n"
             + "}\n"
