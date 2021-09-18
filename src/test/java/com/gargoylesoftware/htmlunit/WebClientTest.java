@@ -1854,6 +1854,19 @@ public class WebClientTest extends SimpleWebTestCase {
      * @throws Exception if test fails
      */
     @Test
+    public void getPageDataProtocol() throws Exception {
+        final WebClient webClient = getWebClient();
+
+        final String html = "<html><body>DataUrl Test</body></html>";
+
+        final Page page = webClient.getPage("data:text/html;charset=utf-8," + html);
+        assertEquals("DataUrl Test", ((HtmlPage) page).asNormalizedText());
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
     public void getPageJavascriptProtocol() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
