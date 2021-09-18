@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.0.0" date="September xx, 2021" description="Bugfixes, Chrome/Edge 93, Firefox 92">
+        <release version="2.53.0" date="September 18, 2021" description="Bugfixes, Chrome/Edge 93, Firefox 92">
             <action type="fix" dev="rbri" issue="374">
                 XMLHttpRequest.send() has to serialize the body value if it is Document.
             </action>
