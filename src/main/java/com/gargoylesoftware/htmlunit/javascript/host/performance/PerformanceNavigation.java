@@ -96,7 +96,7 @@ public class PerformanceNavigation extends SimpleScriptable {
                 .append(Integer.toString(getType()))
                 .append(", \"redirectCount\":")
                 .append(Integer.toString(getRedirectCount()))
-                .append("}").toString();
+                .append('}').toString();
         try {
             return new JsonParser(Context.getCurrentContext(), getParentScope()).parseValue(jsonString);
         }

@@ -89,7 +89,7 @@ public class DefaultJavaScriptErrorListener implements JavaScriptErrorListener, 
                     .append("] line=[").append(line)
                     .append("] lineSource=[").append(lineSource)
                     .append("] lineOffset=[").append(lineOffset)
-                    .append("]");
+                    .append(']');
 
             LOG.warn(msg.toString());
         }

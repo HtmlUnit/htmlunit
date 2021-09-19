@@ -98,7 +98,7 @@ public class HtmlSerializerInnerOuterText {
             appendChildren(builder, node, Mode.PLAIN);
         }
         else if (node instanceof HtmlTextArea) {
-            //
+            // nothing to do
         }
         else {
             appendDomNode(builder, node, mode);
