@@ -617,4 +617,25 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
+
+    /**
+     * Regression test for bug #428.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"cl2", "cl1"})
+    public void onLoadHandler_idChange() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
+            + "<script type='text/javascript'>\n"
+            + LOG_TITLE_FUNCTION
+            + "document.getElementById('id1').id = 'id3';\n"
+            + "log(document.getElementById('id2').className);\n"
+            + "log(document.getElementById('id3').className);\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

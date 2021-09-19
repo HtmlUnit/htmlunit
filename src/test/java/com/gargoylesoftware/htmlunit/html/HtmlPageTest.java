@@ -39,6 +39,7 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -1174,19 +1175,16 @@ public class HtmlPageTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("webm=none")
     public void setCookieMetaTag() throws Exception {
-        final String content = "<html><head><title>first</title>\n"
+        final String content = "<html><head>\n"
             + "<meta http-equiv='set-cookie' content='webm=none; path=/;'>\n"
             + "</head><body>\n"
-            + "<script>alert(document.cookie)</script>\n"
+            + "<script>document.title = document.cookie</script>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"webm=none"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        final HtmlPage page = loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = loadPage(content);
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
 
         final Set<Cookie> cookies = page.getWebClient().getCookieManager().getCookies();
         assertEquals(1, cookies.size());
@@ -1195,30 +1193,6 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertEquals("webm", cookie.getName());
         assertEquals("none", cookie.getValue());
         assertEquals("/", cookie.getPath());
-    }
-
-    /**
-     * Regression test for bug #428.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void onLoadHandler_idChange() throws Exception {
-        final String content = "<html><head><title>foo</title>\n"
-            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
-            + "<script type='text/javascript'>\n"
-            + "document.getElementById('id1').id = 'id3';\n"
-            + "alert(document.getElementById('id2').className);\n"
-            + "alert(document.getElementById('id3').className);\n"
-            + "</script>\n"
-            + "</head><body></body></html>";
-
-        final String[] expectedAlerts = {"cl2", "cl1"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
     }
 
     /**
@@ -1860,7 +1834,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         // check frame on page
         final List<FrameWindow> frames = page.getFrames();
         assertEquals(1, frames.size());
-        assertEquals("frame1", ((HtmlPage) frames.get(0).getEnclosedPage()).asText());
+        assertEquals("frame1", ((HtmlPage) frames.get(0).getEnclosedPage()).asNormalizedText());
 
         // clone page with deep false
         HtmlPage clonedPage = page.cloneNode(false);
