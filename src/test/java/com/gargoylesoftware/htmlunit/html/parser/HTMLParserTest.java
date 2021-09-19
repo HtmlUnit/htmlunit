@@ -75,7 +75,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
         final String htmlContent = "<html>\n" + "<head><foo/>\n<title>foo\n</head>\n"
                 + "<body>\nfoo\n</body>\n</html>";
 
-        final HtmlPage page = loadPageWithAlerts(htmlContent);
+        final HtmlPage page = loadPage(htmlContent);
         assertEquals("foo", page.getTitleText());
     }
 
@@ -134,7 +134,7 @@ public class HTMLParserTest extends SimpleWebTestCase {
             + "    </div>\n"
             + "  </body>\n"
             + "</html>";
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         assertNotNull(page);
     }
 
