@@ -694,34 +694,6 @@ public class DomNodeTest extends SimpleWebTestCase {
     }
 
     /**
-     * @throws Exception on test failure
-     */
-    @Test
-    public void ownerDocument() throws Exception {
-        final String content = "<html>\n"
-            + "<head>\n"
-            + "  <title>test</title>\n"
-            + "  <script>\n"
-            + "    function test() {\n"
-            + "      alert(document == document.body.ownerDocument);\n"
-            + "      alert(document == document.getElementById('foo').ownerDocument);\n"
-            + "      alert(document == document.body.firstChild.ownerDocument);\n"
-            + "    }\n"
-            + "  </script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>bla\n"
-            + "<div id='foo'>bla</div>\n"
-            + "</body>\n"
-            + "</html>";
-
-        final String[] expectedAlerts = {"true", "true", "true"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(content, collectedAlerts);
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
