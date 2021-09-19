@@ -91,10 +91,12 @@ public class HtmlTable2Test extends WebDriverTestCase {
     @Test
     @Alerts({"TBODY->TR->TD->Two", "THEAD->TR->TD->One", "THEAD->TR->TD->Three"})
     public void two_theads() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    for (var child = myTable1.firstChild; child != null; child = child.nextSibling) {\n"
-            + "      alert(debug(child));\n"
+            + "      log(debug(child));\n"
             + "    }\n"
             + "  }\n"
             + "  function debug(node) {\n"
@@ -109,6 +111,33 @@ public class HtmlTable2Test extends WebDriverTestCase {
             + "</table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Regression test for Bug #274: JavaScript inside <tt>&lt;table&gt;</tt> run twice.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"foo", "BODY"})
+    public void jsInTable() throws Exception {
+        final String content
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "<table>\n"
+            + "<tr><td>cell1</td></tr>\n"
+            + "<script>log('foo');</script>\n"
+            + "<tr><td>cell1</td></tr>\n"
+            + "</table>\n"
+            + "<div id='div1'>foo</div>\n"
+            + "<script>log(document.getElementById('div1').parentNode.tagName);</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
     }
 }
