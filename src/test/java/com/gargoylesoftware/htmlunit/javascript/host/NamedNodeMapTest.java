@@ -51,13 +51,14 @@ public class NamedNodeMapTest extends WebDriverTestCase {
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var f = document.getElementById('f');\n"
             + "    for(var i = 0; i < f.attributes.length; i++) {\n"
             + "      if (f.attributes[i]) {\n"
-            + "        alert(f.attributes[i].name + '=' + f.attributes[i].value);\n"
+            + "        log(f.attributes[i].name + '=' + f.attributes[i].value);\n"
             + "      } else {\n"
-            + "        alert(i);\n"
+            + "        log(i);\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
@@ -68,7 +69,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html); // properties order is the reverse of what I get with FF3.6
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,21 +82,22 @@ public class NamedNodeMapTest extends WebDriverTestCase {
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var f = document.getElementById('f');\n"
-            + "    alert(f.attributes.getNamedItem('name').nodeName);\n"
-            + "    alert(f.attributes.getNamedItem('name').nodeValue);\n"
-            + "    alert(f.attributes.getNamedItem('NaMe').nodeName);\n"
-            + "    alert(f.attributes.getNamedItem('nAmE').nodeValue);\n"
+            + "    log(f.attributes.getNamedItem('name').nodeName);\n"
+            + "    log(f.attributes.getNamedItem('name').nodeValue);\n"
+            + "    log(f.attributes.getNamedItem('NaMe').nodeName);\n"
+            + "    log(f.attributes.getNamedItem('nAmE').nodeValue);\n"
             + "    try {\n"
-            + "      alert(f.attributes.name.nodeName);\n"
-            + "      alert(f.attributes.name.nodeValue);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(f.attributes.name.nodeName);\n"
+            + "      log(f.attributes.name.nodeValue);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "    try {\n"
-            + "      alert(f.attributes.NaMe.nodeName);\n"
-            + "      alert(f.attributes.nAmE.nodeValue);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(f.attributes.getNamedItem('notExisting'));\n"
+            + "      log(f.attributes.NaMe.nodeName);\n"
+            + "      log(f.attributes.nAmE.nodeValue);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(f.attributes.getNamedItem('notExisting'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -104,7 +106,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -114,7 +116,9 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Alerts(DEFAULT =  {"myattr", "myattr2", "myattr", "myattr2", "myattr2"},
             IE = {"myAttr", "myattr2", "myAttr", "myattr2", "myattr2"})
     public void getNamedItem_HTML_Case() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('tester');\n"
 
@@ -126,24 +130,24 @@ public class NamedNodeMapTest extends WebDriverTestCase {
 
             + "    for(var i = 0; i < elem.attributes.length; i++) {\n"
             + "      var name = elem.attributes[i].name;\n"
-            + "      if (name.indexOf('my') === 0) { alert(name); }\n"
+            + "      if (name.indexOf('my') === 0) { log(name); }\n"
             + "    }\n"
 
             + "    var item = elem.attributes.getNamedItem('myAttr');\n"
             + "    if (item) {\n"
-            + "      alert(item.nodeName);\n"
+            + "      log(item.nodeName);\n"
             + "    } else {\n"
-            + "      alert('not found');\n"
+            + "      log('not found');\n"
             + "    }\n"
 
-            + "    alert(elem.attributes.getNamedItem('myattr2').name);\n"
-            + "    alert(elem.attributes.getNamedItem('MYaTTr2').name);\n"
+            + "    log(elem.attributes.getNamedItem('myattr2').name);\n"
+            + "    log(elem.attributes.getNamedItem('MYaTTr2').name);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='tester'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -152,18 +156,20 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Test
     @Alerts({"name", "y", "name", "y", "null", "undefined", "null"})
     public void getNamedItem_XML() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'second.xml'") + ";\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeName);\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('name').nodeValue);\n"
+            + "    log(doc.documentElement.attributes.getNamedItem('name').nodeName);\n"
+            + "    log(doc.documentElement.attributes.getNamedItem('name').nodeValue);\n"
             + "    try {\n"
-            + "      alert(doc.documentElement.attributes.name.nodeName);\n"
-            + "      alert(doc.documentElement.attributes.name.nodeValue);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('NaMe'));\n"
-            + "    alert(doc.documentElement.attributes.NaMe);\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('nonExistent'));\n"
+            + "      log(doc.documentElement.attributes.name.nodeName);\n"
+            + "      log(doc.documentElement.attributes.name.nodeValue);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(doc.documentElement.attributes.getNamedItem('NaMe'));\n"
+            + "    log(doc.documentElement.attributes.NaMe);\n"
+            + "    log(doc.documentElement.attributes.getNamedItem('nonExistent'));\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -172,7 +178,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
         final String xml = "<blah name='y'></blah>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -181,23 +187,25 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Test
     @Alerts("myattr")
     public void setNamedItem_HTML() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.createAttribute('myattr');\n"
             + "    var elem = document.getElementById('tester');\n"
             + "    elem.attributes.setNamedItem(node);\n"
             + "    var item = elem.attributes.getNamedItem('myAttr');\n"
             + "    if (item) {\n"
-            + "      alert(item.nodeName);\n"
+            + "      log(item.nodeName);\n"
             + "    } else {\n"
-            + "      alert('not found');\n"
+            + "      log('not found');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='tester'></div\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -206,12 +214,14 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Test
     @Alerts("myAttr")
     public void setNamedItem_XML() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
             + "    var node = doc.createAttribute('myAttr');\n"
             + "    doc.documentElement.attributes.setNamedItem(node);\n"
-            + "    alert(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
+            + "    log(doc.documentElement.attributes.getNamedItem('myAttr').nodeName);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -221,7 +231,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
         final String xml = "<test></test>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -232,15 +242,16 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     public void has() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html ng-app><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var attributes = document.documentElement.attributes;\n"
-            + "alert(0 in attributes);\n"
-            + "alert(attributes[0]);\n"
-            + "alert('0' in attributes);\n"
-            + "alert(attributes['0']);\n"
+            + "log(0 in attributes);\n"
+            + "log(attributes[0]);\n"
+            + "log('0' in attributes);\n"
+            + "log(attributes['0']);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -254,15 +265,16 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "<body>\n"
             + "<div id='div1' style='background-color:#FFFFC1;'>div1</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var el = document.getElementById('div1');\n"
-            + "  alert(el.id);\n"
+            + "  log(el.id);\n"
             + "  el.attributes.removeNamedItem('id');\n"
-            + "  alert(el.id);\n"
+            + "  log(el.id);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -275,10 +287,11 @@ public class NamedNodeMapTest extends WebDriverTestCase {
               "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.body.attributes.language);\n"
-            + "    alert(document.body.attributes.id);\n"
-            + "    alert(document.body.attributes.dir);\n"
+            + "    log(document.body.attributes.language);\n"
+            + "    log(document.body.attributes.id);\n"
+            + "    log(document.body.attributes.dir);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -286,7 +299,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -296,11 +309,12 @@ public class NamedNodeMapTest extends WebDriverTestCase {
     @Alerts("media=\"screen\"")
     public void changedAttribute() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<style id='myStyle'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('myStyle');\n"
             + "  style.media = 'screen';\n"
@@ -308,7 +322,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "  var attributes = style.attributes;\n"
             + "  for (var i = 0; i < attributes.length; i++) {\n"
             + "    if (attributes[i].name === 'media') {\n"
-            + "      alert(attributes[i].name + '=\"' + attributes[i].value + '\"');\n"
+            + "      log(attributes[i].name + '=\"' + attributes[i].value + '\"');\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -316,7 +330,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -329,20 +343,20 @@ public class NamedNodeMapTest extends WebDriverTestCase {
         final String html =
                 "<html>\n"
               + "<head>\n"
-              + "  <title>Test page</title>\n"
               + "</head>\n"
               + "<body>\n"
               + "  <input id='myinput' name='test_input' />\n"
               + "  <script type='text/javascript'>\n"
+              + LOG_TITLE_FUNCTION
               + "    var input = document.getElementById('myinput');\n"
               + "    var attrs = input.attributes;\n"
               + "    for(var i = 0; i < attrs.length; i++) {\n"
               + "      attrs[i];\n"
               + "    }\n"
-              + "    alert(input.outerHTML);\n"
+              + "    log(input.outerHTML);\n"
               + "  </script>\n"
               + "</body>\n"
               + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

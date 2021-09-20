@@ -40,16 +40,18 @@ public class NetscapeTest extends WebDriverTestCase {
             FF = {"[object Object]", "undefined", "[object Object]", "undefined"},
             FF78 = {"[object Object]", "undefined", "[object Object]", "undefined"})
     public void netscape() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(window.netscape);\n"
-            + "  alert(window.Netscape);\n"
-            + "  alert(window.netscape.security);\n"
-            + "  alert(window.netscape.security.PrivilegeManager);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(window.netscape);\n"
+            + "  log(window.Netscape);\n"
+            + "  log(window.netscape.security);\n"
+            + "  log(window.netscape.security.PrivilegeManager);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 
@@ -63,15 +65,17 @@ public class NetscapeTest extends WebDriverTestCase {
     @HtmlUnitNYI(FF = {"undefined", "true", "true"},
             FF78 = {"undefined", "true", "true"})
     public void netscapeDescriptor() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var d1 = Object.getOwnPropertyDescriptor(window, 'netscape');\n"
-            + "  alert(d1.writable);\n"
-            + "  alert(d1.enumerable);\n"
-            + "  alert(d1.configurable);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "  log(d1.writable);\n"
+            + "  log(d1.enumerable);\n"
+            + "  log(d1.configurable);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
