@@ -170,22 +170,6 @@ public class PromiseTest extends WebDriverTestCase {
                     "undefined",
                     "done", "resolved value"},
             IE = {})
-    @HtmlUnitNYI(CHROME = {"function () { [native code] }",
-                           "function () { [native code] }",
-                           "null",
-                           "done", "resolved value"},
-            EDGE = {"function () { [native code] }",
-                    "function () { [native code] }",
-                    "null",
-                    "done", "resolved value"},
-            FF = {"function () {\n    [native code]\n}",
-                  "function () {\n    [native code]\n}",
-                  "null",
-                  "done", "resolved value"},
-            FF78 = {"function () {\n    [native code]\n}",
-                    "function () {\n    [native code]\n}",
-                    "null",
-                    "done", "resolved value"})
     public void constructorStrict() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

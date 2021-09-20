@@ -38,21 +38,20 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
+            + "    <title>Page Title</title>\n"
             + "    <script>\n"
-            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var title = document.getElementsByTagName('title')[0];\n"
-            + "        log(title.text);\n"
+            + "        alert(title.text);\n"
             + "        title.text = 'New Title';\n"
-            + "        log(title.text);\n"
+            + "        alert(title.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -65,19 +64,17 @@ public class HTMLTitleElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var title = document.createElement('title');\n"
-            + "        log(title.text);\n"
+            + "        alert(title.text);\n"
             + "        title.text = 'New Title';\n"
-            + "        log(title.text);\n"
+            + "        alert(title.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 }
