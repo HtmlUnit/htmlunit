@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.54.0" date="October cc, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Fix processing of SCRIPTABLE_UNDEFINED when used in string concatenation.
+            </action>
+        </release>
+
         <release version="2.53.0" date="September 18, 2021" description="Bugfixes, Chrome/Edge 93, Firefox 92">
             <action type="fix" dev="rbri" issue="374">
                 XMLHttpRequest.send() has to serialize the body value if it is Document.
