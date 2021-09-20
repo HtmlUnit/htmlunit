@@ -49,18 +49,20 @@ public class SetTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var myArray = ['value1', 'value2', 'value3'];\n"
             + "    var mySet = new Set(myArray);\n"
             + "    mySet.add('value1');\n"
-            + "    alert(mySet.size);\n"
-            + "    alert(mySet.has('value2'));\n"
+            + "    log(mySet.size);\n"
+            + "    log(mySet.has('value2'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,10 +71,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                        "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF = {"function values() {\n    [native code]\n}",
-                  "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF78 = {"function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void iterator() throws Exception {
         final String html =
@@ -80,25 +78,27 @@ public class SetTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var set = new Set();\n"
             + "      set.add('0');\n"
             + "      set.add(1);\n"
             + "      set.add({});\n"
-            + "      alert(set[Symbol.iterator]);\n"
+            + "      log(set[Symbol.iterator]);\n"
             + "      var iter = set[Symbol.iterator]();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -107,10 +107,6 @@ public class SetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                        "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF = {"function values() {\n    [native code]\n}",
-                  "[object Set Iterator]", "0", "1", "[object Object]"},
-            FF78 = {"function values() {\n    [native code]\n}",
-                    "[object Set Iterator]", "0", "1", "[object Object]"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -118,25 +114,27 @@ public class SetTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var set = new Set();\n"
             + "      set.add('0');\n"
             + "      set.add(1);\n"
             + "      set.add({});\n"
-            + "      alert(set.values);\n"
+            + "      log(set.values);\n"
             + "      var iter = set.values();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -148,15 +146,17 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var mySet = new Set([2, 7]);\n"
-            + "  alert(mySet.size);\n"
+            + "  log(mySet.size);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -168,16 +168,18 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorInt32Array() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int32Array([2, 7]);\n"
             + "  var mySet = new Set(array);\n"
-            + "  alert(mySet.size);\n"
+            + "  log(mySet.size);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -189,17 +191,19 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorStringParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var mySet = new Set('test');\n"
-            + "  alert(mySet.size);\n"
-            + "  alert(mySet.has('t'));\n"
-            + "  alert(mySet.has('x'));\n"
+            + "  log(mySet.size);\n"
+            + "  log(mySet.has('t'));\n"
+            + "  log(mySet.has('x'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -210,20 +214,22 @@ public class SetTest extends WebDriverTestCase {
             IE = {})
     public void constructorStringIteratorParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.Symbol) {\n"
             + "    var strIter = 'HtmlUnit'[Symbol.iterator]();"
             + "    var mySet = new Set(strIter);\n"
-            + "    alert(mySet.size);\n"
-            + "    alert(mySet.has('t'));\n"
-            + "    alert(mySet.has('x'));\n"
+            + "    log(mySet.size);\n"
+            + "    log(mySet.has('t'));\n"
+            + "    log(mySet.has('x'));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -235,17 +241,19 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var mySet = new Set(new Set('test'));\n"
-            + "  alert(mySet.size);\n"
-            + "  alert(mySet.has('t'));\n"
-            + "  alert(mySet.has('x'));\n"
+            + "  log(mySet.size);\n"
+            + "  log(mySet.has('t'));\n"
+            + "  log(mySet.has('x'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -257,19 +265,21 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var kvArray = [['key1', 'value1'], ['key2', 'value2']];\n"
             + "  var myMap = new Map(kvArray);\n"
             + "  var mySet = new Set(myMap);\n"
-            + "  alert(mySet.size);\n"
-            + "  alert(mySet.has('key1'));\n"
-            + "  alert(mySet.has('value2'));\n"
+            + "  log(mySet.size);\n"
+            + "  log(mySet.has('key1'));\n"
+            + "  log(mySet.has('value2'));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -280,9 +290,11 @@ public class SetTest extends WebDriverTestCase {
             IE = "exception")
     public void constructorIteratorParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value) {\n"
-            + "  alert(value);\n"
+            + "  log(value);\n"
             + "}\n"
             + "function test() {\n"
             + "  try {\n"
@@ -300,15 +312,15 @@ public class SetTest extends WebDriverTestCase {
             + "      };\n"
             + "    };\n"
             + "    var mySet = new Set(myIterable);\n"
-            + "    alert(mySet.size);\n"
+            + "    log(mySet.size);\n"
             + "    mySet.forEach(logElement);\n"
-            + "  } catch(e) { alert('exception'); }"
+            + "  } catch(e) { log('exception'); }"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -324,11 +336,12 @@ public class SetTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value1, value2, s) {\n"
-            + "  alert(value1);\n"
-            + "  alert(value2);\n"
-            + "  alert(s);\n"
-            + "  alert(this);\n"
+            + "  log(value1);\n"
+            + "  log(value2);\n"
+            + "  log(s);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "  var mySet = new Set(['ab', undefined, null]);\n"
@@ -339,7 +352,7 @@ public class SetTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -356,11 +369,12 @@ public class SetTest extends WebDriverTestCase {
             = "<html><head>\n"
             + "<script>\n"
             + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value1, value2, s) {\n"
-            + "  alert(value1);\n"
-            + "  alert(value2);\n"
-            + "  alert(s);\n"
-            + "  alert(this);\n"
+            + "  log(value1);\n"
+            + "  log(value2);\n"
+            + "  log(s);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "  var mySet = new Set(['ab', undefined, null]);\n"
@@ -371,7 +385,7 @@ public class SetTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -384,12 +398,14 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void forEachThis() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value1, value2, s) {\n"
-            + "  alert(value1);\n"
-            + "  alert(value2);\n"
-            + "  alert(s);\n"
-            + "  alert(this);\n"
+            + "  log(value1);\n"
+            + "  log(value2);\n"
+            + "  log(s);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "  var mySet = new Set(['ab', undefined, null]);\n"
@@ -398,7 +414,7 @@ public class SetTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -415,18 +431,20 @@ public class SetTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var mySet = new Set();\n"
             + "      var iter = mySet[Symbol.iterator]();\n"
-            + "      alert(Object.getPrototypeOf(iter));\n"
+            + "      log(Object.getPrototypeOf(iter));\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -440,9 +458,11 @@ public class SetTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void forEach_withElision() throws Exception {
         final String html
-                = "<html><head><title>foo</title><script>\n"
+                = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function logElement(value) {\n"
-                + "  alert(value);\n"
+                + "  log(value);\n"
                 + "}\n"
                 + "function test() {\n"
                 + "  var mySet = new Set([, 0]);\n"
@@ -451,6 +471,6 @@ public class SetTest extends WebDriverTestCase {
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -63,9 +63,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
+            + "    log(document.getElementById('myId1'));\n"
+            + "    log(document.getElementById('myId2'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -73,7 +74,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <image id='myId2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -84,9 +85,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void nodeName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1').nodeName);\n"
-            + "    alert(document.getElementById('myId2').nodeName);\n"
+            + "    log(document.getElementById('myId1').nodeName);\n"
+            + "    log(document.getElementById('myId2').nodeName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -94,7 +96,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <image id='myId2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -105,9 +107,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void tagName() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1').tagName);\n"
-            + "    alert(document.getElementById('myId2').tagName);\n"
+            + "    log(document.getElementById('myId1').tagName);\n"
+            + "    log(document.getElementById('myId2').tagName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -115,7 +118,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <image id='myId2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -133,15 +136,16 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void image() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.createElement('img'));\n"
-            + "    alert(document.createElement('image'));\n"
-            + "    alert(document.createElement('img').nodeName);\n"
-            + "    alert(document.createElement('image').nodeName);\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "    alert(document.getElementById('myId1').nodeName);\n"
-            + "    alert(document.getElementById('myId2').nodeName);\n"
+            + "    log(document.createElement('img'));\n"
+            + "    log(document.createElement('image'));\n"
+            + "    log(document.createElement('img').nodeName);\n"
+            + "    log(document.createElement('image').nodeName);\n"
+            + "    log(document.getElementById('myId1'));\n"
+            + "    log(document.getElementById('myId2'));\n"
+            + "    log(document.getElementById('myId1').nodeName);\n"
+            + "    log(document.getElementById('myId2').nodeName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -149,7 +153,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <image id='myId2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -161,11 +165,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void src() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.createElement('img').src);\n"
-            + "    alert(document.createElement('image').src);\n"
-            + "    alert(document.getElementById('myId1').src);\n"
-            + "    alert(document.getElementById('myId2').src);\n"
+            + "    log(document.createElement('img').src);\n"
+            + "    log(document.createElement('image').src);\n"
+            + "    log(document.getElementById('myId1').src);\n"
+            + "    log(document.getElementById('myId2').src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -173,7 +178,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <image id='myId2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -184,9 +189,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts("§§URL§§foo.gif")
     public void getSrc() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.getElementById('anImage').src);\n"
+            + "  log(document.getElementById('anImage').src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<img src='foo.gif' id='anImage'/>\n"
@@ -194,7 +201,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse(""); // to have a dummy response for the image
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -204,15 +211,17 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts("")
     public void getSrc_newImage_srcNotSet() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var oImg = new Image();\n"
-            + "  alert(oImg.src);\n"
+            + "  log(oImg.src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -252,19 +261,21 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts({"onLoad", "§§URL§§bar.gif"})
     public void setSrc_newImage() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var preloadImage = new Image();\n"
-            + "  preloadImage.onload = alert('onLoad');\n"
+            + "  preloadImage.onload = log('onLoad');\n"
             + "  preloadImage.src = 'bar.gif';\n"
-            + "  alert(preloadImage.src);\n"
+            + "  log(preloadImage.src);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(""); // to have a dummy response for the image
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -274,18 +285,20 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts("foo")
     public void attributeName() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var oImg = document.getElementById('myImage');\n"
             + "  oImg.name = 'foo';\n"
-            + "  alert(oImg.name);\n"
+            + "  log(oImg.name);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<img src='foo.png' id='myImage'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(""); // to have a dummy response for the image
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -304,18 +317,21 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Alerts({"true", "relative", "", ""})
     public void newImage() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var i = new Image();\n"
-            + "  alert(i.style != null);\n"
+            + "  log(i.style != null);\n"
             + "  i.style.position = 'relative';\n"
-            + "  alert(i.style.position);\n"
-            + "  alert(i.border);\n"
-            + "  alert(i.alt);\n"
+            + "  log(i.style.position);\n"
+            + "  log(i.border);\n"
+            + "  log(i.alt);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -349,12 +365,14 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='i13' />\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 13; i++) {\n"
-            + "    alert(document.getElementById('i' + i).align);\n"
+            + "    log(document.getElementById('i' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -377,11 +395,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='i1' align='left' />\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('i1');\n"
@@ -403,7 +422,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'texttop');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -418,10 +437,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void widthHeightWithoutSource() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width) + ': ' + img.width);\n"
-            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "    log(typeof(img.width) + ': ' + img.width);\n"
+            + "    log(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -435,7 +455,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='myImage3' width='hello' height='hello'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -449,10 +469,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width) + ': ' + img.width);\n"
-            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "    log(typeof(img.width) + ': ' + img.width);\n"
+            + "    log(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -475,7 +496,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -490,10 +511,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width) + ': ' + img.width);\n"
-            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "    log(typeof(img.width) + ': ' + img.width);\n"
+            + "    log(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -515,7 +537,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -532,10 +554,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width) + ': ' + img.width);\n"
-            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "    log(typeof(img.width) + ': ' + img.width);\n"
+            + "    log(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -557,7 +580,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             webConnection.setResponse(URL_SECOND, directBytes, 200, "ok", "image/jpg", emptyList);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -574,10 +597,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(typeof(img.width) + ': ' + img.width);\n"
-            + "    alert(typeof(img.height) + ': ' + img.height);\n"
+            + "    log(typeof(img.width) + ': ' + img.width);\n"
+            + "    log(typeof(img.height) + ': ' + img.height);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -591,7 +615,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='myImage3' src='" + URL_SECOND + "' width='hello' height='hello'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         shutDownRealIE();
     }
@@ -614,9 +638,10 @@ public class HTMLImageElementTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function showInfo(imageId) {\n"
             + "    var img = document.getElementById(imageId);\n"
-            + "    alert(img.complete);\n"
+            + "    log(img.complete);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    showInfo('myImage1');\n"
@@ -636,7 +661,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             ((HtmlUnitDriver) driver).setDownloadImages(true);
         }
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -774,24 +799,25 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var testImg = document.getElementById('myImage');\n"
-            + "        alert(testImg.alt);\n"
-            + "        alert(typeof testImg.alt);\n"
+            + "        log(testImg.alt);\n"
+            + "        log(typeof testImg.alt);\n"
 
             + "        testImg.alt = 'hui';\n"
-            + "        alert(testImg.alt);\n"
+            + "        log(testImg.alt);\n"
 
             + "        testImg.alt = '';\n"
-            + "        alert(testImg.alt);\n"
+            + "        log(testImg.alt);\n"
 
             + "        testImg.alt = null;\n"
-            + "        alert(testImg.alt);\n"
-            + "        alert(testImg.alt === null);\n"
-            + "        alert(testImg.alt === 'null');\n"
+            + "        log(testImg.alt);\n"
+            + "        log(testImg.alt === null);\n"
+            + "        log(testImg.alt === 'null');\n"
 
             + "        var testImg = document.getElementById('myImageWithoutAlt');\n"
-            + "        alert(testImg.alt);\n"
+            + "        log(testImg.alt);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -802,7 +828,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -813,6 +839,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void click() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('myImage').click();\n"
             + "    document.getElementById('myImageNone').click();\n"
@@ -821,13 +848,13 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "  <img id='myImage' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                                     + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
-                            + " onclick='alert(\"myImage clicked\");'>\n"
+                            + " onclick='log(\"myImage clicked\");'>\n"
             + "  <img id='myImageNone' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                                     + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
-                            + " style='display: none' onclick='alert(\"myImageNone clicked\");'>\n"
+                            + " style='display: none' onclick='log(\"myImageNone clicked\");'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -840,6 +867,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     public void clickWithMap() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('myImageWithMap').click();\n"
             + "  }\n"
@@ -848,14 +876,14 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             + "  <img id='myImageWithMap' usemap='#dot'"
                                 + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                                 + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='"
-                            + " onclick='alert(\"myImageWithMap clicked\");'>\n"
+                            + " onclick='log(\"myImageWithMap clicked\");'>\n"
                 + "  <map name='dot'>\n"
-                + "    <area id='a0' shape='rect' coords='0 0 7 7' onclick='alert(\"a0 clicked\");'/>\n"
-                + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='alert(\"a1 clicked\");'/>\n"
+                + "    <area id='a0' shape='rect' coords='0 0 7 7' onclick='log(\"a0 clicked\");'/>\n"
+                + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='log(\"a1 clicked\");'/>\n"
                 + "  <map>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
