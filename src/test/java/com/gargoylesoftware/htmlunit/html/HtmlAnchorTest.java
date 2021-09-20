@@ -60,7 +60,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     @Alerts({"hi", "%28%29"})
     public void href_js_escaping() throws Exception {
         final String html =
-              "<html><head><script>\n"
+              "<html><head>\n<script>\n"
             + "  function sayHello(text) {\n"
             + "    alert(text);\n"
             + "  }\n"
