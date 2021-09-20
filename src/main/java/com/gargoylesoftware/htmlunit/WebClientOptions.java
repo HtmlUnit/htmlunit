@@ -453,8 +453,8 @@ public class WebClientOptions implements Serializable {
     /**
      * <p>Sets the timeout of the {@link WebConnection}. Set to zero for an infinite wait.</p>
      *
-     * <p>Note: The timeout is used twice. The first is for making the socket connection, the second is
-     * for data retrieval. If the time is critical you must allow for twice the time specified here.</p>
+     * <p>Note: This is a hard timeout. Total time spent for making the socket connection, data retrieval
+     * or following redirects (if enabled) is at most the time specified here.</p>
      *
      * @param timeout the value of the timeout in milliseconds
      */

@@ -96,6 +96,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         try {
             client.getPage("http://localhost:" + PORT + RedirectServlet307.URL);
+            fail();
         }
         catch (final Exception e) {
             assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
@@ -345,6 +346,59 @@ public class WebClient4Test extends WebServerTestCase {
         client.getPage(URL_FIRST);
     }
 
+    public static class DelayRedirectServlet extends RedirectServlet{
+
+        public DelayRedirectServlet() {
+            super(301,"/test2");
+        }
+
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            try {
+                Thread.sleep(500);
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            super.doGet(req, res);
+        }
+    }
+
+    public static class AfterDelayRedirectServlet extends HttpServlet {
+
+        @Override
+        protected void doGet(final HttpServletRequest req, final HttpServletResponse res) throws IOException {
+            try {
+                Thread.sleep(500);
+            }
+            catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            res.setContentType(MimeType.TEXT_HTML);
+            final Writer writer = res.getWriter();
+            writer.write("<html><body>foo</body></html>");
+        }
+    }
+
+    @Test
+    public void hardTimeoutRedirects() throws Exception{
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test1", DelayRedirectServlet.class);
+        servlets.put("/test2", AfterDelayRedirectServlet.class);
+        startWebServer("./", new String[0], servlets);
+
+        final WebClient client = getWebClient();
+        client.getOptions().setTimeout(750);
+
+        try {
+            client.getPage(URL_FIRST + "test1");
+            fail("Should timeout");
+        }
+        catch (final SocketTimeoutException e) {
+            //expected
+        }
+    }
+
     /**
      * Make sure cookies set for the request are overwriting the cookieManager.
      *
@@ -433,6 +487,7 @@ public class WebClient4Test extends WebServerTestCase {
 
         try {
             client.getPage(URL_FIRST + "test1");
+            fail();
         }
         catch (final Exception e) {
             assertTrue(e.getMessage(), e.getMessage().contains("Too much redirect"));
