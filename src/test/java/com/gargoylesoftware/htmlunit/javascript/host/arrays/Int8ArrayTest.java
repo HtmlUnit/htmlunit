@@ -43,21 +43,23 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"[object ArrayBuffer]", "5", "0"})
     public void buffer() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Int8Array(5);\n"
-            + "    alert(array.buffer);\n"
-            + "    alert(array.byteLength);\n"
-            + "    alert(array.byteOffset);\n"
+            + "    log(array.buffer);\n"
+            + "    log(array.byteLength);\n"
+            + "    log(array.byteOffset);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -67,21 +69,23 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"17", "-45", "2"})
     public void arrayConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Int8Array([17, -45.3]);\n"
-            + "    alert(array[0]);\n"
-            + "    alert(array[1]);\n"
-            + "    alert(array.length);\n"
+            + "    log(array[0]);\n"
+            + "    log(array[1]);\n"
+            + "    log(array.length);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,19 +95,21 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"2", "-45", "52"})
     public void bufferConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array([17, -45.3, 52, 123]);\n"
             + "  var array2 = new Int8Array(array.buffer, 1, 2);\n"
-            + "  alert(array2.length);\n"
+            + "  log(array2.length);\n"
             + "  for (var i = 0; i < array2.length; i++) {\n"
-            + "    alert(array2[i]);\n"
+            + "    log(array2[i]);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -113,18 +119,20 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts("1")
     public void constant() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(Int8Array.BYTES_PER_ELEMENT);\n"
+            + "    log(Int8Array.BYTES_PER_ELEMENT);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -134,18 +142,20 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"undefined", "11", "undefined", "undefined"})
     public void index() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array([11]);\n"
-            + "  alert(array[-1]);\n"
-            + "  alert(array[0]);\n"
-            + "  alert(array[1]);\n"
-            + "  alert(array[21]);\n"
+            + "  log(array[-1]);\n"
+            + "  log(array[0]);\n"
+            + "  log(array[1]);\n"
+            + "  log(array[21]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,18 +165,20 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"false", "true", "false", "false"})
     public void in() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array([11]);\n"
-            + "  alert(-1 in array);\n"
-            + "  alert(0 in array);\n"
-            + "  alert(1 in array);\n"
-            + "  alert(42 in array);\n"
+            + "  log(-1 in array);\n"
+            + "  log(0 in array);\n"
+            + "  log(1 in array);\n"
+            + "  log(42 in array);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -176,7 +188,9 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"undefined", "6", "0", "0", "0", "0", "0", "4", "undefined"})
     public void undefinedValueInArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = [];\n"
             + "  array[1] = null;\n"
@@ -184,22 +198,22 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "  array[3] = Number.POSITIVE_INFINITY;\n"
             + "  array[4] = Number.NEGATIVE_INFINITY;\n"
             + "  array[5] = 4;\n"
-            + "  alert(array[0]);\n"
+            + "  log(array[0]);\n"
 
             + "  var nativeArray = new Int8Array(array);\n"
-            + "  alert(nativeArray.length);\n"
-            + "  alert(nativeArray[0]);\n"
-            + "  alert(nativeArray[1]);\n"
-            + "  alert(nativeArray[2]);\n"
-            + "  alert(nativeArray[3]);\n"
-            + "  alert(nativeArray[4]);\n"
-            + "  alert(nativeArray[5]);\n"
-            + "  alert(nativeArray[6]);\n"
+            + "  log(nativeArray.length);\n"
+            + "  log(nativeArray[0]);\n"
+            + "  log(nativeArray[1]);\n"
+            + "  log(nativeArray[2]);\n"
+            + "  log(nativeArray[3]);\n"
+            + "  log(nativeArray[4]);\n"
+            + "  log(nativeArray[5]);\n"
+            + "  log(nativeArray[6]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -209,7 +223,9 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @Alerts({"0", "1", "0", "17"})
     public void specialValueInArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = [];\n"
             + "  array[0] = NaN;\n"
@@ -217,15 +233,15 @@ public class Int8ArrayTest extends WebDriverTestCase {
             + "  array[2] = false;\n"
             + "  array[3] = '17';\n"
             + "  var nativeArray = new Int8Array(array);\n"
-            + "  alert(nativeArray[0]);\n"
-            + "  alert(nativeArray[1]);\n"
-            + "  alert(nativeArray[2]);\n"
-            + "  alert(nativeArray[3]);\n"
+            + "  log(nativeArray[0]);\n"
+            + "  log(nativeArray[1]);\n"
+            + "  log(nativeArray[2]);\n"
+            + "  log(nativeArray[3]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -237,19 +253,21 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Int8Array(null);\n"
-            + "    alert(array.length);\n"
+            + "    log(array.length);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -263,27 +281,29 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array(0);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Int8Array(1);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Int8Array([1]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Int8Array([1,3]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Int8Array([1,3,4,7,11,0,123]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -295,13 +315,15 @@ public class Int8ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void name() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(Int8Array.name);\n"
+            + "  log(Int8Array.name);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
