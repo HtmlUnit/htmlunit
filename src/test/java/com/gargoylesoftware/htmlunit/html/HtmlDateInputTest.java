@@ -42,22 +42,23 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"--null", "--null", "--null"},
             IE = {"--null", "exception", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('text1');\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    try {\n"
             + "      input = document.createElement('input');\n"
             + "      input.type = 'date';\n"
-            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "    } catch(e)  { alert('exception'); }\n"
+            + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { log('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"date\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -66,7 +67,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -76,25 +77,26 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"--null", "--null", "--null"},
             IE = {"--null", "exception", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('text1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    try {\n"
             + "      input = document.createElement('input');\n"
             + "      input.type = 'date';\n"
             + "      input = input.cloneNode(false);\n"
-            + "      alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
-            + "    } catch(e)  { alert('exception'); }\n"
+            + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { log('exception'); }\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"date\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -103,7 +105,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -117,11 +119,12 @@ public class HtmlDateInputTest extends WebDriverTestCase {
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('input1');\n"
-              + "    alert(input.type + '-' + input.getAttribute('type'));\n"
+              + "    log(input.type + '-' + input.getAttribute('type'));\n"
               + "    input = document.getElementById('input2');\n"
-              + "    alert(input.type + '-' + input.getAttribute('type'));\n"
+              + "    log(input.type + '-' + input.getAttribute('type'));\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
@@ -130,7 +133,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
               + "  <input id='input2' type='Date'>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,9 +197,10 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -207,7 +211,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -220,10 +224,11 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var foo = document.getElementById('foo');\n"
             + "    var bar = document.getElementById('bar');\n"
-            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -233,7 +238,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -246,10 +251,11 @@ public class HtmlDateInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var foo = document.getElementById('foo');\n"
             + "    var bar = document.getElementById('bar');\n"
-            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -259,6 +265,6 @@ public class HtmlDateInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
