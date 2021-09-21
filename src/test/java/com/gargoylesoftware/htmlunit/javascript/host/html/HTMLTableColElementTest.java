@@ -56,12 +56,14 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </table>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 7; i++) {\n"
-            + "    alert(document.getElementById('c' + i).align);\n"
+            + "    log(document.getElementById('c' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -80,11 +82,12 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </table>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('c1');\n"
@@ -100,7 +103,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'center');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -121,21 +125,23 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var c1 = document.getElementById('c1');\n"
             + "  var c2 = document.getElementById('c2');\n"
             + "  var c3 = document.getElementById('c3');\n"
-            + "  alert(c1.ch);\n"
-            + "  alert(c2.ch);\n"
-            + "  alert(c3.ch);\n"
+            + "  log(c1.ch);\n"
+            + "  log(c2.ch);\n"
+            + "  log(c3.ch);\n"
             + "  c1.ch = 'u';\n"
             + "  c2.ch = '8';\n"
             + "  c3.ch = 'U8';\n"
-            + "  alert(c1.ch);\n"
-            + "  alert(c2.ch);\n"
-            + "  alert(c3.ch);\n"
+            + "  log(c1.ch);\n"
+            + "  log(c2.ch);\n"
+            + "  log(c3.ch);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -156,21 +162,23 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var c1 = document.getElementById('c1');\n"
             + "  var c2 = document.getElementById('c2');\n"
             + "  var c3 = document.getElementById('c3');\n"
-            + "  alert(c1.chOff);\n"
-            + "  alert(c2.chOff);\n"
-            + "  alert(c3.chOff);\n"
+            + "  log(c1.chOff);\n"
+            + "  log(c2.chOff);\n"
+            + "  log(c3.chOff);\n"
             + "  c1.chOff = '5.2';\n"
             + "  c2.chOff = '-3';\n"
             + "  c3.chOff = 'abc';\n"
-            + "  alert(c1.chOff);\n"
-            + "  alert(c2.chOff);\n"
-            + "  alert(c3.chOff);\n"
+            + "  log(c1.chOff);\n"
+            + "  log(c2.chOff);\n"
+            + "  log(c3.chOff);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -192,28 +200,30 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.span = value;\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
             + "  var c1 = document.getElementById('c1');\n"
             + "  var c2 = document.getElementById('c2');\n"
             + "  var c3 = document.getElementById('c3');\n"
-            + "  alert(c1.span);\n"
-            + "  alert(c2.span);\n"
-            + "  alert(c3.span);\n"
+            + "  log(c1.span);\n"
+            + "  log(c2.span);\n"
+            + "  log(c3.span);\n"
             + "  set(c1, '5.2');\n"
             + "  set(c2, '-3');\n"
             + "  set(c3, 'abc');\n"
-            + "  alert(c1.span);\n"
-            + "  alert(c2.span);\n"
-            + "  alert(c3.span);\n"
+            + "  log(c1.span);\n"
+            + "  log(c2.span);\n"
+            + "  log(c3.span);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -235,28 +245,30 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.vAlign = value;\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
             + "  var c1 = document.getElementById('c1');\n"
             + "  var c2 = document.getElementById('c2');\n"
             + "  var c3 = document.getElementById('c3');\n"
-            + "  alert(c1.vAlign);\n"
-            + "  alert(c2.vAlign);\n"
-            + "  alert(c3.vAlign);\n"
+            + "  log(c1.vAlign);\n"
+            + "  log(c2.vAlign);\n"
+            + "  log(c3.vAlign);\n"
             + "  set(c1, 'middle');\n"
             + "  set(c2, 8);\n"
             + "  set(c3, 'BOTtom');\n"
-            + "  alert(c1.vAlign);\n"
-            + "  alert(c2.vAlign);\n"
-            + "  alert(c3.vAlign);\n"
+            + "  log(c1.vAlign);\n"
+            + "  log(c2.vAlign);\n"
+            + "  log(c3.vAlign);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -282,11 +294,12 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  </tr>\n"
             + "</table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function set(e, value) {\n"
             + "    try {\n"
             + "      e.width = value;\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
             + "  var c1 = document.getElementById('c1');\n"
@@ -295,27 +308,28 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  var c4 = document.getElementById('c4');\n"
             + "  var c5 = document.getElementById('c5');\n"
             + "  var c6 = document.getElementById('c6');\n"
-            + "  alert(c1.width);\n"
-            + "  alert(c2.width);\n"
-            + "  alert(c3.width);\n"
-            + "  alert(c4.width);\n"
-            + "  alert(c5.width);\n"
-            + "  alert(c6.width);\n"
+            + "  log(c1.width);\n"
+            + "  log(c2.width);\n"
+            + "  log(c3.width);\n"
+            + "  log(c4.width);\n"
+            + "  log(c5.width);\n"
+            + "  log(c6.width);\n"
             + "  set(c1, '80');\n"
             + "  set(c2, 40);\n"
             + "  set(c3, 'abc');\n"
             + "  set(c4, -10);\n"
             + "  set(c5, '30%');\n"
             + "  set(c6, 33.3);\n"
-            + "  alert(c1.width);\n"
-            + "  alert(c2.width);\n"
-            + "  alert(c3.width);\n"
-            + "  alert(c4.width);\n"
-            + "  alert(c5.width);\n"
-            + "  alert(c6.width);\n"
+            + "  log(c1.width);\n"
+            + "  log(c2.width);\n"
+            + "  log(c3.width);\n"
+            + "  log(c4.width);\n"
+            + "  log(c5.width);\n"
+            + "  log(c6.width);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -328,9 +342,10 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    myCol.width = '128px';\n"
-            + "    alert(myCol.width);\n"
+            + "    log(myCol.width);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
@@ -338,7 +353,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  <col id='myCol'></col>\n"
             + "</table>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -352,10 +368,11 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    myCol.width = null;\n"
-            + "    alert(myCol.width);\n"
-            + "    alert(typeof myCol.width);\n"
+            + "    log(myCol.width);\n"
+            + "    log(typeof myCol.width);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
@@ -363,7 +380,8 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
             + "  <col id='myCol'></col>\n"
             + "</table>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -375,9 +393,11 @@ public class HTMLTableColElementTest extends WebDriverTestCase {
         final String html
             = "<html><body><div><table><colgroup><col></colgroup></table></div>\n"
             + "<script>\n"
-            + "  alert(document.body.firstChild.innerHTML);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.body.firstChild.innerHTML);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

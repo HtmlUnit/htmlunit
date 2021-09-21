@@ -45,9 +45,10 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming);\n"
+                + "    log(performanceTiming);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -55,7 +56,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,9 +70,10 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.navigationStart > " + now + ");\n"
+                + "    log(performanceTiming.navigationStart > " + now + ");\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -79,7 +81,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -94,9 +96,10 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.secureConnectionStart);\n"
+                + "    log(performanceTiming.secureConnectionStart);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -104,7 +107,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -118,10 +121,11 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.unloadEventStart);\n"
-                + "    alert(performanceTiming.unloadEventEnd);\n"
+                + "    log(performanceTiming.unloadEventStart);\n"
+                + "    log(performanceTiming.unloadEventEnd);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -129,7 +133,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -143,10 +147,11 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.redirectStart);\n"
-                + "    alert(performanceTiming.redirectEnd);\n"
+                + "    log(performanceTiming.redirectStart);\n"
+                + "    log(performanceTiming.redirectEnd);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -154,7 +159,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -168,11 +173,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.domainLookupStart;\n"
-                + "    alert(start > " + now + ");\n"
-                + "    alert(performanceTiming.domainLookupEnd >= start);\n"
+                + "    log(start > " + now + ");\n"
+                + "    log(performanceTiming.domainLookupEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -180,7 +186,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,11 +200,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.responseStart;\n"
-                + "    alert(start > " + now + ");\n"
-                + "    alert(performanceTiming.responseEnd >= start);\n"
+                + "    log(start > " + now + ");\n"
+                + "    log(performanceTiming.responseEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -206,7 +213,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -220,11 +227,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.loadEventStart;\n"
-                + "    alert(start > " + now + ");\n"
-                + "    alert(performanceTiming.loadEventEnd >= start);\n"
+                + "    log(start > " + now + ");\n"
+                + "    log(performanceTiming.loadEventEnd >= start);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -235,7 +243,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -249,11 +257,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.connectStart;\n"
-                + "    alert(start > " + now + ");\n"
-                + "    alert(performanceTiming.connectEnd >= start);\n"
+                + "    log(start > " + now + ");\n"
+                + "    log(performanceTiming.connectEnd >= start);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -261,7 +270,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -275,9 +284,10 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.fetchStart > " + now + ");\n"
+                + "    log(performanceTiming.fetchStart > " + now + ");\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -285,7 +295,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -299,11 +309,12 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
                 + "    var start = performanceTiming.domContentLoadedEventStart;\n"
-                + "    alert(start > " + now + ");\n"
-                + "    alert(performanceTiming.domContentLoadedEventEnd >= start);\n"
+                + "    log(start > " + now + ");\n"
+                + "    log(performanceTiming.domContentLoadedEventEnd >= start);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -314,7 +325,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -328,13 +339,14 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.domLoading > " + now + ");\n"
-                + "    alert(performanceTiming.domInteractive > " + now + ");\n"
-                + "    alert(performanceTiming.domContentLoadedEventStart > " + now + ");\n"
-                + "    alert(performanceTiming.domContentLoadedEventEnd > " + now + ");\n"
-                + "    alert(performanceTiming.domComplete > " + now + ");\n"
+                + "    log(performanceTiming.domLoading > " + now + ");\n"
+                + "    log(performanceTiming.domInteractive > " + now + ");\n"
+                + "    log(performanceTiming.domContentLoadedEventStart > " + now + ");\n"
+                + "    log(performanceTiming.domContentLoadedEventEnd > " + now + ");\n"
+                + "    log(performanceTiming.domComplete > " + now + ");\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -345,7 +357,7 @@ public class PerformanceTimingTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -360,9 +372,10 @@ public class PerformanceTimingTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming.toJSON());\n"
+                + "    log(performanceTiming.toJSON());\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -373,6 +386,6 @@ public class PerformanceTimingTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("clickMe")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }
