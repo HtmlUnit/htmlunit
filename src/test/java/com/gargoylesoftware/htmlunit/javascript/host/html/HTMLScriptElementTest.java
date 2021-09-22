@@ -852,9 +852,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "<script>\n"
+            + "    <script>\n"
             + LOG_TITLE_FUNCTION
-            + "</script>\n"
+            + "    </script>\n"
             + "    <script defer=''>log('3');</script>\n"
             + "    <script defer onreadystatechange='if(this.readyState==\"complete\") log(\"6\");'>log('4');</script>\n"
             + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"1\");'></script>\n"
@@ -897,9 +897,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "<script>\n"
+            + "    <script>\n"
             + LOG_TITLE_FUNCTION
-            + "</script>\n"
+            + "    </script>\n"
             + "    <script defer=''>log('3');</script>\n"
             + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") log(\"5\");'>log('4');</script>\n"
             + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"1\");'></script>\n"
@@ -950,9 +950,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "<script>\n"
+            + "    <script>\n"
             + LOG_TITLE_FUNCTION
-            + "</script>\n"
+            + "    </script>\n"
             + "    <script onreadystatechange='if(this.readyState==\"complete\") log(\"defer\");' defer></script>\n"
             + "  </head>\n"
             + "  <body onload='log(\"onload\")'>\n"
