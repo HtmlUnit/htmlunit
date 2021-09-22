@@ -100,12 +100,12 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void titleAfterInsertedBody() throws Exception {
         final String content = "<html><head>\n"
             + "<noscript><link href='other.css' rel='stylesheet' type='text/css'></noscript>\n"
-            + "<title>Test document</title>\n"
-            + "</head><body onload='alert(document.title)'>\n"
+            + "<title>Test document§</title>\n"
+            + "</head><body>\n"
             + "foo"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -115,13 +115,13 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Alerts("Test document")
     public void titleTwice() throws Exception {
         final String content = "<html><head>\n"
-            + "<title>Test document</title>\n"
+            + "<title>Test document§</title>\n"
             + "<title>2nd title</title>\n"
-            + "</head><body onload='alert(document.title)'>\n"
+            + "</head><body>\n"
             + "foo"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -155,13 +155,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts("hello")
     public void script_between_head_and_body() throws Exception {
-        final String content = "<html><head><title>foo</title></head><script>\n"
-            + "alert('hello');\n"
+        final String content = "<html><head></head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "log('hello');\n"
             + "</script>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -173,18 +174,18 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void wrongHtml_TagBeforeHtml() throws Exception {
         final String html = "<div>\n"
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var toto = 12345;\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='alert(toto)'>\n"
+            + "<body onload='log(toto)'>\n"
             + "blabla"
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "foo");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -197,15 +198,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(document.links.length);\n"
+                + "    log(document.links.length);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  Go to <a href='http://blah.com>blah</a> now.\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -218,15 +221,17 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(document.links.length);\n"
+                + "    log(document.links.length);\n"
                 + "  }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  Go to <a href=\"http://blah.com>blah</a> now.\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -312,10 +317,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<ul id='it'><li>item 1<div>in div</li><li>item2</li></ul>"
             + "<script>\n"
-            + "alert(document.getElementById('it').childNodes.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.getElementById('it').childNodes.length);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -344,10 +350,12 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "hello</isslot> world"
             + "</section>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var elt = document.getElementById('it');\n"
-            + "alert(elt.textContent || elt.innerText);\n"
+            + "log(elt.textContent || elt.innerText);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -369,6 +377,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void nestedAnchorInDivision() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var outerA = document.getElementById('outerA');\n"
             + "    var innerDiv = document.getElementById('innerDiv');\n"
@@ -376,59 +385,59 @@ public class MalformedHtmlTest extends WebDriverTestCase {
             + "    var anchors = document.getElementsByTagName('a');\n"
 
             + "    try {\n"
-            + "      alert(document.body.childNodes.length);\n"
+            + "      log(document.body.childNodes.length);\n"
             + "      dump(document.body.childNodes[0]);\n"
             + "      dump(document.body.childNodes[1]);\n"
             + "      dump(document.body.childNodes[2]);\n"
             + "      dump(document.body.childNodes[3]);\n"
-            + "      alert(document.getElementsByTagName('a').length);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(document.getElementsByTagName('a').length);\n"
+            + "    } catch (e) { log('exception') }\n"
 
             + "    try {\n"
-            + "      alert(innerDiv.id);\n"
+            + "      log(innerDiv.id);\n"
             + "      dump(innerDiv.parentNode);\n"
-            + "      alert(innerDiv.childNodes.length);\n"
+            + "      log(innerDiv.childNodes.length);\n"
             + "      dump(innerDiv.childNodes[0]);\n"
             + "      dump(innerDiv.childNodes[1]);\n"
             + "      dump(innerDiv.childNodes[2]);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "    } catch (e) { log('exception') }\n"
 
             + "    try {\n"
-            + "      alert(anchors[0].id);\n"
+            + "      log(anchors[0].id);\n"
             + "      dump(anchors[0].parentNode);\n"
-            + "      alert(anchors[0].childNodes.length);\n"
+            + "      log(anchors[0].childNodes.length);\n"
             + "      dump(anchors[0].childNodes[0]);\n"
-            + "      alert(anchors[0] == outerA);\n"
-            + "      alert(anchors[0] == innerA);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(anchors[0] == outerA);\n"
+            + "      log(anchors[0] == innerA);\n"
+            + "    } catch (e) { log('exception') }\n"
 
             + "    try {\n"
-            + "      alert(anchors[1].id);\n"
+            + "      log(anchors[1].id);\n"
             + "      dump(anchors[1].parentNode);\n"
-            + "      alert(anchors[1].childNodes.length);\n"
+            + "      log(anchors[1].childNodes.length);\n"
             + "      dump(anchors[1].childNodes[0]);\n"
-            + "      alert(anchors[1] == outerA);\n"
-            + "      alert(anchors[1] == innerA);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(anchors[1] == outerA);\n"
+            + "      log(anchors[1] == innerA);\n"
+            + "    } catch (e) { log('exception') }\n"
 
             + "    try {\n"
-            + "      alert(anchors[2].id);\n"
+            + "      log(anchors[2].id);\n"
             + "      dump(anchors[2].parentNode);\n"
-            + "      alert(anchors[2].childNodes.length);\n"
+            + "      log(anchors[2].childNodes.length);\n"
             + "      dump(anchors[2].childNodes[0]);\n"
-            + "      alert(anchors[2] == outerA);\n"
-            + "      alert(anchors[2] == innerA);\n"
-            + "    } catch (e) { alert('exception') }\n"
+            + "      log(anchors[2] == outerA);\n"
+            + "      log(anchors[2] == innerA);\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + "  function dump(e) {\n"
-            + "    alert(e.nodeName + ':' + e.nodeValue);\n"
+            + "    log(e.nodeName + ':' + e.nodeValue);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <a id='outerA'>V<div id='innerDiv'>W<a id='innerA'>X</a>Y</div>Z</a>\n"
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -441,10 +450,12 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html><body>"
             + "<table id='it'><doc><tr><td>hello</td></tr></doc></table>"
             + "<script>\n"
-            + "alert(document.body.firstChild.tagName);\n"
-            + "alert(document.getElementById('it').rows.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.body.firstChild.tagName);\n"
+            + "log(document.getElementById('it').rows.length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -456,10 +467,11 @@ public class MalformedHtmlTest extends WebDriverTestCase {
         final String html = "<html><body>"
             + "<table id='it'><tbody><doc><tr><td>hello</td></tr></doc></tbody></table>"
             + "<script>\n"
-            + "alert(document.body.firstChild.tagName);\n"
-            + "alert(document.getElementById('it').rows.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.body.firstChild.tagName);\n"
+            + "log(document.getElementById('it').rows.length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -626,17 +638,19 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "    </div>\n"
                 + "  </table>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  for(var i = 0; i < document.forms.length; i++) {\n"
-                + "  alert(document.forms[i].elements.length);\n"
+                + "  log(document.forms[i].elements.length);\n"
                 + "    for(var j = 0; j < document.forms[i].elements.length; j++) {\n"
-                + "      alert(document.forms[i].elements[j].name);\n"
+                + "      log(document.forms[i].elements[j].name);\n"
                 + "    }\n"
-                + "    alert(document.forms[i].children.length);\n"
-                + "    alert(document.forms[i].parentNode.tagName);\n"
+                + "    log(document.forms[i].children.length);\n"
+                + "    log(document.forms[i].parentNode.tagName);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

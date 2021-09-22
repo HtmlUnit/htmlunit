@@ -35,23 +35,25 @@ public class EventTargetTest extends WebDriverTestCase {
     @Test
     @Alerts("not defined")
     public void cloneEvent() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var div = document.getElementById('myId');\n"
             + "    if (div.attachEvent) {\n"
             + "      div.attachEvent('onclick', clickFn = function() {\n"
-            + "        alert('called!');\n"
+            + "        log('called!');\n"
             + "      });\n"
             + "      var clone = div.cloneNode(true);\n"
             + "      clone.fireEvent('onclick');\n"
             + "    } else {\n"
-            + "        alert('not defined');\n"
+            + "        log('not defined');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myId'></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
 }
