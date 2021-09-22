@@ -42,22 +42,24 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var canvas = document.getElementById('myCanvas');\n"
-            + "        alert(canvas.width);\n"
-            + "        alert(typeof canvas.width);\n"
-            + "        alert(canvas.height);\n"
-            + "        alert(typeof canvas.height);\n"
+            + "        log(canvas.width);\n"
+            + "        log(typeof canvas.width);\n"
+            + "        log(canvas.height);\n"
+            + "        log(typeof canvas.height);\n"
             + "        if (canvas.getContext){\n"
             + "          var ctx = canvas.getContext('2d');\n"
-            + "          alert(ctx);\n"
+            + "          log(ctx);\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'><canvas id='myCanvas'></canvas></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -169,22 +171,24 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var canvas = document.createElement('canvas');\n"
             + "        if (canvas.getContext){\n"
-            + "          alert(document.createElement('canvas').getContext('2d'));\n"
-            + "          alert(document.createElement('canvas').getContext('webgl'));\n"
-            + "          alert(document.createElement('canvas').getContext('experimental-webgl'));\n"
-            + "          alert(document.createElement('canvas').getContext('webgl2'));\n"
-            + "          alert(document.createElement('canvas').getContext('experimental-webgl2'));\n"
-            + "          alert(document.createElement('canvas').getContext('abcdefg'));\n"
+            + "          log(document.createElement('canvas').getContext('2d'));\n"
+            + "          log(document.createElement('canvas').getContext('webgl'));\n"
+            + "          log(document.createElement('canvas').getContext('experimental-webgl'));\n"
+            + "          log(document.createElement('canvas').getContext('webgl2'));\n"
+            + "          log(document.createElement('canvas').getContext('experimental-webgl2'));\n"
+            + "          log(document.createElement('canvas').getContext('abcdefg'));\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -197,13 +201,15 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<canvas id='it' width=0 height=0></canvas>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var canvas = document.getElementById('it');\n"
             + "if (canvas.getContext){\n"
-            + "  alert(canvas.getContext('2d'));\n"
+            + "  log(canvas.getContext('2d'));\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -247,10 +253,11 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var canvas = document.getElementById('myId');\n"
-            + "        alert(canvas.width);\n"
-            + "        alert(canvas.height);\n"
+            + "        log(canvas.width);\n"
+            + "        log(canvas.height);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -258,6 +265,7 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
             + "  <canvas id='myId' width='" + value + "' height='" + value + "'></canvas>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }
