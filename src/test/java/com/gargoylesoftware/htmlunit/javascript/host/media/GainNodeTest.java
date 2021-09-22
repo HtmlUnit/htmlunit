@@ -43,8 +43,9 @@ public class GainNodeTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('GainNode' in window);\n"
+            + "      log('GainNode' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -52,7 +53,7 @@ public class GainNodeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
