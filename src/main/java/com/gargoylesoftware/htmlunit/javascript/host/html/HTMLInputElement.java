@@ -246,8 +246,8 @@ public class HTMLInputElement extends HTMLElement {
 
         final String val = Context.toString(newValue);
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
-            if (browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
+        if ("file".equalsIgnoreCase(getType())) {
+            if (StringUtils.isNotEmpty(val) && browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
                 throw Context.reportRuntimeError("InvalidStateError: "
                         + "Failed to set the 'value' property on 'HTMLInputElement'.");
             }

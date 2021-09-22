@@ -543,24 +543,33 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world"},
-            IE = "-Hello world-Hello world")
+    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world-0", "-Hello world-Hello world-0"},
+            IE = {"-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.value = 'HtmlUnit';\n"
-              + "    } catch(e) { alert('exception'); }\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
+
+              + "    try{\n"
+              + "      input.value = '';\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
               + "  }\n"
               + "</script>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert('foo');alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -568,7 +577,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
