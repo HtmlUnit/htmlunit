@@ -29,7 +29,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -1706,7 +1705,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.id("f")).sendKeys(path);
@@ -1911,7 +1910,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.id("f")).sendKeys(path);

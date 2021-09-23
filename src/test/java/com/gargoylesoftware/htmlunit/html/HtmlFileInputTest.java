@@ -40,7 +40,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -336,11 +335,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.name("myInput")).sendKeys(path);
-            driver.findElement(By.id("mySubmit")).click();
+            driver.findElement(By.id("mySubmit")).submit();
         }
         finally {
             assertTrue(tmpFile.delete());
@@ -581,31 +580,40 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("-HtmlUnit-HtmlUnit")
+    @Alerts({"-HtmlUnit-HtmlUnit-0", "---0"})
     public void setDefaultValueOnChange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.defaultValue = 'HtmlUnit';\n"
-              + "    } catch(e) { alert('exception'); }\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
+
+              + "    try{\n"
+              + "      input.defaultValue = '';\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");alert(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -613,11 +621,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1118,8 +1126,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "<head>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-              + "      onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='alert(\"foo\");alert(event.type);'>\n"
               + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
               + "</body></html>";
 
