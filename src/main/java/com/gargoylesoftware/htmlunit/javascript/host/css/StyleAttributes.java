@@ -2997,6 +2997,9 @@ public final class StyleAttributes {
         /** The style property {@code scrollbarFaceColor}. */
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
+        /** The style property {@code scrollbarGutter}. */
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto")),
+
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),
 
