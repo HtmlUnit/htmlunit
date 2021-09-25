@@ -53,7 +53,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"\nbeforeafter", "undefined", "undefined"})
+    @Alerts({"\\nbeforeafter", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"beforeafter", "undefined", "undefined"},
             EDGE = {"beforeafter", "undefined", "undefined"},
             FF = {"beforeafter", "undefined", "undefined"},
@@ -62,7 +62,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
             + "  var tmp = document.getElementById('testDiv');\n"
             + "  tmp = tmp.firstChild;\n"

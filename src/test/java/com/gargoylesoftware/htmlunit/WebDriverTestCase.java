@@ -160,6 +160,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Function used in many tests.
      */
+    public static final String LOG_TITLE_FUNCTION_NORMALIZE =
+            "  function log(msg) { "
+                    + "msg = '' + msg; "
+                    + "msg = msg.replace(/ /g, '\\\\s'); "
+                    + "msg = msg.replace(/\\n/g, '\\\\n'); "
+                    + "msg = msg.replace(/\\r/g, '\\\\r'); "
+                    + "window.document.title += msg + '§';}\n";
+
+    /**
+     * Function used in many tests.
+     */
     public static final String LOG_TITLE_NORMALIZE_FUNCTION = "  function log(msg) { "
             + "msg = ('' + msg).replace(/\\t/g, '\\\\t');"
             + "msg = msg.replace(/\\r/g, '\\\\r');"

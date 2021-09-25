@@ -362,7 +362,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"4", "#text:\n  ", "A:null", "DIV:null", "#text:Z\n\n\n", "3",
+    @Alerts({"4", "#text:\\n\\s\\s", "A:null", "DIV:null", "#text:Z\\n\\n\\n", "3",
                 "innerDiv", "BODY:null", "3", "A:null", "A:null", "#text:Y",
                 "outerA", "BODY:null", "1", "#text:V", "true", "false",
                 "outerA", "DIV:null", "1", "#text:W", "false", "false",
@@ -377,7 +377,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     public void nestedAnchorInDivision() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
-            + LOG_TITLE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + "    var outerA = document.getElementById('outerA');\n"
             + "    var innerDiv = document.getElementById('innerDiv');\n"

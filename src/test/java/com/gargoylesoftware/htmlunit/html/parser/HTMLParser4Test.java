@@ -621,19 +621,18 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
-            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log('titles');\n"
+            + "      alert('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        log(titles[i].parentNode.nodeName);\n"
-            + "        log(titles[i].text);\n"
+            + "        alert(titles[i].parentNode.nodeName);\n"
+            + "        alert(titles[i].text);\n"
             + "      }\n"
-            + "      log('misc');\n"
-            + "      log(document.body != null);\n"
+            + "      alert('misc');\n"
+            + "      alert(document.body != null);\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
             + "      if (innerDiv != null) {\n"
-            + "        log(innerDiv.parentNode.nodeName);\n"
+            + "        alert(innerDiv.parentNode.nodeName);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -652,7 +651,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>\n";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -702,18 +701,19 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
-    @Alerts(DEFAULT = "before1after1\nbefore2\nbefore3\nbefore4after4\nbefore5after5\nbefore6< >after6",
-            IE = "before1after1\n \nbefore2 \nbefore3 \nbefore4after4\n \nbefore5after5\n \nbefore6< >after6\n ")
-    @HtmlUnitNYI(CHROME = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
-            EDGE = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
-            FF = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
-            FF78 = "before1after1 before2 before3 before4after4 before5after5 before6< >after6",
-            IE = "before1after1 before2 before3 before4after4 before5after5 before6< >after6")
+    @Alerts(DEFAULT = "before1after1\\nbefore2\\nbefore3\\nbefore4after4\\nbefore5after5\\nbefore6<\\s>after6",
+            IE = "before1after1\\r\\n\\s\\r\\nbefore2\\s\\r\\nbefore3\\s\\r\\nbefore4after4"
+                    + "\\r\\n\\s\\r\\nbefore5after5\\r\\n\\s\\r\\nbefore6<\\s>after6\\r\\n\\s")
+    @HtmlUnitNYI(CHROME = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
+            EDGE = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
+            FF = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
+            FF78 = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6",
+            IE = "before1after1\\sbefore2\\sbefore3\\sbefore4after4\\sbefore5after5\\sbefore6<\\s>after6")
     public void specialComments2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
                 + "  <script>\n"
-                + LOG_TITLE_FUNCTION
+                + LOG_TITLE_FUNCTION_NORMALIZE
                 + "    function test() {\n"
                 + "      var body = document.getElementById('tester');\n"
                 + "      var text = body.innerText;"

@@ -191,18 +191,17 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var uri='%c3%ae%10%43%72%c3%b4%c3%af%c2%b6%62%34';\n"
-            + "    log(decodeURIComponent(uri));\n"
+            + "    alert(decodeURIComponent(uri));\n"
 
-            + "    log(decodeURIComponent(uri, false));\n"
+            + "    alert(decodeURIComponent(uri, false));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 }

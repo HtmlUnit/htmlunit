@@ -87,10 +87,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_LENGTH_INITIAL,
 
-    /** Is display style of HtmlNoEmbed is 'inline'. */
-    @BrowserFeature({CHROME, EDGE})
-    CSS_NOEMBED_INLINE,
-
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
     @BrowserFeature({CHROME, EDGE})
     CSS_NOSCRIPT_DISPLAY_INLINE,

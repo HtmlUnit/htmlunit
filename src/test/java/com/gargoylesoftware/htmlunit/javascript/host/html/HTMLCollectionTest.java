@@ -63,13 +63,14 @@ public class HTMLCollectionTest extends WebDriverTestCase {
     @Test
     @Alerts("function")
     public void toStringFunction() throws Exception {
-        final String html = "<html><head\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(typeof document.links.toString);\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "<a href='bla.html'>link</a>\n"
             + "</body></html>";
 
