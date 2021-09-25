@@ -86,13 +86,14 @@ public class ExecTest extends WebDriverTestCase {
     }
 
     private void test(final String initialScript, final String script) throws Exception {
-        String html = "<html><head><title>foo</title><script>\n";
+        String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION;
         if (initialScript != null) {
             html += initialScript + ";\n";
         }
-        html += "  alert(" + script + ");\n"
+        html += "  log(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

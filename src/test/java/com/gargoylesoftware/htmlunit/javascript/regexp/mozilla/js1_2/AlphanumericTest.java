@@ -197,7 +197,7 @@ public class AlphanumericTest extends WebDriverTestCase {
 
     private void test(final String script, final boolean charCode) throws Exception {
         String html
-            = "<html><head><title>foo</title><script>\n";
+            = "<html><head><script>\n";
         if (charCode) {
             html += "  var string = " + script + ".toString();\n"
                 + "  var output = '';\n"

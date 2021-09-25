@@ -177,16 +177,20 @@ public class DigitTest extends WebDriverTestCase {
     }
 
     private void test(final String initialScript, final String script) throws Exception {
-        String html = "<html><head><title></title><script>\n";
+        String html = "<html><head>\n"
+                + "</head><body>"
+                + LOG_TEXTAREA
+                + "<script>\n"
+                + LOG_TEXTAREA_FUNCTION;
         if (initialScript != null) {
             html += initialScript + ";\n";
         }
         html += "  var txt = '' + " + script + ";\n"
             + "  txt = txt.replace('\\r', '\\\\r');\n"
             + "  txt = txt.replace('\\n', '\\\\n');\n"
-            + "  alert(txt);\n"
-            + "</script></head><body>\n"
+            + "  log(txt);\n"
+            + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

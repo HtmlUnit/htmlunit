@@ -90,11 +90,15 @@ public class BackspaceTest extends WebDriverTestCase {
     }
 
     private void test(final String script) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  alert(" + script + ");\n"
-            + "</script></head><body>\n"
+        final String html = "<html><head>\n"
+            + "</head><body>\n"
+            + LOG_TEXTAREA
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  log(" + script + ");\n"
+            + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

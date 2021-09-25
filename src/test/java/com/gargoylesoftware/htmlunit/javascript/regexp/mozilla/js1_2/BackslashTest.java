@@ -81,11 +81,12 @@ public class BackslashTest extends WebDriverTestCase {
     }
 
     private void test(final String script) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
-            + "  alert(" + script + ");\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(" + script + ");\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
