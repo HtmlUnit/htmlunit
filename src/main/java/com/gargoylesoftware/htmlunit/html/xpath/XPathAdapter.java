@@ -14,10 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html.xpath;
 
-import java.util.Locale;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
@@ -39,9 +35,16 @@ import org.apache.xpath.res.XPATHMessages;
  * XPath adapter implementation for HtmlUnit.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 class XPathAdapter {
-    private static final Pattern PREPROCESS_XPATH_PATTERN = Pattern.compile("(@[a-zA-Z]+)");
+
+    private enum STATE {
+        DEFAULT,
+        DOUBLE_QUOTED,
+        SINGLE_QUOTED,
+        ATTRIB
+    }
 
     private Expression mainExp_;
     private FunctionTable funcTable_;
@@ -100,40 +103,90 @@ class XPathAdapter {
             return xpath;
         }
 
-        String path = processOutsideBrackets(xpath);
-        final Matcher matcher = PREPROCESS_XPATH_PATTERN.matcher(path);
-        while (matcher.find()) {
-            final String attribute = matcher.group(1);
-            path = path.replace(attribute, attribute.toLowerCase(Locale.ROOT));
-        }
-        return path;
-    }
-
-    /**
-     * Lower case any character outside the brackets.
-     * @param xpath the XPath expression to change
-     */
-    private static String processOutsideBrackets(final String xpath) {
         final char[] charArray = xpath.toCharArray();
+        STATE state = STATE.DEFAULT;
 
         final int length = charArray.length;
         int insideBrackets = 0;
         for (int i = 0; i < length; i++) {
             final char ch = charArray[i];
             switch (ch) {
+                case '@':
+                    if (state == STATE.DEFAULT) {
+                        state = STATE.ATTRIB;
+                    }
+                    break;
+
+                case '"':
+                    if (state == STATE.DEFAULT || state == STATE.ATTRIB) {
+                        state = STATE.DOUBLE_QUOTED;
+                    }
+                    else if (state == STATE.DOUBLE_QUOTED) {
+                        state = STATE.DEFAULT;
+                    }
+                    break;
+
+                case '\'':
+                    if (state == STATE.DEFAULT || state == STATE.ATTRIB) {
+                        state = STATE.SINGLE_QUOTED;
+                    }
+                    else if (state == STATE.SINGLE_QUOTED) {
+                        state = STATE.DEFAULT;
+                    }
+                    break;
+
                 case '[':
                 case '(':
+                    if (state == STATE.ATTRIB) {
+                        state = STATE.DEFAULT;
+                    }
                     insideBrackets++;
                     break;
 
                 case ']':
                 case ')':
+                    if (state == STATE.ATTRIB) {
+                        state = STATE.DEFAULT;
+                    }
                     insideBrackets--;
                     break;
 
                 default:
-                    if (insideBrackets == 0) {
+                    if (insideBrackets == 0
+                            && state != STATE.SINGLE_QUOTED
+                            && state != STATE.DOUBLE_QUOTED) {
                         charArray[i] = Character.toLowerCase(ch);
+                    }
+                    else if (state == STATE.ATTRIB) {
+                        charArray[i] = Character.toLowerCase(ch);
+                    }
+
+                    if (state == STATE.ATTRIB) {
+                        final boolean isValidAttribChar =
+                                ('a' <= ch && ch <= 'z')
+                                || ('A' <= ch && ch <= 'Z')
+                                || ('0' <= ch && ch <= '9')
+                                || ('\u00C0' <= ch && ch <= '\u00D6')
+                                || ('\u00D8' <= ch && ch <= '\u00F6')
+                                || ('\u00F8' <= ch && ch <= '\u02FF')
+                                || ('\u0370' <= ch && ch <= '\u037D')
+                                || ('\u037F' <= ch && ch <= '\u1FFF')
+                                || ('\u200C' <= ch && ch <= '\u200D')
+                                || ('\u2C00' <= ch && ch <= '\u2FEF')
+                                || ('\u3001' <= ch && ch <= '\uD7FF')
+                                || ('\uF900' <= ch && ch <= '\uFDCF')
+                                || ('\uFDF0' <= ch && ch <= '\uFFFD')
+                                // [#x10000-#xEFFFF]
+                                || ('\u00B7' == ch)
+                                || ('\u0300' <= ch && ch <= '\u036F')
+                                || ('\u203F' <= ch && ch <= '\u2040')
+                                || ('_' == ch)
+                                || ('-' == ch)
+                                || ('.' == ch);
+
+                        if (!isValidAttribChar) {
+                            state = STATE.DEFAULT;
+                        }
                     }
             }
         }
