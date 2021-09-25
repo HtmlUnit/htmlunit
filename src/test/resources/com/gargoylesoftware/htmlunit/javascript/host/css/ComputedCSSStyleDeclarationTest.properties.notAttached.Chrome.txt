@@ -337,6 +337,7 @@ scrollPaddingTop=:
 scrollSnapAlign=:
 scrollSnapStop=:
 scrollSnapType=:
+scrollbarGutter=:
 shapeImageThreshold=:
 shapeMargin=:
 shapeOutside=:

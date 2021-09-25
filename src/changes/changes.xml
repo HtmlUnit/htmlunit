@@ -7,7 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.54.0" date="October cc, 2021" description="Bugfixes">
+        <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
+            <action type="fix" dev="rbri" issue="386">
+                Xpath case sensitive processing was broken if an string inside the xpath contains []() or @.
+            </action>
+            <action type="fix" dev="rbri" issue="383">
+                Setting the value of an file input to an empty string should not trigger the on change.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Fix processing of SCRIPTABLE_UNDEFINED when used in string concatenation.
             </action>

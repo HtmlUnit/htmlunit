@@ -186,11 +186,10 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "  }\n"
             + "</style>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var el = document.getElementById('div1');\n"
             + "  el.addEventListener('animationend', function(e) {\n"
-            + "    log(e);\n"
+            + "    alert(e);\n"
             + "  });\n"
             + "  el.className = 'animate';\n"
             + "}\n"
@@ -199,6 +198,6 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "<div id='div1'>TXT</div>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        loadPageWithAlerts2(html);
     }
 }

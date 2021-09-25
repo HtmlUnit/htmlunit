@@ -337,6 +337,7 @@ scrollPaddingTop=:auto
 scrollSnapAlign=:none
 scrollSnapStop=:normal
 scrollSnapType=:none
+scrollbarGutter=:auto
 shapeImageThreshold=:0
 shapeMargin=:0px
 shapeOutside=:none
