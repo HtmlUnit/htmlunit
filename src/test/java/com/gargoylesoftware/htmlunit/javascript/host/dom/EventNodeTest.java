@@ -46,17 +46,19 @@ public class EventNodeTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var form = document.getElementById('myForm');\n"
-            + "    if (!form.fireEvent) { alert('fireEvent not available'); return }\n"
-            + "    alert(form.fireEvent('onsubmit'));\n"
+            + "    if (!form.fireEvent) { log('fireEvent not available'); return }\n"
+            + "    log(form.fireEvent('onsubmit'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <form id='myForm'>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -68,8 +70,9 @@ public class EventNodeTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      if (!document.createEventObject) { alert('createEventObject not available'); return }\n"
+            + "      if (!document.createEventObject) { log('createEventObject not available'); return }\n"
             + "      var myEvent = document.createEventObject();\n"
             + "      myEvent.eventType = 'onclick';\n"
             + "      myEvent.foo = 'hello';\n"
@@ -78,10 +81,10 @@ public class EventNodeTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
-            + "  <span id='theButton' onclick='alert(event.foo)'>a span</span>\n"
+            + "  <span id='theButton' onclick='log(event.foo)'>a span</span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
