@@ -50,17 +50,20 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void createElementWithAngleBrackets() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var select = document.createElement('<select>');\n"
-            + "      alert(select.add == undefined);\n"
+            + "      log(select.add == undefined);\n"
             + "    }\n"
-            + "    catch (e) { alert('exception') }\n"
+            + "    catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,25 +72,27 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void createElementWithHtml() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.createElement('<div>').tagName);\n"
+            + "      log(document.createElement('<div>').tagName);\n"
             + "      var select = document.createElement(\"<select id='mySelect'><option>hello</option>\");\n"
-            + "      alert(select.add == undefined);\n"
-            + "      alert(select.id);\n"
-            + "      alert(select.childNodes.length);\n"
+            + "      log(select.add == undefined);\n"
+            + "      log(select.id);\n"
+            + "      log(select.childNodes.length);\n"
             + "      var option = document.createElement(\"<option id='myOption'>\");\n"
-            + "      alert(option.tagName);\n"
-            + "      alert(option.id);\n"
-            + "      alert(option.childNodes.length);\n"
+            + "      log(option.tagName);\n"
+            + "      log(option.id);\n"
+            + "      log(option.childNodes.length);\n"
             + "    }\n"
-            + "    catch (e) { alert('exception') }\n"
+            + "    catch (e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -98,7 +103,9 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts("false")
     public void createElementPrototype() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var HAS_EXTENDED_CREATE_ELEMENT_SYNTAX = (function() {\n"
             + "    try {\n"
             + "      var el = document.createElement('<input name=\"x\">');\n"
@@ -107,11 +114,11 @@ public class Document2Test extends WebDriverTestCase {
             + "      return false;\n"
             + "    }\n"
             + "  })();\n"
-            + "  alert(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX);\n"
+            + "  log(HAS_EXTENDED_CREATE_ELEMENT_SYNTAX);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -121,18 +128,20 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("true")
     public void appendChild() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var span = document.createElement('SPAN');\n"
             + "  var div = document.getElementById('d');\n"
             + "  div.appendChild(span);\n"
-            + "  alert(span === div.childNodes[0]);\n"
+            + "  log(span === div.childNodes[0]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='d'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,10 +151,11 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("1")
     public void getElementByTagNameNS_includesHtml() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
-            + "    alert(document.getElementsByTagNameNS('*', 'html').length);\n"
+            + "    log(document.getElementsByTagNameNS('*', 'html').length);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -153,7 +163,7 @@ public class Document2Test extends WebDriverTestCase {
             + "  <p>hello world</p>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -175,20 +185,22 @@ public class Document2Test extends WebDriverTestCase {
     }
 
     private void importNode(final boolean deep) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.importNode(document.getElementById('div1'), " + deep + ");\n"
-            + "    alert(node.id);\n"
-            + "    alert(node.parentNode);\n"
-            + "    alert(node.childNodes.length);\n"
+            + "    log(node.id);\n"
+            + "    log(node.parentNode);\n"
+            + "    log(node.childNodes.length);\n"
             + "    if (node.childNodes.length != 0)\n"
-            + "      alert(node.childNodes[0].childNodes.length);\n"
+            + "      log(node.childNodes[0].childNodes.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'><div id='div1_1'><div id='div1_1_1'></div></div><div id='div1_2'></div></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -205,7 +217,7 @@ public class Document2Test extends WebDriverTestCase {
                 200, "OK", MimeType.TEXT_XML);
 
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head><script>\n"
             + "function test() {\n"
             + "  if (!document.evaluate) { alert('evaluate not available'); return; }\n"
             + "  var xmlhttp = new XMLHttpRequest();\n"
@@ -284,18 +296,19 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts({"div1", "null", "null"})
     public void adoptNode() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var newDoc = document.implementation.createHTMLDocument('something');\n"
             + "    var node = newDoc.adoptNode(document.getElementById('div1'));\n"
-            + "    alert(node.id);\n"
-            + "    alert(node.parentNode);\n"
-            + "    alert(document.getElementById('div1'));\n"
+            + "    log(node.id);\n"
+            + "    log(node.parentNode);\n"
+            + "    log(document.getElementById('div1'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='div1'><div id='div1_1'></div></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -396,22 +409,25 @@ public class Document2Test extends WebDriverTestCase {
              "&lt;p&gt;a &amp; b&lt;/p&gt; &amp;amp; \u0162 \" '",
              "<p>a & b</p> &amp; \u0162 \" '"})
     public void createTextNodeWithHtml() throws Exception {
-        final String html = "<html><body onload='test()'><script>\n"
+        final String html = "<html>\n"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var node = document.createTextNode('<p>a & b</p> &amp; \\u0162 \" \\'');\n"
-            + "    alert(node.data);\n"
-            + "    alert(node.nodeValue);\n"
+            + "    log(node.data);\n"
+            + "    log(node.nodeValue);\n"
             + "    var div = document.getElementById('div');\n"
             + "    div.appendChild(node);\n"
-            + "    alert(div.outerHTML);\n"
-            + "    alert(div.innerHTML);\n"
-            + "    alert(div.innerText);\n"
+            + "    log(div.outerHTML);\n"
+            + "    log(div.innerHTML);\n"
+            + "    log(div.innerText);\n"
             + "  }\n"
             + "</script>\n"
             + "<div id='div'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -422,15 +438,17 @@ public class Document2Test extends WebDriverTestCase {
             FF78 = {"false", "false"})
     @NotYetImplemented(FF78)
     public void queryCommandEnabled() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
+        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function x() {\n"
             + "  var d = window.frames['f'].document;\n"
-            + "  try { alert(d.queryCommandEnabled('SelectAll')); } catch(e) { alert('error'); }\n"
-            + "  try { alert(d.queryCommandEnabled('sElectaLL')); } catch(e) { alert('error'); }\n"
+            + "  try { log(d.queryCommandEnabled('SelectAll')); } catch(e) { log('error'); }\n"
+            + "  try { log(d.queryCommandEnabled('sElectaLL')); } catch(e) { log('error'); }\n"
             + "}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 
@@ -443,17 +461,19 @@ public class Document2Test extends WebDriverTestCase {
             FF78 = {"false", "false", "false"})
     @NotYetImplemented({FF, FF78})
     public void queryCommandEnabledDesignMode() throws Exception {
-        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe><script>\n"
+        final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function x() {\n"
             + "  var d = window.frames['f'].document;\n"
             + "  d.designMode = 'on';\n"
-            + "  alert(d.queryCommandEnabled('SelectAll'));\n"
-            + "  alert(d.queryCommandEnabled('selectall'));\n"
-            + "  alert(d.queryCommandEnabled('SeLeCtALL'));\n"
+            + "  log(d.queryCommandEnabled('SelectAll'));\n"
+            + "  log(d.queryCommandEnabled('selectall'));\n"
+            + "  log(d.queryCommandEnabled('SeLeCtALL'));\n"
             + "}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -463,11 +483,13 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts({"bar", "null", "null"})
     public void getElementById() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(top.document.getElementById('input1').value);\n"
-            + "  alert(document.getElementById(''));\n"
-            + "  alert(document.getElementById('non existing'));\n"
+            + "  log(top.document.getElementById('input1').value);\n"
+            + "  log(document.getElementById(''));\n"
+            + "  log(document.getElementById('non existing'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form id='form1'>\n"
@@ -475,7 +497,7 @@ public class Document2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -485,12 +507,14 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts({"bar", "null"})
     public void getElementById_resetId() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var input1 = top.document.getElementById('input1');\n"
             + "  input1.id = 'newId';\n"
-            + "  alert(top.document.getElementById('newId').value);\n"
-            + "  alert(top.document.getElementById('input1'));\n"
+            + "  log(top.document.getElementById('newId').value);\n"
+            + "  log(top.document.getElementById('input1'));\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form id='form1'>\n"
@@ -498,7 +522,7 @@ public class Document2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -508,11 +532,13 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("bar")
     public void getElementById_setNewId() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1 = document.getElementById('div1');\n"
             + "  div1.firstChild.id = 'newId';\n"
-            + "  alert(document.getElementById('newId').value);\n"
+            + "  log(document.getElementById('newId').value);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<form id='form1'>\n"
@@ -520,7 +546,7 @@ public class Document2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -26,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Tests for {@link CharacterData}.
  *
  * @author David K. Taylor
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class CharacterDataTest extends WebDriverTestCase {
@@ -38,21 +38,21 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"Some Text", "9", "3", "Some Text", "#text"})
     public void textNode() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
-            + "  alert(text1.data);\n"
-            + "  alert(text1.length);\n"
-            + "  alert(text1.nodeType);\n"
-            + "  alert(text1.nodeValue);\n"
-            + "  alert(text1.nodeName);\n"
+            + "  log(text1.data);\n"
+            + "  log(text1.length);\n"
+            + "  log(text1.nodeType);\n"
+            + "  log(text1.nodeValue);\n"
+            + "  log(text1.nodeName);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -63,19 +63,20 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"Some New Text", "Some New Text"})
     public void setData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  text1.data = 'Some New Text';\n"
-            + "  alert(text1.data);\n"
-            + "  alert(text1.nodeValue);\n"
+            + "  log(text1.data);\n"
+            + "  log(text1.nodeValue);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -86,19 +87,20 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"Some New Text", "Some New Text"})
     public void setNodeValue() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  text1.nodeValue = 'Some New Text';\n"
-            + "  alert(text1.data);\n"
-            + "  alert(text1.nodeValue);\n"
+            + "  log(text1.data);\n"
+            + "  log(text1.nodeValue);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -109,18 +111,19 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts("Some Text Appended")
     public void appendData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  text1.appendData(' Appended');\n"
-            + "  alert(text1.data);\n"
+            + "  log(text1.data);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,41 +134,42 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"Some Text", "Some", "Some", "me", ""})
     public void deleteData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
 
             + "  try {\n"
             + "    text1.deleteData(5, 11);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(4, 5);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(1, 0);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, 2);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, 2);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -177,36 +181,37 @@ public class CharacterDataTest extends WebDriverTestCase {
             IE = {"", "", "", "exception"})
     public void deleteDataEmptyImput() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, 1);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, 0);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, 1);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(0, -1);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>-</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -217,35 +222,36 @@ public class CharacterDataTest extends WebDriverTestCase {
             IE = {"exception", "exception", "abcde", "exception"})
     public void deleteDataInvalidStart() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  try {\n"
             + "    text1.deleteData(-1, 4);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(20, 4);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(20, 0);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(20, -18);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>abcde</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -256,30 +262,31 @@ public class CharacterDataTest extends WebDriverTestCase {
             IE = {"exception", "exception", "exception"})
     public void deleteDataNegativeCount() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  try {\n"
             + "    text1.deleteData(18, -15);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(5, -4);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
 
             + "  try {\n"
             + "    text1.deleteData(2, -4);\n"
-            + "    alert(text1.data);\n"
-            + "  } catch (e) { alert('exception') }\n"
+            + "    log(text1.data);\n"
+            + "  } catch (e) { log('exception') }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Not So New Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -290,18 +297,18 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts("Some New Text")
     public void insertData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  text1.insertData(5, 'New ');\n"
-            + "  alert(text1.data);\n"
+            + "  log(text1.data);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -312,18 +319,19 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts("Some New Text")
     public void replaceData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  text1.replaceData(5, 3, 'New');\n"
-            + "  alert(text1.data);\n"
+            + "  log(text1.data);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Old Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -334,18 +342,19 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"New", "Some New Text"})
     public void substringData() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
-            + "  alert(text1.substringData(5, 3));\n"
-            + "  alert(text1.data);\n"
+            + "  log(text1.substringData(5, 3));\n"
+            + "  log(text1.data);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some New Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -356,19 +365,20 @@ public class CharacterDataTest extends WebDriverTestCase {
     @Alerts({"Some ", "Text", "true"})
     public void textImpl_splitText() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div1=document.getElementById('div1');\n"
             + "  var text1=div1.firstChild;\n"
             + "  var text2=text1.splitText(5);\n"
-            + "  alert(text1.data);\n"
-            + "  alert(text2.data);\n"
-            + "  alert(text1.nextSibling == text2);\n"
+            + "  log(text1.data);\n"
+            + "  log(text2.data);\n"
+            + "  log(text1.nextSibling == text2);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='div1'>Some Text</div></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "First");
+        loadPageVerifyTitle2(html);
     }
 }
