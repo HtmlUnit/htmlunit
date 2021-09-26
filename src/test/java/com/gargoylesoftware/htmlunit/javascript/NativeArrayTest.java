@@ -141,11 +141,12 @@ public class NativeArrayTest extends WebDriverTestCase {
     public void constructorToString() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "alert([].constructor.toString());\n"
+            + LOG_TITLE_FUNCTION
+            + "log([].constructor.toString());\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

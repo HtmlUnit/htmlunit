@@ -114,59 +114,63 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function anonymous(\n) {\n    var x = 1;\n}",
-            IE = "function anonymous() {\n    var x = 1;\n}")
+    @Alerts(DEFAULT = "function\\sanonymous(\\n)\\s{\\n\\s\\s\\s\\svar\\sx\\s=\\s1;\\n}",
+            IE = "function\\sanonymous()\\s{\\n\\s\\s\\s\\svar\\sx\\s=\\s1;\\n}")
     public void newFunctionToString() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "var f1 = new Function('    var x = 1;');\n"
-            + "alert(f1);\n"
+            + "log(f1);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("function foo() {\n  return 1;\n}")
+    @Alerts("function\\sfoo()\\s{\\n\\s\\sreturn\\s1;\\n}")
     @NotYetImplemented
     public void functionToString() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "function foo() {\n"
             + "  return 1;\n"
             + "}\n"
-            + "alert(foo);\n"
+            + "log(foo);\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function foo(){return 1;}", "function foo( )  { \treturn 1  \n ;\n    ; }" })
+    @Alerts({"function\\sfoo(){return 1;}",
+             "function\\sfoo(\\s)\\s\\s{\\s\\treturn\\s1\\s\\s\\n ;\\n\\s\\s\\s\\s;\\s}" })
     @NotYetImplemented
     public void functionToStringMinimized() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var my = function foo(){return 1;}\n"
-            + "  alert(my.toString());\n"
+            + "  log(my.toString());\n"
 
             + "  var my = function foo( )  { \treturn 1  \n ;\n"
             + "    ; }\n"
-            + "  alert(my.toString());\n"
+            + "  log(my.toString());\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
