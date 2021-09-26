@@ -129,9 +129,10 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  <body>\n"
             + "    <style>div.y { color: green; }</style>\n"
             + "    <script>\n"
-            + "      alert(document.styleSheets.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "      log(document.styleSheets.length);\n"
             + "      for (i = 0; i < document.styleSheets.length; i++) {\n"
-            + "        alert(document.styleSheets[i].href);\n"
+            + "        log(document.styleSheets[i].href);\n"
             + "      }\n"
             + "    </script>\n" + "  </body>\n"
             + "</html>";
@@ -143,7 +144,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "style4.css"), "", MimeType.TEXT_CSS);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -171,10 +172,11 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "    <link href='" + URL_FIRST + "style8.css' rel='stylesheet' ></link>\n"
             + "  </head>\n" + "  <body>\n"
             + "    <script>\n"
-            + "      alert(document.styleSheets.length);\n"
+            + LOG_TITLE_FUNCTION
+            + "      log(document.styleSheets.length);\n"
             + "      for (i = 0; i < document.styleSheets.length; i++) {\n"
             + "        var sheet = document.styleSheets[i];\n"
-            + "        alert(sheet.href + ' ' + sheet.cssRules.length);\n"
+            + "        log(sheet.href + ' ' + sheet.cssRules.length);\n"
             + "      }\n"
             + "    </script>\n" + "  </body>\n"
             + "</html>";
@@ -190,7 +192,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
         conn.setResponse(new URL(URL_FIRST, "style8.css"), "div { color: red; }", "");
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL(URL_FIRST, "test.html"));
+        loadPageVerifyTitle2(html);
     }
 
     /**

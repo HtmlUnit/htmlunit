@@ -557,15 +557,17 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("id1")
     public void getElementById_divId() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var element = document.getElementById('id1');\n"
-            + "  alert(element.id);\n"
+            + "  log(element.id);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<div id='id1'></div></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -576,14 +578,16 @@ public class Document2Test extends WebDriverTestCase {
     @Alerts("script1")
     public void getElementById_scriptId() throws Exception {
         final String html
-            = "<html><head><title>First</title><script id='script1'>\n"
+            = "<html><head>\n"
+            + "<script id='script1'>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(top.document.getElementById('script1').id);\n"
+            + "  log(top.document.getElementById('script1').id);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -596,15 +600,16 @@ public class Document2Test extends WebDriverTestCase {
             + "<span id='it' class='first'></span>\n"
             + "<span id='it' class='second'></span>\n"
             + "<script>\n"
-            + "alert(document.getElementById('it').className);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.getElementById('it').className);\n"
             + "var s = document.createElement('span');\n"
             + "s.id = 'it';\n"
             + "s.className = 'newest';\n"
             + "document.body.insertBefore(s, document.body.firstChild);\n"
-            + "alert(document.getElementById('it').className);\n"
+            + "log(document.getElementById('it').className);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -613,15 +618,16 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     public void createStyleSheet() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    if (document.createStyleSheet) {\n"
             + "      document.createStyleSheet('style.css');\n"
             + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
             + "        var sheet = document.styleSheets[si];\n"
-            + "        alert(sheet.href);\n"
-            + "        alert(sheet.owningElement.tagName);\n"
+            + "        log(sheet.href);\n"
+            + "        log(sheet.owningElement.tagName);\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
@@ -630,7 +636,7 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='id1'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -639,7 +645,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     public void createStyleSheet_emptyUrl() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
+            + LOG_TITLE_FUNCTION
             + "<script>\n"
             + "  function doTest() {\n"
             + "    if (document.createStyleSheet) {\n"
@@ -647,7 +654,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      document.createStyleSheet('');\n"
             + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
             + "        var sheet = document.styleSheets[si];\n"
-            + "        alert(sheet.href);\n"
+            + "        log(sheet.href);\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
@@ -656,7 +663,7 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='id1'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -665,8 +672,9 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     public void createStyleSheet_insertAt() throws Exception {
         final String html
-            = "<html><head><title>First</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    if (document.createStyleSheet) {\n"
             + "      document.createStyleSheet('minus1.css', -1);\n"
@@ -676,7 +684,7 @@ public class Document2Test extends WebDriverTestCase {
             + "      document.createStyleSheet('none.css');\n"
             + "      for (var si = 0; si < document.styleSheets.length; si++) {\n"
             + "        var sheet = document.styleSheets[si];\n"
-            + "        alert(sheet.href);\n"
+            + "        log(sheet.href);\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
@@ -685,6 +693,6 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='id1'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

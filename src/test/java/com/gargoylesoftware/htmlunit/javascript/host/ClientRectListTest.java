@@ -37,20 +37,22 @@ public class ClientRectListTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "1", "[object ClientRect]", "[object ClientRect]"})
     public void getClientRects() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
-            + "    alert(rects);\n"
-            + "    alert(rects.length);\n"
-            + "    alert(rects[0]);\n"
-            + "    alert(rects.item(0));\n"
+            + "    log(rects);\n"
+            + "    log(rects.length);\n"
+            + "    log(rects[0]);\n"
+            + "    log(rects.item(0));\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -61,27 +63,29 @@ public class ClientRectListTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "1", "exception", "exception"})
     public void itemOutside() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
 
-            + "    alert(rects);\n"
-            + "    alert(rects.length);\n"
+            + "    log(rects);\n"
+            + "    log(rects.length);\n"
 
             + "    try {\n"
-            + "      alert(rects.item(1));\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects.item(1));\n"
+            + "    } catch(e) { log('exception'); }\n"
 
             + "    try {\n"
-            + "      alert(rects.item(-1));\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects.item(-1));\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -92,27 +96,29 @@ public class ClientRectListTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "1", "undefined", "undefined"})
     public void indexOutside() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var rects = d1.getClientRects();\n"
 
-            + "    alert(rects);\n"
-            + "    alert(rects.length);\n"
+            + "    log(rects);\n"
+            + "    log(rects.length);\n"
 
             + "    try {\n"
-            + "      alert(rects[1]);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects[1]);\n"
+            + "    } catch(e) { log('exception'); }\n"
 
             + "    try {\n"
-            + "      alert(rects[-1]);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects[-1]);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -123,26 +129,28 @@ public class ClientRectListTest extends WebDriverTestCase {
             IE = {"[object ClientRectList]", "0", "undefined", "undefined"})
     public void empty() throws Exception {
         final String html =
-            "<html><head><title>foo</title><script>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var d1 = document.createElement('div');\n"
             + "    var rects = d1.getClientRects();\n"
 
-            + "    alert(rects);\n"
-            + "    alert(rects.length);\n"
+            + "    log(rects);\n"
+            + "    log(rects.length);\n"
 
             + "    try {\n"
-            + "      alert(rects[1]);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects[1]);\n"
+            + "    } catch(e) { log('exception'); }\n"
 
             + "    try {\n"
-            + "      alert(rects[-1]);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(rects[-1]);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='div1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
