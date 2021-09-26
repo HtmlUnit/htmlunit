@@ -847,9 +847,10 @@ public class ElementTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<div id='myId'><!-- --></div>\n"
             + "<script>\n"
-            + "  alert(myId.getElementsByTagName('*').length);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(myId.getElementsByTagName('*').length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -861,7 +862,9 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts("undefined")
     public void nodeHasUndefinedInnerText() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var data = \"<?xml version='1.0' encoding='UTF-8'?>\\\n"
             + "        <dashboard> \\\n"
@@ -888,12 +891,13 @@ public class ElementTest extends WebDriverTestCase {
             + "      xml = undefined;\n"
             + "    }\n"
             + "\n"
-            + "    alert(xml.getElementsByTagName('tab')[0].innerText);\n"
+            + "    log(xml.getElementsByTagName('tab')[0].innerText);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'/></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -936,15 +940,17 @@ public class ElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"§§URL§§", "§§URL§§"},
             IE = {"undefined", "undefined"})
     public void baseURI() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head><script>\n"
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var text = '<hello><child></child></hello>';\n"
             + "  var doc = " + XMLDocumentTest.callLoadXMLDocumentFromString("text") + ";\n"
             + "  var e = doc.documentElement.firstChild;\n"
-            + "  alert(e.baseURI);\n"
+            + "  log(e.baseURI);\n"
             + "\n"
             + "  e = document.getElementById('myId');\n"
-            + "  alert(e.baseURI);\n"
+            + "  log(e.baseURI);\n"
             + "}\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -952,7 +958,7 @@ public class ElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1093,13 +1099,14 @@ public class ElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var doc = document.implementation.createDocument('', '', null);\n"
             + "        var element = doc.createElement('something');\n"
             + "        var attr = doc.createAttribute('name');\n"
             + "        attr.value = 'test';\n"
             + "        element.setAttributeNode(attr);\n"
-            + "        alert(element.getAttributeNode('name').value);\n"
+            + "        log(element.getAttributeNode('name').value);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1107,7 +1114,7 @@ public class ElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1165,18 +1172,19 @@ public class ElementTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '';\n"
             + "    for (var i in test)\n"
             + "      str += i + ', ';\n"
-            + "    alert(str);\n"
+            + "    log(str);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1185,16 +1193,13 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                        "function Element() { [native code] }"},
-            FF = {"function Element() {\n    [native code]\n}",
-                  "[object Element]", "function Element() {\n    [native code]\n}"},
-            FF78 = {"function Element() {\n    [native code]\n}",
-                    "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented(IE)
     public void prototypConstructor() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      process(Element);\n"
@@ -1204,15 +1209,15 @@ public class ElementTest extends WebDriverTestCase {
             + "  }\n"
             + "  function process(obj) {\n"
             + "    try {\n"
-            + "      alert(obj);\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "      log(obj);\n"
+            + "    } catch (e) {log('exception')}\n"
             + "   }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1221,30 +1226,27 @@ public class ElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function Element() { [native code] }", "[object Element]",
                        "function Element() { [native code] }"},
-            FF = {"function Element() {\n    [native code]\n}",
-                  "[object Element]", "function Element() {\n    [native code]\n}"},
-            FF78 = {"function Element() {\n    [native code]\n}",
-                    "[object Element]", "function Element() {\n    [native code]\n}"},
             IE = {"[object Element]", "[object ElementPrototype]", "[object Element]"})
     @NotYetImplemented(IE)
     public void prototypConstructorStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    process(Element);\n"
             + "    process(Element.prototype);\n"
             + "    process(Element.prototype.constructor);\n"
             + "  }\n"
             + "  function process(obj) {\n"
-            + "    alert(obj);\n"
+            + "    log(obj);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

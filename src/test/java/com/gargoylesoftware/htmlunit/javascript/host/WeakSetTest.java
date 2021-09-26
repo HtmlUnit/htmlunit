@@ -38,19 +38,21 @@ public class WeakSetTest extends WebDriverTestCase {
             IE = {})
     public void constructorArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.WeakSet) {\n"
             + "    var obj = {};\n"
             + "    var foo = {};\n"
             + "    var mySet = new WeakSet([obj, foo]);\n"
-            + "    alert(mySet.has(foo));\n"
+            + "    log(mySet.has(foo));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -61,20 +63,22 @@ public class WeakSetTest extends WebDriverTestCase {
             IE = {})
     public void constructorSetParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.WeakSet) {\n"
             + "    var obj = {};\n"
             + "    var foo = {};\n"
             + "    var mySet = new WeakSet(new Set([foo]));\n"
-            + "    alert(mySet.has(obj));\n"
-            + "    alert(mySet.has(foo));\n"
+            + "    log(mySet.has(obj));\n"
+            + "    log(mySet.has(foo));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -85,7 +89,9 @@ public class WeakSetTest extends WebDriverTestCase {
             IE = {})
     public void constructorMapParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.WeakSet) {\n"
             + "    var obj = {};\n"
@@ -93,15 +99,15 @@ public class WeakSetTest extends WebDriverTestCase {
             + "    var kvArray = [['key1', obj], ['key2', foo]];\n"
             + "    var myMap = new Map(kvArray);\n"
             + "    var mySet = new WeakSet(myMap);\n"
-            + "    alert(mySet.has('key1'));\n"
-            + "    alert(mySet.has(obj));\n"
-            + "    alert(mySet.has(kvArray[1]));\n"
+            + "    log(mySet.has('key1'));\n"
+            + "    log(mySet.has(obj));\n"
+            + "    log(mySet.has(kvArray[1]));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -112,9 +118,11 @@ public class WeakSetTest extends WebDriverTestCase {
             IE = {})
     public void constructorIteratorParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value) {\n"
-            + "  alert(value);\n"
+            + "  log(value);\n"
             + "}\n"
             + "function test() {\n"
             + "  if (window.WeakSet) {\n"
@@ -134,15 +142,15 @@ public class WeakSetTest extends WebDriverTestCase {
             + "      };\n"
             + "    };\n"
             + "    var mySet = new WeakSet(myIterable);\n"
-            + "    alert(mySet.has(foo));\n"
-            + "    alert(mySet.has(obj));\n"
+            + "    log(mySet.has(foo));\n"
+            + "    log(mySet.has(obj));\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -152,7 +160,9 @@ public class WeakSetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"undefined", "true"},
             IE = {})
     public void has() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.WeakSet) {\n"
             + "      var obj = {};\n"
@@ -160,13 +170,13 @@ public class WeakSetTest extends WebDriverTestCase {
             + "      var myArray = [obj, foo];\n"
             + "      var mySet = new WeakSet(myArray);\n"
             + "      mySet.add(window);\n"
-            + "      alert(mySet.size);\n"
-            + "      alert(mySet.has(window));\n"
+            + "      log(mySet.size);\n"
+            + "      log(mySet.has(window));\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -176,26 +186,28 @@ public class WeakSetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"Type error", "Type error", "true"},
             IE = {})
     public void add() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.WeakSet) {\n"
             + "      var mySet = new WeakSet();\n"
 
             + "      try {\n"
             + "        mySet.add(7);\n"
-            + "      } catch(e) { alert('Type error'); }\n"
+            + "      } catch(e) { log('Type error'); }\n"
 
             + "      try {\n"
             + "        mySet.add('seven');\n"
-            + "      } catch(e) { alert('Type error'); }\n"
+            + "      } catch(e) { log('Type error'); }\n"
 
             + "      var foo = {};\n"
             + "      mySet.add(foo);\n"
-            + "      alert(mySet.has(foo));\n"
+            + "      log(mySet.has(foo));\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

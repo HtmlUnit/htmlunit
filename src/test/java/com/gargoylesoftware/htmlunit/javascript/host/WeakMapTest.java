@@ -42,18 +42,20 @@ public class WeakMapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {};\n"
             + "  var foo = {};\n"
             + "  var myMap = new WeakMap([[ obj, 'one' ],[ foo, 'two' ]]);\n"
-            + "  alert(myMap.has(foo));\n"
-            + "  alert(myMap.get(obj));\n"
+            + "  log(myMap.has(foo));\n"
+            + "  log(myMap.get(obj));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -65,19 +67,21 @@ public class WeakMapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var myMap = new WeakMap(new Set('test'));\n"
-            + "    alert(myMap.has('test'));\n"
+            + "    log(myMap.has('test'));\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -89,22 +93,24 @@ public class WeakMapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var obj = {};\n"
             + "  var foo = {};\n"
             + "  var testMap = new Map([[ obj, 'one' ],[ foo, 'two' ]]);\n"
             + "  try {\n"
             + "    var myMap = new WeakMap(testMap);\n"
-            + "    alert(myMap.has(foo));\n"
+            + "    log(myMap.has(foo));\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -115,7 +121,9 @@ public class WeakMapTest extends WebDriverTestCase {
             IE = {})
     public void constructorIteratorParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.WeakSet) {\n"
             + "    var obj = {};\n"
@@ -135,9 +143,9 @@ public class WeakMapTest extends WebDriverTestCase {
             + "    };\n"
             + "    try {\n"
             + "      var myMap = new WeakMap(myIterable);\n"
-            + "      alert(myMap.has(foo));\n"
+            + "      log(myMap.has(foo));\n"
             + "    } catch(e) {\n"
-            + "      alert('exception');\n"
+            + "      log('exception');\n"
             + "    }\n"
             + "  }"
             + "}\n"
@@ -145,7 +153,7 @@ public class WeakMapTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -156,16 +164,18 @@ public class WeakMapTest extends WebDriverTestCase {
             IE = {"undefined", "undefined"})
     @NotYetImplemented(IE)
     public void get() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var kvArray = [[{}, 'value1'], [window, 'value2']];\n"
             + "    var myMap = new WeakMap(kvArray);\n"
-            + "    alert(myMap.size);\n"
-            + "    alert(myMap.get(window));\n"
+            + "    log(myMap.size);\n"
+            + "    log(myMap.get(window));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -174,18 +184,20 @@ public class WeakMapTest extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void setNonObject() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.WeakMap) {\n"
             + "      var kvArray = [[{}, 'value1'], [window, 'value2']];\n"
             + "      var myMap = new WeakMap(kvArray);\n"
             + "      try {\n"
             + "        myMap.set(1, 2);\n"
-            + "      } catch(e) {alert('exception')}\n"
+            + "      } catch(e) {log('exception')}\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
