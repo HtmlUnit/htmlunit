@@ -43,15 +43,17 @@ public class ApplicationCacheTest extends WebDriverTestCase {
             FF78 = "[object OfflineResourceList]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.applicationCache);\n"
+            + "    log(window.applicationCache);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -133,23 +135,25 @@ public class ApplicationCacheTest extends WebDriverTestCase {
 
     private void eventHandler(final String handler) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.applicationCache) {\n"
             + "      window.applicationCache." + handler + " = function(e) {};\n"
             + "      var handler = window.applicationCache." + handler + ".toString();\n"
 
                      // normalize, testing function.toString() is done somewhere else
-            + "      alert(handler.replace(/(\\r|\\n|\\r\\n| )/gm, ''));\n"
+            + "      log(handler.replace(/(\\r|\\n|\\r\\n| )/gm, ''));\n"
             + "    } else {\n"
-            + "      alert('no applicationCache');\n"
+            + "      log('no applicationCache');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -161,23 +165,25 @@ public class ApplicationCacheTest extends WebDriverTestCase {
             EDGE = "no applicationCache")
     public void eventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.applicationCache) {\n"
-            + "      alert(window.applicationCache.addEventListener == null);\n"
-            + "      alert(window.applicationCache.removeEventListener == null);\n"
-            + "      alert(window.applicationCache.dispatchEvent == null);\n"
+            + "      log(window.applicationCache.addEventListener == null);\n"
+            + "      log(window.applicationCache.removeEventListener == null);\n"
+            + "      log(window.applicationCache.dispatchEvent == null);\n"
 
-            + "      alert(window.applicationCache.attachEvent == null);\n"
-            + "      alert(window.applicationCache.detachEvent == null);\n"
+            + "      log(window.applicationCache.attachEvent == null);\n"
+            + "      log(window.applicationCache.detachEvent == null);\n"
             + "    } else {\n"
-            + "      alert('no applicationCache');\n"
+            + "      log('no applicationCache');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

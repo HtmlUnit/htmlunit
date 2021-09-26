@@ -38,12 +38,15 @@ public class CommentTest extends WebDriverTestCase {
     @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.body.firstChild);\n"
+            + "  log(document.body.firstChild);\n"
             + "}\n"
             + "</script></head><body onload='test()'><!-- comment --></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -56,11 +59,13 @@ public class CommentTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var node = document.getElementById('it');\n"
-            + "alert(node.textContent);\n"
-            + "alert(node.firstChild.textContent);\n"
+            + "log(node.textContent);\n"
+            + "log(node.firstChild.textContent);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,11 +78,12 @@ public class CommentTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<div id='it'><!--comment-->after</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var node = document.getElementById('it');\n"
-            + "alert(node.innerText);\n"
-            + "alert(node.firstChild.innerText);\n"
+            + "log(node.innerText);\n"
+            + "log(node.firstChild.innerText);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void property(final String property) throws Exception {
@@ -85,10 +91,11 @@ public class CommentTest extends WebDriverTestCase {
             = "<html><body>\n"
             + "<div id='it'><!--abcdefg-->after</div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var node = document.getElementById('it');\n"
-            + "alert(node.firstChild." + property + ");\n"
+            + "log(node.firstChild." + property + ");\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

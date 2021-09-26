@@ -40,6 +40,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (document.createNodeIterator) {\n"
             + "        var nodeIterator = document.createNodeIterator(\n"
@@ -50,7 +51,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
             + "        var currentNode;\n"
             + "        while (currentNode = nodeIterator.nextNode()) {\n"
-            + "          alert(currentNode);\n"
+            + "          log(currentNode);\n"
             + "        }\n"
             + "      }\n"
             + "    }\n"
@@ -60,7 +61,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "<div id='myId'><span>a</span><span>b</span><span>c</span></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,6 +74,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (document.createNodeIterator) {\n"
             + "        var nodeIterator = document.createNodeIterator(\n"
@@ -86,7 +88,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
             + "        var currentNode;\n"
             + "        while (currentNode = nodeIterator.nextNode()) {\n"
-            + "          alert(currentNode);\n"
+            + "          log(currentNode);\n"
             + "        }\n"
             + "      }\n"
             + "    }\n"
@@ -96,7 +98,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "<div id='myId'><span>a</span><p>b</p><span>c</span></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -109,6 +111,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (document.createNodeIterator) {\n"
             + "        var nodeIterator = document.createNodeIterator(\n"
@@ -123,7 +126,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
             + "        var currentNode;\n"
             + "        while (currentNode = nodeIterator.nextNode()) {\n"
-            + "          alert(currentNode.data);\n"
+            + "          log(currentNode.data);\n"
             + "        }\n"
             + "      }\n"
             + "    }\n"
@@ -133,7 +136,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "<div id='myId'><span>abc</span><p>def</p><span>ghi</span></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -147,6 +150,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (document.createNodeIterator) {\n"
             + "        var nodeIterator = document.createNodeIterator(\n"
@@ -155,7 +159,7 @@ public class NodeIteratorTest extends WebDriverTestCase {
 
             + "        var currentNode;\n"
             + "        while (currentNode = nodeIterator.nextNode()) {\n"
-            + "          alert(currentNode.id);\n"
+            + "          log(currentNode.id);\n"
             + "        }\n"
             + "      }\n"
             + "    }\n"
@@ -176,6 +180,6 @@ public class NodeIteratorTest extends WebDriverTestCase {
             + "<div id='after'>after</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
