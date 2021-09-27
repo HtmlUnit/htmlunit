@@ -35,6 +35,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -137,14 +138,14 @@ public class Location extends SimpleScriptable {
      */
     @JsxFunction
     public void reload(final boolean force) throws IOException {
-        final HtmlPage htmlPage = (HtmlPage) window_.getWebWindow().getEnclosedPage();
+        final WebWindow webWindow = window_.getWebWindow();
+        final HtmlPage htmlPage = (HtmlPage) webWindow.getEnclosedPage();
         final WebRequest request = htmlPage.getWebResponse().getWebRequest();
 
-        if (getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
+        if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_LOCATION_RELOAD_REFERRER)) {
             request.setRefererlHeader(htmlPage.getUrl());
         }
 
-        final WebWindow webWindow = window_.getWebWindow();
         webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS location.reload");
     }
 
@@ -179,13 +180,15 @@ public class Location extends SimpleScriptable {
      */
     @JsxGetter
     public String getHref() {
-        final Page page = window_.getWebWindow().getEnclosedPage();
+        final WebWindow webWindow = window_.getWebWindow();
+        final Page page = webWindow.getEnclosedPage();
         if (page == null) {
             return UNKNOWN;
         }
         try {
             URL url = page.getUrl();
-            final boolean encodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
+            final boolean encodeHash = webWindow.getWebClient()
+                    .getBrowserVersion().hasFeature(JS_LOCATION_HREF_HASH_IS_ENCODED);
             final String hash = getHash(encodeHash);
             if (hash != null) {
                 url = UrlUtils.getUrlWithNewRef(url, hash);
@@ -214,18 +217,22 @@ public class Location extends SimpleScriptable {
      */
     @JsxSetter
     public void setHref(final String newLocation) throws IOException {
-        final HtmlPage page = (HtmlPage) getWindow(getStartingScope()).getWebWindow().getEnclosedPage();
+        final WebWindow webWindow = window_.getWebWindow();
+        final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             page.executeJavaScript(script, "new location value", 1);
             return;
         }
+
         try {
             URL url = page.getFullyQualifiedUrl(newLocation);
+            final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
+
             // fix for empty url
             if (StringUtils.isEmpty(newLocation)) {
-                final boolean dropFilename = page.getWebClient().getBrowserVersion().
-                        hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
+                final boolean dropFilename = browserVersion.hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
                 if (dropFilename) {
                     String path = url.getPath();
                     path = path.substring(0, path.lastIndexOf('/') + 1);
@@ -237,10 +244,10 @@ public class Location extends SimpleScriptable {
                 }
             }
 
-            final WebRequest request = new WebRequest(url);
+            final WebRequest request = new WebRequest(url,
+                        browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             request.setRefererlHeader(page.getUrl());
 
-            final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
         }
         catch (final MalformedURLException e) {
@@ -283,7 +290,8 @@ public class Location extends SimpleScriptable {
      */
     @JsxGetter
     public String getHash() {
-        final boolean decodeHash = getBrowserVersion().hasFeature(JS_LOCATION_HASH_IS_DECODED);
+        final BrowserVersion browserVersion = getBrowserVersion();
+        final boolean decodeHash = browserVersion.hasFeature(JS_LOCATION_HASH_IS_DECODED);
         String hash = hash_;
 
         if (hash_ != null && (decodeHash || hash_.equals(getUrl().getRef()))) {
@@ -291,12 +299,12 @@ public class Location extends SimpleScriptable {
         }
 
         if (StringUtils.isEmpty(hash)) {
-            if (getBrowserVersion().hasFeature(JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED)
+            if (browserVersion.hasFeature(JS_LOCATION_HASH_RETURNS_HASH_FOR_EMPTY_DEFINED)
                     && getHref().endsWith("#")) {
                 return "#";
             }
         }
-        else if (getBrowserVersion().hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
+        else if (browserVersion.hasFeature(JS_LOCATION_HASH_HASH_IS_ENCODED)) {
             return "#" + UrlUtils.encodeHash(hash);
         }
         else {
@@ -514,7 +522,14 @@ public class Location extends SimpleScriptable {
      * @throws IOException if there is a problem loading the new location
      */
     private void setUrl(final URL url) throws IOException {
-        window_.getWebWindow().getWebClient().getPage(window_.getWebWindow(), new WebRequest(url));
+        final WebWindow webWindow = window_.getWebWindow();
+        final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
+
+        final WebRequest webRequest = new WebRequest(url,
+                browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
+        webRequest.setRefererlHeader(getUrl());
+
+        webWindow.getWebClient().getPage(webWindow, webRequest);
     }
 
     /**
