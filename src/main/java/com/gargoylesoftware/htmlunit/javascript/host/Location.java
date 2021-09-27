@@ -38,6 +38,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -237,10 +238,12 @@ public class Location extends SimpleScriptable {
                 }
             }
 
-            final WebRequest request = new WebRequest(url);
+            final WebWindow webWindow = window_.getWebWindow();
+
+            BrowserVersion bs = webWindow.getWebClient().getBrowserVersion();
+            final WebRequest request = new WebRequest(url, bs.getHtmlAcceptHeader(), bs.getAcceptEncodingHeader());
             request.setRefererlHeader(page.getUrl());
 
-            final WebWindow webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
         }
         catch (final MalformedURLException e) {
