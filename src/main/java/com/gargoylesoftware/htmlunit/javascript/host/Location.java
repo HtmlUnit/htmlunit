@@ -217,19 +217,17 @@ public class Location extends SimpleScriptable {
      */
     @JsxSetter
     public void setHref(final String newLocation) throws IOException {
-        final WebWindow webWindow = window_.getWebWindow();
+        WebWindow webWindow = getWindow(getStartingScope()).getWebWindow();
         final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
-
         if (newLocation.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
             final String script = newLocation.substring(11);
             page.executeJavaScript(script, "new location value", 1);
             return;
         }
-
         try {
-            URL url = page.getFullyQualifiedUrl(newLocation);
             final BrowserVersion browserVersion = webWindow.getWebClient().getBrowserVersion();
 
+            URL url = page.getFullyQualifiedUrl(newLocation);
             // fix for empty url
             if (StringUtils.isEmpty(newLocation)) {
                 final boolean dropFilename = browserVersion.hasFeature(ANCHOR_EMPTY_HREF_NO_FILENAME);
@@ -248,6 +246,7 @@ public class Location extends SimpleScriptable {
                         browserVersion.getHtmlAcceptHeader(), browserVersion.getAcceptEncodingHeader());
             request.setRefererlHeader(page.getUrl());
 
+            webWindow = window_.getWebWindow();
             webWindow.getWebClient().download(webWindow, "", request, true, false, false, "JS set location");
         }
         catch (final MalformedURLException e) {

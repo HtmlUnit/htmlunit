@@ -976,7 +976,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Referer: http://localhost:§§PORT§§/",
                     "Upgrade-Insecure-Requests: 1"})
     public void locationSetSearch() throws Exception {
-        final String url = "http://localhost:" + WebTestCase.PORT_PRIMITIVE_SERVER;
         String html = "<html><body><script>location.search='newSearch';</script></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
