@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_F
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_IN_FOCUS_OUT_BLUR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_FOCUS_ON_LOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FOCUS_BODY_ELEMENT_AT_START;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IGNORES_UTF8_BOM_SOMETIMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT;
@@ -62,6 +63,7 @@ import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
 import org.w3c.dom.ranges.Range;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
@@ -1044,8 +1046,16 @@ public class HtmlPage extends SgmlPage {
         final WebRequest request = new WebRequest(url);
         // copy all headers from the referring request
         request.setAdditionalHeaders(new HashMap<>(referringRequest.getAdditionalHeaders()));
+
         // at least overwrite this headers
+        final BrowserVersion browserVersion = client.getBrowserVersion();
         request.setAdditionalHeader(HttpHeader.ACCEPT, client.getBrowserVersion().getScriptAcceptHeader());
+        if (browserVersion.hasFeature(HTTP_HEADER_SEC_FETCH)) {
+            request.setAdditionalHeader(HttpHeader.SEC_FETCH_SITE, "same-origin");
+            request.setAdditionalHeader(HttpHeader.SEC_FETCH_MODE, "no-cors");
+            request.setAdditionalHeader(HttpHeader.SEC_FETCH_DEST, "script");
+        }
+
         request.setRefererlHeader(referringRequest.getUrl());
 
         // our cache is a bit strange;
