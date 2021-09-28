@@ -1693,6 +1693,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
 
+    /** Setting the responseType throws in state unsent. */
+    @BrowserFeature(IE)
+    XHR_RESPONSE_TYPE_THROWS_UNSENT,
+
     /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
     @BrowserFeature(IE)
     XHR_SEND_IGNORES_BLOB_MIMETYPE_AS_CONTENTTYPE,

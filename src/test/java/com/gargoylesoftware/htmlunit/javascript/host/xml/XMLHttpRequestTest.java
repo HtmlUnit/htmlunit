@@ -94,6 +94,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        log(request.readyState);\n"
+            + "        log(request.responseType);\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
             + "        log(request.readyState);\n"
             + "        request.send('');\n"
@@ -103,7 +104,6 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='testSync()'>\n"
-            + LOG_TEXTAREA
             + "  </body>\n"
             + "</html>";
 
@@ -113,7 +113,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        setExpectedAlerts(UNINITIALIZED, LOADING, COMPLETED, xml.replace("\n", "\\n"));
+        setExpectedAlerts(UNINITIALIZED, "", LOADING, COMPLETED, xml.replace("\n", "\\n"));
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
 
         loadPageVerifyTitle2(html);
@@ -388,7 +388,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '/foo.xml', false);\n"
@@ -408,8 +408,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "<content>blah2</content>\n"
             + "</xml>";
 
-        setExpectedAlerts(COMPLETED, xml);
+        setExpectedAlerts(COMPLETED, xml.replace("\n", "\\n"));
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2213,6 +2214,184 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "text", "text", "text", "text", ""},
+            IE = {"", "exception", "exception", "exception", "exception", "exception"})
+    public void responseTypeSetBeforeOpen() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_NORMALIZE_FUNCTION
+            + "      function testSync() {\n"
+            + "        var request = new XMLHttpRequest();\n"
+            + "        log(request.responseType);\n"
+            + "      try {\n"
+            + "        request.responseType = 'arraybuffer';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'blob';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'json';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'text';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = 'JsON';\n"
+            + "        log(request.responseType);\n"
+
+            + "        request.responseType = 'unknown';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = null;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = undefined;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = '';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testSync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "exception", "", "", "", "", "exception"},
+            IE = {"", "arraybuffer", "blob", "blob", "text", "text", "text", "text", "text", ""})
+    public void responseTypeSetAfterOpenSync() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_NORMALIZE_FUNCTION
+            + "      function testSync() {\n"
+            + "        var request = new XMLHttpRequest();\n"
+            + "        request.open('GET', '" + URL_SECOND + "', false);\n"
+
+            + "        log(request.responseType);\n"
+            + "      try {\n"
+            + "        request.responseType = 'arraybuffer';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'blob';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'json';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'text';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = 'JsON';\n"
+            + "        log(request.responseType);\n"
+
+            + "        request.responseType = 'unknown';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = null;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = undefined;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = '';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testSync()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "text", "text", "text", "text", ""},
+            IE = {"", "arraybuffer", "blob", "blob", "text", "text", "text", "text", "text", ""})
+    public void responseTypeSetAfterOpenAsync() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_NORMALIZE_FUNCTION
+            + "      function testSync() {\n"
+            + "        var request = new XMLHttpRequest();\n"
+            + "        request.open('GET', '" + URL_SECOND + "', true);\n"
+
+            + "        log(request.responseType);\n"
+            + "      try {\n"
+            + "        request.responseType = 'arraybuffer';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'blob';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'json';\n"
+            + "        log(request.responseType);\n"
+            + "        request.responseType = 'text';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = 'JsON';\n"
+            + "        log(request.responseType);\n"
+
+            + "        request.responseType = 'unknown';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = null;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = undefined;\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = '';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='testSync()'>\n"
             + "  </body>\n"
             + "</html>";
 

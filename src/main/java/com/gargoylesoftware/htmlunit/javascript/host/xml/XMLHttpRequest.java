@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_LOAD_STAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_NO_CROSS_ORIGIN_TO_ABOUT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_OPEN_ALLOW_EMTPY_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_RESPONSE_TYPE_THROWS_UNSENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_SEND_NETWORK_ERROR_IF_ABORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.XHR_USE_CONTENT_CHARSET;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -145,6 +146,13 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxConstant
     public static final int DONE = 4;
 
+    private static final String RESPONSE_TYPE_DEFAULT = "";
+    private static final String RESPONSE_TYPE_ARRAYBUFFER = "arraybuffer";
+    private static final String RESPONSE_TYPE_BLOB = "blob";
+    // private static final String RESPONSE_TYPE_DOCUMENT = "document";
+    private static final String RESPONSE_TYPE_JSON = "json";
+    private static final String RESPONSE_TYPE_TEXt = "text";
+
     private static final String ALLOW_ORIGIN_ALL = "*";
 
     private static final String[] ALL_PROPERTIES_ = {"onreadystatechange", "readyState", "responseText", "responseXML",
@@ -169,6 +177,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private boolean withCredentials_;
     private int timeout_ = 0;
     private boolean aborted_;
+    private String responseType_;
 
     /**
      * Creates a new instance.
@@ -185,6 +194,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     public XMLHttpRequest(final boolean caseSensitiveProperties) {
         caseSensitiveProperties_ = caseSensitiveProperties;
         state_ = UNSENT;
+        responseType_ = RESPONSE_TYPE_DEFAULT;
     }
 
     /**
@@ -1147,6 +1157,45 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     @JsxSetter
     public void setTimeout(final int timeout) {
         timeout_ = timeout;
+    }
+
+    /**
+     * @return the {@code responseType} property
+     */
+    @JsxGetter
+    public String getResponseType() {
+        return responseType_;
+    }
+
+    /**
+     * Sets the {@code responseType} property.
+     * @param responseType the {@code responseType} property.
+     */
+    @JsxSetter
+    public void setResponseType(final String responseType) {
+        if (state_ == LOADING || state_ == DONE) {
+            throw Context.reportRuntimeError("InvalidStateError");
+        }
+
+        if (state_ == UNSENT && getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
+            throw Context.reportRuntimeError("InvalidStateError");
+        }
+
+        if (RESPONSE_TYPE_DEFAULT.equals(responseType)
+                || RESPONSE_TYPE_ARRAYBUFFER.equals(responseType)
+                || RESPONSE_TYPE_BLOB.equals(responseType)
+                // || RESPONSE_TYPE_DOCUMENT = "document";
+                || (RESPONSE_TYPE_JSON.equals(responseType)
+                        && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT))
+                || RESPONSE_TYPE_TEXt.equals(responseType)) {
+
+            if (state_ == OPENED && !async_ && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT)) {
+                throw Context.reportRuntimeError(
+                        "InvalidAccessError: synchronous XMLHttpRequests do not support responseType");
+            }
+
+            responseType_ = responseType;
+        }
     }
 
     /**
