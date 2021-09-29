@@ -224,6 +224,10 @@ public class Blob extends SimpleScriptable {
                             extractLastModifiedOrDefault(properties)));
     }
 
+    public Blob(final byte[] bits, final String contentType) {
+        setBackend(new InMemoryBackend(bits, null, contentType, -1));
+    }
+
     /**
      * Returns the {@code size} property.
      * @return the {@code size} property

@@ -1693,6 +1693,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
 
+    /** If state unsent the response text is empty even if the response type is wrong. */
+    @BrowserFeature({FF, FF78})
+    XHR_RESPONSE_TEXT_EMPTY_UNSENT,
+
     /** Setting the responseType throws in state unsent. */
     @BrowserFeature(IE)
     XHR_RESPONSE_TYPE_THROWS_UNSENT,

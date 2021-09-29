@@ -2397,4 +2397,405 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    @Test
+    @Alerts(DEFAULT = {"", "", "exception", "exception"},
+            FF = {"", "", "", "exception"},
+            FF78 = {"", "", "", "exception"})
+    public void responseTextInvalidResponseType() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        try {\n"
+            + "          log(xhr.responseText);\n"
+            + "        } catch(ex) { log('exception'); }\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.responseText);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "", "<xml>\\n<content>blah</content>\\n</xml>"})
+    public void responseResponseTypeDefault() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "text", "<xml>\\n<content>blah</content>\\n</xml>"})
+    public void responseResponseTypeText() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'text';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "36"})
+    public void responseResponseTypeArrayBuffer() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "0"})
+    public void responseResponseTypeArrayBufferEmpty() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"", "blob", "[object Blob]", "36", "text/xml"},
+            IE = {"", "blob", "[object Blob]", "36", "text/xml;charset=iso-8859-1"})
+    @HtmlUnitNYI(IE = {"", "blob", "[object Blob]", "36", "text/xml"})
+    public void responseResponseTypeBlob() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'blob';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.size);\n"
+            + "            log(xhr.response.type);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "blob", "[object Blob]", "0"})
+    public void responseResponseTypeBlobEmpty() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'blob';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.size);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml = "";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"", "json", "[object Object]", "Unit", "{\"Html\":\"Unit\"}"},
+            IE = {"", "", "{ \"Html\": \"Unit\" }", "undefined", "\"{ \\\"Html\\\": \\\"Unit\\\" }\""})
+    public void responseResponseTypeJson() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'json';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.Html);\n"
+            + "            log(JSON.stringify(xhr.response));\n"
+            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String json = "{ \"Html\": \"Unit\" }";
+
+        getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"", "json", "null"},
+            IE = {"", "", ""})
+    public void responseResponseTypeJsonEmpty() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'json';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String json = "";
+
+        getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 }
