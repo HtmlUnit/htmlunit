@@ -218,8 +218,9 @@ public class Document2Test extends WebDriverTestCase {
 
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
             + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  if (!document.evaluate) { alert('evaluate not available'); return; }\n"
+            + "  if (!document.evaluate) { log('evaluate not available'); return; }\n"
             + "  var xmlhttp = new XMLHttpRequest();\n"
             + "  xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "  xmlhttp.send();\n"
@@ -229,10 +230,10 @@ public class Document2Test extends WebDriverTestCase {
             + "      document.getElementById(\"parent\").appendChild(child);\n"
             + "      var found = document.evaluate(\"//div[@id='parent']\", document, null,"
             +                      "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "      alert(found.singleNodeValue.id);\n"
+            + "      log(found.singleNodeValue.id);\n"
             + "      found = document.evaluate(\"//div[@id='child']\", document, null,"
             +                      "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "      alert(found.singleNodeValue.id);\n"
+            + "      log(found.singleNodeValue.id);\n"
             + "    }\n"
             + " }\n"
             + "}\n"
@@ -241,7 +242,8 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='parent'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html, 200);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -259,9 +261,10 @@ public class Document2Test extends WebDriverTestCase {
                 200, "OK", MimeType.TEXT_XML);
 
         final String html = "<html xmlns='http://www.w3.org/1999/xhtml'>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  if (!document.evaluate) { alert('evaluate not available'); return; }\n"
+            + "  if (!document.evaluate) { log('evaluate not available'); return; }\n"
             + "  var xmlhttp = new XMLHttpRequest();\n"
             + "  xmlhttp.open(\"GET\",\"content.xhtml\",true);\n"
             + "  xmlhttp.send();\n"
@@ -271,13 +274,13 @@ public class Document2Test extends WebDriverTestCase {
             + "      document.getElementById(\"parent\").appendChild(child);\n"
             + "      var found = document.evaluate(\"//div[@id='parent']\", document, null,"
             +                      "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "      alert(found.singleNodeValue.id);\n"
+            + "      log(found.singleNodeValue.id);\n"
             + "      found = document.evaluate(\"//div[@id='child']\", document, null,"
             +                      "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "      alert(found.singleNodeValue.id);\n"
+            + "      log(found.singleNodeValue.id);\n"
             + "      found = document.evaluate(\"//div[@id='child3']\", document, null,"
             +                      "XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "      alert(found.singleNodeValue.id);\n"
+            + "      log(found.singleNodeValue.id);\n"
             + "    }\n"
             + "  }\n"
             + "}\n"
@@ -286,7 +289,8 @@ public class Document2Test extends WebDriverTestCase {
             + "  <div id='parent'></div>\n"
             + "</body></html>\n";
 
-        loadPageWithAlerts2(html, 200);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

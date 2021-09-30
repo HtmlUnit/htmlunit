@@ -53,20 +53,22 @@ public class SubtleCryptoTest extends WebDriverTestCase {
         final String html
             = ""
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.crypto) {\n"
             + "      window.crypto.subtle.generateKey(\n"
             + "        { name: 'x' }\n"
             + "      )\n"
             + "      .catch(function(e) {\n"
-            + "        alert('TypeError ' + (e instanceof TypeError));\n"
+            + "        log('TypeError ' + (e instanceof TypeError));\n"
             + "      });\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, URL_FIRST, DEFAULT_WAIT_TIME * 3);
+        loadPage2(html, URL_FIRST);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

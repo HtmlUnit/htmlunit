@@ -994,12 +994,13 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     public void javaNotAccessableFromWorker() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception' + e); }\n"
+            + "} catch(e) { log('exception' + e); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "var pi = 'from worker';\n"
@@ -1010,7 +1011,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

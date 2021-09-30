@@ -473,9 +473,10 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function f() {\n"
-            + "    alert('Cookies: ' + document.cookie);\n"
+            + "    log('Cookies: ' + document.cookie);\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -491,7 +492,8 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 4000);
+        loadPage2(html);
+        verifyTitle2(4 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
