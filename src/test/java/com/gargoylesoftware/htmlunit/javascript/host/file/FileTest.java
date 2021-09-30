@@ -56,20 +56,21 @@ public class FileTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.testForm.fileupload.files) {\n"
             + "    var files = document.testForm.fileupload.files;\n"
-            + "    alert(files.length);\n"
+            + "    log(files.length);\n"
 
             + "    var file = files[0];\n"
-            + "    alert(file.name);\n"
-            + "    alert(file.lastModifiedDate);\n"
-            + "    alert(file.lastModified);\n"
-            + "    alert(file.webkitRelativePath);\n"
-            + "    alert(file.size);\n"
-            + "    alert(file.type);\n"
+            + "    log(file.name);\n"
+            + "    log(file.lastModifiedDate);\n"
+            + "    log(file.lastModified);\n"
+            + "    log(file.webkitRelativePath);\n"
+            + "    log(file.size);\n"
+            + "    log(file.type);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -102,7 +103,7 @@ public class FileTest extends WebDriverTestCase {
                 expected[1] = tstFile.getName();
             }
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -119,19 +120,20 @@ public class FileTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.testForm.fileupload.files) {\n"
             + "    var files = document.testForm.fileupload.files;\n"
-            + "    alert(files.length);\n"
+            + "    log(files.length);\n"
 
             + "    var file = files[0];\n"
-            + "    alert(typeof file.text);\n"
+            + "    log(typeof file.text);\n"
 
             + "    try {\n"
-            + "      file.text().then(function(text) { alert(text); });\n"
-            + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+            + "      file.text().then(function(text) { log(text); });\n"
+            + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -155,7 +157,7 @@ public class FileTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -194,14 +196,15 @@ public class FileTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.testForm.fileupload.files) {\n"
             + "    var files = document.testForm.fileupload.files;\n"
 
             + "    var file = files[0];\n"
-            + "    alert(file.type);\n"
+            + "    log(file.type);\n"
             + "  }\n"
             + "}\n"
             + "</script>\n"
@@ -223,7 +226,7 @@ public class FileTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -238,14 +241,15 @@ public class FileTest extends WebDriverTestCase {
     public void ctorNoArgs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(File in window);\n"
+                + "    log(File in window);\n"
 
                 + "    try {\n"
-                + "      alert(new File());\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      log(new File());\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -253,7 +257,7 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -265,20 +269,21 @@ public class FileTest extends WebDriverTestCase {
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var now = Date.now();\n"
                 + "      var file = new File([], 'htMluniT.txt');\n"
-                + "      alert(file);\n"
-                + "      alert(file.name);\n"
-                + "      alert(file.type);\n"
-                + "      alert(file.lastModified >= now);\n"
-                + "      alert(file.size);\n"
+                + "      log(file);\n"
+                + "      log(file.name);\n"
+                + "      log(file.type);\n"
+                + "      log(file.lastModified >= now);\n"
+                + "      log(file.size);\n"
 
-                + "      file.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      file.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -286,7 +291,8 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -298,20 +304,21 @@ public class FileTest extends WebDriverTestCase {
     public void ctorString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var now = Date.now();\n"
                 + "      var file = new File(['HtmlUnit'], 'htMluniT.txt');\n"
-                + "      alert(file);\n"
-                + "      alert(file.name);\n"
-                + "      alert(file.type);\n"
-                + "      alert(file.lastModified >= now);\n"
-                + "      alert(file.size);\n"
+                + "      log(file);\n"
+                + "      log(file.name);\n"
+                + "      log(file.type);\n"
+                + "      log(file.lastModified >= now);\n"
+                + "      log(file.size);\n"
 
-                + "      file.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      file.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -319,7 +326,8 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -332,21 +340,22 @@ public class FileTest extends WebDriverTestCase {
     public void ctorStringWithOptions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var now = Date.now();\n"
                 + "      var file = new File(['HtmlUnit'], 'htMluniT.txt',"
                               + "{type: 'application/octet-stream', lastModified: '1234567'});\n"
-                + "      alert(file);\n"
-                + "      alert(file.name);\n"
-                + "      alert(file.type);\n"
-                + "      alert(file.lastModified);\n"
-                + "      alert(file.size);\n"
+                + "      log(file);\n"
+                + "      log(file.name);\n"
+                + "      log(file.type);\n"
+                + "      log(file.lastModified);\n"
+                + "      log(file.size);\n"
 
-                + "      file.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      file.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -354,7 +363,8 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -367,20 +377,21 @@ public class FileTest extends WebDriverTestCase {
     public void ctorStrings() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var now = Date.now();\n"
                 + "      var file = new File(['Html', 'Unit', 'is great'], 'htMluniT.txt');\n"
-                + "      alert(file);\n"
-                + "      alert(file.name);\n"
-                + "      alert(file.type);\n"
-                + "      alert(file.lastModified >= now);\n"
-                + "      alert(file.size);\n"
+                + "      log(file);\n"
+                + "      log(file.name);\n"
+                + "      log(file.type);\n"
+                + "      log(file.lastModified >= now);\n"
+                + "      log(file.size);\n"
 
-                + "      file.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      file.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -388,7 +399,8 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -400,8 +412,9 @@ public class FileTest extends WebDriverTestCase {
     public void ctorMixed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    try {\n"
                 + "      var now = Date.now();\n"
@@ -410,14 +423,14 @@ public class FileTest extends WebDriverTestCase {
                 + "      nabv.set([77, 77], 0);\n"
                 + "      var file = new File(['HtmlUnit',"
                                       + "nab, new Int8Array([77,75])], 'htMluniT.txt');\n"
-                + "      alert(file);\n"
-                + "      alert(file.name);\n"
-                + "      alert(file.type);\n"
-                + "      alert(file.lastModified >= now);\n"
-                + "      alert(file.size);\n"
+                + "      log(file);\n"
+                + "      log(file.name);\n"
+                + "      log(file.type);\n"
+                + "      log(file.lastModified >= now);\n"
+                + "      log(file.size);\n"
 
-                + "      file.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      file.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -425,6 +438,7 @@ public class FileTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }
