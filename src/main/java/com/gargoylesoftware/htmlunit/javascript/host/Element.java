@@ -124,9 +124,9 @@ public class Element extends Node {
     public void setDomNode(final DomNode domNode) {
         super.setDomNode(domNode);
 
-        style_ = new CSSStyleDeclaration(this);
-
         setParentScope(getWindow().getDocument());
+        // CSSStyleDeclaration uses the parent scope
+        style_ = new CSSStyleDeclaration(this);
 
         /**
          * Convert JavaScript snippets defined in the attribute map to executable event handlers.
