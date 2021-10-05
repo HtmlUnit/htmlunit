@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
+            <action type="fix" dev="rbri" issue="388">
+                Add missing support for XmlHttpRequees responseType and response properties.
+            </action>
             <action type="fix" dev="rbri" issue="386" due-to="Rural Hunter">
                 Add missing request browser headers when setting location from js.
             </action>
