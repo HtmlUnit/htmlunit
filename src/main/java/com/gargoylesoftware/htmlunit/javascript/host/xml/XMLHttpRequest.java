@@ -87,6 +87,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.ProgressEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.Blob;
@@ -155,7 +156,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static final String RESPONSE_TYPE_DEFAULT = "";
     private static final String RESPONSE_TYPE_ARRAYBUFFER = "arraybuffer";
     private static final String RESPONSE_TYPE_BLOB = "blob";
-    // private static final String RESPONSE_TYPE_DOCUMENT = "document";
+    private static final String RESPONSE_TYPE_DOCUMENT = "document";
     private static final String RESPONSE_TYPE_JSON = "json";
     private static final String RESPONSE_TYPE_TEXT = "text";
 
@@ -307,7 +308,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (RESPONSE_TYPE_DEFAULT.equals(responseType)
                 || RESPONSE_TYPE_ARRAYBUFFER.equals(responseType)
                 || RESPONSE_TYPE_BLOB.equals(responseType)
-                // || RESPONSE_TYPE_DOCUMENT = "document";
+                || RESPONSE_TYPE_DOCUMENT.equals(responseType)
                 || (RESPONSE_TYPE_JSON.equals(responseType)
                         && !getBrowserVersion().hasFeature(XHR_RESPONSE_TYPE_THROWS_UNSENT))
                 || RESPONSE_TYPE_TEXT.equals(responseType)) {
@@ -384,6 +385,27 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             catch (final IOException e) {
                 webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
                 return null;
+            }
+        }
+        else if (RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
+            if (webResponse_ != null) {
+                try {
+                    if (webResponse_ != null) {
+                        final Charset encoding = webResponse_.getContentCharset();
+                        if (encoding == null) {
+                            return "";
+                        }
+                        final String content = webResponse_.getContentAsString(encoding);
+                        if (content == null) {
+                            return "";
+                        }
+                        return DOMParser.parseFromString(this, content, webResponse_.getContentType());
+                    }
+                }
+                catch (final IOException e) {
+                    webResponse_ = new NetworkErrorWebResponse(webRequest_, e);
+                    return null;
+                }
             }
         }
         else if (RESPONSE_TYPE_JSON.equals(responseType_)) {

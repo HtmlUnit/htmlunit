@@ -2282,8 +2282,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "exception", "", "", "", "", "exception"},
-            IE = {"", "arraybuffer", "blob", "blob", "text", "text", "text", "text", "text", ""})
+    @Alerts(DEFAULT = {"", "exception", "exception", "exception", "exception", "exception",
+                       "", "", "", "", "exception"},
+            IE = {"", "arraybuffer", "blob", "blob", "text", "document", "document",
+                  "document", "document", "document", ""})
     public void responseTypeSetAfterOpenSync() throws Exception {
         final String html =
               "<html>\n"
@@ -2295,21 +2297,38 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
 
             + "        log(request.responseType);\n"
+
             + "      try {\n"
             + "        request.responseType = 'arraybuffer';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'blob';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'json';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'text';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = 'document';\n"
             + "        log(request.responseType);\n"
             + "      } catch(e) { log('exception'); }\n"
 
             + "      try {\n"
             + "        request.responseType = 'JsON';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
 
+            + "      try {\n"
             + "        request.responseType = 'unknown';\n"
             + "        log(request.responseType);\n"
             + "      } catch(e) { log('exception'); }\n"
@@ -2342,8 +2361,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "text", "text", "text", "text", ""},
-            IE = {"", "arraybuffer", "blob", "blob", "text", "text", "text", "text", "text", ""})
+    @Alerts(DEFAULT = {"", "arraybuffer", "blob", "json", "text", "document",
+                       "document", "document", "document", "document", ""},
+            IE = {"", "arraybuffer", "blob", "blob", "text", "document",
+                  "document", "document", "document", "document", ""})
     public void responseTypeSetAfterOpenAsync() throws Exception {
         final String html =
               "<html>\n"
@@ -2358,18 +2379,34 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "      try {\n"
             + "        request.responseType = 'arraybuffer';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'blob';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'json';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
             + "        request.responseType = 'text';\n"
+            + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
+
+            + "      try {\n"
+            + "        request.responseType = 'document';\n"
             + "        log(request.responseType);\n"
             + "      } catch(e) { log('exception'); }\n"
 
             + "      try {\n"
             + "        request.responseType = 'JsON';\n"
             + "        log(request.responseType);\n"
+            + "      } catch(e) { log('exception'); }\n"
 
+            + "      try {\n"
             + "        request.responseType = 'unknown';\n"
             + "        log(request.responseType);\n"
             + "      } catch(e) { log('exception'); }\n"
@@ -2795,6 +2832,95 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         final String json = "";
 
         getMockWebConnection().setResponse(URL_SECOND, json, MimeType.APPLICATION_JSON);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "document", "[object XMLDocument]"})
+    public void responseResponseTypeDocumentXml() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'document';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+                "<xml>\n"
+              + "<content>blah</content>\n"
+              + "</xml>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+
+    @Test
+    @Alerts({"", "document", "[object HTMLDocument]"})
+    public void responseResponseTypeDocumentHtml() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'document';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "          } catch(ex) { log('exception' + ex); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+                "<html>\n"
+              + "<body>Test</body>\n"
+              + "<html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_HTML);
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }

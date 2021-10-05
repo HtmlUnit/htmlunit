@@ -67,48 +67,71 @@ public class DOMParser extends SimpleScriptable {
      */
     @JsxFunction
     public Document parseFromString(final String str, final Object type) {
+        try {
+            final Document document = parseFromString(this, str, type);
+            if (document == null) {
+                throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
+            }
+            return document;
+        }
+        catch (final IOException e) {
+            throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
+        }
+
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Parses the given Unicode string into a DOM document.
+     * @param scriptable the ScriptableObject this belongs to
+     * @param str the Unicode string to be parsed
+     * @param type the MIME type of the string -
+     *        <code>text/html</code>, <code>text/xml</code>, <code>application/xml</code>,
+     *        <code>application/xhtml+xml</code>, <code>image/svg+xml</code>. Must not be {@code null}.
+     * @return the generated document
+     * @throws IOException in case of error
+     */
+    public static Document parseFromString(final SimpleScriptable scriptable, final String str, final Object type)
+                throws IOException {
         if (type == null || Undefined.isUndefined(type)) {
             throw Context.reportRuntimeError("Missing 'type' parameter");
         }
+
         if (MimeType.TEXT_XML.equals(type)
                 || MimeType.APPLICATION_XML.equals(type)
                 || MimeType.APPLICATION_XHTML.equals(type)
                 || "image/svg+xml".equals(type)) {
             final XMLDocument document = new XMLDocument();
-            document.setParentScope(getParentScope());
-            document.setPrototype(getPrototype(XMLDocument.class));
+            document.setParentScope(scriptable.getParentScope());
+            document.setPrototype(scriptable.getPrototype(XMLDocument.class));
             document.loadXML(str);
             return document;
         }
 
         if (MimeType.TEXT_HTML.equals(type)) {
-            final WebWindow webWindow = getWindow().getWebWindow();
+            final WebWindow webWindow = scriptable.getWindow().getWebWindow();
             final WebClient webClient = webWindow.getWebClient();
             final WebResponse webResponse = new StringWebResponse(str, webWindow.getEnclosedPage().getUrl());
 
             // a similar impl is in
             // com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation.createHTMLDocument(Object)
-            try {
-                final HtmlPage page = new HtmlPage(webResponse, webWindow);
-                page.setEnclosingWindow(null);
-                final Window window = webWindow.getScriptableObject();
+            final HtmlPage page = new HtmlPage(webResponse, webWindow);
+            page.setEnclosingWindow(null);
+            final Window window = webWindow.getScriptableObject();
 
-                // document knows the window but is not the windows document
-                final HTMLDocument document = new HTMLDocument();
-                document.setParentScope(window);
-                document.setPrototype(window.getPrototype(document.getClass()));
-                // document.setWindow(window);
-                document.setDomNode(page);
+            // document knows the window but is not the windows document
+            final HTMLDocument document = new HTMLDocument();
+            document.setParentScope(window);
+            document.setPrototype(window.getPrototype(document.getClass()));
+            // document.setWindow(window);
+            document.setDomNode(page);
 
-                final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
-                htmlParser.parse(webResponse, page, false);
-                return (HTMLDocument) page.getScriptableObject();
-            }
-            catch (final IOException e) {
-                throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
-            }
+            final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
+            htmlParser.parse(webResponse, page, false);
+            return (HTMLDocument) page.getScriptableObject();
         }
 
-        throw Context.reportRuntimeError("Invalid 'type' parameter: " + type);
+        return null;
     }
 }
