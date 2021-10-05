@@ -802,6 +802,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"1", "[object HTMLBodyElement]"},
             FF78 = {"1", "[object HTMLBodyElement]"},
             IE = {"0", "[object HTMLBodyElement]"})
+    @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -816,6 +817,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             FF = {"1", "[object Text]"},
             FF78 = {"1", "[object Text]"},
             IE = {"1", "[object Text]"})
+    @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
