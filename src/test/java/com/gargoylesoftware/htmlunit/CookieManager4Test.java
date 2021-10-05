@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -109,6 +110,11 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Before
     public void clearCookies() throws Exception {
         shutDownAll();
+
+        // [IE] real IE waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
 
         getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection(), null);

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Locale;
 
 import org.apache.http.client.utils.DateUtils;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -799,8 +800,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"},
-            FF78 = {"1", "[object HTMLBodyElement]"})
-    // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
+            FF78 = {"1", "[object HTMLBodyElement]"},
+            IE = {"0", "[object HTMLBodyElement]"})
     public void designMode_selectionRange_empty() throws Exception {
         designMode_selectionRange("");
     }
@@ -813,8 +814,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"},
-            FF78 = {"1", "[object Text]"})
-    // TODO [IE]MODALPANEL real IE opens a modal panel which webdriver cannot handle
+            FF78 = {"1", "[object Text]"},
+            IE = {"1", "[object Text]"})
     public void designMode_selectionRange_text() throws Exception {
         designMode_selectionRange("hello");
     }
@@ -1739,6 +1740,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body>abc</body>\n"
             + "</html>";
+
+        // [IE] real IE waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
 
         loadPageVerifyTitle2(html);
     }

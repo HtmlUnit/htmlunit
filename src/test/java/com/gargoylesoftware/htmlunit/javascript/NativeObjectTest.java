@@ -192,7 +192,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function\\s()\\s{\\s[native\\scode]\\s}",
             FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             FF78 = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
-            IE = "\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
+            IE = "\\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
     @NotYetImplemented(IE)
     public void proto() throws Exception {
         final String html = ""

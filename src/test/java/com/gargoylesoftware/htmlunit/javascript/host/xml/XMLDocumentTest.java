@@ -1138,6 +1138,7 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  <div id='tester'></div>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
 

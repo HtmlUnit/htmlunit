@@ -613,7 +613,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               + "</script>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -1016,11 +1016,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"changed2", "changed"})
     public void firingOnchange() throws Exception {
         final String html = "<html><body>\n"
-            + "<form onchange='alert(\"changed\")'>\n"
-            + "  <input type='file' id='file1' onchange='alert(\"changed2\")' "
-                + "onkeydown='alert(\"onkeydown2\")' "
-                + "onkeypress='alert(\"onkeypress2\")' "
-                + "onkeyup='alert(\"onkeyup2\")'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "<form onchange='log(\"changed\")'>\n"
+            + "  <input type='file' id='file1' onchange='log(\"changed2\")' "
+                + "onkeydown='log(\"onkeydown2\")' "
+                + "onkeypress='log(\"onkeypress2\")' "
+                + "onkeyup='log(\"onkeyup2\")'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -1029,7 +1032,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
         assertTrue(tmpFile.delete());
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1070,9 +1073,10 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
@@ -1087,7 +1091,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1119,14 +1123,17 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("foo, change")
+    @Alerts({"foo", "change"})
     public void onchange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world' onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
               + "</body></html>";
 
@@ -1134,7 +1141,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("f")).sendKeys(absolutePath);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver, 2));
+
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**

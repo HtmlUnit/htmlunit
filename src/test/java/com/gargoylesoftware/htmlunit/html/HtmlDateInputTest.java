@@ -142,8 +142,7 @@ public class HtmlDateInputTest extends WebDriverTestCase {
     @Test
     @Alerts("2018-03-22")
     @BuggyWebDriver(CHROME = "80322-02-01",
-                    EDGE = "80322-02-01",
-                IE = "")
+                    EDGE = "80322-02-01")
     public void typeInto() throws Exception {
         final String html =
               "<html>\n"

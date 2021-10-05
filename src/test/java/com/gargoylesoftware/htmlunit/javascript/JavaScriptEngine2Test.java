@@ -726,9 +726,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "[object Window]",
-            IE = {})
-    @HtmlUnitNYI(IE = "[object Window]")
+    @Alerts("[object Window]")
     public void boundFunction() throws Exception {
         final String html = "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION

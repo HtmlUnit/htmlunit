@@ -21,6 +21,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -42,7 +43,7 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
                        "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"left", "right", "bottom", "middle",
                   "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"left", "right", "", "", "", "", "", "", "", "", ""})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -61,12 +62,14 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "  </form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 11; i++) {\n"
-            + "    alert(document.getElementById('f' + i).align);\n"
+            + "    log(document.getElementById('f' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -86,11 +89,12 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "  <form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('i1');\n"
@@ -110,7 +114,8 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'texttop');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -126,10 +131,11 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "    <fieldset id='a' />\n"
             + "  </form>"
             + "  <script>\n"
-            + "    alert(document.getElementById('a').form);\n"
+            + LOG_TITLE_FUNCTION
+            + "    log(document.getElementById('a').form);\n"
             + "  </script>"
             + "</body>"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

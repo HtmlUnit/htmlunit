@@ -19,6 +19,7 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
@@ -152,9 +153,18 @@ public class NativeFunctionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function\\sfoo(){return 1;}",
-             "function\\sfoo(\\s)\\s\\s{\\s\\treturn\\s1\\s\\s\\n ;\\n\\s\\s\\s\\s;\\s}" })
-    @NotYetImplemented
+    @Alerts({"function\\sfoo(){return\\s1;}",
+             "function\\sfoo(\\s)\\s\\s{\\s\\treturn\\s1\\s\\s\\n\\s;\\n\\s\\s\\s\\s;\\s}" })
+    @HtmlUnitNYI(CHROME = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+                           "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
+            EDGE = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+                    "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
+            FF = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+                  "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
+            FF78 = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+                    "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
+            IE = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+                  "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"})
     public void functionToStringMinimized() throws Exception {
         final String html
             = "<html>\n"
