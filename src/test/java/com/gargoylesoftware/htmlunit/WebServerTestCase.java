@@ -352,6 +352,7 @@ public abstract class WebServerTestCase extends WebTestCase {
 
                 final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
                 handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+                handler.setAuthMethod(Constraint.__BASIC_AUTH);
                 handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
             }
 
