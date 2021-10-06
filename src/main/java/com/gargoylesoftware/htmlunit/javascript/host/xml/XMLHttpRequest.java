@@ -390,17 +390,15 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         else if (RESPONSE_TYPE_DOCUMENT.equals(responseType_)) {
             if (webResponse_ != null) {
                 try {
-                    if (webResponse_ != null) {
-                        final Charset encoding = webResponse_.getContentCharset();
-                        if (encoding == null) {
-                            return "";
-                        }
-                        final String content = webResponse_.getContentAsString(encoding);
-                        if (content == null) {
-                            return "";
-                        }
-                        return DOMParser.parseFromString(this, content, webResponse_.getContentType());
+                    final Charset encoding = webResponse_.getContentCharset();
+                    if (encoding == null) {
+                        return "";
                     }
+                    final String content = webResponse_.getContentAsString(encoding);
+                    if (content == null) {
+                        return "";
+                    }
+                    return DOMParser.parseFromString(this, content, webResponse_.getContentType());
                 }
                 catch (final IOException e) {
                     webResponse_ = new NetworkErrorWebResponse(webRequest_, e);

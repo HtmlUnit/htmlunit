@@ -77,7 +77,6 @@ public class DOMParser extends SimpleScriptable {
         catch (final IOException e) {
             throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
         }
-
     }
 
     /**
