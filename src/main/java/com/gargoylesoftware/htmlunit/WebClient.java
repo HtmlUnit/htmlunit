@@ -910,7 +910,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public synchronized Executor getExecutor() {
         if (executor_ == null) {
-            final ThreadPoolExecutor tmpThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
+            final ThreadPoolExecutor tmpThreadPool = (ThreadPoolExecutor) Executors.newCachedThreadPool();
             tmpThreadPool.setThreadFactory(new ThreadNamingFactory(tmpThreadPool.getThreadFactory()));
             // tmpThreadPool.prestartAllCoreThreads();
             executor_ = tmpThreadPool;
