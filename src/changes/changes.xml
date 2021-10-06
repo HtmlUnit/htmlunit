@@ -8,6 +8,16 @@
 
     <body>
         <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
+            <action type="add" dev="rbri">
+                A short section about 'Multithreading/Threads Pooling' added to the web page.
+            </action>
+            <action type="add" dev="rbri">
+                WebClient.setExecutor(ExecutorService) addet to make treading more flexible.
+            </action>
+            <action type="update" dev="rbri" issue="390" due-to="Dennis Duysak">
+                Use a CachedThreadPool instead of a FixedThreadPool for our executor service because the number
+                of WebSocket threads might block the whole execution otherwise.
+            </action>
             <action type="fix" dev="rbri" issue="388">
                 Add missing support for XmlHttpRequees responseType and response properties.
             </action>
