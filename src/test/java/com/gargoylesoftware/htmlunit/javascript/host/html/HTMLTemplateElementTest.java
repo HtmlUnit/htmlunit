@@ -202,6 +202,41 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<template></template>", "<template>HtmlUnit</template>",
+             "<template><div>HtmlUnit</div><div>is great</div></template>"})
+    public void innerHTMLIncludingTemplate() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        template = document.getElementById('tEmpty');\n"
+            + "        log(template.innerHTML);\n"
+
+            + "        template = document.getElementById('tText');\n"
+            + "        log(template.innerHTML);\n"
+
+            + "        template = document.getElementById('tDiv');\n"
+            + "        log(template.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='tEmpty'><template></template></div>\n"
+            + "    <div id='tText'><template>HtmlUnit</template></div>\n"
+            + "    <div id='tDiv'><template><div>HtmlUnit</div><div>is great</div></template></div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */

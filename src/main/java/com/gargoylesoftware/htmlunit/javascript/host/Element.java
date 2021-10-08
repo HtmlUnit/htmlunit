@@ -971,7 +971,7 @@ public class Element extends Node {
         isPlain = isPlain || "STYLE".equals(tagName);
 
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printChildren(buf, domNode, false, !isPlain);
+        printChildren(buf, domNode, !isPlain);
         return buf.toString();
     }
 
@@ -984,7 +984,7 @@ public class Element extends Node {
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
-        printNode(buf, getDomNodeOrDie(), true, true);
+        printNode(buf, getDomNodeOrDie(), true);
         return buf.toString();
     }
 
@@ -1038,27 +1038,24 @@ public class Element extends Node {
      * Helper for getting code back from nodes.
      * @param builder the builder to write to
      * @param node the node to be serialized
-     * @param forOuter true if this is called during processing of a outerHtml call
      * @param html flag
      */
-    protected final void printChildren(final StringBuilder builder, final DomNode node,
-                final boolean forOuter, final boolean html) {
-        if (forOuter && (node instanceof HtmlTemplate)) {
+    protected final void printChildren(final StringBuilder builder, final DomNode node, final boolean html) {
+        if (node instanceof HtmlTemplate) {
             final HtmlTemplate template = (HtmlTemplate) node;
 
             for (final DomNode child : template.getContent().getChildren()) {
-                printNode(builder, child, forOuter, html);
+                printNode(builder, child, html);
             }
             return;
         }
 
         for (final DomNode child : node.getChildren()) {
-            printNode(builder, child, forOuter, html);
+            printNode(builder, child, html);
         }
     }
 
-    protected void printNode(final StringBuilder builder, final DomNode node,
-                    final boolean forOuter, final boolean html) {
+    protected void printNode(final StringBuilder builder, final DomNode node, final boolean html) {
         if (node instanceof DomComment) {
             if (html) {
                 // Remove whitespace sequences.
@@ -1102,7 +1099,7 @@ public class Element extends Node {
             final boolean isHtml = html
                     && !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
-            printChildren(builder, node, forOuter, isHtml);
+            printChildren(builder, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {
                 builder.append("</").append(tag).append('>');
             }
@@ -1124,7 +1121,7 @@ public class Element extends Node {
                     }
                 }
                 if (!"script".equals(element.getTagName())) {
-                    printChildren(builder, node, forOuter, html);
+                    printChildren(builder, node, html);
                 }
             }
         }
