@@ -9,6 +9,9 @@
     <body>
         <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
             <action type="add" dev="rbri">
+                Navigator.languages added.
+            </action>
+            <action type="add" dev="rbri">
                 A short section about 'Multithreading/Threads Pooling' added to the web page.
             </action>
             <action type="add" dev="rbri">
