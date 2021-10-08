@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
+            <action type="fix" dev="rbri">
+                neko: Fix some problems when parsing template content.
+            </action>
             <action type="add" dev="rbri">
                 Navigator.languages added.
             </action>
