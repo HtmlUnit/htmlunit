@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94">
+        <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94, Firefox 93">
             <action type="fix" dev="rbri">
                 Fix innerHTML and outerHTML if one child node is a template.
             </action>

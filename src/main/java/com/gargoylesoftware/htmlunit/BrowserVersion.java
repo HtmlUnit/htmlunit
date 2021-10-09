@@ -94,7 +94,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(92, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(93, "FF");
 
     /** Firefox 78 ESR. */
     public static final BrowserVersion FIREFOX_78 = new BrowserVersion(78, "FF78");
@@ -174,10 +174,10 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER};
-        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
         FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX.imgAcceptHeader_ = "image/webp,*/*";
+        FIREFOX.imgAcceptHeader_ = "image/avif,image/webp,*/*";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
