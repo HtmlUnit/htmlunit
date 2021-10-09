@@ -1092,10 +1092,10 @@ public final class StyleAttributes {
         FONT_STYLE_("font-style", "font-style", ff("normal")),
 
         /** The style property {@code fontSynthesis}. */
-        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code font-synthesis}. */
-        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdge("normal"), ff("normal"), ie("normal")),
