@@ -187,7 +187,8 @@ public class HtmlDateTimeLocalInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true-true",
             CHROME = "false-true",
-            EDGE = "false-true")
+            EDGE = "false-true",
+            FF = "false-true")
     public void maxValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -212,7 +213,8 @@ public class HtmlDateTimeLocalInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true-true",
             CHROME = "false-true",
-            EDGE = "false-true")
+            EDGE = "false-true",
+            FF = "false-true")
     public void minValidation() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
