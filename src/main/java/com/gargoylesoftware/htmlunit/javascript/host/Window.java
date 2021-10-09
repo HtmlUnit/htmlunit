@@ -657,7 +657,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE, FF, IE})
     public Object getClientInformation() {
         if (clientInformation_ != null) {
             return clientInformation_;

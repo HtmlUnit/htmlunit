@@ -2566,7 +2566,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
-                FF = {"undefined", "##test##"},
+                FF = {"[object Navigator]", "[object Navigator]"},
                 FF78 = {"undefined", "##test##"},
                 IE = {"[object Navigator]", "[object Navigator]"})
     public void clientInformation() throws Exception {
