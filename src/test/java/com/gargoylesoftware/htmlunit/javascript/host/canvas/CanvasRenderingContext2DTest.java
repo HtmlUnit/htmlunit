@@ -929,10 +929,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "G4tdmIrRuA2C5HfMjEk0zEXdbhOn58w1B3KU0Ti8nyPDXaIjbp33my6j2eyLaBHNJpCtVxktotkEsvUqo0U0m0C2XmW0iGYT"
                 + "yNarjBbRbALZepXRIppNIFuvMlpEswlk61VGi2g2gWy9J1+DY2XynG9XAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAqElEQVRYhe2SwQ3DIAxF/yzMwSCeJKN0lg6TXeihRHKNacIh"
-                + "6qHvSUgI8OclWPqkSnqGta0PSXroOubOn+We1Q98C8z27hSNXsPCLHCX1Prlh0Tro7q5LYpa3zvqt6R+z0RbMuIfNVfs59WF"
-                + "r4pKUgm5vn4QvfL0MSQT8mfKJNc09uJPRaX3y5QgVO8QLRp7dEU0tlXWizNR/4EAAAAAAAAAAAAAAP/AC/GNUlQypcRWAAAA"
-                + "AElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAn0lEQVRYhe3S4Q2DIBCG4W+ljuMujuIgrOEYTkF/FJLzehSp"
+                + "JibmfRJixOP8BKW9SVJyc6nMS9KiMdvBvr31X3oNmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6"
+                + "QW24uhHSBUfv67bBeh80BfO3BJU+u/5y91GvS4L6f3Qk6Kz97zSfCQoAAAAAAAAAwMO9AfT+WMj44PJ1AAAAAElFTkSuQmCC",
             FF78 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAn0lEQVR"
                 + "Yhe3S4Q2DIBCG4W+WzuEgTuIozOIw7kJ/FJLzehSpJibmfRJixOP8BKW9SVJyc6nMS9KiMdvBvr31X3o"
                 + "Nmws7L/o3aNOvhqukXK61LpexmOf2Y44Etb1b69coaA6G39FaV9ma6AR6QW24uhHSBUfv67bBeh80BfO"
@@ -2100,9 +2099,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "XM8CVlH4JzAN9s4cx5+sd1haZH/A/XvuT4/2KvNnPK/QumXjgOGIKGQc8coZsPtG/6V6T39XzvCwHrZ5es1vU2Ny/n1svgHo"
                 + "7ESVtzssQAAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlklEQVQ4je2SsQnDMBBF30yezCOI1NlAC3gEdW5cuXYX0miB"
-                + "4Am+GyWWDwXFxKSJDz7ow7/H3SEAB/RJ7gCBNUfUfwJ9AHUgJbU2JGgFg9bQtQaMWbveAdO7EUSbKUz4ah9ATQHYZb4K/GTC"
-                + "KtABPVxucI/reXzAfFoPYYTp6R8w24wBjlMhsFeblbMbflcb+gk8gT8GLkqKbVBaXVuaAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAj0lEQVQ4je2TwQmEMBBFX6nWsBUEPKaLrSANBJsISC4pwCa+"
+                + "F9E4CFnY4EUH/uGHP49hyAA4YNrkOgis6VHPBPoAiiBtSjYkGARJR2hpAVW1R9B4AVwqnwRDY8I9PoK+F8BY+dgC/jJhE+iA"
+                + "CT4z5HKsJxfMp/UQMuzvGYqHYHIW2O1S7A7/qxP9Bb7Am4ErYUp0VpNbEVYAAAAASUVORK5CYII=",
             FF78 = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjklEQVQ4je2TwQmFMBBEX4+2YAE2EEgBFpJU4SWnnFOBjcy/"
                 + "iOYvQgSDF12Yw4TZx7JkATywbPIdBNb0qHcCXQQFkDYlGxIMgqQjtLaAqtoDaDoBrpVPgqEx4R6fQPMJMFQ+tIBXJmwCPbDA"
