@@ -398,7 +398,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     + "image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             EDGE = "text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-            FF = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             FF78 = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
             IE = "text/html, application/xhtml+xml, image/jxr, */*")
     public void acceptHeader() throws Exception {
