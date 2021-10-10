@@ -114,27 +114,7 @@ public class HtmlSerializerInnerOuterText {
      */
     protected void appendDomNode(final HtmlSerializerTextBuilder builder,
             final DomNode domNode, final Mode mode) {
-//        final boolean block;
-//        final Object scriptableObject = domNode.getScriptableObject();
-//        if (domNode instanceof HtmlBody) {
-//            block = false;
-//        }
-//        else if (scriptableObject instanceof Element) {
-//            final Element element = (Element) scriptableObject;
-//            final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
-//            block = "block".equals(display);
-//        }
-//        else {
-//            block = false;
-//        }
-//
-//        if (block) {
-//            builder.appendBlockSeparator();
-//        }
         appendChildren(builder, domNode, mode);
-//        if (block) {
-//            builder.appendBlockSeparator();
-//        }
     }
 
     /**
@@ -219,7 +199,7 @@ public class HtmlSerializerInnerOuterText {
         }
     }
 
-    private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
@@ -298,8 +278,6 @@ public class HtmlSerializerInnerOuterText {
         private State state_;
         private final StringBuilder builder_;
         private int trimRightPos_;
-//        private boolean contentAdded_;
-//        private boolean ignoreHtmlBreaks_;
 
         public HtmlSerializerTextBuilder() {
             builder_ = new StringBuilder();
@@ -450,117 +428,11 @@ public class HtmlSerializerInnerOuterText {
                     continue;
                 }
 
-//                if (c == (char) 160) {
-//                    builder_.append(' ');
-//                    state = State.BLANK_AT_END;
-//                    trimRightPos = builder_.length();
-//
-//                    if (mode == Mode.WHITE_SPACE_NORMAL || mode == Mode.WHITE_SPACE_PRE_LINE) {
-//                        state = State.DEFAULT;
-//                    }
-//                    continue;
-//                }
                 builder_.append(c);
                 state_ = State.DEFAULT;
                 trimRightPos_ = builder_.length();
-                // contentAdded_ = true;
             }
         }
-
-//        public void appendBlockSeparator() {
-//            switch (state_) {
-//                case EMPTY:
-//                    break;
-//                case BLANK_AT_END:
-//                    builder_.setLength(trimRightPos_);
-//                    if (builder_.length() == 0) {
-//                        state_ = State.EMPTY;
-//                    }
-//                    else {
-//                        builder_.append('\n');
-//                        state_ = State.BLOCK_SEPARATOR_AT_END;
-//                    }
-//                    break;
-//                case BLANK_AT_END_AFTER_NEWLINE:
-//                    builder_.setLength(trimRightPos_ - 1);
-//                    if (builder_.length() == 0) {
-//                        state_ = State.EMPTY;
-//                    }
-//                    else {
-//                        builder_.append('\n');
-//                        state_ = State.BLOCK_SEPARATOR_AT_END;
-//                    }
-//                    break;
-//                case BLOCK_SEPARATOR_AT_END:
-//                    break;
-//                case NEWLINE_AT_END:
-//                case BREAK_AT_END:
-//                    builder_.setLength(builder_.length() - 1);
-//                    trimRightPos_ = trimRightPos_ - 1;
-//                    if (builder_.length() == 0) {
-//                        state_ = State.EMPTY;
-//                    }
-//                    else {
-//                        builder_.append('\n');
-//                        state_ = State.BLOCK_SEPARATOR_AT_END;
-//                    }
-//                    break;
-//                default:
-//                    builder_.append('\n');
-//                    state_ = State.BLOCK_SEPARATOR_AT_END;
-//                    break;
-//            }
-//        }
-
-//        public void appendBreak(final Mode mode) {
-//            if (ignoreHtmlBreaks_) {
-//                return;
-//            }
-//
-//            builder_.setLength(trimRightPos_);
-//
-//            builder_.append('\n');
-//            state_ = State.BREAK_AT_END;
-//            trimRightPos_ = builder_.length();
-//        }
-
-//        public void trimRight(final Mode mode) {
-//            if (mode == Mode.PRE) {
-//                switch (state_) {
-//                    case BLOCK_SEPARATOR_AT_END:
-//                    case NEWLINE_AT_END:
-//                    case BREAK_AT_END:
-//                        if (trimRightPos_ == builder_.length()) {
-//                            trimRightPos_--;
-//                        }
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//
-//            builder_.setLength(trimRightPos_);
-//            state_ = State.DEFAULT;
-//            if (builder_.length() == 0) {
-//                state_ = State.EMPTY;
-//            }
-//        }
-
-//        public boolean wasContentAdded() {
-//            return contentAdded_;
-//        }
-//
-//        public void resetContentAdded() {
-//            contentAdded_ = false;
-//        }
-//
-//        public void ignoreHtmlBreaks() {
-//            ignoreHtmlBreaks_ = true;
-//        }
-//
-//        public void processHtmlBreaks() {
-//            ignoreHtmlBreaks_ = false;
-//        }
 
         public String getText() {
             return builder_.substring(0, trimRightPos_);
