@@ -14,8 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_IGNORE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
+
 import org.apache.commons.lang3.StringUtils;
 
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
@@ -27,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlSummary;
+import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
@@ -34,6 +40,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.svg.SvgText;
+import com.gargoylesoftware.htmlunit.svg.SvgTitle;
 
 /**
  * Special serializer to generate the output we need
@@ -42,6 +50,13 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * @author Ronald Brill
  */
 public class HtmlSerializerInnerOuterText {
+
+    private final BrowserVersion browserVersion_;
+
+    public HtmlSerializerInnerOuterText(final BrowserVersion browserVersion) {
+        super();
+        browserVersion_ = browserVersion;
+    }
 
     /**
      * Converts an HTML node to text.
@@ -100,21 +115,29 @@ public class HtmlSerializerInnerOuterText {
         else if (node instanceof HtmlTextArea) {
             // nothing to do
         }
-        else {
-            appendDomNode(builder, node, mode);
+        else if (node instanceof HtmlSvg) {
+            if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {
+                builder.appendRequiredLineBreak();
+                appendChildren(builder, node, mode);
+                builder.appendRequiredLineBreak();
+            }
+            else {
+                appendChildren(builder, node, mode);
+            }
         }
-    }
-
-    /**
-     * Process {@link DomNode}.
-     *
-     * @param builder the StringBuilder to add to
-     * @param domNode the target to process
-     * @param mode the {@link Mode} to use for processing
-     */
-    protected void appendDomNode(final HtmlSerializerTextBuilder builder,
-            final DomNode domNode, final Mode mode) {
-        appendChildren(builder, domNode, mode);
+        else if (node instanceof SvgText) {
+            if (!browserVersion_.hasFeature(JS_INNER_TEXT_SVG_IGNORE)) {
+                appendChildren(builder, node, mode);
+            }
+        }
+        else if (node instanceof SvgTitle) {
+            if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_TITLE)) {
+                appendChildren(builder, node, mode);
+            }
+        }
+        else {
+            appendChildren(builder, node, mode);
+        }
     }
 
     /**

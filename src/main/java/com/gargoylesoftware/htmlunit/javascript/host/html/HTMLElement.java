@@ -702,7 +702,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getInnerText() {
-        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText();
+        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText(getBrowserVersion());
         return ser.asText(this.getDomNodeOrDie());
     }
 

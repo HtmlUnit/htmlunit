@@ -1048,7 +1048,19 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
     @BrowserFeature(IE)
-    JS_INNER_TEXT_LF,
+    JS_INNER_HTML_LF,
+
+    /** Indicates that innerText ignores SVG text content. */
+    @BrowserFeature(FF78)
+    JS_INNER_TEXT_SVG_IGNORE,
+
+    /** Indicates that innerText add a nl when reaching svg element. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INNER_TEXT_SVG_NL,
+
+    /** Indicates that innerText add svg title content also. */
+    @BrowserFeature(IE)
+    JS_INNER_TEXT_SVG_TITLE,
 
     /** Indicates that innerText setter supports null values. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})

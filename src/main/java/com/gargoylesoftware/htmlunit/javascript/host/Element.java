@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BOUNDINGCLIENTRECT_THROWS_IF_DISCONNECTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_LF;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_HTML_LF;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_NULL_AS_STRING;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_REMOVES_CHILDREN_FOR_DETACHED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OUTER_HTML_THROWS_FOR_DETACHED;
@@ -1108,7 +1108,7 @@ public class Element extends Node {
             if (node instanceof HtmlElement) {
                 final HtmlElement element = (HtmlElement) node;
                 if ("p".equals(element.getTagName())) {
-                    if (getBrowserVersion().hasFeature(JS_INNER_TEXT_LF)) {
+                    if (getBrowserVersion().hasFeature(JS_INNER_HTML_LF)) {
                         builder.append('\n'); // \r\n because it's to implement something IE specific
                     }
                     else {

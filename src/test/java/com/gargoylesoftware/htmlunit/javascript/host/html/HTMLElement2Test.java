@@ -986,6 +986,57 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"before\\nsvg-text\\nafter", "before\\nsvg-text\\nafter"},
+            FF = {"beforesvg-textafter", "undefined"},
+            FF78 = {"beforeafter", "undefined"},
+            IE = {"beforesvg-titlesvg-textafter", "beforesvg-titlesvg-textafter"})
+    public void innerText_SVG() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(myTestDiv.innerText);\n"
+            + "    log(myTestDiv.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>abc"
+            + "<div id='myTestDiv'>before<svg><title>svg-title</title><text>svg-text</text></svg>after</div>def"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"MyTitlevar i;", "MyTitlevar i;"},
+            FF = {"MyTitlevar i;", "undefined"},
+            FF78 = {"MyTitlevar i;", "undefined"})
+    public void innerText_Head() throws Exception {
+        final String html = "<html><head>"
+            + "<title>MyTitle</title>"
+            + "<script>var i;</script>"
+            + "</head>"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.head.innerText);\n"
+            + "    log(document.head.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"something", "0"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
