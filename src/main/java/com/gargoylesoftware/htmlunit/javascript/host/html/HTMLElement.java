@@ -707,6 +707,17 @@ public class HTMLElement extends Element {
     }
 
     /**
+     * Gets the outerText attribute.
+     * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
+     * @return the contents of this node as text
+     */
+    @JsxGetter({CHROME, EDGE, IE})
+    public String getOuterText() {
+        // as first hack
+        return getInnerText();
+    }
+
+    /**
      * Replaces all child elements of this element with the supplied text value.
      * (see https://html.spec.whatwg.org/multipage/dom.html#the-innertext-idl-attribute)
      * @param value the new value for the contents of this element

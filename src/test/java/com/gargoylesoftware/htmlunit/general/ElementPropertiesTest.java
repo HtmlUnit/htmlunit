@@ -554,7 +554,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
+                + "onvolumechange,onwaiting,onwheel,outerText,style,tabIndex,title",
             EDGE = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,"
                 + "isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
@@ -570,7 +570,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,onwheel,style,tabIndex,title",
+                + "onvolumechange,onwaiting,onwheel,outerText,style,tabIndex,title",
             FF78 = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,isContentEditable,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onblur,oncanplay,"
@@ -616,7 +616,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onmscontentzoom,onmsmanipulationstatechanged,onpaste,onpause,onplay,onplaying,"
                 + "onprogress,onratechange,onreset,onscroll,onseeked,onseeking,onselect,onselectstart,"
-                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,parentElement,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,outerHTML,outerText,"
+                + "parentElement,"
                 + "releaseCapture(),removeNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "style,tabIndex,title,uniqueID")
     public void htmlElement() throws Exception {
