@@ -10539,7 +10539,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                     + "DOM_VK_WIN_OEM_FJ_ROYA,DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
                     + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,DOM_VK_X,"
                     + "DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
-                    + "initKeyEvent(),isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which",
+                    + "isComposing,key,keyCode,location,metaKey,repeat,shiftKey,which",
                 IE = "altKey,char,charCode,constructor,ctrlKey,DOM_KEY_LOCATION_JOYSTICK,DOM_KEY_LOCATION_LEFT,"
                     + "DOM_KEY_LOCATION_MOBILE,DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,"
                     + "DOM_KEY_LOCATION_STANDARD,key,keyCode,location,metaKey,repeat,shiftKey,which")

@@ -3720,7 +3720,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "DOM_VK_WIN_OEM_FJ_TOUROKU,DOM_VK_WIN_OEM_JUMP,DOM_VK_WIN_OEM_PA1,"
                 + "DOM_VK_WIN_OEM_PA2,DOM_VK_WIN_OEM_PA3,DOM_VK_WIN_OEM_RESET,DOM_VK_WIN_OEM_WSCTRL,"
                 + "DOM_VK_X,DOM_VK_Y,DOM_VK_Z,DOM_VK_ZOOM,"
-                + "eventPhase,initEvent(),initKeyEvent(),initUIEvent(),isComposing,"
+                + "eventPhase,initEvent(),initUIEvent(),isComposing,"
                 + "key,keyCode,location,META_MASK,metaKey,NONE,preventDefault(),repeat,returnValue,"
                 + "SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,"
                 + "shiftKey,srcElement,stopImmediatePropagation(),stopPropagation(),"
