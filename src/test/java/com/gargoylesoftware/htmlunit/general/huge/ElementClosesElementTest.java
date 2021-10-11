@@ -55247,6 +55247,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "1")
+    @HtmlUnitNYI(IE = "2")
     public void _template_col() throws Exception {
         test("template", "col");
     }
@@ -55477,6 +55478,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "1")
+    @HtmlUnitNYI(IE = "2")
     public void _template_frame() throws Exception {
         test("template", "frame");
     }
