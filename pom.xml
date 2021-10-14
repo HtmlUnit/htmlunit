@@ -36,9 +36,10 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.0.1</checkstyle.version>
-        <spotbugs.version>4.4.1</spotbugs.version>
+        <spotbugs.version>4.4.2</spotbugs.version>
         <pmd.version>6.39.0</pmd.version>
         <archunit.version>0.21.0</archunit.version>
+        <dependencycheck.version>6.4.1</dependencycheck.version>
     </properties>
 
     <build>
@@ -73,7 +74,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.4.1</version>
+                <version>4.4.2</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -210,7 +211,7 @@
             <plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
-                <version>6.3.2</version>
+                <version>${dependencycheck.version}</version>
                 <configuration>
                     <suppressionFiles>owasp-suppressions.xml</suppressionFiles>
                     <failBuildOnCVSS>0</failBuildOnCVSS>

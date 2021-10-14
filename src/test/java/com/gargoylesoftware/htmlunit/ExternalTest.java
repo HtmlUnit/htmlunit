@@ -58,7 +58,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_ = "94.0.4606.61";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "94.0.992.38";
+    static String EDGE_DRIVER_ = "94.0.992.47";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -318,6 +318,10 @@ public class ExternalTest {
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
         if (groupId.startsWith("org.eclipse.jetty")
                 && (version.startsWith("11.") || version.startsWith("10."))) {
+            return true;
+        }
+
+        if ("org.seleniumhq.selenium".equals(groupId) && (version.startsWith("4.0.0"))) {
             return true;
         }
 
