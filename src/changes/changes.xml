@@ -8,6 +8,18 @@
 
     <body>
         <release version="2.54.0" date="October cc, 2021" description="Bugfixes, Chrome/Edge 94, Firefox 93">
+            <action type="update" dev="RhinoTeam">
+                core-js: Improve compile speed in some cases.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Avoid unnecessary arrayCopy in Kit.readStream, when initialBufferCapacity matches stream length.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Classcache must honor current security context.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Optimized XmlProcessor toXmlNewlines.
+            </action>
             <action type="fix" dev="rbri">
                 Fix innerText when the element has svg children.
             </action>
