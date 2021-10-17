@@ -46,7 +46,7 @@
                 of WebSocket threads might block the whole execution otherwise.
             </action>
             <action type="fix" dev="rbri" issue="388">
-                Add missing support for XmlHttpRequees responseType and response properties.
+                Add missing support for XmlHttpRequest responseType and response properties.
             </action>
             <action type="fix" dev="rbri" issue="386" due-to="Rural Hunter">
                 Add missing request browser headers when setting location from js.
