@@ -192,28 +192,5 @@ public void cssSelector() throws Exception {
             </subsection>
         </section>
 
-        <section name="Using a proxy server">
-            <p>
-                The last WebClient constructor allows you to specify proxy server information in those cases
-                where you need to connect through one.
-            </p>
-            <source><![CDATA[
-@Test
-public void homePage_proxy() throws Exception {
-    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX, "myproxyserver", myProxyPort)) {
-
-        //set proxy username and password 
-        final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
-        credentialsProvider.addCredentials("username", "password");
-
-        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
-        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
-    }
-}]]></source>
-            <p>
-                Specifying this BrowserVersion will change the user agent header that is sent up to the
-                server and will change the behavior of some of the JavaScript.
-            </p>
-        </section>
     </body>
 </document>
