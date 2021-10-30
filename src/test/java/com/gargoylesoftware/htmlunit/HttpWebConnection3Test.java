@@ -332,7 +332,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
                       "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
@@ -348,7 +348,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -394,7 +394,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
@@ -410,7 +410,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -474,6 +474,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
             }
@@ -493,7 +495,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Connection: keep-alive",
                       "Content-Length: 48",
                       "Cache-Control: max-age=0",
-                      "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
                       "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
@@ -515,7 +517,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Connection: keep-alive",
                     "Content-Length: 48",
                     "Cache-Control: max-age=0",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -580,7 +582,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"POST /foo HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
@@ -602,7 +604,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"POST /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -696,6 +698,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
             }
@@ -713,7 +717,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /foo HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
                       "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
@@ -728,7 +732,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -772,7 +776,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /foo HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
@@ -788,7 +792,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -848,6 +852,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
             }
@@ -865,7 +871,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /?newSearch HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
                       "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
@@ -880,7 +886,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /?newSearch HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -924,7 +930,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /?newSearch HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
@@ -940,7 +946,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /?newSearch HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
@@ -999,6 +1005,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
             }
@@ -1016,7 +1024,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /script.js HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
                       "User-Agent: §§USER_AGENT§§",
                       "sec-ch-ua-platform: \"Windows\"",
@@ -1030,7 +1038,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /script.js HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "User-Agent: §§USER_AGENT§§",
                     "sec-ch-ua-platform: \"Windows\"",
@@ -1071,7 +1079,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /script.js HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"94\", \"Google Chrome\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
                            "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1", // wrong
@@ -1087,7 +1095,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /script.js HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"94\", \"Microsoft Edge\";v=\"94\", \";Not A Brand\";v=\"99\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
                     "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1", // wrong
@@ -1146,6 +1154,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getScriptAcceptHeader());
             }

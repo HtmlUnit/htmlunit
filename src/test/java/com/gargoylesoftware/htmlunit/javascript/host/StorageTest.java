@@ -167,8 +167,8 @@ public class StorageTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("I was here")
-    @BuggyWebDriver(CHROME = "null",
-                    EDGE = "null",
+    @BuggyWebDriver(CHROME = "",
+                    EDGE = "",
                     FF = "null",
                     FF78 = "null")
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
