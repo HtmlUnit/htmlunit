@@ -43,12 +43,18 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
+    // Because this is used for the whole JVM i try to make it as less invasive as possible.
+    // But in gerneral this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
         private CredentialsProvider credentialsProvider_;
 
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-            if (RequestorType.PROXY != getRequestorType()) {
+            // java.base/java/net/SocksSocketImpl.java line 154 ff
+            // no RequestorType set from java - we have to check the requesting prompt string
+            final boolean isProxy = Authenticator.RequestorType.PROXY.equals(getRequestorType())
+                    || "SOCKS authentication".equals(getRequestingPrompt());
+            if (!isProxy) {
                 return null;
             }
 
