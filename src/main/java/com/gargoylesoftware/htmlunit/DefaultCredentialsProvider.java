@@ -44,7 +44,7 @@ import org.apache.http.client.CredentialsProvider;
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
     // Because this is used for the whole JVM i try to make it as less invasive as possible.
-    // But in gerneral this might disturb other application running on the same JVM.
+    // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
         private CredentialsProvider credentialsProvider_;
 
