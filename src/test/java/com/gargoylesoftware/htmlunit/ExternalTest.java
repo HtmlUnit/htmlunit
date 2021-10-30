@@ -195,8 +195,8 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             try {
                 final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
-                final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
-                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), GECKO_DRIVER_);
+                final DomNodeList<DomNode> divs = page.querySelectorAll("li.breadcrumb-item-selected");
+                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), "v" + GECKO_DRIVER_);
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
