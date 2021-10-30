@@ -97,11 +97,11 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
-            if (browsers.contains("hu-ff")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
-            }
             if (browsers.contains("hu-ff78")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, false));
+            }
+            if (browsers.contains("hu-ff")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
