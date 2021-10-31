@@ -877,7 +877,7 @@ public final class StyleAttributes {
         CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
                 chromeAndEdge("auto")),
 
-        /** The style property {@code containIntrinsicHight}. */
+        /** The style property {@code containIntrinsicHeight}. */
         CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-hight", chromeAndEdge("auto")),
 
         /** The style property {@code containIntrinsicInlineSize}. */
