@@ -34,18 +34,19 @@ public class FontFaceSetTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function FontFaceSet() {\n    [native code]\n}",
-            FF78 = "function FontFaceSet() {\n    [native code]\n}")
+            FF = "function FontFaceSet() { [native code] }",
+            FF78 = "function FontFaceSet() { [native code] }")
     public void window() throws Exception {
         final String html
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(window.FontFaceSet);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.FontFaceSet);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -59,11 +60,12 @@ public class FontFaceSetTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(document.fonts);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.fonts);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -77,16 +79,18 @@ public class FontFaceSetTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (document.fonts) {\n"
             + "    document.fonts.load('12px Arial', 'HtmlUnit').then(function(value) {\n"
-            + "        alert('then: ' + value);"
+            + "        log('then: ' + value);"
             + "      });\n"
             + "  } else {\n"
-            + "    alert('document.fonts is undefined');\n"
+            + "    log('document.fonts is undefined');\n"
             + "  }"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

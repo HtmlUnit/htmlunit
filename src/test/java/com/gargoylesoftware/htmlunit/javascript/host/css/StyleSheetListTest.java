@@ -59,14 +59,17 @@ public class StyleSheetListTest extends WebDriverTestCase {
             + "    <link href='style3.css' type='text/css'></link>\n"
             + "    <link href='style4.css' rel='stylesheet' type='text/css'></link>\n"
             + "    <style>div.x { color: red; }</style>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script></head>\n"
             + "  </head>\n"
-            + "  <body onload='alert(document.styleSheets.length)'>\n"
+            + "  <body onload='log(document.styleSheets.length)'>\n"
             + "    <style>div.y { color: green; }</style>\n"
             + "  </body>\n"
             + "</html>";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

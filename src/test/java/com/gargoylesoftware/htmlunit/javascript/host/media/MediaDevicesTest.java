@@ -64,20 +64,21 @@ public class MediaDevicesTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var md = navigator.mediaDevices;\n"
-            + "    alert(md);\n"
+            + "    log(md);\n"
 
             + "    if (md) {\n"
             + "      md.getUserMedia({})\n"
-            + "           .then(function(stream) { alert(stream); })\n"
-            + "           .catch(function(err) { alert('err'); });"
+            + "           .then(function(stream) { log(stream); })\n"
+            + "           .catch(function(err) { log('err'); });"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

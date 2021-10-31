@@ -36,7 +36,8 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts({"undefined", "undefined"})
     public void xml() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    testFragment(doc);\n"
@@ -46,10 +47,11 @@ public class DomDocumentFragmentTest extends WebDriverTestCase {
             + "    var fragment = doc.createDocumentFragment();\n"
             + "    var div = doc.createElement('div');\n"
             + "    fragment.appendChild(div);\n"
-            + "    alert(fragment.xml);\n"
+            + "    log(fragment.xml);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

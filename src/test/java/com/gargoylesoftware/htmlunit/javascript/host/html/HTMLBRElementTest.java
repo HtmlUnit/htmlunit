@@ -51,11 +51,12 @@ public class HTMLBRElementTest extends WebDriverTestCase {
             + "<br id='br6' clear='2'/>\n"
             + "<br id='br7' clear='foo'/>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function set(br, value) {\n"
             + "  try {\n"
             + "    br.clear = value;\n"
             + "  } catch(e) {\n"
-            + "    alert('!');\n"
+            + "    log('!');\n"
             + "  }\n"
             + "}\n"
             + "var br1 = document.getElementById('br1');\n"
@@ -65,13 +66,13 @@ public class HTMLBRElementTest extends WebDriverTestCase {
             + "var br5 = document.getElementById('br5');\n"
             + "var br6 = document.getElementById('br6');\n"
             + "var br7 = document.getElementById('br7');\n"
-            + "alert(br1.clear);\n"
-            + "alert(br2.clear);\n"
-            + "alert(br3.clear);\n"
-            + "alert(br4.clear);\n"
-            + "alert(br5.clear);\n"
-            + "alert(br6.clear);\n"
-            + "alert(br7.clear);\n"
+            + "log(br1.clear);\n"
+            + "log(br2.clear);\n"
+            + "log(br3.clear);\n"
+            + "log(br4.clear);\n"
+            + "log(br5.clear);\n"
+            + "log(br6.clear);\n"
+            + "log(br7.clear);\n"
             + "set(br1, 'left');\n"
             + "set(br2, 'none');\n"
             + "set(br3, 'right');\n"
@@ -79,15 +80,16 @@ public class HTMLBRElementTest extends WebDriverTestCase {
             + "set(br5, 2);\n"
             + "set(br6, 'abc');\n"
             + "set(br7, '8');\n"
-            + "alert(br1.clear);\n"
-            + "alert(br2.clear);\n"
-            + "alert(br3.clear);\n"
-            + "alert(br4.clear);\n"
-            + "alert(br5.clear);\n"
-            + "alert(br6.clear);\n"
-            + "alert(br7.clear);\n"
+            + "log(br1.clear);\n"
+            + "log(br2.clear);\n"
+            + "log(br3.clear);\n"
+            + "log(br4.clear);\n"
+            + "log(br5.clear);\n"
+            + "log(br6.clear);\n"
+            + "log(br7.clear);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -97,14 +99,15 @@ public class HTMLBRElementTest extends WebDriverTestCase {
     @Alerts("<br id=\"myId\">")
     public void outerHTML() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.getElementById('myId').outerHTML);\n"
+            + "  log(document.getElementById('myId').outerHTML);\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "  <br id='myId'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

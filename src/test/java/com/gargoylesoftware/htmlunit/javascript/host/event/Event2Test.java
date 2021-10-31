@@ -528,7 +528,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     public void preventDefault() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
             + "function block(e) {\n"
             + "  if (e && e.preventDefault)\n"
@@ -547,7 +547,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("mySubmit"));
         assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
     }

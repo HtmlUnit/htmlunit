@@ -778,7 +778,7 @@ public class HTMLTableElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"\n    cell1\n  ", "[object Text]", "abc", "[object Text]", ""})
+    @Alerts({"\\n\\s\\s\\s\\scell1\\n\\s\\s", "[object\\sText]", "abc", "[object\\sText]", ""})
     public void textContent() throws Exception {
         final String html
             = "<html><body>\n"
@@ -786,19 +786,20 @@ public class HTMLTableElementTest extends WebDriverTestCase {
             + "    <tr><td>cell1</td></tr>\n"
             + "  </table>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var node = document.getElementById('tab');\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = 'abc'; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
-            + "  alert(node.firstChild);\n"
+            + "  try { node.textContent = 'abc'; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
+            + "  log(node.firstChild);\n"
 
-            + "  try { node.textContent = ''; } catch(e) {alert('ex');}\n"
-            + "  alert(node.textContent);\n"
+            + "  try { node.textContent = ''; } catch(e) {log('ex');}\n"
+            + "  log(node.textContent);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

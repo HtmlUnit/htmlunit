@@ -45,14 +45,15 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var span = document.getElementById('s');\n"
             + "        if(span.doScroll) {\n"
-            + "          alert('yes');\n"
+            + "          log('yes');\n"
             + "          span.doScroll();\n"
             + "          span.doScroll('down');\n"
             + "        } else {\n"
-            + "          alert('no');\n"
+            + "          log('no');\n"
             + "        }\n"
             + "      }\n"
             + "    </script>\n"
@@ -60,7 +61,7 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
             + "  <body onload='test()'><span id='s'>abc</span></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,18 +74,19 @@ public class HTMLSpanElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        debug(document.createElement('span'));\n"
             + "      }\n"
             + "      function debug(e) {\n"
-            + "        alert(e + ' ' + e.cite);\n"
+            + "        log(e + ' ' + e.cite);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

@@ -458,19 +458,21 @@ public class NativeObjectTest extends WebDriverTestCase {
                   "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var proto = i1.constructor.prototype;\n"
-            + "  alert(proto);\n"
+            + "  log(proto);\n"
             + "  var x = Object.getOwnPropertyDescriptor(i1.constructor.prototype, 'value');\n"
-            + "  alert('x = ' + x);\n"
-            + "  alert('x.get = ' + x.get);\n"
-            + "  alert('x.get.call = ' + x.get.call);\n"
+            + "  log('x = ' + x);\n"
+            + "  log('x.get = ' + x.get);\n"
+            + "  log('x.get.call = ' + x.get.call);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input type='text' id='i1' value='foo' />\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

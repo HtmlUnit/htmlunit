@@ -64,12 +64,14 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e11' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 11; i++) {\n"
-            + "    alert(document.getElementById('e' + i).align);\n"
+            + "    log(document.getElementById('e' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -89,11 +91,12 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e1' align='left' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
@@ -113,7 +116,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'texttop');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -134,12 +138,14 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e6' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('e' + i).height);\n"
+            + "    log(document.getElementById('e' + i).height);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,11 +161,12 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e1' height='10px' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setHeight(elem, value) {\n"
             + "    try {\n"
             + "      elem.height = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.height);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.height);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
@@ -170,7 +177,8 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
 
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -191,12 +199,14 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e6' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('e' + i).width);\n"
+            + "    log(document.getElementById('e' + i).width);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -212,11 +222,12 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
             + "  <embed id='e1' width='10px' ></embed>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setWidth(elem, value) {\n"
             + "    try {\n"
             + "      elem.width = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.width);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.width);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
@@ -227,6 +238,7 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
 
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

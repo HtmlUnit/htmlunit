@@ -832,7 +832,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1665,6 +1665,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
             + "  alert(found.length);\n"
