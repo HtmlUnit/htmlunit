@@ -878,7 +878,7 @@ public final class StyleAttributes {
                 chromeAndEdge("auto")),
 
         /** The style property {@code containIntrinsicHeight}. */
-        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-hight", chromeAndEdge("auto")),
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdge("auto")),
 
         /** The style property {@code containIntrinsicInlineSize}. */
         CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
