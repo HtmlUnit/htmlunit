@@ -686,15 +686,15 @@ public enum BrowserVersionFeatures {
 
     /** ClientHeight for input is 17. */
     @BrowserFeature({CHROME, EDGE})
-    JS_CLIENTHIGHT_INPUT_17,
+    JS_CLIENTHEIGHT_INPUT_17,
 
     /** ClientHeight for input is 18. */
     @BrowserFeature(FF)
-    JS_CLIENTHIGHT_INPUT_18,
+    JS_CLIENTHEIGHT_INPUT_18,
 
     /** ClientHeight for radio button and checkbox is 10. */
     @BrowserFeature(FF)
-    JS_CLIENTHIGHT_RADIO_CHECKBOX_10,
+    JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(IE)
