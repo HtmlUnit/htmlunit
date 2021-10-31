@@ -185,6 +185,9 @@ public final class StyleAttributes {
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
 
+        /** The style property {@code appRegion}. */
+        APP_REGION("appRegion", "app-region", chromeAndEdge("none")),
+
         /** The style property {@code appearance}. */
         APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
 
@@ -870,8 +873,22 @@ public final class StyleAttributes {
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdge("none"), ff("none")),
 
+        /** The style property {@code containIntrinsicBlockSize}. */
+        CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
+                chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicHight}. */
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-hight", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicInlineSize}. */
+        CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
+                chromeAndEdge("auto")),
+
         /** The style property {@code containIntrinsicSize}. */
         CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicWidth}. */
+        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdge("auto")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ff("normal")),
