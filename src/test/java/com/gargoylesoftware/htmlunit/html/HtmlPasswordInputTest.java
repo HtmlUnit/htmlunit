@@ -303,20 +303,21 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('password1');\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'password';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"password\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -325,7 +326,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -334,23 +335,24 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('password1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'password';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"password\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -359,7 +361,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -370,26 +372,27 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'newDefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -399,7 +402,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -410,26 +413,27 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-initial-initial", "newValue-initial-initial",
                 "newValue-newDefault-newDefault", "newValue-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'newDefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -438,7 +442,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -449,23 +453,24 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                 "newValue-default-default", "newValue-attribValue-attribValue",
                 "newValue-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var password = document.getElementById('testId');\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'default';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.value = 'newValue';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.setAttribute('value', 'attribValue');\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
 
             + "    password.defaultValue = 'newDefault';\n"
-            + "    alert(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
+            + "    log(password.value + '-' + password.defaultValue + '-' + password.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -474,7 +479,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -485,14 +490,15 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             FF = "7",
             FF78 = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
             + "    if(text.textLength) {\n"
-            + "      alert(text.textLength);\n"
+            + "      log(text.textLength);\n"
             + "    } else {\n"
-            + "      alert('textLength not available');\n"
+            + "      log('textLength not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -502,7 +508,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -513,8 +519,9 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(getSelection(document.getElementById('text1')).length);\n"
+            + "    log(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
             + "    return element.value.substring(element.selectionStart, element.selectionEnd);\n"
@@ -523,7 +530,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <input type='password' id='text1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -561,18 +568,20 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='password'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.value = 'Hello there';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.selectionStart = " + selectionStart + ";\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.selectionEnd = " + selectionEnd + ";\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -586,27 +595,29 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='password'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.selectionStart = 4;\n"
             + "  input.selectionEnd = 5;\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.value = 'abcdefghif';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.value = 'abcd';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.selectionStart = 0;\n"
             + "  input.selectionEnd = 4;\n"
 
             + "  input.value = 'a';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -617,14 +628,15 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     public void upperCase() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId').type);\n"
+            + "    log(document.getElementById('myId').type);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input TYPE='password' id='myId'>\n"
             + "</body></html>";
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlPasswordInput.class.isInstance(page.getHtmlElementById("myId")));
@@ -640,9 +652,10 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -653,7 +666,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -662,10 +675,11 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var foo = document.getElementById('foo');\n"
             + "    var bar = document.getElementById('bar');\n"
-            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() );\n"
+            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -675,7 +689,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -684,11 +698,12 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var foo = document.getElementById('foo');\n"
             + "    var bar = document.getElementById('bar');\n"
             + "    var bar2 = document.getElementById('bar2');\n"
-            + "    alert(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
+            + "    log(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -699,7 +714,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

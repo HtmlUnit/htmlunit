@@ -52,15 +52,16 @@ public class HtmlMapTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <map id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlMap.class.isInstance(page.getHtmlElementById("myId")));
@@ -129,7 +130,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -156,7 +157,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertFalse(displayed);
@@ -180,7 +181,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -201,7 +202,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final boolean displayed = driver.findElement(By.id("myMap")).isDisplayed();
         assertFalse(displayed);

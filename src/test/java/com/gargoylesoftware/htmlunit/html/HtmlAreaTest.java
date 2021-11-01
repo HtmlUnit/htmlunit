@@ -113,7 +113,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -140,7 +140,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -167,7 +167,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -194,7 +194,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertFalse(displayed);
@@ -221,7 +221,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -257,7 +257,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts(new String[] {});
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
         assertEquals(Boolean.parseBoolean(expected[0]), displayed);
@@ -301,7 +301,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts(new String[] {});
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
         assertEquals(Boolean.parseBoolean(expected[0]), displayed);
@@ -336,7 +336,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts(new String[] {});
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
         assertEquals(Boolean.parseBoolean(expected[0]), displayed);
@@ -363,7 +363,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myMap")).isDisplayed();
         assertFalse(displayed);

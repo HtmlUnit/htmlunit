@@ -43,10 +43,11 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var fs = document.getElementById('fs');\n"
-            + "    alert(fs);\n"
-            + "    alert(fs.form);\n"
+            + "    log(fs);\n"
+            + "    log(fs.form);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -56,7 +57,7 @@ public class HtmlFieldSetTest extends WebDriverTestCase {
             + "    </fieldset>\n"
             + "  </form>\n"
             + "</body></html>";
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("fs")));
             assertTrue(element instanceof HtmlFieldSet);
