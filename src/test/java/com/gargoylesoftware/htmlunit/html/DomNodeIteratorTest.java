@@ -53,7 +53,7 @@ public final class DomNodeIteratorTest extends WebDriverTestCase {
                 + "  </form>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         if (driver instanceof HtmlUnitDriver) {
             final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
             final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
