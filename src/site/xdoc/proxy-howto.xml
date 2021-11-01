@@ -9,7 +9,7 @@
     <body>
         <section name="Using a http proxy server">
             <p>
-                The is a special WebClient constructor that allows you to specify proxy server information in those cases
+                There is a special WebClient constructor that allows you to specify proxy server information in those cases
                 where you need to connect through one.
             </p>
             <source><![CDATA[
