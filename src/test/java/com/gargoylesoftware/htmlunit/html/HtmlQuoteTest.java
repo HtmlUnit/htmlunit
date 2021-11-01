@@ -42,9 +42,10 @@ public class HtmlQuoteTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
+            + "    log(document.getElementById('myId1'));\n"
+            + "    log(document.getElementById('myId2'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -52,7 +53,7 @@ public class HtmlQuoteTest extends WebDriverTestCase {
             + "  <blockquote id='myId2'>Second Quote</blockquote>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             assertTrue(toHtmlElement(driver.findElement(By.id("myId1"))) instanceof HtmlInlineQuotation);
             assertTrue(toHtmlElement(driver.findElement(By.id("myId2"))) instanceof HtmlBlockQuote);

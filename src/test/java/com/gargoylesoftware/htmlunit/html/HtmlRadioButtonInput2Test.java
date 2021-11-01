@@ -1144,7 +1144,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final WebElement radio1 = driver.findElement(By.id("radio1"));
         final WebElement radio2 = driver.findElement(By.id("radio2"));

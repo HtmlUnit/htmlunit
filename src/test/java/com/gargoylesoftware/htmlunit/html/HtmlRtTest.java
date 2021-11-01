@@ -41,6 +41,7 @@ public class HtmlRtTest extends WebDriverTestCase {
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.createElement('rt');\n"
             + "    check(e);\n"
@@ -52,7 +53,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  function check(e) {\n"
             + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
-            + "    alert(disp);\n"
+            + "    log(disp);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -61,7 +62,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "</ruby>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -76,6 +77,7 @@ public class HtmlRtTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.createElement('rt');\n"
             + "    check(e);\n"
@@ -87,7 +89,7 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "  function check(e) {\n"
             + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
-            + "    alert(disp);\n"
+            + "    log(disp);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -96,6 +98,6 @@ public class HtmlRtTest extends WebDriverTestCase {
             + "</ruby>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
