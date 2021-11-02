@@ -134,14 +134,17 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
 
+        initSocksAuthenticatorIfNeeded(this);
+    }
+
+    private static synchronized void initSocksAuthenticatorIfNeeded(final CredentialsProvider provider) {
         if (SocksAuthenticator_ == null) {
             SocksAuthenticator_ = new SocksProxyAuthenticator();
-            SocksAuthenticator_.credentialsProvider_ = this;
+            SocksAuthenticator_.credentialsProvider_ = provider;
 
             Authenticator.setDefault(SocksAuthenticator_);
         }
     }
-
     /**
      * {@inheritDoc}
      */
