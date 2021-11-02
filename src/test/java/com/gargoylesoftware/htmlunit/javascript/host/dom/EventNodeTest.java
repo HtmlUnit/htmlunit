@@ -185,7 +185,7 @@ public class EventNodeTest extends WebDriverTestCase {
             + "  <textarea id='myTextarea' cols='80'></textarea>\n"
             + "</body></html>";
 
-        final WebDriver webDriver = loadPageWithAlerts2(html);
+        final WebDriver webDriver = loadPage2(html);
         final WebElement textField = webDriver.findElement(By.id("foo"));
         textField.click(); // to give focus
         textField.sendKeys("a");

@@ -50,12 +50,14 @@ public class HTMLHRElementTest extends WebDriverTestCase {
             + "  <hr id='h5' />\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 5; i++) {\n"
-            + "    alert(document.getElementById('h' + i).align);\n"
+            + "    log(document.getElementById('h' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,11 +72,12 @@ public class HTMLHRElementTest extends WebDriverTestCase {
             + "  <hr id='h1' align='left' />\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('h1');\n"
@@ -88,6 +91,6 @@ public class HTMLHRElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'center');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

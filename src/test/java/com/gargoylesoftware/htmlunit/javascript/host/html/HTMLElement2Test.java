@@ -1404,20 +1404,21 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <b id=\"innerNode\">Old outerHTML</b>",
-                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+    @Alerts({"Old\\s=\\s<b\\sid=\"innerNode\">Old\\souterHTML</b>",
+                "New\\s=\\s\\s<b><i\\sid=\"newElt\">New\\scell\\svalue</i></b>",
                 "I"})
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    var innerNode = document.getElementById('innerNode');\n"
-            + "    alert('Old = ' + innerNode.outerHTML);\n"
+            + "    log('Old = ' + innerNode.outerHTML);\n"
             + "    innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "    alert('New = ' + myNode.innerHTML);\n"
-            + "    alert(document.getElementById('newElt').tagName);\n"
+            + "    log('New = ' + myNode.innerHTML);\n"
+            + "    log(document.getElementById('newElt').tagName);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1426,7 +1427,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         final WebElement pElt = driver.findElement(By.id("myNode"));
         assertEquals("p", pElt.getTagName());

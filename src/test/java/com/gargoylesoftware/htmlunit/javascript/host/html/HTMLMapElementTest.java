@@ -38,6 +38,7 @@ public class HTMLMapElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var map = document.createElement('map');\n"
             + "      var area0 = document.createElement('area');\n"
@@ -47,15 +48,15 @@ public class HTMLMapElementTest extends WebDriverTestCase {
             + "      map.appendChild(area1);\n"
             + "      map.appendChild(area2);\n"
             + "      var areaElems = map.areas;\n"
-            + "      alert(areaElems.length);\n"
-            + "      alert(area0 === areaElems[0]);\n"
-            + "      alert(area1 === areaElems[1]);\n"
-            + "      alert(area2 === areaElems[2]);\n"
+            + "      log(areaElems.length);\n"
+            + "      log(area0 === areaElems[0]);\n"
+            + "      log(area1 === areaElems[1]);\n"
+            + "      log(area2 === areaElems[2]);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
