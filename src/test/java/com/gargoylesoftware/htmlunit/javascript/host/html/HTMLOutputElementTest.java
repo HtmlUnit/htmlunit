@@ -39,6 +39,7 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      debug(document.getElementById('e1'));\n"
             + "      debug(document.getElementById('e2'));\n"
@@ -47,10 +48,10 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
             + "      var labels = document.getElementById('e4').labels;\n"
             + "      document.body.removeChild(document.getElementById('l4'));\n"
             + "      debug(document.getElementById('e4'));\n"
-            + "      alert(labels ? labels.length : labels);\n"
+            + "      log(labels ? labels.length : labels);\n"
             + "    }\n"
             + "    function debug(e) {\n"
-            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "      log(e.labels ? e.labels.length : e.labels);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -63,6 +64,6 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
             + "  <label> this<output id='e4'>e 4</output></label><br>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -1981,7 +1981,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        final WebDriver webdriver = loadPageWithAlerts2(html);
+        final WebDriver webdriver = loadPage2(html);
         final WebElement firstOption = webdriver.findElement(By.id("it"));
         assertTrue(firstOption.isSelected());
         firstOption.click();

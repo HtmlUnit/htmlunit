@@ -48,11 +48,13 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
             + "</form>\n"
             + "<object id='o2'></object>\n"
             + "<script>\n"
-            + "  alert(document.getElementById('o1').form);\n"
-            + "  alert(document.getElementById('o2').form);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.getElementById('o1').form);\n"
+            + "  log(document.getElementById('o2').form);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -63,14 +65,15 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void responseXML_htmlObject() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var xhr = new XMLHttpRequest();\n"
             + "    xhr.open('GET', 'foo.xml', false);\n"
             + "    xhr.send('');\n"
             + "    try {\n"
-            + "      alert(xhr.responseXML);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(xhr.responseXML);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -80,6 +83,7 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
                     + "</html>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

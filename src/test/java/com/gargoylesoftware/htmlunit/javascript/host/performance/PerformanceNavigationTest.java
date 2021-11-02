@@ -67,8 +67,9 @@ public class PerformanceNavigationTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(performance.navigation.redirectCount);\n"
+                + "    log(performance.navigation.redirectCount);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -76,7 +77,7 @@ public class PerformanceNavigationTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -90,8 +91,9 @@ public class PerformanceNavigationTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(performance.navigation.type);\n"
+                + "    log(performance.navigation.type);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -99,7 +101,7 @@ public class PerformanceNavigationTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -112,11 +114,12 @@ public class PerformanceNavigationTest extends WebDriverTestCase {
                 = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(typeof performance.navigation.redirectCount);\n"
-                + "  alert(typeof performance.navigation.toJSON);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(typeof performance.navigation.redirectCount);\n"
+                + "  log(typeof performance.navigation.toJSON);\n"
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
