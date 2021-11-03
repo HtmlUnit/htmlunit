@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * This contains the tests for plain controls.
  *
  * @author Ronald Brill
+ * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
 public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {

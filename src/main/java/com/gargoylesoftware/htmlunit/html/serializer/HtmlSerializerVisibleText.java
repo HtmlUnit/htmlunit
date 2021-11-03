@@ -64,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
  * at least for selenium WebElement#getText().
  *
  * @author Ronald Brill
+ * @author cd alexndr
  */
 public class HtmlSerializerVisibleText {
 
@@ -90,7 +91,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
         for (final DomNode child : node.getChildren()) {
-            appendNode(builder, child, mode);
+            appendNode(builder, child, updateWhiteSpaceStyle(node, mode));
         }
     }
 
@@ -606,15 +607,11 @@ public class HtmlSerializerVisibleText {
      * @param domText the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, Mode mode) {
+    protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
         final DomNode parent = domText.getParentNode();
         if (parent instanceof HtmlTitle
                 || parent instanceof HtmlScript) {
             builder.append(domText.getData(), Mode.WHITE_SPACE_PRE_LINE);
-        }
-
-        if (parent != null) {
-            mode = whiteSpaceStyle(parent, mode);
         }
 
         if (parent == null
@@ -715,6 +712,39 @@ public class HtmlSerializerVisibleText {
                         }
                     }
                     node = node.getParentElement();
+                }
+            }
+        }
+        return defaultMode;
+    }
+
+    private static Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+        final Object scriptableObject = domNode.getScriptableObject();
+        if (scriptableObject instanceof Node) {
+            final Page page = domNode.getPage();
+            if (page != null && page.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
+                final Node node = (Node) scriptableObject;
+
+                if (node instanceof Element) {
+                    final ComputedCSSStyleDeclaration style = node.getWindow().getComputedStyle(node, null);
+                    final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+                    if (StringUtils.isNoneEmpty(value)) {
+                        if ("normal".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_NORMAL;
+                        }
+                        if ("nowrap".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_NORMAL;
+                        }
+                        if ("pre".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_PRE;
+                        }
+                        if ("pre-wrap".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_PRE;
+                        }
+                        if ("pre-line".equalsIgnoreCase(value)) {
+                            return Mode.WHITE_SPACE_PRE_LINE;
+                        }
+                    }
                 }
             }
         }
