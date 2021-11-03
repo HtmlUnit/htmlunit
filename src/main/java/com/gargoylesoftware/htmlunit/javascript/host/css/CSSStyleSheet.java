@@ -130,11 +130,67 @@ public class CSSStyleSheet extends StyleSheet {
         return cssRules_;
     }
 
-    private void initCssRules() {
-        if (cssRules_ == null) {
-            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
-            cssRulesIndexFix_ = new ArrayList<>();
+    /**
+     * Returns the URL of the stylesheet.
+     * @return the URL of the stylesheet
+     */
+    @JsxGetter
+    public String getHref() {
+        final BrowserVersion version = getBrowserVersion();
+
+        if (ownerNode_ != null) {
+            final DomNode node = cssStyleSheet.getOwnerDomNode();
+            if (node instanceof HtmlLink) {
+                // <link rel="stylesheet" type="text/css" href="..." />
+                final HtmlLink link = (HtmlLink) node;
+                final HtmlPage page = (HtmlPage) link.getPage();
+                final String href = link.getHrefAttribute();
+                if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
+                    return null;
+                }
+                // Expand relative URLs.
+                try {
+                    final URL url = page.getFullyQualifiedUrl(href);
+                    return url.toExternalForm();
+                }
+                catch (final MalformedURLException e) {
+                    // Log the error and fall through to the return values below.
+                    LOG.warn(e.getMessage(), e);
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Inserts a new rule.
+     * @param rule the CSS rule
+     * @param position the position at which to insert the rule
+     * @return the position of the inserted rule
+     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
+     */
+    @JsxFunction
+    public int insertRule(final String rule, final int position) {
+        try {
+            initCssRules();
+            cssStyleSheet.getWrappedSheet().insertRule(rule, fixIndex(position));
             refreshCssRules();
+            return position;
+        } catch (final DOMException e) {
+            // in case of error try with an empty rule
+            final int pos = rule.indexOf('{');
+            if (pos > -1) {
+                final String newRule = rule.substring(0, pos) + "{}";
+                try {
+                    cssStyleSheet.getWrappedSheet().insertRule(newRule, fixIndex(position));
+                    refreshCssRules();
+                    return position;
+                } catch (final DOMException ex) {
+                    throw Context.throwAsScriptRuntimeEx(ex);
+                }
+            }
+            throw Context.throwAsScriptRuntimeEx(e);
         }
     }
 
@@ -167,37 +223,6 @@ public class CSSStyleSheet extends StyleSheet {
 
         // reset our index also
         cssStyleSheet.getWrappedSheet().resetRuleIndex();
-    }
-
-    /**
-     * Inserts a new rule.
-     * @param rule the CSS rule
-     * @param position the position at which to insert the rule
-     * @return the position of the inserted rule
-     * @see <a href="http://www.w3.org/TR/DOM-Level-2-Style/css.html#CSS-CSSStyleSheet">DOM level 2</a>
-     */
-    @JsxFunction
-    public int insertRule(final String rule, final int position) {
-        try {
-            initCssRules();
-            cssStyleSheet.getWrappedSheet().insertRule(rule, fixIndex(position));
-            refreshCssRules();
-            return position;
-        } catch (final DOMException e) {
-            // in case of error try with an empty rule
-            final int pos = rule.indexOf('{');
-            if (pos > -1) {
-                final String newRule = rule.substring(0, pos) + "{}";
-                try {
-                    cssStyleSheet.getWrappedSheet().insertRule(newRule, fixIndex(position));
-                    refreshCssRules();
-                    return position;
-                } catch (final DOMException ex) {
-                    throw Context.throwAsScriptRuntimeEx(ex);
-                }
-            }
-            throw Context.throwAsScriptRuntimeEx(e);
-        }
     }
 
     private int fixIndex(int index) {
@@ -274,48 +299,35 @@ public class CSSStyleSheet extends StyleSheet {
         }
     }
 
+    /**
+     * Returns this stylesheet's URI (used to resolved contained @import rules).
+     * @return this stylesheet's URI (used to resolved contained @import rules)
+     */
     public String getUri() {
         return cssStyleSheet.getUri();
     }
 
     /**
-     * Returns the URL of the stylesheet.
-     * @return the URL of the stylesheet
+     * Returns {@code true} if this stylesheet is enabled.
+     * @return {@code true} if this stylesheet is enabled
      */
-    @JsxGetter
-    public String getHref() {
-        final BrowserVersion version = getBrowserVersion();
-
-        if (ownerNode_ != null) {
-            final DomNode node = cssStyleSheet.getOwnerDomNode();
-            if (node instanceof HtmlLink) {
-                // <link rel="stylesheet" type="text/css" href="..." />
-                final HtmlLink link = (HtmlLink) node;
-                final HtmlPage page = (HtmlPage) link.getPage();
-                final String href = link.getHrefAttribute();
-                if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
-                    return null;
-                }
-                // Expand relative URLs.
-                try {
-                    final URL url = page.getFullyQualifiedUrl(href);
-                    return url.toExternalForm();
-                }
-                catch (final MalformedURLException e) {
-                    // Log the error and fall through to the return values below.
-                    LOG.warn(e.getMessage(), e);
-                }
-            }
-        }
-
-        return null;
-    }
-
     public boolean isEnabled() {
         return cssStyleSheet.isEnabled();
     }
 
-    public void setEnabled(boolean enabled) {
+    /**
+     * Sets whether this sheet is enabled or not.
+     * @param enabled enabled or not
+     */
+    public void setEnabled(final boolean enabled) {
         cssStyleSheet.setEnabled(enabled);
+    }
+
+    private void initCssRules() {
+        if (cssRules_ == null) {
+            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
+            cssRulesIndexFix_ = new ArrayList<>();
+            refreshCssRules();
+        }
     }
 }
