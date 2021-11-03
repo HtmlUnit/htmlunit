@@ -73,9 +73,10 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var performanceTiming = performance.timing;\n"
-                + "    alert(performanceTiming);\n"
+                + "    log(performanceTiming);\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -83,7 +84,7 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "<body></body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -96,10 +97,11 @@ public class PerformanceTest extends WebDriverTestCase {
                 = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(typeof performance.now);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(typeof performance.now);\n"
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -47,6 +47,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {HttpHeader.HOST, HttpHeader.CONNECTION, HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
+                       HttpHeader.SEC_CH_UA_PLATFORM,
                        HttpHeader.UPGRADE_INSECURE_REQUESTS, HttpHeader.USER_AGENT, HttpHeader.ACCEPT,
                        HttpHeader.SEC_FETCH_SITE, HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER,
                        HttpHeader.SEC_FETCH_DEST, HttpHeader.ACCEPT_ENCODING, HttpHeader.ACCEPT_LANGUAGE},
@@ -87,6 +88,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {HttpHeader.HOST, HttpHeader.CONNECTION,
                        HttpHeader.SEC_CH_UA, HttpHeader.SEC_CH_UA_MOBILE,
+                       HttpHeader.SEC_CH_UA_PLATFORM,
                        HttpHeader.UPGRADE_INSECURE_REQUESTS,
                        HttpHeader.USER_AGENT, HttpHeader.ACCEPT, HttpHeader.SEC_FETCH_SITE,
                        HttpHeader.SEC_FETCH_MODE, HttpHeader.SEC_FETCH_USER, HttpHeader.SEC_FETCH_DEST,
@@ -330,8 +332,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @Alerts(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                       "Host: localhost:§§PORT§§",
                       "Connection: keep-alive",
-                      "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
                       "User-Agent: §§USER_AGENT§§",
                       "Accept: §§ACCEPT§§",
@@ -345,8 +348,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: keep-alive",
-                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: §§ACCEPT§§",
@@ -390,8 +394,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: §§ACCEPT§§",
@@ -405,8 +410,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"GET /foo?text1=me+%26amp%3B+you&text2=Hello%0D%0Aworld%21 HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: §§ACCEPT§§",
@@ -468,6 +474,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
             }
@@ -487,8 +495,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                       "Connection: keep-alive",
                       "Content-Length: 48",
                       "Cache-Control: max-age=0",
-                      "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
                       "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
                       "Upgrade-Insecure-Requests: 1",
                       "Origin: http://localhost:§§PORT§§",
                       "Content-Type: application/x-www-form-urlencoded",
@@ -508,8 +517,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Connection: keep-alive",
                     "Content-Length: 48",
                     "Cache-Control: max-age=0",
-                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
                     "Origin: http://localhost:§§PORT§§",
                     "Content-Type: application/x-www-form-urlencoded",
@@ -572,8 +582,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"POST /foo HTTP/1.1",
                            "Host: localhost:§§PORT§§",
                            "Connection: Keep-Alive",
-                           "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\"",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
                            "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
                            "Upgrade-Insecure-Requests: 1",
                            "User-Agent: §§USER_AGENT§§",
                            "Accept: §§ACCEPT§§",
@@ -593,8 +604,9 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             EDGE = {"POST /foo HTTP/1.1",
                     "Host: localhost:§§PORT§§",
                     "Connection: Keep-Alive",
-                    "sec-ch-ua: \"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\"92\"",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
                     "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
                     "Upgrade-Insecure-Requests: 1",
                     "User-Agent: §§USER_AGENT§§",
                     "Accept: §§ACCEPT§§",
@@ -686,8 +698,466 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
                         getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
                 expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
                         getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a location href change.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /foo HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "Upgrade-Insecure-Requests: 1",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Dest: document",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /foo HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /foo HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin"},
+            FF78 = {"GET /foo HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1"},
+            IE = {"GET /foo HTTP/1.1",
+                  "Accept: §§ACCEPT§§",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept-Encoding: gzip, deflate",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: Keep-Alive"})
+    @HtmlUnitNYI(CHROME = {"GET /foo HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: Keep-Alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1",
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: navigate",
+                           "Sec-Fetch-User: ?1",
+                           "Sec-Fetch-Dest: document",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /foo HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: Keep-Alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /foo HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: Keep-Alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1"},
+            FF78 = {"GET /foo HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: Keep-Alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1"})
+    public void locationSetHref() throws Exception {
+        final String url = "http://localhost:" + WebTestCase.PORT_PRIMITIVE_SERVER;
+        String html = "<html><body><script>location.href='" + url + "/foo';</script></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a location href change.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /?newSearch HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "Upgrade-Insecure-Requests: 1",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: navigate",
+                      "Sec-Fetch-Dest: document",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /?newSearch HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /?newSearch HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin"},
+            FF78 = {"GET /?newSearch HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1"},
+            IE = {"GET /?newSearch HTTP/1.1",
+                  "Accept: §§ACCEPT§§",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept-Encoding: gzip, deflate",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: Keep-Alive"})
+    @HtmlUnitNYI(CHROME = {"GET /?newSearch HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: Keep-Alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1",
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: navigate",
+                           "Sec-Fetch-User: ?1",
+                           "Sec-Fetch-Dest: document",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /?newSearch HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: Keep-Alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-User: ?1",
+                    "Sec-Fetch-Dest: document",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /?newSearch HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: Keep-Alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1",
+                  "Sec-Fetch-Dest: document",
+                  "Sec-Fetch-Mode: navigate",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1"},
+            FF78 = {"GET /?newSearch HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: Keep-Alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1"})
+    public void locationSetSearch() throws Exception {
+        String html = "<html><body><script>location.search='newSearch';</script></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/plain\r\n"
+                + "\r\n"
+                + "Hi";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getHtmlAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * Tests a location href change.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /script.js HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "User-Agent: §§USER_AGENT§§",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "Accept: §§ACCEPT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Dest: script",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "User-Agent: §§USER_AGENT§§",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /script.js HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Sec-Fetch-Dest: script",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Site: same-origin"},
+            FF78 = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: keep-alive",
+                    "Referer: http://localhost:§§PORT§§/"},
+            IE = {"GET /script.js HTTP/1.1",
+                  "Accept: §§ACCEPT§§",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept-Encoding: gzip, deflate",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: Keep-Alive"})
+    @HtmlUnitNYI(CHROME = {"GET /script.js HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: Keep-Alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1", // wrong
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: no-cors",
+                           "Sec-Fetch-User: ?1", // wrong
+                           "Sec-Fetch-Dest: script",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: Keep-Alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1", // wrong
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-User: ?1", // wrong
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /script.js HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: Keep-Alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1", // wrong
+                  "Sec-Fetch-Dest: script",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1" /* wrong */ },
+            FF78 = {"GET /script.js HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Accept-Language: en-US,en;q=0.5",
+                    "Accept-Encoding: gzip, deflate",
+                    "Connection: Keep-Alive",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Upgrade-Insecure-Requests: 1" /* wrong */ })
+    public void loadJavascript() throws Exception {
+        String html = "<html><head> <script src=\"script.js\"></script> </head><body></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/javascript\r\n"
+                + "\r\n"
+                + ";;";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getScriptAcceptHeader());
             }
             final String request = primitiveWebServer.getRequests().get(1);
             final String[] headers = request.split("\\r\\n");

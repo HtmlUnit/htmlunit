@@ -38,9 +38,11 @@ public class HTMLDataElementTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "  <data id='it' value='1234'>onetwothreefour</data>\n"
             + "<script>\n"
-            + "  alert(document.getElementById('it'));\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.getElementById('it'));\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -54,16 +56,17 @@ public class HTMLDataElementTest extends WebDriverTestCase {
             + "  <data id='d1' value='1234'>onetwothreefour</data>\n"
             + "  <data id='d2' >onetwothreefour</data>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var dat = document.getElementById('d1');\n"
-            + "  alert(dat.value);\n"
+            + "  log(dat.value);\n"
             + "  dat.value = '#12o';\n"
-            + "  alert(dat.value);\n"
+            + "  log(dat.value);\n"
 
             + "  dat = document.getElementById('d2');\n"
-            + "  alert(dat.value);\n"
+            + "  log(dat.value);\n"
             + "  dat.value = '#12o';\n"
-            + "  alert(dat.value);\n"
+            + "  log(dat.value);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

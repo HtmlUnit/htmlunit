@@ -279,7 +279,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
         final CSSStyleDeclarationImpl cssStyle = new CSSStyleDeclarationImpl(null);
         try {
-            cssStyle.setCssText(styleAttribute);
+            // use the configured cssErrorHandler here to do the same error handling during
+            // parsing of inline styles like for external css
+            cssStyle.setCssText(styleAttribute, getPage().getWebClient().getCssErrorHandler());
         }
         catch (final Exception e) {
             if (LOG.isErrorEnabled()) {

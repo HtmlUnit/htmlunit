@@ -66,15 +66,16 @@ public class WebSocketTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var location = 'ws://localhost:" + PORT2 + "/';\n"
             + "    var ws = new WebSocket(location);\n"
-            + "    alert(ws.url);\n"
-            + "    alert(ws.protocol);\n"
+            + "    log(ws.url);\n"
+            + "    log(ws.protocol);\n"
             // this makes our test instable because the real connect is
             // done by an executor and maybe already finished
-            // + "    alert(ws.readyState);\n"
-            + "    alert(ws.binaryType);\n"
+            // + "    log(ws.readyState);\n"
+            + "    log(ws.binaryType);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -83,7 +84,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables("ws://localhost:" + PORT2 + "/");
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -93,11 +94,12 @@ public class WebSocketTest extends WebDriverTestCase {
     @Alerts({"[object WebSocket]", "§§URL§§"})
     public void earlyConstruction() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var location = 'ws://localhost:" + PORT + "/';\n"
             + "    var ws = new WebSocket(location);\n"
-            + "    alert(ws);\n"
-            + "    alert(ws.url);\n"
+            + "    log(ws);\n"
+            + "    log(ws.url);\n"
             + "  }\n"
             + "  test();\n"
             + "</script>\n"
@@ -107,7 +109,7 @@ public class WebSocketTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables("ws://localhost:" + PORT + "/");
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -117,23 +119,25 @@ public class WebSocketTest extends WebDriverTestCase {
     @Alerts({"exception undefined", "exception null", "exception empty", "exception invalid"})
     public void initialWithoutUrl() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      new WebSocket(undefined);\n"
-            + "    } catch(e) { alert('exception undefined') }\n"
+            + "    } catch(e) { log('exception undefined') }\n"
             + "    try {\n"
             + "      new WebSocket(null);\n"
-            + "    } catch(e) { alert('exception null') }\n"
+            + "    } catch(e) { log('exception null') }\n"
             + "    try {\n"
             + "      new WebSocket('');\n"
-            + "    } catch(e) { alert('exception empty') }\n"
+            + "    } catch(e) { log('exception empty') }\n"
             + "    try {\n"
             + "      new WebSocket('#');\n"
-            + "    } catch(e) { alert('exception invalid') }\n"
+            + "    } catch(e) { log('exception invalid') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -145,35 +149,36 @@ public class WebSocketTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void binaryType() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var location = 'ws://localhost:" + PORT + "/';\n"
             + "    var ws = new WebSocket(location);\n"
-            + "    alert(ws.binaryType);\n"
+            + "    log(ws.binaryType);\n"
 
             + "    try {\n"
             + "      ws.binaryType = 'abc';\n"
-            + "      alert(ws.binaryType);\n"
-            + "    } catch(e) { alert('exception') }\n"
+            + "      log(ws.binaryType);\n"
+            + "    } catch(e) { log('exception') }\n"
 
             + "    try {\n"
             + "      ws.binaryType = 'arraybuffer';\n"
-            + "      alert(ws.binaryType);\n"
-            + "    } catch(e) { alert('exception') }\n"
+            + "      log(ws.binaryType);\n"
+            + "    } catch(e) { log('exception') }\n"
 
             + "    try {\n"
             + "      ws.binaryType = 'blob';\n"
-            + "      alert(ws.binaryType);\n"
-            + "    } catch(e) { alert('exception') }\n"
+            + "      log(ws.binaryType);\n"
+            + "    } catch(e) { log('exception') }\n"
 
             + "    try {\n"
             + "      ws.binaryType = '';\n"
-            + "      alert(ws.binaryType);\n"
-            + "    } catch(e) { alert('exception') }\n"
+            + "      log(ws.binaryType);\n"
+            + "    } catch(e) { log('exception') }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -693,15 +698,17 @@ public class WebSocketTest extends WebDriverTestCase {
     @Alerts("true")
     public void prototypeUrl() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var u = WebSocket.prototype.url;\n"
-            + "      alert(u);\n"
-            + "    } catch(e) { alert(e instanceof TypeError) }\n"
+            + "      log(u);\n"
+            + "    } catch(e) { log(e instanceof TypeError) }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

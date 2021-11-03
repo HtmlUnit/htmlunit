@@ -7,7 +7,90 @@
     </properties>
 
     <body>
-        <release version="3.0.0" date="September xx, 2021" description="Bugfixes, HTTP/2, Chrome/Edge 92">
+        <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95">
+        </release>
+
+        <release version="2.54.0" date="October 17, 2021" description="Bugfixes, Chrome/Edge 94, Firefox 93">
+            <action type="update" dev="RhinoTeam">
+                core-js: Improve compile speed in some cases.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Avoid unnecessary arrayCopy in Kit.readStream, when initialBufferCapacity matches stream length.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Classcache must honor current security context.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Optimized XmlProcessor toXmlNewlines.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix innerText when the element has svg children.
+            </action>
+            <action type="add" dev="rbri">
+                HTMLElement.outerText added.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix innerHTML and outerHTML if one child node is a template.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Fix some problems when parsing template content.
+            </action>
+            <action type="add" dev="rbri">
+                Navigator.languages added.
+            </action>
+            <action type="add" dev="rbri">
+                A short section about 'Multithreading/Threads Pooling' added to the web page.
+            </action>
+            <action type="add" dev="rbri">
+                WebClient.setExecutor(ExecutorService) added to make threading more flexible.
+            </action>
+            <action type="update" dev="rbri" issue="390" due-to="Dennis Duysak">
+                Use a CachedThreadPool instead of a FixedThreadPool for our executor service because the number
+                of WebSocket threads might block the whole execution otherwise.
+            </action>
+            <action type="fix" dev="rbri" issue="388">
+                Add missing support for XmlHttpRequest responseType and response properties.
+            </action>
+            <action type="fix" dev="rbri" issue="386" due-to="Rural Hunter">
+                Add missing request browser headers when setting location from js.
+            </action>
+            <action type="fix" dev="rbri" issue="386">
+                Xpath case sensitive processing was broken if an string inside the xpath contains []() or @.
+            </action>
+            <action type="fix" dev="rbri" issue="383">
+                Setting the value of an file input to an empty string should not trigger the on change.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix processing of SCRIPTABLE_UNDEFINED when used in string concatenation.
+            </action>
+        </release>
+
+        <release version="2.53.0" date="September 18, 2021" description="Bugfixes, Chrome/Edge 93, Firefox 92">
+            <action type="fix" dev="rbri" issue="374">
+                XMLHttpRequest.send() has to serialize the body value if it is Document.
+            </action>
+            <action type="fix" dev="rbri">
+                Finally support getting and setting style properties via elem.style['property-name'] notation.
+            </action>
+            <action type="fix" dev="rbri" issue="380">
+                Style property vertical-align now accepts also "baseline", "sub", "super", "text-top", "text-bottom",
+                "middle", "top", "bottom", "inherit", "initial", "revert"and "unset".
+            </action>
+            <action type="fix" dev="rbri">
+                NativeMap's Map.entries() emulation no longer returns NativeMap.NULL_VALUE instead of actual null instance.
+            </action>
+            <action type="fix" dev="rbri" issue="378">
+                Use the CssErrorHandler configured at the WebClient for parsing inline styles also.
+            </action>
+            <action type="fix" dev="rbri">
+                Assigning URL.search has to encode the given string.
+            </action>
+            <action type="fix" dev="rbri" due-to="cdalexndr">
+                If an URLSearchParams object is constructed from an URL all the changes have to update the url also.
+            </action>
+            <action type="fix" dev="rbri" due-to="cdalexndr">
+                URLSearchParams js object misses initialization of parent and prototype.
+            </action>
             <action type="fix" dev="rbri">
                 Fix detail value for PointerEvents.
             </action>

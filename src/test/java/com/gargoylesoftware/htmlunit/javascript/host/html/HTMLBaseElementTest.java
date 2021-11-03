@@ -43,11 +43,12 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "    <base id='b1' href='http://www.foo.com/images/' />\n"
             + "    <base id='b2' target='_blank' />\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.getElementById('b1').href);\n"
-            + "        alert(document.getElementById('b2').href);\n"
-            + "        alert(document.getElementById('b1').target);\n"
-            + "        alert(document.getElementById('b2').target);\n"
+            + "        log(document.getElementById('b1').href);\n"
+            + "        log(document.getElementById('b2').href);\n"
+            + "        log(document.getElementById('b1').target);\n"
+            + "        log(document.getElementById('b2').target);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -55,7 +56,7 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -63,19 +64,18 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLBaseElement]", "function HTMLBaseElement() { [native code] }"},
-            FF = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"},
-            FF78 = {"[object HTMLBaseElement]", "function HTMLBaseElement() {\n    [native code]\n}"},
             IE = {"[object HTMLBaseElement]", "[object HTMLBaseElement]"})
     public void type() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "  var elem = document.getElementById('b1');\n"
             + "    try {\n"
-            + "      alert(elem);\n"
-            + "      alert(HTMLBaseElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(elem);\n"
+            + "      log(HTMLBaseElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -83,6 +83,6 @@ public class HTMLBaseElementTest extends WebDriverTestCase {
             + "  <base id='b1' href='http://somehost/images/' />\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

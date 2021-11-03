@@ -768,21 +768,24 @@ public class NodeTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
+    @Alerts("done")
     public void insertBefore_undefinedRef() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function doTest() {\n"
                 + "  try {\n"
                 + "    var e = document.createElement('div');\n"
                 + "    e.innerHTML = 'new element';\n"
                 + "    document.body.insertBefore(e, undefined);\n"
+                + "    log('done');"
                 + "  } catch(e) {log('exception');}\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='doTest()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

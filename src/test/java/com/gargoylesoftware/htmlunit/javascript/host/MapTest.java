@@ -44,19 +44,22 @@ public class MapTest extends WebDriverTestCase {
             IE = {"1", "undefined"})
     @NotYetImplemented(IE)
     public void get() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Map) {\n"
             + "      var kvArray = [['key1', 'value1'], ['key2', 'value2']];\n"
             + "      var myMap = new Map(kvArray);\n"
             + "      myMap.set(1, 2);\n"
-            + "      alert(myMap.size);\n"
-            + "      alert(myMap.get('key1'));\n"
+            + "      log(myMap.size);\n"
+            + "      log(myMap.get('key1'));\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -65,10 +68,6 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
                        "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF = {"function entries() {\n    [native code]\n}",
-                  "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF78 = {"function entries() {\n    [native code]\n}",
-                    "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void iterator() throws Exception {
         final String html =
@@ -76,26 +75,28 @@ public class MapTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var myMap = new Map();\n"
             + "      myMap.set('0', 'foo');\n"
             + "      myMap.set(1, 'bar');\n"
             + "      myMap.set({}, 'baz');\n"
-            + "      alert(myMap[Symbol.iterator]);\n"
+            + "      log(myMap[Symbol.iterator]);\n"
             + "      var iter = myMap[Symbol.iterator]();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -104,10 +105,6 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }",
                        "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF = {"function entries() {\n    [native code]\n}",
-                  "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
-            FF78 = {"function entries() {\n    [native code]\n}",
-                    "[object Map Iterator]", "0,foo", "1,bar", "[object Object],baz", "undefined"},
             IE = {})
     public void entries() throws Exception {
         final String html =
@@ -115,26 +112,28 @@ public class MapTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var myMap = new Map();\n"
             + "      myMap.set('0', 'foo');\n"
             + "      myMap.set(1, 'bar');\n"
             + "      myMap.set({}, 'baz');\n"
-            + "      alert(myMap.entries);\n"
+            + "      log(myMap.entries);\n"
             + "      var iter = myMap.entries();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -143,10 +142,6 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function values() { [native code] }",
                        "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
-            FF = {"function values() {\n    [native code]\n}",
-                  "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
-            FF78 = {"function values() {\n    [native code]\n}",
-                    "[object Map Iterator]", "foo", "bar", "baz", "undefined"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -154,26 +149,28 @@ public class MapTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var myMap = new Map();\n"
             + "      myMap.set('0', 'foo');\n"
             + "      myMap.set(1, 'bar');\n"
             + "      myMap.set({}, 'baz');\n"
-            + "      alert(myMap.values);\n"
+            + "      log(myMap.values);\n"
             + "      var iter = myMap.values();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -182,10 +179,6 @@ public class MapTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function keys() { [native code] }",
                        "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
-            FF = {"function keys() {\n    [native code]\n}",
-                  "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
-            FF78 = {"function keys() {\n    [native code]\n}",
-                    "[object Map Iterator]", "0", "1", "[object Object]", "undefined"},
             IE = {})
     public void keys() throws Exception {
         final String html =
@@ -193,26 +186,28 @@ public class MapTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var myMap = new Map();\n"
             + "      myMap.set('0', 'foo');\n"
             + "      myMap.set(1, 'bar');\n"
             + "      myMap.set({}, 'baz');\n"
-            + "      alert(myMap.keys);\n"
+            + "      log(myMap.keys);\n"
             + "      var iter = myMap.keys();\n"
-            + "      alert(iter);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
-            + "      alert(iter.next().value);\n"
+            + "      log(iter);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
+            + "      log(iter.next().value);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -224,15 +219,17 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var myMap = new Map([[ 1, 'one' ],[ 2, 'two' ]]);\n"
-            + "  alert(myMap.size);\n"
+            + "  log(myMap.size);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -244,20 +241,22 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorInt32Array() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int32Array([2, 7]);\n"
             + "  try {\n"
             + "    var myMap = new Map(array);\n"
-            + "    alert(myMap.size);\n"
+            + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -269,19 +268,21 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorStringParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var myMap = new Map('test');\n"
-            + "    alert(myMap.size);\n"
+            + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -293,19 +294,21 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorSetParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var myMap = new Map(new Set('test'));\n"
-            + "    alert(myMap.size);\n"
+            + "    log(myMap.size);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -317,17 +320,19 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void constructorMapParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var kvArray = [['key1', 'value1'], ['key2', 'value2']];\n"
             + "  var testMap = new Map(kvArray);\n"
             + "  var myMap = new Map(testMap);\n"
-            + "  alert(myMap.size);\n"
+            + "  log(myMap.size);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -338,10 +343,12 @@ public class MapTest extends WebDriverTestCase {
             IE = "exception")
     public void constructorIteratorParam() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value, key) {\n"
-            + "  alert(key);\n"
-            + "  alert(value);\n"
+            + "  log(key);\n"
+            + "  log(value);\n"
             + "}\n"
             + "function test() {\n"
             + "  try {\n"
@@ -359,15 +366,15 @@ public class MapTest extends WebDriverTestCase {
             + "      };\n"
             + "    };\n"
             + "    var myMap = new Map(myIterable);\n"
-            + "    alert(myMap.size);\n"
+            + "    log(myMap.size);\n"
             + "    myMap.forEach(logElement);\n"
-            + "  }catch(e) { alert('exception'); }"
+            + "  }catch(e) { log('exception'); }"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -384,24 +391,25 @@ public class MapTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
-            + "  alert(value);\n"
-            + "  alert(key);\n"
-            + "  alert(m);\n"
-            + "  alert(this);\n"
+            + "  log(value);\n"
+            + "  log(key);\n"
+            + "  log(m);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "try {"
             + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
             + "  myMap.forEach(logElement);\n"
-             + "}catch(e){alert(e)}"
+             + "}catch(e){log(e)}"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -419,24 +427,25 @@ public class MapTest extends WebDriverTestCase {
             = "<html><head>\n"
             + "<script>\n"
             + "'use strict';\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
-            + "  alert(value);\n"
-            + "  alert(key);\n"
-            + "  alert(m);\n"
-            + "  alert(this);\n"
+            + "  log(value);\n"
+            + "  log(key);\n"
+            + "  log(m);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "try {"
             + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
             + "  myMap.forEach(logElement);\n"
-             + "}catch(e){alert(e)}"
+             + "}catch(e){log(e)}"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -451,12 +460,14 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void forEachThis() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
-            + "  alert(value);\n"
-            + "  alert(key);\n"
-            + "  alert(m);\n"
-            + "  alert(this);\n"
+            + "  log(value);\n"
+            + "  log(key);\n"
+            + "  log(m);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "  var myMap = new Map([['key1', 'value1'], ['key2', {}], ['key3', null], ['key4', undefined]]);\n"
@@ -465,7 +476,7 @@ public class MapTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -482,18 +493,20 @@ public class MapTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.Symbol) {\n"
             + "      var myMap = new Map();\n"
             + "      var iter = myMap[Symbol.iterator]();\n"
-            + "      alert(Object.getPrototypeOf(iter));\n"
+            + "      log(Object.getPrototypeOf(iter));\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -506,23 +519,25 @@ public class MapTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void forEach_withElision() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function logElement(value, key, m) {\n"
-            + "  alert(value);\n"
-            + "  alert(key);\n"
-            + "  alert(m);\n"
-            + "  alert(this);\n"
+            + "  log(value);\n"
+            + "  log(key);\n"
+            + "  log(m);\n"
+            + "  log(this);\n"
             + "}\n"
             + "function test() {\n"
             + "try {"
             + "  var myMap = new Map([[, 'value1'], ['key2', {}]]);\n"
             + "  myMap.forEach(logElement);\n"
-             + "}catch(e){alert(e)}"
+             + "}catch(e){log(e)}"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -535,19 +550,20 @@ public class MapTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var map = new Map();\n"
             + "  try {\n"
-            + "    alert(map.size);\n"
+            + "    log(map.size);\n"
             + "    map.size = 100;\n"
-            + "    alert(map.size);\n"
-            + "  } catch(e) { alert(e); }\n"
+            + "    log(map.size);\n"
+            + "  } catch(e) { log(e); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -560,20 +576,21 @@ public class MapTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  'use strict';\n"
             + "  var map = new Map();\n"
             + "  try {\n"
-            + "    alert(map.size);\n"
+            + "    log(map.size);\n"
             + "    map.size = 100;\n"
-            + "    alert(map.size);\n"
-            + "  } catch(e) { alert('Type error'); }\n"
+            + "    log(map.size);\n"
+            + "  } catch(e) { log('Type error'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

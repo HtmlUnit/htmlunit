@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlTableCell;
 
 /**
  * Tests for XPath evaluation on HtmlUnit DOM.
@@ -267,5 +268,78 @@ public class HtmlUnitXPathTest extends SimpleWebTestCase {
 
         div.setAttribute("class", "design");
         assertSame(div, page.getFirstByXPath("//*[@class = 'design']"));
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void specialAttribute() throws Exception {
+        final String content = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <table><tr>\n"
+            + "    <td id='myTd' ab='test' a_b='test' a-b='test' a.b='test'>@X</td></tr></table>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+
+        final HtmlTableCell cell = page.getHtmlElementById("myTd");
+
+        assertSame(cell, page.getFirstByXPath("//td[@ab= 'test']"));
+        assertSame(cell, page.getFirstByXPath("//td[@AB= 'test']"));
+
+        assertSame(cell, page.getFirstByXPath("//td[@a_b= 'test']"));
+        assertSame(cell, page.getFirstByXPath("//td[@A_B= 'test']"));
+
+        assertSame(cell, page.getFirstByXPath("//td[@a-b= 'test']"));
+        assertSame(cell, page.getFirstByXPath("//td[@A-B= 'test']"));
+
+        assertSame(cell, page.getFirstByXPath("//td[@a.b= 'test']"));
+        assertSame(cell, page.getFirstByXPath("//td[@A.B= 'test']"));
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void specialAtInText() throws Exception {
+        final String content = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <table><tr><td id='myTd'>@X</td></tr></table>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(content);
+
+        final HtmlTableCell cell = page.getHtmlElementById("myTd");
+        assertNull(page.getFirstByXPath("//td[text()='@x']"));
+        assertSame(cell, page.getFirstByXPath("//td[text()='@X']"));
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void specialBracesInText() throws Exception {
+        String content = "<html><head></head>\n"
+            + "<body>\n"
+            + "  <table><tr><td id='myTd'>(X)</td></tr></table>\n"
+            + "</body></html>";
+
+        HtmlPage page = loadPage(content);
+
+        HtmlTableCell cell = page.getHtmlElementById("myTd");
+        assertNull(page.getFirstByXPath("//td[normalize-space()='(x)']"));
+        assertSame(cell, page.getFirstByXPath("//td[normalize-space()='(X)']"));
+
+        content = "<html><head></head>\n"
+                + "<body>\n"
+                + "  <table><tr><td id='myTd'>[X]</td></tr></table>\n"
+                + "</body></html>";
+
+        page = loadPage(content);
+
+        cell = page.getHtmlElementById("myTd");
+        assertNull(page.getFirstByXPath("//td[text()='[x]']"));
+        assertSame(cell, page.getFirstByXPath("//td[text()='[X]']"));
     }
 }

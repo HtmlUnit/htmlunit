@@ -42,21 +42,23 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @Alerts({"117", "107", "126", "84", "52", "111", "-99", "65"})
     public void bufferConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Float64Array([123456789.123456789]);\n"
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
-            + "      alert(array2[i]);\n"
+            + "      log(array2[i]);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,18 +68,20 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @Alerts({"undefined", "1234567.8901", "undefined", "undefined"})
     public void index() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Float64Array([1234567.8901]);\n"
-            + "  alert(array[-1]);\n"
-            + "  alert(array[0]);\n"
-            + "  alert(array[1]);\n"
-            + "  alert(array[21]);\n"
+            + "  log(array[-1]);\n"
+            + "  log(array[0]);\n"
+            + "  log(array[1]);\n"
+            + "  log(array[21]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -87,18 +91,20 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @Alerts({"false", "true", "false", "false"})
     public void in() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Float64Array([1234567.8901]);\n"
-            + "  alert(-1 in array);\n"
-            + "  alert(0 in array);\n"
-            + "  alert(1 in array);\n"
-            + "  alert(42 in array);\n"
+            + "  log(-1 in array);\n"
+            + "  log(0 in array);\n"
+            + "  log(1 in array);\n"
+            + "  log(42 in array);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -108,7 +114,9 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @Alerts({"undefined", "6", "NaN", "0", "NaN", "Infinity", "-Infinity", "4", "undefined"})
     public void undefinedValueInArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = [];\n"
             + "  array[1] = null;\n"
@@ -116,22 +124,22 @@ public class Float64ArrayTest extends WebDriverTestCase {
             + "  array[3] = Number.POSITIVE_INFINITY;\n"
             + "  array[4] = Number.NEGATIVE_INFINITY;\n"
             + "  array[5] = 4;\n"
-            + "  alert(array[0]);\n"
+            + "  log(array[0]);\n"
 
             + "  var nativeArray = new Float64Array(array);\n"
-            + "  alert(nativeArray.length);\n"
-            + "  alert(nativeArray[0]);\n"
-            + "  alert(nativeArray[1]);\n"
-            + "  alert(nativeArray[2]);\n"
-            + "  alert(nativeArray[3]);\n"
-            + "  alert(nativeArray[4]);\n"
-            + "  alert(nativeArray[5]);\n"
-            + "  alert(nativeArray[6]);\n"
+            + "  log(nativeArray.length);\n"
+            + "  log(nativeArray[0]);\n"
+            + "  log(nativeArray[1]);\n"
+            + "  log(nativeArray[2]);\n"
+            + "  log(nativeArray[3]);\n"
+            + "  log(nativeArray[4]);\n"
+            + "  log(nativeArray[5]);\n"
+            + "  log(nativeArray[6]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -141,7 +149,9 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @Alerts({"NaN", "1", "0", "17"})
     public void specialValueInArray() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = [];\n"
             + "  array[0] = NaN;\n"
@@ -149,15 +159,15 @@ public class Float64ArrayTest extends WebDriverTestCase {
             + "  array[2] = false;\n"
             + "  array[3] = '17';\n"
             + "  var nativeArray = new Float64Array(array);\n"
-            + "  alert(nativeArray[0]);\n"
-            + "  alert(nativeArray[1]);\n"
-            + "  alert(nativeArray[2]);\n"
-            + "  alert(nativeArray[3]);\n"
+            + "  log(nativeArray[0]);\n"
+            + "  log(nativeArray[1]);\n"
+            + "  log(nativeArray[2]);\n"
+            + "  log(nativeArray[3]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -169,19 +179,21 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new Float64Array(null);\n"
-            + "    alert(array.length);\n"
+            + "    log(array.length);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -195,27 +207,29 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void asString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Float64Array(0);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Float64Array(1);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Float64Array([1]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Float64Array([1,3]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
 
             + "  array = new Float64Array([1,3,4,7,11,0,123]);\n"
-            + "  alert(array.toString());\n"
+            + "  log(array.toString());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -227,13 +241,15 @@ public class Float64ArrayTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void name() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(Float64Array.name);\n"
+            + "  log(Float64Array.name);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

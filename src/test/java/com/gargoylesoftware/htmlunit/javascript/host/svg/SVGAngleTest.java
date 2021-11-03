@@ -34,29 +34,27 @@ public class SVGAngleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
-            EDGE = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
-            FF = {"function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4"},
-            FF78 = {"function SVGAngle() {\n    [native code]\n}", "0", "1", "2", "3", "4"},
+    @Alerts(DEFAULT = {"function SVGAngle() { [native code] }", "0", "1", "2", "3", "4"},
             IE = {"[object SVGAngle]", "0", "1", "2", "3", "4"})
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.SVGAngle);\n"
+            + "    log(window.SVGAngle);\n"
             + "    if (window.SVGAngle) {\n"
-            + "      alert(SVGAngle.SVG_ANGLETYPE_UNKNOWN);\n"
-            + "      alert(SVGAngle.SVG_ANGLETYPE_UNSPECIFIED);\n"
-            + "      alert(SVGAngle.SVG_ANGLETYPE_DEG);\n"
-            + "      alert(SVGAngle.SVG_ANGLETYPE_RAD);\n"
-            + "      alert(SVGAngle.SVG_ANGLETYPE_GRAD);\n"
+            + "      log(SVGAngle.SVG_ANGLETYPE_UNKNOWN);\n"
+            + "      log(SVGAngle.SVG_ANGLETYPE_UNSPECIFIED);\n"
+            + "      log(SVGAngle.SVG_ANGLETYPE_DEG);\n"
+            + "      log(SVGAngle.SVG_ANGLETYPE_RAD);\n"
+            + "      log(SVGAngle.SVG_ANGLETYPE_GRAD);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

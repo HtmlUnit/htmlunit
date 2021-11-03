@@ -55,14 +55,14 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "92.0.4515.107";
+    static String CHROME_DRIVER_ = "95.0.4638.54";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "92.0.902.73";
+    static String EDGE_DRIVER_ = "95.0.1020.40";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.29.1";
+    static String GECKO_DRIVER_ = "0.30.0";
     static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
 
     /** IE driver. */
@@ -169,7 +169,7 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
             String content = page.asNormalizedText();
-            content = content.substring(content.indexOf("Release " + BrowserVersion.EDGE.getBrowserVersionNumeric()));
+            content = content.substring(content.indexOf("Current general public release channel."));
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
@@ -195,8 +195,8 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             try {
                 final HtmlPage page = webClient.getPage(GECKO_DRIVER_URL_);
-                final DomNodeList<DomNode> divs = page.querySelectorAll(".release-header div");
-                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), GECKO_DRIVER_);
+                final DomNodeList<DomNode> divs = page.querySelectorAll("li.breadcrumb-item-selected");
+                assertEquals("Gecko Driver", divs.get(0).asNormalizedText(), "v" + GECKO_DRIVER_);
             }
             catch (final FailingHttpStatusCodeException e) {
                 // ignore
@@ -318,6 +318,10 @@ public class ExternalTest {
             @SuppressWarnings("unused") final String artifactId, @SuppressWarnings("unused") final String version) {
         if (groupId.startsWith("org.eclipse.jetty")
                 && (version.startsWith("11.") || version.startsWith("10."))) {
+            return true;
+        }
+
+        if ("org.seleniumhq.selenium".equals(groupId) && (version.startsWith("4.0.0"))) {
             return true;
         }
 

@@ -415,9 +415,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "exception"},
-            FF = {"exception",
-                  "keydown, true, true, true, true, true, true, 65, 0",
-                  "keyup, false, false, false, false, false, false, 32, 0"},
             FF78 = {"exception",
                     "keydown, true, true, true, true, true, true, 65, 0",
                     "keyup, false, false, false, false, false, false, 32, 0"})

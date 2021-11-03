@@ -447,18 +447,6 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Facility method transforming expectedAlerts to a list and calling
-     * {@link #createTestPageForRealBrowserIfNeeded(String, List)}.
-     * @param content the content of the HTML page
-     * @param expectedAlerts the expected alerts
-     * @throws IOException if writing file fails
-     */
-    protected void createTestPageForRealBrowserIfNeeded(final String content, final String[] expectedAlerts)
-        throws IOException {
-        createTestPageForRealBrowserIfNeeded(content, Arrays.asList(expectedAlerts));
-    }
-
-    /**
      * Generates an instrumented HTML file in the temporary dir to easily make a manual test in a real browser.
      * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set.
      * @param content the content of the HTML page

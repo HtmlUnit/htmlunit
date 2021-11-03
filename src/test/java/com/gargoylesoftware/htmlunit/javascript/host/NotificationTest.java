@@ -39,13 +39,14 @@ public class NotificationTest extends WebDriverTestCase {
             IE = {"undefined", "false"})
     public void prototype() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(typeof window.Notification);\n"
-            + "  alert('Notification' in window);\n"
-            + "} catch(e) { alert('exception');}\n"
+            + "  log(typeof window.Notification);\n"
+            + "  log('Notification' in window);\n"
+            + "} catch(e) { log('exception');}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -56,12 +57,13 @@ public class NotificationTest extends WebDriverTestCase {
             IE = "exception")
     public void permission() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(Notification.permission);\n"
-            + "} catch(e) { alert('exception');}\n"
+            + "  log(Notification.permission);\n"
+            + "} catch(e) { log('exception');}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -72,12 +74,13 @@ public class NotificationTest extends WebDriverTestCase {
             IE = "exception")
     public void minimalUsage() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  new Notification('Hello here');\n"
-            + "} catch(e) { alert('exception');}\n"
+            + "} catch(e) { log('exception');}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -88,11 +91,12 @@ public class NotificationTest extends WebDriverTestCase {
             IE = "exception")
     public void requestPermission() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "  alert(typeof Notification.requestPermission);\n"
-            + "} catch(e) { alert('exception');}\n"
+            + "  log(typeof Notification.requestPermission);\n"
+            + "} catch(e) { log('exception');}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

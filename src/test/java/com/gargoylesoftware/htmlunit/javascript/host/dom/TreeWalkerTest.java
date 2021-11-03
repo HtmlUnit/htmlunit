@@ -33,20 +33,22 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  */
 @RunWith(BrowserRunner.class)
 public class TreeWalkerTest extends WebDriverTestCase {
-    private static final String contentStart = "<html><head><title>TreeWalker Test</title>\n"
+    private static final String contentStart = "<html><head><title></title>\n"
         + "<script>\n"
+        + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
         + "  return o ? o.tagName : undefined\n"
         + "}\n"
         + "function alertTreeWalker(tw) {\n"
-        + "  alert(safeTagName(tw.root));\n"
-        + "  alert(safeTagName(tw.currentNode));\n"
-        + "  alert(tw.whatToShow);\n"
-        + "  alert(tw.expandEntityReferences);\n"
+        + "  log(safeTagName(tw.root));\n"
+        + "  log(safeTagName(tw.currentNode));\n"
+        + "  log(tw.whatToShow);\n"
+        + "  log(tw.expandEntityReferences);\n"
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd = "\n  } catch(e) { alert('exception') }\n"
+
+    private static final String contentEnd = "\n  } catch(e) { log('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -58,17 +60,19 @@ public class TreeWalkerTest extends WebDriverTestCase {
     private void test(final String script) throws Exception {
         final String html = contentStart + script + contentEnd;
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
-    private static final String contentStart2 = "<html><head><title>TreeWalker Test</title>\n"
+    private static final String contentStart2 = "<html><head><title></title>\n"
         + "<script>\n"
+        + LOG_TITLE_FUNCTION
         + "function safeTagName(o) {\n"
         + "  return o ? o.tagName : undefined\n"
         + "}\n"
         + "function test() {\n"
         + "  try {\n";
-    private static final String contentEnd2 = "\n  } catch(e) { alert('exception') }\n"
+
+    private static final String contentEnd2 = "\n  } catch(e) { log('exception') }\n"
         + "\n}\n</script></head>\n"
         + "<body onload='test()'>\n"
         + "<div id='theDiv'>Hello, <span id='theSpan'>this is a test for"
@@ -81,7 +85,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     private void test2(final String script) throws Exception {
         final String html = contentStart2 + script + contentEnd2;
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -187,7 +191,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "tw.currentNode = document.getElementById('theDiv');\n"
             + "tw.parentNode();\n"
             + "alertTreeWalker(tw);\n"
-            + "alert(tw.parentNode());";
+            + "log(tw.parentNode());";
 
         test(script);
     }
@@ -220,7 +224,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "tw.currentNode = document.getElementById('theDiv');\n"
             + "tw.nextSibling();\n"
             + "alertTreeWalker(tw);\n"
-            + "alert(tw.nextSibling());\n";
+            + "log(tw.nextSibling());\n";
 
         test(script);
     }
@@ -237,7 +241,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "tw.currentNode = document.getElementById('theP');\n"
             + "tw.previousSibling();\n"
             + "alertTreeWalker(tw);\n"
-            + "alert(tw.previousSibling());\n";
+            + "log(tw.previousSibling());\n";
 
         test(script1);
     }
@@ -250,13 +254,13 @@ public class TreeWalkerTest extends WebDriverTestCase {
     public void next() throws Exception {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
-            + "alert(safeTagName(tw.currentNode));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.currentNode));\n";
+            + "log(safeTagName(tw.currentNode));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.currentNode));\n";
 
         test(script);
     }
@@ -270,13 +274,13 @@ public class TreeWalkerTest extends WebDriverTestCase {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
             + "tw.currentNode = document.getElementById('theP');\n"
-            + "alert(safeTagName(tw.currentNode));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.currentNode));\n";
+            + "log(safeTagName(tw.currentNode));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.currentNode));\n";
 
         test(script);
     }
@@ -289,20 +293,20 @@ public class TreeWalkerTest extends WebDriverTestCase {
                 "P", "SPAN", "CODE", "PRE", "undefined"})
     public void walking() throws Exception {
         final String script = "var tw = document.createTreeWalker(document.body, 1, null, true);\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.lastChild()));\n"
-            + "alert(safeTagName(tw.lastChild()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.parentNode()));\n"
-            + "alert(safeTagName(tw.parentNode()));\n"
-            + "alert(safeTagName(tw.lastChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.lastChild()));\n"
+            + "log(safeTagName(tw.lastChild()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.parentNode()));\n"
+            + "log(safeTagName(tw.parentNode()));\n"
+            + "log(safeTagName(tw.lastChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.nextNode()));\n";
 
         test2(script);
     }
@@ -316,13 +320,13 @@ public class TreeWalkerTest extends WebDriverTestCase {
         final String script =
             "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, null, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextNode()));\n"
-            + "alert(safeTagName(tw.parentNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextNode()));\n"
+            + "log(safeTagName(tw.parentNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n";
 
         test2(script);
     }
@@ -335,7 +339,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     public void nullRoot() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, null, true);\n"
-            + "} catch(e) { alert('exception'); }\n";
+            + "} catch(e) { log('exception'); }\n";
 
         test2(script);
     }
@@ -357,13 +361,13 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.parentNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.parentNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n";
 
         test2(script);
     }
@@ -381,13 +385,13 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
             + "tw.currentNode = document.firstChild.firstChild;\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.parentNode()));\n"
-            + "alert(safeTagName(tw.previousNode()));\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.parentNode()));\n"
+            + "log(safeTagName(tw.previousNode()));\n"
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n";
 
         test2(script);
     }
@@ -400,7 +404,7 @@ public class TreeWalkerTest extends WebDriverTestCase {
     public void emptyFilter() throws Exception {
         final String script = "try {\n"
             + "var tw = document.createTreeWalker(null, NodeFilter.SHOW_ELEMENT, {}, true);\n"
-            + "} catch(e) { alert('exception'); }\n";
+            + "} catch(e) { log('exception'); }\n";
 
         test2(script);
     }
@@ -422,8 +426,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "  }\n"
             + "}\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n";
 
         test2(script);
     }
@@ -439,11 +443,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP;"
             + "return NodeFilter.FILTER_ACCEPT}};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
-            + "alert(safeTagName(tw.firstChild()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n"
-            + "alert(safeTagName(tw.nextSibling()));\n";
+            + "log(safeTagName(tw.firstChild()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n"
+            + "log(safeTagName(tw.nextSibling()));\n";
 
         test2(script);
     }
@@ -459,8 +463,8 @@ public class TreeWalkerTest extends WebDriverTestCase {
             + "node.tagName == 'DIV') return NodeFilter.FILTER_REJECT;"
             + "return NodeFilter.FILTER_ACCEPT}};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
-            + "alert(safeTagName(tw.lastChild()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n";
+            + "log(safeTagName(tw.lastChild()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n";
 
         test2(script);
     }
@@ -475,11 +479,11 @@ public class TreeWalkerTest extends WebDriverTestCase {
         final String script = "var noScripts = {acceptNode: function(node) {if (node.tagName == 'SPAN' ||"
             + "node.tagName == 'DIV') return NodeFilter.FILTER_SKIP; return NodeFilter.FILTER_ACCEPT}};\n"
             + "var tw = document.createTreeWalker(document.body, NodeFilter.SHOW_ELEMENT, noScripts, true);\n"
-            + "alert(safeTagName(tw.lastChild()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));\n"
-            + "alert(safeTagName(tw.previousSibling()));";
+            + "log(safeTagName(tw.lastChild()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));\n"
+            + "log(safeTagName(tw.previousSibling()));";
 
         test2(script);
     }

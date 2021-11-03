@@ -702,8 +702,19 @@ public class HTMLElement extends Element {
      */
     @JsxGetter
     public String getInnerText() {
-        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText();
+        final HtmlSerializerInnerOuterText ser = new HtmlSerializerInnerOuterText(getBrowserVersion());
         return ser.asText(this.getDomNodeOrDie());
+    }
+
+    /**
+     * Gets the outerText attribute.
+     * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
+     * @return the contents of this node as text
+     */
+    @JsxGetter({CHROME, EDGE, IE})
+    public String getOuterText() {
+        // as first hack
+        return getInnerText();
     }
 
     /**

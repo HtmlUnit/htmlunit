@@ -42,15 +42,16 @@ public class HtmlHeading2Test extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <h2 id='myId'>asdf</h2>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
             assertTrue(element instanceof HtmlHeading2);
@@ -76,15 +77,17 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "</form>\n"
 
             + "<script>\n"
-            + "  alert(e1.align);\n"
-            + "  alert(e2.align);\n"
-            + "  alert(e3.align);\n"
-            + "  alert(e4.align);\n"
-            + "  alert(e5.align);\n"
-            + "  alert(e6.align);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(e1.align);\n"
+            + "  log(e2.align);\n"
+            + "  log(e3.align);\n"
+            + "  log(e4.align);\n"
+            + "  log(e5.align);\n"
+            + "  log(e6.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,24 +104,26 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "</form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
             + "    } catch (e) {\n"
-            + "      alert('error');\n"
+            + "      log('error');\n"
             + "    }\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
             + "  setAlign(elem, 'CenTer');\n"
-            + "  alert(elem.align);\n"
+            + "  log(elem.align);\n"
             + "  setAlign(e1, '8');\n"
-            + "  alert(e1.align);\n"
+            + "  log(e1.align);\n"
             + "  setAlign(e1, 'foo');\n"
-            + "  alert(e1.align);\n"
+            + "  log(e1.align);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -140,11 +145,12 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "<h6 id='h6' clear='2'>h6</h6>\n"
             + "<h1 id='h7' clear='foo'>h7</h1>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function set(h, value) {\n"
             + "  try {\n"
             + "    h.clear = value;\n"
             + "  } catch(e) {\n"
-            + "    alert('!');\n"
+            + "    log('!');\n"
             + "  }\n"
             + "}\n"
             + "var h1 = document.getElementById('h1');\n"
@@ -154,13 +160,13 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "var h5 = document.getElementById('h5');\n"
             + "var h6 = document.getElementById('h6');\n"
             + "var h7 = document.getElementById('h7');\n"
-            + "alert(h1.clear);\n"
-            + "alert(h2.clear);\n"
-            + "alert(h3.clear);\n"
-            + "alert(h4.clear);\n"
-            + "alert(h5.clear);\n"
-            + "alert(h6.clear);\n"
-            + "alert(h7.clear);\n"
+            + "log(h1.clear);\n"
+            + "log(h2.clear);\n"
+            + "log(h3.clear);\n"
+            + "log(h4.clear);\n"
+            + "log(h5.clear);\n"
+            + "log(h6.clear);\n"
+            + "log(h7.clear);\n"
             + "set(h1, 'left');\n"
             + "set(h2, 'none');\n"
             + "set(h3, 'right');\n"
@@ -168,15 +174,16 @@ public class HtmlHeading2Test extends WebDriverTestCase {
             + "set(h5, 2);\n"
             + "set(h6, 'abc');\n"
             + "set(h7, '8');\n"
-            + "alert(h1.clear);\n"
-            + "alert(h2.clear);\n"
-            + "alert(h3.clear);\n"
-            + "alert(h4.clear);\n"
-            + "alert(h5.clear);\n"
-            + "alert(h6.clear);\n"
-            + "alert(h7.clear);\n"
+            + "log(h1.clear);\n"
+            + "log(h2.clear);\n"
+            + "log(h3.clear);\n"
+            + "log(h4.clear);\n"
+            + "log(h5.clear);\n"
+            + "log(h6.clear);\n"
+            + "log(h7.clear);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

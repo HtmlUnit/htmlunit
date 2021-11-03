@@ -986,6 +986,57 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"before\\nsvg-text\\nafter", "before\\nsvg-text\\nafter"},
+            FF = {"beforesvg-textafter", "undefined"},
+            FF78 = {"beforeafter", "undefined"},
+            IE = {"beforesvg-titlesvg-textafter", "beforesvg-titlesvg-textafter"})
+    public void innerText_SVG() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(myTestDiv.innerText);\n"
+            + "    log(myTestDiv.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>abc"
+            + "<div id='myTestDiv'>before<svg><title>svg-title</title><text>svg-text</text></svg>after</div>def"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"MyTitlevar i;", "MyTitlevar i;"},
+            FF = {"MyTitlevar i;", "undefined"},
+            FF78 = {"MyTitlevar i;", "undefined"})
+    public void innerText_Head() throws Exception {
+        final String html = "<html><head>"
+            + "<title>MyTitle</title>"
+            + "<script>var i;</script>"
+            + "</head>"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.head.innerText);\n"
+            + "    log(document.head.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"something", "0"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
@@ -1353,20 +1404,21 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <b id=\"innerNode\">Old outerHTML</b>",
-                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+    @Alerts({"Old\\s=\\s<b\\sid=\"innerNode\">Old\\souterHTML</b>",
+                "New\\s=\\s\\s<b><i\\sid=\"newElt\">New\\scell\\svalue</i></b>",
                 "I"})
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    var innerNode = document.getElementById('innerNode');\n"
-            + "    alert('Old = ' + innerNode.outerHTML);\n"
+            + "    log('Old = ' + innerNode.outerHTML);\n"
             + "    innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "    alert('New = ' + myNode.innerHTML);\n"
-            + "    alert(document.getElementById('newElt').tagName);\n"
+            + "    log('New = ' + myNode.innerHTML);\n"
+            + "    log(document.getElementById('newElt').tagName);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1375,7 +1427,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         final WebElement pElt = driver.findElement(By.id("myNode"));
         assertEquals("p", pElt.getTagName());

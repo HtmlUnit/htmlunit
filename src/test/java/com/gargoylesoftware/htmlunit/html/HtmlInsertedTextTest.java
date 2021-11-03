@@ -40,12 +40,13 @@ public class HtmlInsertedTextTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <a href='foo' id='it'>ab<ins>cd</ins>ef</a>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var e = document.getElementById('it');\n"
-            + "    alert(e.textContent);\n"
-            + "    alert(e.innerText);\n"
+            + "    log(e.textContent);\n"
+            + "    log(e.innerText);\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

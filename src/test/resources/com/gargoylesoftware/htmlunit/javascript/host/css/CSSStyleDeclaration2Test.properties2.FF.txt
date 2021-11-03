@@ -121,6 +121,7 @@ WebkitTransitionDuration
 WebkitTransitionProperty
 WebkitTransitionTimingFunction
 WebkitUserSelect
+accentColor
 alignContent
 alignItems
 alignSelf
@@ -467,6 +468,7 @@ strokeLinejoin
 strokeMiterlimit
 strokeOpacity
 strokeWidth
+tabSize
 tableLayout
 textAlign
 textAlignLast

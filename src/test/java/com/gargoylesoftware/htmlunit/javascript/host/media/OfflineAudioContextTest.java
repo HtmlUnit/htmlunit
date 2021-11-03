@@ -40,8 +40,9 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('OfflineAudioContext' in window);\n"
+            + "      log('OfflineAudioContext' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -49,29 +50,28 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function startRendering() {\n    [native code]\n}",
-            CHROME =  "function startRendering() { [native code] }",
-            EDGE =  "function startRendering() { [native code] }",
+    @Alerts(DEFAULT = "function startRendering() { [native code] }",
             IE = "OfflineAudioContext not available")
     public void startRendering() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (!('OfflineAudioContext' in window)) {\n"
-            + "        alert('OfflineAudioContext not available');\n"
+            + "        log('OfflineAudioContext not available');\n"
             + "        return;\n"
             + "      }\n"
             + "      var offlineCtx = new OfflineAudioContext(2, 44100*40, 44100);\n"
-            + "      alert(offlineCtx.startRendering);\n"
+            + "      log(offlineCtx.startRendering);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -79,6 +79,6 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -41,18 +41,19 @@ public class HTMLPhraseElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        debug(document.createElement('abbr'));\n"
             + "        debug(document.createElement('big'));\n"
             + "      }\n"
             + "      function debug(e) {\n"
-            + "        alert(e + ' ' + e.cite);\n"
+            + "        log(e + ' ' + e.cite);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

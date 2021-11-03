@@ -39,13 +39,14 @@ public class HTMLVideoElementTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
-            + "alert(HTMLVideoElement.prototype == null);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "log(HTMLVideoElement.prototype == null);\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

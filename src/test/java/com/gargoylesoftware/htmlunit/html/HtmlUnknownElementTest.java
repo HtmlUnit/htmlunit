@@ -41,10 +41,11 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "    alert(document.getElementById('myId3'));\n"
+            + "    log(document.getElementById('myId1'));\n"
+            + "    log(document.getElementById('myId2'));\n"
+            + "    log(document.getElementById('myId3'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -53,7 +54,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
             + "<doesnt-exist id='myId3'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
@@ -73,10 +74,11 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
                 + "\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n";
         final String html = header + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId1'));\n"
-            + "    alert(document.getElementById('myId2'));\n"
-            + "    alert(document.getElementById('myId3'));\n"
+            + "    log(document.getElementById('myId1'));\n"
+            + "    log(document.getElementById('myId2'));\n"
+            + "    log(document.getElementById('myId3'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -85,7 +87,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
             + "<doesnt-exist id='myId3'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
@@ -104,7 +106,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
             + "<foo></foo>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final String xml = driver.getPageSource();
         assertTrue("Node not expanded in: " + xml, xml.contains("</foo>"));

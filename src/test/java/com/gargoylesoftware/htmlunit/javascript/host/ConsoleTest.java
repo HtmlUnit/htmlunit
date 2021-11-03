@@ -49,15 +49,16 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(window.console == undefined);\n"
-            + "    alert(typeof window.console);\n"
-            + "    alert('console' in window);\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "    log(window.console == undefined);\n"
+            + "    log(typeof window.console);\n"
+            + "    log('console' in window);\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -71,15 +72,16 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(window.Console == undefined);\n"
-            + "    alert(typeof window.Console);\n"
-            + "    alert('Console' in window);\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "    log(window.Console == undefined);\n"
+            + "    log(typeof window.Console);\n"
+            + "    log('Console' in window);\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -93,14 +95,15 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (window.console && window.console.timeStamp) {\n"
             + "    console.timeStamp();\n"
             + "    console.timeStamp('ready');\n"
-            + "  } else { alert('window.console.timeStamp not available');}\n"
+            + "  } else { log('window.console.timeStamp not available');}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -114,16 +117,17 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(typeof console.log);\n"
-            + "  alert(typeof console.info);\n"
-            + "  alert(typeof console.warn);\n"
-            + "  alert(typeof console.error);\n"
-            + "  alert(typeof console.debug);\n"
-            + "  alert(typeof console.timeStamp);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof console.log);\n"
+            + "  log(typeof console.info);\n"
+            + "  log(typeof console.warn);\n"
+            + "  log(typeof console.error);\n"
+            + "  log(typeof console.debug);\n"
+            + "  log(typeof console.timeStamp);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -137,15 +141,16 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var x = console.error;\n"
             + "    x('hello');\n"
-            + "    alert('success');\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log('success');\n"
+            + "  } catch(e) {log('exception')}\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

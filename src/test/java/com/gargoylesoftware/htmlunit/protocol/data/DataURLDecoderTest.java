@@ -83,6 +83,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
     public void base64WithPlus() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var canvas = document.getElementById('canvas');\n"
             + "  var img = document.getElementById('image');\n"
@@ -90,15 +91,16 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "  canvas.height = img.height;\n"
             + "  var ctx = canvas.getContext('2d');\n"
             + "  ctx.drawImage(img, 0, 0);\n"
-            + "  alert(canvas.toDataURL());\n"
+            + "  log(canvas.toDataURL());\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "  <img id='image' src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEU"
             + "AAAD///+l2Z/dAAAAM0lEQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6P9/AFGGFyjOXZtQAAAA"
             + "AElFTkSuQmCC'>\n"
             + "  <canvas id='canvas'></canvas>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

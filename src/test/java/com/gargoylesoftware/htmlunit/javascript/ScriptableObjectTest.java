@@ -44,6 +44,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     public void readOnlyPrototype() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var proto = Object.create(Object.prototype, {\n"
             + "    myProp: {\n"
             + "        get: function() { return 'default'; }\n"
@@ -52,14 +53,14 @@ public class ScriptableObjectTest extends WebDriverTestCase {
             + "  var o1 = Object.create(proto);\n"
             + "  var o2 = Object.create(proto);\n"
             + "  o2.myProp = 'bar';\n"
-            + "  alert(o2.myProp);\n"
-            + "  alert(o1.myProp);\n"
-            + "  alert(proto.myProp)"
+            + "  log(o2.myProp);\n"
+            + "  log(o1.myProp);\n"
+            + "  log(proto.myProp)"
             + "</script>\n"
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -71,6 +72,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
 
                 + "    var obj = {};\n"
@@ -82,20 +84,20 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    obj['c'] = 'something else';\n"
 
                 + "    var objectSymbols = Object.getOwnPropertySymbols(obj);\n"
-                + "    alert(objectSymbols.length);\n"
-                + "    alert(typeof objectSymbols[0]);\n"
-                + "    alert(typeof objectSymbols[1]);\n"
+                + "    log(objectSymbols.length);\n"
+                + "    log(typeof objectSymbols[0]);\n"
+                + "    log(typeof objectSymbols[1]);\n"
 
                 + "    var objectNames = Object.getOwnPropertyNames(obj);\n"
-                + "    alert(objectNames.length);\n"
-                + "    alert(objectNames[0]);\n"
+                + "    log(objectNames.length);\n"
+                + "    log(objectNames[0]);\n"
 
-                + "  } else { alert('not defined'); }\n"
+                + "  } else { log('not defined'); }\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -213,9 +215,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
-                + LOG_TITLE_FUNCTION
-
                 + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
 
                 + "  let a = [];\n"
                 + "  a.constructor = String\n"

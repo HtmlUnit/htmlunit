@@ -38,10 +38,12 @@ public class XmlPage2Test extends WebDriverTestCase {
     @Test
     @Alerts("8")
     public void load_XMLComment() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = " + XMLDocumentTest.callLoadXMLDocumentFromFile("'" + URL_SECOND + "'") + ";\n"
-            + "    alert(doc.documentElement.childNodes[0].nodeType);\n"
+            + "    log(doc.documentElement.childNodes[0].nodeType);\n"
             + "  }\n"
             + XMLDocumentTest.LOAD_XML_DOCUMENT_FROM_FILE_FUNCTION
             + "</script></head><body onload='test()'>\n"
@@ -50,7 +52,7 @@ public class XmlPage2Test extends WebDriverTestCase {
         final String xml = "<test><!-- --></test>";
 
         getMockWebConnection().setResponse(URL_SECOND, xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -60,19 +62,21 @@ public class XmlPage2Test extends WebDriverTestCase {
     @Alerts(DEFAULT =  { "true", "14"},
             IE = {"true", "15"})
     public void createElement() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    doc.appendChild(doc.createElement('elementName'));\n"
             + "    var xml = " + XMLDocumentTest.callSerializeXMLDocumentToString("doc") + ";\n"
-            + "    alert(xml.indexOf('<elementName') != -1);\n"
-            + "    alert(xml.length);\n"
+            + "    log(xml.indexOf('<elementName') != -1);\n"
+            + "    log(xml.length);\n"
             + "  }\n"
             + XMLDocumentTest.SERIALIZE_XML_DOCUMENT_TO_STRING_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,17 +85,19 @@ public class XmlPage2Test extends WebDriverTestCase {
     @Test
     @Alerts("[object Element]")
     public void createElementNS() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    try {\n"
-            + "      alert(doc.createElementNS('myNS', 'ppp:eee'));\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(doc.createElementNS('myNS', 'ppp:eee'));\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

@@ -39,18 +39,19 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var test1 = document.getElementById('test1');\n"
-            + "        alert(test1.disabled);\n"
+            + "        log(test1.disabled);\n"
             + "        test1.disabled = true;\n"
-            + "        alert(test1.disabled);\n"
+            + "        log(test1.disabled);\n"
             + "        test1.disabled = true;\n"
-            + "        alert(test1.disabled);\n"
+            + "        log(test1.disabled);\n"
             + "        test1.disabled = false;\n"
-            + "        alert(test1.disabled);\n"
+            + "        log(test1.disabled);\n"
 
             + "        var test2 = document.getElementById('test2');\n"
-            + "        alert(test2.disabled);\n"
+            + "        log(test2.disabled);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -66,7 +67,8 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
             + "      </select>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -79,16 +81,17 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var test1 = document.getElementById('test1');\n"
-            + "        alert(test1.label);\n"
+            + "        log(test1.label);\n"
             + "        test1.label = 'newLabel';\n"
-            + "        alert(test1.label);\n"
+            + "        log(test1.label);\n"
             + "        test1.label = '';\n"
-            + "        alert(test1.label);\n"
+            + "        log(test1.label);\n"
 
             + "        var test2 = document.getElementById('test2');\n"
-            + "        alert(test2.label);\n"
+            + "        log(test2.label);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -104,6 +107,7 @@ public class HTMLOptGroupElementTest extends WebDriverTestCase {
             + "      </select>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -320,6 +320,26 @@ public class NavigatorTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@code language} property.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "en-US,en",
+            IE = "undefined")
+    public void languages() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='log(window.navigator.languages)'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

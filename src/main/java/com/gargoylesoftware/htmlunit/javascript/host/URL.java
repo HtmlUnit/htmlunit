@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxStaticFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.file.File;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -43,6 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author cd alexndr
  */
 @JsxClass
 public class URL extends SimpleScriptable {
@@ -272,7 +275,10 @@ public class URL extends SimpleScriptable {
             return null;
         }
 
-        return new URLSearchParams(url_.getQuery());
+        final URLSearchParams searchParams = new URLSearchParams(this);
+        searchParams.setParentScope(getParentScope());
+        searchParams.setPrototype(getPrototype(searchParams.getClass()));
+        return searchParams;
     }
 
     /**
@@ -389,18 +395,36 @@ public class URL extends SimpleScriptable {
             return;
         }
 
-        final String query;
+        String query;
         if (search == null || "?".equals(search) || "".equals(search)) {
             query = null;
         }
-        else if (search.charAt(0) == '?') {
-            query = search.substring(1);
-        }
         else {
-            query = search;
+            if (search.charAt(0) == '?') {
+                query = search.substring(1);
+            }
+            else {
+                query = search;
+            }
+            query = UrlUtils.encodeQuery(query);
         }
 
         url_ = UrlUtils.getUrlWithNewQuery(url_, query);
+    }
+
+    public void setSearch(final List<NameValuePair> nameValuePairs) throws MalformedURLException {
+        final StringBuilder newSearch = new StringBuilder();
+        for (final NameValuePair nameValuePair : nameValuePairs) {
+            if (newSearch.length() > 0) {
+                newSearch.append('&');
+            }
+            newSearch
+                .append(UrlUtils.encodeQueryPart(nameValuePair.getName()))
+                .append('=')
+                .append(UrlUtils.encodeQueryPart(nameValuePair.getValue()));
+        }
+
+        url_ = UrlUtils.getUrlWithNewQuery(url_, newSearch.toString());
     }
 
     /**

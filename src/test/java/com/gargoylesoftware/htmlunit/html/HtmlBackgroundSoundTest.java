@@ -42,15 +42,16 @@ public class HtmlBackgroundSoundTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ +  "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <bgsound id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("Sound")) {
             assertTrue(HtmlBackgroundSound.class.isInstance(toHtmlElement(driver.findElement(By.id("myId")))));
         }

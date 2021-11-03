@@ -208,6 +208,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "  </body>\n"
 
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function getAttributeValue(element, attribute) {\n"
             + "      if (element) {\n"
             + "        return window.getComputedStyle(element)[attribute].split('px')[0];\n"
@@ -221,7 +222,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "    var titleFontSize = getAttributeValue(titleSizer, 'fontSize');\n"
             + "    var titleHeightGoal = getAttributeValue(titleSizer, 'height');\n"
 
-            + "    alert(titleHeight);\r\n"
+            + "    log(titleHeight);\r\n"
 
             + "    while (titleHeight > titleHeightGoal) {\n"
             + "      titleFontSize -= 1;\n"
@@ -229,10 +230,10 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
             + "      titleHeight = titleSizer.offsetHeight;\n"
             + "    }\n"
 
-            + "    alert(titleHeight);\n"
+            + "    log(titleHeight);\n"
             + "  </script>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

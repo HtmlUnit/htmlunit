@@ -40,7 +40,6 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
@@ -336,11 +335,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", "." + extension);
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.name("myInput")).sendKeys(path);
-            driver.findElement(By.id("mySubmit")).click();
+            driver.findElement(By.id("mySubmit")).submit();
         }
         finally {
             assertTrue(tmpFile.delete());
@@ -543,24 +542,33 @@ public class HtmlFileInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world"},
-            IE = "-Hello world-Hello world")
+    @Alerts(DEFAULT = {"exception", "-Hello world-Hello world-0", "-Hello world-Hello world-0"},
+            IE = {"-Hello world-Hello world-0", "-Hello world-Hello world-0"})
     public void setValueOnChange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.value = 'HtmlUnit';\n"
-              + "    } catch(e) { alert('exception'); }\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
+
+              + "    try{\n"
+              + "      input.value = '';\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
               + "  }\n"
               + "</script>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert('foo');alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -568,35 +576,44 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("-HtmlUnit-HtmlUnit")
+    @Alerts({"-HtmlUnit-HtmlUnit-0", "---0"})
     public void setDefaultValueOnChange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
               + "    try{\n"
               + "      input.defaultValue = 'HtmlUnit';\n"
-              + "    } catch(e) { alert('exception'); }\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
+
+              + "    try{\n"
+              + "      input.defaultValue = '';\n"
+              + "    } catch(e) { log('exception'); }\n"
+              + "    log(input.value + '-' + input.defaultValue "
+                          + "+ '-' + input.getAttribute('value') "
+                          + "+ '-' + input.files.length);\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-                    + " onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='b'>some button</button>\n"
               + "  <button id='set' onclick='test()'>setValue</button>\n"
               + "</body></html>";
@@ -604,11 +621,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("set")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -617,20 +634,21 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('file1');\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'file';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"file\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -639,7 +657,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -648,23 +666,24 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('file1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'file';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"file\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -673,7 +692,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -687,28 +706,29 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                   "-initial-initial", "-initial-initial",
                   "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var file = document.getElementById('testId');\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'newDefault';\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -718,7 +738,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -732,28 +752,29 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                   "-initial-initial", "-initial-initial",
                   "-newDefault-newDefault", "-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var file = document.getElementById('testId');\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'newDefault';\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -762,7 +783,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -776,25 +797,26 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                   "-default-default", "-attribValue-attribValue",
                   "-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var file = document.getElementById('testId');\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'default';\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    try{\n"
             + "      file.value = 'newValue';\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.setAttribute('value', 'attribValue');\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
 
             + "    file.defaultValue = 'newDefault';\n"
-            + "    alert(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
+            + "    log(file.value + '-' + file.defaultValue + '-' + file.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -803,7 +825,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -812,14 +834,15 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts("textLength not available")
     public void textLength() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
             + "    if(text.textLength) {\n"
-            + "      alert(text.textLength);\n"
+            + "      log(text.textLength);\n"
             + "    } else {\n"
-            + "      alert('textLength not available');\n"
+            + "      log('textLength not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -829,7 +852,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -841,28 +864,29 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var s = getSelection(document.getElementById('text1'));\n"
             + "    if (s != undefined) {\n"
-            + "      alert(s.length);\n"
+            + "      log(s.length);\n"
             + "    }\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
             + "    try {\n"
-            + "      alert(element.selectionStart);\n"
-            + "    } catch(e) { alert('ex start'); }\n"
+            + "      log(element.selectionStart);\n"
+            + "    } catch(e) { log('ex start'); }\n"
             + "    try {\n"
-            + "      alert(element.selectionEnd);\n"
-            + "    } catch(e) { alert('ex end'); }\n"
+            + "      log(element.selectionEnd);\n"
+            + "    } catch(e) { log('ex end'); }\n"
             + "    try {\n"
             + "      return element.value.substring(element.selectionStart, element.selectionEnd);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input type='file' id='text1'/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -912,36 +936,38 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Bonjour' type='file'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
 
             + "  try {\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  } catch(e) { log('exception'); }\n"
 
             + "  try{\n"
             + "    input.value = '12345678900';\n"
-            + "  } catch(e) { alert('exception value'); }\n"
+            + "  } catch(e) { log('exception value'); }\n"
             + "  try {\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  } catch(e) { log('exception'); }\n"
 
             + "  try {\n"
             + "    input.selectionStart = " + selectionStart + ";\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "  try {\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  } catch(e) { log('exception'); }\n"
 
             + "  try {\n"
             + "    input.selectionEnd = " + selectionEnd + ";\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "  try {\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -955,30 +981,32 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "<body>\n"
             + "<input id='myTextInput' value='Hello' type='file'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
 
             + "  try {\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "    input.selectionStart = 4;\n"
             + "    input.selectionEnd = 5;\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "    input.value = 'abcdefghif';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "    input.value = 'abcd';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "    input.selectionStart = 0;\n"
             + "    input.selectionEnd = 4;\n"
 
             + "    input.value = 'a';\n"
-            + "    alert(input.selectionStart + ',' + input.selectionEnd);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -988,11 +1016,14 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Alerts({"changed2", "changed"})
     public void firingOnchange() throws Exception {
         final String html = "<html><body>\n"
-            + "<form onchange='alert(\"changed\")'>\n"
-            + "  <input type='file' id='file1' onchange='alert(\"changed2\")' "
-                + "onkeydown='alert(\"onkeydown2\")' "
-                + "onkeypress='alert(\"onkeypress2\")' "
-                + "onkeyup='alert(\"onkeyup2\")'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "<form onchange='log(\"changed\")'>\n"
+            + "  <input type='file' id='file1' onchange='log(\"changed2\")' "
+                + "onkeydown='log(\"onkeydown2\")' "
+                + "onkeypress='log(\"onkeypress2\")' "
+                + "onkeyup='log(\"onkeyup2\")'>\n"
             + "</form>\n"
             + "</body></html>";
 
@@ -1001,7 +1032,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("file1")).sendKeys(tmpFile.getAbsolutePath());
         assertTrue(tmpFile.delete());
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1010,12 +1041,13 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true"})
     public void nonZeroWidthHeight() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var file = document.getElementById('testId');\n"
-                + "    alert(file.clientWidth > 2);\n"
-                + "    alert(file.clientHeight > 2);\n"
+                + "    log(file.clientWidth > 2);\n"
+                + "    log(file.clientHeight > 2);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -1023,7 +1055,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
                 + "  <input type='file' id='testId'>\n"
                 + "</form>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1040,9 +1073,10 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.getElementById('f');\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
@@ -1057,7 +1091,7 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         driver.findElement(By.id("f")).sendKeys(absolutePath);
         driver.findElement(By.id("clickMe")).click();
 
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver));
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1070,33 +1104,36 @@ public class HtmlFileInputTest extends WebDriverTestCase {
               "<html>\n"
               + "<head>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var input = document.createElement('input');\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "    input.setAttribute('value', '');\n"
-              + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
               + "  }\n"
               + "</script>\n"
               + "</head>\n"
               + "<body onload='test()'>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("foo, change")
+    @Alerts({"foo", "change"})
     public void onchange() throws Exception {
         final String html =
               "<html>\n"
               + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
               + "</head>\n"
               + "<body>\n"
-              + "  <input type='file' id='f' value='Hello world'"
-              + "      onChange='alert(\"foo\");alert(event.type);'>\n"
+              + "  <input type='file' id='f' value='Hello world' onChange='log(\"foo\");log(event.type);'>\n"
               + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
               + "</body></html>";
 
@@ -1104,7 +1141,8 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("f")).sendKeys(absolutePath);
-        assertEquals(getExpectedAlerts(), getCollectedAlerts(driver, 2));
+
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1139,9 +1177,10 @@ public class HtmlFileInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1152,6 +1191,6 @@ public class HtmlFileInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

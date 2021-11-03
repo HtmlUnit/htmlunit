@@ -147,17 +147,19 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    alert(typeof Symbol." + name + ");\n"
-            + "    alert(Symbol." + name + " ? Symbol." + name + ".toString() : '-');\n"
-            + "    alert(Symbol." + name + " === Symbol." + name + ");\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
+            + "    log(typeof Symbol." + name + ");\n"
+            + "    log(Symbol." + name + " ? Symbol." + name + ".toString() : '-');\n"
+            + "    log(Symbol." + name + " === Symbol." + name + ");\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -172,18 +174,20 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
-            + "    alert(Symbol().toString());\n"
-            + "    alert(Symbol('foo').toString());\n"
-            + "    alert(Symbol.iterator.toString());\n"
-            + "    try { alert(Symbol.replace) } catch(e) { alert('exception'); };\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
+            + "    log(Symbol().toString());\n"
+            + "    log(Symbol('foo').toString());\n"
+            + "    log(Symbol.iterator.toString());\n"
+            + "    try { log(Symbol.replace) } catch(e) { log('exception'); };\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -198,19 +202,21 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
-            + "      alert(Symbol().toString());\n"
-            + "      alert(Symbol('foo').toString());\n"
-            + "      alert(Symbol.iterator.toString());\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(Symbol().toString());\n"
+            + "      log(Symbol('foo').toString());\n"
+            + "      log(Symbol.iterator.toString());\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -225,20 +231,22 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
-            + "      alert(typeof Symbol);\n"
-            + "      alert(typeof Symbol());\n"
-            + "      alert(typeof Symbol('foo'));\n"
-            + "      alert(typeof Symbol.iterator);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(typeof Symbol);\n"
+            + "      log(typeof Symbol());\n"
+            + "      log(typeof Symbol('foo'));\n"
+            + "      log(typeof Symbol.iterator);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -253,21 +261,23 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
-            + "      alert(Symbol('bar') === Symbol('bar'));\n"
-            + "      alert(Symbol.for('bar') === Symbol.for('bar'));\n"
+            + "      log(Symbol('bar') === Symbol('bar'));\n"
+            + "      log(Symbol.for('bar') === Symbol.for('bar'));\n"
 
             + "      var sym = Symbol.for('mario');\n"
-            + "      alert(sym.toString());\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(sym.toString());\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -285,18 +295,20 @@ public class SymbolTest extends WebDriverTestCase {
             + "  if (window.Symbol) { globSym = Symbol.for('global'); }\n"
             + "</script>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
-            + "      alert(Symbol.for('global') === globSym);\n"
-            + "      alert(Symbol('global') === globSym);\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "      log(Symbol.for('global') === globSym);\n"
+            + "      log(Symbol('global') === globSym);\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -311,20 +323,22 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
             + "      new Symbol();\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    } catch(e) {log('exception')}\n"
             + "    try {\n"
             + "      new Symbol('foo');\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -339,20 +353,22 @@ public class SymbolTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Symbol) { alert('not supported'); return; }\n"
+            + "    if (!window.Symbol) { log('not supported'); return; }\n"
             + "    try {\n"
             + "      new Symbol();\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    } catch(e) {log('exception')}\n"
             + "    try {\n"
             + "      new Symbol('foo');\n"
-            + "    } catch(e) {alert('exception')}\n"
+            + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -362,18 +378,21 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "called",
             IE = {})
     public void inFunction() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.Symbol) {\n"
             + "    [].forEach.call('_', function(e) {\n"
             + "      var x = Symbol.toPrimitive;\n"
-            + "      alert('called');\n"
+            + "      log('called');\n"
             + "    });\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -383,20 +402,23 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "called",
             IE = {})
     public void inFunction2() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.Symbol) {\n"
             + "    [].forEach.call('_', function(e) {\n"
             + "      try {\n"
             + "        var x = Symbol('hello');\n"
-            + "        alert('called');\n"
-            + "      } catch(e) {alert('exception');}\n"
+            + "        log('called');\n"
+            + "      } catch(e) {log('exception');}\n"
             + "    });\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>\n";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -406,16 +428,19 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "function",
             IE = {})
     public void prototypeAddFunction() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  if (window.Symbol) {\n"
                 + "    Symbol.prototype.myCustomFunction = function() {};\n"
-                + "    alert(typeof Symbol.prototype.myCustomFunction);\n"
+                + "    log(typeof Symbol.prototype.myCustomFunction);\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>\n";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -425,14 +450,17 @@ public class SymbolTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "object",
             IE = {})
     public void prototypeTypeOf() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  if (window.Symbol) {\n"
-                + "    alert(typeof Symbol.prototype);\n"
+                + "    log(typeof Symbol.prototype);\n"
                 + "  }\n"
                 + "}\n"
                 + "</script></head><body onload='test()'>\n"
                 + "</body></html>\n";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

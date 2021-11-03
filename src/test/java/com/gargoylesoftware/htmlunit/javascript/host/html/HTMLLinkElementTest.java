@@ -42,27 +42,28 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
               "<html>\n"
             + "  <body onload='test()'>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var s = document.createElement('link');\n"
-            + "        alert(s.href);\n"
-            + "        alert(s.type);\n"
-            + "        alert(s.rel);\n"
-            + "        alert(s.rev);\n"
+            + "        log(s.href);\n"
+            + "        log(s.type);\n"
+            + "        log(s.rel);\n"
+            + "        log(s.rev);\n"
             + "        s.href = 'test.css';\n"
             + "        s.type = 'text/css';\n"
             + "        s.rel  = 'stylesheet';\n"
             + "        s.rev  = 'stylesheet1';\n"
-            + "        alert(s.href);\n"
-            + "        alert(s.type);\n"
-            + "        alert(s.rel);\n"
-            + "        alert(s.rev);\n"
+            + "        log(s.href);\n"
+            + "        log(s.type);\n"
+            + "        log(s.rel);\n"
+            + "        log(s.rev);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,23 +74,25 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
     public void readWriteRel() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
 
-            + "alert(l1.rel);\n"
-            + "alert(l2.rel);\n"
+            + "log(l1.rel);\n"
+            + "log(l2.rel);\n"
 
             + "l1.rel = 'prefetch';\n"
             + "l2.rel = 'prefetch';\n"
-            + "alert(l1.rel);\n"
-            + "alert(l2.rel);\n"
+            + "log(l1.rel);\n"
+            + "log(l2.rel);\n"
 
             + "l1.rel = 'not supported';\n"
             + "l2.rel = 'notsupported';\n"
-            + "alert(l1.rel);\n"
-            + "alert(l2.rel);\n"
+            + "log(l1.rel);\n"
+            + "log(l2.rel);\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,18 +104,20 @@ public class HTMLLinkElementTest extends WebDriverTestCase {
     public void relList() throws Exception {
         final String html
             = "<html><body><link id='l1'><link id='l2' rel='alternate help'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var l1 = document.getElementById('l1'), l2 = document.getElementById('l2');\n"
 
             + "try {\n"
-            + "  alert(l1.relList.length);\n"
-            + "  alert(l2.relList.length);\n"
+            + "  log(l1.relList.length);\n"
+            + "  log(l2.relList.length);\n"
 
             + "  for (var i = 0; i < l2.relList.length; i++) {\n"
-            + "    alert(l2.relList[i]);\n"
+            + "    log(l2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

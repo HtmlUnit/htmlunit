@@ -33,6 +33,8 @@ public final class MimeType {
     public static final String APPLICATION_JSON = "application/json";
     /** application/xhtml+xml. */
     public static final String APPLICATION_XHTML = "application/xhtml+xml";
+    /** application/xml. */
+    public static final String APPLICATION_XML = "application/xml";
 
     /** "text/css". */
     public static final String TEXT_CSS = "text/css";

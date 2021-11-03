@@ -40,8 +40,9 @@ public class MediaSourceTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('MediaSource' in window);\n"
+            + "      log('MediaSource' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -49,7 +50,7 @@ public class MediaSourceTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,9 +70,10 @@ public class MediaSourceTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (!('MediaSource' in window)) {\n"
-            + "        alert('MediaSource not available');\n"
+            + "        log('MediaSource not available');\n"
             + "        return;\n"
             + "      }\n"
 
@@ -80,7 +82,7 @@ public class MediaSourceTest extends WebDriverTestCase {
             + "      supported('');\n"
             + "    }\n"
             + "    function supported(mime) {\n"
-            + "      alert(MediaSource.isTypeSupported(mime));\n"
+            + "      log(MediaSource.isTypeSupported(mime));\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -88,6 +90,6 @@ public class MediaSourceTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

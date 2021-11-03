@@ -30,7 +30,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 public interface RenderingBackend {
 
     enum WindingRule {
+        /** WindingRule.NON_ZERO. */
         NON_ZERO,
+        /** WindingRule.EVEN_ODD. */
         EVEN_ODD
     }
 

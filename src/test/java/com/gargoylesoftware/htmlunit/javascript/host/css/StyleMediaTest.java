@@ -38,17 +38,19 @@ public class StyleMediaTest extends WebDriverTestCase {
             FF78 = "undefined")
     public void type() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.styleMedia);\n"
+            + "    log(window.styleMedia);\n"
             + "    if (window.styleMedia) {\n"
-            + "      alert(window.styleMedia.type);\n"
+            + "      log(window.styleMedia.type);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -60,18 +62,20 @@ public class StyleMediaTest extends WebDriverTestCase {
             FF78 = {})
     public void matchMedium() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.styleMedia) {\n"
-            + "      alert(window.styleMedia.matchMedium('screen'));\n"
-            + "      alert(window.styleMedia.matchMedium('SCREEN'));\n"
-            + "      alert(window.styleMedia.matchMedium('screen, handheld'));\n"
-            + "      alert(window.styleMedia.matchMedium('handheld'));\n"
+            + "      log(window.styleMedia.matchMedium('screen'));\n"
+            + "      log(window.styleMedia.matchMedium('SCREEN'));\n"
+            + "      log(window.styleMedia.matchMedium('screen, handheld'));\n"
+            + "      log(window.styleMedia.matchMedium('handheld'));\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

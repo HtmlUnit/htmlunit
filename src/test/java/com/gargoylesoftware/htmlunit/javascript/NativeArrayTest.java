@@ -135,17 +135,16 @@ public class NativeArrayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function Array() { [native code] }",
-            FF = "function Array() {\n    [native code]\n}",
-            FF78 = "function Array() {\n    [native code]\n}",
-            IE = "\nfunction Array() {\n    [native code]\n}\n")
+            IE = "function Array() { [native code] } ")
     public void constructorToString() throws Exception {
         final String html
             = "<html><head><script>\n"
-            + "alert([].constructor.toString());\n"
+            + LOG_TITLE_FUNCTION
+            + "log([].constructor.toString());\n"
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

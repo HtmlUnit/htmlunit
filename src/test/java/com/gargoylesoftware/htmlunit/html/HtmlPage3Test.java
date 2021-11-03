@@ -116,14 +116,14 @@ public class HtmlPage3Test extends WebDriverTestCase {
             IE = {"ISO-8859-1", "iso-8859-1", "iso-8859-1", "windows-1252"})
     public void getPageEncoding() throws Exception {
         final String htmlContent = "<html><head>\n"
-            + "  <title>foo</title>\n"
             + "  <meta http-equiv='Content-Type' content='text/html; charset=Shift_JIS'>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.inputEncoding);\n"
-            + "      alert(document.characterSet);\n"
-            + "      alert(document.charset);\n"
-            + "      alert(document.defaultCharset);\n"
+            + "      log(document.inputEncoding);\n"
+            + "      log(document.characterSet);\n"
+            + "      log(document.charset);\n"
+            + "      log(document.defaultCharset);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
@@ -135,7 +135,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</form>\n"
             + "</td></tr></table>\n"
             + "</body></html>";
-        loadPageWithAlerts2(htmlContent);
+        loadPageVerifyTitle2(htmlContent);
     }
 
     /**
@@ -174,7 +174,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         assertTitle(driver, "foo");
     }
 
@@ -195,7 +195,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final WebElement form = driver.findElement(By.id("form1"));
         final WebElement input = form.findElement(By.name("textInput1"));
@@ -212,7 +212,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_afterParsing() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    document.write(\"<input id='sendemail'>\");\n"
             + "    alert(document.getElementById('sendemail'));\n"
@@ -238,14 +239,15 @@ public class HtmlPage3Test extends WebDriverTestCase {
     @Alerts({"[object HTMLInputElement]", "1"})
     public void write_getElementById_duringParsing() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title></head>\n"
+            + "<head></head>\n"
             + "<body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  document.write(\"<input id='sendemail'>\");\n"
-            + "  alert(document.getElementById('sendemail'));\n"
+            + "  log(document.getElementById('sendemail'));\n"
             + "  document.write(\"<input name='sendemail2'>\");\n"
-            + "  alert(document.getElementsByName('sendemail2').length);\n"
+            + "  log(document.getElementsByName('sendemail2').length);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -402,13 +404,13 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String content
             = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
             + "<head>\n"
-            + "<title>foo</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('mySvg'));\n"
-            + "    alert(document.getElementById('mySvg').namespaceURI);\n"
-            + "    alert(document.getElementById('myRect'));\n"
-            + "    alert(document.getElementById('myRect').namespaceURI);\n"
+            + "    log(document.getElementById('mySvg'));\n"
+            + "    log(document.getElementById('mySvg').namespaceURI);\n"
+            + "    log(document.getElementById('myRect'));\n"
+            + "    log(document.getElementById('myRect').namespaceURI);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -419,7 +421,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -433,10 +435,10 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "<svg xmlns=\"http://www.w3.org/2000/svg\">\n"
             + "  <rect id='rect' width='50' height='50' fill='green' />\n"
             + "<head>\n"
-            + "<title>foo</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.documentElement.tagName);\n"
+            + "    log(document.documentElement.tagName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -444,7 +446,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</svg>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -458,12 +460,13 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "  <rect id='rect' width='50' height='50' fill='green' />\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(document.documentElement);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.documentElement);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -616,5 +619,26 @@ public class HtmlPage3Test extends WebDriverTestCase {
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
         assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Regression test for bug #428.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"cl2", "cl1"})
+    public void onLoadHandler_idChange() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<div id='id1' class='cl1'><div id='id2' class='cl2'></div></div>'"
+            + "<script type='text/javascript'>\n"
+            + LOG_TITLE_FUNCTION
+            + "document.getElementById('id1').id = 'id3';\n"
+            + "log(document.getElementById('id2').className);\n"
+            + "log(document.getElementById('id3').className);\n"
+            + "</script>\n"
+            + "</head><body></body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

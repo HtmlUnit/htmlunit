@@ -44,15 +44,16 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <menu id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final WebElement element = driver.findElement(By.id("myId"));
             assertTrue(toHtmlElement(element) instanceof HtmlMenu);
@@ -70,28 +71,29 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
-                + "        alert(document.getElementById('menu1').compact);\n"
-                + "        alert(document.getElementById('menu2').compact);\n"
-                + "        alert(document.getElementById('menu3').compact);\n"
-                + "        alert(document.getElementById('menu4').compact);\n"
-                + "        alert(document.getElementById('menu1').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu2').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu3').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu4').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu1').compact);\n"
+                + "        log(document.getElementById('menu2').compact);\n"
+                + "        log(document.getElementById('menu3').compact);\n"
+                + "        log(document.getElementById('menu4').compact);\n"
+                + "        log(document.getElementById('menu1').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu2').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu3').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu4').getAttribute('compact'));\n"
 
                 + "        document.getElementById('menu1').compact = true;\n"
                 + "        document.getElementById('menu2').compact = false;\n"
                 + "        document.getElementById('menu3').compact = 'xyz';\n"
                 + "        document.getElementById('menu4').compact = null;\n"
-                + "        alert(document.getElementById('menu1').compact);\n"
-                + "        alert(document.getElementById('menu2').compact);\n"
-                + "        alert(document.getElementById('menu3').compact);\n"
-                + "        alert(document.getElementById('menu4').compact);\n"
-                + "        alert(document.getElementById('menu1').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu2').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu3').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('menu4').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu1').compact);\n"
+                + "        log(document.getElementById('menu2').compact);\n"
+                + "        log(document.getElementById('menu3').compact);\n"
+                + "        log(document.getElementById('menu4').compact);\n"
+                + "        log(document.getElementById('menu1').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu2').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu3').getAttribute('compact'));\n"
+                + "        log(document.getElementById('menu4').getAttribute('compact'));\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -102,7 +104,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "    <menu compact='2' id='menu4'><li>a</li><li>b</li></menu>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -122,35 +125,36 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
-                + "        alert(document.getElementById('menu1').type);\n"
-                + "        alert(document.getElementById('menu2').type);\n"
-                + "        alert(document.getElementById('menu3').type);\n"
-                + "        alert(document.getElementById('menu4').type);\n"
-                + "        alert(document.getElementById('menu5').type);\n"
-                + "        alert(document.getElementById('menu1').getAttribute('type'));\n"
-                + "        alert(document.getElementById('menu2').getAttribute('type'));\n"
-                + "        alert(document.getElementById('menu3').getAttribute('type'));\n"
-                + "        alert(document.getElementById('menu4').getAttribute('type'));\n"
-                + "        alert(document.getElementById('menu5').getAttribute('type'));\n"
+                + "        log(document.getElementById('menu1').type);\n"
+                + "        log(document.getElementById('menu2').type);\n"
+                + "        log(document.getElementById('menu3').type);\n"
+                + "        log(document.getElementById('menu4').type);\n"
+                + "        log(document.getElementById('menu5').type);\n"
+                + "        log(document.getElementById('menu1').getAttribute('type'));\n"
+                + "        log(document.getElementById('menu2').getAttribute('type'));\n"
+                + "        log(document.getElementById('menu3').getAttribute('type'));\n"
+                + "        log(document.getElementById('menu4').getAttribute('type'));\n"
+                + "        log(document.getElementById('menu5').getAttribute('type'));\n"
 
-                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = 'list' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = 'context' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = 'toolbar' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = 'ConText' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = '' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = '' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
 
-                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {alert('ex');}\n"
-                + "        alert(document.getElementById('menu1').type);\n"
+                + "        try { document.getElementById('menu1').type = 'unknown' } catch(e) {log('ex');}\n"
+                + "        log(document.getElementById('menu1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -162,7 +166,8 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "    <menu type='ToolBar' id='menu5'><li>a</li><li>b</li></menu>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -176,18 +181,19 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
                 + "        var menu1 = document.getElementById('menu1');\n"
-                + "        alert(menu1.label);\n"
+                + "        log(menu1.label);\n"
 
                 + "        var menu2 = document.getElementById('menu1');\n"
-                + "        alert(menu2.label);\n"
+                + "        log(menu2.label);\n"
 
                 + "        menu1.label = 'new';\n"
-                + "        alert(menu1.label);\n"
+                + "        log(menu1.label);\n"
 
                 + "        menu1.label = '';\n"
-                + "        alert(menu1.label);\n"
+                + "        log(menu1.label);\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -196,6 +202,7 @@ public class HTMLMenuElementTest extends WebDriverTestCase {
                 + "    <menu id='menu2' label='Menu1'><li>a</li><li>b</li></menu>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

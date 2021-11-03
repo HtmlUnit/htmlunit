@@ -87,10 +87,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_LENGTH_INITIAL,
 
-    /** Is display style of HtmlNoEmbed is 'inline'. */
-    @BrowserFeature({CHROME, EDGE})
-    CSS_NOEMBED_INLINE,
-
     /** The default value of the display property for the 'noscript' tag is 'inline' instead of the default one. */
     @BrowserFeature({CHROME, EDGE})
     CSS_NOSCRIPT_DISPLAY_INLINE,
@@ -462,7 +458,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
@@ -690,15 +686,15 @@ public enum BrowserVersionFeatures {
 
     /** ClientHeight for input is 17. */
     @BrowserFeature({CHROME, EDGE})
-    JS_CLIENTHIGHT_INPUT_17,
+    JS_CLIENTHEIGHT_INPUT_17,
 
     /** ClientHeight for input is 18. */
     @BrowserFeature(FF)
-    JS_CLIENTHIGHT_INPUT_18,
+    JS_CLIENTHEIGHT_INPUT_18,
 
     /** ClientHeight for radio button and checkbox is 10. */
     @BrowserFeature(FF)
-    JS_CLIENTHIGHT_RADIO_CHECKBOX_10,
+    JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
     @BrowserFeature(IE)
@@ -1052,7 +1048,19 @@ public enum BrowserVersionFeatures {
 
     /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
     @BrowserFeature(IE)
-    JS_INNER_TEXT_LF,
+    JS_INNER_HTML_LF,
+
+    /** Indicates that innerText ignores SVG text content. */
+    @BrowserFeature(FF78)
+    JS_INNER_TEXT_SVG_IGNORE,
+
+    /** Indicates that innerText add a nl when reaching svg element. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INNER_TEXT_SVG_NL,
+
+    /** Indicates that innerText add svg title content also. */
+    @BrowserFeature(IE)
+    JS_INNER_TEXT_SVG_TITLE,
 
     /** Indicates that innerText setter supports null values. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
@@ -1463,16 +1471,16 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /**
-     * Difference of window.outer/inner height is 130.
-     */
-    @BrowserFeature(EDGE)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131,
-
-    /**
      * Difference of window.outer/inner height is 132.
      */
-    @BrowserFeature(CHROME)
+    @BrowserFeature(EDGE)
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_132,
+
+    /**
+     * Difference of window.outer/inner height is 133.
+     */
+    @BrowserFeature(CHROME)
+    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133,
 
     /**
      * Difference of window.outer/inner height is 80.
@@ -1696,6 +1704,14 @@ public enum BrowserVersionFeatures {
      * was thrown in async mode. */
     @BrowserFeature({FF, FF78})
     XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC,
+
+    /** If state unsent the response text is empty even if the response type is wrong. */
+    @BrowserFeature({FF, FF78})
+    XHR_RESPONSE_TEXT_EMPTY_UNSENT,
+
+    /** Setting the responseType throws in state unsent. */
+    @BrowserFeature(IE)
+    XHR_RESPONSE_TYPE_THROWS_UNSENT,
 
     /** Indicates if the XMLHttpRequest.send() method will send the mimeType of the blob as Content-Type header. */
     @BrowserFeature(IE)

@@ -189,24 +189,25 @@ public class NativeObjectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function () { [native code] }",
-            FF = "function () {\n    [native code]\n}",
-            FF78 = "function () {\n    [native code]\n}",
-            IE = "\nfunction() {\n    [native code]\n}\n")
+    @Alerts(DEFAULT = "function\\s()\\s{\\s[native\\scode]\\s}",
+            FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
+            FF78 = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
+            IE = "\\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
     @NotYetImplemented(IE)
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
-            + "    alert(Object.__proto__);\n"
+            + "    log(Object.__proto__);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -457,19 +458,21 @@ public class NativeObjectTest extends WebDriverTestCase {
                   "x.get.call = \nfunction call() {\n    [native code]\n}\n"})
     public void getOwnPropertyDescriptorGetCall() throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var proto = i1.constructor.prototype;\n"
-            + "  alert(proto);\n"
+            + "  log(proto);\n"
             + "  var x = Object.getOwnPropertyDescriptor(i1.constructor.prototype, 'value');\n"
-            + "  alert('x = ' + x);\n"
-            + "  alert('x.get = ' + x.get);\n"
-            + "  alert('x.get.call = ' + x.get.call);\n"
+            + "  log('x = ' + x);\n"
+            + "  log('x.get = ' + x.get);\n"
+            + "  log('x.get.call = ' + x.get.call);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input type='text' id='i1' value='foo' />\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

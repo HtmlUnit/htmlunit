@@ -44,19 +44,18 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"},
-            FF = {"[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}"},
-            FF78 = {"[object HTMLAudioElement]", "function HTMLAudioElement() {\n    [native code]\n}"},
             IE = {"[object HTMLAudioElement]", "[object HTMLAudioElement]"})
     public void type() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('a1');\n"
             + "    try {\n"
-            + "      alert(elem);\n"
-            + "      alert(HTMLAudioElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(elem);\n"
+            + "      log(HTMLAudioElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -64,7 +63,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  <audio id='a1'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -74,13 +73,14 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts({"[object HTMLAudioElement]", "done"})
     public void audio() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = new Audio('1.mp3');\n"
-            + "    alert(a);\n"
+            + "    log(a);\n"
             + "    a.play();\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -89,7 +89,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -146,7 +146,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     public void doNotRetrieveStream() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
             + "  <audio controls>\n"
@@ -169,13 +169,14 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void nullConstructor() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = new Audio(null);\n"
-            + "    alert(a);\n"
-            + "    alert(a.canPlayType('audio/ogg'));\n"
-            + "    alert('done');\n"
+            + "    log(a);\n"
+            + "    log(a.canPlayType('audio/ogg'));\n"
+            + "    log('done');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -184,7 +185,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -194,11 +195,12 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts("true")
     public void canPlayType() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('a1');\n"
-            + "    alert(typeof elem.canPlayType === 'function');\n"
+            + "    log(typeof elem.canPlayType === 'function');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -206,7 +208,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  <audio id='a1'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -362,11 +364,12 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     private void canPlayType(final String mimeType) throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('a1');\n"
-            + "    alert(elem.canPlayType('" + mimeType + "'));\n"
+            + "    log(elem.canPlayType('" + mimeType + "'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -374,7 +377,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  <audio id='a1'/>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -384,19 +387,20 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts({"[object HTMLAudioElement]", "1"})
     public void newAudioNodeType() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = new Audio();\n"
-            + "    alert(a);\n"
-            + "    alert(a.nodeType);\n"
+            + "    log(a);\n"
+            + "    log(a.nodeType);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -406,18 +410,19 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts({"[object HTMLAudioElement]", "AUDIO"})
     public void newAudioNodeName() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var a = new Audio();\n"
-            + "    alert(a);\n"
-            + "    alert(a.nodeName);\n"
+            + "    log(a);\n"
+            + "    log(a.nodeName);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

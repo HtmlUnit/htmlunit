@@ -63,7 +63,7 @@ public class HTMLAnchorElementTest extends SimpleWebTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("");
-        final HtmlPage page1 = loadPageWithAlerts(html);
+        final HtmlPage page1 = loadPage(html);
         final Page page2 = page1.getAnchorByHref("#").click();
 
         assertEquals(URL_FIRST + "foo.html", page2.getUrl());

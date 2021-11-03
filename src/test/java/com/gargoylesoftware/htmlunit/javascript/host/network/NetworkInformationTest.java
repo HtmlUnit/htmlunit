@@ -41,16 +41,17 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(navigator.connection);\n"
-            + "    alert(navigator.mozConnection);\n"
-            + "    alert(navigator.webkitConnection);\n"
+            + "    log(navigator.connection);\n"
+            + "    log(navigator.mozConnection);\n"
+            + "    log(navigator.webkitConnection);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,19 +65,20 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;\n"
             + "    if (connection) {"
-            + "      alert(connection.type);\n"
+            + "      log(connection.type);\n"
             + "    } else {\n"
-            + "      alert('no connection');\n"
+            + "      log('no connection');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -90,19 +92,20 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;\n"
             + "    if (connection) {"
-            + "      alert(connection.downlinkMax);\n"
+            + "      log(connection.downlinkMax);\n"
             + "    } else {\n"
-            + "      alert('no connection');\n"
+            + "      log('no connection');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,19 +119,20 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;\n"
             + "    if (connection) {"
-            + "      alert(connection.effectiveType);\n"
+            + "      log(connection.effectiveType);\n"
             + "    } else {\n"
-            + "      alert('no connection');\n"
+            + "      log('no connection');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,19 +146,20 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;\n"
             + "    if (connection) {"
-            + "      alert(connection.downlink);\n"
+            + "      log(connection.downlink);\n"
             + "    } else {\n"
-            + "      alert('no connection');\n"
+            + "      log('no connection');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -168,19 +173,20 @@ public class NetworkInformationTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;\n"
             + "    if (connection) {"
-            + "      alert(connection.rtt);\n"
+            + "      log(connection.rtt);\n"
             + "    } else {\n"
-            + "      alert('no connection');\n"
+            + "      log('no connection');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

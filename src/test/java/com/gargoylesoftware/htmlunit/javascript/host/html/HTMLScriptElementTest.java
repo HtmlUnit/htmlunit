@@ -106,16 +106,16 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
                 + "      var script = document.getElementById('my');\n"
-                + "      alert(script.src);\n"
-                + "      alert(script.getAttribute('src'));\n"
+                + "      log(script.src);\n"
+                + "      log(script.getAttribute('src'));\n"
 
                 + "      var script2 = document.getElementById('my2');\n"
-                + "      alert(script2.src);\n"
-                + "      alert(script2.getAttribute('src'));\n"
+                + "      log(script2.src);\n"
+                + "      log(script2.getAttribute('src'));\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -127,7 +127,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("", "text/javascript");
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -139,16 +139,16 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
                 "<html>\n"
                 + "<head>\n"
-                + "  <title>foo</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function test() {\n"
                 + "      var script = document.getElementById('my');\n"
-                + "      alert(script.src);\n"
-                + "      alert(script.getAttribute('src'));\n"
+                + "      log(script.src);\n"
+                + "      log(script.getAttribute('src'));\n"
 
                 + "      var script2 = document.createElement('script');\n"
-                + "      alert(script2.src);\n"
-                + "      alert(script2.getAttribute('src'));\n"
+                + "      log(script2.src);\n"
+                + "      log(script2.getAttribute('src'));\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -158,7 +158,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
         getMockWebConnection().setDefaultResponse("", "text/javascript");
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -169,16 +169,17 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     public void srcWithJavaScriptProtocol_Dynamic() throws Exception {
         final String html =
-              "<html><head><title>foo</title><script>\n"
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var script=document.createElement('script');\n"
-            + "    script.src = \"javascript: 'alert(1)'\";\n"
+            + "    script.src = \"javascript: 'log(1)'\";\n"
             + "    document.getElementsByTagName('head')[0].appendChild(script);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -189,16 +190,17 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void reexecuteModifiedScript() throws Exception {
         final String html =
-              "<html><head><title>foo</title></head><body>\n"
+              "<html><head></head><body>\n"
             + "<script>\n"
-            + "  alert('start');\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('start');\n"
             + "  var script = document.getElementsByTagName('script')[0];\n"
-            + "  script.text = \"alert('executed');\";\n"
-            + "  alert('end');\n"
+            + "  script.text = \"log('executed');\";\n"
+            + "  log('end');\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -318,19 +320,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void createElementWithCreateTextNode() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('end');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -342,21 +345,22 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithCreateTextNodeAndAppend() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('middle');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('middle');\n"
               + "  document.body.appendChild(script);\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -367,16 +371,17 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void createElementWithSetText() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('end');\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -388,18 +393,19 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "middle", "executed", "end"})
     public void createElementWithSetTextAndAppend() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('middle');\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('middle');\n"
               + "  document.body.appendChild(script);\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -410,19 +416,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void createElementWithSetSrc() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "alert('executed');";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -460,19 +467,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceSelfWithCreateTextNode() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementsByTagName('script')[0];\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('end');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -484,17 +492,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     public void replaceSelfWithSetText() throws Exception {
         // TODO this test is the same as #reexecuteModifiedScriptWhenReappending()
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementsByTagName('script')[0];\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('end');\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -505,20 +514,21 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceSelfWithSetSrc() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementsByTagName('script')[0];\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "alert('executed');";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -529,20 +539,21 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "executed", "end"})
     public void replaceWithCreateTextNodeEmpty() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'></script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('end');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -553,20 +564,21 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceWithCreateTextNodeBlank() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('end');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -577,22 +589,23 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"script", "start", "end"})
     public void replaceWithCreateTextNodeScript() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'>\n"
-              + "  alert('script');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('script');\n"
               + "</script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
-              + "  } catch(e) {alert('exception'); }\n"
-              + "  alert('end');\n"
+              + "  } catch(e) {log('exception'); }\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -603,17 +616,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "executed", "end"})
     public void replaceWithSetTextEmpty() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'></script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('end');\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -624,17 +638,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceWithSetTextBlank() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('end');\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -645,19 +660,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"script", "start", "end"})
     public void replaceWithSetTextScript() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'>\n"
-              + "  alert('script');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('script');\n"
               + "</script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
-              + "  script.text = \"alert('executed');\";\n"
-              + "  alert('end');\n"
+              + "  script.text = \"log('executed');\";\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -693,20 +709,21 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"start", "end"})
     public void replaceWithSetSrcBlank() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'> </script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "alert('executed');";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -717,22 +734,23 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"script", "start", "end"})
     public void replaceWithSetSrcScript() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script id='js1'>\n"
-              + "  alert('script');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('script');\n"
               + "</script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "alert('executed');";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -743,19 +761,22 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"executed", "start", "end"})
     public void moveWithAppend() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<div>\n"
-              + "<script id='js1'>alert('executed');</script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
+              + "<script id='js1'>log('executed');</script>\n"
+              + "<script>\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
               + "  document.body.appendChild(script);\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</div>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -766,21 +787,22 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"executed", "start", "end"})
     public void moveWithInsert() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<div>\n"
               + "<script id='js1'>\n"
-              + "  alert('executed');\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('executed');\n"
               + "</script>\n"
               + "<script>\n"
-              + "  alert('start');\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
               + "  document.body.insertBefore(script, null);\n"
-              + "  alert('end');\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</div>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -796,22 +818,25 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     }
 
     private void scriptForEvent(final String eventName) throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "<script FOR='window' EVENT='" + eventName + "' LANGUAGE='javascript'>\n"
-            + "  alert('script-for');\n"
+            + "  log('script-for');\n"
             + "  try {\n"
             + "    document.form1.txt.value = 'hello';\n"
-            + "    alert(document.form1.txt.value);\n"
-            + "  } catch(e) {alert('exception'); }\n"
+            + "    log(document.form1.txt.value);\n"
+            + "  } catch(e) {log('exception'); }\n"
             + "</script></head>\n"
             + "<body>\n"
             + "  <form name='form1'><input type='text' name='txt'></form>\n"
             + "  <script>\n"
-            + "    alert('script-body');\n"
+            + "    log('script-body');\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -827,16 +852,19 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>test</title>\n"
-            + "    <script defer=''>alert('3');</script>\n"
-            + "    <script defer onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'>alert('4');</script>\n"
-            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
-            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"7\");'></script>\n"
-            + "    <script>alert('2')</script>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
+            + "    <script defer=''>log('3');</script>\n"
+            + "    <script defer onreadystatechange='if(this.readyState==\"complete\") log(\"6\");'>log('4');</script>\n"
+            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"1\");'></script>\n"
+            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"7\");'></script>\n"
+            + "    <script>log('2')</script>\n"
             + "  </head>\n"
-            + "  <body onload='alert(5)'></body>\n"
+            + "  <body onload='log(5)'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -846,12 +874,14 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     public void onReadyStateChange_EventAvailable() throws Exception {
         final String html =
               "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var s = document.createElement('script');\n"
             + "s.src = '//:';\n"
-            + "s.onreadystatechange = function() {alert(window.event);};\n"
+            + "s.onreadystatechange = function() {log(window.event);};\n"
             + "document.body.appendChild(s);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -867,15 +897,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>test</title>\n"
-            + "    <script defer=''>alert('3');</script>\n"
-            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") alert(\"5\");'>alert('4');</script>\n"
-            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"1\");'></script>\n"
-            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") alert(\"6\");'></script>\n"
-            + "    <script>alert('2')</script>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
+            + "    <script defer=''>log('3');</script>\n"
+            + "    <script defer='' onreadystatechange='if(this.readyState==\"complete\") log(\"5\");'>log('4');</script>\n"
+            + "    <script src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"1\");'></script>\n"
+            + "    <script defer='' src='//:' onreadystatechange='if(this.readyState==\"complete\") log(\"6\");'></script>\n"
+            + "    <script>log('2')</script>\n"
             + "  </head>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -888,8 +921,9 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        execMe('alert(1)');\n"
+            + "        execMe('log(1)');\n"
             + "      }\n"
             + "      function execMe(text) {\n"
             + "        document.head = document.getElementsByTagName('head')[0];\n"
@@ -903,7 +937,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -915,14 +950,16 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <title>test</title>\n"
-            + "    <script onreadystatechange='if(this.readyState==\"complete\") alert(\"defer\");' defer></script>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
+            + "    <script onreadystatechange='if(this.readyState==\"complete\") log(\"defer\");' defer></script>\n"
             + "  </head>\n"
-            + "  <body onload='alert(\"onload\")'>\n"
+            + "  <body onload='log(\"onload\")'>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -937,15 +974,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<head>\n"
-            + "<script type='text/javascript'>alert(1)</script>\n"
-            + "<script type=' text/javascript'>alert(2)</script>\n"
-            + "<script type=' text/javascript '>alert(3)</script>\n"
-            + "<script type=' text / javascript '>alert(4)</script>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "<script type='text/javascript'>log(1)</script>\n"
+            + "<script type=' text/javascript'>log(2)</script>\n"
+            + "<script type=' text/javascript '>log(3)</script>\n"
+            + "<script type=' text / javascript '>log(4)</script>\n"
             + "</head>\n"
             + "<body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -984,19 +1024,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Test
     public void appendChild_UnexpectedCall() throws Exception {
         final String html =
-                "<html><head><title>foo</title></head><body>\n"
+                "<html><head></head><body>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  var script = document.createElement('script');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.appendChild(source);\n"
               + "  } catch(e) {\n"
-              + "    alert(e.message.slice(0,44));\n"
+              + "    log(e.message.slice(0,44));\n"
               + "  }\n"
               + "</script>\n"
               + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1008,12 +1049,13 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
                 "<html><head><title>foo</title></head><body>\n"
               + "<script>\n"
+              + LOG_TITLE_FUNCTION
               + "  var script = document.createElement('script');\n"
-              + "  var source = document.createTextNode(\"alert('executed');\");\n"
+              + "  var source = document.createTextNode(\"log('executed');\");\n"
               + "  try {\n"
               + "    script.insertBefore(source, null);\n"
               + "  } catch(e) {\n"
-              + "    alert(e.message.slice(0,44));\n"
+              + "    log(e.message.slice(0,44));\n"
               + "  }\n"
               + "</script>\n"
               + "</body></html>";
@@ -1065,17 +1107,18 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"function foo() { return a > b}", "function mce() { return a &gt; b}"})
     public void innerHtml() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
 
             + "<script id='script1'>function foo() { return a > b}</script>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  script = document.getElementById('script1');\n"
-            + "  alert(script.innerHTML);\n"
+            + "  log(script.innerHTML);\n"
 
             + "  script = document.getElementById('mce');\n"
-            + "  alert(script.innerHTML);\n"
+            + "  log(script.innerHTML);\n"
 
             + "}\n"
             + "</script>\n"
@@ -1085,7 +1128,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1104,6 +1147,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  </div>\n"
 
             + "  <script type='text/javascript'>\n"
+            + LOG_TITLE_FUNCTION
             + "    var div = document.getElementById('tester');\n"
             + "    try {\n"
             + "      div.innerHTML = div.innerHTML;\n"
@@ -1242,26 +1286,27 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"false", "null", "true", "", "true", "", "false", "null"})
     public void asyncProperty() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script id='script1' src='js1.js'></script>\n"
             + "<script id='script2' src='js2.js' async></script>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var script = document.getElementById('script1');\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script.async = true;\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script = document.getElementById('script2');\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script.async = false;\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "}\n"
             + "</script>\n"
@@ -1271,7 +1316,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "");
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1281,30 +1326,31 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
     @Alerts({"false", "null", "true", "true", "true", "", "true", "true", "false", "null"})
     public void asyncAttribute() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script id='script1' src='js1.js'></script>\n"
             + "<script id='script2' src='js2.js' async></script>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var script = document.getElementById('script1');\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script.setAttribute('async', true);\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script = document.getElementById('script2');\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script.setAttribute('async', true);\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
 
             + "  script.removeAttribute('async');\n"
-            + "  alert(script.async);\n"
-            + "  alert(script.getAttribute('async'));\n"
+            + "  log(script.async);\n"
+            + "  log(script.getAttribute('async'));\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
@@ -1313,7 +1359,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js1.js"), "");
         getMockWebConnection().setResponse(new URL(URL_FIRST, "js2.js"), "");
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1326,6 +1372,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var script = document.createElement('script');\n"
             + "        script.type = 'text/javascript';\n"
@@ -1340,11 +1387,11 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "  </body></html>";
 
-        final String js = "alert('inside script.js');";
+        final String js = "log('inside script.js');";
 
         getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1357,6 +1404,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var script = document.createElement('script');\n"
             + "        script.type = 'true/text/javascript';\n"
@@ -1365,20 +1413,20 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "        var s = document.getElementsByTagName('script')[0];\n"
             + "        s.parentNode.insertBefore(script, s);\n"
 
-            + "        alert('change type');\n"
+            + "        log('change type');\n"
             + "        s.type = 'text/javascript';\n"
-            + "        alert('type changed');\n"
+            + "        log('type changed');\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "  </body></html>";
 
-        final String js = "alert('inside script.js');";
+        final String js = "log('inside script.js');";
 
         getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1422,21 +1470,22 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<body>\n"
 
             + "  <script >\n"
+            + LOG_TITLE_FUNCTION
             + "    var script = document.getElementById('testScript');\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "    script.type = 'testType';\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "    script.type = '';\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "  </script>\n"
 
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1453,24 +1502,25 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<body>\n"
 
             + "  <script >\n"
+            + LOG_TITLE_FUNCTION
             + "    var script = document.getElementById('testScript');\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "    script.removeAttribute('type');\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "    script.setAttribute('type', 'newType');\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "    script.setAttribute('type', null);\n"
-            + "    alert(script.getAttribute('type') + '-' + script.type);\n"
+            + "    log(script.getAttribute('type') + '-' + script.type);\n"
 
             + "  </script>\n"
 
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1482,21 +1532,24 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<head>\n"
-            + "  <script id='testScript' type='typeAttr'>alert('exec');</script>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "  <script id='testScript' type='typeAttr'>log('exec');</script>\n"
             + "</head>\n"
             + "<body>\n"
 
             + "  <script >\n"
             + "    var script = document.getElementById('testScript');\n"
-            + "    alert(script.getAttribute('type'));\n"
+            + "    log(script.getAttribute('type'));\n"
 
             + "    script.type = 'text/javascript';\n"
-            + "    alert(script.getAttribute('type'));\n"
+            + "    log(script.getAttribute('type'));\n"
             + "  </script>\n"
 
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

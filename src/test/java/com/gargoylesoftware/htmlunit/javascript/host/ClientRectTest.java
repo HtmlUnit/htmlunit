@@ -35,24 +35,26 @@ public class ClientRectTest extends WebDriverTestCase {
     @Test
     @Alerts({"100", "400", "100", "450", "50", "0"})
     public void properties() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "    var d1 = document.getElementById('div1');\n"
             + "    var pos = d1.getBoundingClientRect();\n"
-            + "    alert(pos.top);\n"
-            + "    alert(pos.left);\n"
-            + "    alert(pos.bottom);\n"
-            + "    alert(pos.right);\n"
-            + "    alert(pos.width);\n"
-            + "    alert(pos.height);\n"
-            + "    } catch (e) { alert('exception');}\n"
+            + "    log(pos.top);\n"
+            + "    log(pos.left);\n"
+            + "    log(pos.bottom);\n"
+            + "    log(pos.right);\n"
+            + "    log(pos.width);\n"
+            + "    log(pos.height);\n"
+            + "    } catch (e) { log('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='outer' style='position: absolute; left: 400px; top: 100px; width: 50px; height: 80px;'>\n"
             + "<div id='div1'></div></div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -64,10 +66,11 @@ public class ClientRectTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var input = document.getElementById('myInput');\n"
-            + "      alert(input.getBoundingClientRect().height > 10);\n"
-            + "      alert(input.getBoundingClientRect().width > 100);\n"
+            + "      log(input.getBoundingClientRect().height > 10);\n"
+            + "      log(input.getBoundingClientRect().width > 100);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -81,6 +84,6 @@ public class ClientRectTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -97,7 +97,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
             + "function onReadyStateChange() {\n"
             + "  alert(request.readyState);\n"
             + "  if (request.readyState == 4) {\n"
-            + "    if (request.responseText.length == 0)\n"
+            + "    if (request.responseText == null)\n"
             + "      alert('" + MSG_NO_CONTENT + "');\n"
             + "    else\n"
             + "      throw 'Unexpected content, should be zero length but is: \"' + request.responseText + '\"';\n"
@@ -332,7 +332,7 @@ public class XMLHttpRequest3Test extends WebServerTestCase {
         final HtmlPage page = client.getPage(URL_FIRST + "XMLHttpRequestTest_streaming.html");
         assertEquals(0, client.waitForBackgroundJavaScriptStartingBefore(1000));
         final HtmlElement body = page.getBody();
-        assertEquals(10, body.asText().split("\n").length);
+        assertEquals(10, body.asNormalizedText().split("\n").length);
     }
 
     /**

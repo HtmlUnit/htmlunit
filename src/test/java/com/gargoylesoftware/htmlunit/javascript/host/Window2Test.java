@@ -772,8 +772,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"true", "true", "132", "true", "true", "16"},
-            EDGE = {"true", "true", "131", "true", "true", "16"},
+    @Alerts(CHROME = {"true", "true", "133", "true", "true", "16"},
+            EDGE = {"true", "true", "132", "true", "true", "16"},
             FF = {"true", "true", "91", "true", "true", "12"},
             FF78 = {"true", "true", "80", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
@@ -883,8 +883,8 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = {"636", "1256", "619", "1239"},
-            EDGE = {"637", "1256", "620", "1239"},
+    @Alerts(CHROME = {"635", "1256", "618", "1239"},
+            EDGE = {"636", "1256", "619", "1239"},
             FF = {"677", "1260", "660", "1243"},
             FF78 = {"688", "1260", "671", "1243"},
             IE = {"682", "1256", "665", "1239"})
@@ -2566,7 +2566,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
-                FF = {"undefined", "##test##"},
+                FF = {"[object Navigator]", "[object Navigator]"},
                 FF78 = {"undefined", "##test##"},
                 IE = {"[object Navigator]", "[object Navigator]"})
     public void clientInformation() throws Exception {

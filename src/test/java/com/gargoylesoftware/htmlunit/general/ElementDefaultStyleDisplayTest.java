@@ -187,9 +187,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"inline", "inline"})
     public void base() throws Exception {
         test("base");
@@ -201,9 +199,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"inline", "inline"})
     public void basefont() throws Exception {
         test("basefont");
@@ -1085,9 +1081,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"none", "none"})
     public void noembed() throws Exception {
         test("noembed");

@@ -1715,36 +1715,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
              "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"})
-    @HtmlUnitNYI(CHROME = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined"},
-            EDGE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined"},
-            FF = {"L:0px,R:0px,T:0px,B:0px",
-                  "L:3px,R:0px,T:0px,B:0px",
-                  "L:7px,R:0px,T:0px,B:0px",
-                  "L:,R:,T:,B:",
-                  "L:3px,R:,T:,B:",
-                  "L:7px,R:,T:,B:"},
-            FF78 = {"L:0px,R:0px,T:0px,B:0px",
-                    "L:3px,R:0px,T:0px,B:0px",
-                    "L:7px,R:0px,T:0px,B:0px",
-                    "L:,R:,T:,B:",
-                    "L:3px,R:,T:,B:",
-                    "L:7px,R:,T:,B:"},
-            IE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined",
-                  "L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined"})
     public void paddingAllvsPaddingSingle2() throws Exception {
         final String html =
               "<html>\n"
@@ -2900,6 +2870,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @HtmlUnitNYI(IE = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlign() throws Exception {
         setLength("vertical-align", "verticalAlign");
     }
@@ -3671,12 +3643,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body>\n"
             + "  <div id='tester'></div>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    var myDiv = document.getElementById('tester');\n"
             + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
-            + "    alert(myDivStyle.width);\n"
+            + "    log(myDivStyle.width);\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -26,6 +26,7 @@ import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -473,9 +474,10 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function f() {\n"
-            + "    alert('Cookies: ' + document.cookie);\n"
+            + "    log('Cookies: ' + document.cookie);\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -491,7 +493,8 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 4000);
+        loadPage2(html);
+        verifyTitle2(4 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -732,6 +735,11 @@ public class CookieManagerTest extends WebDriverTestCase {
 
             + "</script></body>\n"
             + "</html>";
+
+        // [IE] real IE waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
 
         final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
         getMockWebConnection().setResponse(firstUrl, html);

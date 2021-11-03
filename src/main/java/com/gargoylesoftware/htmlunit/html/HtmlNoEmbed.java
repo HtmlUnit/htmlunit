@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_NOEMBED_INLINE;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -48,9 +46,6 @@ public class HtmlNoEmbed extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_NOEMBED_INLINE)) {
-            return DisplayStyle.INLINE;
-        }
         return DisplayStyle.NONE;
     }
 }

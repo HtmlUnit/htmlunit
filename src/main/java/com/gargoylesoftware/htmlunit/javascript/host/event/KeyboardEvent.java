@@ -1152,7 +1152,7 @@ public class KeyboardEvent extends UIEvent {
      * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
      * @param charCode the Unicode character associated with the depressed key otherwise zero
      */
-    @JsxFunction({FF, FF78})
+    @JsxFunction(FF78)
     public void initKeyEvent(
             final String type,
             final boolean bubbles,

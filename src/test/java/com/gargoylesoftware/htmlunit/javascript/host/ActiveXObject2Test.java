@@ -37,27 +37,28 @@ public class ActiveXObject2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined", "NaN", "false", "No", "No", "No", "No"},
-            IE = {"undefined", "\nfunction ActiveXObject() {\n    [native code]\n}\n",
+            IE = {"undefined", "\\nfunction\\sActiveXObject()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n",
                   "NaN", "false", "No", "No", "Yes", "Yes"})
     public void browserDetection() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
-            + "    alert(typeof window.ActiveXObject);\n"
-            + "    alert(String(window.ActiveXObject));\n"
-            + "    alert(Number(window.ActiveXObject));\n"
-            + "    alert(Boolean(window.ActiveXObject));\n"
-            + "    alert(window.ActiveXObject ? 'Yes' : 'No');\n"
-            + "    if (window.ActiveXObject) { alert('Yes') } else { alert('No') }\n"
-            + "    alert(('ActiveXObject' in window) ? 'Yes' : 'No');\n"
-            + "    if ('ActiveXObject' in window) { alert('Yes') } else { alert('No') }\n"
+            + "    log(typeof window.ActiveXObject);\n"
+            + "    log(String(window.ActiveXObject));\n"
+            + "    log(Number(window.ActiveXObject));\n"
+            + "    log(Boolean(window.ActiveXObject));\n"
+            + "    log(window.ActiveXObject ? 'Yes' : 'No');\n"
+            + "    if (window.ActiveXObject) { log('Yes') } else { log('No') }\n"
+            + "    log(('ActiveXObject' in window) ? 'Yes' : 'No');\n"
+            + "    if ('ActiveXObject' in window) { log('Yes') } else { log('No') }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -68,18 +69,20 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             IE = "object")
     public void xmlDocument() throws Exception {
         final String html = "<html>\n"
-            + " <head><title>foo</title><script>\n"
+            + " <head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var doc = new ActiveXObject('Microsoft.XMLDOM');\n"
-            + "      alert(typeof doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(typeof doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -90,20 +93,22 @@ public class ActiveXObject2Test extends WebDriverTestCase {
             IE = "exception")
     public void activex() throws Exception {
         final String html = "<html>\n"
-            + "<head><title>foo</title><script>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      if ('ActiveXObject' in window) {\n"
             + "        new ActiveXObject('InternetExplorer.Application');\n"
             + "      } else {\n"
-            + "        alert('ActiveXObject undefined');\n"
+            + "        log('ActiveXObject undefined');\n"
             + "      }\n"
-            + "    } catch(e) {alert('exception');}\n"
+            + "    } catch(e) {log('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 //    /**

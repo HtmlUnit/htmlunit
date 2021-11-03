@@ -44,17 +44,18 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     public void stylesheet() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var f = document.getElementById('myStyle');\n"
-            + "  alert(f);\n"
-            + "  alert(f.sheet);\n"
-            + "  alert(f.styleSheet);\n"
+            + "  log(f);\n"
+            + "  log(f.sheet);\n"
+            + "  log(f.styleSheet);\n"
             + "}</script>\n"
             + "<style id='myStyle'>p: vertical-align:top</style>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,6 +67,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
     public void styleChildren() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var doc = document;\n"
             + "  var style = doc.createElement('style');\n"
@@ -76,12 +78,12 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    rules = doc.styleSheets[0].cssRules;\n"
             + "  else\n"
             + "    rules = doc.styleSheets[0].rules;\n"
-            + "  alert(rules.length);\n"
+            + "  log(rules.length);\n"
             + "}</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -98,19 +100,20 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style type='text/html' id='style_html'>.c > .t { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('style_none');\n"
-            + "  alert(style.innerHTML);\n"
+            + "  log(style.innerHTML);\n"
             + "  style = document.getElementById('style_text');\n"
-            + "  alert(style.innerHTML);\n"
+            + "  log(style.innerHTML);\n"
             + "  style = document.getElementById('style_html');\n"
-            + "  alert(style.innerHTML);\n"
+            + "  log(style.innerHTML);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -127,19 +130,20 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style type='text/css' id='style_css'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('style_none');\n"
-            + "  alert(style.type);\n"
+            + "  log(style.type);\n"
             + "  style = document.getElementById('style_text');\n"
-            + "  alert(style.type);\n"
+            + "  log(style.type);\n"
             + "  style = document.getElementById('style_css');\n"
-            + "  alert(style.type);\n"
+            + "  log(style.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -156,19 +160,20 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style media='screen, print,test' id='style_some'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('style_none');\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
             + "  style = document.getElementById('style_all');\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
             + "  style = document.getElementById('style_some');\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -183,29 +188,30 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style id='myStyle' media='all'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('myStyle');\n"
 
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
 
             + "  style.media = '';\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
 
             + "  style.media = 'screen';\n"
-            + "  alert(style.media + ':' + style.attributes['media'].value);\n"
+            + "  log(style.media + ':' + style.attributes['media'].value);\n"
 
             + "  style.media = 'priNT';\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
 
             + "  style.media = 'screen, print';\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
 
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -220,11 +226,12 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style id='style_none'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('style_none');\n"
-            + "  alert(style.scoped);\n"
+            + "  log(style.scoped);\n"
             + "  style = document.getElementById('style_scoped');\n"
-            + "  alert(style.scoped);\n"
+            + "  log(style.scoped);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -232,7 +239,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "  <style id='style_scoped' scoped>my { }</style>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -247,22 +254,23 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style id='myStyle' media='all'>my { }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('myStyle');\n"
 
-            + "  alert(style.scoped);\n"
+            + "  log(style.scoped);\n"
 
             + "  style.scoped = true;\n"
-            + "  alert(style.scoped);\n"
+            + "  log(style.scoped);\n"
 
             + "  style.media = false;\n"
-            + "  alert(style.media);\n"
+            + "  log(style.media);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -276,17 +284,18 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style id='style_none'></style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  style = document.getElementById('style_none');\n"
-            + "  alert(style.type);\n"
+            + "  log(style.type);\n"
             + "  style.type = 'text/css';\n"
-            + "  alert(style.type);\n"
+            + "  log(style.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -300,20 +309,21 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "<style id='myStyle'> .abc { color: green; }</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var style = document.getElementById('myStyle');\n"
-            + "  alert(window.getComputedStyle(div, '').color);\n"
-            + "  alert(style.disabled);\n"
+            + "  log(window.getComputedStyle(div, '').color);\n"
+            + "  log(style.disabled);\n"
             + "  style.disabled = true;\n"
-            + "  alert(window.getComputedStyle(div, '').color);\n"
+            + "  log(window.getComputedStyle(div, '').color);\n"
             + "}\n"
             + "</script>\n"
             + "</head><body onload='doTest()'>\n"
             + "  <div id='myDiv' class='abc'>abcd</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -341,13 +351,14 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    ]]>\n"
             + "  </style>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      var div = document.getElementById('one');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('two');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('three');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -362,7 +373,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
                 .getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -390,13 +401,14 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    ]]>\n"
             + "  </style>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      var div = document.getElementById('one');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('two');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('three');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -411,7 +423,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
                 .getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -435,13 +447,14 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "    ]]>\n"
             + "  </style>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      var div = document.getElementById('one');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('two');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "      div = document.getElementById('three');\n"
-            + "      alert(window.getComputedStyle(div, null).color);\n"
+            + "      log(window.getComputedStyle(div, null).color);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -455,6 +468,6 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
                 .getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

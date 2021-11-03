@@ -209,6 +209,40 @@ public class URLTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "a=u&x=", "x=22", "x=22"},
+            IE = {})
+    public void searchParamsSyncedWithUrlChanges() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof window.URL === 'function') {\n"
+            + "        var u = new URL('http://developer.mozilla.org/en-US/docs');\n"
+            + "        log(u.searchParams);\n"
+            + "        u = new URL('http://developer.mozilla.org/en-US/docs?a=u&x');\n"
+
+            + "        var param = u.searchParams;\n"
+            + "        log(param);\n"
+
+            + "        u.search = 'x=22';\n"
+            + "        log(u.searchParams);\n"
+            + "        log(param);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
     @Test
     @Alerts(DEFAULT = {"/", "/en-US/docs", "/en-US/docs"},
             IE = {})
@@ -623,6 +657,9 @@ public class URLTest extends WebDriverTestCase {
                        "?a=7", "https://developer.mozilla.org/search?a=7",
                        "?17", "https://developer.mozilla.org/search?17",
                        "", "https://developer.mozilla.org/search",
+                       "?Html%20Unit", "https://developer.mozilla.org/search?Html%20Unit",
+                       "?Html?Unit", "https://developer.mozilla.org/search?Html?Unit",
+                       "?Html/Unit", "https://developer.mozilla.org/search?Html/Unit",
                        "?undefined", "https://developer.mozilla.org/search?undefined",
                        "?null", "https://developer.mozilla.org/search?null"},
             IE = {})
@@ -653,6 +690,18 @@ public class URLTest extends WebDriverTestCase {
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
 
+                        + "        u.search = 'Html Unit';\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.search = 'Html?Unit';\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.search = 'Html/Unit';\n"
+                        + "        log(u.search);\n"
+                        + "        log(u.toString());\n"
+
                         + "        u = new URL('https://developer.mozilla.org/search?q=123');\n"
                         + "        u.search = undefined;\n"
                         + "        log(u.search);\n"
@@ -661,6 +710,34 @@ public class URLTest extends WebDriverTestCase {
                         + "        u.search = null;\n"
                         + "        log(u.search);\n"
                         + "        log(u.toString());\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts(DEFAULT = {"https://developer.mozilla.org/search?q%20a=1%202%203", "?q%20a=1%202%203"},
+            IE = {})
+    @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 EDGE = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
+                 FF78 = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
+    public void searchEncoding() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://developer.mozilla.org/search?q a=1 2 3');\n"
+                        + "        log(u);\n"
+                        + "        log(u.search);\n"
                         + "      }\n"
                         + "    }\n"
                         + "  </script>\n"

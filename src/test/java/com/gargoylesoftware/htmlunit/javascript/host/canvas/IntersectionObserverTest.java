@@ -41,8 +41,9 @@ public class IntersectionObserverTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('IntersectionObserver' in window);\n"
+            + "      log('IntersectionObserver' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -50,7 +51,7 @@ public class IntersectionObserverTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,20 +63,22 @@ public class IntersectionObserverTest extends WebDriverTestCase {
     public void functions() throws Exception {
         final String html =
             "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (window.IntersectionObserver) {\n"
             + "    var callback = function (entries, observer) {};\n"
             + "    var observer = new IntersectionObserver(callback);\n"
-            + "    alert(typeof observer.observe);\n"
-            + "    alert(typeof observer.unobserve);\n"
-            + "    alert(typeof observer.disconnect);\n"
-            + "    alert(typeof observer.takeRecords);\n"
-            + "  } else { alert('no IntersectionObserver'); }\n"
+            + "    log(typeof observer.observe);\n"
+            + "    log(typeof observer.unobserve);\n"
+            + "    log(typeof observer.disconnect);\n"
+            + "    log(typeof observer.takeRecords);\n"
+            + "  } else { log('no IntersectionObserver'); }\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

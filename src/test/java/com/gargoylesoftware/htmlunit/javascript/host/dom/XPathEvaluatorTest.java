@@ -39,32 +39,35 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second"},
-            FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second"},
-            FF78 = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second"},
-            IE = {"undefined", "exception"})
+    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second", ""},
+            FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
+            FF78 = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
+            IE = {"undefined", "exception", ""})
     @NotYetImplemented({FF, FF78})
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"
             + "<div><span id='second'>world</span></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var res = '';\n"
             + "try {\n"
-            + "  alert(typeof window.XPathEvaluator);\n"
+            + "  res += typeof window.XPathEvaluator + '§';\n"
             + "  var xpe = new XPathEvaluator();\n"
-            + "  alert(xpe);\n"
+            + "  res += xpe + '§';\n"
             + "  var nsResolver = xpe.createNSResolver(document.documentElement);\n"
-            + "  alert(nsResolver);\n"
+            + "  res += nsResolver + '§';\n"
             + "  var result = xpe.evaluate('//span', document.body, nsResolver, 0, null);\n"
             + "  var found = [];\n"
-            + "  var res;\n"
-            + "  while (res = result.iterateNext()) {\n"
-            + "    alert(res.id);\n"
+            + "  var next;\n"
+            + "  while (next = result.iterateNext()) {\n"
+            + "    res += next.id + '§';\n"
             + "  }\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { res += 'exception' + '§'; }\n"
+            + "log(res);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -74,8 +77,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "exception",
             IE = "window.XPathEvaluator undefined")
     public void namespacesWithNodeInArray() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var xml = "
             + "  '<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">"
             + "    <soap:books>"
@@ -94,16 +98,16 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "      try {\n"
             + "        var result = xpe.evaluate('/soap:Envelope/soap:books/soap:book/title/text()', "
                                      + "[doc.documentElement], nsResolver, XPathResult.STRING_TYPE, null);\n"
-            + "        alert(result.stringValue);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(result.stringValue);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    } else {\n"
-            + "      alert('window.XPathEvaluator undefined');\n"
+            + "      log('window.XPathEvaluator undefined');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -113,8 +117,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "Immortality",
             IE = "window.XPathEvaluator undefined")
     public void namespacesWithCustomNSResolver() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function nsResolver(prefix) {\n"
             + "    return {s : 'http://schemas.xmlsoap.org/soap/envelope/'}[prefix] || null;\n"
             + "  }\n"
@@ -135,14 +140,14 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
             + "      var xpe = new XPathEvaluator();\n"
             + "      var result = xpe.evaluate('/s:Envelope/s:books/s:book/title/text()', "
                                    + "doc.documentElement, nsResolver, XPathResult.STRING_TYPE, null);\n"
-            + "      alert(result.stringValue);\n"
+            + "      log(result.stringValue);\n"
             + "    } else {\n"
-            + "      alert('window.XPathEvaluator undefined');\n"
+            + "      log('window.XPathEvaluator undefined');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

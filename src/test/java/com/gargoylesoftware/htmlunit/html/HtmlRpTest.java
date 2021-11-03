@@ -39,6 +39,7 @@ public class HtmlRpTest extends WebDriverTestCase {
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.createElement('rp');\n"
             + "    check(e);\n"
@@ -50,7 +51,7 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "  function check(e) {\n"
             + "    var cs = window.getComputedStyle(e, null);\n"
             + "    var disp = cs ? cs.display : null;\n"
-            + "    alert(disp);\n"
+            + "    log(disp);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -59,6 +60,6 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "</ruby>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

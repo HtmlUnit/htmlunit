@@ -29,7 +29,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
@@ -1706,7 +1705,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.id("f")).sendKeys(path);
@@ -1911,7 +1910,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final File tmpFile = File.createTempFile("htmlunit-test", ".txt");
         try {
             String path = tmpFile.getAbsolutePath();
-            if (driver instanceof InternetExplorerDriver || driver instanceof ChromeDriver) {
+            if (driver instanceof InternetExplorerDriver) {
                 path = path.substring(path.indexOf('/') + 1).replace('/', '\\');
             }
             driver.findElement(By.id("f")).sendKeys(path);
@@ -2171,8 +2170,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  <input type='button' name='button1' />\n"
             + "</form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  // Prepare the iframe for the target\n"
-            + "  alert('prepare frame');\n"
+            + "  log('prepare frame');\n"
             + "  var div = document.createElement('div');\n"
             + "  div.style.display = 'none';\n"
             + "  div.innerHTML = \"<iframe name='frame' id='frame'></iframe>\";\n"
@@ -2186,9 +2186,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    clearTimeout(t);\n"
             + "    var iframe = document.getElementById('frame');\n"
             + "    iframe.onload = function() {\n"
-            + "      alert('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      log('submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
             + "    };\n"
-            + "    alert('submit form');\n"
+            + "    log('submit form');\n"
             + "    form.submit();\n"
             + "  }, 1000);\n"
             + "</script></body></html>";
@@ -2197,7 +2197,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
         getMockWebConnection().setDefaultResponse(html2);
 
-        loadPageWithAlerts2(html, URL_FIRST, 5000);
+        loadPage2(html, URL_FIRST);
+        verifyTitle2(5 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2211,13 +2212,14 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts({"submit form", "listener: submitted ok"})
     public void submitWithTargetOnIFrameAndOnload_bubbling() throws Exception {
         final String html
-            = "<html><head><title>first</title></head><body>\n"
+            = "<html><head>/head><body>\n"
             + "<p>hello world</p>\n"
             + "<form id='form1' name='form1' method='get' action='" + URL_SECOND + "' target='frame'>\n"
             + "  <input type='button' name='button1' />\n"
             + "</form>\n"
             + "<div style='display:none;'><iframe name='frame' id='frame'></iframe></div>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  // Get the form and set the target\n"
             + "  var form = document.getElementById('form1');\n"
             + "  var iframe = document.getElementById('frame');\n"
@@ -2226,9 +2228,9 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "  var t = setTimeout(function() {\n"
             + "    clearTimeout(t);\n"
             + "    iframe.addEventListener('load', function() {\n"
-            + "      alert('listener: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
+            + "      log('listener: submitted ' + iframe.contentWindow.document.body.getAttribute('id'));\n"
             + "    }, true);\n"
-            + "    alert('submit form');\n"
+            + "    log('submit form');\n"
             + "    form.submit();\n"
             + "  }, 1000);\n"
             + "</script>\n"
@@ -2238,7 +2240,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml'><body id='ok'><span id='result'>OK</span></body></html>";
         getMockWebConnection().setDefaultResponse(html2);
 
-        loadPageWithAlerts2(html, URL_FIRST, 5000);
+        loadPage2(html, URL_FIRST);
+        verifyTitle2(5 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

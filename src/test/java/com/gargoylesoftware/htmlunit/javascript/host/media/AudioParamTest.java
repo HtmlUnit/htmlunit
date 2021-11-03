@@ -40,8 +40,9 @@ public class AudioParamTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('AudioParam' in window);\n"
+            + "      log('AudioParam' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -49,6 +50,6 @@ public class AudioParamTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

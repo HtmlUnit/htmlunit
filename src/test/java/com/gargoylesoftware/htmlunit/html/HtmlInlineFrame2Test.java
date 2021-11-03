@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -32,6 +30,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -247,7 +246,10 @@ public class HtmlInlineFrame2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1:true", "2:false", "3:false", "4:false"},
             IE = {"1:false", "2:false", "3:false", "4:false"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @HtmlUnitNYI(CHROME = {"1:false", "2:false", "3:false", "4:false"},
+            EDGE = {"1:false", "2:false", "3:false", "4:false"},
+            FF = {"1:false", "2:false", "3:false", "4:false"},
+            FF78 = {"1:false", "2:false", "3:false", "4:false"})
     public void createIframeFromStrictFunction() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

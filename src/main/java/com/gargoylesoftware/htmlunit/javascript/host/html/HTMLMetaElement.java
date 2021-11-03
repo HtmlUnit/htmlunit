@@ -135,6 +135,22 @@ public class HTMLMetaElement extends HTMLElement {
     }
 
     /**
+     * @return the {@code meta} attribute
+     */
+    @JsxGetter({CHROME, EDGE})
+    public String getMedia() {
+        return getDomNodeOrDie().getAttribute("media");
+    }
+
+    /**
+     * @param media the media attribute
+     */
+    @JsxSetter({CHROME, EDGE})
+    public void setMedia(final String media) {
+        getDomNodeOrDie().setAttribute("media", media);
+    }
+
+    /**
      * Returns the {@code url} attribute.
      * @return the {@code url} attribute
      */

@@ -40,13 +40,14 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
         final String html
             = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(HTMLTemplateElement.prototype == null);\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "    log(HTMLTemplateElement.prototype == null);\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -60,18 +61,19 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var template = document.createElement('template');\n"
-            + "          alert('content' in template);\n"
-            + "        } catch (e) { alert('exception'); }\n"
+            + "          log('content' in template);\n"
+            + "        } catch (e) { log('exception'); }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -88,23 +90,24 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.createElement('template');\n"
-            + "        if (!('content' in template)) { alert('not available'); return }\n"
-            + "        alert(template.content);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        if (!('content' in template)) { log('not available'); return }\n"
+            + "        log(template.content);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
 
             + "        template = document.getElementById('tEmpty');\n"
-            + "        alert(template.content);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        log(template.content);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
 
             + "        template = document.getElementById('tText');\n"
-            + "        alert(template.content);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        log(template.content);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
 
             + "        template = document.getElementById('tDiv');\n"
-            + "        alert(template.content);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        log(template.content);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -115,7 +118,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -129,17 +132,18 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.createElement('template');\n"
-            + "        if (!('content' in template)) { alert('not available'); return }\n"
+            + "        if (!('content' in template)) { log('not available'); return }\n"
 
             + "        template = document.getElementById('tester');\n"
-            + "        alert(template.content);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        log(template.content);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
 
             + "        var div = document.createElement('div');\n"
             + "        template.appendChild(div);\n"
-            + "        alert(template.childNodes.length + '-' + template.content.childNodes.length);\n"
+            + "        log(template.childNodes.length + '-' + template.content.childNodes.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -148,7 +152,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -162,28 +166,29 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.createElement('template');\n"
-            + "        alert(template.innerHTML);\n"
+            + "        log(template.innerHTML);\n"
 
             + "        var div = document.createElement('div');\n"
             + "        template.appendChild(div);\n"
-            + "        alert(template.innerHTML);\n"
+            + "        log(template.innerHTML);\n"
 
             + "        var p = document.createElement('p');\n"
             + "        if ('content' in template) {\n"
             + "          template.content.appendChild(p);\n"
-            + "          alert(template.innerHTML);\n"
+            + "          log(template.innerHTML);\n"
             + "        }\n"
 
             + "        template = document.getElementById('tEmpty');\n"
-            + "        alert(template.innerHTML);\n"
+            + "        log(template.innerHTML);\n"
 
             + "        template = document.getElementById('tText');\n"
-            + "        alert(template.innerHTML);\n"
+            + "        log(template.innerHTML);\n"
 
             + "        template = document.getElementById('tDiv');\n"
-            + "        alert(template.innerHTML);\n"
+            + "        log(template.innerHTML);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -194,7 +199,42 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"<template></template>", "<template>HtmlUnit</template>",
+             "<template><div>HtmlUnit</div><div>is great</div></template>"})
+    public void innerHTMLIncludingTemplate() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        template = document.getElementById('tEmpty');\n"
+            + "        log(template.innerHTML);\n"
+
+            + "        template = document.getElementById('tText');\n"
+            + "        log(template.innerHTML);\n"
+
+            + "        template = document.getElementById('tDiv');\n"
+            + "        log(template.innerHTML);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <div id='tEmpty'><template></template></div>\n"
+            + "    <div id='tText'><template>HtmlUnit</template></div>\n"
+            + "    <div id='tDiv'><template><div>HtmlUnit</div><div>is great</div></template></div>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -218,28 +258,29 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.createElement('template');\n"
-            + "        alert(template.outerHTML);\n"
+            + "        log(template.outerHTML);\n"
 
             + "        var div = document.createElement('div');\n"
             + "        template.appendChild(div);\n"
-            + "        alert(template.outerHTML);\n"
+            + "        log(template.outerHTML);\n"
 
             + "        var p = document.createElement('p');\n"
             + "        if ('content' in template) {\n"
             + "          template.content.appendChild(p);\n"
-            + "          alert(template.outerHTML);\n"
+            + "          log(template.outerHTML);\n"
             + "        }\n"
 
             + "        template = document.getElementById('tEmpty');\n"
-            + "        alert(template.outerHTML);\n"
+            + "        log(template.outerHTML);\n"
 
             + "        template = document.getElementById('tText');\n"
-            + "        alert(template.outerHTML);\n"
+            + "        log(template.outerHTML);\n"
 
             + "        template = document.getElementById('tDiv');\n"
-            + "        alert(template.outerHTML);\n"
+            + "        log(template.outerHTML);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -250,7 +291,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -264,12 +305,13 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.getElementById('myTemplate');\n"
-            + "        alert(template.id);\n"
+            + "        log(template.id);\n"
 
             + "        outer = document.getElementById('outerDiv');\n"
-            + "        alert(outer);\n"
+            + "        log(outer);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -280,7 +322,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -294,12 +336,13 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.getElementById('myTemplate');\n"
-            + "        alert(template.id);\n"
+            + "        log(template.id);\n"
 
             + "        var children = template.getElementsByTagName('div');"
-            + "        alert(children.length);\n"
+            + "        log(children.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -310,7 +353,7 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -324,11 +367,12 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var template = document.getElementById('myTemplate');\n"
-            + "        alert(template.id);\n"
+            + "        log(template.id);\n"
 
-            + "        alert(template.childNodes.length);\n"
+            + "        log(template.childNodes.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -339,6 +383,6 @@ public class HTMLTemplateElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

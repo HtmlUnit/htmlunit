@@ -40,15 +40,16 @@ public class HtmlProgressTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <progress id='myId'></progress>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             if ("[object HTMLProgressElement]".equals(getExpectedAlerts()[0])) {
@@ -69,12 +70,13 @@ public class HtmlProgressTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<progress id='it' value='70' max='100'>70%</progress>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var elt = document.getElementById('it');\n"
             + "if (window.HTMLProgressElement) {\n"
-            + "  alert(typeof(elt.value) + elt.value);\n"
-            + "  alert(typeof(elt.max) + elt.max);\n"
+            + "  log(typeof(elt.value) + elt.value);\n"
+            + "  log(typeof(elt.max) + elt.max);\n"
             + "}\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -22,6 +22,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -238,6 +239,82 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
 
             + "    log(result == '' ? 'success' : result);\n"
             + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "baseline", "sub", "super", "text-top",
+                       "text-bottom", "middle", "top", "bottom",
+                       "1.7em", "4px", "32%",
+                       "inherit", "initial", "revert", "unset",
+                       "unset", "unset", "unset"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"", "baseline", "sub", "super", "text-top",
+                       "text-bottom", "middle", "top", "bottom",
+                       "1.7em", "4px", "32%",
+                       "inherit", "initial", "revert", "unset",
+                       "unset", "unset", "unset"})
+    public void verticalAlign() throws Exception {
+        checkPropertyValues("vertical-align",
+                "baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
+                "1.7em", "4px", "32%",
+                "inherit", "initial", "revert", "unset",
+                "1 px", "7mond", "not-supported");
+        checkPropertyValuesDirect("verticalAlign",
+                "baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
+                "1.7em", "4px", "32%",
+                "inherit", "initial", "revert", "unset",
+                "1 px", "7mond", "not-supported");
+    }
+
+    private void checkPropertyValuesDirect(final String property, final String... propertyValues) throws Exception {
+        final String propValues = "'" + String.join("', '", propertyValues) + "'";
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var propValues = [" + propValues + "];\n"
+            + "\n"
+            + "  var node = document.createElement('div');\n"
+            + "  var styleVal = node.style." + property + ";\n"
+            + "  log(styleVal);\n"
+
+            + "  propValues.forEach(propValue => {\n"
+            + "    node.style." + property + " = propValue;\n"
+            + "    styleVal = node.style." + property + ";\n"
+            + "    log(styleVal);\n"
+            + "  });\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    private void checkPropertyValues(final String property, final String... propertyValues) throws Exception {
+        final String propValues = "'" + String.join("', '", propertyValues) + "'";
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var propValues = [" + propValues + "];\n"
+            + "\n"
+            + "  var node = document.createElement('div');\n"
+            + "  var styleVal = node.style['" + property + "'];\n"
+            + "  log(styleVal);\n"
+
+            + "  propValues.forEach(propValue => {\n"
+            + "    node.style['" + property + "'] = propValue;\n"
+            + "    styleVal = node.style['" + property + "'];\n"
+            + "    log(styleVal);\n"
+            + "  });\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'></body></html>";

@@ -1138,6 +1138,29 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  <div id='tester'></div>\n"
             + "</body></html>";
 
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("[object XMLDocument]")
+    public void string() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var doc = document.implementation.createDocument('', '', null);\n"
+            + "    log(doc);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='tester'></div>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 }

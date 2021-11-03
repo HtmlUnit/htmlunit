@@ -32,21 +32,23 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase {
 
     private void testProperties(final String string, final String regexp) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = '" + string + "';\n"
             + "    var myRegExp = " + regexp + ";\n"
-            + "    alert(myRegExp.exec(str));\n"
-            + "    alert(myRegExp.source);\n"
-            + "    alert(myRegExp.ignoreCase);\n"
-            + "    alert(myRegExp.global);\n"
-            + "    alert(myRegExp.multiline);\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.exec(str));\n"
+            + "    log(myRegExp.source);\n"
+            + "    log(myRegExp.ignoreCase);\n"
+            + "    log(myRegExp.global);\n"
+            + "    log(myRegExp.multiline);\n"
+            + "    log(myRegExp.lastIndex);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,31 +93,33 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
     @Test
     @Alerts({"0", "true", "8", "true", "27", "true", "8", "true", "27", "false", "0"})
     public void regExpPropertyLastIndexGlobalSetTest() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = 'HtmlUnit is great (HtmlUnit)';\n"
             + "    var myRegExp = new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
             // search again
             + "    myRegExp.lastIndex = 0;\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
             // start later
             + "    myRegExp.lastIndex = 1;\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
             + "    myRegExp.lastIndex = 50;\n"
-            + "    alert(myRegExp.test(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.test(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -124,18 +128,20 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
     @Test
     @Alerts({"0", "HtmlUnit", "8"})
     public void regExpPropertyLastIndexGlobalExec() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = 'HtmlUnit is great';\n"
             + "    var myRegExp = new RegExp('HtmlUnit', 'g');\n"
-            + "    alert(myRegExp.lastIndex);\n"
-            + "    alert(myRegExp.exec(str));\n"
-            + "    alert(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.lastIndex);\n"
+            + "    log(myRegExp.exec(str));\n"
+            + "    log(myRegExp.lastIndex);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -147,32 +153,34 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
                 "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
     @NotYetImplemented
     public void regExResultProperties() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var source = '/html/body/div[5]/div[1]/div[1]';\n"
             + "    var myRegexp = new RegExp(\n"
             + "          '\\\\$?(?:(?![0-9-])[\\\\w-]+:)?(?![0-9-])[\\\\w-]+' ,'g');\n"
 
             + "     var result = source.match(myRegexp);\n"
-            + "     alert(result);\n"
+            + "     log(result);\n"
             + "     if (result) {\n"
-            + "       alert(result.index);\n"
-            + "       alert(result.lastIndex);\n"
-            + "       alert(result.input);\n"
+            + "       log(result.index);\n"
+            + "       log(result.lastIndex);\n"
+            + "       log(result.input);\n"
             + "     }\n"
 
             + "     result = myRegexp.exec(source);\n"
-            + "     alert(result);\n"
+            + "     log(result);\n"
             + "     if (result) {\n"
-            + "       alert(result.index);\n"
-            + "       alert(result.lastIndex);\n"
-            + "       alert(result.input);\n"
+            + "       log(result.index);\n"
+            + "       log(result.lastIndex);\n"
+            + "       log(result.input);\n"
             + "     }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

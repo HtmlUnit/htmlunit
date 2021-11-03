@@ -45,15 +45,16 @@ public class HTMLUListElementTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <ul id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final WebElement element = driver.findElement(By.id("myId"));
             assertTrue(toHtmlElement(element) instanceof HtmlUnorderedList);
@@ -71,28 +72,29 @@ public class HTMLUListElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
-            + "        alert(document.getElementById('u1').compact);\n"
-            + "        alert(document.getElementById('u2').compact);\n"
-            + "        alert(document.getElementById('u3').compact);\n"
-            + "        alert(document.getElementById('u4').compact);\n"
-            + "        alert(document.getElementById('u1').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u2').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u3').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u4').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u1').compact);\n"
+            + "        log(document.getElementById('u2').compact);\n"
+            + "        log(document.getElementById('u3').compact);\n"
+            + "        log(document.getElementById('u4').compact);\n"
+            + "        log(document.getElementById('u1').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u2').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u3').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u4').getAttribute('compact'));\n"
 
             + "        document.getElementById('u1').compact = true;\n"
             + "        document.getElementById('u2').compact = false;\n"
             + "        document.getElementById('u3').compact = 'xyz';\n"
             + "        document.getElementById('u4').compact = null;\n"
-            + "        alert(document.getElementById('u1').compact);\n"
-            + "        alert(document.getElementById('u2').compact);\n"
-            + "        alert(document.getElementById('u3').compact);\n"
-            + "        alert(document.getElementById('u4').compact);\n"
-            + "        alert(document.getElementById('u1').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u2').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u3').getAttribute('compact'));\n"
-            + "        alert(document.getElementById('u4').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u1').compact);\n"
+            + "        log(document.getElementById('u2').compact);\n"
+            + "        log(document.getElementById('u3').compact);\n"
+            + "        log(document.getElementById('u4').compact);\n"
+            + "        log(document.getElementById('u1').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u2').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u3').getAttribute('compact'));\n"
+            + "        log(document.getElementById('u4').getAttribute('compact'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -103,7 +105,8 @@ public class HTMLUListElementTest extends WebDriverTestCase {
             + "    <ul compact='2' id='u4'><li>a</li><li>b</li></ul>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -117,33 +120,34 @@ public class HTMLUListElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
-                + "        alert(document.getElementById('u1').type);\n"
-                + "        alert(document.getElementById('u2').type);\n"
-                + "        alert(document.getElementById('u3').type);\n"
-                + "        alert(document.getElementById('u4').type);\n"
-                + "        alert(document.getElementById('u1').getAttribute('type'));\n"
-                + "        alert(document.getElementById('u2').getAttribute('type'));\n"
-                + "        alert(document.getElementById('u3').getAttribute('type'));\n"
-                + "        alert(document.getElementById('u4').getAttribute('type'));\n"
+                + "        log(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u2').type);\n"
+                + "        log(document.getElementById('u3').type);\n"
+                + "        log(document.getElementById('u4').type);\n"
+                + "        log(document.getElementById('u1').getAttribute('type'));\n"
+                + "        log(document.getElementById('u2').getAttribute('type'));\n"
+                + "        log(document.getElementById('u3').getAttribute('type'));\n"
+                + "        log(document.getElementById('u4').getAttribute('type'));\n"
 
                 + "        document.getElementById('u1').type = '1';\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u1').type);\n"
 
                 + "        document.getElementById('u1').type = 'a';\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u1').type);\n"
 
                 + "        document.getElementById('u1').type = 'A';\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u1').type);\n"
 
                 + "        document.getElementById('u1').type = 'i';\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u1').type);\n"
 
                 + "        document.getElementById('u1').type = 'I';\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        log(document.getElementById('u1').type);\n"
 
-                + "        try { document.getElementById('u1').type = 'u' } catch(e) {alert('exception');}\n"
-                + "        alert(document.getElementById('u1').type);\n"
+                + "        try { document.getElementById('u1').type = 'u' } catch(e) {log('exception');}\n"
+                + "        log(document.getElementById('u1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -154,6 +158,7 @@ public class HTMLUListElementTest extends WebDriverTestCase {
                 + "    <ul type='A' id='u4'><li>a</li><li>b</li></ul>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

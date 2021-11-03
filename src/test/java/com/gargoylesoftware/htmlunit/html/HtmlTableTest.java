@@ -470,32 +470,6 @@ public class HtmlTableTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for Bug #274: JavaScript inside <tt>&lt;table&gt;</tt> run twice.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void jsInTable() throws Exception {
-        final String content
-            = "<html><head><title>foo</title></head><body>\n"
-            + "<table>\n"
-            + "<tr><td>cell1</td></tr>\n"
-            + "<script>alert('foo');</script>\n"
-            + "<tr><td>cell1</td></tr>\n"
-            + "</table>\n"
-            + "<div id='div1'>foo</div>\n"
-            + "<script>alert(document.getElementById('div1').parentNode.tagName);</script>\n"
-            + "</body></html>";
-
-        final String[] expectedAlerts = {"foo", "BODY"};
-        createTestPageForRealBrowserIfNeeded(content, expectedAlerts);
-
-        final List<String> collectedAlerts = new ArrayList<>();
-        loadPage(content, collectedAlerts);
-
-        assertEquals(expectedAlerts, collectedAlerts);
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test

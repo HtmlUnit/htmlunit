@@ -97,6 +97,12 @@ public final class StyleAttributes {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
+        /** The style property {@code accentColor}. */
+        ACCENT_COLOR("accentColor", "accent-color", chromeAndEdge("auto"), ffLatest("auto")),
+
+        /** The style property {@code accent-color}. */
+        ACCENT_COLOR_("accent-color", "accent-color", ffLatest("auto")),
+
         /** The style property {@code additiveSymbols}. */
         ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
 
@@ -178,6 +184,9 @@ public final class StyleAttributes {
 
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
+
+        /** The style property {@code appRegion}. */
+        APP_REGION("appRegion", "app-region", chromeAndEdge("none")),
 
         /** The style property {@code appearance}. */
         APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
@@ -864,8 +873,22 @@ public final class StyleAttributes {
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdge("none"), ff("none")),
 
+        /** The style property {@code containIntrinsicBlockSize}. */
+        CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
+                chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicHeight}. */
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicInlineSize}. */
+        CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
+                chromeAndEdge("auto")),
+
         /** The style property {@code containIntrinsicSize}. */
         CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicWidth}. */
+        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdge("auto")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ff("normal")),
@@ -1086,10 +1109,10 @@ public final class StyleAttributes {
         FONT_STYLE_("font-style", "font-style", ff("normal")),
 
         /** The style property {@code fontSynthesis}. */
-        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code font-synthesis}. */
-        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdge("normal"), ff("normal"), ie("normal")),
@@ -2991,6 +3014,9 @@ public final class StyleAttributes {
         /** The style property {@code scrollbarFaceColor}. */
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
+        /** The style property {@code scrollbarGutter}. */
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto")),
+
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),
 
@@ -3133,7 +3159,10 @@ public final class StyleAttributes {
         SYSTEM("system", "system", chromeAndEdge("")),
 
         /** The style property {@code tabSize}. */
-        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8")),
+        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ffLatest("8")),
+
+        /** The style property {@code tab-size}. */
+        TAB_SIZE_("tab-size", "tab-size", ffLatest("8")),
 
         /** The style property {@code tableLayout}. */
         TABLE_LAYOUT("tableLayout", "table-layout", chromeAndEdge("auto"), ff("auto"), ie("auto")),

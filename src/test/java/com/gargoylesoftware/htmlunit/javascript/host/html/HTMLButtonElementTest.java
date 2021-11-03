@@ -43,24 +43,28 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Alerts({"", "A", "a", "A", "a8", "8Afoo", "8", "@"})
     public void readWriteAccessKey() throws Exception {
         final String html
-            = "<html><body><button id='a1'>a1</button><button id='a2' accesskey='A'>a2</button><script>\n"
+            = "<html><body>\n"
+            + "<button id='a1'>a1</button><button id='a2' accesskey='A'>a2</button>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a';\n"
             + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a8';\n"
             + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = '8';\n"
             + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,20 +74,23 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts({"submit", "button", "submit"})
     public void type() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var b = document.createElement('button');\n"
-            + "    alert(b.type);\n"
+            + "    log(b.type);\n"
             + "    try {\n"
             + "      b.type = 'button';\n"
-            + "    } catch(e) {alert('exception')}\n"
-            + "    alert(b.type);\n"
+            + "    } catch(e) {log('exception')}\n"
+            + "    log(b.type);\n"
             + "    b.removeAttribute('type');\n"
-            + "    alert(b.type);\n"
+            + "    log(b.type);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -95,14 +102,15 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myNone').type);\n"
-            + "    alert(document.getElementById('myEmpty').type);\n"
-            + "    alert(document.getElementById('mySubmit').type);\n"
-            + "    alert(document.getElementById('mySubmitTrim').type);\n"
-            + "    alert(document.getElementById('myReset').type);\n"
-            + "    alert(document.getElementById('myButton').type);\n"
-            + "    alert(document.getElementById('myUnknown').type);\n"
+            + "    log(document.getElementById('myNone').type);\n"
+            + "    log(document.getElementById('myEmpty').type);\n"
+            + "    log(document.getElementById('mySubmit').type);\n"
+            + "    log(document.getElementById('mySubmitTrim').type);\n"
+            + "    log(document.getElementById('myReset').type);\n"
+            + "    log(document.getElementById('myButton').type);\n"
+            + "    log(document.getElementById('myUnknown').type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -119,7 +127,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -132,12 +140,13 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function show(id) {\n"
             + "    elem = document.getElementById(id);\n"
             + "    if (elem.form) {\n"
-            + "      alert(elem.form.id);\n"
+            + "      log(elem.form.id);\n"
             + "    } else {\n"
-            + "      alert(elem.form);\n"
+            + "      log(elem.form);\n"
             + "    }\n"
             + "  }\n"
             + "  function test() {\n"
@@ -171,7 +180,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  <button form='myForm2Id' id='myFormOtherOutside'></button>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -184,22 +193,23 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
             + "        t.value = 'test';\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = 42;\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = document.getElementById('t');\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -208,7 +218,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -221,17 +231,18 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var t = document.getElementById('t');\n"
             + "        t.value = 'null';\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
 
             + "        t.value = null;\n"
-            + "        alert(t.value);\n"
+            + "        log(t.value);\n"
             + "        if (t.value != null)\n"
-            + "          alert(t.value.length);\n"
+            + "          log(t.value.length);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -240,7 +251,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -253,6 +264,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      debug(document.getElementById('e1'));\n"
             + "      debug(document.getElementById('e2'));\n"
@@ -261,10 +273,10 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "      var labels = document.getElementById('e4').labels;\n"
             + "      document.body.removeChild(document.getElementById('l4'));\n"
             + "      debug(document.getElementById('e4'));\n"
-            + "      alert(labels ? labels.length : labels);\n"
+            + "      log(labels ? labels.length : labels);\n"
             + "    }\n"
             + "    function debug(e) {\n"
-            + "      alert(e.labels ? e.labels.length : e.labels);\n"
+            + "      log(e.labels ? e.labels.length : e.labels);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -277,7 +289,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "  <label> this<button id='e4'>e 4</button></label><br>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -293,11 +305,13 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "    <button id='a'>button</button><br>\n"
             + "  </form>"
             + "  <script>\n"
-            + "    alert(document.getElementById('a').form);\n"
+            + LOG_TITLE_FUNCTION
+            + "    log(document.getElementById('a').form);\n"
             + "  </script>"
             + "</body>"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

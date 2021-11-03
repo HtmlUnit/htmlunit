@@ -37,7 +37,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void simple() throws Exception {
-        final String script = "/*@cc_on alert('testing @cc_on'); @*/";
+        final String script = "/*@cc_on log('testing @cc_on'); @*/";
         testScript(script);
     }
 
@@ -49,7 +49,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     public void simple2() throws Exception {
         final String script = "var a={b:/*@cc_on!@*/false,c:/*@cc_on!@*/false};\n"
             + "var foo = (1 + 2/*V*/);\n"
-            + "alert(foo)";
+            + "log(foo)";
         testScript(script);
     }
 
@@ -60,7 +60,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     public void simple3() throws Exception {
         final String script = "/*@cc_on @*/\n"
             + "/*@if (@_win32)\n"
-            + "alert('testing @cc_on');\n"
+            + "log('testing @cc_on');\n"
             + "/*@end @*/";
         testScript(script);
     }
@@ -70,9 +70,9 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void simple4() throws Exception {
-        final String script = "/*@cc_on alert(1) @*/\n"
+        final String script = "/*@cc_on log(1) @*/\n"
             + "/*@if (@_win32)\n"
-            + "alert('testing @cc_on');\n"
+            + "log('testing @cc_on');\n"
             + "/*@end @*/";
         testScript(script);
     }
@@ -82,7 +82,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void ifTest() throws Exception {
-        final String script = "/*@cc_on@if(@_jscript_version>=5){alert(@_jscript_version)}@end@*/";
+        final String script = "/*@cc_on@if(@_jscript_version>=5){log(@_jscript_version)}@end@*/";
         testScript(script);
     }
 
@@ -91,7 +91,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void variables_jscript_version() throws Exception {
-        final String script = "/*@cc_on alert(@_jscript_version) @*/";
+        final String script = "/*@cc_on log(@_jscript_version) @*/";
         testScript(script);
     }
 
@@ -100,7 +100,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void variables_jscript_build() throws Exception {
-        final String script = "/*@cc_on alert(@_jscript_build) @*/";
+        final String script = "/*@cc_on log(@_jscript_build) @*/";
         testScript(script);
     }
 
@@ -109,7 +109,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void reservedString() throws Exception {
-        final String script = "/*@cc_on alert('testing /*@cc_on'); @*/";
+        final String script = "/*@cc_on log('testing /*@cc_on'); @*/";
         testScript(script);
     }
 
@@ -118,7 +118,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void set() throws Exception {
-        final String script = "/*@cc_on @set @mine = 12 alert(@mine); @*/";
+        final String script = "/*@cc_on @set @mine = 12 log(@mine); @*/";
         testScript(script);
     }
 
@@ -127,7 +127,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void elif() throws Exception {
-        final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end alert(type); @*/";
+        final String script = "/*@cc_on @if(@_win32)type='win';@elif(@_mac)type='mac';@end log(type); @*/";
         testScript(script);
     }
 
@@ -136,7 +136,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void dollar_single_quote_in_string() throws Exception {
-        final String script = "/*@cc_on var test='$2'; alert(test);@*/";
+        final String script = "/*@cc_on var test='$2'; log(test);@*/";
         testScript(script);
     }
 
@@ -145,7 +145,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void dollar_double_quote_in_string() throws Exception {
-        final String script = "/*@cc_on var test=\"$2\"; alert(test);@*/";
+        final String script = "/*@cc_on var test=\"$2\"; log(test);@*/";
         testScript(script);
     }
 
@@ -154,7 +154,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void slashes_in_single_quotes() throws Exception {
-        final String script = "/*@cc_on var test='\\\\\'; alert(test);@*/";
+        final String script = "/*@cc_on var test='\\\\\'; log(test);@*/";
         testScript(script);
     }
 
@@ -163,20 +163,21 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
      */
     @Test
     public void slash_dollar_in_single_quotes() throws Exception {
-        final String script = "/*@cc_on var test='\\$\'; alert(test);@*/";
+        final String script = "/*@cc_on var test='\\$\'; log(test);@*/";
         testScript(script);
     }
 
     private void testScript(final String script) throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + script + "\n"
             + "</script>\n"
             + "</head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -186,7 +187,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     @Alerts("false")
     public void escaping() throws Exception {
         final String script = "var isMSIE=eval('false;/*@cc_on@if(@\\x5fwin32)isMSIE=true@end@*/');\n"
-            + "alert(isMSIE);";
+            + "log(isMSIE);";
         testScript(script);
     }
 
@@ -200,7 +201,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
             "var isMSIE;\n"
             + "eval('function f() { isMSIE=eval(\"false;/*@cc_on@if(@' + '_win32)isMSIE=true@end@*/\") }');\n"
             + "f();\n"
-            + "alert(isMSIE);";
+            + "log(isMSIE);";
         testScript(script);
     }
 
@@ -212,7 +213,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
     public void bug3076667() throws Exception {
         final String script =
             "/*@cc_on @*/\n"
-            + "/*@if (true) alert('Alert');\n"
+            + "/*@if (true) log('Alert');\n"
             + "@end @*/ ";
         testScript(script);
     }
@@ -226,7 +227,7 @@ public class IEConditionalCompilationTest extends WebDriverTestCase {
         final String script =
             "/*@cc_on\n"
             + "document.write(\"\\\"\\\"\");\n"
-            + "alert(1);\n"
+            + "log(1);\n"
             + "@*/\n"
             + "</script></html>";
 

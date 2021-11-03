@@ -328,8 +328,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "636",
-            EDGE = "637",
+    @Alerts(CHROME = "635",
+            EDGE = "636",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -474,7 +474,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "18",
+            FF = "19",
             IE = "0")
+    @HtmlUnitNYI(FF = "18")
     public void details() throws Exception {
         loadPageVerifyTitle2(test("details"));
     }
@@ -691,8 +693,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "636",
-            EDGE = "637",
+    @Alerts(CHROME = "635",
+            EDGE = "636",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -711,8 +713,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "636",
-            EDGE = "637",
+    @Alerts(CHROME = "635",
+            EDGE = "636",
             FF = "677",
             FF78 = "688",
             IE = "682")
@@ -830,8 +832,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "636",
-            EDGE = "637",
+    @Alerts(CHROME = "635",
+            EDGE = "636",
             FF = "8",
             FF78 = "8",
             IE = "682")
@@ -1026,7 +1028,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("18")
+    @Alerts(DEFAULT = "18",
+            FF = "19")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",

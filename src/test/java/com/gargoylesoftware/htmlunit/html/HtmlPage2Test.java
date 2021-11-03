@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlPage2Test extends SimpleWebTestCase {
@@ -91,7 +92,7 @@ public class HtmlPage2Test extends SimpleWebTestCase {
         final HtmlForm form = framePage.getFormByName("form");
         final HtmlInput submit = form.getInputByName("submit");
         framePage = submit.click();
-        assertEquals("Form submitted successfully.", framePage.getBody().asText());
+        assertEquals("Form submitted successfully.", framePage.getBody().asNormalizedText());
     }
 
     /**

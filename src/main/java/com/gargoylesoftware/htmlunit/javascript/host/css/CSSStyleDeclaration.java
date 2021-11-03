@@ -109,6 +109,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -197,6 +198,11 @@ public class CSSStyleDeclaration extends SimpleScriptable {
             MAX_HEIGHT.getAttributeName(),
             MAX_WIDTH.getAttributeName()
             ));
+
+    private static final String[] THIN_MED_THICK = new String[] {"thin", "medium", "thick"};
+    private static final String[] ALIGN_KEYWORDS = new String[]
+        {"baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
+         "inherit", "initial", "revert", "unset"};
 
     static final String NONE = "none";
     static final String AUTO = "auto";
@@ -875,7 +881,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setBorderBottomWidth(final Object borderBottomWidth) {
         setStyleLengthAttribute(BORDER_BOTTOM_WIDTH.getAttributeName(), borderBottomWidth, "",
-                false, false, false, false);
+                false, false, false, null);
     }
 
     /**
@@ -992,7 +998,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setBorderLeftWidth(final Object borderLeftWidth) {
         setStyleLengthAttribute(BORDER_LEFT_WIDTH.getAttributeName(), borderLeftWidth, "",
-                false, false, false, false);
+                false, false, false, null);
     }
 
     /**
@@ -1067,7 +1073,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setBorderRightWidth(final Object borderRightWidth) {
         setStyleLengthAttribute(BORDER_RIGHT_WIDTH.getAttributeName(), borderRightWidth, "",
-                false, false, false, false);
+                false, false, false, null);
     }
 
     /**
@@ -1160,7 +1166,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setBorderTopWidth(final Object borderTopWidth) {
         setStyleLengthAttribute(BORDER_TOP_WIDTH.getAttributeName(), borderTopWidth, "",
-                false, false, false, false);
+                false, false, false, null);
     }
 
     /**
@@ -1178,7 +1184,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setBottom(final Object bottom) {
-        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true, false, false);
+        setStyleLengthAttribute(BOTTOM.getAttributeName(), bottom, "", true, true, false, null);
     }
 
     /**
@@ -1284,7 +1290,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setFontSize(final Object fontSize) {
-        setStyleLengthAttribute(FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, false);
+        setStyleLengthAttribute(FONT_SIZE.getAttributeName(), fontSize, "", false, true, false, null);
         updateFont(getFont(), false);
     }
 
@@ -1395,7 +1401,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setHeight(final Object height) {
-        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true, false, false);
+        setStyleLengthAttribute(HEIGHT.getAttributeName(), height, "", true, true, false, null);
     }
 
     /**
@@ -1413,7 +1419,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setLeft(final Object left) {
-        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true, false, false);
+        setStyleLengthAttribute(LEFT.getAttributeName(), left, "", true, true, false, null);
     }
 
     /**
@@ -1459,7 +1465,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setLetterSpacing(final Object letterSpacing) {
         setStyleLengthAttribute(LETTER_SPACING.getAttributeName(), letterSpacing, "",
-                false, false, false, false);
+                false, false, false, null);
     }
 
     /**
@@ -1495,7 +1501,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMarginBottom(final Object marginBottom) {
-        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, false);
+        setStyleLengthAttribute(MARGIN_BOTTOM.getAttributeName(), marginBottom, "", true, true, false, null);
     }
 
     /**
@@ -1513,7 +1519,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMarginLeft(final Object marginLeft) {
-        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, false);
+        setStyleLengthAttribute(MARGIN_LEFT.getAttributeName(), marginLeft, "", true, true, false, null);
     }
 
     /**
@@ -1531,7 +1537,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMarginRight(final Object marginRight) {
-        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, false);
+        setStyleLengthAttribute(MARGIN_RIGHT.getAttributeName(), marginRight, "", true, true, false, null);
     }
 
     /**
@@ -1549,7 +1555,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMarginTop(final Object marginTop) {
-        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, false);
+        setStyleLengthAttribute(MARGIN_TOP.getAttributeName(), marginTop, "", true, true, false, null);
     }
 
     /**
@@ -1567,7 +1573,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMaxHeight(final Object maxHeight) {
-        setStyleLengthAttribute(MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, false, false);
+        setStyleLengthAttribute(MAX_HEIGHT.getAttributeName(), maxHeight, "", false, true, false, null);
     }
 
     /**
@@ -1585,7 +1591,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMaxWidth(final Object maxWidth) {
-        setStyleLengthAttribute(MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, false, false);
+        setStyleLengthAttribute(MAX_WIDTH.getAttributeName(), maxWidth, "", false, true, false, null);
     }
 
     /**
@@ -1603,7 +1609,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMinHeight(final Object minHeight) {
-        setStyleLengthAttribute(MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, false, false);
+        setStyleLengthAttribute(MIN_HEIGHT.getAttributeName(), minHeight, "", true, true, false, null);
     }
 
     /**
@@ -1621,7 +1627,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setMinWidth(final Object minWidth) {
-        setStyleLengthAttribute(MIN_WIDTH.getAttributeName(), minWidth, "", true, true, false, false);
+        setStyleLengthAttribute(MIN_WIDTH.getAttributeName(), minWidth, "", true, true, false, null);
     }
 
     /**
@@ -1635,9 +1641,17 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
         Scriptable prototype = getPrototype();
         while (prototype != null) {
-            final Object value = prototype.get(name, start);
+            Object value = prototype.get(name, start);
             if (value != Scriptable.NOT_FOUND) {
                 return value;
+            }
+
+            final String camel = camelize(name);
+            if (!name.equals(camel)) {
+                value = prototype.get(camel, start);
+                if (value != Scriptable.NOT_FOUND) {
+                    return value;
+                }
             }
             prototype = prototype.getPrototype();
         }
@@ -1709,9 +1723,16 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
 
         final Scriptable prototype = getPrototype();
-        if (prototype != null && !"constructor".equals(name) && prototype.get(name, start) != Scriptable.NOT_FOUND) {
-            prototype.put(name, start, value);
-            return;
+        if (prototype != null && !"constructor".equals(name)) {
+            if (prototype.get(name, start) != Scriptable.NOT_FOUND) {
+                prototype.put(name, start, value);
+                return;
+            }
+            final String camel = camelize(name);
+            if (!name.equals(camel) && prototype.get(camel, start) != Scriptable.NOT_FOUND) {
+                prototype.put(camel, start, value);
+                return;
+            }
         }
 
         if (getDomNodeOrNull() != null) { // check if prototype or not
@@ -1871,7 +1892,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     public void setOutlineWidth(final Object outlineWidth) {
         final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
         setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), outlineWidth, "",
-                false, false, true, requiresUnit);
+                false, false, requiresUnit, THIN_MED_THICK);
     }
 
     /**
@@ -1907,7 +1928,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setPaddingBottom(final Object paddingBottom) {
-        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true, false, false);
+        setStyleLengthAttribute(PADDING_BOTTOM.getAttributeName(), paddingBottom, "", false, true, false, null);
     }
 
     /**
@@ -1925,7 +1946,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setPaddingLeft(final Object paddingLeft) {
-        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, false);
+        setStyleLengthAttribute(PADDING_LEFT.getAttributeName(), paddingLeft, "", false, true, false, null);
     }
 
     /**
@@ -1943,7 +1964,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setPaddingRight(final Object paddingRight) {
-        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true, false, false);
+        setStyleLengthAttribute(PADDING_RIGHT.getAttributeName(), paddingRight, "", false, true, false, null);
     }
 
     /**
@@ -1961,7 +1982,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setPaddingTop(final Object paddingTop) {
-        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, false);
+        setStyleLengthAttribute(PADDING_TOP.getAttributeName(), paddingTop, "", false, true, false, null);
     }
 
     /**
@@ -2220,7 +2241,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setRight(final Object right) {
-        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true, false, false);
+        setStyleLengthAttribute(RIGHT.getAttributeName(), right, "", true, true, false, null);
     }
 
     /**
@@ -2364,7 +2385,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setTextIndent(final Object textIndent) {
-        setStyleLengthAttribute(TEXT_INDENT.getAttributeName(), textIndent, "", false, true, false, false);
+        setStyleLengthAttribute(TEXT_INDENT.getAttributeName(), textIndent, "", false, true, false, null);
     }
 
     /**
@@ -2382,7 +2403,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setTop(final Object top) {
-        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true, false, false);
+        setStyleLengthAttribute(TOP.getAttributeName(), top, "", true, true, false, null);
     }
 
     /**
@@ -2401,7 +2422,8 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setVerticalAlign(final Object verticalAlign) {
         final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-        setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), verticalAlign, "", auto, true, false, false);
+        setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(),
+                verticalAlign, "", auto, true, false, ALIGN_KEYWORDS);
     }
 
     /**
@@ -2419,7 +2441,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setWidth(final Object width) {
-        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true, false, false);
+        setStyleLengthAttribute(WIDTH.getAttributeName(), width, "", true, true, false, null);
     }
 
     /**
@@ -2516,7 +2538,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     @JsxSetter
     public void setWordSpacing(final Object wordSpacing) {
         setStyleLengthAttribute(WORD_SPACING.getAttributeName(), wordSpacing, "",
-                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false);
+                false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, null);
     }
 
     /**
@@ -2622,25 +2644,26 @@ public class CSSStyleDeclaration extends SimpleScriptable {
         }
 
         if (LENGTH_PROPERTIES_FFFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, false, false, false);
+            setStyleLengthAttribute(name, value, imp, false, false, false, null);
         }
         else if (LENGTH_PROPERTIES_TTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, true, true, false, false);
+            setStyleLengthAttribute(name, value, imp, true, true, false, null);
         }
         else if (LENGTH_PROPERTIES_FTFF.contains(name)) {
-            setStyleLengthAttribute(name, value, imp, false, true, false, false);
+            setStyleLengthAttribute(name, value, imp, false, true, false, null);
         }
         else if (OUTLINE_WIDTH.getAttributeName().equals(name)) {
             final boolean requiresUnit = !getBrowserVersion().hasFeature(CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED);
-            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(), value, imp, false, false, true, requiresUnit);
+            setStyleLengthAttribute(OUTLINE_WIDTH.getAttributeName(),
+                    value, imp, false, false, requiresUnit, THIN_MED_THICK);
         }
         else if (WORD_SPACING.getAttributeName().equals(name)) {
             setStyleLengthAttribute(WORD_SPACING.getAttributeName(), value, imp,
-                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, false);
+                    false, getBrowserVersion().hasFeature(JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT), false, null);
         }
         else if (VERTICAL_ALIGN.getAttributeName().equals(name)) {
             final boolean auto = getBrowserVersion().hasFeature(CSS_VERTICAL_ALIGN_SUPPORTS_AUTO);
-            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, imp, auto, true, false, false);
+            setStyleLengthAttribute(VERTICAL_ALIGN.getAttributeName(), value, imp, auto, true, false, null);
         }
         else {
             setStyleAttribute(name, Context.toString(value), imp);
@@ -3073,7 +3096,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param perecent true if percent is supported
      */
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
-                final boolean auto, final boolean percent, final boolean thinMedThick, final boolean unitRequired) {
+                final boolean auto, final boolean percent, final boolean unitRequired, final String[] validValues) {
 
         if (ScriptRuntime.isNaN(value)) {
             return;
@@ -3105,9 +3128,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 return;
             }
 
-            if (thinMedThick && "thin".equals(valueString)
-                    || "medium".equals(valueString)
-                    || "thick".equals(valueString)) {
+            if (validValues != null && ArrayUtils.contains(validValues, valueString)) {
                 setStyleAttribute(name, valueString, important);
                 return;
             }
@@ -3140,6 +3161,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 return;
             }
 
+            if (!valueString.equals(valueString.trim())) {
+                // we have a unit but surrounding blanks
+                return;
+            }
             doubleValue = Context.toNumber(valueString);
         }
 

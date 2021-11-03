@@ -98,21 +98,6 @@ public class NameValuePair implements Serializable {
      * @param pairs the name/value pairs to convert
      * @return the converted name/value pairs
      */
-    public static org.apache.http.NameValuePair[] toHttpClient(final NameValuePair[] pairs) {
-        final org.apache.http.NameValuePair[] pairs2 =
-            new org.apache.http.NameValuePair[pairs.length];
-        for (int i = 0; i < pairs.length; i++) {
-            final NameValuePair pair = pairs[i];
-            pairs2[i] = new BasicNameValuePair(pair.getName(), pair.getValue());
-        }
-        return pairs2;
-    }
-
-    /**
-     * Converts the specified name/value pairs into HttpClient name/value pairs.
-     * @param pairs the name/value pairs to convert
-     * @return the converted name/value pairs
-     */
     public static List<org.apache.http.NameValuePair> toHttpClient(final List<NameValuePair> pairs) {
         final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
         for (int i = 0; i < pairs.size(); i++) {

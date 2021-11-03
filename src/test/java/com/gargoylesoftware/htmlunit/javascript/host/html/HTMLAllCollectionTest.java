@@ -164,18 +164,20 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
         final String html
             = "<!doctype html>\n"
             + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
+            + "  alerts = ''\n"
+            + "  function log(msg) { alerts += msg + '§';}\n"
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    } else if (('length' in result) && ('item' in result)) {\n"
-            + "      alert('coll ' + result.length);\n"
+            + "      log('coll ' + result.length);\n"
             + "      for(var i = 0; i < result.length; i++) {\n"
-            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "        log(result.item(i).id + '-' + result.item(i).name);\n"
             + "      }\n"
             + "    } else if (result.id || result.name) {\n"
-            + "      alert(result.id + '-' + result.name);\n"
+            + "      log(result.id + '-' + result.name);\n"
             + "    } else {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    }\n"
             + "  }\n"
 
@@ -183,7 +185,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all.namedItem(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert(e); }\n"
+            + "    } catch(e) { log(e); }\n"
+            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -198,7 +201,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "  <button id='button6' name='button6_2'></button>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -297,18 +300,20 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
         final String html
             = "<!doctype html>\n"
             + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
+            + "  alerts = ''\n"
+            + "  function log(msg) { alerts += msg + '§';}\n"
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    } else if (('length' in result) && ('item' in result)) {\n"
-            + "      alert('coll ' + result.length);\n"
+            + "      log('coll ' + result.length);\n"
             + "      for(var i = 0; i < result.length; i++) {\n"
-            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "        log(result.item(i).id + '-' + result.item(i).name);\n"
             + "      }\n"
             + "    } else if (result.id || result.name) {\n"
-            + "      alert(result.id + '-' + result.name);\n"
+            + "      log(result.id + '-' + result.name);\n"
             + "    } else {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    }\n"
             + "  }\n"
 
@@ -316,7 +321,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all.item(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -324,7 +330,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "  <button id='b2' name='button2'></button>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -413,18 +419,20 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
         final String html
             = "<!doctype html>\n"
             + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
+            + "  alerts = ''\n"
+            + "  function log(msg) { alerts += msg + '§';}\n"
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    } else if (('length' in result) && ('item' in result)) {\n"
-            + "      alert('coll ' + result.length);\n"
+            + "      log('coll ' + result.length);\n"
             + "      for(var i = 0; i < result.length; i++) {\n"
-            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "        log(result.item(i).id + '-' + result.item(i).name);\n"
             + "      }\n"
             + "    } else if (result.id || result.name) {\n"
-            + "      alert(result.id + '-' + result.name);\n"
+            + "      log(result.id + '-' + result.name);\n"
             + "    } else {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    }\n"
             + "  }\n"
 
@@ -432,7 +440,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all[" + name + "];\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -440,7 +449,7 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "  <button id='b2' name='button2'></button>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -532,18 +541,20 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
         final String html
             = "<!doctype html>\n"
             + "<html id='myHtml'><head id='myHead'><title id='myTitle'>First</title><script>\n"
+            + "  alerts = ''\n"
+            + "  function log(msg) { alerts += msg + '§';}\n"
             + "  function report(result) {\n"
             + "    if (result == null || result == undefined) {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    } else if (('length' in result) && ('item' in result)) {\n"
-            + "      alert('coll ' + result.length);\n"
+            + "      log('coll ' + result.length);\n"
             + "      for(var i = 0; i < result.length; i++) {\n"
-            + "        alert(result.item(i).id + '-' + result.item(i).name);\n"
+            + "        log(result.item(i).id + '-' + result.item(i).name);\n"
             + "      }\n"
             + "    } else if (result.id || result.name) {\n"
-            + "      alert(result.id + '-' + result.name);\n"
+            + "      log(result.id + '-' + result.name);\n"
             + "    } else {\n"
-            + "      alert(result);\n"
+            + "      log(result);\n"
             + "    }\n"
             + "  }\n"
 
@@ -551,7 +562,8 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var item = document.all(" + name + ");\n"
             + "      report(item);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    document.title = alerts;"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -559,34 +571,32 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
             + "  <button id='b2' name='button2'></button>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"},
-            CHROME = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
-            EDGE = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
-            FF = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"},
-            FF78 = {"[object HTMLAllCollection]", "function HTMLAllCollection() {\n    [native code]\n}"})
+    @Alerts(DEFAULT = {"[object HTMLAllCollection]", "function HTMLAllCollection() { [native code] }"},
+            IE = {"[object HTMLAllCollection]", "[object HTMLAllCollection]"})
     public void type() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(document.all);\n"
-            + "      alert(HTMLAllCollection);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(document.all);\n"
+            + "      log(HTMLAllCollection);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -594,22 +604,21 @@ public class HTMLAllCollectionTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function () { [native code] }",
-            FF = "function () {\n    [native code]\n}",
-            FF78 = "function () {\n    [native code]\n}",
             IE = "[object Object]")
     @NotYetImplemented(IE)
     public void proto() throws Exception {
         final String html = ""
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(HTMLAllCollection.__proto__);\n"
+            + "    log(HTMLAllCollection.__proto__);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -43,8 +43,9 @@ public class AudioContextTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert('AudioContext' in window);\n"
+            + "      log('AudioContext' in window);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -52,7 +53,7 @@ public class AudioContextTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,15 +67,16 @@ public class AudioContextTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
-            + "        alert('AudioContext not available');\n"
+            + "        log('AudioContext not available');\n"
             + "        return;\n"
             + "      }\n"
 
             + "      var audioCtx = new AudioContext();\n"
             + "      var source = audioCtx.createBufferSource();\n"
-            + "      alert(source);\n"
+            + "      log(source);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -82,7 +84,7 @@ public class AudioContextTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

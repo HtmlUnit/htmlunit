@@ -53,7 +53,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"\nbeforeafter", "undefined", "undefined"})
+    @Alerts({"\\nbeforeafter", "undefined", "undefined"})
     @HtmlUnitNYI(CHROME = {"beforeafter", "undefined", "undefined"},
             EDGE = {"beforeafter", "undefined", "undefined"},
             FF = {"beforeafter", "undefined", "undefined"},
@@ -62,14 +62,15 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "function test() {\n"
             + "  var tmp = document.getElementById('testDiv');\n"
             + "  tmp = tmp.firstChild;\n"
-            + "  alert(tmp.data);\n"
+            + "  log(tmp.data);\n"
             + "  tmp = tmp.nextSibling;\n"
-            + "  alert(tmp.data);\n"
+            + "  log(tmp.data);\n"
             + "  tmp = tmp.nextSibling;\n"
-            + "  alert(tmp.tagName);\n"
+            + "  log(tmp.tagName);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -77,7 +78,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             + "<table><tr>before<td></td>after</tr></table>\n"
             + "</div></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -818,7 +819,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"\n<var data=\"f\">\n<a href=\"#\">a</a>\n<div>d</div>\n<li>l</li>\n</var>\n", "3"})
+    @Alerts({"<var data=\"f\"> <a href=\"#\">a</a> <div>d</div> <li>l</li> </var> ", "3"})
     public void varInsideUl() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -833,13 +834,14 @@ public class HTMLParser2Test extends WebDriverTestCase {
             +   "</var>\n"
             + "</ul>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var tmp = document.getElementById('myUl');\n"
-            + "  alert(tmp.innerHTML);\n"
-            + "  alert(tmp.childNodes.length);\n"
+            + "  log(tmp.innerHTML);\n"
+            + "  log(tmp.childNodes.length);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -847,7 +849,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"\n<table>\n<tbody><tr>\n<td>data</td>\n</tr>\n</tbody></table>\n", "3"})
+    @Alerts({"<table> <tbody><tr> <td>data</td> </tr> </tbody></table> ", "3"})
     public void tableInsideAnchor() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -862,13 +864,14 @@ public class HTMLParser2Test extends WebDriverTestCase {
             +   "</table>\n"
             +  "</a>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var tmp = document.getElementById('myA');\n"
-            + "  alert(tmp.innerHTML);\n"
-            + "  alert(tmp.childNodes.length);\n"
+            + "  log(tmp.innerHTML);\n"
+            + "  log(tmp.childNodes.length);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

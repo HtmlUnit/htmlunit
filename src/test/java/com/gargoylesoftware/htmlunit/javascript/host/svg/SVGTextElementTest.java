@@ -35,23 +35,21 @@ public class SVGTextElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "function SVGTextElement() { [native code] }",
-            EDGE = "function SVGTextElement() { [native code] }",
-            FF = "function SVGTextElement() {\n    [native code]\n}",
-            FF78 = "function SVGTextElement() {\n    [native code]\n}",
+    @Alerts(DEFAULT = "function SVGTextElement() { [native code] }",
             IE = "[object SVGTextElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.SVGTextElement);\n"
+            + "    log(window.SVGTextElement);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -63,11 +61,12 @@ public class SVGTextElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGPathElement) {\n"
             + "      var text = document.getElementById('myId');\n"
-            + "      alert(text);\n"
-            + "      alert(text.getComputedTextLength() > 0);\n"
+            + "      log(text);\n"
+            + "      log(text.getComputedTextLength() > 0);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -77,7 +76,7 @@ public class SVGTextElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -90,12 +89,13 @@ public class SVGTextElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGTextElement) {\n"
             + "      var text = document.getElementById('myId');\n"
-            + "      alert(text);\n"
+            + "      log(text);\n"
             + "      var length = text.getComputedTextLength();\n"
-            + "      alert(length.toFixed(1));\n"
+            + "      log(length.toFixed(1));\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -105,6 +105,6 @@ public class SVGTextElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

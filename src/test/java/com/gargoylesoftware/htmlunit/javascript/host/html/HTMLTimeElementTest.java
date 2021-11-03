@@ -39,13 +39,13 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>Testpage</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var time1 = document.getElementById('time1');\n"
-            + "        alert(time1.text);\n"
+            + "        log(time1.text);\n"
             + "        var time2 = document.getElementById('time1');\n"
-            + "        alert(time2.text);\n"
+            + "        log(time2.text);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -54,7 +54,8 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
             + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -67,18 +68,18 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "  <head>\n"
-            + "    <title>Testpage</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var time1 = document.getElementById('time1');\n"
-            + "        alert(time1.dateTime);\n"
+            + "        log(time1.dateTime);\n"
             + "        time1.dateTime = '20:40';\n"
-            + "        alert(time1.dateTime);\n"
+            + "        log(time1.dateTime);\n"
 
             + "        var time2 = document.getElementById('time2');\n"
-            + "        alert(time2.dateTime);\n"
+            + "        log(time2.dateTime);\n"
             + "        time2.dateTime = '';\n"
-            + "        alert(time2.dateTime);\n"
+            + "        log(time2.dateTime);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -87,6 +88,7 @@ public class HTMLTimeElementTest extends WebDriverTestCase {
             + "    <p>start <time id='time2' datetime='2001-05-15 19:00'>15. Mai</time></p>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -40,16 +40,16 @@ public class TextTest extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<head>\n"
-            + "  <title>foo</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.body.firstChild);\n"
+            + "      log(document.body.firstChild);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'> </body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -59,16 +59,18 @@ public class TextTest extends WebDriverTestCase {
     @Alerts("abcd")
     public void wholeText() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myId');\n"
-            + "  alert(div.firstChild.wholeText);\n"
+            + "  log(div.firstChild.wholeText);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -78,15 +80,17 @@ public class TextTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void text() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+                    + "<script>\n"
+                    + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myId');\n"
-            + "  alert(div.firstChild.text);\n"
+            + "  log(div.firstChild.text);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myId'>abcd</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

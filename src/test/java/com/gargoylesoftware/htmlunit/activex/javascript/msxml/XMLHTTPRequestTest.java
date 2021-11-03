@@ -1259,7 +1259,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
             EDGE = {"null", "text/html,application/xhtml+xml,application/xml;"
                         + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
                     "null", "null", "no ActiveX"},
-            FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
                   "null", "null", "no ActiveX"},
             FF78 = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
                     "null", "null", "no ActiveX"},

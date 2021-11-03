@@ -38,16 +38,18 @@ public class SVGTest extends WebDriverTestCase {
     @Test
     @Alerts("svgElem")
     public void getAttribute() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');\n"
             + "  svg.setAttribute('id', 'svgElem');\n"
             + "  document.body.appendChild(svg);\n"
-            + "  alert(document.getElementById('svgElem').getAttribute('id'));\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "  log(document.getElementById('svgElem').getAttribute('id'));\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -61,15 +63,16 @@ public class SVGTest extends WebDriverTestCase {
                 "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function init() {\n"
                 + "    try {\n"
                 + "      var rect = document.getElementById('rect');\n"
-                + "      rect.addEventListener('click', function() { alert('clicked') });\n"
+                + "      rect.addEventListener('click', function() { log('clicked') });\n"
 
                 + "      var e = document.createEvent('MouseEvents');\n"
                 + "      e.initEvent('click', true, false);\n"
                 + "      document.getElementById('rect').dispatchEvent(e);\n"
-                + "    } catch (e) { alert('exception'); }\n"
+                + "    } catch (e) { log('exception'); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -80,6 +83,6 @@ public class SVGTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

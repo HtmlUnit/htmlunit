@@ -50,9 +50,10 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var reader = new FileReader();\n"
-            + "      alert(reader.readyState);\n"
+            + "      log(reader.readyState);\n"
             + "    }\n"
             + "  </script>\n"
             + "<head>\n"
@@ -63,7 +64,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("testBtn")).click();
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -77,12 +78,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
             + "        var dataURL = reader.result;\n"
-            + "        alert(dataURL);\n"
+            + "        log(dataURL);\n"
             + "      };\n"
             + "      reader.readAsDataURL(files[0]);\n"
             + "    }\n"
@@ -107,7 +109,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -126,12 +128,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var blob = new Blob(['Html', 'Unit', 'is great']);\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
             + "        var dataURL = reader.result;\n"
-            + "        alert(dataURL);\n"
+            + "        log(dataURL);\n"
             + "      };\n"
             + "      reader.readAsDataURL(blob);\n"
             + "    }\n"
@@ -141,7 +144,7 @@ public class FileReaderTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,12 +158,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var blob = new Blob(['Html', 'Unit', 'is great'], {type : 'text/plain'});\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
             + "        var dataURL = reader.result;\n"
-            + "        alert(dataURL);\n"
+            + "        log(dataURL);\n"
             + "      };\n"
             + "      reader.readAsDataURL(blob);\n"
             + "    }\n"
@@ -170,7 +174,7 @@ public class FileReaderTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -185,12 +189,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var blob = new Blob(['Html', 'Unit', 'is great'], {type : 'unKNown'});\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
             + "        var dataURL = reader.result;\n"
-            + "        alert(dataURL);\n"
+            + "        log(dataURL);\n"
             + "      };\n"
             + "      reader.readAsDataURL(blob);\n"
             + "    }\n"
@@ -200,7 +205,7 @@ public class FileReaderTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -217,13 +222,14 @@ public class FileReaderTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function previewFile() {\n"
             + "    var file = document.querySelector('input[type=file]').files[0];\n"
             + "    var reader = new FileReader();\n"
             + "    reader.addEventListener('load', function () {\n"
-            + "      alert(reader.result);\n"
+            + "      log(reader.result);\n"
             + "    }, false);\n"
             + "\n"
             + "    if (file) {\n"
@@ -246,7 +252,7 @@ public class FileReaderTest extends WebDriverTestCase {
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -261,13 +267,14 @@ public class FileReaderTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function previewFile() {\n"
             + "    var file = document.querySelector('input[type=file]').files[0];\n"
             + "    var reader = new FileReader();\n"
             + "    reader.addEventListener('load', function () {\n"
-            + "      alert('#' + reader.result);\n"
+            + "      log('#' + reader.result);\n"
             + "    }, false);\n"
 
             + "    if (file) {\n"
@@ -290,7 +297,7 @@ public class FileReaderTest extends WebDriverTestCase {
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -304,12 +311,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
-            + "        alert(reader.result.byteLength);\n"
+            + "        log(reader.result);\n"
+            + "        log(reader.result.byteLength);\n"
             + "      };\n"
             + "      reader.readAsArrayBuffer(files[0]);\n"
             + "    }\n"
@@ -334,7 +342,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -350,14 +358,15 @@ public class FileReaderTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function previewFile() {\n"
             + "    var file = document.querySelector('input[type=file]').files[0];\n"
             + "    var reader = new FileReader();\n"
             + "    reader.addEventListener('load', function () {\n"
-            + "      alert(reader.result);\n"
-            + "      alert(reader.result.byteLength);\n"
+            + "      log(reader.result);\n"
+            + "      log(reader.result.byteLength);\n"
             + "    }, false);\n"
             + "\n"
             + "    if (file) {\n"
@@ -380,7 +389,7 @@ public class FileReaderTest extends WebDriverTestCase {
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -392,14 +401,15 @@ public class FileReaderTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function previewFile() {\n"
             + "    var file = document.querySelector('input[type=file]').files[0];\n"
             + "    var reader = new FileReader();\n"
             + "    reader.addEventListener('load', function () {\n"
-            + "      alert(reader.result);\n"
-            + "      alert(reader.result.byteLength);\n"
+            + "      log(reader.result);\n"
+            + "      log(reader.result.byteLength);\n"
             + "    }, false);\n"
             + "\n"
             + "    if (file) {\n"
@@ -422,7 +432,7 @@ public class FileReaderTest extends WebDriverTestCase {
         assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
 
         driver.findElement(By.tagName("input")).sendKeys(file.getAbsolutePath());
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -436,11 +446,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0]);\n"
             + "    }\n"
@@ -465,7 +476,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -483,11 +494,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0], null);\n"
             + "    }\n"
@@ -512,7 +524,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -530,11 +542,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0], undefined);\n"
             + "    }\n"
@@ -559,7 +572,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -577,11 +590,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0], 'Unknown');\n"
             + "    }\n"
@@ -606,7 +620,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -624,11 +638,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0], 'utf-8');\n"
             + "    }\n"
@@ -653,7 +668,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -671,11 +686,12 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
+            + "        log(reader.result);\n"
             + "      };\n"
             + "      reader.readAsText(files[0], 'iso-8859-1');\n"
             + "    }\n"
@@ -700,7 +716,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
@@ -718,12 +734,13 @@ public class FileReaderTest extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var files = document.testForm.fileupload.files;\n"
             + "      var reader = new FileReader();\n"
             + "      reader.onload = function() {\n"
-            + "        alert(reader.result);\n"
-            + "        alert(reader.result.length);\n"
+            + "        log(reader.result);\n"
+            + "        log(reader.result.length);\n"
             + "      };\n"
             + "      reader.readAsText(files[0]);\n"
             + "    }\n"
@@ -748,7 +765,7 @@ public class FileReaderTest extends WebDriverTestCase {
 
             driver.findElement(By.id("testBtn")).click();
 
-            verifyAlerts(driver, getExpectedAlerts());
+            verifyTitle2(driver, getExpectedAlerts());
         }
         finally {
             FileUtils.deleteQuietly(tstFile);
