@@ -606,11 +606,15 @@ public class HtmlSerializerVisibleText {
      * @param domText the target to process
      * @param mode the {@link Mode} to use for processing
      */
-    protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
+    protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, Mode mode) {
         final DomNode parent = domText.getParentNode();
         if (parent instanceof HtmlTitle
                 || parent instanceof HtmlScript) {
             builder.append(domText.getData(), Mode.WHITE_SPACE_PRE_LINE);
+        }
+
+        if (parent != null) {
+            mode = whiteSpaceStyle(parent, mode);
         }
 
         if (parent == null
