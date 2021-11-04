@@ -1410,12 +1410,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the item in the given index
      */
     @JsxFunction
-    public Object item(final int index) {
+    public String item(final int index) {
         if (null != styleDeclaration_) {
-            return styleDeclaration_.getProperties().get(index);
+            return styleDeclaration_.getProperties().get(index).getName();
         }
 
-        return getStyleMap().get(index);
+        return getStyleMap().get(index).getName();
     }
 
     /**

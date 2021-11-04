@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,8 +76,8 @@ public class ElementCssStyleDeclaration implements CssStyleDeclaration {
     }
 
     @Override
-    public List<Property> getProperties() {
-        return Collections.emptyList();
+    public List<StyleElement> getProperties() {
+        return new ArrayList<>(element.getStyleMap().values());
     }
 
     @Override

@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
@@ -93,8 +94,10 @@ public class CssStyleDeclarationWrapper implements CssStyleDeclaration {
     }
 
     @Override
-    public List<Property> getProperties() {
-        return styleDeclaration_.getProperties();
+    public List<StyleElement> getProperties() {
+        return styleDeclaration_.getProperties().stream()
+                .map(property -> getStyleElement(property.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override

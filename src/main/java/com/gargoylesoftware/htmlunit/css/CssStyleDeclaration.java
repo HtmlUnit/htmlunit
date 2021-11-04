@@ -162,7 +162,7 @@ public interface CssStyleDeclaration extends Serializable {
      */
     void setCssText(String value);
 
-    List<Property> getProperties();
+    List<StyleElement> getProperties();
 
     AbstractCSSRuleImpl getParentRule();
 }

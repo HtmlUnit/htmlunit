@@ -78,7 +78,7 @@ class CssStyleDeclarationStatic implements CssStyleDeclaration {
     }
 
     @Override
-    public List<Property> getProperties() {
+    public List<StyleElement> getProperties() {
         return Collections.emptyList();
     }
 

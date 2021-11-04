@@ -238,8 +238,10 @@ public class ComputedCssStyleDeclaration implements CssStyleDeclaration {
     }
 
     @Override
-    public List<Property> getProperties() {
-        return elementStyleDeclaration.getProperties();
+    public List<StyleElement> getProperties() {
+        return elementStyleDeclaration.getProperties().stream()
+                .map(property -> getStyleElement(property.getName()))
+                .collect(Collectors.toList());
     }
 
     @Override
