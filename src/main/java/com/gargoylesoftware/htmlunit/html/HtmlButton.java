@@ -119,7 +119,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute("disabled");
+        return hasAttribute(ATTRIBUTE_DISABLED);
     }
 
     /**
@@ -286,7 +286,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttributeDirect("disabled");
+        return getAttributeDirect(ATTRIBUTE_DISABLED);
     }
 
     /**

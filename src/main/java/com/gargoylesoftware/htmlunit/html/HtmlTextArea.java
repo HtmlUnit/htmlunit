@@ -308,7 +308,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute("disabled");
+        return hasAttribute(ATTRIBUTE_DISABLED);
     }
 
     /**
@@ -316,7 +316,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttributeDirect("disabled");
+        return getAttributeDirect(ATTRIBUTE_DISABLED);
     }
 
     /**

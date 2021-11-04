@@ -476,7 +476,7 @@ public class HtmlForm extends HtmlElement {
         if (!SUBMITTABLE_ELEMENT_NAMES.contains(tagName)) {
             return false;
         }
-        if (element.hasAttribute("disabled")) {
+        if (element.hasAttribute(ATTRIBUTE_DISABLED)) {
             return false;
         }
         // clicked input type="image" is submitted even if it hasn't a name

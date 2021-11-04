@@ -189,7 +189,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         if (hasFeature(HTMLOPTION_PREVENT_DISABLED)) {
             return false;
         }
-        return hasAttribute("disabled");
+        return hasAttribute(ATTRIBUTE_DISABLED);
     }
 
     /**
@@ -197,7 +197,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttributeDirect("disabled");
+        return getAttributeDirect(ATTRIBUTE_DISABLED);
     }
 
     /**

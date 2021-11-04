@@ -178,7 +178,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public final String getDisabledAttribute() {
-        return getAttributeDirect("disabled");
+        return getAttributeDirect(ATTRIBUTE_DISABLED);
     }
 
     /**
@@ -186,7 +186,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public final boolean isDisabled() {
-        return hasAttribute("disabled");
+        return hasAttribute(ATTRIBUTE_DISABLED);
     }
 
     /**

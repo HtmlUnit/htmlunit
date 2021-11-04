@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -438,7 +439,7 @@ public class HTMLElement extends Element {
      */
     @JsxGetter(IE)
     public boolean isDisabled() {
-        return getDomNodeOrDie().hasAttribute("disabled");
+        return getDomNodeOrDie().hasAttribute(ATTRIBUTE_DISABLED);
     }
 
     /**
@@ -449,10 +450,10 @@ public class HTMLElement extends Element {
     public void setDisabled(final boolean disabled) {
         final HtmlElement element = getDomNodeOrDie();
         if (disabled) {
-            element.setAttribute("disabled", "disabled");
+            element.setAttribute(ATTRIBUTE_DISABLED, ATTRIBUTE_DISABLED);
         }
         else {
-            element.removeAttribute("disabled");
+            element.removeAttribute(ATTRIBUTE_DISABLED);
         }
     }
 
