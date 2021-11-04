@@ -145,6 +145,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             Authenticator.setDefault(SocksAuthenticator_);
         }
     }
+
     /**
      * {@inheritDoc}
      */

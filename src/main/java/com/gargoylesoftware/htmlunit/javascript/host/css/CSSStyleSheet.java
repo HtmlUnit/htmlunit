@@ -139,7 +139,6 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxGetter
     public String getHref() {
-
         if (ownerNode_ != null) {
             final DomNode node = cssStyleSheet.getOwnerDomNode();
             if (node instanceof HtmlStyle) {
