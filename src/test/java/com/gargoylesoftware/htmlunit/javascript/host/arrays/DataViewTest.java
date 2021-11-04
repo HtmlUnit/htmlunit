@@ -38,23 +38,25 @@ public class DataViewTest extends WebDriverTestCase {
     @Alerts({"22", "3.1415927410125732"})
     public void arrayConstruction() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var buffer = new ArrayBuffer(12);\n"
             + "    var x = new DataView(buffer);\n"
             + "    x.setInt8(0, 22);\n"
             + "    x.setFloat32(1, Math.PI);\n"
-            + "    alert(x.getInt8(0));\n"
-            + "    alert(x.getFloat32(1));\n"
+            + "    log(x.getInt8(0));\n"
+            + "    log(x.getFloat32(1));\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,27 +68,29 @@ public class DataViewTest extends WebDriverTestCase {
                 "33", "-5", "84", "68", "45", "24"})
     public void endian() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new DataView(new ArrayBuffer(12), 4);\n"
             + "    array.setFloat64(0, Math.PI);\n"
-            + "    alert(array.getInt32(2, true));\n"
-            + "    alert(array.getInt32(2, false));\n"
-            + "    alert(array.getFloat32(0, true));\n"
-            + "    alert(array.getFloat32(0, false));\n"
+            + "    log(array.getInt32(2, true));\n"
+            + "    log(array.getInt32(2, false));\n"
+            + "    log(array.getFloat32(0, true));\n"
+            + "    log(array.getFloat32(0, false));\n"
 
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
-            + "      alert(array2[i]);\n"
+            + "      log(array2[i]);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -96,23 +100,25 @@ public class DataViewTest extends WebDriverTestCase {
     @Alerts({"1234", "0", "4", "-46", "0", "0", "0"})
     public void uint16() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var array = new DataView(new ArrayBuffer(6), 0);\n"
             + "    array.setUint16(1, 1234);\n"
-            + "    alert(array.getUint16(1));\n"
+            + "    log(array.getUint16(1));\n"
             + "    var array2 = new Int8Array(array.buffer);\n"
             + "    for (var i = 0; i < array2.length; i++)\n"
-            + "      alert(array2[i]);\n"
+            + "      log(array2[i]);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -122,18 +128,20 @@ public class DataViewTest extends WebDriverTestCase {
     @Alerts("exception")
     public void nullConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    new DataView(null);\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

@@ -51,13 +51,14 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     public void onmessage() throws Exception {
         final String html = "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -67,7 +68,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -77,13 +79,14 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Alerts("Received: Result = 15")
     public void selfOnmessage() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.onmessage = function(e) {\n"
@@ -93,7 +96,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -103,13 +107,14 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Alerts("Received: Result = 15")
     public void selfAddEventListener() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.addEventListener('message', (e) => {\n"
@@ -119,7 +124,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -129,12 +135,13 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Alerts("Received: timeout")
     public void selfSetTimeout() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "self.setTimeout(function() {\n"
@@ -143,7 +150,8 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -153,12 +161,13 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Alerts("Received: interval")
     public void selfSetInterval() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "var id = self.setInterval(function() {\n"
@@ -168,29 +177,30 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     @Test
     @Alerts(DEFAULT = "Received: func=function addEventListener() { [native code] }",
-            FF = "Received: func=function addEventListener() {\n    [native code]\n}",
-            FF78 = "Received: func=function addEventListener() {\n    [native code]\n}",
-            IE = "Received: func=\nfunction addEventListener() {\n    [native code]\n}\n")
+            IE = "Received: func= function addEventListener() { [native code] } ")
     public void functionDefaultValue() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('func='+self.addEventListener);";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -202,13 +212,14 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     public void workerCodeWithWrongMimeType() throws Exception {
         final String html = "<html><body>"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -218,6 +229,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html, 2000);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

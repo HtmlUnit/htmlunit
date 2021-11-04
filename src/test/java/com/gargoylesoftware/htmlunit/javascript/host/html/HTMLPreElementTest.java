@@ -40,18 +40,19 @@ public class HTMLPreElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var testPre = document.getElementById('testPre');\n"
-            + "        alert(testPre.width);\n"
-            + "        alert(typeof testPre.width);\n"
+            + "        log(testPre.width);\n"
+            + "        log(typeof testPre.width);\n"
             + "        testPre.width = 100;\n"
-            + "        alert(testPre.width);\n"
+            + "        log(testPre.width);\n"
 
             + "        var testPre = document.getElementById('testPreWidth');\n"
-            + "        alert(testPreWidth.width);\n"
-            + "        alert(typeof testPreWidth.width);\n"
+            + "        log(testPreWidth.width);\n"
+            + "        log(typeof testPreWidth.width);\n"
             + "        testPreWidth.width = 123;\n"
-            + "        alert(testPreWidth.width);\n"
+            + "        log(testPreWidth.width);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -60,7 +61,8 @@ public class HTMLPreElementTest extends WebDriverTestCase {
             + "    <pre id='testPreWidth' width='77'>pre content</pre>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -82,11 +84,12 @@ public class HTMLPreElementTest extends WebDriverTestCase {
             + "<pre id='p6' clear='2'>pre6</pre>\n"
             + "<pre id='p7' clear='foo'>pre7</pre>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function set(p, value) {\n"
             + "  try {\n"
             + "    p.clear = value;\n"
             + "  } catch(e) {\n"
-            + "    alert('!');\n"
+            + "    log('!');\n"
             + "  }\n"
             + "}\n"
             + "var p1 = document.getElementById('p1');\n"
@@ -96,13 +99,13 @@ public class HTMLPreElementTest extends WebDriverTestCase {
             + "var p5 = document.getElementById('p5');\n"
             + "var p6 = document.getElementById('p6');\n"
             + "var p7 = document.getElementById('p7');\n"
-            + "alert(p1.clear);\n"
-            + "alert(p2.clear);\n"
-            + "alert(p3.clear);\n"
-            + "alert(p4.clear);\n"
-            + "alert(p5.clear);\n"
-            + "alert(p6.clear);\n"
-            + "alert(p7.clear);\n"
+            + "log(p1.clear);\n"
+            + "log(p2.clear);\n"
+            + "log(p3.clear);\n"
+            + "log(p4.clear);\n"
+            + "log(p5.clear);\n"
+            + "log(p6.clear);\n"
+            + "log(p7.clear);\n"
             + "set(p1, 'left');\n"
             + "set(p2, 'none');\n"
             + "set(p3, 'right');\n"
@@ -110,15 +113,16 @@ public class HTMLPreElementTest extends WebDriverTestCase {
             + "set(p5, 2);\n"
             + "set(p6, 'abc');\n"
             + "set(p7, '8');\n"
-            + "alert(p1.clear);\n"
-            + "alert(p2.clear);\n"
-            + "alert(p3.clear);\n"
-            + "alert(p4.clear);\n"
-            + "alert(p5.clear);\n"
-            + "alert(p6.clear);\n"
-            + "alert(p7.clear);\n"
+            + "log(p1.clear);\n"
+            + "log(p2.clear);\n"
+            + "log(p3.clear);\n"
+            + "log(p4.clear);\n"
+            + "log(p5.clear);\n"
+            + "log(p6.clear);\n"
+            + "log(p7.clear);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -38,15 +38,24 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 @JsxClass
 public class SVGMatrix extends SimpleScriptable {
 
-    private static final MatrixTransformer matrixTransformer_ = new MatrixTransformer();
-    private MatrixTransformer.SvgMatrix svgMatrix_;
+    private double shearX_;
+    private double shearY_;
+    private double scaleX_;
+    private double scaleY_;
+    private double translateX_;
+    private double translateY_;
 
     /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF78})
     public SVGMatrix() {
-        svgMatrix_ = new MatrixTransformer.SvgMatrix();
+        shearX_ = 0.0;
+        shearY_ = 0.0;
+        scaleX_ = 1.0;
+        scaleY_ = 1.0;
+        translateX_ = 0.0;
+        translateY_ = 0.0;
     }
 
     /**
@@ -65,7 +74,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getA() {
-        return svgMatrix_.getScaleX();
+        return scaleX_;
     }
 
     /**
@@ -74,7 +83,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getB() {
-        return svgMatrix_.getShearY();
+        return shearY_;
     }
 
     /**
@@ -83,7 +92,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getC() {
-        return svgMatrix_.getShearX();
+        return shearX_;
     }
 
     /**
@@ -92,7 +101,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getD() {
-        return svgMatrix_.getScaleY();
+        return scaleY_;
     }
 
     /**
@@ -101,7 +110,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getE() {
-        return svgMatrix_.getTranslateX();
+        return translateX_;
     }
 
     /**
@@ -110,7 +119,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxGetter
     public double getF() {
-        return svgMatrix_.getTranslateY();
+        return translateY_;
     }
 
     /**
@@ -119,7 +128,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setA(final double newValue) {
-        svgMatrix_.setScaleX(newValue);
+        scaleX_ = newValue;
     }
 
     /**
@@ -128,7 +137,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setB(final double newValue) {
-        svgMatrix_.setShearY(newValue);
+        shearY_ = newValue;
     }
 
     /**
@@ -137,7 +146,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setC(final double newValue) {
-        svgMatrix_.setShearX(newValue);
+        shearX_ = newValue;
     }
 
     /**
@@ -146,7 +155,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setD(final double newValue) {
-        svgMatrix_.setScaleY(newValue);
+        scaleY_ = newValue;
     }
 
     /**
@@ -155,7 +164,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setE(final double newValue) {
-        svgMatrix_.setTranslateX(newValue);
+        translateX_ = newValue;
     }
 
     /**
@@ -164,7 +173,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxSetter
     public void setF(final double newValue) {
-        svgMatrix_.setTranslateY(newValue);
+        translateY_ = newValue;
     }
 
     /**
@@ -174,7 +183,12 @@ public class SVGMatrix extends SimpleScriptable {
     @JsxFunction
     public SVGMatrix flipX() {
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.flipX(svgMatrix_);
+        result.shearX_ = shearX_;
+        result.shearY_ = -shearY_;
+        result.scaleX_ = -scaleX_;
+        result.scaleY_ = scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -186,7 +200,12 @@ public class SVGMatrix extends SimpleScriptable {
     @JsxFunction
     public SVGMatrix flipY() {
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.flipY(svgMatrix_);
+        result.shearX_ = -shearX_;
+        result.shearY_ = shearY_;
+        result.scaleX_ = scaleX_;
+        result.scaleY_ = -scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -197,15 +216,22 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix inverse() {
-        try {
-            final SVGMatrix result = new SVGMatrix(getWindow());
-            result.svgMatrix_ = matrixTransformer_.inverse(svgMatrix_);
+        final double determinant = scaleX_ * scaleY_ - shearX_ * shearY_;
 
-            return result;
+        if (Math.abs(determinant) < 1E-10) {
+            throw ScriptRuntime.constructError("Error",
+                    "Failed to execute 'inverse' on 'SVGMatrix': The matrix is not invertible.");
         }
-        catch (final IllegalArgumentException e) {
-            throw ScriptRuntime.constructError("Error", e.getMessage());
-        }
+
+        final SVGMatrix result = new SVGMatrix(getWindow());
+        result.shearX_ = -shearX_ / determinant;
+        result.shearY_ = -shearY_ / determinant;
+        result.scaleX_ = scaleY_ / determinant;
+        result.scaleY_ = scaleX_ / determinant;
+        result.translateX_ = (shearX_ * translateY_ - scaleY_ * translateX_) / determinant;
+        result.translateY_ = (shearY_ * translateX_ - scaleX_ * translateY_) / determinant;
+
+        return result;
     }
 
     /**
@@ -216,7 +242,14 @@ public class SVGMatrix extends SimpleScriptable {
     @JsxFunction
     public SVGMatrix multiply(final SVGMatrix by) {
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.multiply(svgMatrix_, by.svgMatrix_);
+
+        result.shearX_ = by.shearX_ * scaleX_ + by.scaleY_ * shearX_;
+        result.shearY_ = by.scaleX_ * shearY_ + by.shearY_ * scaleY_;
+        result.scaleX_ = by.scaleX_ * scaleX_ + by.shearY_ * shearX_;
+        result.scaleY_ = by.shearX_ * shearY_ + by.scaleY_ * scaleY_;
+        result.translateX_ = by.translateX_ * scaleX_ + by.translateY_ * shearX_ + translateX_;
+        result.translateY_ = by.translateX_ * shearY_ + by.translateY_ * scaleY_ + translateY_;
+
         return result;
     }
 
@@ -227,8 +260,18 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix rotate(final double angle) {
+        final double theta = Math.toRadians(angle);
+        final double sin = Math.sin(theta);
+        final double cos = Math.cos(theta);
+
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.rotate(svgMatrix_, angle);
+
+        result.shearX_ = -sin * scaleX_ + cos * shearX_;
+        result.shearY_ = cos * shearY_ + sin * scaleY_;
+        result.scaleX_ = cos * scaleX_ + sin * shearX_;
+        result.scaleY_ = -sin * shearY_ + cos * scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -246,8 +289,18 @@ public class SVGMatrix extends SimpleScriptable {
                     "Failed to execute 'rotateFromVector' on 'SVGMatrix': Arguments cannot be zero.");
         }
 
+        final double theta = Math.atan2(y, x);
+        final double sin = Math.sin(theta);
+        final double cos = Math.cos(theta);
+
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.rotateFromVector(svgMatrix_, x, y);
+
+        result.shearX_ = -sin * scaleX_ + cos * shearX_;
+        result.shearY_ = cos * shearY_ + sin * scaleY_;
+        result.scaleX_ = cos * scaleX_ + sin * shearX_;
+        result.scaleY_ = -sin * shearY_ + cos * scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -259,10 +312,7 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix scale(final double factor) {
-        final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.scale(svgMatrix_, factor);
-
-        return result;
+        return scaleNonUniform(factor, factor);
     }
 
     /**
@@ -274,7 +324,13 @@ public class SVGMatrix extends SimpleScriptable {
     @JsxFunction
     public SVGMatrix scaleNonUniform(final double factorX, final double factorY) {
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.scaleNonUniform(svgMatrix_, factorX, factorY);
+
+        result.shearX_ = factorY * shearX_;
+        result.shearY_ = factorX * shearY_;
+        result.scaleX_ = factorX * scaleX_;
+        result.scaleY_ = factorY * scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -286,8 +342,16 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix skewX(final double angle) {
+        final double shear = Math.tan(Math.toRadians(angle));
+
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.skewX(svgMatrix_, angle);
+
+        result.shearX_ = shear * scaleX_ + shearX_;
+        result.shearY_ = shearY_;
+        result.scaleX_ = scaleX_;
+        result.scaleY_ = shear * shearY_ + scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -299,8 +363,16 @@ public class SVGMatrix extends SimpleScriptable {
      */
     @JsxFunction
     public SVGMatrix skewY(final double angle) {
+        final double shear = Math.tan(Math.toRadians(angle));
+
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.skewY(svgMatrix_, angle);
+
+        result.shearX_ = shearX_;
+        result.shearY_ = shearY_ + shear * scaleY_;
+        result.scaleX_ = scaleX_ + shear * shearX_;
+        result.scaleY_ = scaleY_;
+        result.translateX_ = translateX_;
+        result.translateY_ = translateY_;
 
         return result;
     }
@@ -314,7 +386,13 @@ public class SVGMatrix extends SimpleScriptable {
     @JsxFunction
     public SVGMatrix translate(final double x, final double y) {
         final SVGMatrix result = new SVGMatrix(getWindow());
-        result.svgMatrix_ = matrixTransformer_.translate(svgMatrix_, x, y);
+
+        result.shearX_ = shearX_;
+        result.shearY_ = shearY_;
+        result.scaleX_ = scaleX_;
+        result.scaleY_ = scaleY_;
+        result.translateX_ = x * scaleX_ + y * shearX_ + translateX_;
+        result.translateY_ = x * shearY_ + y * scaleY_ + translateY_;
 
         return result;
     }

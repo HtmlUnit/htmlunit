@@ -42,23 +42,25 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     public void accessKey() throws Exception {
         final String html
             = "<html><body><legend id='a1'>a1</legend><legend id='a2' accesskey='A'>a2</legend><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a';\n"
             + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a8';\n"
             + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = '8';\n"
             + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,9 +71,11 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
     public void form() throws Exception {
         final String html
             = "<html><body><form><fieldset><legend id='a'>a</legend></fieldset></form><script>\n"
-            + "alert(document.getElementById('a').form);\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.getElementById('a').form);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -94,12 +98,14 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
             + "  </fieldset></form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('i' + i).align);\n"
+            + "    log(document.getElementById('i' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,11 +122,12 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
             + "  </fieldset></form>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('i1');\n"
@@ -135,6 +142,7 @@ public class HTMLLegendElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'top');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

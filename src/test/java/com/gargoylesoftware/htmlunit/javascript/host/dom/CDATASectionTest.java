@@ -38,12 +38,15 @@ public class CDATASectionTest extends WebDriverTestCase {
     @Alerts("[object Comment]")
     public void simpleScriptable() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.body.firstChild);\n"
+            + "  log(document.body.firstChild);\n"
             + "}\n"
             + "</script></head><body onload='test()'><![CDATA[Jeep]]></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -52,17 +55,20 @@ public class CDATASectionTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void splitText() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var doc = document.implementation.createDocument('', '', null);\n"
             + "    var root = doc.appendChild(doc.createElement('root'));\n"
             + "    var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n"
             + "    cdata.splitText(2);\n"
-            + "    alert(root.childNodes.length);\n"
+            + "    log(root.childNodes.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
 }

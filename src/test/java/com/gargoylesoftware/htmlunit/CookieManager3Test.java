@@ -19,12 +19,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
-import java.util.List;
 
-import org.apache.http.Header;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.impl.cookie.DefaultCookieSpec;
-import org.apache.http.message.BasicHeader;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.util.Cookie;
@@ -95,21 +90,5 @@ public class CookieManager3Test {
         assertEquals(2, mgr.getCookies().size());
         assertTrue(mgr.clearExpired(new Date(System.currentTimeMillis() + 10_000)));
         assertEquals(1, mgr.getCookies().size());
-    }
-
-    /**
-     * Test that " are not discarded.
-     * Once this test passes, our hack in HttpWebConnection.HtmlUnitBrowserCompatCookieSpec can safely be removed.
-     * @see <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void httpClientParsesCookiesQuotedValuesCorrectly() throws Exception {
-        final Header header = new BasicHeader("Set-Cookie", "first=\"hello world\"");
-        final DefaultCookieSpec spec = new DefaultCookieSpec();
-        final CookieOrigin origin = new CookieOrigin("localhost", 80, "/", false);
-        final List<org.apache.http.cookie.Cookie> list = spec.parse(header, origin);
-        assertEquals(1, list.size());
-        assertEquals("\"hello world\"", list.get(0).getValue());
     }
 }

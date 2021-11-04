@@ -36,21 +36,20 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SVGTSpanElement() { [native code] }",
-            FF = "function SVGTSpanElement() {\n    [native code]\n}",
-            FF78 = "function SVGTSpanElement() {\n    [native code]\n}",
             IE = "[object SVGTSpanElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.SVGTSpanElement);\n"
+            + "    log(window.SVGTSpanElement);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,11 +61,12 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGPathElement) {\n"
             + "      var text = document.getElementById('myId');\n"
-            + "      alert(text);\n"
-            + "      alert(text.getComputedTextLength() > 0);\n"
+            + "      log(text);\n"
+            + "      log(text.getComputedTextLength() > 0);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -78,7 +78,7 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -91,12 +91,13 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGTextElement) {\n"
             + "      var text = document.getElementById('myId');\n"
-            + "      alert(text);\n"
+            + "      log(text);\n"
             + "      var length = text.getComputedTextLength();\n"
-            + "      alert(length.toFixed(1));\n"
+            + "      log(length.toFixed(1));\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -108,6 +109,6 @@ public class SVGTSpanElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

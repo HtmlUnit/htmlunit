@@ -141,7 +141,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     public CSSStyleSheet getSheet() {
         if (sheet_ == null) {
-            sheet_ =  new CSSStyleSheet(this, ((HtmlLink) getDomNodeOrDie()).getSheet());
+            sheet_ = new CSSStyleSheet(this, getWindow(), ((HtmlLink) getDomNodeOrDie()).getSheet());
         }
         return sheet_;
     }

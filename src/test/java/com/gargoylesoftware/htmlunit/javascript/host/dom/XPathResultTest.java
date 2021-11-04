@@ -39,7 +39,9 @@ public class XPathResultTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"4", "1", "3"},
             IE = "evaluate not supported")
     public void resultType() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
@@ -61,17 +63,17 @@ public class XPathResultTest extends WebDriverTestCase {
             + "          var expression = expressions[i];\n"
             + "          var result = doc.evaluate(expression, doc.documentElement, null,"
                                 + " XPathResult.ANY_TYPE, null);\n"
-            + "          alert(result.resultType);\n"
+            + "          log(result.resultType);\n"
             + "        }\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,7 +83,9 @@ public class XPathResultTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"7", "id1", "id2"},
             IE = "evaluate not supported")
     public void snapshotType() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
@@ -100,19 +104,19 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        var doc=parser.parseFromString(text,'text/xml');\n"
             + "        var result = doc.evaluate('//div', doc.documentElement, null,"
                             + " XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
-            + "        alert(result.resultType);\n"
+            + "        log(result.resultType);\n"
             + "        for (var i = 0; i < result.snapshotLength; i++) {\n"
-            + "          alert(result.snapshotItem(i).getAttribute('id'));\n"
+            + "          log(result.snapshotItem(i).getAttribute('id'));\n"
             + "        }\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -122,7 +126,9 @@ public class XPathResultTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"9", "id1"},
             IE = "evaluate not supported")
     public void singleNodeValue() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
@@ -141,17 +147,17 @@ public class XPathResultTest extends WebDriverTestCase {
             + "        var doc=parser.parseFromString(text,'text/xml');\n"
             + "        var result = doc.evaluate('//div', doc.documentElement, null,"
                             + " XPathResult.FIRST_ORDERED_NODE_TYPE, null);\n"
-            + "        alert(result.resultType);\n"
-            + "        alert(result.singleNodeValue.getAttribute('id'));\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "        log(result.resultType);\n"
+            + "        log(result.singleNodeValue.getAttribute('id'));\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -161,7 +167,9 @@ public class XPathResultTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"id1", "id2"},
             IE = "evaluate not supported")
     public void iterateNext() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
@@ -183,18 +191,18 @@ public class XPathResultTest extends WebDriverTestCase {
 
             + "        var thisNode = result.iterateNext();\n"
             + "        while (thisNode) {\n"
-            + "          alert(thisNode.getAttribute('id'));\n"
+            + "          log(thisNode.getAttribute('id'));\n"
             + "          thisNode = result.iterateNext();\n"
             + "        }\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -204,23 +212,25 @@ public class XPathResultTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "7",
             IE = "evaluate not supported")
     public void notOr() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
             + "        var expression = \".//*[@id='level1']/*[not(preceding-sibling::* or following-sibling::*)]\";\n"
             + "        var result = document.evaluate(expression, document, null, "
                             + "XPathResult.ORDERED_NODE_SNAPSHOT_TYPE, null);\n"
-            + "        alert(result.resultType);\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "        log(result.resultType);\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -231,27 +241,29 @@ public class XPathResultTest extends WebDriverTestCase {
             IE = "evaluate not supported")
     public void stringType() throws Exception {
         final String html = "<html><head><title attr=\"bar\">foo</title><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
             + "        var result = document.evaluate('//title/@attr', document, null, "
                             + "XPathResult.STRING_TYPE, null);\n"
-            + "        alert(result.stringValue);\n"
+            + "        log(result.stringValue);\n"
             + "        result = document.evaluate('//title', document, null, "
                             + "XPathResult.STRING_TYPE, null);\n"
-            + "        alert(result.stringValue);\n"
+            + "        log(result.stringValue);\n"
             + "        var result = document.evaluate('//title/text()', document, null, "
                             + "XPathResult.STRING_TYPE, null);\n"
-            + "        alert(result.stringValue);\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "        log(result.stringValue);\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -262,30 +274,32 @@ public class XPathResultTest extends WebDriverTestCase {
             IE = "evaluate not supported")
     public void numberType() throws Exception {
         final String html = "<html><head><title attr=\"1234\">4321.5</title><span>foo</span><script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
             + "        var result = document.evaluate('//title/@attr', document, null, "
                             + "XPathResult.NUMBER_TYPE, null);\n"
-            + "        alert(result.numberValue === 1234);\n"
+            + "        log(result.numberValue === 1234);\n"
             + "        result = document.evaluate('//title', document, null, "
                             + "XPathResult.NUMBER_TYPE, null);\n"
-            + "        alert(result.numberValue === 4321.5);\n"
+            + "        log(result.numberValue === 4321.5);\n"
             + "        result = document.evaluate('//title/text()', document, null, "
                             + "XPathResult.NUMBER_TYPE, null);\n"
-            + "        alert(result.numberValue === 4321.5);\n"
+            + "        log(result.numberValue === 4321.5);\n"
             + "        result = document.evaluate('//span', document, null, "
                             + "XPathResult.NUMBER_TYPE, null);\n"
-            + "        alert(isNaN(result.numberValue));\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "        log(isNaN(result.numberValue));\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -297,35 +311,35 @@ public class XPathResultTest extends WebDriverTestCase {
     public void booleanType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "<title>foo</title>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
             + "        var result = document.evaluate('//unknown', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === false);\n"
+            + "        log(result.booleanValue === false);\n"
 
             + "        var result = document.evaluate('//title', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === true);\n"
+            + "        log(result.booleanValue === true);\n"
 
             + "        result = document.evaluate('//div', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === true);\n"
+            + "        log(result.booleanValue === true);\n"
             + "        result = document.evaluate('//div/@attr', document, null, "
                         + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === true);\n"
+            + "        log(result.booleanValue === true);\n"
 
             + "        result = document.evaluate('//span', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === true);\n"
+            + "        log(result.booleanValue === true);\n"
             + "        result = document.evaluate('//span/@attr', document, null, "
                             + "XPathResult.BOOLEAN_TYPE, null);\n"
-            + "        alert(result.booleanValue === true);\n"
-            + "      } catch (e) { alert(e); }\n"
+            + "        log(result.booleanValue === true);\n"
+            + "      } catch (e) { log(e); }\n"
             + "    } else {\n"
-            + "      alert('evaluate not supported');\n"
+            + "      log('evaluate not supported');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -335,6 +349,6 @@ public class XPathResultTest extends WebDriverTestCase {
             + "  <span attr=\"true\">true</span>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

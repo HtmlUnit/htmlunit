@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -76,28 +77,28 @@ public class CookieManager4Test extends WebDriverTestCase {
             InetAddress.getByName(new URL(URL_HOST1).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST1 + "' are not present");
+            fail("Host configuration '" + URL_HOST1 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST2).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST2 + "' are not present");
+            fail("Host configuration '" + URL_HOST2 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST3).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST3 + "' are not present");
+            fail("Host configuration '" + URL_HOST3 + "' is not present");
         }
 
         try {
             InetAddress.getByName(new URL(URL_HOST4).getHost());
         }
         catch (final UnknownHostException e) {
-            fail("Host configuration '" + URL_HOST4 + "' are not present");
+            fail("Host configuration '" + URL_HOST4 + "' is not present");
         }
     }
 
@@ -109,6 +110,11 @@ public class CookieManager4Test extends WebDriverTestCase {
     @Before
     public void clearCookies() throws Exception {
         shutDownAll();
+
+        // [IE] real IE waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
 
         getMockWebConnection().setDefaultResponse("<html><head></head><body></body></html>");
         startWebServer(getMockWebConnection(), null);

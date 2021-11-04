@@ -36,28 +36,59 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined"},
-            IE = {"", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", ""})
+    @Alerts(DEFAULT = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", ""},
+            FF = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", "undefined"},
+            FF78 = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", "undefined"},
+            IE = {"", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "", "undefined"})
     public void name() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
             + "    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var meta = document.getElementsByTagName('meta')[0];\n"
-            + "        alert(meta.charset);\n"
-            + "        alert(meta.content);\n"
-            + "        alert(meta.httpEquiv);\n"
-            + "        alert(meta.name);\n"
-            + "        alert(meta.scheme);\n"
-            + "        alert(meta.url);\n"
+            + "        log(meta.charset);\n"
+            + "        log(meta.content);\n"
+            + "        log(meta.httpEquiv);\n"
+            + "        log(meta.name);\n"
+            + "        log(meta.scheme);\n"
+            + "        log(meta.url);\n"
+            + "        log(meta.media);\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "only screen and (max-width: 600px)",
+            FF = "undefined",
+            FF78 = "undefined",
+            IE = "undefined")
+    public void media() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <meta http-equiv='Content-Type' media='only screen and (max-width: 600px)'>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var meta = document.getElementsByTagName('meta')[0];\n"
+            + "        log(meta.media);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

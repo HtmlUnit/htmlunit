@@ -36,16 +36,18 @@ public class FunctionsWrapperTest extends WebDriverTestCase {
     @Alerts("1")
     public void function_toString() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var x = test.toString;\n"
             + "  x.guid = 1;\n"
             + "  x[0] = 2;\n"
-            + "  alert(x.guid);\n"
+            + "  log(x.guid);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

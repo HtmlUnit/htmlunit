@@ -103,7 +103,7 @@ public final class ScriptElementSupport {
                     .append(srcAttrib == ATTRIBUTE_NOT_DEFINED ? "inline " : "external ")
                     .append(element.getClass().getSimpleName());
             if (srcAttrib != ATTRIBUTE_NOT_DEFINED) {
-                description.append(" (").append(srcAttrib).append(")");
+                description.append(" (").append(srcAttrib).append(')');
             }
             final PostponedAction action = new PostponedAction(element.getPage(), description.toString()) {
                 @Override

@@ -58,12 +58,15 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDOW
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 
 import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -232,5 +235,15 @@ public class ComputedCssStyleDeclaration implements CssStyleDeclaration {
     @Override
     public void setCssText(String value) {
         //read-only
+    }
+
+    @Override
+    public List<Property> getProperties() {
+        return elementStyleDeclaration.getProperties();
+    }
+
+    @Override
+    public AbstractCSSRuleImpl getParentRule() {
+        return elementStyleDeclaration.getParentRule();
     }
 }

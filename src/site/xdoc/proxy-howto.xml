@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Using HtmlUnit behind a proxy server</title>
+    </properties>
+
+    <body>
+        <section name="Using a http proxy server">
+            <p>
+                There is a special WebClient constructor that allows you to specify proxy server information in those cases
+                where you need to connect through one.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_proxy() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX, PROXY_HOST, PROXY_PORT)) {
+
+        //set proxy username and password 
+        final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
+        credentialsProvider.addCredentials("username", "password");
+
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+
+            <p>
+                In case the proxy server requires credentials you can define them on the
+                DefaultCredentialsProvider from the webClient
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_proxy() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX, PROXY_HOST, PROXY_PORT)) {
+
+        //set proxy username and password 
+        final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
+        credentialsProvider.addCredentials("username", "password", PROXY_HOST, PROXY_PORT);
+
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+        </section>
+
+        <section name="Socks proxy sample">
+            <p>
+                The setup of socks proxies is a bit more tricky but in general follows the same pattern.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_proxy() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX) {
+        // socks proxy / the true as last parameter marks this as socks proxy
+        webClient.getOptions().setProxyConfig(new ProxyConfig(SOCKS_PROXY_HOST, SOCKS_PROXY_PORT, null, true));
+
+        //set proxy username and password if required
+        final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
+        credentialsProvider.addSocksCredentials("username", "password", SOCKS_PROXY_HOST, SOCKS_PROXY_PORT);
+
+        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+        </section>
+    </body>
+</document>

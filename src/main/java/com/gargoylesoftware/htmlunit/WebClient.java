@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CONTENT_SECURITY_POLICY_IGNORED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_SEC_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_HEADER_UPGRADE_INSECURE_REQUEST;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
@@ -152,6 +153,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  * @author Joerg Werner
  * @author Anton Demydenko
+ * @author Sergio Moreno
  */
 public class WebClient implements Serializable, AutoCloseable {
 
@@ -896,7 +898,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the status handler for this webclient.
+     * Returns the status handler for this {@link WebClient}.
      * @return the status handler or null if one hasn't been set
      */
     public StatusHandler getStatusHandler() {
@@ -904,22 +906,36 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the executor for this webclient.
+     * Returns the executor for this {@link WebClient}.
      * @return the executor
      */
     public synchronized Executor getExecutor() {
         if (executor_ == null) {
-            final ThreadPoolExecutor tmpThreadPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
-            tmpThreadPool.setThreadFactory(new ThreadNamingFactory(tmpThreadPool.getThreadFactory()));
-            // tmpThreadPool.prestartAllCoreThreads();
-            executor_ = tmpThreadPool;
+            final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+            threadPoolExecutor.setThreadFactory(new ThreadNamingFactory(threadPoolExecutor.getThreadFactory()));
+            // threadPoolExecutor.prestartAllCoreThreads();
+            executor_ = threadPoolExecutor;
         }
 
         return executor_;
     }
 
     /**
-     * Sets the javascript error listener for this webclient.
+     * Changes the ExecutorService for this {@link WebClient}.
+     * You have to call this before the first use of the executor, otherwise
+     * an IllegalStateExceptions is thrown.
+     * @param executor the new Executor.
+     */
+    public synchronized void setExecutor(final ExecutorService executor) {
+        if (executor_ != null) {
+            throw new IllegalStateException("Can't change the executor after first use.");
+        }
+
+        executor_ = executor;
+    }
+
+    /**
+     * Sets the javascript error listener for this {@link WebClient}.
      * When setting to null, the {@link DefaultJavaScriptErrorListener} is used.
      * @param javaScriptErrorListener the new JavaScriptErrorListener or null if none is specified
      */
@@ -933,7 +949,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the javascript error listener for this webclient.
+     * Returns the javascript error listener for this {@link WebClient}.
      * @return the javascript error listener or null if one hasn't been set
      */
     public JavaScriptErrorListener getJavaScriptErrorListener() {
@@ -1708,6 +1724,20 @@ public class WebClient implements Serializable, AutoCloseable {
             wrs.setAdditionalHeader(HttpHeader.SEC_FETCH_USER, "?1");
         }
 
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA, getBrowserVersion().getSecClientHintUserAgentHeader());
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE, "?0");
+        }
+        if (getBrowserVersion().hasFeature(HTTP_HEADER_CH_UA)
+                && !wrs.isAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM)) {
+            wrs.setAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM,
+                    getBrowserVersion().getSecClientHintUserAgentPlatformHeader());
+        }
+
         if (getBrowserVersion().hasFeature(HTTP_HEADER_UPGRADE_INSECURE_REQUEST)
                 && !wrs.isAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS)) {
             wrs.setAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, "1");
@@ -1780,7 +1810,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Sets the script pre processor for this webclient.
+     * Sets the script pre processor for this {@link WebClient}.
      * @param scriptPreProcessor the new preprocessor or null if none is specified
      */
     public void setScriptPreProcessor(final ScriptPreProcessor scriptPreProcessor) {
@@ -1788,7 +1818,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the script pre processor for this webclient.
+     * Returns the script pre processor for this {@link WebClient}.
      * @return the pre processor or null of one hasn't been set
      */
     public ScriptPreProcessor getScriptPreProcessor() {
@@ -1796,7 +1826,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Sets the active X object map for this webclient. The <code>Map</code> is used to map the
+     * Sets the active X object map for this {@link WebClient}. The <code>Map</code> is used to map the
      * string passed into the <code>ActiveXObject</code> constructor to a java class name. Therefore
      * you can emulate <code>ActiveXObject</code>s in a web page's JavaScript by mapping the object
      * name to a java class to emulate the active X object.
@@ -1807,7 +1837,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the active X object map for this webclient.
+     * Returns the active X object map for this {@link WebClient}.
      * @return the active X object map
      */
     public Map<String, String> getActiveXObjectMap() {
@@ -1995,7 +2025,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Sets the onbeforeunload handler for this webclient.
+     * Sets the onbeforeunload handler for this {@link WebClient}.
      * @param onbeforeunloadHandler the new onbeforeunloadHandler or null if none is specified
      */
     public void setOnbeforeunloadHandler(final OnbeforeunloadHandler onbeforeunloadHandler) {
@@ -2003,7 +2033,7 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the onbeforeunload handler for this webclient.
+     * Returns the onbeforeunload handler for this {@link WebClient}.
      * @return the onbeforeunload handler or null if one hasn't been set
      */
     public OnbeforeunloadHandler getOnbeforeunloadHandler() {
@@ -2147,9 +2177,14 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // do this after closing the windows, otherwise some unload event might
         // start a new window that will start the thread again
+        ThreadDeath toThrow = null;
         if (scriptEngine_ != null) {
             try {
                 scriptEngine_.shutdown();
+            }
+            catch (final ThreadDeath td) {
+                // make sure the following cleanup is performed to avoid resource leaks
+                toThrow = td;
             }
             catch (final Exception e) {
                 LOG.error("Exception while shutdown the scriptEngine", e);
@@ -2175,6 +2210,9 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         cache_.clear();
+        if (toThrow != null) {
+            throw toThrow;
+        }
     }
 
     /**

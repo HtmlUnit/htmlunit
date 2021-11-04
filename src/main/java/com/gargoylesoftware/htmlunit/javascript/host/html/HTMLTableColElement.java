@@ -103,8 +103,8 @@ public class HTMLTableColElement extends HTMLTableComponent {
      * Sets the value of the {@code width} property.
      * @param width the value of the {@code width} property
      */
-    @JsxSetter
-    public void setWidth(final Object width) {
+    @JsxSetter(propertyName = "width")
+    public void setWidth_js(final Object width) {
         final String value;
         if (width == null && !getBrowserVersion().hasFeature(JS_TABLE_COLUMN_WIDTH_NULL_STRING)) {
             value = "";

@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TEXTAREA_DISPLAY_BLOCK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN;
@@ -581,7 +581,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_DISPLAY_BLOCK)) {
+        if (hasFeature(CSS_TEXTAREA_DISPLAY_BLOCK)) {
             return DisplayStyle.INLINE;
         }
         return DisplayStyle.INLINE_BLOCK;

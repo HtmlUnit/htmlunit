@@ -44,19 +44,20 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  if (styleSheet.cssRules) {\n"
             + "    var rule = styleSheet.cssRules[0];\n"
-            + "    alert(rule);\n"
-            + "    alert(rule.type);\n"
+            + "    log(rule);\n"
+            + "    log(rule.type);\n"
             + "  } else {\n"
-            + "    alert('Your browser does not support this example');\n"
+            + "    log('Your browser does not support this example');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -74,19 +75,20 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  if (styleSheet.cssRules) {\n"
             + "    var rule = styleSheet.cssRules[0];\n"
-            + "    alert(rule);\n"
-            + "    alert(rule.name);\n"
+            + "    log(rule);\n"
+            + "    log(rule.name);\n"
             + "  } else {\n"
-            + "    alert('Your browser does not support this example');\n"
+            + "    log('Your browser does not support this example');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -104,17 +106,18 @@ public class CSSKeyframesRuleTest extends WebDriverTestCase {
             + "</style>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  if (styleSheet.cssRules) {\n"
             + "    var rule = styleSheet.cssRules[0];\n"
-            + "    alert(rule.cssRules);\n"
+            + "    log(rule.cssRules);\n"
             + "  } else {\n"
-            + "    alert('Your browser does not support this example');\n"
+            + "    log('Your browser does not support this example');\n"
             + "  }\n"
             + "</script>\n"
 
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

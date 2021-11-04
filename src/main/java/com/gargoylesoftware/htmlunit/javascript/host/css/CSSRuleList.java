@@ -36,6 +36,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Frank Danek
+ * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList">MDN doc</a>
  */
 @JsxClass
 public class CSSRuleList extends SimpleScriptable {
@@ -55,6 +57,15 @@ public class CSSRuleList extends SimpleScriptable {
      */
     public CSSRuleList(final CSSStyleSheet stylesheet) {
         setParentScope(stylesheet.getParentScope());
+        setPrototype(getPrototype(getClass()));
+    }
+
+    /**
+     * Creates a new instance.
+     * @param groupingRule the grouping rule
+     */
+    public CSSRuleList(final CSSGroupingRule groupingRule) {
+        setParentScope(groupingRule.getParentScope());
         setPrototype(getPrototype(getClass()));
     }
 

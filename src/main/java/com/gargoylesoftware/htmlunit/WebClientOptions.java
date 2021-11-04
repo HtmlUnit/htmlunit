@@ -174,7 +174,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Gets the protocol versions enabled for use on SSL connections.
      * @return the protocol versions enabled for use on SSL connections
-     * @see #setSSLClientProtocols(String[])
+     * @see #setSSLClientProtocols(String...)
      */
     public String[] getSSLClientProtocols() {
         return sslClientProtocols_;
@@ -188,14 +188,14 @@ public class WebClientOptions implements Serializable {
      * @see javax.net.ssl.SSLSocket#setEnabledProtocols(String[])
      * @see #getSSLClientProtocols()
      */
-    public void setSSLClientProtocols(final String[] sslClientProtocols) {
+    public void setSSLClientProtocols(final String... sslClientProtocols) {
         sslClientProtocols_ = sslClientProtocols;
     }
 
     /**
      * Gets the cipher suites enabled for use on SSL connections.
      * @return the cipher suites enabled for use on SSL connections
-     * @see #setSSLClientCipherSuites(String[])
+     * @see #setSSLClientCipherSuites(String...)
      */
     public String[] getSSLClientCipherSuites() {
         return sslClientCipherSuites_;
@@ -209,7 +209,7 @@ public class WebClientOptions implements Serializable {
      * @see javax.net.ssl.SSLSocket#setEnabledCipherSuites(String[])
      * @see #getSSLClientCipherSuites()
      */
-    public void setSSLClientCipherSuites(final String[] sslClientCipherSuites) {
+    public void setSSLClientCipherSuites(final String... sslClientCipherSuites) {
         sslClientCipherSuites_ = sslClientCipherSuites;
     }
 

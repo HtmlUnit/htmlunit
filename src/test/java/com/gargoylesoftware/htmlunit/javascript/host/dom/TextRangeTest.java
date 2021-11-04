@@ -40,19 +40,19 @@ public class TextRangeTest extends WebDriverTestCase {
     public void text() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var f = document.getElementById('foo');\n"
             + "        f.focus();\n"
             + "        var r = document.selection.createRange();\n"
-            + "        alert(f.value);\n"
+            + "        log(f.value);\n"
             + "        r.text = 'bla bla';\n"
-            + "        alert(f.value);\n"
+            + "        log(f.value);\n"
             + "        r.duplicate().text = 'bli bli';\n"
-            + "        alert(f.value);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(f.value);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -61,7 +61,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,12 +73,12 @@ public class TextRangeTest extends WebDriverTestCase {
     public void parentElement() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
-            + "        alert(document.body.createTextRange().parentElement().tagName);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(document.body.createTextRange().parentElement().tagName);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -86,7 +86,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -97,18 +97,18 @@ public class TextRangeTest extends WebDriverTestCase {
     public void collapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var f = document.getElementById('foo');\n"
             + "        f.focus();\n"
             + "        f.select();\n"
             + "        var r = document.selection.createRange();\n"
-            + "        alert(r.text);\n"
+            + "        log(r.text);\n"
             + "        r.collapse();\n"
-            + "        alert(r.text);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(r.text);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -117,7 +117,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -129,13 +129,13 @@ public class TextRangeTest extends WebDriverTestCase {
     public void select() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var r = document.selection.createRange();\n"
             + "        r.select();\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -144,7 +144,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -155,20 +155,20 @@ public class TextRangeTest extends WebDriverTestCase {
     public void moveEnd() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var f = document.getElementById('foo');\n"
             + "        f.focus();\n"
             + "        f.select();\n"
             + "        var r = document.selection.createRange();\n"
-            + "        alert(r.text);\n"
+            + "        log(r.text);\n"
             + "        r.moveEnd('character', -1);\n"
-            + "        alert(r.text);\n"
+            + "        log(r.text);\n"
             + "        r.moveStart('character');\n"
-            + "        alert(r.text);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(r.text);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -177,7 +177,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -188,23 +188,23 @@ public class TextRangeTest extends WebDriverTestCase {
     public void moveOutOfBounds_input() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var f = document.getElementById('foo');\n"
             + "        f.focus();\n"
             + "        f.select();\n"
             + "        var r = document.selection.createRange();\n"
-            + "        alert(r.text);\n"
+            + "        log(r.text);\n"
             + "        r.moveEnd('character', -1);\n"
-            + "        alert(r.text);\n"
+            + "        log(r.text);\n"
             + "        r.moveStart('character');\n"
-            + "        alert(r.text);\n"
-            + "        alert(r.moveEnd('character', 100));\n"
-            + "        alert(r.moveStart('character', -100));\n"
-            + "        alert(r.text);\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(r.text);\n"
+            + "        log(r.moveEnd('character', 100));\n"
+            + "        log(r.moveStart('character', -100));\n"
+            + "        log(r.text);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -213,7 +213,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -225,18 +225,18 @@ public class TextRangeTest extends WebDriverTestCase {
     public void inRange() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      try {\n"
             + "        var r1 = document.body.createTextRange();\n"
             + "        var r2 = r1.duplicate();\n"
-            + "        alert(r1.inRange(r2));\n"
-            + "        alert(r2.inRange(r1));\n"
+            + "        log(r1.inRange(r2));\n"
+            + "        log(r2.inRange(r1));\n"
             + "        r1.collapse();\n"
-            + "        alert(r1.inRange(r2));\n"
-            + "        alert(r2.inRange(r1));\n"
-            + "      } catch(e) { alert('exception'); }\n"
+            + "        log(r1.inRange(r2));\n"
+            + "        log(r2.inRange(r1));\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -245,7 +245,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -259,14 +259,16 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value=''></form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var range = document.f.q.createTextRange();\n"
             + "    var selectionRange = document.selection.createRange();\n"
-            + "    alert(range.inRange(selectionRange));\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(range.inRange(selectionRange));\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -278,16 +280,18 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html = "<html><body onload='test()'>\n"
             + "<span id='s1'>abc</span><span id='s2'>xyz</span><span id='s3'>foo</span>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var r = document.selection.createRange();\n"
             + "      r.moveToElementText(document.getElementById('s3'));\n"
-            + "      alert(r.parentElement().id + ' ' + r.text + ' ' + r.htmlText);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(r.parentElement().id + ' ' + r.text + ' ' + r.htmlText);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -300,20 +304,21 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html = "<html><body>\n"
             + "<form name='f'><input name='q' value='hello world'></form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var range1 = document.f.q.createTextRange();\n"
             + "    var range2 = range1.duplicate();\n"
             + "    range1.moveEnd('character', -6);\n"
-            + "    alert(range1.text);\n"
+            + "    log(range1.text);\n"
             + "    range2.moveStart('character', 6);\n"
-            + "    alert(range2.text);\n"
+            + "    log(range2.text);\n"
             + "    var r3 = range1.duplicate();\n"
             + "    r3.setEndPoint('EndToEnd', range2);\n"
-            + "    alert(r3.text);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(r3.text);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -325,14 +330,16 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html =
             "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    s = document.selection.createRange();\n"
             + "    p = s.parentElement();\n"
-            + "    alert(p.tagName);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(p.tagName);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -344,14 +351,16 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html =
             "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    s = document.selection.createRange();\n"
             + "    t = s.htmlText;\n"
-            + "    alert(t);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log(t);\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -364,14 +373,16 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html =
             "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var rng = document.body.createTextRange();\n"
             + "    rng.moveToBookmark(rng.getBookmark());\n"
-            + "    alert('ok');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('ok');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -382,11 +393,12 @@ public class TextRangeTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      if (document.selection) {\n"
             + "        var r1 = document.selection.createRange();\n"
             + "        var r2 = document.selection.createRange();\n"
-            + "        alert(r1.compareEndPoints('StartToStart', r2));\n"
+            + "        log(r1.compareEndPoints('StartToStart', r2));\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -395,7 +407,7 @@ public class TextRangeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

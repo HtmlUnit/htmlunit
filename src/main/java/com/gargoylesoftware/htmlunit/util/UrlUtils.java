@@ -17,10 +17,12 @@ package com.gargoylesoftware.htmlunit.util;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.net.URLStreamHandler;
 import java.nio.charset.Charset;
 import java.util.BitSet;
@@ -333,6 +335,19 @@ public final class UrlUtils {
     }
 
     /**
+     * Encodes and escapes the specified URI hash string.
+     *
+     * @param query the query string to encode and escape
+     * @return the encoded and escaped hash string
+     */
+    public static String encodeQuery(final String query) {
+        if (query == null) {
+            return null;
+        }
+        return encode(query, QUERY_ALLOWED_CHARS, UTF_8);
+    }
+
+    /**
      * Unescapes and decodes the specified string.
      *
      * @param escaped the string to be unescaped and decoded
@@ -469,7 +484,7 @@ public final class UrlUtils {
     /**
      * Creates and returns a new URL identical to the specified URL, except using the specified port.
      * @param u the URL on which to base the returned URL
-     * @param newPort the new port to use in the returned URL
+     * @param newPort the new port to use in the returned URL or -1 to remove it
      * @return a new URL identical to the specified URL, except using the specified port
      * @throws MalformedURLException if there is a problem creating the new URL
      */
@@ -492,7 +507,7 @@ public final class UrlUtils {
     /**
      * Creates and returns a new URL identical to the specified URL, except using the specified reference.
      * @param u the URL on which to base the returned URL
-     * @param newRef the new reference to use in the returned URL
+     * @param newRef the new reference to use in the returned URL or null to remove it
      * @return a new URL identical to the specified URL, except using the specified reference
      * @throws MalformedURLException if there is a problem creating the new URL
      */
@@ -524,44 +539,44 @@ public final class UrlUtils {
     /**
      * Creates and returns a new URL identical to the specified URL but with a changed user name.
      * @param u the URL on which to base the returned URL
-     * @param newUserName the new user name
+     * @param newUserName the new user name or null to remove it
      * @return a new URL identical to the specified URL; only user name updated
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithNewUserName(final URL u, final String newUserName) throws MalformedURLException {
-        String newUserInfo = newUserName;
+        String newUserInfo = newUserName == null ? "" : newUserName;
         final String userInfo = u.getUserInfo();
         if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
-                newUserInfo = newUserName + userInfo.substring(colonIdx);
+                newUserInfo = newUserInfo + userInfo.substring(colonIdx);
             }
         }
-        return createNewUrl(u.getProtocol(), newUserInfo,
+        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo,
                 u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
     /**
      * Creates and returns a new URL identical to the specified URL but with a changed user password.
      * @param u the URL on which to base the returned URL
-     * @param newUserPassword the new user password
+     * @param newUserPassword the new user password or null to remove it
      * @return a new URL identical to the specified URL; only user name updated
      * @throws MalformedURLException if there is a problem creating the new URL
      */
     public static URL getUrlWithNewUserPassword(final URL u, final String newUserPassword)
             throws MalformedURLException {
-        String newUserInfo = ':' + newUserPassword;
+        String newUserInfo = newUserPassword == null ? "" : (':' + newUserPassword);
         final String userInfo = u.getUserInfo();
         if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
             if (colonIdx > -1) {
-                newUserInfo = userInfo.substring(0, colonIdx + 1) + newUserPassword;
+                newUserInfo = userInfo.substring(0, colonIdx) + newUserInfo;
             }
             else {
                 newUserInfo = userInfo + newUserInfo;
             }
         }
-        return createNewUrl(u.getProtocol(), newUserInfo,
+        return createNewUrl(u.getProtocol(), newUserInfo.isEmpty() ? null : newUserInfo,
                 u.getHost(), u.getPort(), u.getPath(), u.getRef(), u.getQuery());
     }
 
@@ -847,24 +862,45 @@ public final class UrlUtils {
         return url;
     }
 
-    /*
+    /**
      * Returns true if specified string is a valid scheme name.
+     *
+     * https://tools.ietf.org/html/rfc1738
+     *
+     * Scheme names consist of a sequence of characters. The lower case
+     * letters "a"--"z", digits, and the characters plus ("+"), period
+     * ("."), and hyphen ("-") are allowed. For resiliency, programs
+     * interpreting URLs should treat upper case letters as equivalent to
+     * lower case in scheme names (e.g., allow "HTTP" as well as "http").
+     *
+     * @param scheme the scheme string to check
+     * @return true if valid
      */
-    private static boolean isValidScheme(final String scheme) {
+    public static boolean isValidScheme(final String scheme) {
         final int length = scheme.length();
         if (length < 1) {
             return false;
         }
+
         char c = scheme.charAt(0);
-        if (!Character.isLetter(c)) {
+        boolean isValid = ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z');
+        if (!isValid) {
             return false;
         }
+
         for (int i = 1; i < length; i++) {
             c = scheme.charAt(i);
-            if (!Character.isLetterOrDigit(c) && c != '.' && c != '+' && c != '-') {
+            isValid =
+                    ('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')
+                    || ('0' <= c && c <= '9')
+                    || c == '+'
+                    || c == '.'
+                    || c == '-';
+            if (!isValid) {
                 return false;
             }
         }
+
         return true;
     }
 
@@ -1244,5 +1280,22 @@ public final class UrlUtils {
             buffer.append(query);
         }
         return new URI(buffer.toString());
+    }
+
+    /**
+     * @param part the part to encode
+     * @return the ecoded string
+     */
+    public static String encodeQueryPart(final String part) {
+        if (part == null || part.isEmpty()) {
+            return "";
+        }
+
+        try {
+            return URLEncoder.encode(part, "UTF-8");
+        }
+        catch (final UnsupportedEncodingException e) {
+            return part;
+        }
     }
 }

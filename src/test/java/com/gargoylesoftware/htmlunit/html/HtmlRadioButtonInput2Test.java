@@ -911,7 +911,8 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
                 + "    document.getElementById('next').focus();\n"
                 + "  }\n"
                 + "</script>\n"
-                + "</head><body onload='test()'>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
                 + "<form>\n"
                 + "  <input type='radio' id='it' onchange='log(\"changed\")'"
                 + "    onmousedown='log(\"down\")' onmouseup='log(\"up\")' onfocus='log(\"focused\")'>Check me\n"
@@ -1143,7 +1144,7 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final WebElement radio1 = driver.findElement(By.id("radio1"));
         final WebElement radio2 = driver.findElement(By.id("radio2"));

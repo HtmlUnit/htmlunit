@@ -40,25 +40,27 @@ public class EnumeratorTest extends WebDriverTestCase {
     public void basicEmptyEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      var en = new Enumerator();\n"
-            + "      alert(en.atEnd());\n"
-            + "      alert(en.item());\n"
-            + "      alert(en.moveNext());\n"
-            + "      alert(en.item());\n"
-            + "      alert(en.atEnd());\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(en.atEnd());\n"
+            + "      log(en.item());\n"
+            + "      log(en.moveNext());\n"
+            + "      log(en.item());\n"
+            + "      log(en.atEnd());\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  } else {\n"
-            + "    alert('Enumerator not supported');\n"
+            + "    log('Enumerator not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,25 +72,27 @@ public class EnumeratorTest extends WebDriverTestCase {
     public void basicEnumerator() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      var en = new Enumerator(document.forms);\n"
-            + "      alert(en.atEnd());\n"
-            + "      alert(en.item());\n"
-            + "      alert(en.moveNext());\n"
-            + "      alert(en.item());\n"
-            + "      alert(en.atEnd());\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(en.atEnd());\n"
+            + "      log(en.item());\n"
+            + "      log(en.moveNext());\n"
+            + "      log(en.item());\n"
+            + "      log(en.atEnd());\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  } else {\n"
-            + "    alert('Enumerator not supported');\n"
+            + "    log('Enumerator not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -100,20 +104,22 @@ public class EnumeratorTest extends WebDriverTestCase {
     public void basicEnumeratorWrongType() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      var en = new Enumerator(window);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  } else {\n"
-            + "    alert('Enumerator not supported');\n"
+            + "    log('Enumerator not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <form/>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -134,21 +140,23 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "    <div id='d'>d</div>\n"
             + "  </form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var f = document.forms.f, t1 = document.all.t1, t2 = document.all.t2;\n"
-            + "  alert(f.id + ' ' + t1.id + ' ' + t2.id);\n"
+            + "  log(f.id + ' ' + t1.id + ' ' + t2.id);\n"
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
             + "      var e = new Enumerator(f);\n"
             + "      for( ; !e.atEnd(); e.moveNext()) {\n"
-            + "        alert(e.item().id);\n"
+            + "        log(e.item().id);\n"
             + "      }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  } else {\n"
-            + "    alert('Enumerator not supported');\n"
+            + "    log('Enumerator not supported');\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -161,15 +169,16 @@ public class EnumeratorTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var form = document.forms.myForm;\n"
-            + "  alert(form.elements.item(0).TyPe);\n"
+            + "  log(form.elements.item(0).TyPe);\n"
             + "  if (typeof(Enumerator) != 'undefined') {\n"
             + "    try {\n"
-            + "      alert(new Enumerator(form).item().TyPe);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(new Enumerator(form).item().TyPe);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  } else {\n"
-            + "    alert('Enumerator not supported');\n"
+            + "    log('Enumerator not supported');\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -178,6 +187,7 @@ public class EnumeratorTest extends WebDriverTestCase {
             + "    <input name='myInput'>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

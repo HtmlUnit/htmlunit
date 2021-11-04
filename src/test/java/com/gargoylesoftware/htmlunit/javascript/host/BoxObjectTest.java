@@ -42,6 +42,7 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "  <body onload='test()'>\n"
             + "    <span id='foo'>foo</span><div id='d'><span id='a'>a</span><span id='b'>b</span></div><span id='bar'>bar</span>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var div = document.getElementById('d');\n"
@@ -50,18 +51,18 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "          var spanB = document.getElementById('b');\n"
             + "          var spanBar = document.getElementById('bar');\n"
             + "          var box = document.getBoxObjectFor(div);\n"
-            + "          alert(box.element == div);\n"
-            + "          alert(box.firstChild == spanA);\n"
-            + "          alert(box.lastChild == spanB);\n"
-            + "          alert(box.previousSibling == spanFoo);\n"
-            + "          alert(box.nextSibling == spanBar);\n"
-            + "        } catch (e) {alert('exception')}\n"
+            + "          log(box.element == div);\n"
+            + "          log(box.firstChild == spanA);\n"
+            + "          log(box.lastChild == spanB);\n"
+            + "          log(box.previousSibling == spanFoo);\n"
+            + "          log(box.nextSibling == spanBar);\n"
+            + "        } catch (e) {log('exception')}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -77,20 +78,21 @@ public class BoxObjectTest extends WebDriverTestCase {
             + "    <style>#d { position:absolute; left:50px; top:100px; width:500px; height:400px; border:3px; padding: 5px; margin: 23px; }</style>\n"
             + "    <div id='d'>daniel</div>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        try {\n"
             + "          var div = document.getElementById('d');\n"
             + "          var box = document.getBoxObjectFor(div);\n"
-            + "          alert(box.x + '-' + box.y);\n"
-            + "          alert(box.screenX + '-' + box.screenY);\n"
-            + "          alert(box.width + '-' + box.height);\n"
-            + "        } catch (e) {alert('exception')}\n"
+            + "          log(box.x + '-' + box.y);\n"
+            + "          log(box.screenX + '-' + box.screenY);\n"
+            + "          log(box.width + '-' + box.height);\n"
+            + "        } catch (e) {log('exception')}\n"
             + "      }\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

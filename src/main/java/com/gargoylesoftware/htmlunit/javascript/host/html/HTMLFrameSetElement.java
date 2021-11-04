@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
@@ -124,16 +123,6 @@ public class HTMLFrameSetElement extends HTMLElement {
     }
 
     /**
-     * Overwritten to throw an exception.
-     * @param value the new value for replacing this node
-     */
-    @JsxSetter
-    @Override
-    public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag 'frameset'");
-    }
-
-    /**
      * Returns the {@code onbeforeunload} event handler.
      * @return the {@code onbeforeunload} event handler
      */
@@ -149,6 +138,42 @@ public class HTMLFrameSetElement extends HTMLElement {
     @JsxSetter
     public void setOnbeforeunload(final Object beforeunload) {
         setEventHandler(Event.TYPE_BEFORE_UNLOAD, beforeunload);
+    }
+
+    /**
+     * Returns the {@code ongamepadconnected} event handler.
+     * @return the {@code ongamepadconnected} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOngamepadconnected() {
+        return getEventHandler(Event.TYPE_GAMEPAD_CONNECTED);
+    }
+
+    /**
+     * Sets the {@code ongamepadconnected} event handler.
+     * @param gamepadconnected the {@code ongamepadconnected} event handler
+     */
+    @JsxSetter(FF)
+    public void setOngamepadconnected(final Object gamepadconnected) {
+        setEventHandler(Event.TYPE_GAMEPAD_CONNECTED, gamepadconnected);
+    }
+
+    /**
+     * Returns the {@code ongamepaddisconnected} event handler.
+     * @return the {@code ongamepaddisconnected} event handler
+     */
+    @JsxGetter(FF)
+    public Function getOngamepaddisconnected() {
+        return getEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED);
+    }
+
+    /**
+     * Sets the {@code ongamepaddisconnected} event handler.
+     * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
+     */
+    @JsxSetter(FF)
+    public void setOngamepaddisconnected(final Object gamepaddisconnected) {
+        setEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED, gamepaddisconnected);
     }
 
     /**

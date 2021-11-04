@@ -45,18 +45,20 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void observeNullNode() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var observer = new MutationObserver(function(mutations) {});\n"
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -67,19 +69,21 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void observeNullInit() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {});\n"
             + "\n"
             + "  try {\n"
             + "    observer.observe(div);\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -90,19 +94,21 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void observeEmptyInit() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {});\n"
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {});\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -113,31 +119,33 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void observeRequiredMissingInit() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {});\n"
             + "\n"
             + "  try {\n"
             + "    observer.observe(div, {subtree: true});\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "  try {\n"
             + "    observer.observe(div, {childList: true});\n"
-            + "    alert('childList');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('childList');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "  try {\n"
             + "    observer.observe(div, {attributes: true});\n"
-            + "    alert('attributes');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('attributes');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "  try {\n"
             + "    observer.observe(div, {characterData: true});\n"
-            + "    alert('characterData');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('characterData');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -148,12 +156,13 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterData() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {\n"
             + "    mutations.forEach(function(mutation) {\n"
-            + "      alert(mutation.oldValue);\n"
-            + "      alert(mutation.target.textContent);\n"
+            + "      log(mutation.oldValue);\n"
+            + "      log(mutation.target.textContent);\n"
             + "    });\n"
             + "  });\n"
             + "\n"
@@ -169,7 +178,8 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -180,12 +190,13 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterDataNoOldValue() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {\n"
             + "    mutations.forEach(function(mutation) {\n"
-            + "      alert(mutation.oldValue);\n"
-            + "      alert(mutation.target.textContent);\n"
+            + "      log(mutation.oldValue);\n"
+            + "      log(mutation.target.textContent);\n"
             + "    });\n"
             + "  });\n"
             + "\n"
@@ -200,7 +211,8 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -210,12 +222,13 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void characterDataNoSubtree() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {\n"
             + "    mutations.forEach(function(mutation) {\n"
-            + "      alert(mutation.oldValue);\n"
-            + "      alert(mutation.target.textContent);\n"
+            + "      log(mutation.oldValue);\n"
+            + "      log(mutation.target.textContent);\n"
             + "    });\n"
             + "  });\n"
             + "\n"
@@ -230,7 +243,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -241,12 +254,13 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void attributes() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var observer = new MutationObserver(function(mutations) {\n"
             + "    mutations.forEach(function(mutation) {\n"
-            + "      alert(mutation.type);\n"
-            + "      alert(mutation.oldValue);\n"
+            + "      log(mutation.type);\n"
+            + "      log(mutation.oldValue);\n"
             + "    });\n"
             + "  });\n"
             + "\n"
@@ -262,7 +276,8 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' dir='ltr'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -270,21 +285,22 @@ public class MutationObserverTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"attributes", "value", "null", "x", "abc",
-             "attributes", "value", "null", "y", "abc"})
+    @Alerts({"heho", "attributes", "value", "null", "x", "abc",
+             "heho", "attributes", "value", "null", "y", "abc"})
     public void attributeValue() throws Exception {
         final String html
             = "<html>\n"
             + "<head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
             + "    var observer = new MutationObserver(function(mutations) {\n"
             + "      mutations.forEach(function(mutation) {\n"
-            + "        alert(mutation.type);\n"
-            + "        alert(mutation.attributeName);\n"
-            + "        alert(mutation.oldValue);\n"
-            + "        alert(mutation.target.getAttribute(\"value\"));\n"
-            + "        alert(mutation.target.value);\n"
+            + "        log(mutation.type);\n"
+            + "        log(mutation.attributeName);\n"
+            + "        log(mutation.oldValue);\n"
+            + "        log(mutation.target.getAttribute(\"value\"));\n"
+            + "        log(mutation.target.value);\n"
             + "      });\n"
             + "    });\n"
             + "    observer.observe(document.getElementById('tester'), config);\n"
@@ -292,7 +308,7 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <input id='tester' value=''>\n"
-            + "  <button id='doAlert' onclick='alert(\"heho\");'>DoAlert</button>\n"
+            + "  <button id='doAlert' onclick='log(\"heho\");'>DoAlert</button>\n"
             + "  <button id='doIt' "
                         + "onclick='document.getElementById(\"tester\").setAttribute(\"value\", \"x\")'>"
                         + "DoIt</button>\n"
@@ -302,20 +318,20 @@ public class MutationObserverTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).sendKeys("abc");
-        verifyAlerts(driver, new String[] {});
+        verifyTitle2(driver, new String[] {});
 
         driver.findElement(By.id("doAlert")).click();
-        verifyAlerts(driver, new String[] {"heho"});
+        verifyTitle2(driver, new String[] {"heho"});
 
         final String[] expected = getExpectedAlerts();
         driver.findElement(By.id("doIt")).click();
-        verifyAlerts(driver, Arrays.copyOfRange(expected, 0, 5));
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 6));
 
         driver.findElement(By.id("doAlert")).click();
-        verifyAlerts(driver, new String[] {"heho"});
+        verifyTitle2(driver, Arrays.copyOfRange(expected, 0, 7));
 
         driver.findElement(By.id("doItAgain")).click();
-        verifyAlerts(driver, Arrays.copyOfRange(expected, 5, 10));
+        verifyTitle2(driver, expected);
     }
 
     /**
@@ -386,31 +402,33 @@ public class MutationObserverTest extends WebDriverTestCase {
     public void callbackOrder() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var div = document.getElementById('myDiv');\n"
             + "  var divObserver = new MutationObserver(function() {\n"
-            + "      alert('div observed');\n"
+            + "      log('div observed');\n"
             + "    });\n"
             + "\n"
             + "  divObserver.observe(div, { attributes: true });\n"
             + "\n"
             + "  var text = document.createTextNode('')\n"
             + "  var txtObserver = new MutationObserver(function() {\n"
-            + "        alert('text observed');\n"
+            + "        log('text observed');\n"
             + "    });\n"
             + "  txtObserver.observe(text, { characterData: true });"
             + "\n"
-            + "  alert('before');\n"
+            + "  log('before');\n"
             + "  div.style = 'background-color: red';\n"
-            + "  alert('after div');\n"
+            + "  log('after div');\n"
             + "  text.data = 42;\n"
-            + "  alert('after text');\n"
+            + "  log('after text');\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div id='myDiv' style='color: green'>old</div>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**

@@ -94,7 +94,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(88, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(93, "FF");
 
     /** Firefox 78 ESR. */
     public static final BrowserVersion FIREFOX_78 = new BrowserVersion(78, "FF78");
@@ -103,10 +103,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(90, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(95, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(90, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(95, "Chrome");
 
     /**
      * Array with all supported browsers
@@ -168,11 +168,16 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.CONNECTION,
             HttpHeader.REFERER,
-            HttpHeader.COOKIE};
-        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+            HttpHeader.COOKIE,
+            HttpHeader.UPGRADE_INSECURE_REQUESTS,
+            HttpHeader.SEC_FETCH_DEST,
+            HttpHeader.SEC_FETCH_MODE,
+            HttpHeader.SEC_FETCH_SITE,
+            HttpHeader.SEC_FETCH_USER};
+        FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
         FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX.imgAcceptHeader_ = "image/webp,*/*";
+        FIREFOX.imgAcceptHeader_ = "image/avif,image/webp,*/*";
         FIREFOX.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
@@ -212,9 +217,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4638.69 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.4638.69 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -223,6 +228,9 @@ public final class BrowserVersion implements Serializable {
         CHROME.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.CONNECTION,
+            HttpHeader.SEC_CH_UA,
+            HttpHeader.SEC_CH_UA_MOBILE,
+            HttpHeader.SEC_CH_UA_PLATFORM,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -242,7 +250,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        // there are other issues with Chrome; a different productSub, etc.
+        CHROME.secClientHintUserAgentHeader_ = "\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"";
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
@@ -253,11 +261,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4638.54 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1020.40";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4430.72 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.818.41";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4638.54 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1020.40";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -266,6 +274,9 @@ public final class BrowserVersion implements Serializable {
         EDGE.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.CONNECTION,
+            HttpHeader.SEC_CH_UA,
+            HttpHeader.SEC_CH_UA_MOBILE,
+            HttpHeader.SEC_CH_UA_PLATFORM,
             "Upgrade-Insecure-Requests",
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -285,7 +296,7 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        // there are other issues with Chrome; a different productSub, etc.
+        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
@@ -299,10 +310,10 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         CHROME.registerUploadMimeType("css", MimeType.TEXT_CSS);
         CHROME.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        CHROME.registerUploadMimeType("gif", "image/gif");
-        CHROME.registerUploadMimeType("jpeg", "image/jpeg");
-        CHROME.registerUploadMimeType("jpg", "image/jpeg");
-        CHROME.registerUploadMimeType("png", "image/png");
+        CHROME.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        CHROME.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        CHROME.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        CHROME.registerUploadMimeType("png", MimeType.IMAGE_PNG);
         CHROME.registerUploadMimeType("webp", "image/webp");
         CHROME.registerUploadMimeType("mp4", "video/mp4");
         CHROME.registerUploadMimeType("m4v", "video/mp4");
@@ -326,10 +337,10 @@ public final class BrowserVersion implements Serializable {
         EDGE.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         EDGE.registerUploadMimeType("css", MimeType.TEXT_CSS);
         EDGE.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        EDGE.registerUploadMimeType("gif", "image/gif");
-        EDGE.registerUploadMimeType("jpeg", "image/jpeg");
-        EDGE.registerUploadMimeType("jpg", "image/jpeg");
-        EDGE.registerUploadMimeType("png", "image/png");
+        EDGE.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        EDGE.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        EDGE.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        EDGE.registerUploadMimeType("png", MimeType.IMAGE_PNG);
         EDGE.registerUploadMimeType("webp", "image/webp");
         EDGE.registerUploadMimeType("mp4", "video/mp4");
         EDGE.registerUploadMimeType("m4v", "video/mp4");
@@ -353,13 +364,13 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_78.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         FIREFOX_78.registerUploadMimeType("css", MimeType.TEXT_CSS);
         FIREFOX_78.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX_78.registerUploadMimeType("gif", "image/gif");
-        FIREFOX_78.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX_78.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX_78.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        FIREFOX_78.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        FIREFOX_78.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
         FIREFOX_78.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_78.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_78.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_78.registerUploadMimeType("png", "image/png");
+        FIREFOX_78.registerUploadMimeType("png", MimeType.IMAGE_PNG);
         FIREFOX_78.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX_78.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX_78.registerUploadMimeType("ogm", "video/ogg");
@@ -379,13 +390,13 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         FIREFOX.registerUploadMimeType("css", MimeType.TEXT_CSS);
         FIREFOX.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX.registerUploadMimeType("gif", "image/gif");
-        FIREFOX.registerUploadMimeType("jpeg", "image/jpeg");
-        FIREFOX.registerUploadMimeType("jpg", "image/jpeg");
+        FIREFOX.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        FIREFOX.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        FIREFOX.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
         FIREFOX.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX.registerUploadMimeType("png", "image/png");
+        FIREFOX.registerUploadMimeType("png", MimeType.IMAGE_PNG);
         FIREFOX.registerUploadMimeType("mp3", "audio/mpeg");
         FIREFOX.registerUploadMimeType("ogv", "video/ogg");
         FIREFOX.registerUploadMimeType("ogm", "video/ogg");
@@ -405,10 +416,10 @@ public final class BrowserVersion implements Serializable {
         INTERNET_EXPLORER.registerUploadMimeType("htm", MimeType.TEXT_HTML);
         INTERNET_EXPLORER.registerUploadMimeType("css", MimeType.TEXT_CSS);
         INTERNET_EXPLORER.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        INTERNET_EXPLORER.registerUploadMimeType("gif", "image/gif");
-        INTERNET_EXPLORER.registerUploadMimeType("jpeg", "image/jpeg");
-        INTERNET_EXPLORER.registerUploadMimeType("jpg", "image/jpeg");
-        INTERNET_EXPLORER.registerUploadMimeType("png", "image/png");
+        INTERNET_EXPLORER.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        INTERNET_EXPLORER.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        INTERNET_EXPLORER.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        INTERNET_EXPLORER.registerUploadMimeType("png", MimeType.IMAGE_PNG);
         INTERNET_EXPLORER.registerUploadMimeType("mp4", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4v", "video/mp4");
         INTERNET_EXPLORER.registerUploadMimeType("m4a", "audio/mp4");
@@ -459,6 +470,8 @@ public final class BrowserVersion implements Serializable {
     private String imgAcceptHeader_;
     private String cssAcceptHeader_;
     private String scriptAcceptHeader_;
+    private String secClientHintUserAgentHeader_;
+    private String secClientHintUserAgentPlatformHeader_;
     private String xmlHttpRequestAcceptHeader_;
     private String[] headerNamesOrdered_;
     private int[] fontHeights_;
@@ -481,6 +494,8 @@ public final class BrowserVersion implements Serializable {
         cssAcceptHeader_ = "*/*";
         scriptAcceptHeader_ = "*/*";
         xmlHttpRequestAcceptHeader_ = "*/*";
+        secClientHintUserAgentHeader_ = "";
+        secClientHintUserAgentPlatformHeader_ = "\"Windows\"";
 
         plugins_ = new HashSet<>();
         features_ = EnumSet.noneOf(BrowserVersionFeatures.class);
@@ -788,6 +803,22 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the value used by the browser for the {@code sec-ch-ua} header.
+     * @return the sec-ch-ua header string
+     */
+    public String getSecClientHintUserAgentHeader() {
+        return secClientHintUserAgentHeader_;
+    }
+
+    /**
+     * Returns the value used by the browser for the {@code sec-ch-ua-platform} header.
+     * @return the sec-ch-ua-platform header string
+     */
+    public String getSecClientHintUserAgentPlatformHeader() {
+        return secClientHintUserAgentPlatformHeader_;
+    }
+
+    /**
      * Returns the available plugins. This makes only sense for Firefox as only this
      * browser makes this kind of information available via JavaScript.
      * @return the available plugins
@@ -924,6 +955,8 @@ public final class BrowserVersion implements Serializable {
                 .setCssAcceptHeader(version.getCssAcceptHeader())
                 .setScriptAcceptHeader(version.getScriptAcceptHeader())
                 .setXmlHttpRequestAcceptHeader(version.getXmlHttpRequestAcceptHeader())
+                .setSecClientHintUserAgentHeader(version.getSecClientHintUserAgentHeader())
+                .setSecClientHintUserAgentPlatformHeader(version.getSecClientHintUserAgentPlatformHeader())
                 .setHeaderNamesOrdered(version.getHeaderNamesOrdered())
                 .setFontHeights(version.fontHeights_);
 
@@ -1124,6 +1157,24 @@ public final class BrowserVersion implements Serializable {
          */
         public BrowserVersionBuilder setXmlHttpRequestAcceptHeader(final String xmlHttpRequestAcceptHeader) {
             workPiece_.xmlHttpRequestAcceptHeader_ = xmlHttpRequestAcceptHeader;
+            return this;
+        }
+
+        /**
+         * @param secClientHintUserAgentHeader the {@code sec-ch-ua} header value
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSecClientHintUserAgentHeader(final String secClientHintUserAgentHeader) {
+            workPiece_.secClientHintUserAgentHeader_ = secClientHintUserAgentHeader;
+            return this;
+        }
+
+        /**
+         * @param secClientHintUserAgentPlatformHeader the {@code sec-ch-ua-platform} header value
+         * @return this for fluent use
+         */
+        public BrowserVersionBuilder setSecClientHintUserAgentPlatformHeader(final String secClientHintUserAgentPlatformHeader) {
+            workPiece_.secClientHintUserAgentPlatformHeader_ = secClientHintUserAgentPlatformHeader;
             return this;
         }
 

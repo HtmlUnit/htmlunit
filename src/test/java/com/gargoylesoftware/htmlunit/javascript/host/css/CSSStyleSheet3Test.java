@@ -815,7 +815,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    @NotYetImplemented
     public void _GB2312__UTF8_() throws Exception {
         charset(TestCharset.GB2312, null, TestCharset.UTF8, null);
     }
@@ -825,7 +824,6 @@ public class CSSStyleSheet3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\"a\"", "\"盲\"", "\"兀賴賱丕賸\"", "\"屑懈褉\"", "\"鎴块棿\""})
-    @NotYetImplemented
     public void _GB2312___() throws Exception {
         charset(TestCharset.GB2312, null, null, null);
     }

@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * Test for ScriptRuntime.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ScriptRuntimeTest extends WebDriverTestCase {
@@ -36,7 +37,10 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
     @Alerts({"0", "50", "100", "xxx", "zzz", "yyy"})
     public void enumChangeObject() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var value = {\n"
             + "    'xxx': 'testxxx',\n"
@@ -47,12 +51,14 @@ public class ScriptRuntimeTest extends WebDriverTestCase {
             + "    'yyy': 'testyyy'\n"
             + "    };\n"
             + "  for (var x in value) {\n"
-            + "    alert(x);\n"
+            + "    log(x);\n"
             + "  }\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

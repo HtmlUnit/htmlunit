@@ -36,21 +36,20 @@ public class SVGPathElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function SVGPathElement() { [native code] }",
-            FF = "function SVGPathElement() {\n    [native code]\n}",
-            FF78 = "function SVGPathElement() {\n    [native code]\n}",
             IE = "[object SVGPathElement]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.SVGPathElement);\n"
+            + "    log(window.SVGPathElement);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,11 +61,12 @@ public class SVGPathElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGPathElement) {\n"
             + "      var path = document.getElementById('myId');\n"
-            + "      alert(path);\n"
-            + "      alert(path.getTotalLength() > 0);\n"
+            + "      log(path);\n"
+            + "      log(path.getTotalLength() > 0);\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -76,7 +76,7 @@ public class SVGPathElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -89,11 +89,12 @@ public class SVGPathElementTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (window.SVGPathElement) {\n"
             + "      var path = document.getElementById('myId');\n"
-            + "      alert(path);\n"
-            + "      alert(path.getTotalLength());\n"
+            + "      log(path);\n"
+            + "      log(path.getTotalLength());\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -103,6 +104,6 @@ public class SVGPathElementTest extends WebDriverTestCase {
             + "</svg>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -136,21 +136,22 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void encodeURIComponent() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var uri='http://w3schools.com/my test.asp?name=st\u00E5le&car=saab';\n"
-            + "    alert(encodeURIComponent(uri));\n"
+            + "    log(encodeURIComponent(uri));\n"
 
             + "    uri='\\u6D4B\\u8A66';\n"
-            + "    alert(encodeURIComponent(uri));\n"
+            + "    log(encodeURIComponent(uri));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -162,11 +163,12 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void encodeURIComponentUtf8() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    uri='\u6D4B\u8A66';\n"
-            + "    alert(encodeURIComponent(uri));\n"
+            + "    log(encodeURIComponent(uri));\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -174,7 +176,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html, URL_FIRST, "text/html;charset=UTF-8", UTF_8);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -187,7 +189,7 @@ public class GlobalFunctionsTest extends WebDriverTestCase {
     public void decodeURIComponent() throws Exception {
         final String html
             = "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    var uri='%c3%ae%10%43%72%c3%b4%c3%af%c2%b6%62%34';\n"

@@ -71,13 +71,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("about:blank")
     public void openWindow_emptyUrl() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var w = window.open('');\n"
-            + "alert(w ? w.document.location : w);\n"
+            + "log(w ? w.document.location : w);\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -96,7 +98,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  alert('one');\n"
             + "  open('" + URL_SECOND + "', 'foo');\n"
             + "}\n"
-            + "function callAlert(text) {\n"
+            + "function calllog(text) {\n"
             + "  alert(text);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -104,7 +106,7 @@ public class Window3Test extends WebDriverTestCase {
         final String secondContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Second</title><script>\n"
             + "function test() {\n"
-            + "  opener.callAlert('two');\n"
+            + "  opener.calllog('two');\n"
             + "  document.form1.submit();\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
@@ -113,7 +115,7 @@ public class Window3Test extends WebDriverTestCase {
         final String thirdContent = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><title>Third</title><script>\n"
             + "function test() {\n"
-            + "  opener.callAlert('three');\n"
+            + "  opener.calllog('three');\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -132,13 +134,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("one")
     public void windowFrames() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><body><script language='JavaScript'>\n"
+            + "<html><body>\n"
+            + "<script language='JavaScript'>\n"
+            + LOG_TITLE_FUNCTION
             + "if (typeof top.frames['anyXXXname'] == 'undefined') {\n"
-            + "  alert('one');\n"
+            + "  log('one');\n"
             + "}\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -150,12 +154,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("foo")
     public void javascriptVariableFromWindow() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>first</title></head><body><script>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "myVariable = 'foo';\n"
-            + "alert(window.myVariable);\n"
+            + "log(window.myVariable);\n"
             + "</script></body></head>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -251,12 +258,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("true")
     public void javascriptVariableFromWindow_NotFound() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>first</title></head><body><script>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "myVariable = 'foo';\n"
-            + "alert(window.myOtherVariable == null);\n"
+            + "log(window.myOtherVariable == null);\n"
             + "</script></body></head>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -315,18 +325,20 @@ public class Window3Test extends WebDriverTestCase {
     @BuggyWebDriver(IE = {"false", "false", "true"})
     public void closed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(window.closed);\n"
+            + "  log(window.closed);\n"
             + "  var newWindow = window.open('about:blank', 'foo');\n"
-            + "  alert(newWindow.closed);\n"
+            + "  log(newWindow.closed);\n"
             + "  newWindow.close();\n"
-            + "  alert(newWindow.closed);\n"
+            + "  log(newWindow.closed);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -336,11 +348,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void moveTo() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  window.moveTo(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -350,11 +364,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void moveBy() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  window.moveBy(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -364,11 +380,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void resizeTo() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "window.resizeTo(10, 20);\n"
             + "window.resizeTo(-10, 20);\n"
             + "</script></head><body></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -378,11 +396,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void resizeBy() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "window.resizeBy(10, 20);\n"
             + "window.resizeBy(-10, 20);\n"
             + "</script></head><body></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -392,11 +412,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void scroll() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "window.scroll(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -440,11 +462,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void scrollBy() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "window.scrollBy(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -491,13 +515,15 @@ public class Window3Test extends WebDriverTestCase {
             FF78 = {})
     public void scrollByLines() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByLines(2);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -510,13 +536,15 @@ public class Window3Test extends WebDriverTestCase {
             FF78 = {})
     public void scrollByPages() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  window.scrollByPages(2);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -526,11 +554,13 @@ public class Window3Test extends WebDriverTestCase {
     @Test
     public void scrollTo() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "window.scrollTo(10, 20);\n"
             + "</script></head><body>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -574,12 +604,14 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"form1", "form1", "2", "2"})
     public void formByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.form1.name);\n"
-            + "    alert(form1.name);\n"
-            + "    alert(window.form2.length);\n"
-            + "    alert(form2.length);\n"
+            + "    log(window.form1.name);\n"
+            + "    log(form1.name);\n"
+            + "    log(window.form2.length);\n"
+            + "    log(form2.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <form name='form1'></form>\n"
@@ -587,7 +619,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <form name='form2'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -600,12 +632,14 @@ public class Window3Test extends WebDriverTestCase {
     public void frameByName() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.frame1.name);\n"
-            + "    alert(frame1.name);\n"
-            + "    alert(window.frame2.length);\n"
-            + "    alert(frame2.length);\n"
+            + "    log(window.frame1.name);\n"
+            + "    log(frame1.name);\n"
+            + "    log(window.frame2.length);\n"
+            + "    log(frame2.length);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<frameset onload='test()'>\n"
@@ -619,7 +653,7 @@ public class Window3Test extends WebDriverTestCase {
                 + "<html><head><title>frame</title></head><body></body></html>";
         getMockWebConnection().setDefaultResponse(frame);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -629,12 +663,14 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"frame1", "frame1", "0", "0"})
     public void iframeByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.frame1.name);\n"
-            + "    alert(frame1.name);\n"
-            + "    alert(window.frame2.length);\n"
-            + "    alert(frame2.length);\n"
+            + "    log(window.frame1.name);\n"
+            + "    log(frame1.name);\n"
+            + "    log(window.frame2.length);\n"
+            + "    log(frame2.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <iframe name='frame1'></iframe>\n"
@@ -644,7 +680,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <form name='frame2'></form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -660,18 +696,21 @@ public class Window3Test extends WebDriverTestCase {
     // useless.
     public void elementsByName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    dump(window.element1);\n"
             + "    dump(element1);\n"
             + "  }\n"
             + "  function dump(c) {\n"
-            + "    alert(c.length);\n"
+            + "    log(c.length);\n"
             + "    for (i = 0; i < c.length; i++) {\n"
-            + "      alert(c.item(i).nodeName);\n"
+            + "      log(c.item(i).nodeName);\n"
             + "    }\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <abbr name='element1'></abbr>\n"
             + "  <acronym name='element1'></acronym>\n"
             + "  <a name='element1'></a>\n"
@@ -814,7 +853,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <xmp name='element1'></xmp>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -824,7 +863,9 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"2-2", "3-3", "4-4", "5-5", "6-6", "7-7", "8-8", "9-9", "10-10", "11-11", "10-10"})
     public void elementsByName_changedAfterGet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             // 2
             + "    var collection1 = window.image1;\n"
@@ -835,55 +876,55 @@ public class Window3Test extends WebDriverTestCase {
             + "    if (!collection2) {\n"
             + "      collection2 = [];\n"
             + "    }\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 3
             + "    var newImage1 = document.createElement('img');\n"
             + "    newImage1.name = 'image1';\n"
             + "    document.getElementById('outer1').appendChild(newImage1);\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 4
             + "    var newImage2 = document.createElement('img');\n"
             + "    newImage2.name = 'image1';\n"
             + "    document.getElementById('outer2').insertBefore(newImage2, null);\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 5
             + "    var newImage3 = document.createElement('img');\n"
             + "    newImage3.name = 'image1';\n"
             + "    document.getElementById('outer3').replaceChild(newImage3, document.getElementById('inner3'));\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 6
             + "    document.getElementById('outer4').outerHTML = '<img name=\"image1\">';\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 7
             + "    document.getElementById('outer5').innerHTML = '<img name=\"image1\">';\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 8
             + "    document.getElementById('outer6').insertAdjacentHTML('beforeend', '<img name=\"image1\">');\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 9
             + "    document.getElementById('image3').setAttribute('name', 'image1');\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 10
             + "    var newAttr = document.createAttribute('name');\n"
             + "    newAttr.nodeValue = 'image1';\n"
             + "    document.getElementById('image4').setAttributeNode(newAttr);\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 11
             + "    document.getElementById('image5').setAttributeNS(null, 'name', 'image1');\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 10
             + "    document.getElementById('outer1').removeChild(newImage1);\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <img name='image1'>\n"
@@ -900,7 +941,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <img id='image5'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -910,7 +951,9 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"2-2", "3-3"})
     public void elementsByName_changedAfterGet2() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             // 2
             + "    var collection1 = window.image1;\n"
@@ -921,11 +964,11 @@ public class Window3Test extends WebDriverTestCase {
             + "    if (!collection2) {\n"
             + "      collection2 = [];\n"
             + "    }\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
 
             // 3
             + "    document.getElementById('image2').name = 'image1';\n"
-            + "    alert(collection1.length + '-' + collection2.length);\n"
+            + "    log(collection1.length + '-' + collection2.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <img name='image1'>\n"
@@ -933,7 +976,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <img id='image2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -944,20 +987,22 @@ public class Window3Test extends WebDriverTestCase {
                 "image1", "element1", "element1"})
     public void elementsById() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.form1.id);\n"
-            + "    alert(form1.id);\n"
-            + "    alert(window.frame1.name);\n"
-            + "    alert(frame1.name);\n"
-            + "    alert(window.input1.id);\n"
-            + "    alert(input1.id);\n"
-            + "    alert(window.anchor1.id);\n"
-            + "    alert(anchor1.id);\n"
-            + "    alert(window.image1.id);\n"
-            + "    alert(image1.id);\n"
-            + "    alert(window.element1.id);\n"
-            + "    alert(element1.id);\n"
+            + "    log(window.form1.id);\n"
+            + "    log(form1.id);\n"
+            + "    log(window.frame1.name);\n"
+            + "    log(frame1.name);\n"
+            + "    log(window.input1.id);\n"
+            + "    log(input1.id);\n"
+            + "    log(window.anchor1.id);\n"
+            + "    log(anchor1.id);\n"
+            + "    log(window.image1.id);\n"
+            + "    log(image1.id);\n"
+            + "    log(window.element1.id);\n"
+            + "    log(element1.id);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <form id='form1'></form>\n"
@@ -968,7 +1013,7 @@ public class Window3Test extends WebDriverTestCase {
             + "  <div id='element1'></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -979,10 +1024,12 @@ public class Window3Test extends WebDriverTestCase {
     public void frameById() throws Exception {
         final String html = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Frameset//EN\""
             + "\"http://www.w3.org/TR/html4/frameset.dtd\">\n"
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.frame1.name);\n"
-            + "    alert(frame1.name);\n"
+            + "    log(window.frame1.name);\n"
+            + "    log(frame1.name);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<frameset onload='test()'>\n"
@@ -994,7 +1041,7 @@ public class Window3Test extends WebDriverTestCase {
                 + "<html><head><title>frame</title></head><body></body></html>";
         getMockWebConnection().setDefaultResponse(frame);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1006,21 +1053,22 @@ public class Window3Test extends WebDriverTestCase {
     public void execScript() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>test</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      window.execScript('alert(\"JavaScript\")', 'JavaScript');\n"
-            + "      window.execScript('alert(\"JScript\")',    'JScript');\n"
+            + "      window.execScript('log(\"JavaScript\")', 'JavaScript');\n"
+            + "      window.execScript('log(\"JScript\")',    'JScript');\n"
             + "      try {\n"
-            + "        window.execScript('alert(\"VBScript\")', 'VBScript');\n"
-            + "      } catch (e) { alert('exception1'); }\n"
+            + "        window.execScript('log(\"VBScript\")', 'VBScript');\n"
+            + "      } catch (e) { log('exception1'); }\n"
             + "      try {\n"
-            + "        window.execScript('alert(\"BadLanguage\")', 'BadLanguage');\n"
+            + "        window.execScript('log(\"BadLanguage\")', 'BadLanguage');\n"
             + "      } catch (e) {\n"
-            + "        alert('exception2: ' + e.message.substr(0, 20)); // msg now contains info on error location\n"
+            + "        log('exception2: ' + e.message.substr(0, 20)); // msg now contains info on error location\n"
             + "      }\n"
-            + "    } catch (e) { alert('exception'); }\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1029,7 +1077,7 @@ public class Window3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1040,11 +1088,11 @@ public class Window3Test extends WebDriverTestCase {
     public void onLoadFunction() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>test</title>\n"
+            + "<head>\n"
             + "<script>\n"
-            + "  function test()\n"
-            + "  {\n"
-            + "    alert('test');\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log('test');\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -1052,16 +1100,15 @@ public class Window3Test extends WebDriverTestCase {
             + "<script>\n"
             + "  var oldOnLoad = window.onload;\n"
             + "  window.onload = test2;\n"
-            + "  function test2()\n"
-            + "  {\n"
-            + "    alert('test2');\n"
+            + "  function test2() {\n"
+            + "    log('test2');\n"
             + "    oldOnLoad();\n"
             + "  }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1073,13 +1120,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"a", "null"})
     public void onloadNotAFunction() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><body><script>\n"
-            + "window.onload = new function() {alert('a')};\n"
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "window.onload = new function() {log('a')};\n"
             + "window.onload = undefined;\n"
-            + "alert(window.onload);\n"
+            + "log(window.onload);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1090,22 +1139,23 @@ public class Window3Test extends WebDriverTestCase {
     public void addOnLoadEventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>test</title>\n"
+            + "<head>\n"
             + "<script>\n"
-            + "  function test1() {alert('test1');}\n"
-            + "  function test2() {alert('test2');}\n"
-            + "  function test3() {alert('test3');}\n"
-            + "  alert(window.addEventListener == null);\n"
-            + "  alert(window.removeEventListener == null);\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test1() {log('test1');}\n"
+            + "  function test2() {log('test2');}\n"
+            + "  function test3() {log('test3');}\n"
+            + "  log(window.addEventListener == null);\n"
+            + "  log(window.removeEventListener == null);\n"
             + "  window.addEventListener('load', test1, true);\n"
             + "  window.addEventListener('load', test1, true);\n"
             + "  window.addEventListener('load', test2, true);\n"
             + "  window.addEventListener('load', test3, true);\n"
             + "  window.removeEventListener('load', test3, true);\n"
             + "</script></head>\n"
-            + "<body onload='alert(\"onload\")'></body></html>";
+            + "<body onload='log(\"onload\")'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1116,24 +1166,25 @@ public class Window3Test extends WebDriverTestCase {
     public void attachOnLoadEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>test</title>\n"
+            + "<head>\n"
             + "<script>\n"
-            + "  function test1(_e) {alert('test1, param null: ' + (_e == null));}\n"
-            + "  function test2() {alert('test2');}\n"
-            + "  function test3() {alert('test3');}\n"
-            + "  alert(window.attachEvent == null);\n"
-            + "  alert(window.detachEvent == null);\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test1(_e) {log('test1, param null: ' + (_e == null));}\n"
+            + "  function test2() {log('test2');}\n"
+            + "  function test3() {log('test3');}\n"
+            + "  log(window.attachEvent == null);\n"
+            + "  log(window.detachEvent == null);\n"
             + "  try {\n"
             + "    window.attachEvent('onload', test1);\n"
             + "    window.attachEvent('onload', test1);\n"
             + "    window.attachEvent('onload', test2);\n"
             + "    window.attachEvent('onload', test3);\n"
             + "    window.detachEvent('onload', test3);\n"
-            + "  } catch (e) { alert('exception'); }\n"
+            + "  } catch (e) { log('exception'); }\n"
             + "</script></head>\n"
-            + "<body onload='alert(\"onload\")'></body></html>";
+            + "<body onload='log(\"onload\")'></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1144,19 +1195,20 @@ public class Window3Test extends WebDriverTestCase {
     public void detachEventInAttachEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>test</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  window.detachEvent('onload', test);\n"
-            + "  alert('detached');\n"
+            + "  log('detached');\n"
             + "}\n"
             + "try {\n"
             + "  window.attachEvent('onload', test);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1169,17 +1221,18 @@ public class Window3Test extends WebDriverTestCase {
     public void windowName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>window.name test</title></head>\n"
+            + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert('window.name before: ' + window.name);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('window.name before: ' + window.name);\n"
             + "  window.name = 'main';\n"
-            + "  alert('window.name after: ' + window.name);\n"
+            + "  log('window.name after: ' + window.name);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1194,15 +1247,16 @@ public class Window3Test extends WebDriverTestCase {
             + "<head></head>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  alert(typeof window.innerWidth);\n"
-            + "  alert(typeof window.innerHeight);\n"
-            + "  alert(typeof window.outerWidth);\n"
-            + "  alert(typeof window.outerHeight);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(typeof window.innerWidth);\n"
+            + "  log(typeof window.innerHeight);\n"
+            + "  log(typeof window.outerWidth);\n"
+            + "  log(typeof window.outerHeight);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1228,7 +1282,7 @@ public class Window3Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         setExpectedAlerts();
 
-        final WebDriver driver = loadPageWithAlerts2(firstContent);
+        final WebDriver driver = loadPageVerifyTitle2(firstContent);
 
         driver.findElement(By.id("clickme")).click();
 
@@ -1274,18 +1328,19 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body><form id='formtest'><input id='element' value='elementValue'/></form>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var docPatate = 'patate';\n"
             + "function test() {\n"
             + "  var f = document.forms['formtest'];\n"
-            + "  alert(eval(\"document.forms['formtest'].element.value\"));\n"
-            + "  alert(f.element.value);\n"
-            + "  alert(eval('f.element.value'));\n"
+            + "  log(eval(\"document.forms['formtest'].element.value\"));\n"
+            + "  log(f.element.value);\n"
+            + "  log(eval('f.element.value'));\n"
             + "}\n"
             + "test();\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1299,10 +1354,11 @@ public class Window3Test extends WebDriverTestCase {
     public void evalScopeEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "   function test() {\n"
             + "     var s = 'string';\n"
             + "     var f = 'initial';\n"
-            + "     eval('f = function() {alert(s);}');\n"
+            + "     eval('f = function() {log(s);}');\n"
             + "     invoke(f);\n"
             + "   }\n"
             + "   function invoke(fn) {\n"
@@ -1310,7 +1366,7 @@ public class Window3Test extends WebDriverTestCase {
             + "   }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1322,11 +1378,12 @@ public class Window3Test extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "<script>\n"
-            + "  alert(window.focus == window.focus);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.focus == window.focus);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1338,20 +1395,21 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"123", "captured"})
     public void captureEvents() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
-            + "  function t() { alert('captured'); }\n"
+            + LOG_TITLE_FUNCTION
+            + "  function t() { log('captured'); }\n"
             + "  window.captureEvents(Event.CLICK);\n"
             + "  window.onclick = t;\n"
             + "</script></head><body>\n"
-            + "<div id='theDiv' onclick='alert(123)'>foo</div>\n"
+            + "<div id='theDiv' onclick='log(123)'>foo</div>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(content);
 
         driver.findElement(By.id("theDiv")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1363,12 +1421,14 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("true")
     public void onLoadContext() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><body><script>\n"
-            + "var x = function() { alert(this==window) };\n"
+            + "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var x = function() { log(this==window) };\n"
             + "window.onload = x;\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1402,25 +1462,28 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts({"undefined", "undefined", "true"})
     public void undefinedProperty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window['something']);\n"
-            + "    alert(typeof window['something']);\n"
-            + "    alert(typeof window['something']=='undefined');\n"
+            + "    log(window['something']);\n"
+            + "    log(typeof window['something']);\n"
+            + "    log(typeof window['something']=='undefined');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts("First")
     public void frames() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>First</title></head>\n"
+            + "<html><head><title>First§</title></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
             + "  <frame name='top' src='" + URL_SECOND + "' />\n"
             + "  <frame name='bottom' src='about:blank' />\n"
@@ -1439,7 +1502,7 @@ public class Window3Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, frameContent);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1449,16 +1512,18 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("true")
     public void openWindow_numericName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var w1 = window.open('about:blank', 1);\n"
-            + "  alert(w1 != null);\n"
+            + "  log(w1 != null);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "<iframe name='myFrame' id='myFrame'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1469,15 +1534,16 @@ public class Window3Test extends WebDriverTestCase {
     public void openWindow_aboutblank_location() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var win = window.open('about:blank', 'test');\n"
-            + "  alert(win.location);\n"
+            + "  log(win.location);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1487,16 +1553,18 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("about:blank")
     public void openWindow_empty_location() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var win = window.open('', 'test');\n"
-            + "  alert(win.location);\n"
+            + "  log(win.location);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1507,12 +1575,13 @@ public class Window3Test extends WebDriverTestCase {
     public void openWindow_aboutblank_img() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var win = window.open('about:blank', 'test', '');\n"
             + "  win.document.open();\n"
             + "  win.document.writeln('<img id=\"myImg\" src=\"img.gif\" />');\n"
             + "  win.document.close();\n"
-            + "  alert(win.document.getElementById('myImg').src);\n"
+            + "  log(win.document.getElementById('myImg').src);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1521,7 +1590,7 @@ public class Window3Test extends WebDriverTestCase {
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1532,13 +1601,14 @@ public class Window3Test extends WebDriverTestCase {
     public void openWindow_aboutblank_document_img() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var win = window.open('about:blank', 'test');\n"
             + "  win.document.open();\n"
             + "  win.document.writeln('<html><head></head><body><img id=\"myImg\" src=\"img.gif\" /></body></html>');\n"
             + "  win.document.close();\n"
             + "  win.focus();\n"
-            + "  alert(win.document.getElementById('myImg').src);\n"
+            + "  log(win.document.getElementById('myImg').src);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1547,7 +1617,7 @@ public class Window3Test extends WebDriverTestCase {
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1557,13 +1627,15 @@ public class Window3Test extends WebDriverTestCase {
     @Alerts("§§URL§§img.gif")
     public void openWindow_empty_img() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var win = window.open('', 'test');\n"
             + "  win.document.open();\n"
             + "  win.document.writeln('<img id=\"myImg\" src=\"img.gif\" />');\n"
             + "  win.document.close();\n"
-            + "  alert(win.document.getElementById('myImg').src);\n"
+            + "  log(win.document.getElementById('myImg').src);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1572,7 +1644,7 @@ public class Window3Test extends WebDriverTestCase {
                 com.gargoylesoftware.htmlunit.util.MimeType.TEXT_HTML);
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1583,19 +1655,21 @@ public class Window3Test extends WebDriverTestCase {
             IE = "error")
     public void stop() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    window.stop();\n"
-            + "    alert(true);\n"
+            + "    log(true);\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1614,7 +1688,7 @@ public class Window3Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final WebDriver driver = loadPageWithAlerts2(firstHtml);
+        final WebDriver driver = loadPageVerifyTitle2(firstHtml);
 
         driver.findElement(By.id("clickme")).click();
     }
@@ -1652,13 +1726,14 @@ public class Window3Test extends WebDriverTestCase {
     public void devicePixelRatio() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.devicePixelRatio);\n"
+            + "    log(window.devicePixelRatio);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1671,14 +1746,16 @@ public class Window3Test extends WebDriverTestCase {
             IE = "auto")
     public void offscreenBuffering() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(window.offscreenBuffering);\n"
+            + "    log(window.offscreenBuffering);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1691,16 +1768,17 @@ public class Window3Test extends WebDriverTestCase {
     public void getComputedStyle() throws Exception {
         final String html
             = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      getComputedStyle(void 0);\n"
-            + "      alert('no exception');\n"
-            + "    } catch (e) {alert('exception')}\n"
+            + "      log('no exception');\n"
+            + "    } catch (e) {log('exception')}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

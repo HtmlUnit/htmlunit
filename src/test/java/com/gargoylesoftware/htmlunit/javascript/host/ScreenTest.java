@@ -219,44 +219,46 @@ public class ScreenTest extends WebDriverTestCase {
     }
 
     private void testBooleanProperty(final String prop) throws Exception {
-        final String html = "<html><head><title>test</title>\n"
+        final String html = "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
-            + "        alert(window.screen." + prop + ");\n"
-            + "      } catch(e) { alert('get exception') }\n"
+            + "        log(window.screen." + prop + ");\n"
+            + "      } catch(e) { log('get exception') }\n"
 
             + "      try {\n"
             + "        window.screen." + prop + " = false;\n"
-            + "        alert(window.screen." + prop + ");\n"
-            + "      } catch(e) { alert('set exception') }\n"
+            + "        log(window.screen." + prop + ");\n"
+            + "      } catch(e) { log('set exception') }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     private void testNumericProperty(final String prop) throws Exception {
-        final String html = "<html><head><title>test</title>\n"
+        final String html = "<html><head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      try {\n"
-            + "        alert(window.screen." + prop + ");\n"
-            + "      } catch(e) { alert('get exception') }\n"
+            + "        log(window.screen." + prop + ");\n"
+            + "      } catch(e) { log('get exception') }\n"
 
             + "      try {\n"
             + "        window.screen." + prop + " = 1234;\n"
-            + "        alert(window.screen." + prop + ");\n"
-            + "      } catch(e) { alert('set exception') }\n"
+            + "        log(window.screen." + prop + ");\n"
+            + "      } catch(e) { log('set exception') }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

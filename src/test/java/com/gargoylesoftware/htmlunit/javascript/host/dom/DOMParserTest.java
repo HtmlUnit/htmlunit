@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -41,16 +40,18 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("[object DOMParser]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(new DOMParser());\n"
-            + "    } catch (e) {alert('exception');}\n"
+            + "      log(new DOMParser());\n"
+            + "    } catch (e) {log('exception');}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -60,22 +61,24 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts({"[object HTMLDocument]", "", "§§URL§§"})
     public void parseFromString_text_html() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<html></html>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/html');\n"
-            + "      alert(doc);\n"
-            + "      alert(doc.body.innerHTML);\n"
-            + "      alert(doc.URL);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "      log(doc.body.innerHTML);\n"
+            + "      log(doc.URL);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -85,22 +88,24 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts({"[object HTMLDocument]", "<div></div>", "§§URL§§"})
     public void parseFromString_text_html_div() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<div></div>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/html');\n"
-            + "      alert(doc);\n"
-            + "      alert(doc.body.innerHTML);\n"
-            + "      alert(doc.URL);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "      log(doc.body.innerHTML);\n"
+            + "      log(doc.URL);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -110,19 +115,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void parseFromString_text_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<note/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "      alert(doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -132,19 +139,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_xml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<note/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'application/xml');\n"
-            + "      alert(doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -154,19 +163,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_xhtmlXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<html/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'application/xhtml+xml');\n"
-            + "      alert(doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -176,19 +187,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("[object XMLDocument]")
     public void parseFromString_application_svgXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<svg xmlns=\"http://www.w3.org/2000/svg\"/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'image/svg+xml');\n"
-            + "      alert(doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -198,19 +211,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("exception")
     public void parseFromString_unknownType() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<test/>';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'unknown/type');\n"
-            + "      alert(doc);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -220,7 +235,9 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("9")
     public void parseFromString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<note> ';\n"
             + "    text += '<to>Tove</to> ';\n"
@@ -231,16 +248,16 @@ public class DOMParserTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
-            + "      if (doc.getElementsByTagName('parsererror').length > 0) { alert('parsererror'); return; }\n"
+            + "      if (doc.getElementsByTagName('parsererror').length > 0) { log('parsererror'); return; }\n"
 
             + "      var x = doc.documentElement;\n"
-            + "      alert(x.childNodes.length);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(x.childNodes.length);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -252,22 +269,24 @@ public class DOMParserTest extends WebDriverTestCase {
             IE = "exception")
     public void parseFromString_invalidXml() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = '</notvalid> ';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
             + "      if (doc.getElementsByTagName('parsererror').length > 0) {\n"
-            + "        alert('parsererror');\n"
+            + "        log('parsererror');\n"
             + "        return;\n"
             + "      }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -278,22 +297,25 @@ public class DOMParserTest extends WebDriverTestCase {
             IE = "0")
     public void parseFromString_emptyString() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='';\n"
             + "    try {\n"
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
             + "      if (doc.getElementsByTagName('parsererror').length > 0) {\n"
-            + "        alert('parsererror');\n"
+            + "        log('parsererror');\n"
             + "        return;\n"
             + "      }\n"
-            + "      alert(doc.childNodes.length);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(doc.childNodes.length);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(content);
+
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -303,18 +325,21 @@ public class DOMParserTest extends WebDriverTestCase {
     @Alerts("exception")
     public void parseFromString_missingMimeType() throws Exception {
         final String content = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text='<root/>';\n"
             + "    try {\n"
             + "      var parser=new DOMParser();\n"
             + "      parser.parseFromString(text);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(content);
+
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -326,7 +351,9 @@ public class DOMParserTest extends WebDriverTestCase {
                 "[object ProcessingInstruction]", "[object Text]"})
     public void parseFromString_processingInstructionKept() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = '<elementWithChildren>' + '<![CDATA[sampl<<< >>e data]]>' + '<!--a sample comment-->'\n"
             + "      + '<elementWithChildren/>' + '<?target processing instruction data?>' + 'sample text node'\n"
@@ -335,17 +362,18 @@ public class DOMParserTest extends WebDriverTestCase {
             + "      var parser = new DOMParser();\n"
             + "      var doc = parser.parseFromString(text, 'text/xml');\n"
             + "      if (doc.getElementsByTagName('parsererror').length > 0) {\n"
-            + "        alert('parsererror');\n"
+            + "        log('parsererror');\n"
             + "        return;\n"
             + "      }\n"
-            + "      alert(doc.documentElement.childNodes.length);\n"
+            + "      log(doc.documentElement.childNodes.length);\n"
             + "      for(var i = 0; i < doc.documentElement.childNodes.length; i++) {\n"
-            + "        alert(doc.documentElement.childNodes[i]);\n"
+            + "        log(doc.documentElement.childNodes[i]);\n"
             + "      }\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script></head><body onload='test()'></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -354,20 +382,19 @@ public class DOMParserTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Org</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var html = '<script>document.title = \"parsed script executed\";</' + 'script>';\n"
             + "      var parser = new DOMParser();\n"
-            + "      alert(parser.parseFromString(html, 'text/html'));\n"
+            + "      log(parser.parseFromString(html, 'text/html'));\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "Org");
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -376,21 +403,20 @@ public class DOMParserTest extends WebDriverTestCase {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Org</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var html = '<svg viewBox=\"0 0 10 10\" xmlns=\"http://www.w3.org/2000/svg\">'\n"
             + "                + '<script>document.title = \"parsed script executed\";</' + 'script>'\n"
             + "                + '</svg>';\n"
             + "      var parser = new DOMParser();\n"
-            + "      alert(parser.parseFromString(html, 'text/html'));\n"
+            + "      log(parser.parseFromString(html, 'text/html'));\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
-        assertTitle(driver, "Org");
+        loadPageVerifyTitle2(html);
     }
 }

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlHeadTest extends WebDriverTestCase {
@@ -43,11 +44,12 @@ public class HtmlHeadTest extends WebDriverTestCase {
     public void addedWhenMissing() throws Exception {
         final String htmlContent = "<html><body>\n"
             + "<script>\n"
-            + "  alert(document.firstChild.firstChild.tagName);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.firstChild.firstChild.tagName);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(htmlContent);
+        loadPageVerifyTitle2(htmlContent);
     }
 
     /**
@@ -57,14 +59,15 @@ public class HtmlHeadTest extends WebDriverTestCase {
     @Alerts("[object HTMLHeadElement]")
     public void simpleScriptable() throws Exception {
         final String html = "<html><head id='myId'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
             assertTrue(element instanceof HtmlHead);

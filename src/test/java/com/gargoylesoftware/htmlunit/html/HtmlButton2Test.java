@@ -50,15 +50,16 @@ public class HtmlButton2Test extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<button id='myId'>OK</button>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlButton.class.isInstance(page.getHtmlElementById("myId")));
@@ -71,19 +72,20 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-undefined", "-undefined", "-"})
     public void defaultValues() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('button1');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('button');\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"button\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -92,7 +94,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,23 +103,24 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-undefined", "-", "-"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('button1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'button';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"button\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue);\n"
+            + "    log(input.value + '-' + input.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -126,7 +129,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -136,26 +139,27 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.value = 'newValue';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.defaultValue = 'newDefault';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -165,7 +169,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -175,26 +179,27 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Alerts({"initial-undefined", "initial-undefined", "newValue-undefined", "newValue-undefined",
                 "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.value = 'newValue';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.defaultValue = 'newDefault';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -203,7 +208,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -212,19 +217,20 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"initial-undefined", "initial-default", "newValue-default", "newValue-newDefault"})
     public void defaultValue() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.defaultValue = 'default';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
 
             + "    button.value = 'newValue';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
             + "    button.defaultValue = 'newDefault';\n"
-            + "    alert(button.value + '-' + button.defaultValue);\n"
+            + "    log(button.value + '-' + button.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -233,7 +239,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -242,17 +248,18 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"initial-OK", "newValue-OK", "newValue-OK"})
     public void innerHtml() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.value + '-' + button.innerHTML);\n"
+            + "    log(button.value + '-' + button.innerHTML);\n"
 
             + "    button.value = 'newValue';\n"
-            + "    alert(button.value + '-' + button.innerHTML);\n"
+            + "    log(button.value + '-' + button.innerHTML);\n"
 
             + "    button.innerHtml = 'Cancel';\n"
-            + "    alert(button.value + '-' + button.innerHTML);\n"
+            + "    log(button.value + '-' + button.innerHTML);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -261,7 +268,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -270,17 +277,18 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"initial-OK", "newValue-OK", "newValue-Cancel"})
     public void innerText() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.value + '-' + button.innerText);\n"
+            + "    log(button.value + '-' + button.innerText);\n"
 
             + "    button.value = 'newValue';\n"
-            + "    alert(button.value + '-' + button.innerText);\n"
+            + "    log(button.value + '-' + button.innerText);\n"
 
             + "    button.innerText = 'Cancel';\n"
-            + "    alert(button.value + '-' + button.innerText);\n"
+            + "    log(button.value + '-' + button.innerText);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -289,7 +297,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -298,18 +306,19 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts({"initial-initial-OK", "newValue-newValue-OK", "newValue-newValue-OK"})
     public void valueAttributeNode() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
             + "    var attr = button.getAttributeNode('value');\n"
-            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
+            + "    log(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
 
             + "    attr.value = 'newValue';\n"
-            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
+            + "    log(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
 
             + "    button.innerHtml = 'Cancel';\n"
-            + "    alert(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
+            + "    log(attr.value + '-' + button.value + '-' + button.innerHTML);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -318,7 +327,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -750,11 +759,12 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Test
     @Alerts("submit")
     public void type() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.type);\n"
+            + "    log(button.type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -763,7 +773,7 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -773,11 +783,12 @@ public class HtmlButton2Test extends WebDriverTestCase {
     @Alerts("submit")
     public void typeStandards() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var button = document.getElementById('testId');\n"
-            + "    alert(button.type);\n"
+            + "    log(button.type);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -786,6 +797,6 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

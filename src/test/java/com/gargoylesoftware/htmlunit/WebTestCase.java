@@ -115,10 +115,6 @@ public abstract class WebTestCase {
     /** The SOCKS proxy host to use for SOCKS proxy tests. */
     public static final String SOCKS_PROXY_HOST = System.getProperty("htmlunit.test.socksproxy.host", "localhost");
 
-    /** Succeeds the SOCKS proxy tests (for windows) . */
-    public static final boolean GEOLOCATION_IGNORE = Boolean.valueOf(
-            System.getProperty("htmlunit.test.geolocation.ignore", "false"));
-
     /** The default time used to wait for the expected alerts. */
     protected static final long DEFAULT_WAIT_TIME = 1000;
 
@@ -448,18 +444,6 @@ public abstract class WebTestCase {
             throw new FileNotFoundException(localizedName);
         }
         return file;
-    }
-
-    /**
-     * Facility method transforming expectedAlerts to a list and calling
-     * {@link #createTestPageForRealBrowserIfNeeded(String, List)}.
-     * @param content the content of the HTML page
-     * @param expectedAlerts the expected alerts
-     * @throws IOException if writing file fails
-     */
-    protected void createTestPageForRealBrowserIfNeeded(final String content, final String[] expectedAlerts)
-        throws IOException {
-        createTestPageForRealBrowserIfNeeded(content, Arrays.asList(expectedAlerts));
     }
 
     /**

@@ -65,10 +65,11 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Alerts("null")
     public void getElementById() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('second'));\n"
+            + "    log(document.getElementById('second'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -78,7 +79,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
             + "  </noscript>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -88,12 +89,13 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Alerts({"1", "[object Text]"})
     public void childNodes() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var noscript = document.getElementById('myDiv').childNodes.item(0);\n"
-            + "    alert(noscript.childNodes.length);\n"
-            + "    alert(noscript.firstChild);\n"
+            + "    log(noscript.childNodes.length);\n"
+            + "    log(noscript.firstChild);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -102,7 +104,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
             + "  </noscript></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -112,7 +114,7 @@ public class HtmlNoScriptTest extends WebDriverTestCase {
     @Alerts("1")
     public void testJavaScript() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "  alert(1);\n"
             + "</script>\n"

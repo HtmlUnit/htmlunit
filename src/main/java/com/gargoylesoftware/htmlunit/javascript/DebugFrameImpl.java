@@ -20,7 +20,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -206,14 +205,14 @@ public class DebugFrameImpl extends DebugFrameAdapter {
                     if (id instanceof String) {
                         final String s = (String) id;
                         if (obj instanceof ScriptableObject) {
-                            Object o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, false);
-                            if (o == null) {
-                                o = ((ScriptableObject) obj).getGetterOrSetter(s, 0, true);
-                                if (o instanceof Callable) {
+                            Function f = ((ScriptableObject) obj).getGetterOrSetter(s, 0, thisObj, false);
+                            if (f == null) {
+                                f = ((ScriptableObject) obj).getGetterOrSetter(s, 0, thisObj, true);
+                                if (f != null) {
                                     return "__defineSetter__ " + s;
                                 }
                             }
-                            else if (o instanceof Callable) {
+                            else {
                                 return "__defineGetter__ " + s;
                             }
                         }

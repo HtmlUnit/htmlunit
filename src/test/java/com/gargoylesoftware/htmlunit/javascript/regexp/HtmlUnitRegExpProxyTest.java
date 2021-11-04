@@ -205,15 +205,16 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("123456")
     public void replaceWithUndefinedPattern() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var pattern;\n"
-            + "    alert('123456'.replace(pattern, ''));\n"
+            + "    log('123456'.replace(pattern, ''));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -222,15 +223,16 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("123456")
     public void replace() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var pattern = /{\\d+}/g;\n"
-            + "    alert('123456'.replace(pattern, ''));\n"
+            + "    log('123456'.replace(pattern, ''));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -238,12 +240,13 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      */
     @Test
     public void match() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + scriptTestMatch_
             + "</script></head><body>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -252,15 +255,16 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void index() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var match = '#{tests} tests'.match(/(^|.|\\r|\\n)(#\\{(.*?)\\})/);\n"
-            + "    alert(match.index);\n"
+            + "    log(match.index);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -278,17 +282,18 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("boo();")
     public void regExp_exec() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var re = new RegExp('(?:<s' + 'cript.*?>)(.*)<\\/script>');\n"
             + "    var t = 'foo <scr' + 'ipt>boo();</' + 'script>bar';\n"
             + "    var r = re.exec(t);\n"
-            + "    alert(r[1]);\n"
+            + "    log(r[1]);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -297,16 +302,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("<script>boo();</script>")
     public void flag_global() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var str = 'foo <script>boo();<'+'/script>bar';\n"
             + "    var regExp = new RegExp('<script[^>]*>([\\\\S\\\\s]*?)<\\/script>', 'img');\n"
-            + "    alert(str.match(regExp));\n"
+            + "    log(str.match(regExp));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -316,21 +322,22 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "false", "true"})
     public void prototype() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regexp = /^(?:(?:(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|"
             + "(?:(?:16|[2468][048]|[3579][26])00)))(\\/|-|\\.)(?:0?2\\1(?:29)))|(?:(?:(?:1[6-9]|[2-9]\\d)?\\d{2})"
             + "(\\/|-|\\.)(?:(?:(?:0?[13578]|1[02])\\2(?:31))|(?:(?:0?[1,3-9]|1[0-2])\\2(29|30))|(?:(?:0?[1-9])|"
             + "(?:1[0-2]))\\2(?:0?[1-9]|1\\d|2[0-8]))))$/;\n"
             + "    var str = '2001-06-16';\n"
-            + "    alert(regexp.test(str));\n"
-            + "    alert(regexp.test('hello'));\n"
-            + "    alert(regexp.exec(str) != null);\n"
+            + "    log(regexp.test(str));\n"
+            + "    log(regexp.test('hello'));\n"
+            + "    log(regexp.exec(str) != null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -344,13 +351,14 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     private void test(final String regexp, final String testString, final boolean... expectedResults) throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regexp = " + regexp + ";\n"
             + "    var str = '" + testString + "';\n"
-            + "    alert(regexp.test(str));\n"
-            + "    alert(regexp.exec(str) != null);\n"
-            + "    alert(regexp.test('blabla'));\n"
+            + "    log(regexp.test(str));\n"
+            + "    log(regexp.exec(str) != null);\n"
+            + "    log(regexp.test('blabla'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
@@ -358,7 +366,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         setExpectedAlerts(String.valueOf(expectedResults[0]), String.valueOf(expectedResults[1]),
             String.valueOf(expectedResults[2]));
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -368,16 +376,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("true")
     public void test_minimal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regexp = /((?:2001)-)/;\n"
             + "    var str = '2001-';\n"
-            + "    alert(regexp.test(str));\n"
+            + "    log(regexp.test(str));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -387,16 +396,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("{#abcd},{,abcd,}")
     public void regexWithNonEscapedCurlyBraces() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regexp = /(^|{)#([^}]+)(}|$)/;\n"
             + "    var str = '|{#abcd}|';\n"
-            + "    alert(str.match(regexp));\n"
+            + "    log(str.match(regexp));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -406,16 +416,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("aa-b-b-")
     public void backSpace() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regexp = /[p\\bz]/g;\n"
             + "    var str = 'aapbzb' + String.fromCharCode(8);\n"
-            + "    alert(str.replace(regexp, '-'));\n"
+            + "    log(str.replace(regexp, '-'));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -433,16 +444,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "["})
     public void openingSquareBracketInCharacterClass() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var re = /[[]/;\n"
-            + "  alert('div'.match(re));\n"
-            + "  alert('['.match(re));\n"
+            + "  log('div'.match(re));\n"
+            + "  log('['.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -452,16 +464,17 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts("div")
     public void jquerySizzleChunker() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + " var re = /((?:\\((?:\\([^()]+\\)|[^()]+)+\\)|\\[(?:\\[[^[\\]]*\\]|['\"][^'\"]+['\"]|[^[\\]'\"]+)+\\]"
             + "|\\\\.|[^ >+~,(\\[]+)+|[>+~])(\\s*,\\s*)?/g\n"
             + "  function test() {\n"
-            + "    alert('div'.match(re));\n"
+            + "    log('div'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -471,17 +484,18 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({":toto,toto,,", "null"})
     public void jqueryPseudo() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + " var re = /:((?:[\\w\\u00c0-\\uFFFF_-]|\\\\.)+)(?:\\((['\"]*)((?:\\([^\\)]+\\)"
             + "|[^\\2\\(\\)]*)+)\\2\\))?/;\n"
             + "  function test() {\n"
-            + "    alert(':toto'.match(re));\n"
-            + "    alert('foo'.match(re));\n"
+            + "    log(':toto'.match(re));\n"
+            + "    log('foo'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -495,19 +509,20 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
                 "[floating=\"true],floating,=,,\"true",
                 "[floating=true\"],floating,=,,true\""})
     public void extJs() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var re = /^(?:\\[((?:[@?$])?[\\w\\-]*)\\s*(?:([\\^$*~%!\\/]?=)\\s*(['\\\"])?((?:\\\\\\]|.)*?)\\3)?(?!\\\\)\\])/;\n"
             + "  function test() {\n"
-            + "    alert('[floating=true]'.match(re));\n"
-            + "    alert('[floating=\"true\"]'.match(re));\n"
-            + "    alert('[floating=\"true\\']'.match(re));\n"
-            + "    alert('[floating=\"true]'.match(re));\n"
-            + "    alert('[floating=true\"]'.match(re));\n"
+            + "    log('[floating=true]'.match(re));\n"
+            + "    log('[floating=\"true\"]'.match(re));\n"
+            + "    log('[floating=\"true\\']'.match(re));\n"
+            + "    log('[floating=\"true]'.match(re));\n"
+            + "    log('[floating=true\"]'.match(re));\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -517,18 +532,19 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"axxxxa,a", "xxxx,", "xxxx,", "xxxx,"})
     public void backReferenceToOptionalGroup() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var re = /(a)?x+\\1/;\n"
-            + "  alert('axxxxa'.match(re));\n"
-            + "  alert('axxxx'.match(re));\n"
-            + "  alert('xxxxa'.match(re));\n"
-            + "  alert('xxxx'.match(re));\n"
+            + "  log('axxxxa'.match(re));\n"
+            + "  log('axxxx'.match(re));\n"
+            + "  log('xxxxa'.match(re));\n"
+            + "  log('xxxx'.match(re));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -538,18 +554,20 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcx\u0004,b,x", "null", "null", "null"})
     public void backReferenceToNotDefinedGroupsAreHandledAsOctal() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "function test() {\n"
             + "  var re = /(?:a)(b)c(x)\\4/;\n"
-            + "  alert('abcx\\04'.match(re));\n"
-            + "  alert('abcx'.match(re));\n"
-            + "  alert('abb'.match(re));\n"
-            + "  alert('abbxx'.match(re));\n"
+            + "  log('abcx\\04'.match(re));\n"
+            + "  log('abcx'.match(re));\n"
+            + "  log('abb'.match(re));\n"
+            + "  log('abbxx'.match(re));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -559,18 +577,19 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"abcx,b,x", "abcx,b,x", "null", "null"})
     public void ignoreBackReferenceNotFinishedGroups() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var re = /(?:a)(b)c(x\\2)/;\n"
-            + "  alert('abcx'.match(re));\n"
-            + "  alert('abcx\\02'.match(re));\n"
-            + "  alert('abb'.match(re));\n"
-            + "  alert('abbxx'.match(re));\n"
+            + "  log('abcx'.match(re));\n"
+            + "  log('abcx\\02'.match(re));\n"
+            + "  log('abb'.match(re));\n"
+            + "  log('abbxx'.match(re));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -581,17 +600,18 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"null", "abb,a,b", "abd,a,b"})
     public void ignoreBackReferenceInCharacterClass() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var re = /(a)(b)[^\\2c]/;\n"
-            + "  alert('abc'.match(re));\n"
-            + "  alert('abb'.match(re));\n"
-            + "  alert('abd'.match(re));\n"
+            + "  log('abc'.match(re));\n"
+            + "  log('abb'.match(re));\n"
+            + "  log('abd'.match(re));\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -738,10 +758,15 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     private static String buildHtml(final String script) {
-        return "<html><head><script>function test() {\n"
+        return "<html><head><script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "function test() {\n"
             + script
             + "\n}</script>\n"
-            + "</head><body onload='test()'></body></html>";
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
     }
 
     /**
@@ -752,9 +777,9 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void test2() throws Exception {
         final String html = buildHtml("var description = 'INPUT#BasisRenameInput';\n"
                 + "if(description.match(/^\\s*([a-z0-9\\_\\-]+)/i)) {\n"
-                + "  alert(RegExp.$1);\n"
+                + "  log(RegExp.$1);\n"
                 + "}");
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -768,8 +793,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         final String html = buildHtml(
                   "var s = '" + s + "';\n"
                 + "s = s.replace(/(\\s*\\S+)*/, 'a');\n"
-                + "alert(s);\n");
-        loadPageWithAlerts2(html);
+                + "log(s);\n");
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -794,26 +819,27 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "    function test() {\n"
             + "      var regex, replacement, x1, x2, x3, x4, x5;\n"
             + "      regex = $replaceAll('*[', "
             + "'([/\\\\\\\\\\\\.\\\\*\\\\+\\\\?\\\\|\\\\(\\\\)\\\\[\\\\]\\\\{\\\\}])', '\\\\\\\\$1');\n"
-            + "      alert(regex);\n"
+            + "      log(regex);\n"
             + "      replacement = "
             + "$replaceAll($replaceAll('\\\\', '\\\\\\\\', '\\\\\\\\\\\\\\\\'), '\\\\$', '\\\\\\\\$');\n"
-            + "      alert(replacement);\n"
-            + "      alert($replaceAll('*[1', regex, '+'));\n"
+            + "      log(replacement);\n"
+            + "      log($replaceAll('*[1', regex, '+'));\n"
             + "      x1 = 'xxxabcxxdexf';\n"
-            + "      alert($replaceAll(x1, 'x*', ''));\n"
+            + "      log($replaceAll(x1, 'x*', ''));\n"
             + "      x2 = '1abc123de1234f';\n"
-            + "      alert($replaceAll(x2, '([1234]+)', '$1\\\\\\\\$1'));\n"
+            + "      log($replaceAll(x2, '([1234]+)', '$1\\\\\\\\$1'));\n"
             + "      x3 = 'x  x';\n"
-            + "      alert($replaceAll(x3, 'x', '\\n'));\n"
+            + "      log($replaceAll(x3, 'x', '\\n'));\n"
             + "      x4 = 'x  \\n';\n"
-            + "      alert($replaceAll(x4, '\\\\\\n', 'x'));\n"
+            + "      log($replaceAll(x4, '\\\\\\n', 'x'));\n"
             + "      x5 = 'x';\n"
-            + "      alert($replaceAll(x5, 'x', '\\\\x\\\\\"\\\\\\\\'));\n"
-            + "      alert($replaceAll(x5, '(x)', '\\\\$\\\\$$1\\\\$'));\n"
+            + "      log($replaceAll(x5, 'x', '\\\\x\\\\\"\\\\\\\\'));\n"
+            + "      log($replaceAll(x5, '(x)', '\\\\$\\\\$$1\\\\$'));\n"
             + "    }\n"
             + "    function $replaceAll(this$static, regex, replace){\n"
             + "      replace = __translateReplaceString(replace);\n"
@@ -836,9 +862,10 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "    }\n"
             + "  </script>\n"
             + "</head><body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -852,10 +879,10 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     }
 
     private void testEvaluate(final String expression) throws Exception {
-        final String script = "alert(" + expression + ");";
+        final String script = "log(" + expression + ");";
         final String html = buildHtml(script);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -869,8 +896,8 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     public void backslash() throws Exception {
         final String html = buildHtml("var regexp = /(\\https:\\/\\/)/;\n"
                 + "var url = 'http://localhost/test.html';\n"
-                + "alert(url.match(regexp));");
-        loadPageWithAlerts2(html);
+                + "log(url.match(regexp));");
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -892,18 +919,19 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert($replace('bazbar', 'baz', 'foo'));\n"
-            + "      alert($replace('foobar', 'foo', '$0'));\n"
-            + "      alert($replace('foobar', 'foo', '$1'));\n"
-            + "      alert($replace('foobar', 'foo', '\\\\$1'));\n"
-            + "      alert($replace('*[)1', '*[)', '\\\\'));\n"
-            + "      alert($replace('$ab', '$a', 'c'));\n"
-            + "      alert($replace('^ab', '^a', 'c'));\n"
-            + "      alert($replace('a[x]b', '[x]', '$$'));\n"
-            + "      alert($replace('a[x]b', '[x]', '$1'));\n"
-            + "      alert($replace('a[x]b', '[x]', '$`'));\n"
-            + "      alert($replace('a[x]b', '[x]', \"$'\"));\n"
+            + "      log($replace('bazbar', 'baz', 'foo'));\n"
+            + "      log($replace('foobar', 'foo', '$0'));\n"
+            + "      log($replace('foobar', 'foo', '$1'));\n"
+            + "      log($replace('foobar', 'foo', '\\\\$1'));\n"
+            + "      log($replace('*[)1', '*[)', '\\\\'));\n"
+            + "      log($replace('$ab', '$a', 'c'));\n"
+            + "      log($replace('^ab', '^a', 'c'));\n"
+            + "      log($replace('a[x]b', '[x]', '$$'));\n"
+            + "      log($replace('a[x]b', '[x]', '$1'));\n"
+            + "      log($replace('a[x]b', '[x]', '$`'));\n"
+            + "      log($replace('a[x]b', '[x]', \"$'\"));\n"
             + "    }\n"
             + "    function $replace(this$static, from, to){\n"
             + "      var regex, replacement;\n"
@@ -936,7 +964,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "</head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1007,6 +1035,7 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Alerts({"2200915", "2000915"})
     public void replace_huge() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "String.prototype.times = function(n) {\n"
             + "  var s = '';\n"
             + "  for (var i =0; i < n; i++) {\n"
@@ -1018,12 +1047,12 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
             + "var longString = '\"' + '123456789\\\\\"'.times(size * 10) + '\"';\n"
             + "var object = '{' + longString + ': ' + longString + '},';\n"
             + "var huge = '[' + object.times(size) + '{\"test\": 123}]';\n"
-            + "alert(huge.length);\n"
-            + "alert(huge.replace(/\\\\./g, '@').length);\n"
+            + "log(huge.length);\n"
+            + "log(huge.replace(/\\\\./g, '@').length);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1032,23 +1061,24 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
     @Test
     @Alerts({"true", "true", "true", "true", "true", "true", "true"})
     public void nullCharacter() throws Exception {
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var regex = new RegExp('[\\0-\\x08]');\n"
-            + "    alert(regex.test('\\0'));\n"
-            + "    alert('\\0'.match(regex) != null);\n"
+            + "    log(regex.test('\\0'));\n"
+            + "    log('\\0'.match(regex) != null);\n"
             + "    regex = new RegExp('[\\\\0-\\x08]');\n"
-            + "    alert(regex.test('\\0'));\n"
-            + "    alert('\\0'.match(regex) != null);\n"
+            + "    log(regex.test('\\0'));\n"
+            + "    log('\\0'.match(regex) != null);\n"
             + "    regex = new RegExp('[\\\\\\0-\\x08]');\n"
-            + "    alert(regex.test('\\0'));\n"
-            + "    alert('\\0'.match(regex) != null);\n"
-            + "    alert('\\0'.match(/^\\0/) != null);\n"
+            + "    log(regex.test('\\0'));\n"
+            + "    log('\\0'.match(regex) != null);\n"
+            + "    log('\\0'.match(/^\\0/) != null);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

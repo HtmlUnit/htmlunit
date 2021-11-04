@@ -19,9 +19,10 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.zip.Deflater;
 
 import org.apache.commons.io.IOUtils;
@@ -47,6 +48,8 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 @RunWith(BrowserRunner.class)
 public class WebClient3Test extends WebDriverTestCase {
+
+    static final SecureRandom RANDOM = new SecureRandom();
 
     /**
      * Regression test for bug 3012067: a null pointer exception was occurring.
@@ -84,9 +87,8 @@ public class WebClient3Test extends WebDriverTestCase {
 
         final MockWebConnection mockConnection = getMockWebConnection();
         final byte[] binaryContent = new byte[4818];
-        final Random random = new Random();
         for (int i = 0; i < binaryContent.length; i++) {
-            binaryContent[i] = (byte) (random.nextInt(Byte.MAX_VALUE));
+            binaryContent[i] = (byte) (RANDOM.nextInt(Byte.MAX_VALUE));
         }
         mockConnection.setDefaultResponse(binaryContent, 200, "OK", MimeType.APPLICATION_OCTET_STREAM);
         final URL urlFoo = new URL(URL_FIRST, "foo.html");
@@ -539,5 +541,56 @@ public class WebClient3Test extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setDefaultResponse("<script>alert('executed')</script>", 200, "OK", MimeType.APPLICATION_JAVASCRIPT);
         loadPageWithAlerts2(URL_FIRST);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGB2312() throws Exception {
+        encodingCharset("\u6211\u662F\u6211\u7684 Abc", "GB2312", "GB2312");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGB2312GBKChar() throws Exception {
+        encodingCharset("\u4eb8 Abc", "GB2312", "GBK");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void encodingCharsetGBK() throws Exception {
+        encodingCharset("\u6211\u662F\u6211\u7684 \u4eb8 Abc", "GBK", "GBK");
+    }
+
+    private void encodingCharset(final String title,
+            final String metaCharset, final String responseCharset) throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<meta http-equiv='Content-Type' content='text/html; charset=" + metaCharset + "'>\n"
+            + "<title>" + title + "</title>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "Connection: close\r\n"
+                + "\r\n" + html;
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer =
+                new PrimitiveWebServer(Charset.forName(responseCharset), firstResponse, firstResponse)) {
+            final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
+            final WebDriver driver = getWebDriver();
+
+            driver.get(url);
+            assertEquals(title, driver.getTitle());
+        }
     }
 }

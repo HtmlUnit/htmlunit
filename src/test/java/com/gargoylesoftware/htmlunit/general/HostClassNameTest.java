@@ -1356,6 +1356,8 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
+            CHROME = "function CSSCounterStyleRule() { [native code] }",
+            EDGE = "function CSSCounterStyleRule() { [native code] }",
             FF = "function CSSCounterStyleRule() {\n    [native code]\n}",
             FF78 = "function CSSCounterStyleRule() {\n    [native code]\n}")
     public void cssCounterStyleRule() throws Exception {
@@ -7996,9 +7998,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            CHROME = "function SharedArrayBuffer() { [native code] }",
-            EDGE = "function SharedArrayBuffer() { [native code] }")
+    @Alerts("exception")
     public void sharedArrayBuffer() throws Exception {
         test("SharedArrayBuffer");
     }

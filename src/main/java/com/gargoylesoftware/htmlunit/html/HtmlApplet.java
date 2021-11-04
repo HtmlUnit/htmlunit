@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.html;
 import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -273,7 +273,7 @@ public class HtmlApplet extends HtmlElement {
             }
 
             // check archive
-            final List<URL> archiveUrls = new LinkedList<>();
+            final List<URL> archiveUrls = new ArrayList<>();
             String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
             if (null != archives) {
                 for (final String tmpArchive : archives) {

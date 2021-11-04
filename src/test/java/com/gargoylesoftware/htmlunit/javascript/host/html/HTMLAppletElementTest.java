@@ -53,12 +53,13 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  <applet id='a7' ></applet>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 7; i++) {\n"
-            + "    alert(document.getElementById('a' + i).align);\n"
+            + "    log(document.getElementById('a' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -73,11 +74,12 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  <applet id='a1' align='left' ></applet>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('a1');\n"
@@ -93,7 +95,7 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'top');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -104,14 +106,15 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             IE = {"[object HTMLAppletElement]", "[object HTMLAppletElement]"})
     public void type() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "  var elem = document.getElementById('a1');\n"
             + "    try {\n"
-            + "      alert(elem);\n"
-            + "      alert(HTMLAppletElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(elem);\n"
+            + "      log(HTMLAppletElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -119,6 +122,6 @@ public class HTMLAppletElementTest extends WebDriverTestCase {
             + "  <applet id='a1' align='left' ></applet>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -33,12 +33,14 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
+import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -47,6 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code CSSStyleSheet}.
@@ -80,13 +83,13 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     public CSSStyleSheet(CssStyleSheet cssStyleSheet) {
-        this(cssStyleSheet.getOwnerDomNode().getScriptableObject(), cssStyleSheet);
+        this(cssStyleSheet.getOwnerDomNode().getScriptableObject(),
+                ((HTMLElement)cssStyleSheet.getOwnerDomNode().getScriptableObject()).getWindow(),
+                cssStyleSheet);
     }
 
-    public CSSStyleSheet(HTMLElement element, CssStyleSheet cssStyleSheet) {
-        final Window win = element.getWindow();
-
-        setParentScope(win);
+    public CSSStyleSheet(HTMLElement element, final Scriptable parentScope, CssStyleSheet cssStyleSheet) {
+        setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         this.cssStyleSheet = cssStyleSheet;
@@ -136,16 +139,18 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxGetter
     public String getHref() {
-        final BrowserVersion version = getBrowserVersion();
 
         if (ownerNode_ != null) {
             final DomNode node = cssStyleSheet.getOwnerDomNode();
+            if (node instanceof HtmlStyle) {
+                return null;
+            }
             if (node instanceof HtmlLink) {
                 // <link rel="stylesheet" type="text/css" href="..." />
                 final HtmlLink link = (HtmlLink) node;
                 final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
-                if ("".equals(href) && version.hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
+                if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
                     return null;
                 }
                 // Expand relative URLs.
@@ -160,7 +165,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
 
-        return null;
+        return getUri();
     }
 
     /**
@@ -329,5 +334,9 @@ public class CSSStyleSheet extends StyleSheet {
             cssRulesIndexFix_ = new ArrayList<>();
             refreshCssRules();
         }
+    }
+
+    public CSSStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
+        return new CSSStyleSheet(null, ownerNode_.getWindow(), cssStyleSheet.getImportedStyleSheet(importRule));
     }
 }

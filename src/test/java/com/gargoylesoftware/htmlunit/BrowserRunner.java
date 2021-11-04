@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author cd alexndr
  */
 public class BrowserRunner extends Suite {
 
@@ -96,11 +97,11 @@ public class BrowserRunner extends Suite {
             if (browsers.contains("hu-chrome")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
-            if (browsers.contains("hu-ff")) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
-            }
             if (browsers.contains("hu-ff78")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, false));
+            }
+            if (browsers.contains("hu-ff")) {
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));
             }
             if (browsers.contains("hu-ie")) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.INTERNET_EXPLORER, false));
@@ -284,6 +285,17 @@ public class BrowserRunner extends Suite {
     }
 
     /**
+     * Marks the os.
+     */
+    public enum OS {
+        /** Linux. */
+        Linux,
+
+        /** Windows. */
+        Windows
+    }
+
+    /**
      * Marks a test as not yet working for a particular browser (default value is all).
      * This will cause a failure to be considered as success and a success as failure forcing
      * us to remove this annotation when a feature has been implemented even unintentionally.
@@ -300,6 +312,12 @@ public class BrowserRunner extends Suite {
         TestedBrowser[] value() default {
             IE, EDGE, FF78, FF, CHROME
         };
+
+        /**
+         * The operating systems with which the case is not yet implemented.
+         * @return the operating systems
+         */
+        OS[] os() default {};
     }
 
     /**

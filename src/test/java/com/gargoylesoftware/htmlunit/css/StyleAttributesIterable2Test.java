@@ -58,25 +58,27 @@ public class StyleAttributesIterable2Test extends WebDriverTestCase {
 
     private void styleVsComputed(final String property) throws Exception {
         final String html =
-            "<html><head><script>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
             + "    for (var i in e.style) {\n"
             + "      if (i == '" + property + "') {\n"
-            + "        alert('in style');\n"
+            + "        log('in style');\n"
             + "      }\n"
             + "    }\n"
             + "    for (var i in window.getComputedStyle(e, null)) {\n"
             + "      if (i == '" + property + "') {\n"
-            + "        alert('in computed style');\n"
+            + "        log('in computed style');\n"
             + "      }\n"
             + "    }\n"
-            + "    alert('done');\n"
+            + "    log('done');\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "  <div id='myDiv'></div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

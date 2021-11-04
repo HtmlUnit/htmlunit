@@ -21,6 +21,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
@@ -31,6 +35,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation;
 import com.gargoylesoftware.htmlunit.javascript.host.media.MediaDevices;
 import com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code Navigator}.
@@ -111,6 +118,31 @@ public class Navigator extends SimpleScriptable {
     @JsxGetter
     public String getLanguage() {
         return getBrowserVersion().getBrowserLanguage();
+    }
+
+    /**
+     * Returns the language of the browser.
+     * @return the language
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF78})
+    public Scriptable getLanguages() {
+        final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
+        if (StringUtils.isEmpty(acceptLang)) {
+            return Context.getCurrentContext().newArray(this, 0);
+        }
+
+        final ArrayList<String> res = new ArrayList<>();
+        final String[] parts = StringUtils.split(acceptLang, ",");
+        for (final String part : parts) {
+            if (!StringUtils.isEmpty(part)) {
+                final String lang = StringUtils.substringBefore(part, ";").trim();
+                if (!StringUtils.isEmpty(part)) {
+                    res.add(lang);
+                }
+            }
+        }
+
+        return Context.getCurrentContext().newArray(this, res.toArray());
     }
 
     /**

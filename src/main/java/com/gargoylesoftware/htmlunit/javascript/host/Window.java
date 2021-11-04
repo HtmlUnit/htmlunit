@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHA
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -171,6 +172,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private Document document_;
     private DocumentProxy documentProxy_;
     private Navigator navigator_;
+    private Object clientInformation_;
     private WebWindow webWindow_;
     private WindowProxy windowProxy_;
     private Screen screen_;
@@ -567,17 +569,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({CHROME, EDGE, IE})
-    public Navigator getClientInformation() {
+    @JsxGetter({CHROME, EDGE, FF, IE})
+    public Object getClientInformation() {
+        if (clientInformation_ != null) {
+            return clientInformation_;
+        }
         return navigator_;
     }
 
     /**
-     * Special setter for IE to ignore this call.
-     * @param ignore param gets ignored
+     * @param clientInformation the new value
      */
-    @JsxSetter(IE)
-    public void setClientInformation(final Object ignore) {
+    @JsxSetter({CHROME, EDGE})
+    public void setClientInformation(final Object clientInformation) {
+        clientInformation_ = clientInformation;
     }
 
     /**
@@ -1599,7 +1604,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @param height the {@code innerHeight}
      */
     @JsxSetter
-    public void setInneHeight(final int height) {
+    public void setInnerHeight(final int height) {
         getWebWindow().setInnerHeight(height);
     }
 
@@ -1800,6 +1805,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78})
     public int getMozInnerScreenY() {
+        if (getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91)) {
+            return 89;
+        }
         return 79;
     }
 
@@ -4302,14 +4310,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             return 1;
         }
         return null;
-    }
-
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("closed".equals(name)) {
-            return false; //ignore
-        }
-        return super.isReadOnlySettable(name, value);
     }
 }
 

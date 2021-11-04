@@ -1477,20 +1477,14 @@ public class CssStyleSheet implements Serializable {
             }
             else if (rule instanceof CSSImportRuleImpl) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
-                final MediaListImpl mediaList = importRule.getMedia();
 
-                CssStyleSheet sheet = imports_.get(importRule);
-                if (sheet == null) {
-                    final String href = importRule.getHref();
-                    final String url = UrlUtils.resolveUrl(getUri(), href);
-                    sheet = loadStylesheet(ownerNode_, url);
-                    imports_.put(importRule, sheet);
-                }
+                final CssStyleSheet sheet = getImportedStyleSheet(importRule);
 
                 if (!alreadyProcessing.contains(sheet.getUri())) {
                     final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
                     alreadyProcessing.add(sheet.getUri());
 
+                    final MediaListImpl mediaList = importRule.getMedia();
                     if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
                         index(index, sheetRuleList, alreadyProcessing);
                     }
@@ -1547,5 +1541,16 @@ public class CssStyleSheet implements Serializable {
         }
 
         return matchingRules;
+    }
+
+    public CssStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
+        CssStyleSheet sheet = imports_.get(importRule);
+        if (sheet == null) {
+            final String href = importRule.getHref();
+            final String url = UrlUtils.resolveUrl(getUri(), href);
+            sheet = loadStylesheet(ownerNode_, url);
+            imports_.put(importRule, sheet);
+        }
+        return sheet;
     }
 }

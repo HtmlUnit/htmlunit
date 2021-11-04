@@ -75,6 +75,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "")
     @BuggyWebDriver(CHROME = "",
                     EDGE = "",
@@ -99,6 +101,10 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [radio] [1]"
                 + " [object Event] change b:true c:false [radio] [-]",
+            CHROME = "[object PointerEvent] click b:true c:true [radio] [1]"
+                + " [object Event] change b:true c:false [radio] [-]",
+            EDGE = "[object PointerEvent] click b:true c:true [radio] [1]"
+                + " [object Event] change b:true c:false [radio] [-]",
             IE = "[object Event] change b:true c:false [radio] [-]"
                 + " [object PointerEvent] click b:true c:true [radio] [1]")
     public void radioClick() throws Exception {
@@ -115,6 +121,10 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [checkbox] [1]"
                 + " [object Event] change b:true c:false [checkbox] [-]",
+            CHROME = "[object PointerEvent] click b:true c:true [checkbox] [1]"
+                + " [object Event] change b:true c:false [checkbox] [-]",
+            EDGE = "[object PointerEvent] click b:true c:true [checkbox] [1]"
+                + " [object Event] change b:true c:false [checkbox] [-]",
             IE = "[object Event] change b:true c:false [checkbox] [-]"
                 + " [object PointerEvent] click b:true c:true [checkbox] [1]")
     public void checkboxClick() throws Exception {
@@ -130,6 +140,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputTextClick() throws Exception {
         final String firstSnippet = "       <input type='text' name='clickMe' id='clickMe' size='2'\n";
@@ -144,6 +156,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void inputPasswordClick() throws Exception {
         final String firstSnippet = "       <input type='password' name='clickMe' id='clickMe' size='2'\n";
@@ -158,6 +172,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void textareaClick() throws Exception {
         final String firstSnippet = "       <textarea name='clickMe' id='clickMe' size='2'\n";
@@ -185,6 +201,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void resetClick() throws Exception {
         final String firstSnippet = "       <input type='reset' name='clickMe' id='clickMe'\n";
@@ -199,6 +217,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void buttonClick() throws Exception {
         final String firstSnippet = "       <input type='button' name='clickMe' id='clickMe'\n";
@@ -213,6 +233,8 @@ public class Event2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object MouseEvent] click b:true c:true [clickMe] [1]",
+            CHROME = "[object PointerEvent] click b:true c:true [clickMe] [1]",
+            EDGE = "[object PointerEvent] click b:true c:true [clickMe] [1]",
             IE = "[object PointerEvent] click b:true c:true [clickMe] [1]")
     public void anchorClick() throws Exception {
         final String firstSnippet = "       <a href='#' name='clickMe' id='clickMe'\n";
@@ -506,7 +528,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     public void preventDefault() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
+            "<html><head>\n"
             + "<script>\n"
             + "function block(e) {\n"
             + "  if (e && e.preventDefault)\n"
@@ -525,7 +547,7 @@ public class Event2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("mySubmit"));
         assertEquals(URL_FIRST.toExternalForm(), driver.getCurrentUrl());
     }

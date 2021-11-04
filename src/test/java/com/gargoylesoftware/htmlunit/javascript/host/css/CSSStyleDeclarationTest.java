@@ -33,6 +33,7 @@ import org.openqa.selenium.WebElement;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
@@ -54,6 +55,561 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
  */
 @RunWith(BrowserRunner.class)
 public class CSSStyleDeclarationTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                       "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
+            IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]",
+                  "[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]"},
+            FF = {"[object CSS2Properties]", "[object CSS2Properties]",
+                  "[object CSS2Properties]", "[object CSS2Properties]"},
+            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]",
+                    "[object CSS2Properties]", "[object CSS2Properties]"})
+    @HtmlUnitNYI(IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                       "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
+            FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                  "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
+            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+                    "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
+    // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
+    public void scriptableToString() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  p { background-color: #FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color: #FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(Object.prototype.toString.call(decl));\n"
+            + "  log(decl);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(Object.prototype.toString.call(decl));\n"
+            + "  log(decl);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"background-color: rgb(255, 255, 255);", "background-color: rgb(255, 255, 255);"})
+    @HtmlUnitNYI(CHROME = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
+            EDGE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
+            IE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
+            FF = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
+            FF78 = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"})
+    // FIXME hex colors are not transformed to rgb for direct styles
+    public void cssText() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.cssText);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", ""})
+    public void cssTextEmpty() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style=''></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.cssText);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"background-color: rgb(255, 255, 255); color: red;",
+                       "background-color: rgb(255, 255, 255); color: red;"},
+            IE = {"color: red; background-color: rgb(255, 255, 255);",
+                  "color: red; background-color: rgb(255, 255, 255);"})
+    @HtmlUnitNYI(CHROME = {"background-color: rgb(255, 255, 255); color: red;",
+                           "background-color: #FFFFFF;color: red;"},
+            EDGE = {"background-color: rgb(255, 255, 255); color: red;",
+                    "background-color: #FFFFFF;color: red;"},
+            IE = {"background-color: rgb(255, 255, 255); color: red;",
+                  "background-color: #FFFFFF;color: red;"},
+            FF = {"background-color: rgb(255, 255, 255); color: red;",
+                  "background-color: #FFFFFF;color: red;"},
+            FF78 = {"background-color: rgb(255, 255, 255); color: red;",
+                    "background-color: #FFFFFF;color: red;"})
+    // FIXME hex colors are not transformed to rgb for direct styles
+    // FIXME add more properties to check formating rules (color handling, spaces,
+    //       case-sensitivity, margin, padding, border, font, background, urls, ...)
+    public void cssTextMultipleProperties() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color: #FFFFFF;color: red; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color: #FFFFFF;color: red;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.cssText);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.cssText);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"color: rgb(0, 0, 0);", "color: rgb(0, 0, 0);"})
+    @HtmlUnitNYI(CHROME = {"color: rgb(0, 0, 0);", "color:#000000;"},
+            EDGE = {"color: rgb(0, 0, 0);", "color:#000000;"},
+            IE = {"color: rgb(0, 0, 0);", "color:#000000;"},
+            FF = {"color: rgb(0, 0, 0);", "color:#000000;"},
+            FF78 = {"color: rgb(0, 0, 0);", "color:#000000;"})
+    // FIXME hex colors are not transformed to rgb for direct styles
+    public void cssTextSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.cssText = 'color:#000000;';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.cssText = 'color:#000000;';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", ""})
+    public void cssTextSetNull() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.cssText = null;\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.cssText = null;\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", ""})
+    public void cssTextSetEmpty() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.cssText = '';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.cssText = '';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"", ""})
+    @HtmlUnitNYI(CHROME = {"", "abc"},
+            EDGE = {"", "abc"},
+            IE = {"", "abc"},
+            FF = {"", "abc"},
+            FF78 = {"", "abc"})
+    @NotYetImplemented
+    // FIXME styles not validated/ignored for direct styles?
+    public void cssTextSetInvalid() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.cssText = 'abc';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.cssText = 'abc';\n"
+            + "    log(decl.cssText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "1"})
+    public void length() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.length);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.length);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"0", "0"})
+    public void lengthEmpty() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style=''></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.length);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.length);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "2"})
+    public void lengthMultipleProperties() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF;color: red; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;color: red;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.length);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.length);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "1"})
+    public void lengthSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + LOG_TEXTAREA
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.length = 2;\n"
+            + "    log(decl.length);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.length = 2;\n"
+            + "    log(decl.length);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSStyleRule]", "null"})
+    public void parentRule() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; };\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  log(decl.parentRule);\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.parentRule);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"[object CSSStyleRule]", "p", "null"})
+    public void parentRuleSet() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  p { background-color:#FFFFFF; };\n"
+            + "  div { color:#000000; };\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color:#FFFFFF;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var decl = styleSheet.cssRules[0].style;\n"
+            + "  try {"
+            + "    decl.parentRule = styleSheet.cssRules[1];\n"
+            + "    log(decl.parentRule);\n"
+            + "    log(decl.parentRule.selectorText);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  try {"
+            + "    decl.parentRule = styleSheet.cssRules[1];\n"
+            + "    log(decl.parentRule);\n"
+            + "  } catch(e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails
@@ -880,7 +1436,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"", "", "15px", "italic", "", "italic"})
-    public void cssText() throws Exception {
+    public void cssText2() throws Exception {
         final String html = "<html><head><script>\n"
                 + LOG_TITLE_FUNCTION
             + "  function test() {\n"
@@ -1160,36 +1716,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts({"L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px",
              "L:3px,R:3px,T:3px,B:3px", "L:5px,R:5px,T:5px,B:5px", "L:7px,R:2px,T:2px,B:2px"})
-    @HtmlUnitNYI(CHROME = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined",
-                           "L:undefined,R:undefined,T:undefined,B:undefined"},
-            EDGE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined",
-                    "L:undefined,R:undefined,T:undefined,B:undefined"},
-            FF = {"L:0px,R:0px,T:0px,B:0px",
-                  "L:3px,R:0px,T:0px,B:0px",
-                  "L:7px,R:0px,T:0px,B:0px",
-                  "L:,R:,T:,B:",
-                  "L:3px,R:,T:,B:",
-                  "L:7px,R:,T:,B:"},
-            FF78 = {"L:0px,R:0px,T:0px,B:0px",
-                    "L:3px,R:0px,T:0px,B:0px",
-                    "L:7px,R:0px,T:0px,B:0px",
-                    "L:,R:,T:,B:",
-                    "L:3px,R:,T:,B:",
-                    "L:7px,R:,T:,B:"},
-            IE = {"L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined",
-                  "L:undefined,R:undefined,T:undefined,B:undefined",
-                  "L:3px,R:undefined,T:undefined,B:undefined",
-                  "L:7px,R:undefined,T:undefined,B:undefined"})
     public void paddingAllvsPaddingSingle2() throws Exception {
         final String html =
               "<html>\n"
@@ -2345,6 +2871,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "auto", "70%", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
+    @HtmlUnitNYI(IE = {"4px", "5px", "6em", "auto", "70%", "initial", "inherit",
+                       "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setVerticalAlign() throws Exception {
         setLength("vertical-align", "verticalAlign");
     }
@@ -2736,7 +3264,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "width", "undefined", "undefined"},
             IE = {"1", "width", "", "undefined"})
-    public void length() throws Exception {
+    public void length2() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
@@ -2848,7 +3376,8 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
         }
 
         for (final String propertyName : config.getPropertyMap().keySet()) {
-            if (!"length".equals(propertyName) && StyleAttributes.getDefinition(propertyName, browserVersion) == null) {
+            if (!"length".equals(propertyName) && !"parentRule".equals(propertyName) && !"cssText".equals(propertyName)
+                    && StyleAttributes.getDefinition(propertyName, browserVersion) == null) {
                 fail("CSSStyleDeclaration: incorrectly defines " + propertyName
                         + " for " + browserVersion.getNickname());
             }
@@ -3098,6 +3627,30 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div id='div1' style='color: black'>foo</div>\n"
             + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0px")
+    public void widthAbsolute() throws Exception {
+        final String html =
+            "<html>\n"
+            + "</head>\n"
+            + "  <style type='text/css'>div {position: absolute;}</style>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <div id='tester'></div>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    var myDiv = document.getElementById('tester');\n"
+            + "    var myDivStyle = window.getComputedStyle(myDiv, null);\n"
+            + "    log(myDivStyle.width);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 }

@@ -39,11 +39,12 @@ public class FormChildTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var elem = document.getElementById('i1');\n"
-            + "  alert(elem.form ? elem.form.id : elem.form);\n"
+            + "  log(elem.form ? elem.form.id : elem.form);\n"
             + "  elem = document.getElementById('i2');\n"
-            + "  alert(elem.form ? elem.form.id : elem.form);\n"
+            + "  log(elem.form ? elem.form.id : elem.form);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -55,7 +56,8 @@ public class FormChildTest extends WebDriverTestCase {
             + "    <input id='i2' name='myInput' type='text'>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -68,11 +70,12 @@ public class FormChildTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var elem = document.getElementById('i1');\n"
-            + "  alert(elem.form ? elem.form.id : elem.form);\n"
+            + "  log(elem.form ? elem.form.id : elem.form);\n"
             + "  elem = document.getElementById('i2');\n"
-            + "  alert(elem.form ? elem.form.id : elem.form);\n"
+            + "  log(elem.form ? elem.form.id : elem.form);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -84,6 +87,7 @@ public class FormChildTest extends WebDriverTestCase {
             + "  <form id='f2'>\n"
             + "  </form>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -15,9 +15,12 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
@@ -158,4 +161,8 @@ public interface CssStyleDeclaration extends Serializable {
      * @param value the new text
      */
     void setCssText(String value);
+
+    List<Property> getProperties();
+
+    AbstractCSSRuleImpl getParentRule();
 }

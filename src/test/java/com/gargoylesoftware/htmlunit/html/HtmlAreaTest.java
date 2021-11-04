@@ -31,6 +31,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -92,6 +93,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
         }
         catch (final WebDriverException e) {
+            e.printStackTrace();
             assertEquals(getExpectedAlerts()[0], "WebDriverException");
         }
     }
@@ -100,7 +102,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void isDisplayed() throws Exception {
+    public void isDisplayedRect() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
@@ -111,7 +113,61 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
+
+        boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
+        assertTrue(displayed);
+
+        displayed = driver.findElement(By.id("myMap")).isDisplayed();
+        assertTrue(displayed);
+
+        displayed = driver.findElement(By.id("myArea")).isDisplayed();
+        assertTrue(displayed);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isDisplayedCircle() throws Exception {
+        final String html = "<html><head><title>Page A</title></head>\n"
+                + "<body>\n"
+                + "  <img id='myImg' usemap='#imgmap'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+                + "  <map id='myMap' name='imgmap'>\n"
+                + "    <area id='myArea' shape='circle' coords='0,0,1'>\n"
+                + "  </map>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
+        assertTrue(displayed);
+
+        displayed = driver.findElement(By.id("myMap")).isDisplayed();
+        assertTrue(displayed);
+
+        displayed = driver.findElement(By.id("myArea")).isDisplayed();
+        assertTrue(displayed);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void isDisplayedPolygon() throws Exception {
+        final String html = "<html><head><title>Page A</title></head>\n"
+                + "<body>\n"
+                + "  <img id='myImg' usemap='#imgmap'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+                + "  <map id='myMap' name='imgmap'>\n"
+                + "    <area id='myArea' shape='poly' coords='7,9,5,1,2,2'>\n"
+                + "  </map>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -138,7 +194,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertFalse(displayed);
@@ -165,7 +221,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -182,7 +238,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"false", "false", "false", "false", "false", "true"})
-    public void isDisplayedEmptyArea() throws Exception {
+    public void isDisplayedEmptyRect() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
                 + "  <img id='myImg' usemap='#imgmap'"
@@ -201,7 +257,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final String[] expected = getExpectedAlerts();
 
         setExpectedAlerts(new String[] {});
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
         assertEquals(Boolean.parseBoolean(expected[0]), displayed);
@@ -226,6 +282,79 @@ public class HtmlAreaTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"false", "false", "true"},
+            IE = {"false", "false", "false"})
+    @HtmlUnitNYI(IE = {"false", "false", "true"})
+    public void isDisplayedEmptyCircle() throws Exception {
+        final String html = "<html><head><title>Page A</title></head>\n"
+                + "<body>\n"
+                + "  <img id='myImg' usemap='#imgmap'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+                + "  <map id='myMap' name='imgmap'>\n"
+                + "    <area id='myArea1' shape='circle' coords='0,0,0'>\n"
+                + "    <area id='myArea2' shape='circle' >\n"
+                + "    <area id='myArea3' shape='circle' coords='0,0,0.8'>\n"
+                + "  </map>\n"
+                + "</body></html>";
+
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts(new String[] {});
+        final WebDriver driver = loadPage2(html);
+
+        boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[0]), displayed);
+
+        displayed = driver.findElement(By.id("myArea2")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[1]), displayed);
+
+        displayed = driver.findElement(By.id("myArea3")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[2]), displayed);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "true", "false", "true"})
+    public void isDisplayedEmptyPolygon() throws Exception {
+        final String html = "<html><head><title>Page A</title></head>\n"
+                + "<body>\n"
+                + "  <img id='myImg' usemap='#imgmap'"
+                        + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
+                        + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
+                + "  <map id='myMap' name='imgmap'>\n"
+                + "    <area id='myArea1' shape='poly' coords='0,0'>\n"
+                + "    <area id='myArea2' shape='poly' coords='0,0,1,1'>\n"
+                + "    <area id='myArea3' shape='poly' >\n"
+                + "    <area id='myArea4' shape='poly' coords='0,0,1,0,0,1'>\n"
+                + "  </map>\n"
+                + "</body></html>";
+
+        final String[] expected = getExpectedAlerts();
+
+        setExpectedAlerts(new String[] {});
+        final WebDriver driver = loadPage2(html);
+
+        boolean displayed = driver.findElement(By.id("myArea1")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[0]), displayed);
+
+        displayed = driver.findElement(By.id("myArea2")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[1]), displayed);
+
+        displayed = driver.findElement(By.id("myArea3")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[2]), displayed);
+
+        displayed = driver.findElement(By.id("myArea4")).isDisplayed();
+        assertEquals(Boolean.parseBoolean(expected[3]), displayed);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void isDisplayedMissingImage() throws Exception {
         final String html = "<html><head><title>Page A</title></head>\n"
                 + "<body>\n"
@@ -234,7 +363,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myMap")).isDisplayed();
         assertFalse(displayed);

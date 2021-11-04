@@ -31,8 +31,12 @@ import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Handler;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.server.handler.ResourceHandler;
@@ -348,11 +352,25 @@ public abstract class WebServerTestCase extends WebTestCase {
 
                 final ConstraintSecurityHandler handler = (ConstraintSecurityHandler) context.getSecurityHandler();
                 handler.setLoginService(new HashLoginService("MyRealm", "./src/test/resources/realm.properties"));
+                handler.setAuthMethod(Constraint.__BASIC_AUTH);
                 handler.setConstraintMappings(new ConstraintMapping[]{constraintMapping});
             }
 
             context.addServlet(MockWebConnectionServlet.class, "/*");
             server.setHandler(context);
+
+            if (isHttps()) {
+                final SslConnectionFactory sslConnectionFactory = getSslConnectionFactory();
+
+                final HttpConfiguration sslConfiguration = new HttpConfiguration();
+                sslConfiguration.addCustomizer(new SecureRequestCustomizer());
+                final HttpConnectionFactory httpConnectionFactory = new HttpConnectionFactory(sslConfiguration);
+
+                final ServerConnector connector =
+                        new ServerConnector(server, sslConnectionFactory, httpConnectionFactory);
+                connector.setPort(PORT2);
+                server.addConnector(connector);
+            }
 
             tryStart(PORT, server);
             STATIC_SERVER_ = server;
@@ -452,6 +470,20 @@ public abstract class WebServerTestCase extends WebTestCase {
      */
     protected boolean isBasicAuthentication() {
         return false;
+    }
+
+    /**
+     * @return whether to support https also
+     */
+    protected boolean isHttps() {
+        return false;
+    }
+
+    /**
+     * @return SslConnectionFactory for https
+     */
+    protected SslConnectionFactory getSslConnectionFactory() {
+        return null;
     }
 
     /**

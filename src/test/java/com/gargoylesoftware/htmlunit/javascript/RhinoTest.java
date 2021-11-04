@@ -46,16 +46,17 @@ public class RhinoTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
+            + LOG_TITLE_FUNCTION
 
             + "  var isStrict = (function() { return !this; })();\n"
-            + "  alert(isStrict);\n"
+            + "  log(isStrict);\n"
 
             + "  isStrict = (function() { return !!!this; })();\n"
-            + "  alert(isStrict);\n"
+            + "  log(isStrict);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,6 +71,7 @@ public class RhinoTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
+            + LOG_TITLE_FUNCTION
 
             + "  function isStrict() {\n"
             + "    var x = true;\n"
@@ -77,11 +79,11 @@ public class RhinoTest extends WebDriverTestCase {
             + "    return x;\n"
             + "  }\n"
 
-            + "  alert(isStrict());\n"
+            + "  log(isStrict());\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -95,17 +97,18 @@ public class RhinoTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
+            + LOG_TITLE_FUNCTION
 
             + "  function isStrict() {\n"
             + "    try { arguments.callee } catch(e) { return true; };"
             + "    return false;\n"
             + "  }\n"
 
-            + "  alert(isStrict());\n"
+            + "  log(isStrict());\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -121,28 +124,29 @@ public class RhinoTest extends WebDriverTestCase {
             + "<body>\n"
             + "<script>\n"
             + "  'use strict'\n"
+            + LOG_TITLE_FUNCTION
 
             + "  function Foo () {}\n"
 
             + "  try {\n"
             + "    true.constructor = Foo;\n"
-            + "    alert('true.constructor');\n"
-            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+            + "    log('true.constructor');\n"
+            + "  } catch(e) { log(e instanceof TypeError); }\n"
 
             + "  try {\n"
             + "    var o = 1;\n"
             + "    o.constructor = Foo;\n"
-            + "    alert('1.constructor');\n"
-            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+            + "    log('1.constructor');\n"
+            + "  } catch(e) { log(e instanceof TypeError); }\n"
 
             + "  try {\n"
             + "    'test'.constructor = Foo;\n"
-            + "    alert('test.constructor');\n"
-            + "  } catch(e) { alert(e instanceof TypeError); }\n"
+            + "    log('test.constructor');\n"
+            + "  } catch(e) { log(e instanceof TypeError); }\n"
 
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

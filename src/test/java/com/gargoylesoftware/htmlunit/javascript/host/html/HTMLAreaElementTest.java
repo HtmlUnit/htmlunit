@@ -41,23 +41,24 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     public void readWriteAccessKey() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' accesskey='A'/></map><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a';\n"
             + "a2.accessKey = 'A';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = 'a8';\n"
             + "a2.accessKey = '8Afoo';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "a1.accessKey = '8';\n"
             + "a2.accessKey = '@';\n"
-            + "alert(a1.accessKey);\n"
-            + "alert(a2.accessKey);\n"
+            + "log(a1.accessKey);\n"
+            + "log(a2.accessKey);\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -65,19 +66,18 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "function HTMLAreaElement() { [native code] }"},
-            FF = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
-            FF78 = {"", "function HTMLAreaElement() {\n    [native code]\n}"},
             IE = {"", "[object HTMLAreaElement]"})
     public void type() throws Exception {
         final String html = ""
-            + "<html><head><title>foo</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "  var elem = document.getElementById('a1');\n"
             + "    try {\n"
-            + "      alert(elem);\n"
-            + "      alert(HTMLAreaElement);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(elem);\n"
+            + "      log(HTMLAreaElement);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -85,7 +85,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "  <map><area id='a1'/><area id='a2' accesskey='A'/></map>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,24 +101,24 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var testNode = document.getElementById('myButton');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('a1');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('a2');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
 
             + "      testNode = document.getElementById('a3');\n"
             + "      testNode.focus();\n"
-            + "      alert(document.activeElement);\n"
+            + "      log(document.activeElement);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -136,7 +136,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -147,6 +147,7 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     public void click() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('a1').click();\n"
             + "    document.getElementById('a2').click();\n"
@@ -158,12 +159,12 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
                         + " src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAA"
                         + "HElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=='>\n"
             + "  <map name='dot'>\n"
-            + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='alert(\"a1 clicked\");'/>\n"
-            + "    <area id='a2' shape='rect' coords='0 0 2 2' onclick='alert(\"a2 clicked\");'/>\n"
+            + "    <area id='a1' shape='rect' coords='0,0,1,1' onclick='log(\"a1 clicked\");'/>\n"
+            + "    <area id='a2' shape='rect' coords='0 0 2 2' onclick='log(\"a2 clicked\");'/>\n"
             + "  <map>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -174,23 +175,24 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     public void readWriteRel() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "a1.rel = 'prefetch';\n"
             + "a2.rel = 'prefetch';\n"
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "a1.rel = 'not supported';\n"
             + "a2.rel = 'notsupported';\n"
-            + "alert(a1.rel);\n"
-            + "alert(a2.rel);\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -202,18 +204,19 @@ public class HTMLAreaElementTest extends WebDriverTestCase {
     public void relList() throws Exception {
         final String html
             = "<html><body><map><area id='a1'/><area id='a2' rel='alternate help'/></map><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
 
             + "try {\n"
-            + "  alert(a1.relList.length);\n"
-            + "  alert(a2.relList.length);\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
 
             + "  for (var i = 0; i < a2.relList.length; i++) {\n"
-            + "    alert(a2.relList[i]);\n"
+            + "    log(a2.relList[i]);\n"
             + "  }\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
 
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

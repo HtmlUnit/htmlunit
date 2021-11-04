@@ -43,18 +43,19 @@ public class HtmlEmbedTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "    alert(document.embeds);\n"
-            + "    alert(document.embeds.length);\n"
-            + "    alert(document.embeds[0]);\n"
+            + "    log(document.getElementById('myId'));\n"
+            + "    log(document.embeds);\n"
+            + "    log(document.embeds.length);\n"
+            + "    log(document.embeds[0]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <embed id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlElement element = toHtmlElement(driver.findElement(By.id("myId")));
             assertTrue(HtmlEmbed.class.isInstance(element));
@@ -69,8 +70,9 @@ public class HtmlEmbedTest extends WebDriverTestCase {
     public void saveAs() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -78,7 +80,7 @@ public class HtmlEmbedTest extends WebDriverTestCase {
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("something");
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlEmbed element = (HtmlEmbed) toHtmlElement(driver.findElement(By.id("myId")));
             final File file = new File(System.getProperty("user.home"), "htmlunit-embed.bin");

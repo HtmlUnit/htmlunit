@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -48,6 +49,10 @@ public class MediaError extends SimpleScriptable {
     /** Source Not Supported Error. */
     @JsxConstant
     public static final int MEDIA_ERR_SRC_NOT_SUPPORTED = 4;
+
+    /** Source Not Supported Error. */
+    @JsxConstant(IE)
+    public static final int MS_MEDIA_ERR_ENCRYPTED = 5;
 
     /**
      * Creates an instance.

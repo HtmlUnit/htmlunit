@@ -65,6 +65,7 @@ import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.ProcessingInstruction;
+import org.w3c.dom.html.HTMLFieldSetElement;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -919,6 +920,27 @@ public class Document extends Node {
     }
 
     /**
+     * Sets the {@code body} element of the document.
+     * @param htmlElement the new html element
+     */
+    @JsxSetter
+    public void setBody(final HTMLElement htmlElement) {
+        if (htmlElement instanceof HTMLBodyElement || htmlElement instanceof HTMLFieldSetElement) {
+            final Page page = getPage();
+            if (page instanceof HtmlPage) {
+                final HtmlElement body = ((HtmlPage) page).getBody();
+                if (body != null) {
+                    body.replace(htmlElement.getDomNodeOrDie());
+                }
+            }
+            return;
+        }
+        throw Context.reportRuntimeError("Failed to set the 'body' property on 'Document': "
+                + "The new body element is of type '" +  htmlElement.getTagName() + "'. "
+                + "It must be either a 'BODY' or 'FRAMESET' element.");
+    }
+
+    /**
      * JavaScript function {@code close}.
      *
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
@@ -1114,7 +1136,7 @@ public class Document extends Node {
      * @return the value of the {@code URL} property
      */
     @JsxGetter(propertyName = "URL")
-    public String getURL() {
+    public String getURL_js() {
         return getPage().getUrl().toExternalForm();
     }
 
@@ -1124,7 +1146,7 @@ public class Document extends Node {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getDocumentURI() {
-        return getURL();
+        return getURL_js();
     }
 
     /**
@@ -1132,8 +1154,8 @@ public class Document extends Node {
      * @return the value of the {@code URLUnencoded} property
      */
     @JsxGetter(value = IE, propertyName = "URLUnencoded")
-    public String getURLUnencoded() {
-        return getURL();
+    public String getURLUnencoded_js() {
+        return getURL_js();
     }
 
     /**
@@ -4236,14 +4258,6 @@ public class Document extends Node {
         return getWindow();
     }
 
-    @Override
-    protected boolean isReadOnlySettable(final String name, final Object value) {
-        if ("body".equals(name)) {
-            throw ScriptRuntime.typeErrorById("msg.set.prop.no.setter", name, getClassName(), Context.toString(value));
-        }
-        return super.isReadOnlySettable(name, value);
-    }
-
     /**
      * Returns the element with the specified ID, as long as it is an HTML element; {@code null} otherwise.
      * @param id the ID to search for
@@ -4295,5 +4309,14 @@ public class Document extends Node {
     @JsxFunction
     public void clear() {
         // nothing
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @Override
+    public boolean contains(final Object element) {
+        return getDocumentElement().contains(element);
     }
 }

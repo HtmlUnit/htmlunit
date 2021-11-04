@@ -40,7 +40,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             FF = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"},
             FF78 = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"})
     public void test() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -48,6 +48,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
@@ -55,26 +56,27 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r);\n"
+                + "    log(r);\n"
                 + "    if (r.type) {\n"
-                + "      alert(r.type);\n"
-                + "      alert(r.parentStyleSheet);\n"
-                + "      alert(r.parentRule);\n"
-                + "      alert(r.selectorText);\n"
+                + "      log(r.type);\n"
+                + "      log(r.parentStyleSheet);\n"
+                + "      log(r.parentRule);\n"
+                + "      log(r.selectorText);\n"
                 + "    } else {\n"
-                + "      alert(r.selectorText);\n"
+                + "      log(r.selectorText);\n"
                 + "    }\n"
-                + "    alert(r.style.marginTop);\n"
+                + "    log(r.style.marginTop);\n"
                 + "    r.style.marginTop = '10px';\n"
-                + "    alert(r.style.marginTop);\n"
-                + "    alert(r.style.backgroundColor);\n"
+                + "    log(r.style.marginTop);\n"
+                + "    log(r.style.backgroundColor);\n"
                 + "    r.style.backgroundColor = 'red';\n"
-                + "    alert(r.style.backgroundColor);\n"
+                + "    log(r.style.backgroundColor);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -83,11 +85,12 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"4px", "4px", "4px", "4px"})
     public void styleSheet() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { margin: 4px; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
@@ -95,15 +98,16 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[0];\n"
-                + "    alert(r.style.marginTop);\n"
-                + "    alert(r.style.marginRight);\n"
-                + "    alert(r.style.marginBottom);\n"
-                + "    alert(r.style.marginLeft);\n"
+                + "    log(r.style.marginTop);\n"
+                + "    log(r.style.marginRight);\n"
+                + "    log(r.style.marginBottom);\n"
+                + "    log(r.style.marginLeft);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -113,7 +117,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "undefined",
             IE = "false")
     public void readOnly() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -121,6 +125,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
@@ -128,12 +133,13 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r.readOnly);\n"
+                + "    log(r.readOnly);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -142,7 +148,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void type() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -150,6 +156,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  A  { text-decoration: none; color: blue; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var rules;\n"
                 + "    if (document.styleSheets[0].cssRules)\n"
@@ -157,12 +164,13 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "    else\n"
                 + "      rules = document.styleSheets[0].rules;\n"
                 + "    var r = rules[1];\n"
-                + "    alert(r.type);\n"
+                + "    log(r.type);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -173,7 +181,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
             FF = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"},
             FF78 = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
     public void selectorText() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BoDY { background-color: white; color: black; }\n"
                 + "  H1 { font: 8pt Arial bold; }\n"
@@ -184,16 +192,18 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
                 + "  #byId { font: 8pt; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
                 + "    for (var i = 0; i < rules.length; i++)\n"
-                + "      alert(rules[i].selectorText);\n"
+                + "      log(rules[i].selectorText);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -203,24 +213,26 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Alerts({"1", ""})
     @NotYetImplemented
     public void oldIEStyleFilter() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: progid:DXImageTransform.Microsoft.AlphaImageLoader"
                 + "(src='rightCorner.gif', sizingMethod='crop'); }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(rules[0].style.filter);\n"
-                + "  } catch(e) { alert('exception'); }\n"
+                + "    log(rules.length);\n"
+                + "    log(rules[0].style.filter);\n"
+                + "  } catch(e) { log('exception'); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -229,22 +241,24 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts({"1", "none"})
     public void filter() throws Exception {
-        final String html = "<html><head><title>First</title>\n"
+        final String html = "<html><head>\n"
                 + "<style>\n"
                 + "  BODY { filter: none; }\n"
                 + "</style>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  try {\n"
                 + "    var sheet = document.styleSheets[0];\n"
                 + "    var rules = sheet.cssRules || sheet.rules;\n"
-                + "    alert(rules.length);\n"
-                + "    alert(rules[0].style.filter);\n"
-                + "  } catch(e) { alert('exception'); }\n"
+                + "    log(rules.length);\n"
+                + "    log(rules[0].style.filter);\n"
+                + "  } catch(e) { log('exception'); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

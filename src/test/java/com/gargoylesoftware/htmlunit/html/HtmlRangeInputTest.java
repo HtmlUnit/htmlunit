@@ -39,24 +39,25 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"50----", "50----", "50----"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('range1');\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'range';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"range\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "  }\n"
@@ -67,7 +68,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -76,19 +77,20 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"50----", "50----", "50----"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('range1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'range';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
@@ -96,7 +98,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "    builder.innerHTML = '<input type=\"range\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "  }\n"
@@ -107,7 +109,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,36 +118,37 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"7-7---", "7-7---", "4-7---", "4-7---", "4-2---", "4-2---"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('testId');\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.value = '4';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.defaultValue = '2';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "  }\n"
@@ -157,7 +160,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -166,36 +169,37 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"7-7---", "7-7---", "4-7---", "4-7---", "4-2---", "4-2---"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('testId');\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.value = '4';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.defaultValue = '2';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "  }\n"
@@ -206,7 +210,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -215,25 +219,26 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"7-7---", "4-4---", "2-4---", "2-8---"})
     public void defaultValue() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('testId');\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.defaultValue = '4';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
 
             + "    input.value = '2';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "    input.defaultValue = '8';\n"
-            + "    alert(input.value + '-' + input.defaultValue"
+            + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
             + "  }\n"
@@ -244,7 +249,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -257,10 +262,11 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    for (i = 1; i <= 6; i++) {\n"
             + "      var input = document.getElementById('testId' + i);\n"
-            + "      alert(input.value + '-' + input.defaultValue"
+            + "      log(input.value + '-' + input.defaultValue"
                         + " + '-' + input.max + '-' + input.min"
                         + " + '-' + input.step);\n"
             + "    }\n"
@@ -279,7 +285,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -288,12 +294,13 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"41-42-1234-2-13", "5-5-10-2-1", "6-5-10-2-2"})
     public void properties() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    for (i = 1; i <= 3; i++) {\n"
             + "      var input = document.getElementById('testId' + i);\n"
-            + "      alert(input.value + '-' + input.defaultValue"
+            + "      log(input.value + '-' + input.defaultValue"
                         + " + '-' + input.max + '-' + input.min"
                         + " + '-' + input.step);\n"
             + "    }\n"
@@ -310,7 +317,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -343,9 +350,10 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -356,7 +364,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -365,14 +373,15 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "    log(document.getElementById('id1').checkValidity() + '-'\n"
             + "         + document.getElementById('id2').checkValidity() + '-'\n"
             + "         + document.getElementById('id3').checkValidity() + '-'\n"
             + "         + document.getElementById('id4').checkValidity() + '-'\n"
             + "         + document.getElementById('id5').checkValidity() + '-'\n"
             + "         + document.getElementById('id6').checkValidity());\n"
-            + "    alert(document.getElementById('id1').value + '-'\n"
+            + "    log(document.getElementById('id1').value + '-'\n"
             + "         + document.getElementById('id2').value + '-'\n"
             + "         + document.getElementById('id3').value + '-'\n"
             + "         + document.getElementById('id4').value + '-'\n"
@@ -391,7 +400,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     @Test
@@ -400,14 +409,15 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('id1').checkValidity() + '-'\n"
+            + "    log(document.getElementById('id1').checkValidity() + '-'\n"
             + "         + document.getElementById('id2').checkValidity() + '-'\n"
             + "         + document.getElementById('id3').checkValidity() + '-'\n"
             + "         + document.getElementById('id4').checkValidity() + '-'\n"
             + "         + document.getElementById('id5').checkValidity() + '-'\n"
             + "         + document.getElementById('id6').checkValidity());\n"
-            + "    alert(document.getElementById('id1').value + '-'\n"
+            + "    log(document.getElementById('id1').value + '-'\n"
             + "         + document.getElementById('id2').value + '-'\n"
             + "         + document.getElementById('id3').value + '-'\n"
             + "         + document.getElementById('id4').value + '-'\n"
@@ -427,6 +437,6 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

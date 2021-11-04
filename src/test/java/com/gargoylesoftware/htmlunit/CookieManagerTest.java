@@ -18,12 +18,15 @@ import static com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.client.utils.DateUtils;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -155,9 +158,10 @@ public class CookieManagerTest extends WebDriverTestCase {
     }
 
     /**
+     * Test that " are not discarded.
      * Regression test for issue 2973040.
      * When a cookie is set with value within quotes, this value should be sent within quotes
-     * in the following requests. This is a problem (bug?) in HttpClient which is not fixed in HttpClient-4.0.1.
+     * in the following requests. This is a bug in HttpClient which is not fixed in HttpClient-4.0.1.
      * @see <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>
      * @throws Exception if the test fails
      */
@@ -165,7 +169,8 @@ public class CookieManagerTest extends WebDriverTestCase {
     public void valueQuoted() throws Exception {
         final List<NameValuePair> responseHeader = new ArrayList<>();
         responseHeader.add(new NameValuePair("Set-Cookie", "key=value"));
-        responseHeader.add(new NameValuePair("Set-Cookie", "test=\"aa= xx==\""));
+        responseHeader.add(new NameValuePair("Set-Cookie", "quoted=\"hello world\""));
+        responseHeader.add(new NameValuePair("Set-Cookie", "quotedEquals=\"aa= xx==\""));
         getMockWebConnection().setResponse(URL_FIRST, "", 200, "OK", MimeType.TEXT_HTML, responseHeader);
         getMockWebConnection().setDefaultResponse("");
 
@@ -173,12 +178,10 @@ public class CookieManagerTest extends WebDriverTestCase {
 
         driver.get(URL_SECOND.toExternalForm());
 
-        // strange check, but there is no order
         final String lastCookies = getMockWebConnection().getLastAdditionalHeaders().get(HttpHeader.COOKIE);
-        assertEquals(26, lastCookies.length());
-        assertTrue("lastCookies: " + lastCookies, lastCookies.contains("key=value")
-                && lastCookies.contains("test=\"aa= xx==\"")
-                && lastCookies.contains("; "));
+        final List<String> cookies = Arrays.asList(lastCookies.split(";\\s"));
+        Collections.sort(cookies);
+        assertEquals(new String[] {"key=value", "quoted=\"hello world\"", "quotedEquals=\"aa= xx==\""}, cookies);
     }
 
     /**
@@ -471,9 +474,10 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"Cookies: cookie1=value1; cookie2=value2", "Cookies: cookie2=value2"})
     public void cookieExpiresAfterBeingSet() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>foo</title><script>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function f() {\n"
-            + "    alert('Cookies: ' + document.cookie);\n"
+            + "    log('Cookies: ' + document.cookie);\n"
             + "  }\n"
 
             + "  function test() {\n"
@@ -489,7 +493,8 @@ public class CookieManagerTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html, 4000);
+        loadPage2(html);
+        verifyTitle2(4 * DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -730,6 +735,11 @@ public class CookieManagerTest extends WebDriverTestCase {
 
             + "</script></body>\n"
             + "</html>";
+
+        // [IE] real IE waits for the page to load until infinity
+        if (useRealBrowser() && getBrowserVersion().isIE()) {
+            Assert.fail("Blocks real IE");
+        }
 
         final URL firstUrl = new URL("http://host1.htmlunit.org:" + PORT + "/");
         getMockWebConnection().setResponse(firstUrl, html);

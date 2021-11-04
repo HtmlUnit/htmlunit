@@ -459,15 +459,22 @@ public final class EncodingSniffer {
      */
     public static Charset sniffEncoding(final List<NameValuePair> headers, final InputStream content)
         throws IOException {
+        final Charset charset;
         if (isHtml(headers)) {
-            return sniffHtmlEncoding(headers, content);
+            charset = sniffHtmlEncoding(headers, content);
         }
         else if (isXml(headers)) {
-            return sniffXmlEncoding(headers, content);
+            charset = sniffXmlEncoding(headers, content);
         }
         else {
-            return sniffUnknownContentTypeEncoding(headers, content);
+            charset = sniffUnknownContentTypeEncoding(headers, content);
         }
+
+        // this is was browsers do
+        if (charset != null && "GB2312".equals(charset.name())) {
+            return Charset.forName("GBK");
+        }
+        return charset;
     }
 
     /**
@@ -487,7 +494,7 @@ public final class EncodingSniffer {
      * @return {@code true} if the specified HTTP response headers indicate an XML response
      */
     static boolean isXml(final List<NameValuePair> headers) {
-        return contentTypeEndsWith(headers, MimeType.TEXT_XML, "application/xml", "text/vnd.wap.wml", "+xml");
+        return contentTypeEndsWith(headers, MimeType.TEXT_XML, MimeType.APPLICATION_XML, "text/vnd.wap.wml", "+xml");
     }
 
     /**

@@ -40,13 +40,14 @@ public class BlobTest extends WebDriverTestCase {
     public void properties() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var blob = new Blob(['abc'], {type : 'text/html'});\n"
 
-            + "  alert(blob.size);\n"
-            + "  alert(blob.type);\n"
+            + "  log(blob.size);\n"
+            + "  log(blob.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -54,7 +55,7 @@ public class BlobTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -66,15 +67,16 @@ public class BlobTest extends WebDriverTestCase {
     public void text() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var blob = new Blob(['Hello HtmlUnit'], {type : 'text/html'});\n"
 
-                + "  alert(typeof blob.text);\n"
+                + "  log(typeof blob.text);\n"
                 + "  try {\n"
-                + "    blob.text().then(function(text) { alert(text); });\n"
-                + "  } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "    blob.text().then(function(text) { log(text); });\n"
+                + "  } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -82,7 +84,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -116,11 +119,12 @@ public class BlobTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var blob = new Blob(['Hello HtmlUnit'], {type : '" + type + "'});\n"
-            + "  alert(blob.type);\n"
+            + "  log(blob.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -128,7 +132,7 @@ public class BlobTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -140,11 +144,12 @@ public class BlobTest extends WebDriverTestCase {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
-            + "<head><title>foo</title>\n"
+            + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var blob = new Blob(['Hello HtmlUnit']);\n"
-            + "  alert(blob.type);\n"
+            + "  log(blob.type);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -152,7 +157,7 @@ public class BlobTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -164,16 +169,17 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorNoArgs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var blob = new Blob();\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -181,7 +187,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -193,16 +200,17 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorEmpty() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var blob = new Blob([]);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -210,7 +218,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -222,16 +231,17 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var blob = new Blob(['HtmlUnit']);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -239,7 +249,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -251,16 +262,17 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorStringWithOptions() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var blob = new Blob(['Html', 'Unit'], {type: 'application/octet-stream'});\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -268,7 +280,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -280,16 +293,17 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorStrings() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var blob = new Blob(['Html', 'Unit', 'is great']);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -297,7 +311,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -309,8 +324,9 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorMixed() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var nab = new ArrayBuffer(2);\n"
                 + "    var nabv = new Uint8Array(nab, 0, 2);\n"
@@ -318,11 +334,11 @@ public class BlobTest extends WebDriverTestCase {
                 + "    var blob = new Blob(['HtmlUnit',"
                                         + "nab, new Int8Array([77,75])]);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -330,7 +346,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -342,8 +359,9 @@ public class BlobTest extends WebDriverTestCase {
     public void ctorMixedBlobs() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var nab = new ArrayBuffer(2);\n"
                 + "    var nabv = new Uint8Array(nab, 0, 2);\n"
@@ -352,11 +370,11 @@ public class BlobTest extends WebDriverTestCase {
                                         + "nab, new Int8Array([77,75])]);\n"
                 + "    blob = new Blob(['HtmlUnit',"
                                     + "blob, new Int8Array([77,75]), blob]);\n"
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
                 + "    try {\n"
-                + "      blob.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      blob.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -364,7 +382,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -376,8 +395,9 @@ public class BlobTest extends WebDriverTestCase {
     public void slice() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var nab = new ArrayBuffer(2);\n"
                 + "    var nabv = new Uint8Array(nab, 0, 2);\n"
@@ -385,18 +405,18 @@ public class BlobTest extends WebDriverTestCase {
                 + "    var blob = new Blob(['HtmlUnit',"
                                         + "nab, new Int8Array([77,75])]);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
 
-                + "    alert(typeof blob.slice);\n"
+                + "    log(typeof blob.slice);\n"
 
                 + "    var sliced = blob.slice(1,4);\n"
-                + "    alert(sliced.size);\n"
-                + "    alert(sliced.type);\n"
+                + "    log(sliced.size);\n"
+                + "    log(sliced.type);\n"
 
                 + "    try {\n"
-                + "      sliced.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      sliced.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -404,7 +424,8 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -541,8 +562,9 @@ public class BlobTest extends WebDriverTestCase {
     private void slice(final String slice) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html>\n"
-                + "<head><title>foo</title>\n"
+                + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var nab = new ArrayBuffer(2);\n"
                 + "    var nabv = new Uint8Array(nab, 0, 2);\n"
@@ -550,16 +572,16 @@ public class BlobTest extends WebDriverTestCase {
                 + "    var blob = new Blob(['HtmlUnit',"
                                         + "nab, new Int8Array([77,75])]);\n"
 
-                + "    alert(blob.size);\n"
-                + "    alert(blob.type);\n"
+                + "    log(blob.size);\n"
+                + "    log(blob.type);\n"
 
                 + "    var sliced = " + slice + "\n"
-                + "    alert(sliced.size);\n"
-                + "    alert(sliced.type);\n"
+                + "    log(sliced.size);\n"
+                + "    log(sliced.type);\n"
 
                 + "    try {\n"
-                + "      sliced.text().then(function(text) { alert(text); });\n"
-                + "    } catch(e) { alert('TypeError ' + (e instanceof TypeError)); }\n"
+                + "      sliced.text().then(function(text) { log(text); });\n"
+                + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -567,6 +589,7 @@ public class BlobTest extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

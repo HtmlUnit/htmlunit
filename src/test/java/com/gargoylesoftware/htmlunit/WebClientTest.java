@@ -1465,16 +1465,16 @@ public class WebClientTest extends SimpleWebTestCase {
         final WebClient c = getWebClient();
 
         // tests empty files, type should be determined from file suffix
-        assertEquals("empty.png", "image/png", c.guessContentType(getTestFile("empty.png")));
-        assertEquals("empty.jpg", "image/jpeg", c.guessContentType(getTestFile("empty.jpg")));
-        assertEquals("empty.gif", "image/gif", c.guessContentType(getTestFile("empty.gif")));
+        assertEquals("empty.png", MimeType.IMAGE_PNG, c.guessContentType(getTestFile("empty.png")));
+        assertEquals("empty.jpg", MimeType.IMAGE_JPEG, c.guessContentType(getTestFile("empty.jpg")));
+        assertEquals("empty.gif", MimeType.IMAGE_GIF, c.guessContentType(getTestFile("empty.gif")));
         assertEquals("empty.js", MimeType.APPLICATION_JAVASCRIPT, c.guessContentType(getTestFile("empty.js")));
         assertEquals("empty.css", "text/css", c.guessContentType(getTestFile("empty.css")));
 
         // test real files with bad file suffix
-        assertEquals("tiny-png.img", "image/png", c.guessContentType(getTestFile("tiny-png.img")));
-        assertEquals("tiny-jpg.img", "image/jpeg", c.guessContentType(getTestFile("tiny-jpg.img")));
-        assertEquals("tiny-gif.img", "image/gif", c.guessContentType(getTestFile("tiny-gif.img")));
+        assertEquals("tiny-png.img", MimeType.IMAGE_PNG, c.guessContentType(getTestFile("tiny-png.img")));
+        assertEquals("tiny-jpg.img", MimeType.IMAGE_JPEG, c.guessContentType(getTestFile("tiny-jpg.img")));
+        assertEquals("tiny-gif.img", MimeType.IMAGE_GIF, c.guessContentType(getTestFile("tiny-gif.img")));
 
         // tests XHTML files, types will be determined based on a mixture of file suffixes and contents
         // note that "xhtml.php" returns content type "text/xml" in Firefox, but "application/xml" is good enough...
@@ -1642,7 +1642,7 @@ public class WebClientTest extends SimpleWebTestCase {
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
         // request has an accept header use the one from the request
-        webClient.addRequestHeader(HttpHeader.ACCEPT, "image/png");
+        webClient.addRequestHeader(HttpHeader.ACCEPT, MimeType.IMAGE_PNG);
         webClient.getPage(wr);
         assertEquals("application/pdf", webConnection.getLastAdditionalHeaders().get(HttpHeader.ACCEPT));
 
@@ -1848,6 +1848,19 @@ public class WebClientTest extends SimpleWebTestCase {
         client.getOptions().setCssEnabled(true);
         client.getPage(URL_FIRST);
         assertEquals(new String[]{"1"}, actual);
+    }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void getPageDataProtocol() throws Exception {
+        final WebClient webClient = getWebClient();
+
+        final String html = "<html><body>DataUrl Test</body></html>";
+
+        final Page page = webClient.getPage("data:text/html;charset=utf-8," + html);
+        assertEquals("DataUrl Test", ((HtmlPage) page).asNormalizedText());
     }
 
     /**

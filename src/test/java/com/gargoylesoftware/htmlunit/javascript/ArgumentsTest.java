@@ -37,20 +37,22 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts({"0", "0", "1", "0"})
     public void arguments() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(test.arguments.length);\n"
+            + "  log(test.arguments.length);\n"
             + "  test1('hi');\n"
             + "}\n"
             + "function test1(hello) {\n"
-            + "  alert(test.arguments.length);\n"
-            + "  alert(test1.arguments.length);\n"
-            + "  alert(arguments.callee.caller.arguments.length);\n"
+            + "  log(test.arguments.length);\n"
+            + "  log(test1.arguments.length);\n"
+            + "  log(arguments.callee.caller.arguments.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -60,15 +62,17 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts({"null", "null"})
     public void argumentsShouldBeNullOutsideFunction() throws Exception {
         final String html
-            = "<html><body><script>\n"
+            = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "}\n"
-            + "alert(test.arguments);\n"
+            + "log(test.arguments);\n"
             + "test();\n"
-            + "alert(test.arguments);\n"
+            + "log(test.arguments);\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -78,17 +82,19 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts("2")
     public void passedCountDifferentFromDeclared() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  test1('hi', 'there');\n"
             + "}\n"
             + "function test1() {\n"
-            + "  alert(test1.arguments.length);\n"
+            + "  log(test1.arguments.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,22 +105,24 @@ public class ArgumentsTest extends WebDriverTestCase {
             IE = {"2", "hi", "undefined", "you"})
     public void readOnlyWhenAccessedThroughFunction() throws Exception {
         final String html
-            = "<html><head><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  test1('hello', 'world');\n"
             + "}\n"
             + "function test1() {\n"
             + "  test1.arguments[1] = 'hi';\n"
             + "  test1.arguments[3] = 'you';\n"
-            + "  alert(test1.arguments.length);\n"
-            + "  alert(test1.arguments[1]);\n"
-            + "  alert(test1.arguments[2]);\n"
-            + "  alert(test1.arguments[3]);\n"
+            + "  log(test1.arguments.length);\n"
+            + "  log(test1.arguments[1]);\n"
+            + "  log(test1.arguments[2]);\n"
+            + "  log(test1.arguments[3]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -123,19 +131,21 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts({"2", "hi", "undefined", "you"})
     public void writableWithinFunction() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test1() {\n"
             + "  arguments[1] = 'hi';\n"
             + "  arguments[3] = 'you';\n"
-            + "  alert(arguments.length);\n"
-            + "  alert(arguments[1]);\n"
-            + "  alert(arguments[2]);\n"
-            + "  alert(arguments[3]);\n"
+            + "  log(arguments.length);\n"
+            + "  log(arguments[1]);\n"
+            + "  log(arguments[2]);\n"
+            + "  log(arguments[3]);\n"
             + "}\n"
             + "test1('hello', 'world');\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -145,14 +155,16 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void argumentsEqualsFnArguments() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test1() {\n"
-            + "  alert(arguments == test1.arguments);\n"
+            + "  log(arguments == test1.arguments);\n"
             + "}\n"
             + "test1('hello', 'world');\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -161,13 +173,15 @@ public class ArgumentsTest extends WebDriverTestCase {
     @Test
     @Alerts("hi")
     public void argumentsAsParameter() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test1(arguments) {\n"
-            + "  alert(arguments);\n"
+            + "  log(arguments);\n"
             + "}\n"
             + "test1('hi');\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

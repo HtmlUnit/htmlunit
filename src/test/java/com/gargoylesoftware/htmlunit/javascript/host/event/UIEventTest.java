@@ -164,8 +164,14 @@ public class UIEventTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1", "[object MouseEvent]", "2"},
-            IE = {"[object Event]", "undefined", "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
+    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1",
+                       "[object MouseEvent]", "2", "[object MouseEvent]", "2"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                    "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            IE = {"[object Event]", "undefined", "[object PointerEvent]", "0",
+                  "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
     public void detail() throws Exception {
         final String html =
               "<html><head><script>\n"
@@ -178,6 +184,7 @@ public class UIEventTest extends WebDriverTestCase {
             + "<body onload='alertDetail(event)'>\n"
             + "  <div id='a' onclick='alertDetail(event)'>abc</div>\n"
             + "  <div id='b' ondblclick='alertDetail(event)'>xyz</div>\n"
+            + "  <div id='c' oncontextmenu='alertDetail(event)'>xyz</div>\n"
             + "</body></html>";
 
         final String[] alerts = getExpectedAlerts();
@@ -190,8 +197,114 @@ public class UIEventTest extends WebDriverTestCase {
         driver.findElement(By.id("a")).click();
         verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
 
-        final Actions action = new Actions(driver);
+        i = 0;
+        Actions action = new Actions(driver);
         action.doubleClick(driver.findElement(By.id("b")));
+        action.perform();
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
+        action = new Actions(driver);
+        action.contextClick(driver.findElement(By.id("c")));
+        action.perform();
+        verifyTitle2(driver, alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1",
+                       "[object MouseEvent]", "2", "[object MouseEvent]", "2"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                    "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            IE = {"[object Event]", "undefined", "[object PointerEvent]", "0",
+                  "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
+    public void detailInputText() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function alertDetail(e) {\n"
+            + "    log(e);\n"
+            + "    log(e.detail);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='alertDetail(event)'>\n"
+            + "  <input type='text' id='a' onclick='alertDetail(event)'>\n"
+            + "  <input type='text' id='b' ondblclick='alertDetail(event)'>\n"
+            + "  <input type='text' id='c' oncontextmenu='alertDetail(event)'>\n"
+            + "</body></html>";
+
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(driver, alerts[i++], alerts[i++]);
+
+        i = 0;
+        driver.findElement(By.id("a")).click();
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
+
+        i = 0;
+        Actions action = new Actions(driver);
+        action.doubleClick(driver.findElement(By.id("b")));
+        action.perform();
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
+        action = new Actions(driver);
+        action.contextClick(driver.findElement(By.id("c")));
+        action.perform();
+        verifyTitle2(driver, alerts);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "1",
+                       "[object MouseEvent]", "2", "[object MouseEvent]", "2"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                      "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "1",
+                    "[object MouseEvent]", "2", "[object PointerEvent]", "0"},
+            IE = {"[object Event]", "undefined", "[object PointerEvent]", "0",
+                  "[object PointerEvent]", "0", "[object PointerEvent]", "0"})
+    public void detailInputRadio() throws Exception {
+        final String html =
+              "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function alertDetail(e) {\n"
+            + "    log(e);\n"
+            + "    log(e.detail);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='alertDetail(event)'>\n"
+            + "  <input type='radio' id='a' onclick='alertDetail(event)'>\n"
+            + "  <input type='radio' id='b' ondblclick='alertDetail(event)'>\n"
+            + "  <input type='radio' id='c' oncontextmenu='alertDetail(event)'>\n"
+            + "</body></html>";
+
+        final String[] alerts = getExpectedAlerts();
+        int i = 0;
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(driver, alerts[i++], alerts[i++]);
+
+        i = 0;
+        driver.findElement(By.id("a")).click();
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
+
+        i = 0;
+        Actions action = new Actions(driver);
+        action.doubleClick(driver.findElement(By.id("b")));
+        action.perform();
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++], alerts[i++]);
+
+        action = new Actions(driver);
+        action.contextClick(driver.findElement(By.id("c")));
         action.perform();
         verifyTitle2(driver, alerts);
     }
@@ -201,6 +314,8 @@ public class UIEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Event]", "undefined", "[object MouseEvent]", "[object Window]"},
+            CHROME = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
+            EDGE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"},
             IE = {"[object Event]", "undefined", "[object PointerEvent]", "[object Window]"})
     public void view() throws Exception {
         final String html =

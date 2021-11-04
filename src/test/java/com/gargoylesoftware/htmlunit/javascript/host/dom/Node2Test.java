@@ -48,7 +48,7 @@ public class Node2Test extends SimpleWebTestCase {
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'><div id='a'><div id='b'/></div></html>";
-        final HtmlPage page = loadPageWithAlerts(html);
+        final HtmlPage page = loadPage(html);
         assertNotNull(page.getHtmlElementById("b").getParentNode());
     }
 }

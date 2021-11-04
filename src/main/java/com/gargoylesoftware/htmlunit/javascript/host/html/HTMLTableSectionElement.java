@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * A JavaScript object representing "HTMLTableSectionElement", it is used by
  * {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
@@ -144,26 +142,5 @@ public class HTMLTableSectionElement extends RowContainer {
     @JsxSetter(IE)
     public void setBgColor(final String bgColor) {
         setColorAttribute("bgColor", bgColor);
-    }
-
-    /**
-     * Overwritten to throw an exception.
-     * @param value the new value for replacing this node
-     */
-    @JsxSetter
-    @Override
-    public void setOuterHTML(final Object value) {
-        throw Context.reportRuntimeError("outerHTML is read-only for tag '"
-                            + getDomNodeOrDie().getNodeName() + "'");
-    }
-
-    /**
-     * Overwritten to throw an exception because this is readonly.
-     * @param value the new value for the contents of this node
-     */
-    @Override
-    @JsxSetter({CHROME, EDGE, IE})
-    public void setInnerText(final Object value) {
-        super.setInnerText(value);
     }
 }

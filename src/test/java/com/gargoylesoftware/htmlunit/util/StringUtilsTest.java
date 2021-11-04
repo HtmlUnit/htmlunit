@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
-import java.awt.Color;
-
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.html.impl.Color;
 
 /**
  * Tests for {@link StringUtils}.

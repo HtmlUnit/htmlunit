@@ -132,7 +132,7 @@ public class WebResponseDataTest extends WebServerTestCase {
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip-only-text/html"));
-        headers.add(new NameValuePair("content-type", "image/png"));
+        headers.add(new NameValuePair("content-type", MimeType.IMAGE_PNG));
 
         final WebResponseData data = new WebResponseData(zippedContent, HttpStatus.SC_OK, "OK", headers);
         final byte[] bytes = IOUtils.toByteArray(data.getInputStream());

@@ -100,20 +100,21 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValues() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('image1');\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'image';\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"image\">';\n"
             + "    input = builder.firstChild;\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -122,7 +123,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,23 +132,24 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts({"--null", "--null", "--null"})
     public void defaultValuesAfterClone() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('image1');\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    input = document.createElement('input');\n"
             + "    input.type = 'image';\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
 
             + "    var builder = document.createElement('div');\n"
             + "    builder.innerHTML = '<input type=\"image\">';\n"
             + "    input = builder.firstChild;\n"
             + "    input = input.cloneNode(false);\n"
-            + "    alert(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -156,7 +158,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -167,26 +169,27 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -196,7 +199,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -207,26 +210,27 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "newValue-newValue-newValue",
                 "newDefault-newDefault-newDefault", "newDefault-newDefault-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -235,7 +239,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -246,23 +250,24 @@ public class HtmlImageInputTest extends WebDriverTestCase {
                 "newValue-newValue-newValue", "attribValue-attribValue-attribValue",
                 "newDefault-newDefault-newDefault"})
     public void value() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var image = document.getElementById('testId');\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'default';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.value = 'newValue';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.setAttribute('value', 'attribValue');\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
 
             + "    image.defaultValue = 'newDefault';\n"
-            + "    alert(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
+            + "    log(image.value + '-' + image.defaultValue + '-' + image.getAttribute('value'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -271,7 +276,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -282,14 +287,15 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             FF = "7",
             FF78 = "7")
     public void textLength() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
             + "    if(text.textLength) {\n"
-            + "      alert(text.textLength);\n"
+            + "      log(text.textLength);\n"
             + "    } else {\n"
-            + "      alert('textLength not available');\n"
+            + "      log('textLength not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -299,7 +305,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -331,14 +337,20 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickFiresOnMouseDown() throws Exception {
-        final String html = "<html><body><input type='image' src='x.png' id='i' onmousedown='alert(1)'></body></html>";
+        final String html = "<html>"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
+                + "<body><input type='image' src='x.png' id='i' onmousedown='log(1)'></body></html>";
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
-        verifyAlerts(webDriver, getExpectedAlerts());
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -348,14 +360,20 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void clickFiresOnMouseUp() throws Exception {
-        final String html = "<html><body><input type='image' src='x.png' id='i' onmouseup='alert(1)'></body></html>";
+        final String html = "<html>"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
+                + "<body><input type='image' src='x.png' id='i' onmouseup='log(1)'></body></html>";
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("i")).click();
 
-        verifyAlerts(webDriver, getExpectedAlerts());
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -365,9 +383,14 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Alerts("1")
     public void outsideForm() throws Exception {
         final String html =
-            "<html><head></head>\n"
+            "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<body>\n"
-            + "<input id='myInput' type='image' src='test.png' onclick='alert(1)'>\n"
+            + "<input id='myInput' type='image' src='test.png' onclick='log(1)'>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
@@ -375,7 +398,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("myInput")).click();
 
-        verifyAlerts(webDriver, getExpectedAlerts());
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -393,15 +416,16 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -415,7 +439,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_SECOND);
         setExpectedAlerts(getExpectedAlerts()[0]);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
     }
@@ -435,15 +459,16 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -457,7 +482,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         setExpectedAlerts(getExpectedAlerts()[0]);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
     }
@@ -472,15 +497,16 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -494,7 +520,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         setExpectedAlerts(getExpectedAlerts()[0]);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
     }
@@ -509,15 +535,16 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -531,7 +558,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         setExpectedAlerts(getExpectedAlerts()[0]);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         assertEquals(expectedRequestCount, getMockWebConnection().getRequestCount() - startCount);
     }
@@ -546,15 +573,16 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_SECOND, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -564,7 +592,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables(URL_SECOND);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -576,11 +604,12 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('myInput');\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "    input.src='" + URL_FIRST + "abcd/img.gif';\n"
-            + "    alert(input.src);\n"
+            + "    log(input.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -590,7 +619,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -608,7 +637,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             final byte[] directBytes = IOUtils.toByteArray(is);
             final URL urlImage = new URL(URL_FIRST, "abcd/img.gif");
             final List<NameValuePair> emptyList = Collections.emptyList();
-            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/gif", emptyList);
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
         }
 
         final String html
@@ -658,9 +687,10 @@ public class HtmlImageInputTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var input = document.getElementById('tester');\n"
-            + "    alert(input.min + '-' + input.max + '-' + input.step);\n"
+            + "    log(input.min + '-' + input.max + '-' + input.step);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -671,6 +701,6 @@ public class HtmlImageInputTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

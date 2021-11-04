@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebClientOptions;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * Tests for {@link ActiveXObject}.
@@ -49,30 +50,27 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         if (!isJacobInstalled()) {
             return;
         }
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
-            + "      alert(ie.FullName);\n"
-            + "    } catch(e) {alert('exception: ' + e.message);}\n"
+            + "      document.title = ie.FullName;\n"
+            + "    } catch(e) {document.title = 'exception: ' + e.message;}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {getProperty("InternetExplorer.Application", "FullName").toString()};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
         final WebClient client = getWebClient();
         client.getOptions().setActiveXNative(true);
-        final List<String> collectedAlerts = new ArrayList<>();
-        client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
         final MockWebConnection webConnection = new MockWebConnection();
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final String expectedAlerts = getProperty("InternetExplorer.Application", "FullName").toString();
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals(expectedAlerts, page.getTitleText());
     }
 
     /**
@@ -111,19 +109,17 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         if (!isJacobInstalled()) {
             return;
         }
-        final String html = "<html><head><title>foo</title><script>\n"
+        final String html = "<html><head>\n"
+            + "<script>\n"
             + "  function test() {\n"
             + "    try {\n"
             + "      var ie = new ActiveXObject('InternetExplorer.Application');\n"
             + "      ie.PutProperty('Hello', 'There');\n"
-            + "      alert(ie.GetProperty('Hello'));\n"
-            + "    } catch(e) {alert('exception: ' + e.message);}\n"
+            + "      document.tile = ie.GetProperty('Hello'));\n"
+            + "    } catch(e) {document.title = 'exception: ' + e.message;}\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
-
-        final String[] expectedAlerts = {"There"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
 
         final WebClient client = getWebClient();
         client.getOptions().setActiveXNative(true);
@@ -134,8 +130,8 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("There", page.getTitleText());
     }
 
     /**
@@ -162,9 +158,6 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"true"};
-        createTestPageForRealBrowserIfNeeded(html, expectedAlerts);
-
         final WebClient client = getWebClient();
         client.getOptions().setActiveXNative(true);
         final List<String> collectedAlerts = new ArrayList<>();
@@ -174,7 +167,7 @@ public class ActiveXObjectTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html);
         client.setWebConnection(webConnection);
 
-        client.getPage(URL_FIRST);
-        assertEquals(expectedAlerts, collectedAlerts);
+        final HtmlPage page = client.getPage(URL_FIRST);
+        assertEquals("True", page.getTitleText());
     }
 }

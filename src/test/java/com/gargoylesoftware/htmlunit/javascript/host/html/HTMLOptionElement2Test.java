@@ -447,7 +447,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "<html>\n"
             + "<body>\n"
             + "<form name='myform'/>\n"
-            + "<script language='javascript'>\n"
+            + "<script>\n"
             + "var select = document.createElement('select');\n"
             + "var opt = document.createElement('option');\n"
             + "opt.value = 'x';\n"
@@ -456,7 +456,8 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "document.myform.appendChild(select);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPage2(html);
     }
 
     /**
@@ -514,7 +515,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
     }
 
     /**

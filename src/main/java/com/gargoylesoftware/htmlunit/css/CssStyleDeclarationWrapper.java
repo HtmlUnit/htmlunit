@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.util.List;
+
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
@@ -86,6 +90,16 @@ public class CssStyleDeclarationWrapper implements CssStyleDeclaration {
     @Override
     public void setCssText(String value) {
         styleDeclaration_.setCssText(value);
+    }
+
+    @Override
+    public List<Property> getProperties() {
+        return styleDeclaration_.getProperties();
+    }
+
+    @Override
+    public AbstractCSSRuleImpl getParentRule() {
+        return styleDeclaration_.getParentRule();
     }
 
     @Override

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLANK;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL;
@@ -21,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PAT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_INVALID_THROWS;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -52,6 +54,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * The JavaScript object that represents an anchor.
@@ -365,7 +368,8 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getHostname() {
         try {
-            return getUrl().getHost();
+            final String host = getUrl().getHost();
+            return UrlUtils.encodeAnchor(host);
         }
         catch (final MalformedURLException e) {
             return "";
@@ -380,7 +384,14 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setHostname(final String hostname) throws Exception {
-        setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        if (getBrowserVersion().hasFeature(JS_ANCHOR_HOSTNAME_IGNORE_BLANK)) {
+            if (!StringUtils.isBlank(hostname)) {
+                setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+            }
+        }
+        else if (!StringUtils.isEmpty(hostname)) {
+            setUrl(UrlUtils.getUrlWithNewHost(getUrl(), hostname));
+        }
     }
 
     /**
@@ -504,7 +515,12 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     public void setProtocol(final String protocol) throws Exception {
         final String bareProtocol = StringUtils.substringBefore(protocol, ":");
-        setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
+        if (UrlUtils.isValidScheme(bareProtocol)) {
+            setUrl(UrlUtils.getUrlWithNewProtocol(getUrl(), bareProtocol));
+        }
+        else if (getBrowserVersion().hasFeature(JS_ANCHOR_PROTOCOL_INVALID_THROWS)) {
+            throw ScriptRuntime.typeError("Invalid protocol '" + protocol + "'.");
+        }
     }
 
     /**
@@ -551,7 +567,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getText() {
         final DomNode htmlElement = getDomNodeOrDie();
-        return htmlElement.asText();
+        return htmlElement.asNormalizedText();
     }
 
     /**
@@ -652,11 +668,11 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getUsername() {
         try {
-            final String userName = getUrl().getUserInfo();
-            if (userName == null) {
+            final String userInfo = getUrl().getUserInfo();
+            if (userInfo == null) {
                 return "";
             }
-            return StringUtils.substringBefore(userName, ":");
+            return StringUtils.substringBefore(userInfo, ':');
         }
         catch (final MalformedURLException e) {
             return "";
@@ -818,7 +834,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @return the {@code Methods} attribute
      */
     @JsxGetter(propertyName = "Methods", value = IE)
-    public String getMethods() {
+    public String getMethods_js() {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 
@@ -827,7 +843,7 @@ public class HTMLAnchorElement extends HTMLElement {
      * @param methods {@code Methods} attribute
      */
     @JsxSetter(propertyName = "Methods", value = IE)
-    public void setMethods(final String methods) {
+    public void setMethods_js(final String methods) {
         throw Context.throwAsScriptRuntimeEx(new UnsupportedOperationException());
     }
 

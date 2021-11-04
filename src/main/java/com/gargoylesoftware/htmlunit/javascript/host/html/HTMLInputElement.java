@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_USES_POINTEREVENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
@@ -61,8 +60,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
-import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -249,8 +246,8 @@ public class HTMLInputElement extends HTMLElement {
 
         final String val = Context.toString(newValue);
         final BrowserVersion browserVersion = getBrowserVersion();
-        if (StringUtils.isNotEmpty(val) && "file".equalsIgnoreCase(getType())) {
-            if (browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
+        if ("file".equalsIgnoreCase(getType())) {
+            if (StringUtils.isNotEmpty(val) && browserVersion.hasFeature(JS_SELECT_FILE_THROWS)) {
                 throw Context.reportRuntimeError("InvalidStateError: "
                         + "Failed to set the 'value' property on 'HTMLInputElement'.");
             }
@@ -652,7 +649,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxGetter
     public String getSrc() {
-        return getDomNodeOrDie().getSrcAttribute();
+        return getDomNodeOrDie().getSrc();
     }
 
     /**
@@ -739,14 +736,8 @@ public class HTMLInputElement extends HTMLElement {
     public void click() throws IOException {
         final HtmlInput domNode = getDomNodeOrDie();
         final boolean originalState = domNode.isChecked();
-        final Event event;
-        if (getBrowserVersion().hasFeature(EVENT_ONCLICK_USES_POINTEREVENT)) {
-            event = new PointerEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
-        }
-        else {
-            event = new MouseEvent(domNode, MouseEvent.TYPE_CLICK, false, false, false, MouseEvent.BUTTON_LEFT);
-        }
-        domNode.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
+
+        domNode.click(false, false, false, false, false, true, false);
 
         final boolean newState = domNode.isChecked();
 
@@ -877,7 +868,6 @@ public class HTMLInputElement extends HTMLElement {
      * Returns the {@code width} property.
      * @return the {@code width} property
      */
-    @Override
     @JsxGetter
     public int getWidth() {
         final String value = getDomNodeOrDie().getAttributeDirect("width");
@@ -901,7 +891,6 @@ public class HTMLInputElement extends HTMLElement {
      * Returns the {@code height} property.
      * @return the {@code height} property
      */
-    @Override
     @JsxGetter
     public int getHeight() {
         final String value = getDomNodeOrDie().getAttributeDirect("height");

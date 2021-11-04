@@ -27,6 +27,7 @@ import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -855,20 +856,15 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"something", "0"},
-            IE = {"something", "null"})
-    public void innerText_null() throws Exception {
+    @Alerts({"something", "Hello World"})
+    public void innerText() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = null;\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = 'Hello World';\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
@@ -889,6 +885,158 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"something", "3", "Hello", "[object HTMLBRElement]", "World"})
+    public void innerText_LineBreak() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+
+            + "    myTestDiv.innerText = 'Hello\\nWorld';\n"
+            + "    log(myTestDiv.childNodes.length);\n"
+            + "    log(myTestDiv.childNodes.item(0).data);\n"
+            + "    log(myTestDiv.childNodes.item(1));\n"
+            + "    log(myTestDiv.childNodes.item(2).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", " ", "0", "1", "undefined", "1", "[object Object]"},
+            IE = {"0", "1", "\u00A0", "1", "1", "undefined", "1", "[object Object]"})
+    @HtmlUnitNYI(IE = {"0", "1", " ", "1", "1", "undefined", "1", "[object Object]"})
+    public void innerText_Empty() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    myTestDiv0.innerText = '';\n"
+            + "    log(myTestDiv0.childNodes.length);\n"
+
+            + "    myTestDiv1.innerText = ' ';\n"
+            + "    log(myTestDiv1.childNodes.length);\n"
+            + "    log(myTestDiv1.childNodes.item(0).data);\n"
+
+            + "    myTestDiv2.innerText = null;\n"
+            + "    log(myTestDiv2.childNodes.length);\n"
+
+            + "    myTestDiv3.innerText = undefined;\n"
+            + "    log(myTestDiv3.childNodes.length);\n"
+            + "    log(myTestDiv3.childNodes.item(0).data);\n"
+
+            + "    myTestDiv4.innerText = { a: 'b'};\n"
+            + "    log(myTestDiv4.childNodes.length);\n"
+            + "    log(myTestDiv4.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv0'>something</div>\n"
+            + "  <div id='myTestDiv1'>something</div>\n"
+            + "  <div id='myTestDiv2'>something</div>\n"
+            + "  <div id='myTestDiv3'>something</div>\n"
+            + "  <div id='myTestDiv4'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"something", "0"},
+            IE = {"something", "null"})
+    public void innerText_null() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    checkChildren();\n"
+            + "    myTestDiv.innerText = null;\n"
+            + "    checkChildren();\n"
+            + "  }\n"
+            + "  function checkChildren() {\n"
+            + "    if (myTestDiv.childNodes.length == 0)\n"
+            + "      log('0');\n"
+            + "    else\n"
+            + "      log(myTestDiv.childNodes.item(0).data);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myTestDiv'>something</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"before\\nsvg-text\\nafter", "before\\nsvg-text\\nafter"},
+            FF = {"beforesvg-textafter", "undefined"},
+            FF78 = {"beforeafter", "undefined"},
+            IE = {"beforesvg-titlesvg-textafter", "beforesvg-titlesvg-textafter"})
+    public void innerText_SVG() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    log(myTestDiv.innerText);\n"
+            + "    log(myTestDiv.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>abc"
+            + "<div id='myTestDiv'>before<svg><title>svg-title</title><text>svg-text</text></svg>after</div>def"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"MyTitlevar i;", "MyTitlevar i;"},
+            FF = {"MyTitlevar i;", "undefined"},
+            FF78 = {"MyTitlevar i;", "undefined"})
+    public void innerText_Head() throws Exception {
+        final String html = "<html><head>"
+            + "<title>MyTitle</title>"
+            + "<script>var i;</script>"
+            + "</head>"
+            + "<body onload='test()'>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.head.innerText);\n"
+            + "    log(document.head.outerText);\n"
+            + "  }\n"
+            + "</script>\n"
+            + LOG_TEXTAREA
+            + "</body></html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"something", "0"})
     public void innerText_emptyString() throws Exception {
         final String html = "<html><head>\n"
@@ -896,12 +1044,8 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    checkChildren();\n"
-            + "    if (myTestDiv.innerText) {\n"
-            + "      myTestDiv.innerText = '';\n"
-            + "      checkChildren();\n"
-            + "    } else {\n"
-            + "      log('innerText not supported');\n"
-            + "    }\n"
+            + "    myTestDiv.innerText = '';\n"
+            + "    checkChildren();\n"
             + "  }\n"
             + "  function checkChildren() {\n"
             + "    if (myTestDiv.childNodes.length == 0)\n"
@@ -1260,20 +1404,21 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"Old = <b id=\"innerNode\">Old outerHTML</b>",
-                "New =  <b><i id=\"newElt\">New cell value</i></b>",
+    @Alerts({"Old\\s=\\s<b\\sid=\"innerNode\">Old\\souterHTML</b>",
+                "New\\s=\\s\\s<b><i\\sid=\"newElt\">New\\scell\\svalue</i></b>",
                 "I"})
     public void getSetOuterHTMLComplex() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function doTest() {\n"
             + "    var myNode = document.getElementById('myNode');\n"
             + "    var innerNode = document.getElementById('innerNode');\n"
-            + "    alert('Old = ' + innerNode.outerHTML);\n"
+            + "    log('Old = ' + innerNode.outerHTML);\n"
             + "    innerNode.outerHTML = ' <b><i id=\"newElt\">New cell value</i></b>';\n"
-            + "    alert('New = ' + myNode.innerHTML);\n"
-            + "    alert(document.getElementById('newElt').tagName);\n"
+            + "    log('New = ' + myNode.innerHTML);\n"
+            + "    log(document.getElementById('newElt').tagName);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -1282,7 +1427,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         final WebElement pElt = driver.findElement(By.id("myNode"));
         assertEquals("p", pElt.getTagName());

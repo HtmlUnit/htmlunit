@@ -39,22 +39,23 @@ public class HTMLMarqueeElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var marquee = document.getElementById('test');\n"
-            + "        alert(marquee.noWrap);\n"
-            + "        alert(marquee.getAttribute('noWrap'));\n"
+            + "        log(marquee.noWrap);\n"
+            + "        log(marquee.getAttribute('noWrap'));\n"
             + "        marquee.noWrap = 'nowrap';\n"
-            + "        alert(marquee.noWrap);\n"
-            + "        alert(marquee.getAttribute('noWrap'));\n"
+            + "        log(marquee.noWrap);\n"
+            + "        log(marquee.getAttribute('noWrap'));\n"
             + "        marquee.noWrap = 'x';\n"
-            + "        alert(marquee.noWrap);\n"
-            + "        alert(marquee.getAttribute('noWrap'));\n"
+            + "        log(marquee.noWrap);\n"
+            + "        log(marquee.getAttribute('noWrap'));\n"
             + "        marquee.setAttribute('noWrap', 'blah');\n"
-            + "        alert(marquee.noWrap);\n"
-            + "        alert(marquee.getAttribute('noWrap'));\n"
+            + "        log(marquee.noWrap);\n"
+            + "        log(marquee.getAttribute('noWrap'));\n"
             + "        marquee.noWrap = '';\n"
-            + "        alert(marquee.noWrap);\n"
-            + "        alert(marquee.getAttribute('noWrap'));\n"
+            + "        log(marquee.noWrap);\n"
+            + "        log(marquee.getAttribute('noWrap'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -62,6 +63,6 @@ public class HTMLMarqueeElementTest extends WebDriverTestCase {
             + "  <marquee id='test'>marquee</marquee>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

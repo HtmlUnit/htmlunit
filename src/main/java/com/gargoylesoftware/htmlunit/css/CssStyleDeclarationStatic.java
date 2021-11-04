@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 
@@ -70,5 +75,15 @@ class CssStyleDeclarationStatic implements CssStyleDeclaration {
 
     @Override
     public void setCssText(String value) {
+    }
+
+    @Override
+    public List<Property> getProperties() {
+        return Collections.emptyList();
+    }
+
+    @Override
+    public AbstractCSSRuleImpl getParentRule() {
+        return null;
     }
 }

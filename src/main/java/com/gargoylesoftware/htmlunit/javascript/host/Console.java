@@ -35,13 +35,13 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.ConsString;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -97,8 +97,7 @@ public class Console extends SimpleScriptable {
 
         final Object[] data;
         final Object first = args[1];
-        if (first instanceof String
-                || first instanceof ConsString
+        if (first instanceof CharSequence
                 || first instanceof ScriptableObject && ("String".equals(((Scriptable) first).getClassName()))) {
             data = new Object[args.length - 1];
             data[0] = "Assertion failed: " + first.toString();
@@ -219,10 +218,13 @@ public class Console extends SimpleScriptable {
     @JsxFunction
     public static void trace(final Context cx, final Scriptable thisObj,
         final Object[] args, final Function funObj) {
+
+        final RhinoException e = ScriptRuntime.throwError(cx, funObj, null);
+
         final WebConsole webConsole = toWebConsole(thisObj);
         final Formatter oldFormatter = webConsole.getFormatter();
         webConsole.setFormatter(FORMATTER_);
-        webConsole.trace(args);
+        webConsole.info(e.getScriptStackTrace());
         webConsole.setFormatter(oldFormatter);
     }
 

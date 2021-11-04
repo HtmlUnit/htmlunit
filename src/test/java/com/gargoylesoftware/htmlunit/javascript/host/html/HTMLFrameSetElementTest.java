@@ -38,12 +38,13 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
     @Alerts({"20%,*", "*,*"})
     public void cols() throws Exception {
         final String html =
-            "<html><head><title>First</title>\n"
-            + "<script>\n"
+            "<html><head>\n"
+            + "<script>"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.getElementById('fs').cols);\n"
+            + "  log(document.getElementById('fs').cols);\n"
             + "  document.getElementById('fs').cols = '*,*';\n"
-            + "  alert(document.getElementById('fs').cols);\n"
+            + "  log(document.getElementById('fs').cols);\n"
             + "}\n"
             + "</script></head>\n"
             + "<frameset id='fs' cols='20%,*' onload='test()'>\n"
@@ -52,7 +53,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,7 +63,7 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
     @Alerts({"20%,*", "*,*"})
     public void rows() throws Exception {
         final String framesetContent =
-            "<html><head><title>First</title></head>\n"
+            "<html><head></head>\n"
             + "<frameset id='fs' rows='20%,*'>\n"
             + "  <frame name='top' src='" + URL_SECOND + "' />\n"
             + "  <frame name='bottom' src='about:blank' />\n"
@@ -85,4 +86,26 @@ public class HTMLFrameSetElementTest extends WebDriverTestCase {
         loadPageWithAlerts2(framesetContent);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"<frameset id=\"fs\" onload=\"test()\"> </frameset>", "new"})
+    public void outerHTML() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(document.getElementById('fs').outerHTML);\n"
+            + "  document.getElementById('fs').outerHTML = '<div id=\"new\">text<div>';\n"
+            + "  log(document.getElementById('new').id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<frameset id='fs' onload='test()'>\n"
+            + "</frameset>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

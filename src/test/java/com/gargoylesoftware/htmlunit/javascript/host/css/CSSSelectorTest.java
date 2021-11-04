@@ -767,8 +767,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
+            + "  log(document.querySelectorAll('p:nth-of-type(2)')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -779,7 +780,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -791,8 +792,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
+            + "  log(document.querySelectorAll('p:nth-last-of-type(1)')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -803,7 +805,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -813,11 +815,13 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void pseudoAfter() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>Pseudo-After</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var list = document.querySelectorAll('#li1:after');\n"
             + "  for (var i = 0 ; i < list.length; i++) {\n"
-            + "    alert(list[i].id);\n"
+            + "    log(list[i].id);\n"
             + "  }\n"
             + "}\n"
             + "</script></head>\n"
@@ -828,7 +832,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -976,8 +980,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:first-child')[0].id);\n"
+            + "  log(document.querySelectorAll('li:first-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -988,7 +993,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1000,8 +1005,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('li:last-child')[0].id);\n"
+            + "  log(document.querySelectorAll('li:last-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1012,7 +1018,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1024,8 +1030,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:first-of-type')[0].id);\n"
+            + "  log(document.querySelectorAll('p:first-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1038,7 +1045,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1090,8 +1097,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:last-of-type')[0].id);\n"
+            + "  log(document.querySelectorAll('p:last-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1104,7 +1112,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1116,8 +1124,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('h1:only-child')[0].id);\n"
+            + "  log(document.querySelectorAll('h1:only-child')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1130,7 +1139,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1142,8 +1151,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('p:only-of-type')[0].id);\n"
+            + "  log(document.querySelectorAll('p:only-of-type')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1156,7 +1166,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</section>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1193,8 +1203,9 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.querySelectorAll('input:not([type=\"file\"])')[0].id);\n"
+            + "  log(document.querySelectorAll('input:not([type=\"file\"])')[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1202,7 +1213,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1219,10 +1230,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('div:not(div:first-of-type)')[0].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll('div:not(div:first-of-type)')[0].id);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1231,7 +1243,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div id='id3'>3</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1298,10 +1310,11 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    alert(document.querySelectorAll('div:not(div:last-of-type)')[1].id);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(document.querySelectorAll('div:not(div:last-of-type)')[1].id);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1310,7 +1323,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div id='id3'>3</div>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1652,6 +1665,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
             + "  alert(found.length);\n"
@@ -1676,9 +1690,10 @@ public class CSSSelectorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  found = document.querySelectorAll(':target');\n"
-            + "  alert(found.length);\n"
+            + "  log(found.length);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1686,7 +1701,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <input id='id2'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1847,12 +1862,14 @@ public class CSSSelectorTest extends WebDriverTestCase {
     public void invalidSelectors() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>Invalid Selectors</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var list = document.querySelectorAll('li:foo() ~ li');\n"
-            + "    alert(list.length);\n"
-            + "  } catch(e) {alert('exception')}\n"
+            + "    log(list.length);\n"
+            + "  } catch(e) {log('exception')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -1862,7 +1879,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "</ul>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

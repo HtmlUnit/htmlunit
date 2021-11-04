@@ -36,16 +36,18 @@ public class ReflectTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "false", "true"},
             IE = "no Reflect")
     public void has() throws Exception {
-        final String html = "<html><head><title>First</title><body>\n"
+        final String html = "<html><head>\n"
+            + "<body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  if (typeof Reflect != 'undefined') {\n"
-            + "    alert(Reflect.has({x: 0}, 'x'));\n"
-            + "    alert(Reflect.has({x: 0}, 'y'));\n"
-            + "    alert(Reflect.has({x: 0}, 'toString'));\n"
-            + "  } else { alert('no Reflect'); }\n"
+            + "    log(Reflect.has({x: 0}, 'x'));\n"
+            + "    log(Reflect.has({x: 0}, 'y'));\n"
+            + "    log(Reflect.has({x: 0}, 'toString'));\n"
+            + "  } else { log('no Reflect'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

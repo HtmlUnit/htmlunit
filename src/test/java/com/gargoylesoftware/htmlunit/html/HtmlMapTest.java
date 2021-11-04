@@ -14,6 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -22,13 +28,18 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.HttpMethod;
+import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlMap}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlMapTest extends WebDriverTestCase {
@@ -41,18 +52,66 @@ public class HtmlMapTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <map id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
             assertTrue(HtmlMap.class.isInstance(page.getHtmlElementById("myId")));
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("§§URL§§a.html")
+    @BuggyWebDriver(FF = "Element <area id=\"tester\" href=\"a.html\"> could not be scrolled into view",
+                    FF78 = "Element <area id=\"tester\" href=\"a.html\"> could not be scrolled into view",
+                    IE = "§§URL§§")
+    public void mapClick() throws Exception {
+        final URL urlImage = new URL(URL_FIRST, "img.jpg");
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", "image/jpg", emptyList);
+        }
+
+        final String html
+            = "<html>\n"
+            + "<head></head>"
+            + "<body>\n"
+            + "  <img id='myImg' src='" + urlImage + "' usemap='#map1'>\n"
+            + "  <map name='map1'>\n"
+            + "    <area id='tester' href='a.html' shape='rect' coords='0,0,4,4'>\n"
+            + "  </map>\n"
+            + "</body></html>";
+
+        final String secondContent
+            = "<html><head><title>Second</title></head><body></body></html>";
+
+        final MockWebConnection webConnection = getMockWebConnection();
+        webConnection.setDefaultResponse(secondContent);
+
+
+        final WebDriver driver = loadPage2(html);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        try {
+            driver.findElement(By.id("tester")).click();
+
+            assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
+            assertSame("method", HttpMethod.GET, webConnection.getLastMethod());
+        }
+        catch (final Exception e) {
+            assertEquals(getExpectedAlerts()[0], e.getMessage().substring(0, getExpectedAlerts()[0].length()));
         }
     }
 
@@ -71,7 +130,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -98,7 +157,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertFalse(displayed);
@@ -122,7 +181,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         boolean displayed = driver.findElement(By.id("myImg")).isDisplayed();
         assertTrue(displayed);
@@ -143,7 +202,7 @@ public class HtmlMapTest extends WebDriverTestCase {
                 + "  </map>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final boolean displayed = driver.findElement(By.id("myMap")).isDisplayed();
         assertFalse(displayed);

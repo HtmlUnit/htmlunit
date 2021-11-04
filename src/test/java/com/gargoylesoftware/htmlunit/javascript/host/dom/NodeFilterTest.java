@@ -38,19 +38,20 @@ public class NodeFilterTest extends WebDriverTestCase {
     public void constants() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var properties = ['FILTER_ACCEPT', 'FILTER_REJECT', 'FILTER_SKIP',\n"
             + "'SHOW_ELEMENT', 'SHOW_ATTRIBUTE', 'SHOW_TEXT', 'SHOW_CDATA_SECTION',\n"
             + "'SHOW_ENTITY_REFERENCE', 'SHOW_ENTITY', 'SHOW_PROCESSING_INSTRUCTION', 'SHOW_COMMENT',\n"
             + "'SHOW_DOCUMENT', 'SHOW_DOCUMENT_TYPE', 'SHOW_DOCUMENT_FRAGMENT', 'SHOW_NOTATION'];\n"
             + "  try {\n"
             + "    for (var i = 0; i < properties.length; i++) {\n"
-            + "      alert(NodeFilter[properties[i]]);\n"
+            + "      log(NodeFilter[properties[i]]);\n"
             + "    }\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -61,12 +62,13 @@ public class NodeFilterTest extends WebDriverTestCase {
     public void constants_SHOW_ALL() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
-            + "    alert(NodeFilter.SHOW_ALL);\n"
-            + "  } catch(e) { alert('exception');}\n"
+            + "    log(NodeFilter.SHOW_ALL);\n"
+            + "  } catch(e) { log('exception');}\n"
             + "</script></head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.svg;
 
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,19 +39,18 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function SVGMatrix() {\n    [native code]\n}",
-            CHROME = "function SVGMatrix() { [native code] }",
-            EDGE = "function SVGMatrix() { [native code] }",
+    @Alerts(DEFAULT = "function SVGMatrix() { [native code] }",
             IE = "[object SVGMatrix]")
     public void simpleScriptable() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><body>\n"
             + "<script>\n"
-            + "  alert(window.SVGMatrix);\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.SVGMatrix);\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -68,12 +64,13 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function alertFields(m) {\n"
             + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
             + "  for (var i = 0; i < fields.length; i++) {\n"
             + "    fields[i] = m[fields[i]];\n"
             + "  }\n"
-            + "  alert(fields.join(', '));\n"
+            + "  log(fields.join(', '));\n"
             + "}\n"
             + "var svg =  document.getElementById('myId');\n"
             + "try {\n"
@@ -86,11 +83,11 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  m.e = 6;\n"
             + "  m.f = 7;\n"
             + "  alertFields(m);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -131,7 +128,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("-1, -2, 3, 4, 5, 6")
+    @Alerts({"false", "-1", "-2", "3", "4", "5", "6"})
     public void flipX() throws Exception {
         transformTest("flipX()");
     }
@@ -140,7 +137,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1, 2, -3, -4, 5, 6")
+    @Alerts({"false", "1", "2", "-3", "-4", "5", "6"})
     public void flipY() throws Exception {
         transformTest("flipY()");
     }
@@ -149,7 +146,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("-2, 1, 1.5, -0.5, 1, -2")
+    @Alerts({"false", "-2", "1", "1.5", "-0.5", "1", "-2"})
     public void inverse() throws Exception {
         transformTest("inverse()");
     }
@@ -165,12 +162,13 @@ public class SvgMatrixTest extends WebDriverTestCase {
                 + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
                 + "  </svg>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function alertFields(m) {\n"
                 + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
                 + "  for (var i = 0; i < fields.length; i++) {\n"
                 + "    fields[i] = m[fields[i]];\n"
                 + "  }\n"
-                + "  alert(fields.join(', '));\n"
+                + "  log(fields.join(', '));\n"
                 + "}\n"
                 + "var svg =  document.getElementById('myId');\n"
                 + "try {\n"
@@ -183,65 +181,34 @@ public class SvgMatrixTest extends WebDriverTestCase {
                 + "  m.f = 6;\n"
                 + "  m = m.inverse();\n"
                 + "  alertFields(m);\n"
-                + "} catch(e) { alert('exception'); }\n"
+                + "} catch(e) { log('exception'); }\n"
                 + "</script>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("25, 38, 17, 26, 14, 20")
+    @Alerts({"false", "25", "38", "17", "26", "14", "20"})
     public void multiply() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><body>\n"
-                + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
-                + "  </svg>\n"
-                + "<script>\n"
-                + "function alertFields(m) {\n"
-                + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
-                + "  for (var i = 0; i < fields.length; i++) {\n"
-                + "    fields[i] = m[fields[i]];\n"
-                + "  }\n"
-                + "  alert(fields.join(', '));\n"
-                + "}\n"
-                + "var svg =  document.getElementById('myId');\n"
-                + "try {\n"
-                + "  var m = svg.createSVGMatrix();\n"
-                + "  m.a = 1;\n"
-                + "  m.b = 2;\n"
-                + "  m.c = 3;\n"
-                + "  m.d = 4;\n"
-                + "  m.e = 5;\n"
-                + "  m.f = 6;\n"
-
-                + "  var n = svg.createSVGMatrix();\n"
-                + "  n.a = 7;\n"
-                + "  n.b = 6;\n"
-                + "  n.c = 5;\n"
-                + "  n.d = 4;\n"
-                + "  n.e = 3;\n"
-                + "  n.f = 2;\n"
-                + "  m = m.multiply(n);\n"
-                + "  alertFields(m);\n"
-                + "} catch(e) { alert('exception'); }\n"
-                + "</script>\n"
-                + "</body></html>";
-
-        loadPageWithAlerts2(html);
+        transformTest("multiply(n)");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1.2322946786880493, 2.307671070098877, 2.912292957305908, 3.8307511806488037, 5, 6",
-            CHROME = "1.2322946209166628, 2.307671050377636, 2.912292905471539, 3.8307511434768218, 5, 6",
-            EDGE = "1.2322946209166628, 2.307671050377636, 2.912292905471539, 3.8307511434768218, 5, 6",
-            IE = "1.2322945594787597, 2.307671070098877, 2.912292718887329, 3.8307509422302246, 5, 6")
+    @Alerts(DEFAULT = {"false", "1.2322946786880493", "2.307671070098877",
+                       "2.912292957305908", "3.8307511806488037", "5", "6"},
+            CHROME = {"false", "1.2322946209166628", "2.307671050377636",
+                      "2.912292905471539", "3.8307511434768218", "5", "6"},
+            EDGE = {"false", "1.2322946209166628", "2.307671050377636",
+                    "2.912292905471539", "3.8307511434768218", "5", "6"},
+            IE = {"false", "1.2322945594787597", "2.307671070098877",
+                  "2.912292718887329", "3.8307509422302246", "5", "6"})
     public void rotate() throws Exception {
         transformTest("rotate(4.5)");
     }
@@ -250,10 +217,14 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "3.147735595703125, 4.346245765686035, -0.3029201924800873, -1.0536353588104248, 5, 6",
-            CHROME = "3.1477355949224934, 4.346245800520598, -0.302920161854466, -1.053635345580751, 5, 6",
-            EDGE = "3.1477355949224934, 4.346245800520598, -0.302920161854466, -1.053635345580751, 5, 6",
-            IE = "3.147735595703125, 4.346245765686035, -0.30292022228240967, -1.0536353588104248, 5, 6")
+    @Alerts(DEFAULT = {"false", "3.147735595703125", "4.346245765686035",
+                       "-0.3029201924800873", "-1.0536353588104248", "5", "6"},
+            CHROME = {"false", "3.1477355949224934", "4.346245800520598",
+                      "-0.302920161854466", "-1.053635345580751", "5", "6"},
+            EDGE = {"false", "3.1477355949224934", "4.346245800520598",
+                    "-0.302920161854466", "-1.053635345580751", "5", "6"},
+            IE = {"false", "3.147735595703125", "4.346245765686035",
+                  "-0.30292022228240967", "-1.0536353588104248", "5", "6"})
     public void rotateFromVector() throws Exception {
         transformTest("rotateFromVector(17, 74)");
     }
@@ -263,7 +234,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "3, 4, -1, -2, 5, 6")
+            IE = {"false", "3", "4", "-1", "-2", "5", "6"})
     @HtmlUnitNYI(IE = "exception")
     public void rotateFromVectorZeroX() throws Exception {
         transformTest("rotateFromVector(0, 74)");
@@ -274,7 +245,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            IE = "1, 2, 3, 4, 5, 6")
+            IE = {"false", "1", "2", "3", "4", "5", "6"})
     @HtmlUnitNYI(IE = "exception")
     public void rotateFromVectorZeroY() throws Exception {
         transformTest("rotateFromVector(17, 0)");
@@ -293,7 +264,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("3, 6, 9, 12, 5, 6")
+    @Alerts({"false", "3", "6", "9", "12", "5", "6"})
     public void scale() throws Exception {
         transformTest("scale(3)");
     }
@@ -302,7 +273,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("7, 14, 21, 28, 5, 6")
+    @Alerts({"false", "7", "14", "21", "28", "5", "6"})
     public void scaleNonUniform() throws Exception {
         transformTest("scale(7, 22)");
     }
@@ -311,10 +282,10 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1, 2, 3.0699267387390137, 4.139853477478027, 5, 6",
-            CHROME = "1, 2, 3.0699268119435104, 4.139853623887021, 5, 6",
-            EDGE = "1, 2, 3.0699268119435104, 4.139853623887021, 5, 6",
-            IE = "1, 2, 3.0699267387390136, 4.139853477478027, 5, 6")
+    @Alerts(DEFAULT = {"false", "1", "2", "3.0699267387390137", "4.139853477478027", "5", "6"},
+            CHROME = {"false", "1", "2", "3.0699268119435104", "4.139853623887021", "5", "6"},
+            EDGE = {"false", "1", "2", "3.0699268119435104", "4.139853623887021", "5", "6"},
+            IE = {"false", "1", "2", "3.0699267387390136", "4.139853477478027", "5", "6"})
     public void skewX() throws Exception {
         transformTest("skewX(4)");
     }
@@ -323,10 +294,10 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1.6926045417785645, 2.9234728813171387, 3, 4, 5, 6",
-            CHROME = "1.6926045733766895, 2.9234727645022525, 3, 4, 5, 6",
-            EDGE = "1.6926045733766895, 2.9234727645022525, 3, 4, 5, 6",
-            IE = "1.6926045417785644, 2.9234728813171386, 3, 4, 5, 6")
+    @Alerts(DEFAULT = {"false", "1.6926045417785645", "2.9234728813171387", "3", "4", "5", "6"},
+            CHROME = {"false", "1.6926045733766895", "2.9234727645022525", "3", "4", "5", "6"},
+            EDGE = {"false", "1.6926045733766895", "2.9234727645022525", "3", "4", "5", "6"},
+            IE = {"false", "1.6926045417785644", "2.9234728813171386", "3", "4", "5", "6"})
     public void skewY() throws Exception {
         transformTest("skewY(13)");
     }
@@ -335,7 +306,7 @@ public class SvgMatrixTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1, 2, 3, 4, 69, 100")
+    @Alerts({"false", "1", "2", "3", "4", "69", "100"})
     public void translate() throws Exception {
         transformTest("translate(13 , 17)");
     }
@@ -346,12 +317,12 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  <svg xmlns='http://www.w3.org/2000/svg' id='myId' version='1.1'>\n"
             + "  </svg>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function alertFields(m) {\n"
             + "  var fields = ['a', 'b', 'c', 'd', 'e', 'f'];\n"
             + "  for (var i = 0; i < fields.length; i++) {\n"
-            + "    fields[i] = m[fields[i]];\n"
+            + "    log(m[fields[i]]);\n"
             + "  }\n"
-            + "  alert(fields.join(', '));\n"
             + "}\n"
             + "var svg =  document.getElementById('myId');\n"
             + "try {\n"
@@ -362,36 +333,44 @@ public class SvgMatrixTest extends WebDriverTestCase {
             + "  m.d = 4;\n"
             + "  m.e = 5;\n"
             + "  m.f = 6;\n"
-            + "  m = m." + transforamtion + ";\n"
-            + "  alertFields(m);\n"
-            + "} catch(e) { alert('exception'); }\n"
+
+            + "  var n = svg.createSVGMatrix();\n"
+            + "  n.a = 7;\n"
+            + "  n.b = 6;\n"
+            + "  n.c = 5;\n"
+            + "  n.d = 4;\n"
+            + "  n.e = 3;\n"
+            + "  n.f = 2;\n"
+
+            + "  r = m." + transforamtion + ";\n"
+            + "  log(m === r);\n"
+            + "  alertFields(r);\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
         final String[] expectedAlerts = getExpectedAlerts();
 
         final WebDriver driver = loadPage2(html, URL_FIRST);
-        final List<String> actualAlerts = getCollectedAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts.length);
+        final String[] actualAlerts = driver.getTitle().split("§");
 
-        assertEquals(expectedAlerts.length, actualAlerts.size());
+        assertEquals(expectedAlerts.length, actualAlerts.length);
         if (useRealBrowser()) {
-            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
-                assertEquals(expectedAlerts[i], actualAlerts.get(i));
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                assertEquals("Expected: " + String.join(",", expectedAlerts)
+                                + " Actual: " + String.join(",", actualAlerts),
+                        expectedAlerts[i], actualAlerts[i]);
             }
         }
         else {
-            for (int i = expectedAlerts.length - 1; i >= 0; i--) {
-                final String[] expected = StringUtils.split(expectedAlerts[i], ',');
-                final String[] actual = StringUtils.split(actualAlerts.get(i), ',');
-
-                assertEquals(expected.length, actual.length);
-                for (int j = expected.length - 1; j >= 0; j--) {
-                    try {
-                        Assert.assertEquals(Double.parseDouble(expected[j]), Double.parseDouble(actual[j]), 0.000001);
-                    }
-                    catch (final NumberFormatException e) {
-                        assertEquals(expected[j], actual[j]);
-                    }
+            for (int i = 0; i < expectedAlerts.length; i++) {
+                try {
+                    Assert.assertEquals(
+                            Double.parseDouble(expectedAlerts[i]),
+                            Double.parseDouble(actualAlerts[i]), 0.000001);
+                }
+                catch (final NumberFormatException e) {
+                    assertEquals(expectedAlerts[i], actualAlerts[i]);
                 }
             }
         }

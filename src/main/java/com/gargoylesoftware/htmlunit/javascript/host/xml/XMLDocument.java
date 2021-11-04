@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
@@ -92,15 +91,6 @@ public class XMLDocument extends Document {
                 throw Context.reportRuntimeError("IOException: " + e);
             }
         }
-    }
-
-    /**
-     * Sets the {@code async} attribute.
-     * @param async Whether or not to send the request to the server asynchronously
-     */
-    @JsxSetter({FF, FF78})
-    public void setAsync(final boolean async) {
-        async_ = async;
     }
 
     /**

@@ -44,15 +44,16 @@ public class HTMLOListElementTest extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
+            + "    log(document.getElementById('myId'));\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <ol id='myId'/>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final WebElement element = driver.findElement(By.id("myId"));
             assertTrue(toHtmlElement(element) instanceof HtmlOrderedList);
@@ -70,28 +71,29 @@ public class HTMLOListElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
-                + "        alert(document.getElementById('o1').compact);\n"
-                + "        alert(document.getElementById('o2').compact);\n"
-                + "        alert(document.getElementById('o3').compact);\n"
-                + "        alert(document.getElementById('o4').compact);\n"
-                + "        alert(document.getElementById('o1').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o2').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o3').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o4').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o1').compact);\n"
+                + "        log(document.getElementById('o2').compact);\n"
+                + "        log(document.getElementById('o3').compact);\n"
+                + "        log(document.getElementById('o4').compact);\n"
+                + "        log(document.getElementById('o1').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o2').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o3').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o4').getAttribute('compact'));\n"
 
                 + "        document.getElementById('o1').compact = true;\n"
                 + "        document.getElementById('o2').compact = false;\n"
                 + "        document.getElementById('o3').compact = 'xyz';\n"
                 + "        document.getElementById('o4').compact = null;\n"
-                + "        alert(document.getElementById('o1').compact);\n"
-                + "        alert(document.getElementById('o2').compact);\n"
-                + "        alert(document.getElementById('o3').compact);\n"
-                + "        alert(document.getElementById('o4').compact);\n"
-                + "        alert(document.getElementById('o1').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o2').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o3').getAttribute('compact'));\n"
-                + "        alert(document.getElementById('o4').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o1').compact);\n"
+                + "        log(document.getElementById('o2').compact);\n"
+                + "        log(document.getElementById('o3').compact);\n"
+                + "        log(document.getElementById('o4').compact);\n"
+                + "        log(document.getElementById('o1').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o2').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o3').getAttribute('compact'));\n"
+                + "        log(document.getElementById('o4').getAttribute('compact'));\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -102,7 +104,8 @@ public class HTMLOListElementTest extends WebDriverTestCase {
                 + "    <ol compact='2' id='o4'><li>a</li><li>b</li></ol>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -116,33 +119,34 @@ public class HTMLOListElementTest extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      function test() {\n"
-                + "        alert(document.getElementById('o1').type);\n"
-                + "        alert(document.getElementById('o2').type);\n"
-                + "        alert(document.getElementById('o3').type);\n"
-                + "        alert(document.getElementById('o4').type);\n"
-                + "        alert(document.getElementById('o1').getAttribute('type'));\n"
-                + "        alert(document.getElementById('o2').getAttribute('type'));\n"
-                + "        alert(document.getElementById('o3').getAttribute('type'));\n"
-                + "        alert(document.getElementById('o4').getAttribute('type'));\n"
+                + "        log(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o2').type);\n"
+                + "        log(document.getElementById('o3').type);\n"
+                + "        log(document.getElementById('o4').type);\n"
+                + "        log(document.getElementById('o1').getAttribute('type'));\n"
+                + "        log(document.getElementById('o2').getAttribute('type'));\n"
+                + "        log(document.getElementById('o3').getAttribute('type'));\n"
+                + "        log(document.getElementById('o4').getAttribute('type'));\n"
 
                 + "        document.getElementById('o1').type = '1';\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o1').type);\n"
 
                 + "        document.getElementById('o1').type = 'a';\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o1').type);\n"
 
                 + "        document.getElementById('o1').type = 'A';\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o1').type);\n"
 
                 + "        document.getElementById('o1').type = 'i';\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o1').type);\n"
 
                 + "        document.getElementById('o1').type = 'I';\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        log(document.getElementById('o1').type);\n"
 
-                + "        try { document.getElementById('o1').type = 'u' } catch(e) {alert('exception');}\n"
-                + "        alert(document.getElementById('o1').type);\n"
+                + "        try { document.getElementById('o1').type = 'u' } catch(e) {log('exception');}\n"
+                + "        log(document.getElementById('o1').type);\n"
                 + "      }\n"
                 + "    </script>\n"
                 + "  </head>\n"
@@ -153,6 +157,7 @@ public class HTMLOListElementTest extends WebDriverTestCase {
                 + "    <ol type='A' id='o4'><li>a</li><li>b</li></ol>\n"
                 + "  </body>\n"
                 + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

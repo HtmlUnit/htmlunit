@@ -188,7 +188,7 @@ public class HtmlSerializerVisibleText {
     }
 
     /**
-     * Process {@link HtmlHiddenInput}.
+     * Process {@link DomNode}.
      *
      * @param builder the StringBuilder to add to
      * @param domNode the target to process
@@ -608,7 +608,15 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendText(final HtmlSerializerTextBuilder builder, final DomText domText, final Mode mode) {
         final DomNode parent = domText.getParentNode();
-        if (parent == null || parent instanceof HtmlTitle || parent.isDisplayed()) {
+        if (parent instanceof HtmlTitle
+                || parent instanceof HtmlScript) {
+            builder.append(domText.getData(), Mode.WHITE_SPACE_PRE_LINE);
+        }
+
+        if (parent == null
+                || parent instanceof HtmlTitle
+                || parent instanceof HtmlScript
+                || parent.isDisplayed()) {
             builder.append(domText.getData(), mode);
         }
     }
@@ -673,7 +681,7 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
-    private Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();

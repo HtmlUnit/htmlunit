@@ -187,9 +187,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"inline", "inline"})
     public void base() throws Exception {
         test("base");
@@ -201,9 +199,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"inline", "inline"})
     public void basefont() throws Exception {
         test("basefont");
@@ -1085,9 +1081,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "inline"},
-            FF = {"", "none"},
-            FF78 = {"", "none"},
+    @Alerts(DEFAULT = {"", "none"},
             IE = {"none", "none"})
     public void noembed() throws Exception {
         test("noembed");
@@ -1562,7 +1556,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF = {"", "inline"},
             FF78 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void textarea() throws Exception {

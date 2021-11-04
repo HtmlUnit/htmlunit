@@ -55,19 +55,21 @@ public class WorkerTest extends WebDriverTestCase {
     public void postMessageFromWorker() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received:' + e.data);\n"
+            + "    log('Received:' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { lob('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -78,19 +80,21 @@ public class WorkerTest extends WebDriverTestCase {
     public void postMessageFromWorker2() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.addEventListener('message', (e) => {\n"
-            + "    alert('Received:' + e.data);\n"
+            + "    log('Received:' + e.data);\n"
             + "  });\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -100,13 +104,14 @@ public class WorkerTest extends WebDriverTestCase {
     @Alerts("Received: Result = 15")
     public void postMessageToWorker() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received: ' + e.data);\n"
+            + "    log('Received: ' + e.data);\n"
             + "  };\n"
             + "  setTimeout(function() { myWorker.postMessage([5, 3]);}, 10);\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "onmessage = function(e) {\n"
@@ -116,7 +121,8 @@ public class WorkerTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -244,15 +250,16 @@ public class WorkerTest extends WebDriverTestCase {
     @Alerts("exception catched")
     public void createFromPrototypeAndDefineProperty() throws Exception {
         final String html = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + "var f = function() {};\n"
             + "f.prototype = Object.create(window.Worker.prototype);\n"
             + "try {\n"
             + "  f.prototype['onmessage'] = function() {};\n"
-            + "  alert('no exception');\n"
-            + "} catch(e) { alert('exception catched'); }\n"
+            + "  log('no exception');\n"
+            + "} catch(e) { log('exception catched'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -262,13 +269,14 @@ public class WorkerTest extends WebDriverTestCase {
     @Alerts("function")
     public void onmessageFunction() throws Exception {
         final String html = "<html><body><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  myWorker.onmessage = function(e) {};\n"
-                + "  alert(typeof myWorker.onmessage);\n"
+                + "  log(typeof myWorker.onmessage);\n"
                 + "</script></body></html>\n";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -280,15 +288,16 @@ public class WorkerTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void onmessageNumber() throws Exception {
         final String html = "<html><body><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  try {\n"
                 + "    myWorker.onmessage = 17;\n"
-                + "    alert(myWorker.onmessage);\n"
-                + "  } catch(e) { alert('exception ' + e.name); }\n"
+                + "    log(myWorker.onmessage);\n"
+                + "  } catch(e) { log('exception ' + e.name); }\n"
                 + "</script></body></html>\n";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -300,15 +309,16 @@ public class WorkerTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void onmessageString() throws Exception {
         final String html = "<html><body><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  var myWorker = new Worker('worker.js');\n"
                 + "  try {\n"
                 + "    myWorker.onmessage = 'HtmlUnit';\n"
-                + "    alert(myWorker.onmessage);\n"
-                + "  } catch(e) { alert('exception ' + e.name); }\n"
+                + "    log(myWorker.onmessage);\n"
+                + "  } catch(e) { log('exception ' + e.name); }\n"
                 + "</script></body></html>\n";
         getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -392,6 +402,21 @@ public class WorkerTest extends WebDriverTestCase {
         testJs(workerJs);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"object", "true"},
+            IE = {"undefined", "globalThis is undefined"})
+    public void globalThis() throws Exception {
+        final String workerJs
+            = "  try {\n"
+            + "    postMessage(typeof globalThis);\n"
+            + "    postMessage(self === globalThis);\n"
+            + "  } catch(e) { postMessage('globalThis is undefined'); }";
+        testJs(workerJs);
+    }
+
     private void testJs(final String workerJs) throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
@@ -405,7 +430,7 @@ public class WorkerTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPageWithAlerts2(html);
     }
 
     /**
@@ -417,18 +442,20 @@ public class WorkerTest extends WebDriverTestCase {
     public void workerCodeWithWrongMimeType() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
+            + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert('Received:' + e.data);\n"
+            + "    log('Received:' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.TEXT_HTML);
 
-        loadPageWithAlerts2(html, 2 * DEFAULT_WAIT_TIME);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 }

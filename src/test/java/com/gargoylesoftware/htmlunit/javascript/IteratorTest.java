@@ -39,20 +39,21 @@ public class IteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Iterator) { alert('Iterator not available'); return; }\n"
+            + "    if (!window.Iterator) { log('Iterator not available'); return; }\n"
 
             + "    var data = { first: 1, second: 2 };\n"
             + "    var it = Iterator(data);\n"
-            + "    alert(it.next());\n"
-            + "    alert(it.next());\n"
+            + "    log(it.next());\n"
+            + "    log(it.next());\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -65,19 +66,20 @@ public class IteratorTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Iterator) { alert('Iterator not available'); return; }\n"
+            + "    if (!window.Iterator) { log('Iterator not available'); return; }\n"
 
             + "    var data = { };\n"
             + "    var it = Iterator(data);\n"
             + "    \n"
             + "    try {\n"
-            + "      alert(it.next());\n"
+            + "      log(it.next());\n"
             + "    } catch (e) {\n"
             + "      if (e == StopIteration) {\n"
-            + "        alert(e);\n"
+            + "        log(e);\n"
             + "      } else {\n"
-            + "        alert('ex');\n"
+            + "        log('ex');\n"
             + "      }\n"
             + "    }\n"
             + "  }\n"
@@ -86,6 +88,6 @@ public class IteratorTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

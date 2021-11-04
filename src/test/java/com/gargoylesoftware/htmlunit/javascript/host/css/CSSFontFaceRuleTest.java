@@ -43,22 +43,24 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void simple() throws Exception {
         final String html
             = "<html><body>\n"
+            + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule);\n"
-            + "  alert(rule.type);\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule);\n"
+            + "  log(rule.type);\n"
+            + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { alert('exception'); }\n"
+            + "catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -71,20 +73,22 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
+            + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//:); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { alert('exception'); }\n"
+            + "catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -97,20 +101,22 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashColon() throws Exception {
         final String html
             = "<html><body>\n"
+            + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(/:); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { alert('exception'); }\n"
+            + "catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
@@ -123,19 +129,21 @@ public class CSSFontFaceRuleTest extends WebDriverTestCase {
     public void urlSlashSlash() throws Exception {
         final String html
             = "<html><body>\n"
+            + LOG_TEXTAREA
             + "<style>\n"
             + "  @font-face { font-family: Delicious; src: url(//); }\n"
             + "  h3 { font-family: Delicious;  }\n"
             + "</style>\n"
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var styleSheet = document.styleSheets[0];\n"
             + "  var rule = styleSheet.cssRules[0];\n"
-            + "  alert(rule.cssText);\n"
+            + "  log(rule.cssText);\n"
             + "}\n"
-            + "catch (e) { alert('exception'); }\n"
+            + "catch (e) { log('exception'); }\n"
             + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 }

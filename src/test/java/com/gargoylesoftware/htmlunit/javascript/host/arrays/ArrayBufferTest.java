@@ -38,15 +38,17 @@ public class ArrayBufferTest extends WebDriverTestCase {
     @Alerts("0")
     public void ctorLengthZero() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var buff = new ArrayBuffer(0);\n"
-            + "  alert(buff.byteLength);\n"
+            + "  log(buff.byteLength);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -56,17 +58,19 @@ public class ArrayBufferTest extends WebDriverTestCase {
     @Alerts("exception true")
     public void ctorLengthNegative() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var buff = new ArrayBuffer(-1);\n"
-            + "    alert(buff.byteLength);\n"
-            + "  } catch(e) { alert('exception ' + (e instanceof RangeError)); }"
+            + "    log(buff.byteLength);\n"
+            + "  } catch(e) { log('exception ' + (e instanceof RangeError)); }"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -76,15 +80,17 @@ public class ArrayBufferTest extends WebDriverTestCase {
     @Alerts("5")
     public void byteLength() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var buff = new ArrayBuffer(5);\n"
-            + "  alert(buff.byteLength);\n"
+            + "  log(buff.byteLength);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -94,23 +100,25 @@ public class ArrayBufferTest extends WebDriverTestCase {
     @Alerts({"1234", "1234", "6789", "1234"})
     public void slice() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var buffer = new ArrayBuffer(12);\n"
             + "  var x = new Int32Array(buffer);\n"
             + "  x[1] = 1234;\n"
             + "  var slice = buffer.slice(4);\n"
             + "  var y = new Int32Array(slice);\n"
-            + "  alert(x[1]);\n"
-            + "  alert(y[0]);\n"
+            + "  log(x[1]);\n"
+            + "  log(y[0]);\n"
             + "  x[1] = 6789;\n"
-            + "  alert(x[1]);\n"
-            + "  alert(y[0]);\n"
+            + "  log(x[1]);\n"
+            + "  log(y[0]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -232,7 +240,9 @@ public class ArrayBufferTest extends WebDriverTestCase {
 
     private void sliceInvalidIndex(final String index) throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var buffer = new ArrayBuffer(12);\n"
@@ -240,18 +250,18 @@ public class ArrayBufferTest extends WebDriverTestCase {
             + "    x[1] = 1234;\n"
             + "    var slice = buffer.slice(" + index + ");\n"
             + "    var y = new Int32Array(slice);\n"
-            + "    alert(y.length);\n"
+            + "    log(y.length);\n"
             + "    for(var i = 0; i < y.length; i++) {\n"
-            + "      alert(y[i]);\n"
+            + "      log(y[i]);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -261,15 +271,17 @@ public class ArrayBufferTest extends WebDriverTestCase {
     @Alerts("0")
     public void nullConstructor() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new ArrayBuffer(null);\n"
-            + "  alert(array.byteLength);\n"
+            + "  log(array.byteLength);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
 }

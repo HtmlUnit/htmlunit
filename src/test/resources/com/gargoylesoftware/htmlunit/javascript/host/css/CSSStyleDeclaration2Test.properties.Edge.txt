@@ -1,3 +1,5 @@
+accentColor
+additiveSymbols
 alignContent
 alignItems
 alignSelf
@@ -12,6 +14,7 @@ animationIterationCount
 animationName
 animationPlayState
 animationTimingFunction
+appRegion
 appearance
 ascentOverride
 aspectRatio
@@ -123,7 +126,11 @@ columnSpan
 columnWidth
 columns
 contain
+containIntrinsicBlockSize
+containIntrinsicHeight
+containIntrinsicInlineSize
 containIntrinsicSize
+containIntrinsicWidth
 content
 contentVisibility
 counterIncrement
@@ -140,6 +147,7 @@ direction
 display
 dominantBaseline
 emptyCells
+fallback
 fill
 fillOpacity
 fillRule
@@ -247,6 +255,7 @@ minInlineSize
 minWidth
 minZoom
 mixBlendMode
+negative
 objectFit
 objectPosition
 offset
@@ -273,6 +282,7 @@ overscrollBehaviorBlock
 overscrollBehaviorInline
 overscrollBehaviorX
 overscrollBehaviorY
+pad
 padding
 paddingBlock
 paddingBlockEnd
@@ -297,8 +307,10 @@ placeItems
 placeSelf
 pointerEvents
 position
+prefix
 quotes
 r
+range
 resize
 right
 rowGap
@@ -331,12 +343,15 @@ scrollPaddingTop
 scrollSnapAlign
 scrollSnapStop
 scrollSnapType
+scrollbarGutter
 shapeImageThreshold
 shapeMargin
 shapeOutside
 shapeRendering
 size
+sizeAdjust
 speak
+speakAs
 src
 stopColor
 stopOpacity
@@ -348,7 +363,10 @@ strokeLinejoin
 strokeMiterlimit
 strokeOpacity
 strokeWidth
+suffix
+symbols
 syntax
+system
 tabSize
 tableLayout
 textAlign

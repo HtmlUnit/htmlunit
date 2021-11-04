@@ -40,22 +40,23 @@ public class HTMLDTElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var dt = document.getElementById('test');\n"
-            + "        alert(dt.noWrap);\n"
-            + "        alert(dt.getAttribute('noWrap'));\n"
+            + "        log(dt.noWrap);\n"
+            + "        log(dt.getAttribute('noWrap'));\n"
             + "        dt.noWrap = 'nowrap';\n"
-            + "        alert(dt.noWrap);\n"
-            + "        alert(dt.getAttribute('noWrap'));\n"
+            + "        log(dt.noWrap);\n"
+            + "        log(dt.getAttribute('noWrap'));\n"
             + "        dt.noWrap = 'x';\n"
-            + "        alert(dt.noWrap);\n"
-            + "        alert(dt.getAttribute('noWrap'));\n"
+            + "        log(dt.noWrap);\n"
+            + "        log(dt.getAttribute('noWrap'));\n"
             + "        dt.setAttribute('noWrap', 'blah');\n"
-            + "        alert(dt.noWrap);\n"
-            + "        alert(dt.getAttribute('noWrap'));\n"
+            + "        log(dt.noWrap);\n"
+            + "        log(dt.getAttribute('noWrap'));\n"
             + "        dt.noWrap = '';\n"
-            + "        alert(dt.noWrap);\n"
-            + "        alert(dt.getAttribute('noWrap'));\n"
+            + "        log(dt.noWrap);\n"
+            + "        log(dt.getAttribute('noWrap'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -63,6 +64,7 @@ public class HTMLDTElementTest extends WebDriverTestCase {
             + "  <dl><dt id='test'>dt</dt></dl>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }

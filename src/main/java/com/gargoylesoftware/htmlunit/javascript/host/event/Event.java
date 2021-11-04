@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -523,6 +523,12 @@ public class Event extends SimpleScriptable {
     /** The ontransitionstart event type, triggered by {@code ontransitionstart} event handlers. */
     public static final String TYPE_ONTRANSITIONSTART = "ontransitionstart";
 
+    /** The ongamepadconnected event type, triggered by {@code ongamepadconnected} event handlers. */
+    public static final String TYPE_GAMEPAD_CONNECTED = "ongamepadconnected";
+
+    /** The ongamepaddisconnected event type, triggered by {@code ongamepaddisconnected} event handlers. */
+    public static final String TYPE_GAMEPAD_DISCONNECTED = "ongamepaddisconnected";
+
     /**
      * The mssitemodejumplistitemremoved event type, triggered
      * by {@code mssitemodejumplistitemremoved} event handlers.
@@ -693,9 +699,9 @@ public class Event extends SimpleScriptable {
     @SuppressWarnings("unchecked")
     public void startFire() {
         final Context context = Context.getCurrentContext();
-        LinkedList<Event> events = (LinkedList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
+        ArrayList<Event> events = (ArrayList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
         if (events == null) {
-            events = new LinkedList<>();
+            events = new ArrayList<>();
             context.putThreadLocal(KEY_CURRENT_EVENT, events);
         }
         events.add(this);
@@ -706,7 +712,11 @@ public class Event extends SimpleScriptable {
      */
     @SuppressWarnings("unchecked")
     public void endFire() {
-        ((LinkedList<Event>) Context.getCurrentContext().getThreadLocal(KEY_CURRENT_EVENT)).removeLast();
+        final Context context = Context.getCurrentContext();
+        final ArrayList<Event> events = (ArrayList<Event>) context.getThreadLocal(KEY_CURRENT_EVENT);
+        if (events != null && events.size() > 0) {
+            events.remove(events.size() - 1);
+        }
     }
 
     /**

@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
@@ -42,6 +44,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     public void readOnlyPrototype() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var proto = Object.create(Object.prototype, {\n"
             + "    myProp: {\n"
             + "        get: function() { return 'default'; }\n"
@@ -50,14 +53,14 @@ public class ScriptableObjectTest extends WebDriverTestCase {
             + "  var o1 = Object.create(proto);\n"
             + "  var o2 = Object.create(proto);\n"
             + "  o2.myProp = 'bar';\n"
-            + "  alert(o2.myProp);\n"
-            + "  alert(o1.myProp);\n"
-            + "  alert(proto.myProp)"
+            + "  log(o2.myProp);\n"
+            + "  log(o1.myProp);\n"
+            + "  log(proto.myProp)"
             + "</script>\n"
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -69,6 +72,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     public void getOwnPropertySymbols() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  if (Object.getOwnPropertySymbols) {\n"
 
                 + "    var obj = {};\n"
@@ -80,19 +84,208 @@ public class ScriptableObjectTest extends WebDriverTestCase {
                 + "    obj['c'] = 'something else';\n"
 
                 + "    var objectSymbols = Object.getOwnPropertySymbols(obj);\n"
-                + "    alert(objectSymbols.length);\n"
-                + "    alert(typeof objectSymbols[0]);\n"
-                + "    alert(typeof objectSymbols[1]);\n"
+                + "    log(objectSymbols.length);\n"
+                + "    log(typeof objectSymbols[0]);\n"
+                + "    log(typeof objectSymbols[1]);\n"
 
                 + "    var objectNames = Object.getOwnPropertyNames(obj);\n"
-                + "    alert(objectNames.length);\n"
-                + "    alert(objectNames[0]);\n"
+                + "    log(objectNames.length);\n"
+                + "    log(objectNames[0]);\n"
 
-                + "  } else { alert('not defined'); }\n"
+                + "  } else { log('not defined'); }\n"
                 + "</script>\n"
                 + "</body>\n"
                 + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts({"exception", "true", "true"})
+    public void ctorNotChangeableForPrimitives() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  let val = null;\n"
+                + "  try {\n"
+                + "    val.constructor = 1;\n"
+                + "  } catch (e) { log('exception'); }\n"
+
+                + "  val = 'abc';\n"
+                + "  val.constructor = Number;"
+                + "  log(val.constructor === String)\n"
+
+                // An implicit instance of String('abc') was created and assigned the prop foo
+                + "  val.foo = 'bar';\n"
+                // true, since a new instance of String('abc') was created for this comparison,
+                // which doesn't have the foo property
+                + "  log (val.foo === undefined);\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts({"exception", "true", "true"})
+    @NotYetImplemented
+    public void ctorNotChangeableForPrimitivesStrict() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "  'use strict';\n"
+
+                + "  let val = null;\n"
+                + "  try {\n"
+                + "    val.constructor = 1;\n"
+                + "  } catch (e) { log('exception'); }\n"
+
+                + "  val = 'abc';\n"
+                + "  val.constructor = Number;"
+                + "  log(val.constructor === String)\n"
+
+                // An implicit instance of String('abc') was created and assigned the prop foo
+                + "  val.foo = 'bar';\n"
+                // true, since a new instance of String('abc') was created for this comparison,
+                // which doesn't have the foo property
+                + "  log (val.foo === undefined);\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
+            IE = {"true", "false", "true", "exception"})
+    @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "false"},
+            EDGE = {"true", "false", "true", "ctor", "false"},
+            FF = {"true", "false", "true", "ctor", "false"},
+            FF78 = {"true", "false", "true", "ctor", "false"})
+    public void ctorChangeableHasNoEffectForTypeOf() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "  let a = [];\n"
+                + "  a.constructor = String\n"
+                + "  log(a.constructor === String);\n"
+                + "  log(a instanceof String);\n"
+                + "  log(a instanceof Array);\n"
+
+                + "  try {\n"
+                + "    a = new Event('test');\n"
+                + "    log('ctor');\n"
+                + "    a.constructor = 'bar';\n"
+                + "    log(a.constructor === 'bar');\n"
+                + "  } catch (e) { log('exception') }\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
+            IE = {"true", "false", "true", "exception"})
+    @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "exception"},
+            EDGE = {"true", "false", "true", "ctor", "exception"},
+            FF = {"true", "false", "true", "ctor", "exception"},
+            FF78 = {"true", "false", "true", "ctor", "exception"})
+    public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + "  'use strict';\n"
+                + LOG_TITLE_FUNCTION
+
+                + "  let a = [];\n"
+                + "  a.constructor = String\n"
+                + "  log(a.constructor === String);\n"
+                + "  log(a instanceof String);\n"
+                + "  log(a instanceof Array);\n"
+
+                + "  try {\n"
+                + "    a = new Event('test');\n"
+                + "    log('ctor');\n"
+                + "    a.constructor = 'bar';\n"
+                + "    log(a.constructor === 'bar');\n"
+                + "  } catch (e) { log('exception') }\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts("true")
+    public void ctorChangeableHasNoEffectForSealed() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "  let a = Object.seal({});\n"
+                + "  a.constructor = Number;\n"
+                + "  log(a.constructor === Object);\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on failure
+     */
+    @Test
+    @Alerts("true")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF78 = "exception",
+            IE = "exception")
+    public void ctorChangeableHasNoEffectForSealedStrict() throws Exception {
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+
+                + "  'use strict';\n"
+
+                + "  let a = Object.seal({});\n"
+                + "  try {\n"
+                + "    a.constructor = Number;\n"
+                + "    log(a.constructor === Object);\n"
+                + "  } catch (e) { log('exception') }\n"
+
+                + "</script>\n"
+                + "</body>\n"
+                + "</html>\n";
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -20,15 +20,16 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
@@ -50,9 +52,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Ween Jiann
+ * @author cd alexndr
  */
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class URLSearchParams extends SimpleScriptable {
+
+    private static final Log LOG = LogFactory.getLog(URLSearchParams.class);
 
     /** Constant used to register the prototype in the context. */
     public static final String URL_SEARCH_PARMS_TAG = "URLSearchParams";
@@ -107,12 +112,21 @@ public class URLSearchParams extends SimpleScriptable {
         }
     }
 
-    private final List<NameValuePair> params_ = new LinkedList<>();
+    private final URL url_;
 
     /**
      * Constructs a new instance.
      */
     public URLSearchParams() {
+        url_ = null;
+    }
+
+    /**
+     * Constructs a new instance for the given js url.
+     * @param url the base url
+     */
+    URLSearchParams(final URL url) {
+        url_ = url;
     }
 
     /**
@@ -127,24 +141,39 @@ public class URLSearchParams extends SimpleScriptable {
         // TODO: Pass in a record
         // new URLSearchParams({"foo" : 1 , "bar" : 2});
 
+        url_ = new URL("http://www.htmlunit.org", "");
+
         if (params == null || Undefined.isUndefined(params)) {
             return;
         }
 
-        splitQuery(Context.toString(params));
+        try {
+            url_.setSearch(splitQuery(Context.toString(params)));
+        }
+        catch (final MalformedURLException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
-    private void splitQuery(String params) {
+    private List<NameValuePair> splitQuery() {
+        String search = url_.getSearch();
+        search = UrlUtils.decode(search);
+        return splitQuery(search);
+    }
+
+    private static List<NameValuePair> splitQuery(String params) {
+        final List<NameValuePair> splitted = new ArrayList<>();
+
         params = StringUtils.stripStart(params, "?");
         if (StringUtils.isEmpty(params)) {
-            return;
+            return splitted;
         }
 
-        // TODO: encoding
         final String[] parts = StringUtils.split(params, '&');
         for (final String part : parts) {
-            params_.add(splitQueryParameter(part));
+            splitted.add(splitQueryParameter(part));
         }
+        return splitted;
     }
 
     private static NameValuePair splitQueryParameter(final String singleParam) {
@@ -171,7 +200,24 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public void append(final String name, final String value) {
-        params_.add(new NameValuePair(name, value));
+        String search = url_.getSearch();
+
+        final List<NameValuePair> pairs;
+        if (search == null || search.isEmpty()) {
+            pairs = new ArrayList<>(1);
+        }
+        else {
+            search = UrlUtils.decode(search);
+            pairs = splitQuery(search);
+        }
+
+        pairs.add(new NameValuePair(name, value));
+        try {
+            url_.setSearch(pairs);
+        }
+        catch (final MalformedURLException e) {
+            LOG.error(e.getMessage(), e);
+        }
     }
 
     /**
@@ -183,12 +229,30 @@ public class URLSearchParams extends SimpleScriptable {
     @JsxFunction
     @Override
     public void delete(final String name) {
-        final Iterator<NameValuePair> iter = params_.iterator();
+        final List<NameValuePair> splitted = splitQuery();
+        final Iterator<NameValuePair> iter = splitted.iterator();
         while (iter.hasNext()) {
             final NameValuePair entry = iter.next();
             if (entry.getName().equals(name)) {
                 iter.remove();
             }
+        }
+
+        if (splitted.size() == 0) {
+            try {
+                url_.setSearch((String) null);
+            }
+            catch (final MalformedURLException e) {
+                LOG.error(e.getMessage(), e);
+            }
+            return;
+        }
+
+        try {
+            url_.setSearch(splitted);
+        }
+        catch (final MalformedURLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -201,7 +265,8 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public String get(final String name) {
-        for (final NameValuePair param : params_) {
+        final List<NameValuePair> splitted = splitQuery();
+        for (final NameValuePair param : splitted) {
             if (param.getName().equals(name)) {
                 return param.getValue();
             }
@@ -218,8 +283,9 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Scriptable getAll(final String name) {
-        final List<String> result = new LinkedList<>();
-        for (final NameValuePair param : params_) {
+        final List<NameValuePair> splitted = splitQuery();
+        final List<String> result = new ArrayList<>(splitted.size());
+        for (final NameValuePair param : splitted) {
             if (param.getName().equals(name)) {
                 result.add(param.getValue());
             }
@@ -239,8 +305,10 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public void set(final String name, final String value) {
+        final List<NameValuePair> splitted = splitQuery();
+
         boolean change = true;
-        final ListIterator<NameValuePair> iter = params_.listIterator();
+        final ListIterator<NameValuePair> iter = splitted.listIterator();
         while (iter.hasNext()) {
             final NameValuePair entry = iter.next();
             if (entry.getName().equals(name)) {
@@ -255,7 +323,14 @@ public class URLSearchParams extends SimpleScriptable {
         }
 
         if (change) {
-            append(name, value);
+            splitted.add(new NameValuePair(name, value));
+        }
+
+        try {
+            url_.setSearch(splitted);
+        }
+        catch (final MalformedURLException e) {
+            LOG.error(e.getMessage(), e);
         }
     }
 
@@ -268,7 +343,9 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public boolean has(final String name) {
-        for (final NameValuePair param : params_) {
+        final List<NameValuePair> splitted = splitQuery();
+
+        for (final NameValuePair param : splitted) {
             if (param.getName().equals(name)) {
                 return true;
             }
@@ -285,13 +362,15 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Object entries() {
+        final List<NameValuePair> splitted = splitQuery();
+
         if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
             return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.BOTH, params_.iterator());
+                    "Iterator", NativeParamsIterator.Type.BOTH, splitted.iterator());
         }
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.BOTH, params_.iterator());
+                "URLSearchParams Iterator", NativeParamsIterator.Type.BOTH, splitted.iterator());
     }
 
     /**
@@ -302,13 +381,15 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Object keys() {
+        final List<NameValuePair> splitted = splitQuery();
+
         if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
             return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.KEYS, params_.iterator());
+                    "Iterator", NativeParamsIterator.Type.KEYS, splitted.iterator());
         }
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.KEYS, params_.iterator());
+                "URLSearchParams Iterator", NativeParamsIterator.Type.KEYS, splitted.iterator());
     }
 
     /**
@@ -319,13 +400,15 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction
     public Object values() {
+        final List<NameValuePair> splitted = splitQuery();
+
         if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
             return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.VALUES, params_.iterator());
+                    "Iterator", NativeParamsIterator.Type.VALUES, splitted.iterator());
         }
 
         return new NativeParamsIterator(getParentScope(),
-                "URLSearchParams Iterator", NativeParamsIterator.Type.VALUES, params_.iterator());
+                "URLSearchParams Iterator", NativeParamsIterator.Type.VALUES, splitted.iterator());
     }
 
     /**
@@ -334,7 +417,18 @@ public class URLSearchParams extends SimpleScriptable {
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
-        return URLEncodedUtils.format(NameValuePair.toHttpClient(params_), "UTF-8");
+        final StringBuilder newSearch = new StringBuilder();
+        for (final NameValuePair nameValuePair : splitQuery(url_.getSearch())) {
+            if (newSearch.length() > 0) {
+                newSearch.append('&');
+            }
+            newSearch
+                .append(nameValuePair.getName())
+                .append('=')
+                .append(nameValuePair.getValue());
+        }
+
+        return newSearch.toString();
     }
 
     /**
@@ -356,9 +450,10 @@ public class URLSearchParams extends SimpleScriptable {
         webRequest.setRequestBody(null);
         webRequest.setEncodingType(FormEncodingType.URL_ENCODED);
 
-        if (params_.size() > 0) {
+        final List<NameValuePair> splitted = splitQuery();
+        if (splitted.size() > 0) {
             final List<NameValuePair> params = new ArrayList<NameValuePair>();
-            for (final NameValuePair entry : params_) {
+            for (final NameValuePair entry : splitted) {
                 params.add(new NameValuePair(entry.getName(), entry.getValue()));
             }
             webRequest.setRequestParameters(params);

@@ -38,18 +38,20 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Alerts({"18", "93", "42"})
     public void set_int8() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array(10);\n"
             + "  array.set(new Int8Array([18, 93, 42]), 3);\n"
-            + "  alert(array[3]);\n"
-            + "  alert(array[4]);\n"
-            + "  alert(array[5]);\n"
+            + "  log(array[3]);\n"
+            + "  log(array[4]);\n"
+            + "  log(array[5]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -59,16 +61,18 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Alerts("10")
     public void set_empty() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var array = new Int8Array(10);\n"
             + "  array.set({});\n"
-            + "  alert(array.length);\n"
+            + "  log(array.length);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -78,20 +82,22 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Alerts({"3", "2", "3", "-1"})
     public void subarray_int8() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var x = new Int8Array([0, 1, 2, 3, 4, 5]);\n"
             + "  var y = x.subarray(2, 5);\n"
-            + "  alert(y.length);\n"
-            + "  alert(y[0]);\n"
-            + "  alert(y[1]);\n"
+            + "  log(y.length);\n"
+            + "  log(y[0]);\n"
+            + "  log(y[1]);\n"
             + "  y[0] = -1;\n"
-            + "  alert(x[2]);\n"
+            + "  log(x[2]);\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -101,18 +107,20 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Alerts({"8", "0", "0", "0", "10", "1", "2", "2", "2"})
     public void ctorInvalidValuesInt() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  var x = new Int8Array([null, 'null', undefined, '10', true, 2.4, 2.5, '2.6']);\n"
-            + "  alert(x.length);\n"
+            + "  log(x.length);\n"
             + "  for(var i = 0; i < x.length; i++) {\n"
-            + "    alert(x[i]);\n"
+            + "    log(x[i]);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -122,21 +130,23 @@ public class ArrayBufferViewTest extends WebDriverTestCase {
     @Alerts({"7", "0", "NaN", "NaN", "10", "1", "2.5", "2.75"})
     public void ctorInvalidValuesFloat() throws Exception {
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var x = new Float32Array([null, 'null', undefined, '10', true, 2.5, '2.75']);\n"
-            + "    alert(x.length);\n"
+            + "    log(x.length);\n"
             + "    for(var i = 0; i < x.length; i++) {\n"
-            + "      alert(x[i]);\n"
+            + "      log(x[i]);\n"
             + "    }\n"
             + "  } catch(e) {\n"
-            + "    alert('exception');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

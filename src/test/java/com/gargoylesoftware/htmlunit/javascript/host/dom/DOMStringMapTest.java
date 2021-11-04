@@ -37,17 +37,19 @@ public class DOMStringMapTest extends WebDriverTestCase {
     @Alerts({"undefined", "there"})
     public void get() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.body.dataset) {\n"
-            + "    alert(document.body.dataset.hi);\n"
-            + "    alert(document.body.dataset.hello);\n"
+            + "    log(document.body.dataset.hi);\n"
+            + "    log(document.body.dataset.hello);\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()' data-hello='there'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -57,20 +59,22 @@ public class DOMStringMapTest extends WebDriverTestCase {
     @Alerts({"old", "old", "null", "null"})
     public void put() throws Exception {
         final String html
-            = "<html><head><title>First</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  if (document.body.dataset) {\n"
             + "    document.body.dataset.dateOfBirth = 'old';\n"
-            + "    alert(document.body.dataset.dateOfBirth);\n"
-            + "    alert(document.body.getAttribute('data-date-of-birth'));\n"
+            + "    log(document.body.dataset.dateOfBirth);\n"
+            + "    log(document.body.getAttribute('data-date-of-birth'));\n"
             + "    document.body.dataset.dateOfBirth = null;\n"
-            + "    alert(document.body.dataset.dateOfBirth);\n"
-            + "    alert(document.body.getAttribute('data-date-of-birth'));\n"
+            + "    log(document.body.dataset.dateOfBirth);\n"
+            + "    log(document.body.getAttribute('data-date-of-birth'));\n"
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

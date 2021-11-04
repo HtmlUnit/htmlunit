@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEd
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffLatest;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ff78;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterable;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ieNotIterable;
@@ -95,6 +96,15 @@ public final class StyleAttributes {
     public enum Definition {
         /** The style property {@code accelerator}. */
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
+
+        /** The style property {@code accentColor}. */
+        ACCENT_COLOR("accentColor", "accent-color", chromeAndEdge("auto"), ffLatest("auto")),
+
+        /** The style property {@code accent-color}. */
+        ACCENT_COLOR_("accent-color", "accent-color", ffLatest("auto")),
+
+        /** The style property {@code additiveSymbols}. */
+        ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), chromeAndEdgeAndFirefox("normal")),
@@ -175,6 +185,9 @@ public final class StyleAttributes {
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
 
+        /** The style property {@code appRegion}. */
+        APP_REGION("appRegion", "app-region", chromeAndEdge("none")),
+
         /** The style property {@code appearance}. */
         APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
 
@@ -182,7 +195,10 @@ public final class StyleAttributes {
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
 
         /** The style property {@code aspectRatio}. */
-        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto")),
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto"), ffLatest("auto")),
+
+        /** The style property {@code aspect-ratio}. */
+        ASPECT_RATIO_("aspect-ratio", "aspect-ratio", ffLatest("auto")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -291,10 +307,12 @@ public final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("322px"), ff("343px")),
+        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("322px"),
+                ff78("343px"), ffLatest("345px")),
 
         /** The style property {@code block-size}. */
-        BLOCK_SIZE_("block-size", "block-size", ff("343px")),
+        BLOCK_SIZE_("block-size", "block-size",
+                ff78("343px"), ffLatest("345px")),
 
         /** The style property {@code border}. */
         BORDER("border", "border", chromeAndEdge("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -855,8 +873,22 @@ public final class StyleAttributes {
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdge("none"), ff("none")),
 
+        /** The style property {@code containIntrinsicBlockSize}. */
+        CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
+                chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicHeight}. */
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicInlineSize}. */
+        CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
+                chromeAndEdge("auto")),
+
         /** The style property {@code containIntrinsicSize}. */
         CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdge("auto")),
+
+        /** The style property {@code containIntrinsicWidth}. */
+        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdge("auto")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ff("normal")),
@@ -937,6 +969,9 @@ public final class StyleAttributes {
 
         /** The style property {@code enableBackground}. */
         ENABLE_BACKGROUND("enableBackground", "enable-background", ie("accumulate")),
+
+        /** The style property {@code fallback}. */
+        FALLBACK("fallback", "fallback", chromeAndEdge("")),
 
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), ie("black"), chromeAndEdge("rgb(0, 0, 0)")),
@@ -1074,10 +1109,10 @@ public final class StyleAttributes {
         FONT_STYLE_("font-style", "font-style", ff("normal")),
 
         /** The style property {@code fontSynthesis}. */
-        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code font-synthesis}. */
-        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff("weight style")),
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdge("normal"), ff("normal"), ie("normal")),
@@ -1953,42 +1988,42 @@ public final class StyleAttributes {
         MOZ_OUTLINE_OFFSET("MozOutlineOffset", "-moz-outline-offset"),
 
         /** The style property {@code MozOutlineRadius}. */
-        MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-moz-outline-radius", ff("")),
+        MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-moz-outline-radius", ff78("")),
 
         /** The style property {@code -moz-outline-radius}. */
-        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff("")),
+        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff78("")),
 
         /** The style property {@code MozOutlineRadiusBottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT("MozOutlineRadiusBottomleft",
-                "-moz-outline-radius-bottomleft", ff("0px")),
+                "-moz-outline-radius-bottomleft", ff78("0px")),
 
         /** The style property {@code -moz-outline-radius-bottomleft}. */
         MOZ_OUTLINE_RADIUS_BOTTOMLEFT__("-moz-outline-radius-bottomleft",
-                "-moz-outline-radius-bottomleft", ff("0px")),
+                "-moz-outline-radius-bottomleft", ff78("0px")),
 
         /** The style property {@code MozOutlineRadiusBottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT("MozOutlineRadiusBottomright",
-                "-moz-outline-radius-bottomright", ff("0px")),
+                "-moz-outline-radius-bottomright", ff78("0px")),
 
         /** The style property {@code -moz-outline-radius-bottomright}. */
         MOZ_OUTLINE_RADIUS_BOTTOMRIGHT__("-moz-outline-radius-bottomright",
-                "-moz-outline-radius-bottomright", ff("0px")),
+                "-moz-outline-radius-bottomright", ff78("0px")),
 
         /** The style property {@code MozOutlineRadiusTopleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT("MozOutlineRadiusTopleft",
-                "-moz-outline-radius-topleft", ff("0px")),
+                "-moz-outline-radius-topleft", ff78("0px")),
 
         /** The style property {@code -moz-outline-radius-topleft}. */
         MOZ_OUTLINE_RADIUS_TOPLEFT__("-moz-outline-radius-topleft",
-                "-moz-outline-radius-topleft", ff("0px")),
+                "-moz-outline-radius-topleft", ff78("0px")),
 
         /** The style property {@code MozOutlineRadiusTopright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT("MozOutlineRadiusTopright",
-                "-moz-outline-radius-topright", ff("0px")),
+                "-moz-outline-radius-topright", ff78("0px")),
 
         /** The style property {@code -moz-outline-radius-topright}. */
         MOZ_OUTLINE_RADIUS_TOPRIGHT__("-moz-outline-radius-topright",
-                "-moz-outline-radius-topright", ff("0px")),
+                "-moz-outline-radius-topright", ff78("0px")),
 
         /** The style property {@code MozOutlineStyle}. */
         MOZ_OUTLINE_STYLE("MozOutlineStyle", "-moz-outline-style"),
@@ -2016,11 +2051,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff("622px 171.5px")),
+                "-moz-perspective-origin", ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code -moz-perspective-origin}. */
         MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
-                "-moz-perspective-origin", ff("622px 171.5px")),
+                "-moz-perspective-origin", ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
@@ -2052,11 +2087,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code -moz-transform-origin}. */
         MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -2398,6 +2433,9 @@ public final class StyleAttributes {
         /** The style property {@code msWrapThrough}. */
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie("wrap")),
 
+        /** The style property {@code negative}. */
+        NEGATIVE("negative", "negative", chromeAndEdge("")),
+
         /** The style property {@code objectFit}. */
         OBJECT_FIT("objectFit", "object-fit", ff("fill"), chromeAndEdge("fill")),
 
@@ -2551,6 +2589,9 @@ public final class StyleAttributes {
         /** The style property {@code overscroll-behavior-y}. */
         OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff("auto")),
 
+        /** The style property {@code pad}. */
+        PAD("pad", "pad", chromeAndEdge("")),
+
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chromeAndEdge("0px"), ff(""), ie("")),
 
@@ -2659,11 +2700,12 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("622px 171.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px"),
+                ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
@@ -2734,11 +2776,17 @@ public final class StyleAttributes {
         /** The style property {@code position}. */
         POSITION("position", "position", chromeAndEdge("static"), ff("static"), ie("static")),
 
+        /** The style property {@code prefix}. */
+        PREFIX("prefix", "prefix", chromeAndEdge("")),
+
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("auto")),
 
         /** The style property {@code r}. */
         R("r", "r", chromeAndEdge("0px"), ff("0px")),
+
+        /** The style property {@code range}. */
+        RANGE("range", "range", chromeAndEdge("")),
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ff("none"), chromeAndEdge("none")),
@@ -2768,10 +2816,11 @@ public final class StyleAttributes {
         RUBY_OVERHANG("rubyOverhang", "ruby-overhang", ie("auto")),
 
         /** The style property {@code rubyPosition}. */
-        RUBY_POSITION("rubyPosition", "ruby-position", chromeAndEdge("over"), ie("above"), ff("over")),
+        RUBY_POSITION("rubyPosition", "ruby-position", chromeAndEdge("over"),
+                ie("above"), ff78("over"), ffLatest("alternate")),
 
         /** The style property {@code ruby-position}. */
-        RUBY_POSITION_("ruby-position", "ruby-position", ff("over")),
+        RUBY_POSITION_("ruby-position", "ruby-position", ff78("over"), ffLatest("alternate")),
 
         /** The style property {@code rx}. */
         RX("rx", "rx", chromeAndEdge("auto"), ff("auto")),
@@ -2965,6 +3014,9 @@ public final class StyleAttributes {
         /** The style property {@code scrollbarFaceColor}. */
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
+        /** The style property {@code scrollbarGutter}. */
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto")),
+
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),
 
@@ -3007,8 +3059,14 @@ public final class StyleAttributes {
         /** The style property {@code size}. */
         SIZE("size", "size", chromeAndEdge("")),
 
+        /** The style property {@code sizeAdjust}. */
+        SIZE_ADJUST("sizeAdjust", "sizeAdjust", chromeAndEdge("")),
+
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chromeAndEdge("normal")),
+
+        /** The style property {@code speakAs}. */
+        SPEAK_AS("speakAs", "speak-as", chromeAndEdge("")),
 
         /** The style property {@code speakHeader}. */
         SPEAK_HEADER("speakHeader", "speak-header"),
@@ -3088,11 +3146,23 @@ public final class StyleAttributes {
         /** The style property {@code styleFloat}. */
         STYLE_FLOAT("styleFloat", "style-float", ie("undefined")),
 
+        /** The style property {@code suffix}. */
+        SUFFIX("suffix", "suffix", chromeAndEdge("")),
+
+        /** The style property {@code symbols}. */
+        SYMBOLS("symbols", "symbols", chromeAndEdge("")),
+
         /** The style property {@code syntax}. */
         SYNTAX("syntax", "syntax", chromeAndEdge("")),
 
+        /** The style property {@code system}. */
+        SYSTEM("system", "system", chromeAndEdge("")),
+
         /** The style property {@code tabSize}. */
-        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8")),
+        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ffLatest("8")),
+
+        /** The style property {@code tab-size}. */
+        TAB_SIZE_("tab-size", "tab-size", ffLatest("8")),
 
         /** The style property {@code tableLayout}. */
         TABLE_LAYOUT("tableLayout", "table-layout", chromeAndEdge("auto"), ff("auto"), ie("auto")),
@@ -3296,10 +3366,12 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("622px 171.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px"),
+                ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("622px 171.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin",
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chromeAndEdge("flat")),
@@ -4090,15 +4162,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                chromeAndEdge("620px 161px"), ff("622px 171.5px")),
+                chromeAndEdge("620px 161px"), ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code -webkit-perspective-origin}. */
         WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chromeAndEdge("")),
@@ -4218,15 +4290,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                chromeAndEdge("620px 161px"), ff("622px 171.5px")),
+                chromeAndEdge("620px 161px"), ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code -webkit-transform-origin}. */
         WEBKIT_TRANSFORM_ORIGIN__("-webkit-transform-origin", "webkit-transform-origin",
-                ff("622px 171.5px")),
+                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chromeAndEdge("")),

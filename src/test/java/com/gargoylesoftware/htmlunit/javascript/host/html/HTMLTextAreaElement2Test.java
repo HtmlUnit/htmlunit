@@ -58,7 +58,7 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
             + "<textarea id='log'></textarea>\n"
             + "</form>\n"
             + "</body></html>";
-        final HtmlPage page = loadPageWithAlerts(content);
+        final HtmlPage page = loadPage(content);
         final HtmlTextArea textArea = page.getHtmlElementById("textArea1");
         textArea.type("hello");
         page.setFocusedElement(null); // remove focus on textarea to trigger onchange

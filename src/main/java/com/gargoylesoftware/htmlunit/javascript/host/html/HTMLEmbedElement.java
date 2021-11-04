@@ -64,7 +64,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * @return the value of the {@code height} property
      */
     @JsxGetter(propertyName = "height")
-    public String getHeightString() {
+    public String getHeight_js() {
         return getDomNodeOrDie().getAttributeDirect("height");
     }
 
@@ -73,7 +73,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * @param height the value of the {@code height} property
      */
     @JsxSetter(propertyName = "height")
-    public void setHeightString(final String height) {
+    public void setHeight_js(final String height) {
         getDomNodeOrDie().setAttribute("height", height);
     }
 
@@ -82,7 +82,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * @return the value of the {@code width} property
      */
     @JsxGetter(propertyName = "width")
-    public String getWidthString() {
+    public String getWidth_js() {
         return getDomNodeOrDie().getAttributeDirect("width");
     }
 
@@ -91,7 +91,7 @@ public class HTMLEmbedElement extends HTMLElement {
      * @param width the value of the {@code width} property
      */
     @JsxSetter(propertyName = "width")
-    public void setWidthString(final String width) {
+    public void setWidth_js(final String width) {
         getDomNodeOrDie().setAttribute("width", width);
     }
 

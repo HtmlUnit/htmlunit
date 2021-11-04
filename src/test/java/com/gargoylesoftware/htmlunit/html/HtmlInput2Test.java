@@ -49,31 +49,33 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + "  function handler() { alert('handler');}\n"
+            + LOG_TITLE_FUNCTION
+            + "  function handler() { log('handler');}\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('myInput');\n"
             + "    try {\n"
-            + "      alert(elem.onchange);\n"
+            + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
-            + "      alert('onchange called');\n"
-            + "    } catch (e) {alert('error')}\n"
+            + "      log('onchange called');\n"
+            + "    } catch (e) {log('error')}\n"
 
             + "    elem.onchange = handler;\n"
             + "    elem.onchange();\n"
 
             + "    elem.onchange = null;\n"
             + "    try {\n"
-            + "      alert(elem.onchange);\n"
+            + "      log(elem.onchange);\n"
             + "      elem.onchange();\n"
-            + "      alert('onchange called');\n"
-            + "    } catch (e) {alert('error')}\n"
+            + "      log('onchange called');\n"
+            + "    } catch (e) {log('error')}\n"
 
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <input id='myInput'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -86,19 +88,21 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler() {}\n"
             + "  function test() {\n"
             + "    var elem = document.getElementById('myInput');\n"
             + "    elem.onchange = handler;\n"
-            + "    alert(elem.onchange);\n"
+            + "    log(elem.onchange);\n"
             + "    elem.onchange = null;\n"
-            + "    alert(elem.onchange);\n"
+            + "    log(elem.onchange);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <input id='myInput'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -245,15 +249,68 @@ public final class HtmlInput2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('myInput');\n"
-            + "    alert(elem.placeholder);\n"
+            + "    log(elem.placeholder);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <input id='myInput' placeholder='something'>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("text")
+    public void badInputType() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(document.form1.text1.type)'>\n"
+            + "<form name='form1'>\n"
+            + "<input type='foo' name='text1'>\n"
+            + "</form></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Tests that clicking a radio button will select it.
+     * @exception Exception If the test fails
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "undefined", "undefined", "undefined"})
+    public void select() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var form = document.getElementById('form1');\n"
+            + "    for (var i = 0; i < form.elements.length; i++) {\n"
+            + "      log(form.elements[i].select());\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form id='form1'>\n"
+            + "<input type='radio' name='foo' value='1'/>\n"
+            + "<input type='password' name='pwd'/>\n"
+            + "<input type='checkbox' name='cb'/>\n"
+            + "<input type='submit' name='button' value='foo'/>\n"
+            + "<textarea name='t'></textarea>\n"
+            + "</form></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

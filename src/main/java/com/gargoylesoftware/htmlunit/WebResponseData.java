@@ -94,7 +94,7 @@ public class WebResponseData implements Serializable {
     }
 
     private InputStream getStream(final DownloadedContent downloadedContent,
-                final List<NameValuePair> headers, final ByteOrderMark[] bomHeaders) throws IOException {
+                final List<NameValuePair> headers, final ByteOrderMark... bomHeaders) throws IOException {
         InputStream stream = downloadedContent_.getInputStream();
         if (downloadedContent.isEmpty()) {
             return stream;
@@ -212,7 +212,7 @@ public class WebResponseData implements Serializable {
      * @return the associated InputStream wrapped with a bom input stream if applicable
      * @throws IOException in case of IO problems
      */
-    public InputStream getInputStreamWithBomIfApplicable(final ByteOrderMark[] bomHeaders) throws IOException {
+    public InputStream getInputStreamWithBomIfApplicable(final ByteOrderMark... bomHeaders) throws IOException {
         return getStream(downloadedContent_, getResponseHeaders(), bomHeaders);
     }
 

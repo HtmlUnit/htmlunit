@@ -61,7 +61,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("Your browser doesn't support applets", page.getHtmlElementById("myId").asText());
+        assertEquals("Your browser doesn't support applets", page.getHtmlElementById("myId").asNormalizedText());
     }
 
     /**
@@ -84,7 +84,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         assertEquals(getExpectedAlerts()[0],
-                page.getHtmlElementById("myId").asText()); // should we display something else?
+                page.getHtmlElementById("myId").asNormalizedText()); // should we display something else?
     }
 
     /**
@@ -366,14 +366,14 @@ public class HtmlAppletTest extends SimpleWebTestCase {
         assertEquals(2, collectedStatus.size());
         assertEquals("call: 'callSample'", collectedStatus.get(0));
         assertEquals("  'done'", collectedStatus.get(1));
-        assertEquals("undefined", input.asText());
+        assertEquals("undefined", input.asNormalizedText());
 
         button = page.getHtmlElementById("callWithStringParam");
         button.click();
 
         assertEquals(4, collectedStatus.size());
         assertEquals("call: 'callSample'", collectedStatus.get(2));
-        assertEquals("HtmlUnit", input.asText());
+        assertEquals("HtmlUnit", input.asNormalizedText());
     }
 
     /**

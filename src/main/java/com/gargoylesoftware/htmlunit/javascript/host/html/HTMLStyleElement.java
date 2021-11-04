@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 
 /**
@@ -54,7 +55,7 @@ public class HTMLStyleElement extends HTMLElement {
     @JsxGetter
     public CSSStyleSheet getSheet() {
         if (sheet_ == null) {
-            sheet_ =  new CSSStyleSheet(this, ((HtmlStyle) getDomNodeOrDie()).getSheet());
+            sheet_ = new CSSStyleSheet(this, getWindow(), ((HtmlStyle) getDomNodeOrDie()).getSheet());
         }
         return sheet_;
     }
@@ -97,16 +98,6 @@ public class HTMLStyleElement extends HTMLElement {
     public void setMedia(final String media) {
         final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
         style.setAttribute("media", media);
-    }
-
-    /**
-     * Sets the scoped of this style.
-     * @param scoped the new scoped
-     */
-    @JsxSetter({FF, FF78})
-    public void setScoped(final boolean scoped) {
-        final HtmlStyle style = (HtmlStyle) getDomNodeOrDie();
-        style.setAttribute("scoped", Boolean.toString(scoped));
     }
 
     /**

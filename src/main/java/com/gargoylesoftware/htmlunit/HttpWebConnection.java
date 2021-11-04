@@ -875,6 +875,24 @@ public class HttpWebConnection implements WebConnection {
                     list.add(new SecFetchUserHeaderHttpRequestInterceptor(headerValue));
                 }
             }
+            else if (HttpHeader.SEC_CH_UA.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA);
+                if (headerValue != null) {
+                    list.add(new SecClientHintUserAgentHeaderHttpRequestInterceptor(headerValue));
+                }
+            }
+            else if (HttpHeader.SEC_CH_UA_MOBILE.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_MOBILE);
+                if (headerValue != null) {
+                    list.add(new SecClientHintUserAgentMobileHeaderHttpRequestInterceptor(headerValue));
+                }
+            }
+            else if (HttpHeader.SEC_CH_UA_PLATFORM.equals(header)) {
+                final String headerValue = webRequest.getAdditionalHeader(HttpHeader.SEC_CH_UA_PLATFORM);
+                if (headerValue != null) {
+                    list.add(new SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(headerValue));
+                }
+            }
             else if (HttpHeader.UPGRADE_INSECURE_REQUESTS.equals(header)) {
                 final String headerValue = webRequest.getAdditionalHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS);
                 if (headerValue != null) {
@@ -1064,6 +1082,47 @@ public class HttpWebConnection implements WebConnection {
         @Override
         public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_DEST, value_);
+        }
+    }
+
+    private static final class SecClientHintUserAgentHeaderHttpRequestInterceptor implements HttpRequestInterceptor {
+        private final String value_;
+
+        SecClientHintUserAgentHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader(HttpHeader.SEC_CH_UA, value_);
+        }
+    }
+
+    private static final class SecClientHintUserAgentMobileHeaderHttpRequestInterceptor
+            implements HttpRequestInterceptor {
+        private final String value_;
+
+        SecClientHintUserAgentMobileHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader(HttpHeader.SEC_CH_UA_MOBILE, value_);
+        }
+    }
+
+    private static final class SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor
+            implements HttpRequestInterceptor {
+        private final String value_;
+
+        SecClientHintUserAgentPlatformHeaderHttpRequestInterceptor(final String value) {
+            value_ = value;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+            request.setHeader(HttpHeader.SEC_CH_UA_PLATFORM, value_);
         }
     }
 
