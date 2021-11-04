@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95">
+            <action type="fix" dev="rbri" due-to="cdalexndr" issue="397">
+                HtmlSerializerVisibleText handling of different white-space style definitions improved.
+            </action>
+            <action type="add" dev="rbri">
+                Separate documentation page for proxy setup and authentication.
+            </action>
+            <action type="add" dev="rbri" issue="394">
+                Support socks proxy authentication.
+            </action>
         </release>
 
         <release version="2.54.0" date="October 17, 2021" description="Bugfixes, Chrome/Edge 94, Firefox 93">
