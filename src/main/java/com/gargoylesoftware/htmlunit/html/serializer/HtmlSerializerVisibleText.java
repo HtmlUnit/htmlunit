@@ -761,35 +761,35 @@ public class HtmlSerializerVisibleText {
         return defaultMode;
     }
 
+    /** Mode. */
+    protected enum Mode {
+        /**
+         * The mode for the pre tag.
+         */
+        PRE,
+
+        /**
+         * Sequences of white space are collapsed. Newline characters
+         * in the source are handled the same as other white space.
+         * Lines are broken as necessary to fill line boxes.
+         */
+        WHITE_SPACE_NORMAL,
+
+        /**
+         * Sequences of white space are preserved. Lines are only broken
+         * at newline characters in the source and at <br> elements.
+         */
+        WHITE_SPACE_PRE,
+
+        /**
+         * Sequences of white space are collapsed. Lines are broken
+         * at newline characters, at <br>, and as necessary
+         * to fill line boxes.
+         */
+        WHITE_SPACE_PRE_LINE
+    }
+
     protected static class HtmlSerializerTextBuilder {
-        /** Mode. */
-        protected enum Mode {
-            /**
-             * The mode for the pre tag.
-             */
-            PRE,
-
-            /**
-             * Sequences of white space are collapsed. Newline characters
-             * in the source are handled the same as other white space.
-             * Lines are broken as necessary to fill line boxes.
-             */
-            WHITE_SPACE_NORMAL,
-
-            /**
-             * Sequences of white space are preserved. Lines are only broken
-             * at newline characters in the source and at <br> elements.
-             */
-            WHITE_SPACE_PRE,
-
-            /**
-             * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary
-             * to fill line boxes.
-             */
-            WHITE_SPACE_PRE_LINE
-        }
-
         private enum State {
             DEFAULT,
             EMPTY,
