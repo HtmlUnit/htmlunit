@@ -692,7 +692,7 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
-    protected static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    protected Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
@@ -728,7 +728,7 @@ public class HtmlSerializerVisibleText {
         return defaultMode;
     }
 
-    protected static Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
