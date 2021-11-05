@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
+import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
