@@ -25,7 +25,6 @@ import java.nio.charset.UnsupportedCharsetException;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -92,11 +91,9 @@ public class DataUrlDecoder {
         final Charset charset = extractCharset(beforeData);
 
         byte[] data = url.substring(comma + 1).getBytes(charset);
+        data = decodeUrl(data);
         if (base64) {
-            data = Base64.decodeBase64(decodeUrl(data));
-        }
-        else {
-            data = URLCodec.decodeUrl(data);
+            data = Base64.decodeBase64(data);
         }
 
         return new DataUrlDecoder(data, mediaType, charset);

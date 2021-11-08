@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.protocol.data;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
@@ -102,5 +103,26 @@ public class DataURLDecoderTest extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts("HtmlUnit")
+    public void withPlus() throws Exception {
+        final String dataUrl = "data:text/html;charset=utf-8,"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  var result = 'Html';\n"
+            + "  result += 'Unit§';\n"
+            + "  window.document.title = result;\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver driver = getWebDriver();
+        driver.get(dataUrl);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }

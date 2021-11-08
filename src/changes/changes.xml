@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95">
+            <action type="fix" dev="rbri" issue="403">
+                Plus sign was replaced by a blank when found inside a data url.
+            </action>
             <action type="fix" dev="rbri" due-to="cdalexndr" issue="397">
                 HtmlSerializerVisibleText handling of different white-space style definitions improved.
             </action>
