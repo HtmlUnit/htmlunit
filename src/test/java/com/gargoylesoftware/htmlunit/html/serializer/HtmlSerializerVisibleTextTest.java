@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder;
-import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.Mode;
 
 /**
  * Tests for {@link HtmlSerializerVisibleText}.

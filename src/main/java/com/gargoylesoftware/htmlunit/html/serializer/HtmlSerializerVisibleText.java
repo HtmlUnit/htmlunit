@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -53,11 +54,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.html.TableRowGroup;
-import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText.HtmlSerializerTextBuilder.Mode;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * Special serializer to generate the output we need
@@ -388,6 +389,14 @@ public class HtmlSerializerVisibleText {
         }
     }
 
+    protected boolean isDisplayed(HtmlElement element) {
+        return element.isDisplayed();
+    }
+
+    protected boolean isDisplayed(DomNode domNode) {
+        return domNode.isDisplayed();
+    }
+
     /**
      * Process {@link HtmlTextArea}.
      *
@@ -397,7 +406,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendTextArea(final HtmlSerializerTextBuilder builder,
             final HtmlTextArea htmlTextArea, final Mode mode) {
-        if (htmlTextArea.isDisplayed()) {
+        if (isDisplayed(htmlTextArea)) {
             builder.append(htmlTextArea.getDefaultValue(), whiteSpaceStyle(htmlTextArea, Mode.PRE));
             builder.trimRight(Mode.PRE);
         }
@@ -574,7 +583,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendPreformattedText(final HtmlSerializerTextBuilder builder,
             final HtmlPreformattedText htmlPreformattedText, final Mode mode) {
-        if (htmlPreformattedText.isDisplayed()) {
+        if (isDisplayed(htmlPreformattedText)) {
             builder.appendBlockSeparator();
             appendChildren(builder, htmlPreformattedText, whiteSpaceStyle(htmlPreformattedText, Mode.PRE));
             builder.appendBlockSeparator();
@@ -590,7 +599,7 @@ public class HtmlSerializerVisibleText {
      */
     protected void appendInlineFrame(final HtmlSerializerTextBuilder builder,
             final HtmlInlineFrame htmlInlineFrame, final Mode mode) {
-        if (htmlInlineFrame.isDisplayed()) {
+        if (isDisplayed(htmlInlineFrame)) {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
@@ -617,7 +626,7 @@ public class HtmlSerializerVisibleText {
         if (parent == null
                 || parent instanceof HtmlTitle
                 || parent instanceof HtmlScript
-                || parent.isDisplayed()) {
+                || isDisplayed(parent)) {
             builder.append(domText.getData(), mode);
         }
     }
@@ -682,7 +691,7 @@ public class HtmlSerializerVisibleText {
         // nothing to do
     }
 
-    private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    protected Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
@@ -718,7 +727,7 @@ public class HtmlSerializerVisibleText {
         return defaultMode;
     }
 
-    private static Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Object scriptableObject = domNode.getScriptableObject();
         if (scriptableObject instanceof Node) {
             final Page page = domNode.getPage();
@@ -751,35 +760,35 @@ public class HtmlSerializerVisibleText {
         return defaultMode;
     }
 
+    /** Mode. */
+    protected enum Mode {
+        /**
+         * The mode for the pre tag.
+         */
+        PRE,
+
+        /**
+         * Sequences of white space are collapsed. Newline characters
+         * in the source are handled the same as other white space.
+         * Lines are broken as necessary to fill line boxes.
+         */
+        WHITE_SPACE_NORMAL,
+
+        /**
+         * Sequences of white space are preserved. Lines are only broken
+         * at newline characters in the source and at <br> elements.
+         */
+        WHITE_SPACE_PRE,
+
+        /**
+         * Sequences of white space are collapsed. Lines are broken
+         * at newline characters, at <br>, and as necessary
+         * to fill line boxes.
+         */
+        WHITE_SPACE_PRE_LINE
+    }
+
     protected static class HtmlSerializerTextBuilder {
-        /** Mode. */
-        protected enum Mode {
-            /**
-             * The mode for the pre tag.
-             */
-            PRE,
-
-            /**
-             * Sequences of white space are collapsed. Newline characters
-             * in the source are handled the same as other white space.
-             * Lines are broken as necessary to fill line boxes.
-             */
-            WHITE_SPACE_NORMAL,
-
-            /**
-             * Sequences of white space are preserved. Lines are only broken
-             * at newline characters in the source and at <br> elements.
-             */
-            WHITE_SPACE_PRE,
-
-            /**
-             * Sequences of white space are collapsed. Lines are broken
-             * at newline characters, at <br>, and as necessary
-             * to fill line boxes.
-             */
-            WHITE_SPACE_PRE_LINE
-        }
-
         private enum State {
             DEFAULT,
             EMPTY,
