@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95">
-            <action type="update" dev="rbri" due-to="cdalexndr" issue="402">
+            <action type="update" dev="rbri" due-to="cdalexndr" issue="399">
                 HtmlSerializerVisibleText is now a bit more customizable.
             </action>
             <action type="fix" dev="rbri" issue="403">
