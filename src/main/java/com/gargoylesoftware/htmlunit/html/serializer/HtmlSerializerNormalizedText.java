@@ -61,6 +61,9 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * Utility to handle conversion from HTML code to string.
+ * This implements HtmlUnit's way of normalization.
+ * <p>Note: There conversation done by selenium WebElement#getText()
+ * is different.</p>
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour

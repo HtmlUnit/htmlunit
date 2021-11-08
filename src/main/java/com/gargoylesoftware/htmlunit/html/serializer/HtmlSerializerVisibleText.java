@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -58,7 +57,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * Special serializer to generate the output we need
@@ -389,11 +387,12 @@ public class HtmlSerializerVisibleText {
         }
     }
 
-    protected boolean isDisplayed(HtmlElement element) {
-        return element.isDisplayed();
-    }
-
-    protected boolean isDisplayed(DomNode domNode) {
+    /**
+     * Check domNode visibility.
+     * @param domNode the node to check
+     * @return true or false
+     */
+    protected boolean isDisplayed(final DomNode domNode) {
         return domNode.isDisplayed();
     }
 
@@ -603,7 +602,7 @@ public class HtmlSerializerVisibleText {
             builder.appendBlockSeparator();
             final Page page = htmlInlineFrame.getEnclosedPage();
             if (page instanceof SgmlPage) {
-                builder.append(((SgmlPage) page).asText(), mode);
+                builder.append(((SgmlPage) page).asNormalizedText(), mode);
             }
             builder.appendBlockSeparator();
         }
