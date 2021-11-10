@@ -35,11 +35,11 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 public class HtmlHiddenInputTest extends WebDriverTestCase {
 
     /**
-     * Verifies that a asText() returns an empty string.
+     * Verifies that getText() returns an empty string.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void getText() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head></head>\n"

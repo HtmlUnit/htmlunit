@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  * Tests for {@link HtmlHeading1} to {@link HtmlHeading6}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlHeadingTest extends SimpleWebTestCase {
@@ -32,7 +33,7 @@ public class HtmlHeadingTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "begin"
@@ -45,21 +46,20 @@ public class HtmlHeadingTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        final String ls = System.lineSeparator();
-        final String expectedText = "begin" + ls
-            + "in h1" + ls
-            + "after h1" + ls
-            + "in h2" + ls
-            + "after h2" + ls
-            + "in h3" + ls
-            + "after h3" + ls
-            + "in h4" + ls
-            + "after h4" + ls
-            + "in h5" + ls
-            + "after h5" + ls
-            + "in h6" + ls
+        final String expectedText = "begin\n"
+            + "in h1\n"
+            + "after h1\n"
+            + "in h2\n"
+            + "after h2\n"
+            + "in h3\n"
+            + "after h3\n"
+            + "in h4\n"
+            + "after h4\n"
+            + "in h5\n"
+            + "after h5\n"
+            + "in h6\n"
             + "after h6";
 
-        assertEquals(expectedText, page.asText());
+        assertEquals(expectedText, page.asNormalizedText());
     }
 }

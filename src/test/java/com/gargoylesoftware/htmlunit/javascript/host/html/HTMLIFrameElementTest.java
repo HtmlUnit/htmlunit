@@ -122,16 +122,16 @@ public class HTMLIFrameElementTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(index);
 
-        assertEquals("frame content", page.getElementById("content").asText());
+        assertEquals("frame content", page.getElementById("content").asNormalizedText());
         // check frame on page
         List<FrameWindow> frames = page.getFrames();
         assertEquals(1, frames.size());
-        assertEquals("frame content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).asText());
+        assertEquals("frame content", ((HtmlPage) page.getFrameByName("content").getEnclosedPage()).asNormalizedText());
 
         // replace frame tag with javascript
         ((HtmlElement) page.getElementById("clickId")).click();
 
-        assertEquals("new content", page.getElementById("content").asText());
+        assertEquals("new content", page.getElementById("content").asNormalizedText());
 
         // frame has to be gone
         frames = page.getFrames();

@@ -61,7 +61,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "Hello<br/>world\n"
@@ -70,7 +70,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertEquals("Hello" + System.lineSeparator() + "world", page.getBody().asText());
+            assertEquals("Hello\nworld", page.getBody().asNormalizedText());
         }
     }
 }

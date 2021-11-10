@@ -90,11 +90,11 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
     }
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the checkbox.
+     * Verifies that asNormalizedText() returns "checked" or "unchecked" according to the state of the checkbox.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html
             = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
@@ -104,9 +104,9 @@ public class HtmlCheckBoxInputTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlCheckBoxInput checkBox = page.getHtmlElementById("checkbox");
-        assertEquals("unchecked", checkBox.asText());
-        assertEquals("uncheckedCheck me", page.asText());
+        assertEquals("unchecked", checkBox.asNormalizedText());
+        assertEquals("uncheckedCheck me", page.asNormalizedText());
         checkBox.setChecked(true);
-        assertEquals("checked", checkBox.asText());
+        assertEquals("checked", checkBox.asNormalizedText());
     }
 }

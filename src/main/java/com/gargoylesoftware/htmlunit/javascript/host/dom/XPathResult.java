@@ -275,7 +275,7 @@ public class XPathResult extends SimpleScriptable {
             return ((DomAttr) resultObj).getValue();
         }
         if (resultObj instanceof DomNode) {
-            return ((DomNode) resultObj).asText();
+            return ((DomNode) resultObj).asNormalizedText();
         }
         return resultObj.toString();
     }

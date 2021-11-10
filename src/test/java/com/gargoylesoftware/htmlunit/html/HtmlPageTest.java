@@ -1716,12 +1716,12 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for asText() which would blow up.
+     * Regression test for asNormalizedText() which would blow up.
      *
      * @exception Exception If the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String htmlContent
             = "<html><head><title>test</title></head>\n"
             + "<body><table>\n"
@@ -1729,7 +1729,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
             + "</table></body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
-        page.asText();
+        page.asNormalizedText();
     }
 
     /**

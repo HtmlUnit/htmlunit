@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
     /**
-     * Verifies that a asText() returns "checked" or "unchecked" according to the state of the radio.
+     * Verifies that asNormalizedText() returns "checked" or "unchecked" according to the state of the radio.
      * @throws Exception if the test fails
      */
     @Test
@@ -52,10 +52,10 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         final HtmlRadioButtonInput radio = page.getHtmlElementById("radio");
-        assertEquals("unchecked", radio.asText());
-        assertEquals("uncheckedCheck me", page.asText());
+        assertEquals("unchecked", radio.asNormalizedText());
+        assertEquals("uncheckedCheck me", page.asNormalizedText());
         radio.setChecked(true);
-        assertEquals("checked", radio.asText());
+        assertEquals("checked", radio.asNormalizedText());
     }
 
     /**

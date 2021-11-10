@@ -178,7 +178,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</body></html>";
         final HtmlPage page = loadPage(html);
         assertEquals("Test", page.getTitleText());
-        assertEquals("4", page.getBody().asText());
+        assertEquals("4", page.getBody().asNormalizedText());
     }
 
     /**
@@ -195,11 +195,11 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "<body><span id='s' onclick='test()'>click</span></body></html>";
 
         HtmlPage page = loadPage(html);
-        assertEquals("click", page.getBody().asText());
+        assertEquals("click", page.getBody().asNormalizedText());
 
         final HtmlSpan span = page.getHtmlElementById("s");
         page = span.click();
-        assertEquals("12", page.getBody().asText());
+        assertEquals("12", page.getBody().asNormalizedText());
     }
 
     /**
@@ -232,7 +232,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         conn.setResponse(new URL(URL_FIRST, "f.js"), "log(12)", MimeType.APPLICATION_JAVASCRIPT);
         client.setWebConnection(conn);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asText().trim());
+        assertEquals("1 2 3 4 5 6 7 8 9 10 11 12", page.getBody().asNormalizedText().trim());
     }
 
     /**
@@ -299,7 +299,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
         assertEquals(1, anchorList.size());
         final HtmlAnchor anchor = anchorList.get(0);
         assertEquals("start.html", anchor.getHrefAttribute());
-        assertEquals("click here", anchor.asText());
+        assertEquals("click here", anchor.asNormalizedText());
     }
 
     /**
@@ -412,7 +412,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
     public void open_IgnoredDuringParsing() throws Exception {
         final String html = "<html><body>1<script>document.open();document.write('2');</script>3</body></html>";
         final HtmlPage page = loadPage(html);
-        assertEquals("123", page.getBody().asText());
+        assertEquals("123", page.getBody().asNormalizedText());
     }
 
     /**
@@ -427,7 +427,7 @@ public class HTMLDocumentWriteTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertTrue(page.asText().contains("Hello World"));
+        assertTrue(page.asNormalizedText().contains("Hello World"));
     }
 
     /**

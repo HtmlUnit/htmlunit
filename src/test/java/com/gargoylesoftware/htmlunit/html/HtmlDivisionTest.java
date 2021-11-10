@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlDivisionTest extends SimpleWebTestCase {
@@ -33,35 +34,34 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
-        final String ls = System.lineSeparator();
-        String expected = "hello" + ls + "world";
-        testAsText(expected, "<div>hello</div>world");
-        testAsText(expected, "<div>hello<br/></div>world");
+    public void asNormalizedText() throws Exception {
+        String expected = "hello\nworld";
+        testAsNormalizedText(expected, "<div>hello</div>world");
+        testAsNormalizedText(expected, "<div>hello<br/></div>world");
 
-        expected = "hello" + ls + ls + "world";
-        testAsText(expected, "<div>hello<br/><br/></div>world");
+        expected = "hello\n\nworld";
+        testAsNormalizedText(expected, "<div>hello<br/><br/></div>world");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_contiguousBlocks() throws Exception {
-        final String expected = "hello" + System.lineSeparator() + "world";
-        testAsText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
-        testAsText(expected, "<div>hello</div><div>world</div>");
-        testAsText(expected, "<div>hello</div><div><div>world</div></div>");
-        testAsText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
+    public void asTextContiguousBlocks() throws Exception {
+        final String expected = "hello\nworld";
+        testAsNormalizedText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
+        testAsNormalizedText(expected, "<div>hello</div><div>world</div>");
+        testAsNormalizedText(expected, "<div>hello</div><div><div>world</div></div>");
+        testAsNormalizedText(expected, "<div><table><tr><td>hello</td></tr><tr><td>world<br/></td></tr></table></div>");
     }
 
-    private void testAsText(final String expected, final String htmlSnippet) throws Exception {
+    private void testAsNormalizedText(final String expected, final String htmlSnippet) throws Exception {
         final String html = "<html><head></head><body>\n"
             + htmlSnippet
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals(expected, page.asText());
+        assertEquals(expected, page.asNormalizedText());
     }
 
     /**
@@ -74,9 +74,9 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("hello", page.asText());
+        assertEquals("hello", page.asNormalizedText());
         final HtmlDivision div = page.getHtmlElementById("foo");
-        assertEquals("hello", div.asText());
+        assertEquals("hello", div.asNormalizedText());
     }
 
     /**
@@ -89,6 +89,6 @@ public class HtmlDivisionTest extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("12", page.getBody().asText());
+        assertEquals("12", page.getBody().asNormalizedText());
     }
 }

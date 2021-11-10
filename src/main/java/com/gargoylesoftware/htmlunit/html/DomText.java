@@ -154,7 +154,7 @@ public class DomText extends DomCharacterData implements Text {
      */
     @Override
     public String toString() {
-        return asText();
+        return asNormalizedText();
     }
 
     /**

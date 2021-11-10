@@ -379,7 +379,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select2").get(0);
-        assertEquals("s2o2", select.getOptionByValue("option2").asText());
+        assertEquals("s2o2", select.getOptionByValue("option2").asNormalizedText());
 
         assertEquals(select.getOption(2), select.getOptionByValue("s2o3"));
     }
@@ -529,12 +529,12 @@ public class HtmlSelectTest extends SimpleWebTestCase {
     }
 
     /**
-     * Test that asText() returns a blank string if nothing is selected.
+     * Test that asNormalizedText() returns a blank string if nothing is selected.
      *
      * @exception Exception If the test fails
      */
     @Test
-    public void asTextWhenNothingSelected() throws Exception {
+    public void asNormalizedTextWhenNothingSelected() throws Exception {
         final String htmlContent = "<html><head><title>foo</title></head><body>\n"
             + "<form>\n"
             + "<select name='select1' size='1' id='mySelect'>\n"
@@ -545,26 +545,26 @@ public class HtmlSelectTest extends SimpleWebTestCase {
 
         final HtmlSelect select = page.getHtmlElementById("mySelect");
 
-        assertEquals("", select.asText());
+        assertEquals("", select.asNormalizedText());
     }
 
     /**
-     * Verifies that asText() returns all options when multiple options are selectable, instead of just
+     * Verifies that asNormalizedText() returns all options when multiple options are selectable, instead of just
      * the selected ones.
      * @throws Exception if an error occurs
      */
     @Test
-    public void asTextWithMultipleSelect() throws Exception {
+    public void asNormalizedTextWithMultipleSelect() throws Exception {
         final String html = "<html><body><form>\n"
             + "<select name='a' multiple>\n"
-            + "<option value='1'>foo</option>\n"
+            + "<option value='1'selected>foo</option>\n"
             + "<option value='2'>bar</option>\n"
-            + "<option value='3'>baz</option>\n"
+            + "<option value='3' selected>baz</option>\n"
             + "</select>\n"
             + "</form></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlSelect select = (HtmlSelect) page.getDocumentElement().getElementsByTagName("select").get(0);
-        assertEquals("foo\nbar\nbaz", select.asText());
+        assertEquals("foo\nbaz", select.asNormalizedText());
     }
 
     /**
@@ -705,7 +705,7 @@ public class HtmlSelectTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
 
         final HtmlSelect select = form.getSelectsByName("select2").get(0);
-        assertEquals("s2o2", select.getOptionByText("s2o2").asText());
+        assertEquals("s2o2", select.getOptionByText("s2o2").asNormalizedText());
 
         assertEquals(select.getOption(2), select.getOptionByText("s2o3"));
     }

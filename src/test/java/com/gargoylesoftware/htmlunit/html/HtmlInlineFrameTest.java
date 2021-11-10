@@ -237,7 +237,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         assertEquals("iframe", iFrame.getTagName());
 
         final HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
-        assertEquals("iframe content", enclosedPage.asText());
+        assertEquals("iframe content", enclosedPage.asNormalizedText());
 
         assertEquals(2, conn.getRequestCount());
     }
@@ -273,13 +273,13 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         assertEquals("iframe", myFrame.getTagName());
 
         HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
-        assertEquals("Third content", enclosedPage.asText());
+        assertEquals("Third content", enclosedPage.asNormalizedText());
 
         final HtmlElement iFrame = page.getHtmlElementById("f");
         assertEquals("iframe", iFrame.getTagName());
 
         enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
-        assertEquals("iframe content", enclosedPage.asText());
+        assertEquals("iframe content", enclosedPage.asNormalizedText());
 
         assertEquals(3, conn.getRequestCount());
     }
@@ -318,7 +318,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         assertEquals("iframe", myFrame.getTagName());
 
         HtmlPage enclosedPage = (HtmlPage) ((HtmlInlineFrame) myFrame).getEnclosedPage();
-        assertEquals("Third content", enclosedPage.asText());
+        assertEquals("Third content", enclosedPage.asNormalizedText());
 
         // wait for the timer
         final JavaScriptJobManager jobManager = page.getEnclosingWindow().getJobManager();
@@ -328,7 +328,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         assertEquals("iframe", iFrame.getTagName());
 
         enclosedPage = (HtmlPage) ((HtmlInlineFrame) iFrame).getEnclosedPage();
-        assertEquals("iframe content", enclosedPage.asText());
+        assertEquals("iframe content", enclosedPage.asNormalizedText());
 
         assertEquals(3, conn.getRequestCount());
     }
@@ -361,7 +361,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
-        final String content = element.asText();
+        final String content = element.asNormalizedText();
         assertEquals("Hi Folks!", content);
     }
 
@@ -393,13 +393,13 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
-        final String content = element.asText();
+        final String content = element.asNormalizedText();
         assertEquals("Hello worl\u0414", content);
     }
 
     /**
      * The iframe has no source and is filled from javascript.
-     * The javascript writes windows charactes into the iframe content.
+     * The javascript writes windows characters into the iframe content.
      * @throws Exception if an error occurs
      */
     @Test
@@ -426,7 +426,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
-        final String content = element.asText();
+        final String content = element.asNormalizedText();
         assertEquals("\u00e4\u00f6\u00fc", content);
     }
 
@@ -467,7 +467,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
 
         final HtmlPage enclosedPage = (HtmlPage) page.getFrames().get(0).getEnclosedPage();
         final HtmlElement element = enclosedPage.getHtmlElementById("myContent");
-        final String content = element.asText();
+        final String content = element.asNormalizedText();
         assertEquals("Hi Folks!", content);
     }
 
@@ -475,7 +475,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String firstContent
             = "<html><head><title>First</title></head><body>\n"
             + "before<iframe id='iframe1' src='" + URL_SECOND + "'></iframe>after\n"
@@ -488,9 +488,7 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_SECOND, secondContent);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        final String ls = System.lineSeparator();
-        assertEquals("First" + ls + "before" + ls
-                + "Second content" + ls + "after", page.asText());
+        assertEquals("First\nbefore\nSecond content\nafter", page.asNormalizedText());
     }
 
     /**
@@ -507,6 +505,6 @@ public class HtmlInlineFrameTest extends SimpleWebTestCase {
                 + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("1" + System.lineSeparator() + "2", page.asText());
+        assertEquals("1\n2", page.asNormalizedText());
     }
 }

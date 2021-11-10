@@ -404,11 +404,11 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         client.getCookieManager().setCookiesEnabled(false);
         HtmlPage page = client.getPage(URL_FIRST + "test1");
-        assertTrue(page.asText().contains("No Cookies"));
+        assertTrue(page.asNormalizedText().contains("No Cookies"));
 
         client.getCookieManager().setCookiesEnabled(true);
         page = client.getPage(URL_FIRST + "test1");
-        assertTrue(page.asText().contains("key1=value1"));
+        assertTrue(page.asNormalizedText().contains("key1=value1"));
     }
 
     /**
@@ -466,7 +466,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         for (int i = 0; i < 5; i++) {
             final HtmlPage page = client.getPage(URL_FIRST + "test");
-            final String port = page.asText();
+            final String port = page.asNormalizedText();
             if (firstPort == null) {
                 firstPort = port;
             }
@@ -500,7 +500,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
-        assertEquals("visible text", page.asText());
+        assertEquals("visible text", page.asNormalizedText());
     }
 
     /**
@@ -537,7 +537,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
 
         final WebClient client = getWebClient();
         final HtmlPage page = client.getPage(URL_FIRST + "contentLengthSmallerThanContent");
-        assertTrue(page.asText(), page.asText().endsWith("visible text"));
+        assertTrue(page.asNormalizedText(), page.asNormalizedText().endsWith("visible text"));
     }
 
     /**
@@ -581,7 +581,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             final WebClient client = getWebClient();
 
             final HtmlPage page = client.getPage("http://localhost:" + primitiveWebServer.getPort());
-            assertEquals("visible text", page.asText());
+            assertEquals("visible text", page.asNormalizedText());
         }
     }
 

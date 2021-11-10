@@ -84,22 +84,21 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_jsEnabled() throws Exception {
+    public void asNormalizedTextjsEnabled() throws Exception {
         final String htmlContent
             = "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
 
-        final String expected = "";
         final HtmlPage page = loadPage(htmlContent);
-        assertEquals(expected, page.getBody().asText());
+        assertEquals("", page.getBody().asNormalizedText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_jsDisabled() throws Exception {
+    public void asNormalizedText_jsDisabled() throws Exception {
         final String html = "<html><body>\n"
             + "<noscript>hello</noscript>"
             + "</body></html>";
@@ -114,7 +113,7 @@ public class HtmlNoScript2Test extends SimpleWebTestCase {
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals(expected, page.getBody().asText());
+        assertEquals(expected, page.getBody().asNormalizedText());
     }
 
     /**

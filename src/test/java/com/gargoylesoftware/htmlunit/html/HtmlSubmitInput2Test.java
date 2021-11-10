@@ -56,7 +56,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertTrue(page.asText().indexOf("Submit Query") > -1);
+        assertTrue(page.asNormalizedText().indexOf("Submit Query") > -1);
         assertFalse(page.asXml().indexOf("Submit Query") > -1);
     }
 
@@ -81,7 +81,7 @@ public class HtmlSubmitInput2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         final HtmlPage page = loadPageWithAlerts(html);
-        assertFalse(page.asText().indexOf("Submit Query") > -1);
+        assertFalse(page.asNormalizedText().indexOf("Submit Query") > -1);
         assertTrue(page.asXml().indexOf("value=\"\"") > -1);
     }
 

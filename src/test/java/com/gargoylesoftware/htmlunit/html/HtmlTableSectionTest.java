@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HtmlTableSectionTest extends SimpleWebTestCase {
@@ -33,7 +34,7 @@ public class HtmlTableSectionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <table>\n"
@@ -45,10 +46,7 @@ public class HtmlTableSectionTest extends SimpleWebTestCase {
             + "  </table>\n"
             + "</body></html>";
 
-        final String ls = System.lineSeparator();
-
         final HtmlPage page = loadPageWithAlerts(html);
-        assertEquals("One" + ls + "Two" + ls + "Three" + ls
-                + "Four" + ls + "Five", page.asText());
+        assertEquals("One\nTwo\nThree\nFour\nFive", page.asNormalizedText());
     }
 }

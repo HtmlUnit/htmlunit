@@ -30,6 +30,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 
@@ -372,19 +373,6 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     }
 
     /**
-     * {@inheritDoc}
-     * This implementation will show the label attribute before the
-     * content of the tag if the attribute exists.
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        return super.asText();
-    }
-
-    /**
      * Sets the text for this HtmlOption.
      * @param text the text
      */
@@ -408,7 +396,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return the text of this option.
      */
     public String getText() {
-        final HtmlSerializer ser = new HtmlSerializer();
+        final HtmlSerializerNormalizedText ser = new HtmlSerializerNormalizedText();
         ser.setIgnoreMaskedElements(false);
         return ser.asText(this);
     }

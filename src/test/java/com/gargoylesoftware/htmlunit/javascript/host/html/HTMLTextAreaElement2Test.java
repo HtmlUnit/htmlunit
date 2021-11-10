@@ -70,7 +70,7 @@ public class HTMLTextAreaElement2Test extends SimpleWebTestCase {
             + "keypressed: hel; "
             + "keypressed: hell; "
             + "changed: hello;";
-        assertEquals(expectation, log.asText());
+        assertEquals(expectation, log.asNormalizedText());
     }
 
 }

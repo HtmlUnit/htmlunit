@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
+            <action type="remove" dev="rbri">
+                Deprecated method DomNode.asText() removed.
+            </action>
             <action type="add" dev="rbri">
                 HTMLElement enterKeyHint property added.
             </action>

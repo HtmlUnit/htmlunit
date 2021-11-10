@@ -58,19 +58,19 @@ public class XmlPageTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
-        asText("<msg>abc</msg>", "abc");
+    public void asNormalizedText() throws Exception {
+        asNormalizedText("<msg>abc</msg>", "abc");
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void asTextOnlyText() throws Exception {
+    public void asNormalizedTextOnlyText() throws Exception {
         final StringWebResponse response = new StringWebResponse("<msg>abc</msg>", new URL("http://www.test.com"));
         final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
-        assertEquals("abc", ((DomText) xmlPage.getFirstByXPath("/msg/text()")).asText());
+        assertEquals("abc", ((DomText) xmlPage.getFirstByXPath("/msg/text()")).asNormalizedText());
     }
 
     /**
@@ -87,7 +87,7 @@ public class XmlPageTest extends WebServerTestCase {
                 + "txt"
                 + "</h2>o"
                 + "</msg>";
-        asText(xml, "1h1h2h3txto");
+        asNormalizedText(xml, "1h1h2h3txto");
     }
 
     /**
@@ -99,7 +99,7 @@ public class XmlPageTest extends WebServerTestCase {
                 = "<outer>outer"
                 + "<msg><h1>h1</h1></msg>"
                 + "xy</outer>";
-        asText(xml, "h1");
+        asNormalizedText(xml, "h1");
     }
 
     /**
@@ -108,16 +108,16 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void asTextEmpty() throws Exception {
-        asText("<msg></msg>", "");
+        asNormalizedText("<msg></msg>", "");
     }
 
-    private void asText(final String xml, final String expected) throws Exception {
+    private void asNormalizedText(final String xml, final String expected) throws Exception {
         final StringWebResponse response = new StringWebResponse(xml, new URL("http://www.test.com"));
         final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
 
         final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
         assertNotNull("No element found by XPath '//msg'", msg);
-        assertEquals(expected, msg.asText());
+        assertEquals(expected, msg.asNormalizedText());
     }
 
     /**
@@ -393,7 +393,7 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void bom() throws Exception {
-        asText(new String(ByteOrderMark.UTF_8.getBytes()) + "<msg>abc</msg>", "abc");
+        asNormalizedText(new String(ByteOrderMark.UTF_8.getBytes()) + "<msg>abc</msg>", "abc");
     }
 
 }

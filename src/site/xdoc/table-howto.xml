@@ -31,7 +31,7 @@ final HtmlTable table = page.getHtmlElementById("table1");
 for (final HtmlTableRow row : table.getRows()) {
     System.out.println("Found row");
     for (final HtmlTableCell cell : row.getCells()) {
-        System.out.println("   Found cell: " + cell.asText());
+        System.out.println("   Found cell: " + cell.asNormalizedText());
     }
 }]]></source>
             </p>

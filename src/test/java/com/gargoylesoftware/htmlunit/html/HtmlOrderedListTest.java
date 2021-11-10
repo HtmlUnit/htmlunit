@@ -34,7 +34,7 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "  <ol id='foo'>\n"
@@ -48,14 +48,13 @@ public class HtmlOrderedListTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String ls = System.lineSeparator();
         final String expectedText = "1. first item"
-                            + ls + "2. second item"
-                            + ls + "something without li node"
-                            + ls + "3. third item";
+                            + "\n2. second item"
+                            + "\nsomething without li node"
+                            + "\n3. third item";
 
-        assertEquals(expectedText, node.asText());
-        assertEquals(expectedText, page.asText());
+        assertEquals(expectedText, node.asNormalizedText());
+        assertEquals(expectedText, page.asNormalizedText());
     }
 
     /**

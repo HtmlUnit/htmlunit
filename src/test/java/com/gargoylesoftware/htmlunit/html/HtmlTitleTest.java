@@ -37,7 +37,7 @@ public class HtmlTitleTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void pageAsText() throws Exception {
+    public void pageAsNormalizedText() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Dummy</title>\n"
@@ -49,15 +49,15 @@ public class HtmlTitleTest extends SimpleWebTestCase {
             + "</html>\n";
 
         final HtmlPage page = loadPage(html);
-        final String expected = "Dummy" + System.lineSeparator() + "Dummy page";
-        assertEquals(expected, page.asText());
+        final String expected = "Dummy\nDummy page";
+        assertEquals(expected, page.asNormalizedText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void getTitleText() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<title>Title\nText     Test</title>\n"

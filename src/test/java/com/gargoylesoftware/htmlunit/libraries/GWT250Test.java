@@ -140,7 +140,7 @@ public class GWT250Test extends WebServerTestCase {
         final List<?> detailsCells = page.getByXPath("//div[@class='MGI']/text()");
         for (int i = 0; i < details.length; i++) {
             final DomText text = (DomText) detailsCells.get(i);
-            assertEquals(details[i], text.asText());
+            assertEquals(details[i], text.asNormalizedText());
         }
     }
 

@@ -73,7 +73,7 @@ public final class HostExtractor {
     private static void fillMDNWebAPI(final WebClient webClient, final Set<String> set) throws Exception {
         final HtmlPage page = webClient.getPage("https://developer.mozilla.org/en-US/docs/Web/API");
         for (final Object o : page.getByXPath("//*[@class='indexListTerm']")) {
-            set.add(((HtmlElement) o).asText());
+            set.add(((HtmlElement) o).asNormalizedText());
         }
     }
 

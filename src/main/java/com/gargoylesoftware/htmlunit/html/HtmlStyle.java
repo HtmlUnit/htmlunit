@@ -87,18 +87,6 @@ public class HtmlStyle extends HtmlElement {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
-     * @return an empty string as the content of style is not visible by itself
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        return "";
-    }
-
-    /**
      * {@inheritDoc}
      * @return {@code true} to make generated XML readable as HTML on Firefox 3 for instance.
      */

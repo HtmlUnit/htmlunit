@@ -91,7 +91,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><body><script id='s'>var foo = 132;</script></body></html>";
         final HtmlPage page = loadPage(html);
         final HtmlScript script = page.getHtmlElementById("s");

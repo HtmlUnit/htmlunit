@@ -803,28 +803,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a textual representation of this element that represents what would
-     * be visible to the user if this page was shown in a web browser. For example,
-     * a single-selection select element would return the currently selected value
-     * as text.
-     *
-     * @return a textual representation of this element that represents what would
-     *         be visible to the user if this page was shown in a web browser
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    public String asText() {
-        if (getPage() instanceof XmlPage) {
-            final XmlSerializer ser = new XmlSerializer();
-            return ser.asText(this);
-        }
-
-        final HtmlSerializer ser = new HtmlSerializer();
-        return ser.asText(this);
-    }
-
-    /**
      * Returns a textual representation of this element in the same way as
      * the selenium/WebDriver WebElement#getText() property does.<br>
      * see https://w3c.github.io/webdriver/#get-element-text and

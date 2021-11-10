@@ -35,10 +35,10 @@ public class DomCommentTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String content = "<html><body><!-- a comment --></body></html>";
         final HtmlPage page = loadPage(content);
-        assertEquals("", page.asText());
+        assertEquals("", page.asNormalizedText());
     }
 
      /**

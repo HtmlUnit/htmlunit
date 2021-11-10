@@ -70,9 +70,9 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         HtmlPage page = loadPage("Hi There");
-        assertTrue(page.asText().contains("Hi There"));
+        assertTrue(page.asNormalizedText().contains("Hi There"));
         page = getWebClient().getPage(URL_SECOND);
-        assertTrue(page.asText().contains("Hello World"));
+        assertTrue(page.asNormalizedText().contains("Hello World"));
     }
 
     /**

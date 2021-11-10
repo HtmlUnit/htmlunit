@@ -46,7 +46,7 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_getTextContent() throws Exception {
+    public void asNormalizedText_getTextContent() throws Exception {
         final String html = "<html><body>\n"
                 + "<p id='p1'></p>\n"
                 + "<p id='p2'>abc</p>\n"
@@ -56,15 +56,15 @@ public class HtmlParagraphTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
 
         HtmlParagraph paragraph = page.getHtmlElementById("p1");
-        assertEquals("", paragraph.asText());
+        assertEquals("", paragraph.asNormalizedText());
         assertEquals("", paragraph.getTextContent());
 
         paragraph = page.getHtmlElementById("p2");
-        assertEquals("abc", paragraph.asText());
+        assertEquals("abc", paragraph.asNormalizedText());
         assertEquals("abc", paragraph.getTextContent());
 
         paragraph = page.getHtmlElementById("p3");
-        assertEquals("$24.43", paragraph.asText());
+        assertEquals("$24.43", paragraph.asNormalizedText());
         assertEquals("$24.43", paragraph.getTextContent());
     }
 }

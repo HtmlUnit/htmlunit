@@ -45,7 +45,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
     public void a() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type('a');
-        final String log = page.getHtmlElementById("log").asText();
+        final String log = page.getHtmlElementById("log").asNormalizedText();
         assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 
@@ -96,7 +96,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
     public void dom_vk_f2() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_F2);
-        final String log = page.getHtmlElementById("log").asText();
+        final String log = page.getHtmlElementById("log").asNormalizedText();
         assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 
@@ -111,7 +111,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
     public void dom_vk_right() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type(KeyboardEvent.DOM_VK_RIGHT);
-        final String log = page.getHtmlElementById("log").asText();
+        final String log = page.getHtmlElementById("log").asNormalizedText();
         assertTrue(log, log.contains(getExpectedAlerts()[0]));
     }
 }

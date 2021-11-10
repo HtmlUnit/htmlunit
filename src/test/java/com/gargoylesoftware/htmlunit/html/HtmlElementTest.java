@@ -501,14 +501,14 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_WithComments() throws Exception {
+    public void asNormalizedTextWithComments() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<p id='p1'>foo<!--bar--></p>\n"
             + "</body></html>";
         final HtmlPage page = loadPage(htmlContent);
         final HtmlElement element = page.getHtmlElementById("p1");
-        assertEquals("foo", element.asText());
+        assertEquals("foo", element.asNormalizedText());
     }
 
     /**
@@ -941,7 +941,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
      * @throws Exception on test failure
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -955,14 +955,14 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("test" + System.lineSeparator() + "Welcome", page.asText());
+        assertEquals("test\nWelcome", page.asNormalizedText());
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void asTextOverridingVisibility() throws Exception {
+    public void asNormalizedTextOverridingVisibility() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -975,15 +975,14 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        final String ls = System.lineSeparator();
-        assertEquals("test" + ls + "Welcome" + ls + "to the world", page.asText());
+        assertEquals("test\nWelcome\nto the world", page.asNormalizedText());
     }
 
     /**
      * @throws Exception on test failure
      */
     @Test
-    public void asTextVisibilityCollapse() throws Exception {
+    public void asNormalizedTextVisibilityCollapse() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <title>test</title>\n"
@@ -994,11 +993,10 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "some more hidden text</p>\n"
             + "</body>\n"
             + "</html>";
-        final String ls = System.lineSeparator();
-        final String expected = "test" + ls + "Welcome" + ls + "to the world";
+        final String expected = "test\nWelcome\nto the world";
 
         final HtmlPage page = loadPage(html);
-        assertEquals(expected, page.asText());
+        assertEquals(expected, page.asNormalizedText());
     }
 
     /**

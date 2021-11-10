@@ -207,19 +207,6 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * @see com.gargoylesoftware.htmlunit.html.HtmlInput#asText()
-     *
-     * @return an empty string as the content of script is not visible by itself
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        return "";
-    }
-
-    /**
      * Indicates if a node without children should be written in expanded form as XML
      * (i.e. with closing tag rather than with "/&gt;")
      * @return {@code true} to make generated XML readable as HTML

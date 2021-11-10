@@ -108,21 +108,6 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * {@inheritDoc} Returns "Reset" if <tt>value</tt> attribute is not defined.
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        String text = getValueAttribute();
-        if (text == ATTRIBUTE_NOT_DEFINED) {
-            text = DEFAULT_VALUE;
-        }
-        return text;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override

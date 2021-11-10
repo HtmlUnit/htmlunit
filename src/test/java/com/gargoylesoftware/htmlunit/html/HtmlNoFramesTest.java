@@ -49,7 +49,7 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html
             = "<html>\n"
             + "  <noframes id='it'>\n"
@@ -58,7 +58,7 @@ public class HtmlNoFramesTest extends SimpleWebTestCase {
             + "</html>";
 
         final HtmlPage page = loadPage(html);
-        assertEquals("", page.getElementById("it").asText());
-        assertFalse(page.asText(), page.asText().contains("Some text"));
+        assertEquals("", page.getElementById("it").asNormalizedText());
+        assertFalse(page.asNormalizedText(), page.asNormalizedText().contains("Some text"));
     }
 }

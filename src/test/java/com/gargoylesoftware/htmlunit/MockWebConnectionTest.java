@@ -48,6 +48,6 @@ public class MockWebConnectionTest extends SimpleWebTestCase {
         webConnection.setResponse(URL_FIRST, html, MimeType.TEXT_HTML, UTF_8);
         client.setWebConnection(webConnection);
         final HtmlPage page = client.getPage(URL_FIRST);
-        assertEquals("\u00A3", page.getBody().asText());
+        assertEquals("\u00A3", page.getBody().asNormalizedText());
     }
 }

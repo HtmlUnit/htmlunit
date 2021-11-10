@@ -521,7 +521,7 @@ public class SimpleRange implements Range, Serializable {
     public String toString() {
         final DomDocumentFragment fragment = cloneContents();
         if (fragment.getPage() != null) {
-            return fragment.asText();
+            return fragment.asNormalizedText();
         }
         return "";
     }

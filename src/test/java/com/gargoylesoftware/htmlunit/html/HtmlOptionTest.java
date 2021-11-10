@@ -158,7 +158,7 @@ public class HtmlOptionTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String htmlContent
             = "<html>\n"
             + "<head><title>foo</title></head>\n"
@@ -180,10 +180,10 @@ public class HtmlOptionTest extends SimpleWebTestCase {
         final HtmlOption option3 = page.getHtmlElementById("option3");
         final HtmlOption option4 = page.getHtmlElementById("option4");
 
-        assertEquals("option1", option1.asText());
-        assertEquals("", option2.asText());
-        assertEquals("Number Three", option3.asText());
-        assertEquals("Number 4", option4.asText());
+        assertEquals("option1", option1.asNormalizedText());
+        assertEquals("", option2.asNormalizedText());
+        assertEquals("Number Three", option3.asNormalizedText());
+        assertEquals("Number 4", option4.asNormalizedText());
     }
 
     /**

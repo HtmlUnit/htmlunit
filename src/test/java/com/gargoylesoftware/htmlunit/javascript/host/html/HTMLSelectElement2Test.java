@@ -69,17 +69,17 @@ public class HTMLSelectElement2Test extends SimpleWebTestCase {
         final HtmlSelect selectA = page.getFormByName("myForm").getSelectByName("a");
         final HtmlOption optionA2 = selectA.getOption(1);
 
-        assertEquals("two", optionA2.asText());
+        assertEquals("two", optionA2.asNormalizedText());
 
         final HtmlSelect selectB = page.getFormByName("myForm").getSelectByName("b");
         assertEquals(1, selectB.getSelectedOptions().size());
-        assertEquals("red", selectB.getSelectedOptions().get(0).asText());
+        assertEquals("red", selectB.getSelectedOptions().get(0).asNormalizedText());
 
          // changed selection in first select
         optionA2.setSelected(true);
         assertTrue(optionA2.isSelected());
         assertEquals(1, selectB.getSelectedOptions().size());
-        assertEquals("green", selectB.getSelectedOptions().get(0).asText());
+        assertEquals("green", selectB.getSelectedOptions().get(0).asNormalizedText());
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
     }

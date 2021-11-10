@@ -62,7 +62,7 @@ public class HtmlMetaTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    public void asText() throws Exception {
+    public void getText() throws Exception {
         final String html = "<html><head><meta id='m' http-equiv='a' content='b'></head><body></body></html>";
 
         final WebDriver driver = loadPage2(html);

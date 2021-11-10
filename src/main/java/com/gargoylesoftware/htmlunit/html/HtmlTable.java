@@ -179,7 +179,7 @@ public class HtmlTable extends HtmlElement {
     public String getCaptionText() {
         for (final DomElement element : getChildElements()) {
             if (element instanceof HtmlCaption) {
-                return element.asText();
+                return element.asNormalizedText();
             }
         }
         return null;

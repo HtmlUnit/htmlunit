@@ -521,11 +521,11 @@ public class HtmlFileInputTest extends WebDriverTestCase {
     }
 
     /**
-     * Verifies that a asText() returns an empty string.
+     * Verifies that getText() returns an empty string.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void getText() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"

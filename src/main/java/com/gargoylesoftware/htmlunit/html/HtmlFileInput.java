@@ -145,17 +145,6 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc}
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        return "";
-    }
-
-    /**
-     * {@inheritDoc}
      */
     @Override
     public void setValueAttribute(final String newValue) {

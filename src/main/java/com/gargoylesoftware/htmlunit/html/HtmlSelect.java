@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -545,41 +544,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
             }
         }
         throw new ElementNotFoundException("option", "text", text);
-    }
-
-    /**
-     * Returns a text representation of this element that represents what would
-     * be visible to the user if this page was shown in a web browser. If the user
-     * can only select one option at a time, this method returns the selected option.
-     * If the user can select multiple options, this method returns all options.
-     *
-     * @return the element as text
-     *
-     * @deprecated as of version 2.48.0; use asNormalizedText() instead
-     */
-    @Deprecated
-    @Override
-    public String asText() {
-        final List<HtmlOption> options;
-        if (isMultipleSelectEnabled()) {
-            options = getOptions();
-        }
-        else {
-            options = getSelectedOptions();
-        }
-
-        final StringBuilder builder = new StringBuilder();
-        for (final Iterator<HtmlOption> i = options.iterator(); i.hasNext();) {
-            final HtmlOption currentOption = i.next();
-            if (currentOption != null) {
-                builder.append(currentOption.asText());
-            }
-            if (i.hasNext()) {
-                builder.append('\n');
-            }
-        }
-
-        return builder.toString();
     }
 
     /**

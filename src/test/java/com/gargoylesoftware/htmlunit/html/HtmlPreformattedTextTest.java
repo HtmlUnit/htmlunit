@@ -63,7 +63,7 @@ public class HtmlPreformattedTextTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("  hello   abc")
-    public void asText() throws Exception {
+    public void getText() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<pre id='foo'>  hello \t abc</pre>"
             + "</body></html>";

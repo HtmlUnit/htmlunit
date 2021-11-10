@@ -667,7 +667,7 @@ public class HtmlPage extends SgmlPage {
         WebAssert.notNull("text", text);
 
         for (final HtmlAnchor anchor : getAnchors()) {
-            if (text.equals(anchor.asText())) {
+            if (text.equals(anchor.asNormalizedText())) {
                 return anchor;
             }
         }
@@ -1152,7 +1152,7 @@ public class HtmlPage extends SgmlPage {
     public String getTitleText() {
         final HtmlTitle titleElement = getTitleElement();
         if (titleElement != null) {
-            return titleElement.asText();
+            return titleElement.asNormalizedText();
         }
         return "";
     }

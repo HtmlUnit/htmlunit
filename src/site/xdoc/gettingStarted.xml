@@ -38,7 +38,7 @@ public void homePage() throws Exception {
         final String pageAsXml = page.asXml();
         Assert.assertTrue(pageAsXml.contains("<body class=\"composite\">"));
 
-        final String pageAsText = page.asText();
+        final String pageAsText = page.asNormalizedText();
         Assert.assertTrue(pageAsText.contains("Support for the HTTP and HTTPS protocols"));
     }
 }]]></source>

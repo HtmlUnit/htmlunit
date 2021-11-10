@@ -33,7 +33,7 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><head>\n"
             + "</head>\n"
             + "<body>\n"
@@ -47,14 +47,10 @@ public class HtmlUnorderedList2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement node = page.getHtmlElementById("foo");
-        final String ls = System.lineSeparator();
-        final String expectedText = "first item" + ls
-            + "second item" + ls
-            + "something without li node" + ls
-            + "third item";
+        final String expectedText = "first item\nsecond item\nsomething without li node\nthird item";
 
-        assertEquals(expectedText, node.asText());
-        assertEquals(expectedText, page.asText());
+        assertEquals(expectedText, node.asNormalizedText());
+        assertEquals(expectedText, page.asNormalizedText());
     }
 
     /**

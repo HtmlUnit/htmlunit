@@ -94,19 +94,18 @@ public class DomTextTest extends SimpleWebTestCase {
 
     /**
      * This test once tested regression for bug #490 but the expectations have been changed
-     * as asText() should now use new lines when appropriate.
+     * as asNormalizedText() should now use new lines when appropriate.
      * @throws Exception if the test fails
      */
     @Test
-    public void asText_regression() throws Exception {
-        final String ls = System.lineSeparator();
-        String expected = "a" + ls + "b" + ls + "c";
+    public void asNormalizedTextRegression() throws Exception {
+        String expected = "a\nb\nc";
         testAsText("a<ul><li>b</ul>c", expected);
         testAsText("a<p>b<br>c", expected);
         testAsText("a<table><tr><td>b</td></tr></table>c", expected);
         testAsText("a<div>b</div>c", expected);
 
-        expected = "a" + ls + "b" + ls + "b" + ls + "c";
+        expected = "a\nb\nb\nc";
         testAsText("a<table><tr><td> b </td></tr>\n<tr><td> b </td></tr></table>c", expected);
     }
 
@@ -121,22 +120,22 @@ public class DomTextTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(content);
 
-        assertEquals("b", page.getHtmlElementById("cell").asText());
-        assertEquals("b", page.getHtmlElementById("row").asText());
-        assertEquals("b", page.getHtmlElementById("table").asText());
+        assertEquals("b", page.getHtmlElementById("cell").asNormalizedText());
+        assertEquals("b", page.getHtmlElementById("row").asNormalizedText());
+        assertEquals("b", page.getHtmlElementById("table").asNormalizedText());
     }
 
     private void testPlainText(final String html, final String expectedText) throws Exception {
         final String content = "<html><body><span id='foo'>" + html + "</span></body></html>";
 
         final HtmlPage page = loadPage(content);
-        assertEquals(expectedText, page.asText());
+        assertEquals(expectedText, page.asNormalizedText());
 
         final HtmlElement elt = page.getHtmlElementById("foo");
-        assertEquals(expectedText, elt.asText());
+        assertEquals(expectedText, elt.asNormalizedText());
 
         final DomNode node = elt.getFirstChild();
-        assertEquals(expectedText, node.asText());
+        assertEquals(expectedText, node.asNormalizedText());
     }
 
     private void testAsText(final String html, final String expectedText) throws Exception {
@@ -144,7 +143,7 @@ public class DomTextTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(content);
         final HtmlElement elt = page.getHtmlElementById("foo");
-        assertEquals(expectedText, elt.asText());
+        assertEquals(expectedText, elt.asNormalizedText());
     }
 
     /**
@@ -296,7 +295,7 @@ public class DomTextTest extends SimpleWebTestCase {
         assertEquals("abc", text.getTextContent());
         text.setTextContent("xyz");
         assertEquals("xyz", text.getTextContent());
-        assertEquals("xyz", page.asText());
+        assertEquals("xyz", page.asNormalizedText());
     }
 
     /**

@@ -52,17 +52,17 @@ public class HtmlTableTest extends SimpleWebTestCase {
         final HtmlTable table = page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        assertEquals("cell1 contents", "cell1", cell1.asText());
+        assertEquals("cell1 contents", "cell1", cell1.asNormalizedText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
-        assertEquals("cell2 contents", "cell2", cell2.asText());
+        assertEquals("cell2 contents", "cell2", cell2.asNormalizedText());
 
         final HtmlTableCell cell3 = table.getCellAt(1, 0);
-        assertEquals("cell3 contents", "cell3", cell3.asText());
+        assertEquals("cell3 contents", "cell3", cell3.asNormalizedText());
         assertSame("cells (1,0) and (1,1)", cell3, table.getCellAt(1, 1));
 
         final HtmlTableCell cell4 = table.getCellAt(0, 2);
-        assertEquals("cell4 contents", "cell4", cell4.asText());
+        assertEquals("cell4 contents", "cell4", cell4.asNormalizedText());
         assertSame("cells (0,2) and (1,2)", cell4, table.getCellAt(1, 2));
     }
 
@@ -91,19 +91,19 @@ public class HtmlTableTest extends SimpleWebTestCase {
         final HtmlTable table = page.getHtmlElementById("table1");
 
         final HtmlTableCell cell1 = table.getCellAt(0, 0);
-        assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asText());
+        assertEquals("cell (0,0) contents", "row 1 col 1", cell1.asNormalizedText());
 
         final HtmlTableCell cell2 = table.getCellAt(0, 1);
         assertNull("cell (0,1) contents", cell2);
 
         final HtmlTableCell cell3 = table.getCellAt(1, 0);
-        assertEquals("cell (1,0) contents", "row 2 col 1", cell3.asText());
+        assertEquals("cell (1,0) contents", "row 2 col 1", cell3.asNormalizedText());
 
         final HtmlTableCell cell4 = table.getCellAt(1, 1);
-        assertEquals("cell (1,1) contents", "row 2 col 2", cell4.asText());
+        assertEquals("cell (1,1) contents", "row 2 col 2", cell4.asNormalizedText());
 
         final HtmlTableCell cell5 = table.getCellAt(2, 0);
-        assertEquals("cell (2, 0) contents", "row 3 col 1&2", cell5.asText());
+        assertEquals("cell (2, 0) contents", "row 3 col 1&2", cell5.asNormalizedText());
         final HtmlTableCell cell6 = table.getCellAt(2, 1);
         assertNull("cell (2, 1) contents", cell6);
     }
@@ -151,113 +151,113 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         // first row
         HtmlTableCell cell = table.getCellAt(0, 0);
-        assertEquals("cell (0,0) contents", "H 1.1", cell.asText());
+        assertEquals("cell (0,0) contents", "H 1.1", cell.asNormalizedText());
         cell = table.getCellAt(0, 1);
-        assertEquals("cell (0,1) contents", "H 1.2", cell.asText());
+        assertEquals("cell (0,1) contents", "H 1.2", cell.asNormalizedText());
         cell = table.getCellAt(0, 2);
-        assertEquals("cell (0,2) contents", "H 1.3", cell.asText());
+        assertEquals("cell (0,2) contents", "H 1.3", cell.asNormalizedText());
         cell = table.getCellAt(0, 3);
-        assertEquals("cell (0,3) contents", "H 1.3", cell.asText());
+        assertEquals("cell (0,3) contents", "H 1.3", cell.asNormalizedText());
         cell = table.getCellAt(0, 4);
-        assertEquals("cell (0,4) contents", "H 1.5", cell.asText());
+        assertEquals("cell (0,4) contents", "H 1.5", cell.asNormalizedText());
         cell = table.getCellAt(0, 5);
         assertNull("cell (0,5) contents", cell);
 
         // second row
         cell = table.getCellAt(1, 0);
-        assertEquals("cell (1,0) contents", "H 2.1", cell.asText());
+        assertEquals("cell (1,0) contents", "H 2.1", cell.asNormalizedText());
         cell = table.getCellAt(1, 1);
-        assertEquals("cell (1,1) contents", "H 2.2", cell.asText());
+        assertEquals("cell (1,1) contents", "H 2.2", cell.asNormalizedText());
         cell = table.getCellAt(1, 2);
-        assertEquals("cell (1,2) contents", "H 1.3", cell.asText());
+        assertEquals("cell (1,2) contents", "H 1.3", cell.asNormalizedText());
         cell = table.getCellAt(1, 3);
-        assertEquals("cell (1,3) contents", "H 1.3", cell.asText());
+        assertEquals("cell (1,3) contents", "H 1.3", cell.asNormalizedText());
         cell = table.getCellAt(1, 4);
-        assertEquals("cell (1,4) contents", "H 2.5", cell.asText());
+        assertEquals("cell (1,4) contents", "H 2.5", cell.asNormalizedText());
         cell = table.getCellAt(1, 5);
         assertNull("cell (0,5) contents", cell);
 
         // third row
         cell = table.getCellAt(2, 0);
-        assertEquals("cell (2,0) contents", "1.1", cell.asText());
+        assertEquals("cell (2,0) contents", "1.1", cell.asNormalizedText());
         cell = table.getCellAt(2, 1);
-        assertEquals("cell (2,1) contents", "1.2", cell.asText());
+        assertEquals("cell (2,1) contents", "1.2", cell.asNormalizedText());
         cell = table.getCellAt(2, 2);
-        assertEquals("cell (2,2) contents", "1.2", cell.asText());
+        assertEquals("cell (2,2) contents", "1.2", cell.asNormalizedText());
         cell = table.getCellAt(2, 3);
-        assertEquals("cell (2,3) contents", "1.2", cell.asText());
+        assertEquals("cell (2,3) contents", "1.2", cell.asNormalizedText());
         cell = table.getCellAt(2, 4);
-        assertEquals("cell (2,4) contents", "1.5", cell.asText());
+        assertEquals("cell (2,4) contents", "1.5", cell.asNormalizedText());
         cell = table.getCellAt(2, 5);
         assertNull("cell (2,5) contents", cell);
 
         // fourth row
         cell = table.getCellAt(3, 0);
-        assertEquals("cell (3,0) contents", "1.1", cell.asText());
+        assertEquals("cell (3,0) contents", "1.1", cell.asNormalizedText());
         cell = table.getCellAt(3, 1);
-        assertEquals("cell (3,1) contents", "2.2", cell.asText());
+        assertEquals("cell (3,1) contents", "2.2", cell.asNormalizedText());
         cell = table.getCellAt(3, 2);
-        assertEquals("cell (3,2) contents", "2.3", cell.asText());
+        assertEquals("cell (3,2) contents", "2.3", cell.asNormalizedText());
         cell = table.getCellAt(3, 3);
-        assertEquals("cell (3,3) contents", "2.4", cell.asText());
+        assertEquals("cell (3,3) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(3, 4);
-        assertEquals("cell (3,4) contents", "2.4", cell.asText());
+        assertEquals("cell (3,4) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(3, 5);
         assertNull("cell (3,5) contents", cell);
 
         // fifth row
         cell = table.getCellAt(4, 0);
-        assertEquals("cell (4,0) contents", "1.1", cell.asText());
+        assertEquals("cell (4,0) contents", "1.1", cell.asNormalizedText());
         cell = table.getCellAt(4, 1);
-        assertEquals("cell (4,1) contents", "2.2", cell.asText());
+        assertEquals("cell (4,1) contents", "2.2", cell.asNormalizedText());
         cell = table.getCellAt(4, 2);
-        assertEquals("cell (4,2) contents", "3.3", cell.asText());
+        assertEquals("cell (4,2) contents", "3.3", cell.asNormalizedText());
         cell = table.getCellAt(4, 3);
-        assertEquals("cell (4,3) contents", "2.4", cell.asText());
+        assertEquals("cell (4,3) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(4, 4);
-        assertEquals("cell (4,4) contents", "2.4", cell.asText());
+        assertEquals("cell (4,4) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(4, 5);
         assertNull("cell (4,5) contents", cell);
 
         // sixth row
         cell = table.getCellAt(5, 0);
-        assertEquals("cell (5,0) contents", "4.1", cell.asText());
+        assertEquals("cell (5,0) contents", "4.1", cell.asNormalizedText());
         cell = table.getCellAt(5, 1);
-        assertEquals("cell (5,1) contents", "4.2", cell.asText());
+        assertEquals("cell (5,1) contents", "4.2", cell.asNormalizedText());
         cell = table.getCellAt(5, 2);
-        assertEquals("cell (5,2) contents", "4.3", cell.asText());
+        assertEquals("cell (5,2) contents", "4.3", cell.asNormalizedText());
         cell = table.getCellAt(5, 3);
-        assertEquals("cell (5,3) contents", "2.4", cell.asText());
+        assertEquals("cell (5,3) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(5, 4);
-        assertEquals("cell (5,4) contents", "2.4", cell.asText());
+        assertEquals("cell (5,4) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(5, 5);
         assertNull("cell (5,5) contents", cell);
 
         // seventh row
         cell = table.getCellAt(6, 0);
-        assertEquals("cell (6,0) contents", "5.1", cell.asText());
+        assertEquals("cell (6,0) contents", "5.1", cell.asNormalizedText());
         cell = table.getCellAt(6, 1);
-        assertEquals("cell (6,1) contents", "5.2", cell.asText());
+        assertEquals("cell (6,1) contents", "5.2", cell.asNormalizedText());
         cell = table.getCellAt(6, 2);
-        assertEquals("cell (6,2) contents", "5.2", cell.asText());
+        assertEquals("cell (6,2) contents", "5.2", cell.asNormalizedText());
         cell = table.getCellAt(6, 3);
-        assertEquals("cell (6,3) contents", "2.4", cell.asText());
+        assertEquals("cell (6,3) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(6, 4);
-        assertEquals("cell (6,4) contents", "2.4", cell.asText());
+        assertEquals("cell (6,4) contents", "2.4", cell.asNormalizedText());
         cell = table.getCellAt(6, 5);
         assertNull("cell (6,5) contents", cell);
 
         // eighth row
         cell = table.getCellAt(7, 0);
-        assertEquals("cell (7,0) contents", "6.1", cell.asText());
+        assertEquals("cell (7,0) contents", "6.1", cell.asNormalizedText());
         cell = table.getCellAt(7, 1);
-        assertEquals("cell (7,1) contents", "5.2", cell.asText());
+        assertEquals("cell (7,1) contents", "5.2", cell.asNormalizedText());
         cell = table.getCellAt(7, 2);
-        assertEquals("cell (7,2) contents", "5.2", cell.asText());
+        assertEquals("cell (7,2) contents", "5.2", cell.asNormalizedText());
         cell = table.getCellAt(7, 3);
-        assertEquals("cell (7,3) contents", "6.4", cell.asText());
+        assertEquals("cell (7,3) contents", "6.4", cell.asNormalizedText());
         cell = table.getCellAt(7, 4);
-        assertEquals("cell (7,4) contents", "6.5", cell.asText());
+        assertEquals("cell (7,4) contents", "6.5", cell.asNormalizedText());
         cell = table.getCellAt(7, 5);
         assertNull("cell (6,5) contents", cell);
 
@@ -473,7 +473,7 @@ public class HtmlTableTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void asText() throws Exception {
+    public void asNormalizedText() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"
             + "  <table id='myId'>\n"
@@ -491,11 +491,11 @@ public class HtmlTableTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(html);
         final HtmlElement table = page.getHtmlElementById("myId");
-        final String expectedText = "This is the caption" + System.lineSeparator()
-            + "cell 1,1\tcell 1,2" + System.lineSeparator()
+        final String expectedText = "This is the caption\n"
+            + "cell 1,1\tcell 1,2\n"
             + "cell 2,1\tcell 2,2";
 
-        assertEquals(expectedText, table.asText());
+        assertEquals(expectedText, table.asNormalizedText());
     }
 
     /**
