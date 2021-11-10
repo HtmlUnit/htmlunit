@@ -1056,7 +1056,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     protected final WebDriver loadPageVerifyTitle2(final String html, final String... expectedAlerts) throws Exception {
         final WebDriver driver = loadPage2(html);
-        return verifyTitle2(driver, expectedAlerts);
+        return verifyTitle2(DEFAULT_WAIT_TIME, driver, expectedAlerts);
     }
 
     protected final WebDriver verifyTitle2(final long maxWaitTime, final WebDriver driver,

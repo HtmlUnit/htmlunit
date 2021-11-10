@@ -1415,6 +1415,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  </table>\n"
             + "</body>\n"
             + "</html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -5204,5 +5205,132 @@ public class HTMLElementTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("child"));
         assertFalse(element.isDisplayed());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "go", "", "enter", "done",  "go", "next", "previous", "search", "send"},
+            FF78 = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"},
+            IE = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"})
+    public void enterKeyHint() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'GO';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'run';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'enter';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'done';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'go';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'next';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'previous';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'search';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'send';\n"
+            + "    log(d1.enterKeyHint);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='display: none'>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "go", "", "", ""},
+            FF78 = {"undefined", "GO", "run", "undefined", "null"},
+            IE = {"undefined", "GO", "run", "undefined", "null"})
+    public void enterKeyHint2() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d1 = document.getElementById('div1');\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'GO';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = 'run';\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = undefined;\n"
+            + "    log(d1.enterKeyHint);\n"
+
+            + "    d1.enterKeyHint = null;\n"
+            + "    log(d1.enterKeyHint);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div1' style='display: none'>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"go", "go", "", "", ""},
+            FF78 = {"undefined", "undefined", "undefined", "undefined", "undefined"},
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
+    public void enterKeyHintDefaults() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var input1 = document.getElementById('input1');\n"
+            + "    log(input1.enterKeyHint);\n"
+
+            + "    var input2 = document.getElementById('input2');\n"
+            + "    log(input2.enterKeyHint);\n"
+
+            + "    var input3 = document.getElementById('input3');\n"
+            + "    log(input3.enterKeyHint);\n"
+
+            + "    var input4 = document.getElementById('input4');\n"
+            + "    log(input4.enterKeyHint);\n"
+
+            + "    var input5 = document.getElementById('input5');\n"
+            + "    log(input5.enterKeyHint);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input id='input1' enterkeyhint='go'>\n"
+            + "  <input id='input2' enterkeyhint='gO'>\n"
+            + "  <input id='input3' enterkeyhint='run'>\n"
+            + "  <input id='input4' enterkeyhint=undefined>\n"
+            + "  <input id='input5' enterkeyhint=null>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

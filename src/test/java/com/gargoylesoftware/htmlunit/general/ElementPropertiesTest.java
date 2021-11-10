@@ -485,7 +485,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),"
-                + "blur(),click(),contentEditable,dataset,dir,draggable,focus(),"
+                + "blur(),click(),contentEditable,dataset,dir,draggable,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
                 + "offsetWidth,"
                 + "onabort,onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onauxclick,"
@@ -539,7 +539,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,"
+    @HtmlUnitNYI(CHROME = "accessKey,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),hidden,innerText,"
                 + "isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,oncontextmenu,"
@@ -555,7 +555,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwheel,outerText,style,tabIndex,title",
-            EDGE = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,"
+            EDGE = "accessKey,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),hidden,innerText,"
                 + "isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationend,onanimationiteration,onanimationstart,"
                 + "onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,oncontextmenu,"
@@ -587,7 +587,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onshow,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
                 + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,spellcheck,style,"
                 + "tabIndex,title",
-            FF = "accessKey,blur(),click(),contentEditable,dataset,dir,focus(),hidden,innerText,isContentEditable,"
+            FF = "accessKey,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),"
+                + "hidden,innerText,isContentEditable,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onblur,oncanplay,"
                 + "oncanplaythrough,onchange,onclick,oncontextmenu,"
@@ -1109,7 +1110,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "screenX,screenY,scroll(),scrollbars,scrollBy(),scrollByLines(),scrollByPages(),scrollMaxX,"
                 + "scrollMaxY,scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setResizable(),setTimeout(),"
-                + "sidebar,sizeToContent(),sortFunction(),speechSynthesis,status,statusbar,stop(),test(),toolbar,"
+                + "sidebar,sizeToContent(),sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),"
+                + "test(),toolbar,"
                 + "top,u2f,updateCommands(),visualViewport,window",
             FF78 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),caches,cancelAnimationFrame(),"
                 + "cancelIdleCallback(),captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),"

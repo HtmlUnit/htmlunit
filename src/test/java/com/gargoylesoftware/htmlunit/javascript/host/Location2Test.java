@@ -426,15 +426,15 @@ public class Location2Test extends WebDriverTestCase {
             + "</script></head><body onload='doTest()'>\n"
             + "</body></html>";
 
-        final String thirdContent = "<html><head><title>Third Page</title></head><body></body></html>";
+        final String thirdContent = "<html><head><title>Third Page§</title></head><body></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, secondContent);
         getMockWebConnection().setResponse(URL_THIRD, thirdContent);
 
-        final WebDriver driver = loadPageWithAlerts2(startContent);
+        final WebDriver driver = loadPage2(startContent);
         driver.get(URL_SECOND.toExternalForm());
 
-        assertTitle(driver, "Third Page");
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, "Third Page");
 
         // navigate back
         driver.navigate().back();

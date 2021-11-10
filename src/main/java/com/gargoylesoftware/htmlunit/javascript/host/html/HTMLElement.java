@@ -22,6 +22,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PAR
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
 import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -33,16 +35,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.xml.sax.helpers.AttributesImpl;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -130,6 +132,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code HTMLElement} which is the base class for all HTML
@@ -206,8 +209,9 @@ public class HTMLElement extends Element {
     private static final Pattern PERCENT_VALUE = Pattern.compile("\\d+%");
     /* http://msdn.microsoft.com/en-us/library/ie/aa358802.aspx */
     private static final Map<String, String> COLORS_MAP_IE = new HashMap<>();
+    private static final Set<String> ENTER_KEY_HINT_VALUES = new HashSet<>();
 
-    private static final Log LOG = LogFactory.getLog(HTMLElement.class);
+    // private static final Log LOG = LogFactory.getLog(HTMLElement.class);
 
     /**
      * Static counter for {@link #uniqueID_}.
@@ -364,6 +368,14 @@ public class HTMLElement extends Element {
         COLORS_MAP_IE.put("WhiteSmoke", "#F5F5F5");
         COLORS_MAP_IE.put("Yellow", "#FFFF00");
         COLORS_MAP_IE.put("YellowGreen", "#9ACD32");
+
+        ENTER_KEY_HINT_VALUES.add("enter");
+        ENTER_KEY_HINT_VALUES.add("done");
+        ENTER_KEY_HINT_VALUES.add("go");
+        ENTER_KEY_HINT_VALUES.add("next");
+        ENTER_KEY_HINT_VALUES.add("previous");
+        ENTER_KEY_HINT_VALUES.add("search");
+        ENTER_KEY_HINT_VALUES.add("send");
     }
 
     private boolean endTagForbidden_;
@@ -3485,6 +3497,39 @@ public class HTMLElement extends Element {
      */
     public void setValue(final Object newValue) {
         getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
+    }
+
+    /**
+     * Returns the value of the JavaScript attribute {@code enterKeyHint}.
+     *
+     * @return the value of this attribute
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public String getEnterKeyHint() {
+        String value = getDomNodeOrDie().getAttributeDirect("enterkeyhint");
+        if (ATTRIBUTE_NOT_DEFINED == value || ATTRIBUTE_VALUE_EMPTY == value) {
+            return "";
+        }
+
+        value = value.toLowerCase(Locale.ROOT);
+        if (ENTER_KEY_HINT_VALUES.contains(value)) {
+            return value;
+        }
+        return "";
+    }
+
+    /**
+     * Sets the value of the JavaScript attribute {@code enterKeyHint}.
+     *
+     * @param enterKeyHint the new value
+     */
+    @JsxSetter({CHROME, EDGE, FF})
+    public void setEnterKeyHint(final Object enterKeyHint) {
+        if (enterKeyHint == null || Undefined.isUndefined(enterKeyHint)) {
+            getDomNodeOrDie().removeAttribute("enterkeyhint");
+            return;
+        }
+        getDomNodeOrDie().setAttribute("enterkeyhint", Context.toString(enterKeyHint));
     }
 
     /**
