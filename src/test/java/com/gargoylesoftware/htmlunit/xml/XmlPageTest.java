@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.xml;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
-import java.net.URL;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +35,6 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.StringWebResponse;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -67,8 +66,11 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void asNormalizedTextOnlyText() throws Exception {
-        final StringWebResponse response = new StringWebResponse("<msg>abc</msg>", new URL("http://www.test.com"));
-        final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse("<msg>abc</msg>", 200, "OK", MimeType.TEXT_XML);
+        client.setWebConnection(webConnection);
+        final XmlPage xmlPage = client.getPage(URL_FIRST);
 
         assertEquals("abc", ((DomText) xmlPage.getFirstByXPath("/msg/text()")).asNormalizedText());
     }
@@ -112,8 +114,11 @@ public class XmlPageTest extends WebServerTestCase {
     }
 
     private void asNormalizedText(final String xml, final String expected) throws Exception {
-        final StringWebResponse response = new StringWebResponse(xml, new URL("http://www.test.com"));
-        final XmlPage xmlPage = new XmlPage(response, getWebClient().getCurrentWindow());
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(xml, 200, "OK", MimeType.TEXT_XML);
+        client.setWebConnection(webConnection);
+        final XmlPage xmlPage = client.getPage(URL_FIRST);
 
         final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
         assertNotNull("No element found by XPath '//msg'", msg);
@@ -393,7 +398,19 @@ public class XmlPageTest extends WebServerTestCase {
      */
     @Test
     public void bom() throws Exception {
-        asNormalizedText(new String(ByteOrderMark.UTF_8.getBytes()) + "<msg>abc</msg>", "abc");
+        final byte[] bom = ByteOrderMark.UTF_8.getBytes();
+        final byte[] xml = "<msg>abc</msg>".getBytes(UTF_8);
+        final byte[] bytes = ByteBuffer.allocate(bom.length + xml.length).put(bom).put(xml).array();
+
+        final WebClient client = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+        webConnection.setDefaultResponse(bytes, 200, "OK", MimeType.TEXT_XML);
+        client.setWebConnection(webConnection);
+        final XmlPage xmlPage = client.getPage(URL_FIRST);
+
+        final DomElement msg = (DomElement) xmlPage.getFirstByXPath("//msg");
+        assertNotNull("No element found by XPath '//msg'", msg);
+        assertEquals("abc", msg.asNormalizedText());
     }
 
 }
