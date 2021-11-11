@@ -52,14 +52,6 @@ public class HtmlUnknownElement extends HtmlElement {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isTrimmedText() {
-        return false;
-    }
-
-    /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * Marks this frame as created by javascript. This is needed to handle

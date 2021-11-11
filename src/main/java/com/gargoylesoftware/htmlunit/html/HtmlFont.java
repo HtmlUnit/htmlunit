@@ -82,14 +82,6 @@ public class HtmlFont extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isTrimmedText() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
     }

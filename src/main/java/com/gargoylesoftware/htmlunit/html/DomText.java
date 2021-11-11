@@ -158,14 +158,6 @@ public class DomText extends DomCharacterData implements Text {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected boolean isTrimmedText() {
-        return false;
-    }
-
-    /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
      * @param c the character you with to simulate typing
      * @param htmlElement the element in which typing occurs

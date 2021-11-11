@@ -708,18 +708,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns a flag indicating whether or not this node should have any leading and trailing
-     * whitespace removed when {@link #asText()} is called. This method should usually return
-     * {@code true}, but must return {@code false} for such things as text formatting tags.
-     *
-     * @return a flag indicating whether or not this node should have any leading and trailing
-     *         whitespace removed when {@link #asText()} is called
-     */
-    protected boolean isTrimmedText() {
-        return true;
-    }
-
-    /**
      * <p>Returns {@code true} if this node is displayed and can be visible to the user
      * (ignoring screen size, scrolling limitations, color, font-size, or overlapping nodes).</p>
      *

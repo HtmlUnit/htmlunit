@@ -51,14 +51,6 @@ public class HtmlSpan extends HtmlElement {
      * {@inheritDoc}
      */
     @Override
-    protected boolean isTrimmedText() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
     }
