@@ -692,11 +692,12 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "<input type='submit' id='clickMe' onClick=\"this.form.target='_blank'; return false;\">\n"
             + "</form>\n"
             + "<script>\n"
-            + "alert(document.forms[0].target == '');\n"
+            + LOG_TITLE_FUNCTION
+            + "log(document.forms[0].target == '');\n"
             + "</script>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
 
         // HtmlUnitDriver is buggy, it returns null here
         // assertEquals("", driver.findElement(By.name("form1")).getAttribute("target"));
@@ -2178,7 +2179,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input id='myInput' value='Test' onchange=\"alert('changed')\">\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("myInput"));
         element.sendKeys("abc");
         verifyAlerts(driver);
@@ -2198,7 +2199,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  <input id='myInput' value='Test' onchange=\"log('changed')\">\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         final WebElement element = driver.findElement(By.id("myInput"));
         element.clear();
         verifyTitle2(driver, "changed");
