@@ -27,7 +27,6 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -153,14 +152,6 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
         if (assignScriptObject) {
             domNode_.setScriptableObject(this);
         }
-    }
-
-    /**
-     * Sets the HTML element that corresponds to this JavaScript object.
-     * @param htmlElement the HTML element
-     */
-    public void setHtmlElement(final HtmlElement htmlElement) {
-        setDomNode(htmlElement);
     }
 
     /**

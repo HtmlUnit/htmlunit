@@ -95,16 +95,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setHtmlElement(final HtmlElement htmlElement) {
-        super.setHtmlElement(htmlElement);
-        final HtmlForm htmlForm = getHtmlForm();
-        htmlForm.setScriptableObject(this);
-    }
-
-    /**
      * Returns the value of the property {@code name}.
      * @return the value of this property
      */
