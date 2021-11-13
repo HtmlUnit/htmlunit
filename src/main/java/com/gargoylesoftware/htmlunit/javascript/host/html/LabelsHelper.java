@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,7 +57,7 @@ class LabelsHelper extends NodeList {
             }
         }
         final String id = domElement.getId();
-        if (id != DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED != id) {
             for (final DomElement label : domElement.getHtmlPageOrNull().getElementsByTagName("label")) {
                 if (id.equals(label.getAttributeDirect("for"))) {
                     response.add(label);

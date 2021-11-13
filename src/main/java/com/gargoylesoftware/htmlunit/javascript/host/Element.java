@@ -196,7 +196,7 @@ public class Element extends Node {
     public String getAttribute(final String attributeName, final Integer flags) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
 
-        if (value == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == value) {
             value = null;
         }
 
@@ -680,7 +680,7 @@ public class Element extends Node {
                     return false;
                 }
                 String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
-                if (classAttribute == ATTRIBUTE_NOT_DEFINED) {
+                if (ATTRIBUTE_NOT_DEFINED == classAttribute) {
                     return false; // probably better performance as most of elements won't have a class attribute
                 }
 

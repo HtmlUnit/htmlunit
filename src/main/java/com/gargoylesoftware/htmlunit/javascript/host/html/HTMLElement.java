@@ -1750,7 +1750,7 @@ public class HTMLElement extends Element {
     @JsxGetter
     public String getContentEditable() {
         final String attribute = getDomNodeOrDie().getAttribute("contentEditable");
-        if (attribute == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == attribute) {
             return "inherit";
         }
         if (attribute == DomElement.ATTRIBUTE_VALUE_EMPTY) {

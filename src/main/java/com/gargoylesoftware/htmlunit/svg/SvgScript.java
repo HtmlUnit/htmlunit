@@ -114,7 +114,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
      */
     @Override
     public boolean isDeferred() {
-        return getDeferAttribute() != ATTRIBUTE_NOT_DEFINED;
+        return ATTRIBUTE_NOT_DEFINED != getDeferAttribute();
     }
 
     /**

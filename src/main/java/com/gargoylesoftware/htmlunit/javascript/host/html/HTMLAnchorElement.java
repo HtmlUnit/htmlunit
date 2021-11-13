@@ -99,7 +99,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (hrefAttr == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == hrefAttr) {
             return "";
         }
 
@@ -119,7 +119,7 @@ public class HTMLAnchorElement extends HTMLElement {
         final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
         final String hrefAttr = anchor.getHrefAttribute();
 
-        if (hrefAttr != DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED != hrefAttr) {
             anchor.focus();
         }
     }
@@ -541,7 +541,7 @@ public class HTMLAnchorElement extends HTMLElement {
     static String getDefaultValue(final HtmlElement element) {
         String href = element.getAttributeDirect("href");
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == href) {
+        if (ATTRIBUTE_NOT_DEFINED == href) {
             return ""; // for example for named anchors
         }
 
@@ -688,7 +688,7 @@ public class HTMLAnchorElement extends HTMLElement {
         try {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
             final String href = anchor.getHrefAttribute();
-            if (href == ATTRIBUTE_NOT_DEFINED) {
+            if (ATTRIBUTE_NOT_DEFINED == href) {
                 return;
             }
 
@@ -727,7 +727,7 @@ public class HTMLAnchorElement extends HTMLElement {
         try {
             final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
             final String href = anchor.getHrefAttribute();
-            if (href == ATTRIBUTE_NOT_DEFINED) {
+            if (ATTRIBUTE_NOT_DEFINED == href) {
                 return;
             }
 

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -383,14 +385,14 @@ public final class XmlUtils {
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
-        String uri = DomElement.ATTRIBUTE_NOT_DEFINED;
+        String uri = ATTRIBUTE_NOT_DEFINED;
         if (prefix.isEmpty()) {
             uri = element.getAttributeDirect("xmlns");
         }
         else {
             uri = element.getAttribute("xmlns:" + prefix);
         }
-        if (uri == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == uri) {
             final DomNode parentNode = element.getParentNode();
             if (parentNode instanceof DomElement) {
                 uri = lookupNamespaceURI((DomElement) parentNode, prefix);
