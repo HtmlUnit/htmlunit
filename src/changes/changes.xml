@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
+            <action type="fix" dev="rbri" issue="384">
+                Text content based width calculations in ComputedCSSStyleDeclaration now using the getVisibleText()
+                method to come closer to real browsers (e.g. whitespace is now removed).
+            </action>
             <action type="remove" dev="rbri">
                 SimpleScriptable#setHtmlElement removed.
             </action>

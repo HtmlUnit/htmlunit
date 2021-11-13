@@ -61,6 +61,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 /**
  * Special serializer to generate the output we need
  * at least for selenium WebElement#getText().
+ * <p>This is also used from estimations by ComputedCSSStyleDeclaration.</p>
  *
  * @author Ronald Brill
  * @author cd alexndr

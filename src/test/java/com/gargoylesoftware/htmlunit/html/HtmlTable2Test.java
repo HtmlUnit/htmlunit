@@ -60,6 +60,39 @@ public class HtmlTable2Test extends WebDriverTestCase {
         }
     }
 
+    @Test
+    @Alerts("true")
+    public void cellWidth() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var th = document.getElementById('tester');\n"
+            + "    log(th.clientWidth < 100);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <table id='dataTable'>"
+            + "    <thead>\n"
+            + "      <tr>\n"
+            + "        <th id='tester'>Head\n"
+            + "          \n"
+            + "          \n"
+            + "          1\n"
+            + "        </th>\n"
+            + "      </tr>\n"
+            + "    </thead>\n"
+            + "  <tbody>\n"
+            + "</tbody>\n"
+            + "</table>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(htmlContent);
+    }
+
     /**
      * @throws Exception if the test fails
      */

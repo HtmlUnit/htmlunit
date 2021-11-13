@@ -934,7 +934,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final String value = style.getStyleAttribute(WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
                     if (ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
-                        final String content = getDomNodeOrDie().getTextContent();
+                        final String content = getDomNodeOrDie().getVisibleText();
                         // do this only for small content
                         // at least for empty div's this is more correct
                         if (null != content && content.length() < 13) {
@@ -1022,7 +1022,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if ("right".equals(cssFloat) || "left".equals(cssFloat)
                     || ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
                 // We're floating; simplistic approximation: text content * pixels per character.
-                width = node.getTextContent().length() * getBrowserVersion().getPixesPerChar();
+                width = node.getVisibleText().length() * getBrowserVersion().getPixesPerChar();
             }
             else if (BLOCK.equals(display)) {
                 final int windowWidth = element.getWindow().getWebWindow().getInnerWidth();
@@ -1042,7 +1042,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton
                         || node instanceof HtmlFileInput) {
-                final String text = node.asNormalizedText();
+                final String text = node.getVisibleText();
                 // default font for buttons is a bit smaller than the body font size
                 width = 10 + (int) (text.length() * getBrowserVersion().getPixesPerChar() * 0.9);
             }
@@ -1119,10 +1119,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     final HTMLElement e = child.getParentNode().getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     final int height = getBrowserVersion().getFontHeight(style.getFontSize());
-                    width += child.getTextContent().length() * (int) (height / 1.8f);
+                    width += child.getVisibleText().length() * (int) (height / 1.8f);
                 }
                 else {
-                    width += child.getTextContent().length() * getBrowserVersion().getPixesPerChar();
+                    width += child.getVisibleText().length() * getBrowserVersion().getPixesPerChar();
                 }
             }
         }
@@ -1288,7 +1288,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     parent = parent.getParentElement();
                 }
                 final int pixelWidth = pixelValue(width);
-                final String content = node.asNormalizedText();
+                final String content = node.getVisibleText();
 
                 if (pixelWidth > 0
                         && !width.isEmpty()
@@ -1599,7 +1599,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     }
                 }
                 else if (prevScriptable instanceof Text) {
-                    final String content = prev.getTextContent();
+                    final String content = prev.getVisibleText();
                     if (content != null) {
                         left += content.trim().length() * getBrowserVersion().getPixesPerChar();
                     }
