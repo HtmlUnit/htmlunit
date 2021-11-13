@@ -2759,4 +2759,117 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("40")
+    @HtmlUnitNYI(CHROME = "1256",
+            EDGE = "1256",
+            FF = "1256",
+            FF78 = "1256",
+            IE = "1256")
+    public void widthBlockElements() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div style='display: inline-block'>\n"
+            + "  <div id='myDiv'>\n"
+            + "    <div style='width: 40px'>\n"
+            + "    </div>\n"
+            + "  </div>\n"
+            + "</div>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Alerts("0")
+    @Test
+    public void widthEmptyInlineContent() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n"
+            + "  <div style='display: none; width: 40px'>hidden elements should have zero width</div>\n"
+            + "  <script>console.log('script elements should have zero width')</script>\n"
+            + "</div></body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("55")
+    public void widthExplicitInlineContent() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n"
+            + "  <div style='width: 55px'>"
+            + "     <div style='width: 40px'></div>\n"
+            + "  </div>"
+            + "</div>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("55")
+    public void widthWhitespaceBetweenTags() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block'>\n      "
+            + "                    <div style='width: 55px'></div>     "
+            + "      </div>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void widthWhitespaceSequence() throws Exception {
+        final String content = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var myDiv = document.getElementById('myDiv');\n"
+            + "    log(myDiv.offsetWidth < 100);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "<div id='myDiv' style='display: inline-block; font-size: 14px'>\n"
+            // browsers usually trim leading/trailing whitespace sequences,
+            // and replace mid-text whitespace them with a single space
+            + "    Hello World          "
+            + "</div>";
+        loadPageVerifyTitle2(content);
+    }
+
 }
