@@ -64,7 +64,7 @@
  PASSED test: ../../dojo/tests/_base/html.html::t::sq100nopos x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::coordsScrolled x ms
      _AssertFailure: assertTrue('false') failed with hint: 
-   quirks iframe element x == 0 (x,y,w,h=2,2,224,22)
+   quirks iframe element x == 0 (x,y,w,h=2,2,174,22)
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html.html::t::coordsIframe x ms
  PASSED test: ../../dojo/tests/_base/html.html::t::doh.is(1, dojo.style('sq100nopos', 'opacity')); x ms
