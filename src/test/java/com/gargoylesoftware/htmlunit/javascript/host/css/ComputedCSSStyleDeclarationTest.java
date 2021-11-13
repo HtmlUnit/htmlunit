@@ -2824,7 +2824,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "</script></head><body onload='test()'>\n"
             + "<div id='myDiv' style='display: inline-block'>\n"
             + "  <div style='width: 55px'>"
-            + "     <div style='width: 40px'></div>\n"
+            + "    <div style='width: 40px'></div>\n"
             + "  </div>"
             + "</div>";
 
@@ -2845,8 +2845,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<div id='myDiv' style='display: inline-block'>\n      "
-            + "                    <div style='width: 55px'></div>     "
-            + "      </div>";
+            + "  <div style='width: 55px'></div>     "
+            + "    </div>";
 
         loadPageVerifyTitle2(content);
     }
