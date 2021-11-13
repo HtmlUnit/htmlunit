@@ -876,11 +876,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "145")
-    @HtmlUnitNYI(CHROME = "30",
-            EDGE = "30",
-            FF = "30",
-            FF78 = "30",
-            IE = "0")
+    @HtmlUnitNYI(IE = "0")
     public void isindex() throws Exception {
         test("isindex");
     }

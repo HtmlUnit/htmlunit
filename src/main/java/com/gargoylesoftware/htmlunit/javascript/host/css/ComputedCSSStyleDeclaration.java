@@ -1042,7 +1042,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
                         || node instanceof HtmlButtonInput || node instanceof HtmlButton
                         || node instanceof HtmlFileInput) {
-                final String text = node.getVisibleText();
+                // use asNormalizedText() here because getVisibleText() returns an empty string
+                // for submit and reset buttons
+                final String text = node.asNormalizedText();
                 // default font for buttons is a bit smaller than the body font size
                 width = 10 + (int) (text.length() * getBrowserVersion().getPixesPerChar() * 0.9);
             }
