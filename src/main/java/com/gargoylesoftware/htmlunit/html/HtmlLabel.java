@@ -117,7 +117,7 @@ public class HtmlLabel extends HtmlElement {
      */
     public HtmlElement getLabeledElement() {
         final String elementId = getForAttribute();
-        if (ATTRIBUTE_NOT_DEFINED.equals(elementId)) {
+        if (ATTRIBUTE_NOT_DEFINED == elementId) {
             for (final DomNode element : getChildren()) {
                 if (element instanceof LabelableElement) {
                     return (HtmlElement) element;

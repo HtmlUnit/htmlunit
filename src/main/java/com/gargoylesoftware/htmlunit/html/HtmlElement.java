@@ -203,7 +203,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlAttributeChangeEvent event;
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, attributeValue);
         }
         else {
@@ -260,7 +260,7 @@ public abstract class HtmlElement extends DomElement {
             htmlPage.addMappedElement(this);
         }
 
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             fireHtmlAttributeAdded(event);
             htmlPage.fireHtmlAttributeAdded(event);
         }
@@ -292,7 +292,7 @@ public abstract class HtmlElement extends DomElement {
         }
 
         final HtmlAttributeChangeEvent event;
-        if (oldAttributeValue == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == oldAttributeValue) {
             event = new HtmlAttributeChangeEvent(this, qualifiedName, attribute.getValue());
         }
         else {
@@ -314,7 +314,7 @@ public abstract class HtmlElement extends DomElement {
     @Override
     public void removeAttribute(final String attributeName) {
         final String value = getAttribute(attributeName);
-        if (value == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == value) {
             return;
         }
 
@@ -460,7 +460,7 @@ public abstract class HtmlElement extends DomElement {
         final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
         if (browserVersion.hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
             final String formId = getAttribute("form");
-            if (formId != ATTRIBUTE_NOT_DEFINED) {
+            if (ATTRIBUTE_NOT_DEFINED != formId) {
                 final Element formById = getPage().getElementById(formId);
                 if (formById instanceof HtmlForm) {
                     return (HtmlForm) formById;
@@ -1346,7 +1346,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public boolean isValid() {
         return !isRequiredSupported()
-                || getAttributeDirect(ATTRIBUTE_REQUIRED) == ATTRIBUTE_NOT_DEFINED
+                || ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)
                 || !getAttributeDirect("value").isEmpty();
     }
 

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.ref.WeakReference;
@@ -472,9 +473,9 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         for (final DomNode next : elements) {
             final HtmlElement element = (HtmlElement) next;
             final String name = element.getAttributeDirect("name");
-            if (name == DomElement.ATTRIBUTE_NOT_DEFINED) {
+            if (ATTRIBUTE_NOT_DEFINED  == name) {
                 final String id = element.getId();
-                if (id == DomElement.ATTRIBUTE_NOT_DEFINED) {
+                if (ATTRIBUTE_NOT_DEFINED == id) {
                     idList.add(Integer.toString(index));
                 }
                 else {

@@ -464,7 +464,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
         final String oldAttributeValue = defaultValue_;
         final HtmlAttributeChangeEvent event;
-        if (defaultValue_ == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == defaultValue_) {
             event = new HtmlAttributeChangeEvent(this, "value", defaultValue);
         }
         else {

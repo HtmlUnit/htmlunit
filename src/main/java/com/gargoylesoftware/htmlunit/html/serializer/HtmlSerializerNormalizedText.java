@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
+
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,7 +24,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomComment;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
@@ -223,7 +224,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendSubmitInput(final HtmlSerializerTextBuilder builder, final HtmlSubmitInput htmlSubmitInput) {
         String text = htmlSubmitInput.getValueAttribute();
-        if (text == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == text) {
             text = HtmlSubmitInput.DEFAULT_VALUE;
         }
 
@@ -269,7 +270,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendResetInput(final HtmlSerializerTextBuilder builder, final HtmlResetInput htmlResetInput) {
         String text = htmlResetInput.getValueAttribute();
-        if (text == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == text) {
             text = HtmlResetInput.DEFAULT_VALUE;
         }
 

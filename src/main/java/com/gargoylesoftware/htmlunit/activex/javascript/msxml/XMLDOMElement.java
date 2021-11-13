@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
 
+import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -175,7 +176,7 @@ public class XMLDOMElement extends XMLDOMNode {
         }
 
         final String value = getDomNodeOrDie().getAttribute(name);
-        if (value == DomElement.ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == value) {
             return null;
         }
         return value;

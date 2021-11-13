@@ -271,7 +271,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         }
 
         final Map<String, StyleElement> styleMap = new LinkedHashMap<>();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
+        if (ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;
             return styleMap_;
@@ -984,9 +984,9 @@ public class DomElement extends DomNamespaceNode implements Element {
                 DomElement elementToFocus = null;
                 if (this instanceof SubmittableElement
                     || this instanceof HtmlAnchor
-                        && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                        && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
                     || this instanceof HtmlArea
-                        && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                        && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
                             || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
                     || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null) {
                     elementToFocus = this;
@@ -1513,9 +1513,9 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public void focus() {
         if (!(this instanceof SubmittableElement
-            || this instanceof HtmlAnchor && ((HtmlAnchor) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+            || this instanceof HtmlAnchor && ATTRIBUTE_NOT_DEFINED != ((HtmlAnchor) this).getHrefAttribute()
             || this instanceof HtmlArea
-                && (((HtmlArea) this).getHrefAttribute() != DomElement.ATTRIBUTE_NOT_DEFINED
+                && (ATTRIBUTE_NOT_DEFINED != ((HtmlArea) this).getHrefAttribute()
                     || getPage().getWebClient().getBrowserVersion().hasFeature(JS_AREA_WITHOUT_HREF_FOCUSABLE))
             || this instanceof HtmlElement && ((HtmlElement) this).getTabIndex() != null)) {
             return;

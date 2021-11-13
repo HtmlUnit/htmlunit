@@ -80,7 +80,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             // if created by the HTMLParser the src attribute is not set via setAttribute() or some other method but is
             // part of the given attributes already.
             final String src = getSrcAttribute();
-            if (src != ATTRIBUTE_NOT_DEFINED && !UrlUtils.ABOUT_BLANK.equals(src)) {
+            if (ATTRIBUTE_NOT_DEFINED != src && !UrlUtils.ABOUT_BLANK.equals(src)) {
                 loadSrcWhenAddedToPage_ = true;
             }
         }

@@ -114,7 +114,7 @@ public final class ScriptElementSupport {
                     if (window != null) {
                         jsDoc = (HTMLDocument) window.getDocument();
                         jsDoc.setExecutingDynamicExternalPosponed(element.getStartLineNumber() == -1
-                                && srcAttrib != ATTRIBUTE_NOT_DEFINED);
+                                && ATTRIBUTE_NOT_DEFINED != srcAttrib);
                     }
                     try {
                         executeScriptIfNeeded(element, false, false);

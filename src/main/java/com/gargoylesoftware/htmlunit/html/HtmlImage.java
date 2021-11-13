@@ -494,7 +494,7 @@ public class HtmlImage extends HtmlElement {
     public int getHeightOrDefault() {
         final String height = getHeightAttribute();
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != height) {
+        if (ATTRIBUTE_NOT_DEFINED != height) {
             try {
                 return Integer.parseInt(height);
             }
@@ -504,7 +504,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+        if (ATTRIBUTE_NOT_DEFINED == src) {
             final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                 return 30;
@@ -561,7 +561,7 @@ public class HtmlImage extends HtmlElement {
     public int getWidthOrDefault() {
         final String widthAttrib = getWidthAttribute();
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != widthAttrib) {
+        if (ATTRIBUTE_NOT_DEFINED != widthAttrib) {
             try {
                 return Integer.parseInt(widthAttrib);
             }
@@ -571,7 +571,7 @@ public class HtmlImage extends HtmlElement {
         }
 
         final String src = getSrcAttribute();
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == src) {
+        if (ATTRIBUTE_NOT_DEFINED == src) {
             final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
 
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
@@ -754,7 +754,7 @@ public class HtmlImage extends HtmlElement {
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        if (getUseMapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED != getUseMapAttribute()) {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
             final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
@@ -773,7 +773,7 @@ public class HtmlImage extends HtmlElement {
         if (anchor == null) {
             return false;
         }
-        if (getIsmapAttribute() != ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED != getIsmapAttribute()) {
             final String suffix = "?" + lastClickX_ + "," + lastClickY_;
             anchor.doClickStateUpdate(false, false, suffix);
             return false;

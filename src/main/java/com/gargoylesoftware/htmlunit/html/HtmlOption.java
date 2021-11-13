@@ -233,7 +233,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      */
     public final String getValueAttribute() {
         String value = getAttributeDirect("value");
-        if (value == ATTRIBUTE_NOT_DEFINED) {
+        if (ATTRIBUTE_NOT_DEFINED == value) {
             value = getText();
         }
         return value;
