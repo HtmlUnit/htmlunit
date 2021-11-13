@@ -8,9 +8,31 @@
 
     <body>
         <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
+            <action type="update" dev="RhinoTeam">
+                core-js: Fix problems with null "this" parameters in Function.prototype.call,
+                Function.prototype.apply, Function.prototype.toString, and Object.prototype.toLocaleString.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Messages now fall back to en in every case.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Fix support for BigInt in Hashtable
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Improved JDK 17 support.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Replace 'new Integer/Double/Long' by Integer/Double/Long.valueOf.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Switch to xerces 2.12.1.
+            </action>
             <action type="fix" dev="rbri" issue="384">
                 Text content based width calculations in ComputedCSSStyleDeclaration now using the getVisibleText()
                 method to come closer to real browsers (e.g. whitespace is now removed).
+            </action>
+            <action type="update" dev="rbri">
+                neko: Switch to jUnit 5.
             </action>
             <action type="remove" dev="rbri">
                 SimpleScriptable#setHtmlElement removed.
