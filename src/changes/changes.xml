@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.55.0" date="November xx, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
+        <release version="2.55.0" date="November 14, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
             <action type="update" dev="RhinoTeam">
                 core-js: Fix problems with null "this" parameters in Function.prototype.call,
                 Function.prototype.apply, Function.prototype.toString, and Object.prototype.toLocaleString.
