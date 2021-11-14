@@ -7,6 +7,9 @@
     </properties>
 
     <body>
+        <release version="2.56.0" date="December xx, 2021" description="Bugfixes">
+        </release>
+
         <release version="2.55.0" date="November 14, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
             <action type="update" dev="RhinoTeam">
                 core-js: Fix problems with null "this" parameters in Function.prototype.call,
