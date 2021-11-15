@@ -169,12 +169,14 @@ public class ExternalTest {
         try (WebClient webClient = buildWebClient()) {
             final HtmlPage page = webClient.getPage(EDGE_DRIVER_URL_);
             String content = page.asNormalizedText();
-            content = content.substring(content.indexOf("Current general public release channel."));
+            content = content.substring(content.indexOf("Recent versions"));
             content = content.replace("\r\n", "");
 
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("Version: (\\d*\\.\\d*\\.\\d*\\.\\d*):\\sx86\\s\\|\\sx64");
+                    Pattern.compile("Version: ("
+                                + BrowserVersion.EDGE.getBrowserVersionNumeric()
+                                + "\\.\\d*\\.\\d*\\.\\d*):\\sx86\\s\\|\\sx64");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
@@ -324,6 +326,13 @@ public class ExternalTest {
         if ("org.seleniumhq.selenium".equals(groupId) && (version.startsWith("4.0.0"))) {
             return true;
         }
+
+        if ("org.seleniumhq.selenium".equals(groupId)
+                && "htmlunit-driver".equals(artifactId)
+                && (version.startsWith("3."))) {
+            return true;
+        }
+
 
         // there is a serious bug
         // https://issues.apache.org/jira/browse/IO-744
