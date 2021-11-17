@@ -43,7 +43,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebResponseData;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
@@ -131,13 +130,10 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         // skip if it is already formatted? => TODO
 
         final ContextFactory factory = new ContextFactory();
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                cx.setOptimizationLevel(-1);
-                final Script script = cx.compileString(scriptSource, scriptName, 0, null);
-                return cx.decompileScript(script, 4);
-            }
+        final ContextAction<Object> action = cx -> {
+            cx.setOptimizationLevel(-1);
+            final Script script = cx.compileString(scriptSource, scriptName, 0, null);
+            return cx.decompileScript(script, 4);
         };
 
         try {

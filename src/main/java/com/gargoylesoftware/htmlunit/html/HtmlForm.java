@@ -596,12 +596,7 @@ public class HtmlForm extends HtmlElement {
                 return accepted;
             }
         };
-        return new Iterable<HtmlElement>() {
-            @Override
-            public Iterator<HtmlElement> iterator() {
-                return iter;
-            }
-        };
+        return () -> iter;
     }
 
     /**

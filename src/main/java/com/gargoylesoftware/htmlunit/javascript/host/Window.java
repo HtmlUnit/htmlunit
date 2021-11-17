@@ -229,11 +229,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         }
 
         public synchronized void put(final Element element, final String normalizedPseudo, final CSS2Properties style) {
-            Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
-            if (elementMap == null) {
-                elementMap = new WeakHashMap<>();
-                computedStyles_.put(element, elementMap);
-            }
+            final Map<String, CSS2Properties>
+                    elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
             elementMap.put(normalizedPseudo, style);
         }
 
@@ -833,13 +830,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     public void cancelAnimationFrame(final Object requestId) {
         final int id = (int) Context.toNumber(requestId);
 
-        final Iterator<AnimationFrame> frames = animationFrames_.iterator();
-        while (frames.hasNext()) {
-            final Window.AnimationFrame animationFrame = frames.next();
-            if (animationFrame.id_ == id) {
-                frames.remove();
-            }
-        }
+        animationFrames_.removeIf(animationFrame -> animationFrame.id_ == id);
     }
 
     /**
@@ -1565,12 +1556,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final boolean includeFormFields = getBrowserVersion().hasFeature(JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME);
         final Filter filter = new Filter(includeFormFields);
 
-        final Iterator<DomElement> it = elements.iterator();
-        while (it.hasNext()) {
-            if (!filter.matches(it.next())) {
-                it.remove();
-            }
-        }
+        elements.removeIf(domElement -> !filter.matches(domElement));
 
         if (elements.isEmpty()) {
             return NOT_FOUND;
@@ -2284,12 +2270,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
             public void execute() throws Exception {
-                final ContextAction<Object> contextAction = new ContextAction<Object>() {
-                    @Override
-                    public Object run(final Context cx) {
-                        return dispatchEvent(event);
-                    }
-                };
+                final ContextAction<Object> contextAction = cx -> dispatchEvent(event);
 
                 final ContextFactory cf = jsEngine.getContextFactory();
                 cf.call(contextAction);

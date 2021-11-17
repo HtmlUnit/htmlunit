@@ -300,7 +300,6 @@ public class Element extends Node {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {

@@ -2419,7 +2419,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final WebWindow targetWindow = resolveWindow(requestingWindow, target);
         final URL url = request.getUrl();
-        boolean justHashJump = false;
 
         if (targetWindow != null && HttpMethod.POST != request.getHttpMethod()) {
             final Page page = targetWindow.getEnclosedPage();
@@ -2430,7 +2429,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 if (checkHash) {
                     final URL current = page.getUrl();
-                    justHashJump =
+                    final boolean justHashJump =
                             HttpMethod.GET == request.getHttpMethod()
                             && UrlUtils.sameFile(url, current)
                             && null != url.getRef();

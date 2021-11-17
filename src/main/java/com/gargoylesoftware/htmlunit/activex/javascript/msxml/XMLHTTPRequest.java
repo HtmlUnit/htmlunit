@@ -479,27 +479,24 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         else {
             // Create and start a thread in which to execute the request.
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-            final ContextAction<Object> action = new ContextAction<Object>() {
-                @Override
-                public Object run(final Context cx) {
-                    // KEY_STARTING_SCOPE maintains a stack of scopes
-                    @SuppressWarnings("unchecked")
-                    Deque<Scriptable> stack =
-                            (Deque<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
-                    if (null == stack) {
-                        stack = new ArrayDeque<>();
-                        cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
-                    }
-                    stack.push(w);
-
-                    try {
-                        doSend(cx);
-                    }
-                    finally {
-                        stack.pop();
-                    }
-                    return null;
+            final ContextAction<Object> action = cx -> {
+                // KEY_STARTING_SCOPE maintains a stack of scopes
+                @SuppressWarnings("unchecked")
+                Deque<Scriptable> stack =
+                        (Deque<Scriptable>) cx.getThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE);
+                if (null == stack) {
+                    stack = new ArrayDeque<>();
+                    cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                 }
+                stack.push(w);
+
+                try {
+                    doSend(cx);
+                }
+                finally {
+                    stack.pop();
+                }
+                return null;
             };
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory().
                     createJavascriptXMLHttpRequestJob(cf, action);

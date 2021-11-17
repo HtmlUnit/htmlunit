@@ -221,7 +221,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
     @Override
     public List<Header> formatCookies(final List<Cookie> cookies) {
-        Collections.sort(cookies, COOKIE_COMPARATOR);
+        cookies.sort(COOKIE_COMPARATOR);
 
         final CharArrayBuffer buffer = new CharArrayBuffer(20 * cookies.size());
         buffer.append(SM.COOKIE);

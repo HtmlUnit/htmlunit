@@ -44,7 +44,6 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.Attributes;
-import org.xml.sax.EntityResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -145,13 +144,7 @@ public final class XmlUtils {
         final InputSource source = new InputSource(tracker);
         final DocumentBuilder builder = factory.newDocumentBuilder();
         builder.setErrorHandler(DISCARD_MESSAGES_HANDLER);
-        builder.setEntityResolver(new EntityResolver() {
-            @Override
-            public InputSource resolveEntity(final String publicId, final String systemId)
-                throws SAXException, IOException {
-                return new InputSource(new StringReader(""));
-            }
-        });
+        builder.setEntityResolver((publicId, systemId) -> new InputSource(new StringReader("")));
         try {
             // this closes the input source/stream
             return builder.parse(source);
@@ -385,7 +378,7 @@ public final class XmlUtils {
      * @return the namespace URI bound to the prefix; or null if there is no such namespace
      */
     public static String lookupNamespaceURI(final DomElement element, final String prefix) {
-        String uri = ATTRIBUTE_NOT_DEFINED;
+        String uri;
         if (prefix.isEmpty()) {
             uri = element.getAttributeDirect("xmlns");
         }

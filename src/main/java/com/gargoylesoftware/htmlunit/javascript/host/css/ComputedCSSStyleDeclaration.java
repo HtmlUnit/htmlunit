@@ -207,7 +207,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         TEXT_TRANSFORM,
         VISIBILITY,
         VOICE_FAMILY,
-        VOICE_FAMILY,
         VOLUME,
         WHITE_SPACE,
         WIDOWS,

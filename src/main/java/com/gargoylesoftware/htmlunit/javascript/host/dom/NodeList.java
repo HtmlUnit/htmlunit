@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSymbol;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -151,17 +150,14 @@ public class NodeList extends AbstractList {
         final WebClient client = getWindow().getWebWindow().getWebClient();
         final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
 
-        final ContextAction<Object> contextAction = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Function function = (Function) callback;
-                final Scriptable scope = getParentScope();
-                for (int i = 0; i < nodes.size(); i++) {
-                    function.call(cx, scope, NodeList.this, new Object[] {
-                            nodes.get(i).getScriptableObject(), i, NodeList.this});
-                }
-                return null;
+        final ContextAction<Object> contextAction = cx -> {
+            final Function function = (Function) callback;
+            final Scriptable scope = getParentScope();
+            for (int i = 0; i < nodes.size(); i++) {
+                function.call(cx, scope, NodeList.this, new Object[] {
+                        nodes.get(i).getScriptableObject(), i, NodeList.this});
             }
+            return null;
         };
         cf.call(contextAction);
     }

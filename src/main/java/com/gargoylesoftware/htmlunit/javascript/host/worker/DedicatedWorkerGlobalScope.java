@@ -278,18 +278,15 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         final JavaScriptEngine javaScriptEngine = (JavaScriptEngine) webClient.getJavaScriptEngine();
 
         final DedicatedWorkerGlobalScope thisScope = this;
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
-                        fullUrl.toExternalForm(), 1);
+        final ContextAction<Object> action = cx -> {
+            final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
+                    fullUrl.toExternalForm(), 1);
 
-                // script might be null here e.g. if there is a syntax error
-                if (script != null) {
-                    return javaScriptEngine.execute(page, thisScope, script);
-                }
-                return null;
+            // script might be null here e.g. if there is a syntax error
+            if (script != null) {
+                return javaScriptEngine.execute(page, thisScope, script);
             }
+            return null;
         };
 
         final ContextFactory cf = javaScriptEngine.getContextFactory();

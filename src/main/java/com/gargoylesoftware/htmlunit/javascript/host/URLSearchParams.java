@@ -229,13 +229,7 @@ public class URLSearchParams extends SimpleScriptable {
     @Override
     public void delete(final String name) {
         final List<NameValuePair> splitted = splitQuery();
-        final Iterator<NameValuePair> iter = splitted.iterator();
-        while (iter.hasNext()) {
-            final NameValuePair entry = iter.next();
-            if (entry.getName().equals(name)) {
-                iter.remove();
-            }
-        }
+        splitted.removeIf(entry -> entry.getName().equals(name));
 
         if (splitted.size() == 0) {
             try {

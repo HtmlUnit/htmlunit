@@ -188,7 +188,7 @@ public final class ScriptElementSupport {
                         charset = page.getCharset();
                     }
 
-                    JavaScriptLoadResult result = null;
+                    final JavaScriptLoadResult result;
                     final Window win = page.getEnclosingWindow().getScriptableObject();
                     final Document doc = win.getDocument();
                     try {

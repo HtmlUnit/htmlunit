@@ -794,52 +794,49 @@ public class HtmlPage extends SgmlPage {
                 }
             }
         }
-        Collections.sort(tabbableElements, createTabOrderComparator());
+        tabbableElements.sort(createTabOrderComparator());
         return Collections.unmodifiableList(tabbableElements);
     }
 
     private static Comparator<HtmlElement> createTabOrderComparator() {
-        return new Comparator<HtmlElement>() {
-            @Override
-            public int compare(final HtmlElement element1, final HtmlElement element2) {
-                final Short i1 = element1.getTabIndex();
-                final Short i2 = element2.getTabIndex();
+        return (element1, element2) -> {
+            final Short i1 = element1.getTabIndex();
+            final Short i2 = element2.getTabIndex();
 
-                final short index1;
-                if (i1 == null) {
-                    index1 = -1;
-                }
-                else {
-                    index1 = i1.shortValue();
-                }
-
-                final short index2;
-                if (i2 == null) {
-                    index2 = -1;
-                }
-                else {
-                    index2 = i2.shortValue();
-                }
-
-                final int result;
-                if (index1 > 0 && index2 > 0) {
-                    result = index1 - index2;
-                }
-                else if (index1 > 0) {
-                    result = -1;
-                }
-                else if (index2 > 0) {
-                    result = +1;
-                }
-                else if (index1 == index2) {
-                    result = 0;
-                }
-                else {
-                    result = index2 - index1;
-                }
-
-                return result;
+            final short index1;
+            if (i1 == null) {
+                index1 = -1;
             }
+            else {
+                index1 = i1.shortValue();
+            }
+
+            final short index2;
+            if (i2 == null) {
+                index2 = -1;
+            }
+            else {
+                index2 = i2.shortValue();
+            }
+
+            final int result;
+            if (index1 > 0 && index2 > 0) {
+                result = index1 - index2;
+            }
+            else if (index1 > 0) {
+                result = -1;
+            }
+            else if (index2 > 0) {
+                result = +1;
+            }
+            else if (index1 == index2) {
+                result = 0;
+            }
+            else {
+                result = index2 - index1;
+            }
+
+            return result;
         };
     }
 

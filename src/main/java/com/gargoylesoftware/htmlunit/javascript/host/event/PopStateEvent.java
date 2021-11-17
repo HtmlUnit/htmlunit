@@ -84,16 +84,13 @@ public class PopStateEvent extends Event {
             final WebClient client = getWindow().getWebWindow().getWebClient();
             final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
 
-            final ContextAction<Object> contextAction = new ContextAction<Object>() {
-                @Override
-                public Object run(final Context cx) {
-                    for (final Object o : ScriptableObject.getPropertyIds(old)) {
-                        final String property = Context.toString(o);
-                        newState.defineProperty(property, ScriptableObject.getProperty(old, property),
-                                ScriptableObject.EMPTY);
-                    }
-                    return null;
+            final ContextAction<Object> contextAction = cx -> {
+                for (final Object o : ScriptableObject.getPropertyIds(old)) {
+                    final String property = Context.toString(o);
+                    newState.defineProperty(property, ScriptableObject.getProperty(old, property),
+                            ScriptableObject.EMPTY);
                 }
+                return null;
             };
             cf.call(contextAction);
             state_ = newState;

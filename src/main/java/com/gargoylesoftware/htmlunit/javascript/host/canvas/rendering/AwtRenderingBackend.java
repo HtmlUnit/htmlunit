@@ -20,7 +20,6 @@ import java.awt.Color;
 import java.awt.Composite;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.geom.AffineTransform;
@@ -471,26 +470,22 @@ public class AwtRenderingBackend implements RenderingBackend {
                 }
 
                 final Object done = new Object();
-                final ImageObserver imageObserver = new ImageObserver() {
-                    @Override
-                    public boolean imageUpdate(final Image img, final int flags,
-                                                final int x, final int y, final int width, final int height) {
+                final ImageObserver imageObserver = (img1, flags, x, y, width, height) -> {
 
-                        if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
-                            return true;
-                        }
-
-                        if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
-                                || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
-                            return true;
-                        }
-
-                        synchronized (done) {
-                            done.notify();
-                        }
-
-                        return false;
+                    if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
+                        return true;
                     }
+
+                    if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
+                            || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
+                        return true;
+                    }
+
+                    synchronized (done) {
+                        done.notify();
+                    }
+
+                    return false;
                 };
 
                 synchronized (done) {

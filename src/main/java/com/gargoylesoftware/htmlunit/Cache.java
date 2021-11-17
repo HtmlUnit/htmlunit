@@ -19,7 +19,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -81,13 +80,7 @@ public class Cache implements Serializable {
          */
         @Override
         public int compareTo(final Entry other) {
-            if (lastAccess_ < other.lastAccess_) {
-                return -1;
-            }
-            if (lastAccess_ == other.lastAccess_) {
-                return 0;
-            }
-            return 1;
+            return Long.compare(lastAccess_, other.lastAccess_);
         }
 
         /**
@@ -422,14 +415,8 @@ public class Cache implements Serializable {
         synchronized (entries_) {
             final long now = getCurrentTimestamp();
 
-            final Iterator<Map.Entry<String, Entry>> iter = entries_.entrySet().iterator();
-            while (iter.hasNext()) {
-                final Map.Entry<String, Entry> entry = iter.next();
-                if (entry.getValue().response_ == null
-                        || !entry.getValue().isStillFresh(now)) {
-                    iter.remove();
-                }
-            }
+            entries_.entrySet().removeIf(entry -> entry.getValue().response_ == null
+                    || !entry.getValue().isStillFresh(now));
         }
     }
 }

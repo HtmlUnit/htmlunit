@@ -84,12 +84,7 @@ public class Geolocation extends SimpleScriptable {
         final WebWindow webWindow = getWindow().getWebWindow();
         if (webWindow.getWebClient().getOptions().isGeolocationEnabled()) {
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory()
-                    .createJavaScriptJob(0, null, new Runnable() {
-                        @Override
-                        public void run() {
-                            doGetPosition();
-                        }
-                    });
+                    .createJavaScriptJob(0, null, () -> doGetPosition());
             webWindow.getJobManager().addJob(job, webWindow.getEnclosedPage());
         }
     }

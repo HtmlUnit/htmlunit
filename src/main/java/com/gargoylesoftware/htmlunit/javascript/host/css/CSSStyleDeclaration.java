@@ -274,7 +274,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     /**
      * Initializes the object.
-     * @param htmlElement the element that this style describes
+     * @param element the element that this style describes
      */
     private void initialize(final Element element) {
         // Initialize.
@@ -949,7 +949,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     /**
      * Gets the border width for the specified side
      * @param borderSideWidth the border side width Definition
-     * @param borderside the border side Definition
+     * @param borderSide the border side Definition
      * @return the width, "" if not defined
      */
     private String getBorderWidth(final Definition borderSideWidth, final Definition borderSide) {
@@ -3088,9 +3088,9 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @param value the attribute value
      * @param important important value
      * @param auto true if auto is supported
-     * @param thinMedThick thin, medium, thick are supported
+     * @param percent true if percent is supported
      * @param unitRequired unit is required
-     * @param perecent true if percent is supported
+     * @param validValues valid values
      */
     private void setStyleLengthAttribute(final String name, final Object value, final String important,
                 final boolean auto, final boolean percent, final boolean unitRequired, final String[] validValues) {

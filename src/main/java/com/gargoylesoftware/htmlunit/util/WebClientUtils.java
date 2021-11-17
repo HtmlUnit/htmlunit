@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
 import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
@@ -54,24 +53,21 @@ public final class WebClientUtils {
         final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
         main.getDebugFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
 
-        final SourceProvider sourceProvider = new SourceProvider() {
-            @Override
-            public String getSource(final DebuggableScript script) {
-                String sourceName = script.getSourceName();
-                if (sourceName.endsWith("(eval)") || sourceName.endsWith("(Function)")) {
-                    return null; // script is result of eval call. Rhino already knows the source and we don't
-                }
-                if (sourceName.startsWith("script in ")) {
-                    sourceName = StringUtils.substringBetween(sourceName, "script in ", " from");
-                    for (final WebWindow ww : client.getWebWindows()) {
-                        final WebResponse wr = ww.getEnclosedPage().getWebResponse();
-                        if (sourceName.equals(wr.getWebRequest().getUrl().toString())) {
-                            return wr.getContentAsString();
-                        }
+        final SourceProvider sourceProvider = script -> {
+            String sourceName = script.getSourceName();
+            if (sourceName.endsWith("(eval)") || sourceName.endsWith("(Function)")) {
+                return null; // script is result of eval call. Rhino already knows the source and we don't
+            }
+            if (sourceName.startsWith("script in ")) {
+                sourceName = StringUtils.substringBetween(sourceName, "script in ", " from");
+                for (final WebWindow ww : client.getWebWindows()) {
+                    final WebResponse wr = ww.getEnclosedPage().getWebResponse();
+                    if (sourceName.equals(wr.getWebRequest().getUrl().toString())) {
+                        return wr.getContentAsString();
                     }
                 }
-                return null;
             }
+            return null;
         };
         main.setSourceProvider(sourceProvider);
     }

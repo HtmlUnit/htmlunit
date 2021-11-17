@@ -136,7 +136,7 @@ public class FormData extends SimpleScriptable {
         if (value instanceof File) {
             final File file = (File) value;
             String fileName = null;
-            String contentType = null;
+            String contentType;
             if (filename instanceof String) {
                 fileName = (String) filename;
             }
@@ -166,13 +166,7 @@ public class FormData extends SimpleScriptable {
             return;
         }
 
-        final Iterator<NameValuePair> iter = requestParameters_.iterator();
-        while (iter.hasNext()) {
-            final NameValuePair pair = iter.next();
-            if (name.equals(pair.getName())) {
-                iter.remove();
-            }
-        }
+        requestParameters_.removeIf(pair -> name.equals(pair.getName()));
     }
 
     /**

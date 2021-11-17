@@ -1283,22 +1283,19 @@ public class Document extends Node {
             final boolean filterFunctionOnly) {
         org.w3c.dom.traversal.NodeFilter filterWrapper = null;
         if (filter != null) {
-            filterWrapper = new org.w3c.dom.traversal.NodeFilter() {
-                @Override
-                public short acceptNode(final org.w3c.dom.Node n) {
-                    final Object[] args = {((DomNode) n).getScriptableObject()};
-                    final Object response;
-                    if (filter instanceof Callable) {
-                        response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
-                    }
-                    else {
-                        if (filterFunctionOnly) {
-                            throw Context.reportRuntimeError("only a function is allowed as filter");
-                        }
-                        response = ScriptableObject.callMethod(filter, "acceptNode", args);
-                    }
-                    return (short) Context.toNumber(response);
+            filterWrapper = n -> {
+                final Object[] args = {((DomNode) n).getScriptableObject()};
+                final Object response;
+                if (filter instanceof Callable) {
+                    response = ((Callable) filter).call(Context.getCurrentContext(), filter, filter, args);
                 }
+                else {
+                    if (filterFunctionOnly) {
+                        throw Context.reportRuntimeError("only a function is allowed as filter");
+                    }
+                    response = ScriptableObject.callMethod(filter, "acceptNode", args);
+                }
+                return (short) Context.toNumber(response);
             };
         }
         return filterWrapper;

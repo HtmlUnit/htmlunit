@@ -691,13 +691,11 @@ public class HTMLInputElement extends HTMLElement {
                     return "";
                 }
 
-                String val = valueAttr;
-                final int lastPos = val.length() - 1;
-                if (lastPos >= 0 && val.charAt(lastPos) == '.') {
+                final int lastPos = valueAttr.length() - 1;
+                if (lastPos >= 0 && valueAttr.charAt(lastPos) == '.') {
                     if (htmlNumberInput.hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
                         return "";
                     }
-                    val = val.substring(0, lastPos);
                 }
                 try {
                     Double.parseDouble(valueAttr);

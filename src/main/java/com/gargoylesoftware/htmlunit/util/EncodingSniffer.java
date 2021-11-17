@@ -122,7 +122,6 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("latin2", "iso-8859-2");
 
         // iso-8859-3
-        ENCODING_FROM_LABEL.put("csisolatin2", "iso-8859-3");
         ENCODING_FROM_LABEL.put("csisolatin3", "iso-8859-3");
         ENCODING_FROM_LABEL.put("iso-8859-3", "iso-8859-3");
         ENCODING_FROM_LABEL.put("iso-ir-109", "iso-8859-3");
@@ -145,7 +144,6 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("latin4", "iso-8859-4");
 
         // iso-8859-5
-        ENCODING_FROM_LABEL.put("csisolatincyrillic", "iso-8859-5");
         ENCODING_FROM_LABEL.put("csisolatincyrillic", "iso-8859-5");
         ENCODING_FROM_LABEL.put("cyrillic", "iso-8859-5");
         ENCODING_FROM_LABEL.put("iso-8859-5", "iso-8859-5");
@@ -186,7 +184,6 @@ public final class EncodingSniffer {
         ENCODING_FROM_LABEL.put("sun_eu_greek", "iso-8859-7");
 
         // iso-8859-8
-        ENCODING_FROM_LABEL.put("csisolatingreek", "iso-8859-8");
         ENCODING_FROM_LABEL.put("csiso88598e", "iso-8859-8");
         ENCODING_FROM_LABEL.put("csisolatinhebrew", "iso-8859-8");
         ENCODING_FROM_LABEL.put("hebrew", "iso-8859-8");

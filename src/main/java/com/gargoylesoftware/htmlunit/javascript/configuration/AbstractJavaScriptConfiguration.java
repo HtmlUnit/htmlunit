@@ -137,7 +137,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 boolean isJsObject = false;
                 String className = null;
-                String extendedClassName = "";
+                String extendedClassName;
 
                 final Class<?> superClass = klass.getSuperclass();
                 if (superClass == SimpleScriptable.class) {
@@ -188,7 +188,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 if (className.isEmpty()) {
                     className = null;
                 }
-                String extendedClassName = "";
+                String extendedClassName;
 
                 final Class<?> superClass = klass.getSuperclass();
                 if (superClass != SimpleScriptable.class) {

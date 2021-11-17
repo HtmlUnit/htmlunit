@@ -31,7 +31,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
-import net.sourceforge.htmlunit.corejs.javascript.ClassShutter;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -275,19 +274,16 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setLanguageVersion(Context.VERSION_ES6);
 
         // make sure no java classes are usable from js
-        cx.setClassShutter(new ClassShutter() {
-            @Override
-            public boolean visibleToScripts(final String fullClassName) {
-                final  Map<String, String> activeXObjectMap = webClient_.getActiveXObjectMap();
-                if (activeXObjectMap != null) {
-                    for (final String mappedClass : activeXObjectMap.values()) {
-                        if (fullClassName.equals(mappedClass)) {
-                            return true;
-                        }
+        cx.setClassShutter(fullClassName -> {
+            final  Map<String, String> activeXObjectMap = webClient_.getActiveXObjectMap();
+            if (activeXObjectMap != null) {
+                for (final String mappedClass : activeXObjectMap.values()) {
+                    if (fullClassName.equals(mappedClass)) {
+                        return true;
                     }
                 }
-                return false;
             }
+            return false;
         });
 
         // Use pure interpreter mode to get observeInstructionCount() callbacks.
