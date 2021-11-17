@@ -73,8 +73,8 @@ public class AwtRenderingBackend implements RenderingBackend {
     private Color fillColor_;
     private Color strokeColor_;
 
-    private List<Path2D> subPaths_;
-    private Deque<SaveState> savedStates_;
+    private final List<Path2D> subPaths_;
+    private final Deque<SaveState> savedStates_;
 
     static {
         // see https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
@@ -980,12 +980,12 @@ public class AwtRenderingBackend implements RenderingBackend {
     }
 
     private static final class SaveState {
-        private AffineTransform transformation_;
-        private float globalAlpha_;
-        private int lineWidth_;
-        private Color fillColor_;
-        private Color strokeColor_;
-        private Shape clip_;
+        private final AffineTransform transformation_;
+        private final float globalAlpha_;
+        private final int lineWidth_;
+        private final Color fillColor_;
+        private final Color strokeColor_;
+        private final Shape clip_;
 
         SaveState(final AwtRenderingBackend backend) {
             transformation_ = backend.transformation_;

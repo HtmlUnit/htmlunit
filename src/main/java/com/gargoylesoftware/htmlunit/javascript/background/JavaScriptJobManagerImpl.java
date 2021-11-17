@@ -316,14 +316,13 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 .append(lineSeparator);
 
         if (null != currentlyRunningJob_ && (filter == null || filter.passes(currentlyRunningJob_))) {
-            status.append("  current running job: ").append(currentlyRunningJob_.toString())
-                .append("      job id: " + currentlyRunningJob_.getId())
+            status.append("  current running job: ").append(currentlyRunningJob_.toString()).append("      job id: ").append(currentlyRunningJob_.getId())
                 .append(lineSeparator)
                 .append(lineSeparator)
                 .append(lineSeparator);
         }
         status.append("  number of jobs on the queue: ")
-            .append(Integer.toString(scheduledJobsQ_.size()))
+            .append(scheduledJobsQ_.size())
             .append(lineSeparator);
 
         int count = 1;
@@ -331,13 +330,10 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             if (filter == null || filter.passes(job)) {
                 final long now = System.currentTimeMillis();
                 final long execTime = job.getTargetExecutionTime();
-                status.append("  " + count)
-                    .append(")  Job target execution time: " + execTime)
-                    .append(" (should start in " + ((execTime - now) / 1000d) + "s)")
-                    .append(lineSeparator)
-                    .append("      job to string: ").append(job)
-                    .append(lineSeparator)
-                    .append("      job id: " + job.getId())
+                status.append("  ").append(count).append(")  Job target execution time: ").append(execTime).append(" (should start in ").append((execTime - now) / 1000d).append("s)")
+                        .append(lineSeparator)
+                        .append("      job to string: ").append(job)
+                        .append(lineSeparator).append("      job id: ").append(job.getId())
                     .append(lineSeparator);
                 if (job.isPeriodic()) {
                     status.append("      period: ")

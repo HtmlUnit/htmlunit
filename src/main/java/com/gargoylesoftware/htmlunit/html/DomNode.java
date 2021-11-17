@@ -1939,7 +1939,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private static final class CheckErrorHandler implements CSSErrorHandler {
         private boolean errorDetected_;
 
-        protected CheckErrorHandler() {
+        private CheckErrorHandler() {
             errorDetected_ = false;
         }
 

@@ -63,9 +63,6 @@ public class Geolocation extends SimpleScriptable {
     private static String PROVIDER_URL_ = "https://maps.googleapis.com/maps/api/browserlocation/json";
     private Function successHandler_;
 
-    @SuppressWarnings("unused")
-    private Function errorHandler_;
-
     /**
      * Creates an instance.
      */
@@ -83,6 +80,7 @@ public class Geolocation extends SimpleScriptable {
     public void getCurrentPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         successHandler_ = successCallback;
+        Function errorHandler_;
         if (errorCallback instanceof Function) {
             errorHandler_ = (Function) errorCallback;
         }

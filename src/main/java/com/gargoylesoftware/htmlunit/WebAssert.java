@@ -411,7 +411,7 @@ public final class WebAssert {
      */
     public static void assertAllTabIndexAttributesSet(final HtmlPage page) {
         final List<String> tags =
-            Arrays.asList(new String[] {"a", "area", "button", "input", "object", "select", "textarea"});
+            Arrays.asList("a", "area", "button", "input", "object", "select", "textarea");
 
         for (final String tag : tags) {
             for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {

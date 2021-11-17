@@ -247,16 +247,16 @@ public class Console extends SimpleScriptable {
                 for (final Object id : ids) {
                     final Object value = obj.get(id);
                     if (value instanceof Delegator) {
-                        sb.append(id + ": " + ((Delegator) value).getClassName() + "\n");
+                        sb.append(id).append(": ").append(((Delegator) value).getClassName()).append("\n");
                     }
                     else if (value instanceof SimpleScriptable) {
-                        sb.append(id + ": " + ((SimpleScriptable) value).getClassName() + "\n");
+                        sb.append(id).append(": ").append(((SimpleScriptable) value).getClassName()).append("\n");
                     }
                     else if (value instanceof BaseFunction) {
-                        sb.append(id + ": function " + ((BaseFunction) value).getFunctionName() + "()\n");
+                        sb.append(id).append(": function ").append(((BaseFunction) value).getFunctionName()).append("()\n");
                     }
                     else {
-                        sb.append(id + ": " + value  + "\n");
+                        sb.append(id).append(": ").append(value).append("\n");
                     }
                 }
                 getWebConsole().info(sb.toString());
@@ -491,7 +491,7 @@ public class Console extends SimpleScriptable {
                         break;
                     default:
                         if (ch < ' ' || ch > '~') {
-                            sb.append("\\u" + Integer.toHexString(ch).toUpperCase(Locale.ROOT));
+                            sb.append("\\u").append(Integer.toHexString(ch).toUpperCase(Locale.ROOT));
                         }
                         else {
                             sb.append(ch);

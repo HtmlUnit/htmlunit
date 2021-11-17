@@ -394,7 +394,7 @@ public class HTMLDocument extends Document {
                     .append("canAlreadyBeParsed() retruns false for content: '")
                     .append(StringUtils.abbreviateMiddle(content, ".", 100))
                     .append("' (scriptTagCount: ")
-                        .append(Integer.toString(scriptTagCount))
+                        .append(scriptTagCount)
                     .append(" tagState: ")
                         .append(tagState)
                     .append(')');

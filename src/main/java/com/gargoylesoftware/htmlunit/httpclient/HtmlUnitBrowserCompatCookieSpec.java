@@ -205,7 +205,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             if (netscape) {
                 cookie.setVersion(0);
             }
-            cookies = Collections.<Cookie>singletonList(cookie);
+            cookies = Collections.singletonList(cookie);
         }
         else {
             cookies = parse(helems, origin);

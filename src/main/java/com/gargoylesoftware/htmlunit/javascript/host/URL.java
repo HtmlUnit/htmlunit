@@ -162,18 +162,18 @@ public class URL extends SimpleScriptable {
         try {
             int ip = Integer.parseInt(newHost);
             final StringBuilder ipString = new StringBuilder();
-            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, ip % 256);
             ipString.insert(0, '.');
 
             ip = ip / 256;
-            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, ip % 256);
             ipString.insert(0, '.');
 
             ip = ip / 256;
-            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, ip % 256);
             ipString.insert(0, '.');
             ip = ip / 256;
-            ipString.insert(0, Integer.toString(ip % 256));
+            ipString.insert(0, ip % 256);
 
             newHost = ipString.toString();
         }

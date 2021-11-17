@@ -72,7 +72,7 @@ public class AppletClassLoader extends URLClassLoader {
      */
     public void addArchiveToClassPath(final URL jarUrl) {
         addURL(jarUrl);
-        info_.append("    Archive: " + jarUrl.toString() + "\n");
+        info_.append("    Archive: ").append(jarUrl.toString()).append("\n");
     }
 
     /**
@@ -86,7 +86,7 @@ public class AppletClassLoader extends URLClassLoader {
             final byte[] bytes = IOUtils.toByteArray(content);
             defineClass(className, bytes, 0, bytes.length);
         }
-        info_.append("    Class: " + webResponse.getWebRequest().getUrl() + "\n");
+        info_.append("    Class: ").append(webResponse.getWebRequest().getUrl()).append("\n");
     }
 
     private Class<?> loadOurNetscapeStuff(final String classNane) throws IOException {

@@ -34,7 +34,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class GainNode extends AudioNode {
 
-    private BaseAudioContext baseAudioContext_;
     private AudioParam gain_;
 
     /**
@@ -50,7 +49,7 @@ public class GainNode extends AudioNode {
                     "Failed to construct 'GainNode': first parameter is not of type 'BaseAudioContext'.");
         }
 
-        baseAudioContext_ = (BaseAudioContext) baCtx;
+        BaseAudioContext baseAudioContext_ = (BaseAudioContext) baCtx;
 
         final AudioParam node = new AudioParam();
         node.setParentScope(getParentScope());

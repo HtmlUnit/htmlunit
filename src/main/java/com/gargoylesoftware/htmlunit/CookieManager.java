@@ -79,7 +79,7 @@ public class CookieManager implements Serializable {
      */
     public synchronized Set<Cookie> getCookies() {
         if (!isCookiesEnabled()) {
-            return Collections.<Cookie>emptySet();
+            return Collections.emptySet();
         }
 
         final Set<Cookie> copy = new LinkedHashSet<>(cookies_);

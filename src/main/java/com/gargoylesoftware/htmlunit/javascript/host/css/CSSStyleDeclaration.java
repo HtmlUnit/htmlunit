@@ -512,7 +512,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      * @return the transformed string
      * @see com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap#decamelize(String)
      */
-    protected static final String camelize(final String string) {
+    protected static String camelize(final String string) {
         if (string == null) {
             return null;
         }
@@ -3175,10 +3175,10 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
             final String valueString;
             if (doubleValue % 1 == 0) {
-                valueString = Integer.toString((int) doubleValue) + unit;
+                valueString = (int) doubleValue + unit;
             }
             else {
-                valueString = Double.toString(doubleValue) + unit;
+                valueString = doubleValue + unit;
             }
 
             setStyleAttribute(name, valueString, important);

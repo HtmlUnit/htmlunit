@@ -42,7 +42,7 @@ public class AudioBufferSourceNode extends AudioScheduledSourceNode {
 
     /**
      * Schedules playback of the audio data contained in the buffer,
-     * or to begin playback immediately..
+     * or to begin playback immediately.
      */
     @JsxFunction
     public void start() {

@@ -685,7 +685,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
      * Constructor is only called from {@link #getInstance(BrowserVersion)} which is synchronized.
      * @param browser the browser version to use
      */
-    protected JavaScriptConfiguration(final BrowserVersion browser) {
+    private JavaScriptConfiguration(final BrowserVersion browser) {
         super(browser);
     }
 

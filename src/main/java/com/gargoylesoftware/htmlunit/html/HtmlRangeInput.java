@@ -175,7 +175,6 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         else {
             super.setValueAttribute(Double.toString(value));
         }
-        return;
     }
 
     /**

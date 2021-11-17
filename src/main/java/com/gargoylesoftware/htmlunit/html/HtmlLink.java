@@ -279,7 +279,7 @@ public class HtmlLink extends HtmlElement {
         if (!StyleSheetList.isStyleSheetLink(this)) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
-                            + asXml().replaceAll("\\r|\\n", "") + ").");
+                            + asXml().replaceAll("[\\r\\n]", "") + ").");
             }
 
             return;
@@ -288,7 +288,7 @@ public class HtmlLink extends HtmlElement {
         if (!webClient.getOptions().isCssEnabled()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Stylesheet Link found but ignored because css support is disabled ("
-                            + asXml().replaceAll("\\r|\\n", "") + ").");
+                            + asXml().replaceAll("[\\r\\n]", "") + ").");
             }
             return;
         }
@@ -296,7 +296,7 @@ public class HtmlLink extends HtmlElement {
         if (!webClient.isJavaScriptEngineEnabled()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Stylesheet Link found but ignored because javascript engine is disabled ("
-                            + asXml().replaceAll("\\r|\\n", "") + ").");
+                            + asXml().replaceAll("[\\r\\n]", "") + ").");
             }
             return;
         }

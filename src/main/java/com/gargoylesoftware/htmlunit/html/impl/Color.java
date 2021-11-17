@@ -16,15 +16,15 @@ package com.gargoylesoftware.htmlunit.html.impl;
 
 /**
  * Our own implementation of color to be
- * independent from awt (for this).
+ * independent of awt (for this).
  *
  * @author Ronald Brill
  */
 public class Color {
-    private int red_;
-    private int green_;
-    private int blue_;
-    private int alpha_;
+    private final int red_;
+    private final int green_;
+    private final int blue_;
+    private final int alpha_;
 
     public Color(final int red, final int green, final int blue) {
         this(red, green, blue, 255);

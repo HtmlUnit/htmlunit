@@ -179,7 +179,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private int jobID_;
     private WebResponse webResponse_;
     private String overriddenMimeType_;
-    private HtmlPage containingPage_;
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
     private int timeout_ = 0;
@@ -670,7 +669,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final String url = Context.toString(urlParam);
 
         // (URL + Method + User + Password) become a WebRequest instance.
-        containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        HtmlPage containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
 
         try {
             final URL pageRequestUrl = containingPage_.getUrl();

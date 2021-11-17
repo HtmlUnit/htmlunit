@@ -1197,7 +1197,7 @@ public final class BrowserVersion implements Serializable {
         }
 
         /**
-         * @param headerNamesOrdered the headerNamesOrdered
+         * @param fontHeights the fontHeights
          * @return this for fluent use
          */
         BrowserVersionBuilder setFontHeights(final int[] fontHeights) {

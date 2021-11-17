@@ -66,8 +66,6 @@ public class ApplicationCache extends EventTarget {
     @JsxConstant
     public static final short OBSOLETE = 5;
 
-    private short status_ = UNCACHED;
-
     /**
      * The constructor.
      */
@@ -232,7 +230,7 @@ public class ApplicationCache extends EventTarget {
      */
     @JsxGetter
     public short getStatus() {
-        return status_;
+        return UNCACHED;
     }
 
     /**

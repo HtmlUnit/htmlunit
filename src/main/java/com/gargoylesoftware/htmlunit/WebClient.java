@@ -163,7 +163,7 @@ public class WebClient implements Serializable, AutoCloseable {
     /** Like the Firefox default value for {@code network.http.redirection-limit}. */
     private static final int ALLOWED_REDIRECTIONS_SAME_URL = 20;
     private static final WebResponseData RESPONSE_DATA_NO_HTTP_RESPONSE = new WebResponseData(
-            0, "No HTTP Response", Collections.<NameValuePair>emptyList());
+            0, "No HTTP Response", Collections.emptyList());
 
     private transient WebConnection webConnection_;
     private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
@@ -2600,7 +2600,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final CookieManager cookieManager = getCookieManager();
 
         if (!cookieManager.isCookiesEnabled()) {
-            return Collections.<Cookie>emptySet();
+            return Collections.emptySet();
         }
 
         final URL normalizedUrl = cookieManager.replaceForCookieIfNecessary(url);

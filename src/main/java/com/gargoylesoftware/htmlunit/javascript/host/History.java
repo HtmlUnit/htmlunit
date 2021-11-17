@@ -184,7 +184,6 @@ public class History extends SimpleScriptable {
         }
         if (SCROLL_RESTAURATION_MANUAL.equals(scrollRestoration)) {
             scrollRestoration_ = SCROLL_RESTAURATION_MANUAL;
-            return;
         }
     }
 }

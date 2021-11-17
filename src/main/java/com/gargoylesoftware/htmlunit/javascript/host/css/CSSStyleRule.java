@@ -41,8 +41,8 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  */
 @JsxClass
 public class CSSStyleRule extends CSSRule {
-    private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[\\.#]?[a-zA-Z]+");
-    private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([\\.#])");
+    private static final Pattern SELECTOR_PARTS_PATTERN = Pattern.compile("[.#]?[a-zA-Z]+");
+    private static final Pattern SELECTOR_REPLACE_PATTERN = Pattern.compile("\\*([.#])");
 
     /**
      * Creates a new instance.

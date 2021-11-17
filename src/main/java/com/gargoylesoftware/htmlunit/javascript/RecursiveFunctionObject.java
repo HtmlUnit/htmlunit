@@ -76,8 +76,7 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object[] getIds() {
-        final Set<Object> objects = new LinkedHashSet<>();
-        objects.addAll(Arrays.asList(super.getIds()));
+        final Set<Object> objects = new LinkedHashSet<>(Arrays.asList(super.getIds()));
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);

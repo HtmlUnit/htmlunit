@@ -66,7 +66,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 public class XSLTProcessor extends SimpleScriptable {
 
     private Node style_;
-    private Map<String, Object> parameters_ = new HashMap<>();
+    private final Map<String, Object> parameters_ = new HashMap<>();
 
     /**
      * Default constructor.

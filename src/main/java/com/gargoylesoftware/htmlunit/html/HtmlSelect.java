@@ -161,7 +161,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return all of the options in this select element
      */
     public List<HtmlOption> getOptions() {
-        return Collections.unmodifiableList(this.<HtmlOption>getElementsByTagNameImpl("option"));
+        return Collections.unmodifiableList(this.getElementsByTagNameImpl("option"));
     }
 
     /**

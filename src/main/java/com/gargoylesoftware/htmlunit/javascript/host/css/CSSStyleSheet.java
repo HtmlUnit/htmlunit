@@ -146,7 +146,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
-    private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\]\\.:])");
+    private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");
 
     /** The parsed stylesheet which this host object wraps. */
     private final CSSStyleSheetImpl wrapped_;
