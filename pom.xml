@@ -738,7 +738,7 @@
     </reporting>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/HtmlUnit/htmlunit/issues</url>
+        <url>https://github.com/HtmlUnit/htmlunit/issues/</url>
     </issueManagement>
     <inceptionYear>2002</inceptionYear>
     <licenses>

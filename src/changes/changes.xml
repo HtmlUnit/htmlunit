@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.56.0" date="December xx, 2021" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="405">
+                Links to issues and pulls on htmlunit webpage changes-report.html corrected.
+            </action>
         </release>
 
         <release version="2.55.0" date="November 14, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
