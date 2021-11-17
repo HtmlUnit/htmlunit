@@ -56,7 +56,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  */
 class DoTypeProcessor implements Serializable, ClipboardOwner {
 
-    private static Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
+    private static final Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
 
     /**
      * Either {@link HtmlElement} or {@link DomText}.

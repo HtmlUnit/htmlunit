@@ -63,9 +63,9 @@ public class URLSearchParams extends SimpleScriptable {
     public static final String URL_SEARCH_PARMS_TAG = "URLSearchParams";
 
     public static final class NativeParamsIterator extends ES6Iterator {
-        private Type type_;
-        private String className_;
-        private transient Iterator<NameValuePair> iterator_ = Collections.emptyIterator();
+        private final Type type_;
+        private final String className_;
+        private transient Iterator<NameValuePair> iterator_;
         enum Type { KEYS, VALUES, BOTH }
 
         public static void init(final ScriptableObject scope, final String className) {
@@ -452,7 +452,7 @@ public class URLSearchParams extends SimpleScriptable {
 
         final List<NameValuePair> splitted = splitQuery();
         if (splitted.size() > 0) {
-            final List<NameValuePair> params = new ArrayList<NameValuePair>();
+            final List<NameValuePair> params = new ArrayList<>();
             for (final NameValuePair entry : splitted) {
                 params.add(new NameValuePair(entry.getName(), entry.getValue()));
             }

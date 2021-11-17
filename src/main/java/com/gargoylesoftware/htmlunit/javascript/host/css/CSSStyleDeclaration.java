@@ -220,7 +220,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     private static final Map<String, String> CamelizeCache_
-            = Collections.synchronizedMap(new HashMap<String, String>());
+            = Collections.synchronizedMap(new HashMap<>());
 
     /** The element to which this style belongs. */
     private Element jsElement_;

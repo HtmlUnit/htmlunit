@@ -100,8 +100,7 @@ public class NameValuePair implements Serializable {
      */
     public static List<org.apache.http.NameValuePair> toHttpClient(final List<NameValuePair> pairs) {
         final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
-        for (int i = 0; i < pairs.size(); i++) {
-            final NameValuePair pair = pairs.get(i);
+        for (final NameValuePair pair : pairs) {
             resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
         }
         return resultingPairs;

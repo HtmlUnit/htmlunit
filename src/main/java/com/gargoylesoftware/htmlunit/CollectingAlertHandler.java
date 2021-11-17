@@ -31,7 +31,7 @@ public class CollectingAlertHandler implements AlertHandler, Serializable {
      * Creates a new instance, initializing it with an empty list.
      */
     public CollectingAlertHandler() {
-        this(new ArrayList<String>());
+        this(new ArrayList<>());
     }
 
     /**

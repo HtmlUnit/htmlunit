@@ -1713,7 +1713,7 @@ public class CSSStyleSheet extends StyleSheet {
         if (index == null) {
             index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
             final CSSRuleListImpl ruleList = styleSheet.getCssRules();
-            index(index, ruleList, new HashSet<String>());
+            index(index, ruleList, new HashSet<>());
 
             styleSheet.setRuleIndex(index);
         }

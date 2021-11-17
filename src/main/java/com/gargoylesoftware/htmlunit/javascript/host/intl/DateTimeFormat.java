@@ -51,11 +51,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class DateTimeFormat extends SimpleScriptable {
 
-    private static ConcurrentHashMap<String, String> CHROME_FORMATS_ = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> FF_78_FORMATS_ = new ConcurrentHashMap<>();
-    private static ConcurrentHashMap<String, String> IE_FORMATS_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> CHROME_FORMATS_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> EDGE_FORMATS_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> FF_FORMATS_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> FF_78_FORMATS_ = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, String> IE_FORMATS_ = new ConcurrentHashMap<>();
 
     private transient DateTimeFormatHelper formatter_;
 

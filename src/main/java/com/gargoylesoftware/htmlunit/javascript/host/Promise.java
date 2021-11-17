@@ -344,7 +344,7 @@ public class Promise extends SimpleScriptable {
                             final Promise promis = (Promise) val;
                             promises.add(promis);
                             if (promis.dependentPromises_ == null) {
-                                promis.dependentPromises_ = new ArrayList<Promise>(2);
+                                promis.dependentPromises_ = new ArrayList<>(2);
                             }
                             promis.dependentPromises_.add(returnPromise);
                         }
@@ -354,7 +354,7 @@ public class Promise extends SimpleScriptable {
                     }
                 }
 
-                returnPromise.all_ = promises.toArray(new Promise[promises.size()]);
+                returnPromise.all_ = promises.toArray(new Promise[0]);
             }
         }
 
@@ -439,7 +439,7 @@ public class Promise extends SimpleScriptable {
                                 }
                                 else {
                                     if (resultPromise.dependentPromises_ == null) {
-                                        resultPromise.dependentPromises_ = new ArrayList<Promise>(2);
+                                        resultPromise.dependentPromises_ = new ArrayList<>(2);
                                     }
                                     resultPromise.dependentPromises_.add(returnPromise);
                                 }
@@ -481,7 +481,7 @@ public class Promise extends SimpleScriptable {
         }
         else {
             if (settledJobs_ == null) {
-                settledJobs_ = new ArrayList<BasicJavaScriptJob>(2);
+                settledJobs_ = new ArrayList<>(2);
             }
             settledJobs_.add(job);
         }

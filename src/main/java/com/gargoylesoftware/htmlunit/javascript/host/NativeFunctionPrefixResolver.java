@@ -27,8 +27,8 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 public class NativeFunctionPrefixResolver implements PrefixResolver {
 
-    private NativeFunction resolverFn_;
-    private Scriptable scope_;
+    private final NativeFunction resolverFn_;
+    private final Scriptable scope_;
 
     /**
      * Constructor.

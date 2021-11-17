@@ -83,7 +83,7 @@ public class XPathEvaluator extends SimpleScriptable {
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
         // contextNodeObj can be either a node or an array with the node as the first element.
-        Node contextNode = null;
+        final Node contextNode;
         if (!(contextNodeObj instanceof Node)) {
             throw Context.reportRuntimeError("Illegal value for parameter 'context'");
         }

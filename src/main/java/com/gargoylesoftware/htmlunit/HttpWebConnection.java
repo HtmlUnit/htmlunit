@@ -186,7 +186,7 @@ public class HttpWebConnection implements WebConnection {
             final long startTime = System.currentTimeMillis();
 
             final HttpContext httpContext = getHttpContext();
-            HttpResponse httpResponse = null;
+            HttpResponse httpResponse;
             try {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
                     httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);

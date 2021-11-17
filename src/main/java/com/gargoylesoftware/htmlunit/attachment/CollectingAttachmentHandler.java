@@ -37,7 +37,7 @@ public class CollectingAttachmentHandler implements AttachmentHandler {
      * Creates a new instance.
      */
     public CollectingAttachmentHandler() {
-        this(new ArrayList<Attachment>());
+        this(new ArrayList<>());
     }
 
     /**

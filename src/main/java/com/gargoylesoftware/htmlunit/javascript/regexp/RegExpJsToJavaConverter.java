@@ -136,7 +136,7 @@ public class RegExpJsToJavaConverter {
     private static final class Subexpresion {
         private boolean closed_;
         private boolean optional_;
-        private boolean enhanced_;
+        private final boolean enhanced_;
         private int start_;
         private int end_;
 

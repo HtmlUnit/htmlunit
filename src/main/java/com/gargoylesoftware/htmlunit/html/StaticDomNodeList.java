@@ -26,7 +26,7 @@ import org.w3c.dom.Node;
  */
 class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<DomNode> {
 
-    private List<DomNode> elements_;
+    private final List<DomNode> elements_;
 
     StaticDomNodeList(final List<DomNode> elements) {
         elements_ = elements;

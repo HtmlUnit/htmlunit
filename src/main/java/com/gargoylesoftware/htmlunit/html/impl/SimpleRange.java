@@ -633,9 +633,7 @@ public class SimpleRange implements Range, Serializable {
 
         boolean foundStart = false;
         boolean started = false;
-        final Iterator<DomNode> i = ancestor.getDescendants().iterator();
-        while (i.hasNext()) {
-            final DomNode n = i.next();
+        for (final DomNode n : ancestor.getDescendants()) {
             if (n == end) {
                 break;
             }

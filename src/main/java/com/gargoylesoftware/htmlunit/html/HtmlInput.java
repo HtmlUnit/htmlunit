@@ -64,7 +64,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public static final String TAG_NAME = "input";
 
     private String defaultValue_;
-    private String originalName_;
+    private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
     private boolean createdByJavascript_;
     private boolean valueModifiedByJavascript_;

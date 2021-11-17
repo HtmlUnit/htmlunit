@@ -27,6 +27,7 @@ import java.net.URLStreamHandler;
 import java.nio.charset.Charset;
 import java.util.BitSet;
 import java.util.Locale;
+import java.util.Objects;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
@@ -1200,7 +1201,7 @@ public final class UrlUtils {
             }
         }
 
-        return f1 == f2 || (f1 != null && f1.equals(f2));
+        return Objects.equals(f1, f2);
     }
 
     /**

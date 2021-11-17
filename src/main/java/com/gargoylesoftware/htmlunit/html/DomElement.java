@@ -732,9 +732,8 @@ public class DomElement extends DomNamespaceNode implements Element {
      */
     public DomElement getLastElementChild() {
         DomElement lastChild = null;
-        final Iterator<DomElement> i = getChildElements().iterator();
-        while (i.hasNext()) {
-            lastChild = i.next();
+        for (final DomElement domElement : getChildElements()) {
+            lastChild = domElement;
         }
         return lastChild;
     }

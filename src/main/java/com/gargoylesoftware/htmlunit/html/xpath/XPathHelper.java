@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
  */
 public final class XPathHelper {
 
-    private static ThreadLocal<Boolean> PROCESS_XPATH_ = ThreadLocal.withInitial(() -> Boolean.FALSE);
+    private static final ThreadLocal<Boolean> PROCESS_XPATH_ = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
     /**
      * Private to avoid instantiation.

@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlWeekInput extends HtmlInput implements LabelableElement {
 
-    private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-'W'ww");
+    private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-'W'ww");
 
     /**
      * Creates an instance.

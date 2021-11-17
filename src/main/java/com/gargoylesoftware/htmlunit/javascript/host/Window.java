@@ -200,8 +200,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
 
     private static final class AnimationFrame {
-        private long id_;
-        private Function callback_;
+        private final long id_;
+        private final Function callback_;
 
         AnimationFrame(final long id, final Function callback) {
             id_ = id;
@@ -2252,7 +2252,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         final URL currentURL = page.getUrl();
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
-            URL targetURL = null;
+            final URL targetURL;
             try {
                 targetURL = new URL(targetOrigin);
             }

@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  */
 abstract class BrowserConfiguration {
 
-    private String defaultValue_;
+    private final String defaultValue_;
 
     BrowserConfiguration(final String defaultValue) {
         defaultValue_ = defaultValue;

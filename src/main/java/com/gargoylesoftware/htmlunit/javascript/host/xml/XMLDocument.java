@@ -67,8 +67,6 @@ public class XMLDocument extends Document {
 
     private static final Log LOG = LogFactory.getLog(XMLDocument.class);
 
-    private boolean async_ = true;
-
     /**
      * Creates a new instance.
      */

@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
  * @author Ronald Brill
  */
 public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
-    private Object clientLock_ = new Object();
+    private final Object clientLock_ = new Object();
     private WebSocketClient client_;
 
     private volatile Session incomingSession_;

@@ -18,7 +18,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -36,7 +35,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  */
 public class Cookie implements Serializable {
 
-    private ClientCookie httpClientCookie_;
+    private final ClientCookie httpClientCookie_;
 
     /**
      * Creates a new cookie with the specified name and value which applies to the specified domain.
@@ -257,9 +256,8 @@ public class Cookie implements Serializable {
      */
     public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<Cookie> cookies) {
         final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
-        final Iterator<Cookie> it = cookies.iterator();
-        while (it.hasNext()) {
-            array.add(it.next().toHttpClient());
+        for (final Cookie cookie : cookies) {
+            array.add(cookie.toHttpClient());
         }
         return array;
     }

@@ -46,7 +46,7 @@ class XPathAdapter {
         ATTRIB
     }
 
-    private Expression mainExp_;
+    private final Expression mainExp_;
     private FunctionTable funcTable_;
 
     /**

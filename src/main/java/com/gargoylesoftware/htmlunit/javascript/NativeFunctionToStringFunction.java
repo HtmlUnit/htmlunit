@@ -76,7 +76,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         final String s = (String) super.call(cx, scope, thisObj, args);
 
-        if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
+        if (thisObj instanceof BaseFunction && s.contains("[native code]")) {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
             return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
@@ -96,7 +96,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
 
-            if (thisObj instanceof BaseFunction && s.indexOf("[native code]") > -1) {
+            if (thisObj instanceof BaseFunction && s.contains("[native code]")) {
                 final String functionName = ((BaseFunction) thisObj).getFunctionName();
                 return "function " + functionName + "() { [native code] }";
             }

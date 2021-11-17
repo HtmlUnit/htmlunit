@@ -289,14 +289,14 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 
         HeaderElement parseHeader(final CharArrayBuffer buffer, final ParserCursor cursor) throws ParseException {
             final NameValuePair nvp = parseNameValuePair(buffer, cursor);
-            final List<NameValuePair> params = new ArrayList<NameValuePair>();
+            final List<NameValuePair> params = new ArrayList<>();
             while (!cursor.atEnd()) {
                 final NameValuePair param = parseNameValuePair(buffer, cursor);
                 params.add(param);
             }
 
             return new BasicHeaderElement(nvp.getName(), nvp.getValue(),
-                    params.toArray(new NameValuePair[params.size()]));
+                    params.toArray(new NameValuePair[0]));
         }
 
         private NameValuePair parseNameValuePair(final CharArrayBuffer buffer, final ParserCursor cursor) {

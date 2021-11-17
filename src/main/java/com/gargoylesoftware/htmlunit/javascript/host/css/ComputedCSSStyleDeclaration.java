@@ -1299,8 +1299,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     int lineCount = 0;
                     final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
                     final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
-                    for (int i = 0; i < lines.length; i++) {
-                        final String line = lines[i];
+                    for (final String line : lines) {
                         if (StringUtils.isBlank(line)) {
                             lineCount++;
                         }

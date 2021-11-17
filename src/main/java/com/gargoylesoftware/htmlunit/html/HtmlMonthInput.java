@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlMonthInput extends HtmlInput implements LabelableElement {
 
-    private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-MM");
+    private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("yyyy-MM");
 
     /**
      * Creates an instance.

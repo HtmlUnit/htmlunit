@@ -32,7 +32,7 @@ import com.gargoylesoftware.htmlunit.CookieManager;
  * @author Ronald Brill
  */
 public final class HtmlUnitCookieStore implements CookieStore, Serializable {
-    private CookieManager manager_;
+    private final CookieManager manager_;
 
     /**
      * Constructor.

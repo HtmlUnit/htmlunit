@@ -41,7 +41,7 @@ public class DataUrlDecoder {
     private static final String DEFAULT_MEDIA_TYPE = MimeType.TEXT_PLAIN;
     private final String mediaType_;
     private final Charset charset_;
-    private byte[] content_;
+    private final byte[] content_;
 
     /**
      * C'tor.

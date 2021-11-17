@@ -51,7 +51,7 @@ public class File extends Blob {
     private static final String LAST_MODIFIED_DATE_FORMAT = "EEE MMM dd yyyy HH:mm:ss 'GMT'Z (zzzz)";
 
     private static class FileBackend extends Backend {
-        private java.io.File file_;
+        private final java.io.File file_;
 
         FileBackend(final String pathname) {
             file_ = new java.io.File(pathname);

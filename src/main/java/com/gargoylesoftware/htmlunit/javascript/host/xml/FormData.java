@@ -63,8 +63,8 @@ public class FormData extends SimpleScriptable {
 
     public static final class FormDataIterator extends ES6Iterator {
 
-        private String className_;
-        private List<NameValuePair> nameValuePairList_;
+        private final String className_;
+        private final List<NameValuePair> nameValuePairList_;
         private int index_;
 
         public static void init(final ScriptableObject scope, final String className) {
@@ -185,9 +185,7 @@ public class FormData extends SimpleScriptable {
             return null;
         }
 
-        final Iterator<NameValuePair> iter = requestParameters_.iterator();
-        while (iter.hasNext()) {
-            final NameValuePair pair = iter.next();
+        for (final NameValuePair pair : requestParameters_) {
             if (name.equals(pair.getName())) {
                 return pair.getValue();
             }
@@ -206,15 +204,13 @@ public class FormData extends SimpleScriptable {
         }
 
         final List<Object> values = new ArrayList<>();
-        final Iterator<NameValuePair> iter = requestParameters_.iterator();
-        while (iter.hasNext()) {
-            final NameValuePair pair = iter.next();
+        for (final NameValuePair pair : requestParameters_) {
             if (name.equals(pair.getName())) {
                 values.add(pair.getValue());
             }
         }
 
-        final Object[] stringValues = values.toArray(new Object[values.size()]);
+        final Object[] stringValues = values.toArray(new Object[0]);
         return Context.getCurrentContext().newArray(this, stringValues);
     }
 
@@ -228,9 +224,7 @@ public class FormData extends SimpleScriptable {
             return false;
         }
 
-        final Iterator<NameValuePair> iter = requestParameters_.iterator();
-        while (iter.hasNext()) {
-            final NameValuePair pair = iter.next();
+        for (final NameValuePair pair : requestParameters_) {
             if (name.equals(pair.getName())) {
                 return true;
             }

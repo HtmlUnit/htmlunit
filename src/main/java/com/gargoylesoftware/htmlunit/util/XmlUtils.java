@@ -168,7 +168,7 @@ public final class XmlUtils {
      * Helper for memory and performance optimization.
      */
     private static final class TrackBlankContentReader extends Reader {
-        private Reader reader_;
+        private final Reader reader_;
         private boolean wasBlank_ = true;
 
         TrackBlankContentReader(final Reader characterStream) {

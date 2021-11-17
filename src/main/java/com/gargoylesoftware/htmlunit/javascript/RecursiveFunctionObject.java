@@ -84,7 +84,7 @@ public class RecursiveFunctionObject extends FunctionObject {
                 objects.addAll(Arrays.asList(((Scriptable) scripatble).getIds()));
             }
         }
-        return objects.toArray(new Object[objects.size()]);
+        return objects.toArray(new Object[0]);
     }
 
     /**

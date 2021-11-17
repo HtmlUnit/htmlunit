@@ -420,7 +420,7 @@ public class AbstractList extends SimpleScriptable implements Function, External
     private static final class DomHtmlAttributeChangeListenerImpl
                                     implements DomChangeListener, HtmlAttributeChangeListener {
 
-        private transient WeakReference<AbstractList> nodeList_;
+        private final transient WeakReference<AbstractList> nodeList_;
 
         DomHtmlAttributeChangeListenerImpl(final AbstractList nodeList) {
             super();

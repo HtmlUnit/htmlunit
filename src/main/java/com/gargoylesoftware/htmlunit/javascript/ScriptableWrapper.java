@@ -43,7 +43,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     private final Map<String, Method> properties_ = new HashMap<>();
 
-    private Method getByIndexMethod_;
+    private final Method getByIndexMethod_;
     private final Object javaObject_;
     private final String jsClassName_;
     private Method getByNameFallback_;

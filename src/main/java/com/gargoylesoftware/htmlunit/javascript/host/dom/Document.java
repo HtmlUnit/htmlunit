@@ -242,7 +242,7 @@ public class Document extends Node {
     /**
      * Static counter for {@link #uniqueID_}.
      */
-    private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
+    private static final AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private Window window_;
     private DOMImplementation implementation_;

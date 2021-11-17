@@ -216,7 +216,7 @@ public class HTMLElement extends Element {
     /**
      * Static counter for {@link #uniqueID_}.
      */
-    private static AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
+    private static final AtomicInteger UniqueID_Counter_ = new AtomicInteger(1);
 
     private String uniqueID_;
 

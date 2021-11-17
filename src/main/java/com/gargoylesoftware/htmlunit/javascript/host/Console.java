@@ -57,7 +57,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class Console extends SimpleScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
-    private static Formatter FORMATTER_ = new ConsoleFormatter();
+    private static final Formatter FORMATTER_ = new ConsoleFormatter();
 
     private WebWindow webWindow_;
 

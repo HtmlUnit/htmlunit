@@ -120,7 +120,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
         else if (arg instanceof Function) {
             return "[function anonymous]";
         }
-        String asString = null;
+        String asString;
         try {
             // try to get the js representation
             asString = Context.toString(arg);

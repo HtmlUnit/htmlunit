@@ -44,8 +44,8 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferV
  */
 @JsxClass({CHROME, EDGE, FF, FF78})
 public class TextDecoder extends SimpleScriptable {
-    private static java.util.Map<String, Charset> ENCODINGS_;
-    private static java.util.Map<String, String> ENCODING_NAMES_;
+    private static final java.util.Map<String, Charset> ENCODINGS_;
+    private static final java.util.Map<String, String> ENCODING_NAMES_;
     private String encoding_ = StandardCharsets.UTF_8.name();
 
     static {

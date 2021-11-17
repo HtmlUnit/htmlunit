@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTimeInput extends HtmlInput implements LabelableElement {
 
-    private static DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * Creates an instance.

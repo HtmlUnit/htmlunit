@@ -168,7 +168,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
 
                 final ClassConfiguration classConfiguration =
-                        new ClassConfiguration(klass, domClasses.toArray(new Class<?>[domClasses.size()]), isJsObject,
+                        new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
                                 className, extendedClassName);
 
                 process(classConfiguration, hostClassName, expectedBrowser);
@@ -203,7 +203,7 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 final ClassConfiguration classConfiguration
                     = new ClassConfiguration(klass,
-                            domClasses.toArray(new Class<?>[domClasses.size()]),
+                            domClasses.toArray(new Class<?>[0]),
                             jsxClass.isJSObject(),
                             className,
                             extendedClassName);

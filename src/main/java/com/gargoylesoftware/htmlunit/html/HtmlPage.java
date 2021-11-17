@@ -161,16 +161,16 @@ public class HtmlPage extends SgmlPage {
     private transient Object lock_ = new Object(); // used for synchronization
 
     private Map<String, SortedSet<DomElement>> idMap_
-            = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
+            = Collections.synchronizedMap(new HashMap<>());
     private Map<String, SortedSet<DomElement>> nameMap_
-            = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
+            = Collections.synchronizedMap(new HashMap<>());
 
     private SortedSet<BaseFrameElement> frameElements_ = new TreeSet<>(documentPositionComparator);
     private int parserCount_;
     private int snippetParserCount_;
     private int inlineSnippetParserCount_;
     private Collection<HtmlAttributeChangeListener> attributeListeners_;
-    private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<PostponedAction>());
+    private List<PostponedAction> afterLoadActions_ = Collections.synchronizedList(new ArrayList<>());
     private boolean cleaning_;
     private HtmlBase base_;
     private URL baseUrl_;
@@ -1105,7 +1105,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         Charset scriptEncoding = Charset.forName("windows-1252");
-        boolean ignoreBom = false;
+        final boolean ignoreBom;
         final Charset contentCharset = EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
         if (contentCharset == null) {
             // use info from script tag or fall back to utf-8
@@ -1477,7 +1477,7 @@ public class HtmlPage extends SgmlPage {
             return;
         }
         final DomElement doc = getDocumentElement();
-        final List<HtmlElement> elements = new ArrayList<HtmlElement>(doc.getElementsByTagName("script"));
+        final List<HtmlElement> elements = new ArrayList<>(doc.getElementsByTagName("script"));
         for (final HtmlElement e : elements) {
             if (e instanceof HtmlScript) {
                 final HtmlScript script = (HtmlScript) e;
@@ -1981,8 +1981,8 @@ public class HtmlPage extends SgmlPage {
         final HtmlPage result = (HtmlPage) super.clone();
         result.elementWithFocus_ = null;
 
-        result.idMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
-        result.nameMap_ = Collections.synchronizedMap(new HashMap<String, SortedSet<DomElement>>());
+        result.idMap_ = Collections.synchronizedMap(new HashMap<>());
+        result.nameMap_ = Collections.synchronizedMap(new HashMap<>());
 
         return result;
     }

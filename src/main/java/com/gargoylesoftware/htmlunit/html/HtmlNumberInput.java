@@ -296,7 +296,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 }
             }
 
-            double value = 0d;
+            final double value;
             try {
                 value = Double.parseDouble(valueAttr);
             }

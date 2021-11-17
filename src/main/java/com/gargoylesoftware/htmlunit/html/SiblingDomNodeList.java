@@ -27,7 +27,7 @@ import org.w3c.dom.Node;
  */
 class SiblingDomNodeList extends AbstractSequentialList<DomNode> implements DomNodeList<DomNode> {
 
-    private DomNode parent_;
+    private final DomNode parent_;
 
     SiblingDomNodeList(final DomNode parent) {
         parent_ = parent;

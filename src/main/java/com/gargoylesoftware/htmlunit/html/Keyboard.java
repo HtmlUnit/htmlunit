@@ -26,8 +26,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
  */
 public class Keyboard {
 
-    private List<Object[]> keys_ = new ArrayList<>();
-    private boolean startAtEnd_;
+    private final List<Object[]> keys_ = new ArrayList<>();
+    private final boolean startAtEnd_;
 
     /**
      * Creates a new instance.

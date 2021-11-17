@@ -40,7 +40,7 @@ public class JSObject {
     private static final Log LOG = LogFactory.getLog(JSObject.class);
 
     private static Window Window_;
-    private ScriptableObject scriptableObject_;
+    private final ScriptableObject scriptableObject_;
 
     /**
      * Constructor.

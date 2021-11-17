@@ -54,9 +54,9 @@ public class WebResponse implements Serializable {
         ByteOrderMark.UTF_16LE,
         ByteOrderMark.UTF_16BE};
 
-    private long loadTime_;
-    private WebResponseData responseData_;
-    private WebRequest request_;
+    private final long loadTime_;
+    private final WebResponseData responseData_;
+    private final WebRequest request_;
     private boolean defaultCharsetUtf8_;
 
     /**

@@ -170,7 +170,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private CookieManager cookieManager_ = new CookieManager();
     private transient AbstractJavaScriptEngine<?> scriptEngine_;
     private transient List<LoadJob> loadQueue_;
-    private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<String, String>(89));
+    private final Map<String, String> requestHeaders_ = Collections.synchronizedMap(new HashMap<>(89));
     private IncorrectnessListener incorrectnessListener_ = new IncorrectnessListenerImpl();
     private WebConsole webConsole_;
     private transient ExecutorService executor_;
@@ -185,15 +185,15 @@ public class WebClient implements Serializable, AutoCloseable {
     private AppletConfirmHandler appletConfirmHandler_;
     private AjaxController ajaxController_ = new AjaxController();
 
-    private BrowserVersion browserVersion_;
+    private final BrowserVersion browserVersion_;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<>(5);
     private final List<TopLevelWindow> topLevelWindows_ =
-            Collections.synchronizedList(new ArrayList<TopLevelWindow>()); // top-level windows
-    private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<WebWindow>()); // all windows
+            Collections.synchronizedList(new ArrayList<>()); // top-level windows
+    private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<>()); // all windows
     private transient List<WeakReference<JavaScriptJobManager>> jobManagers_ =
-            Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
+            Collections.synchronizedList(new ArrayList<>());
     private WebWindow currentWindow_;
 
     private HTMLParserListener htmlParserListener_;
@@ -240,9 +240,9 @@ public class WebClient implements Serializable, AutoCloseable {
     private RefreshHandler refreshHandler_ = new NiceRefreshHandler(2);
     private JavaScriptErrorListener javaScriptErrorListener_ = new DefaultJavaScriptErrorListener();
 
-    private WebClientOptions options_ = new WebClientOptions();
+    private final WebClientOptions options_ = new WebClientOptions();
     private final boolean javaScriptEngineEnabled_;
-    private WebClientInternals internals_ = new WebClientInternals();
+    private final WebClientInternals internals_ = new WebClientInternals();
     private final StorageHolder storageHolder_ = new StorageHolder();
 
     /**
@@ -342,7 +342,7 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     private static final class ThreadNamingFactory implements ThreadFactory {
         private static int ID_ = 1;
-        private ThreadFactory baseFactory_;
+        private final ThreadFactory baseFactory_;
 
         ThreadNamingFactory(final ThreadFactory aBaseFactory) {
             baseFactory_ = aBaseFactory;
@@ -2356,7 +2356,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         webConnection_ = new HttpWebConnection(this);
         scriptEngine_ = new JavaScriptEngine(this);
-        jobManagers_ = Collections.synchronizedList(new ArrayList<WeakReference<JavaScriptJobManager>>());
+        jobManagers_ = Collections.synchronizedList(new ArrayList<>());
         loadQueue_ = new ArrayList<>();
 
         if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {

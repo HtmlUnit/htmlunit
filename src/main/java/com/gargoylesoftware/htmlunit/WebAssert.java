@@ -61,7 +61,7 @@ public final class WebAssert {
      */
     public static void assertTitleContains(final HtmlPage page, final String titlePortion) {
         final String s = page.getTitleText();
-        if (s.indexOf(titlePortion) == -1) {
+        if (!s.contains(titlePortion)) {
             final String msg = "Page title '" + s + "' does not contain the substring '" + titlePortion + "'.";
             throw new AssertionError(msg);
         }
@@ -152,7 +152,7 @@ public final class WebAssert {
      * @param text the text to check for
      */
     public static void assertTextPresent(final HtmlPage page, final String text) {
-        if (page.asNormalizedText().indexOf(text) == -1) {
+        if (!page.asNormalizedText().contains(text)) {
             final String msg = "The page does not contain the text '" + text + "'.";
             throw new AssertionError(msg);
         }
@@ -169,7 +169,7 @@ public final class WebAssert {
     public static void assertTextPresentInElement(final HtmlPage page, final String text, final String id) {
         try {
             final HtmlElement element = page.getHtmlElementById(id);
-            if (element.asNormalizedText().indexOf(text) == -1) {
+            if (!element.asNormalizedText().contains(text)) {
                 final String msg = "The element with ID '" + id + "' does not contain the text '" + text + "'.";
                 throw new AssertionError(msg);
             }
