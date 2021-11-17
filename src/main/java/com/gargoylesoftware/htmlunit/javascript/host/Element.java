@@ -300,15 +300,14 @@ public class Element extends Node {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
+
+        return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return ("*".equals(namespaceURI) || Objects.equals(namespaceURI, node.getNamespaceURI()))
                         && ("*".equals(localName) || Objects.equals(localName, node.getLocalName()));
             }
         };
-
-        return collection;
     }
 
     /**
@@ -402,7 +401,7 @@ public class Element extends Node {
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return child.getScriptableObject();
         }
         return null;
     }
@@ -415,7 +414,7 @@ public class Element extends Node {
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return child.getScriptableObject();
         }
         return null;
     }
@@ -548,7 +547,7 @@ public class Element extends Node {
                 && ("querySelectorAll".equals(name) || "querySelector".equals(name))
                 && getBrowserVersion().hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Document doc = getWindow().getDocument();
-            if (doc instanceof HTMLDocument && ((HTMLDocument) doc).getDocumentMode() < 8) {
+            if (doc instanceof HTMLDocument && doc.getDocumentMode() < 8) {
                 return NOT_FOUND;
             }
         }
@@ -673,7 +672,7 @@ public class Element extends Node {
         final DomElement elt = getDomNodeOrDie();
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 
-        final HTMLCollection collection = new HTMLCollection(elt, true) {
+        return new HTMLCollection(elt, true) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 if (!(node instanceof HtmlElement)) {
@@ -693,8 +692,6 @@ public class Element extends Node {
                 return true;
             }
         };
-
-        return collection;
     }
 
     /**

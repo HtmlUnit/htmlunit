@@ -162,7 +162,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         if (netscape || !versioned) {
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
-            final NetscapeDraftHeaderParser parser = DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER;
             final CharArrayBuffer buffer;
             final ParserCursor cursor;
             if (header instanceof FormattedHeader) {
@@ -180,7 +179,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 buffer.append(s);
                 cursor = new ParserCursor(0, buffer.length());
             }
-            final HeaderElement elem = parser.parseHeader(buffer, cursor);
+            final HeaderElement elem = DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER.parseHeader(buffer, cursor);
             final String name = elem.getName();
             final String value = elem.getValue();
             if (name == null || name.isEmpty()) {

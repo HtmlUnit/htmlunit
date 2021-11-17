@@ -1594,8 +1594,7 @@ public class HTMLElement extends Element {
 
         // account for any scrolled ancestors
         Object parentNode = getOffsetParentInternal(false);
-        while (parentNode != null
-                && (parentNode instanceof HTMLElement)
+        while ((parentNode instanceof HTMLElement)
                 && !(parentNode instanceof HTMLBodyElement)) {
             final HTMLElement elem = (HTMLElement) parentNode;
             left -= elem.getScrollLeft();

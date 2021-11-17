@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.html.applets.AppletClassLoader;
 import com.gargoylesoftware.htmlunit.html.applets.AppletStubImpl;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -373,7 +372,7 @@ public class HtmlObject extends HtmlElement {
         }
 
         try (AppletClassLoader appletClassLoader =
-                new AppletClassLoader((Window) getPage().getEnclosingWindow().getScriptableObject(),
+                new AppletClassLoader(getPage().getEnclosingWindow().getScriptableObject(),
                                             Thread.currentThread().getContextClassLoader())) {
 
             final String documentUrl = page.getUrl().toExternalForm();

@@ -81,8 +81,7 @@ public class AudioContext extends BaseAudioContext {
             return null;
         }
 
-        final Promise promise = Promise.reject(Context.getCurrentContext(), AudioContext.this, new Object[] {}, null);
-        return promise;
+        return Promise.reject(Context.getCurrentContext(), this, new Object[] {}, null);
     }
 
     /**

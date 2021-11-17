@@ -396,7 +396,7 @@ public class Console extends SimpleScriptable {
                 // Remove unnecessary new lines and spaces from the function
                 final Pattern p = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*",
                         Pattern.MULTILINE);
-                final Matcher m = p.matcher(((NativeFunction) val).toString());
+                final Matcher m = p.matcher(val.toString());
                 sb.append(m.replaceAll(" ").trim());
                 sb.append(')');
             }
@@ -450,7 +450,7 @@ public class Console extends SimpleScriptable {
                 }
             }
             else if (val instanceof Number) {
-                sb.append(((Number) val).toString());
+                sb.append(val.toString());
             }
             else {
                 // ?!?
@@ -508,7 +508,7 @@ public class Console extends SimpleScriptable {
                 return "null";
             }
             else if (o instanceof NativeFunction) {
-                return ((NativeFunction) o).toString();
+                return o.toString();
             }
             else if (o instanceof BaseFunction) {
                 return "function " + ((BaseFunction) o).getFunctionName()

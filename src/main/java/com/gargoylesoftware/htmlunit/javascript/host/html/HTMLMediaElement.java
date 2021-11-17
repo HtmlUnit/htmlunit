@@ -113,8 +113,7 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public Promise play() {
-        final Promise promise = new Promise(getWindow());
-        return promise;
+        return new Promise(getWindow());
     }
 
     /**

@@ -322,7 +322,7 @@ public class Node extends EventTarget {
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {
-                    if (!isNodeInsertable((Node) child.getScriptableObject())) {
+                    if (!isNodeInsertable(child.getScriptableObject())) {
                         throw ScriptRuntime.constructError("ReferenceError",
                                 "Node cannot be inserted at the specified point in the hierarchy");
                     }
@@ -462,8 +462,7 @@ public class Node extends EventTarget {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
 
-        final Node jsClonedNode = getJavaScriptNode(clonedNode);
-        return jsClonedNode;
+        return getJavaScriptNode(clonedNode);
     }
 
     /**
@@ -763,7 +762,7 @@ public class Node extends EventTarget {
         if (domNode instanceof DomElement) {
             final DomElement child = ((DomElement) domNode).getFirstElementChild();
             if (child != null) {
-                return (Element) child.getScriptableObject();
+                return child.getScriptableObject();
             }
             return null;
         }
@@ -788,7 +787,7 @@ public class Node extends EventTarget {
         if (domNode instanceof DomElement) {
             final DomElement child = ((DomElement) getDomNodeOrDie()).getLastElementChild();
             if (child != null) {
-                return (Element) child.getScriptableObject();
+                return child.getScriptableObject();
             }
             return null;
         }
@@ -810,7 +809,7 @@ public class Node extends EventTarget {
      */
     protected HTMLCollection getChildren() {
         final DomNode node = getDomNodeOrDie();
-        final HTMLCollection collection = new HTMLCollection(node, false) {
+        return new HTMLCollection(node, false) {
             @Override
             protected List<DomNode> computeElements() {
                 final List<DomNode> children = new ArrayList<>();
@@ -822,7 +821,6 @@ public class Node extends EventTarget {
                 return children;
             }
         };
-        return collection;
     }
 
     /**

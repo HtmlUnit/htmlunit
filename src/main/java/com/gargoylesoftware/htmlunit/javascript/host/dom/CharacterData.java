@@ -163,7 +163,7 @@ public class CharacterData extends Node {
     public Element getNextElementSibling() {
         final DomElement child = getDomNodeOrDie().getNextElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return child.getScriptableObject();
         }
         return null;
     }
@@ -176,7 +176,7 @@ public class CharacterData extends Node {
     public Element getPreviousElementSibling() {
         final DomElement child = getDomNodeOrDie().getPreviousElementSibling();
         if (child != null) {
-            return (Element) child.getScriptableObject();
+            return child.getScriptableObject();
         }
         return null;
     }

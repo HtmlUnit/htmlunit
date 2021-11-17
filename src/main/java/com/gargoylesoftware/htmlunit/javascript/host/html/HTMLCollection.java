@@ -194,8 +194,7 @@ public class HTMLCollection extends AbstractList {
     public Object item(final Object index) {
         if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
             final String name = (String) index;
-            final Object result = namedItem(name);
-            return result;
+            return namedItem(name);
         }
 
         int idx = 0;
@@ -286,13 +285,12 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(IE)
     public Object tags(final String tagName) {
-        final HTMLCollection collection = new HTMLSubCollection(this) {
+        return new HTMLSubCollection(HTMLCollection.this) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return tagName.equalsIgnoreCase(node.getLocalName());
             }
         };
-        return collection;
     }
 }
 

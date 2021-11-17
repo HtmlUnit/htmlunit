@@ -149,8 +149,7 @@ public class XSLTProcessor extends SimpleScriptable {
                             final WebResponseData data =
                                     new WebResponseData(out.toByteArray(), 200, null, Collections.emptyList());
                             final WebResponse response = new WebResponse(data, null, 0);
-                            final org.w3c.dom.Document doc = XmlUtils.buildDocument(response);
-                            return doc;
+                            return XmlUtils.buildDocument(response);
                         }
                     }
                 }

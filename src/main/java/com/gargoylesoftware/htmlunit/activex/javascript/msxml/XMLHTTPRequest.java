@@ -478,7 +478,6 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction<Object> action = new ContextAction<Object>() {
                 @Override
@@ -491,7 +490,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                         stack = new ArrayDeque<>();
                         cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
-                    stack.push(startingScope);
+                    stack.push(w);
 
                     try {
                         doSend(cx);

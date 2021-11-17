@@ -128,7 +128,7 @@ public class DOMParser extends SimpleScriptable {
 
             final HTMLParser htmlParser = webClient.getPageCreator().getHtmlParser();
             htmlParser.parse(webResponse, page, false);
-            return (HTMLDocument) page.getScriptableObject();
+            return page.getScriptableObject();
         }
 
         return null;

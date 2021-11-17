@@ -928,7 +928,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         console_ = new Console();
         ((Console) console_).setWebWindow(webWindow_);
         console_.setParentScope(this);
-        ((Console) console_).setPrototype(getPrototype(((SimpleScriptable) console_).getClass()));
+        console_.setPrototype(getPrototype(((SimpleScriptable) console_).getClass()));
 
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
@@ -1207,7 +1207,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public void scrollBy(final int x, final int y) {
-        final HTMLElement body = ((HTMLDocument) document_).getBody();
+        final HTMLElement body = document_.getBody();
         if (body != null) {
             body.setScrollLeft(body.getScrollLeft() + x);
             body.setScrollTop(body.getScrollTop() + y);
@@ -1223,7 +1223,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction({FF, FF78})
     public void scrollByLines(final int lines) {
-        final HTMLElement body = ((HTMLDocument) document_).getBody();
+        final HTMLElement body = document_.getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (19 * lines));
 
@@ -1238,7 +1238,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction({FF, FF78})
     public void scrollByPages(final int pages) {
-        final HTMLElement body = ((HTMLDocument) document_).getBody();
+        final HTMLElement body = document_.getBody();
         if (body != null) {
             body.setScrollTop(body.getScrollTop() + (getInnerHeight() * pages));
 
@@ -1254,7 +1254,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxFunction
     public void scrollTo(final int x, final int y) {
-        final HTMLElement body = ((HTMLDocument) document_).getBody();
+        final HTMLElement body = document_.getBody();
         if (body != null) {
             body.setScrollLeft(x);
             body.setScrollTop(y);

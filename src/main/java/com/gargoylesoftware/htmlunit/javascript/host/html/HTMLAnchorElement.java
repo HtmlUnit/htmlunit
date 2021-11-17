@@ -221,7 +221,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public String getReferrerPolicy() {
-        String attrib = ((HtmlAnchor) getDomNodeOrDie()).getAttribute("referrerPolicy");
+        String attrib = getDomNodeOrDie().getAttribute("referrerPolicy");
         if (StringUtils.isEmpty(attrib)) {
             return "";
         }

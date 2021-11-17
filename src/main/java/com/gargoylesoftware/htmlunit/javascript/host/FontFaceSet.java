@@ -50,7 +50,6 @@ public class FontFaceSet extends EventTarget {
      */
     @JsxFunction
     public Promise load(final String font, final String text) {
-        final Promise promise = Promise.resolve(null, this, new Object[] {""}, null);
-        return promise;
+        return Promise.resolve(null, this, new Object[] {""}, null);
     }
 }

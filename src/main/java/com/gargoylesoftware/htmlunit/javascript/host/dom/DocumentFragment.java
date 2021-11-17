@@ -81,7 +81,7 @@ public class DocumentFragment extends Node {
         try {
             final DomNode node = getDomNodeOrDie().querySelector(selectors);
             if (node != null) {
-                return (Node) node.getScriptableObject();
+                return node.getScriptableObject();
             }
             return null;
         }
@@ -122,7 +122,7 @@ public class DocumentFragment extends Node {
     @JsxGetter({CHROME, EDGE, FF, FF78})
     public Element getFirstElementChild() {
         for (final DomNode child : getDomNodeOrDie().getChildren()) {
-            return (Element) child.getScriptableObject();
+            return child.getScriptableObject();
         }
         return null;
     }
@@ -139,7 +139,7 @@ public class DocumentFragment extends Node {
         }
 
         if (lastChild != null) {
-            return (Element) lastChild.getScriptableObject();
+            return lastChild.getScriptableObject();
         }
         return null;
     }
@@ -168,7 +168,7 @@ public class DocumentFragment extends Node {
             return null;
         }
         for (final DomNode child : getDomNodeOrDie().getChildren()) {
-            final Element elem = (Element) child.getScriptableObject();
+            final Element elem = child.getScriptableObject();
             if (idString.equals(elem.getId())) {
                 return elem;
             }

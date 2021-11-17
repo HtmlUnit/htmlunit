@@ -523,10 +523,9 @@ public class WebClient implements Serializable, AutoCloseable {
      * @throws IOException if an IO problem occurs
      * @throws MalformedURLException if no URL can be created from the provided string
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final String url) throws IOException, FailingHttpStatusCodeException,
         MalformedURLException {
-        return (P) getPage(UrlUtils.toUrlUnsafe(url));
+        return getPage(UrlUtils.toUrlUnsafe(url));
     }
 
     /**
@@ -539,13 +538,12 @@ public class WebClient implements Serializable, AutoCloseable {
      *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true.
      * @throws IOException if an IO problem occurs
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final URL url) throws IOException, FailingHttpStatusCodeException {
         final WebRequest request = new WebRequest(url, getBrowserVersion().getHtmlAcceptHeader(),
                                                           getBrowserVersion().getAcceptEncodingHeader());
         request.setCharset(UTF_8);
 
-        return (P) getPage(getCurrentWindow().getTopWindow(), request);
+        return getPage(getCurrentWindow().getTopWindow(), request);
     }
 
     /**
@@ -558,10 +556,9 @@ public class WebClient implements Serializable, AutoCloseable {
      * @throws IOException if an IO problem occurs
      * @see #getPage(WebWindow,WebRequest)
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P getPage(final WebRequest request) throws IOException,
         FailingHttpStatusCodeException {
-        return (P) getPage(getCurrentWindow().getTopWindow(), request);
+        return getPage(getCurrentWindow().getTopWindow(), request);
     }
 
     /**

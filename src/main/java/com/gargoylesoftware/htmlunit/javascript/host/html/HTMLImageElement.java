@@ -129,8 +129,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getAlt() {
-        final String alt = getDomNodeOrDie().getAttributeDirect("alt");
-        return alt;
+        return getDomNodeOrDie().getAttributeDirect("alt");
     }
 
     /**
@@ -148,8 +147,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxGetter
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttributeDirect("border");
-        return border;
+        return getDomNodeOrDie().getAttributeDirect("border");
     }
 
     /**

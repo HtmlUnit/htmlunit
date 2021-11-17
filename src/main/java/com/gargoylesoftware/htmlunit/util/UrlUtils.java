@@ -159,12 +159,10 @@ public final class UrlUtils {
         pchar.set('$');
         pchar.set(',');
 
-        final BitSet param = pchar;
-
         final BitSet segment = new BitSet(256);
         segment.or(pchar);
         segment.set(';');
-        segment.or(param);
+        segment.or(pchar);
 
         final BitSet pathSegments = new BitSet(256);
         pathSegments.set('/');

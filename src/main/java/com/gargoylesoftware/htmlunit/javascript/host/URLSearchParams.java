@@ -186,9 +186,8 @@ public class URLSearchParams extends SimpleScriptable {
             }
             return new NameValuePair(key, value);
         }
-        final String key = singleParam;
         final String value = "";
-        return new NameValuePair(key, value);
+        return new NameValuePair(singleParam, value);
     }
 
     /**

@@ -341,8 +341,7 @@ public class HTMLTableElement extends RowContainer {
      */
     @JsxGetter
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttributeDirect("border");
-        return border;
+        return getDomNodeOrDie().getAttributeDirect("border");
     }
 
     /**

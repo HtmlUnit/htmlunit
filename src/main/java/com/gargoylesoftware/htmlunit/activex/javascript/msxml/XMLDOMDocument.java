@@ -92,7 +92,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     public XMLDOMDocument(final WebWindow enclosingWindow) {
         if (enclosingWindow != null) {
             try {
-                final XmlPage page = new XmlPage((WebResponse) null, enclosingWindow, true, false);
+                final XmlPage page = new XmlPage(null, enclosingWindow, true, false);
                 setDomNode(page);
             }
             catch (final IOException e) {
@@ -312,7 +312,7 @@ public class XMLDOMDocument extends XMLDOMNode {
     }
 
     private void verifyChild(final Object newChild) {
-        if (newChild == null || "null".equals(newChild) || !(newChild instanceof XMLDOMNode)) {
+        if (!(newChild instanceof XMLDOMNode)) {
             throw Context.reportRuntimeError("Type mismatch.");
         }
         if (newChild instanceof XMLDOMCDATASection) {
@@ -531,15 +531,13 @@ public class XMLDOMDocument extends XMLDOMNode {
             return XMLDOMNodeList.emptyCollection(this);
         }
 
-        final XMLDOMNodeList collection = new XMLDOMNodeList(getDomNodeOrDie(), false,
+        return new XMLDOMNodeList(XMLDOMDocument.this.getDomNodeOrDie(), false,
                 "XMLDOMDocument.getElementsByTagName") {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node.getNodeName().equals(tagName);
             }
         };
-
-        return collection;
     }
 
     /**

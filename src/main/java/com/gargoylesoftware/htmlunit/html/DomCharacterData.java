@@ -116,7 +116,7 @@ public abstract class DomCharacterData extends DomNode implements CharacterData 
         if (count >= 0) {
             final int fromLeft = offset + count;
             if (fromLeft < data_.length()) {
-                setData(data + data_.substring(fromLeft, data_.length()));
+                setData(data + data_.substring(fromLeft));
                 return;
             }
         }

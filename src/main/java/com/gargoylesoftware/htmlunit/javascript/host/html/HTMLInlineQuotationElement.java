@@ -45,8 +45,7 @@ public class HTMLInlineQuotationElement extends HTMLElement {
      */
     @JsxGetter
     public String getCite() {
-        final String cite = getDomNodeOrDie().getAttributeDirect("cite");
-        return cite;
+        return getDomNodeOrDie().getAttributeDirect("cite");
     }
 
     /**
@@ -64,8 +63,7 @@ public class HTMLInlineQuotationElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getDateTime() {
-        final String cite = getDomNodeOrDie().getAttributeDirect("datetime");
-        return cite;
+        return getDomNodeOrDie().getAttributeDirect("datetime");
     }
 
     /**

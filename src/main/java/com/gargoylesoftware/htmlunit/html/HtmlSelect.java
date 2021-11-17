@@ -329,9 +329,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @return the page contained in the current window as returned
      * by {@link com.gargoylesoftware.htmlunit.WebClient#getCurrentWindow()}
      */
-    @SuppressWarnings("unchecked")
     public <P extends Page> P setSelectedAttribute(final HtmlOption selectedOption, final boolean isSelected) {
-        return (P) setSelectedAttribute(selectedOption, isSelected, true, true, false, true);
+        return setSelectedAttribute(selectedOption, isSelected, true, true, false, true);
     }
 
     /**

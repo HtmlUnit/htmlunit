@@ -164,7 +164,7 @@ public class Attr extends Node {
         }
 
         final DomText text = new DomText(getDomNodeOrDie().getPage(), getNodeValue());
-        return (Node) text.getScriptableObject();
+        return text.getScriptableObject();
     }
 
     /**

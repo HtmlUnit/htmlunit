@@ -511,8 +511,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName,
             final String attributeValue, final boolean notifyAttributeChangeListeners,
             final boolean notifyMutationObservers) {
-        final String value = attributeValue;
-        final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, value, true);
+        final DomAttr newAttr = new DomAttr(getPage(), namespaceURI, qualifiedName, attributeValue, true);
         newAttr.setParentNode(this);
         attributes_.put(qualifiedName, newAttr);
 

@@ -103,7 +103,7 @@ public class XMLDOMNode extends MSXMLScriptable {
                     for (final DomNode child : domNode.getChildren()) {
                         //IE: XmlPage ignores all empty text nodes
                         if (skipEmptyTextNode && child instanceof DomText && !(child instanceof DomCDataSection)
-                            && StringUtils.isBlank(((DomText) child).getNodeValue())) { //and 'xml:space' is 'default'
+                            && StringUtils.isBlank(child.getNodeValue())) { //and 'xml:space' is 'default'
                             continue;
                         }
                         response.add(child);
@@ -399,8 +399,7 @@ public class XMLDOMNode extends MSXMLScriptable {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode clonedNode = domNode.cloneNode(deep);
 
-        final XMLDOMNode jsClonedNode = getJavaScriptNode(clonedNode);
-        return jsClonedNode;
+        return getJavaScriptNode(clonedNode);
     }
 
     /**
@@ -569,14 +568,13 @@ public class XMLDOMNode extends MSXMLScriptable {
     public XMLDOMSelection selectNodes(final String expression) {
         final DomNode domNode = getDomNodeOrDie();
         final boolean attributeChangeSensitive = expression.contains("@");
-        final XMLDOMSelection collection = new XMLDOMSelection(domNode, attributeChangeSensitive,
+        return new XMLDOMSelection(domNode, attributeChangeSensitive,
                 "XMLDOMNode.selectNodes('" + expression + "')") {
             @Override
             protected List<DomNode> computeElements() {
                 return new ArrayList<>(domNode.getByXPath(expression));
             }
         };
-        return collection;
     }
 
     /**

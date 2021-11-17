@@ -164,7 +164,7 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
      */
     protected SimpleScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
-            return (SimpleScriptable) ((WebWindow) object).getScriptableObject();
+            return ((WebWindow) object).getScriptableObject();
         }
 
         final DomNode domNode = (DomNode) object;

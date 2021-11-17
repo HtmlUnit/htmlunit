@@ -61,7 +61,7 @@ public class HTMLLabelElement extends HTMLElement {
      */
     @JsxSetter
     public void setHtmlFor(final String id) {
-        ((HtmlLabel) getDomNodeOrDie()).setAttribute("for", id);
+        getDomNodeOrDie().setAttribute("for", id);
     }
 
     /**

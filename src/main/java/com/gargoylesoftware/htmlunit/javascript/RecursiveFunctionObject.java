@@ -148,11 +148,8 @@ public class RecursiveFunctionObject extends FunctionObject {
     public Object get(final String name, final Scriptable start) {
         final String superFunctionName = super.getFunctionName();
         if ("prototype".equals(name)) {
-            switch (superFunctionName) {
-                case "Proxy":
-                    return NOT_FOUND;
-
-                default:
+            if ("Proxy".equals(superFunctionName)) {
+                return NOT_FOUND;
             }
         }
         Object value = super.get(name, start);

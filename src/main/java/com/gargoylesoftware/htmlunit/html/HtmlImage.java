@@ -505,7 +505,7 @@ public class HtmlImage extends HtmlElement {
 
         final String src = getSrcAttribute();
         if (ATTRIBUTE_NOT_DEFINED == src) {
-            final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                 return 30;
             }
@@ -516,7 +516,7 @@ public class HtmlImage extends HtmlElement {
             return 24;
         }
 
-        final WebClient webClient = ((HtmlPage) getPage()).getWebClient();
+        final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
             return 0;
@@ -572,7 +572,7 @@ public class HtmlImage extends HtmlElement {
 
         final String src = getSrcAttribute();
         if (ATTRIBUTE_NOT_DEFINED == src) {
-            final BrowserVersion browserVersion = ((HtmlPage) getPage()).getWebClient().getBrowserVersion();
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
 
             if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_RETURNS_28x30_28x30)) {
                 return 28;
@@ -584,7 +584,7 @@ public class HtmlImage extends HtmlElement {
             return 24;
         }
 
-        final WebClient webClient = ((HtmlPage) getPage()).getWebClient();
+        final WebClient webClient = getPage().getWebClient();
         final BrowserVersion browserVersion = webClient.getBrowserVersion();
         if (browserVersion.hasFeature(JS_IMAGE_WIDTH_HEIGHT_EMPTY_SOURCE_RETURNS_0x0) && StringUtils.isEmpty(src)) {
             return 0;

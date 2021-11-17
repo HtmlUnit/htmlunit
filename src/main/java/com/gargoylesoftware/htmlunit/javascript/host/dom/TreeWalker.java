@@ -212,7 +212,7 @@ public class TreeWalker extends SimpleScriptable {
         if (domNode == null) {
             return null;
         }
-        return (Node) domNode.getScriptableObject();
+        return domNode.getScriptableObject();
     }
 
     /**

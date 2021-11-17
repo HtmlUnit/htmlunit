@@ -602,7 +602,7 @@ public class HttpWebConnection implements WebConnection {
     }
 
     private static RequestConfig.Builder createRequestConfigBuilder(final int timeout, final InetAddress localAddress) {
-        final RequestConfig.Builder requestBuilder = RequestConfig.custom()
+        return RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
                 .setRedirectsEnabled(false)
                 .setLocalAddress(localAddress)
@@ -611,14 +611,12 @@ public class HttpWebConnection implements WebConnection {
                 .setConnectTimeout(timeout)
                 .setConnectionRequestTimeout(timeout)
                 .setSocketTimeout(timeout);
-        return requestBuilder;
     }
 
     private static SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
-        final SocketConfig.Builder socketBuilder = SocketConfig.custom()
+        return SocketConfig.custom()
                 // timeout
                 .setSoTimeout(timeout);
-        return socketBuilder;
     }
 
     /**

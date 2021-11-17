@@ -78,8 +78,7 @@ public class HTMLBlockElement extends HTMLElement {
      * @return the value of the {@code dateTime} property
      */
     public String getDateTime() {
-        final String dateTime = getDomNodeOrDie().getAttributeDirect("datetime");
-        return dateTime;
+        return getDomNodeOrDie().getAttributeDirect("datetime");
     }
 
     /**

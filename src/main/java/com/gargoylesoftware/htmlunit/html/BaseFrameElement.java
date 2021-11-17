@@ -218,7 +218,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     private boolean isAlreadyLoadedByAncestor(final URL url, final Charset charset) {
         WebWindow window = getPage().getEnclosingWindow();
         int nesting = 0;
-        while (window != null && window instanceof FrameWindow) {
+        while (window instanceof FrameWindow) {
             nesting++;
             if (nesting > 9) {
                 return true;

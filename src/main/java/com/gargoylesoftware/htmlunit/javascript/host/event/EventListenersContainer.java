@@ -302,7 +302,7 @@ public class EventListenersContainer implements Serializable {
 
             final HtmlPage page;
             if (jsNode_ instanceof Window) {
-                page = (HtmlPage) ((Window) jsNode_).getDomNodeOrDie();
+                page = (HtmlPage) jsNode_.getDomNodeOrDie();
             }
             else {
                 final Scriptable parentScope = jsNode_.getParentScope();

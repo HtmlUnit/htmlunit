@@ -73,7 +73,7 @@ public class NodeIterator extends SimpleScriptable {
         if (domNode == null) {
             return null;
         }
-        return (Node) domNode.getScriptableObject();
+        return domNode.getScriptableObject();
     }
 
     /**

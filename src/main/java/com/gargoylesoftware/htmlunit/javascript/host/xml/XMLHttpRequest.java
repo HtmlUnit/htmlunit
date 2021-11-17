@@ -781,7 +781,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final Scriptable startingScope = w;
             final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction<Object> action = new ContextAction<Object>() {
                 @Override
@@ -794,7 +793,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         stack = new ArrayDeque<>();
                         cx.putThreadLocal(JavaScriptEngine.KEY_STARTING_SCOPE, stack);
                     }
-                    stack.push(startingScope);
+                    stack.push(w);
 
                     try {
                         doSend();
@@ -1006,7 +1005,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     }
                     final Charset charset = EncodingSniffer.toCharset(charsetName);
                     final String charsetNameFinal = charsetName;
-                    final Charset charsetFinal = charset;
                     webResponse_ = new WebResponseWrapper(webResponse_) {
                         @Override
                         public String getContentType() {
@@ -1015,11 +1013,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                         @Override
                         public Charset getContentCharset() {
                             if (charsetNameFinal.isEmpty()
-                                    || (charsetFinal == null && browserVersion
+                                    || (charset == null && browserVersion
                                                 .hasFeature(XHR_USE_CONTENT_CHARSET))) {
                                 return super.getContentCharset();
                             }
-                            return charsetFinal;
+                            return charset;
                         }
                     };
                 }

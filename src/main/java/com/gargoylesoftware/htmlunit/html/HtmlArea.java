@@ -264,7 +264,7 @@ public class HtmlArea extends HtmlElement {
     @Override
     public boolean isDisplayed() {
         final DomNode parent = getParentNode();
-        if (null != parent && parent instanceof HtmlMap && parent.isDisplayed()) {
+        if (parent instanceof HtmlMap && parent.isDisplayed()) {
             return !isEmpty();
         }
         return false;

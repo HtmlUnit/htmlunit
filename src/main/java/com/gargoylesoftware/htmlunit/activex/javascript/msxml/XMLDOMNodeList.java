@@ -335,8 +335,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
             return getScriptableForElement(matchingElements.get(0));
         }
         else if (!matchingElements.isEmpty()) {
-            final XMLDOMNodeList collection = new XMLDOMNodeList(getDomNodeOrDie(), matchingElements);
-            return collection;
+            return new XMLDOMNodeList(getDomNodeOrDie(), matchingElements);
         }
 
         // no element found by id, let's search by name
@@ -358,8 +357,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
 
         // many elements => build a sub collection
         final DomNode domNode = getDomNodeOrNull();
-        final XMLDOMNodeList collection = new XMLDOMNodeList(domNode, matchingElements);
-        return collection;
+        return new XMLDOMNodeList(domNode, matchingElements);
     }
 
     /**

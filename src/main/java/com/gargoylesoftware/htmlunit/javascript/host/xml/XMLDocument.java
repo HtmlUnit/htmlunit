@@ -203,7 +203,7 @@ public class XMLDocument extends Document {
             return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
 
-        final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false) {
+        return new HTMLCollection(XMLDocument.this.getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 final String nodeName;
@@ -217,7 +217,5 @@ public class XMLDocument extends Document {
                 return nodeName.equals(tagName);
             }
         };
-
-        return collection;
     }
 }

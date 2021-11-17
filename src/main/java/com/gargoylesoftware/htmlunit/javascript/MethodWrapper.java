@@ -103,8 +103,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
             throw buildInvalidCallException(thisObj);
         }
 
-        final Object jsResp = Context.javaToJS(javaResp, ScriptableObject.getTopLevelScope(scope));
-        return jsResp;
+        return Context.javaToJS(javaResp, ScriptableObject.getTopLevelScope(scope));
     }
 
     private RuntimeException buildInvalidCallException(final Scriptable thisObj) {

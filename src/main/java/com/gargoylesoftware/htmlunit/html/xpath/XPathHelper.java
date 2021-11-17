@@ -71,7 +71,7 @@ public final class XPathHelper {
             final XObject result = evaluateXPath(node, xpathExpr, resolver);
 
             if (result instanceof XNodeSet) {
-                final NodeList nodelist = ((XNodeSet) result).nodelist();
+                final NodeList nodelist = result.nodelist();
                 for (int i = 0; i < nodelist.getLength(); i++) {
                     list.add((T) nodelist.item(i));
                 }

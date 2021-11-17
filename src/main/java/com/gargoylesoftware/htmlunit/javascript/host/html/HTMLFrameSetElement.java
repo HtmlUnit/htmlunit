@@ -109,8 +109,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      */
     @JsxGetter(IE)
     public String getBorder() {
-        final String border = getDomNodeOrDie().getAttributeDirect("border");
-        return border;
+        return getDomNodeOrDie().getAttributeDirect("border");
     }
 
     /**

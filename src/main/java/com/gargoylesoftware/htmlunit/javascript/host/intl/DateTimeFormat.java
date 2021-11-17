@@ -350,8 +350,7 @@ public class DateTimeFormat extends SimpleScriptable {
      */
     @JsxFunction
     public Scriptable resolvedOptions() {
-        final Scriptable object = Context.getCurrentContext().newObject(getParentScope());
-        return object;
+        return Context.getCurrentContext().newObject(getParentScope());
     }
 
     /**

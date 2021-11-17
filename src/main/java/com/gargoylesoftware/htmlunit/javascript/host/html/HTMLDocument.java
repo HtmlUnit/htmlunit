@@ -413,8 +413,7 @@ public class HTMLDocument extends Document {
      */
     HtmlElement getLastHtmlElement(final HtmlElement node) {
         final DomNode lastChild = node.getLastChild();
-        if (lastChild == null
-                || !(lastChild instanceof HtmlElement)
+        if (!(lastChild instanceof HtmlElement)
                 || lastChild instanceof HtmlScript) {
             return node;
         }
@@ -610,7 +609,7 @@ public class HTMLDocument extends Document {
      */
     @Override
     public HTMLCollection getElementsByClassName(final String className) {
-        return ((HTMLElement) getDocumentElement()).getElementsByClassName(className);
+        return getDocumentElement().getElementsByClassName(className);
     }
 
     /**
@@ -802,7 +801,7 @@ public class HTMLDocument extends Document {
                 if (frame instanceof HtmlInlineFrame) {
                     final Window winWithFrame = frame.getPage().getEnclosingWindow().getScriptableObject();
                     ((HTMLDocument) winWithFrame.getDocument()).setActiveElement(
-                                (HTMLElement) frame.getScriptableObject());
+                            frame.getScriptableObject());
                 }
             }
         }

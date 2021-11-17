@@ -112,15 +112,12 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -216,7 +213,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
     static final String BLOCK = "block";
     static final String INLINE = "inline";
 
-    private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
+    // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
     private static final Map<String, String> CamelizeCache_
@@ -662,7 +659,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 if (isComputed) {
                     try {
                         value = value.substring(5, value.length() - 2);
-                        return "url(\"" + ((HtmlElement) jsElement_.getDomNodeOrDie()).getHtmlPageOrNull()
+                        return "url(\"" + jsElement_.getDomNodeOrDie().getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + "\")";
                     }
                     catch (final Exception e) {

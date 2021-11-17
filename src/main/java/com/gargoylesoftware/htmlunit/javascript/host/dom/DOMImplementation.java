@@ -296,7 +296,7 @@ public class DOMImplementation extends SimpleScriptable {
 
             final HTMLParser htmlParser = webWindow.getWebClient().getPageCreator().getHtmlParser();
             htmlParser.parse(webResponse, page, false);
-            return (HTMLDocument) page.getScriptableObject();
+            return page.getScriptableObject();
         }
         catch (final IOException e) {
             throw Context.reportRuntimeError("Parsing failed" + e.getMessage());
