@@ -80,13 +80,7 @@ public class Geolocation extends SimpleScriptable {
     public void getCurrentPosition(final Function successCallback, final Object errorCallback,
             final Object options) {
         successHandler_ = successCallback;
-        Function errorHandler_;
-        if (errorCallback instanceof Function) {
-            errorHandler_ = (Function) errorCallback;
-        }
-        else {
-            errorHandler_ = null;
-        }
+
         final WebWindow webWindow = getWindow().getWebWindow();
         if (webWindow.getWebClient().getOptions().isGeolocationEnabled()) {
             final JavaScriptJob job = BackgroundJavaScriptFactory.theFactory()

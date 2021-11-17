@@ -202,11 +202,18 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
 
         final StringBuilder bduiler = new StringBuilder();
-        bduiler.append("tab[tab.length] = {code: ").append(response.getStatusCode()).append(", ").append("fileName: '").append(file.getName()).append("', ").append("contentType: '").append(response.getContentType()).append("', ").append("method: '").append(request.getHttpMethod().name()).append("', ");
+        bduiler.append("tab[tab.length] = {code: ").append(response.getStatusCode())
+                .append(", ").append("fileName: '").append(file.getName()).append("', ")
+                .append("contentType: '").append(response.getContentType()).append("', ")
+                .append("method: '").append(request.getHttpMethod().name()).append("', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
-            bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getRequestParameters())).append(", ");
+            bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getRequestParameters()))
+                .append(", ");
         }
-        bduiler.append("url: '").append(escapeJSString(url.toString())).append("', ").append("loadTime: ").append(response.getLoadTime()).append(", ").append("responseSize: ").append(length).append(", ").append("responseHeaders: ").append(nameValueListToJsMap(response.getResponseHeaders()))
+        bduiler.append("url: '").append(escapeJSString(url.toString())).append("', ")
+                .append("loadTime: ").append(response.getLoadTime()).append(", ")
+                .append("responseSize: ").append(length).append(", ")
+                .append("responseHeaders: ").append(nameValueListToJsMap(response.getResponseHeaders()))
                 .append("};\n");
         appendToJSFile(bduiler.toString());
     }
@@ -314,7 +321,8 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final StringBuilder bduiler = new StringBuilder("{");
         for (final NameValuePair header : headers) {
-            bduiler.append("'").append(header.getName()).append("': '").append(escapeJSString(header.getValue())).append("', ");
+            bduiler.append("'").append(header.getName()).append("': '")
+                    .append(escapeJSString(header.getValue())).append("', ");
         }
         bduiler.delete(bduiler.length() - 2, bduiler.length());
         bduiler.append('}');

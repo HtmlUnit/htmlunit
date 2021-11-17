@@ -253,7 +253,8 @@ public class Console extends SimpleScriptable {
                         sb.append(id).append(": ").append(((SimpleScriptable) value).getClassName()).append("\n");
                     }
                     else if (value instanceof BaseFunction) {
-                        sb.append(id).append(": function ").append(((BaseFunction) value).getFunctionName()).append("()\n");
+                        sb.append(id).append(": function ").append(((BaseFunction) value).getFunctionName())
+                            .append("()\n");
                     }
                     else {
                         sb.append(id).append(": ").append(value).append("\n");
@@ -449,7 +450,7 @@ public class Console extends SimpleScriptable {
                 }
             }
             else if (val instanceof Number) {
-                sb.append(((Number) val));
+                sb.append(((Number) val).toString());
             }
             else {
                 // ?!?

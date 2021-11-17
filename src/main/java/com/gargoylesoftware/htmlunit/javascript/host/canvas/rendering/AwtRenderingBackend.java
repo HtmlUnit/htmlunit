@@ -948,7 +948,8 @@ public class AwtRenderingBackend implements RenderingBackend {
 
         if (windingRule == WindingRule.NON_ZERO) {
             currentPath.setWindingRule(Path2D.WIND_NON_ZERO);
-        } else {
+        }
+        else {
             currentPath.setWindingRule(Path2D.WIND_EVEN_ODD);
         }
 

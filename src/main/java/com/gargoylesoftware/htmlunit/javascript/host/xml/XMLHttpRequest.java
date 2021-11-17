@@ -669,11 +669,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final String url = Context.toString(urlParam);
 
         // (URL + Method + User + Password) become a WebRequest instance.
-        HtmlPage containingPage_ = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final HtmlPage containingPage = (HtmlPage) getWindow().getWebWindow().getEnclosedPage();
 
         try {
-            final URL pageRequestUrl = containingPage_.getUrl();
-            final URL fullUrl = containingPage_.getFullyQualifiedUrl(url);
+            final URL pageRequestUrl = containingPage.getUrl();
+            final URL fullUrl = containingPage.getFullyQualifiedUrl(url);
             if (!isAllowCrossDomainsFor(fullUrl)) {
                 throw Context.reportRuntimeError("Access to restricted URI denied");
             }
@@ -681,7 +681,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             final WebRequest request = new WebRequest(fullUrl, getBrowserVersion().getXmlHttpRequestAcceptHeader(),
                                                                 getBrowserVersion().getAcceptEncodingHeader());
             request.setCharset(UTF_8);
-            request.setRefererlHeader(containingPage_.getUrl());
+            request.setRefererlHeader(containingPage.getUrl());
 
             if (!isSameOrigin(pageRequestUrl, fullUrl)) {
                 final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")

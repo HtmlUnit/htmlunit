@@ -316,7 +316,8 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                 .append(lineSeparator);
 
         if (null != currentlyRunningJob_ && (filter == null || filter.passes(currentlyRunningJob_))) {
-            status.append("  current running job: ").append(currentlyRunningJob_.toString()).append("      job id: ").append(currentlyRunningJob_.getId())
+            status.append("  current running job: ").append(currentlyRunningJob_.toString())
+                .append("      job id: ").append(currentlyRunningJob_.getId())
                 .append(lineSeparator)
                 .append(lineSeparator)
                 .append(lineSeparator);
@@ -330,7 +331,9 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             if (filter == null || filter.passes(job)) {
                 final long now = System.currentTimeMillis();
                 final long execTime = job.getTargetExecutionTime();
-                status.append("  ").append(count).append(")  Job target execution time: ").append(execTime).append(" (should start in ").append((execTime - now) / 1000d).append("s)")
+                status.append("  ").append(count).append(")  Job target execution time: ")
+                        .append(execTime).append(" (should start in ")
+                        .append((execTime - now) / 1000d).append("s)")
                         .append(lineSeparator)
                         .append("      job to string: ").append(job)
                         .append(lineSeparator).append("      job id: ").append(job.getId())

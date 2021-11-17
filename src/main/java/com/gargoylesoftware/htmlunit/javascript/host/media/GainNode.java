@@ -49,8 +49,6 @@ public class GainNode extends AudioNode {
                     "Failed to construct 'GainNode': first parameter is not of type 'BaseAudioContext'.");
         }
 
-        BaseAudioContext baseAudioContext_ = (BaseAudioContext) baCtx;
-
         final AudioParam node = new AudioParam();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
