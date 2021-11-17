@@ -1133,8 +1133,8 @@ public class HTMLElement extends Element {
         }
         if (!PERCENT_VALUE.matcher(value).matches()) {
             try {
-                final Float f = Float.valueOf(value);
-                final int i = f.intValue();
+                final float f = Float.parseFloat(value);
+                final int i = (int) f;
                 if (i < 0) {
                     if (returnNegativeValues == null) {
                         value = "0";
@@ -1176,8 +1176,8 @@ public class HTMLElement extends Element {
             boolean error = false;
             if (!PERCENT_VALUE.matcher(value).matches()) {
                 try {
-                    final Float f = Float.valueOf(value);
-                    final int i = f.intValue();
+                    final float f = Float.parseFloat(value);
+                    final int i = (int) f;
                     if (i < 0 && !allowNegativeValues) {
                         error = true;
                     }

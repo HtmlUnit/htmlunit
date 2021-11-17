@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -174,7 +175,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
                 return determinePageType(MimeType.APPLICATION_OCTET_STREAM);
             }
 
-            final String asAsciiString = new String(bytes, "ASCII").trim().toUpperCase(Locale.ROOT);
+            final String asAsciiString = new String(bytes, StandardCharsets.US_ASCII).trim().toUpperCase(Locale.ROOT);
             for (final String htmlPattern : htmlPatterns) {
                 try {
                     if ('<' == asAsciiString.charAt(0)) {

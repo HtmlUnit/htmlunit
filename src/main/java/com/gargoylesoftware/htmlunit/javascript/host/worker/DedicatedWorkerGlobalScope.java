@@ -183,14 +183,11 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
         }
         final JavaScriptEngine jsEngine =
                 (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                worker_.getEventListenersContainer().executeCapturingListeners(event, null);
-                final Object[] args = {event};
-                worker_.getEventListenersContainer().executeBubblingListeners(event, args);
-                return null;
-            }
+        final ContextAction<Object> action = cx -> {
+            worker_.getEventListenersContainer().executeCapturingListeners(event, null);
+            final Object[] args = {event};
+            worker_.getEventListenersContainer().executeBubblingListeners(event, args);
+            return null;
         };
 
         final ContextFactory cf = jsEngine.getContextFactory();
@@ -210,12 +207,9 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
 
         final JavaScriptEngine jsEngine =
                 (JavaScriptEngine) owningWindow_.getWebWindow().getWebClient().getJavaScriptEngine();
-        final ContextAction<Object> action = new ContextAction<Object>() {
-            @Override
-            public Object run(final Context cx) {
-                executeEvent(cx, event);
-                return null;
-            }
+        final ContextAction<Object> action = cx -> {
+            executeEvent(cx, event);
+            return null;
         };
 
         final ContextFactory cf = jsEngine.getContextFactory();
@@ -290,7 +284,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
                 final Script script = javaScriptEngine.compile(page, thisScope, scriptCode,
                         fullUrl.toExternalForm(), 1);
 
-                // script might be null here e.g. if there is a syntax error)
+                // script might be null here e.g. if there is a syntax error
                 if (script != null) {
                     return javaScriptEngine.execute(page, thisScope, script);
                 }
@@ -312,7 +306,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     /**
      * Sets a chunk of JavaScript to be invoked at some specified time later.
      * The invocation occurs only if the window is opened after the delay
-     * and does not contain an other page than the one that originated the setTimeout.
+     * and does not contain another page than the one that originated the setTimeout.
      *
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout">
      * MDN web docs</a>

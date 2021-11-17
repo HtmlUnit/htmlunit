@@ -2634,8 +2634,7 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
-        final Set<Cookie> cookies = new LinkedHashSet<>();
-        cookies.addAll(Cookie.fromHttpClient(matches));
+        final Set<Cookie> cookies = new LinkedHashSet<>(Cookie.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
     }
 

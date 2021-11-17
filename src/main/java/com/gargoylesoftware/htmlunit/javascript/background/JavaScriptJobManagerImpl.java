@@ -125,7 +125,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("job added to queue");
                 LOG.debug("    window is: " + w);
-                LOG.debug("    added job: " + job.toString());
+                LOG.debug("    added job: " + job);
                 LOG.debug("after adding job to the queue, the queue is: ");
                 printQueue();
             }
@@ -293,7 +293,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
             int count = 1;
             for (final JavaScriptJob job : scheduledJobsQ_) {
                 LOG.debug("  " + count + ")  Job target execution time: " + job.getTargetExecutionTime());
-                LOG.debug("      job to string: " + job.toString());
+                LOG.debug("      job to string: " + job);
                 LOG.debug("      job id: " + job.getId());
                 if (job.isPeriodic()) {
                     LOG.debug("      period: " + job.getPeriod().intValue());
@@ -335,7 +335,7 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
                     .append(")  Job target execution time: " + execTime)
                     .append(" (should start in " + ((execTime - now) / 1000d) + "s)")
                     .append(lineSeparator)
-                    .append("      job to string: ").append(job.toString())
+                    .append("      job to string: ").append(job)
                     .append(lineSeparator)
                     .append("      job id: " + job.getId())
                     .append(lineSeparator);

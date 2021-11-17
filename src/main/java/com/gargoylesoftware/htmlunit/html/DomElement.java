@@ -960,7 +960,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             if (!isDisplayed()) {
                 if (LOG.isWarnEnabled()) {
-                    LOG.warn("Calling click() ignored because the target element '" + toString()
+                    LOG.warn("Calling click() ignored because the target element '" + this
                                     + "' is not displayed.");
                 }
                 return (P) page;
@@ -968,7 +968,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             if (isDisabledElementAndDisabled()) {
                 if (LOG.isWarnEnabled()) {
-                    LOG.warn("Calling click() ignored because the target element '" + toString() + "' is disabled.");
+                    LOG.warn("Calling click() ignored because the target element '" + this + "' is disabled.");
                 }
                 return (P) page;
             }

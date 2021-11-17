@@ -397,9 +397,7 @@ public class HtmlForm extends HtmlElement {
 
         final List<NameValuePair> parameterList = new ArrayList<>(submittableElements.size());
         for (final SubmittableElement element : submittableElements) {
-            for (final NameValuePair pair : element.getSubmitNameValuePairs()) {
-                parameterList.add(pair);
-            }
+            parameterList.addAll(Arrays.asList(element.getSubmitNameValuePairs()));
         }
 
         return parameterList;

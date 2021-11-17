@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONT
 
 import java.lang.reflect.Executable;
 import java.lang.reflect.Member;
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -76,16 +77,12 @@ public class RecursiveFunctionObject extends FunctionObject {
     @Override
     public Object[] getIds() {
         final Set<Object> objects = new LinkedHashSet<>();
-        for (final Object o : super.getIds()) {
-            objects.add(o);
-        }
+        objects.addAll(Arrays.asList(super.getIds()));
         for (Class<?> c = getMethodOrConstructor().getDeclaringClass().getSuperclass();
                 c != null; c = c.getSuperclass()) {
             final Object scripatble = getParentScope().get(c.getSimpleName(), this);
             if (scripatble instanceof Scriptable) {
-                for (final Object id : ((Scriptable) scripatble).getIds()) {
-                    objects.add(id);
-                }
+                objects.addAll(Arrays.asList(((Scriptable) scripatble).getIds()));
             }
         }
         return objects.toArray(new Object[objects.size()]);

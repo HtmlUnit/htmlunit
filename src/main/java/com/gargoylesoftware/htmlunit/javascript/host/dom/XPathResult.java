@@ -235,7 +235,7 @@ public class XPathResult extends SimpleScriptable {
             throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
         final String asString = asString();
-        Double answer;
+        double answer;
         try {
             answer = Double.parseDouble(asString);
         }

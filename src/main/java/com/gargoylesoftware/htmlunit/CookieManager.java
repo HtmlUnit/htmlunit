@@ -82,8 +82,7 @@ public class CookieManager implements Serializable {
             return Collections.<Cookie>emptySet();
         }
 
-        final Set<Cookie> copy = new LinkedHashSet<>();
-        copy.addAll(cookies_);
+        final Set<Cookie> copy = new LinkedHashSet<>(cookies_);
         return Collections.unmodifiableSet(copy);
     }
 

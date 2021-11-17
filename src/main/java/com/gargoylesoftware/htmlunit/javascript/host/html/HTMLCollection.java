@@ -155,9 +155,9 @@ public class HTMLCollection extends AbstractList {
 
         if (matchingElements.isEmpty()) {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
-                final Double doubleValue = Context.toNumber(name);
-                if (!doubleValue.isNaN()) {
-                    final Object object = get(doubleValue.intValue(), this);
+                final double doubleValue = Context.toNumber(name);
+                if (!Double.isNaN(doubleValue)) {
+                    final Object object = get((int) doubleValue, this);
                     if (object != NOT_FOUND) {
                         return object;
                     }
@@ -199,9 +199,9 @@ public class HTMLCollection extends AbstractList {
         }
 
         int idx = 0;
-        final Double doubleValue = Context.toNumber(index);
-        if (!doubleValue.isNaN()) {
-            idx = doubleValue.intValue();
+        final double doubleValue = Context.toNumber(index);
+        if (!Double.isNaN(doubleValue)) {
+            idx = (int) doubleValue;
         }
 
         final Object object = get(idx, this);

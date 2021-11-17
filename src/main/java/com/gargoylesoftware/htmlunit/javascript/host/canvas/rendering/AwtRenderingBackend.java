@@ -946,13 +946,10 @@ public class AwtRenderingBackend implements RenderingBackend {
         }
         currentPath.closePath();
 
-        switch (windingRule) {
-            case NON_ZERO:
-                currentPath.setWindingRule(Path2D.WIND_NON_ZERO);
-                break;
-            default:
-                currentPath.setWindingRule(Path2D.WIND_EVEN_ODD);
-                break;
+        if (windingRule == WindingRule.NON_ZERO) {
+            currentPath.setWindingRule(Path2D.WIND_NON_ZERO);
+        } else {
+            currentPath.setWindingRule(Path2D.WIND_EVEN_ODD);
         }
 
         graphics2D_.clip(currentPath);

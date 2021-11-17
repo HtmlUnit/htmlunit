@@ -1212,8 +1212,7 @@ public class Document extends Node {
      */
     @JsxFunction
     public Event createEvent(final String eventType) throws DOMException {
-        Class<? extends Event> clazz = null;
-        clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
+        Class<? extends Event> clazz = SUPPORTED_DOM2_EVENT_TYPE_MAP.get(eventType);
         if (clazz == null) {
             clazz = SUPPORTED_DOM3_EVENT_TYPE_MAP.get(eventType);
             if (CloseEvent.class == clazz

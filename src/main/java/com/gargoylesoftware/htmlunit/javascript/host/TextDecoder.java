@@ -244,12 +244,10 @@ public class TextDecoder extends SimpleScriptable {
         ENCODINGS_.put("windows-31j", charset);
         ENCODINGS_.put("x-sjis", charset);
 
-        charset = Charset.forName("utf-16be");
-        ENCODINGS_.put("utf-16be", charset);
+        ENCODINGS_.put("utf-16be", StandardCharsets.UTF_16BE);
 
-        charset = Charset.forName("utf-16le");
-        ENCODINGS_.put("utf-16", charset);
-        ENCODINGS_.put("utf-16le", charset);
+        ENCODINGS_.put("utf-16", StandardCharsets.UTF_16LE);
+        ENCODINGS_.put("utf-16le", StandardCharsets.UTF_16LE);
 
         charset = Charset.forName("windows-1250");
         ENCODINGS_.put("cp1250", charset);

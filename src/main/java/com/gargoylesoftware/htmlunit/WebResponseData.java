@@ -202,7 +202,7 @@ public class WebResponseData implements Serializable {
      * @throws IOException in case of IO problems
      */
     public InputStream getInputStream() throws IOException {
-        return getStream(downloadedContent_, getResponseHeaders(), null);
+        return getStream(downloadedContent_, getResponseHeaders(), (ByteOrderMark[]) null);
     }
 
     /**

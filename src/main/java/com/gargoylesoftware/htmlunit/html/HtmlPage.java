@@ -2361,7 +2361,7 @@ public class HtmlPage extends SgmlPage {
                         baseUrl = new URL(String.format("%s://%s:%d%s", url.getProtocol(), url.getHost(), port, href));
                     }
                     else if (url.toString().endsWith("/")) {
-                        baseUrl = new URL(String.format("%s%s", url.toString(), href));
+                        baseUrl = new URL(String.format("%s%s", url, href));
                     }
                     else {
                         baseUrl = new URL(UrlUtils.resolveUrl(url, href));

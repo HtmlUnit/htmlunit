@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
 
+import java.util.Arrays;
 import java.util.HashSet;
 
 import org.apache.commons.lang3.StringUtils;
@@ -86,9 +87,7 @@ public class DOMTokenList extends SimpleScriptable {
         final String[] parts = StringUtils.split(value, whitespaceChars());
         if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
             final HashSet<String> elements = new HashSet<>(parts.length);
-            for (final String part : parts) {
-                elements.add(part);
-            }
+            elements.addAll(Arrays.asList(parts));
             return elements.size();
         }
         return parts.length;

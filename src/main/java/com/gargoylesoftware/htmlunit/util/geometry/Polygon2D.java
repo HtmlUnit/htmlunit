@@ -66,7 +66,7 @@ public class Polygon2D implements Shape2D {
         int intersectionCount = 0;
 
         int i = 0;
-        for ( ; i < points_.size() - 1;) {
+        while (i < points_.size() - 1) {
             final Point2D start = points_.get(i);
             final Point2D end = points_.get(++i);
             final Line2D border = new Line2D(start, end);

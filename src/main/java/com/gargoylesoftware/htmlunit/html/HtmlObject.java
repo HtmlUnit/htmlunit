@@ -438,7 +438,7 @@ public class HtmlObject extends HtmlElement {
             catch (final ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                 if (LOG.isErrorEnabled()) {
                     LOG.error("Loading applet '" + appletClassName + "' failed\n"
-                            + "    " + e.toString()
+                            + "    " + e
                             + "\n    Classpath:\n" + appletClassLoader.info());
                 }
                 throw new RuntimeException(e);

@@ -100,7 +100,7 @@ public class Console extends SimpleScriptable {
         if (first instanceof CharSequence
                 || first instanceof ScriptableObject && ("String".equals(((Scriptable) first).getClassName()))) {
             data = new Object[args.length - 1];
-            data[0] = "Assertion failed: " + first.toString();
+            data[0] = "Assertion failed: " + first;
             System.arraycopy(args, 2, data, 1, data.length - 1);
         }
         else {
@@ -449,7 +449,7 @@ public class Console extends SimpleScriptable {
                 }
             }
             else if (val instanceof Number) {
-                sb.append(((Number) val).toString());
+                sb.append(((Number) val));
             }
             else {
                 // ?!?
