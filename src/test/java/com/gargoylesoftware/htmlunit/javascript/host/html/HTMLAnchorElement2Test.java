@@ -723,7 +723,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                     "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {":||||||", ":||||||", "mailto:||||||", "tel:||||||",
                   "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
-            FF78 = {"http:||||||", "http:||||||", "mailto:||||||", "tel:||||||",
+            FF78 = {":||||||", ":||||||", "mailto:||||||", "tel:||||||",
                     "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
             IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                   "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"})

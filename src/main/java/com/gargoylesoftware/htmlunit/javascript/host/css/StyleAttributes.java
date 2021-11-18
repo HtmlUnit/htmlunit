@@ -189,16 +189,16 @@ public final class StyleAttributes {
         APP_REGION("appRegion", "app-region", chromeAndEdge("none")),
 
         /** The style property {@code appearance}. */
-        APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ffLatest("none")),
+        APPEARANCE("appearance", "appearance", chromeAndEdge("none"), ff("none")),
 
         /** The style property {@code ascentOverride}. */
         ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
 
         /** The style property {@code aspectRatio}. */
-        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto"), ffLatest("auto")),
+        ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdge("auto"), ff("auto")),
 
         /** The style property {@code aspect-ratio}. */
-        ASPECT_RATIO_("aspect-ratio", "aspect-ratio", ffLatest("auto")),
+        ASPECT_RATIO_("aspect-ratio", "aspect-ratio", ff("auto")),
 
         /** The style property {@code azimuth}. */
         AZIMUTH("azimuth", "azimuth"),
@@ -1987,44 +1987,6 @@ public final class StyleAttributes {
         /** The style property {@code MozOutlineOffset}. */
         MOZ_OUTLINE_OFFSET("MozOutlineOffset", "-moz-outline-offset"),
 
-        /** The style property {@code MozOutlineRadius}. */
-        MOZ_OUTLINE_RADIUS("MozOutlineRadius", "-moz-outline-radius", ff78("")),
-
-        /** The style property {@code -moz-outline-radius}. */
-        MOZ_OUTLINE_RADIUS__("-moz-outline-radius", "-moz-outline-radius", ff78("")),
-
-        /** The style property {@code MozOutlineRadiusBottomleft}. */
-        MOZ_OUTLINE_RADIUS_BOTTOMLEFT("MozOutlineRadiusBottomleft",
-                "-moz-outline-radius-bottomleft", ff78("0px")),
-
-        /** The style property {@code -moz-outline-radius-bottomleft}. */
-        MOZ_OUTLINE_RADIUS_BOTTOMLEFT__("-moz-outline-radius-bottomleft",
-                "-moz-outline-radius-bottomleft", ff78("0px")),
-
-        /** The style property {@code MozOutlineRadiusBottomright}. */
-        MOZ_OUTLINE_RADIUS_BOTTOMRIGHT("MozOutlineRadiusBottomright",
-                "-moz-outline-radius-bottomright", ff78("0px")),
-
-        /** The style property {@code -moz-outline-radius-bottomright}. */
-        MOZ_OUTLINE_RADIUS_BOTTOMRIGHT__("-moz-outline-radius-bottomright",
-                "-moz-outline-radius-bottomright", ff78("0px")),
-
-        /** The style property {@code MozOutlineRadiusTopleft}. */
-        MOZ_OUTLINE_RADIUS_TOPLEFT("MozOutlineRadiusTopleft",
-                "-moz-outline-radius-topleft", ff78("0px")),
-
-        /** The style property {@code -moz-outline-radius-topleft}. */
-        MOZ_OUTLINE_RADIUS_TOPLEFT__("-moz-outline-radius-topleft",
-                "-moz-outline-radius-topleft", ff78("0px")),
-
-        /** The style property {@code MozOutlineRadiusTopright}. */
-        MOZ_OUTLINE_RADIUS_TOPRIGHT("MozOutlineRadiusTopright",
-                "-moz-outline-radius-topright", ff78("0px")),
-
-        /** The style property {@code -moz-outline-radius-topright}. */
-        MOZ_OUTLINE_RADIUS_TOPRIGHT__("-moz-outline-radius-topright",
-                "-moz-outline-radius-topright", ff78("0px")),
-
         /** The style property {@code MozOutlineStyle}. */
         MOZ_OUTLINE_STYLE("MozOutlineStyle", "-moz-outline-style"),
 
@@ -3159,10 +3121,10 @@ public final class StyleAttributes {
         SYSTEM("system", "system", chromeAndEdge("")),
 
         /** The style property {@code tabSize}. */
-        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ffLatest("8")),
+        TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ff("8")),
 
         /** The style property {@code tab-size}. */
-        TAB_SIZE_("tab-size", "tab-size", ffLatest("8")),
+        TAB_SIZE_("tab-size", "tab-size", ff("8")),
 
         /** The style property {@code tableLayout}. */
         TABLE_LAYOUT("tableLayout", "table-layout", chromeAndEdge("auto"), ff("auto"), ie("auto")),

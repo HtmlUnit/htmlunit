@@ -34,11 +34,6 @@ MozImageRegion
 MozMarginEnd
 MozMarginStart
 MozOrient
-MozOutlineRadius
-MozOutlineRadiusBottomleft
-MozOutlineRadiusBottomright
-MozOutlineRadiusTopleft
-MozOutlineRadiusTopright
 MozPaddingEnd
 MozPaddingStart
 MozPerspective
@@ -139,6 +134,8 @@ animationIterationCount
 animationName
 animationPlayState
 animationTimingFunction
+appearance
+aspectRatio
 backfaceVisibility
 background
 backgroundAttachment
@@ -470,6 +467,7 @@ strokeLinejoin
 strokeMiterlimit
 strokeOpacity
 strokeWidth
+tabSize
 tableLayout
 textAlign
 textAlignLast

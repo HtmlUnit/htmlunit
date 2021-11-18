@@ -1368,7 +1368,7 @@ public class CSSStyleDeclaration3Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"normal", "normal", "400", "6px", "normal", "sans-serif"},
             IE = {"normal", "normal", "400", "2.26px", "normal", "sAns-serif"},
             FF = {"normal", "normal", "400", "2.24px", "normal", "sans-serif"},
-            FF78 = {"normal", "normal", "400", "2.23333px", "normal", "sans-serif"})
+            FF78 = {"normal", "normal", "400", "2.24px", "normal", "sans-serif"})
     @HtmlUnitNYI(CHROME = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             EDGE = {"normal", "normal", "400", "16px", "normal", "\"Times New Roman\""},
             IE = {"normal", "normal", "400", "16px", "normal", "Times New Roman"},

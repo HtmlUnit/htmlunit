@@ -1056,7 +1056,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"2", "link_2", "link_3"},
-            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -1221,7 +1220,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id2",
-            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -1252,7 +1250,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
                        "3", "id1", "id2", "id3"},
-            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -1301,7 +1298,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "id2",
-            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
@@ -1332,7 +1328,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
                        "3", "id1", "id2", "id3"},
-            FF78 = "exception",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",

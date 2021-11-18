@@ -62,7 +62,7 @@ public class SVGFECompositeElement extends SVGElement {
     public static final int SVG_FECOMPOSITE_OPERATOR_ARITHMETIC = 6;
 
     /** The constant {@code SVG_FECOMPOSITE_OPERATOR_LIGHTER}. */
-    @JsxConstant(FF)
+    @JsxConstant({FF, FF78})
     public static final int SVG_FECOMPOSITE_OPERATOR_LIGHTER = 7;
 
     /**

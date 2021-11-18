@@ -775,7 +775,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"true", "true", "133", "true", "true", "16"},
             EDGE = {"true", "true", "132", "true", "true", "16"},
             FF = {"true", "true", "91", "true", "true", "12"},
-            FF78 = {"true", "true", "80", "true", "true", "12"},
+            FF78 = {"true", "true", "91", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
     public void heightsAndWidths() throws Exception {
         final String html
@@ -886,7 +886,7 @@ public class Window2Test extends WebDriverTestCase {
     @Alerts(CHROME = {"635", "1256", "618", "1239"},
             EDGE = {"636", "1256", "619", "1239"},
             FF = {"677", "1260", "660", "1243"},
-            FF78 = {"688", "1260", "671", "1243"},
+            FF78 = {"677", "1260", "660", "1243"},
             IE = {"682", "1256", "665", "1239"})
     @NotYetImplemented
     // TODO width and height calculation needs to be reworked in HtmlUnit
@@ -922,7 +922,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0,0", "100,200", "110,230", "0,0", "no scrollByLines()", "0,0", "no scrollByPages()"},
             FF = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"},
-            FF78 = {"0,0", "100,200", "110,230", "0,0", "0,85", "0,0", "0,1274"})
+            FF78 = {"0,0", "100,200", "110,230", "0,0", "0,0", "0,0", "0,0"})
     @NotYetImplemented({FF, FF78})
     public void scrolling1() throws Exception {
         scrolling(true);
@@ -1016,7 +1016,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "undefined"},
             FF = {"10", "89"},
-            FF78 = {"10", "79"})
+            FF78 = {"10", "89"})
     public void mozInnerScreen() throws Exception {
         final String html
             = "<html><body onload='test()'><script>\n"
@@ -2535,8 +2535,6 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object Window]", "[object WindowProperties]", "[object EventTarget]", "[object Object]"},
-            FF78 =  {"[object WindowProperties]", "[object WindowProperties]", "[object EventTarget]",
-                "[object Object]"},
             IE = "exception")
     @HtmlUnitNYI(CHROME = {"[object Window]", "[object EventTarget]", "[object Object]"},
             EDGE = {"[object Window]", "[object EventTarget]", "[object Object]"},
@@ -2567,7 +2565,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object Navigator]", "##test##"},
                 FF = {"[object Navigator]", "[object Navigator]"},
-                FF78 = {"undefined", "##test##"},
+                FF78 = {"[object Navigator]", "[object Navigator]"},
                 IE = {"[object Navigator]", "[object Navigator]"})
     public void clientInformation() throws Exception {
         final String html = "<html><head>\n"

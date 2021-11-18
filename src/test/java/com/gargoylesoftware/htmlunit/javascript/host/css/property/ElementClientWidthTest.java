@@ -356,7 +356,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12",
             FF = "8",
-            FF78 = "16",
+            FF78 = "8",
             IE = "20")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
@@ -1368,7 +1368,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "22",
             FF = "26",
-            FF78 = "27",
+            FF78 = "26",
             IE = "23")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
@@ -1776,7 +1776,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12",
             FF = "8",
-            FF78 = "16",
+            FF78 = "8",
             IE = "20")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
@@ -1794,7 +1794,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10")
+            FF = "10",
+            FF78 = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1807,7 +1808,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "253",
             FF = "261",
-            FF78 = "240",
+            FF78 = "230",
             IE = "228")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
@@ -1851,7 +1852,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "10")
+            FF = "10",
+            FF78 = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -1864,7 +1866,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "47",
             FF = "83",
-            FF78 = "48",
+            FF78 = "40",
             IE = "55")
     @HtmlUnitNYI(CHROME = "55",
             EDGE = "55",
@@ -1897,7 +1899,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "54",
             FF = "100",
-            FF78 = "94",
+            FF78 = "86",
             IE = "101")
     @HtmlUnitNYI(CHROME = "118",
             EDGE = "118",

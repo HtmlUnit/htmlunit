@@ -1556,7 +1556,6 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline-block"},
-            FF78 = {"", "inline"},
             IE = {"inline-block", "inline-block"})
     public void textarea() throws Exception {
         test("textarea");

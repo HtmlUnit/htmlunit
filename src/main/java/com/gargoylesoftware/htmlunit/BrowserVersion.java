@@ -97,7 +97,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX = new BrowserVersion(94, "FF");
 
     /** Firefox 78 ESR. */
-    public static final BrowserVersion FIREFOX_78 = new BrowserVersion(78, "FF78");
+    public static final BrowserVersion FIREFOX_78 = new BrowserVersion(91, "FF78");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");

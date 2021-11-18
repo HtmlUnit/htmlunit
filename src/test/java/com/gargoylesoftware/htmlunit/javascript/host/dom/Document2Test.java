@@ -438,9 +438,7 @@ public class Document2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true"},
-            FF78 = {"false", "false"})
-    @NotYetImplemented(FF78)
+    @Alerts({"true", "true"})
     public void queryCommandEnabled() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"

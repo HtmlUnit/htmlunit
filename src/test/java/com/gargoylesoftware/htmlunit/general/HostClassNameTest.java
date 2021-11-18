@@ -3908,8 +3908,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "exception",
-            FF78 = "function HTMLMenuItemElement() {\n    [native code]\n}")
+    @Alerts("exception")
     public void htmlMenuItemElement() throws Exception {
         test("HTMLMenuItemElement");
     }
@@ -5021,7 +5020,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Intl]",
-            FF78 = "[object Object]",
             IE = "[object Object]")
     public void intl() throws Exception {
         test("Intl");
@@ -7563,10 +7561,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "[object Reflect]",
-            EDGE = "[object Reflect]",
-            FF = "[object Reflect]",
-            FF78 = "[object Object]",
+    @Alerts(DEFAULT = "[object Reflect]",
             IE = "exception")
     public void reflect() throws Exception {
         test("Reflect");

@@ -46,7 +46,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Intl]",
-            FF78 = "[object Object]",
             IE = "[object Object]")
     public void intl() throws Exception {
         test("Intl");
@@ -324,10 +323,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
                 + "\u0645\u064a\u0644\u0627\u062f\u064a, 4:00:00 \u0635",
-            FF78 = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
-                + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + " \u0664:\u0660\u0660:\u0660\u0660 \u0635",
             FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
+                + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
+                + ", \u0664:\u0660\u0660:\u0660\u0660 \u0635",
+            FF78 = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + ", \u0664:\u0660\u0660:\u0660\u0660 \u0635",
             IE = "\u200f\u0627\u0644\u062c\u0645\u0639\u0629\u200f, \u200f\u0661\u0667\u200f \u200f\u0635\u0641"

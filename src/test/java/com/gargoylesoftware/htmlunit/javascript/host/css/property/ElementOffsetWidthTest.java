@@ -375,7 +375,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "22",
             CHROME = "16",
             EDGE = "16",
-            FF = "12")
+            FF = "12",
+            FF78 = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1291,7 +1292,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "160",
-            FF78 = "162",
             IE = "280")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
@@ -1389,7 +1389,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "24",
             FF = "30",
-            FF78 = "27",
+            FF78 = "30",
             IE = "25")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
@@ -1619,7 +1619,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "183",
             CHROME = "161",
             EDGE = "161",
-            FF = "185")
+            FF = "185",
+            FF78 = "185")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",
@@ -1778,7 +1779,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "147",
+            FF78 = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
@@ -1798,7 +1799,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "22",
             CHROME = "16",
             EDGE = "16",
-            FF = "12")
+            FF = "12",
+            FF78 = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
@@ -1815,7 +1817,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "14")
+            FF = "14",
+            FF78 = "14")
     @HtmlUnitNYI(FF = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
@@ -1829,7 +1832,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "253",
             FF = "261",
-            FF78 = "240",
+            FF78 = "230",
             IE = "228")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
@@ -1859,7 +1862,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "147",
+            FF78 = "149",
             IE = "147")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
@@ -1877,7 +1880,8 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "13",
-            FF = "14")
+            FF = "14",
+            FF78 = "14")
     @HtmlUnitNYI(FF = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
@@ -1891,7 +1895,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "51",
             FF = "87",
-            FF78 = "54",
+            FF78 = "44",
             IE = "57")
     @HtmlUnitNYI(CHROME = "55",
             EDGE = "55",
@@ -1910,7 +1914,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "147",
+            FF78 = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
@@ -1929,7 +1933,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "58",
             FF = "104",
-            FF78 = "100",
+            FF78 = "90",
             IE = "103")
     @HtmlUnitNYI(CHROME = "118",
             EDGE = "118",
@@ -1948,7 +1952,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "147",
+            FF78 = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",

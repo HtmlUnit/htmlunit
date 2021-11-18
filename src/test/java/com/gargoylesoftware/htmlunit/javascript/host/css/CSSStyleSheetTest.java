@@ -971,7 +971,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"block", "1"},
             CHROME = {"block", "0"},
             EDGE = {"block", "0"},
-            FF = {"block", "0"})
+            FF = {"block", "0"},
+            FF78 = {"block", "0"})
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
     }
@@ -992,7 +993,8 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"block", "1"},
             CHROME = {"block", "0"},
             EDGE = {"block", "0"},
-            FF = {"block", "0"})
+            FF = {"block", "0"},
+            FF78 = {"block", "0"})
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");
     }

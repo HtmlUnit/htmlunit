@@ -58,7 +58,7 @@ public class SVGMarkerElement extends SVGElement {
     public static final int SVG_MARKERUNITS_STROKEWIDTH = 2;
 
     /** The constant {@code SVG_MARKER_ORIENT_AUTO_START_REVERSE}. */
-    @JsxConstant(FF)
+    @JsxConstant({FF, FF78})
     public static final int SVG_MARKER_ORIENT_AUTO_START_REVERSE = 3;
 
     /**

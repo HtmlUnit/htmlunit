@@ -142,7 +142,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSlotElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement;
@@ -1227,7 +1226,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if ((elem.getClass() == HTMLElement.class
                 || elem instanceof HTMLDivElement
                 || elem instanceof HTMLUnknownElement
-                || elem instanceof HTMLMenuItemElement
                 || elem instanceof HTMLDataElement
                 || elem instanceof HTMLTimeElement
                 || elem instanceof HTMLOutputElement

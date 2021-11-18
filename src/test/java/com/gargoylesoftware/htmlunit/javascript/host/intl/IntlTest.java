@@ -36,7 +36,6 @@ public class IntlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object Intl]",
-            FF78 = "[object Object]",
             IE = "[object Object]")
     public void intl() throws Exception {
         test("Intl");
