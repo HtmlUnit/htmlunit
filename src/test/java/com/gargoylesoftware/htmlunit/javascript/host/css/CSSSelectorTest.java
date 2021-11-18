@@ -1059,7 +1059,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF78 = "exception")
     public void invalid_not() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1223,7 +1224,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF78 = "exception")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1253,7 +1255,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF78 = "exception")
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1301,7 +1304,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF78 = "exception")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1331,7 +1335,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             IE = "exception")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
-            FF = "exception")
+            FF = "exception",
+            FF78 = "exception")
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

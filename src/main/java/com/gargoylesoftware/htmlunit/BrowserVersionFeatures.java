@@ -458,7 +458,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
@@ -567,7 +567,7 @@ public enum BrowserVersionFeatures {
     HTTP_HEADER_CH_UA,
 
     /** Browser sends Sec-Fetch headers. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     HTTP_HEADER_SEC_FETCH,
 
     /** Browser sends Upgrade-Insecure-Requests header. */

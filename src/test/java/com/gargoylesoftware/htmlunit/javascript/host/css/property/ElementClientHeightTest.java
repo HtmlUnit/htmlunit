@@ -476,7 +476,8 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "19",
             FF78 = "19",
             IE = "0")
-    @HtmlUnitNYI(FF = "18")
+    @HtmlUnitNYI(FF = "18",
+            FF78 = "18")
     public void details() throws Exception {
         loadPageVerifyTitle2(test("details"));
     }
@@ -1496,6 +1497,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "20",
             EDGE = "20",
             FF = "20",
+            FF78 = "20",
             IE = "20")
     public void select() throws Exception {
         loadPageVerifyTitle2(test("select"));
@@ -1917,8 +1919,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "18",
             IE = "21")
-    @HtmlUnitNYI(FF78 = "20",
-            IE = "20")
+    @HtmlUnitNYI(IE = "20")
     public void inputButton() throws Exception {
         loadPageVerifyTitle2(testInput("button"));
     }
@@ -1949,7 +1950,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "17",
             EDGE = "17",
             FF = "18",
-            FF78 = "20",
+            FF78 = "18",
             IE = "20")
     public void inputFile() throws Exception {
         loadPageVerifyTitle2(testInput("file"));
@@ -2003,8 +2004,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "18",
             IE = "21")
-    @HtmlUnitNYI(FF78 = "20",
-            IE = "20")
+    @HtmlUnitNYI(IE = "20")
     public void inputReset() throws Exception {
         loadPageVerifyTitle2(testInput("reset"));
     }
@@ -2034,8 +2034,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
             FF = "18",
             FF78 = "18",
             IE = "21")
-    @HtmlUnitNYI(FF78 = "20",
-            IE = "20")
+    @HtmlUnitNYI(IE = "20")
     public void inputSubmit() throws Exception {
         loadPageVerifyTitle2(testInput("submit"));
     }
