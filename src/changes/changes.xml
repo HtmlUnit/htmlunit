@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.56.0" date="December xx, 2021" description="Bugfixes">
+        <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96">
             <action type="fix" dev="rbri" issue="405">
                 Links to issues and pulls on htmlunit webpage changes-report.html corrected.
             </action>
