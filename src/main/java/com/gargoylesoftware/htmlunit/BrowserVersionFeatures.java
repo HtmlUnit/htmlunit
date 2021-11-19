@@ -450,7 +450,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE, FF, FF78})
+    @BrowserFeature({CHROME, EDGE, FF})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
@@ -1301,7 +1301,7 @@ public enum BrowserVersionFeatures {
     JS_STORAGE_PRESERVED_INCLUDED,
 
     /** Stylesheet list contains only active style sheets. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_STYLESHEETLIST_ACTIVE_ONLY,
 
     /** IE supports accessing unsupported style elements via getter
