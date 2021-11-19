@@ -127,7 +127,7 @@ public class Cookie implements Serializable {
             throw new IllegalArgumentException("invalid max age:  " + maxAge);
         }
         if (maxAge >= 0) {
-            cookie.setExpiryDate(new Date(System.currentTimeMillis() + (maxAge * 1000)));
+            cookie.setExpiryDate(new Date(System.currentTimeMillis() + (maxAge * 1000L)));
         }
 
         httpClientCookie_ = cookie;
