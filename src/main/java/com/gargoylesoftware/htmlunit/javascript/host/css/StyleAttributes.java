@@ -308,11 +308,11 @@ public final class StyleAttributes {
 
         /** The style property {@code blockSize}. */
         BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("322px"),
-                ff78("343px"), ffLatest("345px")),
+                ff("345px")),
 
         /** The style property {@code block-size}. */
         BLOCK_SIZE_("block-size", "block-size",
-                ff78("343px"), ffLatest("345px")),
+                ff("345px")),
 
         /** The style property {@code border}. */
         BORDER("border", "border", chromeAndEdge("0px none rgb(0, 0, 0)"), ff(""), ie("")),
@@ -2013,11 +2013,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozPerspectiveOrigin}. */
         MOZ_PERSPECTIVE_ORIGIN("MozPerspectiveOrigin",
-                "-moz-perspective-origin", ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                "-moz-perspective-origin", ff("622px 172.5px")),
 
         /** The style property {@code -moz-perspective-origin}. */
         MOZ_PERSPECTIVE_ORIGIN__("-moz-perspective-origin",
-                "-moz-perspective-origin", ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                "-moz-perspective-origin", ff("622px 172.5px")),
 
         /** The style property {@code MozTabSize}. */
         MOZ_TAB_SIZE("MozTabSize", "-moz-tab-size", ff("8")),
@@ -2049,11 +2049,11 @@ public final class StyleAttributes {
 
         /** The style property {@code MozTransformOrigin}. */
         MOZ_TRANSFORM_ORIGIN("MozTransformOrigin", "-moz-transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code -moz-transform-origin}. */
         MOZ_TRANSFORM_ORIGIN__("-moz-transform-origin", "-moz-transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code MozTransformStyle}. */
         MOZ_TRANSFORM_STYLE("MozTransformStyle", "-moz-transform-style",
@@ -2662,12 +2662,10 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px"),
-                ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code perspective-origin}. */
-        PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+        PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("622px 172.5px")),
 
         /** The style property {@code pitch}. */
         PITCH("pitch", "pitch"),
@@ -2779,10 +2777,10 @@ public final class StyleAttributes {
 
         /** The style property {@code rubyPosition}. */
         RUBY_POSITION("rubyPosition", "ruby-position", chromeAndEdge("over"),
-                ie("above"), ff78("over"), ffLatest("alternate")),
+                ie("above"), ff("alternate")),
 
         /** The style property {@code ruby-position}. */
-        RUBY_POSITION_("ruby-position", "ruby-position", ff78("over"), ffLatest("alternate")),
+        RUBY_POSITION_("ruby-position", "ruby-position", ff("alternate")),
 
         /** The style property {@code rx}. */
         RX("rx", "rx", chromeAndEdge("auto"), ff("auto")),
@@ -3328,12 +3326,10 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px"),
-                ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
 
         /** The style property {@code transform-origin}. */
-        TRANSFORM_ORIGIN_("transform-origin", "transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+        TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("622px 172.5px")),
 
         /** The style property {@code transformStyle}. */
         TRANSFORM_STYLE("transformStyle", "transform-style", ff("flat"), ie("flat"), chromeAndEdge("flat")),
@@ -4124,15 +4120,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                chromeAndEdge("620px 161px"), ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                chromeAndEdge("620px 161px"), ff("622px 172.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code -webkit-perspective-origin}. */
         WEBKIT_PERSPECTIVE_ORIGIN__("-webkit-perspective-origin", "webkit-perspective-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
         WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chromeAndEdge("")),
@@ -4252,15 +4248,15 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                chromeAndEdge("620px 161px"), ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                chromeAndEdge("620px 161px"), ff("622px 172.5px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code -webkit-transform-origin}. */
         WEBKIT_TRANSFORM_ORIGIN__("-webkit-transform-origin", "webkit-transform-origin",
-                ff78("622px 171.5px"), ffLatest("622px 172.5px")),
+                ff("622px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
         WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chromeAndEdge("")),

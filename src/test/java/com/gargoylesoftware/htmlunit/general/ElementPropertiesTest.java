@@ -1240,7 +1240,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setInterval(),setTimeout(),sortFunction(),speechSynthesis,status,stop(),styleMedia,"
                 + "TEMPORARY,test(),top,window",
             FF78 = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
-                + "captureEvents(),clearInterval(),clearTimeout(),close(),closed,confirm(),console,controllers,"
+                + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,"
+                + "close(),closed,confirm(),console,controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,log(),matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"

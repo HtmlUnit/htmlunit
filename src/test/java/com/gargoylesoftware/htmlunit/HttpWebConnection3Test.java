@@ -451,7 +451,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate",
                     "Connection: Keep-Alive",
                     "Referer: http://localhost:§§PORT§§/",
-                    "Upgrade-Insecure-Requests: 1"})
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-User: ?1"})
     public void formGet() throws Exception {
         String html = "<html><body><form action='foo' method='get' accept-charset='iso-8859-1'>\n"
             + "<input name='text1' value='me &amp;amp; you'>\n"
@@ -660,8 +664,12 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate",
                     "Connection: Keep-Alive",
                     "Referer: http://localhost:§§PORT§§/",
-                    "Origin: http://localhost:§§PORT§§",
                     "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-User: ?1",
+                    "Origin: http://localhost:§§PORT§§",
                     "Content-Length: 48",
                     "Content-Type: application/x-www-form-urlencoded",
                     "",
@@ -840,7 +848,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate",
                     "Connection: Keep-Alive",
                     "Referer: http://localhost:§§PORT§§/",
-                    "Upgrade-Insecure-Requests: 1"})
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-User: ?1"})
     public void locationSetHref() throws Exception {
         final String url = "http://localhost:" + WebTestCase.PORT_PRIMITIVE_SERVER;
         String html = "<html><body><script>location.href='" + url + "/foo';</script></body></html>";
@@ -997,7 +1009,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate",
                     "Connection: Keep-Alive",
                     "Referer: http://localhost:§§PORT§§/",
-                    "Upgrade-Insecure-Requests: 1"})
+                    "Upgrade-Insecure-Requests: 1",
+                    "Sec-Fetch-Dest: document",
+                    "Sec-Fetch-Mode: navigate",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-User: ?1"})
     public void locationSetSearch() throws Exception {
         String html = "<html><body><script>location.search='newSearch';</script></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
@@ -1149,7 +1165,11 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                     "Accept-Encoding: gzip, deflate",
                     "Connection: Keep-Alive",
                     "Referer: http://localhost:§§PORT§§/",
-                    "Upgrade-Insecure-Requests: 1" /* wrong */ })
+                    "Upgrade-Insecure-Requests: 1", // wrong
+                    "Sec-Fetch-Dest: script",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-User: ?1" /* wrong */ })
     public void loadJavascript() throws Exception {
         String html = "<html><head> <script src=\"script.js\"></script> </head><body></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
