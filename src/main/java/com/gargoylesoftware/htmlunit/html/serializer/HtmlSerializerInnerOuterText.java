@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_IGNORE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
 
@@ -126,9 +125,7 @@ public class HtmlSerializerInnerOuterText {
             }
         }
         else if (node instanceof SvgText) {
-            if (!browserVersion_.hasFeature(JS_INNER_TEXT_SVG_IGNORE)) {
-                appendChildren(builder, node, mode);
-            }
+            appendChildren(builder, node, mode);
         }
         else if (node instanceof SvgTitle) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_TITLE)) {

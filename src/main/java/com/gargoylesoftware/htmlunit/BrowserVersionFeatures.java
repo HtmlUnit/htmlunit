@@ -609,7 +609,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL,
 
     /** The anchor protocol property returns ':' for broken http(s) url's. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL,
 
     /** The anchor protocol property converts drive letters to uppercase. */
@@ -1041,10 +1041,6 @@ public enum BrowserVersionFeatures {
     /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
     @BrowserFeature(IE)
     JS_INNER_HTML_LF,
-
-    /** Indicates that innerText ignores SVG text content. */
-    @BrowserFeature(FF78)
-    JS_INNER_TEXT_SVG_IGNORE,
 
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})
