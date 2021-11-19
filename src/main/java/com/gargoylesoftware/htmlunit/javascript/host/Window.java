@@ -19,7 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_COM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_SELECTION_NULL_IF_INVISIBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_TOP_WRITABLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -654,7 +653,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * Returns the JavaScript property {@code clientInformation}.
      * @return the client information
      */
-    @JsxGetter({CHROME, EDGE, FF, IE})
+    @JsxGetter({CHROME, EDGE, FF, FF78, IE})
     public Object getClientInformation() {
         if (clientInformation_ != null) {
             return clientInformation_;
@@ -1911,10 +1910,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     @JsxGetter({FF, FF78})
     public int getMozInnerScreenY() {
-        if (getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91)) {
-            return 89;
-        }
-        return 79;
+        return 89;
     }
 
     private static final class Filter {

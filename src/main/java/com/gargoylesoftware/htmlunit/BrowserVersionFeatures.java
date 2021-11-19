@@ -1467,12 +1467,6 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133,
 
     /**
-     * Difference of window.outer/inner height is 80.
-     */
-    @BrowserFeature(FF78)
-    JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_80,
-
-    /**
      * Difference of window.outer/inner height is 86.
      */
     @BrowserFeature(IE)
@@ -1481,7 +1475,7 @@ public enum BrowserVersionFeatures {
     /**
      * Difference of window.outer/inner height is 91.
      */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF78})
     JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_91,
 
     /** Window.getSelection returns null, if the window is not visible. */
