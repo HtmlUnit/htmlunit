@@ -23,7 +23,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
@@ -272,10 +271,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Reflect reflect = new Reflect();
             reflect.setParentScope(window);
             window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
-
-            if (browserVersion.hasFeature(JS_REFLECT_NAMED_OBJECT)) {
-                reflect.setClassName("Object");
-            }
         }
 
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();

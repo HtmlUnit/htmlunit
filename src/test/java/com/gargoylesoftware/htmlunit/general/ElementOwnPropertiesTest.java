@@ -6027,7 +6027,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "compact,constructor,type")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
-            FF78 = "constructor(),label,type",
+            FF78 = "constructor()",
             FF = "constructor()",
             IE = "constructor,type")
     public void menu() throws Exception {

@@ -653,7 +653,7 @@ public enum BrowserVersionFeatures {
     JS_BLOB_CONTENT_TYPE_CASE_SENSITIVE,
 
     /** BlobEvent ctor requires a data value. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_BLOB_EVENT_REQUIRES_DATA,
 
     /** Body {@code margin} is 8px. */
@@ -1099,7 +1099,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_SET_VALUE_URL_TRIMMED,
 
     /** Intl is named Object. */
-    @BrowserFeature({FF78, IE})
+    @BrowserFeature(IE)
     JS_INTL_NAMED_OBJECT,
 
     /** Indicates that Intl.v8BreakIterator is supported. */
@@ -1235,10 +1235,6 @@ public enum BrowserVersionFeatures {
     /** Support {@code Reflect}. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     JS_REFLECT,
-
-    /** {@code Reflect} is named Object. */
-    @BrowserFeature(FF78)
-    JS_REFLECT_NAMED_OBJECT,
 
     /** <code>RegExp.lastParen</code> returns an empty string if the RegExp has too many groups. */
     @BrowserFeature(IE)
