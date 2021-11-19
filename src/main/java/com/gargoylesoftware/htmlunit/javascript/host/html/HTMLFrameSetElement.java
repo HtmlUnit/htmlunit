@@ -143,7 +143,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepadconnected} event handler.
      * @return the {@code ongamepadconnected} event handler
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, FF78})
     public Function getOngamepadconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_CONNECTED);
     }
@@ -152,7 +152,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepadconnected} event handler.
      * @param gamepadconnected the {@code ongamepadconnected} event handler
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF, FF78})
     public void setOngamepadconnected(final Object gamepadconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_CONNECTED, gamepadconnected);
     }
@@ -161,7 +161,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepaddisconnected} event handler.
      * @return the {@code ongamepaddisconnected} event handler
      */
-    @JsxGetter(FF)
+    @JsxGetter({FF, FF78})
     public Function getOngamepaddisconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED);
     }
@@ -170,7 +170,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepaddisconnected} event handler.
      * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
      */
-    @JsxSetter(FF)
+    @JsxSetter({FF, FF78})
     public void setOngamepaddisconnected(final Object gamepaddisconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED, gamepaddisconnected);
     }

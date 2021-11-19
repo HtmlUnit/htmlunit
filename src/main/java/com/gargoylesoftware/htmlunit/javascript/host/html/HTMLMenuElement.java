@@ -42,14 +42,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(domClass = HtmlMenu.class)
 public class HTMLMenuElement extends HTMLListElement {
 
-    private String label_;
-
     /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF78})
     public HTMLMenuElement() {
-        label_ = "";
     }
 
     /**
@@ -57,7 +54,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @return the value of the {@code type} property
      */
     @Override
-    @JsxGetter({FF78, IE})
+    @JsxGetter(IE)
     public String getType() {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             return "";
@@ -83,7 +80,7 @@ public class HTMLMenuElement extends HTMLListElement {
      * @param type the value of the {@code type} property
      */
     @Override
-    @JsxSetter({FF78, IE})
+    @JsxSetter(IE)
     public void setType(final String type) {
         if (getBrowserVersion().hasFeature(JS_MENU_TYPE_EMPTY)) {
             if (StringUtils.isEmpty(type)) {
@@ -107,23 +104,5 @@ public class HTMLMenuElement extends HTMLListElement {
         }
 
         getDomNodeOrDie().setAttribute("type", "list");
-    }
-
-    /**
-     * Returns the value of the {@code label} property.
-     * @return the value of the {@code label} property
-     */
-    @JsxGetter(FF78)
-    public String getLabel() {
-        return label_;
-    }
-
-    /**
-     * Sets the value of the {@code label} property.
-     * @param label the value of the {@code label} property
-     */
-    @JsxSetter(FF78)
-    public void setLabel(final String label) {
-        label_ = label;
     }
 }

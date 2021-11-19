@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF78_STYLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -75,11 +74,6 @@ public class CSSFontFaceRule extends CSSRule {
             cssText = StringUtils.replace(cssText, "; }", ";\n}\n");
             cssText = StringUtils.replace(cssText, "; ", ";\n\t");
             cssText = REPLACEMENT_IE.matcher(cssText).replaceFirst("url($1)");
-        }
-        else if (browserVersion.hasFeature(CSS_CSSTEXT_FF78_STYLE)) {
-            cssText = StringUtils.replace(cssText, "{ ", "{\n  ");
-            cssText = StringUtils.replace(cssText, "; }", ";\n}");
-            cssText = StringUtils.replace(cssText, "; ", ";\n  ");
         }
         return cssText;
     }

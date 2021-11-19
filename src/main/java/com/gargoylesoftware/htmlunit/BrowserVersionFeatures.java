@@ -63,10 +63,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     CSS_BACKGROUND_RGBA,
 
-    /** {@code CSSFontFaceRule.cssText} patches for FF78. */
-    @BrowserFeature(FF78)
-    CSS_CSSTEXT_FF78_STYLE,
-
     /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
     @BrowserFeature(IE)
     CSS_CSSTEXT_IE_STYLE,
@@ -130,10 +126,6 @@ public enum BrowserVersionFeatures {
     /** For disconnected items style font property is blank. */
     @BrowserFeature({CHROME, EDGE})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
-
-    /** Is display style 'block'. */
-    @BrowserFeature(FF78)
-    CSS_TEXTAREA_DISPLAY_BLOCK,
 
     /** 'auto' is supported when setting vertical-align style. */
     @BrowserFeature(IE)
