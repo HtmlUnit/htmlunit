@@ -123,11 +123,11 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_SET_NULL_THROWS,
 
-    /** For disconnectd items style properties are blank. */
+    /** For disconnected items style properties are blank. */
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
-    /** For disconnectd items style font property is blank. */
+    /** For disconnected items style font property is blank. */
     @BrowserFeature({CHROME, EDGE})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
@@ -304,7 +304,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     FORM_SUBMISSION_URL_WITHOUT_HASH,
 
-    /** If the frame src has 'about:' scheme use always 'about:blank' as source. */
+    /** If the frame src has 'about:' scheme always use 'about:blank' as source. */
     @BrowserFeature({FF, FF78, IE})
     FRAME_LOCATION_ABOUT_BLANK_FOR_ABOUT_SCHEME,
 
@@ -378,7 +378,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78})
     HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY,
 
-    /** We can used function in detached documents. */
+    /** We can use functions in detached documents. */
     @BrowserFeature(IE)
     HTMLDOCUMENT_FUNCTION_DETACHED,
 
@@ -441,7 +441,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
-    /** When clicking a input the surrounding anchor is not clicked. */
+    /** When clicking an input the surrounding anchor is not clicked. */
     @BrowserFeature(IE)
     HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR,
 
@@ -760,7 +760,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78, IE})
     JS_DOCUMENT_SELECTION_RANGE_COUNT,
 
-    /** Javascript property document.domain doesn't allow to set domain of {@code about:blank}. */
+    /** Javascript property document.domain doesn't allow setting domain of {@code about:blank}. */
     @BrowserFeature(IE)
     JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK,
 
@@ -1074,8 +1074,8 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF78, IE})
     JS_INPUT_NUMBER_ACCEPT_ALL,
 
-    /** FF commat at end is not an integer. */
-    @BrowserFeature(FF)
+    /** FF comma at end is not an integer. */
+    @BrowserFeature({FF, FF78})
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
@@ -1252,7 +1252,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_REGEXP_EMPTY_LASTPAREN_IF_TOO_MANY_GROUPS,
 
-    /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}. */
+    /** RegExp group <code>$0</code> returns the whole previous match (see {@link java.util.regex.Matcher#group()}). */
     @BrowserFeature(IE)
     JS_REGEXP_GROUP0_RETURNS_WHOLE_MATCH,
 
@@ -1646,7 +1646,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF78})
     URL_AUTH_CREDENTIALS,
 
-    /** Replace only ' ' with %20 when encode the query part of a url. */
+    /** Replace only ' ' with %20 when encode the query part of an url. */
     @BrowserFeature(IE)
     URL_MINIMAL_QUERY_ENCODING,
 

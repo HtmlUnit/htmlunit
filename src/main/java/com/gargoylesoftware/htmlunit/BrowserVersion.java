@@ -96,8 +96,9 @@ public final class BrowserVersion implements Serializable {
     /** Latest Firefox. */
     public static final BrowserVersion FIREFOX = new BrowserVersion(94, "FF");
 
+    private static final int FIREFOX_ESR_NUMERIC = 91;
     /** Firefox 78 ESR. */
-    public static final BrowserVersion FIREFOX_78 = new BrowserVersion(91, "FF78");
+    public static final BrowserVersion FIREFOX_78 = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF78");
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
@@ -606,7 +607,7 @@ public final class BrowserVersion implements Serializable {
      * @return whether or not this version version 60 of a Firefox browser
      */
     public boolean isFirefox78() {
-        return isFirefox() && getBrowserVersionNumeric() == 78;
+        return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;
     }
 
     /**
