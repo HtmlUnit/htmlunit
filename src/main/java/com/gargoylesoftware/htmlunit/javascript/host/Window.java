@@ -4337,24 +4337,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
-     * Returns the {@code onshow} event handler.
-     * @return the {@code onshow} event handler
-     */
-    @JsxGetter(FF78)
-    public Function getOnshow() {
-        return getEventHandler(Event.TYPE_SHOW);
-    }
-
-    /**
-     * Sets the {@code onshow} event handler.
-     * @param onshow the {@code onshow} event handler
-     */
-    @JsxSetter(FF78)
-    public void setOnshow(final Object onshow) {
-        setHandlerForJavaScript(Event.TYPE_SHOW, onshow);
-    }
-
-    /**
      * Returns the {@code onvolumechange} event handler.
      * @return the {@code onvolumechange} event handler
      */

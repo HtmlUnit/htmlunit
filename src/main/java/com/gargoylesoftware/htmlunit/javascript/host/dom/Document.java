@@ -3425,24 +3425,6 @@ public class Document extends Node {
     }
 
     /**
-     * Returns the {@code onshow} event handler for this element.
-     * @return the {@code onshow} event handler for this element
-     */
-    @JsxGetter(FF78)
-    public Function getOnshow() {
-        return getEventHandler(Event.TYPE_SHOW);
-    }
-
-    /**
-     * Sets the {@code onshow} event handler for this element.
-     * @param onshow the {@code onshow} event handler for this element
-     */
-    @JsxSetter(FF78)
-    public void setOnshow(final Object onshow) {
-        setEventHandler(Event.TYPE_SHOW, onshow);
-    }
-
-    /**
      * Returns the {@code onstalled} event handler for this element.
      * @return the {@code onstalled} event handler for this element
      */
