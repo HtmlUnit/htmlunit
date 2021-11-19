@@ -681,11 +681,11 @@ public enum BrowserVersionFeatures {
     JS_CLIENTHEIGHT_INPUT_17,
 
     /** ClientHeight for input is 18. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF78})
     JS_CLIENTHEIGHT_INPUT_18,
 
     /** ClientHeight for radio button and checkbox is 10. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF78})
     JS_CLIENTHEIGHT_RADIO_CHECKBOX_10,
 
     /** ClientRectList.item throws instead of returning null if an element was not found. */
@@ -701,7 +701,7 @@ public enum BrowserVersionFeatures {
     JS_CLIENTWIDTH_INPUT_TEXT_173,
 
     /** ClientWidth for radio button and checkbox is 10. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF78})
     JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
 
     /** Is window can be used as Console. */
