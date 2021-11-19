@@ -638,8 +638,7 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            FF78 = "true")
+    @Alerts("false")
     public void _Node_HTMLMenuItemElement() throws Exception {
         test("Node", "HTMLMenuItemElement");
     }
