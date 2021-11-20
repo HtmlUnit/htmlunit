@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
@@ -24,8 +26,9 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class DefaultPageCreator2Test extends WebTestCase {
+public class DefaultPageCreator2Test {
 
     /**
      * Test for {@link DefaultPageCreator#determinePageType(String)}.

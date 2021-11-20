@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class XSLProcessor2Test extends WebTestCase {
+public class XSLProcessor2Test {
 
     /**
      * @throws Exception if the test fails

@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 /**
@@ -24,7 +28,7 @@ import org.junit.Test;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class BrowserVersionTest extends WebTestCase {
+public class BrowserVersionTest {
 
     /**
      * Test of getBrowserVersionNumeric().

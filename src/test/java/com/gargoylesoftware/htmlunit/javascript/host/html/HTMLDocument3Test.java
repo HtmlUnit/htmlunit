@@ -14,9 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import org.junit.Test;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import com.gargoylesoftware.htmlunit.WebTestCase;
+import org.junit.Test;
 
 /**
  * Tests for {@link HTMLDocument}.
@@ -26,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebTestCase;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HTMLDocument3Test extends WebTestCase {
+public class HTMLDocument3Test {
 
     /**
      * Test having &lt; and &gt; in attribute values.
