@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_NAVIGATOR_
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.ArrayList;
@@ -62,7 +62,7 @@ public class Navigator extends SimpleScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public Navigator() {
     }
 
@@ -124,7 +124,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the language of the browser.
      * @return the language
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Scriptable getLanguages() {
         final String acceptLang = getBrowserVersion().getAcceptLanguageHeader();
         if (StringUtils.isEmpty(acceptLang)) {
@@ -195,7 +195,7 @@ public class Navigator extends SimpleScriptable {
      * @see <a href="https://developer.mozilla.org/en/navigator.productSub">Mozilla Doc</a>
      * @return false
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getProductSub() {
         return getBrowserVersion().getProductSub();
     }
@@ -290,7 +290,7 @@ public class Navigator extends SimpleScriptable {
      * Returns {@code false} always as data tainting support is not enabled in HtmlUnit.
      * @return false
      */
-    @JsxFunction({FF, FF78, IE})
+    @JsxFunction({FF, FF_ESR, IE})
     public boolean taintEnabled() {
         return false;
     }
@@ -311,7 +311,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code buildID} property.
      * @return the {@code buildID} property
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter({FF, FF_ESR})
     public String getBuildID() {
         return getBrowserVersion().getBuildId();
     }
@@ -329,7 +329,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code vendorSub} property.
      * @return the {@code vendorSub} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getVendorSub() {
         return "";
     }
@@ -338,7 +338,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code doNotTrack} property.
      * @return the {@code doNotTrack} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Object getDoNotTrack() {
         final WebClient client = getWindow().getWebWindow().getWebClient();
         if (client.getOptions().isDoNotTrackEnabled()) {
@@ -354,7 +354,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code oscpu} property.
      * @return the {@code oscpu} property
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter({FF, FF_ESR})
     public String getOscpu() {
         return "Windows NT 6.1";
     }
@@ -375,7 +375,7 @@ public class Navigator extends SimpleScriptable {
      * Returns the {@code mimeTypes} property.
      * @return the {@code mimeTypes} property
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public MediaDevices getMediaDevices() {
         if (mediaDevices_ == null) {
             mediaDevices_ = new MediaDevices();

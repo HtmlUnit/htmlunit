@@ -68,13 +68,13 @@ public class BrowserRunner extends Suite {
 
     static final String REAL_CHROME = "chrome";
     static final String REAL_FIREFOX = "ff";
-    static final String REAL_FIREFOX_ESR = "ff78";
+    static final String REAL_FIREFOX_ESR = "ff-esr";
     static final String REAL_EDGE = "edge";
     static final String REAL_IE = "ie";
 
     static final String HTMLUNIT_CHROME = "hu-chrome";
     static final String HTMLUNIT_FIREFOX = "hu-ff";
-    static final String HTMLUNIT_FIREFOX_ESR = "hu-ff78";
+    static final String HTMLUNIT_FIREFOX_ESR = "hu-ff-esr";
     static final String HTMLUNIT_EDGE = "hu-edge";
     static final String HTMLUNIT_IE = "hu-ie";
 
@@ -96,7 +96,7 @@ public class BrowserRunner extends Suite {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, true));
                 }
                 if (browsers.contains(REAL_FIREFOX_ESR)) {
-                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, true));
+                    runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_ESR, true));
                 }
                 if (browsers.contains(REAL_FIREFOX)) {
                     runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, true));
@@ -113,7 +113,7 @@ public class BrowserRunner extends Suite {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.CHROME, false));
             }
             if (browsers.contains(HTMLUNIT_FIREFOX_ESR)) {
-                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_78, false));
+                runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX_ESR, false));
             }
             if (browsers.contains(HTMLUNIT_FIREFOX)) {
                 runners_.add(new BrowserVersionClassRunner(klass, BrowserVersion.FIREFOX, false));

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlTemplate.class, value = {CHROME, EDGE, FF, FF78})
+@JsxClass(domClass = HtmlTemplate.class, value = {CHROME, EDGE, FF, FF_ESR})
 public class HTMLTemplateElement extends HTMLElement {
 
     /**

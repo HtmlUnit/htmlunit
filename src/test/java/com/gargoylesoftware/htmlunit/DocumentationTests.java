@@ -36,7 +36,7 @@ public class DocumentationTests {
         final String userAgent = "USERAGENT";
 
         final BrowserVersion browser =
-                new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_78)
+                new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_ESR)
                     .setApplicationName(applicationName)
                     .setApplicationVersion(applicationVersion)
                     .setUserAgent(userAgent)

@@ -68,7 +68,7 @@ public class BrowserVersionFeaturesTest  {
         browsers.add(BrowserVersion.CHROME);
         browsers.add(BrowserVersion.EDGE);
         browsers.add(BrowserVersion.FIREFOX);
-        browsers.add(BrowserVersion.FIREFOX_78);
+        browsers.add(BrowserVersion.FIREFOX_ESR);
         browsers.add(BrowserVersion.INTERNET_EXPLORER);
 
         for (final BrowserVersionFeatures feature : BrowserVersionFeatures.values()) {
@@ -115,8 +115,8 @@ public class BrowserVersionFeaturesTest  {
         if (browser == BrowserVersion.FIREFOX) {
             return SupportedBrowser.FF;
         }
-        if (browser == BrowserVersion.FIREFOX_78) {
-            return SupportedBrowser.FF78;
+        if (browser == BrowserVersion.FIREFOX_ESR) {
+            return SupportedBrowser.FF_ESR;
         }
 
         return SupportedBrowser.IE;

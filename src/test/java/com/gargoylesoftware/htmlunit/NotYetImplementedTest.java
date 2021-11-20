@@ -120,17 +120,17 @@ public class NotYetImplementedTest {
                     if (nyiString.contains("EDGE = ")) {
                         browser += "EDGE";
                     }
+                    if (nyiString.contains("FF_ESR = ")) {
+                        if (browser.length() > 0) {
+                            browser += ", ";
+                        }
+                        browser += "FF_ESR";
+                    }
                     if (nyiString.contains("FF = ")) {
                         if (browser.length() > 0) {
                             browser += ", ";
                         }
                         browser += "FF";
-                    }
-                    if (nyiString.contains("FF78 = ")) {
-                        if (browser.length() > 0) {
-                            browser += ", ";
-                        }
-                        browser += "FF78";
                     }
                     if (nyiString.contains("IE = ")) {
                         if (browser.length() > 0) {
@@ -205,7 +205,7 @@ public class NotYetImplementedTest {
 
         int count = 0;
         int countIE = 0;
-        int countFF78 = 0;
+        int countFFESR = 0;
         int countFF = 0;
         int countChrome = 0;
         for (final String entry : entries_) {
@@ -258,9 +258,9 @@ public class NotYetImplementedTest {
                 countIE++;
             }
 
-            if (browser.contains("FF78")) {
-                browser = browser.replace("FF78", "");
-                countFF78++;
+            if (browser.contains("FF_ESR")) {
+                browser = browser.replace("FF_ESR", "");
+                countFFESR++;
             }
             if (browser.contains("FF")) {
                 countFF++;
@@ -270,7 +270,7 @@ public class NotYetImplementedTest {
             }
             if (browser.contains("All")) {
                 countIE++;
-                countFF78++;
+                countFFESR++;
                 countFF++;
                 countChrome++;
             }
@@ -290,8 +290,8 @@ public class NotYetImplementedTest {
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");
-        overview.append("    <td class='numeric'>").append(countFF78).append("</td>\n");
-        overview.append("    <td>for FF78</td>\n");
+        overview.append("    <td class='numeric'>").append(countFFESR).append("</td>\n");
+        overview.append("    <td>for FF_ESR</td>\n");
         overview.append("  </tr>\n");
 
         overview.append("  <tr>\n");

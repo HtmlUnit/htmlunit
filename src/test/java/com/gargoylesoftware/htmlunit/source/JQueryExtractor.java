@@ -314,7 +314,7 @@ public final class JQueryExtractor {
                                 && browserNames.contains("CHROME")
                                 && browserNames.contains("EDGE")
                                 && browserNames.contains("FF")
-                                && browserNames.contains("FF78")
+                                && browserNames.contains("FF_ESR")
                                 && browserNames.contains("IE")) {
                             System.out.println("    @NotYetImplemented");
                         }

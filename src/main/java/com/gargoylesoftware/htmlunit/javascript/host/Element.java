@@ -26,7 +26,7 @@ import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINE
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
@@ -111,7 +111,7 @@ public class Element extends Node {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public Element() {
         // Empty.
     }
@@ -325,7 +325,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public boolean hasAttributes() {
         return super.hasAttributes();
     }
@@ -448,7 +448,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public HTMLCollection getChildren() {
         return super.getChildren();
     }
@@ -457,7 +457,7 @@ public class Element extends Node {
      * Gets the token list of class attribute.
      * @return the token list of class attribute
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public DOMTokenList getClassList() {
         return new DOMTokenList(this, "class");
     }
@@ -596,7 +596,7 @@ public class Element extends Node {
      * Returns the class defined for this element.
      * @return the class name
      */
-    @JsxGetter(propertyName = "className", value = {CHROME, EDGE, FF, FF78})
+    @JsxGetter(propertyName = "className", value = {CHROME, EDGE, FF, FF_ESR})
     public Object getClassName_js() {
         return getDomNodeOrDie().getAttributeDirect("class");
     }
@@ -605,7 +605,7 @@ public class Element extends Node {
      * Sets the class attribute for this element.
      * @param className the new class name
      */
-    @JsxSetter(propertyName = "className", value = {CHROME, EDGE, FF, FF78})
+    @JsxSetter(propertyName = "className", value = {CHROME, EDGE, FF, FF_ESR})
     public void setClassName_js(final String className) {
         getDomNodeOrDie().setAttribute("class", className);
     }
@@ -666,7 +666,7 @@ public class Element extends Node {
      * @param className the name to search for
      * @return all the descendant elements with the specified class name
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public HTMLCollection getElementsByClassName(final String className) {
         final DomElement elt = getDomNodeOrDie();
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
@@ -752,7 +752,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536451.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public Object insertAdjacentElement(final String where, final Object insertedElement) {
         if (insertedElement instanceof Node) {
             final DomNode childNode = ((Node) insertedElement).getDomNodeOrDie();
@@ -779,7 +779,7 @@ public class Element extends Node {
      *
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536453.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void insertAdjacentText(final String where, final String text) {
         final Object[] values = getInsertAdjacentLocation(where);
         final DomNode node = (DomNode) values[0];
@@ -867,7 +867,7 @@ public class Element extends Node {
      *      >Mozilla Developer Network</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ie/ms536452.aspx">MSDN</a>
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void insertAdjacentHTML(final String position, final String text) {
         final Object[] values = getInsertAdjacentLocation(position);
         final DomNode domNode = (DomNode) values[0];
@@ -913,7 +913,7 @@ public class Element extends Node {
      * Gets the {@code innerHTML} attribute.
      * @return the contents of this node as HTML
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getInnerHTML() {
         try {
             DomNode domNode = getDomNodeOrDie();
@@ -932,7 +932,7 @@ public class Element extends Node {
      * Replaces all child elements of this element with the supplied value.
      * @param value the new value for the contents of this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setInnerHTML(final Object value) {
         final DomNode domNode;
         try {
@@ -976,7 +976,7 @@ public class Element extends Node {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534310.aspx">MSDN documentation</a>
      * @return the contents of this node as HTML
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getOuterHTML() {
         final StringBuilder buf = new StringBuilder();
         // we can't rely on DomNode.asXml because it adds indentation and new lines
@@ -988,7 +988,7 @@ public class Element extends Node {
      * Replaces this element (including all child elements) with the supplied value.
      * @param value the new value for replacing this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOuterHTML(final Object value) {
         final DomNode domNode = getDomNodeOrDie();
         final DomNode parent = domNode.getParentNode();
@@ -1136,7 +1136,7 @@ public class Element extends Node {
      * Returns the element ID.
      * @return the ID of this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getId() {
         return getDomNodeOrDie().getId();
     }
@@ -1145,7 +1145,7 @@ public class Element extends Node {
      * Sets the id value for this element.
      * @param newId the newId value for this element
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setId(final String newId) {
         getDomNodeOrDie().setId(newId);
     }
@@ -1268,7 +1268,7 @@ public class Element extends Node {
      * anything. The requirement
      * is just to prevent scripts that call that method from failing
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void scrollIntoView() {
         /* do nothing at the moment */
     }
@@ -1286,7 +1286,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Object getPrefix() {
         return super.getPrefix();
     }
@@ -1295,7 +1295,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Object getLocalName() {
         return super.getLocalName();
     }
@@ -1304,7 +1304,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Object getNamespaceURI() {
         return super.getNamespaceURI();
     }
@@ -1923,7 +1923,7 @@ public class Element extends Node {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void remove() {
         super.remove();
     }
@@ -1933,7 +1933,7 @@ public class Element extends Node {
      * @param retargetToElement if true, all events are targeted directly to this element;
      * if false, events can also fire at descendants of this element
      */
-    @JsxFunction({FF, FF78})
+    @JsxFunction({FF, FF_ESR})
     public void setCapture(final boolean retargetToElement) {
         // empty
     }
@@ -1942,7 +1942,7 @@ public class Element extends Node {
      * Mock for the moment.
      * @return true for success
      */
-    @JsxFunction({FF, FF78})
+    @JsxFunction({FF, FF_ESR})
     public boolean releaseCapture() {
         return true;
     }
@@ -1955,7 +1955,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static void before(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.before(context, thisObj, args, function);
@@ -1969,7 +1969,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static void after(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.after(context, thisObj, args, function);
@@ -1982,7 +1982,7 @@ public class Element extends Node {
      * @param args the arguments
      * @param function the function
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
             final Function function) {
         Node.replaceWith(context, thisObj, args, function);
@@ -1996,7 +1996,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         final String selectorString = (String) args[0];
@@ -2022,7 +2022,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({FF, FF78})
+    @JsxFunction({FF, FF_ESR})
     public static boolean mozMatchesSelector(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);
@@ -2036,7 +2036,7 @@ public class Element extends Node {
      * @param function the function
      * @return the value
      */
-    @JsxFunction({CHROME, EDGE, FF, FF78})
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static boolean webkitMatchesSelector(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);

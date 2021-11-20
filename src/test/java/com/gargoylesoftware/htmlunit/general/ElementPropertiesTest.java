@@ -195,7 +195,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     expectedAlerts = BrowserVersionClassRunner
                             .firstDefinedOrGiven(expectedAlerts, alerts.EDGE(), alerts.DEFAULT());
                 }
-                else if (browserVersion == BrowserVersion.FIREFOX_78) {
+                else if (browserVersion == BrowserVersion.FIREFOX_ESR) {
                     expectedAlerts = BrowserVersionClassRunner
                             .firstDefinedOrGiven(expectedAlerts, alerts.FF_ESR(), alerts.DEFAULT());
                 }
@@ -217,7 +217,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     else if (browserVersion == BrowserVersion.EDGE) {
                         nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
                     }
-                    else if (browserVersion == BrowserVersion.FIREFOX_78) {
+                    else if (browserVersion == BrowserVersion.FIREFOX_ESR) {
                         nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF_ESR());
                     }
                     else if (browserVersion == BrowserVersion.FIREFOX) {

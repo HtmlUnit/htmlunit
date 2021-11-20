@@ -43,13 +43,13 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *         final String userAgent = "USERAGENT";
  *
  *         final BrowserVersion browser =
- *                 new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX_78)
+ *                 new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
  *                     .setApplicationName(applicationName)
  *                     .setApplicationVersion(applicationVersion)
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this new one still behaves like a FF78, only the stuff reported to the
+ * <p>But keep in mind this new one still behaves like a FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -97,14 +97,21 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion FIREFOX = new BrowserVersion(94, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 91;
-    /** Firefox 78 ESR. */
-    public static final BrowserVersion FIREFOX_78 = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF78");
+    /** Firefox ESR. */
+    public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
+
+    /**
+     * Firefox 78 ESR.
+     * @deprecated please use FIREFOX_ESR instead
+     */
+    @Deprecated
+    public static final BrowserVersion FIREFOX_78 = FIREFOX_ESR;
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(95, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(96, "Edge");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(96, "Chrome");
@@ -112,7 +119,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Array with all supported browsers
      */
-    public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = new BrowserVersion[] {CHROME, EDGE, FIREFOX, FIREFOX_78, INTERNET_EXPLORER};
+    public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = new BrowserVersion[] {CHROME, EDGE, FIREFOX, FIREFOX_ESR, INTERNET_EXPLORER};
 
     /**
      * The best supported browser version at the moment.
@@ -125,13 +132,13 @@ public final class BrowserVersion implements Serializable {
     /** Register plugins for the browser versions. */
     static {
         // FF68
-        FIREFOX_78.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX_78.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
-                                    + FIREFOX_78.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
-                                    + FIREFOX_78.getBrowserVersionNumeric() + ".0";
-        FIREFOX_78.buildId_ = "20181001000000";
-        FIREFOX_78.productSub_ = "20100101";
-        FIREFOX_78.headerNamesOrdered_ = new String[] {
+        FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
+        FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
+                                    + FIREFOX_ESR.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
+                                    + FIREFOX_ESR.getBrowserVersionNumeric() + ".0";
+        FIREFOX_ESR.buildId_ = "20181001000000";
+        FIREFOX_ESR.productSub_ = "20100101";
+        FIREFOX_ESR.headerNamesOrdered_ = new String[] {
             HttpHeader.HOST,
             HttpHeader.USER_AGENT,
             HttpHeader.ACCEPT,
@@ -145,12 +152,12 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER};
-        FIREFOX_78.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
-        FIREFOX_78.acceptLanguageHeader_ = "en-US,en;q=0.5";
-        FIREFOX_78.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX_78.imgAcceptHeader_ = "image/webp,*/*";
-        FIREFOX_78.cssAcceptHeader_ = "text/css,*/*;q=0.1";
-        FIREFOX_78.fontHeights_ = new int[] {
+        FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
+        FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";
+        FIREFOX_ESR.imgAcceptHeader_ = "image/webp,*/*";
+        FIREFOX_ESR.cssAcceptHeader_ = "text/css,*/*;q=0.1";
+        FIREFOX_ESR.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
             31, 32, 33, 34, 35, 37, 38, 38, 39, 41, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 56, 58, 59, 59,
             60, 61, 63, 64, 65, 66, 68, 69, 69, 70, 71, 73, 74, 75, 76, 77, 79, 79,
@@ -366,31 +373,31 @@ public final class BrowserVersion implements Serializable {
         EDGE.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
         EDGE.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
-        FIREFOX_78.registerUploadMimeType("html", MimeType.TEXT_HTML);
-        FIREFOX_78.registerUploadMimeType("htm", MimeType.TEXT_HTML);
-        FIREFOX_78.registerUploadMimeType("css", MimeType.TEXT_CSS);
-        FIREFOX_78.registerUploadMimeType("xml", MimeType.TEXT_XML);
-        FIREFOX_78.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
-        FIREFOX_78.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
-        FIREFOX_78.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
-        FIREFOX_78.registerUploadMimeType("mp4", "video/mp4");
-        FIREFOX_78.registerUploadMimeType("m4v", "video/mp4");
-        FIREFOX_78.registerUploadMimeType("m4a", "audio/mp4");
-        FIREFOX_78.registerUploadMimeType("png", MimeType.IMAGE_PNG);
-        FIREFOX_78.registerUploadMimeType("mp3", "audio/mpeg");
-        FIREFOX_78.registerUploadMimeType("ogv", "video/ogg");
-        FIREFOX_78.registerUploadMimeType("ogm", "video/ogg");
-        FIREFOX_78.registerUploadMimeType("ogg", "video/ogg");
-        FIREFOX_78.registerUploadMimeType("oga", "audio/ogg");
-        FIREFOX_78.registerUploadMimeType("opus", "audio/ogg");
-        FIREFOX_78.registerUploadMimeType("webm", "video/webm");
-        FIREFOX_78.registerUploadMimeType("webp", "image/webp");
-        FIREFOX_78.registerUploadMimeType("wav", "audio/wav");
-        FIREFOX_78.registerUploadMimeType("flac", "audio/x-flac");
-        FIREFOX_78.registerUploadMimeType("xhtml", "application/xhtml+xml");
-        FIREFOX_78.registerUploadMimeType("xht", "application/xhtml+xml");
-        FIREFOX_78.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
-        FIREFOX_78.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
+        FIREFOX_ESR.registerUploadMimeType("html", MimeType.TEXT_HTML);
+        FIREFOX_ESR.registerUploadMimeType("htm", MimeType.TEXT_HTML);
+        FIREFOX_ESR.registerUploadMimeType("css", MimeType.TEXT_CSS);
+        FIREFOX_ESR.registerUploadMimeType("xml", MimeType.TEXT_XML);
+        FIREFOX_ESR.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
+        FIREFOX_ESR.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
+        FIREFOX_ESR.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        FIREFOX_ESR.registerUploadMimeType("mp4", "video/mp4");
+        FIREFOX_ESR.registerUploadMimeType("m4v", "video/mp4");
+        FIREFOX_ESR.registerUploadMimeType("m4a", "audio/mp4");
+        FIREFOX_ESR.registerUploadMimeType("png", MimeType.IMAGE_PNG);
+        FIREFOX_ESR.registerUploadMimeType("mp3", "audio/mpeg");
+        FIREFOX_ESR.registerUploadMimeType("ogv", "video/ogg");
+        FIREFOX_ESR.registerUploadMimeType("ogm", "video/ogg");
+        FIREFOX_ESR.registerUploadMimeType("ogg", "video/ogg");
+        FIREFOX_ESR.registerUploadMimeType("oga", "audio/ogg");
+        FIREFOX_ESR.registerUploadMimeType("opus", "audio/ogg");
+        FIREFOX_ESR.registerUploadMimeType("webm", "video/webm");
+        FIREFOX_ESR.registerUploadMimeType("webp", "image/webp");
+        FIREFOX_ESR.registerUploadMimeType("wav", "audio/wav");
+        FIREFOX_ESR.registerUploadMimeType("flac", "audio/x-flac");
+        FIREFOX_ESR.registerUploadMimeType("xhtml", "application/xhtml+xml");
+        FIREFOX_ESR.registerUploadMimeType("xht", "application/xhtml+xml");
+        FIREFOX_ESR.registerUploadMimeType("txt", MimeType.TEXT_PLAIN);
+        FIREFOX_ESR.registerUploadMimeType("text", MimeType.TEXT_PLAIN);
 
         FIREFOX.registerUploadMimeType("html", MimeType.TEXT_HTML);
         FIREFOX.registerUploadMimeType("htm", MimeType.TEXT_HTML);
@@ -487,7 +494,7 @@ public final class BrowserVersion implements Serializable {
      * Creates a new browser version instance.
      *
      * @param browserVersionNumeric the floating number version of the browser
-     * @param nickname the short name of the browser (like "FF78", "IE", ...) - has to be unique
+     * @param nickname the short name of the browser (like "FF", "IE", ...) - has to be unique
      */
     BrowserVersion(final int browserVersionNumeric, final String nickname) {
         browserVersionNumeric_ = browserVersionNumeric;
@@ -519,7 +526,7 @@ public final class BrowserVersion implements Serializable {
             expectedBrowser = SupportedBrowser.EDGE;
         }
         else if (isFirefox78()) {
-            expectedBrowser = SupportedBrowser.FF78;
+            expectedBrowser = SupportedBrowser.FF_ESR;
         }
         else if (isFirefox()) {
             expectedBrowser = SupportedBrowser.FF;

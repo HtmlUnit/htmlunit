@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {FF, FF78}, className = "mozRTCPeerConnection")
+@JsxClass(value = {FF, FF_ESR}, className = "mozRTCPeerConnection")
 public class MozRTCPeerConnection extends EventTarget {
 
     /**

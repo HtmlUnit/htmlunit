@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_LABEL_FORM
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -41,7 +41,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLLabelElement() {
     }
 
@@ -67,7 +67,7 @@ public class HTMLLabelElement extends HTMLElement {
     /**
      * @return the HTMLElement labeled by the given label object
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public HTMLElement getControl() {
         final HtmlLabel label = (HtmlLabel) getDomNodeOrDie();
         final HtmlElement labeledElement = label.getLabeledElement();
@@ -84,7 +84,7 @@ public class HTMLLabelElement extends HTMLElement {
      *
      * @param control ignored
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setControl(final HTMLElement control) {
         // the control attribute is read-only
     }

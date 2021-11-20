@@ -902,7 +902,7 @@ public class CodeStyleTest {
                     || line.startsWith("        EDGE = ")
                     || line.startsWith("        IE = ")
                     || line.startsWith("        FF = ")
-                    || line.startsWith("        FF78 = ")) {
+                    || line.startsWith("        FF_ESR = ")) {
                 addFailure("Incorrect indentation in " + relativePath + ", line: " + (i + 2));
             }
         }

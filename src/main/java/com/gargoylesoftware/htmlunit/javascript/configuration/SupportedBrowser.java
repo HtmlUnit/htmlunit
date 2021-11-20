@@ -34,6 +34,6 @@ public enum SupportedBrowser {
     /** Firefox latest. */
     FF,
 
-    /** Firefox 78. */
-    FF78
+    /** Firefox ESR. */
+    FF_ESR
 }

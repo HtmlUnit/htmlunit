@@ -92,7 +92,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                else if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
                     expectedAlerts = firstDefined(alerts.FF_ESR(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
@@ -119,7 +119,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.EDGE(), buggyWebDriver.DEFAULT());
                     }
-                    else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                    else if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
                         expectedAlerts = firstDefinedOrGiven(expectedAlerts,
                                             buggyWebDriver.FF_ESR(), buggyWebDriver.DEFAULT());
                     }
@@ -143,7 +143,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.EDGE());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                else if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
                     expectedAlerts = firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.FF_ESR());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
@@ -172,7 +172,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                 else if (browserVersion_ == BrowserVersion.EDGE) {
                     expectedAlerts = firstDefined(alerts.EDGE(), alerts.DEFAULT());
                 }
-                else if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                else if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
                     expectedAlerts = firstDefined(alerts.FF_ESR(), alerts.DEFAULT());
                 }
                 else if (browserVersion_ == BrowserVersion.FIREFOX) {
@@ -312,7 +312,7 @@ public class BrowserVersionClassRunner extends BlockJUnit4ClassRunner {
                     break;
 
                 case FF_ESR:
-                    if (browserVersion_ == BrowserVersion.FIREFOX_78) {
+                    if (browserVersion_ == BrowserVersion.FIREFOX_ESR) {
                         return true;
                     }
                     break;

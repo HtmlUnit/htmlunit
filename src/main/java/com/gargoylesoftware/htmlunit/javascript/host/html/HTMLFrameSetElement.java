@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.html.HtmlFrameSet;
@@ -42,7 +42,7 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF78})
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLFrameSetElement() {
     }
 
@@ -143,7 +143,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepadconnected} event handler.
      * @return the {@code ongamepadconnected} event handler
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter({FF, FF_ESR})
     public Function getOngamepadconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_CONNECTED);
     }
@@ -152,7 +152,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepadconnected} event handler.
      * @param gamepadconnected the {@code ongamepadconnected} event handler
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter({FF, FF_ESR})
     public void setOngamepadconnected(final Object gamepadconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_CONNECTED, gamepadconnected);
     }
@@ -161,7 +161,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code ongamepaddisconnected} event handler.
      * @return the {@code ongamepaddisconnected} event handler
      */
-    @JsxGetter({FF, FF78})
+    @JsxGetter({FF, FF_ESR})
     public Function getOngamepaddisconnected() {
         return getEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED);
     }
@@ -170,7 +170,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code ongamepaddisconnected} event handler.
      * @param gamepaddisconnected the {@code ongamepaddisconnected} event handler
      */
-    @JsxSetter({FF, FF78})
+    @JsxSetter({FF, FF_ESR})
     public void setOngamepaddisconnected(final Object gamepaddisconnected) {
         setEventHandler(Event.TYPE_GAMEPAD_DISCONNECTED, gamepaddisconnected);
     }
@@ -197,7 +197,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onlanguagechange} event handler.
      * @return the {@code onlanguagechange} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnlanguagechange() {
         return getEventHandler(Event.TYPE_LANGUAGECHANGE);
     }
@@ -206,7 +206,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onlanguagechange} event handler.
      * @param languagechange the {@code onlanguagechange} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnlanguagechange(final Object languagechange) {
         setEventHandler(Event.TYPE_LANGUAGECHANGE, languagechange);
     }
@@ -233,7 +233,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onmessageerror} event handler for this element.
      * @return the {@code onmessageerror} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnmessageerror() {
         return getEventHandler(Event.TYPE_ONMESSAGEERROR);
     }
@@ -323,7 +323,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onpopstate} event handler.
      * @return the {@code onpopstate} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnpopstate() {
         return getEventHandler(Event.TYPE_POPSTATE);
     }
@@ -332,7 +332,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onpopstate} event handler.
      * @param popstate the {@code onpopstate} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnpopstate(final Object popstate) {
         setEventHandler(Event.TYPE_POPSTATE, popstate);
     }
@@ -341,7 +341,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onrejectionhandled} event handler.
      * @return the {@code onrejectionhandled} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnrejectionhandled() {
         return getEventHandler(Event.TYPE_REJECTIONHANDLED);
     }
@@ -350,7 +350,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onrejectionhandled} event handler.
      * @param rejectionhandled the {@code onrejectionhandled} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnrejectionhandled(final Object rejectionhandled) {
         setEventHandler(Event.TYPE_REJECTIONHANDLED, rejectionhandled);
     }
@@ -377,7 +377,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Returns the {@code onunhandledrejection} event handler.
      * @return the {@code onunhandledrejection} event handler
      */
-    @JsxGetter({CHROME, EDGE, FF, FF78})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnunhandledrejection() {
         return getEventHandler(Event.TYPE_UNHANDLEDREJECTION);
     }
@@ -386,7 +386,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onunhandledrejection} event handler.
      * @param unhandledrejection the {@code onunhandledrejection} event handler
      */
-    @JsxSetter({CHROME, EDGE, FF, FF78})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnunhandledrejection(final Object unhandledrejection) {
         setEventHandler(Event.TYPE_UNHANDLEDREJECTION, unhandledrejection);
     }

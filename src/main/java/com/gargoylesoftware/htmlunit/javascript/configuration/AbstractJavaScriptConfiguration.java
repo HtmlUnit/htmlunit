@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.lang.annotation.Annotation;
@@ -112,7 +112,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 expectedBrowser = IE;
             }
             else if (browser.isFirefox78()) {
-                expectedBrowser = FF78;
+                expectedBrowser = FF_ESR;
             }
             else if (browser.isFirefox()) {
                 expectedBrowser = FF;

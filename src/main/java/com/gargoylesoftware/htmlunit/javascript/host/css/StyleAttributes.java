@@ -18,7 +18,7 @@ import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfigura
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff78;
+import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffEsr;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffLatest;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffNotIterable;
 import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
@@ -1109,10 +1109,10 @@ public final class StyleAttributes {
         FONT_STYLE_("font-style", "font-style", ff("normal")),
 
         /** The style property {@code fontSynthesis}. */
-        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
+        FONT_SYNTHESIS("fontSynthesis", "font-synthesis", ffEsr("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code font-synthesis}. */
-        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff78("weight style"), ffLatest("weight style small-caps")),
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ffEsr("weight style"), ffLatest("weight style small-caps")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdge("normal"), ff("normal"), ie("normal")),
