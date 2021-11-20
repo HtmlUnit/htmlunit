@@ -65,13 +65,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                   "[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]",
                   "[object CSS2Properties]", "[object CSS2Properties]"},
-            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]",
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
                     "[object CSS2Properties]", "[object CSS2Properties]"})
     @HtmlUnitNYI(IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
-            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                     "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void scriptableToString() throws Exception {
@@ -110,7 +110,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
             IE = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
             FF = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"},
-            FF78 = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"})
+            FF_ESR = {"background-color: rgb(255, 255, 255);", "background-color:#FFFFFF;"})
     // FIXME hex colors are not transformed to rgb for direct styles
     public void cssText() throws Exception {
         final String html
@@ -187,7 +187,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                   "background-color: #FFFFFF;color: red;"},
             FF = {"background-color: rgb(255, 255, 255); color: red;",
                   "background-color: #FFFFFF;color: red;"},
-            FF78 = {"background-color: rgb(255, 255, 255); color: red;",
+            FF_ESR = {"background-color: rgb(255, 255, 255); color: red;",
                     "background-color: #FFFFFF;color: red;"})
     // FIXME hex colors are not transformed to rgb for direct styles
     // FIXME add more properties to check formating rules (color handling, spaces,
@@ -228,7 +228,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = {"color: rgb(0, 0, 0);", "color:#000000;"},
             IE = {"color: rgb(0, 0, 0);", "color:#000000;"},
             FF = {"color: rgb(0, 0, 0);", "color:#000000;"},
-            FF78 = {"color: rgb(0, 0, 0);", "color:#000000;"})
+            FF_ESR = {"color: rgb(0, 0, 0);", "color:#000000;"})
     // FIXME hex colors are not transformed to rgb for direct styles
     public void cssTextSet() throws Exception {
         final String html
@@ -360,7 +360,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             EDGE = {"", "abc"},
             IE = {"", "abc"},
             FF = {"", "abc"},
-            FF78 = {"", "abc"})
+            FF_ESR = {"", "abc"})
     @NotYetImplemented
     // FIXME styles not validated/ignored for direct styles?
     public void cssTextSetInvalid() throws Exception {
@@ -648,7 +648,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             EDGE = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             FF = {"black", "pink", "color: pink; background: blue; foo: bar;"},
-            FF78 = {"black", "pink", "color: pink; background: blue; foo: bar;"},
+            FF_ESR = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             IE = {"black", "pink", "color: pink; background: blue; foo: bar;"})
     public void style_MultipleCssAttributes() throws Exception {
         final String html
@@ -806,9 +806,9 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "blue",
             FF = "blue none repeat scroll 0% 0%",
-            FF78 = "blue none repeat scroll 0% 0%")
+            FF_ESR = "blue none repeat scroll 0% 0%")
     @HtmlUnitNYI(FF = "blue",
-            FF78 = "blue")
+            FF_ESR = "blue")
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -935,7 +935,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"", "alpha(opacity=50)"},
             EDGE = {"", "alpha(opacity=50)"},
             FF = {"", "alpha(opacity=50)"},
-            FF78 = {"", "alpha(opacity=50)"},
+            FF_ESR = {"", "alpha(opacity=50)"},
             IE = {"", "alpha(opacity=50)"})
     public void styleFilter() throws Exception {
         final String html = "<html><body onload='test()'><script>\n"
@@ -2802,7 +2802,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
-            FF78 = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
+            FF_ESR = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                     "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
@@ -2818,7 +2818,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
                        "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
-            FF78 = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
+            FF_ESR = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                     "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
@@ -3195,7 +3195,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"function", "before", "none", "after", "none"},
             EDGE = {"function", "before", "none", "after", "none"},
             FF = {"function", "before", "none", "after", "none"},
-            FF78 = {"function", "before", "none", "after", "none"})
+            FF_ESR = {"function", "before", "none", "after", "none"})
     public void interceptSetter() throws Exception {
         final String html = "<html>\n"
             + "<body>\n"
@@ -3477,7 +3477,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
-            FF78 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF_ESR = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void widows() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3511,7 +3511,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "2", "", "2", "5", "5", "5", "5"},
             IE = {"", "2", "0", "0", "5", "5", "0", "0"},
             FF = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"},
-            FF78 = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
+            FF_ESR = {"undefined", "undefined", "0", "undefined", "5", "undefined", "0", "undefined"})
     public void orphans() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -3577,10 +3577,10 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
-            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "green", "abc"},
             IE = {"[object MSStyleCSSProperties]", "[object MSStyleCSSProperties]", "", ""})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
-            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
+            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "green", "abc"},
             IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "", ""})
     public void setStyle() throws Exception {
         final String html = "<html><head>\n"

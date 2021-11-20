@@ -87,7 +87,7 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts.FF78())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF_ESR())
                         && BrowserVersionClassRunner.isDefined(alerts.IE())
                         && BrowserVersionClassRunner.isDefined(alerts.EDGE()));
 
@@ -95,7 +95,7 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts.FF78())
+                        && BrowserVersionClassRunner.isDefined(alerts.FF_ESR())
                         && BrowserVersionClassRunner.isDefined(alerts.IE())
                         && BrowserVersionClassRunner.isDefined(alerts.EDGE()));
 
@@ -103,7 +103,7 @@ class BrowserStatement extends Statement {
                 assertNotEquals(BrowserVersion.EDGE, alerts.EDGE(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts.CHROME(), alerts.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts.FF(), alerts.DEFAULT());
-                assertNotEquals(BrowserVersion.FIREFOX_78, alerts.FF78(), alerts.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_78, alerts.FF_ESR(), alerts.DEFAULT());
             }
 
             final HtmlUnitNYI nyiAlerts = method_.getAnnotation(HtmlUnitNYI.class);
@@ -117,13 +117,13 @@ class BrowserStatement extends Statement {
                     assertNotEquals(BrowserVersion.CHROME, alerts.DEFAULT(), nyiAlerts.CHROME());
                 }
 
-                if (BrowserVersionClassRunner.isDefined(alerts.FF78())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF78())) {
-                    assertNotEquals(BrowserVersion.FIREFOX_78, alerts.FF78(), nyiAlerts.FF78());
+                if (BrowserVersionClassRunner.isDefined(alerts.FF_ESR())
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF_ESR())) {
+                    assertNotEquals(BrowserVersion.FIREFOX_78, alerts.FF_ESR(), nyiAlerts.FF_ESR());
                 }
                 else if (BrowserVersionClassRunner.isDefined(alerts.DEFAULT())
-                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF78())) {
-                    assertNotEquals(BrowserVersion.FIREFOX_78, alerts.DEFAULT(), nyiAlerts.FF78());
+                        && BrowserVersionClassRunner.isDefined(nyiAlerts.FF_ESR())) {
+                    assertNotEquals(BrowserVersion.FIREFOX_78, alerts.DEFAULT(), nyiAlerts.FF_ESR());
                 }
 
                 if (BrowserVersionClassRunner.isDefined(alerts.FF())
@@ -162,7 +162,7 @@ class BrowserStatement extends Statement {
                         BrowserVersionClassRunner.isDefined(alerts2.DEFAULT())
                         && BrowserVersionClassRunner.isDefined(alerts2.CHROME())
                         && BrowserVersionClassRunner.isDefined(alerts2.FF())
-                        && BrowserVersionClassRunner.isDefined(alerts2.FF78())
+                        && BrowserVersionClassRunner.isDefined(alerts2.FF_ESR())
                         && BrowserVersionClassRunner.isDefined(alerts2.IE())
                         && BrowserVersionClassRunner.isDefined(alerts2.EDGE()));
 
@@ -170,7 +170,7 @@ class BrowserStatement extends Statement {
                 assertNotEquals(BrowserVersion.EDGE, alerts2.EDGE(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.CHROME, alerts2.CHROME(), alerts2.DEFAULT());
                 assertNotEquals(BrowserVersion.FIREFOX, alerts2.FF(), alerts2.DEFAULT());
-                assertNotEquals(BrowserVersion.FIREFOX_78, alerts2.FF78(), alerts2.DEFAULT());
+                assertNotEquals(BrowserVersion.FIREFOX_78, alerts2.FF_ESR(), alerts2.DEFAULT());
             }
         }
     }

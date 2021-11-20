@@ -82,7 +82,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"4", "0", "1", "2", "3", "length", "item"},
             FF = {"4", "0", "1", "2", "3", "item", "length"},
-            FF78 = {"4", "0", "1", "2", "3", "item", "length"})
+            FF_ESR = {"4", "0", "1", "2", "3", "item", "length"})
     public void rules() throws Exception {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -972,7 +972,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             CHROME = {"block", "0"},
             EDGE = {"block", "0"},
             FF = {"block", "0"},
-            FF78 = {"block", "0"})
+            FF_ESR = {"block", "0"})
     public void mediaOnLinkTag_notScreen() throws Exception {
         mediaOnLinkTag("print");
     }
@@ -994,7 +994,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             CHROME = {"block", "0"},
             EDGE = {"block", "0"},
             FF = {"block", "0"},
-            FF78 = {"block", "0"})
+            FF_ESR = {"block", "0"})
     public void mediaOnLinkTag_multipleWithoutScreen() throws Exception {
         mediaOnLinkTag("print, projection, tv");
     }

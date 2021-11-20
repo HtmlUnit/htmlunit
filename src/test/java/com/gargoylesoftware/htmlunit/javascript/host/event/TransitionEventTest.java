@@ -70,7 +70,7 @@ public class TransitionEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object TransitionEvent]", "undefined", "false", "false", "false"},
-                FF78 = {"[object TransitionEvent]", "undefined", "false", "false", "false"})
+                FF_ESR = {"[object TransitionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -239,7 +239,7 @@ public class TransitionEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object TransitionEvent]", "transition", "false", "false", "false"},
                 EDGE = {"[object TransitionEvent]", "transition", "false", "false", "false"},
                 FF = {"[object TransitionEvent]", "transition", "false", "false", "false"},
-                FF78 = {"[object TransitionEvent]", "transition", "false", "false", "false"})
+                FF_ESR = {"[object TransitionEvent]", "transition", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

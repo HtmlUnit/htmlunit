@@ -1564,7 +1564,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
             FF = "undefined",
-            FF78 = "undefined",
+            FF_ESR = "undefined",
             IE = "undefined")
     public void addEventListenerCaller() throws Exception {
         final String html =
@@ -1679,7 +1679,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                   "function() { return !0 }",
                   "function onreadystatechange() { [native code] }",
                   "true", "true"},
-            FF78 = {"[object Object]", "undefined", "undefined",
+            FF_ESR = {"[object Object]", "undefined", "undefined",
                     "function() { return !0 }",
                     "function onreadystatechange() { [native code] }",
                     "true", "true"},
@@ -1699,7 +1699,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                   "function () { return !0; }",
                   "function onreadystatechange() { [native code] }",
                   "true", "true"},
-            FF78 = {"[object Object]", "undefined", "undefined",
+            FF_ESR = {"[object Object]", "undefined", "undefined",
                     "function () { return !0; }",
                     "function onreadystatechange() { [native code] }",
                     "true", "true"},
@@ -1821,7 +1821,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "text/plain",
             EDGE = "text/plain",
             FF = "text/plain",
-            FF78 = "text/plain",
+            FF_ESR = "text/plain",
             IE = "text/plain")
     public void enctypeBufferSource() throws Exception {
         final String html
@@ -2158,7 +2158,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                   "function onreadystatechange() { [native code] }",
                   "function onreadystatechange() { [native code] }",
                   "true", "true"},
-            FF78 = {"[object Object]", "undefined", "undefined",
+            FF_ESR = {"[object Object]", "undefined", "undefined",
                     "function onreadystatechange() { [native code] }",
                     "function onreadystatechange() { [native code] }",
                     "true", "true"},
@@ -2438,7 +2438,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "", "exception", "exception"},
             FF = {"", "", "", "exception"},
-            FF78 = {"", "", "", "exception"})
+            FF_ESR = {"", "", "", "exception"})
     public void responseTextInvalidResponseType() throws Exception {
         final String html =
               "<html>\n"

@@ -104,7 +104,7 @@ public class HostParentOfSTest extends HostParentOf {
             CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _ServiceWorker_ServiceWorker() throws Exception {
         test("ServiceWorker", "ServiceWorker");
     }
@@ -117,7 +117,7 @@ public class HostParentOfSTest extends HostParentOf {
             CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _ServiceWorkerContainer_ServiceWorkerContainer() throws Exception {
         test("ServiceWorkerContainer", "ServiceWorkerContainer");
     }
@@ -130,7 +130,7 @@ public class HostParentOfSTest extends HostParentOf {
             CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _ServiceWorkerRegistration_ServiceWorkerRegistration() throws Exception {
         test("ServiceWorkerRegistration", "ServiceWorkerRegistration");
     }
@@ -197,7 +197,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _SpeechSynthesis_SpeechSynthesis() throws Exception {
         test("SpeechSynthesis", "SpeechSynthesis");
     }
@@ -248,7 +248,7 @@ public class HostParentOfSTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _SpeechSynthesisVoice_SpeechSynthesisVoice() throws Exception {
         test("SpeechSynthesisVoice", "SpeechSynthesisVoice");
     }

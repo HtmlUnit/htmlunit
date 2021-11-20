@@ -104,7 +104,7 @@ public class CloseEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CloseEvent]", "", "false", "false", "false", "0", "", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = {"[object CloseEvent]", "", "false", "false", "undefined", "0", "", "false"})
     @BuggyWebDriver(IE = {"[object CloseEvent]", "", "false", "false", "undefined", "0", "exception"})
     public void create_createEvent() throws Exception {
@@ -130,7 +130,7 @@ public class CloseEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "no initCloseEvent",
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = {"[object CloseEvent]", "close", "true", "false", "undefined", "42", "time to close", "true"})
     public void initCloseEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

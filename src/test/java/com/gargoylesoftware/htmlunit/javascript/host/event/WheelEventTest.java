@@ -70,7 +70,7 @@ public class WheelEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object WheelEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object WheelEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object WheelEvent]", "undefined", "false", "false", "false"},
-                FF78 = {"[object WheelEvent]", "undefined", "false", "false", "false"})
+                FF_ESR = {"[object WheelEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -240,7 +240,7 @@ public class WheelEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object WheelEvent]", "wheel", "false", "false", "false"},
                 EDGE = {"[object WheelEvent]", "wheel", "false", "false", "false"},
                 FF = {"[object WheelEvent]", "wheel", "false", "false", "false"},
-                FF78 = {"[object WheelEvent]", "wheel", "false", "false", "false"})
+                FF_ESR = {"[object WheelEvent]", "wheel", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

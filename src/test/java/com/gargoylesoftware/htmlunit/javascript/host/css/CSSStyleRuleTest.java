@@ -38,7 +38,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "h1", "", "10px", "", "red"},
             FF = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"},
-            FF78 = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"})
+            FF_ESR = {"[object CSSStyleRule]", "1", "[object CSSStyleSheet]", "null", "H1", "", "10px", "", "red"})
     public void test() throws Exception {
         final String html = "<html><head>\n"
                 + "<style>\n"
@@ -179,7 +179,7 @@ public class CSSStyleRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"body", "h1", "a.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"},
             FF = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"},
-            FF78 = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
+            FF_ESR = {"BoDY", "H1", "A.foo", ".foo", ".foo .foo2", ".myFoo", "#byId"})
     public void selectorText() throws Exception {
         final String html = "<html><head>\n"
                 + "<style>\n"

@@ -133,7 +133,7 @@ public class HostParentOfATest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _Atomics_Atomics() throws Exception {
         test("Atomics", "Atomics");
     }
@@ -165,7 +165,7 @@ public class HostParentOfATest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
-            FF78 = "false")
+            FF_ESR = "false")
     public void _Audio_HTMLAudioElement() throws Exception {
         test("Audio", "HTMLAudioElement");
     }

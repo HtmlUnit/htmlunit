@@ -45,7 +45,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "touch", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -94,7 +94,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "42", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctorNumericType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -119,7 +119,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "null", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -166,7 +166,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "HtmlUnitEvent", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctorArbitraryType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -191,7 +191,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "touch", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctorAllDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -225,7 +225,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object TouchEvent]", "touch", "false", "false", "false"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void create_ctorAllDetailsMissingData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -277,7 +277,7 @@ public class TouchEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF78 = "false",
+            FF_ESR = "false",
             IE = "false")
     public void inWindow() throws Exception {
         final String html

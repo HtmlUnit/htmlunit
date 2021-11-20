@@ -487,7 +487,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"hello", "in timeout"},
             EDGE = {"hello", "in timeout"},
             FF = {"hello", "in timeout"},
-            FF78 = {"hello", "in timeout"},
+            FF_ESR = {"hello", "in timeout"},
             IE = {"hello", "in timeout"})
     // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
     public void xhrDownloadInBackground() throws Exception {
@@ -517,7 +517,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("hello in timeout")
-    @BuggyWebDriver(FF78 = "in timeouthello",
+    @BuggyWebDriver(FF_ESR = "in timeouthello",
                     FF = "in timeouthello",
                     IE = "in timeouthello")
     // IEDriver catches "in timeout", "hello" but real IE gets the correct order
@@ -1068,7 +1068,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
             FF = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
                                 + "Transfer-Encoding: chunked\\n"
                                 + "Server: Jetty(XXX)\\n"},
-            FF78 = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
+            FF_ESR = {"", "", "Date XYZ GMT\\nContent-Type: text/xml;charset=iso-8859-1\\n"
                                 + "Transfer-Encoding: chunked\\n"
                                 + "Server: Jetty(XXX)\\n"})
     public void getAllResponseHeaders() throws Exception {
@@ -1186,7 +1186,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "read onerror",
             EDGE = "read onerror",
             FF = "read onerror",
-            FF78 = "read onerror",
+            FF_ESR = "read onerror",
             IE = "read onerror")
     public void readPropertyFromPrototypeShouldThrow() throws Exception {
         final String html = "<html><body>\n"

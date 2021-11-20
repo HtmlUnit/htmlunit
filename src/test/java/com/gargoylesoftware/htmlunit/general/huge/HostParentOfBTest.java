@@ -93,7 +93,7 @@ public class HostParentOfBTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF78 = "false",
+            FF_ESR = "false",
             IE = "false")
     public void _BatteryManager_BatteryManager() throws Exception {
         test("BatteryManager", "BatteryManager");

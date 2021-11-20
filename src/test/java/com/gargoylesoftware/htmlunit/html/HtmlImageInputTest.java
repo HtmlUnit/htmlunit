@@ -285,7 +285,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "textLength not available",
             FF = "7",
-            FF78 = "7")
+            FF_ESR = "7")
     public void textLength() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -409,7 +409,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"§§URL§§abcd/img.gif", "1"},
             EDGE = {"§§URL§§abcd/img.gif", "1"},
             FF = {"§§URL§§abcd/img.gif", "1"},
-            FF78 = {"§§URL§§abcd/img.gif", "1"},
+            FF_ESR = {"§§URL§§abcd/img.gif", "1"},
             IE = {"§§URL§§abcd/img.gif", "1"})
     public void resolveImage() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
@@ -452,7 +452,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"§§URL§§abcd/img.gif", "1"},
             EDGE = {"§§URL§§abcd/img.gif", "1"},
             FF = {"§§URL§§abcd/img.gif", "1"},
-            FF78 = {"§§URL§§abcd/img.gif", "1"},
+            FF_ESR = {"§§URL§§abcd/img.gif", "1"},
             IE = {"§§URL§§abcd/img.gif", "1"})
     public void resolveImageRelative() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
@@ -630,7 +630,7 @@ public class HtmlImageInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"", "§§URL§§abcd/img.gif", "1", "1"},
             EDGE = {"", "§§URL§§abcd/img.gif", "1", "1"},
             FF = {"", "§§URL§§abcd/img.gif", "1", "1"},
-            FF78 = {"", "§§URL§§abcd/img.gif", "1", "1"},
+            FF_ESR = {"", "§§URL§§abcd/img.gif", "1", "1"},
             IE = {"", "§§URL§§abcd/img.gif", "1", "1"})
     public void resolveImageOnChange() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {

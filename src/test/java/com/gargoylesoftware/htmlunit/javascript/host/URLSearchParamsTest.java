@@ -176,7 +176,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "noValue=undefined",
             EDGE = "noValue=undefined",
             FF = "noValue=undefined",
-            FF78 = "noValue=undefined")
+            FF_ESR = "noValue=undefined")
     public void stringMissingParam() throws Exception {
         final String html =
             "<html>\n"
@@ -365,7 +365,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                          "key2=val2", "http://test.com/p?key2=val2"},
                  FF = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                        "key2=val2", "http://test.com/p?key2=val2"},
-                 FF78 = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                 FF_ESR = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                          "key2=val2", "http://test.com/p?key2=val2"})
     public void deleteFromUrlSpecialChars() throws Exception {
         final String html =
@@ -580,7 +580,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                        "key1", "key2", "key1", "", "true"},
             FF = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
                   "key1", "key2", "key1", "", "true"},
-            FF78 = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
+            FF_ESR = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
                     "key1", "key2", "key1", "", "true"},
             IE = {})
     public void keys() throws Exception {
@@ -626,7 +626,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                        "val1", "", "val3", "val4", "true"},
             FF = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
                   "val1", "", "val3", "val4", "true"},
-            FF78 = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
+            FF_ESR = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
                     "val1", "", "val3", "val4", "true"},
             IE = {})
     public void values() throws Exception {
@@ -702,7 +702,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                        "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
                   "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF78 = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
+            FF_ESR = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
                     "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
     public void entries() throws Exception {

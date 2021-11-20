@@ -72,7 +72,7 @@ public class CustomEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
                 EDGE = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
                 FF = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"},
-                FF78 = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"})
+                FF_ESR = {"[object CustomEvent]", "undefined", "false", "false", "false", "null"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

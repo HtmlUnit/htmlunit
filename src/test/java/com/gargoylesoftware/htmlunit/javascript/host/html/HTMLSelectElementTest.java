@@ -2419,7 +2419,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts("mouse over")
     @BuggyWebDriver(FF = "mouse overmouse overmouse over",
-            FF78 = "mouse overmouse overmouse over")
+            FF_ESR = "mouse overmouse overmouse over")
     public void mouseOver() throws Exception {
         final String html =
             "<html>\n"
@@ -2454,9 +2454,9 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "mouse over",
-            FF78 = "mouse over")
+            FF_ESR = "mouse over")
     @BuggyWebDriver(FF = "mouse overmouse overmouse over",
-            FF78 = "mouse overmouse overmouse over")
+            FF_ESR = "mouse overmouse overmouse over")
     public void mouseOverDisabledSelect() throws Exception {
         final String html =
             "<html>\n"

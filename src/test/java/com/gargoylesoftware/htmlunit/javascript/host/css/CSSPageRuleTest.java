@@ -291,7 +291,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "undefined",
-            FF78 = "undefined")
+            FF_ESR = "undefined")
     public void selectorTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -323,9 +323,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ":first",
             IE = "",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(FF = "undefined",
-            FF78 = "undefined")
+            FF_ESR = "undefined")
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorText() throws Exception {
         final String html
@@ -358,9 +358,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ":first",
             IE = "",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(FF = "undefined",
-            FF78 = "undefined")
+            FF_ESR = "undefined")
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextCaseInsensitive() throws Exception {
         final String html
@@ -393,12 +393,12 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {":first", ":left"},
             IE = {"", "exception"},
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = {":first", ":first"},
             EDGE = {":first", ":first"},
             IE = {"", ""},
             FF = {"undefined", ":left"},
-            FF78 = {"undefined", ":left"})
+            FF_ESR = {"undefined", ":left"})
     // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSet() throws Exception {
@@ -434,12 +434,12 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {":first", "null"},
             IE = {"", "exception"},
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = {":first", ":first"},
             EDGE = {":first", ":first"},
             IE = {"", ""},
             FF = {"undefined", "null"},
-            FF78 = {"undefined", "null"})
+            FF_ESR = {"undefined", "null"})
     // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetNull() throws Exception {
@@ -475,12 +475,12 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {":first", ""},
             IE = {"", "exception"},
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = {":first", ":first"},
             EDGE = {":first", ":first"},
             IE = {"", ""},
             FF = {"undefined", ""},
-            FF78 = {"undefined", ""})
+            FF_ESR = {"undefined", ""})
     // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetEmpty() throws Exception {
@@ -516,10 +516,10 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {":first", ":first"},
             IE = {"", "exception"},
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
             FF = {"undefined", ":grey"},
-            FF78 = {"undefined", ":grey"})
+            FF_ESR = {"undefined", ":grey"})
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetInvalid() throws Exception {
         final String html
@@ -554,12 +554,12 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {":first", ":left"},
             IE = {"", "exception"},
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     @HtmlUnitNYI(CHROME = {":first", ":first"},
             EDGE = {":first", ":first"},
             IE = {"", ""},
             FF = {"undefined", ":LeFt"},
-            FF78 = {"undefined", ":LeFt"})
+            FF_ESR = {"undefined", ":LeFt"})
     // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetCaseInsensitive() throws Exception {
@@ -596,7 +596,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
                        "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
                   "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
-            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
                     "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
     @HtmlUnitNYI(CHROME = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                            "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
@@ -604,7 +604,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
                     "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
             FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
-            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
+            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                     "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
             IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"})
@@ -643,9 +643,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""},
-            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""})
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "0", "[object CSSPageRule]", ""})
     @HtmlUnitNYI(FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""},
-            FF78 = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
+            FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]", "0", "[object CSSPageRule]", ""})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void styleEmpty() throws Exception {
         final String html

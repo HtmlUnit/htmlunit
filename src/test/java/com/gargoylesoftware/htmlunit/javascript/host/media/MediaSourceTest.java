@@ -63,7 +63,7 @@ public class MediaSourceTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = { "false", "false", "false" },
             EDGE = { "false", "false", "false" },
             FF = { "false", "false", "false" },
-            FF78 = { "false", "false", "false" },
+            FF_ESR = { "false", "false", "false" },
             IE = { "false", "false", "false" })
     public void isTypeSypported() throws Exception {
         final String html

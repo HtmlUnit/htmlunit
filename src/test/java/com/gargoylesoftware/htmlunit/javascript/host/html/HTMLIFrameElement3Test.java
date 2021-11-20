@@ -193,9 +193,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "true", "true", "object", "object"},
             FF = {"false", "false", "true", "false", "false", "object", "undefined"},
-            FF78 = {"false", "false", "true", "false", "false", "object", "undefined"})
+            FF_ESR = {"false", "false", "true", "false", "false", "object", "undefined"})
     @HtmlUnitNYI(FF = {"false", "false", "true", "true", "true", "object", "object"},
-            FF78 = {"false", "false", "true", "true", "true", "object", "object"})
+            FF_ESR = {"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -405,7 +405,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"loading", "complete"},
             EDGE = {"loading", "complete"},
             FF = {"loading", "complete"},
-            FF78 = {"loading", "complete"})
+            FF_ESR = {"loading", "complete"})
     public void readyState_IFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -915,7 +915,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             CHROME = {"loaded", "2"},
             EDGE = {"loaded", "2"},
             FF = {"loaded", "2"},
-            FF78 = {"loaded", "2"})
+            FF_ESR = {"loaded", "2"})
     public void recursiveContent() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
@@ -950,7 +950,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"loaded", "6"},
-            FF78 = {"loaded", "19"},
+            FF_ESR = {"loaded", "19"},
             FF = {"loaded", "19"},
             IE = {"loaded", "2"})
     @BuggyWebDriver(IE = "")
@@ -958,7 +958,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"loaded", "21"},
             EDGE = {"loaded", "21"},
             FF = {"loaded", "21"},
-            FF78 = {"loaded", "21"},
+            FF_ESR = {"loaded", "21"},
             IE = {"loaded", "21"})
     public void recursiveContentRedirectHeader() throws Exception {
         final String html

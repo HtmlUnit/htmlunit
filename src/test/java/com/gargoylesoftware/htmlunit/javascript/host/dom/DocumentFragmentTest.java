@@ -40,7 +40,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSSStyleDeclaration]",
             FF = "[object CSS2Properties]",
-            FF78 = "[object CSS2Properties]")
+            FF_ESR = "[object CSS2Properties]")
     public void getComputedStyleOnChild() throws Exception {
         final String html = "<html><head><style>\n"
             + "  body > div { background-color: green#FF0000; }\n"

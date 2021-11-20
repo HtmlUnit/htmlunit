@@ -237,7 +237,7 @@ public class HtmlImageTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = {"16", "16", "2"},
             FF = {"24", "24", "2"},
-            FF78 = {"24", "24", "2"},
+            FF_ESR = {"24", "24", "2"},
             IE = {"28", "30", "2"})
     public void retrieveImagePerDefault() throws Exception {
         final String html =

@@ -70,7 +70,7 @@ public class StorageEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object StorageEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object StorageEvent]", "undefined", "false", "false", "false"},
-                FF78 = {"[object StorageEvent]", "undefined", "false", "false", "false"})
+                FF_ESR = {"[object StorageEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -241,7 +241,7 @@ public class StorageEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object StorageEvent]", "storage", "false", "false", "false"},
                 EDGE = {"[object StorageEvent]", "storage", "false", "false", "false"},
                 FF = {"[object StorageEvent]", "storage", "false", "false", "false"},
-                FF78 = {"[object StorageEvent]", "storage", "false", "false", "false"})
+                FF_ESR = {"[object StorageEvent]", "storage", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

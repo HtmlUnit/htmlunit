@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -60,7 +60,7 @@ public class GeolocationTest extends WebServerTestCase {
      */
     @Test
     @Alerts("12.34567891 98.76543211")
-    @NotYetImplemented(value = {EDGE, FF78, FF, CHROME},
+    @NotYetImplemented(value = {EDGE, FF_ESR, FF, CHROME},
             os = OS.Linux) //since it runs on Windows only (for now)
     public void getCurrentPosition_enabled() throws Exception {
         getCurrentPosition(true);

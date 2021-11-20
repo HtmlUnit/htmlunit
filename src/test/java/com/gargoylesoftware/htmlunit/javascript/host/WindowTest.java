@@ -1195,7 +1195,7 @@ public class WindowTest extends SimpleWebTestCase {
             CHROME = "not available",
             EDGE = "not available",
             FF = "not available",
-            FF78 = "not available")
+            FF_ESR = "not available")
     public void showModalDialog() throws Exception {
         final String html1
             = "<html><head><script>\n"
@@ -1257,7 +1257,7 @@ public class WindowTest extends SimpleWebTestCase {
             CHROME = {"undefined", "not available"},
             EDGE = {"undefined", "not available"},
             FF = {"undefined", "not available"},
-            FF78 = {"undefined", "not available"})
+            FF_ESR = {"undefined", "not available"})
     @NotYetImplemented(IE)
     public void showModalDialogWithButton() throws Exception {
         final String html1
@@ -1493,7 +1493,7 @@ public class WindowTest extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = "",
             FF = "info: Dumper",
-            FF78 = "info: Dumper")
+            FF_ESR = "info: Dumper")
     public void dump() throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<>();

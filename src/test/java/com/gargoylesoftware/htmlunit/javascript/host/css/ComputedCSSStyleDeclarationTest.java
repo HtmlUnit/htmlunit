@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.InputStream;
@@ -57,7 +57,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF = {"[object CSS2Properties]", "[object CSS2Properties]"},
-            FF78 = {"[object CSS2Properties]", "[object CSS2Properties]"})
+            FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]"})
     public void scriptableToString() throws Exception {
         final String html
             = "<html><body>\n"
@@ -327,7 +327,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "inline", "block", /* "inline-block", */ "inline", "block", "block", "none"},
             FF = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"},
-            FF78 = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
+            FF_ESR = {"inline", "inline", "inline", "block", /* "inline-block", */ "none", "block", "block", "none"})
     public void defaultDisplayValues_A() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p id='p'>\n"
@@ -868,7 +868,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "block", "none"},
             FF = {"ruby", "ruby-text", "none"},
-            FF78 = {"ruby", "ruby-text", "none"},
+            FF_ESR = {"ruby", "ruby-text", "none"},
             IE = {"ruby", "ruby-text", "inline"})
     public void defaultDisplayValues_R() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
@@ -1112,7 +1112,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "10px",
             EDGE =  "10px",
             FF = "10px",
-            FF78 = "10px",
+            FF_ESR = "10px",
             IE = "10px")
     public void fontSize2() throws Exception {
         final String html = "<html><body>\n"
@@ -1144,7 +1144,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
-            FF78 = "1px",
+            FF_ESR = "1px",
             IE = "1px")
     public void fontSizeVH() throws Exception {
         final String html = "<html><body>\n"
@@ -1176,7 +1176,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
             FF = "1px",
-            FF78 = "1px",
+            FF_ESR = "1px",
             IE = "1px")
     public void fontSizeVW() throws Exception {
         final String html = "<html><body>\n"
@@ -1259,8 +1259,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             CHROME = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
             EDGE = { "underline solid rgb(0, 0, 0)", "none solid rgb(0, 0, 0)", "underline solid rgb(0, 0, 0)"},
             FF = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"},
-            FF78 = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+            FF_ESR = {"underline rgb(0, 0, 0)", "rgb(0, 0, 0)", "underline rgb(0, 0, 0)"})
+    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void changeInParentClassNodeReferencedByRule() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -1414,7 +1414,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"4", "7", "16", "16"},
             FF = {"4", "7", "24", "24"},
-            FF78 = {"4", "7", "24", "24"},
+            FF_ESR = {"4", "7", "24", "24"},
             IE = {"4", "7", "28", "30"})
     public void widthAndHeightImageElement() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/4x7.jpg")) {
@@ -1498,12 +1498,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"33", "17", "0", "17"},
             FF = {"33", "17", "0", "0"},
-            FF78 = {"33", "17", "0", "0"},
+            FF_ESR = {"33", "17", "0", "0"},
             IE = {"33", "18", "0", "0"})
     @HtmlUnitNYI(CHROME = {"30", "18", "0", "0"},
             EDGE = {"30", "18", "0", "0"},
             FF = {"30", "18", "0", "0"},
-            FF78 = {"30", "18", "0", "0"},
+            FF_ESR = {"30", "18", "0", "0"},
             IE = {"30", "18", "0", "0"})
     public void widthAndHeightChildDisplayNone() throws Exception {
         final String content = "<html><head><script>\n"
@@ -2117,8 +2117,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0px", "20%", "80px", "25%", "100px"},
             FF = {"", "0px", "20%", "360px", "25%", "100px"},
-            FF78 = {"", "0px", "20%", "360px", "25%", "100px"})
-    @NotYetImplemented({FF, FF78})
+            FF_ESR = {"", "0px", "20%", "360px", "25%", "100px"})
+    @NotYetImplemented({FF, FF_ESR})
     public void marginLeftRight() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2158,7 +2158,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "0px", "", "0px", "50%", "100px", "50%", "100px"},
             IE = {"", "auto", "", "auto", "", "auto", "", "auto"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void topLeft() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -2467,7 +2467,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0 0",
             EDGE = "0 0",
             FF = "0 0",
-            FF78 = "0 0",
+            FF_ESR = "0 0",
             IE = "0 0")
     public void iFrameInnerWidth() throws Exception {
         final String html = "<html><head>\n"
@@ -2533,7 +2533,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"\"@\"", "\"@\"", "\"@\"", "\"#\"", "\"#\"", "\"#\""},
             FF = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""},
-            FF78 = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""},
+            FF_ESR = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""},
             IE = {"\"@\"", "normal", "\"@\"", "\"#\"", "normal", "\"#\""})
     public void pseudoBefore() throws Exception {
         final String html = "<html><head>\n"
@@ -2765,7 +2765,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1256",
             EDGE = "1256",
             FF = "1256",
-            FF78 = "1256",
+            FF_ESR = "1256",
             IE = "1256")
     public void widthBlockElements() throws Exception {
         final String content = "<html><head><script>\n"

@@ -800,7 +800,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object HTMLBodyElement]"},
-            FF78 = {"1", "[object HTMLBodyElement]"},
+            FF_ESR = {"1", "[object HTMLBodyElement]"},
             IE = {"0", "[object HTMLBodyElement]"})
     @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_empty() throws Exception {
@@ -815,7 +815,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "exception"},
             FF = {"1", "[object Text]"},
-            FF78 = {"1", "[object Text]"},
+            FF_ESR = {"1", "[object Text]"},
             IE = {"1", "[object Text]"})
     @HtmlUnitNYI(IE = {"0", "exception"})
     public void designMode_selectionRange_text() throws Exception {
@@ -910,7 +910,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object Window]", "true"},
             FF = {"undefined", "false"},
-            FF78 = {"undefined", "false"})
+            FF_ESR = {"undefined", "false"})
     public void frameAccessByName() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -952,7 +952,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "0", "0"},
             FF = {"0", "0", "0"},
-            FF78 = {"0", "0", "0"})
+            FF_ESR = {"0", "0", "0"})
     public void getElementsByName_emptyName() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -1365,7 +1365,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                     + "Open, OverWrite, PlayImage, Refresh, RemoveParaFormat, SaveAs, SizeToControl, "
                     + "SizeToControlHeight, SizeToControlWidth, Stop, StopImage, UnBookmark"},
             FF = "0 commands supported",
-            FF78 = "0 commands supported",
+            FF_ESR = "0 commands supported",
             IE = "46 commands supported")
     public void queryCommandSupported_disctinct() throws Exception {
         final String[] commands = {"2D-Position", "AbsolutePosition",
@@ -2488,7 +2488,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             CHROME = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             EDGE = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
             FF = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"},
-            FF78 = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"})
+            FF_ESR = {"[object HTMLDocument]", "function HTMLDocument() { [native code] }"})
     public void type() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -2752,7 +2752,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
-            FF78 = "false",
+            FF_ESR = "false",
             IE = "false")
     public void hasFocus() throws Exception {
         final String html = ""
@@ -2776,12 +2776,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "complete,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
-            FF78 = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
+            FF_ESR = "uninitialized,[object HTMLBodyElement]-uninitialized,[object HTMLBodyElement]-",
             IE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     @HtmlUnitNYI(CHROME = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             EDGE = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
             FF = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-",
-            FF78 = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
+            FF_ESR = "loading,[object HTMLBodyElement]-complete,[object HTMLBodyElement]-")
     public void readyState() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

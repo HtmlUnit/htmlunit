@@ -308,7 +308,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
                     "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             FF = {"dcl listener added", "head-end", "end",
                   "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
-            FF78 = {"dcl listener added", "head-end", "end",
+            FF_ESR = {"dcl listener added", "head-end", "end",
                     "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             IE = {"dcl listener added", "head-end", "end",
                   "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})

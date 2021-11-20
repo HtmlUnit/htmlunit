@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.junit;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.lang.annotation.ElementType;
@@ -187,8 +187,8 @@ public class BrowserRunner extends Suite {
         /** Firefox. */
         FF,
 
-        /** Firefox 78. */
-        FF78
+        /** Firefox ESR. */
+        FF_ESR
     }
 
     /**
@@ -229,10 +229,10 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 78.
+         * Alerts for Firefox ESR.
          * @return the alerts
          */
-        String[] FF78() default { EMPTY_DEFAULT };
+        String[] FF_ESR() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -281,10 +281,10 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 78.
+         * Alerts for Firefox ESR.
          * @return the alerts
          */
-        String[] FF78() default { EMPTY_DEFAULT };
+        String[] FF_ESR() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -325,7 +325,7 @@ public class BrowserRunner extends Suite {
          * @return the browsers
          */
         TestedBrowser[] value() default {
-            IE, EDGE, FF78, FF, CHROME
+            IE, EDGE, FF_ESR, FF, CHROME
         };
 
         /**
@@ -361,16 +361,16 @@ public class BrowserRunner extends Suite {
         String[] EDGE() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for any Firefox, it can be overridden by specific FF version.
+         * Alerts for latest Firefox.
          * @return the alerts
          */
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 78.
+         * Alerts for Firefox ESR.
          * @return the alerts
          */
-        String[] FF78() default { EMPTY_DEFAULT };
+        String[] FF_ESR() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.
@@ -420,7 +420,7 @@ public class BrowserRunner extends Suite {
          * Alerts for Firefox 78.
          * @return the alerts
          */
-        String[] FF78() default { EMPTY_DEFAULT };
+        String[] FF_ESR() default { EMPTY_DEFAULT };
 
         /**
          * Alerts for latest Chrome.

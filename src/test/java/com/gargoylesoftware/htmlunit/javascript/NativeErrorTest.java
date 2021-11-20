@@ -144,11 +144,11 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url",
-            FF78 = "method@url")
+            FF_ESR = "method@url")
     @HtmlUnitNYI(CHROME = "method()@url",
             EDGE = "method()@url",
             FF = "method()@url",
-            FF78 = "method()@url",
+            FF_ESR = "method()@url",
             IE = "method()@url")
     public void stackContent() throws Exception {
         final String html
@@ -186,11 +186,11 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "method (url)",
             FF = "method@url",
-            FF78 = "method@url")
+            FF_ESR = "method@url")
     @HtmlUnitNYI(CHROME = "method()@url",
             EDGE = "method()@url",
             FF = "method()@url",
-            FF78 = "method()@url",
+            FF_ESR = "method()@url",
             IE = "method()@url")
     public void stackContentNewError() throws Exception {
         final String html
@@ -259,7 +259,7 @@ public class NativeErrorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "10",
             FF = "undefined",
-            FF78 = "undefined")
+            FF_ESR = "undefined")
     public void stackTraceLimit() throws Exception {
         final String html
             = "<html><head><script>\n"

@@ -273,7 +273,7 @@ public class SelectionTest extends WebDriverTestCase {
             FF = {"1:null/0/null/0/true/None/0/",
                   "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                   "3:null/0/null/0/true/None/0/"},
-            FF78 = {"1:null/0/null/0/true/None/0/",
+            FF_ESR = {"1:null/0/null/0/true/None/0/",
                     "2:s1/1/s3/1/false/Range/2/abcxyzfoo[abc[xyzfoo",
                     "3:null/0/null/0/true/None/0/"},
             IE = {"1:null/0/null/0/true/undefined/0/",
@@ -336,7 +336,7 @@ public class SelectionTest extends WebDriverTestCase {
                   "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
                   "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                   "4:null/0/null/0/true/None/0/"},
-            FF78 = {"1:null/0/null/0/true/None/0/",
+            FF_ESR = {"1:null/0/null/0/true/None/0/",
                     "2:s1/1/s2/1/false/Range/2/abcxyz[abc[xyz",
                     "3:s2/1/s3/3/false/Range/3/abcxyzfoo---foo[abc[xyz[foo---foo",
                     "4:null/0/null/0/true/None/0/"},
@@ -435,7 +435,7 @@ public class SelectionTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"},
             FF = {"", "null-0", "", "null-0", "null", "null"},
-            FF78 = {"", "null-0", "", "null-0", "null", "null"},
+            FF_ESR = {"", "null-0", "", "null-0", "null", "null"},
             IE = {"", "[object Text]-1", "", "null-0", "", "null-0", "", "null-0"})
     @HtmlUnitNYI(IE = {"", "null-0", "", "null-0", "", "null-0", "", "null-0"})
     public void getSelection_display() throws Exception {

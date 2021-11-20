@@ -2423,7 +2423,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "0", "0"},
             FF = {"0", "1", "1"},
-            FF78 = {"0", "1", "1"})
+            FF_ESR = {"0", "1", "1"})
     public void designMode_createsSelectionRange() throws Exception {
         final String html1 = "<html><body><iframe id='i' src='" + URL_SECOND + "'></iframe></body></html>";
         final String html2 = "<html><body onload='test()'>\n"
@@ -2955,7 +2955,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "null"},
             FF = {"undefined", "undefined"},
-            FF78 = {"undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined"},
             IE = {"", ""})
     public void xmlEncoding() throws Exception {
         final String html = "<html>\n"
@@ -2981,7 +2981,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false"},
             FF = {"undefined", "undefined"},
-            FF78 = {"undefined", "undefined"})
+            FF_ESR = {"undefined", "undefined"})
     public void xmlStandalone() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -3006,7 +3006,7 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1.0", "null"},
             FF = {"undefined", "undefined"},
-            FF78 = {"undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined"},
             IE = {"1.0", ""})
     public void xmlVersion() throws Exception {
         final String html = "<html>\n"

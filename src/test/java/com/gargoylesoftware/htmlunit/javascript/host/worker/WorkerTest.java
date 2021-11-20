@@ -439,7 +439,7 @@ public class WorkerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Received:worker loaded",
             FF = {},
-            FF78 = {})
+            FF_ESR = {})
     public void workerCodeWithWrongMimeType() throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"

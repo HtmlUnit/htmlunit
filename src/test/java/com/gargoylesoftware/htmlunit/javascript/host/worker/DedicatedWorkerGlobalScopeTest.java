@@ -209,7 +209,7 @@ public class DedicatedWorkerGlobalScopeTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Received: Result = 15",
             FF = {},
-            FF78 = {})
+            FF_ESR = {})
     public void workerCodeWithWrongMimeType() throws Exception {
         final String html = "<html><body>"
             + "<script>\n"

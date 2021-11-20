@@ -215,7 +215,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             FF = {"1", "1--null-true", "1.", "--null-false", "1.2", "1.2--null-false"},
-            FF78 = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
+            FF_ESR = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
     public void typeIntegerWithDot() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
@@ -265,7 +265,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
-            FF78 = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
+            FF_ESR = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"},
             IE = {"-", "--null-false", "-12", "-12--null-true", "-123", "-123--null-false"})
     public void typeIntegerNegativeValid() throws Exception {
         final String html = "<html>\n"
@@ -316,7 +316,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"-", "--null-false", "-12", "-12--null-false"},
             EDGE = {"-", "--null-false", "-12", "-12--null-false"},
             FF = {"-", "--null-false", "-12", "-12--null-false"},
-            FF78 = {"-", "--null-false", "-12", "-12--null-false"},
+            FF_ESR = {"-", "--null-false", "-12", "-12--null-false"},
             IE = {"-", "--null-false", "-12", "-12--null-false"})
     public void typeIntegerNegativeInvalid() throws Exception {
         final String html = "<html>\n"
@@ -1086,10 +1086,10 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"--null-true", "4", "4--null-true", "4", "4--null-true"},
             FF = {"--null-true", "4", "4--null-true", "", "--null-false"},
-            FF78 = {"--null-true", "4", "4--null-true", "", "--null-false"},
+            FF_ESR = {"--null-true", "4", "4--null-true", "", "--null-false"},
             IE = {"--null-true", "4", "4--null-true", "4a", "4a--null-true"})
     @HtmlUnitNYI(FF = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
-            FF78 = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
+            FF_ESR = {"--null-true", "4", "4--null-true", "4a", "--null-false"},
             IE = {"--null-true", "4", "4--null-true", "4a", "--null-false"})
     public void typeInvalidChars() throws Exception {
         final String html = "<html><head>\n"
@@ -1132,10 +1132,10 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-true"},
             FF = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
-            FF78 = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
+            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "", "-0-0-false"},
             IE = {"012", "012-0-0-true", "", "-0-0-true", "", "-0-0-true"})
     @HtmlUnitNYI(FF = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
-            FF78 = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
+            FF_ESR = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"},
             IE = {"120", "120-0-0-true", "", "-0-0-true", "abc", "-0-0-false"})
     public void typeCharsAndClear() throws Exception {
         final String html = "<html>\n"
@@ -1184,7 +1184,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "-0-0-true",
             FF = "-0-0-false",
-            FF78 = "-0-0-false")
+            FF_ESR = "-0-0-false")
     @HtmlUnitNYI(IE = "-0-0-false")
     public void issue321() throws Exception {
         final String html = "<html>\n"
@@ -1314,7 +1314,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "textLength not available",
             FF = "7",
-            FF78 = "7")
+            FF_ESR = "7")
     public void textLength() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

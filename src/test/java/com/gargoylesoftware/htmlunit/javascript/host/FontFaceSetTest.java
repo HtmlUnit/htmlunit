@@ -35,7 +35,7 @@ public class FontFaceSetTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = "function FontFaceSet() { [native code] }",
-            FF78 = "function FontFaceSet() { [native code] }")
+            FF_ESR = "function FontFaceSet() { [native code] }")
     public void window() throws Exception {
         final String html
             = "<html>\n"

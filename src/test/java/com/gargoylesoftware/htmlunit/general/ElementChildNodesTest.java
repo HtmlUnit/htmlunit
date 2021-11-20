@@ -350,7 +350,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "3"},
             FF = {"3", "2", "2", "3", "2", "2"},
-            FF78 = {"3", "2", "2", "3", "2", "2"})
+            FF_ESR = {"3", "2", "2", "3", "2", "2"})
     public void command() throws Exception {
         loadPageVerifyTitle2(test("command"));
     }
@@ -418,9 +418,9 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             FF = {"1", "0", "1", "1", "0", "1"},
-            FF78 = {"1", "0", "1", "1", "0", "1"})
+            FF_ESR = {"1", "0", "1", "1", "0", "1"})
     @HtmlUnitNYI(FF = {"3", "2", "2", "3", "2", "2"},
-            FF78 = {"3", "2", "2", "3", "2", "2"})
+            FF_ESR = {"3", "2", "2", "3", "2", "2"})
     public void dialog() throws Exception {
         loadPageVerifyTitle2(test("dialog"));
     }

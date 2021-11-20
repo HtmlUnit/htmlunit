@@ -191,7 +191,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             FF = {"application/xml;charset=UTF-8",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
-            FF78 = {"application/xml;charset=UTF-8",
+            FF_ESR = {"application/xml;charset=UTF-8",
                     "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             IE = {"application/xml;charset=UTF-8",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"})
@@ -237,7 +237,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "</script></head>\n"
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"},
-            FF78 = {"text/html;charset=UTF-8",
+            FF_ESR = {"text/html;charset=UTF-8",
                     "<!DOCTYPE html>"
                                 + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
@@ -316,7 +316,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "</script></head>"
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
-                 FF78 = {"text/html;charset=UTF-8",
+                 FF_ESR = {"text/html;charset=UTF-8",
                          "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"

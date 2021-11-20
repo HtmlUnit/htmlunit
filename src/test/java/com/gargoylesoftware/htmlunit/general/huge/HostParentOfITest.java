@@ -126,7 +126,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _IDBMutableFile_IDBMutableFile() throws Exception {
         test("IDBMutableFile", "IDBMutableFile");
     }
@@ -293,7 +293,7 @@ public class HostParentOfITest extends HostParentOf {
     @Test
     @Alerts("false")
     @HtmlUnitNYI(FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _InstallTrigger_InstallTrigger() throws Exception {
         test("InstallTrigger", "InstallTrigger");
     }

@@ -154,7 +154,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"function foo() { }", "function foo() { }"},
             EDGE = {"function foo() { }", "function foo() { }"},
             FF = {"function foo() { }", "function foo() { }"},
-            FF78 = {"function foo() { }", "function foo() { }"},
+            FF_ESR = {"function foo() { }", "function foo() { }"},
             IE = {"function foo() { }", "function foo() { }"})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
@@ -326,7 +326,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "function f() { }",
             EDGE = "function f() { }",
             FF = "function f() { }",
-            FF78 = "function f() { }",
+            FF_ESR = "function f() { }",
             IE = "function f() { }")
     public void function_toStringValue() throws Exception {
         final String html = "<html><head>\n"
@@ -446,7 +446,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void onloadJavascriptFunction() throws Exception {
         final String html
@@ -886,7 +886,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             EDGE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
                     "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             FF = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
-            FF78 = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
+            FF_ESR = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
                     "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             IE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
                   "f10", "f11", "f12", "f10", "f11", "f12", "f13"})

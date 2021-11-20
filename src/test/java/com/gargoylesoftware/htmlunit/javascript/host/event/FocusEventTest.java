@@ -72,7 +72,7 @@ public class FocusEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object FocusEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object FocusEvent]", "undefined", "false", "false", "false"},
             FF = {"[object FocusEvent]", "undefined", "false", "false", "false"},
-            FF78 = {"[object FocusEvent]", "undefined", "false", "false", "false"})
+            FF_ESR = {"[object FocusEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

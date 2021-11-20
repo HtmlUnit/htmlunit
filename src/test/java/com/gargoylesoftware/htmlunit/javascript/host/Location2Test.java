@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
 import java.net.URL;
 import java.util.List;
@@ -166,10 +166,10 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"#hash", "about:blank?query#hash", "blank", "", "about:", "?query"},
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     @HtmlUnitNYI(FF = {"", "about:blank", "blank", "", "about:", ""},
-            FF78 = {"", "about:blank", "blank", "", "about:", ""},
+            FF_ESR = {"", "about:blank", "blank", "", "about:", ""},
             IE = {"", "about:blank", "/blank", "", "about:", ""})
     public void about_blank_query_hash_attributes() throws Exception {
         final String html = "<html>\n"
@@ -268,7 +268,7 @@ public class Location2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"#myDataTable=foo%3Dojkoj", "§§URL§§#myDataTable=foo%3Dojkoj"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF78})
+    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void hashEncoding2() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"
@@ -1007,9 +1007,9 @@ public class Location2Test extends WebDriverTestCase {
             CHROME = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             EDGE = {"3", "§§URL§§", "§§URL§§/second/a.html?urlParam=urlVal"},
             FF = {"3", "§§URL§§", "§§URL§§/"},
-            FF78 = {"3", "§§URL§§", "§§URL§§/"})
+            FF_ESR = {"3", "§§URL§§", "§§URL§§/"})
     // FF opens a confirmation window for the post
-    @BuggyWebDriver(FF78 = {"2", "null", "§§URL§§/"})
+    @BuggyWebDriver(FF_ESR = {"2", "null", "§§URL§§/"})
     public void reloadPost() throws Exception {
         final String form =
                 "<html>\n"

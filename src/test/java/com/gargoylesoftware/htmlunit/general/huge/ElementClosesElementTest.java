@@ -188,7 +188,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _a_command() throws Exception {
         test("a", "command");
     }
@@ -372,7 +372,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _abbr_command() throws Exception {
         test("abbr", "command");
     }
@@ -556,7 +556,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _acronym_command() throws Exception {
         test("acronym", "command");
     }
@@ -740,7 +740,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _address_command() throws Exception {
         test("address", "command");
     }
@@ -924,7 +924,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _applet_command() throws Exception {
         test("applet", "command");
     }
@@ -2386,7 +2386,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _article_command() throws Exception {
         test("article", "command");
     }
@@ -2570,7 +2570,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _aside_command() throws Exception {
         test("aside", "command");
     }
@@ -2754,7 +2754,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _audio_command() throws Exception {
         test("audio", "command");
     }
@@ -2938,7 +2938,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _b_command() throws Exception {
         test("b", "command");
     }
@@ -5678,7 +5678,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _bdi_command() throws Exception {
         test("bdi", "command");
     }
@@ -5862,7 +5862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _bdo_command() throws Exception {
         test("bdo", "command");
     }
@@ -7324,7 +7324,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _big_command() throws Exception {
         test("big", "command");
     }
@@ -7508,7 +7508,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _blink_command() throws Exception {
         test("blink", "command");
     }
@@ -7692,7 +7692,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _blockquote_command() throws Exception {
         test("blockquote", "command");
     }
@@ -8047,7 +8047,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "3",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _body_command() throws Exception {
         test("body", "command");
     }
@@ -10319,7 +10319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _button_command() throws Exception {
         test("button", "command");
     }
@@ -10512,7 +10512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _canvas_command() throws Exception {
         test("canvas", "command");
     }
@@ -11974,7 +11974,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _center_command() throws Exception {
         test("center", "command");
     }
@@ -12158,7 +12158,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _cite_command() throws Exception {
         test("cite", "command");
     }
@@ -12342,7 +12342,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _code_command() throws Exception {
         test("code", "command");
     }
@@ -15037,7 +15037,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_a() throws Exception {
         test("command", "a");
     }
@@ -15048,7 +15048,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_abbr() throws Exception {
         test("command", "abbr");
     }
@@ -15059,7 +15059,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_acronym() throws Exception {
         test("command", "acronym");
     }
@@ -15070,7 +15070,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_address() throws Exception {
         test("command", "address");
     }
@@ -15081,7 +15081,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_applet() throws Exception {
         test("command", "applet");
     }
@@ -15092,7 +15092,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_area() throws Exception {
         test("command", "area");
     }
@@ -15103,7 +15103,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_article() throws Exception {
         test("command", "article");
     }
@@ -15114,7 +15114,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_aside() throws Exception {
         test("command", "aside");
     }
@@ -15125,7 +15125,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_audio() throws Exception {
         test("command", "audio");
     }
@@ -15136,7 +15136,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_b() throws Exception {
         test("command", "b");
     }
@@ -15147,7 +15147,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_base() throws Exception {
         test("command", "base");
     }
@@ -15158,7 +15158,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_basefont() throws Exception {
         test("command", "basefont");
     }
@@ -15169,7 +15169,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_bdi() throws Exception {
         test("command", "bdi");
     }
@@ -15180,7 +15180,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_bdo() throws Exception {
         test("command", "bdo");
     }
@@ -15191,7 +15191,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_bgsound() throws Exception {
         test("command", "bgsound");
     }
@@ -15202,7 +15202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_big() throws Exception {
         test("command", "big");
     }
@@ -15213,7 +15213,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_blink() throws Exception {
         test("command", "blink");
     }
@@ -15224,7 +15224,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_blockquote() throws Exception {
         test("command", "blockquote");
     }
@@ -15235,7 +15235,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_body() throws Exception {
         test("command", "body");
     }
@@ -15246,7 +15246,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_br() throws Exception {
         test("command", "br");
     }
@@ -15257,7 +15257,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_button() throws Exception {
         test("command", "button");
     }
@@ -15268,7 +15268,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_canvas() throws Exception {
         test("command", "canvas");
     }
@@ -15279,7 +15279,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_caption() throws Exception {
         test("command", "caption");
     }
@@ -15290,7 +15290,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_center() throws Exception {
         test("command", "center");
     }
@@ -15301,7 +15301,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_cite() throws Exception {
         test("command", "cite");
     }
@@ -15312,7 +15312,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_code() throws Exception {
         test("command", "code");
     }
@@ -15323,7 +15323,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_col() throws Exception {
         test("command", "col");
     }
@@ -15334,7 +15334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_colgroup() throws Exception {
         test("command", "colgroup");
     }
@@ -15345,7 +15345,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_command() throws Exception {
         test("command", "command");
     }
@@ -15356,7 +15356,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_content() throws Exception {
         test("command", "content");
     }
@@ -15367,7 +15367,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_data() throws Exception {
         test("command", "data");
     }
@@ -15378,7 +15378,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_datalist() throws Exception {
         test("command", "datalist");
     }
@@ -15389,7 +15389,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dd() throws Exception {
         test("command", "dd");
     }
@@ -15400,7 +15400,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_del() throws Exception {
         test("command", "del");
     }
@@ -15411,7 +15411,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_details() throws Exception {
         test("command", "details");
     }
@@ -15422,7 +15422,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dfn() throws Exception {
         test("command", "dfn");
     }
@@ -15433,7 +15433,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dialog() throws Exception {
         test("command", "dialog");
     }
@@ -15444,7 +15444,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dir() throws Exception {
         test("command", "dir");
     }
@@ -15455,7 +15455,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_div() throws Exception {
         test("command", "div");
     }
@@ -15466,7 +15466,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dl() throws Exception {
         test("command", "dl");
     }
@@ -15477,7 +15477,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_dt() throws Exception {
         test("command", "dt");
     }
@@ -15488,7 +15488,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_em() throws Exception {
         test("command", "em");
     }
@@ -15499,7 +15499,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_embed() throws Exception {
         test("command", "embed");
     }
@@ -15510,7 +15510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_fieldset() throws Exception {
         test("command", "fieldset");
     }
@@ -15521,7 +15521,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_figcaption() throws Exception {
         test("command", "figcaption");
     }
@@ -15532,7 +15532,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_figure() throws Exception {
         test("command", "figure");
     }
@@ -15543,7 +15543,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_font() throws Exception {
         test("command", "font");
     }
@@ -15554,7 +15554,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_footer() throws Exception {
         test("command", "footer");
     }
@@ -15565,7 +15565,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_form() throws Exception {
         test("command", "form");
     }
@@ -15576,7 +15576,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_frame() throws Exception {
         test("command", "frame");
     }
@@ -15587,7 +15587,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_frameset() throws Exception {
         test("command", "frameset");
     }
@@ -15598,7 +15598,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h1() throws Exception {
         test("command", "h1");
     }
@@ -15609,7 +15609,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h2() throws Exception {
         test("command", "h2");
     }
@@ -15620,7 +15620,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h3() throws Exception {
         test("command", "h3");
     }
@@ -15631,7 +15631,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h4() throws Exception {
         test("command", "h4");
     }
@@ -15642,7 +15642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h5() throws Exception {
         test("command", "h5");
     }
@@ -15653,7 +15653,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_h6() throws Exception {
         test("command", "h6");
     }
@@ -15664,7 +15664,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_head() throws Exception {
         test("command", "head");
     }
@@ -15675,7 +15675,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_header() throws Exception {
         test("command", "header");
     }
@@ -15686,7 +15686,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_hr() throws Exception {
         test("command", "hr");
     }
@@ -15697,7 +15697,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_html() throws Exception {
         test("command", "html");
     }
@@ -15708,7 +15708,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_i() throws Exception {
         test("command", "i");
     }
@@ -15719,7 +15719,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_iframe() throws Exception {
         test("command", "iframe");
     }
@@ -15730,7 +15730,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_image() throws Exception {
         test("command", "image");
     }
@@ -15741,7 +15741,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_img() throws Exception {
         test("command", "img");
     }
@@ -15752,7 +15752,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_input() throws Exception {
         test("command", "input");
     }
@@ -15763,7 +15763,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_ins() throws Exception {
         test("command", "ins");
     }
@@ -15774,7 +15774,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_isindex() throws Exception {
         test("command", "isindex");
     }
@@ -15785,7 +15785,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_kbd() throws Exception {
         test("command", "kbd");
     }
@@ -15796,7 +15796,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_keygen() throws Exception {
         test("command", "keygen");
     }
@@ -15807,7 +15807,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_label() throws Exception {
         test("command", "label");
     }
@@ -15818,7 +15818,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_layer() throws Exception {
         test("command", "layer");
     }
@@ -15829,7 +15829,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_legend() throws Exception {
         test("command", "legend");
     }
@@ -15840,7 +15840,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_li() throws Exception {
         test("command", "li");
     }
@@ -15851,7 +15851,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_link() throws Exception {
         test("command", "link");
     }
@@ -15862,7 +15862,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_listing() throws Exception {
         test("command", "listing");
     }
@@ -15873,7 +15873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_main() throws Exception {
         test("command", "main");
     }
@@ -15884,7 +15884,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_map() throws Exception {
         test("command", "map");
     }
@@ -15895,7 +15895,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_mark() throws Exception {
         test("command", "mark");
     }
@@ -15906,7 +15906,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_marquee() throws Exception {
         test("command", "marquee");
     }
@@ -15917,7 +15917,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_menu() throws Exception {
         test("command", "menu");
     }
@@ -15928,7 +15928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_menuitem() throws Exception {
         test("command", "menuitem");
     }
@@ -15939,7 +15939,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_meta() throws Exception {
         test("command", "meta");
     }
@@ -15950,7 +15950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_meter() throws Exception {
         test("command", "meter");
     }
@@ -15961,7 +15961,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_multicol() throws Exception {
         test("command", "multicol");
     }
@@ -15972,7 +15972,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_nav() throws Exception {
         test("command", "nav");
     }
@@ -15983,7 +15983,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_nextid() throws Exception {
         test("command", "nextid");
     }
@@ -15994,7 +15994,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_nobr() throws Exception {
         test("command", "nobr");
     }
@@ -16005,7 +16005,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_noembed() throws Exception {
         test("command", "noembed");
     }
@@ -16016,7 +16016,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_noframes() throws Exception {
         test("command", "noframes");
     }
@@ -16027,7 +16027,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_nolayer() throws Exception {
         test("command", "nolayer");
     }
@@ -16038,7 +16038,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_noscript() throws Exception {
         test("command", "noscript");
     }
@@ -16049,7 +16049,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_object() throws Exception {
         test("command", "object");
     }
@@ -16060,7 +16060,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_ol() throws Exception {
         test("command", "ol");
     }
@@ -16071,7 +16071,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_optgroup() throws Exception {
         test("command", "optgroup");
     }
@@ -16082,7 +16082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_option() throws Exception {
         test("command", "option");
     }
@@ -16093,7 +16093,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_output() throws Exception {
         test("command", "output");
     }
@@ -16104,7 +16104,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_p() throws Exception {
         test("command", "p");
     }
@@ -16115,7 +16115,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_param() throws Exception {
         test("command", "param");
     }
@@ -16126,7 +16126,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_picture() throws Exception {
         test("command", "picture");
     }
@@ -16137,7 +16137,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_plaintext() throws Exception {
         test("command", "plaintext");
     }
@@ -16148,7 +16148,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_pre() throws Exception {
         test("command", "pre");
     }
@@ -16159,7 +16159,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_progress() throws Exception {
         test("command", "progress");
     }
@@ -16170,7 +16170,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_q() throws Exception {
         test("command", "q");
     }
@@ -16181,7 +16181,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_rp() throws Exception {
         test("command", "rp");
     }
@@ -16192,7 +16192,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_rt() throws Exception {
         test("command", "rt");
     }
@@ -16203,7 +16203,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_ruby() throws Exception {
         test("command", "ruby");
     }
@@ -16214,7 +16214,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_s() throws Exception {
         test("command", "s");
     }
@@ -16225,7 +16225,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_samp() throws Exception {
         test("command", "samp");
     }
@@ -16236,7 +16236,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_script() throws Exception {
         test("command", "script");
     }
@@ -16247,7 +16247,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_section() throws Exception {
         test("command", "section");
     }
@@ -16258,7 +16258,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_select() throws Exception {
         test("command", "select");
     }
@@ -16269,7 +16269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_slot() throws Exception {
         test("command", "slot");
     }
@@ -16280,7 +16280,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_small() throws Exception {
         test("command", "small");
     }
@@ -16291,7 +16291,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_source() throws Exception {
         test("command", "source");
     }
@@ -16302,7 +16302,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_span() throws Exception {
         test("command", "span");
     }
@@ -16313,7 +16313,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_strike() throws Exception {
         test("command", "strike");
     }
@@ -16324,7 +16324,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_strong() throws Exception {
         test("command", "strong");
     }
@@ -16335,7 +16335,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_style() throws Exception {
         test("command", "style");
     }
@@ -16346,7 +16346,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_sub() throws Exception {
         test("command", "sub");
     }
@@ -16357,7 +16357,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_summary() throws Exception {
         test("command", "summary");
     }
@@ -16368,7 +16368,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_sup() throws Exception {
         test("command", "sup");
     }
@@ -16379,7 +16379,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_svg() throws Exception {
         test("command", "svg");
     }
@@ -16390,7 +16390,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_table() throws Exception {
         test("command", "table");
     }
@@ -16401,7 +16401,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_tbody() throws Exception {
         test("command", "tbody");
     }
@@ -16412,7 +16412,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_td() throws Exception {
         test("command", "td");
     }
@@ -16423,7 +16423,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_template() throws Exception {
         test("command", "template");
     }
@@ -16434,7 +16434,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_textarea() throws Exception {
         test("command", "textarea");
     }
@@ -16445,7 +16445,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_tfoot() throws Exception {
         test("command", "tfoot");
     }
@@ -16456,7 +16456,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_th() throws Exception {
         test("command", "th");
     }
@@ -16467,7 +16467,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_thead() throws Exception {
         test("command", "thead");
     }
@@ -16478,7 +16478,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_time() throws Exception {
         test("command", "time");
     }
@@ -16489,7 +16489,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_title() throws Exception {
         test("command", "title");
     }
@@ -16500,7 +16500,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_tr() throws Exception {
         test("command", "tr");
     }
@@ -16511,7 +16511,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_track() throws Exception {
         test("command", "track");
     }
@@ -16522,7 +16522,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_tt() throws Exception {
         test("command", "tt");
     }
@@ -16533,7 +16533,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_u() throws Exception {
         test("command", "u");
     }
@@ -16544,7 +16544,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_ul() throws Exception {
         test("command", "ul");
     }
@@ -16555,7 +16555,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_var() throws Exception {
         test("command", "var");
     }
@@ -16566,7 +16566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_video() throws Exception {
         test("command", "video");
     }
@@ -16577,7 +16577,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "2",
-            FF78 = "2")
+            FF_ESR = "2")
     public void _command_wbr() throws Exception {
         test("command", "wbr");
     }
@@ -16588,7 +16588,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _command_xmp() throws Exception {
         test("command", "xmp");
     }
@@ -16644,7 +16644,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _content_command() throws Exception {
         test("content", "command");
     }
@@ -16828,7 +16828,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _data_command() throws Exception {
         test("data", "command");
     }
@@ -17012,7 +17012,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _datalist_command() throws Exception {
         test("datalist", "command");
     }
@@ -17196,7 +17196,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dd_command() throws Exception {
         test("dd", "command");
     }
@@ -17398,7 +17398,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _del_command() throws Exception {
         test("del", "command");
     }
@@ -17582,7 +17582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _details_command() throws Exception {
         test("details", "command");
     }
@@ -17766,7 +17766,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dfn_command() throws Exception {
         test("dfn", "command");
     }
@@ -17950,7 +17950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dialog_command() throws Exception {
         test("dialog", "command");
     }
@@ -18134,7 +18134,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dir_command() throws Exception {
         test("dir", "command");
     }
@@ -18318,7 +18318,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _div_command() throws Exception {
         test("div", "command");
     }
@@ -18502,7 +18502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dl_command() throws Exception {
         test("dl", "command");
     }
@@ -18686,7 +18686,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _dt_command() throws Exception {
         test("dt", "command");
     }
@@ -18888,7 +18888,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _em_command() throws Exception {
         test("em", "command");
     }
@@ -20350,7 +20350,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _fieldset_command() throws Exception {
         test("fieldset", "command");
     }
@@ -20534,7 +20534,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _figcaption_command() throws Exception {
         test("figcaption", "command");
     }
@@ -20718,7 +20718,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _figure_command() throws Exception {
         test("figure", "command");
     }
@@ -20902,7 +20902,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _font_command() throws Exception {
         test("font", "command");
     }
@@ -21086,7 +21086,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _footer_command() throws Exception {
         test("footer", "command");
     }
@@ -21270,7 +21270,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _form_command() throws Exception {
         test("form", "command");
     }
@@ -23999,7 +23999,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h1_command() throws Exception {
         test("h1", "command");
     }
@@ -24237,7 +24237,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h2_command() throws Exception {
         test("h2", "command");
     }
@@ -24475,7 +24475,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h3_command() throws Exception {
         test("h3", "command");
     }
@@ -24713,7 +24713,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h4_command() throws Exception {
         test("h4", "command");
     }
@@ -24951,7 +24951,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h5_command() throws Exception {
         test("h5", "command");
     }
@@ -25189,7 +25189,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _h6_command() throws Exception {
         test("h6", "command");
     }
@@ -26705,7 +26705,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _header_command() throws Exception {
         test("header", "command");
     }
@@ -28124,7 +28124,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_a() throws Exception {
         test("html", "a");
@@ -28138,7 +28138,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_abbr() throws Exception {
         test("html", "abbr");
@@ -28152,7 +28152,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_acronym() throws Exception {
         test("html", "acronym");
@@ -28166,7 +28166,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_address() throws Exception {
         test("html", "address");
@@ -28180,7 +28180,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_applet() throws Exception {
         test("html", "applet");
@@ -28194,7 +28194,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_area() throws Exception {
         test("html", "area");
@@ -28208,7 +28208,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_article() throws Exception {
         test("html", "article");
@@ -28222,7 +28222,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_aside() throws Exception {
         test("html", "aside");
@@ -28236,7 +28236,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_audio() throws Exception {
         test("html", "audio");
@@ -28250,7 +28250,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_b() throws Exception {
         test("html", "b");
@@ -28264,7 +28264,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_base() throws Exception {
         test("html", "base");
@@ -28278,7 +28278,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_basefont() throws Exception {
         test("html", "basefont");
@@ -28292,7 +28292,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_bdi() throws Exception {
         test("html", "bdi");
@@ -28306,7 +28306,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_bdo() throws Exception {
         test("html", "bdo");
@@ -28320,7 +28320,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_bgsound() throws Exception {
         test("html", "bgsound");
@@ -28334,7 +28334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_big() throws Exception {
         test("html", "big");
@@ -28348,7 +28348,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_blink() throws Exception {
         test("html", "blink");
@@ -28362,7 +28362,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_blockquote() throws Exception {
         test("html", "blockquote");
@@ -28376,7 +28376,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_body() throws Exception {
         test("html", "body");
@@ -28390,7 +28390,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_br() throws Exception {
         test("html", "br");
@@ -28404,7 +28404,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_button() throws Exception {
         test("html", "button");
@@ -28418,7 +28418,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_canvas() throws Exception {
         test("html", "canvas");
@@ -28432,7 +28432,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_caption() throws Exception {
         test("html", "caption");
@@ -28446,7 +28446,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_center() throws Exception {
         test("html", "center");
@@ -28460,7 +28460,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_cite() throws Exception {
         test("html", "cite");
@@ -28474,7 +28474,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_code() throws Exception {
         test("html", "code");
@@ -28488,7 +28488,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_col() throws Exception {
         test("html", "col");
@@ -28502,7 +28502,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_colgroup() throws Exception {
         test("html", "colgroup");
@@ -28516,7 +28516,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_command() throws Exception {
         test("html", "command");
@@ -28530,7 +28530,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_content() throws Exception {
         test("html", "content");
@@ -28544,7 +28544,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_data() throws Exception {
         test("html", "data");
@@ -28558,7 +28558,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_datalist() throws Exception {
         test("html", "datalist");
@@ -28572,7 +28572,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dd() throws Exception {
         test("html", "dd");
@@ -28586,7 +28586,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_del() throws Exception {
         test("html", "del");
@@ -28600,7 +28600,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_details() throws Exception {
         test("html", "details");
@@ -28614,7 +28614,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dfn() throws Exception {
         test("html", "dfn");
@@ -28628,7 +28628,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dialog() throws Exception {
         test("html", "dialog");
@@ -28642,7 +28642,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dir() throws Exception {
         test("html", "dir");
@@ -28656,7 +28656,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_div() throws Exception {
         test("html", "div");
@@ -28670,7 +28670,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dl() throws Exception {
         test("html", "dl");
@@ -28684,7 +28684,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_dt() throws Exception {
         test("html", "dt");
@@ -28698,7 +28698,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_em() throws Exception {
         test("html", "em");
@@ -28712,7 +28712,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_embed() throws Exception {
         test("html", "embed");
@@ -28726,7 +28726,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_fieldset() throws Exception {
         test("html", "fieldset");
@@ -28740,7 +28740,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_figcaption() throws Exception {
         test("html", "figcaption");
@@ -28754,7 +28754,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_figure() throws Exception {
         test("html", "figure");
@@ -28768,7 +28768,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_font() throws Exception {
         test("html", "font");
@@ -28782,7 +28782,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_footer() throws Exception {
         test("html", "footer");
@@ -28796,7 +28796,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_form() throws Exception {
         test("html", "form");
@@ -28810,7 +28810,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_frame() throws Exception {
         test("html", "frame");
@@ -28824,7 +28824,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_frameset() throws Exception {
         test("html", "frameset");
@@ -28838,7 +28838,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h1() throws Exception {
         test("html", "h1");
@@ -28852,7 +28852,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h2() throws Exception {
         test("html", "h2");
@@ -28866,7 +28866,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h3() throws Exception {
         test("html", "h3");
@@ -28880,7 +28880,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h4() throws Exception {
         test("html", "h4");
@@ -28894,7 +28894,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h5() throws Exception {
         test("html", "h5");
@@ -28908,7 +28908,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_h6() throws Exception {
         test("html", "h6");
@@ -28922,7 +28922,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_head() throws Exception {
         test("html", "head");
@@ -28936,7 +28936,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_header() throws Exception {
         test("html", "header");
@@ -28950,7 +28950,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_hr() throws Exception {
         test("html", "hr");
@@ -28964,7 +28964,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_html() throws Exception {
         test("html", "html");
@@ -28978,7 +28978,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_i() throws Exception {
         test("html", "i");
@@ -28992,7 +28992,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_iframe() throws Exception {
         test("html", "iframe");
@@ -29006,7 +29006,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_image() throws Exception {
         test("html", "image");
@@ -29020,7 +29020,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_img() throws Exception {
         test("html", "img");
@@ -29034,7 +29034,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_input() throws Exception {
         test("html", "input");
@@ -29048,7 +29048,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_ins() throws Exception {
         test("html", "ins");
@@ -29062,7 +29062,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_isindex() throws Exception {
         test("html", "isindex");
@@ -29076,7 +29076,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_kbd() throws Exception {
         test("html", "kbd");
@@ -29090,7 +29090,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_keygen() throws Exception {
         test("html", "keygen");
@@ -29104,7 +29104,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_label() throws Exception {
         test("html", "label");
@@ -29118,7 +29118,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_layer() throws Exception {
         test("html", "layer");
@@ -29132,7 +29132,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_legend() throws Exception {
         test("html", "legend");
@@ -29146,7 +29146,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_li() throws Exception {
         test("html", "li");
@@ -29160,7 +29160,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_link() throws Exception {
         test("html", "link");
@@ -29174,7 +29174,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_listing() throws Exception {
         test("html", "listing");
@@ -29188,7 +29188,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_main() throws Exception {
         test("html", "main");
@@ -29202,7 +29202,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_map() throws Exception {
         test("html", "map");
@@ -29216,7 +29216,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_mark() throws Exception {
         test("html", "mark");
@@ -29230,7 +29230,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_marquee() throws Exception {
         test("html", "marquee");
@@ -29244,7 +29244,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_menu() throws Exception {
         test("html", "menu");
@@ -29258,7 +29258,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_menuitem() throws Exception {
         test("html", "menuitem");
@@ -29272,7 +29272,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_meta() throws Exception {
         test("html", "meta");
@@ -29286,7 +29286,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_meter() throws Exception {
         test("html", "meter");
@@ -29300,7 +29300,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_multicol() throws Exception {
         test("html", "multicol");
@@ -29314,7 +29314,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_nav() throws Exception {
         test("html", "nav");
@@ -29328,7 +29328,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_nextid() throws Exception {
         test("html", "nextid");
@@ -29342,7 +29342,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_nobr() throws Exception {
         test("html", "nobr");
@@ -29356,7 +29356,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_noembed() throws Exception {
         test("html", "noembed");
@@ -29370,7 +29370,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_noframes() throws Exception {
         test("html", "noframes");
@@ -29384,7 +29384,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_nolayer() throws Exception {
         test("html", "nolayer");
@@ -29398,7 +29398,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_noscript() throws Exception {
         test("html", "noscript");
@@ -29412,7 +29412,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_object() throws Exception {
         test("html", "object");
@@ -29426,7 +29426,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_ol() throws Exception {
         test("html", "ol");
@@ -29440,7 +29440,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_optgroup() throws Exception {
         test("html", "optgroup");
@@ -29454,7 +29454,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_option() throws Exception {
         test("html", "option");
@@ -29468,7 +29468,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_output() throws Exception {
         test("html", "output");
@@ -29482,7 +29482,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_p() throws Exception {
         test("html", "p");
@@ -29496,7 +29496,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_param() throws Exception {
         test("html", "param");
@@ -29510,7 +29510,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_picture() throws Exception {
         test("html", "picture");
@@ -29524,7 +29524,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_plaintext() throws Exception {
         test("html", "plaintext");
@@ -29538,7 +29538,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_pre() throws Exception {
         test("html", "pre");
@@ -29552,7 +29552,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_progress() throws Exception {
         test("html", "progress");
@@ -29566,7 +29566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_q() throws Exception {
         test("html", "q");
@@ -29580,7 +29580,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_rp() throws Exception {
         test("html", "rp");
@@ -29594,7 +29594,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_rt() throws Exception {
         test("html", "rt");
@@ -29608,7 +29608,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_ruby() throws Exception {
         test("html", "ruby");
@@ -29622,7 +29622,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_s() throws Exception {
         test("html", "s");
@@ -29636,7 +29636,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_samp() throws Exception {
         test("html", "samp");
@@ -29650,7 +29650,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_script() throws Exception {
         test("html", "script");
@@ -29664,7 +29664,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_section() throws Exception {
         test("html", "section");
@@ -29678,7 +29678,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_select() throws Exception {
         test("html", "select");
@@ -29692,7 +29692,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_slot() throws Exception {
         test("html", "slot");
@@ -29706,7 +29706,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_small() throws Exception {
         test("html", "small");
@@ -29720,7 +29720,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_source() throws Exception {
         test("html", "source");
@@ -29734,7 +29734,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_span() throws Exception {
         test("html", "span");
@@ -29748,7 +29748,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_strike() throws Exception {
         test("html", "strike");
@@ -29762,7 +29762,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_strong() throws Exception {
         test("html", "strong");
@@ -29776,7 +29776,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_style() throws Exception {
         test("html", "style");
@@ -29790,7 +29790,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_sub() throws Exception {
         test("html", "sub");
@@ -29804,7 +29804,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_summary() throws Exception {
         test("html", "summary");
@@ -29818,7 +29818,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_sup() throws Exception {
         test("html", "sup");
@@ -29832,7 +29832,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_svg() throws Exception {
         test("html", "svg");
@@ -29846,7 +29846,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_table() throws Exception {
         test("html", "table");
@@ -29860,7 +29860,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_tbody() throws Exception {
         test("html", "tbody");
@@ -29874,7 +29874,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_td() throws Exception {
         test("html", "td");
@@ -29888,7 +29888,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_template() throws Exception {
         test("html", "template");
@@ -29902,7 +29902,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_textarea() throws Exception {
         test("html", "textarea");
@@ -29916,7 +29916,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_tfoot() throws Exception {
         test("html", "tfoot");
@@ -29930,7 +29930,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_th() throws Exception {
         test("html", "th");
@@ -29944,7 +29944,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_thead() throws Exception {
         test("html", "thead");
@@ -29958,7 +29958,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_time() throws Exception {
         test("html", "time");
@@ -29972,7 +29972,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_title() throws Exception {
         test("html", "title");
@@ -29986,7 +29986,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_tr() throws Exception {
         test("html", "tr");
@@ -30000,7 +30000,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_track() throws Exception {
         test("html", "track");
@@ -30014,7 +30014,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_tt() throws Exception {
         test("html", "tt");
@@ -30028,7 +30028,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_u() throws Exception {
         test("html", "u");
@@ -30042,7 +30042,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_ul() throws Exception {
         test("html", "ul");
@@ -30056,7 +30056,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_var() throws Exception {
         test("html", "var");
@@ -30070,7 +30070,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_video() throws Exception {
         test("html", "video");
@@ -30084,7 +30084,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_wbr() throws Exception {
         test("html", "wbr");
@@ -30098,7 +30098,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _html_xmp() throws Exception {
         test("html", "xmp");
@@ -30155,7 +30155,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _i_command() throws Exception {
         test("i", "command");
     }
@@ -34173,7 +34173,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _ins_command() throws Exception {
         test("ins", "command");
     }
@@ -34620,7 +34620,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "0")
     @HtmlUnitNYI(IE = "2")
     public void _isindex_command() throws Exception {
@@ -35920,7 +35920,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _kbd_command() throws Exception {
         test("kbd", "command");
     }
@@ -37382,7 +37382,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _label_command() throws Exception {
         test("label", "command");
     }
@@ -37566,7 +37566,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _layer_command() throws Exception {
         test("layer", "command");
     }
@@ -37750,7 +37750,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _legend_command() throws Exception {
         test("legend", "command");
     }
@@ -37934,7 +37934,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _li_command() throws Exception {
         test("li", "command");
     }
@@ -39405,7 +39405,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _listing_command() throws Exception {
         test("listing", "command");
     }
@@ -39589,7 +39589,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _main_command() throws Exception {
         test("main", "command");
     }
@@ -39773,7 +39773,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _map_command() throws Exception {
         test("map", "command");
     }
@@ -39957,7 +39957,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _mark_command() throws Exception {
         test("mark", "command");
     }
@@ -40141,7 +40141,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _marquee_command() throws Exception {
         test("marquee", "command");
     }
@@ -40325,7 +40325,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _menu_command() throws Exception {
         test("menu", "command");
     }
@@ -40509,7 +40509,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _menuitem_command() throws Exception {
         test("menuitem", "command");
     }
@@ -41971,7 +41971,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _meter_command() throws Exception {
         test("meter", "command");
     }
@@ -42155,7 +42155,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _multicol_command() throws Exception {
         test("multicol", "command");
     }
@@ -42339,7 +42339,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _nav_command() throws Exception {
         test("nav", "command");
     }
@@ -42523,7 +42523,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _nextid_command() throws Exception {
         test("nextid", "command");
     }
@@ -42707,7 +42707,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _nobr_command() throws Exception {
         test("nobr", "command");
     }
@@ -42857,7 +42857,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_area() throws Exception {
         test("noembed", "area");
@@ -42871,7 +42871,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_base() throws Exception {
         test("noembed", "base");
@@ -42885,7 +42885,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_basefont() throws Exception {
         test("noembed", "basefont");
@@ -42899,7 +42899,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_bgsound() throws Exception {
         test("noembed", "bgsound");
@@ -42913,7 +42913,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_br() throws Exception {
         test("noembed", "br");
@@ -42939,7 +42939,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_embed() throws Exception {
         test("noembed", "embed");
@@ -42953,7 +42953,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_hr() throws Exception {
         test("noembed", "hr");
@@ -42967,7 +42967,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_image() throws Exception {
         test("noembed", "image");
@@ -42981,7 +42981,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_img() throws Exception {
         test("noembed", "img");
@@ -42995,7 +42995,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_input() throws Exception {
         test("noembed", "input");
@@ -43009,7 +43009,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_keygen() throws Exception {
         test("noembed", "keygen");
@@ -43023,7 +43023,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_link() throws Exception {
         test("noembed", "link");
@@ -43037,7 +43037,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_meta() throws Exception {
         test("noembed", "meta");
@@ -43051,7 +43051,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_param() throws Exception {
         test("noembed", "param");
@@ -43065,7 +43065,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_script() throws Exception {
         test("noembed", "script");
@@ -43079,7 +43079,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_source() throws Exception {
         test("noembed", "source");
@@ -43093,7 +43093,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_track() throws Exception {
         test("noembed", "track");
@@ -43107,7 +43107,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _noembed_wbr() throws Exception {
         test("noembed", "wbr");
@@ -43164,7 +43164,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _nolayer_command() throws Exception {
         test("nolayer", "command");
     }
@@ -43348,7 +43348,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _object_command() throws Exception {
         test("object", "command");
     }
@@ -43532,7 +43532,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _ol_command() throws Exception {
         test("ol", "command");
     }
@@ -43716,7 +43716,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _optgroup_command() throws Exception {
         test("optgroup", "command");
     }
@@ -43900,7 +43900,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _option_command() throws Exception {
         test("option", "command");
     }
@@ -44102,7 +44102,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _output_command() throws Exception {
         test("output", "command");
     }
@@ -44331,7 +44331,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _p_command() throws Exception {
         test("p", "command");
     }
@@ -44360,9 +44360,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
-            FF78 = "0")
+            FF_ESR = "0")
     @HtmlUnitNYI(FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _p_dialog() throws Exception {
         test("p", "dialog");
     }
@@ -46085,7 +46085,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _picture_command() throws Exception {
         test("picture", "command");
     }
@@ -46269,7 +46269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _pre_command() throws Exception {
         test("pre", "command");
     }
@@ -46453,7 +46453,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _progress_command() throws Exception {
         test("progress", "command");
     }
@@ -46637,7 +46637,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _q_command() throws Exception {
         test("q", "command");
     }
@@ -46821,7 +46821,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _rp_command() throws Exception {
         test("rp", "command");
     }
@@ -46926,7 +46926,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void _rp_rt() throws Exception {
         test("rp", "rt");
@@ -47019,7 +47019,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _rt_command() throws Exception {
         test("rt", "command");
     }
@@ -47203,7 +47203,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _ruby_command() throws Exception {
         test("ruby", "command");
     }
@@ -47387,7 +47387,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _s_command() throws Exception {
         test("s", "command");
     }
@@ -47571,7 +47571,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _samp_command() throws Exception {
         test("samp", "command");
     }
@@ -47773,7 +47773,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _section_command() throws Exception {
         test("section", "command");
     }
@@ -47914,7 +47914,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_area() throws Exception {
         test("select", "area");
@@ -47928,7 +47928,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_base() throws Exception {
         test("select", "base");
@@ -47942,7 +47942,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_basefont() throws Exception {
         test("select", "basefont");
@@ -47956,7 +47956,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_bgsound() throws Exception {
         test("select", "bgsound");
@@ -47970,7 +47970,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_br() throws Exception {
         test("select", "br");
@@ -47996,7 +47996,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_embed() throws Exception {
         test("select", "embed");
@@ -48010,7 +48010,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_hr() throws Exception {
         test("select", "hr");
@@ -48024,7 +48024,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_image() throws Exception {
         test("select", "image");
@@ -48038,7 +48038,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_img() throws Exception {
         test("select", "img");
@@ -48052,7 +48052,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_input() throws Exception {
         test("select", "input");
@@ -48064,11 +48064,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_keygen() throws Exception {
         test("select", "keygen");
@@ -48082,7 +48082,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_link() throws Exception {
         test("select", "link");
@@ -48096,7 +48096,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_meta() throws Exception {
         test("select", "meta");
@@ -48110,7 +48110,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_param() throws Exception {
         test("select", "param");
@@ -48133,7 +48133,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void _select_section() throws Exception {
         test("select", "section");
@@ -48156,7 +48156,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_source() throws Exception {
         test("select", "source");
@@ -48170,7 +48170,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _select_textarea() throws Exception {
         test("select", "textarea");
@@ -48184,7 +48184,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_track() throws Exception {
         test("select", "track");
@@ -48198,7 +48198,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _select_wbr() throws Exception {
         test("select", "wbr");
@@ -48255,7 +48255,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _slot_command() throws Exception {
         test("slot", "command");
     }
@@ -48439,7 +48439,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _small_command() throws Exception {
         test("small", "command");
     }
@@ -49901,7 +49901,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _span_command() throws Exception {
         test("span", "command");
     }
@@ -50085,7 +50085,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _strike_command() throws Exception {
         test("strike", "command");
     }
@@ -50269,7 +50269,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _strong_command() throws Exception {
         test("strong", "command");
     }
@@ -50453,7 +50453,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _sub_command() throws Exception {
         test("sub", "command");
     }
@@ -50637,7 +50637,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _summary_command() throws Exception {
         test("summary", "command");
     }
@@ -50821,7 +50821,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _sup_command() throws Exception {
         test("sup", "command");
     }
@@ -51277,7 +51277,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _svg_strike() throws Exception {
         test("svg", "strike");
@@ -51291,7 +51291,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _svg_strong() throws Exception {
         test("svg", "strong");
@@ -51305,7 +51305,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _svg_sub() throws Exception {
         test("svg", "sub");
@@ -51319,7 +51319,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _svg_sup() throws Exception {
         test("svg", "sup");
@@ -51504,7 +51504,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _table_button() throws Exception {
         test("table", "button");
@@ -51552,7 +51552,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             FF = "0",
-            FF78 = "0")
+            FF_ESR = "0")
     public void _table_command() throws Exception {
         test("table", "command");
     }
@@ -51727,7 +51727,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _table_form() throws Exception {
         test("table", "form");
@@ -51822,7 +51822,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _table_input() throws Exception {
         test("table", "input");
@@ -52215,7 +52215,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _table_select() throws Exception {
         test("table", "select");
@@ -52274,7 +52274,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void _table_style() throws Exception {
         test("table", "style");
@@ -52334,7 +52334,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0")
+            FF_ESR = "0")
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -52347,7 +52347,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "1",
             EDGE = "1",
             FF = "1",
-            FF78 = "1",
+            FF_ESR = "1",
             IE = "1")
     public void _table_textarea() throws Exception {
         test("table", "textarea");
@@ -60289,7 +60289,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _time_command() throws Exception {
         test("time", "command");
     }
@@ -60430,7 +60430,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_area() throws Exception {
         test("title", "area");
@@ -60444,7 +60444,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_base() throws Exception {
         test("title", "base");
@@ -60458,7 +60458,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_basefont() throws Exception {
         test("title", "basefont");
@@ -60472,7 +60472,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_bgsound() throws Exception {
         test("title", "bgsound");
@@ -60486,7 +60486,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_br() throws Exception {
         test("title", "br");
@@ -60512,7 +60512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_embed() throws Exception {
         test("title", "embed");
@@ -60526,7 +60526,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_hr() throws Exception {
         test("title", "hr");
@@ -60540,7 +60540,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_image() throws Exception {
         test("title", "image");
@@ -60554,7 +60554,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_img() throws Exception {
         test("title", "img");
@@ -60568,7 +60568,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_input() throws Exception {
         test("title", "input");
@@ -60582,7 +60582,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_keygen() throws Exception {
         test("title", "keygen");
@@ -60596,7 +60596,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_link() throws Exception {
         test("title", "link");
@@ -60610,7 +60610,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void _title_meta() throws Exception {
         test("title", "meta");
@@ -60624,7 +60624,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_param() throws Exception {
         test("title", "param");
@@ -60638,7 +60638,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_script() throws Exception {
         test("title", "script");
@@ -60652,7 +60652,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_source() throws Exception {
         test("title", "source");
@@ -60666,7 +60666,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void _title_style() throws Exception {
         test("title", "style");
@@ -60680,7 +60680,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_track() throws Exception {
         test("title", "track");
@@ -60694,7 +60694,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "2",
             EDGE = "2",
             FF = "2",
-            FF78 = "2",
+            FF_ESR = "2",
             IE = "2")
     public void _title_wbr() throws Exception {
         test("title", "wbr");
@@ -63307,7 +63307,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _tt_command() throws Exception {
         test("tt", "command");
     }
@@ -63491,7 +63491,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _u_command() throws Exception {
         test("u", "command");
     }
@@ -63675,7 +63675,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _ul_command() throws Exception {
         test("ul", "command");
     }
@@ -63859,7 +63859,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _var_command() throws Exception {
         test("var", "command");
     }
@@ -64043,7 +64043,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "2",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void _video_command() throws Exception {
         test("video", "command");
     }

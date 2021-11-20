@@ -216,7 +216,7 @@ public class HostParentOfHTest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _HTMLCollection_HTMLAllCollection() throws Exception {
         test("HTMLCollection", "HTMLAllCollection");
     }
@@ -249,7 +249,7 @@ public class HostParentOfHTest extends HostParentOf {
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
-            FF78 = "false")
+            FF_ESR = "false")
     public void _HTMLCollection_HTMLOptionsCollection() throws Exception {
         test("HTMLCollection", "HTMLOptionsCollection");
     }

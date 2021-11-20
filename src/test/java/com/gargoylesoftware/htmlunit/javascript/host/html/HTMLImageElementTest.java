@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.io.File;
@@ -129,7 +129,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                        "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
                   "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
-            FF78 = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
+            FF_ESR = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
                     "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             IE = {"[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
                   "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
@@ -342,11 +342,11 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                        "top", "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             FF = {"left", "right", "middle", "justify", "bottom", "middle",
                   "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
-            FF78 = {"left", "right", "middle", "justify", "bottom", "middle",
+            FF_ESR = {"left", "right", "middle", "justify", "bottom", "middle",
                     "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"left", "right", "center", "", "bottom", "middle",
                   "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -383,12 +383,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
                        "bottom", "middle", "top", "absbottom", "absmiddle", "baseline", "texttop"},
             FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                   "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
-            FF78 = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
+            FF_ESR = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                     "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
                   "center", "error", "center", "bottom", "middle", "top", "absBottom",
                   "absMiddle", "baseline", "textTop"})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -670,12 +670,12 @@ public class HTMLImageElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"error2;error3;error4;load5;", "3"},
             FF = {"error2;error3;error4;load5;", "4"},
-            FF78 = {"error2;error3;error4;load5;", "4"})
+            FF_ESR = {"error2;error3;error4;load5;", "4"})
     // at the moment we do not check the image content
     @HtmlUnitNYI(CHROME = {"error2;error3;load4;load5;", "3"},
             EDGE = {"error2;error3;load4;load5;", "3"},
             FF = {"error2;load3;load4;load5;", "4"},
-            FF78 = {"error2;load3;load4;load5;", "4"},
+            FF_ESR = {"error2;load3;load4;load5;", "4"},
             IE = {"error2;error3;load4;load5;", "3"})
     public void onload() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-jpg.img")) {

@@ -92,7 +92,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF78 = "false")
+            FF_ESR = "false")
     public void _TextEvent_TextEvent() throws Exception {
         test("TextEvent", "TextEvent");
     }
@@ -168,7 +168,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _TimeEvent_TimeEvent() throws Exception {
         test("TimeEvent", "TimeEvent");
     }
@@ -303,7 +303,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _UIEvent_MouseScrollEvent() throws Exception {
         test("UIEvent", "MouseScrollEvent");
     }
@@ -353,7 +353,7 @@ public class HostParentOfTTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "true",
             FF = "false",
-            FF78 = "false")
+            FF_ESR = "false")
     public void _UIEvent_TextEvent() throws Exception {
         test("UIEvent", "TextEvent");
     }
@@ -451,7 +451,7 @@ public class HostParentOfTTest extends HostParentOf {
             CHROME = "true",
             EDGE = "true",
             FF = "true",
-            FF78 = "true")
+            FF_ESR = "true")
     public void _URL_webkitURL() throws Exception {
         test("URL", "webkitURL");
     }

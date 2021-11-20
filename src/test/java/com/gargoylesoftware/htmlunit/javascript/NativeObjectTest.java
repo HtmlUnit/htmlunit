@@ -191,7 +191,7 @@ public class NativeObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function\\s()\\s{\\s[native\\scode]\\s}",
             FF = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
-            FF78 = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
+            FF_ESR = "function\\s()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}",
             IE = "\\nfunction()\\s{\\n\\s\\s\\s\\s[native\\scode]\\n}\\n")
     @NotYetImplemented(IE)
     public void proto() throws Exception {
@@ -403,7 +403,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             CHROME = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             EDGE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
             FF = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"},
-            FF78 = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
+            FF_ESR = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     @HtmlUnitNYI(IE = {"[object HTMLInputElement]", "[object HTMLInputElement]", "[object Object]", "function"})
     public void getOwnPropertyDescriptor() throws Exception {
         final String html = ""
@@ -441,7 +441,7 @@ public class NativeObjectTest extends WebDriverTestCase {
             FF = {"[object HTMLInputElement]", "x = [object Object]",
                   "x.get = function value() {\n    [native code]\n}",
                   "x.get.call = function call() {\n    [native code]\n}"},
-            FF78 = {"[object HTMLInputElement]", "x = [object Object]",
+            FF_ESR = {"[object HTMLInputElement]", "x = [object Object]",
                     "x.get = function value() {\n    [native code]\n}",
                     "x.get.call = function call() {\n    [native code]\n}"},
             IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",

@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,9 +41,9 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second", ""},
             FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
-            FF78 = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
+            FF_ESR = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
             IE = {"undefined", "exception", ""})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"

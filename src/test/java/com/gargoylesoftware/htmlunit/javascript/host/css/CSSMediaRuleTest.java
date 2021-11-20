@@ -153,7 +153,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
             FF = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
-            FF78 = "@media print {\n  *#navigation { display: none; }"
+            FF_ESR = "@media print {\n  *#navigation { display: none; }"
                     + "\n  @media (max-width: 12cm) {\n  *.note { float: none; }\n}\n}",
             IE = "@media print {\n\t*#navigation { display: none; }"
                     + "\n\t@media (max-width: 12cm) {\n\t*.note { float: none; }\n}\n}")
@@ -536,7 +536,7 @@ public class CSSMediaRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"1", "exception"},
             FF = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                   "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"},
-            FF78 = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
+            FF_ESR = {"1", "0", "2", "span { color: rgb(0, 0, 0); }", "[object CSSMediaRule]",
                     "p { background-color: rgb(255, 255, 255); }", "[object CSSMediaRule]"})
     public void insertRule() throws Exception {
         final String html

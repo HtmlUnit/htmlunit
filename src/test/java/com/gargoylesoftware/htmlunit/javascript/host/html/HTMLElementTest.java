@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -238,7 +238,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             IE = {"text", "i", "i", "[object MSStyleCSSProperties]", "function", "undefined", "undefined"},
             CHROME = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"},
             EDGE = {"text", "i", "i", "[object CSSStyleDeclaration]", "function", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF78, IE})
+    @NotYetImplemented({FF, FF_ESR, IE})
     public void attributesAccess() throws Exception {
         final String html
             = "<html><head>\n"
@@ -889,7 +889,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "<b>inner HTML</b>",
             FF = "getInnerHTML() not available",
-            FF78 = "getInnerHTML() not available",
+            FF_ESR = "getInnerHTML() not available",
             IE = "getInnerHTML() not available")
     public void getGetInnerHTML() throws Exception {
         final String html = "<html>\n"
@@ -1908,7 +1908,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"Old = Old\ninnerText", "New = New cell value"},
             EDGE =  {"Old = Old\ninnerText", "New = New cell value"},
             FF = {"Old = Old\ninnerText", "New = New cell value"},
-            FF78 = {"Old = Old\ninnerText", "New = New cell value"},
+            FF_ESR = {"Old = Old\ninnerText", "New = New cell value"},
             IE  = {"Old = Old\ninnerText", "New = New cell value"})
     public void getSetInnerTextSimple() throws Exception {
         final String html = "<html>\n"
@@ -2271,7 +2271,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                        "f1", "body", "h1", "i1", "td", "exception", "td", "body", "body"},
             FF = {"null", "body", "body", "body", "body", "body",
                   "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"},
-            FF78 = {"null", "body", "body", "body", "body", "body",
+            FF_ESR = {"null", "body", "body", "body", "body", "body",
                     "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
@@ -2886,7 +2886,7 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {},
             FF = "page2 loaded",
-            FF78 = "page2 loaded")
+            FF_ESR = "page2 loaded")
     public void dispatchEvent_submitOnForm() throws Exception {
         final String html = "<html>\n"
             + "<head><title>page 1</title></head>\n"
@@ -5066,7 +5066,7 @@ public class HTMLElementTest extends WebDriverTestCase {
                     + "mouseup--body\nmouseup--undefined",
             FF = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined",
-            FF78 = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
+            FF_ESR = "mousedown-over-over\nmousedown-over-body\nmousedown-over-undefined\n"
                     + "mouseup--body\nmouseup--undefined\nclick-body-body\nclick-body-undefined")
     @NotYetImplemented
     public void clickAnElementThatDisappears() throws Exception {
@@ -5212,7 +5212,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "go", "", "enter", "done",  "go", "next", "previous", "search", "send"},
-            FF78 = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"},
+            FF_ESR = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"},
             IE = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"})
     public void enterKeyHint() throws Exception {
         final String html =
@@ -5264,7 +5264,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "go", "", "", ""},
-            FF78 = {"undefined", "GO", "run", "undefined", "null"},
+            FF_ESR = {"undefined", "GO", "run", "undefined", "null"},
             IE = {"undefined", "GO", "run", "undefined", "null"})
     public void enterKeyHint2() throws Exception {
         final String html =
@@ -5300,7 +5300,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"go", "go", "", "", ""},
-            FF78 = {"undefined", "undefined", "undefined", "undefined", "undefined"},
+            FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void enterKeyHintDefaults() throws Exception {
         final String html =

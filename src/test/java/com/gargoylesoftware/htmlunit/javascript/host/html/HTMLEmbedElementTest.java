@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -43,11 +43,11 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                        "absbottom", "absmiddle", "baseline", "texttop", "wrong", ""},
             FF = {"left", "right", "bottom", "middle", "top",
                   "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
-            FF78 = {"left", "right", "bottom", "middle", "top",
+            FF_ESR = {"left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined", "undefined", "undefined", "undefined"})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void getAlign() throws Exception {
         final String html
             = "<html><body>\n"
@@ -82,9 +82,9 @@ public class HTMLEmbedElementTest extends WebDriverTestCase {
                        "absbottom", "absmiddle", "baseline", "texttop"},
             FF = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                   "absbottom", "absmiddle", "bottom", "texttop"},
-            FF78 = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
+            FF_ESR = {"CenTer", "8", "foo", "left", "right", "bottom", "middle", "top",
                     "absbottom", "absmiddle", "bottom", "texttop"})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void setAlign() throws Exception {
         final String html
             = "<html><body>\n"

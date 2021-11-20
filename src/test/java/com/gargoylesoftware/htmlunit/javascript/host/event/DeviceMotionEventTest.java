@@ -75,7 +75,7 @@ public class DeviceMotionEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
             FF = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"},
-            FF78 = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"})
+            FF_ESR = {"[object DeviceMotionEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

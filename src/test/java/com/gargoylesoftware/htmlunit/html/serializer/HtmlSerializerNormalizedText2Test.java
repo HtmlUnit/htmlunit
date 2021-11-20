@@ -1859,7 +1859,7 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
     @Test
     @Alerts(DEFAULT = "x y",
             FF = "x ab y",
-            FF78 = "x ab y",
+            FF_ESR = "x ab y",
             IE = "x ab y")
     public void getNormalizedNumberInputInvalidNumber() throws Exception {
         getNormalizedTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");

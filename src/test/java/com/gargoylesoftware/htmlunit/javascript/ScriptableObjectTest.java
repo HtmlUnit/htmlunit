@@ -176,7 +176,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "false"},
             EDGE = {"true", "false", "true", "ctor", "false"},
             FF = {"true", "false", "true", "ctor", "false"},
-            FF78 = {"true", "false", "true", "ctor", "false"})
+            FF_ESR = {"true", "false", "true", "ctor", "false"})
     public void ctorChangeableHasNoEffectForTypeOf() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -211,7 +211,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "exception"},
             EDGE = {"true", "false", "true", "ctor", "exception"},
             FF = {"true", "false", "true", "ctor", "exception"},
-            FF78 = {"true", "false", "true", "ctor", "exception"})
+            FF_ESR = {"true", "false", "true", "ctor", "exception"})
     public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -267,7 +267,7 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception",
+            FF_ESR = "exception",
             IE = "exception")
     public void ctorChangeableHasNoEffectForSealedStrict() throws Exception {
         final String html = "<html><body>\n"

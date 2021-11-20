@@ -238,7 +238,7 @@ public class Selection2Test extends SimpleWebTestCase {
             CHROME = {"None", "None"},
             EDGE = {"None", "None"},
             FF = {"None", "None"},
-            FF78 = {"None", "None"})
+            FF_ESR = {"None", "None"})
     public void empty() throws Exception {
         test("try{selection.empty()}catch(e){alert('exception')}", "selection.type", "x ? x : 'undefined'");
     }

@@ -489,7 +489,7 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "textLength not available",
             FF = "7",
-            FF78 = "7")
+            FF_ESR = "7")
     public void textLength() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

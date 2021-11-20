@@ -321,7 +321,7 @@ public class NativeNumberTest extends WebDriverTestCase {
     @Test
     @Alerts("12,345")
     @BuggyWebDriver(FF = "12.345",
-            FF78 = "12.345")
+            FF_ESR = "12.345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

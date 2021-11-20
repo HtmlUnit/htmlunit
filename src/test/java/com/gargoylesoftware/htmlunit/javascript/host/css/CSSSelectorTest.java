@@ -906,7 +906,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"id3", "id5", "id6"},
             EDGE = {"id3", "id5", "id6"},
             FF = {"id3", "id5", "id6"},
-            FF78 = {"id3", "id5", "id6"})
+            FF_ESR = {"id3", "id5", "id6"})
     public void pseudoInvalid() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
@@ -943,7 +943,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
             EDGE = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
             FF = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
-            FF78 = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
+            FF_ESR = {"", "", "", "", "theform", "id1", "id2", "id4", "id7"},
             IE = {"", "", "", "", "theform", "id1", "id2", "id4", "id5", "id6", "id7"})
     public void pseudoValid() throws Exception {
         final String html = "<html><head>\n"
@@ -1060,7 +1060,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     public void invalid_not() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1225,7 +1225,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1256,7 +1256,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1305,7 +1305,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1336,7 +1336,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception",
             FF = "exception",
-            FF78 = "exception")
+            FF_ESR = "exception")
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

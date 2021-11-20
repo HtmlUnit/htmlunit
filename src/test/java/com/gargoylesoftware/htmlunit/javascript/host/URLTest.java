@@ -726,7 +726,7 @@ public class URLTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  EDGE = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
                  FF = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"},
-                 FF78 = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
+                 FF_ESR = {"https://developer.mozilla.org/search?q a=1 2 3", "?q a=1 2 3"})
     public void searchEncoding() throws Exception {
         final String html =
                 "<html>\n"

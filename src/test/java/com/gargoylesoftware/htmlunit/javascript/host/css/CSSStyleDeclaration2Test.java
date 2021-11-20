@@ -163,7 +163,7 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
                   "success",
                   "success",
                   "success"},
-            FF78 = {"success", "letterSpacing 42% - 42em",
+            FF_ESR = {"success", "letterSpacing 42% - 42em",
                     "outlineWidth 42.0 - ; 42.7 - ; 42 - ; 42% - 42em",
                     "success",
                     "success",

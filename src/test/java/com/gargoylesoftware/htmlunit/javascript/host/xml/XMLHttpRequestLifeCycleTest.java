@@ -324,7 +324,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false",
                       "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_forbidden() throws Exception {
@@ -341,7 +341,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void addEventListener_sync_without_origin() throws Exception {
@@ -358,7 +358,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void addEventListener_sync_preflight_without_origin() throws Exception {
@@ -387,7 +387,7 @@ public final class XMLHttpRequestLifeCycleTest {
                            "abort-done: 0_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                         "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
@@ -407,7 +407,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_networkError() throws Exception {
             try {
@@ -431,7 +431,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_networkError_preflight() throws Exception {
             try {
@@ -480,7 +480,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void addEventListener_sync_Error403_during_preflight() throws Exception {
@@ -521,7 +521,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void addEventListener_sync_Error500_during_preflight() throws Exception {
@@ -665,7 +665,7 @@ public final class XMLHttpRequestLifeCycleTest {
                       "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
                       "progress_3_200_false", "readystatechange_4_200_true",
                       "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                         "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
                         "progress_3_200_false", "readystatechange_4_200_true",
                         "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false"},
@@ -827,7 +827,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false",
                       "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false",
                         "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_forbidden() throws Exception {
@@ -844,7 +844,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void onKeyWord_sync_without_origin() throws Exception {
@@ -861,7 +861,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void onKeyWord_sync_preflight_without_origin() throws Exception {
@@ -891,7 +891,7 @@ public final class XMLHttpRequestLifeCycleTest {
                            "abort-done: 0_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                         "abort-done: 0_0", "load_0_0_false", "loadend_0_0_false", "send-done: 0_0"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_200_true",
                       "load_4_0_false", "abort-done: 4_0", "loadend_4_0_false", "abort-done: 4_0",
@@ -911,7 +911,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_networkError() throws Exception {
             // will throw an exception and user is supposed to handle this.
@@ -964,7 +964,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void onKeyWord_sync_Error403_during_preflight() throws Exception {
@@ -1007,7 +1007,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0",
                       "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                       "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0",
                         "readystatechange_4_0_true", "error_4_0_false", "loadend_4_0_false",
                         "ExceptionThrown"})
         public void onKeyWord_sync_Error500_during_preflight() throws Exception {
@@ -1092,7 +1092,7 @@ public final class XMLHttpRequestLifeCycleTest {
                       "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
                       "progress_3_200_false", "readystatechange_4_200_true", "abort-done: 0_0",
                       "load_0_0_false", "loadend_0_0_false"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                         "send-done: 1_0", "readystatechange_2_200_true", "readystatechange_3_200_true",
                         "progress_3_200_false", "readystatechange_4_200_true", "abort-done: 0_0",
                         "load_0_0_false", "loadend_0_0_false"},
@@ -1347,7 +1347,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1381,7 +1381,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1430,7 +1430,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void addEventListener_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1475,7 +1475,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                       "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                         "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",
@@ -1609,7 +1609,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1643,7 +1643,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1692,7 +1692,7 @@ public final class XMLHttpRequestLifeCycleTest {
         @Alerts(DEFAULT = {"readystatechange_1_0_true", "open-done: 1_0", "ExceptionThrown"},
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false", "ExceptionThrown"})
         public void onKeyWord_sync_preflight_NoHttpResponseException_during_preflight() throws Exception {
             final MockWebConnection mockWebConnection = getMockWebConnection();
@@ -1737,7 +1737,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 FF = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                       "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
                       "error_4_0_false", "loadend_4_0_false"},
-                FF78 = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
+                FF_ESR = {"readystatechange_1_0_true", "open-done: 1_0", "loadstart_1_0_false",
                         "send-done: 1_0", "progress_1_0_false", "readystatechange_4_0_true",
                         "error_4_0_false", "loadend_4_0_false"},
                 IE = {"readystatechange_1_0_true", "open-done: 1_0", "readystatechange_1_0_true",

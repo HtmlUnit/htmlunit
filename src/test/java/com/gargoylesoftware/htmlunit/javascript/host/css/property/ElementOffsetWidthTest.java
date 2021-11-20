@@ -327,7 +327,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "-16",
             EDGE = "-16",
             FF = "-16",
-            FF78 = "-16",
+            FF_ESR = "-16",
             IE = "-16")
     public void blockquote() throws Exception {
         test("blockquote");
@@ -376,11 +376,11 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             CHROME = "16",
             EDGE = "16",
             FF = "12",
-            FF78 = "12")
+            FF_ESR = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
-            FF78 = "10",
+            FF_ESR = "10",
             IE = "10")
     public void button() throws Exception {
         test("button");
@@ -496,7 +496,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "-16",
             EDGE = "-16",
             FF = "-16",
-            FF78 = "-16",
+            FF_ESR = "-16",
             IE = "-16")
     public void dd() throws Exception {
         test("dd");
@@ -602,7 +602,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "-16",
             EDGE = "-16",
             FF = "-16",
-            FF78 = "-16",
+            FF_ESR = "-16",
             IE = "-16")
     public void fieldset() throws Exception {
         test("fieldset");
@@ -629,7 +629,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "-16",
             EDGE = "-16",
             FF = "-16",
-            FF78 = "-16",
+            FF_ESR = "-16",
             IE = "-16")
     public void figure() throws Exception {
         test("figure");
@@ -810,7 +810,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void iframe() throws Exception {
         test("iframe");
@@ -828,7 +828,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void q() throws Exception {
         test("q");
@@ -973,7 +973,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void li() throws Exception {
         test("li");
@@ -1023,7 +1023,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0")
+            FF_ESR = "0")
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -1083,7 +1083,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0")
+            FF_ESR = "0")
     public void meter() throws Exception {
         test("meter");
     }
@@ -1096,7 +1096,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "-16",
-            FF78 = "-16")
+            FF_ESR = "-16")
     public void multicol() throws Exception {
         test("multicol");
     }
@@ -1296,7 +1296,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void progress() throws Exception {
         test("progress");
@@ -1389,12 +1389,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "24",
             FF = "30",
-            FF78 = "30",
+            FF_ESR = "30",
             IE = "25")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void select() throws Exception {
         test("select");
@@ -1620,11 +1620,11 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             CHROME = "161",
             EDGE = "161",
             FF = "185",
-            FF78 = "185")
+            FF_ESR = "185")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",
             FF = "100",
-            FF78 = "100",
+            FF_ESR = "100",
             IE = "100")
     public void textarea() throws Exception {
         test("textarea");
@@ -1741,7 +1741,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void video() throws Exception {
         test("video");
@@ -1779,12 +1779,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "149",
+            FF_ESR = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "145",
-            FF78 = "145",
+            FF_ESR = "145",
             IE = "143")
     public void input() throws Exception {
         test("input");
@@ -1800,11 +1800,11 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             CHROME = "16",
             EDGE = "16",
             FF = "12",
-            FF78 = "12")
+            FF_ESR = "12")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
-            FF78 = "10",
+            FF_ESR = "10",
             IE = "10")
     public void inputButton() throws Exception {
         loadPageVerifyTitle2(testInput("button"));
@@ -1818,9 +1818,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF78 = "14")
+            FF_ESR = "14")
     @HtmlUnitNYI(FF = "10",
-            FF78 = "10")
+            FF_ESR = "10")
     public void inputCheckbox() throws Exception {
         loadPageVerifyTitle2(testInput("checkbox"));
     }
@@ -1833,12 +1833,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "253",
             FF = "261",
-            FF78 = "230",
+            FF_ESR = "230",
             IE = "228")
     @HtmlUnitNYI(CHROME = "10",
             EDGE = "10",
             FF = "10",
-            FF78 = "10",
+            FF_ESR = "10",
             IE = "10")
     public void inputFile() throws Exception {
         loadPageVerifyTitle2(testInput("file"));
@@ -1863,12 +1863,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "149",
+            FF_ESR = "149",
             IE = "147")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "145",
-            FF78 = "145",
+            FF_ESR = "145",
             IE = "143")
     public void inputPassword() throws Exception {
         loadPageVerifyTitle2(testInput("password"));
@@ -1882,9 +1882,9 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "13",
             FF = "14",
-            FF78 = "14")
+            FF_ESR = "14")
     @HtmlUnitNYI(FF = "10",
-            FF78 = "10")
+            FF_ESR = "10")
     public void inputRadio() throws Exception {
         loadPageVerifyTitle2(testInput("radio"));
     }
@@ -1897,12 +1897,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "51",
             FF = "87",
-            FF78 = "44",
+            FF_ESR = "44",
             IE = "57")
     @HtmlUnitNYI(CHROME = "55",
             EDGE = "55",
             FF = "55",
-            FF78 = "55",
+            FF_ESR = "55",
             IE = "55")
     public void inputReset() throws Exception {
         loadPageVerifyTitle2(testInput("reset"));
@@ -1916,12 +1916,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "149",
+            FF_ESR = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "145",
-            FF78 = "145",
+            FF_ESR = "145",
             IE = "143")
     public void inputSelect() throws Exception {
         loadPageVerifyTitle2(testInput("select"));
@@ -1935,12 +1935,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "58",
             FF = "104",
-            FF78 = "90",
+            FF_ESR = "90",
             IE = "103")
     @HtmlUnitNYI(CHROME = "118",
             EDGE = "118",
             FF = "118",
-            FF78 = "118",
+            FF_ESR = "118",
             IE = "118")
     public void inputSubmit() throws Exception {
         loadPageVerifyTitle2(testInput("submit"));
@@ -1954,12 +1954,12 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "177",
             FF = "149",
-            FF78 = "149",
+            FF_ESR = "149",
             IE = "145")
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "145",
-            FF78 = "145",
+            FF_ESR = "145",
             IE = "143")
     public void inputText() throws Exception {
         loadPageVerifyTitle2(testInput("text"));

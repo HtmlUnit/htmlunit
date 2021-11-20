@@ -874,7 +874,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"about:blank", "§§URL§§", "§§URL§§"},
             FF = {"about:blank", "about:blank", "about:blank"},
-            FF78 = {"about:blank", "about:blank", "about:blank"})
+            FF_ESR = {"about:blank", "about:blank", "about:blank"})
     public void location() throws Exception {
         final String html =
                 "<html>\n"
@@ -1019,7 +1019,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                     "about:blank", "iframe script", "loaded"},
             FF = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe script", "loaded"},
-            FF78 = {"iframe script", "loaded", "null", "loaded", "[object Window]",
+            FF_ESR = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe script", "loaded"},
             IE = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe script", "loaded"})
@@ -1084,7 +1084,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
                     "about:blank", "iframe external script", "loaded"},
             FF = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe external script", "loaded"},
-            FF78 = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
+            FF_ESR = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                     "about:blank", "iframe external script", "loaded"},
             IE = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe external script", "loaded"})

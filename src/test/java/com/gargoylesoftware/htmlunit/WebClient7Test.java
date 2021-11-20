@@ -214,7 +214,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
             IE = "/area.html?k\u00c3\u00b6nig")
     @BuggyWebDriver(FF = "WebDriverException",
-            FF78 = "WebDriverException")
+            FF_ESR = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingUTF8Header() throws Exception {
         areaUrlEncoding(true, "UTF-8");
@@ -227,7 +227,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "/area.html?k%C3%B6nig",
             IE = "/area.html?k\u00c3\u00b6nig")
     @BuggyWebDriver(FF = "WebDriverException",
-            FF78 = "WebDriverException")
+            FF_ESR = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingUTF8Meta() throws Exception {
         areaUrlEncoding(false, "UTF-8");
@@ -240,7 +240,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "/area.html?k%F6nig",
             IE = "/area.html?k\u00f6nig")
     @BuggyWebDriver(FF = "WebDriverException",
-            FF78 = "WebDriverException")
+            FF_ESR = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingISO8859_1Header() throws Exception {
         areaUrlEncoding(true, "ISO-8859-1");
@@ -253,7 +253,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "/area.html?k%F6nig",
             IE = "/area.html?k\u00f6nig")
     @BuggyWebDriver(FF = "WebDriverException",
-            FF78 = "WebDriverException")
+            FF_ESR = "WebDriverException")
     @NotYetImplemented(IE)
     public void areaUrlEncodingISO8859_1Meta() throws Exception {
         areaUrlEncoding(false, "ISO-8859-1");

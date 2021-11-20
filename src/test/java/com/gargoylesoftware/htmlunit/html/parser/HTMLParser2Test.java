@@ -57,7 +57,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"beforeafter", "undefined", "undefined"},
             EDGE = {"beforeafter", "undefined", "undefined"},
             FF = {"beforeafter", "undefined", "undefined"},
-            FF78 = {"beforeafter", "undefined", "undefined"},
+            FF_ESR = {"beforeafter", "undefined", "undefined"},
             IE = {"beforeafter", "undefined", "undefined"})
     public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head>\n"
@@ -894,7 +894,7 @@ public class HTMLParser2Test extends WebDriverTestCase {
             FF = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
                   "1", "IFRAME", "null", "1",
                   "3", "#text", "</div></body></html>"},
-            FF78 = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
+            FF_ESR = {"<iframe>&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;</iframe>", "1",
                     "1", "IFRAME", "null", "1",
                     "3", "#text", "</div></body></html>"})
     public void selfClosingIframe() throws Exception {

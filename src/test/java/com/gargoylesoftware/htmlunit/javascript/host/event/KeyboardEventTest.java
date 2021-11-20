@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
 import java.util.Arrays;
 
@@ -94,7 +94,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                     ",,0,false,false,false,false,false,false,0,0"},
             FF = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
                   ",,0,false,false,false,false,false,false,0,0"},
-            FF78 = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
+            FF_ESR = {"[object KeyboardEvent]", "undefined", "false", "false", "false",
                     ",,0,false,false,false,false,false,false,0,0"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -415,7 +415,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"exception", "exception"},
-            FF78 = {"exception",
+            FF_ESR = {"exception",
                     "keydown, true, true, true, true, true, true, 65, 0",
                     "keyup, false, false, false, false, false, false, 32, 0"})
     public void initKeyEvent() throws Exception {
@@ -623,7 +623,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"13", "13", "13"})
-    @NotYetImplemented({FF, FF78})
+    @NotYetImplemented({FF, FF_ESR})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -681,7 +681,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                   "keydown:13,0,13,Enter,undefined,Enter,false",
                   "keypress:13,0,13,Enter,undefined,Enter,false",
                   "keyup:13,0,13,Enter,undefined,Enter,false"},
-            FF78 = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
+            FF_ESR = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
                     "keydown:65,0,65,A,undefined,KeyA,true",
                     "keypress:0,65,65,A,undefined,KeyA,true",
                     "keyup:65,0,65,A,undefined,KeyA,true",
@@ -738,7 +738,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
                             "keydown:13,0,13,Enter,undefined,Enter,false",
                             "keypress:13,13,13,Enter,undefined,Enter,false",
                             "keyup:13,0,13,Enter,undefined,Enter,false"},
-                    FF78 = {"keydown:65,0,65,A,undefined,,false",
+                    FF_ESR = {"keydown:65,0,65,A,undefined,,false",
                             "keypress:65,65,65,A,undefined,,false",
                             "keyup:65,0,65,A,undefined,,false",
                             "keydown:65,0,65,a,undefined,,false",

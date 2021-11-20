@@ -72,7 +72,7 @@ public class HtmlAppletTest extends SimpleWebTestCase {
             CHROME = "Your browser doesn't support applets",
             EDGE = "Your browser doesn't support applets",
             FF = "Your browser doesn't support applets",
-            FF78 = "Your browser doesn't support applets")
+            FF_ESR = "Your browser doesn't support applets")
     public void asText_appletEnabled() throws Exception {
         final String html = "<html><head>\n"
             + "</head><body>\n"

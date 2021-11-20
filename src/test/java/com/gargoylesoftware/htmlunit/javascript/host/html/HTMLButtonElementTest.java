@@ -369,7 +369,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Test:",
             FF = "Test:mouse over [disabledBtn]",
-            FF78 = "Test:mouse over [disabledBtn]")
+            FF_ESR = "Test:mouse over [disabledBtn]")
     public void mouseOverDiabled() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

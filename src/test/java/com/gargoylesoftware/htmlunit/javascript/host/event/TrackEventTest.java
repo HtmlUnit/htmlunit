@@ -70,7 +70,7 @@ public class TrackEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object TrackEvent]", "undefined", "false", "false", "false"},
                 EDGE = {"[object TrackEvent]", "undefined", "false", "false", "false"},
                 FF = {"[object TrackEvent]", "undefined", "false", "false", "false"},
-                FF78 = {"[object TrackEvent]", "undefined", "false", "false", "false"})
+                FF_ESR = {"[object TrackEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
@@ -237,7 +237,7 @@ public class TrackEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object TrackEvent]", "track", "false", "false", "false"},
                 EDGE = {"[object TrackEvent]", "track", "false", "false", "false"},
                 FF = {"[object TrackEvent]", "track", "false", "false", "false"},
-                FF78 = {"[object TrackEvent]", "track", "false", "false", "false"})
+                FF_ESR = {"[object TrackEvent]", "track", "false", "false", "false"})
     public void create_ctorAllDetailsWrongData() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

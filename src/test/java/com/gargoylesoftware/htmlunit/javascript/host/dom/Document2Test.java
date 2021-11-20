@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF78;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.net.URL;
@@ -460,8 +460,8 @@ public class Document2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "true", "true"},
             FF = {"false", "false", "false"},
-            FF78 = {"false", "false", "false"})
-    @NotYetImplemented({FF, FF78})
+            FF_ESR = {"false", "false", "false"})
+    @NotYetImplemented({FF, FF_ESR})
     public void queryCommandEnabledDesignMode() throws Exception {
         final String html = "<html><body onload='x()'><iframe name='f' id='f'></iframe>\n"
             + "<script>\n"

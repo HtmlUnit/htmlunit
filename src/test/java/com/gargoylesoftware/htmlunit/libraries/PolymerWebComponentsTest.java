@@ -43,7 +43,7 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "",
             EDGE = "",
             FF = "",
-            FF78 = "",
+            FF_ESR = "",
             IE = "")
     public void hello() throws Exception {
         final String url = URL_FIRST + "index.html";

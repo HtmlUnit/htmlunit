@@ -127,7 +127,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "none"},
-            FF78 = {"", "none"},
+            FF_ESR = {"", "none"},
             IE = {"inline", "inline"})
     public void area() throws Exception {
         test("area");
@@ -611,7 +611,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "block"},
             FF = {"", "inline"},
-            FF78 = {"", "inline"},
+            FF_ESR = {"", "inline"},
             IE = {"block", "block"})
     public void frame() throws Exception {
         test("frame");
@@ -875,7 +875,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "block"},
             FF = {"", "inline"},
-            FF78 = {"", "inline"},
+            FF_ESR = {"", "inline"},
             IE = {"inline", "inline"})
     public void layer() throws Exception {
         test("layer");
@@ -1033,7 +1033,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "block"},
-            FF78 = {"", "block"},
+            FF_ESR = {"", "block"},
             IE = {"inline", "inline"})
     public void multicol() throws Exception {
         test("multicol");
@@ -1265,7 +1265,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby-text"},
-            FF78 = {"", "ruby-text"},
+            FF_ESR = {"", "ruby-text"},
             IE = {"ruby-text", "ruby-text"})
     public void rt() throws Exception {
         test("rt");
@@ -1279,7 +1279,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby"},
-            FF78 = {"", "ruby"},
+            FF_ESR = {"", "ruby"},
             IE = {"ruby", "ruby"})
     public void ruby() throws Exception {
         test("ruby");

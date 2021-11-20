@@ -94,7 +94,7 @@ public class MouseEventTest extends WebDriverTestCase {
                         "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
                 FF = {"[object MouseEvent]", "undefined", "false", "false", "false", "false",
                       "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
-                FF78 = {"[object MouseEvent]", "undefined", "false", "false", "false", "false",
+                FF_ESR = {"[object MouseEvent]", "undefined", "false", "false", "false", "false",
                         "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_

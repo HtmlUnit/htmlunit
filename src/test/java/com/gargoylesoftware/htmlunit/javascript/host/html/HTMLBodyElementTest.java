@@ -47,7 +47,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"},
             FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"},
-            FF78 = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
+            FF_ESR = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
     @NotYetImplemented({CHROME, EDGE})
     public void defaultPaddingAndMargins() throws Exception {
         final String html =

@@ -161,7 +161,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
                     "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
             FF = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
                   "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
-            FF78 = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
+            FF_ESR = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
                     "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
             IE = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
                   "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"})

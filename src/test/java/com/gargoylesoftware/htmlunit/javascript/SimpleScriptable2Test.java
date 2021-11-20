@@ -330,7 +330,7 @@ public class SimpleScriptable2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",
-            FF78 = "0",
+            FF_ESR = "0",
             IE = "0")
     public void set_ReadOnly_window_length() throws Exception {
         set_ReadOnly("window.length");

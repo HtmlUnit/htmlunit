@@ -82,7 +82,7 @@ public class SvgScriptTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
             EDGE = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
             FF = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
-            FF78 = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
+            FF_ESR = {"[object SVGScriptElement]", "[object SVGScriptElement]"},
             IE = {"[object SVGScriptElement]", "[object SVGScriptElement]"})
     public void htmlOrSvg() throws Exception {
         final String html = "<svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"

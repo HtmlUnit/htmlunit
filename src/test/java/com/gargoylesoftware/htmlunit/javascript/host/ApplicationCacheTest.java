@@ -40,7 +40,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
             CHROME = "undefined",
             EDGE = "undefined",
             FF = "[object OfflineResourceList]",
-            FF78 = "[object OfflineResourceList]")
+            FF_ESR = "[object OfflineResourceList]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

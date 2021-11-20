@@ -77,7 +77,7 @@ public class DeviceOrientationEventTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
             EDGE = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
             FF = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"},
-            FF78 = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"})
+            FF_ESR = {"[object DeviceOrientationEvent]", "undefined", "false", "false", "false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

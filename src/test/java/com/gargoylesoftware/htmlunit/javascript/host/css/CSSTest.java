@@ -35,7 +35,7 @@ public class CSSTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object CSS]", "undefined"},
             FF = {"[object Object]", "undefined"},
-            FF78 = {"[object Object]", "undefined"},
+            FF_ESR = {"[object Object]", "undefined"},
             IE = "Exception")
     public void global() throws Exception {
         final String html

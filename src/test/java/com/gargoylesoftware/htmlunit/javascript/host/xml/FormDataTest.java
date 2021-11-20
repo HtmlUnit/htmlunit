@@ -997,7 +997,7 @@ public class FormDataTest extends WebDriverTestCase {
                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "done", "value",
                   "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF78 = {"[object FormData Iterator]", "done", "value",
+            FF_ESR = {"[object FormData Iterator]", "done", "value",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             IE = "no entries")
     @HtmlUnitNYI(CHROME = {"[object Iterator]", "value", "done",
@@ -1006,7 +1006,7 @@ public class FormDataTest extends WebDriverTestCase {
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "value", "done",
                   "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF78 = {"[object FormData Iterator]", "value", "done",
+            FF_ESR = {"[object FormData Iterator]", "value", "done",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
         final String html

@@ -411,7 +411,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             FF = "1",
-            FF78 = "1")
+            FF_ESR = "1")
     public void command() throws Exception {
         loadPageWithAlerts2(test("command"));
     }

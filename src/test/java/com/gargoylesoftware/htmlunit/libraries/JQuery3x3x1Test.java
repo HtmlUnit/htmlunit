@@ -1880,7 +1880,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "15",
             FF = "1, 14, 15",
-            FF78 = "1, 14, 15")
+            FF_ESR = "1, 14, 15")
     @NotYetImplemented
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
@@ -2706,7 +2706,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(CHROME = "4",
             EDGE = "4",
             FF = "4",
-            FF78 = "4")
+            FF_ESR = "4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -6777,7 +6777,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(CHROME = "8",
             EDGE = "8",
             FF = "10",
-            FF78 = "10",
+            FF_ESR = "10",
             IE = "0")
     @NotYetImplemented
     public void css__css___customProperty_() throws Exception {
@@ -10155,7 +10155,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "4",
             FF = "4, 0, 4",
-            FF78 = "4, 0, 4")
+            FF_ESR = "4, 0, 4")
     @NotYetImplemented
     public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
         runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");

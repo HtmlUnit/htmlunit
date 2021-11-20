@@ -2094,7 +2094,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "in listener",
             FF = {"in listener", "page2 loaded"},
-            FF78 = {"in listener", "page2 loaded"})
+            FF_ESR = {"in listener", "page2 loaded"})
     public void dispatchEventSubmitTriggersHandlers() throws Exception {
         // use an iframe to capture alerts among 2 pages
         final String container = "<html><body><iframe src='page1'></iframe></body></html>\n";

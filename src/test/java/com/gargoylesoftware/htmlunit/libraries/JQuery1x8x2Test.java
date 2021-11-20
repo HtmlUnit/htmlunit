@@ -1596,7 +1596,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     @Alerts(CHROME = "0, 4, 4",
             EDGE = "0, 4, 4",
             FF = "0, 4, 4",
-            FF78 = "0, 4, 4")
+            FF_ESR = "0, 4, 4")
     public void attributes__val___respects_numbers_without_exception__Bug__9319_() throws Exception {
         runTest("attributes: val() respects numbers without exception (Bug #9319)");
     }
@@ -3951,7 +3951,7 @@ public class JQuery1x8x2Test extends JQueryTestBase {
     @Alerts(CHROME = "2, 2, 4",
             EDGE = "2, 2, 4",
             FF = "0, 1, 1",
-            FF78 = "0, 1, 1",
+            FF_ESR = "0, 1, 1",
             IE = "0, 4, 4")
     public void css__widows___orphans__8936() throws Exception {
         runTest("css: widows & orphans #8936");
