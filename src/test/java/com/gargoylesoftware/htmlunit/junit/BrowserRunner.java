@@ -417,7 +417,7 @@ public class BrowserRunner extends Suite {
         String[] FF() default { EMPTY_DEFAULT };
 
         /**
-         * Alerts for Firefox 78.
+         * Alerts for Firefox ESR.
          * @return the alerts
          */
         String[] FF_ESR() default { EMPTY_DEFAULT };

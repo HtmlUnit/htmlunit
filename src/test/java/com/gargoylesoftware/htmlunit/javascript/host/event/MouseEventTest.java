@@ -144,14 +144,6 @@ public class MouseEventTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object MouseEvent]", "null", "false", "false", "false", "false",
                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0", "1"},
             IE = "exception")
-//    @HtmlUnitNYI(CHROME = {"[object MouseEvent]", "null", "false", "false", "false", "false",
-//                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
-//                EDGE = {"[object MouseEvent]", "null", "false", "false", "false", "false",
-//                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
-//                FF = {"[object MouseEvent]", "null", "false", "false", "false", "false",
-//                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"},
-//                FF78 = {"[object MouseEvent]", "null", "false", "false", "false", "false",
-//                        "0", "0", "0", "0", "false", "false", "false", "false", "0", "0"})
     public void create_ctorNullType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
