@@ -132,45 +132,45 @@ public class BrowserParameterizedRunner extends Suite {
         if (BrowserVersionClassRunner.containsTestMethods(klass)) {
             final Set<String> browsers = WebDriverTestCase.getBrowsersProperties();
             if (WebDriverTestCase.class.isAssignableFrom(klass)) {
-                if (browsers.contains("chrome")) {
+                if (browsers.contains(BrowserRunner.REAL_CHROME)) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.CHROME, true, tests));
                 }
-                if (browsers.contains("ff")) {
-                    runners_.add(new BrowserVersionClassRunnerWithParameters(
-                            klass, BrowserVersion.FIREFOX, true, tests));
-                }
-                if (browsers.contains("ff78")) {
+                if (browsers.contains(BrowserRunner.REAL_FIREFOX_ESR)) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.FIREFOX_78, true, tests));
                 }
-                if (browsers.contains("ie")) {
+                if (browsers.contains(BrowserRunner.REAL_FIREFOX)) {
+                    runners_.add(new BrowserVersionClassRunnerWithParameters(
+                            klass, BrowserVersion.FIREFOX, true, tests));
+                }
+                if (browsers.contains(BrowserRunner.REAL_IE)) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.INTERNET_EXPLORER, true, tests));
                 }
-                if (browsers.contains("edge")) {
+                if (browsers.contains(BrowserRunner.REAL_EDGE)) {
                     runners_.add(new BrowserVersionClassRunnerWithParameters(
                             klass, BrowserVersion.EDGE, true, tests));
                 }
             }
 
-            if (browsers.contains("hu-chrome")) {
+            if (browsers.contains(BrowserRunner.HTMLUNIT_CHROME)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.CHROME, false, tests));
             }
-            if (browsers.contains("hu-ff")) {
-                runners_.add(new BrowserVersionClassRunnerWithParameters(
-                        klass, BrowserVersion.FIREFOX, false, tests));
-            }
-            if (browsers.contains("hu-ff78")) {
+            if (browsers.contains(BrowserRunner.HTMLUNIT_FIREFOX_ESR)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.FIREFOX_78, false, tests));
             }
-            if (browsers.contains("hu-ie")) {
+            if (browsers.contains(BrowserRunner.HTMLUNIT_FIREFOX)) {
+                runners_.add(new BrowserVersionClassRunnerWithParameters(
+                        klass, BrowserVersion.FIREFOX, false, tests));
+            }
+            if (browsers.contains(BrowserRunner.HTMLUNIT_IE)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.INTERNET_EXPLORER, false, tests));
             }
-            if (browsers.contains("hu-edge")) {
+            if (browsers.contains(BrowserRunner.HTMLUNIT_EDGE)) {
                 runners_.add(new BrowserVersionClassRunnerWithParameters(
                         klass, BrowserVersion.EDGE, false, tests));
             }
