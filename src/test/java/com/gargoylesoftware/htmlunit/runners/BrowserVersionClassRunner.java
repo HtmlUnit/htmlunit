@@ -33,19 +33,19 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.BrowserRunner.OS;
-import com.gargoylesoftware.htmlunit.BrowserRunner.TestedBrowser;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.AlertsStandards;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.OS;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Tries;
 
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.TestedBrowser}).

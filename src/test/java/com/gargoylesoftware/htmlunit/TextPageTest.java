@@ -23,6 +23,8 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+
 /**
  * Tests for text content.
  *

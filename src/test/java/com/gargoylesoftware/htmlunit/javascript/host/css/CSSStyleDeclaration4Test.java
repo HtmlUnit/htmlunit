@@ -17,9 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 
 /**
  * Unit tests for {@link CSSStyleDeclaration}.

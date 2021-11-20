@@ -19,6 +19,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+
 /**
  * Tests for {@link BrowserRunner}.
  *

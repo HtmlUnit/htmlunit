@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.libraries;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo

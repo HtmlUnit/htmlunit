@@ -25,12 +25,12 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
-import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
-import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
+import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for an element to close another element, which is defined in

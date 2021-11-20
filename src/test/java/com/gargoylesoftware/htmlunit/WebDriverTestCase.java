@@ -259,7 +259,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return false;
     }
 
-    static Set<String> getBrowsersProperties() {
+    public static Set<String> getBrowsersProperties() {
         if (BROWSERS_PROPERTIES_ == null) {
             try {
                 final Properties properties = new Properties();

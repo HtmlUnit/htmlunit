@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.htmlunit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -30,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 
 /**
  * Unit tests for {@link CSSStyleSheet}.

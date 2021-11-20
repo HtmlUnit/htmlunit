@@ -27,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+
 /**
  * Tests for binary content.
  *

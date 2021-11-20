@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.general.HostExtractor;
 
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
- * or the {@link com.gargoylesoftware.htmlunit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
+ * or the {@link com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

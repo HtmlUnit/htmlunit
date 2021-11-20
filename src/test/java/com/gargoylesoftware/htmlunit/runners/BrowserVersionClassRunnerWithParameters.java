@@ -32,9 +32,9 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.parameterized.TestWithParameters;
 
-import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebTestCase;
+import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
 
 /**
  * A {@link BrowserVersionClassRunner} which is also parameterized.

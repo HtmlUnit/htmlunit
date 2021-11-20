@@ -30,13 +30,13 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner;
-import com.gargoylesoftware.htmlunit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**

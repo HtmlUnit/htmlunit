@@ -29,6 +29,8 @@ import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+
 /**
  * Tests for insecure SSL, with client certificate.
  *
