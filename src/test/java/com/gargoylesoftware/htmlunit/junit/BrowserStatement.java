@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.runners;
+package com.gargoylesoftware.htmlunit.junit;
 
 import static org.junit.Assert.assertFalse;
 
@@ -23,7 +23,6 @@ import org.junit.runners.model.Statement;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.AlertsStandards;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;

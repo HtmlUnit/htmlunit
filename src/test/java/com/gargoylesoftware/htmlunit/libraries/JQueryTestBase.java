@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
+import static com.gargoylesoftware.htmlunit.junit.BrowserVersionClassRunner.NO_ALERTS_DEFINED;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;

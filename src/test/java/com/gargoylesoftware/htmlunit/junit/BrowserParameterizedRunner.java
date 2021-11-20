@@ -38,8 +38,6 @@ import org.junit.runners.parameterized.TestWithParameters;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
-import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunnerWithParameters;
 
 /**
  * The custom runner <code>BrowserParameterizedRunner</code> combines the behavior of both

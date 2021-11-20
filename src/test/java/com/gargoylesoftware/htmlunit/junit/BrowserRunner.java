@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
-import com.gargoylesoftware.htmlunit.runners.BrowserVersionClassRunner;
 
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized
