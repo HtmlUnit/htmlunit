@@ -130,7 +130,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
                   "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             FF_ESR = {"[object HTMLImageElement]", "[object HTMLElement]", "IMG", "IMAGE",
-                    "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
+                      "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"},
             IE = {"[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG",
                   "[object HTMLImageElement]", "[object HTMLImageElement]", "IMG", "IMG"})
     public void image() throws Exception {
@@ -343,7 +343,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"left", "right", "middle", "justify", "bottom", "middle",
                   "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             FF_ESR = {"left", "right", "middle", "justify", "bottom", "middle",
-                    "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
+                      "top", "absbottom", "absmiddle", "bottom", "texttop", "wrong", ""},
             IE = {"left", "right", "center", "", "bottom", "middle",
                   "top", "absBottom", "absMiddle", "baseline", "textTop", "", ""})
     @NotYetImplemented({FF, FF_ESR})
@@ -384,7 +384,7 @@ public class HTMLImageElementTest extends WebDriverTestCase {
             FF = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
                   "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             FF_ESR = {"CenTer", "8", "foo", "left", "right", "middle", "justify",
-                    "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
+                      "bottom", "middle", "top", "absbottom", "absmiddle", "bottom", "texttop"},
             IE = {"center", "error", "center", "error", "center", "left", "right",
                   "center", "error", "center", "bottom", "middle", "top", "absBottom",
                   "absMiddle", "baseline", "textTop"})

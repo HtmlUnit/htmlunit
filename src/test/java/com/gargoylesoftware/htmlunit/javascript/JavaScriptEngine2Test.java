@@ -887,7 +887,7 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
                     "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             FF = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8", "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             FF_ESR = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
-                    "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
+                      "f10", "f11", "f12", "f10", "f11", "f12", "f13"},
             IE = {"f1", "f2", "f3", "!f4", "f5", "!f6", "!f7", "!f8",
                   "f10", "f11", "f12", "f10", "f11", "f12", "f13"})
     public void functioNamesExceptionsStrict() throws Exception {

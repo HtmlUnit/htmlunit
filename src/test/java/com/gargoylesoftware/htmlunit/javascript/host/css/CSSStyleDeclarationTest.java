@@ -66,13 +66,13 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"[object CSS2Properties]", "[object CSS2Properties]",
                   "[object CSS2Properties]", "[object CSS2Properties]"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]",
-                    "[object CSS2Properties]", "[object CSS2Properties]"})
+                      "[object CSS2Properties]", "[object CSS2Properties]"})
     @HtmlUnitNYI(IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                        "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                    "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
+                      "[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]"})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(
     public void scriptableToString() throws Exception {
         final String html
@@ -188,7 +188,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"background-color: rgb(255, 255, 255); color: red;",
                   "background-color: #FFFFFF;color: red;"},
             FF_ESR = {"background-color: rgb(255, 255, 255); color: red;",
-                    "background-color: #FFFFFF;color: red;"})
+                      "background-color: #FFFFFF;color: red;"})
     // FIXME hex colors are not transformed to rgb for direct styles
     // FIXME add more properties to check formating rules (color handling, spaces,
     //       case-sensitivity, margin, padding, border, font, background, urls, ...)
@@ -2803,7 +2803,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             FF_ESR = {"4px", "5px", "6em", "17px", "7%", "initial", "inherit",
-                    "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
+                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px"})
     public void setWordSpacingProperty() throws Exception {
@@ -2819,7 +2819,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
             FF = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             FF_ESR = {"4px", "5px", "6em", "17px", "70%", "initial", "inherit",
-                    "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
+                      "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"},
             IE = {"4px", "5px", "6em", "17px", "17px", "17px", "inherit",
                   "17px", "17px", "17px", "", "17px", "", "17px", "17px", "17px", "17px"})
     public void setWordSpacing() throws Exception {

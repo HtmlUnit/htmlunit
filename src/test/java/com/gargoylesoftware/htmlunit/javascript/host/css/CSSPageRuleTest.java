@@ -597,7 +597,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             FF = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
                   "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"},
             FF_ESR = {"[object CSS2Properties]", "[object CSS2Properties]", "4", "[object CSSPageRule]",
-                    "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
+                      "margin: 1cm;", "margin-top", "margin-right", "margin-bottom", "margin-left"})
     @HtmlUnitNYI(CHROME = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                            "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
             EDGE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
@@ -605,7 +605,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             FF = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
             FF_ESR = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
-                    "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
+                      "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"},
             IE = {"[object CSSStyleDeclaration]", "[object CSSStyleDeclaration]",
                   "1", "[object CSSPageRule]", "margin: 1cm;", "margin: 1cm"})
     // FIXME FF returns CSS2Properties vs. default returns CSSStyleDeclaration :(

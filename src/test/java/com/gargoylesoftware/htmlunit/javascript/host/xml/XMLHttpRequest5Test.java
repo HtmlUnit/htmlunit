@@ -192,7 +192,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
             FF = {"application/xml;charset=UTF-8",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             FF_ESR = {"application/xml;charset=UTF-8",
-                    "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
+                      "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"},
             IE = {"application/xml;charset=UTF-8",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"abc\"/></html>"})
     public void sendXMLDocumentRootNamespace() throws Exception {
@@ -238,7 +238,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                              + "<body onload=\"test()\">\n"
                              + "</body></html>"},
             FF_ESR = {"text/html;charset=UTF-8",
-                    "<!DOCTYPE html>"
+                      "<!DOCTYPE html>"
                                 + "<html><head><title>foo</title><script>\n"
                              + "  function test() {\n"
                              + "    try {\n"
@@ -317,7 +317,7 @@ public class XMLHttpRequest5Test extends WebDriverTestCase {
                            + "<body onload=\"test()\">\n"
                            + "</body></html>"},
                  FF_ESR = {"text/html;charset=UTF-8",
-                         "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
+                           "<html xmlns=\"http://www.w3.org/1999/xhtml\" ><head><title>foo</title><script>\n"
                            + "  function test() {\n"
                            + "    try {\n"
                            + "    var doc = document;\n"

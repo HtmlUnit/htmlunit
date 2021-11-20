@@ -858,7 +858,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollTo(),scrollTop,scrollTopMax,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot,slot,tagName,"
                 + "toggleAttribute(),webkitMatchesSelector()",
-            FF_ESR = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,clientHeight,"
+            FF_ESR = "after(),animate(),assignedSlot,attachShadow(),attributes,"
+                + "before(),classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),getAnimations(),"
                 + "getAttribute(),getAttributeNames(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
@@ -3654,7 +3655,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "eventPhase,initEvent(),initUIEvent(),isComposing,key,keyCode,location,"
                 + "metaKey,NONE,preventDefault(),repeat,returnValue,shiftKey,srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type,view,which",
-            FF_ESR = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,charCode,"
+            FF_ESR = "ALT_MASK,altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
+                + "CAPTURING_PHASE,charCode,"
                 + "code,composed,CONTROL_MASK,ctrlKey,currentTarget,defaultPrevented,detail,DOM_KEY_LOCATION_LEFT,"
                 + "DOM_KEY_LOCATION_NUMPAD,DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,"
                 + "DOM_VK_2,DOM_VK_3,DOM_VK_4,DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,"
@@ -4982,7 +4984,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "insertNode(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),"
                 + "setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,startContainer,startOffset,"
                 + "surroundContents()",
-            FF_ESR = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,compareBoundaryPoints(),"
+            FF_ESR = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "compareBoundaryPoints(),"
                 + "createContextualFragment(),deleteContents(),detach(),END_TO_END,END_TO_START,endContainer,"
                 + "endOffset,extractContents(),getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),"
                 + "selectNodeContents(),setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),"

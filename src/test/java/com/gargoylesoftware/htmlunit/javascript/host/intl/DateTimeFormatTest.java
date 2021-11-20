@@ -66,7 +66,7 @@ public class DateTimeFormatTest extends WebDriverTestCase {
             FF = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
-                    "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
+                      "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined",
                   "undefined", "undefined", "undefined", "undefined", "undefined", "undefined", "undefined"})
     public void resolvedOptionsValues() throws Exception {

@@ -162,7 +162,7 @@ public class NativeFunctionTest extends WebDriverTestCase {
             FF = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
                   "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
             FF_ESR = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
-                    "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
+                      "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"},
             IE = {"function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}",
                   "function\\sfoo()\\s{\\n\\s\\s\\s\\sreturn\\s1;\\n}"})
     public void functionToStringMinimized() throws Exception {

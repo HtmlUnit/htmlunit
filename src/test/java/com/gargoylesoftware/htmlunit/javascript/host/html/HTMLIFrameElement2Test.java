@@ -1020,7 +1020,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             FF = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe script", "loaded"},
             FF_ESR = {"iframe script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe script", "loaded"},
+                      "about:blank", "iframe script", "loaded"},
             IE = {"iframe script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe script", "loaded"})
     public void detachAppend() throws Exception {
@@ -1085,7 +1085,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             FF = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe external script", "loaded"},
             FF_ESR = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
-                    "about:blank", "iframe external script", "loaded"},
+                      "about:blank", "iframe external script", "loaded"},
             IE = {"iframe external script", "loaded", "null", "loaded", "[object Window]",
                   "about:blank", "iframe external script", "loaded"})
     public void detachAppendExternalScript() throws Exception {

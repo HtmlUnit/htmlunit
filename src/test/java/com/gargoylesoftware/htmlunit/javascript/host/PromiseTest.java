@@ -115,9 +115,9 @@ public class PromiseTest extends WebDriverTestCase {
                   "[object Window]",
                   "done", "resolved value"},
             FF_ESR = {"function () {\n    [native code]\n}",
-                    "function () {\n    [native code]\n}",
-                    "[object Window]",
-                    "done", "resolved value"},
+                      "function () {\n    [native code]\n}",
+                      "[object Window]",
+                      "done", "resolved value"},
             IE = {})
     public void constructor() throws Exception {
         final String html = "<html>\n"
@@ -165,9 +165,9 @@ public class PromiseTest extends WebDriverTestCase {
                   "undefined",
                   "done", "resolved value"},
             FF_ESR = {"function () {\n    [native code]\n}",
-                    "function () {\n    [native code]\n}",
-                    "undefined",
-                    "done", "resolved value"},
+                      "function () {\n    [native code]\n}",
+                      "undefined",
+                      "done", "resolved value"},
             IE = {})
     public void constructorStrict() throws Exception {
         final String html = "<html>\n"

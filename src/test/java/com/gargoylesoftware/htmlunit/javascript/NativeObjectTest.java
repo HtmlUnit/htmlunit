@@ -442,8 +442,8 @@ public class NativeObjectTest extends WebDriverTestCase {
                   "x.get = function value() {\n    [native code]\n}",
                   "x.get.call = function call() {\n    [native code]\n}"},
             FF_ESR = {"[object HTMLInputElement]", "x = [object Object]",
-                    "x.get = function value() {\n    [native code]\n}",
-                    "x.get.call = function call() {\n    [native code]\n}"},
+                      "x.get = function value() {\n    [native code]\n}",
+                      "x.get.call = function call() {\n    [native code]\n}"},
             IE = {"[object HTMLInputElementPrototype]", "x = [object Object]",
                   "x.get = \nfunction value() {\n    [native code]\n}\n",
                   "x.get.call = \nfunction call() {\n    [native code]\n}\n"})

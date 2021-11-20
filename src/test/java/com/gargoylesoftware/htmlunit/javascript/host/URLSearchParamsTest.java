@@ -366,7 +366,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
                  FF = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                        "key2=val2", "http://test.com/p?key2=val2"},
                  FF_ESR = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
-                         "key2=val2", "http://test.com/p?key2=val2"})
+                           "key2=val2", "http://test.com/p?key2=val2"})
     public void deleteFromUrlSpecialChars() throws Exception {
         final String html =
             "<html>\n"
@@ -581,7 +581,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
                   "key1", "key2", "key1", "", "true"},
             FF_ESR = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
-                    "key1", "key2", "key1", "", "true"},
+                      "key1", "key2", "key1", "", "true"},
             IE = {})
     public void keys() throws Exception {
         final String html =
@@ -627,7 +627,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
                   "val1", "", "val3", "val4", "true"},
             FF_ESR = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
-                    "val1", "", "val3", "val4", "true"},
+                      "val1", "", "val3", "val4", "true"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -703,7 +703,7 @@ public class URLSearchParamsTest extends WebDriverTestCase {
             FF = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
                   "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             FF_ESR = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
-                    "key1-val1", "key2-", "key1-val3", "-val4", "true"},
+                      "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
     public void entries() throws Exception {
         final String html =

@@ -309,7 +309,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             FF = {"dcl listener added", "head-end", "end",
                   "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             FF_ESR = {"dcl listener added", "head-end", "end",
-                    "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
+                      "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"},
             IE = {"dcl listener added", "head-end", "end",
                   "deferred-1", "deferred-2", "deferred-3", "dcLoaded", "onload"})
     public void deferDynamicExternal() throws Exception {

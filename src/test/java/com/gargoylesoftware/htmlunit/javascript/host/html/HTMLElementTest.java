@@ -2272,7 +2272,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             FF = {"null", "body", "body", "body", "body", "body",
                   "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"},
             FF_ESR = {"null", "body", "body", "body", "body", "body",
-                    "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
+                      "f1", "body", "h1", "i1", "td", "body", "td", "body", "body"})
     public void offsetParent_WithCSS() throws Exception {
         final String html = "<html>\n"
             + "  <body id='body' onload='test()'>\n"

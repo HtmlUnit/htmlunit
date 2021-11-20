@@ -78,7 +78,7 @@ public class InputEventTest extends WebDriverTestCase {
             FF = {"[object InputEvent]", "undefined", "false", "false", "false",
                   ",,false"},
             FF_ESR = {"[object InputEvent]", "undefined", "false", "false", "false",
-                    ",,false"})
+                      ",,false"})
     public void create_ctorWithoutType() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"

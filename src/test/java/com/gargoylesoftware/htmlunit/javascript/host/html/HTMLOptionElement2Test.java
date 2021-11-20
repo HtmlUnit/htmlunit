@@ -1019,10 +1019,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                   "InvalidStateError: XPathResult.iterateNext: "
                         + "The document has been mutated since the result was returned"},
             FF_ESR = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
-                    "1", "0", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "1", "0", "o2",
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "0", "evaluate not supported"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "0", "o2"},
@@ -1052,10 +1052,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                   "InvalidStateError: XPathResult.iterateNext: "
                         + "The document has been mutated since the result was returned"},
             FF_ESR = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "InvalidStateError: XPathResult.iterateNext: "
                         + "The document has been mutated since the result was returned",
-                    "1", "1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "1", "1", "o2",
+                      "InvalidStateError: XPathResult.iterateNext: "
                         + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
@@ -1085,10 +1085,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                   "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             FF_ESR = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
-                    "1", "-1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "1", "-1", "o2",
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "-1", "evaluate not supported"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "-1", "o2"},
@@ -1118,10 +1118,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
                   "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             FF_ESR = {"o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned",
-                    "1", "1", "o2",
-                    "InvalidStateError: XPathResult.iterateNext: "
+                      "1", "1", "o2",
+                      "InvalidStateError: XPathResult.iterateNext: "
                             + "The document has been mutated since the result was returned"},
             IE = {"evaluate not supported", "1", "1", "evaluate not supported"})
     @HtmlUnitNYI(CHROME = {"o2", "1", "1", "o2"},
@@ -1350,7 +1350,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
             FF = {"false-null", "true-true", "true-null",
                   "false-selected", "false-null", "false-true"},
             FF_ESR = {"false-null", "true-true", "true-null",
-                    "false-selected", "false-null", "false-true"})
+                      "false-selected", "false-null", "false-true"})
     @NotYetImplemented({FF, FF_ESR})
     public void setSelectedAttribute() throws Exception {
         final String html =

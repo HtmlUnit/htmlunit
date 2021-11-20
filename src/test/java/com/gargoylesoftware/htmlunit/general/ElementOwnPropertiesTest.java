@@ -606,7 +606,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),replaceWith(),"
                 + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
-            FF_ESR = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
+            FF_ESR = "after(),attributes,before(),childElementCount,children,"
+                + "classList,className,clientHeight,clientLeft,"
                 + "clientTop,clientWidth,constructor(),firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"

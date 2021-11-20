@@ -68,8 +68,8 @@ public class EventHandlerTest extends WebDriverTestCase {
                   "function onload(event) { test(); }",
                   "function onload(event) { test(); }"},
             FF_ESR = {"function onload(event) { test(); }",
-                    "function onload(event) { test(); }",
-                    "function onload(event) { test(); }"},
+                      "function onload(event) { test(); }",
+                      "function onload(event) { test(); }"},
             IE = {"function onload(event) { test(); }",
                   "function onload(event) { test(); }",
                   "function onload(event) { test(); }"})

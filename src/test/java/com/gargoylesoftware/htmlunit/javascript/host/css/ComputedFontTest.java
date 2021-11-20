@@ -70,7 +70,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
                   "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "serif"},
             FF_ESR = {"", "", "", "", "", "", "", "", "", "", "", "", "", "",
-                    "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "serif"},
+                      "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "serif"},
             IE = {"", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman",
                   "", "", "", "normal", "", "normal", "", "400", "", "16px", "", "normal", "", "Times New Roman"})
     public void fontInitial() throws Exception {
@@ -118,7 +118,7 @@ public class ComputedFontTest extends WebDriverTestCase {
             FF = {"15px arial, sans-serif", "", "normal", "normal",
                   "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
             FF_ESR = {"15px arial, sans-serif", "", "normal", "normal",
-                    "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
+                      "oblique 15px arial, sans-serif", "", "oblique", "oblique"},
             IE = {"15px/normal arial, sans-serif", "", "normal", "normal",
                   "oblique 15px/normal arial, sans-serif", "", "oblique", "oblique"})
     @HtmlUnitNYI(CHROME = {"", "16px \"Times New Roman\"", "", "normal", "",

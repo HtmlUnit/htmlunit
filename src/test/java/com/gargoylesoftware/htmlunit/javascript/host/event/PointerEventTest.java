@@ -63,7 +63,7 @@ public class PointerEventTest extends WebDriverTestCase {
             FF = {"[object PointerEvent]", "click", "false", "false", "false",
                   "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
             FF_ESR = {"[object PointerEvent]", "click", "false", "false", "false",
-                    "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
+                      "0", "1", "1", "0", "0", "0", "", "false", "undefined", "undefined"},
             IE = "exception")
     public void create_ctor() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -91,7 +91,7 @@ public class PointerEventTest extends WebDriverTestCase {
             FF = {"[object PointerEvent]", "click", "true", "false", "false",
                   "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
             FF_ESR = {"[object PointerEvent]", "click", "true", "false", "false",
-                    "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
+                      "2", "1", "1", "0", "0", "0", "mouse", "false", "undefined", "undefined"},
             IE = "exception")
     public void create_ctorWithDetails() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
