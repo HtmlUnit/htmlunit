@@ -102,7 +102,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * Firefox 78 ESR.
-     * @deprecated please use FIREFOX_ESR instead
+     * @deprecated since 2.56.0; please use FIREFOX_ESR instead
      */
     @Deprecated
     public static final BrowserVersion FIREFOX_78 = FIREFOX_ESR;
@@ -274,11 +274,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4638.54 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1020.40";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4664.45 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1054.29";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4638.54 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1020.40";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4664.45 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1054.29";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -309,7 +309,7 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        EDGE.secClientHintUserAgentHeader_ = "\"Microsoft Edge\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"";
+        EDGE.secClientHintUserAgentHeader_ = "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Microsoft Edge\";v=\"96\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
