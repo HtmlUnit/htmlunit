@@ -217,7 +217,7 @@
   expected
   EQUAL
  but got
-  abs1.offsetTop=1221 control.offsetTop=1239
+  abs1.offsetTop=1219 control.offsetTop=1237
 
      ERROR IN:  function...
  FAILED test: ../../dojo/tests/_base/html_rtl.html::rtl::testScrolledPosition x ms
