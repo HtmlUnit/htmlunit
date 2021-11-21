@@ -281,6 +281,86 @@ public class XMLSerializerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\"></body></html>",
+                       "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\"></body></html>"},
+            IE = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\" /></html>",
+                  "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\" /></html>"})
+    public void xhtmlDocument() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);\n"
+            + "  var body = document.createElementNS('http://www.w3.org/1999/xhtml', 'body');\n"
+            + "  body.setAttribute('id', 'bodyId');\n"
+            + "  doc.documentElement.appendChild(body);"
+
+            + "  log(new XMLSerializer().serializeToString(doc));\n"
+            + "  log(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\"/></html>",
+                       "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\"/></html>"},
+            IE = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\" /></html>",
+                  "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\" /></html>"})
+    public void xhtmlDocumentBodyEmptyNamespace() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var doc = document.implementation.createDocument('http://www.w3.org/1999/xhtml', 'html', null);\n"
+            + "  var body = document.createElementNS('', 'body');\n"
+            + "  body.setAttribute('id', 'bodyId');\n"
+            + "  doc.documentElement.appendChild(body);"
+
+            + "  log(new XMLSerializer().serializeToString(doc));\n"
+            + "  log(new XMLSerializer().serializeToString(doc.documentElement));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body/></soap:Envelope>",
+                       "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body/></soap:Envelope>"},
+            IE = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\" /></soap:Envelope>",
+                  "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\" /></soap:Envelope>"})
+    public void soapTest() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var dom = document.implementation.createDocument('http://schemas.xmlsoap.org/soap/envelope/', 'soap:Envelope', null);\n"
+
+            + "  var soapEnv = dom.documentElement;\n"
+            + "  soapBody = dom.createElementNS('http://schemas.xmlsoap.org/soap/envelope/', 'Body');\n"
+            + "  soapEnv.appendChild(soapBody);"
+
+            + "  log(new XMLSerializer().serializeToString(dom));\n"
+            + "  log(new XMLSerializer().serializeToString(dom.documentElement));\n"
+            + "}\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"<foo/>", "<foo/>"},
             IE = {"<foo />", "<foo />"})
     public void document() throws Exception {
