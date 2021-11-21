@@ -48,9 +48,8 @@ public final class WebClientUtils {
      * @see <a href="http://www.mozilla.org/rhino/debugger.html">Mozilla Rhino Debugger Documentation</a>
      */
     public static void attachVisualDebugger(final WebClient client) {
-        final ScopeProvider sp = null;
         final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
-        final Main main = Main.mainEmbedded(cf, sp, "HtmlUnit JavaScript Debugger");
+        final Main main = Main.mainEmbedded(cf, (ScopeProvider) null, "HtmlUnit JavaScript Debugger");
         main.getDebugFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
 
         final SourceProvider sourceProvider = script -> {

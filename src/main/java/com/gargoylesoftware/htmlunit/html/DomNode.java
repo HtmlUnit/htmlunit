@@ -93,15 +93,6 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public abstract class DomNode implements Cloneable, Serializable, Node {
 
-    /** Indicates a block. Will be rendered as line separator (multiple block marks are ignored) */
-    protected static final String AS_TEXT_BLOCK_SEPARATOR = "§bs§";
-    /** Indicates a new line. Will be rendered as line separator. */
-    protected static final String AS_TEXT_NEW_LINE = "§nl§";
-    /** Indicates a non blank that can't be trimmed or reduced. */
-    protected static final String AS_TEXT_BLANK = "§blank§";
-    /** Indicates a tab. */
-    protected static final String AS_TEXT_TAB = "§tab§";
-
     /** A ready state constant for IE (state 1). */
     public static final String READY_STATE_UNINITIALIZED = "uninitialized";
 
@@ -146,7 +137,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private Object scriptObject_;
 
-    /** The ready state is is an IE-only value that is available to a large number of elements. */
+    /** The ready state is an IE-only value that is available to a large number of elements. */
     private String readyState_;
 
     /**
@@ -370,10 +361,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns {@code true} if this node is an ancestor of any of the specified nodes.
+     * Returns {@code true} if this node is an ancestor of the specified nodes.
      *
      * @param nodes the nodes to check
-     * @return {@code true} if this node is an ancestor of any of the specified nodes
+     * @return {@code true} if this node is an ancestor of the specified nodes
      */
     public boolean isAncestorOfAny(final DomNode... nodes) {
         for (final DomNode node : nodes) {
@@ -911,7 +902,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final SgmlPage page = getPage();
             if (this == page) {
                 final StringBuilder msg = new StringBuilder("No script object associated with the Page.");
-                // because this is a strange case we like to provide as many info as possible
+                // because this is a strange case we like to provide as much info as possible
                 msg.append(" class: '")
                     .append(page.getClass().getName())
                     .append('\'');
@@ -979,15 +970,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         node.setPage(getPage());
         if (firstChild_ == null) {
             firstChild_ = node;
-            firstChild_.previousSibling_ = node;
         }
         else {
             final DomNode last = getLastChild();
             last.nextSibling_ = node;
             node.previousSibling_ = last;
             node.nextSibling_ = null; // safety first
-            firstChild_.previousSibling_ = node; // new last node
         }
+        firstChild_.previousSibling_ = node;
         node.parent_ = this;
     }
 
@@ -1184,7 +1174,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private void fireRemoval(final DomNode exParent) {
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
-            // some of the actions executed on removal need an intact parent relationship (e.g. for the
+            // some actions executed on removal need an intact parent relationship (e.g. for the
             // DocumentPositionComparator) so we have to restore it temporarily
             parent_ = exParent;
             htmlPage.notifyNodeRemoved(this);
@@ -1542,7 +1532,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * <br>
      * Note: This implies that the ',' point to this node but the general axis like '//' are still
      * looking at the whole document. E.g. if you like to get all child h1 nodes from the current one
-     * you have to use './/h1' instead of '//h1' because the later matches all h1 nodes of the#
+     * you have to use './/h1' instead of '//h1' because the latter matches all h1 nodes of the#
      * whole document.
      *
      * @param <T> the expected type
@@ -1706,7 +1696,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Support for reporting DOM changes. This method can be called when a node has been added and it
+     * Support for reporting DOM changes. This method can be called when a node has been added, and it
      * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomChangeEvent)}.
@@ -1782,7 +1772,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Support for reporting DOM changes. This method can be called when a node has been deleted and it
+     * Support for reporting DOM changes. This method can be called when a node has been deleted, and it
      * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
      * Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomChangeEvent)}.

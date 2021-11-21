@@ -110,7 +110,7 @@ public final class XPathHelper {
      * Evaluates an XPath expression to an XObject.
      * @param contextNode the node to start searching from
      * @param str a valid XPath string
-     * @param a prefix resolver to use for resolving namespace prefixes, or null
+     * @param prefixResolver prefix resolver to use for resolving namespace prefixes, or null
      * @return an XObject, which can be used to obtain a string, number, nodelist, etc (should never be {@code null})
      * @throws TransformerException if a syntax or other error occurs
      */

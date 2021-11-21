@@ -217,17 +217,17 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<>();
 
-    /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc). */
+    /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
     private Integer width_;
 
     /**
-     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc),
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * taking child elements into account.
      */
     private Integer height_;
 
     /**
-     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc),
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
      * <b>not</b> taking child elements into account.
      */
     private Integer height2_;
@@ -371,7 +371,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     /**
-     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defualtValue}
+     * @param toReturnIfEmptyOrDefault the value to return if empty or equals the {@code defaultValue}
      * @param defaultValue the default value of the string
      * @return the string, or {@code toReturnIfEmptyOrDefault}
      */

@@ -381,7 +381,7 @@ public final class UrlUtils {
     /**
      * Encodes every occurrence of the escape character '%' in the given input
      * string that is not followed by two hexadecimal characters.
-     * @param str the input string
+     * @param input the input bytes
      * @return the given input string where every occurrence of <code>%</code> in
      * invalid escape sequences has been replace by <code>%25</code>
      */

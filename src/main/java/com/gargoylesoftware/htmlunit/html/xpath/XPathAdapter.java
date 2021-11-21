@@ -63,7 +63,7 @@ class XPathAdapter {
      * @param locator the location of the expression, may be {@code null}
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param errorListener the error listener, or {@code null} if default should be used
-     * @param attributeCaseSensitive whether or not the attributes should be case-sensitive
+     * @param caseSensitive whether or not the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(final String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,

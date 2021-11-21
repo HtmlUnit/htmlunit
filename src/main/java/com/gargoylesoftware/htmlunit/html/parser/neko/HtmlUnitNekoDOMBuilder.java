@@ -251,7 +251,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     /**
      * Create the configuration depending on the simulated browser
-     * @param webClient the current WebClient
      * @return the configuration
      */
     private static XMLParserConfiguration createConfiguration(final BrowserVersion browserVersion) {

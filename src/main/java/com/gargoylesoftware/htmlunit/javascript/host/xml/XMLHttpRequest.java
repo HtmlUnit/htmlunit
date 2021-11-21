@@ -912,7 +912,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
     /**
      * The real send job.
-     * @param context the current context
      */
     void doSend() {
         final BrowserVersion browserVersion = getBrowserVersion();
@@ -1209,7 +1208,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }
-        else if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
+        if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
             return false;
         }
         return true;

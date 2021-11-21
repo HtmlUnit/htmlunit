@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.protocol.data;
 
+import static com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection.DATA_PREFIX;
 import static java.nio.charset.StandardCharsets.US_ASCII;
 
 import java.io.ByteArrayOutputStream;
@@ -81,7 +82,7 @@ public class DataUrlDecoder {
             throw new IllegalArgumentException("Not a data url: " + url);
         }
         final int comma = url.indexOf(',');
-        String beforeData = url.substring("data:".length(), comma);
+        String beforeData = url.substring(DATA_PREFIX.length(), comma);
 
         final boolean base64 = beforeData.endsWith(";base64");
         if (base64) {

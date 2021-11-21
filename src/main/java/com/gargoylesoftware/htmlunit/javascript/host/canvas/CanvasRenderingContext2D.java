@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingB
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend.WindingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -446,7 +447,7 @@ public class CanvasRenderingContext2D extends SimpleScriptable {
             if (type == null) {
                 type = MimeType.IMAGE_PNG;
             }
-            return "data:" + type + ";base64," + getRenderingBackend().encodeToString(type);
+            return DataURLConnection.DATA_PREFIX + type + ";base64," + getRenderingBackend().encodeToString(type);
         }
         catch (final IOException ioe) {
             throw Context.throwAsScriptRuntimeEx(ioe);
