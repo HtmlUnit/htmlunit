@@ -197,7 +197,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         }
 
         try (InputStream content = webResponse.getContentAsStream()) {
-            String encoding = charset.name();
+            final String encoding = charset.name();
             final XMLInputSource in = new XMLInputSource(null, url.toString(), null, content, encoding);
 
             page.registerParsingStart();
