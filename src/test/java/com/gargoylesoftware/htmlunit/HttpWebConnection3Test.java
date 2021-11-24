@@ -1337,10 +1337,10 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
                 + "\r\n"
                 + html;
         final String hi = "HTTP/1.1 200 OK\r\n"
-                + "Content-Length: 2\r\n"
+                + "Content-Length: 0\r\n"
                 + "Content-Type: text/javascript\r\n"
                 + "\r\n"
-                + ";;";
+                + "";
 
         shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(Charset.forName("GB2312"), html, hi)) {
