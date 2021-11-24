@@ -18,6 +18,7 @@ import static org.junit.Assert.fail;
 
 import java.net.URL;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1051,7 +1052,6 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
     }
 
     /**
-     * Tests a location href change.
      * @throws Exception if the test fails
      */
     @Test
@@ -1186,6 +1186,164 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
 
         shutDownAll();
         try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(null, html, hi)) {
+            final WebDriver driver = getWebDriver();
+
+            driver.get("http://localhost:" + primitiveWebServer.getPort());
+
+            final String[] expectedHeaders = getExpectedAlerts();
+            for (int i = 0; i < expectedHeaders.length; i++) {
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§PORT§§", "" + primitiveWebServer.getPort());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§USER_AGENT§§",
+                        getBrowserVersion().getUserAgent());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§SEC_USER_AGENT§§",
+                        getBrowserVersion().getSecClientHintUserAgentHeader());
+                expectedHeaders[i] = expectedHeaders[i].replaceAll("§§ACCEPT§§",
+                        getBrowserVersion().getScriptAcceptHeader());
+            }
+            final String request = primitiveWebServer.getRequests().get(1);
+            final String[] headers = request.split("\\r\\n");
+            assertEquals(Arrays.asList(expectedHeaders).toString(), Arrays.asList(headers).toString());
+        }
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "Connection: keep-alive",
+                      "sec-ch-ua: §§SEC_USER_AGENT§§",
+                      "sec-ch-ua-mobile: ?0",
+                      "User-Agent: §§USER_AGENT§§",
+                      "sec-ch-ua-platform: \"Windows\"",
+                      "Accept: §§ACCEPT§§",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Dest: script",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Accept-Encoding: gzip, deflate, br",
+                      "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: keep-alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "User-Agent: §§USER_AGENT§§",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: keep-alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Sec-Fetch-Dest: script",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Site: same-origin"},
+            FF_ESR = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate",
+                      "Connection: keep-alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Sec-Fetch-Dest: script",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Site: same-origin"},
+            IE = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                  "Accept: §§ACCEPT§§",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Accept-Language: en-US,en;q=0.9",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept-Encoding: gzip, deflate",
+                  "Host: localhost:§§PORT§§",
+                  "Connection: Keep-Alive"})
+    @HtmlUnitNYI(CHROME = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                           "Host: localhost:§§PORT§§",
+                           "Connection: Keep-Alive",
+                           "sec-ch-ua: §§SEC_USER_AGENT§§",
+                           "sec-ch-ua-mobile: ?0",
+                           "sec-ch-ua-platform: \"Windows\"",
+                           "Upgrade-Insecure-Requests: 1", // wrong
+                           "User-Agent: §§USER_AGENT§§",
+                           "Accept: §§ACCEPT§§",
+                           "Sec-Fetch-Site: same-origin",
+                           "Sec-Fetch-Mode: no-cors",
+                           "Sec-Fetch-User: ?1", // wrong
+                           "Sec-Fetch-Dest: script",
+                           "Referer: http://localhost:§§PORT§§/",
+                           "Accept-Encoding: gzip, deflate, br",
+                           "Accept-Language: en-US,en;q=0.9"},
+            EDGE = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                    "Host: localhost:§§PORT§§",
+                    "Connection: Keep-Alive",
+                    "sec-ch-ua: §§SEC_USER_AGENT§§",
+                    "sec-ch-ua-mobile: ?0",
+                    "sec-ch-ua-platform: \"Windows\"",
+                    "Upgrade-Insecure-Requests: 1", // wrong
+                    "User-Agent: §§USER_AGENT§§",
+                    "Accept: §§ACCEPT§§",
+                    "Sec-Fetch-Site: same-origin",
+                    "Sec-Fetch-Mode: no-cors",
+                    "Sec-Fetch-User: ?1", // wrong
+                    "Sec-Fetch-Dest: script",
+                    "Referer: http://localhost:§§PORT§§/",
+                    "Accept-Encoding: gzip, deflate, br",
+                    "Accept-Language: en-US,en;q=0.9"},
+            FF = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                  "Host: localhost:§§PORT§§",
+                  "User-Agent: §§USER_AGENT§§",
+                  "Accept: §§ACCEPT§§",
+                  "Accept-Language: en-US,en;q=0.5",
+                  "Accept-Encoding: gzip, deflate",
+                  "Connection: Keep-Alive",
+                  "Referer: http://localhost:§§PORT§§/",
+                  "Upgrade-Insecure-Requests: 1", // wrong
+                  "Sec-Fetch-Dest: script",
+                  "Sec-Fetch-Mode: no-cors",
+                  "Sec-Fetch-Site: same-origin",
+                  "Sec-Fetch-User: ?1" /* wrong */ },
+            FF_ESR = {"GET /script.js?x=%CE%D2%CA%C7%CE%D2%B5%C4%20?%20Abc HTTP/1.1",
+                      "Host: localhost:§§PORT§§",
+                      "User-Agent: §§USER_AGENT§§",
+                      "Accept: §§ACCEPT§§",
+                      "Accept-Language: en-US,en;q=0.5",
+                      "Accept-Encoding: gzip, deflate",
+                      "Connection: Keep-Alive",
+                      "Referer: http://localhost:§§PORT§§/",
+                      "Upgrade-Insecure-Requests: 1", // wrong
+                      "Sec-Fetch-Dest: script",
+                      "Sec-Fetch-Mode: no-cors",
+                      "Sec-Fetch-Site: same-origin",
+                      "Sec-Fetch-User: ?1" /* wrong */ })
+    public void loadJavascriptCharset() throws Exception {
+        String html = "<html><head>"
+                + "<meta http-equiv='Content-Type' content='text/html; charset=GB2312'>"
+                + "<script src=\"script.js?x=\u6211\u662F\u6211\u7684 \u4eb8 Abc\"></script>"
+                + " </head><body></body></html>";
+        html = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + (html.length()) + "\r\n"
+                + "Content-Type: text/html\r\n"
+                + "\r\n"
+                + html;
+        final String hi = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: 2\r\n"
+                + "Content-Type: text/javascript\r\n"
+                + "\r\n"
+                + ";;";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer = new PrimitiveWebServer(Charset.forName("GB2312"), html, hi)) {
             final WebDriver driver = getWebDriver();
 
             driver.get("http://localhost:" + primitiveWebServer.getPort());
