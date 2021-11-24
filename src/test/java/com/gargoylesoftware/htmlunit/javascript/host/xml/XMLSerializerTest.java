@@ -285,6 +285,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
                        "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\"></body></html>"},
             IE = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\" /></html>",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body id=\"bodyId\" /></html>"})
+    @HtmlUnitNYI(CHROME = {"<html><body id=\"bodyId\"></body></html>",
+                           "<html><body id=\"bodyId\"></body></html>"},
+            EDGE = {"<html><body id=\"bodyId\"></body></html>",
+                    "<html><body id=\"bodyId\"></body></html>"},
+            FF = {"<html><body id=\"bodyId\"></body></html>",
+                  "<html><body id=\"bodyId\"></body></html>"},
+            FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
+                      "<html><body id=\"bodyId\"></body></html>"},
+            IE = {"<html><body id=\"bodyId\"></body></html>",
+                  "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocument() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -311,6 +321,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
                        "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\"/></html>"},
             IE = {"<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\" /></html>",
                   "<html xmlns=\"http://www.w3.org/1999/xhtml\"><body xmlns=\"\" id=\"bodyId\" /></html>"})
+    @HtmlUnitNYI(CHROME = {"<html><body id=\"bodyId\"></body></html>",
+                           "<html><body id=\"bodyId\"></body></html>"},
+            EDGE = {"<html><body id=\"bodyId\"></body></html>",
+                    "<html><body id=\"bodyId\"></body></html>"},
+            FF = {"<html><body id=\"bodyId\"></body></html>",
+                  "<html><body id=\"bodyId\"></body></html>"},
+            FF_ESR = {"<html><body id=\"bodyId\"></body></html>",
+                      "<html><body id=\"bodyId\"></body></html>"},
+            IE = {"<html><body id=\"bodyId\"></body></html>",
+                  "<html><body id=\"bodyId\"></body></html>"})
     public void xhtmlDocumentBodyEmptyNamespace() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -338,6 +358,16 @@ public class XMLSerializerTest extends WebDriverTestCase {
                        "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body/></soap:Envelope>"},
             IE = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\" /></soap:Envelope>",
                   "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body xmlns=\"http://schemas.xmlsoap.org/soap/envelope/\" /></soap:Envelope>"})
+    @HtmlUnitNYI(CHROME = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
+                           "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
+            EDGE = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
+                    "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
+            FF = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
+                  "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
+            FF_ESR = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
+                      "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"},
+            IE = {"<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>",
+                  "<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><Body></Body></soap:Envelope>"})
     public void soapTest() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
