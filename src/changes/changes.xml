@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96">
+            <action type="update" dev="rbri">
+                FIREFOX_78 is now deprecated, use FIREFOX_ESR instead.
+            </action>
+            <action type="update" dev="rbri">
+                FIREFOX_ESR updated to Firefox 91.
+            </action>
             <action type="update" dev="RhinoTeam">
                 core-js: Fix for compilation or try statements.
             </action>
