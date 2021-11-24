@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <title>BrowserUtilityTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+    <script src="./prototype.js"></script>
+    <script src="./BrowserUtility.js"></script>
+</head>
+<body>
+
+<textarea id='myLog' cols='80' rows='42'></textarea>
+
+<script>
+  var browser = new BrowserUtility();
+
+  var log = document.getElementById('myLog');
+  log.value += 'IE ' + browser.isIE + '§';
+  log.value += 'IE6 ' + browser.isIE6 + '§';
+  log.value += 'IE7 ' + browser.isIE7 + '§';
+  log.value += 'IE8 ' + browser.isIE8 + '§';
+  
+  log.value += 'Mozilla ' + browser.isMozilla + '§';
+  
+  log.value += 'Firefox ' + browser.isFirefox + '§';
+  log.value += 'Firefox2 ' + browser.isFirefox2 + '§';
+  log.value += 'Firefox3 ' + browser.isFirefox3 + '§';
+  
+  log.value += 'Gecko ' + browser.isGecko + '§';
+  log.value += 'Safari ' + browser.isSafari + '§';
+  log.value += 'KHTML ' + browser.isKHTML + '§';
+  log.value += 'Opera ' + browser.isOpera + '§';
+
+</script>
+
+</body>
+</html>
+
