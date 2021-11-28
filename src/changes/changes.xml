@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96">
+            <action type="add" dev="rbri">
+                cssparser: hsl/hsla support added.
+            </action>
+            <action type="update" dev="rbri">
+                cssparser: Improved color parsing for rgb/rgba.
+            </action>
+            <action type="fix" dev="rbri" due-to="leeyazhou">
+                Fix request url encoding for script src.
+            </action>
             <action type="update" dev="rbri">
                 FIREFOX_78 is now deprecated, use FIREFOX_ESR instead.
             </action>
