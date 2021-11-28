@@ -182,12 +182,6 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
                 charset = StandardCharsets.ISO_8859_1;
             }
             else {
-                // this is what browsers do
-                // to be consistent, HtmlPage.getCharset() includes
-                // the same adjustment
-                if ("GB2312".equals(charset.name())) {
-                    charset = Charset.forName("GBK");
-                }
                 domBuilder.setFeature(HTMLScanner.IGNORE_SPECIFIED_CHARSET, true);
             }
 
