@@ -467,10 +467,6 @@ public final class EncodingSniffer {
             charset = sniffUnknownContentTypeEncoding(headers, content);
         }
 
-        // this is was browsers do
-        if (charset != null && "GB2312".equals(charset.name())) {
-            return Charset.forName("GBK");
-        }
         return charset;
     }
 

@@ -185,7 +185,9 @@ public final class ScriptElementSupport {
                     scriptElement.setExecuted(true);
                     Charset charset = EncodingSniffer.toCharset(scriptElement.getCharsetAttribute());
                     if (charset == null) {
-                        charset = page.getCharset();
+                        // page.getCharset() does some extra handling for GBM
+                        // we like to process here with real one
+                        charset = page.getWebResponse().getContentCharset();
                     }
 
                     final JavaScriptLoadResult result;

@@ -544,6 +544,13 @@ public class HtmlPage extends SgmlPage {
     public Charset getCharset() {
         if (originalCharset_ == null) {
             originalCharset_ = getWebResponse().getContentCharset();
+
+            // this is what browsers do
+            // we need the same adjustment before parsing the page
+            // see HtmlUnitNekoHtmlParser.parse(WebResponse, HtmlPage, boolean)
+            if (originalCharset_ != null && "GB2312".equals(originalCharset_.name())) {
+                originalCharset_ = Charset.forName("GBK");
+            }
         }
         return originalCharset_;
     }

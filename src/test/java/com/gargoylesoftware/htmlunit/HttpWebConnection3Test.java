@@ -1330,7 +1330,7 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
         String html = "<html><head>"
                 + "<meta http-equiv='Content-Type' content='text/html; charset=GB2312'>"
                 + "<script src=\"script.js?x=\u6211\u662F\u6211\u7684 \u4eb8 Abc\"></script>"
-                + " </head><body></body></html>";
+                + "</head><body></body></html>";
         html = "HTTP/1.1 200 OK\r\n"
                 + "Content-Length: " + (html.length()) + "\r\n"
                 + "Content-Type: text/html\r\n"
