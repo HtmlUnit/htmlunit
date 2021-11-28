@@ -1056,6 +1056,7 @@ public class HtmlPage extends SgmlPage {
 
         request.setRefererlHeader(referringRequest.getUrl());
         request.setCharset(scriptCharset);
+
         // our cache is a bit strange;
         // loadWebResponse check the cache for the web response
         // AND also fixes the request url for the following cache lookups
