@@ -9,6 +9,9 @@
     <body>
         <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96">
             <action type="add" dev="rbri">
+                cssparser: Support for dimensions turn and quater added.
+            </action>
+            <action type="add" dev="rbri">
                 cssparser: hsl/hsla support added.
             </action>
             <action type="update" dev="rbri">

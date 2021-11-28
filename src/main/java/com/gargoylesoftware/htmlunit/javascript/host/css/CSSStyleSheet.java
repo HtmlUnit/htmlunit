@@ -1497,7 +1497,8 @@ public class CSSStyleSheet extends StyleSheet {
     private static double pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
         if (cssValue == null) {
             if (LOG.isWarnEnabled()) {
-                LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
+                LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
+                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
             }
             return -1;
         }
@@ -1539,6 +1540,10 @@ public class CSSStyleSheet extends StyleSheet {
                 case MILLIMETER:
                     dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
                     return (dpi / 25.4f) * cssValue.getDoubleValue();
+                case QUATER:
+                    // One quarter of a millimeter. 1Q = 1/40th of 1cm.
+                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    return ((dpi / 25.4f) * cssValue.getDoubleValue()) / 4d;
                 case CENTIMETER:
                     dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
                     return (dpi / 254f) * cssValue.getDoubleValue();
@@ -1551,7 +1556,8 @@ public class CSSStyleSheet extends StyleSheet {
         }
         if (LOG.isWarnEnabled()) {
             LOG.warn("CSSValue '" + cssValue.getCssText()
-                        + "' has to be a 'px', 'em', '%', 'mm', 'ex', or 'pt' value.");
+                        + "' has to be a 'px', 'em', '%', 'ex', 'ch', "
+                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
         }
         return -1;
     }
