@@ -427,8 +427,7 @@ public class RegExpJsToJavaConverter {
         // ignore invalid back references (inside char classes
         // of if the referenced group is not (yet) available
         if (insideCharClass_
-                || (0 < value && value <= subexpressions_.size() && !subexpressions_.get(value - 1).closed_)
-                || value > subexpressions_.size()) {
+                || (0 < value && !subexpressions_.get(value - 1).closed_)) {
             // drop back reference
             for (int i = tmpInsertPos; i <= 0; i++) {
                 tape_.move(-1);

@@ -403,14 +403,12 @@ public class HtmlSerializerInnerOuterText {
                     if (mode == Mode.WHITE_SPACE_PRE) {
                         if (c == '\t') {
                             builder_.append('\t');
-                            state_ = State.BLANK_AT_END;
-                            trimRightPos_ = builder_.length();
                         }
                         else {
                             builder_.append(' ');
-                            state_ = State.BLANK_AT_END;
-                            trimRightPos_ = builder_.length();
                         }
+                        state_ = State.BLANK_AT_END;
+                        trimRightPos_ = builder_.length();
 
                         continue;
                     }

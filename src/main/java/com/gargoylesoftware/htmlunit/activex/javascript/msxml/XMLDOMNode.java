@@ -478,12 +478,11 @@ public class XMLDOMNode extends MSXMLScriptable {
             // Append the child to the parent node
             if (refChildNode == null) {
                 domNode.appendChild(newChildNode);
-                appendedChild = newChildObject;
             }
             else {
                 refChildNode.insertBefore(newChildNode);
-                appendedChild = newChildObject;
             }
+            appendedChild = newChildObject;
 
             // if parentNode is null in IE, create a DocumentFragment to be the parentNode
             if (domNode.getParentNode() == null) {

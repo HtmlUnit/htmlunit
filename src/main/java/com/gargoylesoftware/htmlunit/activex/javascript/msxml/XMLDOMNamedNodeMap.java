@@ -119,11 +119,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
             throw Context.reportRuntimeError("Type mismatch.");
         }
 
-        final Object attr = getNamedItemWithoutSyntheticClassAttr(name);
-        if (null != attr) {
-            return attr;
-        }
-        return null;
+        return getNamedItemWithoutSyntheticClassAttr(name);
     }
 
     /**

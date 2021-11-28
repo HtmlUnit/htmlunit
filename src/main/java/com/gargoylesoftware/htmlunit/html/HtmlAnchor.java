@@ -211,11 +211,8 @@ public class HtmlAnchor extends HtmlElement {
                 String path = url.getPath();
                 path = path.substring(0, path.lastIndexOf('/') + 1);
                 url = UrlUtils.getUrlWithNewPath(url, path);
-                url = UrlUtils.getUrlWithNewRef(url, null);
             }
-            else {
-                url = UrlUtils.getUrlWithNewRef(url, null);
-            }
+            url = UrlUtils.getUrlWithNewRef(url, null);
         }
         return url;
     }

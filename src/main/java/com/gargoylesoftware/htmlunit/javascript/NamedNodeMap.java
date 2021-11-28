@@ -128,11 +128,7 @@ public class NamedNodeMap extends SimpleScriptable {
      */
     @JsxFunction
     public Object getNamedItem(final String name) {
-        final Object attr = getNamedItemWithoutSytheticClassAttr(name);
-        if (null != attr) {
-            return attr;
-        }
-        return null;
+        return getNamedItemWithoutSytheticClassAttr(name);
     }
 
     /**

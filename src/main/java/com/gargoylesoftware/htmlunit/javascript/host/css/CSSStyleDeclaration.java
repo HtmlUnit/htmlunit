@@ -383,15 +383,12 @@ public class CSSStyleDeclaration extends SimpleScriptable {
                 }
                 return element1.getValue();
             }
-            if (element1 == null) {
-                value = element2.getValue();
-            }
-            else {
+            if (element1 != null) {
                 if (element1.compareTo(element2) > 0) {
                     return element1.getValue();
                 }
-                value = element2.getValue();
             }
+            value = element2.getValue();
         }
         else {
             final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
