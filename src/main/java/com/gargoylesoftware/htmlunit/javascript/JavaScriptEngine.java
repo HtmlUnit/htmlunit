@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
@@ -228,11 +229,11 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         // remove some objects, that Rhino defines in top scope but that we don't want
         deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
-        // TODO we have to migrate to Rhinos promise support
-        // deleteProperties(window, "Promise");
+        if (!browserVersion.hasFeature(JS_PROMISE)) {
+            deleteProperties(window, "Promise");
+        }
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
-            deleteProperties(window, "Promise");
             deleteProperties(window, "Symbol");
         }
 

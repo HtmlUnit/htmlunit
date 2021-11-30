@@ -70,7 +70,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object HTMLAudioElement]", "done"})
+    @Alerts(DEFAULT = {"[object HTMLAudioElement]", "[object Promise]", "done"},
+            IE = {"[object HTMLAudioElement]", "undefined", "done"})
     public void audio() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -79,7 +80,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var a = new Audio('1.mp3');\n"
             + "    log(a);\n"
-            + "    a.play();\n"
+            + "    log(a.play());\n"
             + "    log('done');\n"
             + "  }\n"
             + "</script>\n"

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -33,6 +34,7 @@ import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
 import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code HTMLMediaElement}.
@@ -121,12 +123,15 @@ public class HTMLMediaElement extends HTMLElement {
      */
     @JsxFunction
     public Object play() {
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-        return reject.call(Context.getCurrentContext(), this, ctor,
-                new Object[] {new DOMException("HtmlUnit does not support media play().",
-                        DOMException.NOT_FOUND_ERR)});
+        if (getBrowserVersion().hasFeature(JS_PROMISE)) {
+            final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+            final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+            final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+            return reject.call(Context.getCurrentContext(), this, ctor,
+                    new Object[] {new DOMException("HtmlUnit does not support media play().",
+                            DOMException.NOT_FOUND_ERR)});
+        }
+        return Undefined.instance;
     }
 
     /**

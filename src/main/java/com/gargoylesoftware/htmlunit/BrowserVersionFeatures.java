@@ -1220,6 +1220,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_PRE_WIDTH_STRING,
 
+    /** Supports Promise. */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_PROMISE,
+
     /** Indicates that the {@code Object.getOwnPropertyDescriptor.get} contains name. */
     @BrowserFeature({FF, FF_ESR, IE})
     JS_PROPERTY_DESCRIPTOR_NAME,
