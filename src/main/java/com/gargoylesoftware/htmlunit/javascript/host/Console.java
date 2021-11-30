@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.NativePromise;
 import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -421,11 +422,11 @@ public class Console extends SimpleScriptable {
                     sb.append("({})");
                 }
             }
-            else if (val instanceof Promise) {
+            else if (val instanceof NativePromise) {
                 sb.append("Promise");
                 if (level == 0) {
-                    final Promise p = (Promise) val;
-                    sb.append(' ').append(p.getLogDetails());
+                    final NativePromise p = (NativePromise) val;
+//                    sb.append(' ').append(p.getLogDetails());
                 }
             }
             else if (val instanceof SimpleScriptable) {

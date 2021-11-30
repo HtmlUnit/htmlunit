@@ -25,11 +25,14 @@ import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
@@ -65,7 +68,7 @@ public class AudioContext extends BaseAudioContext {
      * @return the promise or null
      */
     @JsxFunction
-    public Promise decodeAudioData(final NativeArrayBuffer buffer, final Function success, final Function error) {
+    public Object decodeAudioData(final NativeArrayBuffer buffer, final Function success, final Function error) {
         final Window window = getWindow();
         final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
         final JavaScriptEngine jsEngine =
@@ -81,7 +84,10 @@ public class AudioContext extends BaseAudioContext {
             return null;
         }
 
-        return Promise.reject(Context.getCurrentContext(), this, new Object[] {}, null);
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+        return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {});
     }
 
     /**

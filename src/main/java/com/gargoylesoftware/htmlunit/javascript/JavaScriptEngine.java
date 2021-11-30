@@ -229,9 +229,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         deleteProperties(window, "Continuation", "Iterator", "StopIteration", "BigInt");
 
         // TODO we have to migrate to Rhinos promise support
-        deleteProperties(window, "Promise");
+        // deleteProperties(window, "Promise");
 
         if (!browserVersion.hasFeature(JS_SYMBOL)) {
+            deleteProperties(window, "Promise");
             deleteProperties(window, "Symbol");
         }
 
@@ -936,13 +937,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         }
                         response = doRun(cx);
                     }
+
+                    cx.processMicrotasks();
                 }
                 finally {
                     stack.pop();
                 }
-
-                // TODO NativePromise from Rhino
-                // cx.processMicrotasks();
 
                 // doProcessPostponedActions is synchronized
                 // moved out of the sync block to avoid deadlocks

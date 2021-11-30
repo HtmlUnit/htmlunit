@@ -38,9 +38,10 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -290,12 +291,17 @@ public class Blob extends SimpleScriptable {
      * contents of the blob, interpreted as UTF-8.
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public Promise text() {
+    public Object text() {
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+
         try {
-            return Promise.resolve(null, this, new Object[] {getBackend().getText()}, null);
+            final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
+            return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {getBackend().getText()});
         }
         catch (final IOException e) {
-            return Promise.reject(null, this, new Object[] {e.getMessage()}, null);
+            final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+            return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
         }
     }
 

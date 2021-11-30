@@ -55,7 +55,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.PermissionStatus;
 import com.gargoylesoftware.htmlunit.javascript.host.Permissions;
 import com.gargoylesoftware.htmlunit.javascript.host.Plugin;
 import com.gargoylesoftware.htmlunit.javascript.host.PluginArray;
-import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.PushManager;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscription;
 import com.gargoylesoftware.htmlunit.javascript.host.PushSubscriptionOptions;
@@ -600,7 +599,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PointerEvent.class, PopStateEvent.class, Position.class, PositionError.class, Presentation.class,
         PresentationAvailability.class, PresentationConnection.class, PresentationConnectionAvailableEvent.class,
         PresentationConnectionCloseEvent.class, PresentationRequest.class,
-        ProcessingInstruction.class, ProgressEvent.class, Promise.class, PromiseRejectionEvent.class,
+        ProcessingInstruction.class, ProgressEvent.class, PromiseRejectionEvent.class,
         PushManager.class,
         PushSubscription.class, PushSubscriptionOptions.class, RadioNodeList.class, Range.class, ReadableStream.class,
         RemotePlayback.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,

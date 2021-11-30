@@ -22,9 +22,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.Promise;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code MediaDevices}.
@@ -43,9 +48,12 @@ public class MediaDevices extends EventTarget {
     }
 
     @JsxFunction
-    public Promise getUserMedia() {
-        return Promise.reject(null, this,
+    public Object getUserMedia() {
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+        return reject.call(Context.getCurrentContext(), this, ctor,
                 new Object[] {new DOMException("HtmlUnit does not support media streaming.",
-                        DOMException.NOT_FOUND_ERR)}, null);
+                        DOMException.NOT_FOUND_ERR)});
     }
 }
