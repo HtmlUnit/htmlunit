@@ -1165,6 +1165,9 @@
         <contributor>
             <name>Antoni Reus</name>
         </contributor>
+        <contributor>
+            <name>Harald Albers</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
