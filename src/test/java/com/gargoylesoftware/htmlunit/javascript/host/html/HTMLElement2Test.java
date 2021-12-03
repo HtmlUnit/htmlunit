@@ -492,12 +492,21 @@ public class HTMLElement2Test extends WebDriverTestCase {
     @Alerts({"8", "8"})
     public void offsetTopAndLeftWhenParentIsBody() throws Exception {
         final String html
-            = "<html>\n"
-            + "  <body onload='var d = document.getElementById(\"d\"); alert(d.offsetLeft); alert(d.offsetTop);'>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d = document.getElementById('d');\n"
+            + "    log(d.offsetLeft);\n"
+            + "    log(d.offsetTop);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "  <body onload='test()'>\n"
             + "    <div id='d'>foo</div>\n"
             + "  </body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
