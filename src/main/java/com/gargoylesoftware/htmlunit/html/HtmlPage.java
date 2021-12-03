@@ -1812,7 +1812,9 @@ public class HtmlPage extends SgmlPage {
                 elements.add(element);
                 map.put(value, elements);
             }
-            else elements.add(element);
+            else {
+                elements.add(element);
+            }
         }
         if (recurse) {
             for (final DomElement child : element.getChildElements()) {
