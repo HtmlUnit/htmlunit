@@ -187,13 +187,6 @@ public class Document extends Node {
     /** The format to use for the <tt>lastModified</tt> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
-    /**
-     * Map<String, Class> which maps strings a caller may use when calling into
-     * {@link #createEvent(String)} to the associated event class. To support a new
-     * event creation type, the event type and associated class need to be added into this map in
-     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
-     * have a no-arg constructor.
-     */
     /** Contains all supported DOM level 2 events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_DOM2_EVENT_TYPE_MAP;
     /** Contains all supported DOM level 3 events. DOM level 2 events are not included. */
@@ -201,7 +194,14 @@ public class Document extends Node {
     /** Contains all supported vendor specific events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
-    /** Initializes the supported event type map. */
+    /**
+     * Initializes the supported event type map.
+     * Map<String, Class> which maps strings a caller may use when calling into
+     * {@link #createEvent(String)} to the associated event class. To support a new
+     * event creation type, the event type and associated class need to be added into this map in
+     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
+     * have a no-arg constructor.
+     */
     static {
         final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
         dom2EventMap.put("HTMLEvents", Event.class);

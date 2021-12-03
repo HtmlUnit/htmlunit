@@ -115,9 +115,8 @@ public class Cache implements Serializable {
          *
          * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
          *
-         * @param response
-         * @param createdAt
-         * @return freshnessLifetime
+         * @param now the current time
+         * @return true if still fresh
          */
         boolean isStillFresh(final long now) {
             long freshnessLifetime = 0;

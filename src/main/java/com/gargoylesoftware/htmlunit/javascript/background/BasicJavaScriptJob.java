@@ -28,7 +28,7 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
     /** The initial amount of time to wait before executing this job. */
     private final int initialDelay_;
 
-    /** The amount of time to wait between executions of this job (may be {@code null}). */
+    /** The amount of time to wait between executions of this job (maybe {@code null}). */
     private final Integer period_;
 
     private final boolean executeAsap_;
@@ -50,7 +50,7 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
     /**
      * Creates a new job instance.
      * @param initialDelay the initial amount of time to wait before executing this job
-     * @param period the amount of time to wait between executions of this job (may be {@code null})
+     * @param period the amount of time to wait between executions of this job (maybe {@code null})
      */
     BasicJavaScriptJob(final int initialDelay, final Integer period) {
         initialDelay_ = initialDelay;
@@ -86,8 +86,8 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /**
-     * Returns the amount of time to wait between executions of this job (may be {@code null}).
-     * @return the amount of time to wait between executions of this job (may be {@code null})
+     * Returns the amount of time to wait between executions of this job (maybe {@code null}).
+     * @return the amount of time to wait between executions of this job (maybe {@code null})
      */
     @Override
     public Integer getPeriod() {
@@ -104,8 +104,8 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
     }
 
     /**
-     * Returns {@code true} if has to be executed asap.
-     * @return {@code true} if has to be executed asap
+     * Returns {@code true} if this job has to be executed asap.
+     * @return {@code true} if this job has to be executed asap
      */
     @Override
     public boolean isExecuteAsap() {

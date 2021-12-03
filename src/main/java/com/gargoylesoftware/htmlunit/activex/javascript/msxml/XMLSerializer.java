@@ -82,6 +82,7 @@ public class XMLSerializer {
                     parentNode = parentNode.getParentNode()) {
                 if (namespaceURI.equals(parentNode.getNamespaceURI())) {
                     sameNamespace = true;
+                    break;
                 }
             }
             if (node.getParentNode() == null || !sameNamespace) {

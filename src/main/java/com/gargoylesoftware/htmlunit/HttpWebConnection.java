@@ -274,8 +274,7 @@ public class HttpWebConnection implements WebConnection {
      * @param webRequest the request
      * @param httpClientBuilder the httpClientBuilder that will be configured
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
-     * @throws IOException
-     * @throws URISyntaxException
+     * @throws URISyntaxException in case of syntax problems
      */
     private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
         throws URISyntaxException {

@@ -28,14 +28,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlObject;
 public interface AppletConfirmHandler extends Serializable {
 
     /**
-     * Handles a confirm for the specified page.
+     * Handles a confirmation for the specified page.
      * @param applet the applet the browser likes to start
      * @return true if starting is allowed
      */
     boolean confirm(HtmlApplet applet);
 
     /**
-     * Handles a confirm for the specified page.
+     * Handles a confirmation for the specified page.
      * @param applet the applet the browser likes to start
      * @return true if starting is allowed
      */

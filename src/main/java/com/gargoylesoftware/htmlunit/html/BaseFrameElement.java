@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.FrameContentHandler;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -168,7 +169,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *      {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
+     *      {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to true
      */
     private void loadInnerPageIfPossible(final String src) throws FailingHttpStatusCodeException {
         setContentLoaded();
@@ -210,7 +211,7 @@ public abstract class BaseFrameElement extends HtmlElement {
     }
 
     /**
-     * Test if the provided URL is the one of one of the parents which would cause an infinite loop.
+     * Test if the provided URL is the one of the parents which would cause an infinite loop.
      * @param url the URL to test
      * @param charset the request charset
      * @return {@code false} if no parent has already this URL

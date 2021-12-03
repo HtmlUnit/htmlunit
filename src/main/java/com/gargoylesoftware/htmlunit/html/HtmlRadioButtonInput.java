@@ -174,8 +174,6 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
 
     /**
      * Select the specified radio button in the page (outside any &lt;form&gt;).
-     *
-     * @param radioButtonInput the radio Button
      */
     private void setCheckedForPage(final HtmlPage htmlPage) {
         // May be done in single XPath search?

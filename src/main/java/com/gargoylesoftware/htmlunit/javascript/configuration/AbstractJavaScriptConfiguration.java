@@ -52,8 +52,6 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static final Log LOG = LogFactory.getLog(AbstractJavaScriptConfiguration.class);
 
-    private static final Map<String, String> CLASS_NAME_MAP_ = new ConcurrentHashMap<>();
-
     private Map<Class<?>, Class<? extends HtmlUnitScriptable>> domJavaScriptMap_;
 
     private final Map<String, ClassConfiguration> configuration_;
@@ -217,9 +215,6 @@ public abstract class AbstractJavaScriptConfiguration {
 
     private static void process(final ClassConfiguration classConfiguration,
             final String hostClassName, final SupportedBrowser expectedBrowser) {
-        final String simpleClassName = hostClassName.substring(hostClassName.lastIndexOf('.') + 1);
-
-        CLASS_NAME_MAP_.put(hostClassName, simpleClassName);
         final Map<String, Method> allGetters = new ConcurrentHashMap<>();
         final Map<String, Method> allSetters = new ConcurrentHashMap<>();
         for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {

@@ -176,6 +176,7 @@ public class XMLSerializer extends SimpleScriptable {
                     parentNode = parentNode.getParentNode()) {
                 if (namespaceURI.equals(parentNode.getNamespaceURI())) {
                     sameNamespace = true;
+                    break;
                 }
             }
             if (node.getParentNode() == null || !sameNamespace) {

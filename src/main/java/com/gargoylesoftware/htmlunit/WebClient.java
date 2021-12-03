@@ -1378,8 +1378,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * Builds a WebResponse for a file URL.
      * This first implementation is basic.
      * It assumes that the file contains an HTML page encoded with the specified encoding.
-     * @param url the file URL
-     * @param charset encoding to use
+     * @param webRequest the request
      * @return the web response
      * @throws IOException if an IO problem occurs
      */

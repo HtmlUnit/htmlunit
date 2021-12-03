@@ -128,10 +128,8 @@ public class Element extends Node {
         // CSSStyleDeclaration uses the parent scope
         style_ = new CSSStyleDeclaration(this);
 
-        /**
-         * Convert JavaScript snippets defined in the attribute map to executable event handlers.
-         * Should be called only on construction.
-         */
+        // Convert JavaScript snippets defined in the attribute map to executable event handlers.
+        //Should be called only on construction.
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
             final String eventName = attr.getName().toLowerCase(Locale.ROOT);

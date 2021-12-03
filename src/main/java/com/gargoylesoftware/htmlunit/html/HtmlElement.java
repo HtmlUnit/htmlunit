@@ -521,7 +521,6 @@ public abstract class HtmlElement extends DomElement {
      * submits the enclosed form.
      *
      * @param c the character you wish to simulate typing
-     * @param startAtEnd whether typing should start at the text end or not
      * @param lastType is this the last character to type
      * @return the page contained in the current window as returned by {@link WebClient#getCurrentWindow()}
      * @exception IOException if an IO error occurs

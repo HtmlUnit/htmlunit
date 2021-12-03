@@ -105,8 +105,8 @@ public class HTMLInputElement extends HTMLElement {
 
     /**
      * Returns whether the specified type is supported or not.
-     * @param type
-     * @param browserVersion
+     * @param type the input type
+     * @param browserVersion the browser version
      * @return whether the specified type is supported or not
      */
     private static boolean isSupported(final String type, final BrowserVersion browserVersion) {

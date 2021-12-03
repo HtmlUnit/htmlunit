@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
- * Allows to specify for which {@link BrowserVersion} a style attribute is defined.
- * Quite experimental: it allows to do more than what we had previously but let's see if
+ * Allows specifying for which {@link BrowserVersion} a style attribute is defined.
+ * Quite experimental: it allows doing more than what we had previously but let's see if
  * this is the right way.
  *
  * @author Marc Guillemot

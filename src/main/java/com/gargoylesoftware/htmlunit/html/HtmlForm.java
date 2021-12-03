@@ -179,7 +179,7 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
-        /** Calling form.submit() twice forces double download. */
+        // Calling form.submit() twice forces double download.
         final boolean checkHash =
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
         webClient.download(webWindow, target, request, checkHash, false, false, "JS form.submit()");
@@ -189,7 +189,7 @@ public class HtmlForm extends HtmlElement {
      * Check if element which cause submit contains new html5 attributes
      * (formaction, formmethod, formtarget, formenctype)
      * and override existing values
-     * @param submitElement
+     * @param submitElement the element to update
      */
     private void updateHtml5Attributes(final SubmittableElement submitElement) {
         if (submitElement instanceof HtmlElement) {

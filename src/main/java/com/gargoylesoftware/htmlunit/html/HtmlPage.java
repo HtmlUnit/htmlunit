@@ -77,6 +77,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
@@ -827,7 +828,7 @@ public class HtmlPage extends SgmlPage {
                 result = -1;
             }
             else if (index2 > 0) {
-                result = +1;
+                result = 1;
             }
             else if (index1 == index2) {
                 result = 0;
@@ -1811,9 +1812,7 @@ public class HtmlPage extends SgmlPage {
                 elements.add(element);
                 map.put(value, elements);
             }
-            else if (!elements.contains(element)) {
-                elements.add(element);
-            }
+            else elements.add(element);
         }
         if (recurse) {
             for (final DomElement child : element.getChildElements()) {
@@ -1919,7 +1918,7 @@ public class HtmlPage extends SgmlPage {
      * Loads the content of the contained frames. This is done after the page is completely loaded, to allow script
      * contained in the frames to reference elements from the page located after the closing &lt;/frame&gt; tag.
      * @throws FailingHttpStatusCodeException if the server returns a failing status code AND the property
-     *         {@link WebClient#setThrowExceptionOnFailingStatusCode(boolean)} is set to {@code true}
+     *         {@link WebClientOptions#setThrowExceptionOnFailingStatusCode(boolean)} is set to {@code true}
      */
     void loadFrames() throws FailingHttpStatusCodeException {
         for (final FrameWindow w : getFrames()) {

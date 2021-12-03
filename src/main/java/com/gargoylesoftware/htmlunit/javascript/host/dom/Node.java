@@ -230,8 +230,6 @@ public class Node extends EventTarget {
      * If we have added a new iframe that
      * had no source attribute, we have to take care the
      * 'onload' handler is triggered.
-     *
-     * @param childDomNode
      */
     private static void initInlineFrameIfNeeded(final DomNode childDomNode) {
         if (childDomNode instanceof HtmlInlineFrame) {

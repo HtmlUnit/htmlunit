@@ -135,7 +135,6 @@ class XmlSerializer {
     /**
      * @param node a node
      * @return the text representation according to the setting of this serializer
-     * @throws IOException in case of problem saving resources
      */
     public String asText(final DomNode node) {
         builder_.setLength(0);
