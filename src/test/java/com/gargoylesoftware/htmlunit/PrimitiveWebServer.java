@@ -146,7 +146,9 @@ public class PrimitiveWebServer implements Closeable {
                         }
 
                         try (OutputStream out = socket.getOutputStream()) {
-                            out.write(response.getBytes(charset_));
+                            final int headPos = response.indexOf("\r\n\r\n");
+                            out.write(response.substring(0, headPos + 4).getBytes(StandardCharsets.US_ASCII));
+                            out.write(response.substring(headPos + 4).getBytes(charset_));
                         }
                     }
                 }
