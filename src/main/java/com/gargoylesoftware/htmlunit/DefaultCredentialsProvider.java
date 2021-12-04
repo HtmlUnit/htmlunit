@@ -43,6 +43,18 @@ import org.apache.http.client.CredentialsProvider;
  */
 public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
 
+    /** The {@code null} value represents any host. */
+    public static final String ANY_HOST = null;
+
+    /**The {@code -1} value represents any port. */
+    public static final int ANY_PORT = -1;
+
+    /** The {@code null} value represents any realm. */
+    public static final String ANY_REALM = null;
+
+    /** The {@code null} value represents any authentication scheme. */
+    public static final String ANY_SCHEME = null;
+
     // Because this is used for the whole JVM i try to make it as less invasive as possible.
     // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
@@ -83,7 +95,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * @param password the password for the new credentials
      */
     public void addCredentials(final String username, final String password) {
-        addCredentials(username, password, AuthScope.ANY_HOST, AuthScope.ANY_PORT, AuthScope.ANY_REALM);
+        addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
     }
 
     /**
@@ -98,7 +110,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, AuthScope.ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
     }
@@ -116,7 +128,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addNTLMCredentials(final String username, final String password, final String host,
             final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
         final Credentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
@@ -130,7 +142,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      */
     public void addSocksCredentials(final String username, final String password, final String host,
             final int port) {
-        final AuthScope authscope = new AuthScope(host, port, AuthScope.ANY_REALM, AuthScope.ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
 
