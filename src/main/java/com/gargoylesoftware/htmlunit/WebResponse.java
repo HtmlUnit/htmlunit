@@ -31,6 +31,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
@@ -309,5 +310,32 @@ public class WebResponse implements Serializable {
      */
     public void defaultCharsetUtf8() {
         defaultCharsetUtf8_ = true;
+    }
+
+    /**
+     * @return true if the 2xx
+     */
+    public boolean isSuccess() {
+        final int statusCode = getStatusCode();
+        return statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
+    }
+
+    /**
+     * @return true if the 2xx or 305
+     */
+    public boolean isSuccessOrUseProxy() {
+        final int statusCode = getStatusCode();
+        return (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
+                || statusCode == HttpStatus.SC_USE_PROXY;
+    }
+
+    /**
+     * @return true if the 2xx or 305
+     */
+    public boolean isSuccessOrUseProxyOrNotModified() {
+        final int statusCode = getStatusCode();
+        return (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
+                || statusCode == HttpStatus.SC_USE_PROXY
+                || statusCode == HttpStatus.SC_NOT_MODIFIED;
     }
 }
