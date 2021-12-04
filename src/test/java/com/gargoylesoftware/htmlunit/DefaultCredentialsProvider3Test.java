@@ -18,13 +18,14 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.AuthScope;
 import org.junit.Test;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
  *
  * @author Marc Guillemot
+ * @author Joerg Werner
  */
 public class DefaultCredentialsProvider3Test {
 
@@ -33,6 +34,7 @@ public class DefaultCredentialsProvider3Test {
      */
     @Test
     public void serialization() {
+        final String protocol = "https";
         final String username = "foo";
         final String password = "password";
         final String host = "my.host";
@@ -43,16 +45,16 @@ public class DefaultCredentialsProvider3Test {
         DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials(username, password, host, port, realm);
 
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNotNull(provider.getCredentials(new AuthScope(protocol, host, port, realm, scheme), null));
+        assertNull(provider.getCredentials(new AuthScope(protocol, "invalidHost", port, realm, scheme), null));
+        assertNotNull(provider.getCredentials(new AuthScope(protocol, host, port, realm, scheme), null));
+        assertNull(provider.getCredentials(new AuthScope(protocol, "invalidHost", port, realm, scheme), null));
 
         provider = SerializationUtils.clone(provider);
 
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
-        assertNotNull(provider.getCredentials(new AuthScope(host, port, realm, scheme)));
-        assertNull(provider.getCredentials(new AuthScope("invalidHost", port, realm, scheme)));
+        assertNotNull(provider.getCredentials(new AuthScope(protocol, host, port, realm, scheme), null));
+        assertNull(provider.getCredentials(new AuthScope(protocol, "invalidHost", port, realm, scheme), null));
+        assertNotNull(provider.getCredentials(new AuthScope(protocol, host, port, realm, scheme), null));
+        assertNull(provider.getCredentials(new AuthScope(protocol, "invalidHost", port, realm, scheme), null));
     }
 }

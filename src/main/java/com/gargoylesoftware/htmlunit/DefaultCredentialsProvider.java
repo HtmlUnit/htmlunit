@@ -23,11 +23,12 @@ import java.net.PasswordAuthentication;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.Credentials;
-import org.apache.http.auth.NTCredentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.auth.NTCredentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 /**
  * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
@@ -40,8 +41,9 @@ import org.apache.http.client.CredentialsProvider;
  * @author Ahmed Ashour
  * @author Nicolas Belisle
  * @author Ronald Brill
+ * @author Joerg Werner
  */
-public class DefaultCredentialsProvider implements CredentialsProvider, Serializable {
+public class DefaultCredentialsProvider implements CredentialsStore, Serializable {
 
     /** The {@code null} value represents any host. */
     public static final String ANY_HOST = null;
@@ -58,7 +60,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     // Because this is used for the whole JVM i try to make it as less invasive as possible.
     // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
-        private CredentialsProvider credentialsProvider_;
+        private CredentialsStore credentialsProvider_;
 
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
@@ -206,7 +208,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
      * {@inheritDoc}
      */
     @Override
-    public synchronized Credentials getCredentials(final AuthScope authscope) {
+    public synchronized Credentials getCredentials(final AuthScope authscope, final HttpContext httpContext) {
         if (authscope == null) {
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
@@ -267,18 +269,20 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
         }
 
         private void writeObject(final ObjectOutputStream stream) throws IOException {
+            stream.writeObject(authScope_.getProtocol());
             stream.writeObject(authScope_.getHost());
             stream.writeInt(authScope_.getPort());
             stream.writeObject(authScope_.getRealm());
-            stream.writeObject(authScope_.getScheme());
+            stream.writeObject(authScope_.getSchemeName());
         }
 
         private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
+            final String protocol = (String) stream.readObject();
             final String host = (String) stream.readObject();
             final int port = stream.readInt();
             final String realm = (String) stream.readObject();
             final String scheme = (String) stream.readObject();
-            authScope_ = new AuthScope(host, port, realm, scheme);
+            authScope_ = new AuthScope(protocol, host, port, realm, scheme);
         }
 
         @Override

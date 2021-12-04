@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import org.apache.http.cookie.CookieSpec;
-import org.apache.http.cookie.CookieSpecProvider;
-import org.apache.http.protocol.HttpContext;
+import org.apache.hc.client5.http.cookie.CookieSpec;
+import org.apache.hc.client5.http.cookie.CookieSpecFactory;
+import org.apache.hc.core5.http.protocol.HttpContext;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -24,8 +24,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * Customized CookieSpecProvider for HtmlUnit.
  *
  * @author Ronald Brill
+ * @author Joerg Werner
  */
-public final class HtmlUnitCookieSpecProvider implements CookieSpecProvider {
+public final class HtmlUnitCookieSpecProvider implements CookieSpecFactory {
 
     private final BrowserVersion browserVersion_;
 

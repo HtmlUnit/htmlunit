@@ -18,9 +18,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.hc.client5.http.client.CookieStore;
-import org.apache.hc.client5.http.cookie.ClientCookie;
 import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieStore;
 
 import com.gargoylesoftware.htmlunit.CookieManager;
 
@@ -30,6 +29,7 @@ import com.gargoylesoftware.htmlunit.CookieManager;
  *
  * @author Marc Guillemot
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public final class HtmlUnitCookieStore implements CookieStore, Serializable {
     private final CookieManager manager_;
@@ -48,7 +48,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      */
     @Override
     public synchronized void addCookie(final Cookie cookie) {
-        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie((ClientCookie) cookie));
+        manager_.addCookie(new com.gargoylesoftware.htmlunit.util.Cookie(cookie));
     }
 
     /**
