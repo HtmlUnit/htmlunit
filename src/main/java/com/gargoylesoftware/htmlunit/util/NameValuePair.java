@@ -15,11 +15,9 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.LangUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
  * A name/value pair.
@@ -71,7 +69,7 @@ public class NameValuePair implements Serializable {
             return false;
         }
         final NameValuePair other = (NameValuePair) object;
-        return LangUtils.equals(name_, other.name_) && LangUtils.equals(value_, other.value_);
+        return StringUtils.equals(name_, other.name_) && StringUtils.equals(value_, other.value_);
     }
 
     /**
@@ -79,10 +77,10 @@ public class NameValuePair implements Serializable {
      */
     @Override
     public int hashCode() {
-        int hash = LangUtils.HASH_SEED;
-        hash = LangUtils.hashCode(hash, name_);
-        hash = LangUtils.hashCode(hash, value_);
-        return hash;
+        return new HashCodeBuilder().
+                append(name_).
+                append(value_).
+                toHashCode();
     }
 
     /**
@@ -92,18 +90,4 @@ public class NameValuePair implements Serializable {
     public String toString() {
         return name_ + "=" + value_;
     }
-
-    /**
-     * Converts the specified name/value pairs into HttpClient name/value pairs.
-     * @param pairs the name/value pairs to convert
-     * @return the converted name/value pairs
-     */
-    public static List<org.apache.http.NameValuePair> toHttpClient(final List<NameValuePair> pairs) {
-        final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
-        for (final NameValuePair pair : pairs) {
-            resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
-        }
-        return resultingPairs;
-    }
-
 }
