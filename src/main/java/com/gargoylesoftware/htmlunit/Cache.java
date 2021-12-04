@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.client.utils.DateUtils;
+import org.apache.hc.client5.http.utils.DateUtils;
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.htmlunit.util.HeaderUtils;
@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ahmed Ashour
  * @author Anton Demydenko
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public class Cache implements Serializable {
 

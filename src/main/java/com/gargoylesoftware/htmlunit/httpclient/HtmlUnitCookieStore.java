@@ -18,9 +18,9 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.http.client.CookieStore;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.Cookie;
+import org.apache.hc.client5.http.client.CookieStore;
+import org.apache.hc.client5.http.cookie.ClientCookie;
+import org.apache.hc.client5.http.cookie.Cookie;
 
 import com.gargoylesoftware.htmlunit.CookieManager;
 

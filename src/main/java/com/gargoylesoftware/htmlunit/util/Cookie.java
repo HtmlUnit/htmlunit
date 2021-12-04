@@ -22,8 +22,8 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.impl.cookie.BasicClientCookie;
+import org.apache.hc.client5.http.cookie.ClientCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
 
 /**
  * A cookie. This class is immutable.
@@ -32,6 +32,7 @@ import org.apache.http.impl.cookie.BasicClientCookie;
  * @author Nicolas Belisle
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public class Cookie implements Serializable {
 

@@ -35,7 +35,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 
 import com.gargoylesoftware.htmlunit.AjaxController;
 import com.gargoylesoftware.htmlunit.FormEncodingType;
@@ -80,6 +80,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Sebastian Cato
  * @author Frank Danek
  * @author Jake Cobb
+ * @author Joerg Werner
  */
 @JsxClass(IE)
 public class XMLHTTPRequest extends MSXMLScriptable {
@@ -426,7 +427,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     passwordCred = password.toString();
                 }
 
-                request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
+                request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred.toCharArray()));
             }
             webRequest_ = request;
         }
