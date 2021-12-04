@@ -21,7 +21,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.TextUtils;
@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.util.TextUtils;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Carsten Steul
+ * @author Joerg Werner
  */
 public class StringWebResponse extends WebResponse {
 

@@ -47,7 +47,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.message.ParserCursor;
 import org.apache.http.message.TokenParser;
-import org.apache.http.util.CharArrayBuffer;
+import org.apache.hc.core5.util.CharArrayBuffer;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Nicolas Belisle
  * @author Ronald Brill
  * @author John J Murdoch
+ * @author Joerg Werner
  */
 public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
 

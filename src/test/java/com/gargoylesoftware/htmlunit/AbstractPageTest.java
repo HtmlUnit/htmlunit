@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.apache.http.client.utils.DateUtils.formatDate;
+import static org.apache.hc.client5.http.utils.DateUtils.formatDate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +31,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Tests for {@link AbstractPage}.
  *
  * @author Ahmed Ashour
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public final class AbstractPageTest extends WebServerTestCase {

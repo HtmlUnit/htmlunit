@@ -14,9 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.impl.auth.BasicScheme;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
+import org.apache.hc.client5.http.impl.auth.BasicScheme;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
  * Tests for {@link DefaultCredentialsProvider}.
  *
  * @author Marc Guillemot
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
@@ -39,25 +40,25 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
     @Test
     public void overwrite() throws Exception {
         final String realm = "blah";
-        final String scheme = new BasicScheme().getSchemeName();
+        final String scheme = new BasicScheme().getName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials("username", "password");
 
-        UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        UsernamePasswordCredentials credentials = (UsernamePasswordCredentials) provider.getCredentials(
+                new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme), null);
         assertEquals("username", credentials.getUserName());
         assertEquals("password", credentials.getPassword());
 
         provider.addCredentials("username", "new password");
         credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+                        .getCredentials(new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme), null);
         assertEquals("username", credentials.getUserName());
         assertEquals("new password", credentials.getPassword());
 
         provider.addCredentials("new username", "other password");
         credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+                        .getCredentials(new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme), null);
         assertEquals("new username", credentials.getUserName());
         assertEquals("other password", credentials.getPassword());
     }
@@ -82,20 +83,20 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
     @Test
     public void removeCredentials() throws Exception {
         final String realm = "blah";
-        final String scheme = new BasicScheme().getSchemeName();
+        final String scheme = new BasicScheme().getName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials("username", "password", HttpHeader.HOST_LC, 80, realm);
 
-        UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        UsernamePasswordCredentials credentials = (UsernamePasswordCredentials) provider.getCredentials(
+                    new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme), null);
         assertEquals("username", credentials.getUserName());
         assertEquals("password", credentials.getPassword());
 
-        provider.removeCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        provider.removeCredentials(new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme));
 
         credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+                        .getCredentials(new AuthScope(null, HttpHeader.HOST_LC, 80, realm, scheme), null);
         assertNull(credentials);
     }
 

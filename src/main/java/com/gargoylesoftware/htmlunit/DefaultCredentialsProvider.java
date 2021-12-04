@@ -78,8 +78,7 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
                 return null;
             }
 
-            return new PasswordAuthentication(credentials.getUserPrincipal().getName(),
-                    credentials.getPassword().toCharArray());
+            return new PasswordAuthentication(credentials.getUserPrincipal().getName(), credentials.getPassword());
         }
     }
 

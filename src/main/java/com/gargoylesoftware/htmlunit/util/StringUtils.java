@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.http.client.utils.DateUtils;
+import org.apache.hc.client5.http.utils.DateUtils;
 
 import com.gargoylesoftware.htmlunit.html.impl.Color;
 
@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.html.impl.Color;
  * @author Ahmed Ashour
  * @author Martin Tamme
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public final class StringUtils {
 

@@ -26,7 +26,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.client.utils.DateUtils;
+import org.apache.hc.client5.http.utils.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -40,6 +40,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Unit tests for {@link CookieManager}.
  *
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class CookieManager5Test extends WebServerTestCase {

@@ -31,7 +31,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 
 import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
@@ -46,6 +46,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Marc Guillemot
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public class WebResponse implements Serializable {
 

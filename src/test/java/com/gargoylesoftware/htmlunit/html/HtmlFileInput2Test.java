@@ -42,9 +42,9 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.core5.http.HttpEntity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -65,6 +65,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Joerg Werner
  */
 @RunWith(BrowserRunner.class)
 public class HtmlFileInput2Test extends WebServerTestCase {

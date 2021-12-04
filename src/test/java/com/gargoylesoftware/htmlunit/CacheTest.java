@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit;
 
-import static org.apache.http.client.utils.DateUtils.formatDate;
+import static org.apache.hc.client5.http.utils.DateUtils.formatDate;
 import static org.easymock.EasyMock.createMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  * @author Anton Demydenko
  * @author Ronald Brill
+ * @author Joerg Werner
 */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
