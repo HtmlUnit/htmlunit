@@ -61,7 +61,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
@@ -954,11 +953,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
 
                 // do the preflight request
                 final WebResponse preflightResponse = wc.loadWebResponse(preflightRequest);
-                final int statusCode = preflightResponse.getStatusCode();
-                final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES
-                    || statusCode == HttpStatus.SC_USE_PROXY
-                    || statusCode == HttpStatus.SC_NOT_MODIFIED;
-                if (!successful || !isPreflightAuthorized(preflightResponse)) {
+                if (!preflightResponse.isSuccessOrUseProxyOrNotModified()
+                        || !isPreflightAuthorized(preflightResponse)) {
                     setState(DONE);
                     if (async_ || browserVersion.hasFeature(XHR_HANDLE_SYNC_NETWORK_ERRORS)) {
                         fireJavascriptEvent(Event.TYPE_READY_STATE_CHANGE);

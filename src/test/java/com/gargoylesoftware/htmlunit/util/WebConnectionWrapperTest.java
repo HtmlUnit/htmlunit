@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.util;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -40,7 +39,7 @@ public class WebConnectionWrapperTest extends SimpleWebTestCase {
     @Test
     public void wrapper() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
-        final WebResponseData data = new WebResponseData(new byte[]{}, HttpStatus.SC_OK, "", emptyList);
+        final WebResponseData data = new WebResponseData(new byte[]{}, WebResponse.OK, "", emptyList);
         final WebResponse response = new WebResponse(data, URL_FIRST, HttpMethod.GET, 0);
         final WebRequest wrs = new WebRequest(URL_FIRST);
 

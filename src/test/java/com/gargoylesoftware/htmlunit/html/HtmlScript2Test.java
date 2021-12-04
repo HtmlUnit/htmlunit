@@ -21,7 +21,6 @@ import java.net.URL;
 import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -29,6 +28,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -578,7 +578,7 @@ public class HtmlScript2Test extends WebDriverTestCase {
             + "<body onload='test()'></body>\n"
             + "</html>";
 
-        getMockWebConnection().setResponse(scriptUrl, (String) null, HttpStatus.SC_NO_CONTENT, "No Content",
+        getMockWebConnection().setResponse(scriptUrl, (String) null, WebResponse.NO_CONTENT, "No Content",
                                                 MimeType.APPLICATION_JAVASCRIPT, null);
         loadPageVerifyTitle2(html);
     }
