@@ -41,7 +41,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -642,7 +641,7 @@ public class WebClientTest extends SimpleWebTestCase {
         }
         else {
             // A redirect should have happened
-            assertEquals(HttpStatus.SC_OK, webResponse.getStatusCode());
+            assertEquals(WebResponse.OK, webResponse.getStatusCode());
             assertEquals(newLocation, webResponse.getWebRequest().getUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());

@@ -20,7 +20,6 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -43,14 +42,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntityBuilder;
-import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -359,44 +352,6 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         }
         assertNotNull(pair2.getFile());
         assertEquals("text/webtest", pair2.getMimeType());
-    }
-
-    /**
-     * Test HttpClient for uploading a file with non-ASCII name, if it works it means HttpClient has fixed its bug.
-     *
-     * Test for http://issues.apache.org/jira/browse/HTTPCLIENT-293,
-     * which is related to http://sourceforge.net/p/htmlunit/bugs/535/
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void uploadFileWithNonASCIIName_HttpClient() throws Exception {
-        final String filename = "\u6A94\u6848\uD30C\uC77C\u30D5\u30A1\u30A4\u30EB\u0645\u0644\u0641.txt";
-        final URL fileURL = getClass().getClassLoader().getResource(filename);
-        assertNotNull("Resource '" + filename + "' not found", fileURL);
-        final File file = new File(fileURL.toURI());
-        assertTrue("File '" + file.getAbsolutePath() + "' does not exist", file.exists());
-
-        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
-        servlets.put("/upload2", Upload2Servlet.class);
-
-        startWebServer("./", null, servlets);
-        final HttpPost filePost = new HttpPost(URL_FIRST + "upload2");
-
-        final MultipartEntityBuilder builder = MultipartEntityBuilder.create();
-        builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE).setCharset(UTF_8);
-        builder.addPart("myInput", new FileBody(file, ContentType.APPLICATION_OCTET_STREAM));
-
-        filePost.setEntity(builder.build());
-
-        final HttpClientBuilder clientBuilder = HttpClientBuilder.create();
-        final HttpResponse httpResponse = clientBuilder.build().execute(filePost);
-
-        try (InputStream content = httpResponse.getEntity().getContent()) {
-            final String response = new String(IOUtils.toByteArray(content));
-            //this is the value with ASCII encoding
-            assertFalse("3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 3F 2E 74 78 74 <br>myInput".equals(response));
-        }
     }
 
     /**

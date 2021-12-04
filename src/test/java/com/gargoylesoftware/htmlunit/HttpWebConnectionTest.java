@@ -42,7 +42,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
 import org.apache.http.ProtocolVersion;
 import org.apache.http.StatusLine;
 import org.apache.http.entity.StringEntity;
@@ -184,11 +183,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final URL url = new URL("http://htmlunit.sourceforge.net/");
         final String content = "<html><head></head><body></body></html>";
         final DownloadedContent downloadedContent = new DownloadedContent.InMemory(content.getBytes());
-        final int httpStatus = HttpStatus.SC_OK;
         final long loadTime = 500L;
 
         final ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 0);
-        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpStatus.SC_OK, null);
+        final StatusLine statusLine = new BasicStatusLine(protocolVersion, WebResponse.OK, null);
         final HttpResponse httpResponse = new BasicHttpResponse(statusLine);
 
         final HttpEntity responseEntity = new StringEntity(content);
@@ -201,7 +199,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebResponse response = (WebResponse) method.invoke(connection,
                 httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
 
-        assertEquals(httpStatus, response.getStatusCode());
+        assertEquals(WebResponse.OK, response.getStatusCode());
         assertEquals(url, response.getWebRequest().getUrl());
         assertEquals(loadTime, response.getLoadTime());
         assertEquals(content, response.getContentAsString());

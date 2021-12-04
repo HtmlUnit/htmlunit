@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.Node;
@@ -35,6 +34,7 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -209,7 +209,7 @@ public class XmlPageTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals(WebResponse.OK, page.getWebResponse().getStatusCode());
         assertEquals(mimeType, page.getWebResponse().getContentType());
         assertTrue(XmlPage.class.isInstance(page));
         final XmlPage xmlPage = (XmlPage) page;
@@ -241,7 +241,7 @@ public class XmlPageTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals(WebResponse.OK, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
         assertTrue(Page.class.isInstance(page));
@@ -267,7 +267,7 @@ public class XmlPageTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals(WebResponse.OK, page.getWebResponse().getStatusCode());
         assertEquals(MimeType.TEXT_XML, page.getWebResponse().getContentType());
 
         assertTrue(Page.class.isInstance(page));
@@ -293,7 +293,7 @@ public class XmlPageTest extends WebServerTestCase {
         final Page page = client.getPage(URL_FIRST);
         assertEquals(URL_FIRST, page.getUrl());
         assertEquals("OK", page.getWebResponse().getStatusMessage());
-        assertEquals(HttpStatus.SC_OK, page.getWebResponse().getStatusCode());
+        assertEquals(WebResponse.OK, page.getWebResponse().getStatusCode());
         assertEquals("text/xml", page.getWebResponse().getContentType());
 
         assertTrue(Page.class.isInstance(page));

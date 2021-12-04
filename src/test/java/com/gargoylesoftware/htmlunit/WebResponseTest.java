@@ -33,7 +33,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -97,7 +96,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, xml, HttpStatus.SC_OK, "OK", "text/xml; charset=\"ISO-8859-1\"", null);
+        conn.setResponse(URL_FIRST, xml, WebResponse.OK, "OK", "text/xml; charset=\"ISO-8859-1\"", null);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }

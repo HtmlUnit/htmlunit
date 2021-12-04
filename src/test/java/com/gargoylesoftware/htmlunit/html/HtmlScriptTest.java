@@ -20,7 +20,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -29,6 +28,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -219,7 +219,7 @@ public class HtmlScriptTest extends SimpleWebTestCase {
         final MockWebConnection conn = new MockWebConnection();
         conn.setResponse(URL_FIRST, html);
         final ArrayList<NameValuePair> headers = new ArrayList<>();
-        conn.setResponse(URL_SECOND, (String) null, HttpStatus.SC_NO_CONTENT, "No Content",
+        conn.setResponse(URL_SECOND, (String) null, WebResponse.NO_CONTENT, "No Content",
                 MimeType.APPLICATION_JAVASCRIPT,
                 headers);
         client.setWebConnection(conn);

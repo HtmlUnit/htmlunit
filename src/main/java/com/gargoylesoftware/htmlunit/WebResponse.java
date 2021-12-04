@@ -49,6 +49,17 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  */
 public class WebResponse implements Serializable {
 
+    /** Forwarder to HttpStatus.SC_OK. */
+    public static final int OK = HttpStatus.SC_OK;
+    /** Forwarder to HttpStatus.SC_FORBIDDEN. */
+    public static final int FORBIDDEN = HttpStatus.SC_FORBIDDEN;
+    /** Forwarder to HttpStatus.SC_NOT_FOUND. */
+    public static final int NOT_FOUND = HttpStatus.SC_NOT_FOUND;
+    /** Forwarder to HttpStatus.SC_NO_CONTENT. */
+    public static final int NO_CONTENT = HttpStatus.SC_NO_CONTENT;
+    /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR. */
+    public static final int INTERNAL_SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
+
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
     private static final ByteOrderMark[] BOM_HEADERS = {
         ByteOrderMark.UTF_8,

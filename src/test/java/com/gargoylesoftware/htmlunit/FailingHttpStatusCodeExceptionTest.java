@@ -20,7 +20,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.http.HttpStatus;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -45,7 +44,7 @@ public final class FailingHttpStatusCodeExceptionTest extends SimpleWebTestCase 
     public void constructorWithWebResponse() throws Exception {
         final List<NameValuePair> emptyList = Collections.emptyList();
         final WebResponseData webResponseData = new WebResponseData(
-                ArrayUtils.EMPTY_BYTE_ARRAY, HttpStatus.SC_NOT_FOUND, "not found",
+                ArrayUtils.EMPTY_BYTE_ARRAY, WebResponse.NOT_FOUND, "not found",
                 emptyList);
         final WebResponse webResponse = new WebResponse(webResponseData, URL_FIRST, HttpMethod.GET, 10);
         final FailingHttpStatusCodeException e = new FailingHttpStatusCodeException(webResponse);

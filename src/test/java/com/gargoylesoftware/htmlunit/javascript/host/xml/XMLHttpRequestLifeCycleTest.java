@@ -31,7 +31,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.http.HttpStatus;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +44,7 @@ import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MiniServer;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
@@ -154,7 +154,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK);
+                response.setStatus(WebResponse.OK);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -176,7 +176,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     throws ServletException, IOException {
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK);
+                response.setStatus(WebResponse.OK);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -202,7 +202,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_FORBIDDEN);
+                response.setStatus(WebResponse.FORBIDDEN);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -228,7 +228,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+                response.setStatus(WebResponse.INTERNAL_SERVER_ERROR);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.write(RETURN_XML);
@@ -240,7 +240,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             @Override
             protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.SC_FORBIDDEN);
+                response.setStatus(WebResponse.FORBIDDEN);
             }
         }
 
@@ -248,7 +248,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
             @Override
             protected void doOptions(final HttpServletRequest request, final HttpServletResponse response) {
-                response.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+                response.setStatus(WebResponse.INTERNAL_SERVER_ERROR);
             }
         }
 
@@ -263,7 +263,7 @@ public final class XMLHttpRequestLifeCycleTest {
 
                 response.setContentType(MimeType.TEXT_XML);
                 response.setContentLength(RETURN_XML.length());
-                response.setStatus(HttpStatus.SC_OK);
+                response.setStatus(WebResponse.OK);
                 final ServletOutputStream outputStream = response.getOutputStream();
                 try (Writer writer = new OutputStreamWriter(outputStream)) {
                     writer.flush();
