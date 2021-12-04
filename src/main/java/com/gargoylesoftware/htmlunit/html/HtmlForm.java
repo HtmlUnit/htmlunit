@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
@@ -289,7 +290,7 @@ public class HtmlForm extends HtmlElement {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            queryFormFields = URLEncodedUtils.format(NameValuePair.toHttpClient(parameters), enc);
+            queryFormFields = URLEncodedUtils.format(HttpClientConverter.nameValuePairsToHttpClient(parameters), enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");

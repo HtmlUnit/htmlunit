@@ -111,6 +111,7 @@ import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
+import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
 import com.gargoylesoftware.htmlunit.httpclient.SocksConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -302,7 +303,8 @@ public class HttpWebConnection implements WebConnection {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                    final String query = URLEncodedUtils.format(NameValuePair.toHttpClient(pairs), charset);
+                    final String query = URLEncodedUtils.format(
+                                            HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
 
                     final StringEntity urlEncodedEntity;
                     if (webRequest.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
@@ -371,7 +373,8 @@ public class HttpWebConnection implements WebConnection {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
             if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final String query = URLEncodedUtils.format(NameValuePair.toHttpClient(pairs), charset);
+                final String query = URLEncodedUtils.format(
+                                        HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
                 uri = UrlUtils.toURI(url, query);
                 httpMethod.setURI(uri);
             }
