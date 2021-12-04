@@ -20,13 +20,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Locale;
 
-import org.apache.http.cookie.Cookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicDomainHandler;
-import org.apache.http.util.Args;
-import org.apache.http.util.TextUtils;
+import org.apache.hc.client5.http.cookie.Cookie;
+import org.apache.hc.client5.http.cookie.CookieOrigin;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicDomainHandler;
+import org.apache.hc.core5.util.Args;
+import org.apache.hc.core5.util.TextUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpHeader;
@@ -36,6 +36,7 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
+ * @author Joerg Werner
  */
 final class HtmlUnitDomainHandler extends BasicDomainHandler {
     private final BrowserVersion browserVersion_;

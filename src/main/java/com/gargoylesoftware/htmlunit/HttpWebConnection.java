@@ -46,6 +46,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.hc.client5.http.auth.AuthCache;
 import org.apache.http.ConnectionClosedException;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -58,7 +59,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.auth.AuthScheme;
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.Credentials;
-import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpDelete;
@@ -132,6 +132,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author John J Murdoch
  * @author Carsten Steul
  * @author Hartmut Arlt
+ * @author Joerg Werner
  */
 public class HttpWebConnection implements WebConnection {
 

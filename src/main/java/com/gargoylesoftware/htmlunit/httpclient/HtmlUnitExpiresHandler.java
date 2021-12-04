@@ -20,10 +20,10 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTTP_COOKIE_S
 
 import java.util.Date;
 
-import org.apache.http.client.utils.DateUtils;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.BasicExpiresHandler;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.BasicExpiresHandler;
+import org.apache.hc.client5.http.utils.DateUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 
@@ -39,6 +39,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Nicolas Belisle
  * @author Ronald Brill
  * @author John J Murdoch
+ * @author Joerg Werner
  */
 final class HtmlUnitExpiresHandler extends BasicExpiresHandler {
 

@@ -14,16 +14,16 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.CommonCookieAttributeHandler;
-import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.cookie.SetCookie;
-import org.apache.http.impl.cookie.AbstractCookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.CommonCookieAttributeHandler;
+import org.apache.hc.client5.http.cookie.MalformedCookieException;
+import org.apache.hc.client5.http.cookie.SetCookie;
+import org.apache.hc.client5.http.impl.cookie.AbstractCookieAttributeHandler;
 
 /**
  * VersionAttributeHandler for HtmlUnit.
  *
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandler
                 implements CommonCookieAttributeHandler {

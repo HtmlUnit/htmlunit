@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
-import org.apache.http.message.BasicHeaderValueFormatter;
+import org.apache.hc.core5.http.message.BasicHeaderValueFormatter;
 
 /**
  * Customized BasicHeaderValueFormatter for HtmlUnit.
@@ -25,6 +25,7 @@ import org.apache.http.message.BasicHeaderValueFormatter;
  * the quotes from cookies (@see {@link HtmlUnitBrowserCompatCookieSpec})
  *
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public class HtmlUnitBrowserCompatCookieHeaderValueFormatter extends BasicHeaderValueFormatter {
 

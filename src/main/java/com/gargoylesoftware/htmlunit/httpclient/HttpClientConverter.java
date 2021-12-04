@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.httpclient;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.message.BasicNameValuePair;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * Helper methods to convert from/to HttpClient.
  *
  * @author Ronald Brill
+ * @author Joerg Werner
  */
 public final class HttpClientConverter {
 
@@ -36,8 +37,9 @@ public final class HttpClientConverter {
      * @param pairs the name/value pairs to convert
      * @return the converted name/value pairs
      */
-    public static List<org.apache.http.NameValuePair> nameValuePairsToHttpClient(final List<NameValuePair> pairs) {
-        final List<org.apache.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
+    public static List<org.apache.hc.core5.http.NameValuePair>
+                        nameValuePairsToHttpClient(final List<NameValuePair> pairs) {
+        final List<org.apache.hc.core5.http.NameValuePair> resultingPairs = new ArrayList<>(pairs.size());
         for (final NameValuePair pair : pairs) {
             resultingPairs.add(new BasicNameValuePair(pair.getName(), pair.getValue()));
         }
