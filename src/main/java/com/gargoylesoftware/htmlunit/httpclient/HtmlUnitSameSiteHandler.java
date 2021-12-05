@@ -15,13 +15,13 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.apache.hc.client5.http.cookie.CommonCookieAttributeHandler;
 import org.apache.hc.client5.http.cookie.Cookie;
 import org.apache.hc.client5.http.cookie.CookieOrigin;
 import org.apache.hc.client5.http.cookie.MalformedCookieException;
 import org.apache.hc.client5.http.cookie.SetCookie;
 import org.apache.hc.client5.http.impl.cookie.BasicClientCookie;
+
 /**
  * Customized CookieAttributeHandler for handling of the samesite attribute.
  *
