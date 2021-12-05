@@ -43,11 +43,12 @@ final class HtmlUnitVersionAttributeHandler extends AbstractCookieAttributeHandl
         catch (final NumberFormatException e) {
             // ignore invalid versions
         }
-        cookie.setVersion(version);
+     // TODO HC5 cookie.setVersion(version);
     }
 
     @Override
     public String getAttributeName() {
-        return ClientCookie.VERSION_ATTR;
+        // TODO HC5 return ClientCookie.VERSION_ATTR;
+        return null;
     }
 }

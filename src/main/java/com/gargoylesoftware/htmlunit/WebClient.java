@@ -62,13 +62,14 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.hc.client5.http.auth.CredentialsProvider;
+import org.apache.hc.client5.http.auth.CredentialsStore;
 import org.apache.hc.client5.http.cookie.CookieOrigin;
 import org.apache.hc.client5.http.cookie.CookieSpec;
 import org.apache.hc.client5.http.cookie.MalformedCookieException;
 import org.apache.hc.client5.http.utils.DateUtils;
 import org.apache.hc.core5.http.HttpStatus;
 import org.apache.hc.core5.http.NoHttpResponseException;
+import org.apache.hc.core5.http.ParseException;
 import org.apache.hc.core5.http.message.BufferedHeader;
 import org.apache.hc.core5.util.CharArrayBuffer;
 
@@ -165,7 +166,7 @@ public class WebClient implements Serializable, AutoCloseable {
             0, "No HTTP Response", Collections.emptyList());
 
     private transient WebConnection webConnection_;
-    private CredentialsProvider credentialsProvider_ = new DefaultCredentialsProvider();
+    private CredentialsStore credentialsProvider_ = new DefaultCredentialsProvider();
     private CookieManager cookieManager_ = new CookieManager();
     private transient AbstractJavaScriptEngine<?> scriptEngine_;
     private transient List<LoadJob> loadQueue_;
@@ -785,7 +786,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * or Digest authentication.
      * @param credentialsProvider the new credentials provider to use to authenticate
      */
-    public void setCredentialsProvider(final CredentialsProvider credentialsProvider) {
+    public void setCredentialsProvider(final CredentialsStore credentialsProvider) {
         WebAssert.notNull("credentialsProvider", credentialsProvider);
         credentialsProvider_ = credentialsProvider;
     }
@@ -795,7 +796,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * method returns an instance of {@link DefaultCredentialsProvider}.
      * @return the credentials provider for this client instance
      */
-    public CredentialsProvider getCredentialsProvider() {
+    public CredentialsStore getCredentialsProvider() {
         return credentialsProvider_;
     }
 
@@ -2659,13 +2660,20 @@ public class WebClient implements Serializable, AutoCloseable {
                     cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
 
             for (final org.apache.hc.client5.http.cookie.Cookie cookie : cookies) {
-                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
+                final Cookie htmlUnitCookie = new Cookie(cookie);
                 cookieManager.addCookie(htmlUnitCookie);
 
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Added cookie: '" + cookieString + "'");
                 }
             }
+        }
+        catch (final ParseException e) {
+            if (LOG.isDebugEnabled()) {
+                LOG.warn("Adding cookie '" + cookieString + "' failed; reason: '" + e.getMessage() + "'.");
+            }
+            getIncorrectnessListener().notify("Adding cookie '" + cookieString
+                        + "' failed; reason: '" + e.getMessage() + "'.", origin);
         }
         catch (final MalformedCookieException e) {
             if (LOG.isDebugEnabled()) {

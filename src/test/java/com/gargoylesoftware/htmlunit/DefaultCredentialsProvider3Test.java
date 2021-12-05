@@ -36,7 +36,7 @@ public class DefaultCredentialsProvider3Test {
     public void serialization() {
         final String protocol = "https";
         final String username = "foo";
-        final String password = "password";
+        final char[] password = "password".toCharArray();
         final String host = "my.host";
         final int port = 1234;
         final String realm = "blah";

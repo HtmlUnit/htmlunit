@@ -45,6 +45,9 @@ import org.apache.hc.core5.http.protocol.HttpContext;
  */
 public class DefaultCredentialsProvider implements CredentialsStore, Serializable {
 
+    /** The {@code null} value represents any protocol. */
+    public static final String ANY_PROTOCOL = null;
+
     /** The {@code null} value represents any host. */
     public static final String ANY_HOST = null;
 
@@ -72,8 +75,9 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
                 return null;
             }
 
-            final AuthScope authScope = new AuthScope(getRequestingHost(), getRequestingPort(), getRequestingScheme());
-            final Credentials credentials = credentialsProvider_.getCredentials(authScope);
+            final AuthScope authScope = new AuthScope(ANY_PROTOCOL,
+                    getRequestingHost(), getRequestingPort(), ANY_REALM, getRequestingScheme());
+            final Credentials credentials = credentialsProvider_.getCredentials(authScope, null);
             if (credentials == null) {
                 return null;
             }
@@ -95,7 +99,7 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
      * @param username the username for the new credentials
      * @param password the password for the new credentials
      */
-    public void addCredentials(final String username, final String password) {
+    public void addCredentials(final String username, final char[] password) {
         addCredentials(username, password, ANY_HOST, ANY_PORT, ANY_REALM);
     }
 
@@ -109,9 +113,9 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
      * @param realm the realm to which to the new credentials apply ({@code null} if applicable to any realm)
      */
-    public void addCredentials(final String username, final String password, final String host,
+    public void addCredentials(final String username, final char[] password, final String host,
             final int port, final String realm) {
-        final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(ANY_PROTOCOL, host, port, realm, ANY_SCHEME);
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
     }
@@ -127,9 +131,9 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
      *        Essentially, the computer name for this machine.
      * @param domain the domain to authenticate within
      */
-    public void addNTLMCredentials(final String username, final String password, final String host,
+    public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(ANY_PROTOCOL, host, port, ANY_REALM, ANY_SCHEME);
         final Credentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
@@ -141,16 +145,16 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
      * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)
      */
-    public void addSocksCredentials(final String username, final String password, final String host,
+    public void addSocksCredentials(final String username, final char[] password, final String host,
             final int port) {
-        final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
+        final AuthScope authscope = new AuthScope(ANY_PROTOCOL, host, port, ANY_REALM, ANY_SCHEME);
         final Credentials credentials = new UsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
 
         initSocksAuthenticatorIfNeeded(this);
     }
 
-    private static synchronized void initSocksAuthenticatorIfNeeded(final CredentialsProvider provider) {
+    private static synchronized void initSocksAuthenticatorIfNeeded(final CredentialsStore provider) {
         if (SocksAuthenticator_ == null) {
             SocksAuthenticator_ = new SocksProxyAuthenticator();
             SocksAuthenticator_.credentialsProvider_ = provider;
