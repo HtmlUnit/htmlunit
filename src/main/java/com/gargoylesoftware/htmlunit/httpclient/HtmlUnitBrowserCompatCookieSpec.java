@@ -105,7 +105,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
      * @param browserVersion the {@link BrowserVersion} to simulate
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
-        super(new HtmlUnitVersionAttributeHandler(),
+        super(
+                // TODO HC5 new HtmlUnitVersionAttributeHandler(),
                 new HtmlUnitDomainHandler(browserVersion),
                 new HtmlUnitPathHandler(browserVersion),
                 new BasicMaxAgeHandler(),
