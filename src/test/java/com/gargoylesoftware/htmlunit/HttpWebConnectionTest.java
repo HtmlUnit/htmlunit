@@ -42,7 +42,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.client5.http.impl.async.HttpAsyncClientBuilder;
-import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.core5.http.ClassicHttpResponse;
 import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpResponse;
@@ -595,7 +594,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     public void userAgent() throws Exception {
         final WebClient webClient = getWebClient();
         final HttpWebConnection connection = (HttpWebConnection) webClient.getWebConnection();
-        final HttpClientBuilder builder = connection.getHttpClientBuilder();
+        final HttpAsyncClientBuilder builder = connection.getHttpClientBuilder();
         final String userAgent = get(builder, "userAgent");
         assertEquals(webClient.getBrowserVersion().getUserAgent(), userAgent);
     }

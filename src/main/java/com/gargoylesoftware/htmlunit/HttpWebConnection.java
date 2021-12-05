@@ -24,87 +24,85 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.security.GeneralSecurityException;
+import java.security.KeyStore;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
-import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLPeerUnverifiedException;
-import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.JavaVersion;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.hc.client5.http.async.methods.SimpleBody;
+import org.apache.hc.client5.http.async.methods.SimpleHttpRequest;
+import org.apache.hc.client5.http.async.methods.SimpleHttpResponse;
+import org.apache.hc.client5.http.async.methods.SimpleRequestProducer;
+import org.apache.hc.client5.http.async.methods.SimpleResponseConsumer;
 import org.apache.hc.client5.http.auth.AuthCache;
-import org.apache.http.ConnectionClosedException;
+import org.apache.hc.client5.http.auth.AuthScheme;
+import org.apache.hc.client5.http.auth.AuthScope;
+import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.client5.http.auth.CredentialsStore;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.cookie.CookieSpecFactory;
+import org.apache.hc.client5.http.entity.mime.InputStreamBody;
+import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
+import org.apache.hc.client5.http.impl.async.CloseableHttpAsyncClient;
+import org.apache.hc.client5.http.impl.async.HttpAsyncClientBuilder;
+import org.apache.hc.client5.http.impl.auth.BasicAuthCache;
+import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManager;
+import org.apache.hc.client5.http.impl.nio.PoolingAsyncClientConnectionManagerBuilder;
+import org.apache.hc.client5.http.protocol.HttpClientContext;
+import org.apache.hc.client5.http.protocol.RequestAddCookies;
+import org.apache.hc.client5.http.protocol.RequestClientConnControl;
+import org.apache.hc.client5.http.protocol.ResponseProcessCookies;
+import org.apache.hc.client5.http.ssl.ClientTlsStrategyBuilder;
+import org.apache.hc.client5.http.ssl.DefaultHostnameVerifier;
+import org.apache.hc.client5.http.ssl.NoopHostnameVerifier;
+import org.apache.hc.client5.http.ssl.TrustAllStrategy;
+import org.apache.hc.core5.function.Factory;
+import org.apache.hc.core5.http.ConnectionClosedException;
+import org.apache.hc.core5.http.ContentType;
+import org.apache.hc.core5.http.EntityDetails;
 import org.apache.hc.core5.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpEntityEnclosingRequest;
+import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.core5.http.HttpException;
 import org.apache.hc.core5.http.HttpHost;
 import org.apache.hc.core5.http.HttpRequest;
 import org.apache.hc.core5.http.HttpRequestInterceptor;
 import org.apache.hc.core5.http.HttpResponse;
-import org.apache.hc.client5.http.auth.AuthScheme;
-import org.apache.hc.client5.http.auth.AuthScope;
-import org.apache.hc.client5.http.auth.Credentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpOptions;
-import org.apache.http.client.methods.HttpPatch;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.client.methods.HttpTrace;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.client.protocol.RequestAcceptEncoding;
-import org.apache.http.client.protocol.RequestAddCookies;
-import org.apache.http.client.protocol.RequestAuthCache;
-import org.apache.http.client.protocol.RequestClientConnControl;
-import org.apache.http.client.protocol.RequestDefaultHeaders;
-import org.apache.http.client.protocol.RequestExpectContinue;
-import org.apache.http.client.protocol.ResponseProcessCookies;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.config.ConnectionConfig;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.config.SocketConfig;
-import org.apache.http.conn.DnsResolver;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
-import org.apache.hc.client5.http.ssl.DefaultHostnameVerifier;
-import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.util.PublicSuffixMatcher;
-import org.apache.http.conn.util.PublicSuffixMatcherLoader;
-import org.apache.http.cookie.CookieSpecProvider;
-import org.apache.hc.core5.http.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
-import org.apache.hc.client5.http.entity.mime.InputStreamBody;
-import org.apache.hc.client5.http.impl.auth.BasicAuthCache;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.HttpProcessorBuilder;
-import org.apache.http.protocol.RequestContent;
-import org.apache.http.protocol.RequestTargetHost;
+import org.apache.hc.core5.http.Method;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.core5.http.io.SocketConfig;
+import org.apache.hc.core5.http.message.StatusLine;
+import org.apache.hc.core5.http.nio.ssl.TlsStrategy;
+import org.apache.hc.core5.http.protocol.HttpContext;
+import org.apache.hc.core5.net.WWWFormCodec;
+import org.apache.hc.core5.reactor.IOReactorConfig;
+import org.apache.hc.core5.reactor.ssl.TlsDetails;
+import org.apache.hc.core5.ssl.SSLContextBuilder;
 import org.apache.hc.core5.ssl.SSLContexts;
-import org.apache.hc.core5.util.TextUtils;
+import org.apache.hc.core5.util.TimeValue;
+import org.apache.hc.core5.util.Timeout;
 
 import com.gargoylesoftware.htmlunit.WebRequest.HttpHint;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
@@ -112,7 +110,6 @@ import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitRedirectStrategie;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitSSLConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
-import com.gargoylesoftware.htmlunit.httpclient.SocksConnectionSocketFactory;
 import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -142,13 +139,13 @@ public class HttpWebConnection implements WebConnection {
 
     // have one per thread because this is (re)configured for every call (see configureHttpProcessorBuilder)
     // do not use a ThreadLocal because this in only accessed form this class
-    private final Map<Thread, HttpClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
+    private final Map<Thread, HttpAsyncClientBuilder> httpClientBuilder_ = new WeakHashMap<>();
     private final WebClient webClient_;
 
     private String virtualHost_;
-    private final CookieSpecProvider htmlUnitCookieSpecProvider_;
+    private final CookieSpecFactory htmlUnitCookieSpecProvider_;
     private final WebClientOptions usedOptions_;
-    private PoolingHttpClientConnectionManager connectionManager_;
+    private PoolingAsyncClientConnectionManager connectionManager_;
 
     /** Authentication cache shared among all threads of a web client. */
     private final AuthCache sharedAuthCache_ = new SynchronizedAuthCache();
@@ -171,9 +168,9 @@ public class HttpWebConnection implements WebConnection {
      */
     @Override
     public WebResponse getResponse(final WebRequest webRequest) throws IOException {
-        final HttpClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder(), webRequest);
+        final HttpAsyncClientBuilder builder = reconfigureHttpClientIfNeeded(getHttpClientBuilder(), webRequest);
 
-        HttpUriRequest httpMethod = null;
+        SimpleHttpRequest httpMethod = null;
         try {
             try {
                 httpMethod = makeHttpMethod(webRequest, builder);
@@ -183,23 +180,22 @@ public class HttpWebConnection implements WebConnection {
                         + " (reason: " + e.getMessage() + ")", e);
             }
 
-            final URL url = webRequest.getUrl();
-            final HttpHost httpHost = new HttpHost(url.getHost(), url.getPort(), url.getProtocol());
             final long startTime = System.currentTimeMillis();
 
             final HttpContext httpContext = getHttpContext();
-            HttpResponse httpResponse;
+            HttpResponse httpResponse = null;
             try {
-                try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                    httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
+                try (CloseableHttpAsyncClient closeableHttpClient = builder.build()) {
+                    httpResponse = execute(closeableHttpClient, httpMethod);
                 }
             }
             catch (final SSLPeerUnverifiedException s) {
+                // TODO: not sure if we can still support this
                 // Try to use only SSLv3 instead
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
-                    try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                        httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
+                    try (CloseableHttpAsyncClient closeableHttpClient = builder.build()) {
+                        httpResponse = execute(closeableHttpClient, httpMethod);
                     }
                 }
                 else {
@@ -227,11 +223,49 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
+     * Executes the asynchronous operation and waits for the result. This effectively
+     * makes the asynchronous client working synchronously.
+     * @param httpClient the http client instance
+     * @param httpRequest the request
+     * @return the response
+     * @throws IOException if anything went wrongö
+     */
+    private SimpleHttpResponse execute(final CloseableHttpAsyncClient httpClient, final SimpleHttpRequest httpRequest)
+        throws IOException {
+        // first start the client if not done so far
+        httpClient.start();
+
+        final Future<SimpleHttpResponse> future =
+            httpClient.execute(SimpleRequestProducer.create(httpRequest), SimpleResponseConsumer.create(), null);
+
+        try {
+            return future.get();
+        }
+        catch (final InterruptedException e) {
+            throw new IOException(e);
+        }
+        catch (final ExecutionException e) {
+            // throw the causing exception
+            final Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            }
+            else if (cause instanceof IOException) {
+                throw (IOException) cause;
+            }
+            else {
+                // need to wrap the exception so we can throw it
+                throw new IOException(cause);
+            }
+        }
+    }
+
+    /**
      * Called when the response has been generated. Default action is to release
      * the HttpMethod's connection. Subclasses may override.
      * @param httpMethod the httpMethod used (can be null)
      */
-    protected void onResponseGenerated(final HttpUriRequest httpMethod) {
+    protected void onResponseGenerated(final SimpleHttpRequest httpMethod) {
     }
 
     /**
@@ -250,9 +284,13 @@ public class HttpWebConnection implements WebConnection {
         return httpClientContext;
     }
 
-    private void setProxy(final HttpRequestBase httpRequest, final WebRequest webRequest) {
+    private void setProxy(final SimpleHttpRequest httpRequest, final WebRequest webRequest,
+            final HttpAsyncClientBuilder clientBuilder) {
         final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(getTimeout(webRequest), localAddress);
+
+        // clean potential settings made for a previous request
+        clientBuilder.setIOReactorConfig(null);
 
         if (webRequest.getProxyHost() == null) {
             requestBuilder.setProxy(null);
@@ -260,10 +298,15 @@ public class HttpWebConnection implements WebConnection {
             return;
         }
 
-        final HttpHost proxy = new HttpHost(webRequest.getProxyHost(),
-                                    webRequest.getProxyPort(), webRequest.getProxyScheme());
+        final HttpHost proxy = new HttpHost(webRequest.getProxyScheme(), webRequest.getProxyHost(),
+                                            webRequest.getProxyPort());
         if (webRequest.isSocksProxy()) {
-            SocksConnectionSocketFactory.setSocksProxy(getHttpContext(), proxy);
+            final IOReactorConfig.Builder configBuilder = IOReactorConfig.custom();
+            configBuilder.setSocksProxyAddress(new InetSocketAddress(webRequest.getProxyHost(),
+                    webRequest.getProxyPort()));
+            final IOReactorConfig ioConfig = configBuilder.build();
+
+            clientBuilder.setIOReactorConfig(ioConfig);
         }
         else {
             requestBuilder.setProxy(proxy);
@@ -276,9 +319,11 @@ public class HttpWebConnection implements WebConnection {
      * @param webRequest the request
      * @param httpClientBuilder the httpClientBuilder that will be configured
      * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
-     * @throws URISyntaxException in case of syntax problems
+     * @throws IOException
+     * @throws URISyntaxException
      */
-    private HttpUriRequest makeHttpMethod(final WebRequest webRequest, final HttpClientBuilder httpClientBuilder)
+    private SimpleHttpRequest makeHttpMethod(final WebRequest webRequest,
+            final HttpAsyncClientBuilder httpClientBuilder)
         throws URISyntaxException {
 
         final HttpContext httpContext = getHttpContext();
@@ -293,41 +338,35 @@ public class HttpWebConnection implements WebConnection {
         if (getVirtualHost() != null) {
             uri = URI.create(getVirtualHost());
         }
-        final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
-        setProxy(httpMethod, webRequest);
+        final SimpleHttpRequest httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
+        setProxy(httpMethod, webRequest, httpClientBuilder);
 
-        if (httpMethod instanceof HttpEntityEnclosingRequest) {
+        if (StringUtils.equalsAny(httpMethod.getMethod(), Method.POST.name(), Method.PUT.name(), Method.PATCH.name())) {
             // POST as well as PUT and PATCH
-            final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
-            if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            if (webRequest.getEncodingType()
+                    == FormEncodingType.URL_ENCODED && httpMethod.getMethod().equals(Method.POST.name())) {
                 if (webRequest.getRequestBody() == null) {
                     final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                    final String query = URLEncodedUtils.format(
-                                            HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
+                    final String query = WWWFormCodec.format(
+                            HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
 
-                    final StringEntity urlEncodedEntity;
+                    final ContentType contentType;
                     if (webRequest.hasHint(HttpHint.IncludeCharsetInContentTypeHeader)) {
-                        urlEncodedEntity = new StringEntity(query,
-                                ContentType.create(URLEncodedUtils.CONTENT_TYPE, charset));
-
+                        contentType = ContentType.APPLICATION_FORM_URLENCODED.withCharset(charset);
                     }
                     else {
-                        urlEncodedEntity = new StringEntity(query, charset);
-                        urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
+                        contentType = ContentType.APPLICATION_FORM_URLENCODED.withCharset((Charset) null);
                     }
-                    postMethod.setEntity(urlEncodedEntity);
+                    httpMethod.setBody(query, contentType);
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
-                    final StringEntity urlEncodedEntity = new StringEntity(body, charset);
-                    urlEncodedEntity.setContentType(URLEncodedUtils.CONTENT_TYPE);
-                    postMethod.setEntity(urlEncodedEntity);
+                    httpMethod.setBody(body, ContentType.APPLICATION_FORM_URLENCODED.withCharset(charset));
                 }
             }
-            else if (webRequest.getEncodingType() == FormEncodingType.TEXT_PLAIN && method instanceof HttpPost) {
-                final HttpPost postMethod = (HttpPost) method;
+            else if (webRequest.getEncodingType()
+                    == FormEncodingType.TEXT_PLAIN && httpMethod.getMethod().equals(Method.POST.name())) {
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
                     for (final NameValuePair pair : webRequest.getRequestParameters()) {
@@ -336,19 +375,18 @@ public class HttpWebConnection implements WebConnection {
                             .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
                             .append("\r\n");
                     }
-                    final StringEntity bodyEntity = new StringEntity(body.toString(), charset);
-                    bodyEntity.setContentType(MimeType.TEXT_PLAIN);
-                    postMethod.setEntity(bodyEntity);
+                    httpMethod.setBody(body.toString(), ContentType.TEXT_PLAIN.withCharset(charset));
                 }
                 else {
                     final String body = StringUtils.defaultString(webRequest.getRequestBody());
-                    final StringEntity bodyEntity =
-                            new StringEntity(body, ContentType.create(MimeType.TEXT_PLAIN, charset));
-                    postMethod.setEntity(bodyEntity);
+                    httpMethod.setBody(body, ContentType.TEXT_PLAIN.withCharset(charset));
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
                 final Charset c = getCharset(charset, webRequest.getRequestParameters());
+
+                // TODO: There ought to be a way to create a multi-part body for the asynchronous client.
+                // For now, use the classic classes.
                 final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
                 builder.setCharset(c);
 
@@ -358,15 +396,30 @@ public class HttpWebConnection implements WebConnection {
                     }
                     else {
                         builder.addTextBody(pair.getName(), pair.getValue(),
-                                ContentType.create(MimeType.TEXT_PLAIN, charset));
+                                            ContentType.TEXT_PLAIN.withCharset(charset));
                     }
                 }
-                method.setEntity(builder.build());
+
+                final HttpEntity entity = builder.build();
+
+                // convert the classic multi-part entity to bytes
+                final ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+                try {
+                    entity.writeTo(buffer);
+                }
+                catch (final IOException e) {
+                    throw new RuntimeException(e);
+                }
+                final byte[] body = buffer.toByteArray();
+
+                httpMethod.setBody(body, ContentType.MULTIPART_FORM_DATA.withCharset(charset));
             }
             else { // for instance a PUT or PATCH request
                 final String body = webRequest.getRequestBody();
                 if (body != null) {
-                    method.setEntity(new StringEntity(body, charset));
+                    // TODO: can't set charset without a content type
+                    //httpMethod.setBody(body, ContentType.create(body, charset);
+                    httpMethod.setBody(body, null);
                 }
             }
         }
@@ -374,10 +427,10 @@ public class HttpWebConnection implements WebConnection {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
             if (!webRequest.getRequestParameters().isEmpty()) {
                 final List<NameValuePair> pairs = webRequest.getRequestParameters();
-                final String query = URLEncodedUtils.format(
-                                        HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
+                final String query = WWWFormCodec.format(
+                        HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
                 uri = UrlUtils.toURI(url, query);
-                httpMethod.setURI(uri);
+                httpMethod.setUri(uri);
             }
         }
 
@@ -385,7 +438,7 @@ public class HttpWebConnection implements WebConnection {
 
         // Tell the client where to get its credentials from
         // (it may have changed on the webClient since last call to getHttpClientFor(...))
-        final CredentialsProvider credentialsProvider = webClient_.getCredentialsProvider();
+        final CredentialsStore credentialsProvider = webClient_.getCredentialsProvider();
 
         // if the used url contains credentials, we have to add this
         final Credentials requestUrlCredentials = webRequest.getUrlCredentials();
@@ -395,6 +448,9 @@ public class HttpWebConnection implements WebConnection {
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestUrlCredentials);
+            // TODO: not sure if this is the correct way to invalidate a previous auth
+            HttpClientContext.adapt(httpContext).getAuthExchanges().remove(HttpHost.create(uri));
+            sharedAuthCache_.remove(HttpHost.create(uri));
         }
 
         // if someone has set credentials to this request, we have to add this
@@ -404,10 +460,16 @@ public class HttpWebConnection implements WebConnection {
             final AuthScope authScope = new AuthScope(requestUrl.getHost(), requestUrl.getPort());
             // updating our client to keep the credentials for the next request
             credentialsProvider.setCredentials(authScope, requestCredentials);
+            // TODO: not sure if this is the correct way to invalidate a previous auth
+            HttpClientContext.adapt(httpContext).getAuthExchanges().remove(HttpHost.create(uri));
+            sharedAuthCache_.remove(HttpHost.create(uri));
         }
         httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
         httpContext.removeAttribute(HttpClientContext.CREDS_PROVIDER);
-        httpContext.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
+
+        // TODO: don't know how to replace this???
+        //httpContext.removeAttribute(HttpClientContext.TARGET_AUTH_STATE);
+
         return httpMethod;
     }
 
@@ -492,39 +554,40 @@ public class HttpWebConnection implements WebConnection {
      * @param uri the uri being used
      * @return a new HttpClient HTTP method based on the specified parameters
      */
-    private static HttpRequestBase buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
-        final HttpRequestBase method;
+    private static SimpleHttpRequest buildHttpMethod(final HttpMethod submitMethod, final URI uri) {
+        final SimpleHttpRequest method;
+
         switch (submitMethod) {
             case GET:
-                method = new HttpGet(uri);
+                method = new SimpleHttpRequest(Method.GET, uri);
                 break;
 
             case POST:
-                method = new HttpPost(uri);
+                method = new SimpleHttpRequest(Method.POST, uri);
                 break;
 
             case PUT:
-                method = new HttpPut(uri);
+                method = new SimpleHttpRequest(Method.PUT, uri);
                 break;
 
             case DELETE:
-                method = new HttpDelete(uri);
+                method = new SimpleHttpRequest(Method.DELETE, uri);
                 break;
 
             case OPTIONS:
-                method = new HttpOptions(uri);
+                method = new SimpleHttpRequest(Method.OPTIONS, uri);
                 break;
 
             case HEAD:
-                method = new HttpHead(uri);
+                method = new SimpleHttpRequest(Method.HEAD, uri);
                 break;
 
             case TRACE:
-                method = new HttpTrace(uri);
+                method = new SimpleHttpRequest(Method.TRACE, uri);
                 break;
 
             case PATCH:
-                method = new HttpPatch(uri);
+                method = new SimpleHttpRequest(Method.PATCH, uri);
                 break;
 
             default:
@@ -538,16 +601,16 @@ public class HttpWebConnection implements WebConnection {
      *
      * @return the initialized HTTP client
      */
-    protected HttpClientBuilder getHttpClientBuilder() {
+    protected HttpAsyncClientBuilder getHttpClientBuilder() {
         final Thread currentThread = Thread.currentThread();
-        HttpClientBuilder builder = httpClientBuilder_.get(currentThread);
+        HttpAsyncClientBuilder builder = httpClientBuilder_.get(currentThread);
         if (builder == null) {
             builder = createHttpClientBuilder();
 
             // this factory is required later
             // to be sure this is done, we do it outside the createHttpClient() call
-            final RegistryBuilder<CookieSpecProvider> registeryBuilder
-                = RegistryBuilder.<CookieSpecProvider>create()
+            final RegistryBuilder<CookieSpecFactory> registeryBuilder
+                = RegistryBuilder.<CookieSpecFactory>create()
                             .register(HACKED_COOKIE_POLICY, htmlUnitCookieSpecProvider_);
             builder.setDefaultCookieSpecRegistry(registeryBuilder.build());
 
@@ -578,99 +641,133 @@ public class HttpWebConnection implements WebConnection {
      * Creates the <tt>HttpClientBuilder</tt> that will be used by this WebClient.
      * Extensions may override this method in order to create a customized
      * <tt>HttpClientBuilder</tt> instance (e.g. with a custom
-     * {@link org.apache.http.conn.ClientConnectionManager} to perform
+     * {@link org.apache.hc.client5.http.io.HttpClientConnectionManager} to perform
      * some tracking; see feature request 1438216).
      * @return the <tt>HttpClientBuilder</tt> that will be used by this WebConnection
      */
-    protected HttpClientBuilder createHttpClientBuilder() {
-        final HttpClientBuilder builder = HttpClientBuilder.create();
+    protected HttpAsyncClientBuilder createHttpClientBuilder() {
+        final HttpAsyncClientBuilder builder = HttpAsyncClientBuilder.create();
         builder.setRedirectStrategy(new HtmlUnitRedirectStrategie());
         configureTimeout(builder, getTimeout(null));
-        configureHttpsScheme(builder);
-        builder.setMaxConnPerRoute(6);
+
+        //builder.disableContentCompression();
+        builder.disableRedirectHandling();
+        //builder.setVersionPolicy(HttpVersionPolicy.FORCE_HTTP_1);
 
         builder.setConnectionManagerShared(true);
         return builder;
     }
 
-    private void configureTimeout(final HttpClientBuilder builder, final int timeout) {
+    private void configureTimeout(final HttpAsyncClientBuilder builder, final int timeout) {
         final InetAddress localAddress = webClient_.getOptions().getLocalAddress();
         final RequestConfig.Builder requestBuilder = createRequestConfigBuilder(timeout, localAddress);
         builder.setDefaultRequestConfig(requestBuilder.build());
 
-        builder.setDefaultSocketConfig(createSocketConfigBuilder(timeout).build());
+        // TODO:
+        //builder.setDefaultSocketConfig(createSocketConfigBuilder(timeout).build());
 
         getHttpContext().removeAttribute(HttpClientContext.REQUEST_CONFIG);
         usedOptions_.setTimeout(timeout);
     }
 
     private static RequestConfig.Builder createRequestConfigBuilder(final int timeout, final InetAddress localAddress) {
-        return RequestConfig.custom()
+
+        final Timeout timeoutMS = Timeout.ofMilliseconds(timeout);
+
+        final RequestConfig.Builder requestBuilder = RequestConfig.custom()
                 .setCookieSpec(HACKED_COOKIE_POLICY)
                 .setRedirectsEnabled(false)
-                .setLocalAddress(localAddress)
+
+                // TODO: Has been moved elsewhere, but where? HttpRoutePlanner?
+                //.setLocalAddress(localAddress)
 
                 // timeout
-                .setConnectTimeout(timeout)
-                .setConnectionRequestTimeout(timeout)
-                .setSocketTimeout(timeout);
+                .setConnectTimeout(timeoutMS)
+                .setConnectionRequestTimeout(timeoutMS)
+                .setResponseTimeout(timeoutMS);
+        return requestBuilder;
     }
 
+    /**
+     * Creates the <tt>PoolingHttpClientConnectionManagerBuilder</tt> that will be used by this WebClient.
+     * Extensions may override this method in order to create a customized
+     * <tt>PoolingHttpClientConnectionManagerBuilder</tt> instance.
+     * @param options the options
+     * @return the <tt>PoolingHttpClientConnectionManagerBuilder</tt> that will be used by this WebConnection
+     */
+    protected PoolingAsyncClientConnectionManagerBuilder createConnectionManagerBuilder(
+            final WebClientOptions options) {
+        final PoolingAsyncClientConnectionManagerBuilder builder = PoolingAsyncClientConnectionManagerBuilder.create();
+
+        configureHttpsScheme(builder);
+
+        final long connectionTimeToLive = options.getConnectionTimeToLive();
+        if (connectionTimeToLive >= 0) {
+            final TimeValue timeToLive = TimeValue.ofMilliseconds(connectionTimeToLive);
+            builder.setConnectionTimeToLive(timeToLive);
+        }
+
+        builder.setMaxConnPerRoute(6);
+
+        return builder;
+    }
+
+    // TODO: settings probably moved to IORecactorConfig?
     private static SocketConfig.Builder createSocketConfigBuilder(final int timeout) {
-        return SocketConfig.custom()
+        final SocketConfig.Builder socketBuilder = SocketConfig.custom()
                 // timeout
-                .setSoTimeout(timeout);
+                .setSoTimeout(Timeout.ofMilliseconds(timeout));
+        return socketBuilder;
     }
 
     /**
      * React on changes that may have occurred on the WebClient settings.
      * Registering as a listener would be probably better.
      */
-    private HttpClientBuilder reconfigureHttpClientIfNeeded(final HttpClientBuilder httpClientBuilder,
+    private HttpAsyncClientBuilder reconfigureHttpClientIfNeeded(final HttpAsyncClientBuilder httpClientBuilder,
             final WebRequest webRequest) {
         final WebClientOptions options = webClient_.getOptions();
 
-        // register new SSL factory only if settings have changed
-        if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
-                || options.getSSLClientCertificateStore() != usedOptions_.getSSLClientCertificateStore()
-                || options.getSSLTrustStore() != usedOptions_.getSSLTrustStore()
-                || options.getSSLClientCipherSuites() != usedOptions_.getSSLClientCipherSuites()
-                || options.getSSLClientProtocols() != usedOptions_.getSSLClientProtocols()
-                || options.getProxyConfig() != usedOptions_.getProxyConfig()) {
-            configureHttpsScheme(httpClientBuilder);
-
-            if (connectionManager_ != null) {
-                connectionManager_.shutdown();
-                connectionManager_ = null;
-            }
-        }
-
+//        // register new SSL factory only if settings have changed
+//        if (options.isUseInsecureSSL() != usedOptions_.isUseInsecureSSL()
+//                || options.getSSLClientCertificateStore() != usedOptions_.getSSLClientCertificateStore()
+//                || options.getSSLTrustStore() != usedOptions_.getSSLTrustStore()
+//                || options.getSSLClientCipherSuites() != usedOptions_.getSSLClientCipherSuites()
+//                || options.getSSLClientProtocols() != usedOptions_.getSSLClientProtocols()
+//                || options.getProxyConfig() != usedOptions_.getProxyConfig()) {
+//            configureHttpsScheme(httpClientBuilder);
+//
+//            if (connectionManager_ != null) {
+//                connectionManager_.close();
+//                connectionManager_ = null;
+//            }
+//        }
+//
         final int timeout = getTimeout(webRequest);
         if (timeout != usedOptions_.getTimeout()) {
             configureTimeout(httpClientBuilder, timeout);
         }
 
-        final long connectionTimeToLive = webClient_.getOptions().getConnectionTimeToLive();
-        if (connectionTimeToLive != usedOptions_.getConnectionTimeToLive()) {
-            httpClientBuilder.setConnectionTimeToLive(connectionTimeToLive, TimeUnit.MILLISECONDS);
-            usedOptions_.setConnectionTimeToLive(connectionTimeToLive);
-        }
+//        final long connectionTimeToLive = webClient_.getOptions().getConnectionTimeToLive();
+//        if (connectionTimeToLive != usedOptions_.getConnectionTimeToLive()) {
+//            // TODO
+//            //httpClientBuilder.setConnectionTimeToLive(connectionTimeToLive, TimeUnit.MILLISECONDS);
+//            usedOptions_.setConnectionTimeToLive(connectionTimeToLive);
+//        }
 
         if (connectionManager_ == null) {
-            connectionManager_ = createConnectionManager(httpClientBuilder);
+            connectionManager_ = createConnectionManagerBuilder(options).build();
         }
         httpClientBuilder.setConnectionManager(connectionManager_);
 
         return httpClientBuilder;
     }
 
-    private void configureHttpsScheme(final HttpClientBuilder builder) {
+    private void configureHttpsScheme(final PoolingAsyncClientConnectionManagerBuilder builder) {
         final WebClientOptions options = webClient_.getOptions();
 
-        final SSLConnectionSocketFactory socketFactory =
-                HtmlUnitSSLConnectionSocketFactory.buildSSLSocketFactory(options);
-
-        builder.setSSLSocketFactory(socketFactory);
+        final TlsStrategy tlsStrategy = createTlsStrategyBuilder(options).build();
+        builder.setTlsStrategy(tlsStrategy);
 
         usedOptions_.setUseInsecureSSL(options.isUseInsecureSSL());
         usedOptions_.setSSLClientCertificateStore(options.getSSLClientCertificateStore());
@@ -680,22 +777,35 @@ public class HttpWebConnection implements WebConnection {
         usedOptions_.setProxyConfig(options.getProxyConfig());
     }
 
-    private void configureHttpProcessorBuilder(final HttpClientBuilder builder, final WebRequest webRequest) {
-        final HttpProcessorBuilder b = HttpProcessorBuilder.create();
-        for (final HttpRequestInterceptor i : getHttpRequestInterceptors(webRequest)) {
-            b.add(i);
+    private void configureHttpProcessorBuilder(final HttpAsyncClientBuilder builder, final WebRequest webRequest) {
+
+        // HttpProcessor is now created internally only, hence we have to configure
+        // the request interceptors directly at the builder.
+
+        // Disable certain features so the related request interceptors are not added by default.
+        // We will add them on our own, in the order we want.
+        builder.disableConnectionState();
+        builder.disableCookieManagement();
+
+        // first clear the current list of request interceptors at the builder
+        try {
+            // HACK: Seems there is no other way in the moment.
+            setField(builder, "requestInterceptors", null);
+        }
+        catch (final IllegalAccessException e) {
+            throw new RuntimeException(e);
         }
 
-        // These are the headers used in HttpClientBuilder, excluding the already added ones
-        // (RequestClientConnControl and RequestAddCookies)
-        b.addAll(new RequestDefaultHeaders(null),
-                new RequestContent(),
-                new RequestTargetHost(),
-                new RequestExpectContinue());
-        b.add(new RequestAcceptEncoding());
-        b.add(new RequestAuthCache());
-        b.add(new ResponseProcessCookies());
-        builder.setHttpProcessor(b.build());
+        // fill the list of request interceptors anew, specifically for the web request
+        final List<HttpRequestInterceptor> interceptors = getHttpRequestInterceptors(webRequest);
+
+        // reverse the list so we can use addRequestInterceptorFirst() and get the wanted result
+        Collections.reverse(interceptors);
+        for (final HttpRequestInterceptor i : interceptors) {
+            builder.addRequestInterceptorFirst(i);
+        }
+
+        builder.addResponseInterceptorFirst(new ResponseProcessCookies());
     }
 
     /**
@@ -720,13 +830,13 @@ public class HttpWebConnection implements WebConnection {
     private WebResponse makeWebResponse(final HttpResponse httpResponse,
             final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
 
-        String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
+        String statusMessage = new StatusLine(httpResponse).getReasonPhrase();
         if (statusMessage == null) {
             statusMessage = "Unknown status message";
         }
-        final int statusCode = httpResponse.getStatusLine().getStatusCode();
+        final int statusCode = httpResponse.getCode();
         final List<NameValuePair> headers = new ArrayList<>();
-        for (final Header header : httpResponse.getAllHeaders()) {
+        for (final Header header : httpResponse.getHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
         final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
@@ -740,12 +850,22 @@ public class HttpWebConnection implements WebConnection {
      * @throws IOException in case of problem reading/saving the body
      */
     protected DownloadedContent downloadResponseBody(final HttpResponse httpResponse) throws IOException {
-        final HttpEntity httpEntity = httpResponse.getEntity();
+//        final HttpEntity httpEntity = ((CloseableHttpResponse) httpResponse).getEntity();
+//        if (httpEntity == null) {
+//            return new DownloadedContent.InMemory(null);
+//        }
+//
+//        try (InputStream is = httpEntity.getContent()) {
+//            return downloadContent(is, webClient_.getOptions().getMaxInMemory());
+//        }
+
+        // TODO: replace SimpleHttpResponse with a streaming response
+        final SimpleBody httpEntity = ((SimpleHttpResponse) httpResponse).getBody();
         if (httpEntity == null) {
             return new DownloadedContent.InMemory(null);
         }
 
-        try (InputStream is = httpEntity.getContent()) {
+        try (InputStream is = new ByteArrayInputStream(httpEntity.getBodyBytes())) {
             return downloadContent(is, webClient_.getOptions().getMaxInMemory());
         }
     }
@@ -818,7 +938,7 @@ public class HttpWebConnection implements WebConnection {
         final int port = url.getPort();
         if (port > 0 && port != url.getDefaultPort()) {
             host.append(':');
-            host.append(port);
+            host.append(Integer.toString(port));
         }
 
         // make sure the headers are added in the right order
@@ -907,6 +1027,7 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (HttpHeader.CONNECTION.equals(header)) {
+                // TODO: add this only if not HTTP/2
                 list.add(new RequestClientConnControl());
             }
             else if (HttpHeader.COOKIE.equals(header)) {
@@ -938,7 +1059,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.HOST, value_);
         }
     }
@@ -951,7 +1073,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.USER_AGENT, value_);
         }
     }
@@ -964,7 +1087,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.ACCEPT, value_);
         }
     }
@@ -977,7 +1101,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.ACCEPT_LANGUAGE, value_);
         }
     }
@@ -990,7 +1115,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.UPGRADE_INSECURE_REQUESTS, value_);
         }
     }
@@ -1003,7 +1129,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader("Accept-Encoding", value_);
         }
     }
@@ -1016,7 +1143,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.REFERER, value_);
         }
     }
@@ -1029,7 +1157,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.DNT, value_);
         }
     }
@@ -1042,7 +1171,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_MODE, value_);
         }
     }
@@ -1055,7 +1185,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_SITE, value_);
         }
     }
@@ -1068,7 +1199,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_USER, value_);
         }
     }
@@ -1081,7 +1213,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_FETCH_DEST, value_);
         }
     }
@@ -1094,7 +1227,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_CH_UA, value_);
         }
     }
@@ -1108,7 +1242,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_CH_UA_MOBILE, value_);
         }
     }
@@ -1122,7 +1257,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
+                throws HttpException, IOException {
             request.setHeader(HttpHeader.SEC_CH_UA_PLATFORM, value_);
         }
     }
@@ -1135,7 +1271,7 @@ public class HttpWebConnection implements WebConnection {
         }
 
         @Override
-        public void process(final HttpRequest request, final HttpContext context)
+        public void process(final HttpRequest request, final EntityDetails entity, final HttpContext context)
             throws HttpException, IOException {
             for (final Map.Entry<String, String> entry : map_.entrySet()) {
                 request.setHeader(entry.getKey(), entry.getValue());
@@ -1146,6 +1282,7 @@ public class HttpWebConnection implements WebConnection {
     /**
      * An authentication cache that is synchronized.
      */
+    // TODO: Looks like BasicAuthCache is already thread-safe so we can remove this class?
     private static final class SynchronizedAuthCache extends BasicAuthCache {
 
         SynchronizedAuthCache() {
@@ -1185,107 +1322,93 @@ public class HttpWebConnection implements WebConnection {
         httpClientBuilder_.clear();
 
         if (connectionManager_ != null) {
-            connectionManager_.shutdown();
+            connectionManager_.close();
             connectionManager_ = null;
         }
     }
 
     /**
-     * Has the exact logic in {@link HttpClientBuilder#build()} which sets the {@code connManager} part,
-     * but with the ability to configure {@code socketFactory}.
+     * Creates a preconfigured builder for {@link TlsStrategy} objects. Sub classes
+     * may override this method to add further customizations to the builder.
+     * @param options the WebClient options
+     * @return the builder
      */
-    private static PoolingHttpClientConnectionManager createConnectionManager(final HttpClientBuilder builder) {
+    protected ClientTlsStrategyBuilder createTlsStrategyBuilder(final WebClientOptions options) {
         try {
-            PublicSuffixMatcher publicSuffixMatcher = getField(builder, "publicSuffixMatcher");
-            if (publicSuffixMatcher == null) {
-                publicSuffixMatcher = PublicSuffixMatcherLoader.getDefault();
-            }
+            final String[] sslClientProtocols = options.getSSLClientProtocols();
+            final String[] sslClientCipherSuites = options.getSSLClientCipherSuites();
+            final boolean useInsecureSSL = options.isUseInsecureSSL();
 
-            LayeredConnectionSocketFactory sslSocketFactory = getField(builder, "sslSocketFactory");
-            final SocketConfig defaultSocketConfig = getField(builder, "defaultSocketConfig");
-            final ConnectionConfig defaultConnectionConfig = getField(builder, "defaultConnectionConfig");
-            final boolean systemProperties = getField(builder, "systemProperties");
-            final int maxConnTotal = getField(builder, "maxConnTotal");
-            final int maxConnPerRoute = getField(builder, "maxConnPerRoute");
-            HostnameVerifier hostnameVerifier = getField(builder, "hostnameVerifier");
-            final SSLContext sslcontext = getField(builder, "sslContext");
-            final DnsResolver dnsResolver = getField(builder, "dnsResolver");
-            final long connTimeToLive = getField(builder, "connTimeToLive");
-            final TimeUnit connTimeToLiveTimeUnit = getField(builder, "connTimeToLiveTimeUnit");
+            final SSLContext sslContext = createSslContextBuilder(options).build();
 
-            if (sslSocketFactory == null) {
-                final String[] supportedProtocols = systemProperties
-                        ? split(System.getProperty("https.protocols")) : null;
-                final String[] supportedCipherSuites = systemProperties
-                        ? split(System.getProperty("https.cipherSuites")) : null;
-                if (hostnameVerifier == null) {
-                    hostnameVerifier = new DefaultHostnameVerifier(publicSuffixMatcher);
-                }
-                if (sslcontext == null) {
-                    if (systemProperties) {
-                        sslSocketFactory = new SSLConnectionSocketFactory(
-                                (SSLSocketFactory) SSLSocketFactory.getDefault(),
-                                supportedProtocols, supportedCipherSuites, hostnameVerifier);
+            final ClientTlsStrategyBuilder tlsStrategyBuilder = ClientTlsStrategyBuilder.create();
+            tlsStrategyBuilder.setSslContext(sslContext);
+            tlsStrategyBuilder.setCiphers(sslClientCipherSuites);
+            tlsStrategyBuilder.setTlsVersions(sslClientProtocols);
+            tlsStrategyBuilder.setHostnameVerifier(useInsecureSSL
+                    ? NoopHostnameVerifier.INSTANCE : new DefaultHostnameVerifier());
+
+            if (SystemUtils.isJavaVersionAtMost(JavaVersion.JAVA_9)) {
+                // From the async HttpClient examples:
+
+                // IMPORTANT uncomment the following method when running Java 9 or older
+                // in order for ALPN support to work and avoid the illegal reflective
+                // access operation warning
+                tlsStrategyBuilder.setTlsDetailsFactory(new Factory<SSLEngine, TlsDetails>() {
+                    @Override
+                    public TlsDetails create(final SSLEngine sslEngine) {
+                        return new TlsDetails(sslEngine.getSession(), sslEngine.getApplicationProtocol());
                     }
-                    else {
-                        sslSocketFactory = new SSLConnectionSocketFactory(
-                                SSLContexts.createDefault(),
-                                hostnameVerifier);
-                    }
-                }
-                else {
-                    sslSocketFactory = new SSLConnectionSocketFactory(
-                            sslcontext, supportedProtocols, supportedCipherSuites, hostnameVerifier);
-                }
+                });
             }
 
-            final PoolingHttpClientConnectionManager poolingmgr = new PoolingHttpClientConnectionManager(
-                    RegistryBuilder.<ConnectionSocketFactory>create()
-                        .register("http", new SocksConnectionSocketFactory())
-                        .register("https", sslSocketFactory)
-                        .build(),
-                        null,
-                        null,
-                        dnsResolver,
-                        connTimeToLive,
-                        connTimeToLiveTimeUnit != null ? connTimeToLiveTimeUnit : TimeUnit.MILLISECONDS);
-            if (defaultSocketConfig != null) {
-                poolingmgr.setDefaultSocketConfig(defaultSocketConfig);
-            }
-            if (defaultConnectionConfig != null) {
-                poolingmgr.setDefaultConnectionConfig(defaultConnectionConfig);
-            }
-            if (systemProperties) {
-                String s = System.getProperty("http.keepAlive", "true");
-                if ("true".equalsIgnoreCase(s)) {
-                    s = System.getProperty("http.maxConnections", "5");
-                    final int max = Integer.parseInt(s);
-                    poolingmgr.setDefaultMaxPerRoute(max);
-                    poolingmgr.setMaxTotal(2 * max);
-                }
-            }
-            if (maxConnTotal > 0) {
-                poolingmgr.setMaxTotal(maxConnTotal);
-            }
-            if (maxConnPerRoute > 0) {
-                poolingmgr.setDefaultMaxPerRoute(maxConnPerRoute);
-            }
-            return poolingmgr;
+            return tlsStrategyBuilder;
         }
-        catch (final IllegalAccessException e) {
+        catch (final GeneralSecurityException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private static String[] split(final String s) {
-        if (TextUtils.isBlank(s)) {
-            return null;
+    /**
+     * Creates a preconfigured builder for {@link SSLContext} objects. Sub classes
+     * may override this method to add further customizations to the builder.
+     * @param options the WebClient options
+     * @return the builder
+     */
+    protected SSLContextBuilder createSslContextBuilder(final WebClientOptions options) {
+        try {
+            final SSLContextBuilder sslContextBuilder = SSLContexts.custom();
+
+            // custom key store
+            final KeyStore keyStore = options.getSSLClientCertificateStore();
+            final char[] keyStorePassword = options.getSSLClientCertificatePassword();
+
+            sslContextBuilder.loadKeyMaterial(keyStore, keyStorePassword);
+
+            // custom trust store
+            final boolean useInsecureSSL = options.isUseInsecureSSL();
+            if (useInsecureSSL) {
+                sslContextBuilder.loadTrustMaterial(new TrustAllStrategy());
+            }
+            else {
+                final KeyStore trustStore = options.getSSLTrustStore();
+                sslContextBuilder.loadTrustMaterial(trustStore, null);
+            }
+
+            return sslContextBuilder;
         }
-        return s.split(" *, *");
+        catch (final GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @SuppressWarnings("unchecked")
     private static <T> T getField(final Object target, final String fieldName) throws IllegalAccessException {
         return (T) FieldUtils.readDeclaredField(target, fieldName, true);
+    }
+
+    private static <T> void setField(final Object target, final String fieldName, final T value)
+            throws IllegalAccessException {
+        FieldUtils.writeDeclaredField(target, fieldName, value, true);
     }
 }
