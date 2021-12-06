@@ -105,9 +105,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
      * @param browserVersion the {@link BrowserVersion} to simulate
      */
     public HtmlUnitBrowserCompatCookieSpec(final BrowserVersion browserVersion) {
-        super(
-                // TODO HC5 new HtmlUnitVersionAttributeHandler(),
-                new HtmlUnitDomainHandler(browserVersion),
+        super(new HtmlUnitDomainHandler(browserVersion),
                 new HtmlUnitPathHandler(browserVersion),
                 new BasicMaxAgeHandler(),
                 new BasicSecureHandler(),
@@ -153,18 +151,15 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
         final String headerValue = header.getValue();
         final ParserCursor cursor2 = new ParserCursor(0, headerValue.length());
         final HeaderElement[] helems = BasicHeaderValueParser.INSTANCE.parseElements(headerValue, cursor2);
-        boolean versioned = false;
+
         boolean netscape = false;
         for (final HeaderElement helem: helems) {
-            if (helem.getParameterByName("version") != null) {
-                versioned = true;
-            }
             if (helem.getParameterByName("expires") != null) {
                 netscape = true;
             }
         }
-        // TODO HC5
-        if (netscape || !versioned) {
+
+        if (netscape) {
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
             final CharArrayBuffer buffer;
@@ -213,10 +208,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                     handler.parse(cookie, attrib.getValue());
                 }
             }
+
             // Override version for Netscape style cookies
-            if (netscape) {
-                // TODO HC5 cookie.setVersion(0);
-            }
             cookies = Collections.singletonList(cookie);
         }
         else {
@@ -247,7 +240,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             final String cookieName = cookie.getName();
             final String cookieValue = cookie.getValue();
 
-            // TODO HC5 if (cookie.getVersion() > 0 && !isQuoteEnclosed(cookieValue)) {
             if (!isQuoteEnclosed(cookieValue)) {
                 HtmlUnitBrowserCompatCookieHeaderValueFormatter.INSTANCE.formatHeaderElement(
                         buffer,
@@ -274,17 +266,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 && '\"' == s.charAt(0)
                 && '\"' == s.charAt(s.length() - 1);
     }
-
-    // TODO HC5
-//    @Override
-//    public int getVersion() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public Header getVersionHeader() {
-//        return null;
-//    }
 
     @Override
     public String toString() {
