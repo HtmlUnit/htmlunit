@@ -94,7 +94,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN64 = "Win64";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(94, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(95, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 91;
     /** Firefox ESR. */
