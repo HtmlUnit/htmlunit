@@ -46,4 +46,20 @@ public class DocumentationTests {
         assertEquals(applicationVersion, browser.getApplicationVersion());
         assertEquals(userAgent, browser.getUserAgent());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void docuPageDetailsCustomizeHeaders() throws Exception {
+        final BrowserVersion browser =
+                new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
+                    .setAcceptLanguageHeader("de-CH")
+                    .build();
+
+
+        final WebClient webClient = new WebClient(browser);
+
+        assertEquals("de-CH", browser.getAcceptLanguageHeader());
+    }
 }
