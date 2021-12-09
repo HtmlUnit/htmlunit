@@ -11,14 +11,59 @@
         <section name="Request headers">
             <p>
                 HtmlUnit mimics the browser as close as possible, of course this includes the sent request headers also.
-                But you can change this if needed at two levels; the request level and the client level.<br/>
+                But you can change this if needed at three levels; the request level, the client level and the BrowserVersion level.<br/>
+            </p>
+
+            <subsection name="BrowserVersion level">
+            <p>
+              To change the request header at the BrowserVersion level you have to create your own customized browser version using
+              the BrowserVersionBuilder.
+            </p>
+            <source><![CDATA[
+final BrowserVersion browser =
+    new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
+          .setAcceptLanguageHeader("de-CH")
+          .build();
+
+final WebClient webClient = new WebClient(browser);
+....
+]]></source>
+            <p>
+            There are many methods available to customize basic browser behavior like
+            <ul>
+              <li>setApplicationCodeName(String)</li>
+              <li>setApplicationMinorVersion(String)</li>
+              <li>setApplicationName(String)</li>
+              <li>setApplicationVersion(String)</li>
+              <li>setBuildId(String)</li>
+              <li>setPlatform(String)</li>
+              <li>setSystemLanguage(String)</li>
+              <li>setSystemTimezone(TimeZone)</li>
+              <li>setUserAgent(String)</li>
+              <li>setVendor(String)<br/></li>
+
+              <li>setUserLanguage(String)</li>
+              <li>setBrowserLanguage(String)<br/></li>
+
+              <li>setAcceptEncodingHeader(String)</li>
+              <li>setAcceptLanguageHeader(String)</li>
+              <li>setCssAcceptHeader(String)</li>
+              <li>setHtmlAcceptHeader(String)</li>
+              <li>setImgAcceptHeader(String)</li>
+              <li>setScriptAcceptHeader(String)</li>
+              <li>setXmlHttpRequestAcceptHeader(String)</li>
+            </ul>
+            </p>
+            </subsection>
+
+            <subsection name="WebClient level">
+            <p>
                 To change the request header at the client level use WebClient.addRequestHeader(). You are able to
                 add additional headers to every request made by this client or overwrite the default ones.<br/>
                 Example: add an addition header to every client request
             </p>
             <source><![CDATA[client.addRequestHeader("from htmlunit", "yes");]]></source>
             <p>
-                To change the request header at the client level use WebClient.addRequestHeader().<br/>
                 Example: replace the default accept-language header for all request made by this client.
             </p>
             <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, "fr");]]></source>
@@ -30,6 +75,9 @@
                 Example: replace the default accept-language header for all request made by this client.
             </p>
             <source><![CDATA[client.addRequestHeader(HttpHeader.ACCEPT_LANGUAGE, fromClient);]]></source>
+            </subsection>
+
+            <subsection name="Request level">
             <p>
                 It is also possible to add/overwrite a request header for a dedicated request.
                 Example:
@@ -40,6 +88,7 @@ wr.setAdditionalHeader("from htmlunit", "yes");
 ....
 client .getPage(wr);
 ]]></source>
+             </subsection>
         </section>
 
         <section name="Animations based on Window.requestAnimationFrame()">

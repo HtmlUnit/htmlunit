@@ -486,7 +486,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),"
                 + "blur(),click(),contentEditable,dataset,dir,draggable,enterKeyHint,focus(),"
-                + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
+                + "hidden,innerText,inputMode,isContentEditable,"
+                + "lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
                 + "offsetWidth,"
                 + "onabort,onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onauxclick,"
                 + "onbeforeinput,onblur,"
