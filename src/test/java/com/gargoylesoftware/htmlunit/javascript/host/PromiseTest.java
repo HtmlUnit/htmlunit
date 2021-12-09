@@ -23,8 +23,10 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
+import net.sourceforge.htmlunit.corejs.javascript.NativePromise;
+
 /**
- * Tests for {@link Promise}.
+ * Tests for {@link NativePromise}.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

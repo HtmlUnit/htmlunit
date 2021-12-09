@@ -2511,8 +2511,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuItemElement}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -4662,8 +4660,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Promise}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
