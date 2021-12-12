@@ -32,12 +32,11 @@ import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.TestCaseTest;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.annotations.ToRunWithRealBrowsers;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Test all {@code constant}s defined in host classes.
@@ -46,7 +45,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigur
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
-@ToRunWithRealBrowsers
 public class HostConstantsTest extends WebDriverTestCase {
 
     /**
