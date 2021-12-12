@@ -57,7 +57,7 @@
                 <dl>
                     <dt>Latest release <date>November 14, 2021</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.55.0/">version 2.55.0</a></p>
+                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.56.0/">version 2.56.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -175,7 +175,7 @@
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.55.0</version>
+    <version>2.56.0</version>
 </dependency>]]></source>
             </p>
 

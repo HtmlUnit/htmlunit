@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 95, FF78 deprecated">
+        <release version="2.56.0" date="December 12, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 95, FF78 deprecated">
             <action type="fix" dev="rbri">
                 Fix charCode/keyCode for KeyPressEvent's when simulating Firefox.
             </action>
