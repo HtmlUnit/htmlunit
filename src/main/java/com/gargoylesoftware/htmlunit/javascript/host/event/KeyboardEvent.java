@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_DISTINGUISH_PRINTABLE_KEY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_EVENT_KEYBOARD_CTOR_WHICH;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -918,30 +917,20 @@ public class KeyboardEvent extends UIEvent {
 
         if ('\n' == character) {
             setKeyCode(DOM_VK_RETURN);
-            if (!getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY)) {
-                charCode_ = DOM_VK_RETURN;
-            }
+            charCode_ = DOM_VK_RETURN;
             which_ = DOM_VK_RETURN;
             return;
         }
 
         int keyCode = 0;
         if (getType().equals(Event.TYPE_KEY_PRESS)) {
-            if (getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY)) {
-                if (character < 32 || character > 126) {
-                    keyCode = Integer.valueOf(charToKeyCode(character));
-                }
-            }
-            else {
-                keyCode = Integer.valueOf(character);
-            }
+            keyCode = Integer.valueOf(character);
         }
         else {
             keyCode = Integer.valueOf(charToKeyCode(character));
         }
         setKeyCode(keyCode);
-        if (getType().equals(Event.TYPE_KEY_PRESS) && (character >= 32 && character <= 126
-                    || !getBrowserVersion().hasFeature(JS_EVENT_DISTINGUISH_PRINTABLE_KEY))) {
+        if (getType().equals(Event.TYPE_KEY_PRESS)) {
             charCode_ = character;
         }
         which_ = charCode_ == 0 ? keyCode : Integer.valueOf(charCode_);
