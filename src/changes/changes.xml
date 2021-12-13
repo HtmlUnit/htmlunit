@@ -7,7 +7,31 @@
     </properties>
 
     <body>
-        <release version="2.56.0" date="December xx, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 96, FF78 deprecated">
+        <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+        </release>
+
+        <release version="2.56.0" date="December 12, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 95, FF78 deprecated">
+            <action type="fix" dev="rbri">
+                Fix charCode/keyCode for KeyPressEvent's when simulating Firefox.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Array.from when called with a sparse array.
+            </action>
+            <action type="update" dev="RhinoTeam">
+                core-js: Improved BitInt support.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix return value of __lookupSetter__ with prototypes.
+            </action>
+            <action type="fix" dev="RBRi">
+                core-js: Fix regression when setting __proto__.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix some potential NPEs in Parser.java.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix invalid single quotes in French messages.
+            </action>
             <action type="fix" dev="rbri" due-to="Harald Albers">
                 Some fixes for the code samples on the getting started page.
             </action>
@@ -29,7 +53,7 @@
             <action type="update" dev="rbri">
                 FIREFOX_ESR updated to Firefox 91.
             </action>
-            <action type="update" dev="RhinoTeam">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Fix for compilation or try statements.
             </action>
             <action type="fix" dev="rbri" issue="405">
@@ -38,14 +62,14 @@
         </release>
 
         <release version="2.55.0" date="November 14, 2021" description="Bugfixes, Chrome/Edge 95, Firefox 94">
-            <action type="update" dev="RhinoTeam">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Fix problems with null "this" parameters in Function.prototype.call,
                 Function.prototype.apply, Function.prototype.toString, and Object.prototype.toLocaleString.
             </action>
-            <action type="update" dev="RhinoTeam">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Messages now fall back to en in every case.
             </action>
-            <action type="update" dev="RhinoTeam">
+            <action type="fix" dev="RhinoTeam">
                 core-js: Fix support for BigInt in Hashtable
             </action>
             <action type="update" dev="RhinoTeam">

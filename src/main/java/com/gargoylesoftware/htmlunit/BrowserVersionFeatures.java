@@ -908,10 +908,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, IE})
     JS_ERROR_STACK_TRACE_LIMIT,
 
-    /** Javascript event.keyCode and event.charCode distinguish between printable and not printable keys. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_EVENT_DISTINGUISH_PRINTABLE_KEY,
-
     /** Javascript InputEvent reads the inputType property from data. */
     @BrowserFeature({FF, FF_ESR})
     JS_EVENT_INPUT_CTOR_INPUTTYPE,

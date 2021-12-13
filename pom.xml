@@ -24,14 +24,14 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.55.0</htmlunitdriver.version>
-        <htmlunitcssparser.version>1.11.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitneko.version>2.55.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.56.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitdriver.version>2.56.0</htmlunitdriver.version>
+        <htmlunitcssparser.version>1.11.0</htmlunitcssparser.version>
+        <htmlunitneko.version>2.56.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.56.0</htmlunitcorejs.version>
 
         <httpclient5.version>5.1.2</httpclient5.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
-        <log4j.version>2.14.1</log4j.version>
+        <log4j.version>2.15.0</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->

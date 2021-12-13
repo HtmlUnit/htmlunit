@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import java.util.Arrays;
 
 import org.junit.Test;
@@ -26,13 +23,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 
 /**
  * Tests for {@link KeyboardEvent}.
@@ -623,7 +619,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"13", "13", "13"})
-    @NotYetImplemented({FF, FF_ESR})
     public void keyCodeEnter_keypress() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -667,34 +662,6 @@ public class KeyboardEventTest extends WebDriverTestCase {
                        "keydown:13,0,13,Enter,undefined,Enter,false",
                        "keypress:13,13,13,Enter,undefined,Enter,false",
                        "keyup:13,0,13,Enter,undefined,Enter,false"},
-            FF = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
-                  "keydown:65,0,65,A,undefined,KeyA,true",
-                  "keypress:0,65,65,A,undefined,KeyA,true",
-                  "keyup:65,0,65,A,undefined,KeyA,true",
-                  "keyup:16,0,16,Shift,undefined,ShiftLeft,false",
-                  "keydown:65,0,65,a,undefined,KeyA,false",
-                  "keypress:0,97,97,a,undefined,KeyA,false",
-                  "keyup:65,0,65,a,undefined,KeyA,false",
-                  "keydown:190,0,190,.,undefined,Period,false",
-                  "keypress:0,46,46,.,undefined,Period,false",
-                  "keyup:190,0,190,.,undefined,Period,false",
-                  "keydown:13,0,13,Enter,undefined,Enter,false",
-                  "keypress:13,0,13,Enter,undefined,Enter,false",
-                  "keyup:13,0,13,Enter,undefined,Enter,false"},
-            FF_ESR = {"keydown:16,0,16,Shift,undefined,ShiftLeft,true",
-                      "keydown:65,0,65,A,undefined,KeyA,true",
-                      "keypress:0,65,65,A,undefined,KeyA,true",
-                      "keyup:65,0,65,A,undefined,KeyA,true",
-                      "keyup:16,0,16,Shift,undefined,ShiftLeft,false",
-                      "keydown:65,0,65,a,undefined,KeyA,false",
-                      "keypress:0,97,97,a,undefined,KeyA,false",
-                      "keyup:65,0,65,a,undefined,KeyA,false",
-                      "keydown:190,0,190,.,undefined,Period,false",
-                      "keypress:0,46,46,.,undefined,Period,false",
-                      "keyup:190,0,190,.,undefined,Period,false",
-                      "keydown:13,0,13,Enter,undefined,Enter,false",
-                      "keypress:13,0,13,Enter,undefined,Enter,false",
-                      "keyup:13,0,13,Enter,undefined,Enter,false"},
             IE = {"keydown:16,0,16,Shift,,undefined,true",
                   "keydown:65,0,65,A,A,undefined,true",
                   "keypress:65,65,65,A,A,undefined,true",

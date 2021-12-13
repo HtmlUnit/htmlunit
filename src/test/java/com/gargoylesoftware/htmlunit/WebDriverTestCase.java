@@ -93,6 +93,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -583,9 +584,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             options.setBinary(binary);
 
             // at least FF79 is not stable when using a profile
-            // final FirefoxProfile profile = new FirefoxProfile();
-            // profile.setPreference("intl.accept_languages", "en-US");
-            // options.setProfile(profile);
+            final FirefoxProfile profile = new FirefoxProfile();
+            profile.setPreference("intl.accept_languages", "en-US");
+            options.setProfile(profile);
             return new FirefoxDriver(options);
         }
 

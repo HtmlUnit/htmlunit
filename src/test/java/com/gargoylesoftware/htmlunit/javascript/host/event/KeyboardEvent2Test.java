@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * And no keypress event in IE.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class KeyboardEvent2Test extends SimpleWebTestCase {
@@ -39,9 +40,7 @@ public class KeyboardEvent2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "keydown:65,0,65 keypress:97,97,97 keyup:65,0,65",
-            FF = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65",
-            FF_ESR = "keydown:65,0,65 keypress:0,97,97 keyup:65,0,65")
+    @Alerts("keydown:65,0,65 keypress:97,97,97 keyup:65,0,65")
     public void a() throws Exception {
         final HtmlPage page = getHtmlPage();
         page.getDocumentElement().type('a');
