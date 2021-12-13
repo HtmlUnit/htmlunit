@@ -786,7 +786,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * the selenium/WebDriver WebElement#getText() property does.<br>
      * see https://w3c.github.io/webdriver/#get-element-text and
      * https://w3c.github.io/webdriver/#dfn-bot-dom-getvisibletext
-     * Note: this is different from asText
+     * Note: this is different from {@link #asNormalizedText()}
      *
      * @return a textual representation of this element that represents what would
      *         be visible to the user if this page was shown in a web browser
