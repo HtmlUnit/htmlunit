@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.16.0.
+            </action>
         </release>
 
         <release version="2.56.0" date="December 12, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 95, FF78 deprecated">

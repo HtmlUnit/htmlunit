@@ -31,12 +31,12 @@
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
-        <log4j.version>2.15.0</log4j.version>
+        <log4j.version>2.16.0</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.2</checkstyle.version>
-        <spotbugs.version>4.5.1</spotbugs.version>
+        <spotbugs.version>4.5.2</spotbugs.version>
         <pmd.version>6.41.0</pmd.version>
         <archunit.version>0.22.0</archunit.version>
         <dependencycheck.version>6.5.0</dependencycheck.version>
@@ -302,7 +302,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.2</version>
+                <version>5.1.3</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -1316,7 +1316,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.7.0</version>
+            <version>3.8.0</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
