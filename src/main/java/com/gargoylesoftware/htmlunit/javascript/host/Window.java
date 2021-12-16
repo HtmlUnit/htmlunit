@@ -39,7 +39,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
@@ -2053,8 +2052,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
                 return;
             }
             if (changed instanceof HtmlLink) {
-                final String rel = ((HtmlLink) changed).getRelAttribute().toLowerCase(Locale.ROOT);
-                if ("stylesheet".equals(rel)) {
+                if (((HtmlLink) changed).isStyleSheetLink()) {
                     clearComputedStyles();
                     return;
                 }
