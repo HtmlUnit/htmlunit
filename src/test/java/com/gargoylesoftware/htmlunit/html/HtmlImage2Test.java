@@ -29,6 +29,7 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -420,5 +421,44 @@ public class HtmlImage2Test extends WebDriverTestCase {
         loadPageWithAlerts2(html);
 
         shutDownRealIE();
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"58", "29", "58", "29"})
+    public void clickWithCoordinates() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function clickImage(event) {\n"
+            + "    log(event.clientX);\n"
+            + "    log(event.clientY);\n"
+            + "    log(event.screenX);\n"
+            + "    log(event.screenY);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <img id='myImg' src='" + URL_SECOND + "img.gif' "
+                    + "width='100px' height='42px' onclick='clickImage(event)'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        final Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(By.id("myImg")), 0, 0).click().build().perform();
+
+        verifyTitle2(driver, getExpectedAlerts());
     }
 }
