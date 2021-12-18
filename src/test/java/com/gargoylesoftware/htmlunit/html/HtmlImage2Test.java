@@ -428,6 +428,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"58", "29", "58", "29"})
+    @NotYetImplemented
     public void clickWithCoordinates() throws Exception {
         try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
             final byte[] directBytes = IOUtils.toByteArray(is);
@@ -457,6 +458,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
 
         final Actions actions = new Actions(driver);
+        // this requires a webdriver change
         actions.moveToElement(driver.findElement(By.id("myImg")), 0, 0).click().build().perform();
 
         verifyTitle2(driver, getExpectedAlerts());
