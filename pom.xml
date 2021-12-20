@@ -1168,6 +1168,9 @@
         <contributor>
             <name>Harald Albers</name>
         </contributor>
+        <contributor>
+            <name>Michael Lück</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
