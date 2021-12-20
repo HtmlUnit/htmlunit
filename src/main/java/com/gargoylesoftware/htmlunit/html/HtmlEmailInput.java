@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,9 +32,14 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Michael Lück
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
+    // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#validation
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+
+    
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
@@ -178,6 +184,16 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, La
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
+    }
+    
+
+    @Override
+    public boolean isValid() {
+        boolean isValid = super.isValid();
+        if(isValid && StringUtils.isNotBlank(getValueAttribute())) {
+            isValid &= DEFAULT_PATTERN.matcher(getValueAttribute()).matches(); 
+        }
+        return isValid; 
     }
 
     /**
