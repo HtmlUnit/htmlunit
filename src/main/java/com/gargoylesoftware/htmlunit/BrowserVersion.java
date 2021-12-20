@@ -471,7 +471,7 @@ public final class BrowserVersion implements Serializable {
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
-    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
+    private Locale systemLocale_ = new Locale(LANGUAGE_ENGLISH_US);
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
@@ -719,13 +719,22 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the system locale.
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
+     * @return the system locale
+     */
+    public Locale getSystemLocale() {
+        return systemLocale_;
+    }
+
+    /**
      * Returns the system language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the system language
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534653.aspx">MSDN documentation</a>
      */
     public String getSystemLanguage() {
-        return systemLanguage_;
+        return getSystemLocale().getLanguage();
     }
 
     /**
@@ -1078,7 +1087,7 @@ public final class BrowserVersion implements Serializable {
          * @return this for fluent use
          */
         public BrowserVersionBuilder setSystemLanguage(final String systemLanguage) {
-            workPiece_.systemLanguage_ = systemLanguage;
+            workPiece_.systemLocale_ = new Locale(systemLanguage);
             return this;
         }
 
