@@ -147,7 +147,7 @@ public class File extends Blob {
     public String getLastModifiedDate() {
         final Date date = new Date(getLastModified());
         final BrowserVersion browser = getBrowserVersion();
-        final Locale locale = browser.getSystemLocale();
+        final Locale locale = browser.getBrowserLocale();
         final TimeZone timezone = browser.getSystemTimezone();
 
         final FastDateFormat format = FastDateFormat.getInstance(LAST_MODIFIED_DATE_FORMAT, timezone, locale);

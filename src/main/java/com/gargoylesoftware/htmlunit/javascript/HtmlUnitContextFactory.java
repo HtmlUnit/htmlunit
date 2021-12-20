@@ -272,6 +272,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
         cx.setLanguageVersion(Context.VERSION_ES6);
+        cx.setLocale(browserVersion_.getBrowserLocale());
 
         // make sure no java classes are usable from js
         cx.setClassShutter(fullClassName -> {

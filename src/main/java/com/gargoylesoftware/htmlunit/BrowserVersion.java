@@ -467,11 +467,11 @@ public final class BrowserVersion implements Serializable {
     private String buildId_;
     private String productSub_;
     private String vendor_ = "";
-    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
+    private Locale browserLocale_ = new Locale(LANGUAGE_ENGLISH_US);
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
-    private Locale systemLocale_ = new Locale(LANGUAGE_ENGLISH_US);
+    private String systemLanguage_ = LANGUAGE_ENGLISH_US;
     private TimeZone systemTimezone_ = TimeZone.getTimeZone(TIMEZONE_NEW_YORK);
     private String userAgent_;
     private String userLanguage_ = LANGUAGE_ENGLISH_US;
@@ -679,13 +679,22 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the browser locale.
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
+     * @return the system locale
+     */
+    public Locale getBrowserLocale() {
+        return browserLocale_;
+    }
+
+    /**
      * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the browser application language
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
      */
     public String getBrowserLanguage() {
-        return browserLanguage_;
+        return browserLocale_.getLanguage();
     }
 
     /**
@@ -719,22 +728,13 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the system locale.
-     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
-     * @return the system locale
-     */
-    public Locale getSystemLocale() {
-        return systemLocale_;
-    }
-
-    /**
      * Returns the system language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the system language
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms534653.aspx">MSDN documentation</a>
      */
     public String getSystemLanguage() {
-        return getSystemLocale().getLanguage();
+        return systemLanguage_;
     }
 
     /**
@@ -1051,7 +1051,7 @@ public final class BrowserVersion implements Serializable {
          * @return this for fluent use
          */
         public BrowserVersionBuilder setBrowserLanguage(final String browserLanguage) {
-            workPiece_.browserLanguage_ = browserLanguage;
+            workPiece_.browserLocale_ = new Locale(browserLanguage);
             return this;
         }
 
@@ -1087,7 +1087,7 @@ public final class BrowserVersion implements Serializable {
          * @return this for fluent use
          */
         public BrowserVersionBuilder setSystemLanguage(final String systemLanguage) {
-            workPiece_.systemLocale_ = new Locale(systemLanguage);
+            workPiece_.systemLanguage_ = systemLanguage;
             return this;
         }
 

@@ -326,4 +326,32 @@ public class WebClient2Test extends SimpleWebTestCase {
         // Fails: return 98 (about) instead of 1
         assertEquals(1, page.querySelectorAll("p").size());
     }
+
+    /**
+     */
+    @Test
+    public void toLocaleLowerCase() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><script>\n"
+            + "  function doTest() {\n"
+            + "    window.document.title = '\\u0130'.toLocaleLowerCase();\n"
+            + "  }\n"
+            + "</script></head>"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        HtmlPage page = loadPage(html);
+        assertEquals("i̇", page.getTitleText());
+
+        releaseResources();
+        final BrowserVersion trBrowser =
+                new BrowserVersion.BrowserVersionBuilder(getBrowserVersion())
+                        .setBrowserLanguage("tr")
+                        .build();
+
+        setBrowserVersion(trBrowser);
+        page = loadPage(html);
+        assertEquals("\u0069", page.getTitleText());
+    }
 }

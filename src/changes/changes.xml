@@ -8,8 +8,16 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                The browser locale (language) is now forwarded to the JS engine; this fixes
+                String.toLocaleLowerCase() if the locale is different from en.
+            </action>
             <action type="update" dev="rbri">
-                Upgrade Apache log4j-api to 2.16.0.
+                File.lastModifiedDate uses the browser locale (language);
+                same for Date.toLocalDateString and toLocalTimeString.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.17.0.
             </action>
         </release>
 

@@ -62,7 +62,7 @@ public final class DateCustom {
         else {
             formatString = "EEEE, MMMM dd, yyyy";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getSystemLocale());
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getBrowserLocale());
         return format.format(getDateValue(thisObj));
     }
 
@@ -86,7 +86,7 @@ public final class DateCustom {
         else {
             formatString = "h:mm:ss a";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getSystemLocale());
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getBrowserLocale());
         return format.format(getDateValue(thisObj));
     }
 
