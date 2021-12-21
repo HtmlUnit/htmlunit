@@ -342,7 +342,7 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "</body></html>";
 
         HtmlPage page = loadPage(html);
-        assertEquals("i̇", page.getTitleText());
+        assertEquals("\u0069\u0307", page.getTitleText());
 
         releaseResources();
         final BrowserVersion trBrowser =
