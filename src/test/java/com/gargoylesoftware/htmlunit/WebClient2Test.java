@@ -328,6 +328,7 @@ public class WebClient2Test extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if something goes wrong
      */
     @Test
     public void toLocaleLowerCase() throws Exception {

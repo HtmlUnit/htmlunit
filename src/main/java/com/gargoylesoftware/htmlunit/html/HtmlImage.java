@@ -728,7 +728,6 @@ public class HtmlImage extends HtmlElement {
      * @exception IOException if an IO error occurs
      */
     public Page click(final int x, final int y) throws IOException {
-        final HTMLElement scriptableObject = (HTMLElement) getScriptableObject();
         lastClickX_ = x;
         lastClickY_ = y;
         try {
