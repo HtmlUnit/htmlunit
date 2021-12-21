@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="fix" dev="Michael Lueck">
+                Fix validation for email input fields.
+            </action>
             <action type="fix" dev="rbri">
                 The browser locale (language) is now forwarded to the JS engine; this fixes
                 String.toLocaleLowerCase() if the locale is different from en.

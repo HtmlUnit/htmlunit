@@ -203,6 +203,31 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
     }
 
     @Test
+    @Alerts("false-true-true")
+    public void defaultPatternValidation() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    var bar = document.getElementById('bar');\n"
+            + "    var empty = document.getElementById('empty');\n"
+            + "    log(foo.checkValidity() + '-' + bar.checkValidity() + '-' + empty.checkValidity() );\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='email' id='foo' value='abc'>\n"
+            + "  <input type='email' id='bar' value='abc@email.com'>\n"
+            + "  <input type='email' id='empty' value=''>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
     @Alerts("false-true")
     public void patternValidation() throws Exception {
         final String html = "<html>\n"

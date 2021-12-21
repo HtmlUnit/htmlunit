@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
  *
  * @author Ronald Brill
  * @author Anton Demydenko
- * @author Michael Lück
+ * @author Michael Lueck
  */
 @RunWith(BrowserRunner.class)
 public class HtmlEmailInput2Test extends SimpleWebTestCase {
@@ -129,10 +129,10 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.setValueAttribute("abc@email.com");
         assertTrue(input.isValid());
     }
-    
+
     /**
      * Test should verify that even if there is no pattern
-     * the emailInput still validates the emailadress as browsers would do
+     * the emailInput still validates the email adress as browsers would do.
      * @throws Exception if the test fails
      */
     @Test

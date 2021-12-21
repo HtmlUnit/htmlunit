@@ -32,14 +32,15 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
- * @author Michael Lück
+ * @author Michael Lueck
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
     // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#validation
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+    private static final Pattern DEFAULT_PATTERN =
+            Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
+                                + "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
 
-    
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
@@ -185,15 +186,19 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, La
 
         return newnode;
     }
-    
 
     @Override
     public boolean isValid() {
-        boolean isValid = super.isValid();
-        if(isValid && StringUtils.isNotBlank(getValueAttribute())) {
-            isValid &= DEFAULT_PATTERN.matcher(getValueAttribute()).matches(); 
+        final boolean isValid = super.isValid();
+        if (!isValid) {
+            return false;
         }
-        return isValid; 
+
+        final String val = getValueAttribute();
+        if (StringUtils.isNotBlank(val)) {
+            return DEFAULT_PATTERN.matcher(val).matches();
+        }
+        return true;
     }
 
     /**
