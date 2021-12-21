@@ -467,7 +467,7 @@ public final class BrowserVersion implements Serializable {
     private String buildId_;
     private String productSub_;
     private String vendor_ = "";
-    private Locale browserLocale_ = new Locale(LANGUAGE_ENGLISH_US);
+    private Locale browserLocale_ = Locale.forLanguageTag(LANGUAGE_ENGLISH_US);
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
@@ -694,7 +694,7 @@ public final class BrowserVersion implements Serializable {
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
      */
     public String getBrowserLanguage() {
-        return browserLocale_.getLanguage();
+        return browserLocale_.toLanguageTag();
     }
 
     /**
@@ -1051,7 +1051,7 @@ public final class BrowserVersion implements Serializable {
          * @return this for fluent use
          */
         public BrowserVersionBuilder setBrowserLanguage(final String browserLanguage) {
-            workPiece_.browserLocale_ = new Locale(browserLanguage);
+            workPiece_.browserLocale_ = Locale.forLanguageTag(browserLanguage);
             return this;
         }
 
