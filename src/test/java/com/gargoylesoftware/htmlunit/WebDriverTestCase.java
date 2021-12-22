@@ -584,7 +584,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             options.setBinary(binary);
 
             final FirefoxProfile profile = new FirefoxProfile();
-            profile.setPreference("intl.accept_languages", "en-US");
+            profile.setPreference("intl.accept_languages", "en-US,en");
             options.setProfile(profile);
             return new FirefoxDriver(options);
         }
