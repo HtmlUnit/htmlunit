@@ -2112,6 +2112,41 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"0", "1", "0"})
+    public void selectedIndex_insertBeforeExisting() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    var o1 = document.getElementById('option1');\n"
+            + "    var o = document.createElement('option');\n"
+            + "    log(s.selectedIndex);\n"
+
+            + "    s.insertBefore(o, o1);\n"
+            + "    log(s.selectedIndex);\n"
+
+            + "    s.removeChild(o1);\n"
+            + "    log(s.selectedIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option id='option1'>option1</option>"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"-1", "0", "-1"})
     public void selectedIndex_add() throws Exception {
         final String html =

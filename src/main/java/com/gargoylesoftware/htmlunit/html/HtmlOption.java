@@ -439,4 +439,19 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
         }
         return super.handles(event);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void basicRemove() {
+        final DomNode parent = getParentNode();
+        super.basicRemove();
+
+        if (parent != null && isSelected()) {
+            // update selection and size if needed
+            parent.onAllChildrenAddedToPage(false);
+        }
+    }
+
 }
