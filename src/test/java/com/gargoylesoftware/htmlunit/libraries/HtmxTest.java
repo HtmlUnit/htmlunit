@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -44,10 +42,10 @@ public class HtmxTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "passes:394failures:0",
             IE = "passes:17failures:378")
-    @HtmlUnitNYI(CHROME = "passes:380failures:15",
-            EDGE = "passes:380failures:15",
-            FF = "passes:380failures:15",
-            FF_ESR = "passes:380failures:15",
+    @HtmlUnitNYI(CHROME = "passes:382failures:13",
+            EDGE = "passes:382failures:13",
+            FF = "passes:382failures:13",
+            FF_ESR = "passes:382failures:13",
             IE = "passes:16failures:379")
     public void htmx() throws Exception {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.5.0", null, null);
@@ -73,15 +71,17 @@ public class HtmxTest extends WebDriverTestCase {
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
-                    fail("HtmxTest runs too long (longer than " + runTime / 1000 + "s)");
+                    // fail("HtmxTest runs too long (longer than " + runTime / 1000 + "s)");
+                    lastStats = "HtmxTest runs too long (longer than " + runTime / 1000 + "s) - "
+                            + getResultElementText(webDriver);
+                    break;
                 }
 
                 lastStats = getResultElementText(webDriver);
             }
 
-            assertTrue(lastStats, lastStats.startsWith(getExpectedAlerts()[0]));
-
-            /* bug hunting
+            // bug hunting
+            /*
             if (getWebDriver() instanceof HtmlUnitDriver) {
                 final WebClient webClient = getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient();
 
@@ -89,6 +89,8 @@ public class HtmxTest extends WebDriverTestCase {
                 System.out.println(((HtmlPage) page).asNormalizedText());
             }
             */
+
+            assertTrue(lastStats, lastStats.startsWith(getExpectedAlerts()[0]));
         }
         catch (final Exception e) {
             e.printStackTrace();
