@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlFieldSet extends HtmlElement {
 
@@ -44,4 +45,10 @@ public class HtmlFieldSet extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return false;
+    }
 }

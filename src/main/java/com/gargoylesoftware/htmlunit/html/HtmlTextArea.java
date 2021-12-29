@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
@@ -30,6 +31,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -620,5 +622,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         newnode.newNames_ = new HashSet<>(newNames_);
 
         return newnode;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean willValidate() {
+        return !isDisabled()
+                && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
     }
 }

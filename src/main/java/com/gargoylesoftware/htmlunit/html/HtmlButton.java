@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -120,6 +121,14 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public final boolean isDisabled() {
         return hasAttribute(ATTRIBUTE_DISABLED);
+    }
+
+    /**
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
     }
 
     /**
@@ -380,5 +389,17 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        if ("reset".equals(getType())) {
+            return false;
+        }
+
+        return !isDisabled()
+                && (hasFeature(HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
     }
 }

@@ -32,6 +32,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * The JavaScript object {@code HTMLFieldSetElement}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @JsxClass(domClass = HtmlFieldSet.class)
 public class HTMLFieldSetElement extends HTMLElement {
@@ -123,4 +124,11 @@ public class HTMLFieldSetElement extends HTMLElement {
         super.setDisabled(disabled);
     }
 
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return ((HtmlFieldSet) getDomNodeOrDie()).willValidate();
+    }
 }

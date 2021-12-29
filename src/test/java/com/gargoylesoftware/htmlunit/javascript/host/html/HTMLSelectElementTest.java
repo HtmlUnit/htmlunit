@@ -2762,4 +2762,39 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertFalse(options.get(1).isSelected());
         assertFalse(options.get(2).isSelected());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            FF = {"true", "false", "true", "true", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true"},
+            IE = {"true", "true", "true", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('s1').willValidate);\n"
+                + "      log(document.getElementById('s2').willValidate);\n"
+                + "      log(document.getElementById('s3').willValidate);\n"
+                + "      log(document.getElementById('s4').willValidate);\n"
+                + "      log(document.getElementById('s5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s1'>s1</select>\n"
+                + "    <select id='s2' disabled>s2</select>\n"
+                + "    <select id='s3' hidden>s3</select>\n"
+                + "    <select id='s4' readonly>s4</select>\n"
+                + "    <select id='s5' style='display: none'>s5</select>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

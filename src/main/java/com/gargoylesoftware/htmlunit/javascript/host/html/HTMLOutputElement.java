@@ -87,4 +87,11 @@ public class HTMLOutputElement extends HTMLElement {
         return getDomNodeOrDie().isValid();
     }
 
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return ((HtmlOutput) getDomNodeOrDie()).willValidate();
+    }
 }

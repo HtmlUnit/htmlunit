@@ -9,6 +9,9 @@
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
             <action type="add" dev="rbri">
+                willValidate property added.
+            </action>
+            <action type="add" dev="rbri">
                 htmx testsuite version 1.5.0 added.
             </action>
             <action type="fix" dev="rbri">

@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -47,5 +49,12 @@ public class HtmlOutput extends HtmlElement implements LabelableElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return hasFeature(HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE);
     }
 }

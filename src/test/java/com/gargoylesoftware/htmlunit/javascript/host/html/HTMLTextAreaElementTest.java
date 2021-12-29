@@ -805,4 +805,37 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            IE = {"true", "false", "true", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('t1').willValidate);\n"
+                + "      log(document.getElementById('t2').willValidate);\n"
+                + "      log(document.getElementById('t3').willValidate);\n"
+                + "      log(document.getElementById('t4').willValidate);\n"
+                + "      log(document.getElementById('t5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <textarea id='t1'>t1</textarea>\n"
+                + "    <textarea id='t2' disabled>t2</textarea>\n"
+                + "    <textarea id='t3' hidden>t3</textarea>\n"
+                + "    <textarea id='t4' readonly>t4</textarea>\n"
+                + "    <textarea id='t5' style='display: none'>t5</textarea>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

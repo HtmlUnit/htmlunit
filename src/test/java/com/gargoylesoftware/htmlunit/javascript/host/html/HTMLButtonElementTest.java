@@ -413,4 +413,43 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "false", "true"},
+            FF = {"true", "false", "true", "true", "true", "false", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true", "false", "true"},
+            IE = {"true", "false", "true", "true", "true", "false", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('b1').willValidate);\n"
+                + "      log(document.getElementById('b2').willValidate);\n"
+                + "      log(document.getElementById('b3').willValidate);\n"
+                + "      log(document.getElementById('b4').willValidate);\n"
+                + "      log(document.getElementById('b5').willValidate);\n"
+                + "      log(document.getElementById('b6').willValidate);\n"
+                + "      log(document.getElementById('b7').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <button id='b1'>b1</button>\n"
+                + "    <button id='b2' disabled>b2</button>\n"
+                + "    <button id='b3' hidden>b3</button>\n"
+                + "    <button id='b4' readonly>b4</button>\n"
+                + "    <button id='b5' style='display: none'>b5</button>\n"
+                + "    <button id='b6' type='reset'>b6</button>\n"
+                + "    <button id='b7' type='button'>b7</button>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

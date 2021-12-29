@@ -138,4 +138,37 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
             + "</html>";
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    @HtmlUnitNYI(IE = {"false", "false", "false", "false", "false"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('f1').willValidate);\n"
+                + "      log(document.getElementById('f2').willValidate);\n"
+                + "      log(document.getElementById('f3').willValidate);\n"
+                + "      log(document.getElementById('f4').willValidate);\n"
+                + "      log(document.getElementById('f5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <fieldset id='f1' />\n"
+                + "    <fieldset id='f2' disabled />\n"
+                + "    <fieldset id='f3' />\n"
+                + "    <fieldset id='f4' readonly />\n"
+                + "    <fieldset id='f5' style='display: none' />\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

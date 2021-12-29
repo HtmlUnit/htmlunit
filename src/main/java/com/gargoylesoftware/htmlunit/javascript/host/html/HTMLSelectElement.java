@@ -68,12 +68,20 @@ public class HTMLSelectElement extends HTMLElement {
      *
      */
     public void initialize() {
-        final HtmlSelect htmlSelect = getHtmlSelect();
+        final HtmlSelect htmlSelect = getDomNodeOrDie();
         htmlSelect.setScriptableObject(this);
         if (optionsArray_ == null) {
             optionsArray_ = new HTMLOptionsCollection(this);
             optionsArray_.initialize(htmlSelect);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlSelect getDomNodeOrDie() {
+        return (HtmlSelect) super.getDomNodeOrDie();
     }
 
     /**
@@ -110,7 +118,7 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     public Object appendChild(final Object childObject) {
         final Object object = super.appendChild(childObject);
-        getHtmlSelect().ensureSelectedIndex();
+        getDomNodeOrDie().ensureSelectedIndex();
         return object;
     }
 
@@ -120,7 +128,7 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     public Object insertBeforeImpl(final Object[] args) {
         final Object object = super.insertBeforeImpl(args);
-        getHtmlSelect().ensureSelectedIndex();
+        getDomNodeOrDie().ensureSelectedIndex();
         return object;
     }
 
@@ -145,7 +153,7 @@ public class HTMLSelectElement extends HTMLElement {
     @JsxGetter
     public String getType() {
         final String type;
-        if (getHtmlSelect().isMultipleSelectEnabled()) {
+        if (getDomNodeOrDie().isMultipleSelectEnabled()) {
             type = "select-multiple";
         }
         else {
@@ -172,7 +180,7 @@ public class HTMLSelectElement extends HTMLElement {
      */
     @JsxGetter
     public int getSelectedIndex() {
-        return getHtmlSelect().getSelectedIndex();
+        return getDomNodeOrDie().getSelectedIndex();
     }
 
     /**
@@ -181,7 +189,7 @@ public class HTMLSelectElement extends HTMLElement {
      */
     @JsxSetter
     public void setSelectedIndex(final int index) {
-        getHtmlSelect().setSelectedIndex(index);
+        getDomNodeOrDie().setSelectedIndex(index);
     }
 
     /**
@@ -191,8 +199,7 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     @JsxGetter
     public String getValue() {
-        final HtmlSelect htmlSelect = getHtmlSelect();
-        final List<HtmlOption> selectedOptions = htmlSelect.getSelectedOptions();
+        final List<HtmlOption> selectedOptions = getDomNodeOrDie().getSelectedOptions();
         if (selectedOptions.isEmpty()) {
             return "";
         }
@@ -243,14 +250,6 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     /**
-     * Returns the HTML select object.
-     * @return the HTML select object
-     */
-    private HtmlSelect getHtmlSelect() {
-        return (HtmlSelect) getDomNodeOrDie();
-    }
-
-    /**
      * Selects the option with the specified value.
      * @param newValue the value of the option to select
      */
@@ -258,7 +257,7 @@ public class HTMLSelectElement extends HTMLElement {
     @JsxSetter
     public void setValue(final Object newValue) {
         final String val = Context.toString(newValue);
-        getHtmlSelect().setSelectedAttribute(val, true, false);
+        getDomNodeOrDie().setSelectedAttribute(val, true, false);
     }
 
     /**
@@ -394,5 +393,13 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     public HTMLFormElement getForm() {
         return super.getForm();
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return getDomNodeOrDie().willValidate();
     }
 }

@@ -992,4 +992,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         return true;
     }
 
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return !isDisabled() && !isReadOnly();
+    }
 }

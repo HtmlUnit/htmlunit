@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE;
 
 import java.util.ArrayList;
@@ -30,6 +32,7 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -593,6 +596,14 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
+    }
+
+    /**
      * Returns the value of the attribute {@code tabindex}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
@@ -746,5 +757,15 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected boolean isRequiredSupported() {
         return true;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean willValidate() {
+        return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
+                || (!isDisabled()
+                        && (hasFeature(HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly()));
     }
 }

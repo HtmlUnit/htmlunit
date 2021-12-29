@@ -163,4 +163,12 @@ public class HTMLButtonElement extends HTMLElement {
     public void setValue(final Object newValue) {
         super.setValue(newValue);
     }
+
+    /**
+     * @return always false
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return ((HtmlButton) getDomNodeOrDie()).willValidate();
+    }
 }

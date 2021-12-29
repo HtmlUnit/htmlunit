@@ -982,4 +982,12 @@ public class HTMLInputElement extends HTMLElement {
     public HTMLFormElement getForm() {
         return super.getForm();
     }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return getDomNodeOrDie().willValidate();
+    }
 }

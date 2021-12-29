@@ -328,6 +328,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature({FF, FF_ESR, IE})
+    HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,
+
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature(IE)
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
@@ -481,9 +485,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
+    /** willValidate returns always true. */
+    @BrowserFeature(FF_ESR)
+    HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE,
+
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLSCRIPT_TRIM_TYPE,
+
+    /** willValidate returns always true. */
+    @BrowserFeature(IE)
+    HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE,
+
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature({FF, FF_ESR})
+    HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,
 
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -492,6 +508,10 @@ public enum BrowserVersionFeatures {
     /** When calculation the value of a text area ie uses a recursive approach. */
     @BrowserFeature(IE)
     HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
+
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature(IE)
+    HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
     @BrowserFeature({FF, FF_ESR, IE})
