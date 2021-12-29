@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="add" dev="rbri">
+                htmx testsuite version 1.5.0 added.
+            </action>
             <action type="fix" dev="rbri">
                 Adjust selection if the selected option gets removed.
             </action>
@@ -23,7 +26,7 @@
                 same for Date.toLocalDateString and toLocalTimeString.
             </action>
             <action type="update" dev="rbri">
-                Upgrade Apache log4j-api to 2.17.0.
+                Upgrade Apache log4j-api to 2.17.1.
             </action>
         </release>
 
