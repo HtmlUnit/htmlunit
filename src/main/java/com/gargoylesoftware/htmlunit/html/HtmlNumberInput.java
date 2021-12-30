@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMB
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -37,6 +38,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Frank Danek
  * @author Anton Demydenko
  * @author Raik Bieniek
+ * @author Michael Lück
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -296,9 +298,9 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 }
             }
 
-            final double value;
+            final BigDecimal value;
             try {
-                value = Double.parseDouble(valueAttr);
+                value = new BigDecimal(valueAttr);
             }
             catch (final NumberFormatException e) {
                 return false;
@@ -306,15 +308,15 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
 
             if (!getMin().isEmpty()) {
                 try {
-                    final double min = Double.parseDouble(getMin());
-                    if (value < min) {
+                    final BigDecimal min = new BigDecimal(getMin());
+                    if (value.compareTo(min) < 0) {
                         return false;
                     }
 
                     if (!getStep().isEmpty()) {
                         try {
-                            final double step = Double.parseDouble(getStep());
-                            if (Math.abs((value - min) % step) > 0.000001d) {
+                            final BigDecimal step = new BigDecimal(getStep());
+                            if(value.remainder(step).doubleValue() > 0.0) {
                                 return false;
                             }
                         }
@@ -329,8 +331,8 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
             }
             if (!getMax().isEmpty()) {
                 try {
-                    final double max = Double.parseDouble(getMax());
-                    if (value > max) {
+                    final BigDecimal max = new BigDecimal(getMax());
+                    if (value.compareTo(max) > 0) {
                         return false;
                     }
                 }
