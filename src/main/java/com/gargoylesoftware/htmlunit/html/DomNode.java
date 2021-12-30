@@ -1995,4 +1995,37 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         in.defaultReadObject();
         listeners_lock_ = new Object();
     }
+
+    /**
+     * @param selectorString the selector to test
+     * @return true if the element would be selected by the specified selector string; otherwise, returns false.
+     */
+    public DomElement closest(final String selectorString) {
+        try {
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+            final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
+
+            DomNode current = this;
+            if (selectorList != null) {
+                do {
+                    for (final Selector selector : selectorList) {
+                        final DomElement elem = (DomElement) current;
+                        if (CSSStyleSheet.selects(browserVersion, selector, elem, null, true)) {
+                            return elem;
+                        }
+                    }
+
+                    do {
+                        current = current.getParentNode();
+                    }
+                    while (current != null && !(current instanceof DomElement));
+                }
+                while (current != null);
+            }
+            return null;
+        }
+        catch (final IOException e) {
+            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
+        }
+    }
 }

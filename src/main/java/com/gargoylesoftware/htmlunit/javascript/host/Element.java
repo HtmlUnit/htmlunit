@@ -2053,4 +2053,29 @@ public class Element extends Node {
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
         return matches(context, thisObj, args, function);
     }
+
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public static Element closest(
+            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        final String selectorString = (String) args[0];
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+        try {
+            final DomNode domNode = ((Element) thisObj).getDomNodeOrNull();
+            if (domNode == null) {
+                return null;
+            }
+            final DomElement elem = domNode.closest(selectorString);
+            if (elem == null) {
+                return null;
+            }
+            return elem.getScriptableObject();
+        }
+        catch (final CSSException e) {
+            throw ScriptRuntime.constructError("SyntaxError",
+                    "An invalid or illegal selector was specified (selector: '"
+                    + selectorString + "' error: " + e.getMessage() + ").");
+        }
+    }
 }
