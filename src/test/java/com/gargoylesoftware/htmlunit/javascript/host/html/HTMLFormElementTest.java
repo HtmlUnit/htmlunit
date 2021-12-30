@@ -2695,4 +2695,103 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         driver.findElement(By.id("submit")).click();
         assertEquals(getExpectedAlerts()[1], driver.getTitle());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("first")
+    public void notNovalidate() throws Exception {
+        novalidate("");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidate() throws Exception {
+        novalidate("novalidate");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateEmpty() throws Exception {
+        novalidate("novalidate=''");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateBlank() throws Exception {
+        novalidate("novalidate=' '");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateTrue() throws Exception {
+        novalidate("novalidate=true");
+        novalidate("novalidate='true'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateFalse() throws Exception {
+        required("novalidate=false");
+        required("novalidate='false'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateArbitrary() throws Exception {
+        required("novalidate='Arbitrary'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second")
+    public void novalidateNovalidate() throws Exception {
+        required("novalidate='novalidate'");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    private void novalidate(final String novalidate) throws Exception {
+        final String html = "<html>\n"
+            + "<head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <form name='testForm' action='\" + URL_SECOND + \"' " + novalidate + " >\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input name='test' value='' required >"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String html2 = "<?xml version='1.0'?>\n"
+            + "<html>\n"
+            + "<head><title>second</title></head>\n"
+            + "<body>OK</body></html>";
+        getMockWebConnection().setDefaultResponse(html2);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("submit")).click();
+
+        assertEquals(getExpectedAlerts()[0], driver.getTitle());
+    }
 }
