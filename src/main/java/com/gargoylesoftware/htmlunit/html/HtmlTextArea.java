@@ -31,7 +31,6 @@ import org.apache.commons.text.StringEscapeUtils;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -627,7 +626,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     /**
      * @return whether the element is a candidate for constraint validation
      */
-    @JsxGetter
     public boolean willValidate() {
         return !isDisabled()
                 && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -762,7 +761,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * @return whether the element is a candidate for constraint validation
      */
-    @JsxGetter
     public boolean willValidate() {
         return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
                 || (!isDisabled()
