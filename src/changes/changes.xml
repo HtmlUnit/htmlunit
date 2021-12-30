@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="update" dev="rbri">
+                Some text added to the web page to clarify js disable option.
+            </action>
             <action type="add" dev="rbri">
                 willValidate property added.
             </action>
