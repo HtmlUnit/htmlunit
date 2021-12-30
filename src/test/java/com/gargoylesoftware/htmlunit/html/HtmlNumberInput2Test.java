@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static org.junit.Assert.fail;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,6 +28,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  *
  * @author Ronald Brill
  * @author Anton Demydenko
+ * @author Michael Lück
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNumberInput2Test extends SimpleWebTestCase {
@@ -159,6 +162,74 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         assertTrue(second.isValid());
         third.setValueAttribute("10");
         assertTrue(third.isValid());
+    }
+    
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void testMinValidationWithDecimalStepping() throws Exception {
+      
+        final String htmlContent = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='number' id='first' min='0.5' step='0.1'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlNumberInput first = (HtmlNumberInput) page.getElementById("first");
+
+        // empty
+        assertTrue(first.isValid());
+        // lesser
+        first.setValueAttribute("0.4");
+        assertFalse(first.isValid());
+        // equal
+        first.setValueAttribute("0.5");
+        assertTrue(first.isValid());
+        // bigger
+        first.setValueAttribute("0.6");
+        assertTrue(first.isValid());
+        // even bigger
+        first.setValueAttribute("1.6");
+        assertTrue(first.isValid());
+        // and even bigger again
+        first.setValueAttribute("2.1");
+        assertTrue(first.isValid());
+        // a lot bigger
+        first.setValueAttribute("10.8");
+        assertTrue(first.isValid());
+        // a lot bigger and insignificant decimal zeros
+        first.setValueAttribute("123456789.90");
+        assertTrue(first.isValid());
+        
+        //incorrect step
+        // a little bit different but still wroing
+        first.setValueAttribute("0.50000000000001");
+        assertFalse(first.isValid());
+        // still only little addition bit wrong nontheless
+        first.setValueAttribute("0.51");
+        assertFalse(first.isValid());
+        // even bigger
+        first.setValueAttribute("1.51");
+        assertFalse(first.isValid());
+        // and even bigger again
+        first.setValueAttribute("2.15");
+        assertFalse(first.isValid());
+        // a lot bigger
+        first.setValueAttribute("10.10001");
+        assertFalse(first.isValid());
+        // a lot bigger
+        first.setValueAttribute("123456789.1000001");
+        assertFalse(first.isValid());
+    }
+    
+    @Test
+    void testSteppingOnDefaultInsteadOfMin() {
+      fail("not yet implemented");
     }
 
     /**
