@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -28,7 +26,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  *
  * @author Ronald Brill
  * @author Anton Demydenko
- * @author Michael Lück
+ * @author Michael Lueck
  */
 @RunWith(BrowserRunner.class)
 public class HtmlNumberInput2Test extends SimpleWebTestCase {
@@ -163,13 +161,13 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         third.setValueAttribute("10");
         assertTrue(third.isValid());
     }
-    
+
     /**
      * @throws Exception if the test fails
      */
     @Test
     public void testMinValidationWithDecimalStepping() throws Exception {
-      
+
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
@@ -205,7 +203,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         // a lot bigger and insignificant decimal zeros
         first.setValueAttribute("123456789.90");
         assertTrue(first.isValid());
-        
+
         //incorrect step
         // a little bit different but still wroing
         first.setValueAttribute("0.50000000000001");
@@ -225,11 +223,6 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         // a lot bigger
         first.setValueAttribute("123456789.1000001");
         assertFalse(first.isValid());
-    }
-    
-    @Test
-    void testSteppingOnDefaultInsteadOfMin() {
-      fail("not yet implemented");
     }
 
     /**

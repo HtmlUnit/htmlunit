@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Frank Danek
  * @author Anton Demydenko
  * @author Raik Bieniek
- * @author Michael Lück
+ * @author Michael Lueck
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
@@ -316,7 +316,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                     if (!getStep().isEmpty()) {
                         try {
                             final BigDecimal step = new BigDecimal(getStep());
-                            if(value.remainder(step).doubleValue() > 0.0) {
+                            if (value.remainder(step).doubleValue() > 0.0) {
                                 return false;
                             }
                         }
