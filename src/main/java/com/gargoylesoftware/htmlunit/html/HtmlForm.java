@@ -1009,16 +1009,21 @@ public class HtmlForm extends HtmlElement {
     /**
      * @return the value of the attribute {@code novalidate} or an empty string if that attribute isn't defined
      */
-    public final String getNoValidateAttribute() {
-        return getAttributeDirect(ATTRIBUTE_NOVALIDATE);
+    public final boolean isNoValidate() {
+        return hasAttribute(ATTRIBUTE_NOVALIDATE);
     }
 
     /**
      * Sets the value of the attribute {@code novalidate}.
      *
-     * @param target the value of the attribute {@code novalidate}
+     * @param noValidate the value of the attribute {@code novalidate}
      */
-    public final void setNoValidateAttribute(final String target) {
-        setAttribute(ATTRIBUTE_NOVALIDATE, target);
+    public final void setNoValidate(final boolean noValidate) {
+        if (noValidate) {
+            setAttribute(ATTRIBUTE_NOVALIDATE, ATTRIBUTE_NOVALIDATE);
+        }
+        else {
+            removeAttribute(ATTRIBUTE_NOVALIDATE);
+        }
     }
 }

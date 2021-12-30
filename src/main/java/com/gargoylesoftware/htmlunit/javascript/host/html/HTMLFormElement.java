@@ -544,8 +544,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @return the value of this property
      */
     @JsxGetter
-    public String getNoValidate() {
-        return getHtmlForm().getNoValidateAttribute();
+    public boolean isNoValidate() {
+        return getHtmlForm().isNoValidate();
     }
 
     /**
@@ -553,7 +553,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * @param value the new value
      */
     @JsxSetter
-    public void setNoValidate(final String value) {
-        getHtmlForm().setNoValidateAttribute(value);
+    public void setNoValidate(final boolean value) {
+        getHtmlForm().setNoValidate(value);
     }
 }
