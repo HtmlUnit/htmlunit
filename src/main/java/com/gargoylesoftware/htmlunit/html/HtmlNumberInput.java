@@ -316,7 +316,7 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                     if (!getStep().isEmpty()) {
                         try {
                             final BigDecimal step = new BigDecimal(getStep());
-                            if (value.remainder(step).doubleValue() > 0.0) {
+                            if (value.subtract(min).abs().remainder(step).doubleValue() > 0.0) {
                                 return false;
                             }
                         }

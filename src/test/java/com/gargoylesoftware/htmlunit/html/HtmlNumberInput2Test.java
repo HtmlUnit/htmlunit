@@ -167,7 +167,6 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      */
     @Test
     public void testMinValidationWithDecimalStepping() throws Exception {
-
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
