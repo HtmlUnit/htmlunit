@@ -503,9 +503,7 @@ public class WebClient implements Serializable, AutoCloseable {
         // start execution here
         // note: we have to do this also if the server reports an error!
         //       e.g. if the server returns a 404 error page that includes javascript
-        if (scriptEngine_ != null) {
-            scriptEngine_.registerWindowAndMaybeStartEventLoop(webWindow);
-        }
+        registerWindowToScriptEngineIfNeeded(webWindow);
 
         // check and report problems if needed
         throwFailingHttpStatusCodeExceptionIfNecessary(webResponse);
@@ -2526,9 +2524,7 @@ public class WebClient implements Serializable, AutoCloseable {
             loadWebResponseInto(loadJob.response_, win, loadJob.forceAttachment_);
 
             // start execution here.
-            if (scriptEngine_ != null) {
-                scriptEngine_.registerWindowAndMaybeStartEventLoop(win);
-            }
+            registerWindowToScriptEngineIfNeeded(win);
 
             if (pageBeforeLoad != win.getEnclosedPage()) {
                 updatedWindows.add(win);
@@ -2536,6 +2532,12 @@ public class WebClient implements Serializable, AutoCloseable {
 
             // check and report problems if needed
             throwFailingHttpStatusCodeExceptionIfNecessary(loadJob.response_);
+        }
+    }
+    
+    private void registerWindowToScriptEngineIfNeeded(WebWindow webWindow) {
+        if (isJavaScriptEnabled()) {
+            scriptEngine_.registerWindowAndMaybeStartEventLoop(webWindow);
         }
     }
 
