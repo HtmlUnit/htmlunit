@@ -328,6 +328,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
+    /** If type submit/reset the form update is triggered even if disabled. */
+    @BrowserFeature({FF, FF_ESR, IE})
+    HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE,
+
     /** willValidate does not check the readonly property. */
     @BrowserFeature({FF, FF_ESR, IE})
     HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,

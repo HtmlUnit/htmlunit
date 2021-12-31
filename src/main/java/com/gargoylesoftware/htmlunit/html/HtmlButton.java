@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 
 import java.io.IOException;
@@ -84,31 +85,33 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        HtmlForm form = null;
-        final String formId = getAttributeDirect("form");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
-            form = getEnclosingForm();
-        }
-        else {
-            final DomElement elem = getHtmlPageOrNull().getElementById(formId);
-            if (elem instanceof HtmlForm) {
-                form = (HtmlForm) elem;
+        if (hasFeature(HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE) || !isDisabled()) {
+            HtmlForm form = null;
+            final String formId = getAttributeDirect("form");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
+                form = getEnclosingForm();
             }
-        }
+            else {
+                final DomElement elem = getHtmlPageOrNull().getElementById(formId);
+                if (elem instanceof HtmlForm) {
+                    form = (HtmlForm) elem;
+                }
+            }
 
-        if (form != null) {
-            final String type = getType();
-            if ("button".equals(type)) {
+            if (form != null) {
+                final String type = getType();
+                if ("button".equals(type)) {
+                    return false;
+                }
+
+                if ("reset".equals(type)) {
+                    form.reset();
+                    return false;
+                }
+
+                form.submit(this);
                 return false;
             }
-
-            if ("reset".equals(type)) {
-                form.reset();
-                return false;
-            }
-
-            form.submit(this);
-            return false;
         }
 
         super.doClickStateUpdate(shiftKey, ctrlKey);

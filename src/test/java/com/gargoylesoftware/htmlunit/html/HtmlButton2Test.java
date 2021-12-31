@@ -26,6 +26,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -798,5 +799,73 @@ public class HtmlButton2Test extends WebDriverTestCase {
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            FF = "2",
+            FF_ESR = "2",
+            IE = "2")
+    public void onclickDisablesSubmit() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='test' name='deliveryChannelForm'>\n"
+            + "    <button name='submitBtn' type='submit' onclick='submitForm();'>Save</button>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement input = webDriver.findElement(By.name("submitBtn"));
+        input.click();
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"foo", "foonewValue", "foonewValue"},
+            FF = {"foo", "foonewValue", "foo"},
+            FF_ESR = {"foo", "foonewValue", "foo"},
+            IE = {"foo", "foonewValue", "foo"})
+    public void onclickDisablesReset() throws Exception {
+        final String html = "<html><head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.deliveryChannelForm.resetBtn.disabled = true;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='test' name='deliveryChannelForm'>\n"
+            + "    <input type='text' id='textfield' value='foo'/>\n"
+            + "    <button name='resetBtn' type='reset' title='Save' onclick='submitForm();'>Save</button>\n"
+            + "  </form>"
+            + "</script>\n"
+            + "</body></html>";
+
+        final WebDriver webDriver = loadPage2(html);
+
+        final WebElement textfield = webDriver.findElement(By.id("textfield"));
+        assertEquals(getExpectedAlerts()[0], textfield.getAttribute("value"));
+        textfield.sendKeys("newValue");
+        assertEquals(getExpectedAlerts()[1], textfield.getAttribute("value"));
+
+        final WebElement reset = webDriver.findElement(By.name("resetBtn"));
+        reset.click();
+        assertEquals(getExpectedAlerts()[2], textfield.getAttribute("value"));
     }
 }

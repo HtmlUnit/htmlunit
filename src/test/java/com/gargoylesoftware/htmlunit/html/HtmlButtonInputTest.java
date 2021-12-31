@@ -39,11 +39,13 @@ public class HtmlButtonInputTest extends SimpleWebTestCase {
     @Alerts("foo")
     public void click_onClick() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
             + "<form id='form1' onSubmit='alert(\"bar\")'>\n"
-            + "  <input type='button' name='button' id='button' "
-            + "onClick='alert(\"foo\")'>Push me</button>\n"
-            + "</form></body></html>";
+            + "  <input type='button' name='button' id='button' onClick='alert(\"foo\")'>Push me</button>\n"
+            + "</form>\n"
+            + "</body></html>";
 
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(htmlContent, collectedAlerts);
