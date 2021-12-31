@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Submit/Reset button does not submit if the onclick handler disables the button.
+            </action>
             <action type="add" dev="rbri">
                 Form noValidate property added.
             </action>

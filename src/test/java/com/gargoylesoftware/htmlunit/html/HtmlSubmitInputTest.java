@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -135,6 +136,37 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         input.click();
 
         verifyTitle2(webDriver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "1",
+            IE = "2")
+    @HtmlUnitNYI(IE = "1")
+    public void onclickDisables() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script type='text/javascript'>\n"
+            + "    function submitForm() {\n"
+            + "      document.deliveryChannelForm.submitBtn.disabled = true;\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <form action='test' name='deliveryChannelForm'>\n"
+            + "    <input name='submitBtn' type='submit' value='Save' title='Save' onclick='submitForm();'>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        getMockWebConnection().setDefaultResponse("");
+        final WebDriver webDriver = loadPage2(html);
+        final WebElement input = webDriver.findElement(By.name("submitBtn"));
+        input.click();
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
     }
 
     /**

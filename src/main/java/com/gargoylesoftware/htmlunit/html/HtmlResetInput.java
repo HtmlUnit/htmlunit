@@ -81,10 +81,12 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        final HtmlForm form = getEnclosingForm();
-        if (form != null) {
-            form.reset();
-            return false;
+        if (!isDisabled()) {
+            final HtmlForm form = getEnclosingForm();
+            if (form != null) {
+                form.reset();
+                return false;
+            }
         }
         super.doClickStateUpdate(shiftKey, ctrlKey);
         return false;
