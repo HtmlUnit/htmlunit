@@ -990,4 +990,13 @@ public class HTMLInputElement extends HTMLElement {
     public boolean getWillValidate() {
         return getDomNodeOrDie().willValidate();
     }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    @JsxFunction
+    public void setCustomValidity(final String message) {
+        // empty impl for now
+    }
 }
