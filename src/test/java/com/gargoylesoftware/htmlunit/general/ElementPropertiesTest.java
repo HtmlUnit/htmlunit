@@ -730,7 +730,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNode(),removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),tagName")
     @HtmlUnitNYI(CHROME = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
@@ -741,7 +741,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
             EDGE = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),"
                 + "getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
@@ -752,7 +752,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
                 + "setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
             FF_ESR = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -761,7 +761,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),"
                 + "setAttributeNode(),setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
             FF = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
                 + "hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),"
@@ -888,7 +888,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "removeAttributeNS(),scrollHeight,scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNodeNS(),setAttributeNS(),setPointerCapture(),tagName")
     @HtmlUnitNYI(CHROME = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getInnerHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,"
@@ -899,7 +899,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "replaceWith(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
             EDGE = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
-                + "clientWidth,getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
                 + "getElementsByTagNameNS(),getInnerHTML(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,"
@@ -910,7 +910,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "replaceWith(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
                 + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
             FF_ESR = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
-                + "getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
+                + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),localName,matches(),mozMatchesSelector(),namespaceURI,"
@@ -919,7 +920,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
             FF = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
-                + "getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
+                + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "getBoundingClientRect(),"
                 + "getClientRects(),getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),"
                 + "hasAttribute(),hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),"
                 + "insertAdjacentHTML(),insertAdjacentText(),localName,matches(),mozMatchesSelector(),namespaceURI,"
@@ -1974,14 +1976,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "requestSubmit(),reset(),submit(),target",
+                    + "noValidate,requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "requestSubmit(),reset(),submit(),target",
+                    + "noValidate,requestSubmit(),reset(),submit(),target",
             FF_ESR = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "requestSubmit(),reset(),submit(),target",
+                    + "noValidate,requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "requestSubmit(),reset(),submit(),target",
-            IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,reset(),submit(),target")
+                    + "noValidate,requestSubmit(),reset(),submit(),target",
+            IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,noValidate,"
+                    + "reset(),submit(),target")
     public void form() throws Exception {
         test("form");
     }
