@@ -26,7 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
