@@ -2642,7 +2642,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
     @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
             EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            FF_ESR = "align,border,checkValidity(),form,height,setCustomValidity(),name,width",
+            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
             FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
             IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),width")
     public void object() throws Exception {
