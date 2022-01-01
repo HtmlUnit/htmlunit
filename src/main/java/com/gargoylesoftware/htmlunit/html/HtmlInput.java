@@ -1037,9 +1037,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public boolean isSubmitable() {
         final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
-        if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
-            return false;
-        }
-        return true;
+        return !"submit".equals(type) && !"image".equals(type) && !"reset".equals(type) && !"button".equals(type);
     }
 }

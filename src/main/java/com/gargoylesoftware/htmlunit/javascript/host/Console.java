@@ -247,17 +247,17 @@ public class Console extends SimpleScriptable {
                 for (final Object id : ids) {
                     final Object value = obj.get(id);
                     if (value instanceof Delegator) {
-                        sb.append(id).append(": ").append(((Delegator) value).getClassName()).append("\n");
+                        sb.append(id).append(": ").append(((Delegator) value).getClassName()).append('\n');
                     }
                     else if (value instanceof SimpleScriptable) {
-                        sb.append(id).append(": ").append(((SimpleScriptable) value).getClassName()).append("\n");
+                        sb.append(id).append(": ").append(((SimpleScriptable) value).getClassName()).append('\n');
                     }
                     else if (value instanceof BaseFunction) {
                         sb.append(id).append(": function ").append(((BaseFunction) value).getFunctionName())
                             .append("()\n");
                     }
                     else {
-                        sb.append(id).append(": ").append(value).append("\n");
+                        sb.append(id).append(": ").append(value).append('\n');
                     }
                 }
                 getWebConsole().info(sb.toString());

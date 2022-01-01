@@ -317,7 +317,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final StringBuilder bduiler = new StringBuilder("{");
         for (final NameValuePair header : headers) {
-            bduiler.append("'").append(header.getName()).append("': '")
+            bduiler.append('\'').append(header.getName()).append("': '")
                     .append(escapeJSString(header.getValue())).append("', ");
         }
         bduiler.delete(bduiler.length() - 2, bduiler.length());
