@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -57,6 +58,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
+    private String customValidity_;
 
     /**
      * Creates a new instance.
@@ -395,6 +397,15 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid()
+                && ("reset".equals(getType()) || StringUtils.isEmpty(customValidity_));
+    }
+
+    /**
      * @return whether the element is a candidate for constraint validation
      */
     public boolean willValidate() {
@@ -404,5 +415,13 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
         return !isDisabled()
                 && (hasFeature(HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 }

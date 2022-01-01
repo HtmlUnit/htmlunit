@@ -178,6 +178,6 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        ((HtmlButton) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

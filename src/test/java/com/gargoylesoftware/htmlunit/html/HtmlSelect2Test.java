@@ -144,4 +144,43 @@ public class HtmlSelect2Test extends WebDriverTestCase {
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[2]), options.get(2).isSelected());
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[3]), options.get(3).isSelected());
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity(' ');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('invalid');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='foo'>\n"
+            + "      <option value='option1'>Option1</option>\n"
+            + "    </select>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

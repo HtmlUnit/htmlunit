@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -60,6 +61,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     private Collection<String> newNames_ = Collections.emptySet();
     /** What is the index of the HtmlOption which was last selected. */
     private int lastSelectedIndex_ = -1;
+    private String customValidity_;
 
     /**
      * Creates an instance.
@@ -759,11 +761,27 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
      * @return whether the element is a candidate for constraint validation
      */
     public boolean willValidate() {
         return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
                 || (!isDisabled()
                         && (hasFeature(HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly()));
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 }

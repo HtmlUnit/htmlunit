@@ -16,51 +16,28 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
- * Tests for {@link HtmlObject}.
+ * Tests for {@link HtmlOutput}.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlObject2Test extends WebDriverTestCase {
+public class HtmlOutputTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("[object HTMLObjectElement]")
-    public void simpleScriptable() throws Exception {
-        final String html = "<html><head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    log(document.getElementById('myId'));\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "  <object id='myId'>\n"
-            + "</body></html>";
-
-        final WebDriver driver = loadPageVerifyTitle2(html);
-        if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
-            assertTrue(HtmlObject.class.isInstance(page.getHtmlElementById("myId")));
-        }
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"true", "true", "true", "true", "true"})
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "false", "false", "true"},
+            IE = "no checkValidity()")
+    @HtmlUnitNYI(FF_ESR = {"true", "true", "true", "true", "true"})
     public void checkValidity() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -68,6 +45,9 @@ public class HtmlObject2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var foo = document.getElementById('foo');\n"
+
+            + "    if (!foo.checkValidity) {log('no checkValidity()'); return;}\n"
+
             + "    log(foo.checkValidity());\n"
 
             + "    foo.setCustomValidity('');\n"
@@ -85,7 +65,7 @@ public class HtmlObject2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <object id='foo'>\n"
+            + "  <output id='foo'>\n"
             + "</body>\n"
             + "</html>";
 
