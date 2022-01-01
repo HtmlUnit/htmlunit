@@ -465,6 +465,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
+    /** HTMLInputElement image type is not supported. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY,
+
     /** HTMLInputElement month type is supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_MONTH_SUPPORTED,

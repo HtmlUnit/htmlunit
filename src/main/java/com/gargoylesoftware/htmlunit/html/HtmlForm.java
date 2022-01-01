@@ -498,8 +498,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttributeDirect("type").toLowerCase(Locale.ROOT);
-            if ("radio".equals(type) || "checkbox".equals(type)) {
+            final HtmlInput input = (HtmlInput) element;
+            if (input.isCheckable()) {
                 return ((HtmlInput) element).isChecked();
             }
         }
@@ -529,8 +529,7 @@ public class HtmlForm extends HtmlElement {
         }
         if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
-            final String type = input.getTypeAttribute().toLowerCase(Locale.ROOT);
-            if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
+            if (!input.isSubmitable()) {
                 return false;
             }
         }

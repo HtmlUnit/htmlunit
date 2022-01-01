@@ -240,7 +240,9 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public boolean isValid() {
-        return !isRequiredSupported() || ATTRIBUTE_NOT_DEFINED == getAttributeDirect("required")
-                || files_.length > 0;
+        return isCustomValidityValid()
+                && (!isRequiredSupported()
+                        || ATTRIBUTE_NOT_DEFINED == getAttributeDirect("required")
+                        || files_.length > 0);
     }
 }

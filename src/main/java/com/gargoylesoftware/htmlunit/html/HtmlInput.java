@@ -17,11 +17,13 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
 
 import java.net.MalformedURLException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -63,12 +65,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 
+    private static final String TYPE_ATTRUBUTE = "type";
+
     private String defaultValue_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
     private boolean createdByJavascript_;
     private boolean valueModifiedByJavascript_;
     private Object valueAtFocus_;
+    private String customValidity_;
 
     /**
      * Creates an instance.
@@ -133,7 +138,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        final String type = getAttributeDirect("type");
+        final String type = getAttributeDirect(TYPE_ATTRUBUTE);
         if (ATTRIBUTE_NOT_DEFINED == type) {
             return "text";
         }
@@ -869,14 +874,26 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isValid() {
-        return super.isValid() && isMaxLengthValid() && isMinLengthValid() && isPatternValid();
+        return super.isValid()
+                && isCustomValidityValid()
+                && isMaxLengthValid() && isMinLengthValid() && isPatternValid();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     protected boolean isRequiredSupported() {
+        return true;
+    }
+
+    protected boolean isCustomValidityValid() {
+        if (!StringUtils.isEmpty(customValidity_)) {
+            final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+            if (!"button".equals(type)
+                    && !"hidden".equals(type)
+                    && !"reset".equals(type)
+                    && !("image".equals(type) && hasFeature(HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY))) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -997,5 +1014,32 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public boolean willValidate() {
         return !isDisabled() && !isReadOnly();
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
+    }
+
+    /**
+     * @return whether this is a checkbox or a radio button
+     */
+    public boolean isCheckable() {
+        final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+        return "radio".equals(type) || "checkbox".equals(type);
+    }
+
+    /**
+     * @return false for type submit/resest/image/button otherwise true
+     */
+    public boolean isSubmitable() {
+        final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+        if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
+            return false;
+        }
+        return true;
     }
 }

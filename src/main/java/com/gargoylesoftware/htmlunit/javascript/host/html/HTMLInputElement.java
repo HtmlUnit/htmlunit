@@ -66,7 +66,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * The JavaScript object for {@code HTMLInputElement}.
+ * The JavaScript object for {@code HtmlInput}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -997,6 +997,6 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        getDomNodeOrDie().setCustomValidity(message);
     }
 }

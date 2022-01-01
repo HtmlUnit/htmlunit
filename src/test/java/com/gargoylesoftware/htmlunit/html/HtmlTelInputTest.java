@@ -388,4 +388,40 @@ public class HtmlTelInputTest extends WebDriverTestCase {
 
         assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity(' ');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('invalid');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='tel' id='foo'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

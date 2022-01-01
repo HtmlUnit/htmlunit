@@ -439,4 +439,40 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity(' ');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('invalid');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='range' id='foo'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
