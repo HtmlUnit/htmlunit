@@ -144,6 +144,7 @@ public class HtmlSelect2Test extends WebDriverTestCase {
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[2]), options.get(2).isSelected());
         assertEquals(Boolean.parseBoolean(getExpectedAlerts()[3]), options.get(3).isSelected());
     }
+
     /**
      * @throws Exception if the test fails
      */

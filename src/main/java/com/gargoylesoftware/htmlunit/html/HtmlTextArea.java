@@ -632,6 +632,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     public boolean isValid() {
         return super.isValid() && StringUtils.isEmpty(customValidity_);
     }
+
     /**
      * @return whether the element is a candidate for constraint validation
      */

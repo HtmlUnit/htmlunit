@@ -66,7 +66,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * The JavaScript object for {@code HtmlInput}.
+ * The JavaScript object for {@link HtmlInput}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
