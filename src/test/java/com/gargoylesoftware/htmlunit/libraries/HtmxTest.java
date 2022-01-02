@@ -23,10 +23,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -45,10 +42,10 @@ public class HtmxTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "passes:394failures:0",
             IE = "passes:17failures:378")
-    @HtmlUnitNYI(CHROME = "passes:387failures:8",
-            EDGE = "passes:387failures:8",
-            FF = "passes:387failures:8",
-            FF_ESR = "passes:387failures:8",
+    @HtmlUnitNYI(CHROME = "passes:388failures:6",
+            EDGE = "passes:388failures:6",
+            FF = "passes:388failures:6",
+            FF_ESR = "passes:388failures:6",
             IE = "passes:16failures:379")
     public void htmx() throws Exception {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.5.0", null, null);
