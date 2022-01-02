@@ -250,7 +250,7 @@ public final class ScriptElementSupport {
     private static boolean isExecutionNeeded(final DomElement element, final boolean ignoreAttachedToPage,
             final boolean ignorePageIsAncestor) {
         final ScriptElement script = (ScriptElement) element;
-        if (script.isExecuted() || script.wasCreatedByJavascript()) {
+        if (script.isExecuted() || script.wasCreatedByDomParser()) {
             return false;
         }
 

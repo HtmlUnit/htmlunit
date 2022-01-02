@@ -68,7 +68,7 @@ public interface ScriptElement {
      * transformToDocument feature, and scripts that are first inserted by a script into a Document
      * that was created using the createDocument() API
      */
-    void markAsCreatedByJavascript();
+    void markAsCreatedByDomParser();
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -77,5 +77,5 @@ public interface ScriptElement {
      * some special IE behavior.
      * @return true or false
      */
-    boolean wasCreatedByJavascript();
+    boolean wasCreatedByDomParser();
 }

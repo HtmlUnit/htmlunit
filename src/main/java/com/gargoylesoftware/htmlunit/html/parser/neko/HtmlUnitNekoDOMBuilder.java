@@ -391,7 +391,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         else if (createdByJavascript_ && "script".equals(tagLower)) {
             final ScriptElement script = (ScriptElement) newElement;
-            script.markAsCreatedByJavascript();
+            script.markAsCreatedByDomParser();
         }
 
         currentNode_ = newElement;
