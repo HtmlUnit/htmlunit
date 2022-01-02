@@ -23,7 +23,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
