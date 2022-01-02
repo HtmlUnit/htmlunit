@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
 
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSummary;
 import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
+import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -66,6 +68,14 @@ public class HtmlSerializerInnerOuterText {
         if (node instanceof HtmlBreak) {
             return "";
         }
+
+        // included scripts are ignored, but if we ask for the script itself....
+        if (node instanceof ScriptElement) {
+            final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
+            appendChildren(builder, node, Mode.WHITE_SPACE_NORMAL);
+            return builder.getText();
+        }
+
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
         appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL));
         return builder.getText();
@@ -113,6 +123,11 @@ public class HtmlSerializerInnerOuterText {
         }
         else if (node instanceof HtmlTextArea) {
             // nothing to do
+        }
+        else if (node instanceof ScriptElement) {
+            if (browserVersion_.hasFeature(JS_INNER_TEXT_SCRIPT)) {
+                appendChildren(builder, node, mode);
+            }
         }
         else if (node instanceof HtmlSvg) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {

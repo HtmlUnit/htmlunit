@@ -1066,6 +1066,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_INNER_HTML_LF,
 
+    /** Indicates that innerText adds script content also. */
+    @BrowserFeature(IE)
+    JS_INNER_TEXT_SCRIPT,
+
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})
     JS_INNER_TEXT_SVG_NL,
