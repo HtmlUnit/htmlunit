@@ -85,10 +85,12 @@ public interface HTMLParser {
      * @param parent where the new parsed nodes will be added to
      * @param context the context to build the fragment context stack
      * @param source the (X)HTML to be parsed
+     * @param createdByJavascript if true the (script) tag was created by javascript
      * @throws SAXException if a SAX error occurs
      * @throws IOException if an IO error occurs
      */
-    void parseFragment(DomNode parent, DomNode context, String source) throws SAXException, IOException;
+    void parseFragment(DomNode parent, DomNode context, String source,
+            boolean createdByJavascript) throws SAXException, IOException;
 
     /**
      * Parses the WebResponse into an object tree representation.
@@ -96,7 +98,8 @@ public interface HTMLParser {
      * @param webResponse the response data
      * @param page the HtmlPage to add the nodes
      * @param xhtml if true use the XHtml parser
+     * @param createdByJavascript if true the (script) tag was created by javascript
      * @throws IOException if there is an IO error
      */
-    void parse(WebResponse webResponse, HtmlPage page, boolean xhtml) throws IOException;
+    void parse(WebResponse webResponse, HtmlPage page, boolean xhtml, boolean createdByJavascript) throws IOException;
 }

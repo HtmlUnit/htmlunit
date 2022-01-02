@@ -295,7 +295,7 @@ public class DOMImplementation extends SimpleScriptable {
             document.setDomNode(page);
 
             final HTMLParser htmlParser = webWindow.getWebClient().getPageCreator().getHtmlParser();
-            htmlParser.parse(webResponse, page, false);
+            htmlParser.parse(webResponse, page, false, false);
             return page.getScriptableObject();
         }
         catch (final IOException e) {

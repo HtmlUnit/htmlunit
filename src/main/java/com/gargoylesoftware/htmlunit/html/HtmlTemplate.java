@@ -63,10 +63,11 @@ public class HtmlTemplate extends HtmlElement {
     }
 
     /**
-     * Parsing of the children is done, we can move our children to the content.
+     * {@inheritDoc}
      */
     @Override
     public void onAllChildrenAddedToPage(final boolean postponed) {
+        // parsing of the children is done, we can move our children to the content
         while (getFirstChild() != null) {
             final DomNode child = getFirstChild();
 

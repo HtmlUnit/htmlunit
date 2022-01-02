@@ -67,6 +67,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
+import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.SubmittableElement;
 import com.gargoylesoftware.htmlunit.html.XHtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
@@ -175,6 +176,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private boolean snippetStartNodeOverwritten_;
     private final int initialSize_;
     private DomNode currentNode_;
+    private final boolean createdByJavascript_;
     private StringBuilder characters_;
     private HtmlUnitNekoDOMBuilder.HeadParsed headParsed_ = HeadParsed.NO;
     private HtmlElement body_;
@@ -211,9 +213,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * Creates a new builder for parsing the specified response contents.
      * @param node the location at which to insert the new content
      * @param url the page's URL
+     * @param createdByJavascript if true the (script) tag was created by javascript
      */
     HtmlUnitNekoDOMBuilder(final HTMLParser htmlParser,
-                                final DomNode node, final URL url, final String htmlContent) {
+            final DomNode node, final URL url, final String htmlContent, final boolean createdByJavascript) {
         super(createConfiguration(node.getPage().getWebClient().getBrowserVersion()));
 
         htmlParser_ = htmlParser;
@@ -223,6 +226,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         for (final Node ancestor : currentNode_.getAncestors()) {
             stack_.push((DomNode) ancestor);
         }
+        createdByJavascript_ = createdByJavascript;
 
         final WebClient webClient = page_.getWebClient();
         final HTMLParserListener listener = webClient.getHTMLParserListener();
@@ -385,6 +389,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 }
             }
         }
+        else if (createdByJavascript_ && "script".equals(tagLower)) {
+            final ScriptElement script = (ScriptElement) newElement;
+            script.markAsCreatedByJavascript();
+        }
+
         currentNode_ = newElement;
         stack_.push(currentNode_);
     }

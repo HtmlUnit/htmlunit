@@ -249,7 +249,8 @@ public final class ScriptElementSupport {
      */
     private static boolean isExecutionNeeded(final DomElement element, final boolean ignoreAttachedToPage,
             final boolean ignorePageIsAncestor) {
-        if (((ScriptElement) element).isExecuted()) {
+        final ScriptElement script = (ScriptElement) element;
+        if (script.isExecuted() || script.wasCreatedByJavascript()) {
             return false;
         }
 

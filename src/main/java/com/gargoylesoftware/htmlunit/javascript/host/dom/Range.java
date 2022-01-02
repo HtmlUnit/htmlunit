@@ -332,7 +332,7 @@ public class Range extends SimpleScriptable {
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
             page.getWebClient().getPageCreator().getHtmlParser()
-                    .parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString);
+                    .parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString, false);
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);

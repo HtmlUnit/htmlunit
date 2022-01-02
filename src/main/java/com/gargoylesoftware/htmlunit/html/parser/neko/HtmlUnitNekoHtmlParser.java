@@ -109,7 +109,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      */
     @Override
     public void parseFragment(final DomNode parent, final String source) throws SAXException, IOException {
-        parseFragment(parent, parent, source);
+        parseFragment(parent, parent, source, false);
     }
 
     /**
@@ -118,11 +118,13 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      * @param parent where the new parsed nodes will be added to
      * @param context the context to build the fragment context stack
      * @param source the (X)HTML to be parsed
+     * @param createdByJavascript if true the (script) tag was created by javascript
      * @throws SAXException if a SAX error occurs
      * @throws IOException if an IO error occurs
      */
     @Override
-    public void parseFragment(final DomNode parent, final DomNode context, final String source)
+    public void parseFragment(final DomNode parent, final DomNode context, final String source,
+            final boolean createdByJavascript)
         throws SAXException, IOException {
         final Page page = parent.getPage();
         if (!(page instanceof HtmlPage)) {
@@ -131,7 +133,8 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
         final HtmlPage htmlPage = (HtmlPage) page;
         final URL url = htmlPage.getUrl();
 
-        final HtmlUnitNekoDOMBuilder domBuilder = new HtmlUnitNekoDOMBuilder(this, parent, url, source);
+        final HtmlUnitNekoDOMBuilder domBuilder =
+                new HtmlUnitNekoDOMBuilder(this, parent, url, source, createdByJavascript);
         domBuilder.setFeature("http://cyberneko.org/html/features/balance-tags/document-fragment", true);
         // build fragment context stack
         DomNode node = context;
@@ -169,12 +172,15 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
      * @param webResponse the response data
      * @param page the HtmlPage to add the nodes
      * @param xhtml if true use the XHtml parser
+     * @param createdByJavascript if true the (script) tag was created by javascript
      * @throws IOException if there is an IO error
      */
     @Override
-    public void parse(final WebResponse webResponse, final HtmlPage page, final boolean xhtml) throws IOException {
+    public void parse(final WebResponse webResponse, final HtmlPage page,
+            final boolean xhtml, final boolean createdByJavascript) throws IOException {
         final URL url = webResponse.getWebRequest().getUrl();
-        final HtmlUnitNekoDOMBuilder domBuilder = new HtmlUnitNekoDOMBuilder(this, page, url, null);
+        final HtmlUnitNekoDOMBuilder domBuilder =
+                new HtmlUnitNekoDOMBuilder(this, page, url, null, createdByJavascript);
 
         Charset charset = webResponse.getContentCharsetOrNull();
         try {

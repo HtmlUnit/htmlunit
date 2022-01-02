@@ -419,4 +419,32 @@ public class DOMParserTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * Test exception throw by IE when calling <code>insertBefore</code>.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"parsed", "inserted"})
+    public void dontExecScriptsFromDOMParser() throws Exception {
+        final String html =
+                "<html>\n"
+              + "<head></head>\n"
+              + "<body>\n"
+              + "<div id='tester'><div>"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "  var script = \"<div><script>log('from script');</\" + \"script></div>\"\n"
+              + "  var parser = new DOMParser();\n"
+              + "  var parsedDoc = parser.parseFromString(script, 'text/html');\n"
+              + "  var parsedNode = parsedDoc.body.firstChild.firstChild;\n"
+              + "  log('parsed');\n"
+
+              + "  document.getElementById('tester').insertBefore(parsedNode, null);\n"
+              + "  log('inserted');\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

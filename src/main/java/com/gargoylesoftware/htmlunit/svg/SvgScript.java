@@ -33,6 +33,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
     /** The tag represented by this element. */
     public static final String TAG_NAME = "script";
     private boolean executed_;
+    private boolean createdByJavascript_;
 
     /**
      * Creates a new instance.
@@ -124,5 +125,21 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public void onAllChildrenAddedToPage(final boolean postponed) {
         ScriptElementSupport.onAllChildrenAddedToPage(this, postponed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markAsCreatedByJavascript() {
+        createdByJavascript_ = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean wasCreatedByJavascript() {
+        return createdByJavascript_;
     }
 }
