@@ -57,7 +57,6 @@ public class HtmlSerializerInnerOuterText {
     public HtmlSerializerInnerOuterText(final BrowserVersion browserVersion) {
         super();
         browserVersion_ = browserVersion;
-
     }
 
     /**

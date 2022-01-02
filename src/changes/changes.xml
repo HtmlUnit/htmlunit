@@ -9,7 +9,7 @@
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
             <action type="fix" dev="rbri">
-                innerText ignores script children. 
+                innerText ignores script children.
             </action>
             <action type="fix" dev="rbri">
                 Script tags in DOMParser-created documents are not executed when adding to pages.
