@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
     /** The tag represented by this element. */
     public static final String TAG_NAME = "script";
     private boolean executed_;
+    private boolean createdByDomParser_;
 
     /**
      * Creates a new instance.
@@ -124,5 +125,21 @@ public class SvgScript extends SvgElement implements ScriptElement {
     @Override
     public void onAllChildrenAddedToPage(final boolean postponed) {
         ScriptElementSupport.onAllChildrenAddedToPage(this, postponed);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void markAsCreatedByDomParser() {
+        createdByDomParser_ = true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean wasCreatedByDomParser() {
+        return createdByDomParser_;
     }
 }

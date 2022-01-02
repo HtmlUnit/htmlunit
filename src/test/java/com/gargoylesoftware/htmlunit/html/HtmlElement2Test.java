@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -194,8 +194,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     // to test this manually you have to use an english keyboard layout
-    @Alerts(DEFAULT = "down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
-                + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0")
+    @Alerts("down: 16,0 down: 49,0 press: 33,33 up: 49,0 up: 16,0"
+            + " down: 16,0 down: 220,0 press: 124,124 up: 220,0 up: 16,0")
     //https://github.com/SeleniumHQ/selenium/issues/639
     @BuggyWebDriver(FF_ESR = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0",
                 FF = "down: 49,0 press: 33,33 up: 49,0 down: 220,0 press: 124,124 up: 220,0")

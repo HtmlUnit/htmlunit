@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -249,7 +249,8 @@ public final class ScriptElementSupport {
      */
     private static boolean isExecutionNeeded(final DomElement element, final boolean ignoreAttachedToPage,
             final boolean ignorePageIsAncestor) {
-        if (((ScriptElement) element).isExecuted()) {
+        final ScriptElement script = (ScriptElement) element;
+        if (script.isExecuted() || script.wasCreatedByDomParser()) {
             return false;
         }
 

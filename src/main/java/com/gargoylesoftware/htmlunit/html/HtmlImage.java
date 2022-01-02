@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -53,6 +54,8 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -79,8 +82,8 @@ public class HtmlImage extends HtmlElement {
 
     private final String originalQualifiedName_;
 
-    private int lastClickX_;
-    private int lastClickY_;
+    private int lastClickX_ = -1;
+    private int lastClickY_ = -1;
     private WebResponse imageWebResponse_;
     private transient ImageData imageData_;
     private int width_ = -1;
@@ -206,8 +209,8 @@ public class HtmlImage extends HtmlElement {
 
         if (oldUrl == null || !UrlUtils.sameFile(oldUrl, url)) {
             // image has to be reloaded
-            lastClickX_ = 0;
-            lastClickY_ = 0;
+            lastClickX_ = -1;
+            lastClickY_ = -1;
             imageWebResponse_ = null;
             imageData_ = null;
             width_ = -1;
@@ -727,7 +730,13 @@ public class HtmlImage extends HtmlElement {
     public Page click(final int x, final int y) throws IOException {
         lastClickX_ = x;
         lastClickY_ = y;
-        return super.click();
+        try {
+            return super.click();
+        }
+        finally {
+            lastClickX_ = -1;
+            lastClickY_ = -1;
+        }
     }
 
     /**
@@ -759,7 +768,7 @@ public class HtmlImage extends HtmlElement {
             for (final DomElement element : map.getChildElements()) {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;
-                    if (area.containsPoint(lastClickX_, lastClickY_)) {
+                    if (area.containsPoint(Math.max(lastClickX_, 0), Math.max(lastClickY_, 0))) {
                         area.doClickStateUpdate(shiftKey, ctrlKey);
                         return false;
                     }
@@ -771,7 +780,7 @@ public class HtmlImage extends HtmlElement {
             return false;
         }
         if (ATTRIBUTE_NOT_DEFINED != getIsmapAttribute()) {
-            final String suffix = "?" + lastClickX_ + "," + lastClickY_;
+            final String suffix = "?" + Math.max(lastClickX_, 0) + "," + Math.max(lastClickY_, 0);
             anchor.doClickStateUpdate(false, false, suffix);
             return false;
         }
@@ -919,5 +928,24 @@ public class HtmlImage extends HtmlElement {
             return originalQualifiedName_;
         }
         return super.getLocalName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ScriptResult fireEvent(final Event event) {
+        if (event instanceof MouseEvent) {
+            final MouseEvent mouseEvent = (MouseEvent) event;
+            final HTMLElement scriptableObject = (HTMLElement) getScriptableObject();
+            if (lastClickX_ >= 0) {
+                mouseEvent.setClientX(scriptableObject.getPosX() + lastClickX_);
+            }
+            if (lastClickY_ >= 0) {
+                mouseEvent.setClientY(scriptableObject.getPosX() + lastClickY_);
+            }
+        }
+
+        return super.fireEvent(event);
     }
 }

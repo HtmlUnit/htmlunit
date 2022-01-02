@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,6 @@ public abstract class BaseFrameElement extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(BaseFrameElement.class);
     private FrameWindow enclosedWindow_;
     private boolean contentLoaded_;
-    private boolean createdByJavascript_;
     private boolean loadSrcWhenAddedToPage_;
 
     /**
@@ -462,37 +461,6 @@ public abstract class BaseFrameElement extends HtmlElement {
             };
             jsEngine.addPostponedAction(action);
         }
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Marks this frame as created by javascript. This is needed to handle
-     * some special IE behavior.
-     */
-    public void markAsCreatedByJavascript() {
-        createdByJavascript_ = true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Unmarks this frame as created by javascript. This is needed to handle
-     * some special IE behavior.
-     */
-    public void unmarkAsCreatedByJavascript() {
-        createdByJavascript_ = false;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns true if this frame was created by javascript. This is needed to handle
-     * some special IE behavior.
-     * @return true or false
-     */
-    public boolean wasCreatedByJavascript() {
-        return createdByJavascript_;
     }
 
     /**

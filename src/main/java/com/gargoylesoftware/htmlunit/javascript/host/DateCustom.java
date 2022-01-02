@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_LOCAL
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MARK;
 
 import java.util.Date;
-import java.util.Locale;
 
 import org.apache.commons.lang3.time.FastDateFormat;
 
@@ -63,7 +62,7 @@ public final class DateCustom {
         else {
             formatString = "EEEE, MMMM dd, yyyy";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getBrowserLocale());
         return format.format(getDateValue(thisObj));
     }
 
@@ -87,16 +86,12 @@ public final class DateCustom {
         else {
             formatString = "h:mm:ss a";
         }
-        final FastDateFormat format =  FastDateFormat.getInstance(formatString, getLocale(browserVersion));
+        final FastDateFormat format =  FastDateFormat.getInstance(formatString, browserVersion.getBrowserLocale());
         return format.format(getDateValue(thisObj));
     }
 
     private static long getDateValue(final Scriptable thisObj) {
         final Date date = (Date) Context.jsToJava(thisObj, Date.class);
         return date.getTime();
-    }
-
-    private static Locale getLocale(final BrowserVersion browserVersion) {
-        return new Locale(browserVersion.getSystemLanguage());
     }
 }

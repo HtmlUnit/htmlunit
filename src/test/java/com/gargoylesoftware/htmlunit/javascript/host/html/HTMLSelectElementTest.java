@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -2112,6 +2112,41 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"0", "1", "0"})
+    public void selectedIndex_insertBeforeExisting() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('mySelect');\n"
+            + "    var o1 = document.getElementById('option1');\n"
+            + "    var o = document.createElement('option');\n"
+            + "    log(s.selectedIndex);\n"
+
+            + "    s.insertBefore(o, o1);\n"
+            + "    log(s.selectedIndex);\n"
+
+            + "    s.removeChild(o1);\n"
+            + "    log(s.selectedIndex);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <select id='mySelect'>\n"
+            + "    <option id='option1'>option1</option>"
+            + "  </select>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"-1", "0", "-1"})
     public void selectedIndex_add() throws Exception {
         final String html =
@@ -2726,5 +2761,40 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertTrue(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
         assertFalse(options.get(2).isSelected());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            FF = {"true", "false", "true", "true", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true"},
+            IE = {"true", "true", "true", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('s1').willValidate);\n"
+                + "      log(document.getElementById('s2').willValidate);\n"
+                + "      log(document.getElementById('s3').willValidate);\n"
+                + "      log(document.getElementById('s4').willValidate);\n"
+                + "      log(document.getElementById('s5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s1'>s1</select>\n"
+                + "    <select id='s2' disabled>s2</select>\n"
+                + "    <select id='s3' hidden>s3</select>\n"
+                + "    <select id='s4' readonly>s4</select>\n"
+                + "    <select id='s5' style='display: none'>s5</select>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

@@ -13,16 +13,56 @@
                 There is nothing really specific for using JavaScript, it is automatically processed.
                 So, you just need to .getPage(), find the element to click(), and then check the result.
                 Tests for complex JavaScript libraries are included in HtmlUnit test base, you can find it
-                <a href="http://htmlunit.svn.sourceforge.net/viewvc/htmlunit/trunk/htmlunit/src/test/java/com/gargoylesoftware/htmlunit/libraries/">here</a>
+                <a href="https://github.com/HtmlUnit/htmlunit/tree/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/">here</a>
                 which is useful to get an idea.
             </p>
             <p>
-                Usually, you should wait() or sleep() a little, as HtmlUnit can finish before the AJAX response is
+                Usually, you should wait a little, as HtmlUnit can finish before the AJAX response is
                 retrieved from the server, please read <a href="http://htmlunit.sourceforge.net/faq.html#AJAXDoesNotWork">this FAQ</a>.
             </p>
+        </section>
+
+        <section name="Enable/Disable JavaScript support">
             <p>
-                Below are some examples:
+                JavaScript support is enabled per default like in real browsers.
             </p>
+            <p>
+                <s>But:</s> There is one major difference - in the default configuration HtmlUnit will
+                stop JavaScript execution if an unhandled JavaScript error occurs. This is done
+                because HtmlUnit was initially designed for testing where fail early is
+                a good practice.<br></br>
+                You can change this to silently (HtmlUnit will still log the exceptions)
+                ignore them (like in real browsers) by setting
+                the option throwExceptionOnScriptError to false.
+            </p>
+            <source><![CDATA[
+ final WebClient webClient = new WebClient();
+ webClient.getOptions.setThrowExceptionOnScriptError(false);
+]]></source>
+
+            <p>
+                For some use cases it might be helpful to completely disable the JavaScript support
+                (e.g. for better performance).
+                HtmlUnit offers two way to do this; you can completely disable JavaScript or only
+                temporary.<br></br>
+                To disable the JavaScript support (without the possibility to enable it for the WebClient
+                later on) a special WebClient constructor is available. This is the most performance/resource
+                effective solution.
+            </p>
+            <source><![CDATA[
+ WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1);
+]]></source>
+            <p>
+                By using the WebClientOptions it is possible to disable and re-enable the JavaScript support
+                at any time for a given client. Doing this will only stop executing the script tags 
+                and triggering any event listeners.
+            </p>
+            <source><![CDATA[
+ final WebClient webClient = new WebClient(BrowserVersion.FIREFOX);
+ webClient.getOptions.setJavaScriptEnabled(false);
+ ....
+ webClient.getOptions.setJavaScriptEnabled(true);
+]]></source>
         </section>
 
         <section name="Example: using Document.write()">

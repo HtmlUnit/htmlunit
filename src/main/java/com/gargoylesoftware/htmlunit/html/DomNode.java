@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -786,7 +786,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * the selenium/WebDriver WebElement#getText() property does.<br>
      * see https://w3c.github.io/webdriver/#get-element-text and
      * https://w3c.github.io/webdriver/#dfn-bot-dom-getvisibletext
-     * Note: this is different from asText
+     * Note: this is different from {@link #asNormalizedText()}
      *
      * @return a textual representation of this element that represents what would
      *         be visible to the user if this page was shown in a web browser
@@ -1994,5 +1994,38 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
         listeners_lock_ = new Object();
+    }
+
+    /**
+     * @param selectorString the selector to test
+     * @return true if the element would be selected by the specified selector string; otherwise, returns false.
+     */
+    public DomElement closest(final String selectorString) {
+        try {
+            final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
+            final SelectorList selectorList = getSelectorList(selectorString, browserVersion);
+
+            DomNode current = this;
+            if (selectorList != null) {
+                do {
+                    for (final Selector selector : selectorList) {
+                        final DomElement elem = (DomElement) current;
+                        if (CSSStyleSheet.selects(browserVersion, selector, elem, null, true)) {
+                            return elem;
+                        }
+                    }
+
+                    do {
+                        current = current.getParentNode();
+                    }
+                    while (current != null && !(current instanceof DomElement));
+                }
+                while (current != null);
+            }
+            return null;
+        }
+        catch (final IOException e) {
+            throw new CSSException("Error parsing CSS selectors from '" + selectorString + "': " + e.getMessage());
+        }
     }
 }

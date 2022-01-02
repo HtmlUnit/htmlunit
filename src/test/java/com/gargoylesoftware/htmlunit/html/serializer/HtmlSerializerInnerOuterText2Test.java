@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1869,6 +1869,20 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
     }
 
+    private void getOuterTextFormated(final String htmlTesterSnipped) throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  " + htmlTesterSnipped + "\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = (String) ((JavascriptExecutor) driver)
+                .executeScript("return document.getElementById('tester').outerText");
+        assertEquals(getExpectedAlerts()[0], "" + text);
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -1906,5 +1920,33 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
         final String text = (String) ((JavascriptExecutor) driver)
                 .executeScript("return document.getElementById('tester').innerText");
         assertEquals(getExpectedAlerts()[0], text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text",
+            IE = "textvar x = 'invisible';")
+    public void getInnerTextWithScript() throws Exception {
+        getInnerTextFormated("<div id='tester'>"
+                + "text"
+                + "<script>var x = 'invisible';</script>"
+                + "</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "text",
+            FF = "null",
+            FF_ESR = "null",
+            IE = "textvar x = 'invisible';")
+    public void getOuterTextWithScript() throws Exception {
+        getOuterTextFormated("<div id='tester'>"
+                + "text"
+                + "<script>var x = 'invisible';</script>"
+                + "</div>");
     }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -230,6 +230,42 @@ public class HtmlDateTimeLocalInputTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <input type='datetime-local' min='2018-12-01T00:00' id='foo' value='2018-11-01T00:00'>\n"
             + "  <input type='datetime-local' min='2018-12-01T00:00' id='bar' value='2018-12-01T01:00'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity(' ');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('invalid');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='datetime-local' id='foo'>\n"
             + "</body>\n"
             + "</html>";
 

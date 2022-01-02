@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -583,9 +583,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final FirefoxOptions options = new FirefoxOptions();
             options.setBinary(binary);
 
-            // at least FF79 is not stable when using a profile
             final FirefoxProfile profile = new FirefoxProfile();
-            profile.setPreference("intl.accept_languages", "en-US");
+            profile.setPreference("intl.accept_languages", "en-US,en");
             options.setProfile(profile);
             return new FirefoxDriver(options);
         }

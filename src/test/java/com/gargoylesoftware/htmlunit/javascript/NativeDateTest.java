@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -140,8 +140,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1/1/2000",
             IE = "\u200E1\u200E/\u200E1\u200E/\u200E2000")
-    @BuggyWebDriver(FF = "1.1.2000",
-            FF_ESR = "1.1.2000")
+    @BuggyWebDriver(FF = "1.1.2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -246,8 +245,7 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"12:00:00 AM", "7:08:09 AM"},
             IE = {"\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
                   "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
-    @BuggyWebDriver(FF = "00:00:00, 07:08:09",
-            FF_ESR = "00:00:00, 07:08:09")
+    @BuggyWebDriver(FF = {"00:00:00", "07:08:09"})
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><script>\n"

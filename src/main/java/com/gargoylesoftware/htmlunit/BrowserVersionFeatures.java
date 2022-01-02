@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -328,6 +328,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLBASE_HREF_DEFAULT_EMPTY,
 
+    /** If type submit/reset the form update is triggered even if disabled. */
+    @BrowserFeature({FF, FF_ESR, IE})
+    HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE,
+
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature({FF, FF_ESR, IE})
+    HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY,
+
     /** HtmlCollection.item() supports also doubles as index. */
     @BrowserFeature(IE)
     HTMLCOLLECTION_ITEM_FUNCT_SUPPORTS_DOUBLE_INDEX_ALSO,
@@ -457,6 +465,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_TYPE_DATETIME_SUPPORTED,
 
+    /** HTMLInputElement image type is not supported. */
+    @BrowserFeature({CHROME, EDGE})
+    HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY,
+
     /** HTMLInputElement month type is supported. */
     @BrowserFeature({CHROME, EDGE})
     HTMLINPUT_TYPE_MONTH_SUPPORTED,
@@ -481,9 +493,21 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
+    /** willValidate returns always true. */
+    @BrowserFeature(FF_ESR)
+    HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE,
+
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLSCRIPT_TRIM_TYPE,
+
+    /** willValidate returns always true. */
+    @BrowserFeature(IE)
+    HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE,
+
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature({FF, FF_ESR})
+    HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY,
 
     /** Setting defaultValue updates the value also. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -492,6 +516,10 @@ public enum BrowserVersionFeatures {
     /** When calculation the value of a text area ie uses a recursive approach. */
     @BrowserFeature(IE)
     HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN,
+
+    /** willValidate does not check the readonly property. */
+    @BrowserFeature(IE)
+    HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY,
 
     /** Should {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
     @BrowserFeature({FF, FF_ESR, IE})
@@ -1037,6 +1065,10 @@ public enum BrowserVersionFeatures {
     /** Indicates that innerHTML uses {@code lf} instead of {@code lf}. */
     @BrowserFeature(IE)
     JS_INNER_HTML_LF,
+
+    /** Indicates that innerText adds script content also. */
+    @BrowserFeature(IE)
+    JS_INNER_TEXT_SCRIPT,
 
     /** Indicates that innerText add a nl when reaching svg element. */
     @BrowserFeature({CHROME, EDGE})

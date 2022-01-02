@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -276,5 +277,46 @@ public class HtmlImageTest extends SimpleWebTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         assertEquals(getExpectedAlerts()[0], img.getSrcAttribute());
         assertEquals(getExpectedAlerts()[1], img.getSrc());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"8-8-18-18-", "10-15-18-18-"})
+    public void clickWithCoordinates() throws Exception {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("testfiles/tiny-gif.img")) {
+            final byte[] directBytes = IOUtils.toByteArray(is);
+            final URL urlImage = new URL(URL_SECOND, "img.gif");
+            final List<NameValuePair> emptyList = Collections.emptyList();
+            getMockWebConnection().setResponse(urlImage, directBytes, 200, "ok", MimeType.IMAGE_GIF, emptyList);
+        }
+
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) { window.document.title += msg + '-';}\n"
+            + "  function clickImage(event) {\n"
+            + "    log(event.clientX);\n"
+            + "    log(event.clientY);\n"
+            + "    log(event.screenX);\n"
+            + "    log(event.screenY);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <img id='myImage' src='" + URL_SECOND + "img.gif' "
+                    + "width='100px' height='42px' onclick='clickImage(event)'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlImage img = page.getHtmlElementById("myImage");
+
+        img.click();
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+
+        img.click(2, 7);
+        assertEquals(getExpectedAlerts()[0] + getExpectedAlerts()[1], page.getTitleText());
     }
 }

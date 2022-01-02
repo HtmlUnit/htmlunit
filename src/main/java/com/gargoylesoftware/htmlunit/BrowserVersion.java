@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -467,7 +467,7 @@ public final class BrowserVersion implements Serializable {
     private String buildId_;
     private String productSub_;
     private String vendor_ = "";
-    private String browserLanguage_ = LANGUAGE_ENGLISH_US;
+    private Locale browserLocale_ = Locale.forLanguageTag(LANGUAGE_ENGLISH_US);
     private String cpuClass_ = CPU_CLASS_X86;
     private boolean onLine_ = true;
     private String platform_ = PLATFORM_WIN32;
@@ -679,13 +679,22 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
+     * Returns the browser locale.
+     * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
+     * @return the system locale
+     */
+    public Locale getBrowserLocale() {
+        return browserLocale_;
+    }
+
+    /**
      * Returns the browser application language, for example "en-us".
      * Default value is {@link #LANGUAGE_ENGLISH_US} if not explicitly configured.
      * @return the browser application language
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms533542.aspx">MSDN documentation</a>
      */
     public String getBrowserLanguage() {
-        return browserLanguage_;
+        return browserLocale_.toLanguageTag();
     }
 
     /**
@@ -1042,7 +1051,7 @@ public final class BrowserVersion implements Serializable {
          * @return this for fluent use
          */
         public BrowserVersionBuilder setBrowserLanguage(final String browserLanguage) {
-            workPiece_.browserLanguage_ = browserLanguage;
+            workPiece_.browserLocale_ = Locale.forLanguageTag(browserLanguage);
             return this;
         }
 

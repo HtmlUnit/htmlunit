@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,9 @@ import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.StringTokenizer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
@@ -36,8 +39,12 @@ import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class ScriptException extends RuntimeException {
+
+    /** Logging support. */
+    private static final Log LOG = LogFactory.getLog(ScriptException.class);
 
     private final String scriptSourceCode_;
     private final HtmlPage page_;
@@ -203,7 +210,7 @@ public class ScriptException extends RuntimeException {
         }
         catch (final IOException e) {
             // Theoretically impossible
-            e.printStackTrace();
+            LOG.error("Reading scriptSourceCode failed.", e);
         }
 
         return "";

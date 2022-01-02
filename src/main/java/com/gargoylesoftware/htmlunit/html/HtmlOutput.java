@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,8 @@
  * limitations under the License.
  */
 package com.gargoylesoftware.htmlunit.html;
+
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE;
 
 import java.util.Map;
 
@@ -47,5 +49,12 @@ public class HtmlOutput extends HtmlElement implements LabelableElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return hasFeature(HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE);
     }
 }

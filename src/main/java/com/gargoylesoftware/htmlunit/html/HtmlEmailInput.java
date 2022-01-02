@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_EMAIL_TRIMMED;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,8 +32,14 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Michael Lueck
  */
 public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, LabelableElement {
+
+    // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#validation
+    private static final Pattern DEFAULT_PATTERN =
+            Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
+                                + "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
@@ -178,6 +185,20 @@ public class HtmlEmailInput extends HtmlInput implements SelectableTextInput, La
         newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
 
         return newnode;
+    }
+
+    @Override
+    public boolean isValid() {
+        final boolean isValid = super.isValid();
+        if (!isValid) {
+            return false;
+        }
+
+        final String val = getValueAttribute();
+        if (StringUtils.isNotBlank(val)) {
+            return DEFAULT_PATTERN.matcher(val).matches();
+        }
+        return true;
     }
 
     /**

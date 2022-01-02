@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_NEW_NAMES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORMFIELD_REACHABLE_BY_ORIGINAL_NAME;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_ACTION_EXPANDURL_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DISPATCHEVENT_SUBMITS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_REJECT_INVALID_ENCODING;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_USABLE_AS_FUNCTION;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -34,12 +32,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -59,7 +53,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
-import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -312,24 +305,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxFunction
     public void submit() {
-        final HtmlPage page = (HtmlPage) getDomNodeOrDie().getPage();
-        final WebClient webClient = page.getWebClient();
-
-        final String action = getHtmlForm().getActionAttribute().trim();
-        if (StringUtils.startsWithIgnoreCase(action, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
-            final String js = action.substring(JavaScriptURLConnection.JAVASCRIPT_PREFIX.length());
-            webClient.getJavaScriptEngine().execute(page, js, "Form action", 0);
-        }
-        else {
-            // download should be done ASAP, response will be loaded into a window later
-            final WebRequest request = getHtmlForm().getWebRequest(null);
-            final String target = page.getResolvedTarget(getTarget());
-            final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
-            final boolean checkHash =
-                    !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
-            webClient.download(page.getEnclosingWindow(),
-                        target, request, checkHash, forceDownload, false, "JS form.submit()");
-        }
+        getHtmlForm().submit(null);
     }
 
     /**
@@ -563,4 +539,21 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return getDomNodeOrDie().isValid();
     }
 
+    /**
+     * Returns the value of the property {@code novalidate}.
+     * @return the value of this property
+     */
+    @JsxGetter
+    public boolean isNoValidate() {
+        return getHtmlForm().isNoValidate();
+    }
+
+    /**
+     * Sets the value of the property {@code novalidate}.
+     * @param value the new value
+     */
+    @JsxSetter
+    public void setNoValidate(final boolean value) {
+        getHtmlForm().setNoValidate(value);
+    }
 }

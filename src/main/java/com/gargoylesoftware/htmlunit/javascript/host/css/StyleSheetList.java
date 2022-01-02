@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,12 +75,7 @@ public class StyleSheetList extends SimpleScriptable {
      */
     public static boolean isStyleSheetLink(final DomNode domNode) {
         if (domNode instanceof HtmlLink) {
-            final HtmlLink link = (HtmlLink) domNode;
-            String rel = link.getRelAttribute();
-            if (rel != null) {
-                rel = rel.trim();
-            }
-            return "stylesheet".equalsIgnoreCase(rel);
+            return ((HtmlLink) domNode).isStyleSheetLink();
         }
         return false;
     }
@@ -94,11 +89,7 @@ public class StyleSheetList extends SimpleScriptable {
     public boolean isActiveStyleSheetLink(final DomNode domNode) {
         if (domNode instanceof HtmlLink) {
             final HtmlLink link = (HtmlLink) domNode;
-            String rel = link.getRelAttribute();
-            if (rel != null) {
-                rel = rel.trim();
-            }
-            if ("stylesheet".equalsIgnoreCase(rel)) {
+            if (link.isStyleSheetLink()) {
                 final String media = link.getMediaAttribute();
                 if (StringUtils.isBlank(media)) {
                     return true;

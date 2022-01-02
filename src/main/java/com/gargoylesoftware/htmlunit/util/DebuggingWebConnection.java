@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -317,7 +317,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
         }
         final StringBuilder bduiler = new StringBuilder("{");
         for (final NameValuePair header : headers) {
-            bduiler.append("'").append(header.getName()).append("': '")
+            bduiler.append('\'').append(header.getName()).append("': '")
                     .append(escapeJSString(header.getValue())).append("', ");
         }
         bduiler.delete(bduiler.length() - 2, bduiler.length());

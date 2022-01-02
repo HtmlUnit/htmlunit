@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,6 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -688,10 +687,7 @@ public class Document extends Node {
             final SgmlPage page = getPage();
             org.w3c.dom.Node element = page.createElement(tagName);
 
-            if (element instanceof BaseFrameElement) {
-                ((BaseFrameElement) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlInput) {
+            if (element instanceof HtmlInput) {
                 ((HtmlInput) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlImage) {
@@ -702,9 +698,6 @@ public class Document extends Node {
             }
             else if (element instanceof HtmlRt) {
                 ((HtmlRt) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlScript) {
-                ((HtmlScript) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlUnknownElement) {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();

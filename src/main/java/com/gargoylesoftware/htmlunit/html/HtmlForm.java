@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSI
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_URL_WITHOUT_HASH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_SUBMIT_FORCES_DOWNLOAD;
 import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -83,6 +84,9 @@ public class HtmlForm extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "form";
 
+    /** The "novalidate" attribute name. */
+    private static final String ATTRIBUTE_NOVALIDATE = "novalidate";
+
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES = Arrays.asList(HtmlInput.TAG_NAME,
         HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME);
 
@@ -140,7 +144,7 @@ public class HtmlForm extends HtmlElement {
                 }
 
                 if (validate
-                        && getAttributeDirect("novalidate") != ATTRIBUTE_NOT_DEFINED) {
+                        && getAttributeDirect(ATTRIBUTE_NOVALIDATE) != ATTRIBUTE_NOT_DEFINED) {
                     validate = false;
                 }
 
@@ -180,10 +184,11 @@ public class HtmlForm extends HtmlElement {
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
         final WebWindow webWindow = htmlPage.getEnclosingWindow();
+        final boolean forceDownload = webClient.getBrowserVersion().hasFeature(JS_FORM_SUBMIT_FORCES_DOWNLOAD);
         // Calling form.submit() twice forces double download.
         final boolean checkHash =
                 !webClient.getBrowserVersion().hasFeature(FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED);
-        webClient.download(webWindow, target, request, checkHash, false, false, "JS form.submit()");
+        webClient.download(webWindow, target, request, checkHash, forceDownload, false, "JS form.submit()");
     }
 
     /**
@@ -493,8 +498,8 @@ public class HtmlForm extends HtmlElement {
         }
 
         if (element instanceof HtmlInput) {
-            final String type = element.getAttributeDirect("type").toLowerCase(Locale.ROOT);
-            if ("radio".equals(type) || "checkbox".equals(type)) {
+            final HtmlInput input = (HtmlInput) element;
+            if (input.isCheckable()) {
                 return ((HtmlInput) element).isChecked();
             }
         }
@@ -524,8 +529,7 @@ public class HtmlForm extends HtmlElement {
         }
         if (element instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) element;
-            final String type = input.getTypeAttribute().toLowerCase(Locale.ROOT);
-            if ("submit".equals(type) || "image".equals(type) || "reset".equals(type) || "button".equals(type)) {
+            if (!input.isSubmitable()) {
                 return false;
             }
         }
@@ -999,5 +1003,26 @@ public class HtmlForm extends HtmlElement {
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * @return the value of the attribute {@code novalidate} or an empty string if that attribute isn't defined
+     */
+    public final boolean isNoValidate() {
+        return hasAttribute(ATTRIBUTE_NOVALIDATE);
+    }
+
+    /**
+     * Sets the value of the attribute {@code novalidate}.
+     *
+     * @param noValidate the value of the attribute {@code novalidate}
+     */
+    public final void setNoValidate(final boolean noValidate) {
+        if (noValidate) {
+            setAttribute(ATTRIBUTE_NOVALIDATE, ATTRIBUTE_NOVALIDATE);
+        }
+        else {
+            removeAttribute(ATTRIBUTE_NOVALIDATE);
+        }
     }
 }

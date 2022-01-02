@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -295,7 +295,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser_.parse(webResponse, page, false);
+        htmlParser_.parse(webResponse, page, false, false);
         return page;
     }
 
@@ -311,7 +311,7 @@ public class DefaultPageCreator implements PageCreator, Serializable {
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
-        htmlParser_.parse(webResponse, page, true);
+        htmlParser_.parse(webResponse, page, true, false);
         return page;
     }
 

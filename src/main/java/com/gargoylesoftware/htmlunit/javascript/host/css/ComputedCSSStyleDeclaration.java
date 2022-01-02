@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -294,7 +294,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (!StyleElement.PRIORITY_IMPORTANT.equals(priority)) {
             final StyleElement existingElement = localModifications_.get(name);
             if (existingElement != null) {
-                if (StyleElement.PRIORITY_IMPORTANT.equals(existingElement.getPriority())) {
+                if (existingElement.isImportant()) {
                     return; // can't override a !important rule by a normal rule. Ignore it!
                 }
                 else if (specificity.compareTo(existingElement.getSpecificity()) < 0) {
@@ -338,7 +338,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
             // replace if !IMPORTANT
             if (StyleElement.PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
-                if (StyleElement.PRIORITY_IMPORTANT.equals(existent.getPriority())) {
+                if (existent.isImportant()) {
                     if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
                         return localStyleMod;
                     }

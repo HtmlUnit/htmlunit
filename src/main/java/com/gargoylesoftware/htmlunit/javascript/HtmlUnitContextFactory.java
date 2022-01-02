@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -272,6 +272,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
     protected Context makeContext() {
         final TimeoutContext cx = new TimeoutContext(this);
         cx.setLanguageVersion(Context.VERSION_ES6);
+        cx.setLocale(browserVersion_.getBrowserLocale());
 
         // make sure no java classes are usable from js
         cx.setClassShutter(fullClassName -> {

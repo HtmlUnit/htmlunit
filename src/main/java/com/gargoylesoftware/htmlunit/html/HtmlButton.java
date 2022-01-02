@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -24,6 +26,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -55,6 +58,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
+    private String customValidity_;
 
     /**
      * Creates a new instance.
@@ -83,31 +87,33 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
-        HtmlForm form = null;
-        final String formId = getAttributeDirect("form");
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
-            form = getEnclosingForm();
-        }
-        else {
-            final DomElement elem = getHtmlPageOrNull().getElementById(formId);
-            if (elem instanceof HtmlForm) {
-                form = (HtmlForm) elem;
+        if (hasFeature(HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE) || !isDisabled()) {
+            HtmlForm form = null;
+            final String formId = getAttributeDirect("form");
+            if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
+                form = getEnclosingForm();
             }
-        }
+            else {
+                final DomElement elem = getHtmlPageOrNull().getElementById(formId);
+                if (elem instanceof HtmlForm) {
+                    form = (HtmlForm) elem;
+                }
+            }
 
-        if (form != null) {
-            final String type = getType();
-            if ("button".equals(type)) {
+            if (form != null) {
+                final String type = getType();
+                if ("button".equals(type)) {
+                    return false;
+                }
+
+                if ("reset".equals(type)) {
+                    form.reset();
+                    return false;
+                }
+
+                form.submit(this);
                 return false;
             }
-
-            if ("reset".equals(type)) {
-                form.reset();
-                return false;
-            }
-
-            form.submit(this);
-            return false;
         }
 
         super.doClickStateUpdate(shiftKey, ctrlKey);
@@ -120,6 +126,14 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public final boolean isDisabled() {
         return hasAttribute(ATTRIBUTE_DISABLED);
+    }
+
+    /**
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
     }
 
     /**
@@ -380,5 +394,34 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid()
+                && ("reset".equals(getType()) || StringUtils.isEmpty(customValidity_));
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        if ("reset".equals(getType())) {
+            return false;
+        }
+
+        return !isDisabled()
+                && (hasFeature(HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 }

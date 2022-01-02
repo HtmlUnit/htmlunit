@@ -8,6 +8,57 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                innerText ignores script children.
+            </action>
+            <action type="fix" dev="rbri">
+                Script tags in DOMParser-created documents are not executed when adding to pages.
+            </action>
+            <action type="add" dev="rbri">
+                setCustomValidity() added.
+            </action>
+            <action type="fix" dev="rbri">
+                Button of type submit/reset button does not submit if the onclick handler disables the button
+                for Chrome/Edge.
+            </action>
+            <action type="fix" dev="rbri">
+                Submit/Reset button does not submit if the onclick handler disables the button.
+            </action>
+            <action type="add" dev="rbri">
+                Form noValidate property added.
+            </action>
+            <action type="fix" dev="Michael Lueck">
+                Fix validation of decimal min/max/step values in number input.
+            </action>
+            <action type="add" dev="rbri">
+                Element.closest() function added.
+            </action>
+            <action type="update" dev="rbri">
+                Some text added to the web page to clarify js disable option.
+            </action>
+            <action type="add" dev="rbri">
+                willValidate property added.
+            </action>
+            <action type="add" dev="rbri">
+                htmx testsuite version 1.5.0 added.
+            </action>
+            <action type="fix" dev="rbri">
+                Adjust selection if the selected option gets removed.
+            </action>
+            <action type="fix" dev="Michael Lueck">
+                Fix validation for email input fields.
+            </action>
+            <action type="fix" dev="rbri">
+                The browser locale (language) is now forwarded to the JS engine; this fixes
+                String.toLocaleLowerCase() if the locale is different from en.
+            </action>
+            <action type="update" dev="rbri">
+                File.lastModifiedDate uses the browser locale (language);
+                same for Date.toLocalDateString and toLocalTimeString.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.17.1.
+            </action>
         </release>
 
         <release version="2.56.0" date="December 12, 2021" description="Bugfixes, Chrome/Edge 96, Firefox 95, FF78 deprecated">

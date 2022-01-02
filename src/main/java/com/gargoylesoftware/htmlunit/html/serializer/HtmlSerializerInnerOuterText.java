@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SCRIPT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
 
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
 import com.gargoylesoftware.htmlunit.html.HtmlListItem;
 import com.gargoylesoftware.htmlunit.html.HtmlNoFrames;
 import com.gargoylesoftware.htmlunit.html.HtmlParagraph;
@@ -34,12 +36,12 @@ import com.gargoylesoftware.htmlunit.html.HtmlSummary;
 import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
+import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
-import com.gargoylesoftware.htmlunit.svg.SvgText;
 import com.gargoylesoftware.htmlunit.svg.SvgTitle;
 
 /**
@@ -66,8 +68,16 @@ public class HtmlSerializerInnerOuterText {
         if (node instanceof HtmlBreak) {
             return "";
         }
+
+        // included scripts are ignored, but if we ask for the script itself....
+        if (node instanceof ScriptElement) {
+            final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
+            appendChildren(builder, node, Mode.WHITE_SPACE_NORMAL, false);
+            return builder.getText();
+        }
+
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
-        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL));
+        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), false);
         return builder.getText();
     }
 
@@ -77,10 +87,12 @@ public class HtmlSerializerInnerOuterText {
      * @param builder the StringBuilder to add to
      * @param node the node to process
      * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
      */
-    protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
+    protected void appendChildren(final HtmlSerializerTextBuilder builder, final DomNode node,
+            final Mode mode, final boolean insideHead) {
         for (final DomNode child : node.getChildren()) {
-            appendNode(builder, child, mode);
+            appendNode(builder, child, mode, insideHead);
         }
     }
 
@@ -91,8 +103,10 @@ public class HtmlSerializerInnerOuterText {
      * @param builder the StringBuilder to add to
      * @param node the node to process
      * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
      */
-    protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node, final Mode mode) {
+    protected void appendNode(final HtmlSerializerTextBuilder builder, final DomNode node,
+            final Mode mode, final boolean insideHead) {
         if (node instanceof DomText) {
             appendText(builder, (DomText) node, mode);
         }
@@ -100,40 +114,45 @@ public class HtmlSerializerInnerOuterText {
             appendBreak(builder, (HtmlBreak) node);
         }
         else if (node instanceof HtmlParagraph) {
-            appendParagraph(builder, (HtmlParagraph) node, mode);
+            appendParagraph(builder, (HtmlParagraph) node, mode, insideHead);
         }
         else if (node instanceof HtmlListItem) {
-            appendListItem(builder, (HtmlListItem) node, mode);
+            appendListItem(builder, (HtmlListItem) node, mode, insideHead);
         }
         else if (node instanceof HtmlDetails) {
-            appendDetails(builder, (HtmlDetails) node, mode);
+            appendDetails(builder, (HtmlDetails) node, mode, insideHead);
+        }
+        else if (node instanceof HtmlHead) {
+            appendChildren(builder, node, mode, true);
         }
         else if (node instanceof HtmlNoFrames) {
-            appendChildren(builder, node, Mode.PLAIN);
+            appendChildren(builder, node, Mode.PLAIN, insideHead);
         }
         else if (node instanceof HtmlTextArea) {
             // nothing to do
         }
+        else if (node instanceof ScriptElement) {
+            if (insideHead || browserVersion_.hasFeature(JS_INNER_TEXT_SCRIPT)) {
+                appendChildren(builder, node, mode, insideHead);
+            }
+        }
         else if (node instanceof HtmlSvg) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_NL)) {
                 builder.appendRequiredLineBreak();
-                appendChildren(builder, node, mode);
+                appendChildren(builder, node, mode, insideHead);
                 builder.appendRequiredLineBreak();
             }
             else {
-                appendChildren(builder, node, mode);
+                appendChildren(builder, node, mode, insideHead);
             }
-        }
-        else if (node instanceof SvgText) {
-            appendChildren(builder, node, mode);
         }
         else if (node instanceof SvgTitle) {
             if (browserVersion_.hasFeature(JS_INNER_TEXT_SVG_TITLE)) {
-                appendChildren(builder, node, mode);
+                appendChildren(builder, node, mode, insideHead);
             }
         }
         else {
-            appendChildren(builder, node, mode);
+            appendChildren(builder, node, mode, insideHead);
         }
     }
 
@@ -177,11 +196,12 @@ public class HtmlSerializerInnerOuterText {
      * @param builder the StringBuilder to add to
      * @param htmlParagraph the target to process
      * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
      */
     protected void appendParagraph(final HtmlSerializerTextBuilder builder,
-            final HtmlParagraph htmlParagraph, final Mode mode) {
+            final HtmlParagraph htmlParagraph, final Mode mode, final boolean insideHead) {
         builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlParagraph, mode);
+        appendChildren(builder, htmlParagraph, mode, insideHead);
         builder.appendRequiredLineBreak();
     }
 
@@ -191,11 +211,12 @@ public class HtmlSerializerInnerOuterText {
      * @param builder the StringBuilder to add to
      * @param htmlListItem the target to process
      * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
      */
     protected void appendListItem(final HtmlSerializerTextBuilder builder,
-            final HtmlListItem htmlListItem, final Mode mode) {
+            final HtmlListItem htmlListItem, final Mode mode, final boolean insideHead) {
         builder.appendRequiredLineBreak();
-        appendChildren(builder, htmlListItem, mode);
+        appendChildren(builder, htmlListItem, mode, insideHead);
         builder.appendRequiredLineBreak();
     }
 
@@ -204,17 +225,18 @@ public class HtmlSerializerInnerOuterText {
      * @param builder the StringBuilder to add to
      * @param htmlDetails the target to process
      * @param mode the {@link Mode} to use for processing
+     * @param insideHead true if inside head section
      */
     protected void appendDetails(final HtmlSerializerTextBuilder builder,
-                    final HtmlDetails htmlDetails, final Mode mode) {
+                    final HtmlDetails htmlDetails, final Mode mode, final boolean insideHead) {
         if (htmlDetails.isOpen()) {
-            appendChildren(builder, htmlDetails, mode);
+            appendChildren(builder, htmlDetails, mode, insideHead);
             return;
         }
 
         for (final DomNode child : htmlDetails.getChildren()) {
             if (child instanceof HtmlSummary) {
-                appendNode(builder, child, mode);
+                appendNode(builder, child, mode, insideHead);
             }
         }
     }

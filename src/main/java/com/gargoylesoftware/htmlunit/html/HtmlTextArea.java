@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_SET_DEFAULT_VALUE_UPDATES_VALUE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_USE_ALL_TEXT_CHILDREN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.io.PrintWriter;
@@ -25,6 +26,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -60,6 +62,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     private String valueAtFocus_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
+    private String customValidity_;
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
@@ -620,5 +623,29 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
         newnode.newNames_ = new HashSet<>(newNames_);
 
         return newnode;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return !isDisabled()
+                && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 }

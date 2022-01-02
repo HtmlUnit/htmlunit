@@ -46,7 +46,7 @@
                 <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a> of
                 <a href="http://www.GargoyleSoftware.com">Gargoyle Software</a>
                 and is released under the <a href="https://www.apache.org/licenses/LICENSE-2.0.txt">Apache 2 license</a>.  
-                Since then, it has received many contributions from <a href="team-list.html">
+                Since then, it has received many contributions from <a href="team.html">
                 other developers</a>, and would not be where it is today without their
                 assistance.
             </p>
@@ -55,7 +55,7 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>November 14, 2021</date></dt>
+                    <dt>Latest release <date>December 12, 2021</date></dt>
                     <dd>
                         <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.56.0/">version 2.56.0</a></p>
                     </dd>
@@ -202,6 +202,7 @@
                 The unit tests of some well-known JavaScript libraries are included in HtmlUnit's own unit tests; based on these unit
                 tests, the following libraries are known to work well with HtmlUnit:
                 <ul>
+                    <li>htmx 1.15.0: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/HtmxTest.java">here</a>)</li>
                     <li>jQuery 1.11.3: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery1x11x3Test.java">here</a>)</li>
                     <li>jQuery 1.8.2: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery182Test.java">here</a>)</li>
                     <li>MochiKit 1.4.1: Full support (see unit tests <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/MochiKitTest.java">here</a>)</li>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlFieldSet extends HtmlElement {
 
@@ -44,4 +45,10 @@ public class HtmlFieldSet extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return false;
+    }
 }

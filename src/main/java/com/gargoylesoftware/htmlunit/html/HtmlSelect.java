@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_SET_VALUES_CHECKS_ONLY_VALUE_ATTRIBUTE;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -58,6 +61,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     private Collection<String> newNames_ = Collections.emptySet();
     /** What is the index of the HtmlOption which was last selected. */
     private int lastSelectedIndex_ = -1;
+    private String customValidity_;
 
     /**
      * Creates an instance.
@@ -593,6 +597,14 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * Returns {@code true} if this element is read only.
+     * @return {@code true} if this element is read only
+     */
+    public boolean isReadOnly() {
+        return hasAttribute("readOnly");
+    }
+
+    /**
      * Returns the value of the attribute {@code tabindex}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
@@ -746,5 +758,30 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected boolean isRequiredSupported() {
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    public boolean willValidate() {
+        return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
+                || (!isDisabled()
+                        && (hasFeature(HTMLSELECT_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly()));
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 }

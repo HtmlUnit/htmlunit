@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1438,6 +1438,44 @@ public class ElementTest extends WebDriverTestCase {
             + "  <ul id='birds'>\n"
             + "    <li>Great white pelican</li>\n"
             + "  </ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"div-02", "div-03", "div-01", "article-01", "null"},
+            IE = "no closest")
+    public void closest() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var el = document.getElementById('div-03');\n"
+            + "    if (!el.closest) { log('no closest'); return }\n"
+
+            + "    log(el.closest('#div-02').id);\n"
+            + "    log(el.closest('div div').id);\n"
+            + "    log(el.closest('article > div').id);\n"
+            + "    log(el.closest(':not(div)').id);\n"
+
+            + "    log(el.closest('span'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <article id='article-01'>\n"
+            + "    <div id='div-01'>Here is div-01\n"
+            + "      <div id='div-02'>Here is div-02\n"
+            + "        <div id='div-03'>Here is div-03</div>\n"
+            + "      </div>\n"
+            + "    </div>\n"
+            + "  </article>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

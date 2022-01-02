@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2021 Gargoyle Software Inc.
+ * Copyright (c) 2002-2022 Gargoyle Software Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * The JavaScript object for {@code HTMLInputElement}.
+ * The JavaScript object for {@link HtmlInput}.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
@@ -981,5 +981,22 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public HTMLFormElement getForm() {
         return super.getForm();
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return getDomNodeOrDie().willValidate();
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    @JsxFunction
+    public void setCustomValidity(final String message) {
+        getDomNodeOrDie().setCustomValidity(message);
     }
 }
