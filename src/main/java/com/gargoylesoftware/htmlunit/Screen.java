@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.Serializable;
+
 /**
  * {@code Screen}.
  *
@@ -24,9 +26,9 @@ package com.gargoylesoftware.htmlunit;
  * @author Ahmed Ashour
  * @author cd alexndr
  */
-public class Screen {
+public class Screen implements Serializable {
 
-    private final WebClient webClient_;
+    private final transient WebClient webClient_;
 
     /**
      * Creates an instance.
@@ -175,6 +177,9 @@ public class Screen {
      * @return the {@code height} property
      */
     public int getHeight() {
+        if (webClient_ == null) {
+            return WebClientOptions.DEFAULT_SCRREN_HEIGHT;
+        }
         return webClient_.getOptions().getScreenHeight();
     }
 
@@ -295,6 +300,9 @@ public class Screen {
      * @return the {@code width} property
      */
     public int getWidth() {
+        if (webClient_ == null) {
+            return WebClientOptions.DEFAULT_SCRREN_WIDTH;
+        }
         return webClient_.getOptions().getScreenWidth();
     }
 
