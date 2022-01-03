@@ -52,6 +52,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 
     private final WebClient webClient_;
+    private Screen screen_;
     private Page enclosedPage_;
     private transient Object scriptObject_;
     private JavaScriptJobManager jobManager_;
@@ -74,6 +75,8 @@ public abstract class WebWindowImpl implements WebWindow {
         WebAssert.notNull("webClient", webClient);
         webClient_ = webClient;
         jobManager_ = BackgroundJavaScriptFactory.theFactory().createJavaScriptJobManager(this);
+
+        screen_ = new Screen(webClient);
 
         innerHeight_ = 605;
         innerWidth_ = 1256;
@@ -112,6 +115,14 @@ public abstract class WebWindowImpl implements WebWindow {
     @Override
     public WebClient getWebClient() {
         return webClient_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Screen getScreen() {
+        return screen_;
     }
 
     /**
