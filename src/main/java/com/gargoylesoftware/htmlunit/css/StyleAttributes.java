@@ -12,17 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.css;
+package com.gargoylesoftware.htmlunit.css;
 
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdge;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.chromeAndEdgeNotIterable;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ff;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffEsr;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffLatest;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ffNotIterable;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ie;
-import static com.gargoylesoftware.htmlunit.javascript.host.css.BrowserConfiguration.ieNotIterable;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdge;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ff;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffEsr;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffLatest;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterable;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ie;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ieNotIterable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
