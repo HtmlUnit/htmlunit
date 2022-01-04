@@ -177,4 +177,9 @@ public interface WebWindow extends Serializable {
      * @param outerHeight the outer height
      */
     void setOuterHeight(int outerHeight);
+
+    /**
+     * @return the screen this window belongs to
+     */
+    Screen getScreen();
 }

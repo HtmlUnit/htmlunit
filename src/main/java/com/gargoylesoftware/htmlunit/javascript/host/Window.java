@@ -901,7 +901,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         navigator_.setParentScope(this);
         navigator_.setPrototype(getPrototype(navigator_.getClass()));
 
-        screen_ = new Screen();
+        screen_ = new Screen(getWebWindow().getScreen());
         screen_.setParentScope(this);
         screen_.setPrototype(getPrototype(screen_.getClass()));
 

@@ -30,6 +30,11 @@ import java.security.KeyStore;
  */
 public class WebClientOptions implements Serializable {
 
+    /** 1920. */
+    private static final int DEFAULT_SCRREN_WIDTH = 1920;
+    /** 1080. */
+    private static final int DEFAULT_SCRREN_HEIGHT = 1080;
+
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;
     private boolean printContentOnFailingStatusCode_ = true;
@@ -58,8 +63,8 @@ public class WebClientOptions implements Serializable {
     private int historyPageCacheLimit_ = Integer.MAX_VALUE;
     private InetAddress localAddress_;
     private boolean downloadImages_;
-    private int screenWidth_ = 1920;
-    private int screenHeight_ = 1080;
+    private int screenWidth_ = DEFAULT_SCRREN_WIDTH;
+    private int screenHeight_ = DEFAULT_SCRREN_HEIGHT;
 
     private boolean webSocketEnabled_ = true;
     private int webSocketMaxTextMessageSize_ = -1;
