@@ -48,6 +48,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.AlertHandler;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
@@ -4417,6 +4418,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             return 1;
         }
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     * optimized version
+     */
+    @Override
+    public BrowserVersion getBrowserVersion() {
+        return getWebWindow().getWebClient().getBrowserVersion();
     }
 }
 
