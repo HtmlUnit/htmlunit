@@ -257,11 +257,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * Creates an instance.
      *
-     * @param style the original Style
+     * @param element the element this belongs to
      */
-    public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
-        super(style.getElement());
-        getElement().setDefaults(this);
+    public ComputedCSSStyleDeclaration(final Element element) {
+        super(element);
+        element.setDefaults(this);
     }
 
     /**

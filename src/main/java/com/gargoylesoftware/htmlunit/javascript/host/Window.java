@@ -1774,7 +1774,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             return styleFromCache;
         }
 
-        final CSS2Properties style = new CSS2Properties(e.getStyle());
+        final CSS2Properties style = new CSS2Properties(e);
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
