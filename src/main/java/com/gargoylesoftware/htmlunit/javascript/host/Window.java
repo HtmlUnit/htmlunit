@@ -887,12 +887,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             final SgmlPage page = (SgmlPage) pageToEnclose;
             document_.setDomNode(page);
 
-            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-            page.addDomChangeListener(listener);
-
             if (page.isHtmlPage()) {
-                ((HtmlPage) page).addHtmlAttributeChangeListener(listener);
-                ((HtmlPage) page).addAutoCloseable(this);
+                final HtmlPage htmlPage = (HtmlPage) page;
+
+                // maintain the style cache
+                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+                htmlPage.addDomChangeListener(listener);
+                htmlPage.addHtmlAttributeChangeListener(listener);
+
+                htmlPage.addAutoCloseable(this);
             }
         }
 
