@@ -31,9 +31,9 @@ import java.security.KeyStore;
 public class WebClientOptions implements Serializable {
 
     /** 1920. */
-    public static final int DEFAULT_SCRREN_WIDTH = 1920;
+    private static final int DEFAULT_SCRREN_WIDTH = 1920;
     /** 1080. */
-    public static final int DEFAULT_SCRREN_HEIGHT = 1080;
+    private static final int DEFAULT_SCRREN_HEIGHT = 1080;
 
     private boolean javaScriptEnabled_ = true;
     private boolean cssEnabled_ = true;

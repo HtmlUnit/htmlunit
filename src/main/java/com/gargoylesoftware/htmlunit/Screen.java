@@ -28,14 +28,16 @@ import java.io.Serializable;
  */
 public class Screen implements Serializable {
 
-    private final transient WebClient webClient_;
+    private final int screenHeight_;
+    private final int screenWidth_;
 
     /**
      * Creates an instance.
      * @param webClient the client this belongs to
      */
     public Screen(final WebClient webClient) {
-        webClient_ = webClient;
+        screenHeight_ = webClient.getOptions().getScreenHeight();
+        screenWidth_ =  webClient.getOptions().getScreenWidth();
     }
 
     /**
@@ -177,10 +179,7 @@ public class Screen implements Serializable {
      * @return the {@code height} property
      */
     public int getHeight() {
-        if (webClient_ == null) {
-            return WebClientOptions.DEFAULT_SCRREN_HEIGHT;
-        }
-        return webClient_.getOptions().getScreenHeight();
+        return screenHeight_;
     }
 
     /**
@@ -300,10 +299,7 @@ public class Screen implements Serializable {
      * @return the {@code width} property
      */
     public int getWidth() {
-        if (webClient_ == null) {
-            return WebClientOptions.DEFAULT_SCRREN_WIDTH;
-        }
-        return webClient_.getOptions().getScreenWidth();
+        return screenWidth_;
     }
 
     /**
