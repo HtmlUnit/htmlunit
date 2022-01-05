@@ -36,7 +36,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.2.1</checkstyle.version>
-        <spotbugs.version>4.5.2</spotbugs.version>
+        <spotbugs.version>4.5.3</spotbugs.version>
         <pmd.version>6.41.0</pmd.version>
         <archunit.version>0.22.0</archunit.version>
         <dependencycheck.version>6.5.2</dependencycheck.version>
@@ -74,7 +74,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.5.2.0</version>
+                <version>4.5.3.0</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -316,7 +316,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.15.0</version>
+                <version>1.16.0</version>
                 <executions>
                     <execution>
                         <goals>
