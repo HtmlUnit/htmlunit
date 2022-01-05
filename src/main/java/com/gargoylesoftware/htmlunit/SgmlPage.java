@@ -395,7 +395,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * Clears the computed styles for a specific {@link Element}.
      * @param element the element to clear its cache
      */
-    public void clearComputedStyles(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+    public void clearComputedStyles(final DomElement element) {
     }
 
     /**
@@ -405,6 +405,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * and all parent elements.
      * @param element the element to clear its cache
      */
-    public void clearComputedStylesUpToRoot(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+    public void clearComputedStylesUpToRoot(final DomElement element) {
     }
 }

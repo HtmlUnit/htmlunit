@@ -2668,7 +2668,7 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    public void clearComputedStyles(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+    public void clearComputedStyles(final DomElement element) {
         cssPropertiesCache_.remove(element);
     }
 
@@ -2676,13 +2676,13 @@ public class HtmlPage extends SgmlPage {
      * {@inheritDoc}
      */
     @Override
-    public void clearComputedStylesUpToRoot(final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+    public void clearComputedStylesUpToRoot(final DomElement element) {
         cssPropertiesCache_.remove(element);
 
-        com.gargoylesoftware.htmlunit.javascript.host.Element parent = element.getParentElement();
+        DomNode parent = element.getParentNode();
         while (parent != null) {
             cssPropertiesCache_.remove(parent);
-            parent = parent.getParentElement();
+            parent = parent.getParentNode();
         }
     }
 
@@ -2792,14 +2792,14 @@ public class HtmlPage extends SgmlPage {
             nodeChanged(event.getHtmlElement(), event.getName());
         }
 
-        private void nodeChanged(final DomNode changed, final String attribName) {
+        private void nodeChanged(final DomNode changedNode, final String attribName) {
             // If a stylesheet was changed, all of our calculations could be off; clear the cache.
-            if (changed instanceof HtmlStyle) {
+            if (changedNode instanceof HtmlStyle) {
                 clearComputedStyles();
                 return;
             }
-            if (changed instanceof HtmlLink) {
-                if (((HtmlLink) changed).isStyleSheetLink()) {
+            if (changedNode instanceof HtmlLink) {
+                if (((HtmlLink) changedNode).isStyleSheetLink()) {
                     clearComputedStyles();
                     return;
                 }
@@ -2807,7 +2807,7 @@ public class HtmlPage extends SgmlPage {
 
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-            cssPropertiesCache_.nodeChanged(changed, clearParents);
+            cssPropertiesCache_.nodeChanged(changedNode, clearParents);
         }
     }
 
@@ -2886,7 +2886,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         public synchronized Map<String, CSS2Properties> remove(
-                final com.gargoylesoftware.htmlunit.javascript.host.Element element) {
+                final DomNode element) {
             return computedStyles_.remove(element);
         }
 

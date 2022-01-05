@@ -433,7 +433,7 @@ public class HTMLTableElement extends RowContainer {
     @Override
     public Object appendChild(final Object childObject) {
         final Object appendedChild = super.appendChild(childObject);
-        getDomNodeOrDie().getPage().clearComputedStyles(this);
+        getDomNodeOrDie().getPage().clearComputedStyles(getDomNodeOrDie());
         return appendedChild;
     }
 
@@ -443,7 +443,7 @@ public class HTMLTableElement extends RowContainer {
     @Override
     public Object removeChild(final Object childObject) {
         final Object removedChild = super.removeChild(childObject);
-        getDomNodeOrDie().getPage().clearComputedStyles(this);
+        getDomNodeOrDie().getPage().clearComputedStyles(getDomNodeOrDie());
         return removedChild;
     }
 
