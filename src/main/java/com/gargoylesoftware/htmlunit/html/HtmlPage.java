@@ -186,6 +186,7 @@ public class HtmlPage extends SgmlPage {
     private List<Range> selectionRanges_ = new ArrayList<>(3);
 
     private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
+    private boolean cacheRefreshListenerAdded_;
 
     private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
@@ -223,11 +224,6 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
-
-        // maintain the style cache
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-        addDomChangeListener(listener);
-        addHtmlAttributeChangeListener(listener);
     }
 
     /**
@@ -2162,6 +2158,7 @@ public class HtmlPage extends SgmlPage {
      */
     public void registerParsingEnd() {
         parserCount_--;
+        addCacheRefreshListenerIfRequired();
     }
 
     /**
@@ -2634,10 +2631,7 @@ public class HtmlPage extends SgmlPage {
 
         lock_ = new Object();
         cssPropertiesCache_ = new CSSPropertiesCache();
-
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-        addDomChangeListener(listener);
-        addHtmlAttributeChangeListener(listener);
+        addCacheRefreshListenerIfRequired();
     }
 
     /**
@@ -2712,6 +2706,23 @@ public class HtmlPage extends SgmlPage {
      */
     public void putStyleIntoCache(final DomElement element, final String normalizedPseudo, final CSS2Properties style) {
         cssPropertiesCache_.put(element, normalizedPseudo, style);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Add a cache refresh listener if not done so far.
+     */
+    public void addCacheRefreshListenerIfRequired() {
+        if (cacheRefreshListenerAdded_) {
+            return;
+        }
+
+        // maintain the style cache
+        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+        addDomChangeListener(listener);
+        addHtmlAttributeChangeListener(listener);
+        cacheRefreshListenerAdded_ = true;
     }
 
     /**
