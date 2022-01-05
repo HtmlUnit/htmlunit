@@ -1445,8 +1445,7 @@ public class DomElement extends DomNamespaceNode implements Element {
         if (mouseOver_ != mouseOver) {
             mouseOver_ = mouseOver;
 
-            final SimpleScriptable scriptable = getScriptableObject();
-            scriptable.getWindow().clearComputedStyles();
+            page.clearComputedStyles();
         }
 
         return currentPage;

@@ -29,19 +29,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.WeakHashMap;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -65,14 +59,11 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
-import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
-import com.gargoylesoftware.htmlunit.html.DomChangeListener;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
@@ -80,12 +71,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
-import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlMap;
 import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
@@ -156,13 +145,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
-    /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
-    private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
-            "style",
-            "class",
-            "height",
-            "width"));
-
     /** To be documented. */
     @JsxConstant({CHROME, EDGE})
     public static final short TEMPORARY = 0;
@@ -192,8 +174,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
 
-    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
-
     private final EnumMap<Type, Storage> storages_ = new EnumMap<>(Type.class);
 
     private transient List<AnimationFrame> animationFrames_ = new ArrayList<>();
@@ -205,87 +185,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         AnimationFrame(final long id, final Function callback) {
             id_ = id;
             callback_ = callback;
-        }
-    }
-
-    /**
-     * Cache computed styles when possible, because their calculation is very expensive.
-     * We use a weak hash map because we don't want this cache to be the only reason
-     * nodes are kept around in the JVM, if all other references to them are gone.
-     */
-    private static final class CSSPropertiesCache implements Serializable {
-        private transient WeakHashMap<Element, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
-
-        CSSPropertiesCache() {
-        }
-
-        public synchronized CSS2Properties get(final Element element, final String normalizedPseudo) {
-            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
-            if (elementMap != null) {
-                return elementMap.get(normalizedPseudo);
-            }
-            return null;
-        }
-
-        public synchronized void put(final Element element, final String normalizedPseudo, final CSS2Properties style) {
-            final Map<String, CSS2Properties>
-                    elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
-            elementMap.put(normalizedPseudo, style);
-        }
-
-        public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
-            final Iterator<Map.Entry<Element, Map<String, CSS2Properties>>> i = computedStyles_.entrySet().iterator();
-            while (i.hasNext()) {
-                final Map.Entry<Element, Map<String, CSS2Properties>> entry = i.next();
-                final DomNode node = entry.getKey().getDomNodeOrDie();
-                if (changed == node
-                    || changed.getParentNode() == node.getParentNode()
-                    || changed.isAncestorOf(node)
-                    || clearParents && node.isAncestorOf(changed)) {
-                    i.remove();
-                }
-            }
-
-            // maybe this is a better solution but i have to think a bit more about this
-            //
-            //            if (computedStyles_.isEmpty()) {
-            //                return;
-            //            }
-            //
-            //            // remove all siblings
-            //            DomNode parent = changed.getParentNode();
-            //            if (parent != null) {
-            //                for (DomNode sibling : parent.getChildNodes()) {
-            //                    computedStyles_.remove(sibling.getScriptableObject());
-            //                }
-            //
-            //                if (clearParents) {
-            //                    // remove all parents
-            //                    while (parent != null) {
-            //                        computedStyles_.remove(parent.getScriptableObject());
-            //                        parent = parent.getParentNode();
-            //                    }
-            //                }
-            //            }
-            //
-            //            // remove changed itself and all descendants
-            //            computedStyles_.remove(changed.getScriptableObject());
-            //            for (DomNode descendant : changed.getDescendants()) {
-            //                computedStyles_.remove(descendant.getScriptableObject());
-            //            }
-        }
-
-        public synchronized void clear() {
-            computedStyles_.clear();
-        }
-
-        public synchronized Map<String, CSS2Properties> remove(final Element element) {
-            return computedStyles_.remove(element);
-        }
-
-        private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-            in.defaultReadObject();
-            computedStyles_ = new WeakHashMap<>();
         }
     }
 
@@ -318,7 +217,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      */
     private void readObject(final ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
-        cssPropertiesCache_ = new CSSPropertiesCache();
         animationFrames_ = new ArrayList<>();
     }
 
@@ -889,11 +787,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
             if (page.isHtmlPage()) {
                 final HtmlPage htmlPage = (HtmlPage) page;
-
-                // maintain the style cache
-                final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-                htmlPage.addDomChangeListener(listener);
-                htmlPage.addHtmlAttributeChangeListener(listener);
 
                 htmlPage.addAutoCloseable(this);
             }
@@ -1772,9 +1665,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             }
         }
 
-        final CSS2Properties styleFromCache = cssPropertiesCache_.get(e, normalizedPseudo);
-        if (styleFromCache != null) {
-            return styleFromCache;
+        final SgmlPage sgmlPage = e.getDomNodeOrDie().getPage();
+        if (sgmlPage instanceof HtmlPage) {
+            final CSS2Properties styleFromCache = ((HtmlPage) sgmlPage).getStyleFromCache(e, normalizedPseudo);
+            if (styleFromCache != null) {
+                return styleFromCache;
+            }
         }
 
         final CSS2Properties style = new CSS2Properties(e);
@@ -1792,7 +1688,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
                 }
             }
 
-            cssPropertiesCache_.put(e, normalizedPseudo, style);
+            ((HtmlPage) e.getDomNodeOrDie().getPage()).putStyleIntoCache(e, normalizedPseudo, style);
         }
         return style;
     }
@@ -1938,133 +1834,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
                         || object instanceof HtmlMap
                         || object instanceof HtmlSelect
                         || object instanceof HtmlTextArea);
-        }
-    }
-
-    /**
-     * Clears the computed styles.
-     */
-    public void clearComputedStyles() {
-        cssPropertiesCache_.clear();
-    }
-
-    /**
-     * Clears the computed styles for a specific {@link Element}.
-     * @param element the element to clear its cache
-     */
-    public void clearComputedStyles(final Element element) {
-        cssPropertiesCache_.remove(element);
-    }
-
-    /**
-     * Clears the computed styles for a specific {@link Element}
-     * and all parent elements.
-     * @param element the element to clear its cache
-     */
-    public void clearComputedStylesUpToRoot(final Element element) {
-        cssPropertiesCache_.remove(element);
-
-        Element parent = element.getParentElement();
-        while (parent != null) {
-            cssPropertiesCache_.remove(parent);
-            parent = parent.getParentElement();
-        }
-    }
-
-    /**
-     * <p>Listens for changes anywhere in the document and evicts cached computed styles whenever something relevant
-     * changes. Note that the very lazy way of doing this (completely clearing the cache every time something happens)
-     * results in very meager performance gains. In order to get good (but still correct) performance, we need to be
-     * a little smarter.</p>
-     *
-     * <p>CSS 2.1 has the following <a href="http://www.w3.org/TR/CSS21/selector.html">selector types</a> (where "SN" is
-     * shorthand for "the selected node"):</p>
-     *
-     * <ol>
-     *   <li><em>Universal</em> (i.e. "*"): Affected by the removal of SN from the document.</li>
-     *   <li><em>Type</em> (i.e. "div"): Affected by the removal of SN from the document.</li>
-     *   <li><em>Descendant</em> (i.e. "div span"): Affected by changes to SN or to any of its ancestors.</li>
-     *   <li><em>Child</em> (i.e. "div &gt; span"): Affected by changes to SN or to its parent.</li>
-     *   <li><em>Adjacent Sibling</em> (i.e. "table + p"): Affected by changes to SN or its previous sibling.</li>
-     *   <li><em>Attribute</em> (i.e. "div.up, div[class~=up]"): Affected by changes to an attribute of SN.</li>
-     *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <tt>id</tt> attribute of SN.</li>
-     *   <li><em>Pseudo-Elements and Pseudo-Classes</em> (i.e. "p:first-child"): Affected by changes to parent.</li>
-     * </ol>
-     *
-     * <p>Together, these rules dictate that the smart (but still lazy) way of removing elements from the computed style
-     * cache is as follows -- whenever a node changes in any way, the cache needs to be cleared of styles for nodes
-     * which:</p>
-     *
-     * <ul>
-     *   <li>are actually the same node as the node that changed</li>
-     *   <li>are siblings of the node that changed</li>
-     *   <li>are descendants of the node that changed</li>
-     * </ul>
-     *
-     * <p>Additionally, whenever a <tt>style</tt> node or a <tt>link</tt> node with <tt>rel=stylesheet</tt> is added or
-     * removed, all elements should be removed from the computed style cache.</p>
-     */
-    private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {
-
-        DomHtmlAttributeChangeListenerImpl() {
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void nodeAdded(final DomChangeEvent event) {
-            nodeChanged(event.getChangedNode(), null);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void nodeDeleted(final DomChangeEvent event) {
-            nodeChanged(event.getChangedNode(), null);
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeAdded(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement(), event.getName());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeRemoved(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement(), event.getName());
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        public void attributeReplaced(final HtmlAttributeChangeEvent event) {
-            nodeChanged(event.getHtmlElement(), event.getName());
-        }
-
-        private void nodeChanged(final DomNode changed, final String attribName) {
-            // If a stylesheet was changed, all of our calculations could be off; clear the cache.
-            if (changed instanceof HtmlStyle) {
-                clearComputedStyles();
-                return;
-            }
-            if (changed instanceof HtmlLink) {
-                if (((HtmlLink) changed).isStyleSheetLink()) {
-                    clearComputedStyles();
-                    return;
-                }
-            }
-
-            // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
-            final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-            cssPropertiesCache_.nodeChanged(changed, clearParents);
         }
     }
 

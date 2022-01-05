@@ -456,10 +456,15 @@ public class WebClient implements Serializable, AutoCloseable {
                     webWindow.getHistory().addPage(page);
                 }
 
+                // clear the cache because the anchors are now matched by
+                // the target pseudo style
+                if (page instanceof HtmlPage) {
+                    ((HtmlPage) page).clearComputedStyles();
+                }
+
                 final Window window = webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
-                    window.clearComputedStyles();
                 }
                 return (P) page;
             }

@@ -139,8 +139,9 @@ public class HTMLStyleElement extends HTMLElement {
         final CSSStyleSheet sheet = getSheet();
         final boolean modified = disabled == sheet.isEnabled();
         sheet.setEnabled(!disabled);
+
         if (modified) {
-            getWindow().clearComputedStyles();
+            getDomNodeOrDie().getPage().clearComputedStyles();
         }
     }
 }
