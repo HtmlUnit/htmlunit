@@ -23,7 +23,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomComment;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
@@ -58,7 +60,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.html.TableRowGroup;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * Utility to handle conversion from HTML code to string.
@@ -197,11 +198,10 @@ public class HtmlSerializerNormalizedText {
         boolean block = false;
         if (!(domNode instanceof HtmlBody)) {
             final SgmlPage page = domNode.getPage();
-            if (page != null && page.getWebClient().isJavaScriptEngineEnabled()) {
-                final Object scriptableObject = domNode.getScriptableObject();
-                if (scriptableObject instanceof Element) {
-                    final Element element = (Element) scriptableObject;
-                    final String display = element.getWindow().getComputedStyle(element, null).getDisplay();
+            final WebWindow window = page.getEnclosingWindow();
+            if (page != null && window.getWebClient().getOptions().isCssEnabled()) {
+                if (domNode instanceof DomElement) {
+                    final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
                     block = "block".equals(display);
                 }
             }

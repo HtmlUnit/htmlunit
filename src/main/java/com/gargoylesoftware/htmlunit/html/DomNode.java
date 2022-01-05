@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText;
@@ -64,7 +65,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -718,7 +718,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
 
         final Page page = getPage();
-        final WebClient webClient = page.getEnclosingWindow().getWebClient();
+        final WebWindow window = page.getEnclosingWindow();
+        final WebClient webClient = window.getWebClient();
         if (webClient.getOptions().isCssEnabled() && webClient.isJavaScriptEnabled()) {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
@@ -730,10 +731,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     return false;
                 }
 
-                final Object scriptableObject = ((DomNode) node).getScriptableObject();
-                if (scriptableObject instanceof HTMLElement) {
-                    final HTMLElement elem = (HTMLElement) scriptableObject;
-                    final CSSStyleDeclaration style = elem.getWindow().getComputedStyle(elem, null);
+                if (node instanceof HtmlElement) {
+                    final CSSStyleDeclaration style = window.getComputedStyle((HtmlElement) node, null);
                     if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }

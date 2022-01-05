@@ -2693,7 +2693,7 @@ public class HtmlPage extends SgmlPage {
      * @param normalizedPseudo the pseudo attribute
      * @return the cached CSS2Properties object or null
      */
-    public CSS2Properties getStyleFromCache(final com.gargoylesoftware.htmlunit.javascript.host.Element element,
+    public CSS2Properties getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
         final CSS2Properties styleFromCache = cssPropertiesCache_.get(element, normalizedPseudo);
         if (styleFromCache != null) {
@@ -2710,8 +2710,7 @@ public class HtmlPage extends SgmlPage {
      * @param normalizedPseudo the pseudo attribute
      * @param style the CSS2Properties to cache
      */
-    public void putStyleIntoCache(final com.gargoylesoftware.htmlunit.javascript.host.Element element,
-            final String normalizedPseudo, final CSS2Properties style) {
+    public void putStyleIntoCache(final DomElement element, final String normalizedPseudo, final CSS2Properties style) {
         cssPropertiesCache_.put(element, normalizedPseudo, style);
     }
 
@@ -2818,13 +2817,12 @@ public class HtmlPage extends SgmlPage {
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
     private static final class CSSPropertiesCache implements Serializable {
-        private transient WeakHashMap<com.gargoylesoftware.htmlunit.javascript.host.Element, Map<String,
-            CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+        private transient WeakHashMap<DomElement, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
 
         CSSPropertiesCache() {
         }
 
-        public synchronized CSS2Properties get(final com.gargoylesoftware.htmlunit.javascript.host.Element element,
+        public synchronized CSS2Properties get(final DomElement element,
                 final String normalizedPseudo) {
             final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
@@ -2833,7 +2831,7 @@ public class HtmlPage extends SgmlPage {
             return null;
         }
 
-        public synchronized void put(final com.gargoylesoftware.htmlunit.javascript.host.Element element,
+        public synchronized void put(final DomElement element,
                 final String normalizedPseudo, final CSS2Properties style) {
             final Map<String, CSS2Properties>
                     elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
@@ -2841,13 +2839,11 @@ public class HtmlPage extends SgmlPage {
         }
 
         public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
-            final Iterator<Map.Entry
-                            <com.gargoylesoftware.htmlunit.javascript.host.Element, Map<String, CSS2Properties>>>
+            final Iterator<Map.Entry<DomElement, Map<String, CSS2Properties>>>
                     i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
-                final Map.Entry<com.gargoylesoftware.htmlunit.javascript.host.Element,
-                                    Map<String, CSS2Properties>> entry = i.next();
-                final DomNode node = entry.getKey().getDomNodeOrDie();
+                final Map.Entry<DomElement, Map<String, CSS2Properties>> entry = i.next();
+                final DomElement node = entry.getKey();
                 if (changed == node
                     || changed.getParentNode() == node.getParentNode()
                     || changed.isAncestorOf(node)

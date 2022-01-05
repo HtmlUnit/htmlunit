@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_CHANGE_OPENER_ONLY_WINDOW_OBJECT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FORMFIELDS_ACCESSIBLE_BY_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAMES_ACCESSIBLE_BY_ID;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW;
@@ -87,10 +86,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -1654,43 +1651,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         }
         final Element e = (Element) element;
 
-        String normalizedPseudo = pseudoElement;
-        if (normalizedPseudo != null) {
-            if (normalizedPseudo.startsWith("::")) {
-                normalizedPseudo = normalizedPseudo.substring(1);
-            }
-            else if (getBrowserVersion().hasFeature(JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON)
-                    && normalizedPseudo.length() > 0 && normalizedPseudo.charAt(0) != ':') {
-                normalizedPseudo = ":" + normalizedPseudo;
-            }
-        }
-
-        final SgmlPage sgmlPage = e.getDomNodeOrDie().getPage();
-        if (sgmlPage instanceof HtmlPage) {
-            final CSS2Properties styleFromCache = ((HtmlPage) sgmlPage).getStyleFromCache(e, normalizedPseudo);
-            if (styleFromCache != null) {
-                return styleFromCache;
-            }
-        }
-
-        final CSS2Properties style = new CSS2Properties(e);
-        final Object ownerDocument = e.getOwnerDocument();
-        if (ownerDocument instanceof HTMLDocument) {
-            final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
-            final boolean trace = LOG.isTraceEnabled();
-            for (int i = 0; i < sheets.getLength(); i++) {
-                final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-                if (sheet.isActive() && sheet.isEnabled()) {
-                    if (trace) {
-                        LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
-                    }
-                    sheet.modifyIfNecessary(style, e, normalizedPseudo);
-                }
-            }
-
-            ((HtmlPage) e.getDomNodeOrDie().getPage()).putStyleIntoCache(e, normalizedPseudo, style);
-        }
-        return style;
+        return getWebWindow().getComputedStyle(e.getDomNodeOrDie(), pseudoElement);
     }
 
     /**
