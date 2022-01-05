@@ -224,6 +224,7 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
+        addCacheRefreshListenerIfRequired();
     }
 
     /**
@@ -2158,7 +2159,7 @@ public class HtmlPage extends SgmlPage {
      */
     public void registerParsingEnd() {
         parserCount_--;
-        addCacheRefreshListenerIfRequired();
+        clearComputedStyles();
     }
 
     /**
