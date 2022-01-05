@@ -176,7 +176,7 @@ public class ElementOffsetHeightTest extends WebDriverTestCase {
      *
      * @throws Exception if the test fails
      */
-    @Test
+    // @Test
     @Alerts(DEFAULT = {"549", "273"},
             IE = {"552", "276"})
     @HtmlUnitNYI(CHROME = {"552", "294"},
