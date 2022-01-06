@@ -26,7 +26,7 @@
 
         <htmlunitdriver.version>2.56.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.11.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.56.0</htmlunitneko.version>
+        <htmlunitneko.version>2.57.0-SNAPSHOT</htmlunitneko.version>
         <htmlunitcorejs.version>2.56.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
