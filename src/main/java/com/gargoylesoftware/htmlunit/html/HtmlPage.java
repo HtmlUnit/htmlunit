@@ -185,8 +185,7 @@ public class HtmlPage extends SgmlPage {
     private DomElement elementWithFocus_;
     private List<Range> selectionRanges_ = new ArrayList<>(3);
 
-    private CSSPropertiesCache cssPropertiesCache_ = new CSSPropertiesCache();
-    private boolean cacheRefreshListenerAdded_;
+    private CSSPropertiesCache cssPropertiesCache_;
 
     private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
@@ -224,7 +223,7 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
-        addCacheRefreshListenerIfRequired();
+        addCacheRefreshListener();
     }
 
     /**
@@ -2159,7 +2158,6 @@ public class HtmlPage extends SgmlPage {
      */
     public void registerParsingEnd() {
         parserCount_--;
-        clearComputedStyles();
     }
 
     /**
@@ -2631,8 +2629,7 @@ public class HtmlPage extends SgmlPage {
         }
 
         lock_ = new Object();
-        cssPropertiesCache_ = new CSSPropertiesCache();
-        addCacheRefreshListenerIfRequired();
+        addCacheRefreshListener();
     }
 
     /**
@@ -2714,16 +2711,13 @@ public class HtmlPage extends SgmlPage {
      *
      * Add a cache refresh listener if not done so far.
      */
-    public void addCacheRefreshListenerIfRequired() {
-        if (cacheRefreshListenerAdded_) {
-            return;
-        }
+    public void addCacheRefreshListener() {
+        cssPropertiesCache_ = new CSSPropertiesCache();
 
         // maintain the style cache
         final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
         addDomChangeListener(listener);
         addHtmlAttributeChangeListener(listener);
-        cacheRefreshListenerAdded_ = true;
     }
 
     /**
