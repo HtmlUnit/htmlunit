@@ -185,7 +185,7 @@ public class HtmlPage extends SgmlPage {
     private DomElement elementWithFocus_;
     private List<Range> selectionRanges_ = new ArrayList<>(3);
 
-    private CSSPropertiesCache cssPropertiesCache_;
+    private transient CSSPropertiesCache cssPropertiesCache_;
 
     private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
             HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
@@ -223,7 +223,6 @@ public class HtmlPage extends SgmlPage {
      */
     public HtmlPage(final WebResponse webResponse, final WebWindow webWindow) {
         super(webResponse, webWindow);
-        addCacheRefreshListener();
     }
 
     /**
@@ -2629,7 +2628,6 @@ public class HtmlPage extends SgmlPage {
         }
 
         lock_ = new Object();
-        addCacheRefreshListener();
     }
 
     /**
@@ -2653,7 +2651,9 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public void clearComputedStyles() {
-        cssPropertiesCache_.clear();
+        if (cssPropertiesCache_ != null) {
+            cssPropertiesCache_.clear();
+        }
     }
 
     /**
@@ -2661,7 +2661,9 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public void clearComputedStyles(final DomElement element) {
-        cssPropertiesCache_.remove(element);
+        if (cssPropertiesCache_ != null) {
+            cssPropertiesCache_.remove(element);
+        }
     }
 
     /**
@@ -2669,12 +2671,14 @@ public class HtmlPage extends SgmlPage {
      */
     @Override
     public void clearComputedStylesUpToRoot(final DomElement element) {
-        cssPropertiesCache_.remove(element);
+        if (cssPropertiesCache_ != null) {
+            cssPropertiesCache_.remove(element);
 
-        DomNode parent = element.getParentNode();
-        while (parent != null) {
-            cssPropertiesCache_.remove(parent);
-            parent = parent.getParentNode();
+            DomNode parent = element.getParentNode();
+            while (parent != null) {
+                cssPropertiesCache_.remove(parent);
+                parent = parent.getParentNode();
+            }
         }
     }
 
@@ -2687,7 +2691,7 @@ public class HtmlPage extends SgmlPage {
      */
     public CSS2Properties getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
-        final CSS2Properties styleFromCache = cssPropertiesCache_.get(element, normalizedPseudo);
+        final CSS2Properties styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
         if (styleFromCache != null) {
             return styleFromCache;
         }
@@ -2703,21 +2707,22 @@ public class HtmlPage extends SgmlPage {
      * @param style the CSS2Properties to cache
      */
     public void putStyleIntoCache(final DomElement element, final String normalizedPseudo, final CSS2Properties style) {
-        cssPropertiesCache_.put(element, normalizedPseudo, style);
+        getCssPropertiesCache().put(element, normalizedPseudo, style);
     }
 
     /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Add a cache refresh listener if not done so far.
+     * @return the CSSPropertiesCache for this page
      */
-    public void addCacheRefreshListener() {
-        cssPropertiesCache_ = new CSSPropertiesCache();
+    private CSSPropertiesCache getCssPropertiesCache() {
+        if (cssPropertiesCache_ == null) {
+            cssPropertiesCache_ = new CSSPropertiesCache();
 
-        // maintain the style cache
-        final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
-        addDomChangeListener(listener);
-        addHtmlAttributeChangeListener(listener);
+            // maintain the style cache
+            final DomHtmlAttributeChangeListenerImpl listener = new DomHtmlAttributeChangeListenerImpl();
+            addDomChangeListener(listener);
+            addHtmlAttributeChangeListener(listener);
+        }
+        return cssPropertiesCache_;
     }
 
     /**
@@ -2813,7 +2818,9 @@ public class HtmlPage extends SgmlPage {
 
             // Apparently it wasn't a stylesheet that changed; be semi-smart about what we evict and when.
             final boolean clearParents = ATTRIBUTES_AFFECTING_PARENT.contains(attribName);
-            cssPropertiesCache_.nodeChanged(changedNode, clearParents);
+            if (cssPropertiesCache_ != null) {
+                cssPropertiesCache_.nodeChanged(changedNode, clearParents);
+            }
         }
     }
 
