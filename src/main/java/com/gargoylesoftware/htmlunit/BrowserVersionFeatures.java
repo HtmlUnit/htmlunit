@@ -1585,10 +1585,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
 
-    /** Wait for the whole page to load before initializing bodies for frames. */
-    @BrowserFeature(IE)
-    PAGE_WAIT_LOAD_BEFORE_BODY,
-
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
     @BrowserFeature(IE)
     QUERYSELECTORALL_NOT_IN_QUIRKS,
