@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HTMLButtonElement}.
@@ -422,6 +423,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             FF = {"true", "false", "true", "true", "true", "false", "true"},
             FF_ESR = {"true", "false", "true", "true", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true", "false", "true"})
+    @HtmlUnitNYI(CHROME = {"true", "false", "true", "false", "true", "false", "true"},
+            EDGE = {"true", "false", "true", "false", "true", "false", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"
