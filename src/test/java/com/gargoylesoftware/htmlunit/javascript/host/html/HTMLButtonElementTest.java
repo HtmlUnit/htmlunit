@@ -418,7 +418,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "false", "true"},
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "false", "false"},
             FF = {"true", "false", "true", "true", "true", "false", "true"},
             FF_ESR = {"true", "false", "true", "true", "true", "false", "true"},
             IE = {"true", "false", "true", "true", "true", "false", "true"})
