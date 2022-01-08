@@ -202,7 +202,7 @@
                 The unit tests of some well-known JavaScript libraries are included in HtmlUnit's own unit tests; based on these unit
                 tests, the following libraries are known to work well with HtmlUnit:
                 <ul>
-                    <li>htmx 1.15.0: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/HtmxTest.java">here</a>)</li>
+                    <li>htmx 1.6.1: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/HtmxTest.java">here</a>)</li>
                     <li>jQuery 1.11.3: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery1x11x3Test.java">here</a>)</li>
                     <li>jQuery 1.8.2: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/JQuery182Test.java">here</a>)</li>
                     <li>MochiKit 1.4.1: Full support (see unit tests <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/com/gargoylesoftware/htmlunit/libraries/MochiKitTest.java">here</a>)</li>
