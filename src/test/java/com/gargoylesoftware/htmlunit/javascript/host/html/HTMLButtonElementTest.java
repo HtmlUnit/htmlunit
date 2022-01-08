@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HTMLButtonElement}.
@@ -419,12 +418,10 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "false", "false"},
-            FF = {"true", "false", "true", "true", "true", "false", "true"},
-            FF_ESR = {"true", "false", "true", "true", "true", "false", "true"},
-            IE = {"true", "false", "true", "true", "true", "false", "true"})
-    @HtmlUnitNYI(CHROME = {"true", "false", "true", "false", "true", "false", "true"},
-            EDGE = {"true", "false", "true", "false", "true", "false", "true"})
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "true", "false", "false", "true", "true"},
+            FF = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
+            IE = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
     public void willValidate() throws Exception {
         final String html =
                 "<html><head>\n"
@@ -438,6 +435,9 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
                 + "      log(document.getElementById('b5').willValidate);\n"
                 + "      log(document.getElementById('b6').willValidate);\n"
                 + "      log(document.getElementById('b7').willValidate);\n"
+                + "      log(document.getElementById('b8').willValidate);\n"
+                + "      log(document.getElementById('b9').willValidate);\n"
+                + "      log(document.getElementById('b10').willValidate);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -448,8 +448,11 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
                 + "    <button id='b3' hidden>b3</button>\n"
                 + "    <button id='b4' readonly>b4</button>\n"
                 + "    <button id='b5' style='display: none'>b5</button>\n"
-                + "    <button id='b6' type='reset'>b6</button>\n"
-                + "    <button id='b7' type='button'>b7</button>\n"
+                + "    <button id='b6' type='submit'>b6</button>\n"
+                + "    <button id='b7' type='reset'>b7</button>\n"
+                + "    <button id='b8' type='button'>b8</button>\n"
+                + "    <button id='b9' type='unknown'>b9</button>\n"
+                + "    <button id='b10' type=''>b10</button>\n"
                 + "  </form>\n"
                 + "</body></html>";
 
