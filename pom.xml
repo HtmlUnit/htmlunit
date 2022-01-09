@@ -755,7 +755,7 @@
     </scm>
     <ciManagement>
         <system>Jenkins</system>
-        <url>http://167.86.92.69/job/HtmlUnit/</url>
+        <url>https://jenkins.wetator.org/view/HtmlUnit/</url>
     </ciManagement>
     <mailingLists>
         <mailingList>
