@@ -366,19 +366,19 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
-     */
-    @JsxFunction
-    public void setCustomValidity(final String message) {
-        // empty impl for now
-    }
-
-    /**
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
     public boolean getWillValidate() {
         return ((HtmlObject) getDomNodeOrDie()).willValidate();
+    }
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    @JsxFunction
+    public void setCustomValidity(final String message) {
+        ((HtmlObject) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

@@ -25,4 +25,10 @@ public interface ValidatableElement {
      * @return whether the element is a candidate for constraint validation
      */
     boolean willValidate();
+
+    /**
+     * Sets the custom validity message for the element to the specified message.
+     * @param message the new message
+     */
+    void setCustomValidity(String message);
 }

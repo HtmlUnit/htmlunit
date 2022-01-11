@@ -101,6 +101,6 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        ((HtmlOutput) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

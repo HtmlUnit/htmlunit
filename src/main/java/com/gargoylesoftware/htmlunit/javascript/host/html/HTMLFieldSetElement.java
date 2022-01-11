@@ -138,6 +138,6 @@ public class HTMLFieldSetElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        ((HtmlFieldSet) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

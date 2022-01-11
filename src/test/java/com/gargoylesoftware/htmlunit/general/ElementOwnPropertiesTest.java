@@ -7110,11 +7110,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,namedRecordset(),object,readyState,recordset,"
                 + "setCustomValidity(),standby,type,useMap,validationMessage,validity,vspace,width,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),width",
-            EDGE = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),width",
-            FF_ESR = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),width",
-            FF = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),width",
-            IE = "align,alt,border,checkValidity(),classid,constructor,form,height,name,setCustomValidity(),width")
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
+                        + "width,willValidate",
+            EDGE = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
+                        + "width,willValidate",
+            FF_ESR = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity()"
+                        + ",width,willValidate",
+            FF = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
+                        + "width,willValidate",
+            IE = "align,alt,border,checkValidity(),classid,constructor,form,height,name,setCustomValidity(),"
+                        + "width,willValidate")
     public void object() throws Exception {
         test("object");
     }

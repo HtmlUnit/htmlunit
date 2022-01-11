@@ -779,9 +779,9 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
+     * {@inheritDoc}
      */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }

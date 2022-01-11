@@ -58,4 +58,11 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
     public boolean willValidate() {
         return hasFeature(HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCustomValidity(final String message) {
+    }
 }

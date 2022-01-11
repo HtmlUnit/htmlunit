@@ -452,4 +452,11 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     public boolean willValidate() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCustomValidity(final String message) {
+    }
 }
