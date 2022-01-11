@@ -648,4 +648,64 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }
+
+    @Override
+    public boolean hasBadInput() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isCustomError() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasPatternMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isStepMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isTooLong() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isTooShort() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasTypeMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeOverflow() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeUnderflow() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isValueMissing() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

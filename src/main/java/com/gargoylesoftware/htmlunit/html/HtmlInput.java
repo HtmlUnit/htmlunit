@@ -1040,4 +1040,64 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
         return !"submit".equals(type) && !"image".equals(type) && !"reset".equals(type) && !"button".equals(type);
     }
+
+    @Override
+    public boolean hasBadInput() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isCustomError() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasPatternMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isStepMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isTooLong() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isTooShort() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasTypeMismatch() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeOverflow() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeUnderflow() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isValueMissing() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

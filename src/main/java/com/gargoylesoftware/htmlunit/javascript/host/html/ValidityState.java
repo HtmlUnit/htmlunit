@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import com.gargoylesoftware.htmlunit.html.ValidatableElement;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -40,13 +41,25 @@ public class ValidityState extends SimpleScriptable {
     public ValidityState() {
     }
 
+    private ValidatableElement getValidatableElementOrDie() {
+        return (ValidatableElement) getDomNodeOrDie();
+    }
+
     /**
-     * Returns whether the customer validity message is set or not.
+     * @return a boolean value that is true if the user has provided
+     * input that the browser is unable to convert.
+     */
+    @JsxGetter
+    public boolean hasBadInput() {
+        return getValidatableElementOrDie().hasBadInput();
+    }
+
+    /**
      * @return whether the customer validity message is set or not
      */
     @JsxGetter
     public boolean isCustomError() {
-        return false;
+        return getValidatableElementOrDie().isCustomError();
     }
 
     /**
@@ -54,8 +67,8 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value does not match its {@code pattern} attribute
      */
     @JsxGetter
-    public boolean isPatternMismatch() {
-        return false;
+    public boolean hasPatternMismatch() {
+        return getValidatableElementOrDie().hasPatternMismatch();
     }
 
     /**
@@ -63,8 +76,8 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value is greater than its {@code max} attribute
      */
     @JsxGetter
-    public boolean isRangeOverlow() {
-        return false;
+    public boolean hasRangeOverlow() {
+        return getValidatableElementOrDie().hasRangeOverflow();
     }
 
     /**
@@ -72,8 +85,8 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value is less than its {@code min} attribute
      */
     @JsxGetter
-    public boolean isRangeUnderflow() {
-        return false;
+    public boolean hasRangeUnderflow() {
+        return getValidatableElementOrDie().hasRangeUnderflow();
     }
 
     /**
@@ -82,15 +95,25 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isStepMismatch() {
-        return false;
+        return getValidatableElementOrDie().isStepMismatch();
     }
 
     /**
      * Returns whether the element value exceeds its {@code maxLength} attribute.
      * @return whether the element value exceeds its {@code maxLength} attribute
      */
+    @JsxGetter
     public boolean isTooLong() {
-        return false;
+        return getValidatableElementOrDie().isTooLong();
+    }
+
+    /**
+     * Returns whether the element value exceeds its {@code minLength} attribute.
+     * @return whether the element value exceeds its {@code minLength} attribute
+     */
+    @JsxGetter
+    public boolean isTooShort() {
+        return getValidatableElementOrDie().isTooShort();
     }
 
     /**
@@ -99,7 +122,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isTypeMismatch() {
-        return false;
+        return getValidatableElementOrDie().hasTypeMismatch();
     }
 
     /**
@@ -108,7 +131,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isValueMissing() {
-        return false;
+        return getValidatableElementOrDie().isValueMissing();
     }
 
     /**
@@ -117,7 +140,6 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isValid() {
-        return false;
+        return getValidatableElementOrDie().isValid();
     }
-
 }
