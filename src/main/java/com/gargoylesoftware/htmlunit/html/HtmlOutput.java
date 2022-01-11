@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlOutput extends HtmlElement implements LabelableElement {
+public class HtmlOutput extends HtmlElement implements LabelableElement, ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "output";
@@ -52,8 +52,9 @@ public class HtmlOutput extends HtmlElement implements LabelableElement {
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return hasFeature(HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE);
     }

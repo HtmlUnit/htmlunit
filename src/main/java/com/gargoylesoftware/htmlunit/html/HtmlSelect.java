@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory {
+                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
@@ -769,8 +769,9 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
                 || (!isDisabled()

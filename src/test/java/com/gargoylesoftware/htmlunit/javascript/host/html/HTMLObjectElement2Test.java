@@ -86,4 +86,36 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
         loadPage2(html);
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('o1').willValidate);\n"
+                + "      log(document.getElementById('o2').willValidate);\n"
+                + "      log(document.getElementById('o3').willValidate);\n"
+                + "      log(document.getElementById('o4').willValidate);\n"
+                + "      log(document.getElementById('o5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o1'>o1</object>\n"
+                + "    <object id='o2' disabled>o2</object>\n"
+                + "    <object id='o3' hidden>o3</object>\n"
+                + "    <object id='o4' readonly>o4</object>\n"
+                + "    <object id='o5' style='display: none'>o5</object>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

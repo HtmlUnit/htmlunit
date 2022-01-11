@@ -2644,11 +2644,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),width")
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
+            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
+            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
+            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
+            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),width,willValidate")
     public void object() throws Exception {
         test("object");
     }

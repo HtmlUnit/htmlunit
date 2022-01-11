@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Anton Demydenko
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
-    FormFieldWithNameHistory {
+    FormFieldWithNameHistory, ValidatableElement  {
 
     private static final Log LOG = LogFactory.getLog(HtmlInput.class);
 
@@ -1010,8 +1010,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return !isDisabled() && !isReadOnly();
     }

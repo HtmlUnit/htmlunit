@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class HtmlFieldSet extends HtmlElement {
+public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";
@@ -46,8 +46,9 @@ public class HtmlFieldSet extends HtmlElement {
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return false;
     }

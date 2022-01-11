@@ -373,4 +373,12 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     public void setCustomValidity(final String message) {
         // empty impl for now
     }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return ((HtmlObject) getDomNodeOrDie()).willValidate();
+    }
 }

@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory {
+                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
@@ -410,8 +410,9 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         if (TYPE_RESET.equals(getType()) || TYPE_BUTTON.equals(getType())) {
             return false;

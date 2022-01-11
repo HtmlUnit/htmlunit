@@ -53,8 +53,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, SelectableTextInput,
-    FormFieldWithNameHistory {
+                LabelableElement, SelectableTextInput, FormFieldWithNameHistory, ValidatableElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
 
@@ -634,8 +633,9 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return !isDisabled()
                 && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());

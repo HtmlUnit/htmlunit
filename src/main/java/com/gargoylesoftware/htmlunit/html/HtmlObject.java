@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * @author Ronald Brill
  * @author Frank Danek
  */
-public class HtmlObject extends HtmlElement {
+public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlObject.class);
 
@@ -443,5 +443,13 @@ public class HtmlObject extends HtmlElement {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean willValidate() {
+        return false;
     }
 }
