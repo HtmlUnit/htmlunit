@@ -94,6 +94,9 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.TimeoutError;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
+import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -343,6 +346,7 @@ public class HtmlPage extends SgmlPage {
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
+        executeInitializationJobs(enclosingWindow);
         executeRefreshIfNeeded();
     }
 
@@ -2906,6 +2910,38 @@ public class HtmlPage extends SgmlPage {
         private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
             in.defaultReadObject();
             computedStyles_ = new WeakHashMap<>();
+        }
+    }
+    
+    /**
+     * Executes js jobs usually needed to initialize the page.
+     * @param webWindow The enclosing window of the page.
+     */
+    private void executeInitializationJobs(WebWindow webWindow) {
+        if (!getWebClient().isJavaScriptEnabled()) {
+            return;
+        }
+        final JavaScriptJobManager jobManager = webWindow.getJobManager();
+        if (jobManager != null) {
+            int jobsDone = 0;
+            JavaScriptJob earliestJob = jobManager.getEarliestJob();
+            try {
+                while(earliestJob != null && (earliestJob.isExecuteAsap() || earliestJob.getTargetExecutionTime() <= System.currentTimeMillis())) {
+                    jobManager.runSingleJob(earliestJob);
+                    jobsDone++;
+                    if(jobsDone > 1000) {
+                        LOG.warn("Too many init jobs executed for window " + webWindow + ". Return for now.");
+                        break;
+                    }
+                    earliestJob = jobManager.getEarliestJob();
+                }
+            } catch(TimeoutError e) {
+                getWebClient().getJavaScriptErrorListener().timeoutError(this, e.getAllowedTime(), e.getExecutionTime());
+                if (getWebClient().getOptions().isThrowExceptionOnScriptError()) {
+                    throw new RuntimeException(e);
+                }
+                LOG.info("Caught script timeout error", e);
+            }
         }
     }
 }
