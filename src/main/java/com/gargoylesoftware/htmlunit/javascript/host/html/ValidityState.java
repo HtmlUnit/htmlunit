@@ -49,8 +49,8 @@ public class ValidityState extends SimpleScriptable {
      * @return a boolean value that is true if the user has provided
      * input that the browser is unable to convert.
      */
-    @JsxGetter
-    public boolean hasBadInput() {
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public boolean isBadInput() {
         return getValidatableElementOrDie().hasBadInput();
     }
 
@@ -67,7 +67,7 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value does not match its {@code pattern} attribute
      */
     @JsxGetter
-    public boolean hasPatternMismatch() {
+    public boolean isPatternMismatch() {
         return getValidatableElementOrDie().hasPatternMismatch();
     }
 
@@ -76,7 +76,7 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value is greater than its {@code max} attribute
      */
     @JsxGetter
-    public boolean hasRangeOverlow() {
+    public boolean isRangeOverflow() {
         return getValidatableElementOrDie().hasRangeOverflow();
     }
 
@@ -85,7 +85,7 @@ public class ValidityState extends SimpleScriptable {
      * @return whether the element value is less than its {@code min} attribute
      */
     @JsxGetter
-    public boolean hasRangeUnderflow() {
+    public boolean isRangeUnderflow() {
         return getValidatableElementOrDie().hasRangeUnderflow();
     }
 
@@ -111,7 +111,7 @@ public class ValidityState extends SimpleScriptable {
      * Returns whether the element value exceeds its {@code minLength} attribute.
      * @return whether the element value exceeds its {@code minLength} attribute
      */
-    @JsxGetter
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public boolean isTooShort() {
         return getValidatableElementOrDie().isTooShort();
     }
