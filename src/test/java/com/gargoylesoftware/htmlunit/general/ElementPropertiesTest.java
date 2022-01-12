@@ -2707,13 +2707,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,value,"
-                + "willValidate",
+                + "validationMessage,validity,value,willValidate",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            EDGE = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            FF_ESR = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            FF = "checkValidity(),labels,name,setCustomValidity(),willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate")
     public void output() throws Exception {
         test("output");
     }

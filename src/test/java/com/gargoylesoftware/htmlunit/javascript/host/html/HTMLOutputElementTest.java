@@ -101,4 +101,88 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
+            IE = "no validity")
+    public void validityState() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('o1');\n"
+                + "      if (!elem.validity) { log('no validity'); return }\n"
+                + "      logValidityState(elem.validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o1'>o1</output>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false",
+                       "false-true-false-false-false-false-false-false-false-false-false"},
+            IE = "no validity")
+    public void validityStateCustomValidity() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('o1');\n"
+                + "      var validity = elem.validity;\n"
+                + "      if (!elem.validity) { log('no validity'); return }\n"
+                + "      logValidityState(validity);\n"
+                + "      elem.setCustomValidity('Invalid');\n"
+                + "      logValidityState(validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o1'>o1</output>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

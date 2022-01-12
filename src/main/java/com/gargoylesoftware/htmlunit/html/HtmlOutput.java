@@ -18,6 +18,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLOUTPUT_WI
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -30,6 +32,8 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "output";
+
+    private String customValidity_;
 
     /**
      * Creates a new instance.
@@ -64,65 +68,94 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
      */
     @Override
     public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasBadInput() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCustomError() {
-        // TODO Auto-generated method stub
-        return false;
+        return !StringUtils.isEmpty(customValidity_);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasPatternMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isStepMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooLong() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooShort() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasTypeMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeOverflow() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeUnderflow() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && !isCustomError();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValueMissing() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

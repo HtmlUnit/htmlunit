@@ -405,8 +405,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValid() {
-        return super.isValid()
-                && (TYPE_RESET.equals(getType()) || StringUtils.isEmpty(customValidity_));
+        return super.isValid() && !isCustomError();
     }
 
     /**
@@ -430,63 +429,83 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         customValidity_ = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasBadInput() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCustomError() {
-        // TODO Auto-generated method stub
-        return false;
+        return !(TYPE_RESET.equals(getType()) || StringUtils.isEmpty(customValidity_));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasPatternMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isStepMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooLong() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooShort() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasTypeMismatch() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeOverflow() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeUnderflow() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValueMissing() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

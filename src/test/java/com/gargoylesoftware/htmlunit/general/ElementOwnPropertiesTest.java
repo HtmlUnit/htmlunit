@@ -7189,10 +7189,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),type,validationMessage,validity,value,"
                 + "willValidate",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),labels,name,setCustomValidity(),willValidate",
-            EDGE = "checkValidity(),constructor(),labels,name,setCustomValidity(),willValidate",
-            FF_ESR = "checkValidity(),constructor(),labels,name,setCustomValidity(),willValidate",
-            FF = "checkValidity(),constructor(),labels,name,setCustomValidity(),willValidate",
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
             IE = "constructor")
     public void output() throws Exception {
         test("output");
