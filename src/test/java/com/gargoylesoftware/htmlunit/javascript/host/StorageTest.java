@@ -169,8 +169,8 @@ public class StorageTest extends WebDriverTestCase {
     @Alerts("I was here")
     @BuggyWebDriver(CHROME = "",
                     EDGE = "",
-                    FF = "null",
-                    FF_ESR = "null")
+                    FF = "",
+                    FF_ESR = "")
     // The way ChromeDriver and FFDriver start the real browsers clears the LocalStorage somehow.
     // But when executed manually the LocalStorage is shared.
     @NotYetImplemented
