@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes, Chrome/Edge 97">
+        <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96">
             <action type="update" dev="rbri">
                 htmx testsuite changed to version 1.6.1 added.
             </action>

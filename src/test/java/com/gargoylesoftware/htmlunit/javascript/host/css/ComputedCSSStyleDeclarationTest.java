@@ -2348,9 +2348,13 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "0", "16"},
+            FF = {"8px", "0", "16"},
             CHROME = {"8px", "0", "16"},
             EDGE = {"8px", "0", "16"})
-    @NotYetImplemented({CHROME, EDGE, IE})
+    @HtmlUnitNYI(CHROME = {"0px", "0", "16"},
+            EDGE = {"0px", "0", "16"},
+            FF = {"0px", "0", "16"},
+            IE = {"8px", "0", "16"})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
