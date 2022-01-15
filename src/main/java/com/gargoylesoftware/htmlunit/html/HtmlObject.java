@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR;
+
 import java.applet.Applet;
 import java.io.IOException;
 import java.net.URL;
@@ -62,6 +64,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     public static final String TAG_NAME = "object";
 
     private Applet applet_;
+    private String customValidity_;
 
     /**
      * Creates an instance of HtmlObject
@@ -449,6 +452,14 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean willValidate() {
         return false;
     }
@@ -458,35 +469,35 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      */
     @Override
     public void setCustomValidity(final String message) {
+        customValidity_ = message;
     }
 
     @Override
     public boolean hasBadInputValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isCustomErrorValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        if (hasFeature(JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR)) {
+            return false;
+        }
+
+        return !StringUtils.isEmpty(customValidity_);
     }
 
     @Override
     public boolean hasPatternMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isStepMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isTooLongValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
@@ -498,31 +509,26 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     @Override
     public boolean hasTypeMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean hasRangeOverflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean hasRangeUnderflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isValidValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !isCustomErrorValidityState();
     }
 
     @Override
     public boolean isValueMissingValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

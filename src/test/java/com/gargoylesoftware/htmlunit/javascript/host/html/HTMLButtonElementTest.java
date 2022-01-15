@@ -415,6 +415,44 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b1 = document.getElementById('b1');\n"
+            + "    log(b1.checkValidity());\n"
+
+            + "    b1.setCustomValidity('');\n"
+            + "    log(b1.checkValidity());\n"
+
+            + "    b1.setCustomValidity(' ');\n"
+            + "    log(b1.checkValidity());\n"
+
+            + "    b1.setCustomValidity('invalid');\n"
+            + "    log(b1.checkValidity());\n"
+
+            + "    b1.setCustomValidity('');\n"
+            + "    log(b1.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <button id='b1'>b1</button>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test

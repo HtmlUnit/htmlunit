@@ -147,7 +147,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
 
     @Override
     public boolean isValidValidityState() {
-        return false;
+        return !isCustomErrorValidityState();
     }
 
     /**

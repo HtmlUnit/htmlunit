@@ -503,7 +503,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     @Override
     public boolean isValidValidityState() {
-        return false;
+        return isValid();
     }
 
     /**

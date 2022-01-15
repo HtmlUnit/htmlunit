@@ -140,6 +140,46 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var f1 = document.getElementById('f1');\n"
+            + "    log(f1.checkValidity());\n"
+
+            + "    f1.setCustomValidity('');\n"
+            + "    log(f1.checkValidity());\n"
+
+            + "    f1.setCustomValidity(' ');\n"
+            + "    log(f1.checkValidity());\n"
+
+            + "    f1.setCustomValidity('invalid');\n"
+            + "    log(f1.checkValidity());\n"
+
+            + "    f1.setCustomValidity('');\n"
+            + "    log(f1.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "  <fieldset id='f1' align='left'>\n"
+            + "    <legend>Legend</legend>\n"
+            + "  </fieldset>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -214,10 +254,10 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false",
-                       "false-true-false-false-false-false-false-false-false-false-false"},
-            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false"})
+    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false", "true",
+                       "false-true-false-false-false-false-false-false-false-false-false", "true"},
+            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false", "true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false", "true"})
     public void validityStateCustomValidity() throws Exception {
         final String html =
                 "<html><head>\n"
@@ -240,8 +280,11 @@ public class HTMLFieldSetElementTest extends WebDriverTestCase {
                 + "      var elem = document.getElementById('f1');\n"
                 + "      var validity = elem.validity;\n"
                 + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
+
                 + "      elem.setCustomValidity('Invalid');\n"
                 + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"

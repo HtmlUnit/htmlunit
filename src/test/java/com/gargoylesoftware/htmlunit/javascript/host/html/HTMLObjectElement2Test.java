@@ -88,6 +88,45 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true", "true", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var o1 = document.getElementById('o1');\n"
+            + "    log(o1.checkValidity());\n"
+
+            + "    o1.setCustomValidity('');\n"
+            + "    log(o1.checkValidity());\n"
+
+            + "    o1.setCustomValidity(' ');\n"
+            + "    log(o1.checkValidity());\n"
+
+            + "    o1.setCustomValidity('invalid');\n"
+            + "    log(o1.checkValidity());\n"
+
+            + "    o1.setCustomValidity('');\n"
+            + "    log(o1.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <object id='o1'>o1</object>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -113,6 +152,95 @@ public class HTMLObjectElement2Test extends WebDriverTestCase {
                 + "    <object id='o3' hidden>o3</object>\n"
                 + "    <object id='o4' readonly>o4</object>\n"
                 + "    <object id='o5' style='display: none'>o5</object>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
+            IE = "undefined-false-false-false-false-false-false-undefined-false-true-false")
+    public void validityState() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      logValidityState(document.getElementById('o1').validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o1'>o1</object>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false", "true",
+                       "false-true-false-false-false-false-false-false-false-false-false", "true"},
+            CHROME = {"false-false-false-false-false-false-false-false-false-true-false", "true",
+                      "false-false-false-false-false-false-false-false-false-true-false", "true"},
+            EDGE = {"false-false-false-false-false-false-false-false-false-true-false", "true",
+                    "false-false-false-false-false-false-false-false-false-true-false", "true"},
+            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false", "true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false", "true"})
+    public void validityStateCustomValidity() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('o1');\n"
+                + "      var validity = elem.validity;\n"
+                + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
+
+                + "      elem.setCustomValidity('Invalid');\n"
+                + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o1'>o1</object>\n"
                 + "  </form>\n"
                 + "</body></html>";
 

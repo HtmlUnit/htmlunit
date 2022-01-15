@@ -1001,6 +1001,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
 
+    /** HTMLObject Validity isValid ignores custom error property. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR,
+
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_HTML_RUBY_ELEMENT_CLASS_NAME,
