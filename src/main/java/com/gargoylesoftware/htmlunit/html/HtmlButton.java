@@ -405,7 +405,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && !isCustomError();
+        return super.isValid() && !isCustomErrorValidityState();
     }
 
     /**
@@ -433,7 +433,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBadInput() {
+    public boolean hasBadInputValidityState() {
         return false;
     }
 
@@ -441,7 +441,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isCustomError() {
+    public boolean isCustomErrorValidityState() {
         return !(TYPE_RESET.equals(getType()) || StringUtils.isEmpty(customValidity_));
     }
 
@@ -449,7 +449,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasPatternMismatch() {
+    public boolean hasPatternMismatchValidityState() {
         return false;
     }
 
@@ -457,7 +457,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isStepMismatch() {
+    public boolean isStepMismatchValidityState() {
         return false;
     }
 
@@ -465,7 +465,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isTooLong() {
+    public boolean isTooLongValidityState() {
         return false;
     }
 
@@ -473,7 +473,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isTooShort() {
+    public boolean isTooShortValidityState() {
         return false;
     }
 
@@ -481,7 +481,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasTypeMismatch() {
+    public boolean hasTypeMismatchValidityState() {
         return false;
     }
 
@@ -489,7 +489,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasRangeOverflow() {
+    public boolean hasRangeOverflowValidityState() {
         return false;
     }
 
@@ -497,7 +497,12 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasRangeUnderflow() {
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
         return false;
     }
 
@@ -505,7 +510,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isValueMissing() {
+    public boolean isValueMissingValidityState() {
         return false;
     }
 }

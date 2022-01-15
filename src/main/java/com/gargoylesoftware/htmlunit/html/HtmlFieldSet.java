@@ -69,7 +69,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBadInput() {
+    public boolean hasBadInputValidityState() {
         return false;
     }
 
@@ -77,7 +77,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean isCustomError() {
+    public boolean isCustomErrorValidityState() {
         return !StringUtils.isEmpty(customValidity_);
     }
 
@@ -85,7 +85,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasPatternMismatch() {
+    public boolean hasPatternMismatchValidityState() {
         return false;
     }
 
@@ -93,7 +93,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean isStepMismatch() {
+    public boolean isStepMismatchValidityState() {
         return false;
     }
 
@@ -101,7 +101,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean isTooLong() {
+    public boolean isTooLongValidityState() {
         return false;
     }
 
@@ -109,7 +109,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean isTooShort() {
+    public boolean isTooShortValidityState() {
         return false;
     }
 
@@ -117,7 +117,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasTypeMismatch() {
+    public boolean hasTypeMismatchValidityState() {
         return false;
     }
 
@@ -125,7 +125,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasRangeOverflow() {
+    public boolean hasRangeOverflowValidityState() {
         return false;
     }
 
@@ -133,7 +133,7 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      * {@inheritDoc}
      */
     @Override
-    public boolean hasRangeUnderflow() {
+    public boolean hasRangeUnderflowValidityState() {
         return false;
     }
 
@@ -142,14 +142,19 @@ public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && !isCustomError();
+        return true;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return false;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean isValueMissing() {
+    public boolean isValueMissingValidityState() {
         return false;
     }
 }

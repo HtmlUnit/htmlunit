@@ -650,61 +650,67 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     }
 
     @Override
-    public boolean hasBadInput() {
+    public boolean hasBadInputValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isCustomError() {
+    public boolean isCustomErrorValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean hasPatternMismatch() {
+    public boolean hasPatternMismatchValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isStepMismatch() {
+    public boolean isStepMismatchValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isTooLong() {
+    public boolean isTooLongValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isTooShort() {
+    public boolean isTooShortValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean hasTypeMismatch() {
+    public boolean hasTypeMismatchValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean hasRangeOverflow() {
+    public boolean hasRangeOverflowValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean hasRangeUnderflow() {
+    public boolean hasRangeUnderflowValidityState() {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public boolean isValueMissing() {
+    public boolean isValidValidityState() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public boolean isValueMissingValidityState() {
         // TODO Auto-generated method stub
         return false;
     }

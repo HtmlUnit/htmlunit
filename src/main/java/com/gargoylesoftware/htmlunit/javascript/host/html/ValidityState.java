@@ -51,7 +51,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public boolean isBadInput() {
-        return getValidatableElementOrDie().hasBadInput();
+        return getValidatableElementOrDie().hasBadInputValidityState();
     }
 
     /**
@@ -59,7 +59,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isCustomError() {
-        return getValidatableElementOrDie().isCustomError();
+        return getValidatableElementOrDie().isCustomErrorValidityState();
     }
 
     /**
@@ -68,7 +68,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isPatternMismatch() {
-        return getValidatableElementOrDie().hasPatternMismatch();
+        return getValidatableElementOrDie().hasPatternMismatchValidityState();
     }
 
     /**
@@ -77,7 +77,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isRangeOverflow() {
-        return getValidatableElementOrDie().hasRangeOverflow();
+        return getValidatableElementOrDie().hasRangeOverflowValidityState();
     }
 
     /**
@@ -86,7 +86,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isRangeUnderflow() {
-        return getValidatableElementOrDie().hasRangeUnderflow();
+        return getValidatableElementOrDie().hasRangeUnderflowValidityState();
     }
 
     /**
@@ -95,7 +95,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isStepMismatch() {
-        return getValidatableElementOrDie().isStepMismatch();
+        return getValidatableElementOrDie().isStepMismatchValidityState();
     }
 
     /**
@@ -104,7 +104,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isTooLong() {
-        return getValidatableElementOrDie().isTooLong();
+        return getValidatableElementOrDie().isTooLongValidityState();
     }
 
     /**
@@ -113,7 +113,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public boolean isTooShort() {
-        return getValidatableElementOrDie().isTooShort();
+        return getValidatableElementOrDie().isTooShortValidityState();
     }
 
     /**
@@ -122,7 +122,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isTypeMismatch() {
-        return getValidatableElementOrDie().hasTypeMismatch();
+        return getValidatableElementOrDie().hasTypeMismatchValidityState();
     }
 
     /**
@@ -131,7 +131,7 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isValueMissing() {
-        return getValidatableElementOrDie().isValueMissing();
+        return getValidatableElementOrDie().isValueMissingValidityState();
     }
 
     /**
@@ -140,6 +140,6 @@ public class ValidityState extends SimpleScriptable {
      */
     @JsxGetter
     public boolean isValid() {
-        return getValidatableElementOrDie().isValid();
+        return getValidatableElementOrDie().isValidValidityState();
     }
 }
