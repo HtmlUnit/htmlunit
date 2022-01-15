@@ -8286,15 +8286,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "remove(),required,selectedIndex,setCustomValidity(),size,tags(),type,urns(),validationMessage,"
                 + "validity,value,willValidate")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
+                + "validity,value,willValidate",
             EDGE = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
+                + "validity,value,willValidate",
             FF_ESR = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
+                + "validity,value,willValidate",
             FF = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
+                + "validity,value,willValidate",
             IE = "add(),checkValidity(),constructor,form,item(),length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,value,willValidate")
+                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
+                + "validity,value,willValidate")
     public void select() throws Exception {
         test("select");
     }
@@ -9463,19 +9468,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "wrap")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,"
                 + "maxLength,minLength,name,placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             EDGE = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,"
                 + "maxLength,minLength,name,placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF_ESR = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             IE = "checkValidity(),cols,constructor,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),type,value,willValidate")
+                + "selectionStart,setCustomValidity(),setSelectionRange(),type,validity,value,willValidate")
     public void textarea() throws Exception {
         test("textarea");
     }

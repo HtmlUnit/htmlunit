@@ -483,6 +483,18 @@ public class HTMLTextAreaElement extends HTMLElement {
     }
 
     /**
+     * @return a ValidityState with the validity states that this element is in.
+     */
+    @JsxGetter
+    public ValidityState getValidity() {
+        final ValidityState validityState = new ValidityState();
+        validityState.setPrototype(getPrototype(validityState.getClass()));
+        validityState.setParentScope(getParentScope());
+        validityState.setDomNode(getDomNodeOrDie());
+        return validityState;
+    }
+
+    /**
      * Sets the custom validity message for the element to the specified message.
      * @param message the new message
      */
