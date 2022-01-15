@@ -764,14 +764,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isValid() {
-        return super.isValid() && StringUtils.isEmpty(customValidity_);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean willValidate() {
         return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
                 || (!isDisabled()
@@ -786,69 +778,96 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
         customValidity_ = message;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return super.isValid() && StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasBadInputValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCustomErrorValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !StringUtils.isEmpty(customValidity_);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasPatternMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isStepMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooLongValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isTooShortValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasTypeMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeOverflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean hasRangeUnderflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isValidValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !isCustomErrorValidityState();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isValueMissingValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 }

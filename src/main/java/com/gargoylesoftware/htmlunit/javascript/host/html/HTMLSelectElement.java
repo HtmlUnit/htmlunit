@@ -324,15 +324,6 @@ public class HTMLSelectElement extends HTMLElement {
     }
 
     /**
-     * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
-     */
-    @JsxFunction
-    public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
-    }
-
-    /**
      * Returns the {@code required} property.
      * @return the {@code required} property
      */
@@ -393,6 +384,27 @@ public class HTMLSelectElement extends HTMLElement {
     @Override
     public HTMLFormElement getForm() {
         return super.getForm();
+    }
+
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
+    }
+
+    /**
+     * @return a ValidityState with the validity states that this element is in.
+     */
+    @JsxGetter
+    public ValidityState getValidity() {
+        final ValidityState validityState = new ValidityState();
+        validityState.setPrototype(getPrototype(validityState.getClass()));
+        validityState.setParentScope(getParentScope());
+        validityState.setDomNode(getDomNodeOrDie());
+        return validityState;
     }
 
     /**

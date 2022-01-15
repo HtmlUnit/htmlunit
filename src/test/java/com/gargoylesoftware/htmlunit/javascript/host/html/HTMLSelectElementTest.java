@@ -2764,6 +2764,44 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "false", "false", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s1 = document.getElementById('s1');\n"
+            + "    log(s1.checkValidity());\n"
+
+            + "    s1.setCustomValidity('');\n"
+            + "    log(s1.checkValidity());\n"
+
+            + "    s1.setCustomValidity(' ');\n"
+            + "    log(s1.checkValidity());\n"
+
+            + "    s1.setCustomValidity('invalid');\n"
+            + "    log(s1.checkValidity());\n"
+
+            + "    s1.setCustomValidity('');\n"
+            + "    log(s1.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <select id='s1'>s1</select>\n"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -2792,6 +2830,88 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
                 + "    <select id='s3' hidden>s3</select>\n"
                 + "    <select id='s4' readonly>s4</select>\n"
                 + "    <select id='s5' style='display: none'>s5</select>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
+            IE = "undefined-false-false-false-false-false-false-undefined-false-true-false")
+    public void validityState() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      logValidityState(document.getElementById('s1').validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s1'>s1</select>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false",
+                       "false-true-false-false-false-false-false-false-false-false-false"},
+            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false"})
+    public void validityStateCustomValidity() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('s1');\n"
+                + "      var validity = elem.validity;\n"
+                + "      logValidityState(validity);\n"
+                + "      elem.setCustomValidity('Invalid');\n"
+                + "      logValidityState(validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <select id='s1'>s1</select>\n"
                 + "  </form>\n"
                 + "</body></html>";
 
