@@ -194,27 +194,147 @@ public class HtmlColorInputTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    var o1 = document.getElementById('o1');\n"
+            + "    log(o1.checkValidity());\n"
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    o1.setCustomValidity('');\n"
+            + "    log(o1.checkValidity());\n"
 
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    o1.setCustomValidity(' ');\n"
+            + "    log(o1.checkValidity());\n"
 
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    o1.setCustomValidity('invalid');\n"
+            + "    log(o1.checkValidity());\n"
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    o1.setCustomValidity('');\n"
+            + "    log(o1.checkValidity());\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <input type='color' id='foo'>\n"
+            + "  <form>\n"
+            + "  <input type='color' id='o1'>\n"
+            + "  </form>\n"
             + "</body>\n"
             + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "false", "true", "false", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('o1').willValidate);\n"
+                + "      log(document.getElementById('o2').willValidate);\n"
+                + "      log(document.getElementById('o3').willValidate);\n"
+                + "      log(document.getElementById('o4').willValidate);\n"
+                + "      log(document.getElementById('o5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input type='color' id='o1'>\n"
+                + "    <input type='color' id='o2' disabled>\n"
+                + "    <input type='color' id='o3' hidden>\n"
+                + "    <input type='color' id='o4' readonly>\n"
+                + "    <input type='color' id='o5' style='display: none'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
+            IE = "undefined-false-false-false-false-false-false-undefined-false-true-false")
+    public void validityState() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      logValidityState(document.getElementById('o1').validity);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input type='color' id='o1'>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false", "true",
+                       "false-true-false-false-false-false-false-false-false-false-false", "false"},
+            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false", "true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false", "false"})
+    public void validityStateCustomValidity() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('o1');\n"
+                + "      var validity = elem.validity;\n"
+                + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
+
+                + "      elem.setCustomValidity('Invalid');\n"
+                + "      logValidityState(validity);\n"
+                + "      log(elem.checkValidity());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input type='color' id='o1'>\n"
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

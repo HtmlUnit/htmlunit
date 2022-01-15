@@ -106,7 +106,6 @@ public interface ValidatableElement {
     /**
      * @return true if the element has a required attribute, but no value, or false otherwise.
      * If true, the element matches the :invalid CSS pseudo-class.
-     * @return
      */
     boolean isValueMissingValidityState();
 }
