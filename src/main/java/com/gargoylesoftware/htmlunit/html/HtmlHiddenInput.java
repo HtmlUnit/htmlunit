@@ -80,4 +80,12 @@ public class HtmlHiddenInput extends HtmlInput {
     protected boolean isRequiredSupported() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean willValidate() {
+        return false;
+    }
 }

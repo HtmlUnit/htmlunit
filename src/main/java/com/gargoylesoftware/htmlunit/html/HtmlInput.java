@@ -879,13 +879,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 && isMaxLengthValid() && isMinLengthValid() && isPatternValid();
     }
 
-    @Override
-    protected boolean isRequiredSupported() {
-        return true;
-    }
-
     protected boolean isCustomValidityValid() {
-        if (!StringUtils.isEmpty(customValidity_)) {
+        if (isCustomErrorValidityState()) {
             final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
             if (!"button".equals(type)
                     && !"hidden".equals(type)
@@ -894,6 +889,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 return false;
             }
         }
+        return true;
+    }
+
+    @Override
+    protected boolean isRequiredSupported() {
         return true;
     }
 
@@ -1043,67 +1043,56 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean hasBadInputValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isCustomErrorValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !StringUtils.isEmpty(customValidity_);
     }
 
     @Override
     public boolean hasPatternMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isStepMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isTooLongValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isTooShortValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean hasTypeMismatchValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean hasRangeOverflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean hasRangeUnderflowValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public boolean isValidValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !isCustomErrorValidityState();
     }
 
     @Override
     public boolean isValueMissingValidityState() {
-        // TODO Auto-generated method stub
         return false;
     }
 }
