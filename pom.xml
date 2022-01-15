@@ -39,7 +39,7 @@
         <spotbugs.version>4.5.3</spotbugs.version>
         <pmd.version>6.41.0</pmd.version>
         <archunit.version>0.22.0</archunit.version>
-        <dependencycheck.version>6.5.2</dependencycheck.version>
+        <dependencycheck.version>6.5.3</dependencycheck.version>
     </properties>
 
     <build>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.9.0</version>
                 <configuration>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <manifest>
