@@ -51,7 +51,7 @@ public class HtmxTest extends WebDriverTestCase {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
 
 
-        final long runTime = 20 * DEFAULT_WAIT_TIME;
+        final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
