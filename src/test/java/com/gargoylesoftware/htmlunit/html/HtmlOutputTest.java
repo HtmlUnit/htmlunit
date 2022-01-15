@@ -16,11 +16,13 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlOutput}.
@@ -34,40 +36,67 @@ public class HtmlOutputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
-            FF_ESR = {"true", "true", "false", "false", "true"},
-            IE = "no checkValidity()")
-    @HtmlUnitNYI(FF_ESR = {"true", "true", "true", "true", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
+    @Alerts(DEFAULT = {"[object HTMLOutputElement]", "[object HTMLFormElement]"},
+            IE = {"[object HTMLUnknownElement]", "undefined"})
+    public void simpleScriptable() throws Exception {
+        final String html
+            = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-
-            + "    if (!foo.checkValidity) {log('no checkValidity()'); return;}\n"
-
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    var o = document.getElementById('o');\n"
+            + "    log(o);\n"
+            + "    log(o.form);\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <output id='foo'>\n"
-            + "</body>\n"
-            + "</html>";
+            + "</head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <output id='o'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPageVerifyTitle2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("o")));
+            assertTrue(element instanceof HtmlOutput || element instanceof HtmlUnknownElement);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "undefined", "center", "8", "foo"})
+    public void align() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "  <output id='o1' align='left'>\n"
+            + "  <output id='o2' align='right'>\n"
+            + "  <output id='o3' align='3'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function set(fs, value) {\n"
+            + "    try {\n"
+            + "      fs.align = value;\n"
+            + "    } catch (e) {\n"
+            + "      log('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var o1 = document.getElementById('o1');\n"
+            + "  var o2 = document.getElementById('o2');\n"
+            + "  var o3 = document.getElementById('o3');\n"
+            + "  log(o1.align);\n"
+            + "  log(o2.align);\n"
+            + "  log(o3.align);\n"
+            + "  set(o1, 'center');\n"
+            + "  set(o2, '8');\n"
+            + "  set(o3, 'foo');\n"
+            + "  log(o1.align);\n"
+            + "  log(o2.align);\n"
+            + "  log(o3.align);\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

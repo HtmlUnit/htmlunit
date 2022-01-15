@@ -7111,15 +7111,15 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),standby,type,useMap,validationMessage,validity,vspace,width,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
-                        + "width,willValidate",
+                        + "validity,width,willValidate",
             EDGE = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
-                        + "width,willValidate",
-            FF_ESR = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity()"
-                        + ",width,willValidate",
+                        + "validity,width,willValidate",
+            FF_ESR = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
+                        + "validity,width,willValidate",
             FF = "align,border,checkValidity(),constructor(),form,height,name,setCustomValidity(),"
-                        + "width,willValidate",
+                        + "validity,width,willValidate",
             IE = "align,alt,border,checkValidity(),classid,constructor,form,height,name,setCustomValidity(),"
-                        + "width,willValidate")
+                        + "validity,width,willValidate")
     public void object() throws Exception {
         test("object");
     }
@@ -7189,10 +7189,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setCustomValidity(),type,validationMessage,validity,value,"
                 + "willValidate",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),constructor(),labels,name,setCustomValidity(),validity,willValidate",
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),form,labels,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),constructor(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),constructor(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),constructor(),form,labels,name,setCustomValidity(),validity,willValidate",
             IE = "constructor")
     public void output() throws Exception {
         test("output");

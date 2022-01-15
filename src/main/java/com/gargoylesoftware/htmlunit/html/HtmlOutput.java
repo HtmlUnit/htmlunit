@@ -75,6 +75,14 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
      * {@inheritDoc}
      */
     @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean hasBadInputValidityState() {
         return false;
     }
@@ -143,18 +151,9 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
         return false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isValid() {
-        return super.isValid() && !isCustomErrorValidityState();
-    }
-
     @Override
     public boolean isValidValidityState() {
-        // TODO Auto-generated method stub
-        return false;
+        return !isCustomErrorValidityState();
     }
 
     /**

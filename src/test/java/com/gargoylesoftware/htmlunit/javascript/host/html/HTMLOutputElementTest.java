@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HTMLOutputElement}.
@@ -64,6 +65,48 @@ public class HTMLOutputElementTest extends WebDriverTestCase {
             + "  <label id='l4' for='e4'> what about</label>\n"
             + "  <label> this<output id='e4'>e 4</output></label><br>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
+            FF_ESR = {"true", "true", "false", "false", "true"},
+            IE = "no checkValidity()")
+    @HtmlUnitNYI(FF_ESR = {"true", "true", "true", "true", "true"})
+    public void checkValidity() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var foo = document.getElementById('foo');\n"
+
+            + "    if (!foo.checkValidity) {log('no checkValidity()'); return;}\n"
+
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity(' ');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('invalid');\n"
+            + "    log(foo.checkValidity());\n"
+
+            + "    foo.setCustomValidity('');\n"
+            + "    log(foo.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <output id='foo'>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageVerifyTitle2(html);
     }

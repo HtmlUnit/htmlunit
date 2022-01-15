@@ -2649,11 +2649,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
-            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
-            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
-            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),width,willValidate",
-            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),width,willValidate")
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate")
     public void object() throws Exception {
         test("object");
     }
@@ -2709,10 +2714,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,value,willValidate",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),labels,name,setCustomValidity(),validity,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate")
     public void output() throws Exception {
         test("output");
     }
