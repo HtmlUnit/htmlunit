@@ -1629,45 +1629,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts({"true", "true", "false", "false", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var o1 = document.getElementById('o1');\n"
-            + "    log(o1.checkValidity());\n"
-
-            + "    o1.setCustomValidity('');\n"
-            + "    log(o1.checkValidity());\n"
-
-            + "    o1.setCustomValidity(' ');\n"
-            + "    log(o1.checkValidity());\n"
-
-            + "    o1.setCustomValidity('invalid');\n"
-            + "    log(o1.checkValidity());\n"
-
-            + "    o1.setCustomValidity('');\n"
-            + "    log(o1.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form>\n"
-            + "  <input type='number' id='o1'>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -1703,49 +1664,60 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
-            IE = "undefined-false-false-false-false-false-false-undefined-false-true-false")
-    public void validityState() throws Exception {
-        final String html =
-                "<html><head>\n"
-                + "  <script>\n"
-                + LOG_TITLE_FUNCTION
-                + "    function logValidityState(s) {\n"
-                + "      log(s.badInput"
-                        + "+ '-' + s.customError"
-                        + "+ '-' + s.patternMismatch"
-                        + "+ '-' + s.rangeOverflow"
-                        + "+ '-' + s.rangeUnderflow"
-                        + "+ '-' + s.stepMismatch"
-                        + "+ '-' + s.tooLong"
-                        + "+ '-' + s.tooShort"
-                        + " + '-' + s.typeMismatch"
-                        + " + '-' + s.valid"
-                        + " + '-' + s.valueMissing);\n"
-                + "    }\n"
-                + "    function test() {\n"
-                + "      logValidityState(document.getElementById('o1').validity);\n"
-                + "    }\n"
-                + "  </script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "  <form>\n"
-                + "    <input type='number' id='o1'>\n"
-                + "  </form>\n"
-                + "</body></html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationEmpty() throws Exception {
+        validation("<input type='number' id='e1'>\n", "");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false", "true",
-                       "false-true-false-false-false-false-false-false-false-false-false", "false"},
-            IE = {"undefined-false-false-false-false-false-false-undefined-false-true-false", "true",
-                  "undefined-true-false-false-false-false-false-undefined-false-false-false", "false"})
-    public void validityStateCustomValidity() throws Exception {
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<input type='number' id='e1'>\n", "elem.setCustomValidity('Invalid');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<input type='number' id='e1'>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationResetCustomValidity() throws Exception {
+        validation("<input type='number' id='e1'>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"
                 + "  <script>\n"
@@ -1764,20 +1736,17 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                         + " + '-' + s.valueMissing);\n"
                 + "    }\n"
                 + "    function test() {\n"
-                + "      var elem = document.getElementById('o1');\n"
-                + "      var validity = elem.validity;\n"
-                + "      logValidityState(validity);\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + jsPart
                 + "      log(elem.checkValidity());\n"
-
-                + "      elem.setCustomValidity('Invalid');\n"
-                + "      logValidityState(validity);\n"
-                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <form>\n"
-                + "    <input type='number' id='o1'>\n"
+                + htmlPart
                 + "  </form>\n"
                 + "</body></html>";
 
