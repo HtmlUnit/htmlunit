@@ -42,15 +42,24 @@ public class HtmxTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "passes:412failures:0",
             IE = "passes:17failures:396")
-    @HtmlUnitNYI(CHROME = "passes:406failures:6",
-            EDGE = "passes:406failures:6",
-            FF = "passes:406failures:6",
-            FF_ESR = "passes:406failures:6",
+    @HtmlUnitNYI(CHROME = "passes:407failures:5",
+            EDGE = "passes:407failures:5",
+            FF = "passes:407failures:5",
+            FF_ESR = "passes:407failures:5",
             IE = "passes:16failures:397")
     public void htmx() throws Exception {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
 
+        try {
+            htmxRun();
+        }
+        catch (final Exception e) {
+            // second try
+            htmxRun();
+        }
+    }
 
+    private void htmxRun() throws Exception {
         final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 

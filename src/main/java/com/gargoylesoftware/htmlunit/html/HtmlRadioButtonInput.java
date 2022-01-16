@@ -313,4 +313,9 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
                 && super.propagateClickStateUpdateToParent();
     }
 
+    @Override
+    public boolean isValueMissingValidityState() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && ATTRIBUTE_NOT_DEFINED == getAttributeDirect("checked");
+    }
 }

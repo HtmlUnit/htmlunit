@@ -24,13 +24,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests for {@link HTMLTextAreaElement}.
+ * Tests for {@link HtmlTextArea}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -705,6 +704,20 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     public void validationResetCustomValidity() throws Exception {
         validation("<textarea id='e1'>t1</textarea>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequired() throws Exception {
+        validation("<textarea id='e1' required></textarea>\n", "");
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {

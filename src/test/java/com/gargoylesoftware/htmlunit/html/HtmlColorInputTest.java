@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlColorInput}.
@@ -270,6 +271,21 @@ public class HtmlColorInputTest extends WebDriverTestCase {
     public void validationResetCustomValidity() throws Exception {
         validation("<input type='color' id='e1'>\n",
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    @HtmlUnitNYI(IE = {"true", "undefined-false-false-false-false-false-false-undefined-false-true-false", "true"})
+    public void validationRequired() throws Exception {
+        validation("<input type='color' id='e1' required>\n", "");
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {

@@ -874,7 +874,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isValid() {
-        return super.isValid()
+        return !isValueMissingValidityState()
                 && isCustomValidityValid()
                 && isMaxLengthValid() && isMinLengthValid() && isPatternValid();
     }
@@ -1088,11 +1088,14 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isValidValidityState() {
-        return !isCustomErrorValidityState();
+        return !isCustomErrorValidityState()
+                && !isValueMissingValidityState();
     }
 
     @Override
     public boolean isValueMissingValidityState() {
-        return false;
+        return isRequiredSupported()
+                && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && getAttributeDirect("value").isEmpty();
     }
 }

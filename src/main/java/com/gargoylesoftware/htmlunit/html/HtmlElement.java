@@ -138,7 +138,8 @@ public abstract class HtmlElement extends DomElement {
      */
     public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
 
-    private static final String ATTRIBUTE_REQUIRED = "required";
+    /** Constant 'required'. */
+    protected static final String ATTRIBUTE_REQUIRED = "required";
 
     /** The listeners which are to be notified of attribute changes. */
     private Collection<HtmlAttributeChangeListener> attributeListeners_;

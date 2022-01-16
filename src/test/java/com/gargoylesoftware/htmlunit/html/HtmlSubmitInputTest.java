@@ -529,6 +529,20 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequired() throws Exception {
+        validation("<input type='submit' id='e1' required>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

@@ -199,6 +199,21 @@ public class HtmlOutputTest extends WebDriverTestCase {
                 "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationRequired() throws Exception {
+        validation("<output id='e1' required></output>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

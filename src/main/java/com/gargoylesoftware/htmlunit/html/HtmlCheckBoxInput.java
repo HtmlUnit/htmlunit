@@ -233,4 +233,10 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
         return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
                 && super.propagateClickStateUpdateToParent();
     }
+
+    @Override
+    public boolean isValueMissingValidityState() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && ATTRIBUTE_NOT_DEFINED == getAttributeDirect("checked");
+    }
 }

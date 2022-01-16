@@ -646,7 +646,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public boolean isValid() {
-        return super.isValid() && StringUtils.isEmpty(customValidity_);
+        return isValidValidityState();
     }
 
     /**
@@ -723,7 +723,8 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     @Override
     public boolean isValidValidityState() {
-        return !isCustomErrorValidityState();
+        return !isCustomErrorValidityState()
+                && !isValueMissingValidityState();
     }
 
     /**
@@ -731,6 +732,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      */
     @Override
     public boolean isValueMissingValidityState() {
-        return false;
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && getAttributeDirect("value").isEmpty();
     }
 }
