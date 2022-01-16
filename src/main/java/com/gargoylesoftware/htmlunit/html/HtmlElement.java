@@ -140,6 +140,8 @@ public abstract class HtmlElement extends DomElement {
 
     /** Constant 'required'. */
     protected static final String ATTRIBUTE_REQUIRED = "required";
+    /** Constant 'checked'. */
+    protected static final String ATTRIBUTE_CHECKED = "checked";
 
     /** The listeners which are to be notified of attribute changes. */
     private Collection<HtmlAttributeChangeListener> attributeListeners_;

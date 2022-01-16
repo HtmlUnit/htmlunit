@@ -175,7 +175,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code checked} or an empty string if that attribute isn't defined
      */
     public final String getCheckedAttribute() {
-        return getAttributeDirect("checked");
+        return getAttributeDirect(ATTRIBUTE_CHECKED);
     }
 
     /**
@@ -541,7 +541,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return {@code true} if this element is currently selected
      */
     public boolean isChecked() {
-        return hasAttribute("checked");
+        return hasAttribute(ATTRIBUTE_CHECKED);
     }
 
     /**
