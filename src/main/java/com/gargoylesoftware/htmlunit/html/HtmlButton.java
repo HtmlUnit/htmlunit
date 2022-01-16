@@ -405,6 +405,10 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValid() {
+        if (TYPE_RESET.equals(getType())) {
+            return true;
+        }
+
         return super.isValid() && !isCustomErrorValidityState();
     }
 
@@ -442,7 +446,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isCustomErrorValidityState() {
-        return !(TYPE_RESET.equals(getType()) || StringUtils.isEmpty(customValidity_));
+        return !StringUtils.isEmpty(customValidity_);
     }
 
     /**
@@ -503,7 +507,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     @Override
     public boolean isValidValidityState() {
-        return isValid();
+        return !isCustomErrorValidityState();
     }
 
     /**

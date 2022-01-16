@@ -103,48 +103,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
-            FF_ESR = {"true", "true", "false", "false", "true"},
-            IE = "no checkValidity()")
-    @HtmlUnitNYI(FF_ESR = {"true", "true", "true", "true", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-
-            + "    if (!foo.checkValidity) {log('no checkValidity()'); return;}\n"
-
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <output id='foo'>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
      * @throws Exception if an error occurs
      */
     @Test
@@ -182,50 +140,66 @@ public class HtmlOutputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "false-false-false-false-false-false-false-false-false-true-false",
-            IE = "no validity")
-    public void validityState() throws Exception {
-        final String html =
-                "<html><head>\n"
-                + "  <script>\n"
-                + LOG_TITLE_FUNCTION
-                + "    function logValidityState(s) {\n"
-                + "      log(s.badInput"
-                        + "+ '-' + s.customError"
-                        + "+ '-' + s.patternMismatch"
-                        + "+ '-' + s.rangeOverflow"
-                        + "+ '-' + s.rangeUnderflow"
-                        + "+ '-' + s.stepMismatch"
-                        + "+ '-' + s.tooLong"
-                        + "+ '-' + s.tooShort"
-                        + " + '-' + s.typeMismatch"
-                        + " + '-' + s.valid"
-                        + " + '-' + s.valueMissing);\n"
-                + "    }\n"
-                + "    function test() {\n"
-                + "      var elem = document.getElementById('o1');\n"
-                + "      if (!elem.validity) { log('no validity'); return }\n"
-                + "      logValidityState(elem.validity);\n"
-                + "    }\n"
-                + "  </script>\n"
-                + "</head>\n"
-                + "<body onload='test()'>\n"
-                + "  <form>\n"
-                + "    <output id='o1'>o1</output>\n"
-                + "  </form>\n"
-                + "</body></html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationEmpty() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false-false-false-false-false-false-false-false-false-true-false",
-                       "false-true-false-false-false-false-false-false-false-false-false"},
-            IE = "no validity")
-    public void validityStateCustomValidity() throws Exception {
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            FF_ESR = {"false",
+                      "false-true-false-false-false-false-false-false-false-false-false",
+                      "true"},
+            IE = "no checkValidity")
+    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity('Invalid');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            FF_ESR = {"false",
+                      "false-true-false-false-false-false-false-false-false-false-false",
+                      "true"},
+            IE = "no checkValidity")
+    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationResetCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"
                 + "  <script>\n"
@@ -244,18 +218,18 @@ public class HtmlOutputTest extends WebDriverTestCase {
                         + " + '-' + s.valueMissing);\n"
                 + "    }\n"
                 + "    function test() {\n"
-                + "      var elem = document.getElementById('o1');\n"
-                + "      var validity = elem.validity;\n"
-                + "      if (!elem.validity) { log('no validity'); return }\n"
-                + "      logValidityState(validity);\n"
-                + "      elem.setCustomValidity('Invalid');\n"
-                + "      logValidityState(validity);\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + "      if (!elem.validity) { log('no checkValidity'); return }\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <form>\n"
-                + "    <output id='o1'>o1</output>\n"
+                + htmlPart
                 + "  </form>\n"
                 + "</body></html>";
 
