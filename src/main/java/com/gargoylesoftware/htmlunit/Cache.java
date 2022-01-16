@@ -156,8 +156,8 @@ public class Cache implements Serializable {
         else if (response.getResponseHeaderValue(HttpHeader.LAST_MODIFIED) != null) {
             final Date lastModified = parseDateHeader(response, HttpHeader.LAST_MODIFIED);
             if (lastModified != null) {
-                freshnessLifetime = (long)(((double)createdAt - lastModified.getTime()) *
-                        TEN_PERCENT_OF_MILLISECONDS_IN_SECONDS);
+                freshnessLifetime = (long) ((createdAt - lastModified.getTime())
+                        * TEN_PERCENT_OF_MILLISECONDS_IN_SECONDS);
             }
         }
         return now - createdAt < freshnessLifetime * org.apache.commons.lang3.time.DateUtils.MILLIS_PER_SECOND;

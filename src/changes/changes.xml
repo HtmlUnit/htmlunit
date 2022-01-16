@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96">
+            <action type="fix" dev="Ashley Frieze">
+                The caching algorithm now observe the max-age headers.
+            </action>
             <action type="add" dev="rbri">
                 HTMLOutputElement form property added.
             </action>
