@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -51,16 +53,16 @@ public class HtmxTest extends WebDriverTestCase {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
 
         try {
-            htmxRun();
+            htmxRun(1);
         }
         catch (final Exception e) {
             // second try
-            htmxRun();
+            htmxRun(2);
         }
     }
 
-    private void htmxRun() throws Exception {
-        final long runTime = 42 * DEFAULT_WAIT_TIME;
+    private void htmxRun(final int tryCount) throws Exception {
+        final long runTime = 21 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
@@ -80,8 +82,7 @@ public class HtmxTest extends WebDriverTestCase {
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
-                    // fail("HtmxTest runs too long (longer than " + runTime / 1000 + "s)");
-                    lastStats = "HtmxTest runs too long (longer than " + runTime / 1000 + "s) - "
+                    lastStats = "HtmxTest " + tryCount + " runs too long (longer than " + runTime / 1000 + "s) - "
                             + getResultElementText(webDriver);
                     break;
                 }
@@ -99,7 +100,7 @@ public class HtmxTest extends WebDriverTestCase {
             }
             */
 
-            assertTrue(lastStats, lastStats.startsWith(getExpectedAlerts()[0]));
+            assertTrue(lastStats + "\n\n" + getErrors(webDriver), lastStats.startsWith(getExpectedAlerts()[0]));
         }
         catch (final Exception e) {
             e.printStackTrace();
@@ -127,6 +128,25 @@ public class HtmxTest extends WebDriverTestCase {
         }
         catch (final NoSuchElementException e) {
             return "";
+        }
+    }
+
+    private static String getErrors(final WebDriver webdriver) {
+        final StringBuilder result = new StringBuilder();
+
+        try {
+            final List<WebElement> elements = webdriver.findElements(By.tagName("li"));
+            for (final WebElement elem : elements) {
+                final String cssClass = elem.getAttribute("class");
+                if (cssClass != null && cssClass.contains(" fail")) {
+                    result.append(elem.getText())
+                        .append("\n-------------------------\n\n");
+                }
+            }
+            return result.toString();
+        }
+        catch (final Exception e) {
+            return e.getMessage();
         }
     }
 
