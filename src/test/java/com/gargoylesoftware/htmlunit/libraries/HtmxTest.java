@@ -62,7 +62,7 @@ public class HtmxTest extends WebDriverTestCase {
     }
 
     private void htmxRun(final int tryCount) throws Exception {
-        final long runTime = 21 * DEFAULT_WAIT_TIME;
+        final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
