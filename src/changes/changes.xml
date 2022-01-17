@@ -8,7 +8,10 @@
 
     <body>
         <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96">
-            <action type="fix" dev="rbri" issue="#435">
+            <action type="fix" dev="rbri" issue="436">
+                Formaction, formmethod, formtarget and formenctype no longer ignored on button without type attribute.
+            </action>
+            <action type="fix" dev="rbri" issue="435">
                 Fix duplicate classes inside our javadoc.
             </action>
             <action type="fix" dev="Ashley Frieze">

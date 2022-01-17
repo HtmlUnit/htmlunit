@@ -218,12 +218,12 @@ public class HtmlForm extends HtmlElement {
             // could be excessive validation but support of html5 fromxxx
             // attributes available for:
             // - input with 'submit' and 'image' types
-            // - button with 'submit'
+            // - button with 'submit' or without type
             if (isInput && !typeSubmit && !typeImage) {
                 return;
             }
             else if (HtmlButton.TAG_NAME.equals(element.getTagName())
-                && !"submit".equalsIgnoreCase(type)) {
+                && !"submit".equals(((HtmlButton) element).getType())) {
                 return;
             }
 
