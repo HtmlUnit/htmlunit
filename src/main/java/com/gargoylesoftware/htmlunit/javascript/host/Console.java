@@ -229,6 +229,12 @@ public class Console extends SimpleScriptable {
     }
 
     private WebConsole getWebConsole() {
+        if (webWindow_ == null) {
+            final Scriptable s = getTopLevelScope(this);
+            if (s instanceof Window) {
+                return ((Window) s).getWebWindow().getWebClient().getWebConsole();
+            }
+        }
         return webWindow_.getWebClient().getWebConsole();
     }
 
