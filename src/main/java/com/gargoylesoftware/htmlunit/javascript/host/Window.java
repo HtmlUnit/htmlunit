@@ -808,10 +808,11 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this, pageToEnclose);
 
-        console_ = new Console();
-        ((Console) console_).setWebWindow(webWindow_);
-        console_.setParentScope(this);
-        console_.setPrototype(getPrototype(((SimpleScriptable) console_).getClass()));
+        final Console console  = new Console();
+        console.setWebWindow(webWindow_);
+        console.setParentScope(this);
+        console.setPrototype(getPrototype(console.getClass()));
+        console_ = console;
 
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
