@@ -44,10 +44,10 @@ public class HtmxTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "passes:412failures:0",
             IE = "passes:17failures:396")
-    @HtmlUnitNYI(CHROME = "passes:408failures:4",
-            EDGE = "passes:408failures:4",
-            FF = "passes:408failures:4",
-            FF_ESR = "passes:408failures:4",
+    @HtmlUnitNYI(CHROME = "passes:409failures:3",
+            EDGE = "passes:409failures:3",
+            FF = "passes:409failures:3",
+            FF_ESR = "passes:409failures:3",
             IE = "passes:16failures:397")
     public void htmx() throws Exception {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);

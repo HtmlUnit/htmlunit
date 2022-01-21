@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -28,6 +25,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -109,6 +107,90 @@ public class StorageTest extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(URL_SECOND.toExternalForm());
         verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"works 5200000", "fails 5290000"})
+    public void localStorageSizeOneEntry() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (window.localStorage) {\n"
+            + "    localStorage.clear();\n"
+
+            + "    var content = '';"
+            + "    for (var i = 0; i < 10000; i++) { content += '0123456789' }"
+            + "    var bigContent = '';\n"
+
+            + "    for (var i = 0; i < 52; i++) {\n"
+            + "      bigContent += content;\n"
+            + "    }"
+
+            + "    try {"
+            + "      localStorage.setItem('HtmlUnit', bigContent);\n"
+            + "      log('works ' + bigContent.length);\n"
+            + "    } catch(e) {\n"
+            + "      log('fails ' + bigContent.length);\n"
+            + "    }\n"
+
+            + "    content = '';"
+            + "    for (var i = 0; i < 9000; i++) { content += '0123456789' }"
+            + "    bigContent += content;\n"
+            + "    try {"
+            + "      localStorage.setItem('HtmlUnit', bigContent);\n"
+            + "      log('works ' + bigContent.length);\n"
+            + "    } catch(e) {\n"
+            + "      log('fails ' + bigContent.length);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(firstHtml);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"works 52", "fails"})
+    public void localStorageSizeManyEntries() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  if (window.localStorage) {\n"
+            + "    localStorage.clear();\n"
+
+            + "    var content = '';"
+            + "    for (var i = 0; i < 10000; i++) { content += '0123456789' }"
+            + "    var bigContent = content;\n"
+
+            + "    for (var i = 0; i < 52; i++) {\n"
+            + "      try {"
+            + "        localStorage.setItem('HtmlUnit-' + i, bigContent);\n"
+            + "      } catch(e) {\n"
+            + "        log('fails ' + i);\n"
+            + "        break;\n"
+            + "      }\n"
+            + "    }"
+            + "    log('works ' + i);\n"
+
+            + "    try {"
+            + "      localStorage.setItem('HtmlUnit-xx', bigContent);\n"
+            + "      log('works');\n"
+            + "    } catch(e) {\n"
+            + "      log('fails');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(firstHtml);
     }
 
     /**
@@ -269,7 +351,8 @@ public class StorageTest extends WebDriverTestCase {
             FF = {"function", "null", "function", "value", "1"},
             FF_ESR = {"function", "null", "function", "value", "1"},
             IE = {"function", "null", "string", "value", "1"})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"function", "null", "string", "value", "1"},
+            FF_ESR = {"function", "null", "string", "value", "1"})
     public void writeToPrototypeProperty() throws Exception {
         final String html = "<html><body>\n"
             + "<script>\n"

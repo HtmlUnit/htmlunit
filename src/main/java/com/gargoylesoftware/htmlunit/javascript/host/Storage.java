@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.w3c.dom.DOMException;
+
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -48,7 +50,10 @@ public class Storage extends SimpleScriptable {
         "setItem", "constructor", "toString", "toLocaleString", "valueOf", "hasOwnProperty", "propertyIsEnumerable",
         "isPrototypeOf", "__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__");
 
+    private static final long STORE_SIZE_KIMIT = 5_200_000;
+
     private final Map<String, String> store_;
+    private long storeSize_;
 
     /**
      * Public default constructor only for the prototype.
@@ -65,6 +70,7 @@ public class Storage extends SimpleScriptable {
      */
     public Storage(final Window window, final Map<String, String> store) {
         store_ = store;
+        storeSize_ = 0L;
         setParentScope(window);
         setPrototype(window.getPrototype(Storage.class));
     }
@@ -105,7 +111,7 @@ public class Storage extends SimpleScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return getMap().size();
+        return store_.size();
     }
 
     /**
@@ -114,7 +120,10 @@ public class Storage extends SimpleScriptable {
      */
     @JsxFunction
     public void removeItem(final String key) {
-        getMap().remove(key);
+        final String removed = store_.remove(key);
+        if (removed != null) {
+            storeSize_ -= removed.length();
+        }
     }
 
     /**
@@ -125,16 +134,12 @@ public class Storage extends SimpleScriptable {
     @JsxFunction
     public String key(final int index) {
         int counter = 0;
-        for (final String key : getMap().keySet()) {
+        for (final String key : store_.keySet()) {
             if (counter++ == index) {
                 return key;
             }
         }
         return null;
-    }
-
-    private Map<String, String> getMap() {
-        return store_;
     }
 
     /**
@@ -144,7 +149,7 @@ public class Storage extends SimpleScriptable {
      */
     @JsxFunction
     public Object getItem(final String key) {
-        return getMap().get(key);
+        return store_.get(key);
     }
 
     /**
@@ -154,7 +159,15 @@ public class Storage extends SimpleScriptable {
      */
     @JsxFunction
     public void setItem(final String key, final String data) {
-        getMap().put(key, data);
+        final long storeSize = storeSize_ + data.length();
+        if (storeSize > STORE_SIZE_KIMIT) {
+            Context.throwAsScriptRuntimeEx(
+                    new DOMException((short) 22, "QuotaExceededError: Failed to execute 'setItem' on 'Storage': "
+                            + "Setting the value of '" + key + "' exceeded the quota."));
+            return;
+        }
+        storeSize_ = storeSize;
+        store_.put(key, data);
     }
 
     /**
@@ -162,6 +175,7 @@ public class Storage extends SimpleScriptable {
      */
     @JsxFunction
     public void clear() {
-        getMap().clear();
+        store_.clear();
+        storeSize_ = 0;
     }
 }
