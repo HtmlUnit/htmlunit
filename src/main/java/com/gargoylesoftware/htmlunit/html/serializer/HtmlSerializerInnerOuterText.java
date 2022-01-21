@@ -76,8 +76,11 @@ public class HtmlSerializerInnerOuterText {
             return builder.getText();
         }
 
+        // when calling on the title itself we have to output
+        final boolean insideHead = node instanceof HtmlTitle;
+
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
-        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), false);
+        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), insideHead);
         return builder.getText();
     }
 
@@ -127,6 +130,9 @@ public class HtmlSerializerInnerOuterText {
         }
         else if (node instanceof HtmlNoFrames) {
             appendChildren(builder, node, Mode.PLAIN, insideHead);
+        }
+        else if (node instanceof HtmlTitle && !insideHead) {
+            // nothing to do
         }
         else if (node instanceof HtmlTextArea) {
             // nothing to do

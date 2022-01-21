@@ -1939,6 +1939,49 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "xz",
+            IE = "xyz")
+    @HtmlUnitNYI(IE = "xz")
+    public void getInnerTextWithTitle() throws Exception {
+        getInnerTextFormated("<div id='tester'>"
+                + "x<title>y</title>z"
+                + "</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("y")
+    public void getInnerTextTitle() throws Exception {
+        getInnerTextFormated("<div>"
+                + "x<title id='tester'>y</title>z"
+                + "</div>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("y")
+    public void getInnerTextTitleInHead() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head id='tester'><title>y</title></head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final String text = (String) ((JavascriptExecutor) driver)
+                .executeScript("return document.getElementById('tester').innerText");
+        assertEquals(getExpectedAlerts()[0], text);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "text",
             FF = "null",
             FF_ESR = "null",
