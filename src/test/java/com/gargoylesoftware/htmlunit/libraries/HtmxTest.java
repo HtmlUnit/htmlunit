@@ -47,21 +47,10 @@ public class HtmxTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "passes:409failures:3",
             EDGE = "passes:409failures:3",
             FF = "passes:409failures:3",
-            FF_ESR = "passes:409failures:3",
-            IE = "passes:16failures:397")
+            FF_ESR = "passes:409failures:3")
     public void htmx() throws Exception {
         startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
 
-        try {
-            htmxRun(1);
-        }
-        catch (final Exception e) {
-            // second try
-            htmxRun(2);
-        }
-    }
-
-    private void htmxRun(final int tryCount) throws Exception {
         final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 
@@ -82,7 +71,7 @@ public class HtmxTest extends WebDriverTestCase {
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
-                    lastStats = "HtmxTest " + tryCount + " runs too long (longer than " + runTime / 1000 + "s) - "
+                    lastStats = "HtmxTest runs too long (longer than " + runTime / 1000 + "s) - "
                             + getResultElementText(webDriver);
                     break;
                 }
