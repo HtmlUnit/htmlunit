@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96">
+        <release version="2.57.0" date="Januar 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
             <action type="add" dev="rbri">
                 Quota simulation added to localStorage.
             </action>
@@ -23,7 +23,7 @@
             <action type="fix" dev="rbri" issue="435">
                 Fix duplicate classes inside our javadoc.
             </action>
-            <action type="fix" dev="Ashley Frieze">
+            <action type="fix" dev="Ashley Frieze" issue="432">
                 The caching algorithm now observe the max-age headers.
             </action>
             <action type="add" dev="rbri">
