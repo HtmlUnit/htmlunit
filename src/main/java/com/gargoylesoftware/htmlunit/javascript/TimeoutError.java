@@ -35,7 +35,7 @@ public class TimeoutError extends Error {
      * Returns the allowed time.
      * @return the allowed time
      */
-    long getAllowedTime() {
+    public long getAllowedTime() {
         return allowedTime_;
     }
 
@@ -43,7 +43,7 @@ public class TimeoutError extends Error {
      * Returns the execution time.
      * @return the execution time
      */
-    long getExecutionTime() {
+    public long getExecutionTime() {
         return executionTime_;
     }
 }
