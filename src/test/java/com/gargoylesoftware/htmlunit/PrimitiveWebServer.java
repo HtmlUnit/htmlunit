@@ -72,6 +72,7 @@ public class PrimitiveWebServer implements Closeable {
      * @throws Exception if an error occurs
      */
     private void start() throws Exception {
+System.out.println("############## start server");
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
@@ -105,7 +106,7 @@ public class PrimitiveWebServer implements Closeable {
                         int i;
 
                         while ((i = in.read()) != -1) {
-System.out.println('#' + i + " '" + ((char) i) + "'");
+// System.out.println('#' + i + " '" + ((char) i) + "'");
                             writer.append((char) i);
                             requestString = writer.toString();
 
