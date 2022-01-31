@@ -1339,6 +1339,65 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
         validation("<input type='radio' id='e1' required checked>\n", "");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredClicked() throws Exception {
+        validation("<input type='radio' id='e1' required>\n", "elem.click();");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredClickUncheck() throws Exception {
+        validation("<input type='radio' id='e1' name='test' required checked>\n"
+                + "<input type='radio' id='e2' name='test'>\n", "document.getElementById('e2').click();");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredClickUncheck2() throws Exception {
+        validation("<input type='radio' id='e1' name='test' required>\n"
+                + "<input type='radio' id='e2' name='test'>\n", "document.getElementById('e2').click();");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredOther() throws Exception {
+        validation("<input type='radio' id='e1' name='test' required>\n"
+                + "<input type='radio' id='e2' name='test' checked>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

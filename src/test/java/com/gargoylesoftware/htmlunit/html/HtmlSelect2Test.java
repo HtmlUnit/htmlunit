@@ -252,6 +252,50 @@ public class HtmlSelect2Test extends WebDriverTestCase {
         validation("<select id='e1' required>s1</select>\n", "");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredSelected() throws Exception {
+        validation("<select id='e1' size='4' required><option value='unit' selected>Html</option></select>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredSelect() throws Exception {
+        validation("<select id='e1' size='4' required><option id='e2' value='unit'>Html</option></select>\n",
+                "document.getElementById('e2').selected=true;");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequiredDeselect() throws Exception {
+        validation("<select id='e1' size='4' required><option id='e2' value='unit' selected>Html</option></select>\n",
+                "document.getElementById('e2').selected=false;");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

@@ -161,13 +161,16 @@ public class HTMLOptionElement extends HTMLElement {
     public void setSelected(final boolean selected) {
         final HtmlOption optionNode = (HtmlOption) getDomNodeOrNull();
         final HtmlSelect enclosingSelect = optionNode.getEnclosingSelect();
+
         if (!selected && optionNode.isSelected()
-                && enclosingSelect != null && !enclosingSelect.isMultipleSelectEnabled()) {
+                && enclosingSelect != null
+                && enclosingSelect.getSize() <= 1
+                && !enclosingSelect.isMultipleSelectEnabled()) {
             enclosingSelect.getOption(0).setSelectedFromJavaScript(true);
+            return;
         }
-        else {
-            optionNode.setSelectedFromJavaScript(selected);
-        }
+
+        optionNode.setSelectedFromJavaScript(selected);
     }
 
     /**

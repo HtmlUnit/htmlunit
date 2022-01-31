@@ -733,6 +733,6 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     public boolean isValueMissingValidityState() {
         return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && getAttributeDirect("value").isEmpty();
+                && getText().isEmpty();
     }
 }

@@ -237,6 +237,6 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     @Override
     public boolean isValueMissingValidityState() {
         return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && ATTRIBUTE_NOT_DEFINED == getCheckedAttribute();
+                && !isChecked();
     }
 }

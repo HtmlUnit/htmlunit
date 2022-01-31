@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SELECT_REMOVE_IGNORE_IF_INDEX_OUTSIDE;
-import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -23,7 +22,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -266,17 +264,7 @@ public class HTMLSelectElement extends HTMLElement {
      */
     @JsxGetter
     public int getSize() {
-        int size = 0;
-        final String sizeAttribute = getDomNodeOrDie().getAttributeDirect("size");
-        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
-            try {
-                size = Integer.parseInt(sizeAttribute);
-            }
-            catch (final Exception e) {
-                //silently ignore
-            }
-        }
-        return size;
+        return getDomNodeOrDie().getSize();
     }
 
     /**

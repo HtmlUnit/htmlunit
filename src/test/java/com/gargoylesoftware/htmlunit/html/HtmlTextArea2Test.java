@@ -720,6 +720,48 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
         validation("<textarea id='e1' required></textarea>\n", "");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredWithText() throws Exception {
+        validation("<textarea id='e1' required>HtmlUnit</textarea>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredValueSet() throws Exception {
+        validation("<textarea id='e1' required></textarea>\n", "elem.value='A';");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequiredValueClear() throws Exception {
+        validation("<textarea id='e1' required>abc</textarea>\n", "elem.value='';");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

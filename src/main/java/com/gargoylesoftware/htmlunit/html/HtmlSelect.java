@@ -571,6 +571,23 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * @return the size or 1 if not defined or not convertable to int
+     */
+    public final int getSize() {
+        int size = 0;
+        final String sizeAttribute = getSizeAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
+            try {
+                size = Integer.parseInt(sizeAttribute);
+            }
+            catch (final Exception e) {
+                //silently ignore
+            }
+        }
+        return size;
+    }
+
+    /**
      * Returns the value of the attribute {@code multiple}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
@@ -870,6 +887,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     @Override
     public boolean isValueMissingValidityState() {
         return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && getAttributeDirect("value").isEmpty();
+                && getSelectedOptions().isEmpty();
     }
 }
