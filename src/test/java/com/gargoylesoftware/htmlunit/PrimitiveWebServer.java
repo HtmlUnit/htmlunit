@@ -105,6 +105,7 @@ public class PrimitiveWebServer implements Closeable {
                         int i;
 
                         while ((i = in.read()) != -1) {
+System.out.println('#' + i + " '" + ((char) i) + "'");
                             writer.append((char) i);
                             requestString = writer.toString();
 
@@ -112,8 +113,9 @@ public class PrimitiveWebServer implements Closeable {
                                 break;
                             }
                         }
-
-                        final int contentLenghtPos = StringUtils.indexOfIgnoreCase(requestString, "Content-Length:");
+System.out.println(requestString);
+                        final int contentLenghtPos =
+                                StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
                         if (contentLenghtPos > -1) {
                             final int endPos = requestString.indexOf('\n', contentLenghtPos + 16);
                             final String toParse = requestString.substring(contentLenghtPos + 16, endPos);
@@ -125,7 +127,7 @@ public class PrimitiveWebServer implements Closeable {
                                 requestString += new String(charArray);
                             }
                         }
-
+System.out.println("xxx");
                         final String response;
                         if (requestString.length() < 1
                                 || requestString.contains("/favicon.ico")) {
