@@ -72,7 +72,6 @@ public class PrimitiveWebServer implements Closeable {
      * @throws Exception if an error occurs
      */
     private void start() throws Exception {
-System.out.println("############## start server");
         server_ = new ServerSocket();
         server_.setReuseAddress(true);
 
@@ -106,7 +105,6 @@ System.out.println("############## start server");
                         int i;
 
                         while ((i = in.read()) != -1) {
-// System.out.println('#' + i + " '" + ((char) i) + "'");
                             writer.append((char) i);
                             requestString = writer.toString();
 
@@ -114,7 +112,6 @@ System.out.println("############## start server");
                                 break;
                             }
                         }
-System.out.println(requestString);
                         final int contentLenghtPos =
                                 StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
                         if (contentLenghtPos > -1) {
@@ -128,7 +125,7 @@ System.out.println(requestString);
                                 requestString += new String(charArray);
                             }
                         }
-System.out.println("xxx");
+
                         final String response;
                         if (requestString.length() < 1
                                 || requestString.contains("/favicon.ico")) {
@@ -139,7 +136,6 @@ System.out.println("xxx");
                         }
                         else {
                             requests_.add(requestString);
-System.out.println("requestString added");
                             if (first || otherResponse_ == null) {
                                 response = firstResponse_;
                             }
@@ -149,14 +145,10 @@ System.out.println("requestString added");
                             first = false;
                         }
 
-System.out.println("r1");
                         try (OutputStream out = socket.getOutputStream()) {
-System.out.println("r2");
                             final int headPos = response.indexOf("\r\n\r\n");
-System.out.println("r3 " + headPos);
                             out.write(response.substring(0, headPos + 4).getBytes(StandardCharsets.US_ASCII));
                             out.write(response.substring(headPos + 4).getBytes(charset_));
-System.out.println("r4");
                         }
                     }
                 }
