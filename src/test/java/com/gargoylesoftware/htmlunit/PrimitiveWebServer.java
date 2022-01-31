@@ -138,6 +138,7 @@ System.out.println("xxx");
                         }
                         else {
                             requests_.add(requestString);
+System.out.println("requestString added");
                             if (first || otherResponse_ == null) {
                                 response = firstResponse_;
                             }
@@ -147,10 +148,14 @@ System.out.println("xxx");
                             first = false;
                         }
 
+System.out.println("r1");
                         try (OutputStream out = socket.getOutputStream()) {
+System.out.println("r2");
                             final int headPos = response.indexOf("\r\n\r\n");
+System.out.println("r3 " + headPos);
                             out.write(response.substring(0, headPos + 4).getBytes(StandardCharsets.US_ASCII));
                             out.write(response.substring(headPos + 4).getBytes(charset_));
+System.out.println("r4");
                         }
                     }
                 }
