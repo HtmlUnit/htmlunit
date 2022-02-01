@@ -75,9 +75,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlObject;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -223,7 +223,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @return the prototype object corresponding to the specified class inside the specified scope
      */
     @Override
-    public Scriptable getPrototype(final Class<? extends SimpleScriptable> jsClass) {
+    public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> jsClass) {
         return prototypes_.get(jsClass);
     }
 

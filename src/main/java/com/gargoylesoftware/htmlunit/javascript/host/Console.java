@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Formatter;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
@@ -54,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(IE)
-public class Console extends SimpleScriptable {
+public class Console extends HtmlUnitScriptable {
 
     private static final Map<String, Long> TIMERS = new HashMap<>();
     private static final Formatter FORMATTER_ = new ConsoleFormatter();
@@ -131,7 +131,7 @@ public class Console extends SimpleScriptable {
 
     private static WebConsole toWebConsole(Scriptable thisObj) {
         if (thisObj instanceof Window
-                && ((SimpleScriptable) thisObj).getDomNodeOrDie().hasFeature(JS_CONSOLE_HANDLE_WINDOW)) {
+                && ((HtmlUnitScriptable) thisObj).getDomNodeOrDie().hasFeature(JS_CONSOLE_HANDLE_WINDOW)) {
             thisObj = ((Window) thisObj).getConsole();
         }
         if (thisObj instanceof Console) {
@@ -255,8 +255,8 @@ public class Console extends SimpleScriptable {
                     if (value instanceof Delegator) {
                         sb.append(id).append(": ").append(((Delegator) value).getClassName()).append('\n');
                     }
-                    else if (value instanceof SimpleScriptable) {
-                        sb.append(id).append(": ").append(((SimpleScriptable) value).getClassName()).append('\n');
+                    else if (value instanceof HtmlUnitScriptable) {
+                        sb.append(id).append(": ").append(((HtmlUnitScriptable) value).getClassName()).append('\n');
                     }
                     else if (value instanceof BaseFunction) {
                         sb.append(id).append(": function ").append(((BaseFunction) value).getFunctionName())
@@ -427,10 +427,10 @@ public class Console extends SimpleScriptable {
                     sb.append("({})");
                 }
             }
-            else if (val instanceof SimpleScriptable) {
+            else if (val instanceof HtmlUnitScriptable) {
                 if (level == 0) {
                     sb.append("[object ");
-                    sb.append(((SimpleScriptable) val).getClassName());
+                    sb.append(((HtmlUnitScriptable) val).getClassName());
                     sb.append(']');
                 }
                 else {
@@ -525,8 +525,8 @@ public class Console extends SimpleScriptable {
             else if (o instanceof NativeObject) {
                 return "[object " + ((NativeObject) o).getClassName() + "]";
             }
-            else if (o instanceof SimpleScriptable) {
-                return "[object " + ((SimpleScriptable) o).getClassName() + "]";
+            else if (o instanceof HtmlUnitScriptable) {
+                return "[object " + ((HtmlUnitScriptable) o).getClassName() + "]";
             }
             else {
                 return o.toString();

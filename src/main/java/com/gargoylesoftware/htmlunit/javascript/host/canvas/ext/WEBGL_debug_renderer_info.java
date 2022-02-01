@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas.ext;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ronald Brill
  */
 @JsxClass(IE)
-public class WEBGL_debug_renderer_info extends SimpleScriptable {
+public class WEBGL_debug_renderer_info extends HtmlUnitScriptable {
 
     /** The constant {@code UNMASKED_RENDERER_WEBGL}. */
     @JsxConstant

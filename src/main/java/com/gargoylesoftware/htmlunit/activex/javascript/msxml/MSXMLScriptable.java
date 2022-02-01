@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -93,10 +94,10 @@ public class MSXMLScriptable extends SimpleScriptable {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public Scriptable getPrototype(final Class<? extends SimpleScriptable> javaScriptClass) {
+    public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> javaScriptClass) {
         final Scriptable prototype = getEnvironment().getPrototype(javaScriptClass);
-        if (prototype == null && javaScriptClass != SimpleScriptable.class) {
-            return getPrototype((Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+        if (prototype == null && javaScriptClass != HtmlUnitScriptable.class) {
+            return getPrototype((Class<? extends HtmlUnitScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
     }

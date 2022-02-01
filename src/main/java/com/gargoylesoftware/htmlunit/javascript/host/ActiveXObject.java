@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(IE)
-public class ActiveXObject extends SimpleScriptable {
+public class ActiveXObject extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(ActiveXObject.class);
 
@@ -140,7 +140,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param isGetter is getter
      * @param isSetter is setter
      */
-    public static void addProperty(final SimpleScriptable scriptable, final String propertyName,
+    public static void addProperty(final HtmlUnitScriptable scriptable, final String propertyName,
             final boolean isGetter, final boolean isSetter) {
         final String initialUpper = Character.toUpperCase(propertyName.charAt(0)) + propertyName.substring(1);
         String getterName = null;
@@ -154,7 +154,7 @@ public class ActiveXObject extends SimpleScriptable {
         addProperty(scriptable, propertyName, getterName, setterName);
     }
 
-    static void addProperty(final SimpleScriptable scriptable, final String propertyName,
+    static void addProperty(final HtmlUnitScriptable scriptable, final String propertyName,
             final String getterMethodName, final String setterMethodName) {
         scriptable.defineProperty(propertyName, null,
                 getMethod(scriptable.getClass(), getterMethodName, JsxGetter.class),
@@ -169,7 +169,7 @@ public class ActiveXObject extends SimpleScriptable {
      * @param annotationClass the class of the annotation required
      * @return {@code null} if not found
      */
-    static Method getMethod(final Class<? extends SimpleScriptable> clazz,
+    static Method getMethod(final Class<? extends HtmlUnitScriptable> clazz,
             final String name, final Class<? extends Annotation> annotationClass) {
         if (name == null) {
             return null;

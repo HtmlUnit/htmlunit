@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  */
 @JsxClass(IE)
 @JsxClass(className = "DOMRect", value = {CHROME, EDGE, FF, FF_ESR})
-public class ClientRect extends SimpleScriptable {
+public class ClientRect extends HtmlUnitScriptable {
 
     private int bottom_;
     private int left_;

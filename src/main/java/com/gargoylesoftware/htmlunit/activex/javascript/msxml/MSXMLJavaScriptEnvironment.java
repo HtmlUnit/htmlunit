@@ -23,7 +23,7 @@ import java.util.Map.Entry;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
@@ -162,7 +162,7 @@ public class MSXMLJavaScriptEnvironment {
      * @param jsClass the class whose prototype is to be returned
      * @return the prototype object corresponding to the specified class inside the specified scope
      */
-    public Scriptable getPrototype(final Class<? extends SimpleScriptable> jsClass) {
+    public Scriptable getPrototype(final Class<? extends HtmlUnitScriptable> jsClass) {
         return prototypes_.get(jsClass);
     }
 }
