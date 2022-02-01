@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUMERATOR_CONSTRUCTOR_THROWS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
@@ -29,14 +28,11 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code Enumerator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  * @see <a href="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx">MSDN Documentation</a>
  */
 @JsxClass(IE)
 public class Enumerator extends HtmlUnitScriptable {
-
-    private int index_;
-
-    private HTMLCollection collection_;
 
     /**
      * Creates an instance.
@@ -51,20 +47,9 @@ public class Enumerator extends HtmlUnitScriptable {
     @JsxConstructor
     public void jsConstructor(final Object o) {
         if (Undefined.isUndefined(o)) {
-            collection_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
+            return;
         }
-        else if (getBrowserVersion().hasFeature(JS_ENUMERATOR_CONSTRUCTOR_THROWS)) {
-            throw ScriptRuntime.typeError("object is not enumerable");
-        }
-        else if (o instanceof HTMLCollection) {
-            collection_ = (HTMLCollection) o;
-        }
-        else if (o instanceof HTMLFormElement) {
-            collection_ = ((HTMLFormElement) o).getElements();
-        }
-        else {
-            throw ScriptRuntime.typeError("object is not enumerable (" + o + ")");
-        }
+        throw ScriptRuntime.typeError("object is not enumerable");
     }
 
     /**
@@ -73,7 +58,7 @@ public class Enumerator extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean atEnd() {
-        return index_ >= collection_.getLength();
+        return true;
     }
 
     /**
@@ -82,12 +67,6 @@ public class Enumerator extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item() {
-        if (!atEnd()) {
-            HtmlUnitScriptable scriptable = (HtmlUnitScriptable) collection_.get(index_, collection_);
-            scriptable = scriptable.clone();
-            scriptable.setCaseSensitive(false);
-            return scriptable;
-        }
         return Undefined.instance;
     }
 
@@ -96,7 +75,6 @@ public class Enumerator extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void moveFirst() {
-        index_ = 0;
     }
 
     /**
@@ -104,6 +82,5 @@ public class Enumerator extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void moveNext() {
-        index_++;
     }
 }

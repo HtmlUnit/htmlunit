@@ -924,10 +924,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
 
-    /** The Enumerator constructor throws an exception if called with HtmlCollections as parameter. */
-    @BrowserFeature(IE)
-    JS_ENUMERATOR_CONSTRUCTOR_THROWS,
-
     /** Javascript {@code Error.captureStackTrace}. */
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_CAPTURE_STACK_TRACE,

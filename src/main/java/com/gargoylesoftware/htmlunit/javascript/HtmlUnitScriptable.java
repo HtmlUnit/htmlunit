@@ -53,7 +53,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     private static final Log LOG = LogFactory.getLog(HtmlUnitScriptable.class);
 
     private DomNode domNode_;
-    private boolean caseSensitive_ = true;
     private String className_;
 
     /**
@@ -120,17 +119,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      * {@inheritDoc}
      */
     @Override
-    public Object get(String name, final Scriptable start) {
-        // If this object is not case-sensitive about property names, transform the property name accordingly.
-        if (!caseSensitive_) {
-            for (final Object o : getAllIds()) {
-                final String objectName = Context.toString(o);
-                if (name.equalsIgnoreCase(objectName)) {
-                    name = objectName;
-                    break;
-                }
-            }
-        }
+    public Object get(final String name, final Scriptable start) {
         // Try to get property configured on object itself.
         Object response = super.get(name, start);
         if (response != NOT_FOUND) {
@@ -416,18 +405,6 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         }
         catch (final Exception e) {
             throw new IllegalStateException("Clone not supported");
-        }
-    }
-
-    /**
-     * Sets case sensitivity of all properties of this scriptable.
-     * @param caseSensitive case sensitive or no
-     */
-    public void setCaseSensitive(final boolean caseSensitive) {
-        caseSensitive_ = caseSensitive;
-        final Scriptable prototype = getPrototype();
-        if (prototype instanceof HtmlUnitScriptable) {
-            ((HtmlUnitScriptable) prototype).setCaseSensitive(caseSensitive);
         }
     }
 }
