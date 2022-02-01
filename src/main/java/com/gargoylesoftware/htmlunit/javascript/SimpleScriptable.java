@@ -77,6 +77,18 @@ public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
         // Try to get property configured on object itself.
         Object response = super.get(name, start);
         if (response != NOT_FOUND) {
+            if (response instanceof ScriptableObject) {
+                ScriptableObject responseScriptable = (ScriptableObject) response;
+                if (responseScriptable.getParentScope() == null) {
+                    responseScriptable.setParentScope(this.getParentScope());
+                }
+            }
+            if (response instanceof SimpleScriptable) {
+                SimpleScriptable simpleScriptable = (SimpleScriptable) response;
+                if (simpleScriptable.getPrototype() == null) {
+                    simpleScriptable.setPrototype(getPrototype(simpleScriptable.getClass()));
+                }
+            }
             return response;
         }
         if (this == start) {
