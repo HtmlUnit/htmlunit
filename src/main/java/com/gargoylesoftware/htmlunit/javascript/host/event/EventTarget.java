@@ -31,7 +31,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLabel;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
 @JsxClass(isJSObject = false, value = IE)
-public class EventTarget extends SimpleScriptable {
+public class EventTarget extends HtmlUnitScriptable {
 
     private EventListenersContainer eventListenersContainer_;
 

@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import org.apache.xml.utils.PrefixResolver;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
-public class XPathEvaluator extends SimpleScriptable {
+public class XPathEvaluator extends HtmlUnitScriptable {
 
     /**
      * Default constructor.

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ENUMERATOR_CONSTRUCTOR_THROWS;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/6ch9zb09.aspx">MSDN Documentation</a>
  */
 @JsxClass(IE)
-public class Enumerator extends SimpleScriptable {
+public class Enumerator extends HtmlUnitScriptable {
 
     private int index_;
 
@@ -83,7 +83,7 @@ public class Enumerator extends SimpleScriptable {
     @JsxFunction
     public Object item() {
         if (!atEnd()) {
-            SimpleScriptable scriptable = (SimpleScriptable) collection_.get(index_, collection_);
+            HtmlUnitScriptable scriptable = (HtmlUnitScriptable) collection_.get(index_, collection_);
             scriptable = scriptable.clone();
             scriptable.setCaseSensitive(false);
             return scriptable;

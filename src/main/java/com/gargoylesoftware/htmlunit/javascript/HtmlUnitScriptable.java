@@ -235,7 +235,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
     public DomNode getDomNodeOrDie() {
         if (domNode_ == null) {
             final String clazz = getClass().getName();
-            throw new IllegalStateException("DomNode has not been set for this SimpleScriptable: " + clazz);
+            throw new IllegalStateException("DomNode has not been set for this HtmlUnitScriptable: " + clazz);
         }
         return domNode_;
     }
@@ -278,7 +278,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * @param object a {@link DomNode} or a {@link WebWindow}
      * @return the JavaScript object or NOT_FOUND
      */
-    protected SimpleScriptable getScriptableFor(final Object object) {
+    protected HtmlUnitScriptable getScriptableFor(final Object object) {
         if (object instanceof WebWindow) {
             return ((WebWindow) object).getScriptableObject();
         }
@@ -287,7 +287,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
 
         final Object scriptObject = domNode.getScriptableObject();
         if (scriptObject != null) {
-            return (SimpleScriptable) scriptObject;
+            return (HtmlUnitScriptable) scriptObject;
         }
         return makeScriptableFor(domNode);
     }
@@ -297,11 +297,10 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * @param domNode the DOM node for which a JS object should be created
      * @return the JavaScript object
      */
-    @SuppressWarnings("unchecked")
-    public SimpleScriptable makeScriptableFor(final DomNode domNode) {
+    public HtmlUnitScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
-        Class<? extends SimpleScriptable> javaScriptClass = null;
+        Class<? extends HtmlUnitScriptable> javaScriptClass = null;
         if (domNode instanceof HtmlImage && "image".equals(((HtmlImage) domNode).getOriginalQualifiedName())
                 && ((HtmlImage) domNode).wasCreatedByJavascript()) {
             if (domNode.hasFeature(HTMLIMAGE_HTMLELEMENT)) {
@@ -315,11 +314,11 @@ public class HtmlUnitScriptable extends ScriptableObject {
             final JavaScriptEngine javaScriptEngine =
                     (JavaScriptEngine) getWindow().getWebWindow().getWebClient().getJavaScriptEngine();
             for (Class<?> c = domNode.getClass(); javaScriptClass == null && c != null; c = c.getSuperclass()) {
-                javaScriptClass = (Class<? extends SimpleScriptable>) javaScriptEngine.getJavaScriptClass(c);
+                javaScriptClass = javaScriptEngine.getJavaScriptClass(c);
             }
         }
 
-        final SimpleScriptable scriptable;
+        final HtmlUnitScriptable scriptable;
         if (javaScriptClass == null) {
             // We don't have a specific subclass for this element so create something generic.
             scriptable = new HTMLElement();
@@ -348,7 +347,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * @param domNode the DOM node for the script object
      * @param scriptable the script object to initialize
      */
-    protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
+    protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
         final SgmlPage page = domNode.getPage();
         final WebWindow enclosingWindow = page.getEnclosingWindow();
         if (enclosingWindow != null && enclosingWindow.getEnclosedPage() == page) {
@@ -460,8 +459,8 @@ public class HtmlUnitScriptable extends ScriptableObject {
      */
     @Override
     protected Object equivalentValues(Object value) {
-        if (value instanceof SimpleScriptableProxy<?>) {
-            value = ((SimpleScriptableProxy<?>) value).getDelegee();
+        if (value instanceof HtmlUnitScriptableProxy<?>) {
+            value = ((HtmlUnitScriptableProxy<?>) value).getDelegee();
         }
         return super.equivalentValues(value);
     }
@@ -470,9 +469,9 @@ public class HtmlUnitScriptable extends ScriptableObject {
      * {@inheritDoc}
      */
     @Override
-    public SimpleScriptable clone() {
+    public HtmlUnitScriptable clone() {
         try {
-            return (SimpleScriptable) super.clone();
+            return (HtmlUnitScriptable) super.clone();
         }
         catch (final Exception e) {
             throw new IllegalStateException("Clone not supported");
@@ -486,8 +485,8 @@ public class HtmlUnitScriptable extends ScriptableObject {
     public void setCaseSensitive(final boolean caseSensitive) {
         caseSensitive_ = caseSensitive;
         final Scriptable prototype = getPrototype();
-        if (prototype instanceof SimpleScriptable) {
-            ((SimpleScriptable) prototype).setCaseSensitive(caseSensitive);
+        if (prototype instanceof HtmlUnitScriptable) {
+            ((HtmlUnitScriptable) prototype).setCaseSensitive(caseSensitive);
         }
     }
 }

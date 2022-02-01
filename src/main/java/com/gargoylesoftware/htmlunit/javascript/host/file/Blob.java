@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -57,7 +57,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferV
  * @author Ronald Brill
  */
 @JsxClass
-public class Blob extends SimpleScriptable {
+public class Blob extends HtmlUnitScriptable {
     private static final String OPTIONS_TYPE_NAME = "type";
     //default according to https://developer.mozilla.org/en-US/docs/Web/API/File/File
     private static final String OPTIONS_TYPE_DEFAULT = "";

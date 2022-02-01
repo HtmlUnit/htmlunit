@@ -19,7 +19,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -29,7 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Frank Danek
  */
-public class MSXMLScriptable extends SimpleScriptable {
+public class MSXMLScriptable extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(MSXMLScriptable.class);
 
@@ -53,7 +52,7 @@ public class MSXMLScriptable extends SimpleScriptable {
      * @return the JavaScript object
      */
     @Override
-    public SimpleScriptable makeScriptableFor(final DomNode domNode) {
+    public HtmlUnitScriptable makeScriptableFor(final DomNode domNode) {
         // Get the JS class name for the specified DOM node.
         // Walk up the inheritance chain if necessary.
         Class<? extends MSXMLScriptable> javaScriptClass = null;

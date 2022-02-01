@@ -40,8 +40,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
@@ -239,7 +239,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
     public void obsoleteJsxClasses() {
         final JavaScriptConfiguration config = JavaScriptConfiguration.getInstance(FIREFOX);
 
-        for (final Class<? extends SimpleScriptable> klass : config.getClasses()) {
+        for (final Class<? extends HtmlUnitScriptable> klass : config.getClasses()) {
             boolean found = false;
             for (final BrowserVersion browser : BrowserVersion.ALL_SUPPORTED_BROWSERS) {
                 if (AbstractJavaScriptConfiguration.getClassConfiguration(klass, browser) != null) {

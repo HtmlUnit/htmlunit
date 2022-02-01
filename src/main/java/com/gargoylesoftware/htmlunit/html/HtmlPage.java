@@ -91,9 +91,9 @@ import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserDOMBuilder;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitContextFactory;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -2008,7 +2008,7 @@ public class HtmlPage extends SgmlPage {
         // we need the ScriptObject clone before cloning the kids.
         final HtmlPage result = (HtmlPage) super.cloneNode(false);
         if (getWebClient().isJavaScriptEnabled()) {
-            final SimpleScriptable jsObjClone = ((SimpleScriptable) getScriptableObject()).clone();
+            final HtmlUnitScriptable jsObjClone = ((HtmlUnitScriptable) getScriptableObject()).clone();
             jsObjClone.setDomNode(result);
         }
 

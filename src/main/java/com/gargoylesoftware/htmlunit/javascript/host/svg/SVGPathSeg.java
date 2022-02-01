@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ronald Brill
  */
 @JsxClass(IE)
-public class SVGPathSeg extends SimpleScriptable {
+public class SVGPathSeg extends HtmlUnitScriptable {
 
     /** The constant {@code PATHSEG_UNKNOWN}. */
     @JsxConstant

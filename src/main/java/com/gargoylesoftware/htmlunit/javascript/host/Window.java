@@ -839,7 +839,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
             final HtmlPage htmlPage = (HtmlPage) enclosedPage;
 
             // Windows don't have corresponding DomNodes so set the domNode
-            // variable to be the page. If this isn't set then SimpleScriptable.get()
+            // variable to be the page. If this isn't set then HtmlUnitScriptable.get()
             // won't work properly
             setDomNode(htmlPage);
             clearEventListenersContainer();

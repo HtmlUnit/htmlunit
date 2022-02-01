@@ -27,7 +27,7 @@ import org.w3c.dom.NamedNodeMap;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.*;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -48,7 +48,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
  * @author Frank Danek
  */
 @JsxClass
-public class XMLSerializer extends SimpleScriptable {
+public class XMLSerializer extends HtmlUnitScriptable {
 
     // this is a bit strange but it is the way FF works
     // output of empty tags are not allowed for these HTML tags

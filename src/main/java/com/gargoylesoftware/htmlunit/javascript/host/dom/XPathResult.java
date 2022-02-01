@@ -23,7 +23,7 @@ import java.util.List;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
-public class XPathResult extends SimpleScriptable {
+public class XPathResult extends HtmlUnitScriptable {
 
     /**
      * This code does not represent a specific type.

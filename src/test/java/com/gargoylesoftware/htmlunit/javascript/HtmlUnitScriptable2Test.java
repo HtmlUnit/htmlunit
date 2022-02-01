@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class SimpleScriptable2Test extends WebDriverTestCase {
+public class HtmlUnitScriptable2Test extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails

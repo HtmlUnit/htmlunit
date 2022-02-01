@@ -105,7 +105,7 @@ public class Prototype161Test extends PrototypeTestBase {
     }
 
     /**
-     * Depends on {@link com.gargoylesoftware.htmlunit.javascript.SimpleScriptable2Test#parentProtoFeature()}.
+     * Depends on {@link com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable2Test#parentProtoFeature()}.
      *
      * @throws Exception if test fails
      */

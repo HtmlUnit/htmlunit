@@ -120,7 +120,7 @@ import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -151,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN doc</a>
  */
 @JsxClass
-public class CSSStyleDeclaration extends SimpleScriptable {
+public class CSSStyleDeclaration extends HtmlUnitScriptable {
     private static final Pattern TO_FLOAT_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");

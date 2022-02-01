@@ -15,7 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript.host;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptableProxy;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptableProxy;
 
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
@@ -24,7 +24,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  */
-public class WindowProxy extends SimpleScriptableProxy<Window> {
+public class WindowProxy extends HtmlUnitScriptableProxy<Window> {
 
     private final WebWindow webWindow_;
 

@@ -100,7 +100,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlUnknownElement;
 import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -410,7 +410,7 @@ public class Document extends Node {
      * @return the DocumentType of the document
      */
     @JsxGetter
-    public SimpleScriptable getDoctype() {
+    public HtmlUnitScriptable getDoctype() {
         final Object documentType = getPage().getDoctype();
         if (documentType == null) {
             return null;
@@ -1337,10 +1337,10 @@ public class Document extends Node {
 
     @SuppressWarnings("unchecked")
     private static Scriptable staticGetPrototype(final Window window,
-            final Class<? extends SimpleScriptable> javaScriptClass) {
+            final Class<? extends HtmlUnitScriptable> javaScriptClass) {
         final Scriptable prototype = window.getPrototype(javaScriptClass);
-        if (prototype == null && javaScriptClass != SimpleScriptable.class) {
-            return staticGetPrototype(window, (Class<? extends SimpleScriptable>) javaScriptClass.getSuperclass());
+        if (prototype == null && javaScriptClass != HtmlUnitScriptable.class) {
+            return staticGetPrototype(window, (Class<? extends HtmlUnitScriptable>) javaScriptClass.getSuperclass());
         }
         return prototype;
     }

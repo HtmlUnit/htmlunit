@@ -43,7 +43,7 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -701,7 +701,7 @@ public class XMLDOMDocument extends XMLDOMNode {
      * {@inheritDoc}
      */
     @Override
-    protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
+    protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
         scriptable.setParentScope(getParentScope());
     }
 }

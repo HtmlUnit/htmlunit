@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.security.SecureRandom;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeTypedArrayVi
  * @author Ronald Brill
  */
 @JsxClass
-public class Crypto extends SimpleScriptable {
+public class Crypto extends HtmlUnitScriptable {
 
     static final SecureRandom RANDOM = new SecureRandom();
 

@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.PluginConfiguration;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -53,7 +53,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535867.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Navigator extends SimpleScriptable {
+public class Navigator extends HtmlUnitScriptable {
 
     private PluginArray plugins_;
     private MimeTypeArray mimeTypes_;

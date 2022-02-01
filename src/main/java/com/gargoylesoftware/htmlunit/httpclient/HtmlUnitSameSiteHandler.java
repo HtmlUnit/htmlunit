@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.httpclient;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.apache.http.cookie.CommonCookieAttributeHandler;
 import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;

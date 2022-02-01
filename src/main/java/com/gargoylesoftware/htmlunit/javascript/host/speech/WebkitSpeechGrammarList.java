@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.speech;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(value = {CHROME, EDGE}, className = "webkitSpeechGrammarList")
-public class WebkitSpeechGrammarList extends SimpleScriptable {
+public class WebkitSpeechGrammarList extends HtmlUnitScriptable {
 
     /**
      * Creates a new instance.

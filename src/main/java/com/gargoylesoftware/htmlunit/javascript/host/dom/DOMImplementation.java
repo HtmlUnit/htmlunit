@@ -50,7 +50,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -74,7 +74,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * W3C Dom Level 1</a>
  */
 @JsxClass
-public class DOMImplementation extends SimpleScriptable {
+public class DOMImplementation extends HtmlUnitScriptable {
 
     /**
      * Creates an instance.

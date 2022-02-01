@@ -60,7 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -918,8 +918,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 throw new IllegalStateException(msg.toString());
             }
             final Object o = page.getScriptableObject();
-            if (o instanceof SimpleScriptable) {
-                scriptObject_ = ((SimpleScriptable) o).makeScriptableFor(this);
+            if (o instanceof HtmlUnitScriptable) {
+                scriptObject_ = ((HtmlUnitScriptable) o).makeScriptableFor(this);
             }
         }
         return (T) scriptObject_;

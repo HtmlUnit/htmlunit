@@ -37,7 +37,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * @author Frank Danek
  */
 @RunWith(BrowserRunner.class)
-public class SimpleScriptableTest extends SimpleWebTestCase {
+public class HtmlUnitScriptableTest extends SimpleWebTestCase {
 
     /**
      * @throws Exception if the test fails

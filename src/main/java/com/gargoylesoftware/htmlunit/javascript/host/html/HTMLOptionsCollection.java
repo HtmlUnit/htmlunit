@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlSelect;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -63,7 +63,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
 @JsxClass(isJSObject = false, value = IE)
-public class HTMLOptionsCollection extends SimpleScriptable {
+public class HTMLOptionsCollection extends HtmlUnitScriptable {
 
     private HtmlSelect htmlSelect_;
 
@@ -78,7 +78,7 @@ public class HTMLOptionsCollection extends SimpleScriptable {
      * Creates an instance.
      * @param parentScope parent scope
      */
-    public HTMLOptionsCollection(final SimpleScriptable parentScope) {
+    public HTMLOptionsCollection(final HtmlUnitScriptable parentScope) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
     }

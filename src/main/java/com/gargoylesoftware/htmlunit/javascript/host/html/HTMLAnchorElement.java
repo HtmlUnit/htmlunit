@@ -524,7 +524,7 @@ public class HTMLAnchorElement extends HTMLElement {
 
     /**
      * Calls for instance for implicit conversion to string.
-     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
+     * @see com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
      * @return the default value
      */

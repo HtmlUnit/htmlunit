@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeTypeArray.html">XUL Planet</a>
  */
 @JsxClass(isJSObject = false)
-public class SimpleArray extends SimpleScriptable {
+public class SimpleArray extends HtmlUnitScriptable {
     private final List<Object> elements_ = new ArrayList<>();
 
     /**

@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.media.rtc;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass(value = {FF, FF_ESR}, className = "mozRTCIceCandidate")
-public class MozRTCIceCandidate extends SimpleScriptable {
+public class MozRTCIceCandidate extends HtmlUnitScriptable {
 
     /**
      * Creates a new instance.

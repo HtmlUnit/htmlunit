@@ -33,7 +33,7 @@ import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.css.dom.CSSUnknownRuleImpl;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule">MDN doc</a>
  */
 @JsxClass
-public class CSSRule extends SimpleScriptable {
+public class CSSRule extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(CSSRule.class);
 

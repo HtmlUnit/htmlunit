@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 
@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
  * @author Ahmed Ashour
  */
 @JsxClass(IE)
-public class PositionError extends SimpleScriptable {
+public class PositionError extends HtmlUnitScriptable {
 
     /** The constant for {@code PERMISSION_DENIED}. */
     @JsxConstant

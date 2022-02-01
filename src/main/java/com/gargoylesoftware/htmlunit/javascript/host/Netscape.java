@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 
@@ -23,7 +23,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  *
  * @author Marc Guillemot
  */
-public class Netscape extends SimpleScriptable {
+public class Netscape extends HtmlUnitScriptable {
 
     Netscape(final Window window) {
         setParentScope(window);

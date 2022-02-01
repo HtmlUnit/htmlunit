@@ -194,8 +194,8 @@ public class DebugFrameImpl extends DebugFrameAdapter {
             // For example, someone may have set foo.prototype.bar = function() { ... };
             // And then called fooInstance.bar() -- in which case it's "named" bar.
 
-            // on our SimpleScriptable we need to avoid looking at the properties we have defined => TODO: improve it
-            if (thisObj instanceof SimpleScriptable) {
+            // on our HtmlUnitScriptable we need to avoid looking at the properties we have defined => TODO: improve it
+            if (thisObj instanceof HtmlUnitScriptable) {
                 return "[anonymous]";
             }
 

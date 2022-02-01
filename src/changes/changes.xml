@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.58.0" date="February x, 2022" description="Bugfixes">
+            <action type="update" dev="rbri">
+                SimpleScriptable is deprecated, please use HtmlUnitScriptable instead.
+            </action>
             <action type="fix" dev="rbri">
                 Various fixes for the handling of select options when the select property changes.
             </action>

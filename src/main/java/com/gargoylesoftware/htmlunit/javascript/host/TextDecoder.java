@@ -24,7 +24,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Locale;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferV
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
-public class TextDecoder extends SimpleScriptable {
+public class TextDecoder extends HtmlUnitScriptable {
     private static final java.util.Map<String, Charset> ENCODINGS_;
     private static final java.util.Map<String, String> ENCODING_NAMES_;
     private String encoding_ = StandardCharsets.UTF_8.name();

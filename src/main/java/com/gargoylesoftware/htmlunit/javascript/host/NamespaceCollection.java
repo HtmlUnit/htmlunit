@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -38,7 +38,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Daniel Gredler
  */
 @JsxClass(isJSObject = false, value = IE)
-public class NamespaceCollection extends SimpleScriptable implements Function {
+public class NamespaceCollection extends HtmlUnitScriptable implements Function {
 
     /** The HTML document to which this namespace collection belongs. */
     private final HTMLDocument doc_;

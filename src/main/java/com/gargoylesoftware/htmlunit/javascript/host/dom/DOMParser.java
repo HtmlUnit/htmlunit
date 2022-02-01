@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -48,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://www.xulplanet.com/references/objref/DOMParser.html">XUL Planet</a>
  */
 @JsxClass
-public class DOMParser extends SimpleScriptable {
+public class DOMParser extends HtmlUnitScriptable {
 
     /**
      * The constructor.
@@ -91,7 +91,7 @@ public class DOMParser extends SimpleScriptable {
      * @return the generated document
      * @throws IOException in case of error
      */
-    public static Document parseFromString(final SimpleScriptable scriptable, final String str, final Object type)
+    public static Document parseFromString(final HtmlUnitScriptable scriptable, final String str, final Object type)
                 throws IOException {
         if (type == null || Undefined.isUndefined(type)) {
             throw Context.reportRuntimeError("Missing 'type' parameter");

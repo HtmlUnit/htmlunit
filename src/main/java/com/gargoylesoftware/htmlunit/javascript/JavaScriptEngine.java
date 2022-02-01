@@ -338,7 +338,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
                     else {
                         constructor = config.getHostClass().newInstance();
-                        ((SimpleScriptable) constructor).setClassName(config.getClassName());
+                        ((HtmlUnitScriptable) constructor).setClassName(config.getClassName());
                     }
                     defineConstructor(window, prototype, constructor);
                     configureConstantsStaticPropertiesAndStaticFunctions(config, constructor);
@@ -465,7 +465,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param scriptable the window or the DedicatedWorkerGlobalScope
      */
     public static void configureRhino(final WebClient webClient,
-            final BrowserVersion browserVersion, final SimpleScriptable scriptable) {
+            final BrowserVersion browserVersion, final HtmlUnitScriptable scriptable) {
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");

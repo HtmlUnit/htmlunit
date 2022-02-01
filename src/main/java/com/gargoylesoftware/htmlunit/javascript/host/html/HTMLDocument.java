@@ -56,8 +56,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlScript;
 import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -702,7 +702,7 @@ public class HTMLDocument extends Document {
             }
 
             @Override
-            protected SimpleScriptable getScriptableFor(final Object object) {
+            protected HtmlUnitScriptable getScriptableFor(final Object object) {
                 if (alsoFrames && object instanceof BaseFrameElement) {
                     return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
                 }

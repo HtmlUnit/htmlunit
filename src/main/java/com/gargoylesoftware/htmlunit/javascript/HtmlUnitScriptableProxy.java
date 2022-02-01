@@ -26,7 +26,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Marc Guillemot
  * @author Daniel Gredler
  */
-public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends Delegator
+public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> extends Delegator
         implements Serializable {
 
     /**
@@ -40,8 +40,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public Object get(final int index, Scriptable start) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         return getDelegee().get(index, start);
     }
@@ -51,8 +51,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public Object get(final String name, Scriptable start) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         return getDelegee().get(name, start);
     }
@@ -62,8 +62,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public boolean has(final int index, Scriptable start) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         return getDelegee().has(index, start);
     }
@@ -73,8 +73,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public boolean has(final String name, Scriptable start) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         return getDelegee().has(name, start);
     }
@@ -84,8 +84,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public boolean hasInstance(Scriptable instance) {
-        if (instance instanceof SimpleScriptableProxy<?>) {
-            instance = ((SimpleScriptableProxy<?>) instance).getDelegee();
+        if (instance instanceof HtmlUnitScriptableProxy<?>) {
+            instance = ((HtmlUnitScriptableProxy<?>) instance).getDelegee();
         }
         return getDelegee().hasInstance(instance);
     }
@@ -95,8 +95,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public void put(final int index, Scriptable start, final Object value) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         getDelegee().put(index, start, value);
     }
@@ -106,8 +106,8 @@ public abstract class SimpleScriptableProxy<T extends SimpleScriptable> extends 
      */
     @Override
     public void put(final String name, Scriptable start, final Object value) {
-        if (start instanceof SimpleScriptableProxy<?>) {
-            start = ((SimpleScriptableProxy<?>) start).getDelegee();
+        if (start instanceof HtmlUnitScriptableProxy<?>) {
+            start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
         }
         getDelegee().put(name, start, value);
     }
