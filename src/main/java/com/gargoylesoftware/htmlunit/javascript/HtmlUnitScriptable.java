@@ -50,7 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public class HtmlUnitScriptable extends ScriptableObject {
+public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
 
     private static final Log LOG = LogFactory.getLog(HtmlUnitScriptable.class);
 
@@ -171,6 +171,7 @@ public class HtmlUnitScriptable extends ScriptableObject {
                 + name + "' called on an object that does not implement interface " + getClassName());
         }
     }
+
     /**
      * Gets a named property from the object.
      * Normally HtmlUnit objects don't need to overwrite this method as properties are defined
