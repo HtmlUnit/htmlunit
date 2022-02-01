@@ -151,7 +151,7 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     @Override
     public boolean has(final int index, final Scriptable start) {
         final Object found = get(index, start);
-        if (!Undefined.isUndefined(found) && Scriptable.NOT_FOUND != found) {
+        if (Scriptable.NOT_FOUND != found && !Undefined.isUndefined(found)) {
             return true;
         }
         return super.has(index, start);
@@ -164,8 +164,8 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
      */
     public DomNode getDomNodeOrDie() {
         if (domNode_ == null) {
-            final String clazz = getClass().getName();
-            throw new IllegalStateException("DomNode has not been set for this HtmlUnitScriptable: " + clazz);
+            throw new IllegalStateException("DomNode has not been set for this HtmlUnitScriptable: "
+                        + getClass().getName());
         }
         return domNode_;
     }
