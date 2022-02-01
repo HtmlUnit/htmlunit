@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -59,6 +60,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.html.TableRowGroup;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
 
 /**
@@ -206,6 +208,9 @@ public class HtmlSerializerNormalizedText {
                     final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
                     block = "block".equals(display);
                 }
+            }
+            else if (domNode instanceof HtmlElement) {
+                block = DisplayStyle.BLOCK == ((HtmlElement) domNode).getDefaultStyleDisplay();
             }
         }
 

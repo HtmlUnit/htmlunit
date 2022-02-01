@@ -17,11 +17,14 @@ package com.gargoylesoftware.htmlunit.html.serializer;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
 
@@ -298,5 +301,91 @@ public class HtmlSerializerNormalizedTextTest {
         serializer.append("\n", Mode.NORMALIZE);
         serializer.appendBlockSeparator();
         assertEquals("", serializer.getText());
+    }
+
+    /**
+     * @throws IOException in case of errors
+     */
+    @Test
+    public void cssEnableDisable1() throws IOException {
+        final String html =
+                "<div>\r\n"
+                  + "<p>p\r\n"
+                    + "<br>br\r\n"
+                  + "</p>\r\n"
+                + "</div>";
+        final String expected = "p \nbr";
+
+        try (WebClient webClient = new WebClient()) {
+            final HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(html);
+
+            assertEquals(expected, page.asNormalizedText());
+
+            webClient.getOptions().setCssEnabled(false);
+            assertEquals(expected, page.asNormalizedText());
+        }
+    }
+
+    /**
+     * @throws IOException in case of errors
+     */
+    @Test
+    public void cssEnableDisable2() throws IOException {
+        final String html =
+                "<div>\r\n"
+                  + "<p>p\r\n"
+                    + "<br>br\r\n"
+                  + "</p>\r\n"
+                  + "<p>p</p>\r\n"
+                + "</div>";
+        final String expected = "p \nbr\np";
+
+        try (WebClient webClient = new WebClient()) {
+            final HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(html);
+
+            assertEquals(expected, page.asNormalizedText());
+
+            webClient.getOptions().setCssEnabled(false);
+            assertEquals(expected, page.asNormalizedText());
+        }
+    }
+
+    /**
+     * @throws IOException in case of errors
+     */
+    @Test
+    public void cssEnableDisable3() throws IOException {
+        final String html =
+                "<div>\r\n"
+                  + "<p>p\r\n"
+                    + "<br>br\r\n"
+                  + "</p>\r\n"
+                  + "<p>p</p>\r\n"
+                  + "<p>p\r\n"
+                    + "<br>br\r\n"
+                    + "<br>br\r\n"
+                    + "<br>br\r\n"
+                  + "</p>\r\n"
+                  + "<p>p</p>\r\n"
+                + "</div>";
+
+        final String expected =
+                "p \n"
+                + "br\n"
+                + "p\n"
+                + "p \n"
+                + "br \n"
+                + "br \n"
+                + "br\n"
+                + "p";
+
+        try (WebClient webClient = new WebClient()) {
+            final HtmlPage page = webClient.loadHtmlCodeIntoCurrentWindow(html);
+
+            assertEquals(expected, page.asNormalizedText());
+
+            webClient.getOptions().setCssEnabled(false);
+            assertEquals(expected, page.asNormalizedText());
+        }
     }
 }
