@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.58.0" date="February x, 2022" description="Bugfixes">
+        <release version="2.58.0" date="February 4, 2022" description="Bugfixes">
+            <action type="update" dev="rbri">
+                neko: Switch to xerces 2.12.2.
+            </action>
             <action type="fix" dev="rbri" issue="439">
                 asNormalizedText() uses the default style to determine blocks if css is disabled.
             </action>
