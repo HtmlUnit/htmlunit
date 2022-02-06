@@ -29,7 +29,7 @@
         <htmlunitneko.version>2.58.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.58.0</htmlunitcorejs.version>
 
-        <httpclient5.version>5.1.2</httpclient5.version>
+        <httpclient5.version>5.1.3</httpclient5.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
         <log4j.version>2.17.1</log4j.version>
         <selenium.version>3.141.59</selenium.version>
