@@ -35,7 +35,6 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
 
@@ -67,7 +66,7 @@ public abstract class AbstractJavaScriptConfiguration {
     /**
      * @return the classes configured by this configuration
      */
-    protected abstract Class<? extends SimpleScriptable>[] getClasses();
+    protected abstract Class<? extends HtmlUnitScriptable>[] getClasses();
 
     /**
      * Gets all the configurations.
@@ -80,7 +79,7 @@ public abstract class AbstractJavaScriptConfiguration {
     private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
         final Map<String, ClassConfiguration> classMap = new ConcurrentHashMap<>(getClasses().length);
 
-        for (final Class<? extends SimpleScriptable> klass : getClasses()) {
+        for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
             final ClassConfiguration config = getClassConfiguration(klass, browser);
             if (config != null) {
                 classMap.put(config.getClassName(), config);
@@ -138,7 +137,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 String extendedClassName;
 
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass == SimpleScriptable.class) {
+                if (superClass == HtmlUnitScriptable.class) {
                     extendedClassName = "";
                 }
                 else {
@@ -155,7 +154,7 @@ public abstract class AbstractJavaScriptConfiguration {
                             className = jsxClass.className();
                         }
                         if (jsxClass.extendedClass() != Object.class) {
-                            if (jsxClass.extendedClass() == SimpleScriptable.class) {
+                            if (jsxClass.extendedClass() == HtmlUnitScriptable.class) {
                                 extendedClassName = "";
                             }
                             else {
@@ -189,7 +188,7 @@ public abstract class AbstractJavaScriptConfiguration {
                 String extendedClassName;
 
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass != SimpleScriptable.class) {
+                if (superClass != HtmlUnitScriptable.class) {
                     extendedClassName = superClass.getSimpleName();
                 }
                 else {

@@ -57,37 +57,152 @@ public class HtmlObject2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "true", "true", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
+    @Alerts({"false", "false", "false", "false", "false"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('o1').willValidate);\n"
+                + "      log(document.getElementById('o2').willValidate);\n"
+                + "      log(document.getElementById('o3').willValidate);\n"
+                + "      log(document.getElementById('o4').willValidate);\n"
+                + "      log(document.getElementById('o5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <object id='o1'>o1</object>\n"
+                + "    <object id='o2' disabled>o2</object>\n"
+                + "    <object id='o3' hidden>o3</object>\n"
+                + "    <object id='o4' readonly>o4</object>\n"
+                + "    <object id='o5' style='display: none'>o5</object>\n"
+                + "  </form>\n"
+                + "</body></html>";
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+        loadPageVerifyTitle2(html);
+    }
 
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationEmpty() throws Exception {
+        validation("<object id='e1'>o1</object>\n", "");
+    }
 
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            CHROME = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "false"},
+            EDGE = {"true",
+                    "false-false-false-false-false-false-false-false-false-true-false",
+                    "false"},
+            IE = {"true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "false"})
+    public void validationCustomValidity() throws Exception {
+        validation("<object id='e1'>o1</object>\n", "elem.setCustomValidity('Invalid');");
+    }
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <object id='foo'>\n"
-            + "</body>\n"
-            + "</html>";
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            CHROME = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "false"},
+            EDGE = {"true",
+                    "false-false-false-false-false-false-false-false-false-true-false",
+                    "false"},
+            IE = {"true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "false"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<object id='e1'>o1</object>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationResetCustomValidity() throws Exception {
+        validation("<object id='e1'>o1</object>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationRequired() throws Exception {
+        validation("<object id='e1' required></object>\n", "");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + htmlPart
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

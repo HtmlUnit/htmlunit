@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -40,18 +42,16 @@ public class HtmxTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:394failures:0",
-            IE = "passes:17failures:378")
-    @HtmlUnitNYI(CHROME = "passes:388failures:6",
-            EDGE = "passes:388failures:6",
-            FF = "passes:388failures:6",
-            FF_ESR = "passes:388failures:6",
-            IE = "passes:16failures:379")
+    @Alerts(DEFAULT = "passes:412failures:0",
+            IE = "passes:17failures:396")
+    @HtmlUnitNYI(CHROME = "passes:409failures:3",
+            EDGE = "passes:409failures:3",
+            FF = "passes:409failures:3",
+            FF_ESR = "passes:409failures:3")
     public void htmx() throws Exception {
-        startWebServer("src/test/resources/libraries/htmx/htmx-1.5.0", null, null);
+        startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
 
-
-        final long runTime = 40 * DEFAULT_WAIT_TIME;
+        final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;
 
         try {
@@ -71,7 +71,6 @@ public class HtmxTest extends WebDriverTestCase {
                 Thread.sleep(100);
 
                 if (System.currentTimeMillis() > endTime) {
-                    // fail("HtmxTest runs too long (longer than " + runTime / 1000 + "s)");
                     lastStats = "HtmxTest runs too long (longer than " + runTime / 1000 + "s) - "
                             + getResultElementText(webDriver);
                     break;
@@ -90,7 +89,7 @@ public class HtmxTest extends WebDriverTestCase {
             }
             */
 
-            assertTrue(lastStats, lastStats.startsWith(getExpectedAlerts()[0]));
+            assertTrue(lastStats + "\n\n" + getErrors(webDriver), lastStats.startsWith(getExpectedAlerts()[0]));
         }
         catch (final Exception e) {
             e.printStackTrace();
@@ -118,6 +117,25 @@ public class HtmxTest extends WebDriverTestCase {
         }
         catch (final NoSuchElementException e) {
             return "";
+        }
+    }
+
+    private static String getErrors(final WebDriver webdriver) {
+        final StringBuilder result = new StringBuilder();
+
+        try {
+            final List<WebElement> elements = webdriver.findElements(By.tagName("li"));
+            for (final WebElement elem : elements) {
+                final String cssClass = elem.getAttribute("class");
+                if (cssClass != null && cssClass.contains(" fail")) {
+                    result.append(elem.getText())
+                        .append("\n-------------------------\n\n");
+                }
+            }
+            return result.toString();
+        }
+        catch (final Exception e) {
+            return e.getMessage();
         }
     }
 

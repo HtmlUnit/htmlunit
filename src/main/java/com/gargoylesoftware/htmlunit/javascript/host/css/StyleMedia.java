@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -33,7 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE})
 @JsxClass(IE)
-public class StyleMedia extends SimpleScriptable {
+public class StyleMedia extends HtmlUnitScriptable {
 
     /**
      * Default constructor.

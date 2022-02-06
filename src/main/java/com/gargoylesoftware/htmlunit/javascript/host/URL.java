@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -48,7 +48,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author cd alexndr
  */
 @JsxClass
-public class URL extends SimpleScriptable {
+public class URL extends HtmlUnitScriptable {
 
     private java.net.URL url_;
 
@@ -454,7 +454,7 @@ public class URL extends SimpleScriptable {
 
     /**
      * Calls for instance for implicit conversion to string.
-     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
+     * @see com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
      * @return the default value
      */

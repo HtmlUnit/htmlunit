@@ -24,7 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
  */
 // FIXME according to MDN this is part of the CSSOM -> move to .host.css!
 @JsxClass
-public class MediaList extends SimpleScriptable {
+public class MediaList extends HtmlUnitScriptable {
 
     private final MediaListImpl wrappedList_;
 

@@ -640,7 +640,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"false", "false", "true", "false", "false", "false", "true", "true"})
+    @Alerts({"false", "false", "true", "false", "false", "false", "true", "true", "false", "false"})
     public void css3_required() throws Exception {
         final String htmlSnippet =
             "  <input id='elt2' required>\n"
@@ -648,7 +648,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  <select id='elt4'></select>\n"
             + "  <textarea id='elt5'></textarea>\n"
             + "  <textarea id='elt6' required=false></textarea>\n"
-            + "  <textarea id='elt7' required=true></textarea>\n";
+            + "  <textarea id='elt7' required=true></textarea>\n"
+            + "  <div id='elt8'></div>\n"
+            + "  <div id='elt9' required=true></div>\n";
         doTest(":required", htmlSnippet);
     }
 
@@ -656,7 +658,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"false", "false", "false", "true", "true", "true", "false", "false"})
+    @Alerts({"false", "false", "false", "true", "true", "true", "false", "false", "false", "false"})
     public void css3_optional() throws Exception {
         final String htmlSnippet =
             "  <input id='elt2' required>\n"
@@ -664,7 +666,9 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
             + "  <select id='elt4'></select>\n"
             + "  <textarea id='elt5'></textarea>\n"
             + "  <textarea id='elt6' required=false></textarea>\n"
-            + "  <textarea id='elt7' required=true></textarea>\n";
+            + "  <textarea id='elt7' required=true></textarea>\n"
+            + "  <div id='elt8'></div>\n"
+            + "  <div id='elt9' required=true></div>\n";
         doTest(":optional", htmlSnippet);
     }
 

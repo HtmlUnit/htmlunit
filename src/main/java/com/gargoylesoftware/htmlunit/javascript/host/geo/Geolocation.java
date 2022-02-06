@@ -38,8 +38,8 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJob;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -55,7 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR, IE})
-public class Geolocation extends SimpleScriptable {
+public class Geolocation extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(Geolocation.class);
 

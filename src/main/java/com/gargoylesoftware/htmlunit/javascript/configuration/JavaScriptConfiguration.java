@@ -18,8 +18,8 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
@@ -490,7 +490,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTProcessor;
 public final class JavaScriptConfiguration extends AbstractJavaScriptConfiguration {
 
     @SuppressWarnings("unchecked")
-    static final Class<? extends SimpleScriptable>[] CLASSES_ = new Class[] {
+    static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
         AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class,
@@ -707,7 +707,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
     }
 
     @Override
-    protected Class<? extends SimpleScriptable>[] getClasses() {
+    protected Class<? extends HtmlUnitScriptable>[] getClasses() {
         return CLASSES_;
     }
 }

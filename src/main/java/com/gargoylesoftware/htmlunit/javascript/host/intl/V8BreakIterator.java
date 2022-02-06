@@ -20,7 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.text.BreakIterator;
 import java.util.Locale;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  */
 @JsxClass({CHROME, EDGE})
-public class V8BreakIterator extends SimpleScriptable {
+public class V8BreakIterator extends HtmlUnitScriptable {
 
     private transient BreakIterator breakIterator_;
     private String text_;

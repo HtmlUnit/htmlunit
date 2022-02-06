@@ -366,11 +366,31 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     }
 
     /**
+     * @return a ValidityState with the validity states that this element is in.
+     */
+    @JsxGetter
+    public ValidityState getValidity() {
+        final ValidityState validityState = new ValidityState();
+        validityState.setPrototype(getPrototype(validityState.getClass()));
+        validityState.setParentScope(getParentScope());
+        validityState.setDomNode(getDomNodeOrDie());
+        return validityState;
+    }
+
+    /**
+     * @return whether the element is a candidate for constraint validation
+     */
+    @JsxGetter
+    public boolean getWillValidate() {
+        return ((HtmlObject) getDomNodeOrDie()).willValidate();
+    }
+
+    /**
      * Sets the custom validity message for the element to the specified message.
      * @param message the new message
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        ((HtmlObject) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

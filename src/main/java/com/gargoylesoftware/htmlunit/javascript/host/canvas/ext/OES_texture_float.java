@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.canvas.ext;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 
 /**
@@ -25,7 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
  * @author Ahmed Ashour
  */
 @JsxClass(IE)
-public class OES_texture_float extends SimpleScriptable {
+public class OES_texture_float extends HtmlUnitScriptable {
 
     /**
      * Default constructor.

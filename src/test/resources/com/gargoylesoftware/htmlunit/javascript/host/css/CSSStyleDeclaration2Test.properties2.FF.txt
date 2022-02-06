@@ -229,6 +229,7 @@ color
 colorAdjust
 colorInterpolation
 colorInterpolationFilters
+colorScheme
 columnCount
 columnFill
 columnGap

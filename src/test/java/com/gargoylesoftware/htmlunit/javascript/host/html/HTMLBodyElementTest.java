@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -25,7 +22,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
@@ -46,9 +43,10 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"},
-            FF = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"},
             FF_ESR = {",0px,0px,0px,0px", ",,,,", ",8px,8px,8px,8px", ",,,,"})
-    @NotYetImplemented({CHROME, EDGE})
+    @HtmlUnitNYI(CHROME = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
+            EDGE = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
+            FF = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"})
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"
@@ -369,7 +367,11 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"0", "8"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"0", "0"},
+            EDGE = {"0", "0"},
+            FF = {"0", "0"},
+            FF_ESR = {"0", "0"},
+            IE = {"0", "0"})
     public void top() throws Exception {
         final String html =
             "<html>\n"

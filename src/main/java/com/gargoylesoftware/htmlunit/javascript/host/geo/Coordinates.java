@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.geo;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
@@ -26,7 +26,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @author Ahmed Ashour
  */
 @JsxClass(IE)
-public class Coordinates extends SimpleScriptable {
+public class Coordinates extends HtmlUnitScriptable {
 
     private double latitude_;
     private double longitude_;

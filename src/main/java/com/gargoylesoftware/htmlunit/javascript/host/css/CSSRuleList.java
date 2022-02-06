@@ -23,7 +23,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRuleList">MDN doc</a>
  */
 @JsxClass
-public class CSSRuleList extends SimpleScriptable {
+public class CSSRuleList extends HtmlUnitScriptable {
 
     private final List<CSSRule> rules_ = new ArrayList<>();
 

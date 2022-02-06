@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host;
 
 import java.lang.reflect.Method;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -27,7 +27,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Ahmed Ashour
  */
-public class ActiveXObjectImpl extends SimpleScriptable {
+public class ActiveXObjectImpl extends HtmlUnitScriptable {
 
     private static final Class<?> activeXComponentClass_;
 

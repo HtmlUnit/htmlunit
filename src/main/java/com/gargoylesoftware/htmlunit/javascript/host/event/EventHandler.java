@@ -59,7 +59,7 @@ public class EventHandler extends BaseFunction {
         throws JavaScriptException {
 
         // the js object to which this event is attached has to be the scope
-        // final SimpleScriptable jsObj = node_.getScriptableObject();
+        // final HtmlUnitScriptable jsObj = node_.getScriptableObject();
         // have changed this - the scope is now thisObj to fix
         // https://github.com/HtmlUnit/htmlunit/issues/347
         // but i still have not found any description about the right scope

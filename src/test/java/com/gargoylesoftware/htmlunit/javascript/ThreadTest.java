@@ -115,7 +115,7 @@ public class ThreadTest extends TestCase {
         }
 
         /**
-         * @see SimpleScriptableTest#callInheritedFunction()
+         * @see HtmlUnitScriptableTest#callInheritedFunction()
          * @throws Exception if the test failed
          */
         public void testCallInheritedFunction() throws Exception {

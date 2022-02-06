@@ -22,7 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import org.apache.xml.utils.PrefixResolver;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.util.XmlUtils;
@@ -35,7 +35,7 @@ import com.gargoylesoftware.htmlunit.util.XmlUtils;
  * @author Ronald Brill
  */
 @JsxClass(isJSObject = false, value = {CHROME, EDGE, FF, FF_ESR})
-public class XPathNSResolver extends SimpleScriptable implements PrefixResolver {
+public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
 
     private Node element_;
 

@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -35,7 +35,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  */
 @JsxClass({CHROME, EDGE})
 @JsxClass(isJSObject = false)
-public class External extends SimpleScriptable {
+public class External extends HtmlUnitScriptable {
 
     /**
      * The constructor.

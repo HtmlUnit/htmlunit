@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass({FF, FF_ESR})
-public class FileSystem extends SimpleScriptable {
+public class FileSystem extends HtmlUnitScriptable {
 
     /**
      * Creates a new instance.

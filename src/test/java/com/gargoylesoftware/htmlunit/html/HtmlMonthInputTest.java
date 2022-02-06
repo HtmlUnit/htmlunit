@@ -28,6 +28,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -261,37 +262,156 @@ public class HtmlMonthInputTest extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "false", "false", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            IE = {"true", "false", "true", "true", "true"})
+    @HtmlUnitNYI(IE = {"true", "false", "true", "false", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('o1').willValidate);\n"
+                + "      log(document.getElementById('o2').willValidate);\n"
+                + "      log(document.getElementById('o3').willValidate);\n"
+                + "      log(document.getElementById('o4').willValidate);\n"
+                + "      log(document.getElementById('o5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <input type='month' id='o1'>\n"
+                + "    <input type='month' id='o2' disabled>\n"
+                + "    <input type='month' id='o3' hidden>\n"
+                + "    <input type='month' id='o4' readonly>\n"
+                + "    <input type='month' id='o5' style='display: none'>\n"
+                + "  </form>\n"
+                + "</body></html>";
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+        loadPageVerifyTitle2(html);
+    }
 
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationEmpty() throws Exception {
+        validation("<input type='month' id='e1'>\n", "");
+    }
 
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<input type='month' id='e1'>\n", "elem.setCustomValidity('Invalid');");
+    }
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='month' id='foo'>\n"
-            + "</body>\n"
-            + "</html>";
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<input type='month' id='e1'>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationResetCustomValidity() throws Exception {
+        validation("<input type='month' id='e1'>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequired() throws Exception {
+        validation("<input type='month' id='e1' required>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredValueSet() throws Exception {
+        validation("<input type='month' id='e1' required>\n", "elem.value='2018-12';");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + htmlPart
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

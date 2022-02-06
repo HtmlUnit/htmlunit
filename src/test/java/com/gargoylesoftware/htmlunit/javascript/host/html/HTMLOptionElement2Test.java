@@ -342,6 +342,31 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    @Test
+    @Alerts({"1", "", "-1"})
+    public void unselectResetToFirstOption1() throws Exception {
+        final String html =
+            HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var sel = document.form1.select1;\n"
+            + "  log(sel.selectedIndex);\n"
+            + "  sel.options[1].selected = false;\n"
+            + "  log(sel.value);\n"
+            + "  log(sel.selectedIndex);\n"
+            + "}</script></head><body onload='doTest()'>\n"
+            + "<form name='form1'>\n"
+            + "  <select name='select1' size='4'>\n"
+            + "    <option value='option1' name='option1'>One</option>\n"
+            + "    <option value='option2' name='option2' selected>Two</option>\n"
+            + "  </select>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * @throws Exception if the test fails
      */

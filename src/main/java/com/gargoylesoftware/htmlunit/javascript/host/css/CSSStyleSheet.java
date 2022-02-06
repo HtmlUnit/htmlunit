@@ -111,12 +111,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -269,13 +268,12 @@ public class CSSStyleSheet extends StyleSheet {
      *        the specified style
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      */
-    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final Element element,
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final DomElement element,
             final String pseudoElement) {
 
         final BrowserVersion browser = getBrowserVersion();
-        final DomElement e = element.getDomNodeOrDie();
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
-                selects(getRuleIndex(), this, browser, e, pseudoElement, false);
+                selects(getRuleIndex(), this, browser, element, pseudoElement, false);
         for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
@@ -1351,7 +1349,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @param mediaList the media list
      * @return whether the specified {@link MediaList} is active or not
      */
-    static boolean isActive(final SimpleScriptable scriptable, final MediaListImpl mediaList) {
+    static boolean isActive(final HtmlUnitScriptable scriptable, final MediaListImpl mediaList) {
         if (mediaList.getLength() == 0) {
             return true;
         }
@@ -1369,7 +1367,7 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static boolean isActive(final SimpleScriptable scriptable, final MediaQuery mediaQuery) {
+    private static boolean isActive(final HtmlUnitScriptable scriptable, final MediaQuery mediaQuery) {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
@@ -1494,7 +1492,7 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static double pixelValue(final CSSValueImpl cssValue, final SimpleScriptable scriptable) {
+    private static double pixelValue(final CSSValueImpl cssValue, final HtmlUnitScriptable scriptable) {
         if (cssValue == null) {
             if (LOG.isWarnEnabled()) {
                 LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
@@ -1788,7 +1786,7 @@ public class CSSStyleSheet extends StyleSheet {
 
     private List<CSSStyleSheetImpl.SelectorEntry> selects(
                             final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
-                            final SimpleScriptable scriptable,
+                            final HtmlUnitScriptable scriptable,
                             final BrowserVersion browserVersion, final DomElement element,
                             final String pseudoElement, final boolean fromQuerySelectorAll) {
 

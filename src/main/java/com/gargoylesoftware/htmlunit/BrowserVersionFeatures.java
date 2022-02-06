@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
     /** For disconnected items style font property is blank. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
     /** 'auto' is supported when setting vertical-align style. */
@@ -924,10 +924,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ELEMENT_GET_ATTRIBUTE_RETURNS_EMPTY,
 
-    /** The Enumerator constructor throws an exception if called with HtmlCollections as parameter. */
-    @BrowserFeature(IE)
-    JS_ENUMERATOR_CONSTRUCTOR_THROWS,
-
     /** Javascript {@code Error.captureStackTrace}. */
     @BrowserFeature({CHROME, EDGE})
     JS_ERROR_CAPTURE_STACK_TRACE,
@@ -1000,6 +996,10 @@ public enum BrowserVersionFeatures {
     /** HTMLElement instead of HTMLUnknownElement for elements with hyphen ('-'). */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_HTML_HYPHEN_ELEMENT_CLASS_NAME,
+
+    /** HTMLObject Validity isValid ignores custom error property. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR,
 
     /** HTMLElement instead of HTMLUnknownElement for ruby elements. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -1584,10 +1584,6 @@ public enum BrowserVersionFeatures {
     /** */
     @BrowserFeature(IE)
     PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT,
-
-    /** Wait for the whole page to load before initializing bodies for frames. */
-    @BrowserFeature(IE)
-    PAGE_WAIT_LOAD_BEFORE_BODY,
 
     /** Indicates <code>.querySelectorAll()</code> and <code>.querySelector()</code> is not supported in quirks mode. */
     @BrowserFeature(IE)

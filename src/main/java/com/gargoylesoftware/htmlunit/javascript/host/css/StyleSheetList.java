@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -60,7 +60,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Carsten Steul
  */
 @JsxClass
-public class StyleSheetList extends SimpleScriptable {
+public class StyleSheetList extends HtmlUnitScriptable {
 
     /**
      * We back the stylesheet list with an {@link HTMLCollection} of styles/links because this list must be "live".
@@ -68,25 +68,12 @@ public class StyleSheetList extends SimpleScriptable {
     private HTMLCollection nodes_;
 
     /**
-     * Verifies if the provided node is a link node pointing to a stylesheet.
-     *
-     * @param domNode the mode to check
-     * @return true if the provided node is a stylesheet link
-     */
-    public static boolean isStyleSheetLink(final DomNode domNode) {
-        if (domNode instanceof HtmlLink) {
-            return ((HtmlLink) domNode).isStyleSheetLink();
-        }
-        return false;
-    }
-
-    /**
      * Verifies if the provided node is a link node pointing to an active stylesheet.
      *
      * @param domNode the mode to check
      * @return true if the provided node is a stylesheet link
      */
-    public boolean isActiveStyleSheetLink(final DomNode domNode) {
+    boolean isActiveStyleSheetLink(final DomNode domNode) {
         if (domNode instanceof HtmlLink) {
             final HtmlLink link = (HtmlLink) domNode;
             if (link.isStyleSheetLink()) {
@@ -142,6 +129,14 @@ public class StyleSheetList extends SimpleScriptable {
                     }
                     return EffectOnCache.NONE;
                 }
+
+                private boolean isStyleSheetLink(final DomNode domNode) {
+                    if (domNode instanceof HtmlLink) {
+                        return ((HtmlLink) domNode).isStyleSheetLink();
+                    }
+                    return false;
+                }
+
             };
         }
         else {

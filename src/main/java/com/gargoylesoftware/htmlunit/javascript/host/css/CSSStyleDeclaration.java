@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUN
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_OUTLINE_WIDTH_UNIT_NOT_REQUIRED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SET_NULL_THROWS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_VERTICAL_ALIGN_SUPPORTS_AUTO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TYPE_INTEGER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
@@ -118,10 +117,10 @@ import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
-import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -152,7 +151,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration">MDN doc</a>
  */
 @JsxClass
-public class CSSStyleDeclaration extends SimpleScriptable {
+public class CSSStyleDeclaration extends HtmlUnitScriptable {
     private static final Pattern TO_FLOAT_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
     private static final Pattern URL_PATTERN =
         Pattern.compile("url\\(\\s*[\"']?(.*?)[\"']?\\s*\\)");
@@ -1329,7 +1328,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
 
     private void updateFont(final String font, final boolean force) {
         final BrowserVersion browserVersion = getBrowserVersion();
-        final String[] details = ComputedFont.getDetails(font, !browserVersion.hasFeature(CSS_SET_NULL_THROWS));
+        final String[] details = ComputedFont.getDetails(font, browserVersion);
         if (details != null || force) {
             final StringBuilder newFont = new StringBuilder();
             newFont.append(getFontSize());
@@ -1369,7 +1368,7 @@ public class CSSStyleDeclaration extends SimpleScriptable {
      */
     @JsxSetter
     public void setFont(final String font) {
-        final String[] details = ComputedFont.getDetails(font, !getBrowserVersion().hasFeature(CSS_SET_NULL_THROWS));
+        final String[] details = ComputedFont.getDetails(font, getBrowserVersion());
         if (details != null) {
             setStyleAttribute(FONT_FAMILY.getAttributeName(), details[ComputedFont.FONT_FAMILY_INDEX]);
             final String fontSize = details[ComputedFont.FONT_SIZE_INDEX];

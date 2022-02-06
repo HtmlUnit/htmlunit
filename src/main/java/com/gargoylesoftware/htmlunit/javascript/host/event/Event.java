@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -60,7 +60,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Thorsten Wendelmuth
  */
 @JsxClass
-public class Event extends SimpleScriptable {
+public class Event extends HtmlUnitScriptable {
 
     /**
      * Key to place the event's target in the Context's scope during event processing

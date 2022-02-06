@@ -380,4 +380,31 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * @return the content type of this page
      */
     public abstract String getContentType();
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Clears the computed styles.
+     */
+    public void clearComputedStyles() {
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Clears the computed styles for a specific {@link Element}.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStyles(final DomElement element) {
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Clears the computed styles for a specific {@link Element}
+     * and all parent elements.
+     * @param element the element to clear its cache
+     */
+    public void clearComputedStylesUpToRoot(final DomElement element) {
+    }
 }

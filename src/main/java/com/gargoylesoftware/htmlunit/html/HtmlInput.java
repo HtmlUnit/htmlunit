@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Anton Demydenko
  */
 public abstract class HtmlInput extends HtmlElement implements DisabledElement, SubmittableElement,
-    FormFieldWithNameHistory {
+    FormFieldWithNameHistory, ValidatableElement  {
 
     private static final Log LOG = LogFactory.getLog(HtmlInput.class);
 
@@ -175,7 +175,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code checked} or an empty string if that attribute isn't defined
      */
     public final String getCheckedAttribute() {
-        return getAttributeDirect("checked");
+        return getAttributeDirect(ATTRIBUTE_CHECKED);
     }
 
     /**
@@ -541,7 +541,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return {@code true} if this element is currently selected
      */
     public boolean isChecked() {
-        return hasAttribute("checked");
+        return hasAttribute(ATTRIBUTE_CHECKED);
     }
 
     /**
@@ -874,18 +874,13 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isValid() {
-        return super.isValid()
+        return !isValueMissingValidityState()
                 && isCustomValidityValid()
                 && isMaxLengthValid() && isMinLengthValid() && isPatternValid();
     }
 
-    @Override
-    protected boolean isRequiredSupported() {
-        return true;
-    }
-
     protected boolean isCustomValidityValid() {
-        if (!StringUtils.isEmpty(customValidity_)) {
+        if (isCustomErrorValidityState()) {
             final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
             if (!"button".equals(type)
                     && !"hidden".equals(type)
@@ -894,6 +889,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 return false;
             }
         }
+        return true;
+    }
+
+    @Override
+    protected boolean isRequiredSupported() {
         return true;
     }
 
@@ -1010,16 +1010,17 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
         return !isDisabled() && !isReadOnly();
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
+     * {@inheritDoc}
      */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
     }
@@ -1038,5 +1039,63 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public boolean isSubmitable() {
         final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
         return !"submit".equals(type) && !"image".equals(type) && !"reset".equals(type) && !"button".equals(type);
+    }
+
+    @Override
+    public boolean hasBadInputValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isCustomErrorValidityState() {
+        return !StringUtils.isEmpty(customValidity_);
+    }
+
+    @Override
+    public boolean hasPatternMismatchValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isStepMismatchValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isTooLongValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isTooShortValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeOverflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return !isCustomErrorValidityState()
+                && !isValueMissingValidityState();
+    }
+
+    @Override
+    public boolean isValueMissingValidityState() {
+        return isRequiredSupported()
+                && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && getAttributeDirect("value").isEmpty();
     }
 }

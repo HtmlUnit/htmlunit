@@ -23,7 +23,7 @@ import org.w3c.dom.ranges.Range;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -45,7 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author David Gileadi
  */
 @JsxClass(IE)
-public class TextRange extends SimpleScriptable {
+public class TextRange extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(TextRange.class);
 

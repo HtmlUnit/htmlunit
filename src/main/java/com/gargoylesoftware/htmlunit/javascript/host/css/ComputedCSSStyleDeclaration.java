@@ -109,8 +109,8 @@ import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
-import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -257,11 +257,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * Creates an instance.
      *
-     * @param style the original Style
+     * @param element the element this belongs to
      */
-    public ComputedCSSStyleDeclaration(final CSSStyleDeclaration style) {
-        super(style.getElement());
-        getElement().setDefaults(this);
+    public ComputedCSSStyleDeclaration(final Element element) {
+        super(element);
+        element.setDefaults(this);
     }
 
     /**

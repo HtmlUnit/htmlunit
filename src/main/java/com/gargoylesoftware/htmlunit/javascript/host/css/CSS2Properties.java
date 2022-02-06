@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
  * A JavaScript object for {@code CSS2Properties}.
@@ -39,10 +40,10 @@ public class CSS2Properties extends ComputedCSSStyleDeclaration {
     /**
      * Creates an instance.
      *
-     * @param style the original Style
+     * @param element the element this belongs to
      */
-    public CSS2Properties(final CSSStyleDeclaration style) {
-        super(style);
+    public CSS2Properties(final Element element) {
+        super(element);
     }
 
 }

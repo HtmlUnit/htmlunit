@@ -22,7 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser.ParseException
  * @author Ronald Brill
  */
 @JsxClass
-public class PerformanceNavigation extends SimpleScriptable {
+public class PerformanceNavigation extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(PerformanceNavigation.class);
 

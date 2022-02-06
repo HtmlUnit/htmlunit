@@ -53,8 +53,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlTextArea extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, SelectableTextInput,
-    FormFieldWithNameHistory {
+                LabelableElement, SelectableTextInput, FormFieldWithNameHistory, ValidatableElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "textarea";
 
@@ -629,23 +628,111 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
      * {@inheritDoc}
      */
     @Override
-    public boolean isValid() {
-        return super.isValid() && StringUtils.isEmpty(customValidity_);
-    }
-
-    /**
-     * @return whether the element is a candidate for constraint validation
-     */
     public boolean willValidate() {
         return !isDisabled()
                 && (hasFeature(HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY) || !isReadOnly());
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
+     * {@inheritDoc}
      */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return isValidValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBadInputValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCustomErrorValidityState() {
+        return !StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasPatternMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStepMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooLongValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooShortValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeOverflowValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return !isCustomErrorValidityState()
+                && !isValueMissingValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValueMissingValidityState() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && getText().isEmpty();
     }
 }

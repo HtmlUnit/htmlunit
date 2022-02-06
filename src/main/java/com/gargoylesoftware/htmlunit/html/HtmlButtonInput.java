@@ -79,4 +79,12 @@ public class HtmlButtonInput extends HtmlInput implements LabelableElement {
     protected boolean isRequiredSupported() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean willValidate() {
+        return false;
+    }
 }

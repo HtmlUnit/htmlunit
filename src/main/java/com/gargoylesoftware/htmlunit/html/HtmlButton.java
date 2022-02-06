@@ -49,12 +49,16 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlButton extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory {
+                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
 
     private static final Log LOG = LogFactory.getLog(HtmlButton.class);
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "button";
+
+    private static final String TYPE_SUBMIT = "submit";
+    private static final String TYPE_RESET = "reset";
+    private static final String TYPE_BUTTON = "button";
 
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
@@ -102,11 +106,11 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
             if (form != null) {
                 final String type = getType();
-                if ("button".equals(type)) {
+                if (TYPE_BUTTON.equals(type)) {
                     return false;
                 }
 
-                if ("reset".equals(type)) {
+                if (TYPE_RESET.equals(type)) {
                     form.reset();
                     return false;
                 }
@@ -258,7 +262,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         String type = super.getAttribute(attributeName);
 
         if (type == DomElement.ATTRIBUTE_NOT_DEFINED && "type".equalsIgnoreCase(attributeName)) {
-            type = "submit";
+            type = TYPE_SUBMIT;
         }
         return type;
     }
@@ -282,13 +286,13 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
         if (null != type) {
             type = type.toLowerCase(Locale.ROOT);
         }
-        if ("reset".equals(type)) {
-            return "reset";
+        if (TYPE_RESET.equals(type)) {
+            return TYPE_RESET;
         }
-        if ("button".equals(type)) {
-            return "button";
+        if (TYPE_BUTTON.equals(type)) {
+            return TYPE_BUTTON;
         }
-        return "submit";
+        return TYPE_SUBMIT;
     }
 
     /**
@@ -401,15 +405,19 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      */
     @Override
     public boolean isValid() {
-        return super.isValid()
-                && ("reset".equals(getType()) || StringUtils.isEmpty(customValidity_));
+        if (TYPE_RESET.equals(getType())) {
+            return true;
+        }
+
+        return super.isValid() && !isCustomErrorValidityState();
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
-        if ("reset".equals(getType())) {
+        if (TYPE_RESET.equals(getType()) || TYPE_BUTTON.equals(getType())) {
             return false;
         }
 
@@ -418,10 +426,95 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
+     * {@inheritDoc}
      */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBadInputValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCustomErrorValidityState() {
+        return !StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasPatternMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStepMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooLongValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooShortValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeOverflowValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return !isCustomErrorValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValueMissingValidityState() {
+        return false;
     }
 }

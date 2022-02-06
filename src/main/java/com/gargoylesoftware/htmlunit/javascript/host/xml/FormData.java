@@ -31,7 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -54,7 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Thorsten Wendelmuth
  */
 @JsxClass
-public class FormData extends SimpleScriptable {
+public class FormData extends HtmlUnitScriptable {
 
     /** Constant used to register the prototype in the context. */
     public static final String FORM_DATA_TAG = "FormData";

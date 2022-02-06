@@ -35,11 +35,11 @@ public class BrowserVersionTest {
      */
     @Test
     public void getBrowserVersionNumeric() {
-        assertEquals(95, BrowserVersion.FIREFOX.getBrowserVersionNumeric());
+        assertEquals(96, BrowserVersion.FIREFOX.getBrowserVersionNumeric());
         assertEquals(91, BrowserVersion.FIREFOX_ESR.getBrowserVersionNumeric());
         assertEquals(11, BrowserVersion.INTERNET_EXPLORER.getBrowserVersionNumeric());
-        assertEquals(96, BrowserVersion.CHROME.getBrowserVersionNumeric());
-        assertEquals(96, BrowserVersion.EDGE.getBrowserVersionNumeric());
+        assertEquals(97, BrowserVersion.CHROME.getBrowserVersionNumeric());
+        assertEquals(97, BrowserVersion.EDGE.getBrowserVersionNumeric());
     }
 
     /**
@@ -48,6 +48,13 @@ public class BrowserVersionTest {
     @Test
     public void testClone() {
         final BrowserVersion ff = BrowserVersion.INTERNET_EXPLORER;
+
+        final PluginConfiguration flash = new PluginConfiguration("Shockwave Flash",
+                "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx");
+        flash.getMimeTypes().add(new PluginConfiguration.MimeType("application/x-shockwave-flash",
+                "Shockwave Flash", "swf"));
+        ff.getPlugins().add(flash);
+
         final BrowserVersion clone = new BrowserVersion.BrowserVersionBuilder(ff).build();
 
         // Nickname is used as key for dictionaries storing browser setups
@@ -56,7 +63,9 @@ public class BrowserVersionTest {
         assertFalse(ff == clone);
         assertFalse(ff.equals(clone));
 
+        assertFalse(clone.getPlugins().isEmpty());
         clone.getPlugins().clear();
+        assertTrue(clone.getPlugins().isEmpty());
         assertFalse(ff.getPlugins().isEmpty());
     }
 }

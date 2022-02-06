@@ -24,7 +24,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -41,7 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  */
 @JsxClass(className = "DOMRectList", value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(IE)
-public class ClientRectList extends SimpleScriptable {
+public class ClientRectList extends HtmlUnitScriptable {
 
     private final List<ClientRect> clientRects_;
 

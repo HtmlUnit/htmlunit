@@ -20,9 +20,9 @@ import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeListener;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -45,7 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.TopLevel;
  * @author Atsushi Nakagawa
  */
 @JsxClass
-public class MutationObserver extends SimpleScriptable implements HtmlAttributeChangeListener,
+public class MutationObserver extends HtmlUnitScriptable implements HtmlAttributeChangeListener,
         CharacterDataChangeListener {
 
     private Function function_;

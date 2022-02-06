@@ -24,10 +24,10 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.56.0</htmlunitdriver.version>
+        <htmlunitdriver.version>2.58.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.11.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.56.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.56.0</htmlunitcorejs.version>
+        <htmlunitneko.version>2.58.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.58.0</htmlunitcorejs.version>
 
         <httpclient5.version>5.1.2</httpclient5.version>
         <jetty.version>9.4.44.v20210927</jetty.version>
@@ -35,11 +35,11 @@
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>9.2.1</checkstyle.version>
-        <spotbugs.version>4.5.2</spotbugs.version>
-        <pmd.version>6.41.0</pmd.version>
+        <checkstyle.version>9.3</checkstyle.version>
+        <spotbugs.version>4.5.3</spotbugs.version>
+        <pmd.version>6.42.0</pmd.version>
         <archunit.version>0.22.0</archunit.version>
-        <dependencycheck.version>6.5.2</dependencycheck.version>
+        <dependencycheck.version>6.5.3</dependencycheck.version>
     </properties>
 
     <build>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.9.0</version>
                 <configuration>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
@@ -74,7 +74,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.5.2.0</version>
+                <version>4.5.3.0</version>
                 <dependencies>
                     <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
@@ -112,7 +112,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.2</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -179,6 +179,8 @@
                 <version>3.3.1</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
+                    <sourcepath>${basedir}/src/main/java</sourcepath>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
@@ -302,7 +304,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.3</version>
+                <version>5.1.4</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -316,7 +318,7 @@
             <plugin>
                 <groupId>org.simplify4u.plugins</groupId>
                 <artifactId>pgpverify-maven-plugin</artifactId>
-                <version>1.15.0</version>
+                <version>1.16.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -690,7 +692,8 @@
                 <version>3.3.1</version>
                 <configuration>
                     <quiet>true</quiet>
-                    <excludePackageNames>com.gargoylesoftware.htmlunit.javascript:com.gargoylesoftware.htmlunit.protocol:com.gargoylesoftware.htmlunit.ssl:com.gargoylesoftware.htmlunit.html.xpath:com.gargoylesoftware.htmlunit.html.applets:com.gargoylesoftware.htmlunit.html.impl:com.gargoylesoftware.htmlunit.activex</excludePackageNames>
+                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
+                    <sourcepath>${basedir}/src/main/java</sourcepath>
                     <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
@@ -755,7 +758,7 @@
     </scm>
     <ciManagement>
         <system>Jenkins</system>
-        <url>http://167.86.92.69/job/HtmlUnit/</url>
+        <url>https://jenkins.wetator.org/view/HtmlUnit/</url>
     </ciManagement>
     <mailingLists>
         <mailingList>
@@ -1170,6 +1173,9 @@
         </contributor>
         <contributor>
             <name>Michael Lueck</name>
+        </contributor>
+        <contributor>
+            <name>Ashley Frieze</name>
         </contributor>
     </contributors>
     <dependencies>

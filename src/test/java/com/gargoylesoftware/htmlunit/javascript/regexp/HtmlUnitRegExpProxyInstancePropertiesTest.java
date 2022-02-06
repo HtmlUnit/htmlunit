@@ -20,7 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
@@ -151,7 +151,16 @@ public class HtmlUnitRegExpProxyInstancePropertiesTest extends WebDriverTestCase
     @Test
     @Alerts({"html,body,div,div,div", "undefined", "undefined", "undefined",
                 "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
+                           "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
+            FF = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
+                  "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
+            FF_ESR = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
+                      "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
+            IE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
+                  "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"},
+            EDGE = {"html,body,div,div,div", "1", "undefined", "/html/body/div[5]/div[1]/div[1]",
+                    "html", "1", "undefined", "/html/body/div[5]/div[1]/div[1]"})
     public void regExResultProperties() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

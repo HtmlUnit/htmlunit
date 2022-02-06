@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.html;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -34,40 +37,216 @@ public class HtmlOutputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true", "true", "true", "true"},
-            FF_ESR = {"true", "true", "false", "false", "true"},
-            IE = "no checkValidity()")
-    @HtmlUnitNYI(FF_ESR = {"true", "true", "true", "true", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
+    @Alerts(DEFAULT = {"[object HTMLOutputElement]", "[object HTMLFormElement]"},
+            IE = {"[object HTMLUnknownElement]", "undefined"})
+    public void simpleScriptable() throws Exception {
+        final String html
+            = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-
-            + "    if (!foo.checkValidity) {log('no checkValidity()'); return;}\n"
-
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+            + "    var o = document.getElementById('o');\n"
+            + "    log(o);\n"
+            + "    log(o.form);\n"
             + "  }\n"
             + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <output id='foo'>\n"
-            + "</body>\n"
-            + "</html>";
+            + "</head><body onload='test()'>\n"
+            + "  <form>\n"
+            + "    <output id='o'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+        final WebDriver driver = loadPageVerifyTitle2(html);
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlElement element = toHtmlElement(driver.findElement(By.id("o")));
+            assertTrue(element instanceof HtmlOutput || element instanceof HtmlUnknownElement);
+        }
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"undefined", "undefined", "undefined", "center", "8", "foo"})
+    public void align() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<form>\n"
+            + "  <output id='o1' align='left'>\n"
+            + "  <output id='o2' align='right'>\n"
+            + "  <output id='o3' align='3'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function set(fs, value) {\n"
+            + "    try {\n"
+            + "      fs.align = value;\n"
+            + "    } catch (e) {\n"
+            + "      log('error');\n"
+            + "    }\n"
+            + "  }\n"
+            + "  var o1 = document.getElementById('o1');\n"
+            + "  var o2 = document.getElementById('o2');\n"
+            + "  var o3 = document.getElementById('o3');\n"
+            + "  log(o1.align);\n"
+            + "  log(o2.align);\n"
+            + "  log(o3.align);\n"
+            + "  set(o1, 'center');\n"
+            + "  set(o2, '8');\n"
+            + "  set(o3, 'foo');\n"
+            + "  log(o1.align);\n"
+            + "  log(o2.align);\n"
+            + "  log(o3.align);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "false", "false", "false", "false"},
+            FF_ESR = {"true", "true", "true", "true", "true"},
+            IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('o1').willValidate);\n"
+                + "      log(document.getElementById('o2').willValidate);\n"
+                + "      log(document.getElementById('o3').willValidate);\n"
+                + "      log(document.getElementById('o4').willValidate);\n"
+                + "      log(document.getElementById('o5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <output id='o1'>o1</output>\n"
+                + "    <output id='o2' disabled>o2</output>\n"
+                + "    <output id='o3' hidden>o3</output>\n"
+                + "    <output id='o4' readonly>o4</output>\n"
+                + "    <output id='o5' style='display: none'>o5</output>\n"
+                + "  </form>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationEmpty() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            FF_ESR = {"false",
+                      "false-true-false-false-false-false-false-false-false-false-false",
+                      "true"},
+            IE = "no checkValidity")
+    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity('Invalid');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            FF_ESR = {"false",
+                      "false-true-false-false-false-false-false-false-false-false-false",
+                      "true"},
+            IE = "no checkValidity")
+    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationResetCustomValidity() throws Exception {
+        validation("<output id='e1'>o1</output>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            FF_ESR = {"true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true"},
+            IE = "no checkValidity")
+    public void validationRequired() throws Exception {
+        validation("<output id='e1' required></output>\n", "");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + "      if (!elem.validity) { log('no checkValidity'); return }\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + htmlPart
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

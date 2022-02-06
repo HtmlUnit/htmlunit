@@ -93,15 +93,6 @@ public class HTMLButtonElement extends HTMLElement {
     }
 
     /**
-     * Checks whether the element has any constraints and whether it satisfies them.
-     * @return if the element is valid
-     */
-    @JsxFunction
-    public boolean checkValidity() {
-        return getDomNodeOrDie().isValid();
-    }
-
-    /**
      * {@inheritDoc}
      */
     @JsxGetter
@@ -162,6 +153,27 @@ public class HTMLButtonElement extends HTMLElement {
     @Override
     public void setValue(final Object newValue) {
         super.setValue(newValue);
+    }
+
+    /**
+     * Checks whether the element has any constraints and whether it satisfies them.
+     * @return if the element is valid
+     */
+    @JsxFunction
+    public boolean checkValidity() {
+        return getDomNodeOrDie().isValid();
+    }
+
+    /**
+     * @return a ValidityState with the validity states that this element is in.
+     */
+    @JsxGetter
+    public ValidityState getValidity() {
+        final ValidityState validityState = new ValidityState();
+        validityState.setPrototype(getPrototype(validityState.getClass()));
+        validityState.setParentScope(getParentScope());
+        validityState.setDomNode(getDomNodeOrDie());
+        return validityState;
     }
 
     /**

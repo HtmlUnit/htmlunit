@@ -21,7 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.nio.charset.StandardCharsets;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -40,7 +40,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8Array;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
-public class TextEncoder extends SimpleScriptable {
+public class TextEncoder extends HtmlUnitScriptable {
 
     /**
      * Creates an instance.

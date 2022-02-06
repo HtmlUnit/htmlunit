@@ -66,10 +66,7 @@ public class DataURLDecoderTest extends WebDriverTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVQ4jWP4TyFgIFsjAwN5BjAwMMA1oxgAkyAGY/UCugQu"
-                + "m/G6gBhnE2UAhiJ8coQUYTOMKC/gDDS6GYBPjORYINoAchITAzbTB84AcgAA8YbvLfsmafwAAAAASUVORK5CYII=",
-            CHROME = "data:image/png;base64,"
+    @Alerts(CHROME = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
                 + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
                 + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
@@ -77,6 +74,13 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAHBJREFUOE+tkkkOACAIA+3/H40hEYOI"
                 + "iAtXYKBNQURUHgq3AACFbx8DeJFLHu8AaWTUaNUDILLDHnA/WAH026GETrU6m2Es7xgwLUQmDua0Qe14+gM9eA0QiDU25UGU"
                 + "hS9BcpNode8SOQXpC2B31etXnvKZ0TEDfq8AAAAASUVORK5CYII=",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8frZKIQUTEhSsw0KbItdJD4RYA"
+                + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
+                + "7K5a/QKe8pnRes1vRwAAAABJRU5ErkJggg==",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVQ4jWP4TyFgIFsjAwN5BjAwMMA1oxgAkyAGY/UCugQu"
+                + "m/G6gBhnE2UAhiJ8coQUYTOMKC/gDDS6GYBPjORYINoAchITAzbTB84AcgAA8YbvLfsmafwAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
                 + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"

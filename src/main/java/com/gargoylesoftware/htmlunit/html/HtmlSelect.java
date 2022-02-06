@@ -52,7 +52,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Frank Danek
  */
 public class HtmlSelect extends HtmlElement implements DisabledElement, SubmittableElement,
-                LabelableElement, FormFieldWithNameHistory {
+                LabelableElement, FormFieldWithNameHistory, ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "select";
@@ -571,6 +571,23 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
+     * @return the size or 1 if not defined or not convertable to int
+     */
+    public final int getSize() {
+        int size = 0;
+        final String sizeAttribute = getSizeAttribute();
+        if (ATTRIBUTE_NOT_DEFINED != sizeAttribute && sizeAttribute != DomElement.ATTRIBUTE_VALUE_EMPTY) {
+            try {
+                size = Integer.parseInt(sizeAttribute);
+            }
+            catch (final Exception e) {
+                //silently ignore
+            }
+        }
+        return size;
+    }
+
+    /**
      * Returns the value of the attribute {@code multiple}. Refer to the <a
      * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
      *
@@ -764,13 +781,6 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean isValid() {
-        return super.isValid() && StringUtils.isEmpty(customValidity_);
-    }
-
-    /**
-     * @return whether the element is a candidate for constraint validation
-     */
     public boolean willValidate() {
         return hasFeature(HTMLSELECT_WILL_VALIDATE_ALWAYS_TRUE)
                 || (!isDisabled()
@@ -778,10 +788,105 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Sets the custom validity message for the element to the specified message.
-     * @param message the new message
+     * {@inheritDoc}
      */
+    @Override
     public void setCustomValidity(final String message) {
         customValidity_ = message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return isValidValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBadInputValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCustomErrorValidityState() {
+        return !StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasPatternMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStepMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooLongValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooShortValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeOverflowValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return !isCustomErrorValidityState()
+                && !isValueMissingValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValueMissingValidityState() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && getSelectedOptions().isEmpty();
     }
 }

@@ -217,8 +217,7 @@ public class NavigatorTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "Shockwave Flash not available",
-            IE = {"Shockwave Flash", "Shockwave Flash 32.0 r0", "32.0.0.445", "Flash.ocx"})
+    @Alerts("Shockwave Flash not available")
     public void pluginsShockwaveFlash() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"

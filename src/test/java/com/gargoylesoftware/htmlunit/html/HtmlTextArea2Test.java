@@ -24,13 +24,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
- * Tests for {@link HTMLTextAreaElement}.
+ * Tests for {@link HtmlTextArea}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour
@@ -618,39 +617,183 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "false", "false", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true"},
+            IE = {"true", "false", "true", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('t1').willValidate);\n"
+                + "      log(document.getElementById('t2').willValidate);\n"
+                + "      log(document.getElementById('t3').willValidate);\n"
+                + "      log(document.getElementById('t4').willValidate);\n"
+                + "      log(document.getElementById('t5').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <textarea id='t1'>t1</textarea>\n"
+                + "    <textarea id='t2' disabled>t2</textarea>\n"
+                + "    <textarea id='t3' hidden>t3</textarea>\n"
+                + "    <textarea id='t4' readonly>t4</textarea>\n"
+                + "    <textarea id='t5' style='display: none'>t5</textarea>\n"
+                + "  </form>\n"
+                + "</body></html>";
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+        loadPageVerifyTitle2(html);
+    }
 
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationEmpty() throws Exception {
+        validation("<textarea id='e1'>t1</textarea>\n", "");
+    }
 
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<textarea id='e1'>t1</textarea>\n", "elem.setCustomValidity('Invalid');");
+    }
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <textarea id='foo'></textarea>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<textarea id='e1'>t1</textarea>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationResetCustomValidity() throws Exception {
+        validation("<textarea id='e1'>t1</textarea>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequired() throws Exception {
+        validation("<textarea id='e1' required></textarea>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredWithText() throws Exception {
+        validation("<textarea id='e1' required>HtmlUnit</textarea>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredValueSet() throws Exception {
+        validation("<textarea id='e1' required></textarea>\n", "elem.value='A';");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequiredValueClear() throws Exception {
+        validation("<textarea id='e1' required>abc</textarea>\n", "elem.value='';");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('e1');\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + htmlPart
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

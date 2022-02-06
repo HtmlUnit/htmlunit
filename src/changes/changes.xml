@@ -7,7 +7,74 @@
     </properties>
 
     <body>
-        <release version="2.57.0" date="Januar xx, 2022" description="Bugfixes">
+        <release version="2.58.0" date="February 4, 2022" description="Bugfixes">
+            <action type="update" dev="rbri">
+                neko: Switch to xerces 2.12.2.
+            </action>
+            <action type="fix" dev="rbri" issue="439">
+                asNormalizedText() uses the default style to determine blocks if css is disabled.
+            </action>
+            <action type="update" dev="rbri">
+                HtmlUnitScriptable code cleanup.
+            </action>
+            <action type="update" dev="rbri">
+                SimpleScriptable is deprecated, please use HtmlUnitScriptable instead.
+            </action>
+            <action type="fix" dev="rbri">
+                Various fixes for the handling of select options when the select property changes.
+            </action>
+            <action type="fix" dev="rbri">
+                checkValidity returns correct value for radiobuttons checked by js or the user.
+            </action>
+            <action type="fix" dev="rbri" issue="438">
+                checkValidity returns correct value if the checkbox was checked by js or the user.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Object.hasOwn added.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Support optional variable binding in catch.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: RegEx handles {0} quantifier with max of zero correctly.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Date ctor now respects the timezone.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Promise.allSettled() added.
+            </action>
+        </release>
+
+
+        <release version="2.57.0" date="Januar 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
+            <action type="add" dev="rbri">
+                Quota simulation added to localStorage.
+            </action>
+            <action type="fix" dev="rbri">
+                innerText ignores title content in most cases.
+            </action>
+            <action type="fix" dev="rbri">
+                NPE when using the console in a special scenario fixed.
+            </action>
+            <action type="fix" dev="rbri" issue="436">
+                Formaction, formmethod, formtarget and formenctype no longer ignored on button without type attribute.
+            </action>
+            <action type="fix" dev="rbri" issue="435">
+                Fix duplicate classes inside our javadoc.
+            </action>
+            <action type="fix" dev="Ashley Frieze" issue="432">
+                The caching algorithm now observe the max-age headers.
+            </action>
+            <action type="add" dev="rbri">
+                HTMLOutputElement form property added.
+            </action>
+            <action type="update" dev="rbri">
+                htmx testsuite changed to version 1.6.1 added.
+            </action>
+            <action type="update" dev="rbri">
+                Flash is no longer available in IE.
+            </action>
             <action type="fix" dev="rbri">
                 innerText ignores script children.
             </action>

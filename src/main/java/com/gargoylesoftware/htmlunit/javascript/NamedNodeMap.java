@@ -43,7 +43,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @see <a href="http://msdn2.microsoft.com/en-us/library/ms763824.aspx">IXMLDOMNamedNodeMap</a>
  */
 @JsxClass
-public class NamedNodeMap extends SimpleScriptable {
+public class NamedNodeMap extends HtmlUnitScriptable {
 
     private final org.w3c.dom.NamedNodeMap attributes_;
 

@@ -32,7 +32,6 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
-import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
@@ -273,7 +272,7 @@ public class HtmlLink extends HtmlElement {
         }
 
         final WebClient webClient = getPage().getWebClient();
-        if (!StyleSheetList.isStyleSheetLink(this)) {
+        if (!isStyleSheetLink()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
                             + asXml().replaceAll("[\\r\\n]", "") + ").");

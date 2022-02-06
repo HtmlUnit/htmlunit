@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -86,7 +86,7 @@ public class RowContainer extends HTMLElement {
         }
         final boolean rowIndexValid = rowIndex >= 0 && rowIndex < rowCount;
         if (rowIndexValid) {
-            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(rowIndex));
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(rowIndex));
             row.getDomNodeOrDie().remove();
         }
     }
@@ -137,11 +137,11 @@ public class RowContainer extends HTMLElement {
             getDomNodeOrDie().appendChild(newRow);
         }
         else if (index == rowCount) {
-            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(index - 1));
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index - 1));
             row.getDomNodeOrDie().getParentNode().appendChild(newRow);
         }
         else {
-            final SimpleScriptable row = (SimpleScriptable) rows.item(Integer.valueOf(index));
+            final HtmlUnitScriptable row = (HtmlUnitScriptable) rows.item(Integer.valueOf(index));
             // if at the end, then in the same "sub-container" as the last existing row
             if (index > rowCount - 1) {
                 row.getDomNodeOrDie().getParentNode().appendChild(newRow);
@@ -167,8 +167,8 @@ public class RowContainer extends HTMLElement {
         final boolean sourceIndexValid = sourceIndex >= 0 && sourceIndex < rowCount;
         final boolean targetIndexValid = targetIndex >= 0 && targetIndex < rowCount;
         if (sourceIndexValid && targetIndexValid) {
-            final SimpleScriptable sourceRow = (SimpleScriptable) rows.item(Integer.valueOf(sourceIndex));
-            final SimpleScriptable targetRow = (SimpleScriptable) rows.item(Integer.valueOf(targetIndex));
+            final HtmlUnitScriptable sourceRow = (HtmlUnitScriptable) rows.item(Integer.valueOf(sourceIndex));
+            final HtmlUnitScriptable targetRow = (HtmlUnitScriptable) rows.item(Integer.valueOf(targetIndex));
             targetRow.getDomNodeOrDie().insertBefore(sourceRow.getDomNodeOrDie());
             return sourceRow;
         }

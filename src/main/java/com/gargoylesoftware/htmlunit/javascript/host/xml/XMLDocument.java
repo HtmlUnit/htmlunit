@@ -38,7 +38,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -151,8 +150,8 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    public SimpleScriptable makeScriptableFor(final DomNode domNode) {
-        final SimpleScriptable scriptable;
+    public HtmlUnitScriptable makeScriptableFor(final DomNode domNode) {
+        final HtmlUnitScriptable scriptable;
 
         // TODO: cleanup, getScriptObject() should be used!!!
         if (domNode instanceof DomElement && !(domNode instanceof HtmlElement)) {
@@ -161,7 +160,7 @@ public class XMLDocument extends Document {
                     = ((JavaScriptEngine) getWindow().getWebWindow().getWebClient()
                         .getJavaScriptEngine()).getJavaScriptClass(domNode.getClass());
                 try {
-                    scriptable = (SimpleScriptable) javaScriptClass.newInstance();
+                    scriptable = javaScriptClass.newInstance();
                 }
                 catch (final Exception e) {
                     throw Context.throwAsScriptRuntimeEx(e);
@@ -188,7 +187,7 @@ public class XMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    protected void initParentScope(final DomNode domNode, final SimpleScriptable scriptable) {
+    protected void initParentScope(final DomNode domNode, final HtmlUnitScriptable scriptable) {
         scriptable.setParentScope(getParentScope());
     }
 

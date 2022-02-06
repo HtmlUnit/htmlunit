@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlOutput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -67,6 +68,21 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
+     * Returns the value of the JavaScript {@code form} attribute.
+     *
+     * @return the value of the JavaScript {@code form} attribute
+     */
+    @JsxGetter
+    @Override
+    public HTMLFormElement getForm() {
+        final HtmlForm form = getDomNodeOrDie().getEnclosingForm();
+        if (form == null) {
+            return null;
+        }
+        return (HTMLFormElement) getScriptableFor(form);
+    }
+
+    /**
      * Returns the labels associated with the element.
      * @return the labels associated with the element
      */
@@ -88,6 +104,18 @@ public class HTMLOutputElement extends HTMLElement {
     }
 
     /**
+     * @return a ValidityState with the validity states that this element is in.
+     */
+    @JsxGetter
+    public ValidityState getValidity() {
+        final ValidityState validityState = new ValidityState();
+        validityState.setPrototype(getPrototype(validityState.getClass()));
+        validityState.setParentScope(getParentScope());
+        validityState.setDomNode(getDomNodeOrDie());
+        return validityState;
+    }
+
+    /**
      * @return whether the element is a candidate for constraint validation
      */
     @JsxGetter
@@ -101,6 +129,6 @@ public class HTMLOutputElement extends HTMLElement {
      */
     @JsxFunction
     public void setCustomValidity(final String message) {
-        // empty impl for now
+        ((HtmlOutput) getDomNodeOrDie()).setCustomValidity(message);
     }
 }

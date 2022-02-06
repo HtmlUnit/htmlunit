@@ -20,9 +20,8 @@
                   <li>submit the form (by pressing the button like the user does)</li>
                 </ul>
             </p>
-            <p>
-                Example:<br/>Upload a file using the path to a local file
-            </p>
+
+            <subsection name="Upload a file using the path to a local file">
 <source><![CDATA[
 HtmlPage firstPage = client.getPage(URL_FIRST);
 HtmlForm f = firstPage.getForms().get(0);
@@ -32,9 +31,9 @@ String path = getClass().getClassLoader().getResource("testfiles/" + "tiny-png.i
 fileInput.setValueAttribute(path);
 firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
-            <p>
-                Example:<br/>Upload file content from memory
-            </p>
+            </subsection>
+
+            <subsection name="Upload file content from memory">
 <source><![CDATA[
 HtmlPage firstPage = client.getPage(URL_FIRST);
 HtmlForm f = firstPage.getForms().get(0);
@@ -45,9 +44,9 @@ fileInput.setContentType("text/csv");
 fileInput.setData("My file data".getBytes());
 firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
-            <p>
-                Example:<br/>Upload multiple files (if the 'multiple' attribut is set for the file input control)
-            </p>
+            </subsection>
+
+            <subsection name="Upload multiple files (if the 'multiple' attribut is set for the file input control)">
 <source><![CDATA[
 String filename1 = "HtmlFileInputTest_one.txt";
 String path1 = getClass().getResource(filename1).toExternalForm();
@@ -65,6 +64,7 @@ fileInput.setFiles(file1, file2);
 
 firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
+            </subsection>
         </section>
     </body>
 </document>

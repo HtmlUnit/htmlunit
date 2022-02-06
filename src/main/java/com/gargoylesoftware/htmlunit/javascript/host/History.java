@@ -27,7 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -47,7 +47,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Adam Afeltowicz
  */
 @JsxClass
-public class History extends SimpleScriptable {
+public class History extends HtmlUnitScriptable {
     private static final String SCROLL_RESTAURATION_AUTO = "auto";
     private static final String SCROLL_RESTAURATION_MANUAL = "manual";
 

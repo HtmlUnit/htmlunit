@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -28,10 +30,12 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Frank Danek
  * @author Ronald Brill
  */
-public class HtmlFieldSet extends HtmlElement {
+public class HtmlFieldSet extends HtmlElement implements ValidatableElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "fieldset";
+
+    private String customValidity_;
 
     /**
      * Creates an instance of HtmlFieldSet
@@ -46,9 +50,111 @@ public class HtmlFieldSet extends HtmlElement {
     }
 
     /**
-     * @return whether the element is a candidate for constraint validation
+     * {@inheritDoc}
      */
+    @Override
     public boolean willValidate() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setCustomValidity(final String message) {
+        customValidity_ = message;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasBadInputValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isCustomErrorValidityState() {
+        return !StringUtils.isEmpty(customValidity_);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasPatternMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isStepMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooLongValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isTooShortValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasTypeMismatchValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeOverflowValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        return true;
+    }
+
+    @Override
+    public boolean isValidValidityState() {
+        return !isCustomErrorValidityState();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValueMissingValidityState() {
         return false;
     }
 }

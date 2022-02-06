@@ -22,7 +22,9 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlBreak;
@@ -39,9 +41,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.svg.SvgTitle;
 
 /**
@@ -76,8 +76,11 @@ public class HtmlSerializerInnerOuterText {
             return builder.getText();
         }
 
+        // when calling on the title itself we have to output
+        final boolean insideHead = node instanceof HtmlTitle;
+
         final HtmlSerializerTextBuilder builder = new HtmlSerializerTextBuilder();
-        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), false);
+        appendNode(builder, node, whiteSpaceStyle(node, Mode.WHITE_SPACE_NORMAL), insideHead);
         return builder.getText();
     }
 
@@ -127,6 +130,9 @@ public class HtmlSerializerInnerOuterText {
         }
         else if (node instanceof HtmlNoFrames) {
             appendChildren(builder, node, Mode.PLAIN, insideHead);
+        }
+        else if (node instanceof HtmlTitle && !insideHead) {
+            // nothing to do
         }
         else if (node instanceof HtmlTextArea) {
             // nothing to do
@@ -242,15 +248,15 @@ public class HtmlSerializerInnerOuterText {
     }
 
     private static Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
-        final Object scriptableObject = domNode.getScriptableObject();
-        if (scriptableObject instanceof Node) {
+        if (domNode instanceof DomElement) {
             final Page page = domNode.getPage();
-            if (page != null && page.getEnclosingWindow().getWebClient().getOptions().isCssEnabled()) {
-                Node node = (Node) scriptableObject;
+            final WebWindow window = page.getEnclosingWindow();
+            if (page != null && window.getWebClient().getOptions().isCssEnabled()) {
 
+                DomNode node = domNode;
                 while (node != null) {
-                    if (node instanceof Element) {
-                        final ComputedCSSStyleDeclaration style = node.getWindow().getComputedStyle(node, null);
+                    if (node instanceof DomElement) {
+                        final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
                         final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                         if (StringUtils.isNoneEmpty(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
@@ -270,7 +276,7 @@ public class HtmlSerializerInnerOuterText {
                             }
                         }
                     }
-                    node = node.getParentElement();
+                    node = node.getParentNode();
                 }
             }
         }

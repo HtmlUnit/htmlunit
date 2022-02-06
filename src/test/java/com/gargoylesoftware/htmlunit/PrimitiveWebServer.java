@@ -112,8 +112,8 @@ public class PrimitiveWebServer implements Closeable {
                                 break;
                             }
                         }
-
-                        final int contentLenghtPos = StringUtils.indexOfIgnoreCase(requestString, "Content-Length:");
+                        final int contentLenghtPos =
+                                StringUtils.indexOfIgnoreCase(requestString, HttpHeader.CONTENT_LENGTH);
                         if (contentLenghtPos > -1) {
                             final int endPos = requestString.indexOf('\n', contentLenghtPos + 16);
                             final String toParse = requestString.substring(contentLenghtPos + 16, endPos);

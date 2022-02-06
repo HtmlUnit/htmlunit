@@ -47,6 +47,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -534,7 +535,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"2", "third"})
+    @Alerts(DEFAULT = {"2", "third"},
+            IE = {"1", "third"})
+    @HtmlUnitNYI(IE = {"2", "third"})
     public void buttonWithFormAction() throws Exception {
         final String html = "<!DOCTYPE html>\n"
             + "<html><head><title>first</title></head>\n"
@@ -542,6 +545,42 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  <p>hello world</p>\n"
             + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
             + "    <button id='myButton' type='submit' formaction='" + URL_THIRD
+                        + "'>Submit with different form action</button>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String secondContent = "<html><head><title>second</title></head>\n"
+                + "<body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
+
+        final String thirdContent = "<html><head><title>third</title></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        getMockWebConnection().setResponse(URL_THIRD, thirdContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        assertEquals(Integer.parseInt(getExpectedAlerts()[0]), getMockWebConnection().getRequestCount());
+        assertTrue(driver.getPageSource().contains(getExpectedAlerts()[1]));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"2", "third"})
+    public void buttonWithFormActionWithoutType() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head><title>first</title></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' action='" + URL_SECOND + "'>\n"
+            + "    <button id='myButton' formaction='" + URL_THIRD
                         + "'>Submit with different form action</button>\n"
             + "  </form>\n"
             + "</body></html>";

@@ -33,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -55,7 +55,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author cd alexndr
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
-public class URLSearchParams extends SimpleScriptable {
+public class URLSearchParams extends HtmlUnitScriptable {
 
     private static final Log LOG = LogFactory.getLog(URLSearchParams.class);
 
@@ -426,7 +426,7 @@ public class URLSearchParams extends SimpleScriptable {
 
     /**
      * Calls for instance for implicit conversion to string.
-     * @see com.gargoylesoftware.htmlunit.javascript.SimpleScriptable#getDefaultValue(java.lang.Class)
+     * @see com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable#getDefaultValue(java.lang.Class)
      * @param hint the type hint
      * @return the default value
      */

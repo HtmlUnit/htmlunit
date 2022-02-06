@@ -70,7 +70,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
             setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
         }
 
-        defaultCheckedState_ = hasAttribute("checked");
+        defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);
         checkedState_ = defaultCheckedState_;
     }
 
@@ -297,7 +297,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
-        if ("checked".equals(qualifiedName)) {
+        if (ATTRIBUTE_CHECKED.equals(qualifiedName)) {
             checkedState_ = true;
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
@@ -313,4 +313,23 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
                 && super.propagateClickStateUpdateToParent();
     }
 
+    @Override
+    public boolean isValueMissingValidityState() {
+        if (ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)) {
+            return false;
+        }
+        if (ATTRIBUTE_NOT_DEFINED == getNameAttribute()) {
+            return !isChecked();
+        }
+
+        final List<HtmlRadioButtonInput> pageInputs = getPage()
+                .getByXPath("//input[lower-case(@type)='radio' and @name='" + getNameAttribute() + "']");
+
+        for (final HtmlRadioButtonInput input : pageInputs) {
+            if (input.isChecked()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

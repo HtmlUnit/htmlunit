@@ -26,7 +26,7 @@ import org.w3c.dom.ranges.Range;
 
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -45,7 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ronald Brill
  */
 @JsxClass
-public class Selection extends SimpleScriptable {
+public class Selection extends HtmlUnitScriptable {
     private static final String TYPE_NONE = "None";
     private static final String TYPE_CARET = "Caret";
     private static final String TYPE_RANGE = "Range";
@@ -373,8 +373,8 @@ public class Selection extends SimpleScriptable {
      * @return the scriptable object corresponding to the specified HtmlUnit DOM object, or {@code null} if
      *         <tt>object</tt> was {@code null}
      */
-    private SimpleScriptable getScriptableNullSafe(final Object object) {
-        final SimpleScriptable scriptable;
+    private HtmlUnitScriptable getScriptableNullSafe(final Object object) {
+        final HtmlUnitScriptable scriptable;
         if (object != null) {
             scriptable = getScriptableFor(object);
         }

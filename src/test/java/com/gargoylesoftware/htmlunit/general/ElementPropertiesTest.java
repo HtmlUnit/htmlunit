@@ -47,9 +47,9 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserVersionClassRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.junit.BrowserVersionClassRunner;
 
 /**
  * Tests all properties of an object.
@@ -461,7 +461,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onreset,onresize,onscroll,onsecuritypolicyviolation,onseeked,onseeking,"
+                + "onselect,onselectionchange,onselectstart,onslotchange,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
                 + "onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,"
@@ -478,7 +479,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,"
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onreset,onresize,onscroll,onsecuritypolicyviolation,onseeked,onseeking,"
+                + "onselect,onselectionchange,onselectstart,onslotchange,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
                 + "onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,"
@@ -1033,7 +1035,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerrawupdate,"
                 + "onpointerup,onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,"
-                + "onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,onstorage,"
+                + "onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,"
+                + "onselectstart,onslotchange,onstalled,onstorage,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onunhandledrejection,onunload,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,open(),"
@@ -1066,7 +1069,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onoffline,ononline,onpagehide,onpageshow,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerrawupdate,"
                 + "onpointerup,onpopstate,onprogress,onratechange,onrejectionhandled,onreset,onresize,onscroll,"
-                + "onsearch,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,onstorage,"
+                + "onsearch,onsecuritypolicyviolation,onseeked,onseeking,onselect,"
+                + "onselectionchange,onselectstart,onslotchange,onstalled,onstorage,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onunhandledrejection,onunload,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,open(),"
@@ -1660,11 +1664,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "autofocus,checkValidity(),createTextRange(),form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,labels,name,setCustomValidity(),type,value,willValidate",
-            EDGE = "checkValidity(),disabled,form,labels,name,setCustomValidity(),type,value,willValidate",
-            FF_ESR = "checkValidity(),disabled,form,labels,name,setCustomValidity(),type,value,willValidate",
-            FF = "checkValidity(),disabled,form,labels,name,setCustomValidity(),type,value,willValidate",
-            IE = "checkValidity(),createTextRange(),form,name,setCustomValidity(),type,value,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,labels,name,setCustomValidity()"
+                + ",type,validity,value,willValidate",
+            EDGE = "checkValidity(),disabled,form,labels,name,setCustomValidity(),"
+                + "type,validity,value,willValidate",
+            FF_ESR = "checkValidity(),disabled,form,labels,name,setCustomValidity(),"
+                + "type,validity,value,willValidate",
+            FF = "checkValidity(),disabled,form,labels,name,setCustomValidity(),"
+                + "type,validity,value,willValidate",
+            IE = "checkValidity(),createTextRange(),form,name,setCustomValidity(),"
+                + "type,validity,value,willValidate")
     public void button() throws Exception {
         test("button");
     }
@@ -1912,11 +1921,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "checkValidity(),disabled,elements,form,name,reportValidity(),setCustomValidity(),type,"
                 + "validationMessage,validity,willValidate",
             IE = "align,checkValidity(),form,setCustomValidity(),validationMessage,validity,willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,setCustomValidity(),willValidate",
-            EDGE = "checkValidity(),disabled,form,name,setCustomValidity(),willValidate",
-            FF_ESR = "checkValidity(),disabled,form,name,setCustomValidity(),willValidate",
-            FF = "checkValidity(),disabled,form,name,setCustomValidity(),willValidate",
-            IE = "align,checkValidity(),form,setCustomValidity(),willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),disabled,form,name,setCustomValidity(),validity,willValidate",
+            IE = "align,checkValidity(),form,setCustomValidity(),validity,willValidate")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -2640,11 +2649,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "contentDocument,data,declare,form,getSVGDocument(),height,hspace,msPlayToDisabled,"
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,object,readyState,setCustomValidity(),standby,"
                 + "type,useMap,validationMessage,validity,vspace,width,willValidate")
-    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),width",
-            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),width")
+    @HtmlUnitNYI(CHROME = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            EDGE = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            FF_ESR = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            FF = "align,border,checkValidity(),form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate",
+            IE = "align,alt,border,checkValidity(),classid,form,height,name,setCustomValidity(),"
+                    + "validity,width,willValidate")
     public void object() throws Exception {
         test("object");
     }
@@ -2698,13 +2712,12 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "checkValidity(),defaultValue,form,htmlFor,labels,name,reportValidity(),setCustomValidity(),type,"
-                + "validationMessage,validity,value,"
-                + "willValidate",
+                + "validationMessage,validity,value,willValidate",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            EDGE = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            FF_ESR = "checkValidity(),labels,name,setCustomValidity(),willValidate",
-            FF = "checkValidity(),labels,name,setCustomValidity(),willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            EDGE = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF_ESR = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate",
+            FF = "checkValidity(),form,labels,name,setCustomValidity(),validity,willValidate")
     public void output() throws Exception {
         test("output");
     }
@@ -2899,15 +2912,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "required,selectedIndex,setCustomValidity(),size,type,validationMessage,validity,value,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             EDGE = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             FF_ESR = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             FF = "add(),checkValidity(),disabled,form,item(),labels,length,multiple,name,options,"
-                + "required,selectedIndex,setCustomValidity(),size,type,value,willValidate",
+                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate",
             IE = "add(),checkValidity(),form,item(),length,multiple,name,options,remove(),"
-                + "required,selectedIndex,setCustomValidity(),size,type,value,willValidate")
+                + "required,selectedIndex,setCustomValidity(),size,type,validity,value,willValidate")
     public void select() throws Exception {
         test("select");
     }
@@ -3187,19 +3200,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "wrap")
     @HtmlUnitNYI(CHROME = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart"
-                + ",setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + ",setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             EDGE = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,"
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF_ESR = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             FF = "checkValidity(),cols,defaultValue,disabled,form,labels,maxLength,minLength,name,placeholder,"
                 + "readOnly,required,rows,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),textLength,type,value,willValidate",
+                + "setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
             IE = "checkValidity(),cols,createTextRange(),defaultValue,form,maxLength,name,placeholder,readOnly,"
                 + "required,rows,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),type,value,willValidate")
+                + "setCustomValidity(),setSelectionRange(),type,validity,value,willValidate")
     public void textarea() throws Exception {
         test("textarea");
     }
@@ -3471,23 +3484,26 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
                 + "required,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,step,type,value,width,willValidate",
+                + "setCustomValidity(),setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             EDGE = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,"
                 + "disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,"
                 + "required,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,step,type,value,width,willValidate",
+                + "setCustomValidity(),setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             FF_ESR = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
                 + "files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,required,"
                 + "select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,value,width,willValidate",
+                + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,"
+                + "validity,value,width,willValidate",
             FF = "accept,align,alt,autocomplete,checked,checkValidity(),defaultChecked,defaultValue,disabled,"
                 + "files,form,height,labels,max,maxLength,min,minLength,name,placeholder,readOnly,required,"
                 + "select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,value,width,willValidate",
+                + "setCustomValidity(),setSelectionRange(),size,src,step,textLength,type,"
+                + "validity,value,width,willValidate",
             IE = "accept,align,alt,autocomplete,border,checked,checkValidity(),createTextRange(),"
                 + "defaultChecked,defaultValue,files,form,height,max,maxLength,min,name,placeholder,readOnly,"
                 + "required,select(),selectionEnd,selectionStart,"
-                + "setCustomValidity(),setSelectionRange(),size,src,step,type,value,width,willValidate")
+                + "setCustomValidity(),setSelectionRange(),size,src,step,type,"
+                + "validity,value,width,willValidate")
     public void input() throws Exception {
         test("input");
     }
@@ -4463,7 +4479,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,"
                 + "onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onresume,onscroll,onsearch,"
-                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,onslotchange,"
+                + "onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvisibilitychange,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkitfullscreenchange,"
@@ -4500,7 +4517,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointerlockchange,"
                 + "onpointerlockerror,onpointermove,onpointerout,onpointerover,onpointerrawupdate,onpointerup,"
                 + "onprogress,onratechange,onreadystatechange,onreset,onresize,onresume,onscroll,onsearch,"
-                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,onslotchange,"
+                + "onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvisibilitychange,onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkitfullscreenchange,"
@@ -4755,7 +4773,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerrawupdate,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
-                + "onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
+                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,"
+                + "onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,"
@@ -4770,7 +4789,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerrawupdate,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
-                + "onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
+                + "onsecuritypolicyviolation,onseeked,onseeking,onselect,"
+                + "onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
                 + "onwebkittransitionend,onwheel,ownerSVGElement,style,tabIndex,"

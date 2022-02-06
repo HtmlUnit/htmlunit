@@ -456,10 +456,15 @@ public class WebClient implements Serializable, AutoCloseable {
                     webWindow.getHistory().addPage(page);
                 }
 
+                // clear the cache because the anchors are now matched by
+                // the target pseudo style
+                if (page instanceof HtmlPage) {
+                    ((HtmlPage) page).clearComputedStyles();
+                }
+
                 final Window window = webWindow.getScriptableObject();
                 if (window != null) { // js enabled
                     window.getLocation().setHash(current.getRef());
-                    window.clearComputedStyles();
                 }
                 return (P) page;
             }
@@ -2122,10 +2127,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (webClient_.isJavaScriptEnabled() && frameElement.isDisplayed()) {
-                    final Object element = frameElement.getScriptableObject();
-                    final HTMLElement htmlElement = (HTMLElement) element;
-                    final ComputedCSSStyleDeclaration style =
-                            htmlElement.getWindow().getComputedStyle(htmlElement, null);
+                    final ComputedCSSStyleDeclaration style = fw.getComputedStyle(frameElement, null);
                     use = style.getCalculatedWidth(false, false) != 0
                             && style.getCalculatedHeight(false, false) != 0;
                 }

@@ -68,7 +68,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
             setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
         }
 
-        defaultCheckedState_ = hasAttribute("checked");
+        defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);
         checkedState_ = defaultCheckedState_;
     }
 
@@ -218,7 +218,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
         if ("value".equals(qualifiedName)) {
             setDefaultValue(attributeValue, false);
         }
-        if ("checked".equals(qualifiedName)) {
+        if (ATTRIBUTE_CHECKED.equals(qualifiedName)) {
             checkedState_ = true;
         }
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
@@ -232,5 +232,11 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     protected boolean propagateClickStateUpdateToParent() {
         return !hasFeature(HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR)
                 && super.propagateClickStateUpdateToParent();
+    }
+
+    @Override
+    public boolean isValueMissingValidityState() {
+        return ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
+                && !isChecked();
     }
 }

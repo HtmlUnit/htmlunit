@@ -33,7 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Marek Gawlicki
  */
 @JsxClass
-public class DOMTokenList extends SimpleScriptable {
+public class DOMTokenList extends HtmlUnitScriptable {
 
     private static final String WHITESPACE_CHARS = " \t\r\n\u000C";
     private static final String WHITESPACE_CHARS_IE_11 = WHITESPACE_CHARS + "\u000B";

@@ -20,7 +20,6 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 
@@ -32,7 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
  *
  * @author Ahmed Ashour
  */
-public class Intl extends SimpleScriptable {
+public class Intl extends HtmlUnitScriptable {
 
     /**
      * Define needed properties.
@@ -47,7 +46,7 @@ public class Intl extends SimpleScriptable {
         }
     }
 
-    private void define(final Class<? extends SimpleScriptable> c, final BrowserVersion browserVersion) {
+    private void define(final Class<? extends HtmlUnitScriptable> c, final BrowserVersion browserVersion) {
         try {
             final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(c, browserVersion);
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);

@@ -869,115 +869,295 @@ public class HtmlButton2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "false", "false", "true"})
-    public void checkValidity() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <button id='foo'>Test</button>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
+    @Alerts(DEFAULT = {"true", "false", "true", "false", "true", "true", "false", "false", "true", "true"},
+            FF = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
+            FF_ESR = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"},
+            IE = {"true", "false", "true", "true", "true", "true", "false", "false", "true", "true"})
+    public void willValidate() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      log(document.getElementById('b1').willValidate);\n"
+                + "      log(document.getElementById('b2').willValidate);\n"
+                + "      log(document.getElementById('b3').willValidate);\n"
+                + "      log(document.getElementById('b4').willValidate);\n"
+                + "      log(document.getElementById('b5').willValidate);\n"
+                + "      log(document.getElementById('b6').willValidate);\n"
+                + "      log(document.getElementById('b7').willValidate);\n"
+                + "      log(document.getElementById('b8').willValidate);\n"
+                + "      log(document.getElementById('b9').willValidate);\n"
+                + "      log(document.getElementById('b10').willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + "    <button id='b1'>b1</button>\n"
+                + "    <button id='b2' disabled>b2</button>\n"
+                + "    <button id='b3' hidden>b3</button>\n"
+                + "    <button id='b4' readonly>b4</button>\n"
+                + "    <button id='b5' style='display: none'>b5</button>\n"
+                + "    <button id='b6' type='submit'>b6</button>\n"
+                + "    <button id='b7' type='reset'>b7</button>\n"
+                + "    <button id='b8' type='button'>b8</button>\n"
+                + "    <button id='b9' type='unknown'>b9</button>\n"
+                + "    <button id='b10' type=''>b10</button>\n"
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "false", "false", "true"})
-    public void checkValidityTypeSubmit() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
-
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <button id='foo' type='submit'>Test</button>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationEmpty() throws Exception {
+        validation("<button id='b1'>b1</button>\n", "");
     }
 
     /**
-     * @throws Exception if the test fails
+     * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"true", "true", "true", "true", "true"})
-    public void checkValidityTypeReset() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    log(foo.checkValidity());\n"
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationEmpty_Submit() throws Exception {
+        validation("<button id='b1' type='submit'>b1</button>\n", "");
+    }
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationEmpty_Reset() throws Exception {
+        validation("<button id='b1' type='reset'>b1</button>\n", "");
+    }
 
-            + "    foo.setCustomValidity(' ');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationCustomValidity() throws Exception {
+        validation("<button id='b1'>b1</button>\n", "elem.setCustomValidity('Invalid');");
+    }
 
-            + "    foo.setCustomValidity('invalid');\n"
-            + "    log(foo.checkValidity());\n"
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationCustomValidity_Submit() throws Exception {
+        validation("<button id='b1' type='submit'>b1</button>\n", "elem.setCustomValidity('Invalid');");
+    }
 
-            + "    foo.setCustomValidity('');\n"
-            + "    log(foo.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <form>\n"
-            + "    <button id='foo' type='reset'>Test</button>\n"
-            + "  </form>\n"
-            + "</body>\n"
-            + "</html>";
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "false"})
+    public void validationCustomValidity_Reset() throws Exception {
+        validation("<button id='b1' type='reset'>b1</button>\n", "elem.setCustomValidity('Invalid');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationBlankCustomValidity() throws Exception {
+        validation("<button id='b1'>b1</button>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationBlankCustomValidity_Submit() throws Exception {
+        validation("<button id='b1' type='submit'>b1</button>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-true-false-false-false-false-false-false-false-false-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-true-false-false-false-false-false-undefined-false-false-false",
+                  "false"})
+    public void validationBlankCustomValidity_Reset() throws Exception {
+        validation("<button id='b1' type='reset'>b1</button>\n", "elem.setCustomValidity(' ');\n");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationResetCustomValidity() throws Exception {
+        validation("<button id='b1'>b1</button>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationResetCustomValidity_Submit() throws Exception {
+        validation("<button id='b1' type='submit'>b1</button>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationResetCustomValidity_Reset() throws Exception {
+        validation("<button id='b1' type='reset'>b1</button>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequired() throws Exception {
+        validation("<button id='b1' required>b1</button>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequired_Submit() throws Exception {
+        validation("<button id='b1' type='submit' required>b1</button>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "false"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "false"})
+    public void validationRequired_Reset() throws Exception {
+        validation("<button id='b1' type='reset' required>b1</button>\n", "");
+    }
+
+    private void validation(final String htmlPart, final String jsPart) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function logValidityState(s) {\n"
+                + "      log(s.badInput"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
+                + "    }\n"
+                + "    function test() {\n"
+                + "      var elem = document.getElementById('b1');\n"
+                + jsPart
+                + "      log(elem.checkValidity());\n"
+                + "      logValidityState(elem.validity);\n"
+                + "      log(elem.willValidate);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "  <form>\n"
+                + htmlPart
+                + "  </form>\n"
+                + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

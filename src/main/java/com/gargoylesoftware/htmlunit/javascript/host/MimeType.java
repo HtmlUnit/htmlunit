@@ -19,7 +19,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -34,7 +34,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
  * @see <a href="http://www.xulplanet.com/references/objref/MimeType.html">XUL Planet</a>
  */
 @JsxClass
-public class MimeType extends SimpleScriptable {
+public class MimeType extends HtmlUnitScriptable {
 
     private String description_;
     private String suffixes_;
