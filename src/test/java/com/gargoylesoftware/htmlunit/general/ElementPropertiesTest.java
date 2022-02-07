@@ -1046,7 +1046,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestIdleCallback(),resizeBy(),resizeTo(),scheduler,screen,screenLeft,screenTop,screenX,"
                 + "screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),showDirectoryPicker(),showOpenFilePicker(),showSaveFilePicker(),"
-                + "sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,TEMPORARY,test(),toolbar,top,"
+                + "sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),"
+                + "styleMedia,TEMPORARY,test(),toolbar,top,"
                 + "trustedTypes,visualViewport,webkitCancelAnimationFrame(),webkitRequestAnimationFrame(),"
                 + "webkitRequestFileSystem(),webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
@@ -1080,7 +1081,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestIdleCallback(),resizeBy(),resizeTo(),scheduler,screen,screenLeft,screenTop,screenX,"
                 + "screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),showDirectoryPicker(),showOpenFilePicker(),showSaveFilePicker(),"
-                + "sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,TEMPORARY,test(),toolbar,top,"
+                + "sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),"
+                + "styleMedia,TEMPORARY,test(),toolbar,top,"
                 + "trustedTypes,visualViewport,webkitCancelAnimationFrame(),webkitRequestAnimationFrame(),"
                 + "webkitRequestFileSystem(),webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
