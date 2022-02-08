@@ -3037,4 +3037,31 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myBody", "newFrameset"})
+    public void setBodyFrameset() throws Exception {
+        final String html = ""
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.body.id);\n"
+
+            + "      var newBody = document.createElement('frameset');\n"
+            + "      newBody.id = 'newFrameset';\n"
+            + "      document.body = newBody;\n"
+            + "      log(document.body.id);\n"
+            + "    } catch(e) {log('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body id='myBody' onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
