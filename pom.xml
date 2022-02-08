@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>2.58.0</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.44.v20210927</jetty.version>
+        <jetty.version>9.4.45.v20220203</jetty.version>
         <log4j.version>2.17.1</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
