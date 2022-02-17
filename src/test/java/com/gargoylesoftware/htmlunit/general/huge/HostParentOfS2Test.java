@@ -890,9 +890,9 @@ public class HostParentOfS2Test extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            EDGE = "false")
+    @Alerts(DEFAULT = "false",
+            FF_ESR = "true",
+            IE = "true")
     public void _SVGPathSegList_SVGPathSegList() throws Exception {
         test("SVGPathSegList", "SVGPathSegList");
     }

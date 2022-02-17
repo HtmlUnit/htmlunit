@@ -2797,6 +2797,12 @@ public final class StyleAttributes {
         /** The style property {@code prefix}. */
         PREFIX("prefix", "prefix", chromeAndEdge("")),
 
+        /** The style property {@code printColorAdjust}. */
+        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ffLatest("economy")),
+
+        /** The style property {@code printColorAdjust}. */
+        PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ffLatest("economy")),
+
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("auto")),
 
@@ -3036,7 +3042,10 @@ public final class StyleAttributes {
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
         /** The style property {@code scrollbarGutter}. */
-        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto"), ffLatest("auto")),
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbar-gutter", chromeAndEdge("auto"), ffLatest("auto")),
+
+        /** The style property {@code scrollbar-gutter}. */
+        SCROLLBAR_GUTTER_("scrollbar-gutter", "scrollbar-gutter", ffLatest("auto")),
 
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),
