@@ -251,6 +251,7 @@ cssText
 cursor
 cx
 cy
+d
 direction
 display
 dominantBaseline
@@ -419,6 +420,7 @@ placeItems
 placeSelf
 pointerEvents
 position
+printColorAdjust
 quotes
 r
 resize
@@ -456,6 +458,7 @@ scrollPaddingTop
 scrollSnapAlign
 scrollSnapType
 scrollbarColor
+scrollbarGutter
 scrollbarWidth
 shapeImageThreshold
 shapeMargin

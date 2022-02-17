@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Bugfixes">
+        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
             <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.45.v20220203.
             </action>
@@ -48,7 +48,7 @@
             <action type="fix" dev="RhinoTeam">
                 core-js: RegEx handles {0} quantifier with max of zero correctly.
             </action>
-            <action type="add" dev="rbri">
+            <action type="add" dev="rbri" issue="423">
                 core-js: Date ctor now respects the timezone.
             </action>
             <action type="add" dev="RhinoTeam">

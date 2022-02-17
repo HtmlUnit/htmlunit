@@ -2689,7 +2689,6 @@ public class Window2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
-
     /**
      * @throws Exception if the test fails
      */
@@ -2703,6 +2702,27 @@ public class Window2Test extends WebDriverTestCase {
                 + "    window.__defineSetter__('foo', function(a) { document.title = a; });\n"
                 + "    window.foo = 'world';\n"
                 + "    log(document.title);\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("1")
+    public void userDefinedProperty() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    window.count = 0;\n"
+                + "    window.count++;\n"
+                + "    log(window.count);\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body>\n"

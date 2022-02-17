@@ -975,7 +975,7 @@ public final class StyleAttributes {
         CY("cy", "cy", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code d}. */
-        D("d", "d", chromeAndEdge("none")),
+        D("d", "d", chromeAndEdge("none"), ffLatest("none")),
 
         /** The style property {@code descentOverride}. */
         DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdge("")),
@@ -3036,7 +3036,7 @@ public final class StyleAttributes {
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
         /** The style property {@code scrollbarGutter}. */
-        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto")),
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto"), ffLatest("auto")),
 
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),
