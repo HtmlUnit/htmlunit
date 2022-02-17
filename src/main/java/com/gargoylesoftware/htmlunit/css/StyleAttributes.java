@@ -2800,7 +2800,7 @@ public final class StyleAttributes {
         /** The style property {@code printColorAdjust}. */
         PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ffLatest("economy")),
 
-        /** The style property {@code printColorAdjust}. */
+        /** The style property {@code print-color-adjust}. */
         PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ffLatest("economy")),
 
         /** The style property {@code quotes}. */
