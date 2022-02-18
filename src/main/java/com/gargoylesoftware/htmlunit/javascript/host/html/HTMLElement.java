@@ -152,6 +152,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @JsxClass(domClass = HtmlAbbreviated.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlAcronym.class, value = {CHROME, EDGE, FF, FF_ESR})
@@ -1663,6 +1664,41 @@ public class HTMLElement extends Element {
      */
     protected boolean isLowerCaseInOuterHtml() {
         return false;
+    }
+
+    /**
+     * The <tt>toggleAttribute()</tt> method of the Element interface toggles a
+     * Boolean attribute (removing it if it is present and adding it if it is not
+     * present) on the given element. If <tt>force</tt> is <tt>true</tt>, adds
+     * boolean attribute with <tt>name</tt>. If <tt>force</tt> is <tt>false</tt>,
+     * removes attribute with <tt>name</tt>.
+     * 
+     * @param name
+     * @param force
+     * @return true if name is now present; otherwise false
+     * @see <a href=
+     *      "https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute">Element.toggleAttribute()</a>
+     */
+    @JsxFunction({ CHROME, EDGE, FF, FF_ESR })
+    public boolean toggleAttribute(String name, String force) {
+        if ("undefined".equals(force)) {
+            if (hasAttribute(name)) {
+                removeAttribute(name);
+                return false;
+            }
+            else {
+                setAttribute(name, "");
+                return true;
+            }
+        }
+        if (Boolean.valueOf(force)) {
+            setAttribute(name, "");
+            return true;
+        }
+        else {
+            removeAttribute(name);
+            return false;
+        }
     }
 
     /**

@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * @author Ethan Glasser-Camp
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @RunWith(BrowserRunner.class)
 public class HTMLElementTest extends WebDriverTestCase {
@@ -5329,6 +5330,49 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  <input id='input3' enterkeyhint='run'>\n"
             + "  <input id='input4' enterkeyhint=undefined>\n"
             + "  <input id='input5' enterkeyhint=null>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "true", "true", "true", "false", "false"})
+    @NotYetImplemented(value = IE)
+    public void toggleAttribute() throws Exception {
+        final String html =
+            "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var d0 = document.getElementById('div0');"
+            + "    d0.toggleAttribute('hidden');"
+            + "    log(d0.hidden);\n"
+            + "    var d1 = document.getElementById('div1');"
+            + "    d1.toggleAttribute('hidden');"
+            + "    log(d1.hidden);\n"
+            + "    var d2 = document.getElementById('div2');"
+            + "    d2.toggleAttribute('hidden', true);"
+            + "    log(d2.hidden);\n"
+            + "    var d3 = document.getElementById('div3');"
+            + "    d3.toggleAttribute('hidden', true);"
+            + "    log(d3.hidden);\n"
+            + "    var d4 = document.getElementById('div4');"
+            + "    d4.toggleAttribute('hidden', false);"
+            + "    log(d4.hidden);\n"
+            + "    var d5 = document.getElementById('div5');"
+            + "    d5.toggleAttribute('hidden', false);"
+            + "    log(d5.hidden);\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='div0' hidden />\n"
+            + "  <div id='div1' />\n"
+            + "  <div id='div2' hidden/>\n"
+            + "  <div id='div3' />\n"
+            + "  <div id='div4' hidden />\n"
+            + "  <div id='div5' />\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
