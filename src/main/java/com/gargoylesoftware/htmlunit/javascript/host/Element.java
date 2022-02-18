@@ -89,6 +89,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @JsxClass(domClass = DomElement.class)
 public class Element extends Node {
@@ -2076,6 +2077,41 @@ public class Element extends Node {
             throw ScriptRuntime.constructError("SyntaxError",
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
+        }
+    }
+
+    /**
+     * The <tt>toggleAttribute()</tt> method of the Element interface toggles a
+     * Boolean attribute (removing it if it is present and adding it if it is not
+     * present) on the given element. If <tt>force</tt> is <tt>true</tt>, adds
+     * boolean attribute with <tt>name</tt>. If <tt>force</tt> is <tt>false</tt>,
+     * removes attribute with <tt>name</tt>.
+     *
+     * @param name
+     * @param force
+     * @return true if name is now present; otherwise false
+     * @see <a href=
+     *      "https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute">Element.toggleAttribute()</a>
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public boolean toggleAttribute(final String name, final String force) {
+        if ("undefined".equals(force)) {
+            if (hasAttribute(name)) {
+                removeAttribute(name);
+                return false;
+            }
+            else {
+                setAttribute(name, "");
+                return true;
+            }
+        }
+        if (Boolean.valueOf(force)) {
+            setAttribute(name, "");
+            return true;
+        }
+        else {
+            removeAttribute(name);
+            return false;
         }
     }
 }
