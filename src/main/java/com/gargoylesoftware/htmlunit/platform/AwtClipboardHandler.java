@@ -15,18 +15,21 @@
 package com.gargoylesoftware.htmlunit.platform;
 
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 
+import com.gargoylesoftware.htmlunit.ClipboardHandler;
+
 /**
- * Abstraction to be able to support android and maybe others.
+ * {@link ClipboardHandler} using the {@link Clipboard}.
  *
  * @author Ronald Brill
  */
-public class AwtClipboard implements ClipboardAccess {
+public class AwtClipboardHandler implements ClipboardHandler {
 
     /**
      * {@inheritDoc}

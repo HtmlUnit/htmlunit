@@ -12,27 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.platform;
+package com.gargoylesoftware.htmlunit;
+
+import java.io.Serializable;
 
 /**
- * Abstraction to be able to support android and maybe others.
+ * A handler for system clipboard access.
  *
  * @author Ronald Brill
  */
-public class NoOpClipboard implements ClipboardAccess {
+public interface ClipboardHandler extends Serializable {
 
     /**
-     * {@inheritDoc}
+     * @return the current content of the clipboard
      */
-    @Override
-    public String getClipboardContent() {
-        return "";
-    }
+    String getClipboardContent();
 
     /**
-     * {@inheritDoc}
+     * Writes the sting to the system clipboard.
+     * @param string the content to be stored in the clipboard
      */
-    @Override
-    public void setClipboardContent(final String string) {
-    }
+    void setClipboardContent(String string);
 }

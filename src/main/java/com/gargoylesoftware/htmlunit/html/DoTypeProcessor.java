@@ -36,8 +36,8 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.ClipboardHandler;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
-import com.gargoylesoftware.htmlunit.platform.ClipboardAccessImpl;
 
 /**
  * The processor for {@link HtmlElement#doType(char, boolean)}
@@ -96,20 +96,29 @@ class DoTypeProcessor implements Serializable {
         else if (acceptChar(c)) {
             final boolean ctrlKey = element.isCtrlPressed();
             if (ctrlKey && (c == 'C' || c == 'c')) {
-                final String content = newValue.substring(selectionStart, selectionEnd);
-                ClipboardAccessImpl.setClipboardContent(content);
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = newValue.substring(selectionStart, selectionEnd);
+                    clipboardHandler.setClipboardContent(content);
+                }
             }
             else if (ctrlKey && (c == 'V' || c == 'v')) {
-                final String content = ClipboardAccessImpl.getClipboardContent();
-                add(newValue, content, selectionStart, selectionEnd);
-                selectionStart += content.length();
-                selectionEnd = selectionStart;
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = clipboardHandler.getClipboardContent();
+                    add(newValue, content, selectionStart, selectionEnd);
+                    selectionStart += content.length();
+                    selectionEnd = selectionStart;
+                }
             }
             else if (ctrlKey && (c == 'X' || c == 'x')) {
-                final String content = newValue.substring(selectionStart, selectionEnd);
-                ClipboardAccessImpl.setClipboardContent(content);
-                newValue.delete(selectionStart, selectionEnd);
-                selectionEnd = selectionStart;
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = newValue.substring(selectionStart, selectionEnd);
+                    clipboardHandler.setClipboardContent(content);
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
+                }
             }
             else if (ctrlKey && (c == 'A' || c == 'a')) {
                 selectionStart = 0;

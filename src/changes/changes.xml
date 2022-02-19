@@ -9,7 +9,8 @@
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
             <action type="add" dev="rbri">
-                Fall back to a noop clipboard on android.
+                Introducing a ClipboardHandler configurable at the WebClient. If you need clipboard support
+                for entry fields set this to an AwtClipboardHandler.
             </action>
             <action type="add" dev="rbri" due-to="Anton Demydenko">
                 Element.toggleAttribute() added.

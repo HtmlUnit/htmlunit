@@ -180,9 +180,11 @@ public class WebClient implements Serializable, AutoCloseable {
     private PromptHandler promptHandler_;
     private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
+    private ClipboardHandler clipboardHandler_;
     private WebStartHandler webStartHandler_;
     private FrameContentHandler frameContentHandler_;
     private AppletConfirmHandler appletConfirmHandler_;
+
     private AjaxController ajaxController_ = new AjaxController();
 
     private final BrowserVersion browserVersion_;
@@ -1990,6 +1992,22 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public WebStartHandler getWebStartHandler() {
         return webStartHandler_;
+    }
+
+    /**
+     * Sets the clipboard handler.
+     * @param handler the new clipboard handler
+     */
+    public void setClipboardHandler(final ClipboardHandler handler) {
+        clipboardHandler_ = handler;
+    }
+
+    /**
+     * Returns the current clipboard handler.
+     * @return the current clipboard handler
+     */
+    public ClipboardHandler getClipboardHandler() {
+        return clipboardHandler_;
     }
 
     /**
