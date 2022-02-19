@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.platform;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.awt.GraphicsEnvironment;
 
 import org.junit.Test;
 
@@ -32,7 +35,9 @@ public class ClipboardAccessTest {
     public void awtClipboard() throws Exception {
         final String content = "HtmlUnit";
 
+        assertTrue(GraphicsEnvironment.isHeadless());
+
         ClipboardAccessImpl.setClipboardContent(content);
-        assertEquals(content, ClipboardAccessImpl.getClipboardContent());
+        assertEquals("", ClipboardAccessImpl.getClipboardContent());
     }
 }

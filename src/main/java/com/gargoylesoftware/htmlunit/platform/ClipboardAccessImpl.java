@@ -38,6 +38,12 @@ public final class ClipboardAccessImpl {
             try {
                 final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.platform.AwtClipboard");
                 ClipboardAccess_ = (ClipboardAccess) ConstructorUtils.invokeConstructor(clazz);
+
+                // the class might be available bot in headless environments the clipboard
+                // is not usable - let as make a check
+                ClipboardAccess_.getClipboardContent();
+
+                // clipboard is ready
                 return ClipboardAccess_;
             }
             catch (final Throwable e) {

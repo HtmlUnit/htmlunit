@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="add" dev="rbri">
+                Fall back to a noop clipboard on android.
+            </action>
             <action type="add" dev="rbri" due-to="Anton Demydenko">
                 Element.toggleAttribute() added.
             </action>
