@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="fix" dev="rbri">
+                FileReader readAsArrayBuffer() and readAsText() are working for blobs also.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade commons-codec to 1.15.
             </action>
