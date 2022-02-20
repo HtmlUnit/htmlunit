@@ -61,7 +61,7 @@ public class PolyfillTest extends SimpleWebTestCase {
     public void fetchPolyfillDisabled() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
-            + "function test() {\n"
+            + "  function test() {\n"
             + "    alert(typeof fetch == 'function');\n"
             + "  }\n"
             + "</script>\n"
