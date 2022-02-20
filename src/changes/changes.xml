@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade commons-codec to 1.15.
+            </action>
             <action type="add" dev="rbri">
                 Introducing a ClipboardHandler configurable at the WebClient. If you need clipboard support
                 for entry fields set this to an AwtClipboardHandler.

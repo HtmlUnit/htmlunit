@@ -38,7 +38,7 @@
         <checkstyle.version>9.3</checkstyle.version>
         <spotbugs.version>4.5.3</spotbugs.version>
         <pmd.version>6.42.0</pmd.version>
-        <archunit.version>0.22.0</archunit.version>
+        <archunit.version>0.23.0</archunit.version>
         <dependencycheck.version>6.5.3</dependencycheck.version>
     </properties>
 
@@ -1200,7 +1200,14 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpmime</artifactId>
             <version>${httpcomponents.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-codec</groupId>
+                    <artifactId>commons-codec</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-core-js</artifactId>
@@ -1250,7 +1257,7 @@
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
-            <version>1.11</version>
+            <version>1.15</version>
         </dependency>
         <dependency>
             <groupId>org.brotli</groupId>
