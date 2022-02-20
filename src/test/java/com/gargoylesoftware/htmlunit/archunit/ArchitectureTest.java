@@ -71,6 +71,7 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName(
                     "com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
             .and().doNotHaveFullyQualifiedName("com.gargoylesoftware.htmlunit.html.applets.AppletContextImpl")
+            .and().resideOutsideOfPackage("com.gargoylesoftware.htmlunit.platform..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
