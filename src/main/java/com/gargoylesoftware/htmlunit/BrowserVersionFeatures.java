@@ -652,6 +652,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ANCHOR_PROTOCOL_INVALID_THROWS,
 
+    /**
+     * Javascript fetch api is supported.
+     */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_API_FETCH,
+
     /** An area element without a href attribute is focusable. */
     @BrowserFeature({FF, FF_ESR})
     JS_AREA_WITHOUT_HREF_FOCUSABLE,

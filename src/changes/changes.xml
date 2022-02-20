@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="add" dev="rbri">
+                New web client option setFetchPolyfillEnabled() to automatically load a polyfill for the
+                fetch api into the client.
+            </action>
             <action type="fix" dev="rbri">
                 FileReader readAsArrayBuffer() and readAsText() are working for blobs also.
             </action>
