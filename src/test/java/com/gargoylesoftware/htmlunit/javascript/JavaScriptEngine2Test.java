@@ -1037,4 +1037,30 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1 ready", "2 ready", "3 ready", "4 ready",
+        "5 ready", "6 ready", "7 ready", "8 ready", "9 ready", "10 ready"})
+    public void ensureOrder() throws Exception {
+        final String html = "<html><body>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function timeoutFunction(nr) {\n"
+            + "    return function () {\n"
+            + "      log(nr + ' ready');\n"
+            + "    }\n"
+            + "  }\n"
+
+            + "  for (let i = 1; i <= 10; i++) {\n"
+            + "    setTimeout(timeoutFunction(i));\n"
+            + "  }\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        Thread.sleep(DEFAULT_WAIT_TIME);
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }

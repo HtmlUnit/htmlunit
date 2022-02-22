@@ -136,7 +136,13 @@ public abstract class BasicJavaScriptJob implements JavaScriptJob {
             return 1;
         }
 
-        return (int) (targetExecutionTime_ - other.getTargetExecutionTime());
+        final long span = targetExecutionTime_ - other.getTargetExecutionTime();
+
+        if (span == 0L) {
+            return id_ - other.getId();
+        }
+
+        return (int) span;
     }
 
     /**
