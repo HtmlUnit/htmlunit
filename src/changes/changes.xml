@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: regex sticky support împlemented.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: improved error msg about unsupported regex flags.
+            </action>
             <action type="fix" dev="rbri" issue="369">
                 Jobs sheduled with the same targetExecutionTime are now processed in sheduling order.
             </action>
