@@ -43,6 +43,10 @@ public class Polyfill {
         return getPolyfill("fetch/fetch.umd.js");
     }
 
+    public static Polyfill getProxyPolyfill() throws IOException {
+        return getPolyfill("proxy/es6-proxy-polyfill.js");
+    }
+
     private static Polyfill getPolyfill(final String resouceName) throws IOException {
         Polyfill poly = CACHE.get(resouceName);
         if (poly != null) {

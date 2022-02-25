@@ -658,6 +658,12 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_API_FETCH,
 
+    /**
+     * Javascript proxy api is supported.
+     */
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    JS_API_PROXY,
+
     /** An area element without a href attribute is focusable. */
     @BrowserFeature({FF, FF_ESR})
     JS_AREA_WITHOUT_HREF_FOCUSABLE,

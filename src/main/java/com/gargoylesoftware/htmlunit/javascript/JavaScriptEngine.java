@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_FETCH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_PROXY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
@@ -544,6 +545,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (webClient.getOptions().isFetchPolyfillEnabled() && browserVersion.hasFeature(JS_API_FETCH)) {
             Polyfill.getFetchPolyfill().apply(context, scriptable);
+        }
+
+        if (webClient.getOptions().isProxyPolyfillEnabled() && browserVersion.hasFeature(JS_API_PROXY)) {
+            Polyfill.getProxyPolyfill().apply(context, scriptable);
         }
     }
 

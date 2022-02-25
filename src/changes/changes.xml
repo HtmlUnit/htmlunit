@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="add" dev="rbri">
+                New web client option setProxyPolyfillEnabled() to automatically load a polyfill for the
+                proxy api into the client.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: regex sticky support împlemented.
             </action>
