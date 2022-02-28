@@ -31,14 +31,14 @@
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.45.v20220203</jetty.version>
-        <log4j.version>2.17.1</log4j.version>
+        <log4j.version>2.17.2</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
-        <checkstyle.version>9.3</checkstyle.version>
+        <checkstyle.version>10.0</checkstyle.version>
         <spotbugs.version>4.5.3</spotbugs.version>
-        <pmd.version>6.42.0</pmd.version>
-        <archunit.version>0.23.0</archunit.version>
+        <pmd.version>6.43.0</pmd.version>
+        <archunit.version>0.23.1</archunit.version>
         <dependencycheck.version>6.5.3</dependencycheck.version>
     </properties>
 
@@ -706,7 +706,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
