@@ -31,6 +31,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -1092,11 +1093,10 @@ public final class EncodingSniffer {
      */
     static byte[] read(final InputStream content, final int size) throws IOException {
         byte[] bytes = new byte[size];
-        final int count = content.read(bytes);
-        if (count == -1) {
-            bytes = new byte[0];
-        }
-        else if (count < size) {
+        // using IOUtils guarantees that it will read as many bytes as possible before giving up;
+        // this may not always be the case for subclasses of InputStream} - eg. GZIPInputStream
+        final int count = IOUtils.read(content, bytes);
+        if (count < size) {
             final byte[] smaller = new byte[count];
             System.arraycopy(bytes, 0, smaller, 0, count);
             bytes = smaller;
@@ -1117,10 +1117,20 @@ public final class EncodingSniffer {
      * @throws IOException if an IO error occurs
      */
     static byte[] readAndPrepend(final InputStream content, final int size, final byte[] prefix) throws IOException {
-        final byte[] bytes = read(content, size);
-        final byte[] joined = new byte[prefix.length + bytes.length];
+        final int prefixLength = prefix.length;
+        final byte[] joined = new byte[prefixLength + size];
+
+        // using IOUtils guarantees that it will read as many bytes as possible before giving up;
+        // this may not always be the case for subclasses of InputStream} - eg. GZIPInputStream
+        final int count = IOUtils.read(content, joined, prefixLength, joined.length - prefixLength);
+        if (count < size) {
+            final byte[] smaller = new byte[prefixLength + count];
+            System.arraycopy(prefix, 0, joined, 0, prefix.length);
+            System.arraycopy(joined, 0, smaller, prefixLength, count);
+            return smaller;
+        }
+
         System.arraycopy(prefix, 0, joined, 0, prefix.length);
-        System.arraycopy(bytes, 0, joined, prefix.length, bytes.length);
         return joined;
     }
 
