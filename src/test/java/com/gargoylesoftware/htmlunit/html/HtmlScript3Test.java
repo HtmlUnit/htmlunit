@@ -281,6 +281,7 @@ public class HtmlScript3Test extends WebDriverTestCase {
     public void _ISO88591_____false() throws Exception {
         charset(TestCharset.ISO88591, null, null, null, null, false);
     }
+
     /**
      * @throws Exception if the test fails
      */
