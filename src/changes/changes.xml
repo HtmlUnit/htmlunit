@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+            <action type="add" dev="rbri" issue="450">
+                Handle bom header also for gzip'ed responses.
+            </action>
             <action type="add" dev="rbri">
                 New web client option setProxyPolyfillEnabled() to automatically load a polyfill for the
                 proxy api into the client.

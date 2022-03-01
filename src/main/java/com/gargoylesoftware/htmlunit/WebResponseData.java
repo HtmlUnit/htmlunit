@@ -123,6 +123,9 @@ public class WebResponseData implements Serializable {
                                  + "</body>\n"
                                  + "</html>", ISO_8859_1);
                 }
+                if (stream != null && bomHeaders != null) {
+                    stream = new BOMInputStream(stream, bomHeaders);
+                }
                 return stream;
             }
 
