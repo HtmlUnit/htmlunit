@@ -93,7 +93,7 @@
         </release>
 
 
-        <release version="2.57.0" date="Januar 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
+        <release version="2.57.0" date="January 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
             <action type="add" dev="rbri">
                 Quota simulation added to localStorage.
             </action>
