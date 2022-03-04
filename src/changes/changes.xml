@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Bugfixes">
+        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
+            <action type="update" dev="rbri">
+                Polyfill support documented.
+            </action>
             <action type="update" dev="rbri">
                 Dedicated documentation of the WebClient/WebClientOptions and some more documentation updates.
             </action>

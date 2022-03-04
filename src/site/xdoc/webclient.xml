@@ -164,5 +164,40 @@ public void homePage_Firefox() throws Exception {
 
         </section>
 
+        <section name="Polyfills">
+            <p>
+                The number of javascript API's supported by the browsers seems to increase every day. Because of the limited development resources
+                of the HtmlUnit projcet, being on track with this is really hard.<br/>
+                But there are alrady many polyfills available (to add API support for older borwsers). The idea is to use some of these polyfills
+                to add the missing API's.<br/>
+                Starting with version 2.59.0 HtmlUnit supports the integration of polyfills; there is a dedicated option for every supported
+                polyfill (disabled per default) and if enabled, the polifyll is automatically loaded.
+            </p>
+            <source><![CDATA[
+@Test
+public void fetchSupport() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+         // enable fetch api polyfill
+         webClient.getOptions().setFetchPolyfillEnabled(true);
+
+        final HtmlPage page = webClient.getPage(....);
+    }
+}]]></source>
+
+            <subsection name="Fetch API Polyfill">
+                <p>
+                    <a href="https://github.com/github/fetch">window.fetch polyfill</a>
+                </p>
+                <source><![CDATA[webClient.getOptions().setFetchPolyfillEnabled(true);]]></source>
+            </subsection>
+
+            <subsection name="Proxy Polyfill">
+                <p>
+                    <a href="https://github.com/ambit-tsai/es6-proxy-polyfill">ambit-tsai/es6-proxy-polyfill</a>
+                </p>
+                <source><![CDATA[webClient.getOptions().setProxyPolyfillEnabled(true);]]></source>
+            </subsection>
+
+        </section>
     </body>
 </document>
