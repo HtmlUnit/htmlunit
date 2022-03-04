@@ -346,6 +346,11 @@ public class ExternalTest {
             return true;
         }
 
+        // version 10 requires JDK 11
+        if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
+            return true;
+        }
+
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
