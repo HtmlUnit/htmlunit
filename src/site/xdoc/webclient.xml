@@ -60,8 +60,26 @@ public void homePage_Firefox() throws Exception {
     }
 }]]></source>
             <p>
+                The default values for most options are similar to the default values
+                of real browsers - but (as always) there is one important exception:<br/>
+                HtmlUnit stops the Javascript execution at the first unhandled exception -
+                Browsers do not stop. You can change this by changing the throwExceptionOnScriptError
+                option to false.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_Firefox() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+         // procced with the js execution on unhandled js errors
+         webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
                 For a complete list and more details please have a look at the 
-            <a href="apidocs//com/gargoylesoftware/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
+                <a href="apidocs//com/gargoylesoftware/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
             </p>
         </section>
 

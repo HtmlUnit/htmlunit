@@ -15,8 +15,13 @@
             </p>
             <p>
                 The class com.gargoylesoftware.htmlunit.WebClient is the
-                main starting point.  This simulates a web browser and will be used to execute
-                all of the tests.
+                main starting point. This simulates a web browser and will be used to execute
+                all of the tests. (see <a href="webclient.html">WebClient - the browser</a>)
+            </p>
+            <p><strong>Android</strong><br/>
+                Using HtmlUnit on Android has some challanges because of the subtle technical distinction
+                of java on android. Because of this we offer a customized distribution to work around these problem.
+                Please check out <a href="https://github.com/HtmlUnit/htmlunit-android" target="_blank">htmlunit-android</a> on github.
             </p>
             <p>
                 Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
