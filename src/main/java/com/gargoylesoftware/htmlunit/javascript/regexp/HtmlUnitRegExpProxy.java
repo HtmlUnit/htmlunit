@@ -78,6 +78,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
         try {
             return doAction(cx, scope, thisObj, args, actionType);
         }
+        catch (final RegExStickyNotSupportedException e) {
+            LOG.warn(e.getMessage(), e);
+            return wrapped_.action(cx, scope, thisObj, args, actionType);
+        }
         catch (final StackOverflowError e) {
             // TODO: We shouldn't have to catch this exception and fall back to Rhino's regex support!
             // See HtmlUnitRegExpProxyTest.stackOverflow()
@@ -420,6 +424,10 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             final String jsSource = StringUtils.substringBeforeLast(str.substring(1), "/");
             final String jsFlags = StringUtils.substringAfterLast(str, "/");
 
+            if (jsFlags.indexOf('y') != -1) {
+                throw new RegExStickyNotSupportedException(str);
+            }
+
             global_ = jsFlags.indexOf('g') != -1;
 
             pattern_ = PATTENS.get(str);
@@ -527,4 +535,12 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             return 0;
         }
     }
+
+    // a bit of a hack but sufficent for the moment
+    private static class RegExStickyNotSupportedException extends IllegalArgumentException {
+        RegExStickyNotSupportedException(final String regex) {
+            super("RegEx sticky flag is not supported (" + regex + ") by HtmlUnitRegExProxy");
+        }
+    }
+
 }

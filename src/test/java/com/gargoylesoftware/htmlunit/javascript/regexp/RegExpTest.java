@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for the RegEx support.
@@ -377,6 +378,7 @@ public class RegExpTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "a", "a"},
             IE = {})
+    @HtmlUnitNYI(IE = {"2", "a", "a"})
     public void stickyAndGlobal() throws Exception {
         final String script =
                 "var result = 'aaba'.match(/a/yg);\n"
@@ -389,17 +391,68 @@ public class RegExpTest extends WebDriverTestCase {
     /**
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
             IE = {})
-    public void flagsPropery() throws Exception {
+    @NotYetImplemented
+    public void flagsProperty() throws Exception {
+        testProperty("flags");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
+            IE = {})
+    @NotYetImplemented
+    public void globalProperty() throws Exception {
+        testProperty("global");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
+            IE = {})
+    @NotYetImplemented
+    public void ignoreCaseProperty() throws Exception {
+        testProperty("ignoreCase");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
+            IE = {})
+    @NotYetImplemented
+    public void multilineProperty() throws Exception {
+        testProperty("multiline");
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "true", "false", "undefined"},
+            IE = {})
+    @NotYetImplemented
+    public void stickyProperty() throws Exception {
+        testProperty("sticky");
+    }
+
+    private void testProperty(final String property) throws Exception {
         final String script =
-                "var get = Object.getOwnPropertyDescriptor(RegExp.prototype, 'flags');\n"
+                "var get = Object.getOwnPropertyDescriptor(RegExp.prototype, '" + property + "');\n"
                 + "log(get.get.length);\n"
                 + "log(get.value);\n"
                 + "log(get.configurable);\n"
                 + "log(get.enumerable);\n"
                 + "log(get.writable);\n";
+
         testEvaluate(script);
     }
 
