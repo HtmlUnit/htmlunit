@@ -116,13 +116,16 @@
                         <a href="gettingStarted.html">Getting Started</a>
                     </li>
                     <li>
+                        <a href="webclient.html">WebClient - the browser</a>
+                    </li>
+                    <li>
                         <a href="table-howto.html">Tables</a>
                     </li>
                     <li>
                         <a href="logging.html">Logging</a>
                     </li>
                     <li>
-                        <a href="window-howto.html">Windows and frames</a>
+                        <a href="window-frame.html">Windows and Frames</a>
                     </li>
                     <li>
                         <a href="keyboard-howto.html">Keyboard navigation</a>

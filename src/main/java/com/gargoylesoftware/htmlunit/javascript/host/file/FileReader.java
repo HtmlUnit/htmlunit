@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.file;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER_CONTENT_TYPE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FILEREADER_EMPTY_NULL;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -28,7 +27,6 @@ import java.util.Locale;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.Charsets;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -170,11 +168,9 @@ public class FileReader extends EventTarget {
     @JsxFunction
     public void readAsArrayBuffer(final Object object) throws IOException {
         readyState_ = LOADING;
-        final java.io.File file = ((File) object).getFile();
-        try (ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
-            FileUtils.copyFile(file, bos);
 
-            final byte[] bytes = bos.toByteArray();
+        if (object instanceof Blob) {
+            final byte[] bytes = ((Blob) object).getBytes();
 
             final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
             System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
@@ -183,6 +179,7 @@ public class FileReader extends EventTarget {
 
             result_ = buffer;
         }
+
         readyState_ = DONE;
 
         final Event event = new Event(this, Event.TYPE_LOAD);
@@ -201,7 +198,7 @@ public class FileReader extends EventTarget {
     @JsxFunction
     public void readAsText(final Object object, final Object encoding) throws IOException {
         readyState_ = LOADING;
-        final java.io.File file = ((File) object).getFile();
+
         Charset charset = StandardCharsets.UTF_8;
         if (encoding != null && !Undefined.isUndefined(encoding)) {
             final String encAsString = Context.toString(encoding);
@@ -218,12 +215,10 @@ public class FileReader extends EventTarget {
             }
         }
 
-        try {
-            result_ = FileUtils.readFileToString(file, charset);
+        if (object instanceof Blob) {
+            result_ = new String(((Blob) object).getBytes(), charset);
         }
-        catch (final IOException e) {
-            LOG.warn("FileReader readAsText can't read the file.", e);
-        }
+
         readyState_ = DONE;
 
         final Event event = new Event(this, Event.TYPE_LOAD);

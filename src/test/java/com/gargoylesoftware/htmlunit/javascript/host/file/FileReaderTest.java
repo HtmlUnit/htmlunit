@@ -771,4 +771,63 @@ public class FileReaderTest extends WebDriverTestCase {
             FileUtils.deleteQuietly(tstFile);
         }
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("HtmlUnit")
+    public void readAsText_blob() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var blob = new Blob(['HtmlUnit'], {type : 'text/html'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        log(reader.result);\n"
+            + "      };\n"
+            + "      reader.readAsText(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "<head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"[object ArrayBuffer]", "8"})
+    public void readAsArrayBuffer_blob() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var blob = new Blob(['HtmlUnit'], {type : 'text/html'});\n"
+            + "      var reader = new FileReader();\n"
+            + "      reader.onload = function() {\n"
+            + "        log(reader.result);\n"
+            + "        log(reader.result.byteLength);\n"
+            + "      };\n"
+            + "      reader.readAsArrayBuffer(blob);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

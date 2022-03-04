@@ -32,18 +32,11 @@ import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.
 import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SPACE;
 import static com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent.DOM_VK_SUBTRACT;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.ClipboardOwner;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.gargoylesoftware.htmlunit.ClipboardHandler;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 
 /**
@@ -54,7 +47,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
  * @author Ronald Brill
  * @author Ahmed Ashour
  */
-class DoTypeProcessor implements Serializable, ClipboardOwner {
+class DoTypeProcessor implements Serializable {
 
     private static final Map<Integer, Character> SPECIAL_KEYS_MAP_ = new HashMap<>();
 
@@ -103,20 +96,29 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         else if (acceptChar(c)) {
             final boolean ctrlKey = element.isCtrlPressed();
             if (ctrlKey && (c == 'C' || c == 'c')) {
-                final String content = newValue.substring(selectionStart, selectionEnd);
-                setClipboardContent(content);
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = newValue.substring(selectionStart, selectionEnd);
+                    clipboardHandler.setClipboardContent(content);
+                }
             }
             else if (ctrlKey && (c == 'V' || c == 'v')) {
-                final String content = getClipboardContent();
-                add(newValue, content, selectionStart, selectionEnd);
-                selectionStart += content.length();
-                selectionEnd = selectionStart;
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = clipboardHandler.getClipboardContent();
+                    add(newValue, content, selectionStart, selectionEnd);
+                    selectionStart += content.length();
+                    selectionEnd = selectionStart;
+                }
             }
             else if (ctrlKey && (c == 'X' || c == 'x')) {
-                final String content = newValue.substring(selectionStart, selectionEnd);
-                setClipboardContent(content);
-                newValue.delete(selectionStart, selectionEnd);
-                selectionEnd = selectionStart;
+                final ClipboardHandler clipboardHandler = element.getPage().getWebClient().getClipboardHandler();
+                if (clipboardHandler != null) {
+                    final String content = newValue.substring(selectionStart, selectionEnd);
+                    clipboardHandler.setClipboardContent(content);
+                    newValue.delete(selectionStart, selectionEnd);
+                    selectionEnd = selectionStart;
+                }
             }
             else if (ctrlKey && (c == 'A' || c == 'a')) {
                 selectionStart = 0;
@@ -153,26 +155,6 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         else {
             newValue.replace(selectionStart, selectionEnd, string);
         }
-    }
-
-    private static String getClipboardContent() {
-        String result = "";
-        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        final Transferable contents = clipboard.getContents(null);
-        if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
-            try {
-                result = (String) contents.getTransferData(DataFlavor.stringFlavor);
-            }
-            catch (final UnsupportedFlavorException | IOException ex) {
-            }
-        }
-        return result;
-    }
-
-    private void setClipboardContent(final String string) {
-        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        final StringSelection stringSelection = new StringSelection(string);
-        clipboard.setContents(stringSelection, this);
     }
 
     private void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
@@ -277,12 +259,4 @@ class DoTypeProcessor implements Serializable, ClipboardOwner {
         selectionDelegate.setSelectionStart(selectionStart);
         selectionDelegate.setSelectionEnd(selectionEnd);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void lostOwnership(final Clipboard clipboard, final Transferable contents) {
-    }
-
 }

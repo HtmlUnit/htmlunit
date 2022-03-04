@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_FETCH;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_PROXY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
@@ -70,6 +72,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
+import com.gargoylesoftware.htmlunit.javascript.polyfill.Polyfill;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
@@ -455,6 +458,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow, page);
+
+        applyPolyfills(webClient, browserVersion, context, window);
     }
 
     /**
@@ -523,6 +528,27 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (!webClient.getOptions().isWebSocketEnabled()) {
             deleteProperties(scriptable, "WebSocket");
+        }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param webClient the WebClient
+     * @param browserVersion the BrowserVersion
+     * @param context the current context
+     * @param scriptable the window or the DedicatedWorkerGlobalScope
+     * @throws IOException in case of problems
+     */
+    public static void applyPolyfills(final WebClient webClient, final BrowserVersion browserVersion,
+            final Context context, final HtmlUnitScriptable scriptable) throws IOException {
+
+        if (webClient.getOptions().isFetchPolyfillEnabled() && browserVersion.hasFeature(JS_API_FETCH)) {
+            Polyfill.getFetchPolyfill().apply(context, scriptable);
+        }
+
+        if (webClient.getOptions().isProxyPolyfillEnabled() && browserVersion.hasFeature(JS_API_PROXY)) {
+            Polyfill.getProxyPolyfill().apply(context, scriptable);
         }
     }
 

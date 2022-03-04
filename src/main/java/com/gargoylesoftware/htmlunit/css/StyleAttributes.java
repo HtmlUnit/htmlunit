@@ -910,20 +910,20 @@ public final class StyleAttributes {
 
         /** The style property {@code containIntrinsicBlockSize}. */
         CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
-                chromeAndEdge("auto")),
+                chromeAndEdge("none")),
 
         /** The style property {@code containIntrinsicHeight}. */
-        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdge("auto")),
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdge("none")),
 
         /** The style property {@code containIntrinsicInlineSize}. */
         CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
-                chromeAndEdge("auto")),
+                chromeAndEdge("none")),
 
         /** The style property {@code containIntrinsicSize}. */
-        CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdge("auto")),
+        CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdge("none")),
 
         /** The style property {@code containIntrinsicWidth}. */
-        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdge("auto")),
+        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdge("none")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ff("normal")),
@@ -975,7 +975,7 @@ public final class StyleAttributes {
         CY("cy", "cy", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code d}. */
-        D("d", "d", chromeAndEdge("none")),
+        D("d", "d", chromeAndEdge("none"), ffLatest("none")),
 
         /** The style property {@code descentOverride}. */
         DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdge("")),
@@ -2797,6 +2797,12 @@ public final class StyleAttributes {
         /** The style property {@code prefix}. */
         PREFIX("prefix", "prefix", chromeAndEdge("")),
 
+        /** The style property {@code printColorAdjust}. */
+        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ffLatest("economy")),
+
+        /** The style property {@code print-color-adjust}. */
+        PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ffLatest("economy")),
+
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdge("auto")),
 
@@ -3036,7 +3042,10 @@ public final class StyleAttributes {
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
         /** The style property {@code scrollbarGutter}. */
-        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbarGutter", chromeAndEdge("auto")),
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbar-gutter", chromeAndEdge("auto"), ffLatest("auto")),
+
+        /** The style property {@code scrollbar-gutter}. */
+        SCROLLBAR_GUTTER_("scrollbar-gutter", "scrollbar-gutter", ffLatest("auto")),
 
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),

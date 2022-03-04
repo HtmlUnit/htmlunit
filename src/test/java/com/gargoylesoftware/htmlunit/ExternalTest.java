@@ -55,10 +55,10 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "97.0.4692.71";
+    static String CHROME_DRIVER_ = "98.0.4758.102";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "97.0.1072.76";
+    static String EDGE_DRIVER_ = "98.0.1108.62";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -327,6 +327,12 @@ public class ExternalTest {
             return true;
         }
 
+        if ("commons-codec".equals(groupId)
+                && "commons-codec".equals(artifactId)
+                && "20041127.091804".equals(version)) {
+            return true;
+        }
+
         if ("org.seleniumhq.selenium".equals(groupId)
                 && "htmlunit-driver".equals(artifactId)
                 && (version.startsWith("3."))) {
@@ -337,6 +343,11 @@ public class ExternalTest {
         // there is a serious bug
         // https://issues.apache.org/jira/browse/IO-744
         if ("commons-io".equals(artifactId) && (version.startsWith("2.11.0"))) {
+            return true;
+        }
+
+        // version 10 requires JDK 11
+        if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
             return true;
         }
 

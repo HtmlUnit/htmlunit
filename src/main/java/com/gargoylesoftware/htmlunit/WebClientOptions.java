@@ -72,6 +72,9 @@ public class WebClientOptions implements Serializable {
     private int webSocketMaxBinaryMessageSize_ = -1;
     private int webSocketMaxBinaryMessageBufferSize_ = -1;
 
+    private boolean isFetchPolyfillEnabled_;
+    private boolean isProxyPolyfillEnabled_;
+
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
      * whether they have valid certificates or not. This is especially useful when you are trying to
@@ -764,5 +767,35 @@ public class WebClientOptions implements Serializable {
      */
     public void setWebSocketMaxBinaryMessageBufferSize(final int webSocketMaxBinaryMessageBufferSize) {
         webSocketMaxBinaryMessageBufferSize_ = webSocketMaxBinaryMessageBufferSize;
+    }
+
+    /**
+     * Sets whether or not fetch polyfill should be used.
+     * @param enabled true to enable fetch polyfill
+     */
+    public void setFetchPolyfillEnabled(final boolean enabled) {
+        isFetchPolyfillEnabled_ = enabled;
+    }
+
+    /**
+     * @return true if the fetch api polyfill is enabled
+     */
+    public boolean isFetchPolyfillEnabled() {
+        return isFetchPolyfillEnabled_;
+    }
+
+    /**
+     * Sets whether or not proxy polyfill should be used.
+     * @param enabled true to enable proxy polyfill
+     */
+    public void setProxyPolyfillEnabled(final boolean enabled) {
+        isProxyPolyfillEnabled_ = enabled;
+    }
+
+    /**
+     * @return true if the proxy api polyfill is enabled
+     */
+    public boolean isProxyPolyfillEnabled() {
+        return isProxyPolyfillEnabled_;
     }
 }

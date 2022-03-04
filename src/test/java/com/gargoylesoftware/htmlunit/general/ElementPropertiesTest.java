@@ -741,7 +741,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "querySelector(),querySelectorAll(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
-                + "setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -752,7 +753,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "querySelector(),querySelectorAll(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,"
-                + "setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -761,7 +763,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,outerHTML,prefix,"
                 + "querySelector(),querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),"
                 + "removeAttributeNS(),scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),"
-                + "setAttributeNode(),setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
+                + "setAttributeNode(),setAttributeNS(),setCapture(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "attributes,childElementCount,children,classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
                 + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
@@ -770,7 +773,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,outerHTML,prefix,"
                 + "querySelector(),querySelectorAll(),releaseCapture(),removeAttribute(),removeAttributeNode(),"
                 + "removeAttributeNS(),scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),"
-                + "setAttributeNode(),setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
+                + "setAttributeNode(),setAttributeNS(),setCapture(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),lastElementChild,"
@@ -899,7 +903,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceWith(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
-                + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
+                + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             EDGE = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,"
                 + "clientWidth,closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
@@ -910,7 +915,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
                 + "previousElementSibling,remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
                 + "replaceWith(),scrollHeight,scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft,scrollTop,"
-                + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),tagName,webkitMatchesSelector()",
+                + "scrollWidth,setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF_ESR = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
                 + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),"
@@ -920,7 +926,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling,outerHTML,prefix,previousElementSibling,releaseCapture(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,"
                 + "scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
-                + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
+                + "setAttributeNS(),setCapture(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             FF = "after(),attributes,before(),classList,className,clientHeight,clientLeft,clientTop,clientWidth,"
                 + "closest(),getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),"
@@ -930,7 +937,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "nextElementSibling,outerHTML,prefix,previousElementSibling,releaseCapture(),remove(),"
                 + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,"
                 + "scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
-                + "setAttributeNS(),setCapture(),tagName,webkitMatchesSelector()",
+                + "setAttributeNS(),setCapture(),"
+                + "tagName,toggleAttribute(),webkitMatchesSelector()",
             IE = "childElementCount,clientHeight,clientLeft,clientTop,clientWidth,firstElementChild,getAttribute(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),"
                 + "getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
@@ -1046,7 +1054,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestIdleCallback(),resizeBy(),resizeTo(),scheduler,screen,screenLeft,screenTop,screenX,"
                 + "screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),showDirectoryPicker(),showOpenFilePicker(),showSaveFilePicker(),"
-                + "sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,TEMPORARY,test(),toolbar,top,"
+                + "sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),"
+                + "styleMedia,TEMPORARY,test(),toolbar,top,"
                 + "trustedTypes,visualViewport,webkitCancelAnimationFrame(),webkitRequestAnimationFrame(),"
                 + "webkitRequestFileSystem(),webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
@@ -1080,7 +1089,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "requestIdleCallback(),resizeBy(),resizeTo(),scheduler,screen,screenLeft,screenTop,screenX,"
                 + "screenY,scroll(),scrollbars,scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,"
                 + "setInterval(),setTimeout(),showDirectoryPicker(),showOpenFilePicker(),showSaveFilePicker(),"
-                + "sortFunction(),speechSynthesis,status,statusbar,stop(),styleMedia,TEMPORARY,test(),toolbar,top,"
+                + "sortFunction(),speechSynthesis,status,statusbar,stop(),structuredClone(),"
+                + "styleMedia,TEMPORARY,test(),toolbar,top,"
                 + "trustedTypes,visualViewport,webkitCancelAnimationFrame(),webkitRequestAnimationFrame(),"
                 + "webkitRequestFileSystem(),webkitResolveLocalFileSystemURL(),webkitStorageInfo,"
                 + "window",
@@ -1111,9 +1121,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onslotchange,onstalled,onstorage,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onunhandledrejection,onunload,"
-                + "onvolumechange,onvrdisplayactivate,onvrdisplayconnect,"
-                + "onvrdisplaydeactivate,onvrdisplaydisconnect,onvrdisplaypresentchange,"
-                + "onwaiting,onwebkitanimationend,"
+                + "onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,open(),opener,"
                 + "origin,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,"
                 + "performance,personalbar,postMessage(),"
@@ -1152,9 +1160,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onstorage,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onunhandledrejection,onunload,"
-                + "onvolumechange,onvrdisplayactivate,onvrdisplayconnect,"
-                + "onvrdisplaydeactivate,onvrdisplaydisconnect,onvrdisplaypresentchange,"
-                + "onwaiting,onwebkitanimationend,"
+                + "onvolumechange,onwaiting,onwebkitanimationend,"
                 + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,open(),opener,"
                 + "origin,outerHeight,outerWidth,pageXOffset,pageYOffset,parent,"
                 + "performance,personalbar,postMessage(),"

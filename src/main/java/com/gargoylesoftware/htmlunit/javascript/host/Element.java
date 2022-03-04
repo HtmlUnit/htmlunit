@@ -80,6 +80,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code Element}.
@@ -89,6 +90,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Sudhan Moghe
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Anton Demydenko
  */
 @JsxClass(domClass = DomElement.class)
 public class Element extends Node {
@@ -2076,6 +2078,43 @@ public class Element extends Node {
             throw ScriptRuntime.constructError("SyntaxError",
                     "An invalid or illegal selector was specified (selector: '"
                     + selectorString + "' error: " + e.getMessage() + ").");
+        }
+    }
+
+    /**
+     * The <tt>toggleAttribute()</tt> method of the Element interface toggles a
+     * Boolean attribute (removing it if it is present and adding it if it is not
+     * present) on the given element. If <tt>force</tt> is <tt>true</tt>, adds
+     * boolean attribute with <tt>name</tt>. If <tt>force</tt> is <tt>false</tt>,
+     * removes attribute with <tt>name</tt>.
+     *
+     * @param name the name of the attribute to be toggled.
+     * The attribute name is automatically converted to all lower-case when toggleAttribute()
+     * is called on an HTML element in an HTML document.
+     * @param force if true, the toggleAttribute method adds an attribute named name
+     * @return true if attribute name is eventually present, and false otherwise
+     * @see <a href=
+     *      "https://developer.mozilla.org/en-US/docs/Web/API/Element/toggleAttribute">Element.toggleAttribute()</a>
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public boolean toggleAttribute(final String name, final Object force) {
+        if (Undefined.isUndefined(force)) {
+            if (hasAttribute(name)) {
+                removeAttribute(name);
+                return false;
+            }
+            else {
+                setAttribute(name, "");
+                return true;
+            }
+        }
+        if (ScriptRuntime.toBoolean(force)) {
+            setAttribute(name, "");
+            return true;
+        }
+        else {
+            removeAttribute(name);
+            return false;
         }
     }
 }

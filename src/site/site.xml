@@ -26,13 +26,13 @@
         </menu>
         <menu name="How do I...">
             <item name="Get started" href="/gettingStarted.html"/>
+            <item name="WebClient - the browser" href="/webclient.html"/>
             <item name="Use the Keyboard" href="/keyboard-howto.html"/>
             <item name="Use Tables" href="/table-howto.html"/>
             <item name="Behind a proxy" href="/proxy-howto.html"/>
             <item name="File download" href="/filedownload-howto.html"/>
             <item name="File upload" href="/fileupload-howto.html"/>
-            <item name="Use Frames" href="/frame-howto.html"/>
-            <item name="Use Windows" href="/window-howto.html"/>
+            <item name="Windows and Frames" href="/window-frame.html"/>
             <item name="Use JavaScript" href="/javascript-howto.html"/>
             <item name="Image formats" href="/images-howto.html"/>
             <item name="Use ActiveX" href="/activeX-howto.html"/>

@@ -81,10 +81,16 @@ If you use maven please add:
 
 You have to add the sonatype snapshot repository to your pom distributionManagement section also:
 
+Maven
+
     <snapshotRepository>
         <id>sonatype-nexus-snapshots</id>
         <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </snapshotRepository>
+
+Gradle
+
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots"}
 
 Some insights
 --------

@@ -7,6 +7,58 @@
     </properties>
 
     <body>
+        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
+            <action type="update" dev="rbri">
+                Polyfill support documented.
+            </action>
+            <action type="update" dev="rbri">
+                Dedicated documentation of the WebClient/WebClientOptions and some more documentation updates.
+            </action>
+            <action type="add" dev="rbri" issue="452">
+                Make sure to read sufficient byte for the encoding sniffer when the response is gzip encoded.
+            </action>
+            <action type="add" dev="rbri" issue="450">
+                Handle bom header also for gzip'ed responses.
+            </action>
+            <action type="add" dev="rbri">
+                New web client option setProxyPolyfillEnabled() to automatically load a polyfill for the
+                proxy api into the client.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: regex sticky support împlemented.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: improved error msg about unsupported regex flags.
+            </action>
+            <action type="fix" dev="rbri" issue="369">
+                Jobs sheduled with the same targetExecutionTime are now processed in sheduling order.
+            </action>
+            <action type="add" dev="rbri">
+                New web client option setFetchPolyfillEnabled() to automatically load a polyfill for the
+                fetch api into the client.
+            </action>
+            <action type="fix" dev="rbri">
+                FileReader readAsArrayBuffer() and readAsText() are working for blobs also.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade commons-codec to 1.15.
+            </action>
+            <action type="add" dev="rbri">
+                Introducing a ClipboardHandler configurable at the WebClient. If you need clipboard support
+                for entry fields set this to an AwtClipboardHandler.
+            </action>
+            <action type="add" dev="rbri" due-to="Anton Demydenko">
+                Element.toggleAttribute() added.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.45.v20220203.
+            </action>
+            <action type="fix" dev="rbri" issue="441">
+                Document.body setter accepts Framesets.
+            </action>
+        </release>
+
+
         <release version="2.58.0" date="February 4, 2022" description="Bugfixes">
             <action type="update" dev="rbri">
                 neko: Switch to xerces 2.12.2.
@@ -38,7 +90,7 @@
             <action type="fix" dev="RhinoTeam">
                 core-js: RegEx handles {0} quantifier with max of zero correctly.
             </action>
-            <action type="add" dev="rbri">
+            <action type="add" dev="rbri" issue="423">
                 core-js: Date ctor now respects the timezone.
             </action>
             <action type="add" dev="RhinoTeam">
@@ -47,7 +99,7 @@
         </release>
 
 
-        <release version="2.57.0" date="Januar 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
+        <release version="2.57.0" date="January 23, 2022" description="Bugfixes, Chrome/Edge 97, Firefox 96, ValidityState, htmx support">
             <action type="add" dev="rbri">
                 Quota simulation added to localStorage.
             </action>

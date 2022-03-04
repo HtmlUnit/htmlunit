@@ -166,7 +166,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.put("en-CA", yyyyDash);
         CHROME_FORMATS_.put("en-IE", ddSlash);
         CHROME_FORMATS_.put("en-MT", ddSlash);
-        CHROME_FORMATS_.put("en-PH", ddSlash);
+        CHROME_FORMATS_.put("en-PH", mmSlash);
         CHROME_FORMATS_.put("es-US", ddSlash);
         CHROME_FORMATS_.put("fr-CH", ddDot);
         CHROME_FORMATS_.put("ga", mmSlash);
@@ -174,6 +174,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.put("in-ID", ddSlash);
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("iw", ddDot);
+        CHROME_FORMATS_.put("lv", ddDotDot);
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sq", mmSlash);

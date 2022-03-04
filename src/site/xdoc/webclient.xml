@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<document>
+
+    <properties>
+        <title>WebClient - the browser</title>
+        <author>Ronald Brill</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                The WebClient represent the browser if you work with HtmlUnit. To start using HtmlUnit
+                you have to in instantiate a new WebClient - like starting the browser in the real world. 
+            </p>
+            <source><![CDATA[
+    try (final WebClient webClient = new WebClient()) {
+        // no you have a running browser and you can start doing real things
+        // like going to a web page
+        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+    }
+}]]></source>
+        </section>
+
+        <section name="Imitating a specific browser">
+            <p>
+                Often you will want to simulate a specific browser. This is done by passing a
+                com.gargoylesoftware.htmlunit.BrowserVersion into the WebClient constructor.
+                Constants have been provided for some common browsers but you can create your own specific
+                version by instantiating a BrowserVersion.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_Firefox() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
+                Specifying this BrowserVersion will change the user agent header that is sent up to the
+                server and will change the behavior of some of the JavaScript.
+            </p>
+        </section>
+
+        <section name="Using the options to adjust the browser">
+            <p>
+                There are various options available to make fine grained adjustments to the browser.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_Firefox() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+         // disable javascript
+         webClient.getOptions().setJavaScriptEnabled(false);
+         // disable css support
+         webClient.getOptions().setCssEnabled(false);
+
+        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
+                The default values for most options are similar to the default values
+                of real browsers - but (as always) there is one important exception:<br/>
+                HtmlUnit stops the Javascript execution at the first unhandled exception -
+                Browsers do not stop. You can change this by changing the throwExceptionOnScriptError
+                option to false.
+            </p>
+            <source><![CDATA[
+@Test
+public void homePage_Firefox() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+         // procced with the js execution on unhandled js errors
+         webClient.getOptions().setThrowExceptionOnScriptError(false);
+
+        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
+    }
+}]]></source>
+            <p>
+                For a complete list and more details please have a look at the 
+                <a href="apidocs//com/gargoylesoftware/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
+            </p>
+        </section>
+
+        <section name="Using handlers">
+            <p>
+                There are many handlers used by the WebClient for special purposes. These Handlers are implementing
+                specific interfaces and you are able to replace them with your own implementations. Default implementations
+                are also available.
+            </p>
+
+            <subsection name="AlertHandler">
+            <p>
+                The handler to be used to process JavaScript alerts triggered when the JavaScript method Window.alert() is called.
+            </p>
+            </subsection>
+
+            <subsection name="ConfirmHandler">
+            <p>
+                The handler for the JavaScript function <tt>window.confirm()</tt>.
+            </p>
+            </subsection>
+
+            <subsection name="PromptHandler">
+            <p>
+                The handler for the JavaScript function <tt>window.prompt()</tt>.
+            </p>
+            </subsection>
+
+            <subsection name="StatusHandler">
+            <p>
+                A handler for changes to <tt>window.status</tt>.
+            </p>
+            </subsection>
+
+            <subsection name="AttachmentHandler">
+            <p>
+                A handler for attachments, which represent pages received from the server which contain 
+                Content-Disposition=attachment headers.
+            </p>
+            </subsection>
+
+            <subsection name="ClipboardHandler">
+            <p>
+                A handler for clipboard access.
+            </p>
+            </subsection>
+
+            <subsection name="WebStartHandler">
+            <p>
+                A handler for webstart support.
+            </p>
+            </subsection>
+
+            <subsection name="FrameContentHandler">
+            <p>
+                A handler to make a decision to load the frame content or not.
+            </p>
+            </subsection>
+
+            <subsection name="AppletConfirmHandler">
+            <p>
+                Like in real browsers, you have to confirm before the browser starts an applet.
+            </p>
+            </subsection>
+
+            <subsection name="CSSErrorHandler">
+            <p>
+                For CSS parser error processing.
+            </p>
+            </subsection>
+
+            <subsection name="OnbeforeunloadHandler">
+            <p>
+            </p>
+            </subsection>
+
+            <subsection name="RefreshHandler">
+            <p>
+                A handler for page refreshes.
+            </p>
+            </subsection>
+
+        </section>
+
+        <section name="Polyfills">
+            <p>
+                The number of javascript API's supported by the browsers seems to increase every day. Because of the limited development resources
+                of the HtmlUnit projcet, being on track with this is really hard.<br/>
+                But there are alrady many polyfills available (to add API support for older borwsers). The idea is to use some of these polyfills
+                to add the missing API's.<br/>
+                Starting with version 2.59.0 HtmlUnit supports the integration of polyfills; there is a dedicated option for every supported
+                polyfill (disabled per default) and if enabled, the polifyll is automatically loaded.
+            </p>
+            <source><![CDATA[
+@Test
+public void fetchSupport() throws Exception {
+    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
+         // enable fetch api polyfill
+         webClient.getOptions().setFetchPolyfillEnabled(true);
+
+        final HtmlPage page = webClient.getPage(....);
+    }
+}]]></source>
+
+            <subsection name="Fetch API Polyfill">
+                <p>
+                    <a href="https://github.com/github/fetch">window.fetch polyfill</a>
+                </p>
+                <source><![CDATA[webClient.getOptions().setFetchPolyfillEnabled(true);]]></source>
+            </subsection>
+
+            <subsection name="Proxy Polyfill">
+                <p>
+                    <a href="https://github.com/ambit-tsai/es6-proxy-polyfill">ambit-tsai/es6-proxy-polyfill</a>
+                </p>
+                <source><![CDATA[webClient.getOptions().setProxyPolyfillEnabled(true);]]></source>
+            </subsection>
+
+        </section>
+    </body>
+</document>

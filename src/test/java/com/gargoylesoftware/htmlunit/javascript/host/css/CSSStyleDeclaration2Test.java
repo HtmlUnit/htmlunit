@@ -327,8 +327,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties() throws Exception {
-        final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
-
         final String html
             = "<html>\n"
             + "<head><title>Tester</title>\n"
@@ -350,10 +348,13 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
 
+        final String expected = loadExpectation("CSSStyleDeclaration2Test.properties", ".txt");
+
         final WebDriver driver = loadPage2(html);
 
         String actual = driver.findElement(By.id("myTextarea")).getAttribute("value");
         actual = StringUtils.replace(actual, "\r\n", "\n");
+
         assertEquals(expected, actual);
     }
 
@@ -363,8 +364,6 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
      */
     @Test
     public void properties2() throws Exception {
-        final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
-
         final String html
             = "<html>\n"
             + "<head>\n"
@@ -385,6 +384,8 @@ public class CSSStyleDeclaration2Test extends WebDriverTestCase {
             + "  <div id='myDiv'><br></div>\n"
             + "  <textarea id='myTextarea' cols='120' rows='20'></textarea>\n"
             + "</body></html>";
+
+        final String expected = loadExpectation("CSSStyleDeclaration2Test.properties2", ".txt");
 
         final WebDriver driver = loadPage2(html);
 
