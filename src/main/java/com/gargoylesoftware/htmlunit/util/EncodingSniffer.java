@@ -1125,8 +1125,8 @@ public final class EncodingSniffer {
         final int count = IOUtils.read(content, joined, prefixLength, joined.length - prefixLength);
         if (count < size) {
             final byte[] smaller = new byte[prefixLength + count];
-            System.arraycopy(prefix, 0, joined, 0, prefix.length);
-            System.arraycopy(joined, 0, smaller, prefixLength, count);
+            System.arraycopy(prefix, 0, smaller, 0, prefix.length);
+            System.arraycopy(joined, prefixLength, smaller, prefixLength, count);
             return smaller;
         }
 
