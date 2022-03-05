@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
+        <release version="2.59.0" date="March 5, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
             <action type="update" dev="rbri">
                 Polyfill support documented.
             </action>
