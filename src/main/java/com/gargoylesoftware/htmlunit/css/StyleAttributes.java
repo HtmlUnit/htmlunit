@@ -3286,25 +3286,27 @@ public final class StyleAttributes {
                 ie("false")),
 
         /** The style property {@code textEmphasis}. */
-        TEXT_EMPHASIS("textEmphasis", "text-emphasis", ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
+        TEXT_EMPHASIS("textEmphasis", "text-emphasis", chromeAndEdge(""), ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
 
         /** The style property {@code text-emphasis}. */
         TEXT_EMPHASIS_("text-emphasis", "text-emphasis", ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
 
         /** The style property {@code textEmphasisColor}. */
-        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", ff("rgb(0, 0, 0)")),
+        TEXT_EMPHASIS_COLOR("textEmphasisColor", "text-emphasis-color", chromeAndEdge("rgb(0, 0, 0)"),
+                ff("rgb(0, 0, 0)")),
 
         /** The style property {@code text-emphasis-color}. */
         TEXT_EMPHASIS_COLOR_("text-emphasis-color", "text-emphasis-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textEmphasisPosition}. */
-        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", ff("over right")),
+        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over right"),
+                ff("over right")),
 
         /** The style property {@code text-emphasis-position}. */
         TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position", ff("over right")),
 
         /** The style property {@code textEmphasisStyle}. */
-        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", ff("none")),
+        TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", chromeAndEdge("none"), ff("none")),
 
         /** The style property {@code text-emphasis-style}. */
         TEXT_EMPHASIS_STYLE_("text-emphasis-style", "text-emphasis-style", ff("none")),
