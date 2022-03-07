@@ -55,10 +55,10 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "98.0.4758.102";
+    static String CHROME_DRIVER_ = "99.0.4844.51";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "98.0.1108.62";
+    static String EDGE_DRIVER_ = "99.0.1153.0";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -348,6 +348,10 @@ public class ExternalTest {
 
         // version 10 requires JDK 11
         if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
+            return true;
+        }
+        // version 3.11.x seem to requires
+        if ("maven-site-plugin".equals(artifactId) && (version.startsWith("3.11."))) {
             return true;
         }
 
