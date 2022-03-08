@@ -354,7 +354,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.Image;
 import com.gargoylesoftware.htmlunit.javascript.host.html.Option;
 import com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer;
 import com.gargoylesoftware.htmlunit.javascript.host.html.ValidityState;
@@ -564,7 +563,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
         IDBKeyRange.class, IDBMutableFile.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
-        Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
+        ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
         InputDeviceCapabilities.class, InputEvent.class,
         InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
