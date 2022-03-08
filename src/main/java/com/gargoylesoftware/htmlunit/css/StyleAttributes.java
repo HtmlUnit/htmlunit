@@ -3286,7 +3286,8 @@ public final class StyleAttributes {
                 ie("false")),
 
         /** The style property {@code textEmphasis}. */
-        TEXT_EMPHASIS("textEmphasis", "text-emphasis", chromeAndEdge(""), ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
+        TEXT_EMPHASIS("textEmphasis", "text-emphasis", chromeAndEdge("none rgb(0, 0, 0)"),
+                ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
 
         /** The style property {@code text-emphasis}. */
         TEXT_EMPHASIS_("text-emphasis", "text-emphasis", ffEsr(""), ffLatest("none rgb(0, 0, 0)")),
@@ -3299,7 +3300,7 @@ public final class StyleAttributes {
         TEXT_EMPHASIS_COLOR_("text-emphasis-color", "text-emphasis-color", ff("rgb(0, 0, 0)")),
 
         /** The style property {@code textEmphasisPosition}. */
-        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over right"),
+        TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over"),
                 ff("over right")),
 
         /** The style property {@code text-emphasis-position}. */
@@ -4249,7 +4250,7 @@ public final class StyleAttributes {
                 chromeAndEdge("none")),
 
         /** The style property {@code webkitTextEmphasis}. */
-        WEBKIT_TEXT_EMPHASIS("webkitTextEmphasis", "webkit-text-emphasis", chromeAndEdge("")),
+        WEBKIT_TEXT_EMPHASIS("webkitTextEmphasis", "webkit-text-emphasis", chromeAndEdge("none rgb(0, 0, 0)")),
 
         /** The style property {@code webkitTextEmphasisColor}. */
         WEBKIT_TEXT_EMPHASIS_COLOR("webkitTextEmphasisColor", "webkit-text-emphasis-color",
@@ -4257,7 +4258,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTextEmphasisPosition}. */
         WEBKIT_TEXT_EMPHASIS_POSITION("webkitTextEmphasisPosition", "webkit-text-emphasis-position",
-                chromeAndEdge("over right")),
+                chromeAndEdge("over")),
 
         /** The style property {@code webkitTextEmphasisStyle}. */
         WEBKIT_TEXT_EMPHASIS_STYLE("webkitTextEmphasisStyle", "webkit-text-emphasis-style",
