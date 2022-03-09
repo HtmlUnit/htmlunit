@@ -200,14 +200,13 @@ public class HtmlSerializerNormalizedText {
         boolean block = false;
         if (!(domNode instanceof HtmlBody)) {
             final SgmlPage page = domNode.getPage();
+            final WebWindow window = page.getEnclosingWindow();
             if (page != null
-                    && page.getWebClient().isJavaScriptEngineEnabled()) {  // TODO
-                final WebWindow window = page.getEnclosingWindow();
-                if (window.getWebClient().getOptions().isCssEnabled()) {
-                    if (domNode instanceof DomElement) {
-                        final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
-                        block = "block".equals(display);
-                    }
+                    && page.getWebClient().isJavaScriptEngineEnabled()  // TODO
+                    && window.getWebClient().getOptions().isCssEnabled()) {
+                if (domNode instanceof DomElement) {
+                    final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
+                    block = "block".equals(display);
                 }
             }
             else if (domNode instanceof HtmlElement) {
