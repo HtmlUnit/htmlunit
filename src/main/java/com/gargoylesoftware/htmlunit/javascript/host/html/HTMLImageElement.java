@@ -25,7 +25,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -36,6 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * The JavaScript object {@code HTMLImageElement}.
@@ -71,12 +71,7 @@ public class HTMLImageElement extends HTMLElement {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
-        final DomElement fake =
-                page.getWebClient().getPageCreator().getHtmlParser()
-                    .getFactory(HtmlImage.TAG_NAME)
-                    .createElement(page, HtmlImage.TAG_NAME, null);
-        setDomNode(fake);
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

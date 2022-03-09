@@ -14,6 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
+import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
@@ -31,7 +34,12 @@ public class Image extends HTMLImageElement {
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        super.jsConstructor();
+        final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
+        final DomElement fake =
+                page.getWebClient().getPageCreator().getHtmlParser()
+                    .getFactory(HtmlImage.TAG_NAME)
+                    .createElement(page, HtmlImage.TAG_NAME, null);
+        setDomNode(fake);
     }
 
     /**
