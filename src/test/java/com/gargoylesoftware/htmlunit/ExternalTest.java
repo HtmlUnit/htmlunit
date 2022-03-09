@@ -350,8 +350,14 @@ public class ExternalTest {
         if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
             return true;
         }
-        // version 3.11.x seem to requires
+        // version 3.11.x seem to requires JDK11
         if ("maven-site-plugin".equals(artifactId) && (version.startsWith("3.11."))) {
+            return true;
+        }
+
+        // there is a serious bug
+        // https://github.com/HtmlUnit/htmlunit/issues/457
+        if ("maven-compiler-plugin".equals(artifactId) && (version.startsWith("3.10.0"))) {
             return true;
         }
 

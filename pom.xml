@@ -36,7 +36,7 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
-        <spotbugs.version>4.5.3</spotbugs.version>
+        <spotbugs.version>4.6.0</spotbugs.version>
         <pmd.version>6.43.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
         <dependencycheck.version>7.0.0</dependencycheck.version>
@@ -47,7 +47,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.0</version>
+                <version>3.9.0</version>
                 <configuration>
                     <testExcludes>
                         <exclude>**/CodeChecker.java</exclude>
