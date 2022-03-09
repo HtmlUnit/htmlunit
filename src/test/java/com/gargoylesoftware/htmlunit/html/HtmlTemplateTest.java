@@ -17,53 +17,44 @@ package com.gargoylesoftware.htmlunit.html;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlTemplate}.
  *
- * @author Ronny Shapiro
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlTemplateTest extends SimpleWebTestCase {
+public class HtmlTemplateTest extends WebDriverTestCase {
 
+
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
-    public void asXmlWithChildren() throws Exception {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "<template id='template'>\n"
-                + "<div></div>\n"
-                + "</template>\n"
-                + "</body>\n"
-                + "</html>";
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void ignoreContent() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.getElementById('radio1').checked);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='radio1' name='rad' value='1' checked/>\n"
+            + "  <input type='radio' name='rad' value='2'/>\n"
+            + "  <template>\n"
+            + "    <input type='radio' name='rad' value='3' checked/>\n"
+            + "    <input type='radio' name='rad' value='4'/>\n"
+            + "  </template>\n"
+            + "</body></html>";
 
-        final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
-                + "  <template id=\"template\">\r\n"
-                + "    <div>\r\n"
-                + "    </div>\r\n"
-                + "  </template>\r\n"
-                + "</body>\r\n");
-    }
-
-    @Test
-    public void asXmlWithoutChildren() throws Exception {
-        final String html = "<html>\n"
-                + "<head>\n"
-                + "</head>\n"
-                + "<body>\n"
-                + "<template id='template'></template>\n"
-                + "</body>\n"
-                + "</html>";
-
-        final HtmlPage htmlPage = loadPage(html);
-        assertEquals(htmlPage.getBody().asXml(), "<body>\r\n"
-                + "  <template id=\"template\">\r\n"
-                + "  </template>\r\n"
-                + "</body>\r\n");
+        loadPageVerifyTitle2(html);
     }
 }
