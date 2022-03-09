@@ -69,7 +69,7 @@ public class HTMLImageElement extends HTMLElement {
     /**
      * JavaScript constructor.
      */
-    @JsxConstructor
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
         final SgmlPage page = (SgmlPage) getWindow().getWebWindow().getEnclosedPage();
         final DomElement fake =
@@ -304,4 +304,5 @@ public class HTMLImageElement extends HTMLElement {
     public void setName(final String name) {
         getDomNodeOrDie().setAttribute("name", name);
     }
+
 }

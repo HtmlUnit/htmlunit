@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROMISE;
@@ -69,7 +70,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
 import com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
 import com.gargoylesoftware.htmlunit.javascript.host.intl.Intl;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.FormData;
 import com.gargoylesoftware.htmlunit.javascript.polyfill.Polyfill;
@@ -314,6 +314,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
 
+            if ("Image".equals(hostClassSimpleName)
+                    && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
+                prototype = prototypesPerJSName.get("HTMLImageElement");
+            }
             if ("Option".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
@@ -390,14 +394,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     else {
                         if (function instanceof FunctionObject) {
                             try {
-                                if (prototype instanceof HTMLImageElement) {
-                                    ((HtmlUnitScriptable) prototype).setClassName("Image");
-                                    ((FunctionObject) function).addAsConstructor(window, prototype);
-                                    ((HtmlUnitScriptable) prototype).setClassName("HTMLImageElement");
-                                }
-                                else {
-                                    ((FunctionObject) function).addAsConstructor(window, prototype);
-                                }
+                                ((FunctionObject) function).addAsConstructor(window, prototype);
                             }
                             catch (final Exception e) {
                                 // TODO see issue #1897

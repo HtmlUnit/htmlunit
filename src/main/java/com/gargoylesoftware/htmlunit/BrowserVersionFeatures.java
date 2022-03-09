@@ -1037,6 +1037,13 @@ public enum BrowserVersionFeatures {
     JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST,
 
     /**
+     * Is the prototype of {@link com.gargoylesoftware.htmlunit.javascript.host.html.Image} the same as
+     * {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
+     */
+    @BrowserFeature({FF, FF_ESR, IE})
+    JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE,
+
+    /**
      * Getting the width and height of an image tag with an empty source returns 0x0.
      */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
