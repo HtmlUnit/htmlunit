@@ -692,13 +692,46 @@ public class HtmlSerializerVisibleText {
 
     protected Mode whiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
         final Page page = domNode.getPage();
-        final WebWindow window = page.getEnclosingWindow();
-        if (page != null && window.getWebClient().getOptions().isCssEnabled()) {
+        if (page != null) {
+            final WebWindow window = page.getEnclosingWindow();
+            if (window.getWebClient().getOptions().isCssEnabled()) {
+                DomNode node = domNode;
+                while (node != null) {
+                    if (node instanceof DomElement) {
+                        final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
+                        final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
+                        if (StringUtils.isNoneEmpty(value)) {
+                            if ("normal".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_NORMAL;
+                            }
+                            if ("nowrap".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_NORMAL;
+                            }
+                            if ("pre".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_PRE;
+                            }
+                            if ("pre-wrap".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_PRE;
+                            }
+                            if ("pre-line".equalsIgnoreCase(value)) {
+                                return Mode.WHITE_SPACE_PRE_LINE;
+                            }
+                        }
+                    }
+                    node = node.getParentNode();
+                }
+            }
+        }
+        return defaultMode;
+    }
 
-            DomNode node = domNode;
-            while (node != null) {
-                if (node instanceof DomElement) {
-                    final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
+    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
+        final Page page = domNode.getPage();
+        if (page != null) {
+            final WebWindow window = page.getEnclosingWindow();
+            if (window.getWebClient().getOptions().isCssEnabled()) {
+                if (domNode instanceof DomElement) {
+                    final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
                     final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                     if (StringUtils.isNoneEmpty(value)) {
                         if ("normal".equalsIgnoreCase(value)) {
@@ -716,36 +749,6 @@ public class HtmlSerializerVisibleText {
                         if ("pre-line".equalsIgnoreCase(value)) {
                             return Mode.WHITE_SPACE_PRE_LINE;
                         }
-                    }
-                }
-                node = node.getParentNode();
-            }
-        }
-        return defaultMode;
-    }
-
-    protected Mode updateWhiteSpaceStyle(final DomNode domNode, final Mode defaultMode) {
-        final Page page = domNode.getPage();
-        final WebWindow window = page.getEnclosingWindow();
-        if (page != null && window.getWebClient().getOptions().isCssEnabled()) {
-            if (domNode instanceof DomElement) {
-                final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
-                final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
-                if (StringUtils.isNoneEmpty(value)) {
-                    if ("normal".equalsIgnoreCase(value)) {
-                        return Mode.WHITE_SPACE_NORMAL;
-                    }
-                    if ("nowrap".equalsIgnoreCase(value)) {
-                        return Mode.WHITE_SPACE_NORMAL;
-                    }
-                    if ("pre".equalsIgnoreCase(value)) {
-                        return Mode.WHITE_SPACE_PRE;
-                    }
-                    if ("pre-wrap".equalsIgnoreCase(value)) {
-                        return Mode.WHITE_SPACE_PRE;
-                    }
-                    if ("pre-line".equalsIgnoreCase(value)) {
-                        return Mode.WHITE_SPACE_PRE_LINE;
                     }
                 }
             }
