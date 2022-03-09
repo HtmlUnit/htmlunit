@@ -1348,7 +1348,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
-        final List<NameValuePair> responseHeaders = new ArrayList<>();
         final DataURLConnection connection;
         try {
             connection = new DataURLConnection(url);
@@ -1356,6 +1355,8 @@ public class WebClient implements Serializable, AutoCloseable {
         catch (final DecoderException e) {
             throw new IOException(e.getMessage());
         }
+
+        final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
             connection.getMediaType() + ";charset=" + connection.getCharset()));
 

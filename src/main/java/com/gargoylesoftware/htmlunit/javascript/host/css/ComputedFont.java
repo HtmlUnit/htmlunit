@@ -65,10 +65,11 @@ final class ComputedFont {
     private static String[] getFontSizeDetails(final String fontSize) {
         final int slash = fontSize.indexOf('/');
         final String actualFontSize = slash == -1 ? fontSize : fontSize.substring(0, slash);
-        String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1);
         if (!isLength(actualFontSize)) {
             return null;
         }
+
+        String actualLineHeight = slash == -1 ? "" : fontSize.substring(slash + 1);
         if (actualLineHeight.isEmpty()) {
             actualLineHeight = null;
         }

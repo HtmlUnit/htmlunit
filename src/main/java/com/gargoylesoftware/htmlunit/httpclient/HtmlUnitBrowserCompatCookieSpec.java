@@ -142,8 +142,6 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             header = new BasicHeader(header.getName(), EMPTY_COOKIE_NAME + header.getValue());
         }
 
-        final List<Cookie> cookies;
-
         final String headername = header.getName();
         if (!headername.equalsIgnoreCase(SM.SET_COOKIE)) {
             throw new MalformedCookieException("Unrecognized cookie header '" + header + "'");
@@ -159,6 +157,8 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 netscape = true;
             }
         }
+
+        final List<Cookie> cookies;
         if (netscape || !versioned) {
             // Need to parse the header again, because Netscape style cookies do not correctly
             // support multiple header elements (comma cannot be treated as an element separator)
@@ -181,10 +181,10 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
             }
             final HeaderElement elem = DEFAULT_NETSCAPE_DRAFT_HEADER_PARSER.parseHeader(buffer, cursor);
             final String name = elem.getName();
-            final String value = elem.getValue();
             if (name == null || name.isEmpty()) {
                 throw new MalformedCookieException("Cookie name may not be empty");
             }
+            final String value = elem.getValue();
             final BasicClientCookie cookie = new BasicClientCookie(name, value);
             cookie.setPath(getDefaultPath(origin));
             cookie.setDomain(getDefaultDomain(origin));

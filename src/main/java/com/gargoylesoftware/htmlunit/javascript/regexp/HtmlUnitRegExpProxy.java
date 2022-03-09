@@ -421,7 +421,6 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
         RegExpData(final NativeRegExp re) {
             final String str = re.toString(); // the form is /regex/flags
-            final String jsSource = StringUtils.substringBeforeLast(str.substring(1), "/");
             final String jsFlags = StringUtils.substringAfterLast(str, "/");
 
             if (jsFlags.indexOf('y') != -1) {
@@ -432,6 +431,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
 
             pattern_ = PATTENS.get(str);
             if (pattern_ == null) {
+                final String jsSource = StringUtils.substringBeforeLast(str.substring(1), "/");
                 pattern_ = Pattern.compile(jsRegExpToJavaRegExp(jsSource), getJavaFlags(jsFlags));
                 PATTENS.put(str, pattern_);
             }

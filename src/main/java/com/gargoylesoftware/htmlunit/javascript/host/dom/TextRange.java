@@ -263,11 +263,12 @@ public class TextRange extends HtmlUnitScriptable {
     public boolean inRange(final TextRange other) {
         final Range otherRange = other.range_;
 
-        final org.w3c.dom.Node start = range_.getStartContainer();
         final org.w3c.dom.Node otherStart = otherRange.getStartContainer();
         if (otherStart == null) {
             return false;
         }
+
+        final org.w3c.dom.Node start = range_.getStartContainer();
         final short startComparison = start.compareDocumentPosition(otherStart);
         final boolean startNodeBefore = startComparison == 0
                 || (startComparison & Node.DOCUMENT_POSITION_CONTAINS) != 0

@@ -1999,10 +1999,11 @@ public class Element extends Node {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static boolean matches(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        final String selectorString = (String) args[0];
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
+
+        final String selectorString = (String) args[0];
         try {
             final DomNode domNode = ((Element) thisObj).getDomNodeOrNull();
             return domNode != null && ((DomElement) domNode).matches(selectorString);
@@ -2059,10 +2060,11 @@ public class Element extends Node {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public static Element closest(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        final String selectorString = (String) args[0];
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
+
+        final String selectorString = (String) args[0];
         try {
             final DomNode domNode = ((Element) thisObj).getDomNodeOrNull();
             if (domNode == null) {

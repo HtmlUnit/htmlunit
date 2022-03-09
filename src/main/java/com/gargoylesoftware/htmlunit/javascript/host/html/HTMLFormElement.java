@@ -317,12 +317,12 @@ public class HTMLFormElement extends HTMLElement implements Function {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public void requestSubmit(final Object submitter) {
-        SubmittableElement submittable = null;
         if (Undefined.isUndefined(submitter)) {
             submit();
             return;
         }
 
+        SubmittableElement submittable = null;
         if (submitter instanceof HTMLElement) {
             final HTMLElement subHtmlElement = (HTMLElement) submitter;
             if (subHtmlElement instanceof HTMLButtonElement) {

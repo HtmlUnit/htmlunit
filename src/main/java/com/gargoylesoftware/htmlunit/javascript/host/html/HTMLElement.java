@@ -1385,7 +1385,6 @@ public class HTMLElement extends Element {
         }
 
         int left = 0;
-        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1398,6 +1397,8 @@ public class HTMLElement extends Element {
         if ("absolute".equals(position)) {
             return left;
         }
+
+        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for the ancestor nodes.
         node = node.getParentNode();
@@ -1483,7 +1484,6 @@ public class HTMLElement extends Element {
         }
 
         int top = 0;
-        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for this node.
         DomNode node = getDomNodeOrDie();
@@ -1496,6 +1496,8 @@ public class HTMLElement extends Element {
         if ("absolute".equals(position)) {
             return top;
         }
+
+        final HTMLElement offsetParent = getOffsetParent();
 
         // Add the offset for the ancestor nodes.
         node = node.getParentNode();

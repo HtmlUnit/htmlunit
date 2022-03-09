@@ -83,11 +83,11 @@ public class XPathEvaluator extends HtmlUnitScriptable {
             xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
         }
         // contextNodeObj can be either a node or an array with the node as the first element.
-        final Node contextNode;
         if (!(contextNodeObj instanceof Node)) {
             throw Context.reportRuntimeError("Illegal value for parameter 'context'");
         }
-        contextNode = (Node) contextNodeObj;
+
+        final Node contextNode = (Node) contextNodeObj;
         PrefixResolver prefixResolver = null;
         if (resolver instanceof PrefixResolver) {
             prefixResolver = (PrefixResolver) resolver;

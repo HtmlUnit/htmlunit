@@ -166,7 +166,6 @@ public final class ScriptElementSupport {
             return;
         }
 
-        final HtmlPage page = (HtmlPage) element.getPage();
         final ScriptElement scriptElement = (ScriptElement) element;
 
         final String src = scriptElement.getSrcAttribute();
@@ -175,6 +174,7 @@ public final class ScriptElementSupport {
             return;
         }
 
+        final HtmlPage page = (HtmlPage) element.getPage();
         if (src != ATTRIBUTE_NOT_DEFINED) {
             if (!src.startsWith(JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 // <script src="[url]"></script>

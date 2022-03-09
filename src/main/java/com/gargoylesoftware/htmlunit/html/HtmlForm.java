@@ -203,7 +203,6 @@ public class HtmlForm extends HtmlElement {
 
             final String type = element.getAttributeDirect("type");
             boolean typeImage = false;
-            final boolean typeSubmit = "submit".equalsIgnoreCase(type);
             final boolean isInput = HtmlInput.TAG_NAME.equals(element.getTagName());
             if (isInput) {
                 typeImage = "image".equalsIgnoreCase(type);
@@ -219,6 +218,7 @@ public class HtmlForm extends HtmlElement {
             // attributes available for:
             // - input with 'submit' and 'image' types
             // - button with 'submit' or without type
+            final boolean typeSubmit = "submit".equalsIgnoreCase(type);
             if (isInput && !typeSubmit && !typeImage) {
                 return;
             }
