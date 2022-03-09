@@ -180,7 +180,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private String overriddenMimeType_;
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
-    private int timeout_ = 0;
+    private int timeout_;
     private boolean aborted_;
     private String responseType_;
 

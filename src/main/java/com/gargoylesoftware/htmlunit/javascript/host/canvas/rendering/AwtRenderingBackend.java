@@ -58,7 +58,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class AwtRenderingBackend implements RenderingBackend {
 
     private static final Log LOG = LogFactory.getLog(AwtRenderingBackend.class);
-    private static int ID_GENERATOR_ = 0;
+    private static int ID_GENERATOR_;
 
     private static final Map<String, Color> knownColors = new HashMap<>();
 

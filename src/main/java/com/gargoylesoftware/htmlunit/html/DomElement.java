@@ -1613,7 +1613,7 @@ class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serial
     private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
-    private boolean dirty_ = false;
+    private boolean dirty_;
     private DomAttr[] attrPositions_ = EMPTY_ARRAY;
     private final DomElement domNode_;
     private final boolean caseSensitive_;
