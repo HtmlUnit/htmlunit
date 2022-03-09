@@ -17,8 +17,6 @@ package com.gargoylesoftware.htmlunit.html;
 import java.io.PrintWriter;
 import java.util.Map;
 
-import org.w3c.dom.Node;
-
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -62,18 +60,6 @@ public class HtmlTemplate extends HtmlElement {
      */
     public DomDocumentFragment getContent() {
         return domDocumentFragment_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode appendChild(final Node node) {
-        final DomNode domNode = (DomNode) node;
-
-        domDocumentFragment_.appendChild(domNode);
-
-        return domNode;
     }
 
     @Override
