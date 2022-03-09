@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.60.0" date="April x, 2022" description="Chrome/Edge 99, Bugfixes">
+            <action type="fix" dev="rbri" issue="451">
+                Image.prototype setup fixed.
+            </action>
         </release>
 
         <release version="2.59.0" date="March 5, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
