@@ -217,8 +217,6 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("true")
-    @HtmlUnitNYI(CHROME = "false",
-            EDGE = "false")
     public void _Image_HTMLImageElement() throws Exception {
         // although Image != HTMLImageElement, they seem to be synonyms!!!
         test("Image", "HTMLImageElement");
