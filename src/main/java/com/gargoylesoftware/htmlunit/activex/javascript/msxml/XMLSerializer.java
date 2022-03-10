@@ -93,8 +93,7 @@ public class XMLSerializer {
         final NamedNodeMap attributesMap = node.getAttributes();
         for (int i = 0; i < attributesMap.getLength(); i++) {
             final DomAttr attrib = (DomAttr) attributesMap.item(i);
-            builder.append(' ').append(attrib.getQualifiedName()).append('=')
-                .append('"').append(attrib.getValue()).append('"');
+            builder.append(' ').append(attrib.getQualifiedName()).append("=\"").append(attrib.getValue()).append('"');
         }
         boolean startTagClosed = false;
         for (final DomNode child : node.getChildren()) {
@@ -147,7 +146,7 @@ public class XMLSerializer {
                     builder.append('\t');
                 }
             }
-            builder.append('<').append('/').append(nodeName).append('>');
+            builder.append("</").append(nodeName).append('>');
         }
         else {
             builder.append(optionalPrefix).append("/>");

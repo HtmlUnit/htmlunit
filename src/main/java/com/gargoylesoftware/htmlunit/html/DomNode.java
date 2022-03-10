@@ -907,8 +907,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     .append('\'');
                 try {
                     msg.append(" url: '")
-                        .append(page.getUrl()).append('\'')
-                        .append(" content: ")
+                        .append(page.getUrl()).append("' content: ")
                         .append(page.getWebResponse().getContentAsString());
                 }
                 catch (final Exception e) {
