@@ -675,4 +675,30 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         Thread.sleep(100);
         assertEquals(getExpectedAlerts(), getCollectedAlerts(page));
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void clear() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + "    function test() {\n"
+                + "      var f =  document.createElement('input');\n"
+                + "      f.type='file';\n"
+                + "      f.id='fileId';\n"
+                + "      document.body.appendChild(f);"
+
+                + "      f.value='';\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlFileInput file = page.<HtmlFileInput>getHtmlElementById("fileId");
+        assertEquals(0, file.getFiles().length);
+    }
 }
