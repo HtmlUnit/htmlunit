@@ -29,6 +29,35 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 @RunWith(BrowserRunner.class)
 public class HtmlTemplateTest extends WebDriverTestCase {
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "null", "null"},
+            IE = {"4", "[object HTMLInputElement]", "[object HTMLInputElement]"})
+    public void noChilds() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    log(document.querySelectorAll('form input[type=radio][name=\"rad\"]').length);\n"
+            + "    log(document.querySelector('form input[type=radio][name=\"rad\"][value=\"3\"]'));\n"
+            + "    log(document.querySelector('form input[type=radio][name=\"rad\"][value=\"4\"]'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='radio' id='radio1' name='rad' value='1' checked/>\n"
+            + "  <input type='radio' name='rad' value='2'/>\n"
+            + "  <template>\n"
+            + "    <input type='radio' name='rad' value='3' checked/>\n"
+            + "    <input type='radio' name='rad' value='4'/>\n"
+            + "  </template>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails
