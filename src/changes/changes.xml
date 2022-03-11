@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.60.0" date="April x, 2022" description="Chrome/Edge 99, Bugfixes">
+            <action type="fix" dev="rbri" issue="383">
+                HtmlFileInput.setValueAttribute(String) now handles an empty input as no file.
+            </action>
             <action type="fix" dev="rbri" issue="455">
                 Make sure template content is not added to the dom during parsing;
                 only to the content document fragment.
