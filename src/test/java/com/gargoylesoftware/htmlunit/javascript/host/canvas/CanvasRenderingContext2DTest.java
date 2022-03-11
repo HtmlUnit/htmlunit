@@ -1302,6 +1302,69 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
+                + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
+                + "AABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
+                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+    public void fillStyleNullFillRect() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = '#cc0000'; context.fillStyle = null; context.fillRect(2, 2, 16, 6);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
+                + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
+                + "AABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
+                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+    public void fillStyleUndefinedFillRect() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = '#cc0000'; context.fillStyle = undefined; context.fillRect(2, 2, 16, 6);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQxwA88wMPyn"
+                + "xHATBohZowaSH4q0D0Py3Yaqk+rpEAAqPQwLveqeQwAAAABJRU5ErkJggg==",
+            FF = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
+            FF_ESR = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
+                + "AABJRU5ErkJggg==",
+            IE = "data:image/png;base64,"
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
+                + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
+    public void fillStyleUnknownFillRect() throws Exception {
+        draw("<canvas id='myCanvas' width='20', height='10' style='border: 1px solid red;'></canvas>\n",
+                "context.fillStyle = '#cc0000'; context.fillStyle = 'pipi'; context.fillRect(2, 2, 16, 6);\n");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAC1JREFUOE9jZKAyYKSyeQzIBv6n0HCw"
                 + "WXQxEFcwEPIBTheOIAMpjGSIdqqnQwA/UgoLxnfNlgAAAABJRU5ErkJggg==",
             FF = "data:image/png;base64,"

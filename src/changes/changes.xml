@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.60.0" date="April x, 2022" description="Chrome/Edge 99, Bugfixes">
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D ignores unknown colors.
+            </action>
             <action type="fix" dev="rbri" issue="383">
                 HtmlFileInput.setValueAttribute(String) now handles an empty input as no file.
             </action>

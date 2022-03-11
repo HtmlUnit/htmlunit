@@ -744,7 +744,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] setFillStyle(" + fillStyle + ")");
         }
 
-        fillColor_ = extractColor(fillStyle);
+        final Color color = extractColor(fillStyle);
+        if (color != null) {
+            fillColor_ = color;
+        }
     }
 
     /**
@@ -756,7 +759,10 @@ public class AwtRenderingBackend implements RenderingBackend {
             LOG.debug("[" + id_ + "] setStrokeStyle(" + strokeStyle + ")");
         }
 
-        strokeColor_ = extractColor(strokeStyle);
+        final Color color = extractColor(strokeStyle);
+        if (color != null) {
+            strokeColor_ = color;
+        }
     }
 
     private static Color extractColor(final String style) {
@@ -776,12 +782,6 @@ public class AwtRenderingBackend implements RenderingBackend {
             }
             else {
                 color = knownColors.get(tmpStyle.toLowerCase(Locale.ROOT));
-                if (color == null) {
-                    if (LOG.isInfoEnabled()) {
-                        LOG.info("Can not find color '" + tmpStyle + '\'');
-                    }
-                    color = Color.black;
-                }
             }
         }
         return color;
