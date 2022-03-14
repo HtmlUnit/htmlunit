@@ -355,12 +355,6 @@ public class ExternalTest {
             return true;
         }
 
-        // there is a serious bug
-        // https://github.com/HtmlUnit/htmlunit/issues/457
-        if ("maven-compiler-plugin".equals(artifactId) && (version.startsWith("3.10.0"))) {
-            return true;
-        }
-
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;
