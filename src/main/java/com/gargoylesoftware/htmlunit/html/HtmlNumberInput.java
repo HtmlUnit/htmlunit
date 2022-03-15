@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  */
 public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
 
-    private static final char[] VALID_INT_CHARS = new char[] {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
+    private static final char[] VALID_INT_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
 
     private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
     private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);

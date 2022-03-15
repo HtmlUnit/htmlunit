@@ -119,7 +119,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Array with all supported browsers
      */
-    public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = new BrowserVersion[] {CHROME, EDGE, FIREFOX, FIREFOX_ESR, INTERNET_EXPLORER};
+    public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = {CHROME, EDGE, FIREFOX, FIREFOX_ESR, INTERNET_EXPLORER};
 
     /**
      * The best supported browser version at the moment.

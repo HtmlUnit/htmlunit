@@ -196,8 +196,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             MAX_WIDTH.getAttributeName()
             ));
 
-    private static final String[] THIN_MED_THICK = new String[] {"thin", "medium", "thick"};
-    private static final String[] ALIGN_KEYWORDS = new String[]
+    private static final String[] THIN_MED_THICK = {"thin", "medium", "thick"};
+    private static final String[] ALIGN_KEYWORDS =
         {"baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
          "inherit", "initial", "revert", "unset"};
 
