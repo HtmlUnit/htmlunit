@@ -1045,8 +1045,7 @@ public class Event extends HtmlUnitScriptable {
         final StringBuilder builder = new StringBuilder(40);
         builder.append("Event ")
             .append(getType())
-            .append(" (")
-            .append("Current Target: ")
+            .append(" (Current Target: ")
             .append(currentTarget_)
             .append(");");
         return builder.toString();

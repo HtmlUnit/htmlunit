@@ -1085,8 +1085,7 @@ public class Element extends Node {
 
                 final String name = attr.getName();
                 final String value = PRINT_NODE_QUOTE_PATTERN.matcher(attr.getValue()).replaceAll("&quot;");
-                builder.append(' ').append(name).append('=');
-                builder.append('\"');
+                builder.append(' ').append(name).append("=\"");
                 builder.append(value);
                 builder.append('\"');
             }
