@@ -24,6 +24,7 @@ import java.io.IOException;
 import javax.imageio.ImageReader;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,7 +35,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend;
+import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.NoOpRenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend.WindingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
@@ -86,7 +87,17 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         if (renderingBackend_ == null) {
             final int imageWidth = Math.max(1, canvas_.getWidth());
             final int imageHeight = Math.max(1, canvas_.getHeight());
-            renderingBackend_ = new AwtRenderingBackend(imageWidth, imageHeight);
+
+            // for Android
+            try {
+                final Class<?> backendClass = Class.forName(
+                            "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend");
+                renderingBackend_ = (RenderingBackend) ConstructorUtils
+                        .invokeExactConstructor(backendClass, imageHeight, imageWidth);
+            }
+            catch (final Exception e) {
+                renderingBackend_ = new NoOpRenderingBackend(imageWidth, imageHeight);
+            }
         }
         return renderingBackend_;
     }
