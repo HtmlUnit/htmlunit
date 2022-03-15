@@ -93,7 +93,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                 final Class<?> backendClass = Class.forName(
                             "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend");
                 renderingBackend_ = (RenderingBackend) ConstructorUtils
-                        .invokeExactConstructor(backendClass, imageHeight, imageWidth);
+                        .invokeConstructor(backendClass, imageWidth, imageHeight);
             }
             catch (final Exception e) {
                 renderingBackend_ = new NoOpRenderingBackend(imageWidth, imageHeight);
