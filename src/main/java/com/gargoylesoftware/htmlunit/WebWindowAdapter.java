@@ -25,7 +25,6 @@ public class WebWindowAdapter implements WebWindowListener {
      * Creates an instance.
      */
     public WebWindowAdapter() {
-        // ignore
     }
 
     /**
