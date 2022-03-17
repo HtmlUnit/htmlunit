@@ -91,6 +91,15 @@ public class Worker extends EventTarget {
     }
 
     /**
+     * immediately terminates the Worker. This does not offer the worker
+     * an opportunity to finish its operations; it is stopped at once.
+     */
+    @JsxFunction
+    public void terminate() {
+        // TODO
+    }
+
+    /**
      * Sets the value of the onmessage event handler.
      * @param onmessage the new handler
      */

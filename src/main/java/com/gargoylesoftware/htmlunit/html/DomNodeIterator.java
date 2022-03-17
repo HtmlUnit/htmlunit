@@ -98,6 +98,7 @@ public class DomNodeIterator implements NodeIterator {
      */
     @Override
     public void detach() {
+        // nothing to do
     }
 
     /**

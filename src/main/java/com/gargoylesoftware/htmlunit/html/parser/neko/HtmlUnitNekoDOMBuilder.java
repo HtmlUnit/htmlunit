@@ -279,6 +279,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      */
     @Override
     public void startDocument() throws SAXException {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
@@ -643,21 +644,25 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void startPrefixMapping(final String prefix, final String uri) throws SAXException {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void endPrefixMapping(final String prefix) throws SAXException {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void processingInstruction(final String target, final String data) throws SAXException {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void skippedEntity(final String name) throws SAXException {
+        // nothing to do
     }
 
     // LexicalHandler methods
@@ -674,21 +679,25 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void endCDATA() {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void endDTD() {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void endEntity(final String name) {
+        // nothing to do
     }
 
     /** {@inheritDoc} */
     @Override
     public void startCDATA() {
+        // nothing to do
     }
 
     /** {@inheritDoc} */

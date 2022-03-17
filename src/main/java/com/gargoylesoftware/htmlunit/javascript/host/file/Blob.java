@@ -63,6 +63,8 @@ public class Blob extends HtmlUnitScriptable {
     private static final String OPTIONS_TYPE_DEFAULT = "";
     private static final String OPTIONS_LASTMODIFIED = "lastModified";
 
+    private Backend backend_;
+
     protected abstract static class Backend implements Serializable {
         abstract String getName();
         abstract long getLastModified();
@@ -199,8 +201,6 @@ public class Blob extends HtmlUnitScriptable {
 
         return System.currentTimeMillis();
     }
-
-    private Backend backend_;
 
     /**
      * Creates an instance.

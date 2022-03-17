@@ -387,6 +387,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * Clears the computed styles.
      */
     public void clearComputedStyles() {
+        // nothing to do here, overwritten in HtmlPage
     }
 
     /**
@@ -396,6 +397,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * @param element the element to clear its cache
      */
     public void clearComputedStyles(final DomElement element) {
+        // nothing to do here, overwritten in HtmlPage
     }
 
     /**
@@ -406,5 +408,6 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      * @param element the element to clear its cache
      */
     public void clearComputedStylesUpToRoot(final DomElement element) {
+        // nothing to do here, overwritten in HtmlPage
     }
 }
