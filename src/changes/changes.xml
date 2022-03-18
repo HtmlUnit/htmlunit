@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.60.0" date="April x, 2022" description="Chrome/Edge 99, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: ES2017 Object.getOwnPropertyDescriptors() implemented.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Object.assign when undefined value and inextensible.
+            </action>
+            <action type="fix" dev="rbri">
+                Worker.terminate() stub added.
+            </action>
             <action type="fix" dev="rbri">
                 CanvasRenderingContext2D ignores unknown colors.
             </action>

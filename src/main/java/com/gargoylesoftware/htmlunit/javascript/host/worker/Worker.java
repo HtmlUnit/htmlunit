@@ -91,7 +91,7 @@ public class Worker extends EventTarget {
     }
 
     /**
-     * immediately terminates the Worker. This does not offer the worker
+     * Immediately terminates the Worker. This does not offer the worker
      * an opportunity to finish its operations; it is stopped at once.
      */
     @JsxFunction
