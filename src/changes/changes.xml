@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.60.0" date="April x, 2022" description="Chrome/Edge 99, Bugfixes">
+        <release version="2.60.0" date="March 20, 2022" description="Chrome/Edge 99, Bugfixes">
             <action type="fix" dev="RhinoTeam">
                 core-js: ES2017 Object.getOwnPropertyDescriptors() implemented.
             </action>
