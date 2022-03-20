@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.general;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -43,10 +40,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     private void test(final String className) throws Exception {
         final String html =
             "<html><head><script>\n"
-            + "  function log(msg) {\n"
-            + "    var ta = document.getElementById('myTextArea');\n"
-            + "    ta.value += msg + '; ';\n"
-            + "  }\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      log(" + className + ");\n"
@@ -54,13 +48,10 @@ public class HostClassNameTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        assertEquals(String.join("; ", getExpectedAlerts()) + "; ", textArea.getAttribute("value"));
+        loadPageVerifyTextArea2(html);
     }
 
     /**

@@ -352,7 +352,6 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
         if (StringUtils.isEmpty(params.get(CODEBASE)) && StringUtils.isNotEmpty(getCodebaseAttribute())) {
             params.put(CODEBASE, getCodebaseAttribute());
         }
-        final String codebaseProperty = params.get(CODEBASE);
 
         if (StringUtils.isEmpty(params.get(ARCHIVE)) && StringUtils.isNotEmpty(getArchiveAttribute())) {
             params.put(ARCHIVE, getArchiveAttribute());
@@ -380,6 +379,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
             final String documentUrl = page.getUrl().toExternalForm();
             String baseUrl = UrlUtils.resolveUrl(documentUrl, ".");
+            final String codebaseProperty = params.get(CODEBASE);
             if (StringUtils.isNotEmpty(codebaseProperty)) {
                 // codebase can be relative to the page
                 baseUrl = UrlUtils.resolveUrl(baseUrl, codebaseProperty);

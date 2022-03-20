@@ -34,6 +34,7 @@ public class WebWindowAdapter implements WebWindowListener {
      */
     @Override
     public void webWindowOpened(final WebWindowEvent event) {
+        // ignore
     }
 
     /**
@@ -43,6 +44,7 @@ public class WebWindowAdapter implements WebWindowListener {
      */
     @Override
     public void webWindowContentChanged(final WebWindowEvent event) {
+        // ignore
     }
 
     /**
@@ -52,6 +54,7 @@ public class WebWindowAdapter implements WebWindowListener {
      */
     @Override
     public void webWindowClosed(final WebWindowEvent event) {
+        // ignore
     }
 }
 

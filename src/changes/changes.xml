@@ -7,7 +7,35 @@
     </properties>
 
     <body>
-        <release version="2.59.0" date="March x, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
+        <release version="2.61.0" date="April xx, 2022" description="Bugfixes">
+        </release>
+
+        <release version="2.60.0" date="March 20, 2022" description="Chrome/Edge 99, Bugfixes">
+            <action type="fix" dev="RhinoTeam">
+                core-js: ES2017 Object.getOwnPropertyDescriptors() implemented.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix Object.assign when undefined value and inextensible.
+            </action>
+            <action type="fix" dev="rbri">
+                Worker.terminate() stub added.
+            </action>
+            <action type="fix" dev="rbri">
+                CanvasRenderingContext2D ignores unknown colors.
+            </action>
+            <action type="fix" dev="rbri" issue="383">
+                HtmlFileInput.setValueAttribute(String) now handles an empty input as no file.
+            </action>
+            <action type="fix" dev="rbri" issue="455">
+                Make sure template content is not added to the dom during parsing;
+                only to the content document fragment.
+            </action>
+            <action type="fix" dev="rbri" issue="451">
+                Image.prototype setup fixed.
+            </action>
+        </release>
+
+        <release version="2.59.0" date="March 5, 2022" description="Chrome/Edge 98, Firefox 97, Polyfills, Bugfixes">
             <action type="update" dev="rbri">
                 Polyfill support documented.
             </action>

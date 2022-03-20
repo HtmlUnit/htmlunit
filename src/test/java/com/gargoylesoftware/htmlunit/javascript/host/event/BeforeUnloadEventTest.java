@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -27,20 +26,21 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * Tests for {@link BeforeUnloadEvent}.
  *
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class BeforeUnloadEventTest extends WebDriverTestCase {
 
     private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
         + "    if (event) {\n"
-        + "      document.title += ' -' + event;\n"
-        + "      document.title += ' -' + event.type;\n"
-        + "      document.title += ' -' + event.bubbles;\n"
-        + "      document.title += ' -' + event.cancelable;\n"
-        + "      document.title += ' -' + event.composed;\n"
-        + "      document.title += ' -' + event.returnValue;\n"
+        + "      log(event);\n"
+        + "      log(event.type);\n"
+        + "      log(event.bubbles);\n"
+        + "      log(event.cancelable);\n"
+        + "      log(event.composed);\n"
+        + "      log(event.returnValue);\n"
         + "    } else {\n"
-        + "      document.title += ' ' + 'no event';\n"
+        + "      log('no event');\n"
         + "    }\n"
         + "  }\n";
 
@@ -68,97 +68,97 @@ public class BeforeUnloadEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-", "-false", "-false", "-false", "-"},
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "", "false", "false", "false", ""},
             IE = "exception")
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { document.title += 'exception' }\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-false", "-"},
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""},
             IE = "exception")
     public void initEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dump(event);\n"
-            + "    } catch (e) { document.title += 'exception' }\n"
+            + "    } catch (e) { log('exception') }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object BeforeUnloadEvent]", "-beforeunload", "-true", "-false", "-false", "-"},
+    @Alerts(DEFAULT = {"[object BeforeUnloadEvent]", "beforeunload", "true", "false", "false", ""},
             IE = "exception")
     public void dispatchEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('BeforeUnloadEvent');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { document.title += 'exception' }\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onbeforeunload  = dump;\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"-[object Event]", "-beforeunload", "-true", "-false", "-false", "-true"},
-            IE = {"-[object Event]", "-beforeunload", "-true", "-false", "-undefined", "-undefined"})
+    @Alerts(DEFAULT = {"[object Event]", "beforeunload", "true", "false", "false", "true"},
+            IE = {"[object Event]", "beforeunload", "true", "false", "undefined", "undefined"})
     public void dispatchEvent_event() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
             + "      var event = document.createEvent('Event');\n"
             + "      event.initEvent('beforeunload', true, false);\n"
             + "      dispatchEvent(event);\n"
-            + "    } catch (e) { document.title = 'exception'; }\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "  window.onbeforeunload = dump;\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**

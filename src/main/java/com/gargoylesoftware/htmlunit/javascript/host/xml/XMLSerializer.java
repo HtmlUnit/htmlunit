@@ -223,8 +223,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
         if (!startTagClosed) {
             final String tagName = nodeName.toLowerCase(Locale.ROOT);
             if (NON_EMPTY_TAGS.contains(tagName)) {
-                builder.append('>');
-                builder.append("</").append(nodeName).append('>');
+                builder.append("></").append(nodeName).append('>');
             }
             else {
                 builder.append(optionalPrefix);
@@ -236,7 +235,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             }
         }
         else {
-            builder.append('<').append('/').append(nodeName).append('>');
+            builder.append("</").append(nodeName).append('>');
         }
     }
 

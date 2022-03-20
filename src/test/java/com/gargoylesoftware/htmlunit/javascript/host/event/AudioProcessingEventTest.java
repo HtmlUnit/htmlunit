@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.event;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -133,14 +132,13 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "    try {\n"
             + "      var event = document.createEvent('AudioProcessingEvent');\n"
             + "      dump(event);\n"
-            + "    } catch (e) { document.title += 'exception' }\n"
+            + "    } catch (e) { log('exception'); }\n"
             + "  }\n"
             + DUMP_EVENT_FUNCTION
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, String.join(" ", getExpectedAlerts()));
+        loadPageVerifyTitle2(html);
     }
 
     /**

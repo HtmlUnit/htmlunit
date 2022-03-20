@@ -21,7 +21,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROMISE;
@@ -314,8 +313,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();
 
-            if ("Image".equals(hostClassSimpleName)
-                    && browserVersion.hasFeature(JS_IMAGE_PROTOTYPE_SAME_AS_HTML_IMAGE)) {
+            if ("Image".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
             }
             if ("Option".equals(hostClassSimpleName)) {

@@ -1332,4 +1332,31 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0")
+    public void clear() throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var f =  document.createElement('input');\n"
+                + "      f.type='file';\n"
+                + "      f.id='fileId';\n"
+                + "      document.body.appendChild(f);"
+
+                + "      f.value='';\n"
+                + "      log(f.files.length);\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

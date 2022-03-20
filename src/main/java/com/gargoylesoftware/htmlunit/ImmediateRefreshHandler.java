@@ -45,7 +45,6 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable {
         if (window == null) {
             return;
         }
-        final WebClient client = window.getWebClient();
         if (page.getUrl().toExternalForm().equals(url.toExternalForm())
                 && HttpMethod.GET == page.getWebResponse().getWebRequest().getHttpMethod()) {
             final String msg = "Refresh to " + url + " (" + seconds + "s) aborted by HtmlUnit: "
@@ -54,7 +53,8 @@ public class ImmediateRefreshHandler implements RefreshHandler, Serializable {
                 + "Please use WaitingRefreshHandler or ThreadedRefreshHandler instead.";
             throw new RuntimeException(msg);
         }
-        client.getPage(window, new WebRequest(url));
+
+        window.getWebClient().getPage(window, new WebRequest(url));
     }
 
 }

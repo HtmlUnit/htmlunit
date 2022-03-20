@@ -148,6 +148,11 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public void setValueAttribute(final String newValue) {
+        if (StringUtils.isEmpty(newValue)) {
+            setFiles();
+            return;
+        }
+
         setFiles(new File(newValue));
     }
 

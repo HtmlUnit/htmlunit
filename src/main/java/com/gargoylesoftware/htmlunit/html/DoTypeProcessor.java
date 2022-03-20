@@ -176,8 +176,6 @@ class DoTypeProcessor implements Serializable {
     void doType(final String currentValue, final SelectionDelegate selectionDelegate,
             final int keyCode, final HtmlElement element, final boolean lastType) {
 
-        final StringBuilder newValue = new StringBuilder(currentValue);
-
         int selectionStart = selectionDelegate.getSelectionStart();
         selectionStart = Math.max(0, Math.min(selectionStart, currentValue.length()));
 
@@ -189,6 +187,8 @@ class DoTypeProcessor implements Serializable {
             doType(currentValue, selectionDelegate, ch, element, lastType);
             return;
         }
+
+        final StringBuilder newValue = new StringBuilder(currentValue);
         switch (keyCode) {
             case DOM_VK_BACK_SPACE:
                 if (selectionStart > 0) {

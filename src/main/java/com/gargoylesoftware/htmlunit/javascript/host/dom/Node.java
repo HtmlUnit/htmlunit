@@ -310,13 +310,14 @@ public class Node extends EventTarget {
 
         if (newChildObject instanceof Node) {
             final Node newChild = (Node) newChildObject;
-            final DomNode newChildNode = newChild.getDomNodeOrDie();
 
             // is the node allowed here?
             if (!isNodeInsertable(newChild)) {
                 throw ScriptRuntime.constructError("ReferenceError",
                         "Node cannot be inserted at the specified point in the hierarchy");
             }
+
+            final DomNode newChildNode = newChild.getDomNodeOrDie();
             if (newChildNode instanceof DomDocumentFragment) {
                 final DomDocumentFragment fragment = (DomDocumentFragment) newChildNode;
                 for (final DomNode child : fragment.getChildren()) {

@@ -271,7 +271,6 @@ public class HtmlLink extends HtmlElement {
             LOG.debug("Link node added: " + asXml());
         }
 
-        final WebClient webClient = getPage().getWebClient();
         if (!isStyleSheetLink()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Link type '" + getRelAttribute() + "' not supported ("
@@ -281,6 +280,7 @@ public class HtmlLink extends HtmlElement {
             return;
         }
 
+        final WebClient webClient = getPage().getWebClient();
         if (!webClient.getOptions().isCssEnabled()) {
             if (LOG.isDebugEnabled()) {
                 LOG.debug("Stylesheet Link found but ignored because css support is disabled ("

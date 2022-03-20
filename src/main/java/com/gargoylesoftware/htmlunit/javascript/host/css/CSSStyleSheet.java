@@ -1129,13 +1129,13 @@ public class CSSStyleSheet extends StyleSheet {
             if (node instanceof HtmlLink) {
                 // <link rel="stylesheet" type="text/css" href="..." />
                 final HtmlLink link = (HtmlLink) node;
-                final HtmlPage page = (HtmlPage) link.getPage();
                 final String href = link.getHrefAttribute();
                 if ("".equals(href) && getBrowserVersion().hasFeature(STYLESHEET_HREF_EMPTY_IS_NULL)) {
                     return null;
                 }
                 // Expand relative URLs.
                 try {
+                    final HtmlPage page = (HtmlPage) link.getPage();
                     final URL url = page.getFullyQualifiedUrl(href);
                     return url.toExternalForm();
                 }

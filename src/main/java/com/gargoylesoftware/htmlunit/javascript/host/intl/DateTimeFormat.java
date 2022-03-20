@@ -183,12 +183,13 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         EDGE_FORMATS_.put("en-CA", yyyyDash);
         EDGE_FORMATS_.put("en-IE", ddSlash);
         EDGE_FORMATS_.put("en-MT", ddSlash);
-        EDGE_FORMATS_.put("en-PH", ddSlash);
+        EDGE_FORMATS_.put("en-PH", mmSlash);
         EDGE_FORMATS_.put("es-US", ddSlash);
         EDGE_FORMATS_.put("fr-CH", ddDot);
         EDGE_FORMATS_.put("hr", ddDotBlankDot);
         EDGE_FORMATS_.put("in-ID", ddSlash);
         EDGE_FORMATS_.put("iw", ddDot);
+        EDGE_FORMATS_.put("lv", ddDotDot);
         EDGE_FORMATS_.put("nl-BE", ddSlash);
 
         IE_FORMATS_.put("ar", rightToLeft);

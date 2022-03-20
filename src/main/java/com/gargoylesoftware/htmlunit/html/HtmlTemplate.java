@@ -62,25 +62,6 @@ public class HtmlTemplate extends HtmlElement {
         return domDocumentFragment_;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void onAllChildrenAddedToPage(final boolean postponed) {
-        // parsing of the children is done, we can move our children to the content
-        while (getFirstChild() != null) {
-            final DomNode child = getFirstChild();
-
-            child.basicRemove();
-            final HtmlPage htmlPage = getHtmlPageOrNull();
-            if (htmlPage != null) {
-                htmlPage.notifyNodeRemoved(child);
-            }
-
-            domDocumentFragment_.appendChild(child);
-        }
-    }
-
     @Override
     protected boolean isEmptyXmlTagExpanded() {
         // Always print expanded tag to force printing of

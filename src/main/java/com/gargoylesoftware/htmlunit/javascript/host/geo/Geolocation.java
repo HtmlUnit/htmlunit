@@ -208,14 +208,11 @@ public class Geolocation extends HtmlUnitScriptable {
                                 if (line.startsWith("Signal")) {
                                     final String signal = line.substring(line.lastIndexOf(' ') + 1, line.length() - 1);
                                     final int signalStrength = Integer.parseInt(signal) / 2 - 100;
-                                    builder.append("&wifi=")
-                                        .append("mac:")
+                                    builder.append("&wifi=mac:")
                                         .append(mac.replace(':', '-'))
-                                        .append("%7C")
-                                        .append("ssid:")
+                                        .append("%7Cssid:")
                                         .append(name)
-                                        .append("%7C")
-                                        .append("ss:")
+                                        .append("%7Css:")
                                         .append(signalStrength);
                                 }
                             }

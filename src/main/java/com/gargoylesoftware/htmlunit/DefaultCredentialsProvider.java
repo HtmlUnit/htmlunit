@@ -60,6 +60,9 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
     /** The {@code null} value represents any authentication scheme. */
     public static final String ANY_SCHEME = null;
 
+    private static SocksProxyAuthenticator SocksAuthenticator_;
+    private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
+
     // Because this is used for the whole JVM i try to make it as less invasive as possible.
     // But in general this might disturb other application running on the same JVM.
     private static final class SocksProxyAuthenticator extends Authenticator {
@@ -85,10 +88,6 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
             return new PasswordAuthentication(credentials.getUserPrincipal().getName(), credentials.getPassword());
         }
     }
-
-    private static SocksProxyAuthenticator SocksAuthenticator_;
-
-    private final Map<AuthScopeProxy, Credentials> credentialsMap_ = new HashMap<>();
 
     /**
      * Adds credentials for the specified username/password for any host/port/realm combination.

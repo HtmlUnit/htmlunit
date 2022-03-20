@@ -734,11 +734,11 @@ public class Document extends Node {
      */
     @JsxFunction
     public Object createElementNS(final String namespaceURI, final String qualifiedName) {
-        final org.w3c.dom.Element element;
         if ("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul".equals(namespaceURI)) {
             throw Context.reportRuntimeError("XUL not available");
         }
 
+        final org.w3c.dom.Element element;
         if (Html.XHTML_NAMESPACE.equals(namespaceURI)
                 || Html.SVG_NAMESPACE.equals(namespaceURI)) {
             element = getPage().createElementNS(namespaceURI, qualifiedName);
