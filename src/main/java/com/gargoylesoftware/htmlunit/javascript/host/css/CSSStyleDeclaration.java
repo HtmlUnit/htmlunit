@@ -216,9 +216,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
-    private static final Map<String, String> CamelizeCache_
-            = Collections.synchronizedMap(new HashMap<>());
-
     /** The element to which this style belongs. */
     private Element jsElement_;
 
@@ -497,49 +494,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return Collections.emptyMap();
         }
         return jsElement_.getDomNodeOrDie().getStyleMap();
-    }
-
-    /**
-     * Transforms the specified string from delimiter-separated (e.g. <tt>font-size</tt>)
-     * to camel-cased (e.g. <tt>fontSize</tt>).
-     * @param string the string to camelize
-     * @return the transformed string
-     * @see com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap#decamelize(String)
-     */
-    protected static String camelize(final String string) {
-        if (string == null) {
-            return null;
-        }
-
-        String result = CamelizeCache_.get(string);
-        if (null != result) {
-            return result;
-        }
-
-        // not found in CamelizeCache_; convert and store in cache
-        final int pos = string.indexOf('-');
-        if (pos == -1 || pos == string.length() - 1) {
-            // cache also this strings for performance
-            CamelizeCache_.put(string, string);
-            return string;
-        }
-
-        final StringBuilder builder = new StringBuilder(string);
-        builder.deleteCharAt(pos);
-        builder.setCharAt(pos, Character.toUpperCase(builder.charAt(pos)));
-
-        int i = pos + 1;
-        while (i < builder.length() - 1) {
-            if (builder.charAt(i) == '-') {
-                builder.deleteCharAt(i);
-                builder.setCharAt(i, Character.toUpperCase(builder.charAt(i)));
-            }
-            i++;
-        }
-        result = builder.toString();
-        CamelizeCache_.put(string, result);
-
-        return result;
     }
 
     /**
@@ -1640,7 +1594,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 return value;
             }
 
-            final String camel = camelize(name);
+            final String camel = com.gargoylesoftware.htmlunit.util.StringUtils.cssCamelize(name);
             if (!name.equals(camel)) {
                 value = prototype.get(camel, start);
                 if (value != Scriptable.NOT_FOUND) {
@@ -1722,7 +1676,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 prototype.put(name, start, value);
                 return;
             }
-            final String camel = camelize(name);
+            final String camel = com.gargoylesoftware.htmlunit.util.StringUtils.cssCamelize(name);
             if (!name.equals(camel) && prototype.get(camel, start) != Scriptable.NOT_FOUND) {
                 prototype.put(camel, start, value);
                 return;
@@ -2602,7 +2556,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @JsxFunction
     public String getPropertyValue(final String name) {
         if (name != null && name.contains("-")) {
-            final Object value = getProperty(this, camelize(name));
+            final Object value = getProperty(this, com.gargoylesoftware.htmlunit.util.StringUtils.cssCamelize(name));
             if (value instanceof String) {
                 return (String) value;
             }

@@ -1901,7 +1901,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
-        final Object property = getProperty(this, camelize(name));
+        final Object property = getProperty(this, com.gargoylesoftware.htmlunit.util.StringUtils.cssCamelize(name));
         if (property == NOT_FOUND) {
             return super.getPropertyValue(name);
         }
