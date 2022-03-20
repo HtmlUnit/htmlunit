@@ -33,13 +33,14 @@
             </p>
             <p>
                 HtmlUnit is used as the underlying "browser" by different Open Source tools like
+                <a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,
+                <a href="https://www.wetator.org/">WETATOR</a>,
+                <a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,
+                <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a>, ...
                 <a href="http://webtest.canoo.com/">Canoo WebTest</a>,
                 <a href="https://jwebunit.github.io/jwebunit/">JWebUnit</a>,
-                <a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,
                 <a href="http://www.jboss.org/jsfunit/">JSFUnit</a>,
-                <a href="https://www.wetator.org/">WETATOR</a>,
                 <a href="http://celerity.rubyforge.org/">Celerity</a>,
-                <a href="https://docs.spring.io/spring/docs/current/spring-framework-reference/testing.html#spring-mvc-test-server-htmlunit">Spring Testing</a>, ...
             </p>
             <p>
                 HtmlUnit was originally written by
