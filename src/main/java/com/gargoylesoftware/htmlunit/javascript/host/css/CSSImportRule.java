@@ -22,6 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.htmlunit.css.CssMediaList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -75,7 +76,8 @@ public class CSSImportRule extends CSSRule {
         if (media_ == null) {
             final CSSStyleSheet parent = getParentStyleSheet();
             final MediaListImpl ml = getImportRule().getMedia();
-            media_ = new MediaList(parent, ml);
+
+            media_ = new MediaList(parent, new CssMediaList(ml));
         }
         return media_;
     }

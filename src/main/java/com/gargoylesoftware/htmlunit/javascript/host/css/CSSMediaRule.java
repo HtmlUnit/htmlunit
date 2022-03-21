@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.css.CssMediaList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -68,7 +69,8 @@ public class CSSMediaRule extends CSSConditionRule {
         if (media_ == null) {
             final CSSStyleSheet parent = getParentStyleSheet();
             final MediaListImpl ml = getMediaRule().getMediaList();
-            media_ = new MediaList(parent, ml);
+
+            media_ = new MediaList(parent, new CssMediaList(ml));
         }
         return media_;
     }

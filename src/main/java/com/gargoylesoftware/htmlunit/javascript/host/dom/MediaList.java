@@ -21,9 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.css.CssMediaList;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -44,23 +44,23 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 @JsxClass
 public class MediaList extends HtmlUnitScriptable {
 
-    private final MediaListImpl wrappedList_;
+    private final CssMediaList cssMediaList_;
 
     /**
      * Creates a new instance.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public MediaList() {
-        wrappedList_ = null;
+        cssMediaList_ = null;
     }
 
     /**
      * Creates a new instance.
      * @param parent the parent style
-     * @param wrappedList the wrapped media list that this host object exposes
+     * @param cssMediaList the css media list that this host object exposes
      */
-    public MediaList(final CSSStyleSheet parent, final MediaListImpl wrappedList) {
-        wrappedList_ = wrappedList;
+    public MediaList(final CSSStyleSheet parent, final CssMediaList cssMediaList) {
+        cssMediaList_ = cssMediaList;
         setParentScope(parent);
         setPrototype(getPrototype(getClass()));
     }
@@ -72,10 +72,11 @@ public class MediaList extends HtmlUnitScriptable {
      */
     @JsxFunction
     public String item(final int index) {
-        if (index < 0 || index >= getLength()) {
+        if (cssMediaList_ == null || index < 0 || index >= getLength()) {
             return null;
         }
-        final MediaQuery mq = wrappedList_.mediaQuery(index);
+
+        final MediaQuery mq = cssMediaList_.getMediaQuery(index);
         return mq.toString();
     }
 
@@ -85,7 +86,11 @@ public class MediaList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return wrappedList_.getLength();
+        if (cssMediaList_ == null) {
+            return 0;
+        }
+
+        return cssMediaList_.getLength();
     }
 
     /**
@@ -95,13 +100,17 @@ public class MediaList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMediaText() {
-        return wrappedList_.getMediaText();
+        if (cssMediaList_ == null) {
+            return null;
+        }
+
+        return cssMediaList_.getMediaText();
     }
 
     @Override
     public Object getDefaultValue(final Class<?> hint) {
-        if (getPrototype() != null && wrappedList_ != null) {
-            if (wrappedList_.getLength() == 0) {
+        if (getPrototype() != null && cssMediaList_ != null) {
+            if (cssMediaList_.getLength() == 0) {
                 final BrowserVersion browserVersion = getBrowserVersion();
                 if (browserVersion.hasFeature(JS_MEDIA_LIST_EMPTY_STRING)) {
                     return "";
@@ -110,8 +119,9 @@ public class MediaList extends HtmlUnitScriptable {
                     return "all";
                 }
             }
-            return wrappedList_.getMediaText();
+            return cssMediaList_.getMediaText();
         }
+
         return super.getDefaultValue(hint);
     }
 }
