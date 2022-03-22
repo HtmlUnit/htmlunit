@@ -149,9 +149,6 @@ public class CSSStyleSheet extends StyleSheet {
     /** cache parsed media strings */
     private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
 
-    /** This stylesheet's URI (used to resolved contained @import rules). */
-    private String uri_;
-
     private boolean enabled_ = true;
 
     private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
@@ -188,7 +185,6 @@ public class CSSStyleSheet extends StyleSheet {
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
-        uri_ = uri;
         ownerNode_ = element;
     }
 
@@ -213,7 +209,6 @@ public class CSSStyleSheet extends StyleSheet {
         setPrototype(getPrototype(CSSStyleSheet.class));
 
         styleSheet_ = css;
-        uri_ = uri;
         ownerNode_ = element;
     }
 
@@ -229,7 +224,6 @@ public class CSSStyleSheet extends StyleSheet {
         setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
         styleSheet_ = cssStyleSheet;
-        uri_ = uri;
         ownerNode_ = element;
     }
 
@@ -723,7 +717,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @return this stylesheet's URI (used to resolved contained @import rules)
      */
     public String getUri() {
-        return uri_;
+        return getCssStyleSheet().getUri();
     }
 
     /**

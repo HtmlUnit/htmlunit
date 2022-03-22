@@ -205,6 +205,15 @@ public class CssStyleSheet {
     }
 
     /**
+     * Returns this stylesheet's URI (used to resolved contained @import rules).
+     * For inline styles this is the page uri.
+     * @return this stylesheet's URI (used to resolved contained @import rules)
+     */
+    public String getUri() {
+        return uri_;
+    }
+
+    /**
      * Loads the stylesheet at the specified link or href.
      * @param element the parent DOM element
      * @param link the stylesheet's link (may be {@code null} if a <tt>url</tt> is specified)
