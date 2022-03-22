@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
@@ -25,17 +24,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
-import static java.nio.charset.StandardCharsets.UTF_16BE;
-import static java.nio.charset.StandardCharsets.UTF_16LE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -46,8 +39,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -85,11 +76,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.Cache;
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -107,8 +94,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
-import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -263,140 +248,21 @@ public class CSSStyleSheet extends StyleSheet {
      * @return the loaded stylesheet
      */
     public static CSSStyleSheet loadStylesheet(final HTMLElement element, final HtmlLink link, final String url) {
-        final HtmlPage page = (HtmlPage) element.getDomNodeOrDie().getPage();
-        String uri = page.getUrl().toExternalForm();
         try {
-            // Retrieve the associated content and respect client settings regarding failing HTTP status codes.
-            final WebRequest request;
-            final WebResponse response;
-            final WebClient client = page.getWebClient();
-            if (link == null) {
-                // Use href.
-                final BrowserVersion browser = client.getBrowserVersion();
-                request = new WebRequest(new URL(url), browser.getCssAcceptHeader(), browser.getAcceptEncodingHeader());
-                request.setRefererlHeader(page.getUrl());
-
-                // our cache is a bit strange;
-                // loadWebResponse check the cache for the web response
-                // AND also fixes the request url for the following cache lookups
-                response = client.loadWebResponse(request);
-            }
-            else {
-                // Use link.
-                request = link.getWebRequest();
-
-                if (element.getBrowserVersion().hasFeature(HTMLLINK_CHECK_TYPE_FOR_STYLESHEET)) {
-                    final String type = link.getTypeAttribute();
-                    if (StringUtils.isNotBlank(type) && !MimeType.TEXT_CSS.equals(type)) {
-                        return new CSSStyleSheet(element, "", uri);
-                    }
-                }
-
-                // our cache is a bit strange;
-                // loadWebResponse check the cache for the web response
-                // AND also fixes the request url for the following cache lookups
-                response = link.getWebResponse(true, request);
-            }
-
-            // now we can look into the cache with the fixed request for
-            // a cached script
-            final Cache cache = client.getCache();
-            final Object fromCache = cache.getCachedObject(request);
-            if (fromCache instanceof CSSStyleSheetImpl) {
-                uri = request.getUrl().toExternalForm();
-                final CssStyleSheet css = new CssStyleSheet(element.getDomNodeOrDie(),
-                        (CSSStyleSheetImpl) fromCache, uri);
-                return new CSSStyleSheet(element, element.getWindow(), css);
-            }
-
-            uri = response.getWebRequest().getUrl().toExternalForm();
-            client.printContentIfNecessary(response);
-            client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
-            // CSS content must have downloaded OK; go ahead and build the corresponding stylesheet.
-
-            final CSSStyleSheet sheet;
-            final String contentType = response.getContentType();
-            if (StringUtils.isEmpty(contentType) || MimeType.TEXT_CSS.equals(contentType)) {
-
-                final InputStream in = response.getContentAsStreamWithBomIfApplicable();
-                if (in == null) {
-                    if (LOG.isWarnEnabled()) {
-                        LOG.warn("Loading stylesheet for url '" + uri + "' returns empty responseData");
-                    }
-                    return new CSSStyleSheet(element, "", uri);
-                }
-                try {
-                    Charset cssEncoding = Charset.forName("windows-1252");
-                    final Charset contentCharset =
-                            EncodingSniffer.sniffEncodingFromHttpHeaders(response.getResponseHeaders());
-                    if (contentCharset == null && request.getCharset() != null) {
-                        cssEncoding = request.getCharset();
-                    }
-                    else if (contentCharset != null) {
-                        cssEncoding = contentCharset;
-                    }
-
-                    if (in instanceof BOMInputStream) {
-                        final BOMInputStream bomIn = (BOMInputStream) in;
-                        // there seems to be a bug in BOMInputStream
-                        // we have to call this before hasBOM(ByteOrderMark)
-                        if (bomIn.hasBOM()) {
-                            if (bomIn.hasBOM(ByteOrderMark.UTF_8)) {
-                                cssEncoding = UTF_8;
-                            }
-                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16BE)) {
-                                cssEncoding = UTF_16BE;
-                            }
-                            else if (bomIn.hasBOM(ByteOrderMark.UTF_16LE)) {
-                                cssEncoding = UTF_16LE;
-                            }
-                        }
-                    }
-                    try (InputSource source = new InputSource(new InputStreamReader(in, cssEncoding))) {
-                        source.setURI(uri);
-                        sheet = new CSSStyleSheet(element, source, uri);
-                    }
-                }
-                finally {
-                    in.close();
-                }
-            }
-            else {
-                sheet = new CSSStyleSheet(element, "", uri);
-            }
-
-            // cache the style sheet
-            if (!cache.cacheIfPossible(request, response, sheet.getCssStyleSheet().getWrappedSheet())) {
-                response.cleanUp();
-            }
-
-            return sheet;
-        }
-        catch (final FailingHttpStatusCodeException e) {
-            // Got a 404 response or something like that; behave nicely.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception loading " + uri, e);
-            }
-            return new CSSStyleSheet(element, "", uri);
-        }
-        catch (final IOException e) {
-            // Got a basic IO error; behave nicely.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("IOException loading " + uri, e);
-            }
-            return new CSSStyleSheet(element, "", uri);
+            final CssStyleSheet css = CssStyleSheet.loadStylesheet(element.getDomNodeOrDie(), link, url);
+            return new CSSStyleSheet(element, element.getWindow(), css);
         }
         catch (final RuntimeException e) {
             // Got something unexpected; we can throw an exception in this case.
             if (LOG.isErrorEnabled()) {
-                LOG.error("RuntimeException loading " + uri, e);
+                LOG.error("RuntimeException loading " + url, e);
             }
             throw Context.reportRuntimeError("Exception: " + e);
         }
         catch (final Exception e) {
             // Got something unexpected; we can throw an exception in this case.
             if (LOG.isErrorEnabled()) {
-                LOG.error("Exception loading " + uri, e);
+                LOG.error("Exception loading " + url, e);
             }
             throw Context.reportRuntimeError("Exception: " + e);
         }

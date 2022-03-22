@@ -91,8 +91,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-
 /**
  * A css StyleSheet.
  *
@@ -342,20 +340,6 @@ public class CssStyleSheet implements Serializable {
                 LOG.error("IOException loading " + uri, e);
             }
             return new CssStyleSheet(element, "", uri);
-        }
-        catch (final RuntimeException e) {
-            // Got something unexpected; we can throw an exception in this case.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("RuntimeException loading " + uri, e);
-            }
-            throw Context.reportRuntimeError("Exception: " + e);
-        }
-        catch (final Exception e) {
-            // Got something unexpected; we can throw an exception in this case.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception loading " + uri, e);
-            }
-            throw Context.reportRuntimeError("Exception: " + e);
         }
     }
 

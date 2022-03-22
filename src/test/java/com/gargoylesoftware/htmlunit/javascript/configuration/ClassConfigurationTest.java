@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.configuration;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.javascript.SimpleScriptable;
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * Tests for {@link ClassConfiguration}.
@@ -48,7 +48,7 @@ public class ClassConfigurationTest extends SimpleWebTestCase {
     /**
      * Test class.
      */
-    protected class ConfigTestClass extends SimpleScriptable {
+    protected class ConfigTestClass extends HtmlUnitScriptable {
         private boolean test_ = false;
 
         /**
