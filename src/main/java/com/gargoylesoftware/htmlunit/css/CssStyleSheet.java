@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -103,7 +104,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Frank Danek
  * @author Carsten Steul
  */
-public class CssStyleSheet {
+public class CssStyleSheet implements Serializable {
 
     private static final Log LOG = LogFactory.getLog(CssStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");

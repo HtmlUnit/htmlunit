@@ -217,10 +217,9 @@ public class CSSStyleSheet extends StyleSheet {
      * @param element the owning node
      * @param parentScope the parent scope
      * @param cssStyleSheet the CSS stylesheet which this stylesheet host object represents
-     * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final Scriptable parentScope,
-            final CssStyleSheet cssStyleSheet, final String uri) {
+            final CssStyleSheet cssStyleSheet) {
         setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
         styleSheet_ = cssStyleSheet;
@@ -305,7 +304,9 @@ public class CSSStyleSheet extends StyleSheet {
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache instanceof CSSStyleSheetImpl) {
                 uri = request.getUrl().toExternalForm();
-                return new CSSStyleSheet(element, element.getWindow(), (CssStyleSheet) fromCache, uri);
+                final CssStyleSheet css = new CssStyleSheet(element.getDomNodeOrDie(),
+                        (CSSStyleSheetImpl) fromCache, uri);
+                return new CSSStyleSheet(element, element.getWindow(), css);
             }
 
             uri = response.getWebRequest().getUrl().toExternalForm();

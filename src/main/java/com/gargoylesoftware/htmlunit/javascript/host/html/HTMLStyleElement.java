@@ -70,7 +70,7 @@ public class HTMLStyleElement extends HTMLElement {
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                 .getUrl().toExternalForm();
         if (cached != null) {
-            sheet_ = new CSSStyleSheet(this, window, new CssStyleSheet(style, cached, uri), uri);
+            sheet_ = new CSSStyleSheet(this, window, new CssStyleSheet(style, cached, uri));
         }
         else {
             sheet_ = new CSSStyleSheet(this, css, uri);
