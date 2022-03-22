@@ -32,7 +32,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +47,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.ByteOrderMark;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -136,7 +134,7 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
 
     /** The parsed stylesheet which this host object wraps. */
-    private final CSSStyleSheetImpl wrapped_;
+    private final CssStyleSheet styleSheet_;
 
     /** The HTML element which owns this stylesheet. */
     private final HTMLElement ownerNode_;
@@ -175,7 +173,7 @@ public class CSSStyleSheet extends StyleSheet {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSStyleSheet() {
-        wrapped_ = new CSSStyleSheetImpl();
+        styleSheet_ = new CssStyleSheet(null, (InputSource) null, null);
         ownerNode_ = null;
     }
 
@@ -186,14 +184,10 @@ public class CSSStyleSheet extends StyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final InputSource source, final String uri) {
-        final Window win = element.getWindow();
-
-        setParentScope(win);
+        setParentScope(element.getWindow());
         setPrototype(getPrototype(CSSStyleSheet.class));
-        if (source != null) {
-            source.setURI(uri);
-        }
-        wrapped_ = parseCSS(source, win.getWebWindow().getWebClient());
+
+        styleSheet_ = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
         uri_ = uri;
         ownerNode_ = element;
     }
@@ -207,10 +201,9 @@ public class CSSStyleSheet extends StyleSheet {
     public CSSStyleSheet(final HTMLElement element, final String styleSheet, final String uri) {
         final Window win = element.getWindow();
 
-        CSSStyleSheetImpl css = null;
+        CssStyleSheet css = null;
         try (InputSource source = new InputSource(new StringReader(styleSheet))) {
-            source.setURI(uri);
-            css = parseCSS(source, win.getWebWindow().getWebClient());
+            css = new CssStyleSheet(element.getDomNodeOrDie(), source, uri);
         }
         catch (final IOException e) {
             LOG.error(e.getMessage(), e);
@@ -218,7 +211,8 @@ public class CSSStyleSheet extends StyleSheet {
 
         setParentScope(win);
         setPrototype(getPrototype(CSSStyleSheet.class));
-        wrapped_ = css;
+
+        styleSheet_ = css;
         uri_ = uri;
         ownerNode_ = element;
     }
@@ -227,14 +221,14 @@ public class CSSStyleSheet extends StyleSheet {
      * Creates a new stylesheet representing the specified CSS stylesheet.
      * @param element the owning node
      * @param parentScope the parent scope
-     * @param wrapped the CSS stylesheet which this stylesheet host object represents
+     * @param cssStyleSheet the CSS stylesheet which this stylesheet host object represents
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CSSStyleSheet(final HTMLElement element, final Scriptable parentScope,
-            final CSSStyleSheetImpl wrapped, final String uri) {
+            final CssStyleSheet cssStyleSheet, final String uri) {
         setParentScope(parentScope);
         setPrototype(getPrototype(CSSStyleSheet.class));
-        wrapped_ = wrapped;
+        styleSheet_ = cssStyleSheet;
         uri_ = uri;
         ownerNode_ = element;
     }
@@ -243,8 +237,8 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the wrapped stylesheet.
      * @return the wrapped stylesheet
      */
-    public CSSStyleSheetImpl getWrappedSheet() {
-        return wrapped_;
+    public CssStyleSheet getCssStyleSheet() {
+        return styleSheet_;
     }
 
     /**
@@ -317,7 +311,7 @@ public class CSSStyleSheet extends StyleSheet {
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache instanceof CSSStyleSheetImpl) {
                 uri = request.getUrl().toExternalForm();
-                return new CSSStyleSheet(element, element.getWindow(), (CSSStyleSheetImpl) fromCache, uri);
+                return new CSSStyleSheet(element, element.getWindow(), (CssStyleSheet) fromCache, uri);
             }
 
             uri = response.getWebRequest().getUrl().toExternalForm();
@@ -377,7 +371,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
 
             // cache the style sheet
-            if (!cache.cacheIfPossible(request, response, sheet.getWrappedSheet())) {
+            if (!cache.cacheIfPossible(request, response, sheet.getCssStyleSheet().getWrappedSheet())) {
                 response.cleanUp();
             }
 
@@ -450,31 +444,6 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Parses the CSS at the specified input source. If anything at all goes wrong, this method
-     * returns an empty stylesheet.
-     *
-     * @param source the source from which to retrieve the CSS to be parsed
-     * @param client the client
-     * @return the stylesheet parsed from the specified input source
-     */
-    private static CSSStyleSheetImpl parseCSS(final InputSource source, final WebClient client) {
-        CSSStyleSheetImpl ss;
-        try {
-            final CSSErrorHandler errorHandler = client.getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-            ss = parser.parseStyleSheet(source, null);
-        }
-        catch (final Throwable t) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS from '" + toString(source) + "': " + t.getMessage(), t);
-            }
-            ss = new CSSStyleSheetImpl();
-        }
-        return ss;
-    }
-
-    /**
      * Parses the selectors at the specified input source. If anything at all goes wrong, this
      * method returns an empty selector list.
      *
@@ -532,30 +501,6 @@ public class CSSStyleSheet extends StyleSheet {
         media = new MediaListImpl(null);
         media_.put(mediaString, media);
         return media;
-    }
-
-    /**
-     * Returns the contents of the specified input source, ignoring any {@link IOException}s.
-     * @param source the input source from which to read
-     * @return the contents of the specified input source, or an empty string if an {@link IOException} occurs
-     */
-    private static String toString(final InputSource source) {
-        try {
-            final Reader reader = source.getReader();
-            if (null != reader) {
-                // try to reset to produce some output
-                if (reader instanceof StringReader) {
-                    final StringReader sr = (StringReader) reader;
-                    sr.reset();
-                }
-                return IOUtils.toString(reader);
-            }
-            return "";
-        }
-        catch (final IOException e) {
-            LOG.error(e.getMessage(), e);
-            return "";
-        }
     }
 
     /**
@@ -640,7 +585,7 @@ public class CSSStyleSheet extends StyleSheet {
     public int insertRule(final String rule, final int position) {
         try {
             initCssRules();
-            wrapped_.insertRule(rule, fixIndex(position));
+            getCssStyleSheet().getWrappedSheet().insertRule(rule, fixIndex(position));
             refreshCssRules();
             return position;
         }
@@ -650,7 +595,7 @@ public class CSSStyleSheet extends StyleSheet {
             if (pos > -1) {
                 final String newRule = rule.substring(0, pos) + "{}";
                 try {
-                    wrapped_.insertRule(newRule, fixIndex(position));
+                    getCssStyleSheet().getWrappedSheet().insertRule(newRule, fixIndex(position));
                     refreshCssRules();
                     return position;
                 }
@@ -670,7 +615,7 @@ public class CSSStyleSheet extends StyleSheet {
         cssRules_.clearRules();
         cssRulesIndexFix_.clear();
 
-        final CSSRuleListImpl ruleList = getWrappedSheet().getCssRules();
+        final CSSRuleListImpl ruleList = getCssStyleSheet().getWrappedSheet().getCssRules();
         final List<AbstractCSSRuleImpl> rules = ruleList.getRules();
         int pos = 0;
         for (final AbstractCSSRuleImpl rule : rules) {
@@ -691,7 +636,7 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         // reset our index also
-        getWrappedSheet().resetRuleIndex();
+        getCssStyleSheet().getWrappedSheet().resetRuleIndex();
     }
 
     private int fixIndex(int index) {
@@ -713,7 +658,7 @@ public class CSSStyleSheet extends StyleSheet {
     public void deleteRule(final int position) {
         try {
             initCssRules();
-            wrapped_.deleteRule(fixIndex(position));
+            getCssStyleSheet().getWrappedSheet().deleteRule(fixIndex(position));
             refreshCssRules();
         }
         catch (final DOMException e) {
@@ -733,14 +678,16 @@ public class CSSStyleSheet extends StyleSheet {
         String completeRule = selector + " {" + rule + "}";
         try {
             initCssRules();
-            wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+            getCssStyleSheet().getWrappedSheet().insertRule(completeRule,
+                    getCssStyleSheet().getWrappedSheet().getCssRules().getLength());
             refreshCssRules();
         }
         catch (final DOMException e) {
             // in case of error try with an empty rule
             completeRule = selector + " {}";
             try {
-                wrapped_.insertRule(completeRule, wrapped_.getCssRules().getLength());
+                getCssStyleSheet().getWrappedSheet().insertRule(completeRule,
+                        getCssStyleSheet().getWrappedSheet().getCssRules().getLength());
                 refreshCssRules();
             }
             catch (final DOMException ex) {
@@ -748,7 +695,7 @@ public class CSSStyleSheet extends StyleSheet {
             }
         }
         if (getBrowserVersion().hasFeature(STYLESHEET_ADD_RULE_RETURNS_POS)) {
-            return wrapped_.getCssRules().getLength() - 1;
+            return getCssStyleSheet().getWrappedSheet().getCssRules().getLength() - 1;
         }
         return -1;
     }
@@ -762,7 +709,7 @@ public class CSSStyleSheet extends StyleSheet {
     public void removeRule(final int position) {
         try {
             initCssRules();
-            wrapped_.deleteRule(fixIndex(position));
+            getCssStyleSheet().getWrappedSheet().deleteRule(fixIndex(position));
             refreshCssRules();
         }
         catch (final DOMException e) {
@@ -1191,7 +1138,7 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     private CSSStyleSheetImpl.CSSStyleSheetRuleIndex getRuleIndex() {
-        final CSSStyleSheetImpl styleSheet = getWrappedSheet();
+        final CSSStyleSheetImpl styleSheet = getCssStyleSheet().getWrappedSheet();
         CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
 
         if (index == null) {
@@ -1239,7 +1186,7 @@ public class CSSStyleSheet extends StyleSheet {
                 final CSSStyleSheet sheet = getImportedStyleSheet(importRule);
 
                 if (!alreadyProcessing.contains(sheet.getUri())) {
-                    final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
+                    final CSSRuleListImpl sheetRuleList = sheet.getCssStyleSheet().getWrappedSheet().getCssRules();
                     alreadyProcessing.add(sheet.getUri());
 
                     final MediaListImpl mediaList = importRule.getMedia();

@@ -152,10 +152,13 @@ public class CssStyleSheet {
      * @param uri this stylesheet's URI (used to resolved contained @import rules)
      */
     public CssStyleSheet(final HtmlElement element, final InputSource source, final String uri) {
-        if (source != null) {
-            source.setURI(uri);
+        if (source == null) {
+            wrapped_ = new CSSStyleSheetImpl();
         }
-        wrapped_ = parseCSS(source, element.getPage().getWebClient());
+        else {
+            source.setURI(uri);
+            wrapped_ = parseCSS(source, element.getPage().getWebClient());
+        }
         uri_ = uri;
         owner_ = element;
     }
