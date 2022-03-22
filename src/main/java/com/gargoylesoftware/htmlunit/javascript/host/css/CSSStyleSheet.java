@@ -17,11 +17,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLLINK_CHECK_TYPE_FOR_STYLESHEET;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTORALL_NOT_IN_QUIRKS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
-import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -47,14 +45,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.ByteOrderMark;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.DOMException;
@@ -74,7 +70,6 @@ import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.condition.Condition;
@@ -86,7 +81,6 @@ import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
-import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
@@ -99,17 +93,12 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
-import com.gargoylesoftware.htmlunit.html.DisabledElement;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomText;
-import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
-import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -145,7 +134,6 @@ public class CSSStyleSheet extends StyleSheet {
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
-    private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");
 
     /** The parsed stylesheet which this host object wraps. */
     private final CSSStyleSheetImpl wrapped_;
@@ -434,109 +422,14 @@ public class CSSStyleSheet extends StyleSheet {
      * @param pseudoElement the pseudo element to match, (can be {@code null})
      * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
+     *
+     * @deprecated since 2.61.0; please use
+     * {@link CssStyleSheet#selects(BrowserVersion, Selector, DomElement, String, boolean)} instead
      */
+    @Deprecated
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
-        switch (selector.getSelectorType()) {
-            case ELEMENT_NODE_SELECTOR:
-                final ElementSelector es = (ElementSelector) selector;
-
-                final String name;
-                final String elementName;
-                if (element.getPage().hasCaseSensitiveTagNames()) {
-                    name = es.getLocalName();
-                    elementName = element.getLocalName();
-                }
-                else {
-                    name = es.getLocalNameLowerCase();
-                    elementName = element.getLowercaseName();
-                }
-
-                if (name == null || name.equals(elementName)) {
-                    final List<Condition> conditions = es.getConditions();
-                    if (conditions != null) {
-                        for (final Condition condition : conditions) {
-                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
-                                return false;
-                            }
-                        }
-                    }
-                    return true;
-                }
-
-                return false;
-
-            case CHILD_SELECTOR:
-                final DomNode parentNode = element.getParentNode();
-                if (parentNode == element.getPage()) {
-                    return false;
-                }
-                if (!(parentNode instanceof DomElement)) {
-                    return false; // for instance parent is a DocumentFragment
-                }
-                final ChildSelector cs = (ChildSelector) selector;
-                return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
-                    && selects(browserVersion, cs.getAncestorSelector(), (DomElement) parentNode,
-                            pseudoElement, fromQuerySelectorAll);
-
-            case DESCENDANT_SELECTOR:
-                final DescendantSelector ds = (DescendantSelector) selector;
-                final SimpleSelector simpleSelector = ds.getSimpleSelector();
-                if (selects(browserVersion, simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
-                    DomNode ancestor = element;
-                    if (simpleSelector.getSelectorType() != SelectorType.PSEUDO_ELEMENT_SELECTOR) {
-                        ancestor = ancestor.getParentNode();
-                    }
-                    final Selector dsAncestorSelector = ds.getAncestorSelector();
-                    while (ancestor instanceof DomElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (DomElement) ancestor, pseudoElement,
-                                fromQuerySelectorAll)) {
-                            return true;
-                        }
-                        ancestor = ancestor.getParentNode();
-                    }
-                }
-                return false;
-
-            case DIRECT_ADJACENT_SELECTOR:
-                final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
-                    DomNode prev = element.getPreviousSibling();
-                    while (prev != null && !(prev instanceof DomElement)) {
-                        prev = prev.getPreviousSibling();
-                    }
-                    return prev != null
-                            && selects(browserVersion, das.getSelector(),
-                                    (DomElement) prev, pseudoElement, fromQuerySelectorAll);
-                }
-                return false;
-
-            case GENERAL_ADJACENT_SELECTOR:
-                final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-                if (selects(browserVersion, gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
-                    for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
-                                                        prev1 = prev1.getPreviousSibling()) {
-                        if (prev1 instanceof DomElement
-                            && selects(browserVersion, gas.getSelector(), (DomElement) prev1,
-                                    pseudoElement, fromQuerySelectorAll)) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            case PSEUDO_ELEMENT_SELECTOR:
-                if (pseudoElement != null && pseudoElement.length() != 0 && pseudoElement.charAt(0) == ':') {
-                    final String pseudoName = ((PseudoElementSelector) selector).getLocalName();
-                    return pseudoName.equals(pseudoElement.substring(1));
-                }
-                return false;
-
-            default:
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Unknown CSS selector type '" + selector.getSelectorType() + "'.");
-                }
-                return false;
-        }
+        return CssStyleSheet.selects(browserVersion, selector, element, pseudoElement, fromQuerySelectorAll);
     }
 
     /**
@@ -547,426 +440,13 @@ public class CSSStyleSheet extends StyleSheet {
      * @param element the element to test
      * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
+     *
+     * @deprecated since 2.61.0
      */
+    @Deprecated
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
             final boolean fromQuerySelectorAll) {
-
-        switch (condition.getConditionType()) {
-            case ID_CONDITION:
-                return condition.getValue().equals(element.getId());
-
-            case CLASS_CONDITION:
-                String v3 = condition.getValue();
-                if (v3.indexOf('\\') > -1) {
-                    v3 = UNESCAPE_SELECTOR.matcher(v3).replaceAll("$1");
-                }
-                final String a3 = element.getAttributeDirect("class");
-                return selectsWhitespaceSeparated(v3, a3);
-
-            case ATTRIBUTE_CONDITION:
-                String value = condition.getValue();
-                if (value != null) {
-                    if (value.indexOf('\\') > -1) {
-                        value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
-                    }
-                    final String attrValue = element.getAttribute(condition.getLocalName());
-                    return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
-                }
-                return element.hasAttribute(condition.getLocalName());
-
-            case PREFIX_ATTRIBUTE_CONDITION:
-                final String prefixValue = condition.getValue();
-                return !"".equals(prefixValue)
-                        && element.getAttribute(condition.getLocalName()).startsWith(prefixValue);
-
-            case SUFFIX_ATTRIBUTE_CONDITION:
-                final String suffixValue = condition.getValue();
-                return !"".equals(suffixValue)
-                        && element.getAttribute(condition.getLocalName()).endsWith(suffixValue);
-
-            case SUBSTRING_ATTRIBUTE_CONDITION:
-                final String substringValue = condition.getValue();
-                return !"".equals(substringValue)
-                        && element.getAttribute(condition.getLocalName()).contains(substringValue);
-
-            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                final String v = condition.getValue();
-                final String a = element.getAttribute(condition.getLocalName());
-                return selectsHyphenSeparated(v, a);
-
-            case ONE_OF_ATTRIBUTE_CONDITION:
-                final String v2 = condition.getValue();
-                final String a2 = element.getAttribute(condition.getLocalName());
-                return selectsOneOf(v2, a2);
-
-            case LANG_CONDITION:
-                final String lcLang = condition.getValue();
-                final int lcLangLength = lcLang.length();
-                for (DomNode node = element; node instanceof HtmlElement; node = node.getParentNode()) {
-                    final String nodeLang = ((HtmlElement) node).getAttributeDirect("lang");
-                    if (ATTRIBUTE_NOT_DEFINED != nodeLang) {
-                        // "en", "en-GB" should be matched by "en" but not "english"
-                        return nodeLang.startsWith(lcLang)
-                            && (nodeLang.length() == lcLangLength || '-' == nodeLang.charAt(lcLangLength));
-                    }
-                }
-                return false;
-
-            case PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion, condition, element, fromQuerySelectorAll);
-
-            default:
-                if (LOG.isErrorEnabled()) {
-                    LOG.error("Unknown CSS condition type '" + condition.getConditionType() + "'.");
-                }
-                return false;
-        }
-    }
-
-    private static boolean selectsOneOf(final String condition, final String attribute) {
-        // attribute.equals(condition)
-        // || attribute.startsWith(condition + " ") || attriubte.endsWith(" " + condition)
-        // || attribute.contains(" " + condition + " ");
-
-        final int conditionLength = condition.length();
-        if (conditionLength < 1) {
-            return false;
-        }
-
-        final int attribLength = attribute.length();
-        if (attribLength < conditionLength) {
-            return false;
-        }
-        if (attribLength > conditionLength) {
-            if (' ' == attribute.charAt(conditionLength)
-                    && attribute.startsWith(condition)) {
-                return true;
-            }
-            if (' ' == attribute.charAt(attribLength - conditionLength - 1)
-                    && attribute.endsWith(condition)) {
-                return true;
-            }
-            if (attribLength + 1 > conditionLength) {
-                final StringBuilder tmp = new StringBuilder(conditionLength + 2);
-                tmp.append(' ').append(condition).append(' ');
-                return attribute.contains(tmp);
-            }
-            return false;
-        }
-        return attribute.equals(condition);
-    }
-
-    private static boolean selectsHyphenSeparated(final String condition, final String attribute) {
-        final int conditionLength = condition.length();
-        if (conditionLength < 1) {
-            if (attribute != ATTRIBUTE_NOT_DEFINED) {
-                final int attribLength = attribute.length();
-                return attribLength == 0 || '-' == attribute.charAt(0);
-            }
-            return false;
-        }
-
-        final int attribLength = attribute.length();
-        if (attribLength < conditionLength) {
-            return false;
-        }
-        if (attribLength > conditionLength) {
-            if ('-' == attribute.charAt(conditionLength)
-                    && attribute.startsWith(condition)) {
-                return true;
-            }
-            return false;
-        }
-        return attribute.equals(condition);
-    }
-
-    private static boolean selectsWhitespaceSeparated(final String condition, final String attribute) {
-        final int conditionLength = condition.length();
-        if (conditionLength < 1) {
-            return false;
-        }
-
-        final int attribLength = attribute.length();
-        if (attribLength < conditionLength) {
-            return false;
-        }
-
-        int pos = attribute.indexOf(condition);
-        while (pos != -1) {
-            if (pos > 0 && !Character.isWhitespace(attribute.charAt(pos - 1))) {
-                pos = attribute.indexOf(condition, pos + 1);
-            }
-            else {
-                final int lastPos = pos + condition.length();
-                if (lastPos >= attribLength || Character.isWhitespace(attribute.charAt(lastPos))) {
-                    return true;
-                }
-                pos = attribute.indexOf(condition, pos + 1);
-            }
-        }
-
-        return false;
-    }
-
-    private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final Condition condition, final DomElement element, final boolean fromQuerySelectorAll) {
-        if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
-            final Object sobj = element.getPage().getScriptableObject();
-            if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
-                return false;
-            }
-        }
-
-        final String value = condition.getValue();
-        switch (value) {
-            case "root":
-                return element == element.getPage().getDocumentElement();
-
-            case "enabled":
-                return element instanceof DisabledElement && !((DisabledElement) element).isDisabled();
-
-            case "disabled":
-                return element instanceof DisabledElement && ((DisabledElement) element).isDisabled();
-
-            case "focus":
-                final HtmlPage htmlPage = element.getHtmlPageOrNull();
-                if (htmlPage != null) {
-                    final DomElement focus = htmlPage.getFocusedElement();
-                    return element == focus;
-                }
-                return false;
-
-            case "checked":
-                return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
-                        || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
-                                || (element instanceof HtmlOption && ((HtmlOption) element).isSelected()));
-
-            case "required":
-                return element instanceof HtmlElement && ((HtmlElement) element).isRequired();
-
-            case "optional":
-                return element instanceof HtmlElement && ((HtmlElement) element).isOptional();
-
-            case "first-child":
-                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                    if (n instanceof DomElement) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "last-child":
-                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                    if (n instanceof DomElement) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "first-of-type":
-                final String firstType = element.getNodeName();
-                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                    if (n instanceof DomElement && n.getNodeName().equals(firstType)) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "last-of-type":
-                final String lastType = element.getNodeName();
-                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                    if (n instanceof DomElement && n.getNodeName().equals(lastType)) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "only-child":
-                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                    if (n instanceof DomElement) {
-                        return false;
-                    }
-                }
-                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                    if (n instanceof DomElement) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "only-of-type":
-                final String type = element.getNodeName();
-                for (DomNode n = element.getPreviousSibling(); n != null; n = n.getPreviousSibling()) {
-                    if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                        return false;
-                    }
-                }
-                for (DomNode n = element.getNextSibling(); n != null; n = n.getNextSibling()) {
-                    if (n instanceof DomElement && n.getNodeName().equals(type)) {
-                        return false;
-                    }
-                }
-                return true;
-
-            case "valid":
-                return element instanceof HtmlElement && ((HtmlElement) element).isValid();
-
-            case "invalid":
-                return element instanceof HtmlElement && !((HtmlElement) element).isValid();
-
-            case "empty":
-                return isEmpty(element);
-
-            case "target":
-                final String ref = element.getPage().getUrl().getRef();
-                return StringUtils.isNotBlank(ref) && ref.equals(element.getId());
-
-            case "hover":
-                return element.isMouseOver();
-
-            case "placeholder-shown":
-                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
-                    return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
-                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
-                }
-
-            case "-ms-input-placeholder":
-                if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
-                    return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
-                            && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
-                }
-
-            default:
-                if (value.startsWith("nth-child(")) {
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                        if (n instanceof DomElement) {
-                            index++;
-                        }
-                    }
-                    return getNth(nth, index);
-                }
-                else if (value.startsWith("nth-last-child(")) {
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                        if (n instanceof DomElement) {
-                            index++;
-                        }
-                    }
-                    return getNth(nth, index);
-                }
-                else if (value.startsWith("nth-of-type(")) {
-                    final String nthType = element.getNodeName();
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getPreviousSibling()) {
-                        if (n instanceof DomElement && n.getNodeName().equals(nthType)) {
-                            index++;
-                        }
-                    }
-                    return getNth(nth, index);
-                }
-                else if (value.startsWith("nth-last-of-type(")) {
-                    final String nthLastType = element.getNodeName();
-                    final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    int index = 0;
-                    for (DomNode n = element; n != null; n = n.getNextSibling()) {
-                        if (n instanceof DomElement && n.getNodeName().equals(nthLastType)) {
-                            index++;
-                        }
-                    }
-                    return getNth(nth, index);
-                }
-                else if (value.startsWith("not(")) {
-                    final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    final AtomicBoolean errorOccured = new AtomicBoolean(false);
-                    final CSSErrorHandler errorHandler = new CSSErrorHandler() {
-                        @Override
-                        public void warning(final CSSParseException exception) throws CSSException {
-                            // ignore
-                        }
-
-                        @Override
-                        public void fatalError(final CSSParseException exception) throws CSSException {
-                            errorOccured.set(true);
-                        }
-
-                        @Override
-                        public void error(final CSSParseException exception) throws CSSException {
-                            errorOccured.set(true);
-                        }
-                    };
-                    final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-                    parser.setErrorHandler(errorHandler);
-                    try {
-                        final SelectorList selectorList = parser.parseSelectors(selectors);
-                        if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
-                            throw new CSSException("Invalid selectors: " + selectors);
-                        }
-
-                        validateSelectors(selectorList, 9, element);
-
-                        return !selects(browserVersion, selectorList.get(0), element,
-                                null, fromQuerySelectorAll);
-                    }
-                    catch (final IOException e) {
-                        throw new CSSException("Error parsing CSS selectors from '" + selectors + "': "
-                                + e.getMessage());
-                    }
-                }
-                return false;
-        }
-    }
-
-    private static boolean isEmpty(final DomElement element) {
-        for (DomNode n = element.getFirstChild(); n != null; n = n.getNextSibling()) {
-            if (n instanceof DomElement || n instanceof DomText) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean getNth(final String nth, final int index) {
-        if ("odd".equalsIgnoreCase(nth)) {
-            return index % 2 != 0;
-        }
-
-        if ("even".equalsIgnoreCase(nth)) {
-            return index % 2 == 0;
-        }
-
-        // an+b
-        final int nIndex = nth.indexOf('n');
-        int a = 0;
-        if (nIndex != -1) {
-            String value = nth.substring(0, nIndex).trim();
-            if ("-".equals(value)) {
-                a = -1;
-            }
-            else {
-                if (value.length() > 0 && value.charAt(0) == '+') {
-                    value = value.substring(1);
-                }
-                a = NumberUtils.toInt(value, 1);
-            }
-        }
-
-        String value = nth.substring(nIndex + 1).trim();
-        if (value.length() > 0 && value.charAt(0) == '+') {
-            value = value.substring(1);
-        }
-        final int b = NumberUtils.toInt(value, 0);
-        if (a == 0) {
-            return index == b && b > 0;
-        }
-
-        final double n = (index - b) / (double) a;
-        return n >= 0 && n % 1 == 0;
+        return CssStyleSheet.selects(browserVersion, condition, element, fromQuerySelectorAll);
     }
 
     /**
@@ -1800,7 +1280,7 @@ public class CSSStyleSheet extends StyleSheet {
 
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
-                if (CSSStyleSheet.selects(browserVersion, entry.getSelector(),
+                if (CssStyleSheet.selects(browserVersion, entry.getSelector(),
                                             element, pseudoElement, fromQuerySelectorAll)) {
                     matchingRules.add(entry);
                 }
