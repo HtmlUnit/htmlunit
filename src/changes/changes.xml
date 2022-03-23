@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="461" due-to="Rural Hunter">
+                'Origin' header added to same-origin non-GET requests.
+            </action>
         </release>
 
         <release version="2.60.0" date="March 20, 2022" description="Chrome/Edge 99, Bugfixes">

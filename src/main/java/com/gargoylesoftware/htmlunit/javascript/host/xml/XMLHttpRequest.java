@@ -180,6 +180,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private String overriddenMimeType_;
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
+    private boolean isSameOrigin_;
     private int timeout_;
     private boolean aborted_;
     private String responseType_;
@@ -681,16 +682,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             request.setCharset(UTF_8);
             request.setRefererlHeader(containingPage.getUrl());
 
-            final URL pageRequestUrl = containingPage.getUrl();
-            if (!isSameOrigin(pageRequestUrl, fullUrl)) {
-                final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
-                        .append(pageRequestUrl.getHost());
-                if (pageRequestUrl.getPort() != -1) {
-                    origin.append(':').append(pageRequestUrl.getPort());
-                }
-                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
-            }
-
             try {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
             }
@@ -699,6 +690,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     LOG.info("Incorrect HTTP Method '" + method + "'");
                 }
                 return;
+            }
+
+            final URL pageRequestUrl = containingPage.getUrl();
+            isSameOrigin_ = isSameOrigin(pageRequestUrl, fullUrl);
+            final boolean alwaysAddOrigin = !getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
+                                            && HttpMethod.GET != request.getHttpMethod()
+                                            && HttpMethod.PATCH != request.getHttpMethod()
+                                            && HttpMethod.HEAD != request.getHttpMethod();
+            if (alwaysAddOrigin || !isSameOrigin_) {
+                final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
+                        .append(pageRequestUrl.getHost());
+                if (pageRequestUrl.getPort() != -1) {
+                    origin.append(':').append(pageRequestUrl.getPort());
+                }
+                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
             }
 
             // password is ignored if no user defined
@@ -921,12 +927,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
         try {
-            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-            if (originHeaderValue != null && isPreflight()) {
+            if (!isSameOrigin_ && isPreflight()) {
                 preflighted = true;
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
+                final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
                 preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
 
                 // header request-method
@@ -979,9 +985,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webResponse_.defaultCharsetUtf8();
 
             boolean allowOriginResponse = true;
-            if (originHeaderValue != null) {
+            if (!isSameOrigin_) {
                 String value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = originHeaderValue.equals(value);
+                allowOriginResponse = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(value);
                 if (isWithCredentials()) {
                     // second step: check the allow-credentials header for true
                     value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);
