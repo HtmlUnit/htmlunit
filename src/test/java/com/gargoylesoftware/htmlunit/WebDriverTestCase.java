@@ -63,13 +63,10 @@ import org.apache.commons.logging.LogFactory;
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.HashLoginService;
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Request;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
-import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -1539,15 +1536,22 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     // limit resource usage
     private static Server buildServer(final int port) {
-        final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
+        return new Server(port);
 
-        final Server server = new Server(threadPool);
-
-        final ServerConnector connector = new ServerConnector(server);
-        connector.setPort(port);
-        server.setConnectors(new Connector[] {connector});
-
-        return server;
+        //    https://github.com/HtmlUnit/htmlunit/issues/462
+        //    https://github.com/eclipse/jetty.project/issues/2503
+        //    the value for the QueuedThreadPool are validated,
+        //    let's amke another try with the defaults
+        //
+        //    final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
+        //
+        //    final Server server = new Server(threadPool);
+        //
+        //    final ServerConnector connector = new ServerConnector(server);
+        //    connector.setPort(port);
+        //    server.setConnectors(new Connector[] {connector});
+        //
+        //    return server;
     }
 
     /**
