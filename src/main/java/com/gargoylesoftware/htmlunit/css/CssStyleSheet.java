@@ -464,7 +464,7 @@ public class CssStyleSheet implements Serializable {
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     // TODO make (package) private again
