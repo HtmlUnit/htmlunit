@@ -189,10 +189,17 @@
                 <a href="https://twitter.com/HtmlUnit">Twitter</a> for regular information about new
                 snapshot builds).
             <source><![CDATA[
-<snapshotRepository>
-  <id>sonatype-nexus-snapshots</id>
-  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-</snapshotRepository>]]></source>
+<repository>
+  <id>OSS Sonatype snapshots</id>
+  <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+  <snapshots>
+    <enabled>true</enabled>
+    <updatePolicy>always</updatePolicy>
+  </snapshots>
+  <releases>
+    <enabled>false</enabled>
+  </releases>
+</repository>]]></source>
             </p>
         </section>
 
