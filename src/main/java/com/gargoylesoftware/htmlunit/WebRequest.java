@@ -77,7 +77,7 @@ public class WebRequest implements Serializable {
     private transient Set<HttpHint> httpHints_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List<NameValuePair> requestUrlParameters_ = Collections.emptyList();
+    private List<NameValuePair> plainRequestParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
@@ -331,7 +331,7 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getRequestUrlParameters();
+                return getPlainRequestParameters();
             }
 
             return HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset());
@@ -339,7 +339,7 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getRequestUrlParameters();
+                return getPlainRequestParameters();
             }
 
             final List<NameValuePair> pairs = Collections.emptyList();
@@ -347,7 +347,7 @@ public class WebRequest implements Serializable {
         }
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
-            return getRequestUrlParameters();
+            return getPlainRequestParameters();
         }
 
         // for instance a PUT or PATCH request
@@ -361,8 +361,8 @@ public class WebRequest implements Serializable {
      * combination with the {@link #setRequestBody(String) request body}.
      * @return the request parameters to use
      */
-    public List<NameValuePair> getRequestUrlParameters() {
-        return requestUrlParameters_;
+    public List<NameValuePair> getPlainRequestParameters() {
+        return plainRequestParameters_;
     }
 
     /**
@@ -372,18 +372,18 @@ public class WebRequest implements Serializable {
      * @param requestParameters the request parameters to use
      * @throws RuntimeException if the request body has already been set
      */
-    public void setRequestUrlParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
+    public void setPlainRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        requestUrlParameters_ = requestParameters;
+        plainRequestParameters_ = requestParameters;
     }
 
     /**
      * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
-     * types. Should not be used in combination with {@link #setRequestUrlParameters(List) request parameters}.
+     * types. Should not be used in combination with {@link #setPlainRequestParameters(List) request parameters}.
      * @return the body content to be submitted if this is a <tt>POST</tt> request
      */
     public String getRequestBody() {
@@ -393,14 +393,14 @@ public class WebRequest implements Serializable {
     /**
      * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
      * Ignored for all other request types.
-     * Should not be used in combination with {@link #setRequestUrlParameters(List) request parameters}.
+     * Should not be used in combination with {@link #setPlainRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
      * or {@code PATCH} request
      * @throws RuntimeException if the request parameters have already been set
      *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
-        if (requestUrlParameters_ != null && !requestUrlParameters_.isEmpty()) {
+        if (plainRequestParameters_ != null && !plainRequestParameters_.isEmpty()) {
             final String msg = "Trying to set the request body, but the request parameters have already been specified;"
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
@@ -587,7 +587,7 @@ public class WebRequest implements Serializable {
                 .append("[<url=\"").append(url_).append('"')
                 .append(", ").append(httpMethod_)
                 .append(", ").append(encodingType_)
-                .append(", ").append(requestUrlParameters_)
+                .append(", ").append(plainRequestParameters_)
                 .append(", ").append(additionalHeaders_)
                 .append(", ").append(credentials_)
                 .append(">]");

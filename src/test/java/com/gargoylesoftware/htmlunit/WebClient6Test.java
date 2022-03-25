@@ -439,9 +439,9 @@ public class WebClient6Test extends WebDriverTestCase {
         assertEquals(httpMethod, getMockWebConnection().getLastWebRequest().getHttpMethod());
 
         if (resendParams) {
-            assertTrue(getMockWebConnection().getLastWebRequest().getRequestUrlParameters().size() > 0);
+            assertTrue(getMockWebConnection().getLastWebRequest().getPlainRequestParameters().size() > 0);
 
-            final NameValuePair param = getMockWebConnection().getLastWebRequest().getRequestUrlParameters().get(0);
+            final NameValuePair param = getMockWebConnection().getLastWebRequest().getPlainRequestParameters().get(0);
             if ("param1".equals(param.getName())) {
                 assertEquals("paramValue", param.getValue());
             }
@@ -453,7 +453,7 @@ public class WebClient6Test extends WebDriverTestCase {
             }
         }
         else {
-            assertEquals(0, getMockWebConnection().getLastWebRequest().getRequestUrlParameters().size());
+            assertEquals(0, getMockWebConnection().getLastWebRequest().getPlainRequestParameters().size());
         }
 
         // assertEquals(getExpectedAlerts()[0], getMockWebConnection().getLastWebRequest().getUrl().toString());

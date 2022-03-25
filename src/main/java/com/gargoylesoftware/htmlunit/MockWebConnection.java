@@ -254,7 +254,7 @@ public class MockWebConnection implements WebConnection {
      * @return the parameters that were used in the last call to submitRequest()
      */
     public List<NameValuePair> getLastParameters() {
-        return lastRequest_.getRequestUrlParameters();
+        return lastRequest_.getPlainRequestParameters();
     }
 
     /**
