@@ -185,7 +185,7 @@
 
             <p>
                 If you like to use the lastest available snapshot build you have to add the sonatype
-                snapshot repository to your pom distributionManagement section also (check
+                snapshot repository to your pom repositories section; also (check
                 <a href="https://twitter.com/HtmlUnit">Twitter</a> for regular information about new
                 snapshot builds).
             <source><![CDATA[

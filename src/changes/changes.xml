@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                docu: various fixes regarding using the sonatype snapshot repository.
+            </action>
             <action type="fix" dev="rbri" issue="462" due-to="Rural Hunter">
                 Running the test suite fails on some newer maschines because Jetty is not happy
                 with  tread pool limits setups in use.
