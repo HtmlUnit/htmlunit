@@ -8,6 +8,11 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Bugfixes">
+            <action type="update" dev="rbri" issue="360">
+                INCOMPATIBLE CHANGE: Class MediaList was moved from package 
+                com.gargoylesoftware.htmlunit.javascript.host.dom
+                into package com.gargoylesoftware.htmlunit.javascript.host.css.
+            </action>
             <action type="update" dev="rbri" issue="223">
                 INCOMPATIBLE CHANGE: Method WebRequest.getRequestParameters() now returns
                 parameters also from the url or the body if available. The new method

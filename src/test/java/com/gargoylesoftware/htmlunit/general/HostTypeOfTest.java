@@ -3519,7 +3519,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.MediaList}.
      *
      * @throws Exception if an error occurs
      */
