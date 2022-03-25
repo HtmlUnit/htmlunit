@@ -318,7 +318,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         assertEquals(1, requestedParams.size());
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
@@ -1152,7 +1153,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1206,7 +1208,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1245,7 +1248,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1283,7 +1287,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1321,7 +1326,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1459,7 +1465,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         driver.findElement(new ById("mySubmit")).click();
 
-        final List<NameValuePair> requestedParams = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> requestedParams =
+                getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());

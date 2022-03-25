@@ -235,4 +235,55 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         assertEquals(url.toExternalForm(), request.getUrl().toExternalForm());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersNone() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+
+        assertEquals(1, request.getRequestParameters().size());
+        assertEquals("x", request.getRequestParameters().get(0).getName());
+        assertEquals("u", request.getRequestParameters().get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlPost() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlEncodedBodyPost() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+        request.setEncodingType(FormEncodingType.URL_ENCODED);
+        request.setRequestBody("x=u");
+
+        assertEquals(1, request.getRequestParameters().size());
+        assertEquals("x", request.getRequestParameters().get(0).getName());
+        assertEquals("u", request.getRequestParameters().get(0).getValue());
+    }
 }

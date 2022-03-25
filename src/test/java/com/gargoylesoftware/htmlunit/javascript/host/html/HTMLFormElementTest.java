@@ -1538,7 +1538,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(0, getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().size());
+                .getRequestUrlParameters().size());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1566,7 +1566,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+                .getRequestUrlParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1594,7 +1594,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+                .getRequestUrlParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1622,7 +1622,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+                .getRequestUrlParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1650,7 +1650,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+                .getRequestUrlParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1678,7 +1678,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString());
+                .getRequestUrlParameters().get(0).toString());
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());
     }
 
@@ -1720,7 +1720,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerContentType);
 
         final String body = getMockWebConnection().getLastWebRequest()
-                .getRequestParameters().get(0).toString();
+                .getRequestUrlParameters().get(0).toString();
         assertTrue(body, body.startsWith(getExpectedAlerts()[1]));
         assertTrue(body, body.endsWith(getExpectedAlerts()[2]));
         assertNull(getMockWebConnection().getLastWebRequest().getRequestBody());

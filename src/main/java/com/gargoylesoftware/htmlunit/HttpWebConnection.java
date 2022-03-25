@@ -295,14 +295,18 @@ public class HttpWebConnection implements WebConnection {
         final HttpRequestBase httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest);
 
+        // POST, PUT and PATCH
         if (httpMethod instanceof HttpEntityEnclosingRequest) {
-            // POST as well as PUT and PATCH
+            // developer note:
+            // this has to be in sync with
+            // com.gargoylesoftware.htmlunit.WebRequest.getRequestParameters()
+
             final HttpEntityEnclosingRequest method = (HttpEntityEnclosingRequest) httpMethod;
 
             if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
-                    final List<NameValuePair> pairs = webRequest.getRequestParameters();
+                    final List<NameValuePair> pairs = webRequest.getRequestUrlParameters();
                     final String query = URLEncodedUtils.format(
                                             HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
 
@@ -329,7 +333,7 @@ public class HttpWebConnection implements WebConnection {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
-                    for (final NameValuePair pair : webRequest.getRequestParameters()) {
+                    for (final NameValuePair pair : webRequest.getRequestUrlParameters()) {
                         body.append(StringUtils.remove(StringUtils.remove(pair.getName(), '\r'), '\n'))
                             .append('=')
                             .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
@@ -347,11 +351,11 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final Charset c = getCharset(charset, webRequest.getRequestParameters());
+                final Charset c = getCharset(charset, webRequest.getRequestUrlParameters());
                 final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
                 builder.setCharset(c);
 
-                for (final NameValuePair pair : webRequest.getRequestParameters()) {
+                for (final NameValuePair pair : webRequest.getRequestUrlParameters()) {
                     if (pair instanceof KeyDataPair) {
                         buildFilePart((KeyDataPair) pair, builder);
                     }
@@ -371,8 +375,8 @@ public class HttpWebConnection implements WebConnection {
         }
         else {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (!webRequest.getRequestParameters().isEmpty()) {
-                final List<NameValuePair> pairs = webRequest.getRequestParameters();
+            if (!webRequest.getRequestUrlParameters().isEmpty()) {
+                final List<NameValuePair> pairs = webRequest.getRequestUrlParameters();
                 final String query = URLEncodedUtils.format(
                                         HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
                 uri = UrlUtils.toURI(url, query);

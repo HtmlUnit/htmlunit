@@ -985,7 +985,7 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(HttpMethod.GET, getMockWebConnection().getLastWebRequest().getHttpMethod());
         assertEquals(URL_FIRST + "a.html?p1=sieben&p2", getMockWebConnection().getLastWebRequest().getUrl());
 
-        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         assertEquals(2, params.size());
         assertEquals("p1", params.get(0).getName());
         assertEquals("sieben", params.get(0).getValue());
@@ -1053,7 +1053,7 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(HttpMethod.POST, getMockWebConnection().getLastWebRequest().getHttpMethod());
         assertEquals(URL_SECOND + "a.html?urlParam=urlVal", getMockWebConnection().getLastWebRequest().getUrl());
 
-        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
+        final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestUrlParameters();
         assertEquals(4, params.size());
         assertEquals("p1", params.get(0).getName());
         assertEquals("seven", params.get(0).getValue());

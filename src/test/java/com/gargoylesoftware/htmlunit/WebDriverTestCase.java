@@ -842,7 +842,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 webRequest.setRequestBody(new String(buffer, webRequest.getCharset()));
             }
             else {
-                webRequest.setRequestParameters(requestParameters);
+                webRequest.setRequestUrlParameters(requestParameters);
             }
 
             // check content type if it is multipart enctype

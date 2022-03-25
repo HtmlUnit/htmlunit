@@ -77,7 +77,7 @@ public class History implements Serializable {
 
             final WebRequest request = page.getWebResponse().getWebRequest();
             webRequest_ = new WebRequest(request.getUrl(), request.getHttpMethod());
-            webRequest_.setRequestParameters(request.getRequestParameters());
+            webRequest_.setRequestUrlParameters(request.getRequestUrlParameters());
         }
 
         Page getPage() {

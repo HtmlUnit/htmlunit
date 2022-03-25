@@ -35,6 +35,7 @@ import java.util.regex.Pattern;
 import org.apache.http.auth.Credentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 
+import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -76,7 +77,7 @@ public class WebRequest implements Serializable {
     private transient Set<HttpHint> httpHints_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List<NameValuePair> requestParameters_ = Collections.emptyList();
+    private List<NameValuePair> requestUrlParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
@@ -312,13 +313,56 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Retrieves the request parameters to use. Similar to the servlet api this will
+     * work depending on the request type and check the url parameters and
+     * the body.
+     * @return the request parameters to use
+     */
+    public List<NameValuePair> getRequestParameters() {
+        // developer note:
+        // this has to be in sync with
+        // com.gargoylesoftware.htmlunit.HttpWebConnection.makeHttpMethod(WebRequest, HttpClientBuilder)
+
+        if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
+                && HttpMethod.PATCH != getHttpMethod()) {
+            return HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset());
+
+        }
+
+        if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
+            if (getRequestBody() == null) {
+                return getRequestUrlParameters();
+            }
+
+            return HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset());
+        }
+
+        if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
+            if (getRequestBody() == null) {
+                return getRequestUrlParameters();
+            }
+
+            final List<NameValuePair> pairs = Collections.emptyList();
+            return pairs;
+        }
+
+        if (FormEncodingType.MULTIPART == getEncodingType()) {
+            return getRequestUrlParameters();
+        }
+
+        // for instance a PUT or PATCH request
+        final List<NameValuePair> pairs = Collections.emptyList();
+        return pairs;
+    }
+
+    /**
      * Retrieves the request parameters to use. If set, these request parameters will overwrite any
      * request parameters which may be present in the {@link #getUrl() URL}. Should not be used in
      * combination with the {@link #setRequestBody(String) request body}.
      * @return the request parameters to use
      */
-    public List<NameValuePair> getRequestParameters() {
-        return requestParameters_;
+    public List<NameValuePair> getRequestUrlParameters() {
+        return requestUrlParameters_;
     }
 
     /**
@@ -328,18 +372,18 @@ public class WebRequest implements Serializable {
      * @param requestParameters the request parameters to use
      * @throws RuntimeException if the request body has already been set
      */
-    public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
+    public void setRequestUrlParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        requestParameters_ = requestParameters;
+        requestUrlParameters_ = requestParameters;
     }
 
     /**
      * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
-     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
+     * types. Should not be used in combination with {@link #setRequestUrlParameters(List) request parameters}.
      * @return the body content to be submitted if this is a <tt>POST</tt> request
      */
     public String getRequestBody() {
@@ -349,14 +393,14 @@ public class WebRequest implements Serializable {
     /**
      * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
      * Ignored for all other request types.
-     * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
+     * Should not be used in combination with {@link #setRequestUrlParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
      * or {@code PATCH} request
      * @throws RuntimeException if the request parameters have already been set
      *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
-        if (requestParameters_ != null && !requestParameters_.isEmpty()) {
+        if (requestUrlParameters_ != null && !requestUrlParameters_.isEmpty()) {
             final String msg = "Trying to set the request body, but the request parameters have already been specified;"
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
@@ -543,7 +587,7 @@ public class WebRequest implements Serializable {
                 .append("[<url=\"").append(url_).append('"')
                 .append(", ").append(httpMethod_)
                 .append(", ").append(encodingType_)
-                .append(", ").append(requestParameters_)
+                .append(", ").append(requestUrlParameters_)
                 .append(", ").append(additionalHeaders_)
                 .append(", ").append(credentials_)
                 .append(">]");

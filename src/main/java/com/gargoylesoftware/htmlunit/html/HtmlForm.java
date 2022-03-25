@@ -338,7 +338,7 @@ public class HtmlForm extends HtmlElement {
         final WebRequest request = new WebRequest(url, browser.getHtmlAcceptHeader(),
                                                         browser.getAcceptEncodingHeader());
         request.setHttpMethod(method);
-        request.setRequestParameters(parameters);
+        request.setRequestUrlParameters(parameters);
         if (HttpMethod.POST == method) {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
