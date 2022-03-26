@@ -98,6 +98,18 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Instantiates a {@link WebRequest} for the specified URL.
+     * @param url the target URL
+     * @param charset the charset to use
+     * @param refererUrl the url be used by the referer header
+     */
+    public WebRequest(final URL url, final Charset charset, final URL refererUrl) {
+        setUrl(url);
+        setCharset(charset);
+        setRefererlHeader(refererUrl);
+    }
+
+    /**
      * @return a new request for about:blank
      */
     public static WebRequest newAboutBlankRequest() {

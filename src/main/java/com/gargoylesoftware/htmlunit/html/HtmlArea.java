@@ -95,11 +95,8 @@ public class HtmlArea extends HtmlElement {
                 throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute(), e);
             }
-            final WebRequest request = new WebRequest(url);
-            request.setCharset(page.getCharset());
-            request.setRefererlHeader(page.getUrl());
+            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
             final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-
             final String target = enclosingPage.getResolvedTarget(getTargetAttribute());
             webClient.getPage(webClient.openTargetWindow(webWindow, target, WebClient.TARGET_SELF), request);
         }

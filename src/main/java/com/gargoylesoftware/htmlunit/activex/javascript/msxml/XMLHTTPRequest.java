@@ -411,10 +411,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         try {
             final URL fullUrl = containingPage_.getFullyQualifiedUrl(urlAsString);
 
-            final WebRequest request = new WebRequest(fullUrl);
-            request.setCharset(UTF_8);
-            request.setAdditionalHeader(HttpHeader.REFERER, containingPage_.getUrl().toExternalForm());
-
+            final WebRequest request = new WebRequest(fullUrl, UTF_8, containingPage_.getUrl());
             request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
 
             // password is ignored if no user defined

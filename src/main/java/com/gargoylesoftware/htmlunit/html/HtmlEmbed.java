@@ -63,9 +63,7 @@ public class HtmlEmbed extends HtmlElement {
         final WebClient webclient = page.getWebClient();
 
         final URL url = page.getFullyQualifiedUrl(getAttributeDirect(SRC_ATTRIBUTE));
-        final WebRequest request = new WebRequest(url);
-        request.setCharset(page.getCharset());
-        request.setRefererlHeader(page.getUrl());
+        final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
         final WebResponse webResponse = webclient.loadWebResponse(request);
 
         try (OutputStream fos = Files.newOutputStream(file.toPath());
