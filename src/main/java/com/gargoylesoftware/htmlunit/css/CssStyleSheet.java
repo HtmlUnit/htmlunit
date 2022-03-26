@@ -353,8 +353,8 @@ public class CssStyleSheet implements Serializable {
      * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
-    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
+    public static boolean selectsSpecifiedElement(final BrowserVersion browserVersion, final Selector selector,
+                                                  final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
         switch (selector.getSelectorType()) {
             case ELEMENT_NODE_SELECTOR:
                 final ElementSelector es = (ElementSelector) selector;
@@ -374,7 +374,7 @@ public class CssStyleSheet implements Serializable {
                     final List<Condition> conditions = es.getConditions();
                     if (conditions != null) {
                         for (final Condition condition : conditions) {
-                            if (!selects(browserVersion, condition, element, fromQuerySelectorAll)) {
+                            if (!selectsSpecifiedElement(browserVersion, condition, element, fromQuerySelectorAll)) {
                                 return false;
                             }
                         }
@@ -393,21 +393,21 @@ public class CssStyleSheet implements Serializable {
                     return false; // for instance parent is a DocumentFragment
                 }
                 final ChildSelector cs = (ChildSelector) selector;
-                return selects(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
-                    && selects(browserVersion, cs.getAncestorSelector(), (DomElement) parentNode,
+                return selectsSpecifiedElement(browserVersion, cs.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)
+                    && selectsSpecifiedElement(browserVersion, cs.getAncestorSelector(), (DomElement) parentNode,
                             pseudoElement, fromQuerySelectorAll);
 
             case DESCENDANT_SELECTOR:
                 final DescendantSelector ds = (DescendantSelector) selector;
                 final SimpleSelector simpleSelector = ds.getSimpleSelector();
-                if (selects(browserVersion, simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
+                if (selectsSpecifiedElement(browserVersion, simpleSelector, element, pseudoElement, fromQuerySelectorAll)) {
                     DomNode ancestor = element;
                     if (simpleSelector.getSelectorType() != SelectorType.PSEUDO_ELEMENT_SELECTOR) {
                         ancestor = ancestor.getParentNode();
                     }
                     final Selector dsAncestorSelector = ds.getAncestorSelector();
                     while (ancestor instanceof DomElement) {
-                        if (selects(browserVersion, dsAncestorSelector, (DomElement) ancestor, pseudoElement,
+                        if (selectsSpecifiedElement(browserVersion, dsAncestorSelector, (DomElement) ancestor, pseudoElement,
                                 fromQuerySelectorAll)) {
                             return true;
                         }
@@ -418,24 +418,24 @@ public class CssStyleSheet implements Serializable {
 
             case DIRECT_ADJACENT_SELECTOR:
                 final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                if (selects(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+                if (selectsSpecifiedElement(browserVersion, das.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
                     DomNode prev = element.getPreviousSibling();
                     while (prev != null && !(prev instanceof DomElement)) {
                         prev = prev.getPreviousSibling();
                     }
                     return prev != null
-                            && selects(browserVersion, das.getSelector(),
+                            && selectsSpecifiedElement(browserVersion, das.getSelector(),
                                     (DomElement) prev, pseudoElement, fromQuerySelectorAll);
                 }
                 return false;
 
             case GENERAL_ADJACENT_SELECTOR:
                 final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-                if (selects(browserVersion, gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
+                if (selectsSpecifiedElement(browserVersion, gas.getSimpleSelector(), element, pseudoElement, fromQuerySelectorAll)) {
                     for (DomNode prev1 = element.getPreviousSibling(); prev1 != null;
                                                         prev1 = prev1.getPreviousSibling()) {
                         if (prev1 instanceof DomElement
-                            && selects(browserVersion, gas.getSelector(), (DomElement) prev1,
+                            && selectsSpecifiedElement(browserVersion, gas.getSelector(), (DomElement) prev1,
                                     pseudoElement, fromQuerySelectorAll)) {
                             return true;
                         }
@@ -464,13 +464,13 @@ public class CssStyleSheet implements Serializable {
      * @param browserVersion the browser version
      * @param condition the condition to test
      * @param element the element to test
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
+     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      */
     // TODO make (package) private again
-    public static boolean selects(final BrowserVersion browserVersion,
-            final Condition condition, final DomElement element,
-            final boolean fromQuerySelectorAll) {
+    public static boolean selectsSpecifiedElement(final BrowserVersion browserVersion,
+                                                  final Condition condition, final DomElement element,
+                                                  final boolean fromQuerySelectorAll) {
 
         switch (condition.getConditionType()) {
             case ID_CONDITION:
@@ -511,14 +511,14 @@ public class CssStyleSheet implements Serializable {
                         && element.getAttribute(condition.getLocalName()).contains(substringValue);
 
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                final String v = condition.getValue();
-                final String a = element.getAttribute(condition.getLocalName());
-                return selectsHyphenSeparated(v, a);
+                final String beginHyphenAttributeValue = condition.getValue();
+                final String attribute = element.getAttribute(condition.getLocalName());
+                return selectsHyphenSeparated(beginHyphenAttributeValue, attribute);
 
             case ONE_OF_ATTRIBUTE_CONDITION:
-                final String v2 = condition.getValue();
-                final String a2 = element.getAttribute(condition.getLocalName());
-                return selectsOneOf(v2, a2);
+                final String oneOfAttributeCondition = condition.getValue();
+                final String attributeOneoOfAttribute = element.getAttribute(condition.getLocalName());
+                return selectsOneOf(oneOfAttributeCondition, attributeOneoOfAttribute);
 
             case LANG_CONDITION:
                 final String lcLang = condition.getValue();
@@ -831,7 +831,7 @@ public class CssStyleSheet implements Serializable {
 
                         validateSelectors(selectorList, 9, element);
 
-                        return !selects(browserVersion, selectorList.get(0), element,
+                        return !selectsSpecifiedElement(browserVersion, selectorList.get(0), element,
                                 null, fromQuerySelectorAll);
                     }
                     catch (final IOException e) {
