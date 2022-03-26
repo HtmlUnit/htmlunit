@@ -21,6 +21,12 @@
                 setPlainRequestParameters().
                 This change was required to fix some issues with Spring MockMVC.
             </action>
+            <action type="add" dev="rbri" issue="360">
+                Implementation of CSSPageRule selectorText setter added.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: Support page rule setSelectorText().
+            </action>
             <action type="fix" dev="rbri">
                 docu: various fixes regarding using the sonatype snapshot repository.
             </action>
