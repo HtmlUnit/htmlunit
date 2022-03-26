@@ -1352,10 +1352,10 @@ public class Document extends Node {
      */
     @JsxFunction
     public Range createRange() {
-        final Range r = new Range(this);
-        r.setParentScope(getWindow());
-        r.setPrototype(getPrototype(Range.class));
-        return r;
+        final Range range = new Range(this);
+        range.setParentScope(getWindow());
+        range.setPrototype(getPrototype(Range.class));
+        return range;
     }
 
     /**
