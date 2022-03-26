@@ -852,7 +852,7 @@ public class CssStyleSheet implements Serializable {
         return true;
     }
 
-    private static boolean getNth(final String nth, final int index) {
+    private static boolean getNthElement(final String nth, final int index) {
         if ("odd".equalsIgnoreCase(nth)) {
             return index % 2 != 0;
         }
@@ -861,19 +861,19 @@ public class CssStyleSheet implements Serializable {
             return index % 2 == 0;
         }
 
-        // an+b
+        // (numerator) * n + (denominator)
         final int nIndex = nth.indexOf('n');
-        int a = 0;
+        int denominator = 0;
         if (nIndex != -1) {
             String value = nth.substring(0, nIndex).trim();
             if ("-".equals(value)) {
-                a = -1;
+                denominator = -1;
             }
             else {
                 if (value.length() > 0 && value.charAt(0) == '+') {
                     value = value.substring(1);
                 }
-                a = NumberUtils.toInt(value, 1);
+                denominator = NumberUtils.toInt(value, 1);
             }
         }
 
@@ -881,12 +881,12 @@ public class CssStyleSheet implements Serializable {
         if (value.length() > 0 && value.charAt(0) == '+') {
             value = value.substring(1);
         }
-        final int b = NumberUtils.toInt(value, 0);
-        if (a == 0) {
-            return index == b && b > 0;
+        final int numerator = NumberUtils.toInt(value, 0);
+        if (denominator == 0) {
+            return index == numerator && numerator > 0;
         }
 
-        final double n = (index - b) / (double) a;
+        final double n = (index - numerator) / (double) denominator;
         return n >= 0 && n % 1 == 0;
     }
 
