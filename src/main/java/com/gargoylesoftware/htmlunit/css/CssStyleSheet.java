@@ -1056,61 +1056,100 @@ public class CssStyleSheet implements Serializable {
     }
 
     /**
+     * Condition Factory
+     * Refactoring isValidCondition using Strategy Design Pattern to choose the best algorithm depending on the case,
+     * and implementing factory class to create objects of the newly created classes for Polymorphism.
+     */
+    public static class ConditionFactory {
+        private static final Map<Condition.ConditionType, ConditionStrategy> strategies = new HashMap<>();
+        private final ConditionStrategy DEFAULT_STRATEGY = new NonPseudoClassCondition();
+        private int documentMode;
+        private Condition condition;
+        private DomNode domNode;
+
+        ConditionFactory(final Condition condition, final int documentMode, final DomNode domNode) {
+
+            this.domNode = domNode;
+            this.condition = condition;
+            this.documentMode = documentMode;
+
+            strategies.put(Condition.ConditionType.ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.ID_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.LANG_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.ONE_OF_ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.BEGIN_HYPHEN_ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.CLASS_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.PREFIX_ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.SUBSTRING_ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.SUFFIX_ATTRIBUTE_CONDITION, new NonPseudoClassCondition());
+            strategies.put(Condition.ConditionType.PSEUDO_CLASS_CONDITION, new PseudoClassCondition());
+        }
+
+        public boolean getConditionStrategy() {
+            Condition.ConditionType conditionType = this.condition.getConditionType();
+            if (!strategies.containsKey(conditionType)) {
+                return DEFAULT_STRATEGY.getConditionValue(condition, documentMode, domNode);
+            }
+            return strategies.get(conditionType).getConditionValue(condition, documentMode, domNode);
+        }
+    }
+
+    interface ConditionStrategy {
+        public boolean getConditionValue(final Condition condition, final int documentMode, final DomNode domNode);
+    }
+
+    public static class NonPseudoClassCondition implements ConditionStrategy {
+        @Override
+        public boolean getConditionValue(final Condition condition, final int documentMode, final DomNode domNode) {
+            return true;
+        }
+    }
+
+    public static class PseudoClassCondition implements ConditionStrategy {
+        @Override
+        public boolean getConditionValue(final Condition condition, final int documentMode, final DomNode domNode) {
+            String value = condition.getValue();
+            if (value.endsWith(")")) {
+                if (value.endsWith("()")) {
+                    return false;
+                }
+                value = value.substring(0, value.indexOf('(') + 1) + ')';
+            }
+            if (documentMode < 9) {
+                return CSS2_PSEUDO_CLASSES.contains(value);
+            }
+
+            if (!CSS2_PSEUDO_CLASSES.contains(value)
+                    && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
+                    && !domNode.isAttachedToPage()
+                    && !domNode.hasChildNodes()) {
+                throw new CSSException("Syntax Error");
+            }
+
+            if ("nth-child()".equals(value)) {
+                final String arg = StringUtils.substringBetween(condition.getValue(), "(", ")").trim();
+                return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
+                        || NTH_NUMERIC.matcher(arg).matches()
+                        || NTH_COMPLEX.matcher(arg).matches();
+            }
+
+            if ("placeholder-shown".equals(value)) {
+                return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
+            }
+
+            if ("-ms-input-placeholder".equals(value)) {
+                return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
+            }
+
+            return CSS3_PSEUDO_CLASSES.contains(value);
+        }
+    }
+
+    /**
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      */
     private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
-        switch (condition.getConditionType()) {
-            case ATTRIBUTE_CONDITION:
-            case ID_CONDITION:
-            case LANG_CONDITION:
-            case ONE_OF_ATTRIBUTE_CONDITION:
-            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-            case CLASS_CONDITION:
-            case PREFIX_ATTRIBUTE_CONDITION:
-            case SUBSTRING_ATTRIBUTE_CONDITION:
-            case SUFFIX_ATTRIBUTE_CONDITION:
-                return true;
-            case PSEUDO_CLASS_CONDITION:
-                String value = condition.getValue();
-                if (value.endsWith(")")) {
-                    if (value.endsWith("()")) {
-                        return false;
-                    }
-                    value = value.substring(0, value.indexOf('(') + 1) + ')';
-                }
-                if (documentMode < 9) {
-                    return CSS2_PSEUDO_CLASSES.contains(value);
-                }
-
-                if (!CSS2_PSEUDO_CLASSES.contains(value)
-                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
-                        && !domNode.isAttachedToPage()
-                        && !domNode.hasChildNodes()) {
-                    throw new CSSException("Syntax Error");
-                }
-
-                if ("nth-child()".equals(value)) {
-                    final String arg = StringUtils.substringBetween(condition.getValue(), "(", ")").trim();
-                    return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
-                            || NTH_NUMERIC.matcher(arg).matches()
-                            || NTH_COMPLEX.matcher(arg).matches();
-                }
-
-                if ("placeholder-shown".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
-                }
-
-                if ("-ms-input-placeholder".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
-                }
-
-                return CSS3_PSEUDO_CLASSES.contains(value);
-            default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unhandled CSS condition type '"
-                                + condition.getConditionType() + "'. Accepting it silently.");
-                }
-                return true;
-        }
+        ConditionFactory conditionFactory = new ConditionFactory(condition, documentMode, domNode);
+        return conditionFactory.getConditionStrategy();
     }
 }
