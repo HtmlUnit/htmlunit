@@ -1063,7 +1063,7 @@ public class Element extends Node {
             // Remove whitespace sequences, possibly escape XML characters.
             String s = node.getNodeValue();
             if (html) {
-                s = com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlChars(s);
+                s = com.gargoylesoftware.htmlunit.util.XMLStringUtils.escapeXmlChars(s);
             }
             builder.append(s);
         }
