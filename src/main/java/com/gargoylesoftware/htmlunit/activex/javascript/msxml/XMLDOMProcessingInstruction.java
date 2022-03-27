@@ -38,7 +38,6 @@ public final class XMLDOMProcessingInstruction extends XMLDOMNode {
     private static final String XML_DECLARATION_TARGET = "xml";
 
     private boolean attributesComputed_;
-    private XMLDOMNamedNodeMap attributes_;
 
     /**
      * Returns the list of attributes for this element.
