@@ -95,12 +95,22 @@ public class HtmlArea extends HtmlElement {
                 throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute(), e);
             }
-            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
-            final WebWindow webWindow = enclosingPage.getEnclosingWindow();
-            final String target = enclosingPage.getResolvedTarget(getTargetAttribute());
-            webClient.getPage(webClient.openTargetWindow(webWindow, target, WebClient.TARGET_SELF), request);
+            setupWebClientPage(enclosingPage, webClient, page, url);
         }
         return false;
+    }
+
+    /**
+     * Sets up a Web Client Page
+     */
+    private void setupWebClientPage(HtmlPage enclosingPage, WebClient webClient, HtmlPage page, URL url) throws IOException {
+        final WebRequest request = new WebRequest(url);
+        request.setCharset(page.getCharset());
+        request.setRefererlHeader(page.getUrl());
+        final WebWindow webWindow = enclosingPage.getEnclosingWindow();
+
+        final String target = enclosingPage.getResolvedTarget(getTargetAttribute());
+        webClient.getPage(webClient.openTargetWindow(webWindow, target, WebClient.TARGET_SELF), request);
     }
 
     /**
@@ -227,17 +237,17 @@ public class HtmlArea extends HtmlElement {
         }
 
         if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D rectangle = parseRect();
+            final Shape2D rectangle = Rectangle2D.parse(this);
             return rectangle.contains(x, y);
         }
 
         if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D circle = parseCircle();
+            final Shape2D circle = Circle2D.parse(this);
             return circle.contains(x, y);
         }
 
         if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D path = parsePoly();
+            final Shape2D path = Polygon2D.parse(this);
             return path.contains(x, y);
         }
 
@@ -267,87 +277,10 @@ public class HtmlArea extends HtmlElement {
         return false;
     }
 
-    private Rectangle2D parseRect() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-
-        double leftX = 0;
-        double topY = 0;
-        double rightX = 0;
-        double bottomY = 0;
-
-        try {
-            if (coords.length > 0) {
-                leftX = Double.parseDouble(coords[0].trim());
-            }
-            if (coords.length > 1) {
-                topY = Double.parseDouble(coords[1].trim());
-            }
-            if (coords.length > 2) {
-                rightX = Double.parseDouble(coords[2].trim());
-            }
-            if (coords.length > 3) {
-                bottomY = Double.parseDouble(coords[3].trim());
-            }
-        }
-        catch (final NumberFormatException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
-            }
-        }
-
-        return new Rectangle2D(leftX, topY, rightX, bottomY);
+    public static Log getLOG() {
+        return LOG;
     }
 
-    private Circle2D parseCircle() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-
-        double centerX = 0;
-        double centerY = 0;
-        double radius = 0;
-
-        try {
-            if (coords.length > 0) {
-                centerX = Double.parseDouble(coords[0].trim());
-            }
-            if (coords.length > 1) {
-                centerY = Double.parseDouble(coords[1].trim());
-            }
-            if (coords.length > 2) {
-                radius = Double.parseDouble(coords[2].trim());
-            }
-
-        }
-        catch (final NumberFormatException e) {
-            LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
-        }
-
-        return new Circle2D(centerX, centerY, radius);
-    }
-
-    private Shape2D parsePoly() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-
-        try {
-            if (coords.length > 1) {
-                final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
-
-                for (int i = 2; i + 1 < coords.length; i += 2) {
-                    path.lineTo(Double.parseDouble(coords[i]), Double.parseDouble(coords[i + 1]));
-                }
-                return path;
-            }
-        }
-        catch (final NumberFormatException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
-            }
-        }
-
-        return new Rectangle2D(0, 0, 0, 0);
-    }
 
     /**
      * {@inheritDoc}
@@ -368,17 +301,17 @@ public class HtmlArea extends HtmlElement {
         }
 
         if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D rectangle = parseRect();
+            final Shape2D rectangle = Rectangle2D.parse(this);
             return rectangle.isEmpty();
         }
 
         if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D circle = parseCircle();
+            final Shape2D circle = Circle2D.parse(this);
             return circle.isEmpty();
         }
 
         if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D path = parsePoly();
+            final Shape2D path = Polygon2D.parse(this);
             return path.isEmpty();
         }
 
