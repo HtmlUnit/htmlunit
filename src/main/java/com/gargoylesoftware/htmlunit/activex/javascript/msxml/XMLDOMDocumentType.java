@@ -35,8 +35,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(domClass = DomDocumentType.class, value = IE)
 public class XMLDOMDocumentType extends XMLDOMNode {
 
-    private XMLDOMNamedNodeMap attributes_;
-
     /**
      * Returns the list of attributes for this element.
      * @return the list of attributes for this element
