@@ -12,7 +12,7 @@
                 Improved method and vaiable naming at some places.
             </action>
             <action type="update" dev="rbri" issue="360">
-                INCOMPATIBLE CHANGE: Class MediaList was moved from package 
+                INCOMPATIBLE CHANGE: Class MediaList was moved from package
                 com.gargoylesoftware.htmlunit.javascript.host.dom
                 into package com.gargoylesoftware.htmlunit.javascript.host.css.
             </action>
