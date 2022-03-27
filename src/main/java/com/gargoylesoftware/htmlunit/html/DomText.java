@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.impl.SelectionDelegate;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleSelectionDelegate;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 /**
  * Representation of a text node in the HTML DOM.
@@ -140,7 +141,7 @@ public class DomText extends DomCharacterData implements Text {
         if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
             printWriter.print(indent);
             if (!(getParentNode() instanceof HtmlStyle) || !data.startsWith("<!--") || !data.endsWith("-->")) {
-                data = StringUtils.escapeXmlChars(data);
+                data = XMLStringUtils.escapeXmlChars(data);
             }
             printWriter.print(data);
             printWriter.print("\r\n");
