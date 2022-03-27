@@ -14,7 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.util.geometry;
 
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Simple 2D shape polygon.
@@ -107,6 +111,29 @@ public class Polygon2D implements Shape2D {
     @Override
     public boolean isEmpty() {
         return points_.size() < 2;
+    }
+
+    public static Shape2D parse(HtmlArea htmlArea) {
+        // browsers seem to support comma and blank
+        final String[] coords = StringUtils.split(htmlArea.getCoordsAttribute(), ", ");
+
+        try {
+            if (coords.length > 1) {
+                final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
+
+                for (int i = 2; i + 1 < coords.length; i += 2) {
+                    path.lineTo(Double.parseDouble(coords[i]), Double.parseDouble(coords[i + 1]));
+                }
+                return path;
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (htmlArea.getLOG().isWarnEnabled()) {
+                htmlArea.getLOG().warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
+            }
+        }
+
+        return new Rectangle2D(0, 0, 0, 0);
     }
 
     @Override
