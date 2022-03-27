@@ -66,6 +66,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 /**
  * @author Ahmed Ashour
@@ -314,7 +315,7 @@ public class DomElement extends DomNamespaceNode implements Element {
             printWriter.print(" ");
             printWriter.print(entry.getKey());
             printWriter.print("=\"");
-            printWriter.print(StringUtils.escapeXmlAttributeValue(entry.getValue().getNodeValue()));
+            printWriter.print(XMLStringUtils.escapeXmlAttributeValue(entry.getValue().getNodeValue()));
             printWriter.print("\"");
         }
     }
