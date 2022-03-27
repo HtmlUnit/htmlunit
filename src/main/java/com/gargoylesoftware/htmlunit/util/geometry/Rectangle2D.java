@@ -14,6 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.util.geometry;
 
+import com.gargoylesoftware.htmlunit.html.HtmlArea;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+
 /**
  * Simple 2D shape rectangle.
  *
@@ -103,6 +108,39 @@ public class Rectangle2D implements Shape2D {
     @Override
     public boolean isEmpty() {
         return Math.abs(top_ - bottom_) < epsilon || Math.abs(left_ - right_) < epsilon;
+    }
+
+
+    public static Shape2D parse(HtmlArea htmlArea) {
+        // browsers seem to support comma and blank
+        final String[] coords = StringUtils.split(htmlArea.getCoordsAttribute(), ", ");
+
+        double leftX = 0;
+        double topY = 0;
+        double rightX = 0;
+        double bottomY = 0;
+
+        try {
+            if (coords.length > 0) {
+                leftX = Double.parseDouble(coords[0].trim());
+            }
+            if (coords.length > 1) {
+                topY = Double.parseDouble(coords[1].trim());
+            }
+            if (coords.length > 2) {
+                rightX = Double.parseDouble(coords[2].trim());
+            }
+            if (coords.length > 3) {
+                bottomY = Double.parseDouble(coords[3].trim());
+            }
+        }
+        catch (final NumberFormatException e) {
+            if (htmlArea.getLOG().isWarnEnabled()) {
+                htmlArea.getLOG().warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
+            }
+        }
+
+        return new Rectangle2D(leftX, topY, rightX, bottomY);
     }
 
     @Override
