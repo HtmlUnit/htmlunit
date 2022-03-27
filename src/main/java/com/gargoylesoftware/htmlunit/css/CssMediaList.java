@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.io.Serializable;
+
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
 
@@ -25,7 +27,7 @@ import com.gargoylesoftware.css.parser.media.MediaQuery;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-public class CssMediaList {
+public class CssMediaList implements Serializable {
 
     private final MediaListImpl wrappedList_;
 

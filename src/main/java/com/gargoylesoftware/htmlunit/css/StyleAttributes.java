@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterab
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ieNotIterable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public final class StyleAttributes {
+public final class StyleAttributes implements Serializable {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 
     static {
