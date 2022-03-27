@@ -60,6 +60,9 @@ public class XMLDOMNode extends MSXMLScriptable {
 
     /** "Live" child nodes collection; has to be a member to have equality (==) working. */
     private XMLDOMNodeList childNodes_;
+    
+    
+    protected XMLDOMNamedNodeMap attributes_;
 
     /**
      * Returns the list of attributes for this node.
