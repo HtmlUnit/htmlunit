@@ -768,7 +768,7 @@ public class CssStyleSheet implements Serializable {
                             index++;
                         }
                     }
-                    return getNth(nth, index);
+                    return getNthElement(nth, index);
                 }
                 else if (value.startsWith("nth-last-child(")) {
                     final String nth = value.substring(value.indexOf('(') + 1, value.length() - 1);
@@ -778,7 +778,7 @@ public class CssStyleSheet implements Serializable {
                             index++;
                         }
                     }
-                    return getNth(nth, index);
+                    return getNthElement(nth, index);
                 }
                 else if (value.startsWith("nth-of-type(")) {
                     final String nthType = element.getNodeName();
@@ -789,7 +789,7 @@ public class CssStyleSheet implements Serializable {
                             index++;
                         }
                     }
-                    return getNth(nth, index);
+                    return getNthElement(nth, index);
                 }
                 else if (value.startsWith("nth-last-of-type(")) {
                     final String nthLastType = element.getNodeName();
@@ -800,7 +800,7 @@ public class CssStyleSheet implements Serializable {
                             index++;
                         }
                     }
-                    return getNth(nth, index);
+                    return getNthElement(nth, index);
                 }
                 else if (value.startsWith("not(")) {
                     final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
