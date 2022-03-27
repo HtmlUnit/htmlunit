@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -197,7 +198,7 @@ public class XMLDOMAttribute extends XMLDOMNode {
     public String getXml() {
         final StringBuilder sb = new StringBuilder(getName())
                 .append("=\"")
-                .append(StringUtils.escapeXmlAttributeValue(getValue()))
+                .append(XMLStringUtils.escapeXmlAttributeValue(getValue()))
                 .append('"');
         return sb.toString();
     }
