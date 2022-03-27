@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 /**
  * Wrapper for the HTML element "input".
@@ -127,7 +128,7 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
                 printWriter.print(" ");
                 printWriter.print(name);
                 printWriter.print("=\"");
-                printWriter.print(StringUtils.escapeXmlAttributeValue(value));
+                printWriter.print(XMLStringUtils.escapeXmlAttributeValue(value));
                 printWriter.print("\"");
             }
         }
