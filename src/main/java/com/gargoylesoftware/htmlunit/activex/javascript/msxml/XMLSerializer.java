@@ -21,6 +21,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 /**
  * A JavaScript object for XMLSerializer.
@@ -108,7 +109,7 @@ public class XMLSerializer {
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
-                    value = StringUtils.escapeXmlChars(value);
+                    value = XMLStringUtils.escapeXmlChars(value);
                     if (preserveWhiteSpace_) {
                         builder.append(value.replace("\n", "\r\n"));
                     }
