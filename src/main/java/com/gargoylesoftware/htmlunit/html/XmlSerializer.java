@@ -177,7 +177,7 @@ class XmlSerializer {
             builder_.append(entry.getKey());
             builder_.append("=\"");
             final String value = entry.getValue().getNodeValue();
-            builder_.append(com.gargoylesoftware.htmlunit.util.StringUtils.escapeXmlAttributeValue(value));
+            builder_.append(com.gargoylesoftware.htmlunit.util.XMLStringUtils.escapeXmlAttributeValue(value));
             builder_.append('"');
         }
     }
