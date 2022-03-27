@@ -38,6 +38,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
+import com.gargoylesoftware.htmlunit.util.XMLStringUtils;
 
 /**
  * A JavaScript object for {@code XMLSerializer}.
@@ -156,7 +157,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             final DomCDataSection domCData = (DomCDataSection) root.getDomNodeOrDie();
             final String data = domCData.getData();
             if (org.apache.commons.lang3.StringUtils.isNotBlank(data)) {
-                return StringUtils.escapeXmlChars(data);
+                return XMLStringUtils.escapeXmlChars(data);
             }
         }
         return root.getDomNodeOrDie().asXml();
@@ -207,7 +208,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
 
                 case Node.TEXT_NODE:
                     String value = child.getNodeValue();
-                    value = StringUtils.escapeXmlChars(value);
+                    value = XMLStringUtils.escapeXmlChars(value);
                     builder.append(value);
                     break;
 
