@@ -49,7 +49,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass(domClass = DomElement.class, value = IE)
 public class XMLDOMElement extends XMLDOMNode {
 
-    private XMLDOMNamedNodeMap attributes_;
     private Map<String, XMLDOMNodeList> elementsByTagName_; // for performance and for equality (==)
 
     /**
