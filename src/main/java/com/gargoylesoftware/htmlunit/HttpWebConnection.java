@@ -306,7 +306,7 @@ public class HttpWebConnection implements WebConnection {
             if (webRequest.getEncodingType() == FormEncodingType.URL_ENCODED && method instanceof HttpPost) {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
-                    final List<NameValuePair> pairs = webRequest.getPlainRequestParameters();
+                    final List<NameValuePair> pairs = webRequest.getRequestParameters();
                     final String query = URLEncodedUtils.format(
                                             HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
 
@@ -333,7 +333,7 @@ public class HttpWebConnection implements WebConnection {
                 final HttpPost postMethod = (HttpPost) method;
                 if (webRequest.getRequestBody() == null) {
                     final StringBuilder body = new StringBuilder();
-                    for (final NameValuePair pair : webRequest.getPlainRequestParameters()) {
+                    for (final NameValuePair pair : webRequest.getRequestParameters()) {
                         body.append(StringUtils.remove(StringUtils.remove(pair.getName(), '\r'), '\n'))
                             .append('=')
                             .append(StringUtils.remove(StringUtils.remove(pair.getValue(), '\r'), '\n'))
@@ -351,11 +351,11 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (FormEncodingType.MULTIPART == webRequest.getEncodingType()) {
-                final Charset c = getCharset(charset, webRequest.getPlainRequestParameters());
+                final Charset c = getCharset(charset, webRequest.getRequestParameters());
                 final MultipartEntityBuilder builder = MultipartEntityBuilder.create().setLaxMode();
                 builder.setCharset(c);
 
-                for (final NameValuePair pair : webRequest.getPlainRequestParameters()) {
+                for (final NameValuePair pair : webRequest.getRequestParameters()) {
                     if (pair instanceof KeyDataPair) {
                         buildFilePart((KeyDataPair) pair, builder);
                     }
@@ -375,8 +375,8 @@ public class HttpWebConnection implements WebConnection {
         }
         else {
             // this is the case for GET as well as TRACE, DELETE, OPTIONS and HEAD
-            if (!webRequest.getPlainRequestParameters().isEmpty()) {
-                final List<NameValuePair> pairs = webRequest.getPlainRequestParameters();
+            if (!webRequest.getRequestParameters().isEmpty()) {
+                final List<NameValuePair> pairs = webRequest.getRequestParameters();
                 final String query = URLEncodedUtils.format(
                                         HttpClientConverter.nameValuePairsToHttpClient(pairs), charset);
                 uri = UrlUtils.toURI(url, query);

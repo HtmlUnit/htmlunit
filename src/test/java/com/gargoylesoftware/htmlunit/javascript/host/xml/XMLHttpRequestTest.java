@@ -2130,9 +2130,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[2], headerContentType);
         if (getExpectedAlerts().length > 3) {
             assertEquals(getExpectedAlerts()[3], getMockWebConnection().getLastWebRequest()
-                                .getPlainRequestParameters().get(0).toString());
+                                .getRequestParameters().get(0).toString());
             assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest()
-                    .getPlainRequestParameters().get(1).toString());
+                    .getRequestParameters().get(1).toString());
             assertEquals(null, getMockWebConnection().getLastWebRequest().getRequestBody());
         }
     }

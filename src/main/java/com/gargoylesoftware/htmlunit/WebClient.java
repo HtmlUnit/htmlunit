@@ -1535,7 +1535,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         URL url = webRequest.getUrl();
         final HttpMethod method = webRequest.getHttpMethod();
-        final List<NameValuePair> parameters = webRequest.getPlainRequestParameters();
+        final List<NameValuePair> parameters = webRequest.getRequestParameters();
 
         WebAssert.notNull("url", url);
         WebAssert.notNull("method", method);
@@ -1676,7 +1676,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     }
                 }
                 else {
-                    wrs.setPlainRequestParameters(parameters);
+                    wrs.setRequestParameters(parameters);
                 }
 
                 for (final Map.Entry<String, String> entry : webRequest.getAdditionalHeaders().entrySet()) {
@@ -2475,7 +2475,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 if (!forceLoad
                     && url.getPath().equals(otherUrl.getPath()) // fail fast
                     && url.toString().equals(otherUrl.toString())
-                    && request.getPlainRequestParameters().equals(otherRequest.getPlainRequestParameters())
+                    && request.getRequestParameters().equals(otherRequest.getRequestParameters())
                     && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
                     return; // skip it;
                 }

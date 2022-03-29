@@ -203,7 +203,7 @@ public class DebuggingWebConnection extends WebConnectionWrapper {
                 .append("contentType: '").append(response.getContentType()).append("', ")
                 .append("method: '").append(request.getHttpMethod().name()).append("', ");
         if (request.getHttpMethod() == HttpMethod.POST && request.getEncodingType() == FormEncodingType.URL_ENCODED) {
-            bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getPlainRequestParameters()))
+            bduiler.append("postParameters: ").append(nameValueListToJsMap(request.getRequestParameters()))
                 .append(", ");
         }
         bduiler.append("url: '").append(escapeJSString(url.toString())).append("', ")

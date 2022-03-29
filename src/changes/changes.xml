@@ -16,12 +16,9 @@
                 com.gargoylesoftware.htmlunit.javascript.host.dom
                 into package com.gargoylesoftware.htmlunit.javascript.host.css.
             </action>
-            <action type="update" dev="rbri" issue="223">
-                INCOMPATIBLE CHANGE: Method WebRequest.getRequestParameters() now returns
-                parameters also from the url or the body if available. The new method
-                WebRequest.getPlainRequestParameters() can be used if you like to have
-                the old behaviour. Additionally setRequestParameters() was renamed to
-                setPlainRequestParameters().
+            <action type="add" dev="rbri" issue="223">
+                New method WebRequest.getParameters() returning all parameters
+                (from the url and the body if available).
                 This change was required to fix some issues with Spring MockMVC.
             </action>
             <action type="add" dev="rbri" issue="360">

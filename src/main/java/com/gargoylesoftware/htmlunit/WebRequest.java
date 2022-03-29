@@ -325,12 +325,12 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Retrieves the request parameters to use. Similar to the servlet api this will
+     * Retrieves the request parameters in use. Similar to the servlet api this will
      * work depending on the request type and check the url parameters and
      * the body.
      * @return the request parameters to use
      */
-    public List<NameValuePair> getRequestParameters() {
+    public List<NameValuePair> getParameters() {
         // developer note:
         // this has to be in sync with
         // com.gargoylesoftware.htmlunit.HttpWebConnection.makeHttpMethod(WebRequest, HttpClientBuilder)
@@ -343,7 +343,7 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getPlainRequestParameters();
+                return getRequestParameters();
             }
 
             return HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset());
@@ -351,7 +351,7 @@ public class WebRequest implements Serializable {
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getPlainRequestParameters();
+                return getRequestParameters();
             }
 
             final List<NameValuePair> pairs = Collections.emptyList();
@@ -359,7 +359,7 @@ public class WebRequest implements Serializable {
         }
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
-            return getPlainRequestParameters();
+            return getRequestParameters();
         }
 
         // for instance a PUT or PATCH request
@@ -368,23 +368,27 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Retrieves the request parameters to use. If set, these request parameters will overwrite any
      * request parameters which may be present in the {@link #getUrl() URL}. Should not be used in
      * combination with the {@link #setRequestBody(String) request body}.
      * @return the request parameters to use
      */
-    public List<NameValuePair> getPlainRequestParameters() {
+    public List<NameValuePair> getRequestParameters() {
         return plainRequestParameters_;
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Sets the request parameters to use. If set, these request parameters will overwrite any request
      * parameters which may be present in the {@link #getUrl() URL}. Should not be used in combination
      * with the {@link #setRequestBody(String) request body}.
      * @param requestParameters the request parameters to use
      * @throws RuntimeException if the request body has already been set
      */
-    public void setPlainRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
+    public void setRequestParameters(final List<NameValuePair> requestParameters) throws RuntimeException {
         if (requestBody_ != null) {
             final String msg = "Trying to set the request parameters, but the request body has already been specified;"
                              + "the two are mutually exclusive!";
@@ -395,7 +399,7 @@ public class WebRequest implements Serializable {
 
     /**
      * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
-     * types. Should not be used in combination with {@link #setPlainRequestParameters(List) request parameters}.
+     * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @return the body content to be submitted if this is a <tt>POST</tt> request
      */
     public String getRequestBody() {
@@ -405,7 +409,7 @@ public class WebRequest implements Serializable {
     /**
      * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
      * Ignored for all other request types.
-     * Should not be used in combination with {@link #setPlainRequestParameters(List) request parameters}.
+     * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
      * or {@code PATCH} request
      * @throws RuntimeException if the request parameters have already been set

@@ -649,7 +649,7 @@ public class HtmlAnchorTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         assertEquals(1, requestedParams.size());
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());

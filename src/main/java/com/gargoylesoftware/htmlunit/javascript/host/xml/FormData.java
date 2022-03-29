@@ -290,6 +290,6 @@ public class FormData extends HtmlUnitScriptable {
      */
     public void fillRequest(final WebRequest webRequest) {
         webRequest.setEncodingType(FormEncodingType.MULTIPART);
-        webRequest.setPlainRequestParameters(requestParameters_);
+        webRequest.setRequestParameters(requestParameters_);
     }
 }

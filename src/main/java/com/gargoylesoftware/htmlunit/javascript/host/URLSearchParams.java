@@ -449,7 +449,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
             for (final NameValuePair entry : splitted) {
                 params.add(new NameValuePair(entry.getName(), entry.getValue()));
             }
-            webRequest.setPlainRequestParameters(params);
+            webRequest.setRequestParameters(params);
         }
     }
 }

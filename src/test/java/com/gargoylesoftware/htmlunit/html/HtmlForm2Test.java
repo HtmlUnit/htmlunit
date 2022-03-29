@@ -319,7 +319,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], driver.getCurrentUrl());
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         assertEquals(1, requestedParams.size());
         assertEquals(getExpectedAlerts()[1], requestedParams.get(0).getName());
         assertEquals(getExpectedAlerts()[2], requestedParams.get(0).getValue());
@@ -1154,7 +1154,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1209,7 +1209,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1249,7 +1249,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1288,7 +1288,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1327,7 +1327,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());
@@ -1466,7 +1466,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(new ById("mySubmit")).click();
 
         final List<NameValuePair> requestedParams =
-                getMockWebConnection().getLastWebRequest().getPlainRequestParameters();
+                getMockWebConnection().getLastWebRequest().getRequestParameters();
         Collections.sort(requestedParams, Comparator.comparing(NameValuePair::getName));
 
         assertEquals(getExpectedAlerts().length, requestedParams.size());

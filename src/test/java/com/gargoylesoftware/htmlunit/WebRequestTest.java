@@ -243,7 +243,7 @@ public class WebRequestTest {
     public void getRequestParametersNone() throws Exception {
         final URL url = new URL("http://localhost/test");
         final WebRequest request = new WebRequest(url);
-        assertEquals(0, request.getRequestParameters().size());
+        assertEquals(0, request.getParameters().size());
     }
 
     /**
@@ -254,9 +254,9 @@ public class WebRequestTest {
         final URL url = new URL("http://localhost/test?x=u");
         final WebRequest request = new WebRequest(url);
 
-        assertEquals(1, request.getRequestParameters().size());
-        assertEquals("x", request.getRequestParameters().get(0).getName());
-        assertEquals("u", request.getRequestParameters().get(0).getValue());
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("u", request.getParameters().get(0).getValue());
     }
 
     /**
@@ -268,7 +268,7 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         request.setHttpMethod(HttpMethod.POST);
 
-        assertEquals(0, request.getRequestParameters().size());
+        assertEquals(0, request.getParameters().size());
     }
 
     /**
@@ -282,8 +282,8 @@ public class WebRequestTest {
         request.setEncodingType(FormEncodingType.URL_ENCODED);
         request.setRequestBody("x=u");
 
-        assertEquals(1, request.getRequestParameters().size());
-        assertEquals("x", request.getRequestParameters().get(0).getName());
-        assertEquals("u", request.getRequestParameters().get(0).getValue());
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("u", request.getParameters().get(0).getValue());
     }
 }
