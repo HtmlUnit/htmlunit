@@ -39,7 +39,7 @@
         <spotbugs.version>4.6.0</spotbugs.version>
         <pmd.version>6.44.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
-        <dependencycheck.version>7.0.1</dependencycheck.version>
+        <dependencycheck.version>7.0.3</dependencycheck.version>
     </properties>
 
     <build>
