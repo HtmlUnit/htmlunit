@@ -256,7 +256,7 @@ public class CssStyleSheet implements Serializable {
             }
 
             // now we can look into the cache with the fixed request for
-            // a cached script
+            // a cached style sheet
             final Cache cache = client.getCache();
             final Object fromCache = cache.getCachedObject(request);
             if (fromCache instanceof CSSStyleSheetImpl) {

@@ -457,6 +457,77 @@ public class CacheTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cssFromCacheIsUsed() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>x</body>\n"
+            + "</html>";
+
+        final String css = ".x { color: red; }";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final URL cssUrl = new URL(URL_FIRST, "foo.css");
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
+        connection.setResponse(cssUrl, css, 200, "OK", MimeType.TEXT_CSS, headers);
+
+        client.getPage(pageUrl);
+
+        assertEquals(2, connection.getRequestCount());
+        assertEquals(1, client.getCache().getSize());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void cssManuallyAddeToCache() throws Exception {
+        final String html = "<html><head>\n"
+            + "<link rel='stylesheet' type='text/css' href='foo.css' />\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "abc <div class='test'>def</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        final String css = ".test { visibility: hidden; }";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html);
+
+        final URL cssUrl = new URL(URL_FIRST, "foo.css");
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair(LAST_MODIFIED, "Sun, 15 Jul 2007 20:46:27 GMT"));
+        final WebRequest request = new WebRequest(cssUrl);
+        final WebResponseData data = new WebResponseData(css.getBytes("UTF-8"), 200, "OK", headers);
+        final WebResponse response = new WebResponse(data, request, 100);
+        client.getCache().cacheIfPossible(new WebRequest(cssUrl), response, headers);
+
+        final HtmlPage page = client.getPage(pageUrl);
+        assertEquals("abc", page.asNormalizedText());
+
+        assertEquals(1, connection.getRequestCount());
+        assertEquals(1, client.getCache().getSize());
+    }
+
+    /**
      * Test that content retrieved with XHR is cached when right headers are here.
      * @throws Exception if the test fails
      */

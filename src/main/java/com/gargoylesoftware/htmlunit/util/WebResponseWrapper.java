@@ -194,4 +194,24 @@ public class WebResponseWrapper extends WebResponse {
     public void defaultCharsetUtf8() {
         wrappedWebResponse_.defaultCharsetUtf8();
     }
+
+    @Override
+    public InputStream getContentAsStreamWithBomIfApplicable() throws IOException {
+        return wrappedWebResponse_.getContentAsStreamWithBomIfApplicable();
+    }
+
+    @Override
+    public boolean isSuccess() {
+        return wrappedWebResponse_.isSuccess();
+    }
+
+    @Override
+    public boolean isSuccessOrUseProxy() {
+        return wrappedWebResponse_.isSuccessOrUseProxy();
+    }
+
+    @Override
+    public boolean isSuccessOrUseProxyOrNotModified() {
+        return wrappedWebResponse_.isSuccessOrUseProxyOrNotModified();
+    }
 }
