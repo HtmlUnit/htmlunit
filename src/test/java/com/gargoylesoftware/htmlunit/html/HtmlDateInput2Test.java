@@ -35,7 +35,7 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented(TestedBrowser.IE)
-    public void testMinValidation() throws Exception {
+    public void minValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
@@ -75,7 +75,7 @@ public class HtmlDateInput2Test extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented(TestedBrowser.IE)
-    public void testMaxValidation() throws Exception {
+    public void maxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"

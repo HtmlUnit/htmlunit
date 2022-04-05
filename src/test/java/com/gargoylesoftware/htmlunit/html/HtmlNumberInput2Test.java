@@ -127,7 +127,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMinValidation() throws Exception {
+    public void minValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
@@ -166,7 +166,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMinValidationWithDecimalStepping() throws Exception {
+    public void minValidationWithDecimalStepping() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
@@ -228,7 +228,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void testMaxValidation() throws Exception {
+    public void maxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"

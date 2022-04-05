@@ -498,7 +498,7 @@ public class Event2Test extends WebDriverTestCase {
     @Test
     @Alerts({"object", "undefined", "undefined", "undefined", "undefined",
              "object", "false", "false", "false", "false"})
-    public void testKeys() throws Exception {
+    public void keys() throws Exception {
         final String html =
               "<html><body onload='test(event)'><script>\n"
             + LOG_TITLE_FUNCTION

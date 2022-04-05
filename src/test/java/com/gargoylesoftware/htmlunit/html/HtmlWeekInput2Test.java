@@ -38,7 +38,7 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented({IE, FF, FF_ESR})
-    public void testMinValidation() throws Exception {
+    public void minValidation() throws Exception {
         final String htmlContent = "<html>\n"
                 + "<head></head>\n"
                 + "<body>\n"
@@ -78,7 +78,7 @@ public class HtmlWeekInput2Test extends SimpleWebTestCase {
      */
     @Test
     @NotYetImplemented({IE, FF, FF_ESR})
-    public void testMaxValidation() throws Exception {
+    public void naxValidation() throws Exception {
         final String htmlContent = "<html>\n" + "<head></head>\n"
                 + "<body>\n"
                 + "<form id='form1'>\n"
