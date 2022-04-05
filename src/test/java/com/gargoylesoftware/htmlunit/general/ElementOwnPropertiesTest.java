@@ -981,7 +981,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -1128,7 +1128,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -1312,7 +1312,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -1509,7 +1509,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -1692,7 +1692,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -1958,7 +1958,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -2108,7 +2108,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -2259,7 +2259,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -2406,7 +2406,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -2623,7 +2623,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -2860,7 +2860,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3009,7 +3009,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3155,7 +3155,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3333,7 +3333,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3483,7 +3483,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3729,7 +3729,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -3895,7 +3895,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -4071,7 +4071,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -4245,7 +4245,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -4477,7 +4477,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -4748,7 +4748,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -5235,7 +5235,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -5382,7 +5382,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -5555,7 +5555,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "constructor()",
             FF_ESR = "constructor()",
@@ -5715,7 +5715,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -5876,7 +5876,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -6162,7 +6162,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -6348,7 +6348,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -6498,7 +6498,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -6678,7 +6678,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -6859,7 +6859,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "constructor()",
             FF_ESR = "constructor()",
@@ -6942,7 +6942,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7264,7 +7264,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7446,7 +7446,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7559,7 +7559,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7672,7 +7672,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7789,7 +7789,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -7936,7 +7936,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8113,7 +8113,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8343,7 +8343,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8516,7 +8516,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8663,7 +8663,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8828,7 +8828,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -8975,7 +8975,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -9122,7 +9122,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -9564,7 +9564,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -9755,7 +9755,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -9922,7 +9922,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
@@ -10109,7 +10109,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onselectionchange,onselectstart,onslotchange,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,translate,"
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,textprediction,title,translate,"
                 + "virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),blur(),click(),constructor(),contentEditable,dataset,"
                 + "dir,draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
