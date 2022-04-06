@@ -77,7 +77,7 @@ public class WebRequest implements Serializable {
     private transient Set<HttpHint> httpHints_;
 
     /* These two are mutually exclusive; additionally, requestBody_ should only be set for POST requests. */
-    private List<NameValuePair> plainRequestParameters_ = Collections.emptyList();
+    private List<NameValuePair> requestParameters_ = Collections.emptyList();
     private String requestBody_;
 
     /**
@@ -376,7 +376,7 @@ public class WebRequest implements Serializable {
      * @return the request parameters to use
      */
     public List<NameValuePair> getRequestParameters() {
-        return plainRequestParameters_;
+        return requestParameters_;
     }
 
     /**
@@ -394,7 +394,7 @@ public class WebRequest implements Serializable {
                              + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
         }
-        plainRequestParameters_ = requestParameters;
+        requestParameters_ = requestParameters;
     }
 
     /**
@@ -416,7 +416,7 @@ public class WebRequest implements Serializable {
      *                          or this is not a {@code POST}, {@code PUT} or {@code PATCH} request.
      */
     public void setRequestBody(final String requestBody) throws RuntimeException {
-        if (plainRequestParameters_ != null && !plainRequestParameters_.isEmpty()) {
+        if (requestParameters_ != null && !requestParameters_.isEmpty()) {
             final String msg = "Trying to set the request body, but the request parameters have already been specified;"
                        + "the two are mutually exclusive!";
             throw new RuntimeException(msg);
@@ -603,7 +603,7 @@ public class WebRequest implements Serializable {
                 .append("[<url=\"").append(url_).append('"')
                 .append(", ").append(httpMethod_)
                 .append(", ").append(encodingType_)
-                .append(", ").append(plainRequestParameters_)
+                .append(", ").append(requestParameters_)
                 .append(", ").append(additionalHeaders_)
                 .append(", ").append(credentials_)
                 .append(">]");

@@ -1055,14 +1055,17 @@ public class Location2Test extends WebDriverTestCase {
 
         final List<NameValuePair> params = getMockWebConnection().getLastWebRequest().getRequestParameters();
         assertEquals(4, params.size());
-        assertEquals("p1", params.get(0).getName());
-        assertEquals("seven", params.get(0).getValue());
-        assertEquals("sub", params.get(1).getName());
-        assertEquals("ok", params.get(1).getValue());
+
+        assertEquals("urlParam", params.get(0).getName());
+        assertEquals("urlVal", params.get(0).getValue());
+
+        assertEquals("p1", params.get(1).getName());
+        assertEquals("seven", params.get(1).getValue());
         assertEquals("p2", params.get(2).getName());
         assertEquals("", params.get(2).getValue());
-        assertEquals("urlParam", params.get(3).getName());
-        assertEquals("urlVal", params.get(3).getValue());
+
+        assertEquals("sub", params.get(3).getName());
+        assertEquals("ok", params.get(3).getValue());
 
         expandExpectedAlertsVariables("http://localhost:" + PORT);
         final Map<String, String> additionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
