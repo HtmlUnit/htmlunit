@@ -52,7 +52,9 @@ import com.gargoylesoftware.htmlunit.util.geometry.Shape2D;
 public class HtmlArea extends HtmlElement {
     private static final Log LOG = LogFactory.getLog(HtmlArea.class);
 
-    /** The HTML tag represented by this element. */
+    /**
+     * The HTML tag represented by this element.
+     */
     public static final String TAG_NAME = "area";
 
     private static final String SHAPE_RECT = "rect";
@@ -63,11 +65,11 @@ public class HtmlArea extends HtmlElement {
      * Creates a new instance.
      *
      * @param qualifiedName the qualified name of the element type to instantiate
-     * @param page the page that contains this element
-     * @param attributes the initial attributes
+     * @param page          the page that contains this element
+     * @param attributes    the initial attributes
      */
     HtmlArea(final String qualifiedName, final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
+             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
     }
 
@@ -84,14 +86,13 @@ public class HtmlArea extends HtmlElement {
             final HtmlPage page = (HtmlPage) getPage();
             if (StringUtils.startsWithIgnoreCase(href, JavaScriptURLConnection.JAVASCRIPT_PREFIX)) {
                 page.executeJavaScript(
-                    href, "javascript url", getStartLineNumber());
+                        href, "javascript url", getStartLineNumber());
                 return false;
             }
             final URL url;
             try {
                 url = enclosingPage.getFullyQualifiedUrl(getHrefAttribute());
-            }
-            catch (final MalformedURLException e) {
+            } catch (final MalformedURLException e) {
                 throw new IllegalStateException(
                         "Not a valid url: " + getHrefAttribute(), e);
             }
@@ -218,6 +219,7 @@ public class HtmlArea extends HtmlElement {
 
     /**
      * Indicates if this area contains the specified point.
+     *
      * @param x the x coordinate of the point
      * @param y the y coordinate of the point
      * @return {@code true} if the point is contained in this area
@@ -230,20 +232,19 @@ public class HtmlArea extends HtmlElement {
         }
 
         if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D rectangle = parseRect();
+            final Shape2D rectangle = new ShapeContext(new ParseRectangle()).executeStrategy(getCoordsAttribute());
             return rectangle.contains(x, y);
         }
 
         if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D circle = parseCircle();
+            final Shape2D circle = new ShapeContext(new ParseCircle()).executeStrategy(getCoordsAttribute());
             return circle.contains(x, y);
         }
 
         if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D path = parsePoly();
+            final Shape2D path = new ShapeContext(new ParsePoly()).executeStrategy(getCoordsAttribute());
             return path.contains(x, y);
         }
-
         return false;
     }
 
@@ -270,87 +271,69 @@ public class HtmlArea extends HtmlElement {
         return false;
     }
 
-    private Rectangle2D parseRect() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
+    public class ParseRectangle implements Strategy {
+        @Override
+        public Shape2D parseShape(String coordinates) {
+            // browsers seem to support comma and blank
+            final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
 
-        double leftX = 0;
-        double topY = 0;
-        double rightX = 0;
-        double bottomY = 0;
+            double leftX = 0;
+            double topY = 0;
+            double rightX = 0;
+            double bottomY = 0;
 
-        try {
-            if (coords.length > 0) {
-                leftX = Double.parseDouble(coords[0].trim());
-            }
-            if (coords.length > 1) {
-                topY = Double.parseDouble(coords[1].trim());
-            }
-            if (coords.length > 2) {
-                rightX = Double.parseDouble(coords[2].trim());
-            }
-            if (coords.length > 3) {
-                bottomY = Double.parseDouble(coords[3].trim());
-            }
-        }
-        catch (final NumberFormatException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
-            }
-        }
-
-        return new Rectangle2D(leftX, topY, rightX, bottomY);
-    }
-
-    private Circle2D parseCircle() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-
-        double centerX = 0;
-        double centerY = 0;
-        double radius = 0;
-
-        try {
-            if (coords.length > 0) {
-                centerX = Double.parseDouble(coords[0].trim());
-            }
-            if (coords.length > 1) {
-                centerY = Double.parseDouble(coords[1].trim());
-            }
-            if (coords.length > 2) {
-                radius = Double.parseDouble(coords[2].trim());
-            }
-
-        }
-        catch (final NumberFormatException e) {
-            LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
-        }
-
-        return new Circle2D(centerX, centerY, radius);
-    }
-
-    private Shape2D parsePoly() {
-        // browsers seem to support comma and blank
-        final String[] coords = StringUtils.split(getCoordsAttribute(), ", ");
-
-        try {
-            if (coords.length > 1) {
-                final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
-
-                for (int i = 2; i + 1 < coords.length; i += 2) {
-                    path.lineTo(Double.parseDouble(coords[i]), Double.parseDouble(coords[i + 1]));
+            try {
+                if (coords.length > 0) {
+                    leftX = Double.parseDouble(coords[0].trim());
                 }
-                return path;
+                if (coords.length > 1) {
+                    topY = Double.parseDouble(coords[1].trim());
+                }
+                if (coords.length > 2) {
+                    rightX = Double.parseDouble(coords[2].trim());
+                }
+                if (coords.length > 3) {
+                    bottomY = Double.parseDouble(coords[3].trim());
+                }
+            } catch (final NumberFormatException e) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Invalid rect coords '" + Arrays.toString(coords) + "'", e);
+                }
             }
-        }
-        catch (final NumberFormatException e) {
-            if (LOG.isWarnEnabled()) {
-                LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
-            }
-        }
 
-        return new Rectangle2D(0, 0, 0, 0);
+            return new Rectangle2D(leftX, topY, rightX, bottomY);
+        }
     }
+
+    public class ParseCircle implements Strategy {
+        @Override
+        public Shape2D parseShape(String coordinates) {
+            // browsers seem to support comma and blank
+            final String[] coords = StringUtils.split(coordinates, ", ");
+
+            double centerX = 0;
+            double centerY = 0;
+            double radius = 0;
+
+            try {
+                if (coords.length > 0) {
+                    centerX = Double.parseDouble(coords[0].trim());
+                }
+                if (coords.length > 1) {
+                    centerY = Double.parseDouble(coords[1].trim());
+                }
+                if (coords.length > 2) {
+                    radius = Double.parseDouble(coords[2].trim());
+                }
+
+            } catch (final NumberFormatException e) {
+                LOG.warn("Invalid circle coords '" + Arrays.toString(coords) + "'", e);
+            }
+
+            return new Circle2D(centerX, centerY, radius);
+        }
+    }
+
 
     /**
      * {@inheritDoc}
@@ -363,6 +346,47 @@ public class HtmlArea extends HtmlElement {
         return super.handles(event);
     }
 
+    public interface Strategy {
+        public Shape2D parseShape(String coordinates);
+    }
+
+    public class ParsePoly implements Strategy {
+        @Override
+        public Shape2D parseShape(String coordinates) {
+            // browsers seem to support comma and blank
+            final String[] coords = StringUtils.split(coordinates, ", ");
+
+            try {
+                if (coords.length > 1) {
+                    final Polygon2D path = new Polygon2D(Double.parseDouble(coords[0]), Double.parseDouble(coords[1]));
+
+                    for (int i = 2; i + 1 < coords.length; i += 2) {
+                        path.lineTo(Double.parseDouble(coords[i]), Double.parseDouble(coords[i + 1]));
+                    }
+                    return path;
+                }
+            } catch (final NumberFormatException e) {
+                if (LOG.isWarnEnabled()) {
+                    LOG.warn("Invalid poly coords '" + Arrays.toString(coords) + "'", e);
+                }
+            }
+
+            return new Rectangle2D(0, 0, 0, 0);
+        }
+    }
+
+    public class ShapeContext {
+        private Strategy strategy;
+
+        public ShapeContext(Strategy strategy) {
+            this.strategy = strategy;
+        }
+
+        public Shape2D executeStrategy(String coordinates) {
+            return strategy.parseShape(coordinates);
+        }
+    }
+
     private boolean isEmpty() {
         final String shape = StringUtils.defaultIfEmpty(getShapeAttribute(), SHAPE_RECT).toLowerCase(Locale.ROOT);
 
@@ -371,17 +395,17 @@ public class HtmlArea extends HtmlElement {
         }
 
         if (SHAPE_RECT.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D rectangle = parseRect();
+            final Shape2D rectangle = new ShapeContext(new ParseRectangle()).executeStrategy(getCoordsAttribute());
             return rectangle.isEmpty();
         }
 
         if (SHAPE_CIRCLE.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D circle = parseCircle();
+            final Shape2D circle = new ShapeContext(new ParseCircle()).executeStrategy(getCoordsAttribute());
             return circle.isEmpty();
         }
 
         if (SHAPE_POLY.equals(shape) && getCoordsAttribute() != null) {
-            final Shape2D path = parsePoly();
+            final Shape2D path = new ShapeContext(new ParsePoly()).executeStrategy(getCoordsAttribute());
             return path.isEmpty();
         }
 
