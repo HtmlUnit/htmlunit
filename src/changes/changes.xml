@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Bugfixes">
+        <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 97, Bugfixes">
             <action type="fix" dev="rbri" issue="471" due-to="Rural Hunter">
                 Add missing delegate methods to WebResponseWrapper.
             </action>
