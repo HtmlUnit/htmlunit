@@ -529,7 +529,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             + "    rule.selectorText = ':grey';\n"
             + "    log(rule.selectorText);\n"
             + "  } catch(e) {\n"
-            + "    log('exception e');\n"
+            + "    log('exception');\n"
             + "  }\n"
             + "</script>\n"
 
