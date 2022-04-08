@@ -2106,9 +2106,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined",
+            IE = "undefined")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
     }

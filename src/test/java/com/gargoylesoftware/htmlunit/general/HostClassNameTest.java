@@ -3436,7 +3436,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLDialogElement() { [native code] }",
-            EDGE = "function HTMLDialogElement() { [native code] }")
+            EDGE = "function HTMLDialogElement() { [native code] }",
+            FF = "function HTMLDialogElement() {\n    [native code]\n}")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
     }
