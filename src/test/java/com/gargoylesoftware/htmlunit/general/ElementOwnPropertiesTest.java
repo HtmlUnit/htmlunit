@@ -998,8 +998,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -1064,7 +1064,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1145,8 +1145,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -1212,7 +1212,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -1329,8 +1329,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -1399,7 +1399,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1526,8 +1526,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -1613,7 +1613,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1709,8 +1709,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -1796,7 +1796,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -1880,7 +1880,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -1975,8 +1975,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2063,7 +2063,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title")
     public void basefont() throws Exception {
         test("basefont");
@@ -2125,8 +2125,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2195,7 +2195,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2276,8 +2276,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2342,7 +2342,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2423,8 +2423,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2507,7 +2507,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void big() throws Exception {
@@ -2640,8 +2640,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2726,7 +2726,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void b() throws Exception {
@@ -2877,8 +2877,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -2963,7 +2963,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "clear,constructor,width")
     public void center() throws Exception {
@@ -3026,8 +3026,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3109,7 +3109,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             IE = "constructor")
     public void cite() throws Exception {
@@ -3172,8 +3172,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3256,7 +3256,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void code() throws Exception {
@@ -3350,8 +3350,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3437,7 +3437,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             IE = "constructor")
     public void dfn() throws Exception {
@@ -3500,8 +3500,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3583,7 +3583,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title")
     public void dd() throws Exception {
         test("dd");
@@ -3628,11 +3628,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(CHROME = "close(),constructor(),open,returnValue,show(),showModal()",
             EDGE = "close(),constructor(),open,returnValue,show(),showModal()",
-            FF = "constructor()",
+            FF = "close(),constructor(),open,returnValue,show(),showModal()",
             FF_ESR = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
+            FF = "constructor()",
             IE = "constructor")
     public void dialog() throws Exception {
         test("dialog");
@@ -3746,8 +3747,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3829,7 +3830,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title")
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title")
     public void dt() throws Exception {
         test("dt");
     }
@@ -3912,8 +3913,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -3996,7 +3997,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void em() throws Exception {
@@ -4088,8 +4089,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -4185,7 +4186,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -4262,8 +4263,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -4366,7 +4367,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -4494,8 +4495,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -4600,7 +4601,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -4765,8 +4766,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -4870,7 +4871,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -5100,8 +5101,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -5158,7 +5159,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width")
     public void image() throws Exception {
@@ -5252,8 +5253,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -5336,7 +5337,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void i() throws Exception {
@@ -5399,8 +5400,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -5483,7 +5484,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void kbd() throws Exception {
@@ -5732,8 +5733,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -5815,7 +5816,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
            IE = "constructor")
     public void main() throws Exception {
@@ -5893,8 +5894,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -5995,7 +5996,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -6179,8 +6180,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -6275,7 +6276,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -6365,8 +6366,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -6452,7 +6453,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,"
                 + "title",
             IE = "constructor")
     public void nobr() throws Exception {
@@ -6515,8 +6516,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -6617,7 +6618,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -6695,8 +6696,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -6796,7 +6797,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -6959,8 +6960,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7062,7 +7063,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -7281,8 +7282,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7368,7 +7369,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "clear,constructor,width")
     public void plaintext() throws Exception {
@@ -7463,8 +7464,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7576,8 +7577,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7689,8 +7690,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7806,8 +7807,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -7890,7 +7891,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void s() throws Exception {
@@ -7953,8 +7954,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8041,7 +8042,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void samp() throws Exception {
@@ -8130,8 +8131,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8238,7 +8239,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -8360,8 +8361,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8439,7 +8440,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void small() throws Exception {
         test("small");
@@ -8533,8 +8534,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8618,7 +8619,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void strike() throws Exception {
         test("strike");
@@ -8680,8 +8681,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8766,7 +8767,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void strong() throws Exception {
@@ -8845,8 +8846,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -8929,7 +8930,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void sub() throws Exception {
@@ -8992,8 +8993,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -9077,7 +9078,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void summary() throws Exception {
         test("summary");
@@ -9139,8 +9140,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -9223,7 +9224,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void sup() throws Exception {
@@ -9581,8 +9582,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -9662,7 +9663,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void tt() throws Exception {
         test("tt");
@@ -9772,8 +9773,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -9856,7 +9857,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onscroll,onseeked,onseeking,"
                 + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void u() throws Exception {
@@ -9939,8 +9940,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -10027,7 +10028,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void var() throws Exception {
@@ -10126,8 +10127,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsecuritypolicyviolation,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
                 + "onslotchange,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,"
                 + "ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,"
-                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,spellcheck,style,"
-                + "tabIndex,"
+                + "onwebkitanimationiteration,onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,"
+                + "spellcheck,style,tabIndex,"
                 + "title",
             FF_ESR = "accessKey,accessKeyLabel,blur(),click(),constructor(),contentEditable,dataset,dir,draggable,"
                 + "focus(),hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,"
@@ -10228,7 +10229,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onresize,onscroll,onseeked,"
                 + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"

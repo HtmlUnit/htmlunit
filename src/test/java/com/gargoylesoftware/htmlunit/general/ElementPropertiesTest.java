@@ -508,7 +508,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,"
                 + "ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,onvolumechange,"
                 + "onwaiting,onwebkitanimationend,onwebkitanimationiteration,onwebkitanimationstart,"
-                + "onwebkittransitionend,onwheel,spellcheck,style,tabIndex,title",
+                + "onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,accessKeyLabel,"
                 + "blur(),click(),contentEditable,dataset,dir,draggable,focus(),"
                 + "hidden,innerText,isContentEditable,lang,nonce,offsetHeight,offsetLeft,offsetParent,offsetTop,"
@@ -611,7 +611,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
-                + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,spellcheck,style,"
+                + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -1837,10 +1837,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "-",
-            CHROME = "close(),open,returnValue,show(),showModal()",
-            EDGE = "close(),open,returnValue,show(),showModal()")
-    @HtmlUnitNYI(CHROME = "-", EDGE = "-")
+    @Alerts(DEFAULT = "close(),open,returnValue,show(),showModal()",
+            FF_ESR = "-",
+            IE = "-")
+    @HtmlUnitNYI(CHROME = "-", EDGE = "-", FF = "-")
     public void dialog() throws Exception {
         test("dialog");
     }
