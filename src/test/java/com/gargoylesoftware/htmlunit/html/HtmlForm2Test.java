@@ -448,9 +448,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "gzip, deflate",
-            CHROME = "gzip, deflate, br",
-            EDGE = "gzip, deflate, br")
+    @Alerts(DEFAULT = "gzip, deflate, br",
+            FF_ESR = "gzip, deflate",
+            IE = "gzip, deflate")
     public void acceptEncodingHeader() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_

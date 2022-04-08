@@ -996,7 +996,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"before\\nsvg-text\\nafter", "before\\nsvg-text\\nafter"},
-            FF = {"beforesvg-textafter", "undefined"},
+            FF = {"beforesvg-textafter", "beforesvg-textafter"},
             FF_ESR = {"beforesvg-textafter", "undefined"},
             IE = {"beforesvg-titlesvg-textafter", "beforesvg-titlesvg-textafter"})
     public void innerText_SVG() throws Exception {
@@ -1021,7 +1021,6 @@ public class HTMLElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"MyTitlevar i;", "MyTitlevar i;"},
-            FF = {"MyTitlevar i;", "undefined"},
             FF_ESR = {"MyTitlevar i;", "undefined"})
     public void innerText_Head() throws Exception {
         final String html = "<html><head>"
