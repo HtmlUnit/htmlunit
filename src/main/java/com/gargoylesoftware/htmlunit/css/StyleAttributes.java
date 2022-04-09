@@ -1343,14 +1343,14 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code grid-template-rows}. */
         GRID_TEMPLATE_ROWS_("grid-template-rows", "grid-template-rows", ff("none")),
 
+        /** The style property {@code height}. */
+        HEIGHT("height", "height", chromeAndEdge(""), ff(""), ie("")),
+
         /** The style property {@code hyphenateCharacter}. */
         HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ffLatest("auto")),
 
         /** The style property {@code hyphenate-character}. */
         HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ffLatest("auto")),
-
-        /** The style property {@code height}. */
-        HEIGHT("height", "height", chromeAndEdge(""), ff(""), ie("")),
 
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff("manual"), chromeAndEdge("manual")),
