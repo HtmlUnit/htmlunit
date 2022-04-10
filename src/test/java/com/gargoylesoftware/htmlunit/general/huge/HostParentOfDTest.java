@@ -615,7 +615,8 @@ public class HostParentOfDTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            EDGE = "true")
+            EDGE = "true",
+            FF = "true")
     public void _Element_HTMLDialogElement() throws Exception {
         test("Element", "HTMLDialogElement");
     }
