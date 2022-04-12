@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.StorageHolder.Type;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -648,32 +649,13 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
-     * Returns the {@code console} property.
-     * @return the {@code console} property
-     */
-    @JsxGetter
-    public ScriptableObject getConsole() {
-        return console_;
-    }
-
-    /**
-     * Sets the {@code console}.
-     * @param console the console
-     */
-    @JsxSetter
-    public void setConsole(final ScriptableObject console) {
-        console_ = console;
-    }
-
-    /**
      * Prints messages to the {@code console}.
      * @param message the message to log
      */
     @JsxFunction({FF, FF_ESR})
     public void dump(final String message) {
-        if (console_ instanceof Console) {
-            Console.log(null, console_, new Object[] {message}, null);
-        }
+        final WebConsole console = getWebWindow().getWebClient().getWebConsole();
+        console.info(message);
     }
 
     /**
@@ -808,12 +790,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this, pageToEnclose);
 
-        final Console console  = new Console();
-        console.setWebWindow(webWindow_);
-        console.setParentScope(this);
-        console.setPrototype(getPrototype(console.getClass()));
-        console_ = console;
-
+//        final Console console  = new Console();
+//        console.setWebWindow(webWindow_);
+//        console.setParentScope(this);
+//        console.setPrototype(getPrototype(console.getClass()));
+//        console_ = console;
+//
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
         applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));

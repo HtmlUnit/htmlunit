@@ -80,6 +80,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole;
 import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -469,6 +470,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static void configureRhino(final WebClient webClient,
             final BrowserVersion browserVersion, final HtmlUnitScriptable scriptable) {
+
+        NativeConsole.init(scriptable, false, webClient.getWebConsole());
+
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");

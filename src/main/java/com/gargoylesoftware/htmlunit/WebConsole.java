@@ -18,9 +18,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+
+import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Delegator;
+import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.ConsolePrinter;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.Level;
+import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptStackElement;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * This class can be used to print messages to the logger. The first parameter
@@ -32,7 +48,9 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Andrea Martino
  */
-public class WebConsole implements Serializable {
+public class WebConsole implements ConsolePrinter, Serializable {
+
+    private static final Formatter CONSOLE_FORMATTER_ = new ConsoleFormatter();
 
     private Formatter formatter_ = new DefaultFormatter();
     private Logger logger_ = new DefaultLogger();
@@ -242,6 +260,39 @@ public class WebConsole implements Serializable {
         }
     }
 
+    @Override
+    public void print(final Context cx, final Scriptable scope, final Level level,
+            final Object[] args, final ScriptStackElement[] stack) {
+
+        final Formatter oldFormatter = getFormatter();
+        setFormatter(CONSOLE_FORMATTER_);
+
+        switch (level) {
+            case TRACE:
+                if (logger_.isTraceEnabled()) {
+                    logger_.trace(process(args));
+                }
+                break;
+            case DEBUG:
+                debug(args);
+                break;
+            case INFO:
+                info(args);
+                break;
+            case WARN:
+                warn(args);
+                break;
+            case ERROR:
+                error(args);
+                break;
+
+            default:
+                break;
+        }
+
+        setFormatter(oldFormatter);
+    }
+
     /**
      * This method is used by all the public method to process the passed
      * parameters.
@@ -436,6 +487,267 @@ public class WebConsole implements Serializable {
         @Override
         public void error(final Object message) {
             LOG.error(message);
+        }
+    }
+
+    /**
+     * This class is the default formatter used by Console.
+     */
+    private static class ConsoleFormatter implements Formatter {
+
+        private static void appendNativeArray(final NativeArray a, final StringBuilder sb, final int level) {
+            sb.append('[');
+            if (level < 3) {
+                for (int i = 0; i < a.size(); i++) {
+                    if (i > 0) {
+                        sb.append(", ");
+                    }
+                    final Object val = a.get(i);
+                    if (val != null) {
+                        appendValue(val, sb, level + 1);
+                    }
+                }
+            }
+            sb.append(']');
+        }
+
+        private static void appendNativeObject(final NativeObject obj, final StringBuilder sb, final int level) {
+            if (level == 0) {
+                // For whatever reason, when a native object is printed at the
+                // root level Firefox puts brackets outside it. This is not the
+                // case when a native object is printed as part of an array or
+                // inside another object.
+                sb.append('(');
+            }
+            sb.append('{');
+            if (level < 3) {
+                final Object[] ids = obj.getIds();
+                if (ids != null && ids.length > 0) {
+                    boolean needsSeparator = false;
+                    for (final Object key : ids) {
+                        if (needsSeparator) {
+                            sb.append(", ");
+                        }
+                        sb.append(key);
+                        sb.append(": ");
+                        appendValue(obj.get(key), sb, level + 1);
+                        needsSeparator = true;
+                    }
+                }
+            }
+            sb.append('}');
+            if (level == 0) {
+                sb.append(')');
+            }
+        }
+
+        /**
+         * This methods appends the val parameter to the passed StringBuffer.
+         * FireBug's console prints some object differently if printed at the
+         * root level or as part of an array or native object. This method tries
+         * to simulate Firebus's behavior.
+         *
+         * @param val
+         *            the object to be printed
+         * @param sb
+         *            the StringBuilder used as destination
+         * @param level
+         *            the recursion level. If zero, it mean the object is
+         *            printed at the console root level. Otherwise, the object
+         *            is printed as part of an array or a native object.
+         */
+        private static void appendValue(final Object val, final StringBuilder sb, final int level) {
+            if (val instanceof NativeFunction) {
+                sb.append('(');
+                // Remove unnecessary new lines and spaces from the function
+                final Pattern p = Pattern.compile("[ \\t]*\\r?\\n[ \\t]*",
+                        Pattern.MULTILINE);
+                final Matcher m = p.matcher(val.toString());
+                sb.append(m.replaceAll(" ").trim());
+                sb.append(')');
+            }
+            else if (val instanceof BaseFunction) {
+                sb.append("function ");
+                sb.append(((BaseFunction) val).getFunctionName());
+                sb.append("() {[native code]}");
+            }
+            else if (val instanceof NativeObject) {
+                appendNativeObject((NativeObject) val, sb, level);
+            }
+            else if (val instanceof NativeArray) {
+                appendNativeArray((NativeArray) val, sb, level);
+            }
+            else if (val instanceof Delegator) {
+                if (level == 0) {
+                    sb.append("[object ");
+                    sb.append(((Delegator) val).getDelegee().getClassName());
+                    sb.append(']');
+                }
+                else {
+                    sb.append("({})");
+                }
+            }
+            else if (val instanceof HtmlUnitScriptable) {
+                if (level == 0) {
+                    sb.append("[object ");
+                    sb.append(((HtmlUnitScriptable) val).getClassName());
+                    sb.append(']');
+                }
+                else {
+                    sb.append("({})");
+                }
+            }
+            else if (val instanceof String) {
+                if (level == 0) {
+                    sb.append((String) val);
+                }
+                else {
+                    // When printing a string as part of an array or native
+                    // object,
+                    // enclose it in double quotes and escape its content.
+                    sb.append(quote((String) val));
+                }
+            }
+            else if (val instanceof Number) {
+                sb.append(val.toString());
+            }
+            else {
+                // ?!?
+                sb.append(val);
+            }
+        }
+
+        /**
+         * Even if similar, this is not JSON encoding. This replicates the way
+         * Firefox console prints strings when logging.
+         * @param s the string to be quoted
+         */
+        private static String quote(final CharSequence s) {
+            final StringBuilder sb = new StringBuilder();
+            sb.append('\"');
+            for (int i = 0; i < s.length(); i++) {
+                final char ch = s.charAt(i);
+                switch (ch) {
+                    case '\\':
+                        sb.append("\\\\");
+                        break;
+                    case '\"':
+                        sb.append("\\\"");
+                        break;
+                    case '\b':
+                        sb.append("\\b");
+                        break;
+                    case '\t':
+                        sb.append("\\t");
+                        break;
+                    case '\n':
+                        sb.append("\\n");
+                        break;
+                    case '\f':
+                        sb.append("\\f");
+                        break;
+                    case '\r':
+                        sb.append("\\r");
+                        break;
+                    default:
+                        if (ch < ' ' || ch > '~') {
+                            sb.append("\\u").append(Integer.toHexString(ch).toUpperCase(Locale.ROOT));
+                        }
+                        else {
+                            sb.append(ch);
+                        }
+                }
+            }
+            sb.append('\"');
+            return sb.toString();
+        }
+
+        private static String formatToString(final Object o) {
+            if (o == null) {
+                return "null";
+            }
+            else if (o instanceof NativeFunction) {
+                return o.toString();
+            }
+            else if (o instanceof BaseFunction) {
+                return "function " + ((BaseFunction) o).getFunctionName()
+                        + "\n" + "    [native code]\n" + "}";
+            }
+            else if (o instanceof NativeArray) {
+                // If an array is embedded inside another array, just return
+                // "[object Object]"
+                return "[object Object]";
+            }
+            else if (o instanceof Delegator) {
+                return "[object " + ((Delegator) o).getDelegee().getClassName()
+                        + "]";
+            }
+            else if (o instanceof NativeObject) {
+                return "[object " + ((NativeObject) o).getClassName() + "]";
+            }
+            else if (o instanceof HtmlUnitScriptable) {
+                return "[object " + ((HtmlUnitScriptable) o).getClassName() + "]";
+            }
+            else {
+                return o.toString();
+            }
+        }
+
+        ConsoleFormatter() {
+        }
+
+        @Override
+        public String printObject(final Object o) {
+            final StringBuilder sb = new StringBuilder();
+            appendValue(o, sb, 0);
+            return sb.toString();
+        }
+
+        @Override
+        public String parameterAsString(final Object o) {
+            if (o instanceof NativeArray) {
+                final StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < ((NativeArray) o).size(); i++) {
+                    if (i > 0) {
+                        sb.append(',');
+                    }
+                    sb.append(formatToString(((NativeArray) o).get(i)));
+                }
+                return sb.toString();
+            }
+            return formatToString(o);
+        }
+
+        @Override
+        public String parameterAsInteger(final Object o) {
+            if (o instanceof Number) {
+                return Integer.toString(((Number) o).intValue());
+            }
+            else if (o instanceof String) {
+                try {
+                    return Integer.toString(Integer.parseInt((String) o));
+                }
+                catch (final NumberFormatException e) {
+                    // Swallow the exception and return below
+                }
+            }
+            return "NaN";
+        }
+
+        @Override
+        public String parameterAsFloat(final Object o) {
+            if (o instanceof Number) {
+                return Float.toString(((Number) o).floatValue());
+            }
+            else if (o instanceof String) {
+                try {
+                    return Float.toString(Float.parseFloat((String) o));
+                }
+                catch (final NumberFormatException e) {
+                    // Swallow the exception and return below
+                }
+            }
+            return "NaN";
         }
     }
 }

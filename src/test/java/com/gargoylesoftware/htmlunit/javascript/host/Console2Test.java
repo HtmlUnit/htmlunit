@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebConsole.Logger;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for Console.
@@ -35,6 +37,60 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  */
 @RunWith(BrowserRunner.class)
 public class Console2Test extends SimpleWebTestCase {
+
+    private final class LoggerMock implements Logger {
+        private final List<String> messages_;
+
+        private LoggerMock(final List<String> messages) {
+            messages_ = messages;
+        }
+
+        @Override
+        public void warn(final Object message) {
+        }
+
+        @Override
+        public void trace(final Object message) {
+        }
+
+        @Override
+        public void info(final Object message) {
+            messages_.add("info: " + message);
+        }
+
+        @Override
+        public void error(final Object message) {
+        }
+
+        @Override
+        public void debug(final Object message) {
+        }
+
+        @Override
+        public boolean isTraceEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isDebugEnabled() {
+            return false;
+        }
+
+        @Override
+        public boolean isInfoEnabled() {
+            return true;
+        }
+
+        @Override
+        public boolean isWarnEnabled() {
+            return true;
+        }
+
+        @Override
+        public boolean isErrorEnabled() {
+            return true;
+        }
+    }
 
     /**
      * @throws Exception if the test fails
@@ -118,58 +174,10 @@ public class Console2Test extends SimpleWebTestCase {
     public void logDollar() throws Exception {
         log("'%s', '$Version$'");
     }
-
     private void log(final String logInput) throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<>();
-        console.setLogger(new Logger() {
-
-            @Override
-            public void warn(final Object message) {
-            }
-
-            @Override
-            public void trace(final Object message) {
-            }
-
-            @Override
-            public void info(final Object message) {
-                messages.add("info: " + message);
-            }
-
-            @Override
-            public void error(final Object message) {
-            }
-
-            @Override
-            public void debug(final Object message) {
-            }
-
-            @Override
-            public boolean isTraceEnabled() {
-                return false;
-            }
-
-            @Override
-            public boolean isDebugEnabled() {
-                return false;
-            }
-
-            @Override
-            public boolean isInfoEnabled() {
-                return true;
-            }
-
-            @Override
-            public boolean isWarnEnabled() {
-                return true;
-            }
-
-            @Override
-            public boolean isErrorEnabled() {
-                return true;
-            }
-        });
+        console.setLogger(new LoggerMock(messages));
 
         final String html
             = "<html><head>\n"
@@ -183,6 +191,31 @@ public class Console2Test extends SimpleWebTestCase {
             + "</html>";
 
         loadPage(html);
+        assertEquals(getExpectedAlerts(), messages);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("info: from worker")
+    public void fromWorker() throws Exception {
+        final WebConsole console = getWebClient().getWebConsole();
+        final List<String> messages = new ArrayList<>();
+        console.setLogger(new LoggerMock(messages));
+
+        final String workerJs = "console.log('from worker');\n";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
+
+        final String html = "<html><body>\n"
+                + "<script async>\n"
+                + "try {\n"
+                + "  var myWorker = new Worker('worker.js');\n"
+                + "} catch(e) { log('exception'); }\n"
+                + "</script></body></html>\n";
+
+        loadPage(html);
+        Thread.sleep(100);
         assertEquals(getExpectedAlerts(), messages);
     }
 }
