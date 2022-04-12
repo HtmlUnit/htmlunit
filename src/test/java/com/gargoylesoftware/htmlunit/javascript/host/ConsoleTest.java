@@ -30,7 +30,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 
 /**
- * Tests for {@link Console}.
+ * Tests for Console.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -354,7 +354,6 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         final String logMsg = logEntry.getMessage();
-        System.out.println(logMsg);
         assertTrue(logMsg, logMsg
                 .matches("bar\\(\\)@script in http.*:6\\n"
                         + "foo\\(\\)@script in http.*:8\\n"
@@ -389,7 +388,6 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         final String logMsg = logEntry.getMessage();
-        System.out.println(logMsg);
         assertTrue(logMsg, logMsg.contains("he ho"));
     }
 }

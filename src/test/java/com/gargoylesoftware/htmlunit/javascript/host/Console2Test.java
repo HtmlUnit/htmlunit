@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link Console}.
+ * Tests for Console.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -172,11 +172,15 @@ public class Console2Test extends SimpleWebTestCase {
         });
 
         final String html
-            = "<html><head><title>foo</title><script>\n"
+            = "<html><head>\n"
+            + "<script>\n"
             + "function test() {\n"
             + "  window.console.log(" + logInput + ");\n"
             + "}\n"
-            + "</script></head><body onload='test()'></body></html>";
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
 
         loadPage(html);
         assertEquals(getExpectedAlerts(), messages);
