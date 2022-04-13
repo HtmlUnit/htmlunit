@@ -267,6 +267,7 @@ public class HostParentOfCTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
+    @HtmlUnitNYI(IE = "false")
     public void _Console_Console() throws Exception {
         test("Console", "Console");
     }

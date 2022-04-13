@@ -22,13 +22,14 @@ import java.util.Date;
 import org.apache.commons.lang3.time.FastDateFormat;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.javascript.NativeDateTest;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * Contains some missing features of Rhino NativeDate.
+ * Contains some missing features of Rhino {@link NativeDateTest}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

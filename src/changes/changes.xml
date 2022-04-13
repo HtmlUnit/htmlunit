@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 97, Bugfixes">
+        <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+            <action type="update" dev="rbri">
+                Use NativeConsole from core-js instead of our own implementation. As a side effect,
+                WebConsole.Formatter is no longer supported.
+            </action>
+            <action type="fix" dev="rbri" issue="476" due-to="Rural Hunter">
+                core-js: Using subarray() on a subarray produces incorrect results.
+            </action>
             <action type="fix" dev="rbri" issue="471" due-to="Rural Hunter">
                 Add missing delegate methods to WebResponseWrapper.
             </action>

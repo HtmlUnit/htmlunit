@@ -159,8 +159,17 @@ public class WebConsole implements ConsolePrinter, Serializable {
 
         switch (level) {
             case TRACE:
-                if (logger_.isTraceEnabled()) {
-                    logger_.trace(NativeConsole.format(cx, scope, args));
+                if (logger_.isInfoEnabled()) {
+                    String msg = NativeConsole.format(cx, scope, args);
+                    if (stack != null) {
+                        for (final ScriptStackElement scriptStackElement : stack) {
+                            if (msg.length() > 0) {
+                                msg += "\n";
+                            }
+                            msg += scriptStackElement;
+                        }
+                    }
+                    logger_.info(msg);
                 }
                 break;
             case DEBUG:
