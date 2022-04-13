@@ -112,6 +112,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.Level;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -160,7 +161,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private Screen screen_;
     private History history_;
     private Location location_;
-    private ScriptableObject console_;
     private ApplicationCache applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
@@ -649,13 +649,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
-     * Prints messages to the {@code console}.
+     * Logs messages to the browser's standard output (stdout). If the browser was started
+     * from a terminal, output sent to dump() will appear in the terminal.
+     * Output from dump() is not sent to the browser's developer tools console.
+     * To log to the developer tools console, use console.log().
+     *
+     * HtmlUnit always uses the WebConsole.
+     *
      * @param message the message to log
      */
     @JsxFunction({FF, FF_ESR})
     public void dump(final String message) {
         final WebConsole console = getWebWindow().getWebClient().getWebConsole();
-        console.info(message);
+        console.print(Context.getCurrentContext(), this, Level.INFO, new String[] {message}, null);
     }
 
     /**
@@ -790,12 +796,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this, pageToEnclose);
 
-//        final Console console  = new Console();
-//        console.setWebWindow(webWindow_);
-//        console.setParentScope(this);
-//        console.setPrototype(getPrototype(console.getClass()));
-//        console_ = console;
-//
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
         applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));

@@ -105,7 +105,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: string: HtmlUnit; numb: 4, 4; float: 4.2, link: http://htmlunit.sourceforge.net/")
+    @Alerts("info: string: HtmlUnit; numb: 4, 4; float: 4.2, link: \"http://htmlunit.sourceforge.net/\"")
     public void logSimplePlaceholder() throws Exception {
         log("'string: %s; numb: %d, %i; float: %f, link: %o', 'HtmlUnit', 4.2, 4, 4.2,"
                 + " 'http://htmlunit.sourceforge.net/'");
@@ -142,7 +142,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: %i; 1; %i; % 2.0 3.0 4.0")
+    @Alerts("info: %i; 1; %i; % 2 3 4")
     public void logEscaping() throws Exception {
         log("'%%i; %i; %%i; %', 1, 2, 3, 4");
     }
@@ -151,7 +151,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: 12%i3; 4.0")
+    @Alerts("info: 12%i3; 4")
     public void logContinous() throws Exception {
         log("'%i%i%%i%i;', 1, 2, 3, 4");
     }
@@ -160,7 +160,7 @@ public class Console2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("info: %x 1 10%  % ; 2.0")
+    @Alerts("info: %x 1 10%  % ; 2")
     public void logPercent() throws Exception {
         log("'%x %i 10%  %% ;', 1, 2");
     }
