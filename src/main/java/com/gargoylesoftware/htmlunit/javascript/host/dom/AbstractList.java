@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
+
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -32,9 +34,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The parent class of {@link NodeList} and {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
@@ -46,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Frank Danek
  */
 @JsxClass(isJSObject = false)
-public class AbstractList extends HtmlUnitScriptable implements ExternalArrayData {
+public class AbstractList extends HtmlUnitScriptable implements Function, ExternalArrayData {
 
     /**
      * Cache effect of some changes.
@@ -139,12 +144,38 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * Helper that retrieves the item or items corresponding to the specified
+     * {@inheritDoc}
+     */
+    @Override
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (args.length == 0) {
+            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+        }
+        final Object object = getIt(args[0]);
+        if (object == NOT_FOUND) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+                return null;
+            }
+            return Undefined.instance;
+        }
+        return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
+        return null;
+    }
+
+    /**
+     * Private helper that retrieves the item or items corresponding to the specified
      * index or key.
      * @param o the index or key corresponding to the element or elements to return
      * @return the element or elements corresponding to the specified index or key
      */
-    protected Object getIt(final Object o) {
+    private Object getIt(final Object o) {
         if (o instanceof Number) {
             final Number n = (Number) o;
             final int i = n.intValue();
