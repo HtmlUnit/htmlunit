@@ -136,6 +136,29 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    @HtmlUnitNYI(IE = "true")
+    public void windowProperty() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    var x = Object.getOwnPropertyNames(window).indexOf('console');\n"
+            + "    log(x >= 0);\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "success",
             IE = "exception")
     @HtmlUnitNYI(IE = "success")

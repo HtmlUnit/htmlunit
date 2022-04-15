@@ -174,6 +174,7 @@ public class Console2Test extends SimpleWebTestCase {
     public void logDollar() throws Exception {
         log("'%s', '$Version$'");
     }
+
     private void log(final String logInput) throws Exception {
         final WebConsole console = getWebClient().getWebConsole();
         final List<String> messages = new ArrayList<>();

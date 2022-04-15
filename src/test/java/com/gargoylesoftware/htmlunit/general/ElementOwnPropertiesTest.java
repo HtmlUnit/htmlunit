@@ -749,7 +749,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "toStaticHTML(),toString(),"
                 + "window")
     @HtmlUnitNYI(CHROME = "alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
-                + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),console,constructor(),"
+                + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),constructor(),"
                 + "crypto,devicePixelRatio,document,event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),"
                 + "getSelection(),history,innerHeight,innerWidth,length,localStorage,location,matchMedia(),"
@@ -772,7 +772,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "resizeTo(),screen,scroll(),scrollBy(),scrollTo(),scrollX,scrollY,self,sessionStorage,setInterval(),"
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window",
             EDGE = "alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
-                + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),console,constructor(),"
+                + "clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),constructor(),"
                 + "crypto,devicePixelRatio,document,event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),"
                 + "getSelection(),history,innerHeight,innerWidth,length,localStorage,location,matchMedia(),"
@@ -796,7 +796,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setTimeout(),speechSynthesis,status,stop(),styleMedia,TEMPORARY,top,window",
             FF = "alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),console,constructor(),controllers,"
+                + "close(),closed,confirm(),constructor(),controllers,"
                 + "crypto,devicePixelRatio,document,dump(),event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,localStorage,location,"
                 + "matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,name,navigator,"
@@ -815,7 +815,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollX,scrollY,self,sessionStorage,setInterval(),setTimeout(),status,stop(),top,window",
             FF_ESR = "alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),console,constructor(),controllers,"
+                + "close(),closed,confirm(),constructor(),controllers,"
                 + "crypto,devicePixelRatio,document,dump(),event,external,find(),focus(),frameElement,frames,"
                 + "getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,localStorage,location,"
                 + "matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,name,navigator,"
@@ -837,7 +837,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "btoa(),Call(),CallSite(),cancelAnimationFrame(),CanvasGradient,CanvasPattern,"
                 + "CanvasRenderingContext2D,captureEvents(),CDATASection,CharacterData,clearInterval(),"
                 + "clearTimeout(),clientInformation,ClientRect,ClientRectList,clipboardData,close(),"
-                + "closed,CloseEvent,CollectGarbage(),Comment,CompositionEvent,confirm(),Console,console,"
+                + "closed,CloseEvent,CollectGarbage(),Comment,CompositionEvent,confirm(),console,"
                 + "constructor,Coordinates,Crypto,CSSFontFaceRule,CSSImportRule,CSSKeyframeRule,"
                 + "CSSKeyframesRule,CSSMediaRule,CSSNamespaceRule,CSSPageRule,CSSRule,CSSRuleList,"
                 + "CSSStyleDeclaration,CSSStyleRule,CSSStyleSheet,CustomEvent,DataTransfer,DataView(),"

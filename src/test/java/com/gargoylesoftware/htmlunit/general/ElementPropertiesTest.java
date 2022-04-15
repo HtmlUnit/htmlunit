@@ -1211,7 +1211,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "window")
     @HtmlUnitNYI(CHROME = "addEventListener(),alert(),atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
-                + "console,crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
+                + "crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,"
                 + "localStorage,location,log(),matchMedia(),moveBy(),moveTo(),name,navigator,offscreenBuffering,"
                 + "onabort,onanimationend,onanimationiteration,onanimationstart,onauxclick,onbeforeunload,"
@@ -1236,7 +1236,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "TEMPORARY,test(),top,window",
             EDGE = "addEventListener(),alert(),atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,close(),closed,confirm(),"
-                + "console,crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
+                + "crypto,devicePixelRatio,dispatchEvent(),document,event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,length,"
                 + "localStorage,location,log(),matchMedia(),moveBy(),moveTo(),name,navigator,offscreenBuffering,"
                 + "onabort,onanimationend,onanimationiteration,onanimationstart,onauxclick,onbeforeunload,"
@@ -1261,7 +1261,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "TEMPORARY,test(),top,window",
             FF_ESR = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),console,controllers,"
+                + "close(),closed,confirm(),controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,log(),matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
@@ -1282,7 +1282,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window",
             FF = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),console,controllers,"
+                + "close(),closed,confirm(),controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,log(),matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
@@ -1303,7 +1303,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window",
             IE = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,clipboardData,close(),"
-                + "closed,CollectGarbage(),confirm(),console,devicePixelRatio,dispatchEvent(),document,"
+                + "closed,CollectGarbage(),confirm(),devicePixelRatio,dispatchEvent(),document,"
                 + "doNotTrack,event,external,focus(),frameElement,frames,getComputedStyle(),getSelection(),"
                 + "history,innerHeight,innerWidth,length,localStorage,location,log(),matchMedia(),moveBy(),"
                 + "moveTo(),name,navigate(),navigator,offscreenBuffering,onabort,onafterprint,"
