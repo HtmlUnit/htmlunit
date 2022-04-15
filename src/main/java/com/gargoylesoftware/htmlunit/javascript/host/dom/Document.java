@@ -136,6 +136,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollectionFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement;
@@ -1810,19 +1811,19 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getForms() {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+            return new HTMLCollectionFunction(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlForm && node.getPrefix() == null;
+                }
+            };
+        }
+
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node instanceof HtmlForm && node.getPrefix() == null;
-            }
-
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
-                throw ScriptRuntime.typeError("document.forms is not a function");
             }
         };
     }
@@ -1833,19 +1834,19 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getEmbeds() {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+            return new HTMLCollectionFunction(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlEmbed;
+                }
+            };
+        }
+
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node instanceof HtmlEmbed;
-            }
-
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
-                throw ScriptRuntime.typeError("document.embeds is not a function");
             }
         };
     }
@@ -1856,19 +1857,19 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getImages() {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+            return new HTMLCollectionFunction(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlImage;
+                }
+            };
+        }
+
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node instanceof HtmlImage;
-            }
-
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
-                throw ScriptRuntime.typeError("document.images is not a function");
             }
         };
     }
@@ -1879,19 +1880,19 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getScripts() {
+        if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
+            return new HTMLCollectionFunction(getDomNodeOrDie(), false) {
+                @Override
+                protected boolean isMatching(final DomNode node) {
+                    return node instanceof HtmlScript;
+                }
+            };
+        }
+
         return new HTMLCollection(getDomNodeOrDie(), false) {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node instanceof HtmlScript;
-            }
-
-            @Override
-            public Object call(final Context cx, final Scriptable scope,
-                    final Scriptable thisObj, final Object[] args) {
-                if (getBrowserVersion().hasFeature(JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED)) {
-                    return super.call(cx, scope, thisObj, args);
-                }
-                throw ScriptRuntime.typeError("document.scripts is not a function");
             }
         };
     }

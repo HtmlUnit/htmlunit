@@ -39,8 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -113,18 +111,6 @@ public class HTMLCollection extends AbstractList {
     @Override
     protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        if (supportsParentheses()) {
-            return super.call(cx, scope, thisObj, args);
-        }
-
-        throw ScriptRuntime.typeError("HTMLCollection does nont support function like access");
     }
 
     /**

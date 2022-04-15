@@ -45,7 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ahmed Ashour
  */
 @JsxClass
-public class HTMLAllCollection extends HTMLCollection {
+public class HTMLAllCollection extends HTMLCollectionFunction {
 
     /**
      * Creates an instance.
