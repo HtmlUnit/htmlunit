@@ -34,9 +34,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -51,7 +51,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Frank Danek
  */
 @JsxClass(isJSObject = false)
-public class AbstractList extends HtmlUnitScriptable implements Function, ExternalArrayData {
+public class AbstractList extends HtmlUnitScriptable implements Callable, ExternalArrayData {
 
     /**
      * Cache effect of some changes.
@@ -159,14 +159,6 @@ public class AbstractList extends HtmlUnitScriptable implements Function, Extern
             return Undefined.instance;
         }
         return object;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public final Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        return null;
     }
 
     /**
