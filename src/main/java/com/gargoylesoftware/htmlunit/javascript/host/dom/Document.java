@@ -4201,13 +4201,8 @@ public class Document extends Node {
      */
     @JsxGetter
     public HTMLCollection getAll() {
-        final HTMLCollection all = new HTMLAllCollection(getDomNodeOrDie()) {
-            @Override
-            public boolean avoidObjectDetection() {
-                return true;
-            }
-        };
-
+        final HTMLCollection all = new HTMLAllCollection(getDomNodeOrDie());
+        all.setAvoidObjectDetection(true);
         all.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
         return all;
     }
