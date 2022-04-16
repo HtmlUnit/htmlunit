@@ -46,6 +46,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -5653,5 +5655,40 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "-")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "entries(),forEach(),item(),keys(),length,values()",
+            FF = "entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length")
+    public void htmlCollection() throws Exception {
+        testString("", "document.getElementsByName('myLog')");
+    }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "entries(),forEach(),item(),keys(),length,values()",
+            FF = "entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
+            IE = "item(),length")
+    public void nodeList() throws Exception {
+        testString("", "document.getElementById('myLog').childNodes");
     }
 }

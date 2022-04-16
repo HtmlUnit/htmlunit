@@ -46,6 +46,8 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -11416,5 +11418,49 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                    + "constructor(),hasOwnProperty(),isPrototypeOf(),"
+                    + "propertyIsEnumerable(),toLocaleString(),toString(),valueOf()")
+    public void htmlCollection() throws Exception {
+        testString("", "document.getElementsByName('myLog')");
+    }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            IE = "constructor,item(),length")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                    + "constructor(),hasOwnProperty(),isPrototypeOf(),"
+                    + "propertyIsEnumerable(),toLocaleString(),toString(),valueOf()")
+    public void nodeList() throws Exception {
+        testString("", "document.getElementById('myLog').childNodes");
     }
 }
