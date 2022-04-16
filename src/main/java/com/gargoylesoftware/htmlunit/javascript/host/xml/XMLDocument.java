@@ -24,6 +24,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -202,19 +204,21 @@ public class XMLDocument extends Document {
             return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
 
-        return new HTMLCollection(XMLDocument.this.getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                final String nodeName;
-                if (getBrowserVersion().hasFeature(JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL)) {
-                    nodeName = node.getLocalName();
-                }
-                else {
-                    nodeName = node.getNodeName();
-                }
+        final HTMLCollection elements = new HTMLCollection(XMLDocument.this.getDomNodeOrDie(), false);
 
-                return nodeName.equals(tagName);
-            }
-        };
+        elements.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> {
+                    final String nodeName;
+                    if (getBrowserVersion().hasFeature(JS_XML_GET_ELEMENTS_BY_TAG_NAME_LOCAL)) {
+                        nodeName = node.getLocalName();
+                    }
+                    else {
+                        nodeName = node.getNodeName();
+                    }
+
+                    return nodeName.equals(tagName);
+                });
+        return elements;
     }
 }

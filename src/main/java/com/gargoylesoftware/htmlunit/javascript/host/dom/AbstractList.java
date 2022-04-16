@@ -16,11 +16,13 @@ package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -76,7 +78,9 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
 
     private boolean listenerRegistered_;
 
-    private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ = event -> EffectOnCache.RESET;
+    private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
+            (Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable) event -> EffectOnCache.RESET;
+    private Predicate<DomNode> isMatchingPredicate_ = (Predicate<DomNode> & Serializable) domNode -> false;
 
     /**
      * Creates an instance.
@@ -148,7 +152,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     }
 
     /**
-     * @param effectOnCacheFunction the new value
+     * @param effectOnCacheFunction the new function
      */
     public void setEffectOnCacheFunction(
             final Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction) {
@@ -156,6 +160,17 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
             throw new NullPointerException("EffectOnCacheFunction can't be null");
         }
         effectOnCacheFunction_ = effectOnCacheFunction;
+    }
+
+    /**
+     * Indicates if the node should belong to the collection.
+     * @param isMatchingPredicate the new predicate
+     */
+    public void setIsMatchingPredicate(final Predicate<DomNode> isMatchingPredicate) {
+        if (isMatchingPredicate == null) {
+            throw new NullPointerException("IsMatchingPredicate can't be null");
+        }
+        isMatchingPredicate_ = isMatchingPredicate;
     }
 
     /**
@@ -257,7 +272,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
             return response;
         }
         for (final DomNode node : getCandidates()) {
-            if (node instanceof DomElement && isMatching(node)) {
+            if (node instanceof DomElement && isMatchingPredicate_.test(node)) {
                 response.add(node);
             }
         }
@@ -272,16 +287,6 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     protected Iterable<DomNode> getCandidates() {
         final DomNode domNode = getDomNodeOrNull();
         return domNode.getDescendants();
-    }
-
-    /**
-     * Indicates if the node should belong to the collection.
-     * Belongs to the refactoring effort to improve HTMLCollection's performance.
-     * @param node the node to test. Will be a child node of the reference node.
-     * @return {@code false} here as subclasses for concrete collections should decide it.
-     */
-    protected boolean isMatching(final DomNode node) {
-        return false;
     }
 
     /**

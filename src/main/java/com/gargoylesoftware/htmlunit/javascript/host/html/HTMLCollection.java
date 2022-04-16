@@ -24,9 +24,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -285,31 +287,10 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(IE)
     public Object tags(final String tagName) {
-        return new HTMLSubCollection(HTMLCollection.this) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return tagName.equalsIgnoreCase(node.getLocalName());
-            }
-        };
-    }
-}
-
-class HTMLSubCollection extends HTMLCollection {
-    private final HTMLCollection mainCollection_;
-
-    HTMLSubCollection(final HTMLCollection mainCollection) {
-        super(mainCollection.getDomNodeOrDie(), false);
-        mainCollection_ = mainCollection;
-    }
-
-    @Override
-    protected List<DomNode> computeElements() {
-        final List<DomNode> list = new ArrayList<>();
-        for (final DomNode o : mainCollection_.getElements()) {
-            if (isMatching(o)) {
-                list.add(o);
-            }
-        }
-        return list;
+        final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), getElements());
+        tags.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> tagName.equalsIgnoreCase(node.getLocalName()));
+        return tags;
     }
 }

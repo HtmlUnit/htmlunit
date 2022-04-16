@@ -27,15 +27,18 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
+import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -142,20 +145,23 @@ public class HTMLFormElement extends HTMLElement implements Function {
             protected Object getWithPreemption(final String name) {
                 return HTMLFormElement.this.getWithPreemption(name);
             }
-
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                if (node instanceof HtmlForm) {
-                    filterChildrenOfNestedForms_ = true;
-                    return false;
-                }
-
-                return node instanceof HtmlInput || node instanceof HtmlButton
-                        || node instanceof HtmlTextArea || node instanceof HtmlSelect;
-            }
         };
 
-        elements.setEffectOnCacheFunction(event -> EffectOnCache.NONE);
+        elements.setEffectOnCacheFunction(
+                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
+                event -> EffectOnCache.NONE);
+
+        elements.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> {
+                    if (node instanceof HtmlForm) {
+                        // filterChildrenOfNestedForms_ = true;
+                        return false;
+                    }
+
+                    return node instanceof HtmlInput || node instanceof HtmlButton
+                            || node instanceof HtmlTextArea || node instanceof HtmlSelect;
+                });
 
         return elements;
     }
