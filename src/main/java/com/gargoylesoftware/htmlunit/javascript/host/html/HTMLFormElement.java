@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -52,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -115,7 +115,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     public HTMLCollection getElements() {
         final HtmlForm htmlForm = getHtmlForm();
 
-        return new HTMLCollection(htmlForm, false) {
+        final HTMLCollection elements = new HTMLCollection(htmlForm, false) {
             private boolean filterChildrenOfNestedForms_;
 
             @Override
@@ -144,11 +144,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
             }
 
             @Override
-            public EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                return EffectOnCache.NONE;
-            }
-
-            @Override
             protected boolean isMatching(final DomNode node) {
                 if (node instanceof HtmlForm) {
                     filterChildrenOfNestedForms_ = true;
@@ -159,6 +154,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
                         || node instanceof HtmlTextArea || node instanceof HtmlSelect;
             }
         };
+
+        elements.setEffectOnCacheFunction(event -> EffectOnCache.NONE);
+
+        return elements;
     }
 
     /**

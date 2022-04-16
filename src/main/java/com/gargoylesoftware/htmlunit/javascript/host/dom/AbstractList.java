@@ -20,6 +20,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -49,6 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Chris Erskine
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @JsxClass(isJSObject = false)
 public class AbstractList extends HtmlUnitScriptable implements Callable, ExternalArrayData {
@@ -56,7 +58,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     /**
      * Cache effect of some changes.
      */
-    protected enum EffectOnCache {
+    public enum EffectOnCache {
         /** No effect, cache is still valid. */
         NONE,
         /** Cache is not valid anymore and should be reset. */
@@ -73,6 +75,8 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     private List<DomNode> cachedElements_;
 
     private boolean listenerRegistered_;
+
+    private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ = event -> EffectOnCache.RESET;
 
     /**
      * Creates an instance.
@@ -141,6 +145,17 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
      */
     public void setAvoidObjectDetection(final boolean newValue) {
         avoidObjectDetection_ = newValue;
+    }
+
+    /**
+     * @param effectOnCacheFunction the new value
+     */
+    public void setEffectOnCacheFunction(
+            final Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction) {
+        if (effectOnCacheFunction == null) {
+            throw new NullPointerException("EffectOnCacheFunction can't be null");
+        }
+        effectOnCacheFunction_ = effectOnCacheFunction;
     }
 
     /**
@@ -319,7 +334,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
      * @return the newly created instance
      */
     protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
-        return new AbstractList(parentScope, initialElements);
+        return new AbstractList(parentScope, true, new ArrayList<>(initialElements));
     }
 
     /**
@@ -472,7 +487,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
                 return;
             }
 
-            final EffectOnCache effectOnCache = nodes.getEffectOnCache(event);
+            final EffectOnCache effectOnCache = nodes.effectOnCacheFunction_.apply(event);
             if (EffectOnCache.NONE == effectOnCache) {
                 return;
             }
@@ -487,16 +502,6 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
                 nodes.cachedElements_ = null;
             }
         }
-    }
-
-    /**
-     * Gets the effect of the change on an attribute of the reference node
-     * on this collection's cache.
-     * @param event the change event
-     * @return the effect on cache
-     */
-    protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-        return EffectOnCache.RESET;
     }
 
     /**

@@ -48,7 +48,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -65,6 +64,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
@@ -626,20 +626,22 @@ public class HTMLDocument extends Document {
         }
 
         final HtmlPage page = getPage();
-        return new HTMLCollection(page, true) {
+        final HTMLCollection elements = new HTMLCollection(page, true) {
             @Override
             protected List<DomNode> computeElements() {
                 return new ArrayList<>(page.getElementsByName(elementName));
             }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
         };
+
+        elements.setEffectOnCacheFunction(
+                event -> {
+                    if ("name".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                });
+
+        return elements;
     }
 
     /**
@@ -685,20 +687,10 @@ public class HTMLDocument extends Document {
             return super.getScriptableFor(object);
         }
 
-        return new HTMLCollection(page, matchingElements) {
+        final HTMLCollection coll = new HTMLCollection(page, matchingElements) {
             @Override
             protected List<DomNode> computeElements() {
                 return getItComputeElements(page, name, forIDAndOrName, alsoFrames);
-            }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final String attributeName = event.getName();
-                if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
-                    return EffectOnCache.RESET;
-                }
-
-                return EffectOnCache.NONE;
             }
 
             @Override
@@ -709,6 +701,18 @@ public class HTMLDocument extends Document {
                 return super.getScriptableFor(object);
             }
         };
+
+        coll.setEffectOnCacheFunction(
+                event -> {
+                    final String attributeName = event.getName();
+                    if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
+                        return EffectOnCache.RESET;
+                    }
+
+                    return EffectOnCache.NONE;
+                });
+
+        return coll;
     }
 
     static List<DomNode> getItComputeElements(final HtmlPage page, final String name,

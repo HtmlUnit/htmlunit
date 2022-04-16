@@ -85,7 +85,6 @@ import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -111,6 +110,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CloseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.CompositionEvent;
@@ -856,7 +856,8 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getAnchors() {
-        return new HTMLCollection(getDomNodeOrDie(), true) {
+        final HTMLCollection anchors = new HTMLCollection(getDomNodeOrDie(), true) {
+
             @Override
             protected boolean isMatching(final DomNode node) {
                 if (!(node instanceof HtmlAnchor)) {
@@ -868,15 +869,17 @@ public class Document extends Node {
                 }
                 return anchor.hasAttribute("name");
             }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName()) || "id".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
         };
+
+        anchors.setEffectOnCacheFunction(
+                    event -> {
+                        if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                            return EffectOnCache.RESET;
+                        }
+                        return EffectOnCache.NONE;
+                    });
+
+        return anchors;
     }
 
     /**
@@ -1927,22 +1930,25 @@ public class Document extends Node {
      */
     @JsxGetter
     public Object getLinks() {
-        return new HTMLCollection(getDomNodeOrDie(), true) {
+        final HTMLCollection links = new HTMLCollection(getDomNodeOrDie(), true) {
+
             @Override
             protected boolean isMatching(final DomNode node) {
                 return (node instanceof HtmlAnchor || node instanceof HtmlArea)
                         && ((HtmlElement) node).hasAttribute("href");
             }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final HtmlElement node = event.getHtmlElement();
-                if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
         };
+
+        links.setEffectOnCacheFunction(
+                event -> {
+                    final HtmlElement node = event.getHtmlElement();
+                    if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                });
+
+        return links;
     }
 
     /**

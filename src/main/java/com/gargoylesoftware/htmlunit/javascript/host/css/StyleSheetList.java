@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
@@ -34,6 +33,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -121,23 +121,21 @@ public class StyleSheetList extends HtmlUnitScriptable {
                     return isStyleSheetLink(node);
                 }
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
-                    return EffectOnCache.NONE;
-                }
-
                 private boolean isStyleSheetLink(final DomNode domNode) {
                     if (domNode instanceof HtmlLink) {
                         return ((HtmlLink) domNode).isStyleSheetLink();
                     }
                     return false;
                 }
-
             };
+            nodes_.setEffectOnCacheFunction(
+                    event -> {
+                        final HtmlElement node = event.getHtmlElement();
+                        if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
+                            return EffectOnCache.RESET;
+                        }
+                        return EffectOnCache.NONE;
+                    });
         }
         else {
             nodes_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());

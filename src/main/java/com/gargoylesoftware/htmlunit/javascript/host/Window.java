@@ -63,7 +63,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
@@ -89,6 +88,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -1444,7 +1444,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         // Null must be changed to '' for proper collection initialization.
         final String expElementName = "null".equals(name) ? "" : name;
 
-        return new HTMLCollection(page, true) {
+        final HTMLCollection coll = new HTMLCollection(page, true) {
+
             @Override
             protected List<DomNode> computeElements() {
                 final List<DomElement> expElements = page.getElementsByName(expElementName);
@@ -1457,15 +1458,17 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
                 }
                 return result;
             }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
         };
+
+        coll.setEffectOnCacheFunction(
+                event -> {
+                    if ("name".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                });
+
+        return coll;
     }
 
     /**
