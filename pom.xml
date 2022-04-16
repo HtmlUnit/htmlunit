@@ -1414,7 +1414,7 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.65</version>
+            <version>4.0.66</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->
