@@ -28,7 +28,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * Contains some missing features of Rhino {@link NativeDate}.
+ * Contains some missing features of Rhino NativeDate.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

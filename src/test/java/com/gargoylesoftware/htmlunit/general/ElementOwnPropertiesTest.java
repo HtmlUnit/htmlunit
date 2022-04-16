@@ -11453,10 +11453,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             IE = "constructor,item(),length")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
+    @HtmlUnitNYI(CHROME = "constructor(),entries(),forEach(),keys(),values()",
+            EDGE = "constructor(),entries(),forEach(),keys(),values()",
+            FF = "constructor(),entries(),forEach(),keys(),values()",
+            FF_ESR = "constructor(),entries(),forEach(),keys(),values()",
             IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
                     + "constructor(),hasOwnProperty(),isPrototypeOf(),"
                     + "propertyIsEnumerable(),toLocaleString(),toString(),valueOf()")

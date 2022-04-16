@@ -5672,7 +5672,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length")
+            IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
