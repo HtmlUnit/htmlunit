@@ -192,6 +192,7 @@ public class HTMLCollection extends AbstractList {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
+    @JsxFunction
     @Override
     public Object item(final Object index) {
         if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {

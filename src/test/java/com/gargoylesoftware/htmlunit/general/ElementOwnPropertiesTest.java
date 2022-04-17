@@ -11435,9 +11435,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),item(),namedItem()",
             FF = "constructor(),item(),namedItem()",
             FF_ESR = "constructor(),item(),namedItem()",
-            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
-                    + "constructor(),hasOwnProperty(),isPrototypeOf(),"
-                    + "propertyIsEnumerable(),toLocaleString(),toString(),valueOf()")
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -11457,9 +11455,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),entries(),forEach(),keys(),values()",
             FF = "constructor(),entries(),forEach(),keys(),values()",
             FF_ESR = "constructor(),entries(),forEach(),keys(),values()",
-            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
-                    + "constructor(),hasOwnProperty(),isPrototypeOf(),"
-                    + "propertyIsEnumerable(),toLocaleString(),toString(),valueOf()")
+            IE = "constructor")
     public void nodeList() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
