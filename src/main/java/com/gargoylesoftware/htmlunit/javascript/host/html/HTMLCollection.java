@@ -287,10 +287,30 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(IE)
     public Object tags(final String tagName) {
-        final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), getElements());
+        final HTMLCollection tags = new HTMLSubCollection(HTMLCollection.this);
         tags.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
                 node -> tagName.equalsIgnoreCase(node.getLocalName()));
         return tags;
+    }
+}
+
+class HTMLSubCollection extends HTMLCollection {
+    private final HTMLCollection mainCollection_;
+
+    HTMLSubCollection(final HTMLCollection mainCollection) {
+        super(mainCollection.getDomNodeOrDie(), false);
+        mainCollection_ = mainCollection;
+    }
+
+    @Override
+    protected List<DomNode> computeElements() {
+        final List<DomNode> list = new ArrayList<>();
+        for (final DomNode o : mainCollection_.getElements()) {
+            if (getIsMatchingPredicate().test(o)) {
+                list.add(o);
+            }
+        }
+        return list;
     }
 }

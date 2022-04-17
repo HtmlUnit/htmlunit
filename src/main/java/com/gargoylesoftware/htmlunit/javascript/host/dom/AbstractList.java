@@ -163,6 +163,13 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     }
 
     /**
+     * @return isMatchingPredicate
+     */
+    protected Predicate<DomNode> getIsMatchingPredicate() {
+        return isMatchingPredicate_;
+    }
+
+    /**
      * Indicates if the node should belong to the collection.
      * @param isMatchingPredicate the new predicate
      */
