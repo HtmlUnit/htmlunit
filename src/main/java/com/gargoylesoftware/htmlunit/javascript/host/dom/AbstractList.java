@@ -278,22 +278,12 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
         if (domNode == null) {
             return response;
         }
-        for (final DomNode node : getCandidates()) {
+        for (final DomNode node : domNode.getDescendants()) {
             if (node instanceof DomElement && isMatchingPredicate_.test(node)) {
                 response.add(node);
             }
         }
         return response;
-    }
-
-    /**
-     * Gets the DOM node that have to be examined to see if they are matching.
-     * Default implementation looks at all descendants of reference node.
-     * @return the nodes
-     */
-    protected Iterable<DomNode> getCandidates() {
-        final DomNode domNode = getDomNodeOrNull();
-        return domNode.getDescendants();
     }
 
     /**
