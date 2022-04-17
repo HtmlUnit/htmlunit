@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -1447,21 +1448,20 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         // Null must be changed to '' for proper collection initialization.
         final String expElementName = "null".equals(name) ? "" : name;
 
-        final HTMLCollection coll = new HTMLCollection(page, true) {
+        final HTMLCollection coll = new HTMLCollection(page, true);
+        coll.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomElement> expElements = page.getElementsByName(expElementName);
+                    final List<DomNode> result = new ArrayList<>(expElements.size());
 
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomElement> expElements = page.getElementsByName(expElementName);
-                final List<DomNode> result = new ArrayList<>(expElements.size());
-
-                for (final DomElement domElement : expElements) {
-                    if (filter.matches(domElement)) {
-                        result.add(domElement);
+                    for (final DomElement domElement : expElements) {
+                        if (filter.matches(domElement)) {
+                            result.add(domElement);
+                        }
                     }
-                }
-                return result;
-            }
-        };
+                    return result;
+                });
 
         coll.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)

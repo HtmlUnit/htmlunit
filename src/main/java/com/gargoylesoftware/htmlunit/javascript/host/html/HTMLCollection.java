@@ -28,7 +28,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -94,19 +94,18 @@ public class HTMLCollection extends AbstractList {
         super(domNode, initialElements);
     }
 
+    private HTMLCollection(final DomNode domNode, final boolean attributeChangeSensitive,
+            final List<DomNode> initialElements) {
+        super(domNode, attributeChangeSensitive, new ArrayList<>(initialElements));
+    }
+
     /**
      * Gets an empty collection.
      * @param domNode the DOM node
      * @return an empty collection
      */
     public static HTMLCollection emptyCollection(final DomNode domNode) {
-        final List<DomNode> list = Collections.emptyList();
-        return new HTMLCollection(domNode, false) {
-            @Override
-            public List<DomNode> getElements() {
-                return list;
-            }
-        };
+        return new HTMLCollection(domNode, false, Collections.emptyList());
     }
 
     /**
@@ -288,30 +287,18 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(IE)
     public Object tags(final String tagName) {
-        final HTMLCollection tags = new HTMLSubCollection(HTMLCollection.this);
-        tags.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
-                node -> tagName.equalsIgnoreCase(node.getLocalName()));
+        final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), false);
+        tags.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomNode> list = new ArrayList<>();
+                    for (final DomNode elem : this.getElements()) {
+                        if (tagName.equalsIgnoreCase(elem.getLocalName())) {
+                            list.add(elem);
+                        }
+                    }
+                    return list;
+                });
         return tags;
-    }
-}
-
-class HTMLSubCollection extends HTMLCollection {
-    private final HTMLCollection mainCollection_;
-
-    HTMLSubCollection(final HTMLCollection mainCollection) {
-        super(mainCollection.getDomNodeOrDie(), false);
-        mainCollection_ = mainCollection;
-    }
-
-    @Override
-    protected List<DomNode> computeElements() {
-        final List<DomNode> list = new ArrayList<>();
-        for (final DomNode o : mainCollection_.getElements()) {
-            if (getIsMatchingPredicate().test(o)) {
-                list.add(o);
-            }
-        }
-        return list;
     }
 }

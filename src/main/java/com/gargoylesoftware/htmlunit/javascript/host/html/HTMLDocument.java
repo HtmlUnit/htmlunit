@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -628,12 +629,10 @@ public class HTMLDocument extends Document {
         }
 
         final HtmlPage page = getPage();
-        final HTMLCollection elements = new HTMLCollection(page, true) {
-            @Override
-            protected List<DomNode> computeElements() {
-                return new ArrayList<>(page.getElementsByName(elementName));
-            }
-        };
+        final HTMLCollection elements = new HTMLCollection(page, true);
+        elements.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> new ArrayList<>(page.getElementsByName(elementName)));
 
         elements.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
@@ -692,11 +691,6 @@ public class HTMLDocument extends Document {
 
         final HTMLCollection coll = new HTMLCollection(page, matchingElements) {
             @Override
-            protected List<DomNode> computeElements() {
-                return getItComputeElements(page, name, forIDAndOrName, alsoFrames);
-            }
-
-            @Override
             protected HtmlUnitScriptable getScriptableFor(final Object object) {
                 if (alsoFrames && object instanceof BaseFrameElement) {
                     return ((BaseFrameElement) object).getEnclosedWindow().getScriptableObject();
@@ -704,6 +698,10 @@ public class HTMLDocument extends Document {
                 return super.getScriptableFor(object);
             }
         };
+
+        coll.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> getItComputeElements(page, name, forIDAndOrName, alsoFrames));
 
         coll.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)

@@ -32,10 +32,11 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
@@ -119,49 +120,56 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final HtmlForm htmlForm = getHtmlForm();
 
         final HTMLCollection elements = new HTMLCollection(htmlForm, false) {
-            private boolean filterChildrenOfNestedForms_;
-
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomNode> response = super.computeElements();
-                // it would be more performant to avoid iterating through
-                // nested forms but as it is a corner case of ill formed HTML
-                // the needed refactoring would take too much time
-                // => filter here and not in isMatching as it won't be needed in most
-                // of the cases
-                if (filterChildrenOfNestedForms_) {
-                    for (final Iterator<DomNode> iter = response.iterator(); iter.hasNext();) {
-                        final HtmlElement field = (HtmlElement) iter.next();
-                        if (field.getEnclosingForm() != htmlForm) {
-                            iter.remove();
-                        }
-                    }
-                }
-                response.addAll(htmlForm.getLostChildren());
-                return response;
-            }
-
             @Override
             protected Object getWithPreemption(final String name) {
                 return HTMLFormElement.this.getWithPreemption(name);
             }
         };
 
+        elements.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    boolean filterChildrenOfNestedForms = false;
+
+                    final List<DomNode> response = new ArrayList<>();
+                    final DomNode domNode = getDomNodeOrNull();
+                    if (domNode == null) {
+                        return response;
+                    }
+                    for (final DomNode desc : domNode.getDescendants()) {
+                        if (desc instanceof DomElement) {
+                            if (desc instanceof HtmlForm) {
+                                filterChildrenOfNestedForms = true;
+                            }
+                            else {
+                                if (desc instanceof HtmlInput || desc instanceof HtmlButton
+                                    || desc instanceof HtmlTextArea || desc instanceof HtmlSelect) {
+                                    response.add(desc);
+                                }
+                            }
+                        }
+                    }
+
+                    // it would be more performant to avoid iterating through
+                    // nested forms but as it is a corner case of ill formed HTML
+                    // the needed refactoring would take too much time
+                    // => filter here and not in isMatching as it won't be needed in most
+                    // of the cases
+                    if (filterChildrenOfNestedForms) {
+                        for (final Iterator<DomNode> iter = response.iterator(); iter.hasNext();) {
+                            final HtmlElement field = (HtmlElement) iter.next();
+                            if (field.getEnclosingForm() != htmlForm) {
+                                iter.remove();
+                            }
+                        }
+                    }
+                    response.addAll(htmlForm.getLostChildren());
+                    return response;
+                });
+
         elements.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> EffectOnCache.NONE);
-
-        elements.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
-                node -> {
-                    if (node instanceof HtmlForm) {
-                        // filterChildrenOfNestedForms_ = true;
-                        return false;
-                    }
-
-                    return node instanceof HtmlInput || node instanceof HtmlButton
-                            || node instanceof HtmlTextArea || node instanceof HtmlSelect;
-                });
 
         return elements;
     }
@@ -410,12 +418,10 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return getScriptableFor(elements.get(0));
         }
         final List<DomNode> nodes = new ArrayList<>(elements);
-        return new HTMLCollection(getHtmlForm(), nodes) {
-            @Override
-            protected List<DomNode> computeElements() {
-                return new ArrayList<>(findElements(name));
-            }
-        };
+
+        final HTMLCollection coll = new HTMLCollection(getHtmlForm(), nodes);
+        coll.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(findElements(name)));
+        return coll;
     }
 
     List<HtmlElement> findElements(final String name) {

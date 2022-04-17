@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -81,6 +82,21 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
     private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
             (Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable) event -> EffectOnCache.RESET;
     private Predicate<DomNode> isMatchingPredicate_ = (Predicate<DomNode> & Serializable) domNode -> false;
+    private Supplier<List<DomNode>> elementsSupplier_ =
+            (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomNode> response = new ArrayList<>();
+                    final DomNode domNode = getDomNodeOrNull();
+                    if (domNode == null) {
+                        return response;
+                    }
+                    for (final DomNode desc : domNode.getDescendants()) {
+                        if (desc instanceof DomElement && isMatchingPredicate_.test(desc)) {
+                            response.add(desc);
+                        }
+                    }
+                    return response;
+                };
 
     /**
      * Creates an instance.
@@ -117,7 +133,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      * @param initialElements the initial content for the cache
      */
-    private AbstractList(final DomNode domNode, final boolean attributeChangeSensitive,
+    protected AbstractList(final DomNode domNode, final boolean attributeChangeSensitive,
             final List<DomNode> initialElements) {
         if (domNode != null) {
             setDomNode(domNode, false);
@@ -160,6 +176,24 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
             throw new NullPointerException("EffectOnCacheFunction can't be null");
         }
         effectOnCacheFunction_ = effectOnCacheFunction;
+    }
+
+    /**
+     * @return elementSupplier
+     */
+    protected Supplier<List<DomNode>> getElementSupplier() {
+        return elementsSupplier_;
+    }
+
+    /**
+     * Returns the elements whose associated host objects are available through this collection.
+     * @param elementsSupplier the new supplier
+     */
+    public void setElementsSupplier(final Supplier<List<DomNode>> elementsSupplier) {
+        if (elementsSupplier == null) {
+            throw new NullPointerException("ElementsSupplier can't be null");
+        }
+        elementsSupplier_ = elementsSupplier;
     }
 
     /**
@@ -238,7 +272,7 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
                 cachedElements = new ArrayList<>();
             }
             else {
-                cachedElements = computeElements();
+                cachedElements = elementsSupplier_.get();
             }
             cachedElements_ = cachedElements;
         }
@@ -266,24 +300,6 @@ public class AbstractList extends HtmlUnitScriptable implements Callable, Extern
                 listenerRegistered_ = true;
             }
         }
-    }
-
-    /**
-     * Returns the elements whose associated host objects are available through this collection.
-     * @return the elements whose associated host objects are available through this collection
-     */
-    protected List<DomNode> computeElements() {
-        final List<DomNode> response = new ArrayList<>();
-        final DomNode domNode = getDomNodeOrNull();
-        if (domNode == null) {
-            return response;
-        }
-        for (final DomNode node : domNode.getDescendants()) {
-            if (node instanceof DomElement && isMatchingPredicate_.test(node)) {
-                response.add(node);
-            }
-        }
-        return response;
     }
 
     /**
