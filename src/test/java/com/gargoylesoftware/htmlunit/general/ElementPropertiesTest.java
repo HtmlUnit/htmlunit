@@ -5691,4 +5691,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void nodeList() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "entries(),forEach(),item(),keys(),length,values()",
+            FF = "entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
+            IE = "-")
+    public void nodeListButtonLabels() throws Exception {
+        testString("var button = document.createElement('button');", "button.labels");
+    }
 }

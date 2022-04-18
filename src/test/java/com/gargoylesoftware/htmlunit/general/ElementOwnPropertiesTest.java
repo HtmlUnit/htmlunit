@@ -11459,4 +11459,24 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void nodeList() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor(),entries(),forEach(),keys(),values()",
+            EDGE = "constructor(),entries(),forEach(),keys(),values()",
+            FF = "constructor(),entries(),forEach(),keys(),values()",
+            FF_ESR = "constructor(),entries(),forEach(),keys(),values()",
+            IE = "constructor")
+    public void nodeListButtonLabels() throws Exception {
+        testString("var button = document.createElement('button');", "button.labels");
+    }
 }
