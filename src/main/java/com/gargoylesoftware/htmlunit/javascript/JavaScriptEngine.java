@@ -457,6 +457,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         configureRhino(webClient, browserVersion, window);
 
+        // only for window / IE
+        if (!browserVersion.hasFeature(JS_CONSOLE_TIMESTAMP)) {
+            final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(window, "console");
+            ScriptableObject.defineProperty(window, "Console", console, ScriptableObject.DONTENUM);
+        }
+
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow, page);
 

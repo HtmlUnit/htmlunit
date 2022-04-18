@@ -68,7 +68,6 @@ public class ConsoleTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "undefined", "false"},
             IE = {"false", "object", "true"})
-    @HtmlUnitNYI(IE = {"true", "undefined", "false"})
     public void prototypeUppercase() throws Exception {
         final String html
             = "<html>\n"

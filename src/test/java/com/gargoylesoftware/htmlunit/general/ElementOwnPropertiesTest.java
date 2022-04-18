@@ -839,7 +839,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "btoa(),Call(),CallSite(),cancelAnimationFrame(),CanvasGradient,CanvasPattern,"
                 + "CanvasRenderingContext2D,captureEvents(),CDATASection,CharacterData,clearInterval(),"
                 + "clearTimeout(),clientInformation,ClientRect,ClientRectList,clipboardData,close(),"
-                + "closed,CloseEvent,CollectGarbage(),Comment,CompositionEvent,confirm(),console,"
+                + "closed,CloseEvent,CollectGarbage(),Comment,CompositionEvent,confirm(),Console,console,"
                 + "constructor,Coordinates,Crypto,CSSFontFaceRule,CSSImportRule,CSSKeyframeRule,"
                 + "CSSKeyframesRule,CSSMediaRule,CSSNamespaceRule,CSSPageRule,CSSRule,CSSRuleList,"
                 + "CSSStyleDeclaration,CSSStyleRule,CSSStyleSheet,CustomEvent,DataTransfer,DataView(),"
