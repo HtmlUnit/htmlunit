@@ -11435,7 +11435,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),item(),length,namedItem()",
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
-            IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+            IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -11451,7 +11451,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
     }
@@ -11467,7 +11467,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
     }
@@ -11483,7 +11483,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -11499,7 +11499,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -11515,7 +11515,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -11531,7 +11531,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
     }
@@ -11547,7 +11547,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
     }

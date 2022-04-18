@@ -5672,7 +5672,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+            IE = "item(),length,namedItem(),tags()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -5688,7 +5688,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
     }
@@ -5704,7 +5704,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
     }
@@ -5720,7 +5720,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -5736,7 +5736,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -5752,7 +5752,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -5768,7 +5768,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
             IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
     }
@@ -5784,7 +5784,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "0,item(),length,namedItem()",
             FF_ESR = "0,item(),length,namedItem()",
             IE = "0,item(),length,namedItem()")
-    @HtmlUnitNYI(IE = "0,item(),length,namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "0,item(),length,namedItem(),tags()")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
     }

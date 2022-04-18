@@ -68,11 +68,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class HTMLCollection extends AbstractList implements Callable {
 
     /**
-     * IE provides a way of enumerating through some element collections; this counter supports that functionality.
-     */
-    private int currentIndex_;
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
@@ -272,32 +267,6 @@ public class HTMLCollection extends AbstractList implements Callable {
             }
         }
         return null;
-    }
-
-    /**
-     * Returns the next node in the collection (supporting iteration in IE only).
-     * @return the next node in the collection
-     */
-    @JsxFunction(IE)
-    public Object nextNode() {
-        final Object nextNode;
-        final List<DomNode> elements = getElements();
-        if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
-            nextNode = elements.get(currentIndex_);
-        }
-        else {
-            nextNode = null;
-        }
-        currentIndex_++;
-        return nextNode;
-    }
-
-    /**
-     * Resets the node iterator accessed via {@link #nextNode()}.
-     */
-    @JsxFunction(IE)
-    public void reset() {
-        currentIndex_ = 0;
     }
 
     /**

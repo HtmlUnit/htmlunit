@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+            <action type="remove" dev="rbri">
+                HTMLCollection IE only methods nextNode() and reset() removed.
+            </action>
             <action type="fix" dev="rbri">
-                Bunch of fixes for HTMLcollection and NodeList properties.
+                Bunch of fixes for HTMLCollection and NodeList properties.
             </action>
             <action type="update" dev="rbri">
                 Use NativeConsole from core-js instead of our own implementation. As a side effect,
