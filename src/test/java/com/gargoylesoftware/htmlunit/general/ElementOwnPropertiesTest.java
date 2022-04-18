@@ -11431,11 +11431,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollection() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
@@ -11451,11 +11451,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentAnchors() throws Exception {
         testString("", "document.anchors");
     }
@@ -11471,11 +11467,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentApplets() throws Exception {
         testString("", "document.applets");
     }
@@ -11491,11 +11483,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -11511,11 +11499,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentForms() throws Exception {
         testString("", "document.forms");
     }
@@ -11531,11 +11515,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -11551,11 +11531,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentLinks() throws Exception {
         testString("", "document.links");
     }
@@ -11571,11 +11547,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
-            EDGE = "constructor(),item(),namedItem()",
-            FF = "constructor(),item(),namedItem()",
-            FF_ESR = "constructor(),item(),namedItem()",
-            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),nextNode(),reset(),tags()")
     public void htmlCollectionDocumentScripts() throws Exception {
         testString("", "document.scripts");
     }
@@ -11591,11 +11563,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             IE = "constructor,item(),length")
-    @HtmlUnitNYI(CHROME = "constructor(),entries(),forEach(),keys(),values()",
-            EDGE = "constructor(),entries(),forEach(),keys(),values()",
-            FF = "constructor(),entries(),forEach(),keys(),values()",
-            FF_ESR = "constructor(),entries(),forEach(),keys(),values()",
-            IE = "constructor")
     public void nodeList() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
     }
@@ -11611,10 +11578,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "constructor(),entries(),forEach(),keys(),values()",
-            EDGE = "constructor(),entries(),forEach(),keys(),values()",
-            FF = "constructor(),entries(),forEach(),keys(),values()",
-            FF_ESR = "constructor(),entries(),forEach(),keys(),values()")
     public void nodeListButtonLabels() throws Exception {
         testString("var button = document.createElement('button');", "button.labels");
     }

@@ -30,6 +30,7 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSymbol;
 
 import net.sourceforge.htmlunit.corejs.javascript.Callable;
@@ -164,6 +165,31 @@ public class NodeList extends AbstractList implements Callable {
             return null;
         };
         cf.call(contextAction);
+    }
+
+    /**
+     * Returns the length.
+     * @return the length
+     */
+    @JsxGetter
+    @Override
+    public final int getLength() {
+        return super.getLength();
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object item(final Object index) {
+        final Object object = getIt(index);
+        if (object == NOT_FOUND) {
+            return null;
+        }
+        return object;
     }
 
     /**

@@ -33,8 +33,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -367,24 +365,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * Returns the length.
      * @return the length
      */
-    @JsxGetter
-    public final int getLength() {
+    public int getLength() {
         return getElements().size();
-    }
-
-    /**
-     * Returns the item or items corresponding to the specified index or key.
-     * @param index the index or key corresponding to the element or elements to return
-     * @return the element or elements corresponding to the specified index or key
-     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
-     */
-    @JsxFunction
-    public Object item(final Object index) {
-        final Object object = getIt(index);
-        if (object == NOT_FOUND) {
-            return null;
-        }
-        return object;
     }
 
     /**
