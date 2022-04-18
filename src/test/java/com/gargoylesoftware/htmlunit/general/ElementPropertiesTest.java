@@ -5678,6 +5678,118 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentAnchors() throws Exception {
+        testString("", "document.anchors");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentApplets() throws Exception {
+        testString("", "document.applets");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentEmbeds() throws Exception {
+        testString("", "document.embeds");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentForms() throws Exception {
+        testString("", "document.forms");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentImages() throws Exception {
+        testString("", "document.images");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "item(),length,namedItem()",
+            EDGE = "item(),length,namedItem()",
+            FF = "item(),length,namedItem()",
+            FF_ESR = "item(),length,namedItem()",
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentLinks() throws Exception {
+        testString("", "document.links");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "0,item(),length,namedItem()",
+            EDGE = "0,item(),length,namedItem()",
+            FF = "0,item(),length,namedItem()",
+            FF_ESR = "0,item(),length,namedItem()",
+            IE = "0,item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "0,item(),length,namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentScripts() throws Exception {
+        testString("", "document.scripts");
+    }
+
+    /**
      * Test {@link NodeList}.
      *
      * @throws Exception if the test fails

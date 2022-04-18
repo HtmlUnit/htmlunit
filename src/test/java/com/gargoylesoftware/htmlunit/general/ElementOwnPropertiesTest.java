@@ -11441,6 +11441,146 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentAnchors() throws Exception {
+        testString("", "document.anchors");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentApplets() throws Exception {
+        testString("", "document.applets");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentEmbeds() throws Exception {
+        testString("", "document.embeds");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentForms() throws Exception {
+        testString("", "document.forms");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentImages() throws Exception {
+        testString("", "document.images");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentLinks() throws Exception {
+        testString("", "document.links");
+    }
+
+    /**
+     * Test {@link HTMLCollection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
+            EDGE = "constructor(),item(),length,namedItem()",
+            FF = "constructor(),item(),length,namedItem()",
+            FF_ESR = "constructor(),item(),length,namedItem()",
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(CHROME = "constructor(),item(),namedItem()",
+            EDGE = "constructor(),item(),namedItem()",
+            FF = "constructor(),item(),namedItem()",
+            FF_ESR = "constructor(),item(),namedItem()",
+            IE = "constructor,item(),namedItem(),nextNode(),reset(),tags()")
+    public void htmlCollectionDocumentScripts() throws Exception {
+        testString("", "document.scripts");
+    }
+
+    /**
      * Test {@link NodeList}.
      *
      * @throws Exception if the test fails
@@ -11474,8 +11614,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor(),entries(),forEach(),keys(),values()",
             EDGE = "constructor(),entries(),forEach(),keys(),values()",
             FF = "constructor(),entries(),forEach(),keys(),values()",
-            FF_ESR = "constructor(),entries(),forEach(),keys(),values()",
-            IE = "constructor")
+            FF_ESR = "constructor(),entries(),forEach(),keys(),values()")
     public void nodeListButtonLabels() throws Exception {
         testString("var button = document.createElement('button');", "button.labels");
     }
