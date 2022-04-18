@@ -128,7 +128,7 @@ public class HTMLMeterElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public NodeList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie());
+            labels_ = new LabelsNodeList(getDomNodeOrDie());
         }
         return labels_;
     }

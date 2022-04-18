@@ -25,20 +25,20 @@ import com.gargoylesoftware.htmlunit.html.HtmlLabel;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 /**
- * A helper class to implement {@code .labels} property.
+ * A special {@link NodeList} to implement {@code .labels} property.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  *
  */
-class LabelsHelper extends NodeList {
+class LabelsNodeList extends NodeList {
 
     /**
      * Creates an instance.
      *
      * @param domeNode the {@link DomNode}
-     * @param description a text useful for debugging
      */
-    LabelsHelper(final DomElement domeNode) {
+    LabelsNodeList(final DomElement domeNode) {
         super(domeNode, false);
     }
 
