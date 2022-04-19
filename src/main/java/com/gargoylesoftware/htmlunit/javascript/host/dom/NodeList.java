@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -208,5 +209,13 @@ public class NodeList extends AbstractList implements Callable {
             return Undefined.instance;
         }
         return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
+        return new NodeList(parentScope, new ArrayList<>(initialElements));
     }
 }
