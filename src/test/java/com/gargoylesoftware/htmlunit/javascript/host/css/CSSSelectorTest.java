@@ -1467,7 +1467,6 @@ public class CSSSelectorTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -1497,6 +1496,41 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  log(found[2].id);\n"
             + "  log(found[3]);\n"
             + "  log(found[3].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='setTimeout(test, 10);'>\n"
+            + "  <form id='id0'>\n"
+            + "    <input id='id1'>\n"
+            + "    <input id='id2'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "1", "[object HTMLInputElement]", "id2"},
+            IE = {})
+    public void focusVisible() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  found = document.querySelectorAll(':focus-visible');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "\n"
+            + "  document.getElementById('id2').focus();\n"
+            + "\n"
+            + "  found = document.querySelectorAll(':focus-visible');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "  log(found[0].id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='setTimeout(test, 10);'>\n"
@@ -2008,6 +2042,16 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"null", "null", "null"})
+    public void focusEmptyDetached() throws Exception {
+        emptyAndDetached("*:focus");
+        emptyAndDetached(":focus");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"null", "null", "null"},
             IE = {"exception", "exception", "exception"})
     @HtmlUnitNYI(IE = {"null", "exception", "null"})
@@ -2020,10 +2064,12 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"null", "null", "null"})
-    public void focusEmptyDetached() throws Exception {
-        emptyAndDetached("*:focus");
-        emptyAndDetached(":focus");
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"exception", "exception", "exception"})
+    @HtmlUnitNYI(IE = {"null", "exception", "null"})
+    public void focusVisibleEmptyDetached() throws Exception {
+        emptyAndDetached("*:focus-visible");
+        emptyAndDetached(":focus-visible");
     }
 
     /**

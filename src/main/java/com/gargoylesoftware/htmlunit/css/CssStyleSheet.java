@@ -87,6 +87,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -148,7 +149,7 @@ public class CssStyleSheet implements Serializable {
      */
     public static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             // only what is supported at the moment
-            "focus-within"));
+            "focus-within", "focus-visible"));
 
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
@@ -673,6 +674,16 @@ public class CssStyleSheet implements Serializable {
                 if (htmlPage2 != null) {
                     final DomElement focus = htmlPage2.getFocusedElement();
                     return element == focus || element.isAncestorOf(focus);
+                }
+                return false;
+
+            case "focus-visible":
+                final HtmlPage htmlPage3 = element.getHtmlPageOrNull();
+                if (htmlPage3 != null) {
+                    final DomElement focus = htmlPage3.getFocusedElement();
+                    return element == focus
+                            && ((element instanceof HtmlInput && !((HtmlInput) element).isReadOnly())
+                                || (element instanceof HtmlTextArea && !((HtmlTextArea) element).isReadOnly()));
                 }
                 return false;
 
