@@ -130,7 +130,10 @@ public class CssStyleSheet implements Serializable {
 
     private boolean enabled_ = true;
 
-    private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
+    /**
+     * Set of CSS2 pseudo class names.
+     */
+    public static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
             "link", "visited", "hover", "active",
             "focus", "lang", "first-child"));
 
@@ -140,8 +143,16 @@ public class CssStyleSheet implements Serializable {
             "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
             "optional", "required", "valid", "invalid"));
 
+    /**
+     * Set of CSS4 pseudo class names.
+     */
+    public static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
+            // only what is supported at the moment
+            "focus-within"));
+
     static {
         CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
+        CSS4_PSEUDO_CLASSES.addAll(CSS3_PSEUDO_CLASSES);
     }
 
     /**
@@ -657,6 +668,14 @@ public class CssStyleSheet implements Serializable {
                 }
                 return false;
 
+            case "focus-within":
+                final HtmlPage htmlPage2 = element.getHtmlPageOrNull();
+                if (htmlPage2 != null) {
+                    final DomElement focus = htmlPage2.getFocusedElement();
+                    return element == focus || element.isAncestorOf(focus);
+                }
+                return false;
+
             case "checked":
                 return (element instanceof HtmlCheckBoxInput && ((HtmlCheckBoxInput) element).isChecked())
                         || (element instanceof HtmlRadioButtonInput && ((HtmlRadioButtonInput) element).isChecked()
@@ -1104,7 +1123,7 @@ public class CssStyleSheet implements Serializable {
                     return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
                 }
 
-                return CSS3_PSEUDO_CLASSES.contains(value);
+                return CSS4_PSEUDO_CLASSES.contains(value);
             default:
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Unhandled CSS condition type '"

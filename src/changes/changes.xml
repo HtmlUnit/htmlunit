@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+            <action type="add" dev="rbri">
+                Support for :focus-within pseudo selector added.
+            </action>
             <action type="fix" dev="rbri" issue="449">
                 core-js: Did another hack in the code to tread const in for-of loop's like let.
             </action>

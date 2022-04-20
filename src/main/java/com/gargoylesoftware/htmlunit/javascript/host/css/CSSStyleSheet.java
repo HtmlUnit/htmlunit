@@ -30,7 +30,6 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -134,20 +133,6 @@ public class CSSStyleSheet extends StyleSheet {
     private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
 
     private boolean enabled_ = true;
-
-    private static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "link", "visited", "hover", "active",
-            "focus", "lang", "first-child"));
-
-    private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
-            "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
-            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required", "valid", "invalid"));
-
-    static {
-        CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
-    }
 
     /**
      * Creates a new empty stylesheet.
@@ -954,10 +939,10 @@ public class CSSStyleSheet extends StyleSheet {
                     value = value.substring(0, value.indexOf('(') + 1) + ')';
                 }
                 if (documentMode < 9) {
-                    return CSS2_PSEUDO_CLASSES.contains(value);
+                    return CssStyleSheet.CSS2_PSEUDO_CLASSES.contains(value);
                 }
 
-                if (!CSS2_PSEUDO_CLASSES.contains(value)
+                if (!CssStyleSheet.CSS2_PSEUDO_CLASSES.contains(value)
                         && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
                         && !domNode.isAttachedToPage()
                         && !domNode.hasChildNodes()) {
@@ -979,7 +964,7 @@ public class CSSStyleSheet extends StyleSheet {
                     return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
                 }
 
-                return CSS3_PSEUDO_CLASSES.contains(value);
+                return CssStyleSheet.CSS4_PSEUDO_CLASSES.contains(value);
             default:
                 if (LOG.isWarnEnabled()) {
                     LOG.warn("Unhandled CSS condition type '"
