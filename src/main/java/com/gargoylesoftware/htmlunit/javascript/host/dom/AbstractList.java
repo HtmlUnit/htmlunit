@@ -49,7 +49,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  */
 @JsxClass(isJSObject = false)
-public abstract class AbstractList extends HtmlUnitScriptable implements ExternalArrayData {
+public class AbstractList extends HtmlUnitScriptable implements ExternalArrayData {
 
     /**
      * Cache effect of some changes.
@@ -326,7 +326,9 @@ public abstract class AbstractList extends HtmlUnitScriptable implements Externa
      * @param initialElements the initial content for the cache
      * @return the newly created instance
      */
-    protected abstract AbstractList create(DomNode parentScope, List<DomNode> initialElements);
+    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
+        throw new IllegalAccessError("Creation of AbstractListInstances is not allowed.");
+    }
 
     /**
      * Helper for {@link #getWithPreemption(String)} when finding by id doesn't get results.
