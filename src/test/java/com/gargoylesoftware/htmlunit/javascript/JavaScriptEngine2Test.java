@@ -1042,6 +1042,31 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"1", "2"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"1", "2"})
+    public void constInOfLoop() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var arr = [1, 2];\n"
+                + "  for(const elem of arr) {\n"
+                + "    log(elem);\n"
+                + "  }\n"
+                + "}\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"1 ready", "2 ready", "3 ready", "4 ready",
         "5 ready", "6 ready", "7 ready", "8 ready", "9 ready", "10 ready"})
     public void ensureOrder() throws Exception {
