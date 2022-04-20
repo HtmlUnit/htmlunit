@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+            <action type="fix" dev="rbri">
+                neko: Some missing end-of-file checks added (this fixes possible IndexOutOfBounds exceptions).
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Possilbe OOM exception with broken input fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: JSON.stringify() fixes.
+            </action>
             <action type="remove" dev="rbri">
                 HTMLCollection IE only methods nextNode() and reset() removed.
             </action>
