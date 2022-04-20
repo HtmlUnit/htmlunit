@@ -100,27 +100,6 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     /**
      * Creates an instance.
      *
-     * @param domeNode the {@link DomNode}
-     * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
-     * of a descendant node of parentScope changes (attribute added, modified or removed)
-     */
-    public AbstractList(final DomNode domeNode, final boolean attributeChangeSensitive) {
-        this(domeNode, attributeChangeSensitive, null);
-    }
-
-    /**
-     * Creates an instance with an initial cache value.
-     *
-     * @param domNode the {@link DomNode}
-     * @param initialElements the initial content for the cache
-     */
-    protected AbstractList(final DomNode domNode, final List<DomNode> initialElements) {
-        this(domNode, true, new ArrayList<>(initialElements));
-    }
-
-    /**
-     * Creates an instance.
-     *
      * @param domNode the {@link DomNode}
      * @param attributeChangeSensitive indicates if the content of the collection may change when an attribute
      * of a descendant node of parentScope changes (attribute added, modified or removed)

@@ -75,7 +75,7 @@ public class NodeList extends AbstractList implements Callable {
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
-        super(domNode, attributeChangeSensitive);
+        super(domNode, attributeChangeSensitive, null);
     }
 
     /**
@@ -84,7 +84,7 @@ public class NodeList extends AbstractList implements Callable {
      * @param initialElements the initial content for the cache
      */
     public NodeList(final DomNode domNode, final List<DomNode> initialElements) {
-        super(domNode, initialElements);
+        super(domNode, true, new ArrayList<>(initialElements));
     }
 
     /**
