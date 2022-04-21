@@ -15,7 +15,9 @@
 package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import org.junit.Test;
@@ -106,7 +108,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("10")
-    @NotYetImplemented
     public void ready__jQuery_ready() throws Exception {
         runTest("ready: jQuery ready");
     }
@@ -710,7 +711,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("15")
-    @NotYetImplemented(CHROME)
     public void core__jQuery_makeArray() throws Exception {
         runTest("core: jQuery.makeArray");
     }
@@ -1393,7 +1393,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented({ CHROME, IE })
     public void deferred__jQuery_Deferred_then___filtering__fail_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (fail)");
     }
@@ -1404,7 +1403,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("4")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_catch() throws Exception {
         runTest("deferred: jQuery.Deferred.catch");
     }
@@ -1425,7 +1423,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("3")
-    @NotYetImplemented(CHROME)
     public void deferred__jQuery_Deferred_then___filtering__progress_() throws Exception {
         runTest("deferred: jQuery.Deferred.then - filtering (progress)");
     }
@@ -1496,7 +1493,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented(FF)
     public void deferred__jQuery_Deferred_then___spec_compatibility() throws Exception {
         runTest("deferred: jQuery.Deferred.then - spec compatibility");
     }
@@ -1518,7 +1514,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented({ CHROME, FF })
     public void deferred__jQuery_Deferred_exceptionHook() throws Exception {
         runTest("deferred: jQuery.Deferred.exceptionHook");
     }
@@ -1589,7 +1584,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("68")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, FF_ESR })
     public void deferred__jQuery_when_thenable____like_Promise_resolve() throws Exception {
         runTest("deferred: jQuery.when(thenable) - like Promise.resolve");
     }
@@ -1600,7 +1595,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("196")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, FF_ESR })
     public void deferred__jQuery_when_a__b____like_Promise_all() throws Exception {
         runTest("deferred: jQuery.when(a, b) - like Promise.all");
     }
@@ -1763,7 +1758,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented(IE)
     public void deprecated__isFunction_GeneratorFunction_() throws Exception {
         runTest("deprecated: isFunction(GeneratorFunction)");
     }
@@ -1775,7 +1770,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, FF_ESR })
     public void deprecated__isFunction_AsyncFunction_() throws Exception {
         runTest("deprecated: isFunction(AsyncFunction)");
     }
@@ -1881,7 +1876,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(DEFAULT = "15",
             FF = "1, 14, 15",
             FF_ESR = "1, 14, 15")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, EDGE, IE})
     public void support__Verify_that_support_tests_resolve_as_expected_per_browser() throws Exception {
         runTest("support: Verify that support tests resolve as expected per browser");
     }
@@ -2392,7 +2387,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented(CHROME)
     public void queue__fn_promise___queue______waits_for_animation_to_complete_before_resolving() throws Exception {
         runTest("queue: fn.promise( \"queue\" ) - waits for animation to complete before resolving");
     }
@@ -5681,7 +5675,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "4",
             IE = "0")
-    @NotYetImplemented(CHROME)
+    @NotYetImplemented
     public void manipulation__html_script_type_module_() throws Exception {
         runTest("manipulation: html(script type module)");
     }
@@ -6276,7 +6270,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("17")
-    @NotYetImplemented
     public void css__css___non_px_relative_values__gh_1711_() throws Exception {
         runTest("css: css() non-px relative values (gh-1711)");
     }
@@ -6754,7 +6747,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Test
     @Alerts(DEFAULT = "3",
             IE = "2")
-    @NotYetImplemented(CHROME)
     public void css__Don_t_default_to_a_cached_previously_used_wrong_prefixed_name__gh_2015_() throws Exception {
         runTest("css: Don't default to a cached previously used wrong prefixed name (gh-2015)");
     }
@@ -7042,7 +7034,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void ajax__jQuery_ajax_____native_timeout() throws Exception {
         runTest("ajax: jQuery.ajax() - native timeout");
     }
@@ -7514,7 +7505,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("1")
-    @NotYetImplemented
     public void ajax__jQuery_ajax_____failing_cross_domain__non_existing_() throws Exception {
         runTest("ajax: jQuery.ajax() - failing cross-domain (non-existing)");
     }
@@ -7726,7 +7716,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("2")
-    @NotYetImplemented
     public void ajax__gh_2498___jQuery_ajax_____binary_data_shouldn_t_throw_an_exception() throws Exception {
         runTest("ajax: gh-2498 - jQuery.ajax() - binary data shouldn't throw an exception");
     }
@@ -7810,6 +7799,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(DEFAULT = "1",
             CHROME = "1, 0, 1",
             EDGE = "1, 0, 1")
+    @NotYetImplemented({ CHROME, EDGE })
     public void ajax___14379___jQuery_ajax___on_unload() throws Exception {
         runTest("ajax: #14379 - jQuery.ajax() on unload");
     }
@@ -8283,7 +8273,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("27")
-    @NotYetImplemented({ CHROME, FF })
+    @NotYetImplemented({ CHROME, FF, FF_ESR })
     public void effects__show__() throws Exception {
         runTest("effects: show()");
     }
@@ -8346,7 +8336,6 @@ public class JQuery3x3x1Test extends JQueryTestBase {
      */
     @Test
     @Alerts("12")
-    @NotYetImplemented
     public void effects__animate_relative_values() throws Exception {
         runTest("effects: animate relative values");
     }
@@ -10156,7 +10145,7 @@ public class JQuery3x3x1Test extends JQueryTestBase {
     @Alerts(DEFAULT = "4",
             FF = "4, 0, 4",
             FF_ESR = "4, 0, 4")
-    @NotYetImplemented
+    @NotYetImplemented({ CHROME, EDGE, IE})
     public void dimensions__width_height_on_a_table_row_with_phantom_borders__gh_3698_() throws Exception {
         runTest("dimensions: width/height on a table row with phantom borders (gh-3698)");
     }
