@@ -609,7 +609,7 @@ public class Node extends EventTarget {
     public Object getRootNode() {
         Node parent = this;
         while (parent != null) {
-            if (parent instanceof HTMLDocument) {
+            if (parent instanceof Document) {
                 return parent;
             }
             if (parent instanceof DocumentFragment) {
