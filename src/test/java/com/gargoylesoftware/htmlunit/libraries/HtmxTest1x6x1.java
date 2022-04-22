@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for <a href="https://htmx.org/">htmx</a>.
@@ -35,10 +34,6 @@ public class HtmxTest1x6x1 extends HtmxTest {
     @Test
     @Alerts(DEFAULT = "passes:412failures:0",
             IE = "passes:17failures:396")
-    @HtmlUnitNYI(CHROME = "passes:411failures:1",
-            EDGE = "passes:411failures:1",
-            FF = "passes:411failures:1",
-            FF_ESR = "passes:411failures:1")
     public void htmx() throws Exception {
         htmx("htmx-1.6.1");
     }
