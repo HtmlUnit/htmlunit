@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
@@ -202,4 +203,13 @@ public class Attr extends Node {
         return super.getNamespaceURI();
     }
 
+    /**
+     * Returns the owner document.
+     * @return the document
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @Override
+    public Object getRootNode() {
+        return this;
+    }
 }

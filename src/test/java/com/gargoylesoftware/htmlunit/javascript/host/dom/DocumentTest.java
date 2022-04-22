@@ -2626,15 +2626,17 @@ public class DocumentTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"[object HTMLDocument]", "true"},
-            IE = {})
+            IE = "-")
     public void getRootNode() throws Exception {
         final String html = "<html>\n"
                 + "<body id='hello' onload='doTest()'>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function doTest() {\n"
-                + "      log(document.getRootNode());\n"
-                + "      log(document === document.getRootNode());\n"
+                + "      if (document.getRootNode) {\n"
+                + "        log(document.getRootNode());\n"
+                + "        log(document === document.getRootNode());\n"
+                + "      } else log('-');\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</body>\n" + "</html>";
