@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -31,13 +32,13 @@ public class HtmxTest1x7x0 extends HtmxTest {
     /**
      * @throws Exception if an error occurs
      */
-    // @Test
+    @Test
     @Alerts(DEFAULT = "passes:446failures:0",
             IE = "passes:16failures:431")
-    @HtmlUnitNYI(CHROME = "passes:411failures:1",
-            EDGE = "passes:411failures:1",
-            FF = "passes:411failures:1",
-            FF_ESR = "passes:411failures:1")
+    @HtmlUnitNYI(CHROME = "passes:445failures:1",
+            EDGE = "passes:445failures:1",
+            FF = "passes:445failures:1",
+            FF_ESR = "passes:445failures:1")
     public void htmx() throws Exception {
         htmx("htmx-1.7.0");
     }
