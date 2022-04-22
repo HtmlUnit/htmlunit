@@ -602,6 +602,29 @@ public class Node extends EventTarget {
     }
 
     /**
+     * Returns the owner document.
+     * @return the document
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public Object getRootNode() {
+        Node parent = this;
+        while (parent != null) {
+            if (parent instanceof HTMLDocument) {
+                return parent;
+            }
+            if (parent instanceof DocumentFragment) {
+                final Object document = parent.getOwnerDocument();
+                if (document != null) {
+                    return document;
+                }
+                return this;
+            }
+            parent = parent.getParent();
+        }
+        return this;
+    }
+
+    /**
      * Compares the positions of this node and the provided node within the document.
      * @param node node object that specifies the node to check
      * @return how the node is positioned relatively to the reference node.

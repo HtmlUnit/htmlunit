@@ -1269,8 +1269,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"},
-            IE = {"null", "myID", "blah", "span", "[object XMLDocument]"})
+    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]", "[object XMLDocument]"},
+            IE = {"null", "myID", "blah", "span", "[object XMLDocument]", "-"})
     public void responseXML_getElementById2() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1290,6 +1290,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          log(request.responseXML.getElementById('myID').innerHTML);\n"
             + "          log(request.responseXML.getElementById('myID').tagName);\n"
             + "          log(request.responseXML.getElementById('myID').ownerDocument);\n"
+            + "          if (request.responseXML.getElementById('myID').getRootNode) {\n"
+            + "            log(request.responseXML.getElementById('myID').getRootNode());\n"
+            + "          } else log('-');\n"
             + "        } else  {\n"
             + "          log('responseXML.getElementById not available');\n"
             + "        }\n"
@@ -1318,8 +1321,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                "[object HTMLSpanElement]", "[object XMLDocument]", "undefined"})
+    @Alerts(DEFAULT = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                       "[object HTMLSpanElement]", "[object XMLDocument]", "[object XMLDocument]", "undefined"},
+            IE = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                  "[object HTMLSpanElement]", "[object XMLDocument]", "-", "undefined"})
     public void responseXML_getElementById() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1340,6 +1345,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (doc.getElementById) {\n"
             + "          log(doc.getElementById('out'));\n"
             + "          log(doc.getElementById('out').ownerDocument);\n"
+            + "          if (doc.getElementById('out').getRootNode) {\n"
+            + "            log(doc.getElementById('out').getRootNode());\n"
+            + "          } else log('-');\n"
             + "        }\n"
             + "        log(doc.documentElement.childNodes[1].xml);\n"
             + "      }\n"

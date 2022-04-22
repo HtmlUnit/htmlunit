@@ -685,10 +685,16 @@ public class XMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"same doc: false", "in first: 3", "book", "ownerDocument: doc1",
-             "in 2nd: 3", "ownerDocument: doc2", "first child ownerDocument: doc2", "in first: 2", "in 2nd: 4",
-             "ownerDocument: doc1", "in first: 2", "in 2nd: 3",
-             "ownerDocument: doc2", "in first: 1", "in 2nd: 4"})
+    @Alerts(DEFAULT = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1", "getRootNode(): doc1",
+                       "in 2nd: 3", "ownerDocument: doc2", "getRootNode(): doc2",
+                       "first child ownerDocument: doc2", "first child getRootNode(): doc2", "in first: 2", "in 2nd: 4",
+                       "ownerDocument: doc1", "getRootNode(): doc1", "in first: 2", "in 2nd: 3",
+                       "ownerDocument: doc2", "getRootNode(): doc2", "in first: 1", "in 2nd: 4"},
+            IE = {"same doc: false", "in first: 3", "book", "ownerDocument: doc1", "-",
+                  "in 2nd: 3", "ownerDocument: doc2", "-",
+                  "first child ownerDocument: doc2", "-", "in first: 2", "in 2nd: 4",
+                  "ownerDocument: doc1", "-", "in first: 2", "in 2nd: 3",
+                  "ownerDocument: doc2", "-", "in first: 1", "in 2nd: 4"})
     public void moveChildBetweenDocuments() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -701,24 +707,40 @@ public class XMLDocumentTest extends WebDriverTestCase {
             + "  log('in first: ' + doc1Root.childNodes.length);\n"
             + "  var doc1RootOriginalFirstChild = doc1Root.firstChild;\n"
             + "  log(doc1RootOriginalFirstChild.tagName);\n"
-            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'));\n"
+
+            + "  var hasRootNode = doc1RootOriginalFirstChild.getRootNode !== undefined;\n"
+            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
+            + "  hasRootNode ? log('getRootNode(): ' "
+                                + "+ (doc1RootOriginalFirstChild.getRootNode() === doc1 ? 'doc1' : 'doc2'))"
+                                + " : log('-');\n"
             + "\n"
             + "  var doc2Root = doc2.firstChild;\n"
             + "  log('in 2nd: ' + doc2Root.childNodes.length);\n"
             + "  doc2Root.appendChild(doc1RootOriginalFirstChild);\n"
-            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'));\n"
+            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
+            + "  hasRootNode ? log('getRootNode(): ' "
+                                + "+ (doc1RootOriginalFirstChild.getRootNode() === doc1 ? 'doc1' : 'doc2'))"
+                                + " : log('-');\n"
             + "  log('first child ownerDocument: ' + "
-            + "(doc1RootOriginalFirstChild.firstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'));\n"
+                    + "(doc1RootOriginalFirstChild.firstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
+            + "  hasRootNode ? log('first child getRootNode(): ' + "
+                    + "(doc1RootOriginalFirstChild.firstChild.getRootNode() === doc1 ? 'doc1' : 'doc2')) : log('-');\n"
             + "  log('in first: ' + doc1Root.childNodes.length);\n"
             + "  log('in 2nd: ' + doc2Root.childNodes.length);\n"
             + "\n"
             + "  doc1Root.replaceChild(doc1RootOriginalFirstChild, doc1Root.firstChild);\n"
-            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'));\n"
+            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
+            + "  hasRootNode ? log('getRootNode(): ' "
+                                + "+ (doc1RootOriginalFirstChild.getRootNode() === doc1 ? 'doc1' : 'doc2'))"
+                                + " : log('-');\n"
             + "  log('in first: ' + doc1Root.childNodes.length);\n"
             + "  log('in 2nd: ' + doc2Root.childNodes.length);\n"
             + "\n"
             + "  doc2Root.insertBefore(doc1RootOriginalFirstChild, doc2Root.firstChild);\n"
-            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument == doc1 ? 'doc1' : 'doc2'));\n"
+            + "  log('ownerDocument: ' + (doc1RootOriginalFirstChild.ownerDocument === doc1 ? 'doc1' : 'doc2'));\n"
+            + "  hasRootNode ? log('getRootNode(): ' "
+                                + "+ (doc1RootOriginalFirstChild.getRootNode() === doc1 ? 'doc1' : 'doc2'))"
+                                + " : log('-');\n"
             + "  log('in first: ' + doc1Root.childNodes.length);\n"
             + "  log('in 2nd: ' + doc2Root.childNodes.length);\n"
             + "\n"

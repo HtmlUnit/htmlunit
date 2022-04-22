@@ -2622,6 +2622,27 @@ public class DocumentTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLDocument]", "true"},
+            IE = {})
+    public void getRootNode() throws Exception {
+        final String html = "<html>\n"
+                + "<body id='hello' onload='doTest()'>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function doTest() {\n"
+                + "      log(document.getRootNode());\n"
+                + "      log(document === document.getRootNode());\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body>\n" + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
