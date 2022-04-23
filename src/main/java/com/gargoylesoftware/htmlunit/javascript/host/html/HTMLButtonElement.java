@@ -192,4 +192,22 @@ public class HTMLButtonElement extends HTMLElement {
     public void setCustomValidity(final String message) {
         ((HtmlButton) getDomNodeOrDie()).setCustomValidity(message);
     }
+
+    /**
+     * Returns the value of the property {@code formnovalidate}.
+     * @return the value of this property
+     */
+    @JsxGetter
+    public boolean isFormNoValidate() {
+        return ((HtmlButton) getDomNodeOrDie()).isFormNoValidate();
+    }
+
+    /**
+     * Sets the value of the property {@code formnovalidate}.
+     * @param value the new value
+     */
+    @JsxSetter
+    public void setFormNoValidate(final boolean value) {
+        ((HtmlButton) getDomNodeOrDie()).setFormNoValidate(value);
+    }
 }

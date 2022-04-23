@@ -60,6 +60,9 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     private static final String TYPE_RESET = "reset";
     private static final String TYPE_BUTTON = "button";
 
+    /** The "formnovalidate" attribute name. */
+    private static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
+
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
     private String customValidity_;
@@ -516,5 +519,26 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public boolean isValueMissingValidityState() {
         return false;
+    }
+
+    /**
+     * @return the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined
+     */
+    public final boolean isFormNoValidate() {
+        return hasAttribute(ATTRIBUTE_FORMNOVALIDATE);
+    }
+
+    /**
+     * Sets the value of the attribute {@code formnovalidate}.
+     *
+     * @param noValidate the value of the attribute {@code formnovalidate}
+     */
+    public final void setFormNoValidate(final boolean noValidate) {
+        if (noValidate) {
+            setAttribute(ATTRIBUTE_FORMNOVALIDATE, ATTRIBUTE_FORMNOVALIDATE);
+        }
+        else {
+            removeAttribute(ATTRIBUTE_FORMNOVALIDATE);
+        }
     }
 }

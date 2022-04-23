@@ -138,7 +138,7 @@ public class HtmlForm extends HtmlElement {
                 else if (submitElement instanceof HtmlButton) {
                     final HtmlButton htmlButton = (HtmlButton) submitElement;
                     if ("submit".equalsIgnoreCase(htmlButton.getType())
-                            && htmlButton.getAttributeDirect("formnovalidate") != ATTRIBUTE_NOT_DEFINED) {
+                            && htmlButton.isFormNoValidate()) {
                         validate = false;
                     }
                 }

@@ -2769,15 +2769,15 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "autofocus,checkValidity(),constructor,createTextRange(),form,formAction,formEnctype,formMethod,"
                 + "formNoValidate,formTarget,name,setCustomValidity(),status,type,validationMessage,validity,value,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,labels,name,"
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,formNoValidate,labels,name,"
                 + "setCustomValidity(),type,validity,value,willValidate",
-            EDGE = "checkValidity(),constructor(),disabled,form,labels,name,"
+            EDGE = "checkValidity(),constructor(),disabled,form,formNoValidate,labels,name,"
                 + "setCustomValidity(),type,validity,value,willValidate",
-            FF_ESR = "checkValidity(),constructor(),disabled,form,labels,name,"
+            FF_ESR = "checkValidity(),constructor(),disabled,form,formNoValidate,labels,name,"
                 + "setCustomValidity(),type,validity,value,willValidate",
-            FF = "checkValidity(),constructor(),disabled,form,labels,name,"
+            FF = "checkValidity(),constructor(),disabled,form,formNoValidate,labels,name,"
                 + "setCustomValidity(),type,validity,value,willValidate",
-            IE = "checkValidity(),constructor,createTextRange(),form,name,"
+            IE = "checkValidity(),constructor,createTextRange(),form,formNoValidate,name,"
                 + "setCustomValidity(),type,validity,value,willValidate")
     public void button() throws Exception {
         test("button");
