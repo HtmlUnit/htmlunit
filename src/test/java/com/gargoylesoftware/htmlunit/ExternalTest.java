@@ -352,7 +352,8 @@ public class ExternalTest {
             return true;
         }
         // version 3.11.x seem to requires JDK11
-        if ("maven-site-plugin".equals(artifactId) && (version.startsWith("3.11."))) {
+        if ("maven-site-plugin".equals(artifactId)
+                && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
             return true;
         }
 
