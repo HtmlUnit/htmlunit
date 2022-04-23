@@ -975,6 +975,20 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         validation("<input type='password' id='e1' required>\n", "elem.value='victoria';");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-true-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationPattern() throws Exception {
+        validation("<input type='password' id='e1' pattern='abc'>\n", "elem.value='one';");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

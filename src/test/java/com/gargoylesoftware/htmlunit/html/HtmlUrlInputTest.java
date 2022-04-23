@@ -417,6 +417,20 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
         validation("<input type='url' id='e1' required>\n", "elem.value='http://example.com';");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-true-false-false-false-false-false-false-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
+                  "true"})
+    public void validationPattern() throws Exception {
+        validation("<input type='url' id='e1' pattern='.*test.*' value='http://example.com'>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"

@@ -394,6 +394,20 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         validation("<input type='email' id='e1' required>\n", "elem.value='test@abc.edu';");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-true-false-false-false-false-false-true-false-false",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true"})
+    public void validationPattern() throws Exception {
+        validation("<input type='email' id='e1' pattern='.+@email.com' value='abc@eemail.com!'>\n", "");
+    }
+
     private void validation(final String htmlPart, final String jsPart) throws Exception {
         final String html =
                 "<html><head>\n"
