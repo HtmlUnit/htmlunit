@@ -207,7 +207,6 @@ public class Attr extends Node {
      * Returns the owner document.
      * @return the document
      */
-    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     @Override
     public Object getRootNode() {
         return this;
