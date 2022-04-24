@@ -9,6 +9,9 @@
     <body>
         <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
             <action type="add" dev="rbri">
+                String.toLocaleLowerCase() takes care of provided locale.
+            </action>
+            <action type="add" dev="rbri">
                 Button/Input formNoValidate propery added.
             </action>
             <action type="fix" dev="rbri">
