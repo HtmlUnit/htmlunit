@@ -242,7 +242,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <input type='email' pattern='.+@email.com' id='foo' value='abc@eemail.com!'>\n"
+            + "  <input type='email' pattern='.+@email.com' id='foo' value='abc@eemail.com'>\n"
             + "  <input type='email' pattern='.+@email.com' id='bar' value='abc@email.com'>\n"
             + "</body>\n"
             + "</html>";
@@ -399,13 +399,13 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false",
-                       "false-false-true-false-false-false-false-false-true-false-false",
+                       "false-false-true-false-false-false-false-false-false-false-false",
                        "true"},
             IE = {"false",
-                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
                   "true"})
     public void validationPattern() throws Exception {
-        validation("<input type='email' id='e1' pattern='.+@email.com' value='abc@eemail.com!'>\n", "");
+        validation("<input type='email' id='e1' pattern='.+@email.com' value='abc@eemail.com'>\n", "");
     }
 
     private void validation(final String htmlPart, final String jsPart) throws Exception {
@@ -415,16 +415,16 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
                 + "      log(s.badInput"
-                        + "+ '-' + s.customError"
-                        + "+ '-' + s.patternMismatch"
-                        + "+ '-' + s.rangeOverflow"
-                        + "+ '-' + s.rangeUnderflow"
-                        + "+ '-' + s.stepMismatch"
-                        + "+ '-' + s.tooLong"
-                        + "+ '-' + s.tooShort"
-                        + " + '-' + s.typeMismatch"
-                        + " + '-' + s.valid"
-                        + " + '-' + s.valueMissing);\n"
+                        + "+ '-' + s.customError "
+                        + "+ '-' + s.patternMismatch "
+                        + "+ '-' + s.rangeOverflow "
+                        + "+ '-' + s.rangeUnderflow "
+                        + "+ '-' + s.stepMismatch "
+                        + "+ '-' + s.tooLong "
+                        + "+ '-' + s.tooShort "
+                        + "+ '-' + s.typeMismatch "
+                        + "+ '-' + s.valid "
+                        + "+ '-' + s.valueMissing);\n"
                 + "    }\n"
                 + "    function test() {\n"
                 + "      var elem = document.getElementById('e1');\n"
