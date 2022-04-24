@@ -87,6 +87,9 @@ public class HtmlForm extends HtmlElement {
     /** The "novalidate" attribute name. */
     private static final String ATTRIBUTE_NOVALIDATE = "novalidate";
 
+    /** The "formnovalidate" attribute name. */
+    public static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
+
     private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES = Arrays.asList(HtmlInput.TAG_NAME,
         HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME);
 
@@ -131,8 +134,7 @@ public class HtmlForm extends HtmlElement {
 
                 boolean validate = true;
                 if (submitElement instanceof HtmlSubmitInput
-                        && ((HtmlSubmitInput) submitElement).getAttributeDirect("formnovalidate")
-                                != ATTRIBUTE_NOT_DEFINED) {
+                        && ((HtmlSubmitInput) submitElement).isFormNoValidate()) {
                     validate = false;
                 }
                 else if (submitElement instanceof HtmlButton) {

@@ -10314,23 +10314,28 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "useMap,validationMessage,validity,value,valueAsNumber,vrml,vspace,width,"
                 + "willValidate")
     @HtmlUnitNYI(CHROME = "accept,align,alt,autocomplete,checked,checkValidity(),constructor(),defaultChecked,"
-                + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
+                + "defaultValue,disabled,files,form,formNoValidate,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,"
                 + "readOnly,required,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             EDGE = "accept,align,alt,autocomplete,checked,checkValidity(),constructor(),defaultChecked,"
-                + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
+                + "defaultValue,disabled,files,form,formNoValidate,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,"
                 + "readOnly,required,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),size,src,step,type,validity,value,width,willValidate",
             FF_ESR = "accept,align,alt,autocomplete,checked,checkValidity(),constructor(),defaultChecked,"
-                + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
+                + "defaultValue,disabled,files,form,formNoValidate,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,"
                 + "readOnly,required,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),size,src,step,textLength,type,validity,value,width,willValidate",
             FF = "accept,align,alt,autocomplete,checked,checkValidity(),constructor(),defaultChecked,"
-                + "defaultValue,disabled,files,form,height,labels,max,maxLength,min,minLength,name,placeholder,"
+                + "defaultValue,disabled,files,form,formNoValidate,"
+                + "height,labels,max,maxLength,min,minLength,name,placeholder,"
                 + "readOnly,required,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),size,src,step,textLength,type,validity,value,width,willValidate",
             IE = "accept,align,alt,autocomplete,border,checked,checkValidity(),constructor,createTextRange(),"
-                + "defaultChecked,defaultValue,files,form,height,max,maxLength,min,name,placeholder,readOnly,required,"
+                + "defaultChecked,defaultValue,files,form,formNoValidate,"
+                + "height,max,maxLength,min,name,placeholder,readOnly,required,"
                 + "select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),size,src,step,type,validity,value,width,willValidate")
     public void input() throws Exception {

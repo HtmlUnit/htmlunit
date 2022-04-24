@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_CUSTOM_VALIDITY;
+import static com.gargoylesoftware.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.net.MalformedURLException;
 import java.util.Collection;
@@ -1099,5 +1100,26 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         return isRequiredSupported()
                 && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
                 && getAttributeDirect("value").isEmpty();
+    }
+
+    /**
+     * @return the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined
+     */
+    public final boolean isFormNoValidate() {
+        return hasAttribute(ATTRIBUTE_FORMNOVALIDATE);
+    }
+
+    /**
+     * Sets the value of the attribute {@code formnovalidate}.
+     *
+     * @param noValidate the value of the attribute {@code formnovalidate}
+     */
+    public final void setFormNoValidate(final boolean noValidate) {
+        if (noValidate) {
+            setAttribute(ATTRIBUTE_FORMNOVALIDATE, ATTRIBUTE_FORMNOVALIDATE);
+        }
+        else {
+            removeAttribute(ATTRIBUTE_FORMNOVALIDATE);
+        }
     }
 }

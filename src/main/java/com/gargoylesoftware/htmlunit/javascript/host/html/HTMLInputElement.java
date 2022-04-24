@@ -1010,4 +1010,22 @@ public class HTMLInputElement extends HTMLElement {
     public void setCustomValidity(final String message) {
         getDomNodeOrDie().setCustomValidity(message);
     }
+
+    /**
+     * Returns the value of the property {@code formnovalidate}.
+     * @return the value of this property
+     */
+    @JsxGetter
+    public boolean isFormNoValidate() {
+        return getDomNodeOrDie().isFormNoValidate();
+    }
+
+    /**
+     * Sets the value of the property {@code formnovalidate}.
+     * @param value the new value
+     */
+    @JsxSetter
+    public void setFormNoValidate(final boolean value) {
+        getDomNodeOrDie().setFormNoValidate(value);
+    }
 }

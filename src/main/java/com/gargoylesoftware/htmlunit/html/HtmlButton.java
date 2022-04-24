@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
+import static com.gargoylesoftware.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -59,9 +60,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     private static final String TYPE_SUBMIT = "submit";
     private static final String TYPE_RESET = "reset";
     private static final String TYPE_BUTTON = "button";
-
-    /** The "formnovalidate" attribute name. */
-    private static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
 
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();

@@ -2260,4 +2260,32 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "true", "false"})
+    public void formNoValidate() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = document.createElement('input');\n"
+            + "    log(i.formNoValidate);\n"
+
+            + "    i.formNoValidate = '';\n"
+            + "    log(i.formNoValidate);\n"
+
+            + "    i.formNoValidate = 'yes';\n"
+            + "    log(i.formNoValidate);\n"
+
+            + "    i.removeAttribute('formNoValidate');\n"
+            + "    log(i.formNoValidate);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
