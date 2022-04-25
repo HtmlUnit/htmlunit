@@ -27,7 +27,7 @@
         <htmlunitdriver.version>2.60.0</htmlunitdriver.version>
         <htmlunitcssparser.version>1.12.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.61.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.61.0</htmlunitcorejs.version>
+        <htmlunitcorejs.version>2.61.1</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.46.v20220331</jetty.version>
