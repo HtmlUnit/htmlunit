@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.61.0" date="April xx, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+        <release version="2.61.0" date="April 25, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
             <action type="add" dev="rbri">
                 String.toLocaleLowerCase() takes care of provided locale.
             </action>
