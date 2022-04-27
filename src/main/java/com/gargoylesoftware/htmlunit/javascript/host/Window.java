@@ -1950,7 +1950,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public void postMessage(final String message, final String targetOrigin, final Object transfer) {
+    public void postMessage(final Object message, final String targetOrigin, final Object transfer) {
         final WebWindow webWindow = getWebWindow();
         final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
