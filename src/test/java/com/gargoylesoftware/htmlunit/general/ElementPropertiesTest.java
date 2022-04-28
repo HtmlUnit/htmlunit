@@ -2251,11 +2251,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,"
-                + "height,hspace,isMap,loading,longDesc,lowsrc,name,"
+                + "fetchpriority,height,hspace,isMap,loading,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             EDGE = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,"
-                + "height,hspace,isMap,loading,longDesc,lowsrc,name,"
+                + "fetchpriority,height,hspace,isMap,loading,longDesc,lowsrc,name,"
                 + "naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,useMap,vspace,width,x,"
                 + "y",
             FF = "align,alt,border,complete,crossOrigin,currentSrc,decode(),decoding,height,hspace,isMap,loading,"
@@ -2421,10 +2421,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "as,charset,crossOrigin,disabled,href,hreflang,"
+    @Alerts(CHROME = "as,charset,crossOrigin,disabled,fetchpriority,href,hreflang,"
                 + "imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
-            EDGE = "as,charset,crossOrigin,disabled,href,hreflang,"
+            EDGE = "as,charset,crossOrigin,disabled,fetchpriority,href,hreflang,"
                 + "imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
             FF = "as,charset,crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
@@ -2869,9 +2869,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "async,charset,crossOrigin,defer,event,htmlFor,"
+    @Alerts(CHROME = "async,charset,crossOrigin,defer,event,fetchpriority,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",
-            EDGE = "async,charset,crossOrigin,defer,event,htmlFor,"
+            EDGE = "async,charset,crossOrigin,defer,event,fetchpriority,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",
             FF = "async,charset,crossOrigin,defer,event,htmlFor,"
                 + "integrity,noModule,referrerPolicy,src,text,type",

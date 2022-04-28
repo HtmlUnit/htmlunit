@@ -5053,10 +5053,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
+    @Alerts(CHROME = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,"
+                + "fetchpriority,height,hspace,"
                 + "isMap,loading,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
                 + "useMap,vspace,width,x,y",
-            EDGE = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,height,hspace,"
+            EDGE = "align,alt,border,complete,constructor(),crossOrigin,currentSrc,decode(),decoding,"
+                + "fetchpriority,height,hspace,"
                 + "isMap,loading,longDesc,lowsrc,name,naturalHeight,naturalWidth,referrerPolicy,sizes,src,srcset,"
                 + "useMap,vspace,width,x,"
                 + "y",
@@ -5658,9 +5660,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,"
+    @Alerts(CHROME = "as,charset,constructor(),crossOrigin,disabled,fetchpriority,"
+                + "href,hreflang,imageSizes,imageSrcset,"
                 + "integrity,media,referrerPolicy,rel,relList,rev,sheet,sizes,target,type",
-            EDGE = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,integrity,"
+            EDGE = "as,charset,constructor(),crossOrigin,disabled,fetchpriority,"
+                + "href,hreflang,imageSizes,imageSrcset,integrity,"
                 + "media,referrerPolicy,rel,relList,rev,sheet,sizes,target,"
                 + "type",
             FF = "as,charset,constructor(),crossOrigin,disabled,href,hreflang,imageSizes,imageSrcset,"
@@ -8057,14 +8061,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,"
+    @Alerts(CHROME = "async,charset,constructor(),crossOrigin,defer,event,fetchpriority,htmlFor,"
                         + "integrity,noModule,referrerPolicy,src,text,type",
-            EDGE = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,integrity,noModule,referrerPolicy,"
-                + "src,text,"
-                + "type",
-            FF = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,integrity,noModule,referrerPolicy,"
-                + "src,text,"
-                + "type",
+            EDGE = "async,charset,constructor(),crossOrigin,defer,event,fetchpriority,htmlFor,"
+                + "integrity,noModule,referrerPolicy,src,text,type",
+            FF = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,"
+                + "integrity,noModule,referrerPolicy,src,text,type",
             FF_ESR = "async,charset,constructor(),crossOrigin,defer,event,htmlFor,"
                         + "integrity,noModule,referrerPolicy,src,text,type",
             IE = "async,charset,constructor,crossOrigin,defer,event,htmlFor,src,text,type")

@@ -930,9 +930,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "-16",
-            EDGE = "-16")
+    @Alerts("0")
     public void layer() throws Exception {
         test("layer");
     }
