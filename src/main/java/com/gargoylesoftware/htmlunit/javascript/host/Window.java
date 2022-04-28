@@ -144,7 +144,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Function, AutoCloseable {
+public class Window extends EventTarget implements WindowOrWorkerGlobalScope, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -1333,22 +1333,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
 
     private void setHandlerForJavaScript(final String eventName, final Object handler) {
         getEventListenersContainer().setEventHandler(eventName, handler);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        throw Context.reportRuntimeError("Window is not a function.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        throw Context.reportRuntimeError("Window is not a function.");
     }
 
     /**

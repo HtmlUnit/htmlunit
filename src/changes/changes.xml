@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="482" due-to="Rural Hunter">
+                Window is no longer a callable.
+            </action>
             <action type="fix" dev="rbri" due-to="Thorsten Wendelmuth">
-                Window.postMessage now supports arbritary js objects as message
+                Window.postMessage now supports arbitary js objects as message
                 instead of converting them into strings.
             </action>
         </release>

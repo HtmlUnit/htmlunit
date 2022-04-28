@@ -2281,7 +2281,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("exception true")
     public void constructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2289,6 +2289,32 @@ public class Window2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(new Window());\n"
+            + "    } catch(e) {log('exception ' + (e instanceof TypeError));}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test case for {@link https://github.com/HtmlUnit/htmlunit/issues/482}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "exception")
+    public void constructorError() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var divs = document.querySelectorAll('div');\n"
+            + "      var a = Array.from.call(window, divs);\n"
+            + "      log(a.length);\n"
             + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"
