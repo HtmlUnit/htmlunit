@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="2.62.0" date="May xx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri" due-to="Thorsten Wendelmuth">
+                Window.postMessage now supports arbritary js objects as message
+                instead of converting them into strings.
+            </action>
+        </release>
+
         <release version="2.61.0" date="April 25, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
             <action type="add" dev="rbri">
                 String.toLocaleLowerCase() takes care of provided locale.
