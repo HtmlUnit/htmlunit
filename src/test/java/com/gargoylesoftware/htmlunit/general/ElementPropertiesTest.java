@@ -469,8 +469,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
                 + "onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,"
-                + "translate,"
-                + "virtualKeyboardPolicy",
+                + "translate,virtualKeyboardPolicy",
             EDGE = "accessKey,attachInternals(),autocapitalize,autofocus,blur(),click(),contentEditable,dataset,dir,"
                 + "draggable,enterKeyHint,focus(),hidden,innerText,inputMode,isContentEditable,lang,nonce,"
                 + "offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,onanimationend,"
@@ -487,9 +486,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onselect,onselectionchange,onselectstart,onslotchange,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,"
                 + "ontransitionstart,onvolumechange,onwaiting,onwebkitanimationend,onwebkitanimationiteration,"
-                + "onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,title,"
-                + "translate,"
-                + "virtualKeyboardPolicy",
+                + "onwebkitanimationstart,onwebkittransitionend,onwheel,outerText,spellcheck,style,tabIndex,"
+                + "textprediction,title,translate,virtualKeyboardPolicy",
             FF = "accessKey,accessKeyLabel,attachInternals(),"
                 + "blur(),click(),contentEditable,dataset,dir,draggable,enterKeyHint,focus(),"
                 + "hidden,innerText,inputMode,isContentEditable,"

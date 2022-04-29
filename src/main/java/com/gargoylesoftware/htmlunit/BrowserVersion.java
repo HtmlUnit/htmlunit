@@ -111,7 +111,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(100, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(101, "Edge");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(101, "Chrome");
@@ -277,11 +277,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4896.60 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1185.29";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4951.41 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1210.32";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.4896.60 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1185.29";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.4951.41 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1210.32";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";

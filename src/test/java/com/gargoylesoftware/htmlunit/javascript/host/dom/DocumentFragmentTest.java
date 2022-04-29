@@ -268,6 +268,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "true"},
             CHROME = {"false", "false"},
+            EDGE = {"false", "false"},
             IE = "-")
     public void getRootNode() throws Exception {
         final String content = "<html>\n"
