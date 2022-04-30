@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
+            <action type="fix" dev="rbri">
+                Node.getRootNode() fixed for DocumentFragment itself and for childrens.
+            </action>
             <action type="fix" dev="rbri" issue="482" due-to="Rural Hunter">
                 Window is no longer a callable.
             </action>

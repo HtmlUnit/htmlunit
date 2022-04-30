@@ -266,9 +266,7 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"true", "true"},
-            CHROME = {"false", "false"},
-            EDGE = {"false", "false"},
+    @Alerts(DEFAULT = {"false", "true", "false", "true", "false", "true", "true", "false"},
             IE = "-")
     public void getRootNode() throws Exception {
         final String content = "<html>\n"
@@ -281,10 +279,18 @@ public class DocumentFragmentTest extends WebDriverTestCase {
             + "      }\n"
             + "      var fragment = document.createDocumentFragment();\n"
             + "      log(document === fragment.getRootNode());\n"
+            + "      log(fragment === fragment.getRootNode());\n"
 
             + "      var div = document.createElement('div');\n"
             + "      fragment.appendChild(div);\n"
-            + "      log(div.getRootNode() === document);\n"
+            + "      log(document === div.getRootNode());\n"
+            + "      log(fragment === div.getRootNode());\n"
+
+            + "      document.body.appendChild(fragment);\n"
+            + "      log(document === fragment.getRootNode());\n"
+            + "      log(fragment === fragment.getRootNode());\n"
+            + "      log(document === div.getRootNode());\n"
+            + "      log(fragment === div.getRootNode());\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

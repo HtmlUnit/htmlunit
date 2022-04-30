@@ -609,15 +609,8 @@ public class Node extends EventTarget {
     public Object getRootNode() {
         Node parent = this;
         while (parent != null) {
-            if (parent instanceof Document) {
+            if (parent instanceof Document || parent instanceof DocumentFragment) {
                 return parent;
-            }
-            if (parent instanceof DocumentFragment) {
-                final Object document = parent.getOwnerDocument();
-                if (document != null) {
-                    return document;
-                }
-                return this;
             }
             parent = parent.getParent();
         }
