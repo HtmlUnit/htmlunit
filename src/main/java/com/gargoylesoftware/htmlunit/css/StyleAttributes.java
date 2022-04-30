@@ -300,6 +300,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code background-size}. */
         BACKGROUND_SIZE_("background-size", "background-size", ff("auto")),
 
+        /** The style property {@code basePalette}. */
+        BASE_PALETTE("basePalette", "base-palette", chromeAndEdge("")),
+
         /** The style property {@code baselineShift}. */
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie("baseline"),
                 chromeAndEdge("0px")),
@@ -1121,6 +1124,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code font-optical-sizing}. */
         FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
+
+        /** The style property {@code fontPalette}. */
+        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdge("normal")),
 
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),
@@ -2582,6 +2588,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code overflow-y}. */
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
+
+        /** The style property {@code overrideColors}. */
+        OVERRIDE_COLOR("overrideColors", "override-colors", chromeAndEdge("")),
 
         /** The style property {@code overscrollBehavior}. */
         OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chromeAndEdge("auto"),
