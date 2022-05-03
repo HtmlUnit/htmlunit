@@ -9,6 +9,12 @@
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
             <action type="fix" dev="rbri">
+                core-js: Code cleanup and minor optimizations.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Better handling of Callables in NativeConsole.
+            </action>
+            <action type="fix" dev="rbri">
                 Node.getRootNode() fixed for DocumentFragment itself and fragment children.
             </action>
             <action type="fix" dev="rbri" issue="482" due-to="Rural Hunter">
