@@ -1428,6 +1428,31 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
+    public void getComputedStyleCached() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='myDiv'></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  var cs1 = window.getComputedStyle(e, null);\n"
+            + "  var cs2 = window.getComputedStyle(e, null);\n"
+            + "  log(cs1 === cs2);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * The reason was that "top" evaluate to WindowProxy and "Object(top)" was setting the top scope as parentScope
      * of the WindowProxy which was setting it on the Window where it should always be null.
      * @throws Exception if the test fails
