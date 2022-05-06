@@ -133,6 +133,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -244,8 +245,18 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSStyleDeclaration() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw ScriptRuntime.typeError("CSSStyleDeclaration ctor is not available");
     }
 
     /**
