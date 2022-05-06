@@ -5836,7 +5836,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
@@ -7230,7 +7229,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
-     *
      * @throws Exception if the test fails
      */
     @Test
