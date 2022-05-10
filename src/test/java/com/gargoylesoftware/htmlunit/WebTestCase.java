@@ -55,8 +55,8 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
-import org.junit.rules.TestRule;
 
 import com.github.romankh3.image.comparison.ImageComparison;
 import com.github.romankh3.image.comparison.ImageComparisonUtil;
@@ -174,7 +174,7 @@ public abstract class WebTestCase {
      * JUnit 4 {@link Rule} controlling System.err.
      */
     @Rule
-    public final TestRule errOutputChecker_ = new ErrorOutputChecker();
+    public final MethodRule errOutputChecker_ = new ErrorOutputChecker();
 
     static {
         try {
