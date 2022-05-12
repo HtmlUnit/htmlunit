@@ -178,7 +178,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private final int initialSize_;
     private DomNode currentNode_;
     private final boolean createdByJavascript_;
-    private StringBuilder characters_;
+    private StringBuilder characters_ = new StringBuilder();
     private HtmlUnitNekoDOMBuilder.HeadParsed headParsed_ = HeadParsed.NO;
     private HtmlElement body_;
     private boolean lastTagWasSynthesized_;
@@ -564,18 +564,12 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     /** {@inheritDoc} */
     @Override
     public void characters(final char[] ch, final int start, final int length) throws SAXException {
-        if (characters_ == null) {
-            characters_ = new StringBuilder();
-        }
         characters_.append(ch, start, length);
     }
 
     /** {@inheritDoc} */
     @Override
     public void ignorableWhitespace(final char[] ch, final int start, final int length) throws SAXException {
-        if (characters_ == null) {
-            characters_ = new StringBuilder();
-        }
         characters_.append(ch, start, length);
     }
 
@@ -583,7 +577,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      * Picks up the character data accumulated so far and add it to the current element as a text node.
      */
     private void handleCharacters() {
-        if (characters_ != null && characters_.length() != 0) {
+        if (characters_.length() != 0) {
             if (currentNode_ instanceof HtmlHtml) {
                 // In HTML, the <html> node only has two possible children:
                 // the <head> and the <body>; any text is ignored.
