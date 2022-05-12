@@ -30,15 +30,18 @@ public class SilentJavaScriptErrorListener implements JavaScriptErrorListener, S
 
     @Override
     public void scriptException(final HtmlPage page, final ScriptException scriptException) {
+        // silence
     }
 
     @Override
     public void timeoutError(final HtmlPage page, final long allowedTime, final long executionTime) {
+        // silence
     }
 
     @Override
     public void malformedScriptURL(final HtmlPage page, final String url,
                 final MalformedURLException malformedURLException) {
+        // silence
     }
 
     @Override
@@ -48,5 +51,6 @@ public class SilentJavaScriptErrorListener implements JavaScriptErrorListener, S
     @Override
     public void warn(final String message, final String sourceName,
             final int line, final String lineSource, final int lineOffset) {
+        // silence
     }
 }

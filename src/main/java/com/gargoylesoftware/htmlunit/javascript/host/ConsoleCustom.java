@@ -42,5 +42,6 @@ public final class ConsoleCustom {
      */
     public static void timeStamp(
             final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+        // noop
     }
 }

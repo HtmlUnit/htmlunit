@@ -207,6 +207,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
 
     @Override
     void handleFocusLostValueChanged() {
+        // ignore
     }
 
     /**
