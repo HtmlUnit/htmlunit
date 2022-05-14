@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
+            <action type="fix" dev="rbri" issue="483">
+                Ignore invalid css selectors (inside pseudo not) instead of throwing an exception.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Code cleanup and minor optimizations.
             </action>

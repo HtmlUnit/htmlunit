@@ -2873,4 +2873,30 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
         loadPageVerifyTitle2(content);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("0")
+    public void getOffsetHeightInvalidSelector() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  *:not(:invalid-pseudo) { background-color: #FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var div = document.getElementById('myDiv');\n"
+            + "  var offHeight = div.offsetHeight;\n"
+            + "  log(offHeight);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

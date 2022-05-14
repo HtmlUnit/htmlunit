@@ -856,10 +856,14 @@ public class CssStyleSheet implements Serializable {
                     try {
                         final SelectorList selectorList = parser.parseSelectors(selectors);
                         if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
-                            throw new CSSException("Invalid selectors: " + selectors);
+                            return false;
                         }
 
-                        validateSelectors(selectorList, 9, element);
+                        for (final Selector selector : selectorList) {
+                            if (!isValidSelector(selector, 9, element)) {
+                                return false;
+                            }
+                        }
 
                         return !selects(browserVersion, selectorList.get(0), element,
                                 null, fromQuerySelectorAll);
