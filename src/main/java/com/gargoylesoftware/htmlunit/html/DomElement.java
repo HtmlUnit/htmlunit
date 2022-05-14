@@ -1584,7 +1584,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
             if (selectorList != null) {
                 for (final Selector selector : selectorList) {
-                    if (CssStyleSheet.selects(browserVersion, selector, this, null, true)) {
+                    if (CssStyleSheet.selects(browserVersion, selector, this, null, true, true)) {
                         return true;
                     }
                 }

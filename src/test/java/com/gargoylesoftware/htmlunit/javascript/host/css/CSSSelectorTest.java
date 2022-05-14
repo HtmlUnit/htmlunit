@@ -2354,4 +2354,33 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void querySelector_invalid() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    log(document.querySelectorAll('#foo > :not(:first)'));\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "  try {\n"
+            + "    log(document.querySelector('#foo > :not(:first)'));\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul id='foo'>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

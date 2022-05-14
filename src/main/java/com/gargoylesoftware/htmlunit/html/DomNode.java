@@ -1829,7 +1829,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
                     for (final Selector selector : selectorList) {
-                        if (CssStyleSheet.selects(browserVersion, selector, child, null, true)) {
+                        if (CssStyleSheet.selects(browserVersion, selector, child, null, true, true)) {
                             elements.add(child);
                             break;
                         }
@@ -2009,7 +2009,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 do {
                     for (final Selector selector : selectorList) {
                         final DomElement elem = (DomElement) current;
-                        if (CssStyleSheet.selects(browserVersion, selector, elem, null, true)) {
+                        if (CssStyleSheet.selects(browserVersion, selector, elem, null, true, true)) {
                             return elem;
                         }
                     }

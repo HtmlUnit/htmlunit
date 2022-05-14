@@ -268,7 +268,7 @@ public class CSSStyleSheet extends StyleSheet {
     @Deprecated
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
             final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
-        return CssStyleSheet.selects(browserVersion, selector, element, pseudoElement, fromQuerySelectorAll);
+        return CssStyleSheet.selects(browserVersion, selector, element, pseudoElement, fromQuerySelectorAll, true);
     }
 
     /**
@@ -285,7 +285,7 @@ public class CSSStyleSheet extends StyleSheet {
     @Deprecated
     static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
             final boolean fromQuerySelectorAll) {
-        return CssStyleSheet.selects(browserVersion, condition, element, fromQuerySelectorAll);
+        return CssStyleSheet.selects(browserVersion, condition, element, fromQuerySelectorAll, true);
     }
 
     /**
@@ -1073,7 +1073,7 @@ public class CSSStyleSheet extends StyleSheet {
             CSSStyleSheetImpl.SelectorEntry entry = iter.next();
             while (null != entry) {
                 if (CssStyleSheet.selects(browserVersion, entry.getSelector(),
-                                            element, pseudoElement, fromQuerySelectorAll)) {
+                                            element, pseudoElement, fromQuerySelectorAll, false)) {
                     matchingRules.add(entry);
                 }
                 entry = iter.next();
