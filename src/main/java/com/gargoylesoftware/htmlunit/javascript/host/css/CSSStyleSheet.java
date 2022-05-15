@@ -263,7 +263,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @return {@code true} if it does apply, {@code false} if it doesn't apply
      *
      * @deprecated since 2.61.0; please use
-     * {@link CssStyleSheet#selects(BrowserVersion, Selector, DomElement, String, boolean)} instead
+     * {@link CssStyleSheet#selects(BrowserVersion, Selector, DomElement, String, boolean, boolean)} instead
      */
     @Deprecated
     public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
