@@ -1883,6 +1883,15 @@ public class HtmlSerializerNormalizedText2Test extends SimpleWebTestCase {
         getNormalizedTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "+");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("demo")
+    public void getVisibleEm() throws Exception {
+        getNormalizedTextFormated("<em id='tester'>demo</em>");
+    }
+
     private void getNormalizedTextFormatedAfterTyping(final String htmlTesterSnipped,
                         final String... typed) throws Exception {
         final String htmlContent
