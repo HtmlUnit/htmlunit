@@ -8,8 +8,11 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
+            <action type="update" dev="rbri" issue="223">
+                WebRequest.getParameters() normalizes null values to empty strings.
+            </action>
             <action type="fix" dev="rbri" issue="223">
-                WebRequest.getParameters() now takes care of explicit set parametes for get requests also.
+                WebRequest.getParameters() now takes care of explicit set parameters for get requests also.
             </action>
             <action type="fix" dev="rbri" issue="483">
                 Ignore invalid css selectors (inside pseudo not) instead of throwing an exception.

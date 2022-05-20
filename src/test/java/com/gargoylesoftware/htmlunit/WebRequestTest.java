@@ -17,7 +17,6 @@ package com.gargoylesoftware.htmlunit;
 import static com.gargoylesoftware.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -291,7 +290,7 @@ public class WebRequestTest {
 
         assertEquals(1, request.getParameters().size());
         assertEquals("x", request.getParameters().get(0).getName());
-        assertNull(request.getParameters().get(0).getValue());
+        assertEquals("", request.getParameters().get(0).getValue());
     }
 
     /**
@@ -331,7 +330,7 @@ public class WebRequestTest {
         pairs.add(new NameValuePair("null", null));
         assertEquals(3, request.getParameters().size());
         assertEquals("null", request.getParameters().get(2).getName());
-        assertNull(null, request.getParameters().get(2).getValue());
+        assertEquals("", request.getParameters().get(2).getValue());
 
         // test for our internal conversation
         query = URLEncodedUtils.

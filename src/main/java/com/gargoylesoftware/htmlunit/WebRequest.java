@@ -24,6 +24,7 @@ import java.net.IDN;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -327,7 +328,7 @@ public class WebRequest implements Serializable {
     /**
      * Retrieves the request parameters in use. Similar to the servlet api this will
      * work depending on the request type and check the url parameters and
-     * the body.
+     * the body. The value is also normalized - null is converted to an empty string.
      * @return the request parameters to use
      */
     public List<NameValuePair> getParameters() {
@@ -339,37 +340,53 @@ public class WebRequest implements Serializable {
                 && HttpMethod.PATCH != getHttpMethod()) {
 
             if (!getRequestParameters().isEmpty()) {
-                return getRequestParameters();
+                return normalize(getRequestParameters());
             }
 
-            return HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset());
+            return normalize(HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset()));
 
         }
 
         if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getRequestParameters();
+                return normalize(getRequestParameters());
             }
 
-            return HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset());
+            return normalize(HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset()));
         }
 
         if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
             if (getRequestBody() == null) {
-                return getRequestParameters();
+                return normalize(getRequestParameters());
             }
 
-            final List<NameValuePair> pairs = Collections.emptyList();
-            return pairs;
+            return Collections.emptyList();
         }
 
         if (FormEncodingType.MULTIPART == getEncodingType()) {
-            return getRequestParameters();
+            return normalize(getRequestParameters());
         }
 
         // for instance a PUT or PATCH request
-        final List<NameValuePair> pairs = Collections.emptyList();
-        return pairs;
+        return Collections.emptyList();
+    }
+
+    private static List<NameValuePair> normalize(final List<NameValuePair> pairs) {
+        if (pairs == null || pairs.isEmpty()) {
+            return pairs;
+        }
+
+        final List<NameValuePair> resultingPairs = new ArrayList<>();
+        for (final NameValuePair pair : pairs) {
+            String value = pair.getValue();
+            if (value == null) {
+                value = "";
+            }
+            resultingPairs.add(new NameValuePair(pair.getName(), value));
+        }
+
+        return resultingPairs;
+
     }
 
     /**
