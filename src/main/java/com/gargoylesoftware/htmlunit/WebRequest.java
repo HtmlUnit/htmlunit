@@ -337,6 +337,11 @@ public class WebRequest implements Serializable {
 
         if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
                 && HttpMethod.PATCH != getHttpMethod()) {
+
+            if (!getRequestParameters().isEmpty()) {
+                return getRequestParameters();
+            }
+
             return HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset());
 
         }
