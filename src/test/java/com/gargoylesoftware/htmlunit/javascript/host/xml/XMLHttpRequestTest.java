@@ -18,11 +18,15 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -2847,6 +2851,117 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "36"})
+    public void responseResponseTypeArrayBufferGzipIncrease() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        final byte[] bytes = xml.getBytes(UTF_8);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final GZIPOutputStream gout = new GZIPOutputStream(bos);
+        gout.write(bytes);
+        gout.finish();
+
+        final byte[] encoded = bos.toByteArray();
+        assertTrue(encoded.length > xml.length());
+
+        final List<NameValuePair> headers = new LinkedList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setResponse(URL_SECOND, encoded, 200, "OK", MimeType.TEXT_XML, headers);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "72"})
+    public void responseResponseTypeArrayBufferGzipDecrease() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blahblahblahblahblahblahblahblahblahblah</content>\n"
+            + "</xml>";
+
+        final byte[] bytes = xml.getBytes(UTF_8);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final GZIPOutputStream gout = new GZIPOutputStream(bos);
+        gout.write(bytes);
+        gout.finish();
+
+        final byte[] encoded = bos.toByteArray();
+        assertTrue(encoded.length < xml.length());
+
+        final List<NameValuePair> headers = new LinkedList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setResponse(URL_SECOND, encoded, 200, "OK", MimeType.TEXT_XML, headers);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "0"})

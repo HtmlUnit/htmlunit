@@ -344,18 +344,35 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (RESPONSE_TYPE_ARRAYBUFFER.equals(responseType_)) {
-            final NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(webResponse_.getContentLength());
+            long contentLength = webResponse_.getContentLength();
+            NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(contentLength);
 
             try {
-                final int bufferLength = 1;
+                final int bufferLength = Math.min(1024, (int) contentLength);
                 final byte[] buffer = new byte[bufferLength];
+                int offset = 0;
                 try (InputStream inputStream = webResponse_.getContentAsStream()) {
-                    int offset = 0;
                     int readLen;
                     while ((readLen = inputStream.read(buffer, 0, bufferLength)) != -1) {
+                        final long newLength = offset + readLen;
+                        // gzip content and the unzipped content is larger
+                        if (newLength > contentLength) {
+                            final NativeArrayBuffer expanded = new NativeArrayBuffer(newLength);
+                            System.arraycopy(nativeArrayBuffer.getBuffer(), 0,
+                                    expanded.getBuffer(), 0, (int) contentLength);
+                            contentLength = newLength;
+                            nativeArrayBuffer = expanded;
+                        }
                         System.arraycopy(buffer, 0, nativeArrayBuffer.getBuffer(), offset, readLen);
-                        offset += readLen;
+                        offset = (int) newLength;
                     }
+                }
+
+                // for small responses the gzipped content might be larger than the original
+                if (offset < contentLength) {
+                    final NativeArrayBuffer shrinked = new NativeArrayBuffer(offset);
+                    System.arraycopy(nativeArrayBuffer.getBuffer(), 0, shrinked.getBuffer(), 0, offset);
+                    nativeArrayBuffer = shrinked;
                 }
 
                 nativeArrayBuffer.setParentScope(getParentScope());

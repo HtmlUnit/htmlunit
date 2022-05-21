@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
+            <action type="fix" dev="rbri">
+                Correct the length of the resulting ArrayBuffer for XMLHttpRequest having a response type of 'arraybuffer'
+                if the response is gzip compressed. This also fixes an ArrayIndexOutOfBounds exception.
+            </action>
             <action type="update" dev="rbri" issue="223">
                 WebRequest.getParameters() normalizes null values to empty strings.
             </action>
