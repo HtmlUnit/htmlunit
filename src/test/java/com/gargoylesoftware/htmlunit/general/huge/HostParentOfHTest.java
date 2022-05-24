@@ -299,7 +299,8 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            EDGE = "true")
+            EDGE = "true",
+            FF = "true")
     public void _HTMLDialogElement_HTMLDialogElement() throws Exception {
         test("HTMLDialogElement", "HTMLDialogElement");
     }
@@ -516,7 +517,8 @@ public class HostParentOfHTest extends HostParentOf {
     @Test
     @Alerts(DEFAULT = "false",
             CHROME = "true",
-            EDGE = "true")
+            EDGE = "true",
+            FF = "true")
     public void _HTMLElement_HTMLDialogElement() throws Exception {
         test("HTMLElement", "HTMLDialogElement");
     }

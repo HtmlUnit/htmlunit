@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NAMED_ITEM_ID_FIRST;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_SUPPORTS_PARANTHESES;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -24,9 +25,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -36,11 +39,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
 
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -59,12 +65,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Ronald Brill
  */
 @JsxClass
-public class HTMLCollection extends AbstractList {
-
-    /**
-     * IE provides a way of enumerating through some element collections; this counter supports that functionality.
-     */
-    private int currentIndex_;
+public class HTMLCollection extends AbstractList implements Callable {
 
     /**
      * Creates an instance.
@@ -80,7 +81,7 @@ public class HTMLCollection extends AbstractList {
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public HTMLCollection(final DomNode domNode, final boolean attributeChangeSensitive) {
-        super(domNode, attributeChangeSensitive);
+        super(domNode, attributeChangeSensitive, null);
     }
 
     /**
@@ -89,7 +90,12 @@ public class HTMLCollection extends AbstractList {
      * @param initialElements the initial content for the cache
      */
     HTMLCollection(final DomNode domNode, final List<DomNode> initialElements) {
-        super(domNode, initialElements);
+        super(domNode, true, new ArrayList<>(initialElements));
+    }
+
+    private HTMLCollection(final DomNode domNode, final boolean attributeChangeSensitive,
+            final List<DomNode> initialElements) {
+        super(domNode, attributeChangeSensitive, new ArrayList<>(initialElements));
     }
 
     /**
@@ -98,21 +104,25 @@ public class HTMLCollection extends AbstractList {
      * @return an empty collection
      */
     public static HTMLCollection emptyCollection(final DomNode domNode) {
-        final List<DomNode> list = Collections.emptyList();
-        return new HTMLCollection(domNode, false) {
-            @Override
-            public List<DomNode> getElements() {
-                return list;
-            }
-        };
+        return new HTMLCollection(domNode, false, Collections.emptyList());
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
+    protected HTMLCollection create(final DomNode parentScope, final List<DomNode> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
+    }
+
+    /**
+     * Returns the length.
+     * @return the length
+     */
+    @JsxGetter
+    @Override
+    public final int getLength() {
+        return super.getLength();
     }
 
     /**
@@ -121,7 +131,17 @@ public class HTMLCollection extends AbstractList {
     @Override
     public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
         if (supportsParentheses()) {
-            return super.call(cx, scope, thisObj, args);
+            if (args.length == 0) {
+                throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+            }
+            final Object object = getIt(args[0]);
+            if (object == NOT_FOUND) {
+                if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+                    return null;
+                }
+                return Undefined.instance;
+            }
+            return object;
         }
 
         throw ScriptRuntime.typeError("HTMLCollection does nont support function like access");
@@ -190,7 +210,7 @@ public class HTMLCollection extends AbstractList {
      * @return the element or elements corresponding to the specified index or key
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
      */
-    @Override
+    @JsxFunction
     public Object item(final Object index) {
         if (index instanceof String && getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_ID_SEARCH_ALSO)) {
             final String name = (String) index;
@@ -250,32 +270,6 @@ public class HTMLCollection extends AbstractList {
     }
 
     /**
-     * Returns the next node in the collection (supporting iteration in IE only).
-     * @return the next node in the collection
-     */
-    @JsxFunction(IE)
-    public Object nextNode() {
-        final Object nextNode;
-        final List<DomNode> elements = getElements();
-        if (currentIndex_ >= 0 && currentIndex_ < elements.size()) {
-            nextNode = elements.get(currentIndex_);
-        }
-        else {
-            nextNode = null;
-        }
-        currentIndex_++;
-        return nextNode;
-    }
-
-    /**
-     * Resets the node iterator accessed via {@link #nextNode()}.
-     */
-    @JsxFunction(IE)
-    public void reset() {
-        currentIndex_ = 0;
-    }
-
-    /**
      * Returns all the elements in this element array that have the specified tag name.
      * This method returns an empty element array if there are no elements with the
      * specified tag name.
@@ -285,31 +279,18 @@ public class HTMLCollection extends AbstractList {
      */
     @JsxFunction(IE)
     public Object tags(final String tagName) {
-        return new HTMLSubCollection(HTMLCollection.this) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return tagName.equalsIgnoreCase(node.getLocalName());
-            }
-        };
-    }
-}
-
-class HTMLSubCollection extends HTMLCollection {
-    private final HTMLCollection mainCollection_;
-
-    HTMLSubCollection(final HTMLCollection mainCollection) {
-        super(mainCollection.getDomNodeOrDie(), false);
-        mainCollection_ = mainCollection;
-    }
-
-    @Override
-    protected List<DomNode> computeElements() {
-        final List<DomNode> list = new ArrayList<>();
-        for (final DomNode o : mainCollection_.getElements()) {
-            if (isMatching(o)) {
-                list.add(o);
-            }
-        }
-        return list;
+        final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), false);
+        tags.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomNode> list = new ArrayList<>();
+                    for (final DomNode elem : this.getElements()) {
+                        if (tagName.equalsIgnoreCase(elem.getLocalName())) {
+                            list.add(elem);
+                        }
+                    }
+                    return list;
+                });
+        return tags;
     }
 }

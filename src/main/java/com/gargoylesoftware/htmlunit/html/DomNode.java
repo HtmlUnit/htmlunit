@@ -55,6 +55,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText;
@@ -1828,7 +1829,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (selectorList != null) {
                 for (final DomElement child : getDomElementDescendants()) {
                     for (final Selector selector : selectorList) {
-                        if (CSSStyleSheet.selects(browserVersion, selector, child, null, true)) {
+                        if (CssStyleSheet.selects(browserVersion, selector, child, null, true, true)) {
                             elements.add(child);
                             break;
                         }
@@ -2008,7 +2009,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 do {
                     for (final Selector selector : selectorList) {
                         final DomElement elem = (DomElement) current;
-                        if (CSSStyleSheet.selects(browserVersion, selector, elem, null, true)) {
+                        if (CssStyleSheet.selects(browserVersion, selector, elem, null, true, true)) {
                             return elem;
                         }
                     }

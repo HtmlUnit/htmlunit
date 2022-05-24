@@ -24,22 +24,23 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>2.60.0</htmlunitdriver.version>
-        <htmlunitcssparser.version>1.11.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.60.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.60.0</htmlunitcorejs.version>
+        <htmlunitdriver.version>2.61.0</htmlunitdriver.version>
+        <htmlunitcssparser.version>1.12.0</htmlunitcssparser.version>
+        <htmlunitneko.version>2.61.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.62.0-SNAPSHOT</htmlunitcorejs.version>
+
 
         <httpclient5.version>5.1.3</httpclient5.version>
-        <jetty.version>9.4.45.v20220203</jetty.version>
+        <jetty.version>9.4.46.v20220331</jetty.version>
         <log4j.version>2.17.2</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
-        <spotbugs.version>4.6.0</spotbugs.version>
-        <pmd.version>6.43.0</pmd.version>
+        <spotbugs.version>4.7.0</spotbugs.version>
+        <pmd.version>6.45.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
-        <dependencycheck.version>7.0.0</dependencycheck.version>
+        <dependencycheck.version>7.1.0</dependencycheck.version>
     </properties>
 
     <build>
@@ -74,9 +75,8 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.5.3.0</version>
+                <version>4.7.0.0</version>
                 <dependencies>
-                    <!-- overwrite dependency on spotbugs if you want to specify the version of spotbugs -->
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
                         <artifactId>spotbugs</artifactId>
@@ -176,7 +176,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <quiet>true</quiet>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
@@ -304,7 +304,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.4</version>
+                <version>5.1.6</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
@@ -689,7 +689,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.0</version>
                 <configuration>
                     <quiet>true</quiet>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
@@ -706,12 +706,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.3.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>3.2.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1177,6 +1177,9 @@
         <contributor>
             <name>Ashley Frieze</name>
         </contributor>
+        <contributor>
+            <name>Bharatwaaj Shankaranarayanan</name>
+        </contributor>
     </contributors>
     <dependencies>
         <dependency>
@@ -1408,7 +1411,7 @@
         <dependency>
             <groupId>com.caucho</groupId>
             <artifactId>quercus</artifactId>
-            <version>4.0.65</version>
+            <version>4.0.66</version>
             <scope>test</scope>
         </dependency>
         <!-- WebDriver -->

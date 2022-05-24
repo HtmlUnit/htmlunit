@@ -174,7 +174,8 @@ public abstract class BaseFrameElement extends HtmlElement {
         setContentLoaded();
 
         String source = src;
-        final WebClient webClient = getPage().getWebClient();
+        final SgmlPage page = getPage();
+        final WebClient webClient = page.getWebClient();
         final FrameContentHandler handler = webClient.getFrameContentHandler();
         if (null != handler && !handler.loadFrameDocument(this)) {
             source = UrlUtils.ABOUT_BLANK;
@@ -183,16 +184,14 @@ public abstract class BaseFrameElement extends HtmlElement {
         if (!source.isEmpty()) {
             final URL url;
             try {
-                url = ((HtmlPage) getPage()).getFullyQualifiedUrl(source);
+                url = ((HtmlPage) page).getFullyQualifiedUrl(source);
             }
             catch (final MalformedURLException e) {
                 notifyIncorrectness("Invalid src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");
                 return;
             }
 
-            final WebRequest request = new WebRequest(url);
-            request.setCharset(getPage().getCharset());
-            request.setRefererlHeader(getPage().getUrl());
+            final WebRequest request = new WebRequest(url, page.getCharset(), page.getUrl());
 
             if (isAlreadyLoadedByAncestor(url, request.getCharset())) {
                 notifyIncorrectness("Recursive src attribute of " + getTagName() + ": url=[" + source + "]. Ignored.");

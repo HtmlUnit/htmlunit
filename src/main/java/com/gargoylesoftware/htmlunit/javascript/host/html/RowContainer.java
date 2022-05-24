@@ -16,6 +16,9 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
+import java.util.function.Predicate;
+
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -54,13 +57,11 @@ public class RowContainer extends HTMLElement {
      */
     @JsxGetter
     public Object getRows() {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node);
-            }
-
-        };
+        final HTMLCollection rows = new HTMLCollection(getDomNodeOrDie(), false);
+        rows.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> node instanceof HtmlTableRow && isContainedRow((HtmlTableRow) node));
+        return rows;
     }
 
     /**

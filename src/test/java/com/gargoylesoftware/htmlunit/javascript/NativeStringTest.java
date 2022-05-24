@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * String is a native JavaScript object and therefore provided by Rhino but some tests are needed here.
@@ -305,6 +306,29 @@ public class NativeStringTest extends WebDriverTestCase {
             + "  }\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if something goes wrong
+     */
+    @Test
+    @Alerts(DEFAULT = {"\u0069\u0307", "\u0069"},
+            IE = {"\u0130", "\u0130"})
+    @HtmlUnitNYI(IE = {"\u0069\u0307", "\u0069"})
+    public void toLocaleLowerCase() throws Exception {
+        final String html
+            = "<!DOCTYPE html>\n"
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function doTest() {\n"
+            + "    log('\\u0130'.toLocaleLowerCase('en'));\n"
+            + "    log('\\u0130'.toLocaleLowerCase('tr'));\n"
+            + "  }\n"
+            + "</script></head>"
+            + "<body onload='doTest()'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

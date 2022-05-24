@@ -7,7 +7,115 @@
     </properties>
 
     <body>
-        <release version="2.61.0" date="April xx, 2022" description="Bugfixes">
+        <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 101, Bugfixes">
+            <action type="fix" dev="rbri">
+                Correct the length of the resulting ArrayBuffer for XMLHttpRequest having a response type of 'arraybuffer'
+                if the response is gzip compressed. This also fixes an ArrayIndexOutOfBounds exception.
+            </action>
+            <action type="update" dev="rbri" issue="223">
+                WebRequest.getParameters() normalizes null values to empty strings.
+            </action>
+            <action type="fix" dev="rbri" issue="223">
+                WebRequest.getParameters() now takes care of explicit set parameters for get requests also.
+            </action>
+            <action type="fix" dev="rbri" issue="483">
+                Ignore invalid css selectors (inside pseudo not) instead of throwing an exception.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Code cleanup and minor optimizations.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Better handling of Callables in NativeConsole.
+            </action>
+            <action type="fix" dev="rbri">
+                Node.getRootNode() fixed for DocumentFragment itself and fragment children.
+            </action>
+            <action type="fix" dev="rbri" issue="482" due-to="Rural Hunter">
+                Window is no longer a callable.
+            </action>
+            <action type="fix" dev="rbri" due-to="Thorsten Wendelmuth">
+                Window.postMessage now supports arbitary js objects as message
+                instead of converting them into strings.
+            </action>
+        </release>
+
+        <release version="2.61.0" date="April 25, 2022" description="Chrome/Edge 100, Firefox 99, Bugfixes">
+            <action type="add" dev="rbri">
+                String.toLocaleLowerCase() takes care of provided locale.
+            </action>
+            <action type="add" dev="rbri">
+                Button/Input formNoValidate propery added.
+            </action>
+            <action type="fix" dev="rbri">
+                ValidityState.patternMismatch fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                Dispatching custion events now works for all DomNode's. This fixes also a NPE when running
+                the htmx 1.7.0 test suite.
+            </action>
+            <action type="add" dev="rbri">
+                Node.getRootNode() added.
+            </action>
+            <action type="add" dev="rbri">
+                Support for :focus-within and :focus-visible pseudo selectors added.
+            </action>
+            <action type="fix" dev="rbri" issue="449">
+                core-js: Did another hack in the code to tread const in for-of loop's like let.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Some missing end-of-file checks added (this fixes possible IndexOutOfBounds exceptions).
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Possilbe OOM exception with broken input fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: JSON.stringify() fixes.
+            </action>
+            <action type="remove" dev="rbri">
+                HTMLCollection IE only methods nextNode() and reset() removed.
+            </action>
+            <action type="fix" dev="rbri">
+                Bunch of fixes for HTMLCollection and NodeList properties.
+            </action>
+            <action type="update" dev="rbri">
+                Use NativeConsole from core-js instead of our own implementation. As a side effect,
+                WebConsole.Formatter is no longer supported.
+            </action>
+            <action type="fix" dev="rbri" issue="476" due-to="Rural Hunter">
+                core-js: Using subarray() on a subarray produces incorrect results.
+            </action>
+            <action type="fix" dev="rbri" issue="471" due-to="Rural Hunter">
+                Add missing delegate methods to WebResponseWrapper.
+            </action>
+            <action type="update" dev="rbri" due-to="Bharatwaaj Shankaranarayanan">
+                Improved method and vaiable naming at some places.
+            </action>
+            <action type="update" dev="rbri" issue="360">
+                INCOMPATIBLE CHANGE: Class MediaList was moved from package
+                com.gargoylesoftware.htmlunit.javascript.host.dom
+                into package com.gargoylesoftware.htmlunit.javascript.host.css.
+            </action>
+            <action type="add" dev="rbri" issue="223">
+                New method WebRequest.getParameters() returning all parameters
+                (from the url and the body if available).
+                This change was required to fix some issues with Spring MockMVC.
+            </action>
+            <action type="add" dev="rbri" issue="360">
+                Implementation of CSSPageRule selectorText setter added.
+            </action>
+            <action type="add" dev="rbri">
+                cssparser: Support page rule setSelectorText().
+            </action>
+            <action type="fix" dev="rbri">
+                docu: various fixes regarding using the sonatype snapshot repository.
+            </action>
+            <action type="fix" dev="rbri" issue="462" due-to="Rural Hunter">
+                Running the test suite fails on some newer maschines because Jetty is not happy
+                with  tread pool limits setups in use.
+            </action>
+            <action type="fix" dev="rbri" issue="461" due-to="Rural Hunter">
+                'Origin' header added to same-origin non-GET requests.
+            </action>
         </release>
 
         <release version="2.60.0" date="March 20, 2022" description="Chrome/Edge 99, Bugfixes">

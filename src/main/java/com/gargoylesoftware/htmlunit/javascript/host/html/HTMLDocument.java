@@ -29,11 +29,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -65,6 +67,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Attr;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
@@ -626,20 +629,21 @@ public class HTMLDocument extends Document {
         }
 
         final HtmlPage page = getPage();
-        return new HTMLCollection(page, true) {
-            @Override
-            protected List<DomNode> computeElements() {
-                return new ArrayList<>(page.getElementsByName(elementName));
-            }
+        final HTMLCollection elements = new HTMLCollection(page, true);
+        elements.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> new ArrayList<>(page.getElementsByName(elementName)));
 
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
-        };
+        elements.setEffectOnCacheFunction(
+                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
+                event -> {
+                    if ("name".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                });
+
+        return elements;
     }
 
     /**
@@ -685,22 +689,7 @@ public class HTMLDocument extends Document {
             return super.getScriptableFor(object);
         }
 
-        return new HTMLCollection(page, matchingElements) {
-            @Override
-            protected List<DomNode> computeElements() {
-                return getItComputeElements(page, name, forIDAndOrName, alsoFrames);
-            }
-
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                final String attributeName = event.getName();
-                if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
-                    return EffectOnCache.RESET;
-                }
-
-                return EffectOnCache.NONE;
-            }
-
+        final HTMLCollection coll = new HTMLCollection(page, matchingElements) {
             @Override
             protected HtmlUnitScriptable getScriptableFor(final Object object) {
                 if (alsoFrames && object instanceof BaseFrameElement) {
@@ -709,6 +698,23 @@ public class HTMLDocument extends Document {
                 return super.getScriptableFor(object);
             }
         };
+
+        coll.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> getItComputeElements(page, name, forIDAndOrName, alsoFrames));
+
+        coll.setEffectOnCacheFunction(
+                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
+                event -> {
+                    final String attributeName = event.getName();
+                    if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
+                        return EffectOnCache.RESET;
+                    }
+
+                    return EffectOnCache.NONE;
+                });
+
+        return coll;
     }
 
     static List<DomNode> getItComputeElements(final HtmlPage page, final String name,

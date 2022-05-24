@@ -254,4 +254,37 @@ public class CustomEventTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "details", "I was here"})
+    public void dispatchEventOnDomText() throws Exception {
+        final String html =
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var listener = function(x) {\n"
+            + "    log(x == myEvent);\n"
+            + "    log(x.detail);\n"
+            + "    x.foo = 'I was here';\n"
+            + "  }\n"
+            + "  var txt = document.getElementById('myDiv').firstChild;\n"
+            + "  txt.addEventListener('MyEvent', listener);\n"
+
+            + "  var myEvent = document.createEvent('CustomEvent');\n"
+            + "  myEvent.initCustomEvent('MyEvent', true, true, 'details');\n"
+            + "  txt.dispatchEvent(myEvent);\n"
+            + "  log(myEvent.foo);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>Hallo HtmlUnit</div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

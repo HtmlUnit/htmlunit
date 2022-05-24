@@ -234,4 +234,70 @@ public class DocumentFragmentTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void ownerDocument() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      log(document === fragment.ownerDocument);\n"
+
+            + "      var div = document.createElement('div');\n"
+            + "      fragment.appendChild(div);\n"
+            + "      log(div.ownerDocument === document);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>bla\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "false", "true", "false", "true", "true", "false"},
+            IE = "-")
+    public void getRootNode() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (!document.body.getRootNode) {\n"
+            + "        log('-'); return;\n"
+            + "      }\n"
+            + "      var fragment = document.createDocumentFragment();\n"
+            + "      log(document === fragment.getRootNode());\n"
+            + "      log(fragment === fragment.getRootNode());\n"
+
+            + "      var div = document.createElement('div');\n"
+            + "      fragment.appendChild(div);\n"
+            + "      log(document === div.getRootNode());\n"
+            + "      log(fragment === div.getRootNode());\n"
+
+            + "      document.body.appendChild(fragment);\n"
+            + "      log(document === fragment.getRootNode());\n"
+            + "      log(fragment === fragment.getRootNode());\n"
+            + "      log(document === div.getRootNode());\n"
+            + "      log(fragment === div.getRootNode());\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>bla\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
 }

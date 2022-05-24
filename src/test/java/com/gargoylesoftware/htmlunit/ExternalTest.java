@@ -55,14 +55,14 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "99.0.4844.51";
+    static String CHROME_DRIVER_ = "101.0.4951.41";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "99.0.1153.0";
+    static String EDGE_DRIVER_ = "101.0.1210.53";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.30.0";
+    static String GECKO_DRIVER_ = "0.31.0";
     static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
 
     /** IE driver. */
@@ -351,7 +351,8 @@ public class ExternalTest {
             return true;
         }
         // version 3.11.x seem to requires JDK11
-        if ("maven-site-plugin".equals(artifactId) && (version.startsWith("3.11."))) {
+        if ("maven-site-plugin".equals(artifactId)
+                && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
             return true;
         }
 

@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_O
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
+import static com.gargoylesoftware.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -516,5 +517,26 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     public boolean isValueMissingValidityState() {
         return false;
+    }
+
+    /**
+     * @return the value of the attribute {@code formnovalidate} or an empty string if that attribute isn't defined
+     */
+    public final boolean isFormNoValidate() {
+        return hasAttribute(ATTRIBUTE_FORMNOVALIDATE);
+    }
+
+    /**
+     * Sets the value of the attribute {@code formnovalidate}.
+     *
+     * @param noValidate the value of the attribute {@code formnovalidate}
+     */
+    public final void setFormNoValidate(final boolean noValidate) {
+        if (noValidate) {
+            setAttribute(ATTRIBUTE_FORMNOVALIDATE, ATTRIBUTE_FORMNOVALIDATE);
+        }
+        else {
+            removeAttribute(ATTRIBUTE_FORMNOVALIDATE);
+        }
     }
 }

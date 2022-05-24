@@ -286,6 +286,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
 
     @Override
     void handleFocusLostValueChanged() {
+        // ignore
     }
 
     /**

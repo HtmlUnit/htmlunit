@@ -202,4 +202,12 @@ public class Attr extends Node {
         return super.getNamespaceURI();
     }
 
+    /**
+     * Returns the owner document.
+     * @return the document
+     */
+    @Override
+    public Object getRootNode() {
+        return this;
+    }
 }

@@ -28,6 +28,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -35,6 +36,8 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -55,6 +58,7 @@ import com.gargoylesoftware.htmlunit.StorageHolder.Type;
 import com.gargoylesoftware.htmlunit.TopLevelWindow;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
@@ -88,6 +92,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Selection;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -111,6 +116,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
 import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.Level;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -138,7 +144,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @see <a href="http://msdn.microsoft.com/en-us/library/ms535873.aspx">MSDN documentation</a>
  */
 @JsxClass
-public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Function, AutoCloseable {
+public class Window extends EventTarget implements WindowOrWorkerGlobalScope, AutoCloseable {
 
     private static final Log LOG = LogFactory.getLog(Window.class);
 
@@ -159,7 +165,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     private Screen screen_;
     private History history_;
     private Location location_;
-    private ScriptableObject console_;
     private ApplicationCache applicationCache_;
     private Selection selection_;
     private Event currentEvent_;
@@ -648,32 +653,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
-     * Returns the {@code console} property.
-     * @return the {@code console} property
-     */
-    @JsxGetter
-    public ScriptableObject getConsole() {
-        return console_;
-    }
-
-    /**
-     * Sets the {@code console}.
-     * @param console the console
-     */
-    @JsxSetter
-    public void setConsole(final ScriptableObject console) {
-        console_ = console;
-    }
-
-    /**
-     * Prints messages to the {@code console}.
+     * Logs messages to the browser's standard output (stdout). If the browser was started
+     * from a terminal, output sent to dump() will appear in the terminal.
+     * Output from dump() is not sent to the browser's developer tools console.
+     * To log to the developer tools console, use console.log().
+     *
+     * HtmlUnit always uses the WebConsole.
+     *
      * @param message the message to log
      */
     @JsxFunction({FF, FF_ESR})
     public void dump(final String message) {
-        if (console_ instanceof Console) {
-            Console.log(null, console_, new Object[] {message}, null);
-        }
+        final WebConsole console = getWebWindow().getWebClient().getWebConsole();
+        console.print(Context.getCurrentContext(), this, Level.INFO, new String[] {message}, null);
     }
 
     /**
@@ -807,12 +799,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(location_.getClass()));
         location_.initialize(this, pageToEnclose);
-
-        final Console console  = new Console();
-        console.setWebWindow(webWindow_);
-        console.setParentScope(this);
-        console.setPrototype(getPrototype(console.getClass()));
-        console_ = console;
 
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
@@ -1350,22 +1336,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        throw Context.reportRuntimeError("Window is not a function.");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Scriptable construct(final Context cx, final Scriptable scope, final Object[] args) {
-        throw Context.reportRuntimeError("Window is not a function.");
-    }
-
-    /**
      * To be called when the property detection fails in normal scenarios.
      *
      * @param name the name
@@ -1462,28 +1432,31 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
         // Null must be changed to '' for proper collection initialization.
         final String expElementName = "null".equals(name) ? "" : name;
 
-        return new HTMLCollection(page, true) {
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomElement> expElements = page.getElementsByName(expElementName);
-                final List<DomNode> result = new ArrayList<>(expElements.size());
+        final HTMLCollection coll = new HTMLCollection(page, true);
+        coll.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomElement> expElements = page.getElementsByName(expElementName);
+                    final List<DomNode> result = new ArrayList<>(expElements.size());
 
-                for (final DomElement domElement : expElements) {
-                    if (filter.matches(domElement)) {
-                        result.add(domElement);
+                    for (final DomElement domElement : expElements) {
+                        if (filter.matches(domElement)) {
+                            result.add(domElement);
+                        }
                     }
-                }
-                return result;
-            }
+                    return result;
+                });
 
-            @Override
-            protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                if ("name".equals(event.getName())) {
-                    return EffectOnCache.RESET;
-                }
-                return EffectOnCache.NONE;
-            }
-        };
+        coll.setEffectOnCacheFunction(
+                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
+                event -> {
+                    if ("name".equals(event.getName())) {
+                        return EffectOnCache.RESET;
+                    }
+                    return EffectOnCache.NONE;
+                });
+
+        return coll;
     }
 
     /**
@@ -1961,7 +1934,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Fu
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public void postMessage(final String message, final String targetOrigin, final Object transfer) {
+    public void postMessage(final Object message, final String targetOrigin, final Object transfer) {
         final WebWindow webWindow = getWebWindow();
         final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
@@ -4169,11 +4142,7 @@ class HTMLCollectionFrames extends HTMLCollection {
 
     HTMLCollectionFrames(final HtmlPage page) {
         super(page, false);
-    }
-
-    @Override
-    protected boolean isMatching(final DomNode node) {
-        return node instanceof BaseFrameElement;
+        this.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof BaseFrameElement);
     }
 
     @Override

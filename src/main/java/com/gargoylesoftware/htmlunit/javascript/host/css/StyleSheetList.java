@@ -20,6 +20,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.io.Serializable;
+import java.util.function.Predicate;
+
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
@@ -34,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
@@ -109,35 +113,29 @@ public class StyleSheetList extends HtmlUnitScriptable {
 
         if (webClient.getOptions().isCssEnabled()) {
             final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
-            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true) {
-                @Override
-                protected boolean isMatching(final DomNode node) {
-                    if (node instanceof HtmlStyle) {
-                        return true;
-                    }
-                    if (onlyActive) {
-                        return isActiveStyleSheetLink(node);
-                    }
-                    return isStyleSheetLink(node);
-                }
+            nodes_ = new HTMLCollection(document.getDomNodeOrDie(), true);
 
-                @Override
-                protected EffectOnCache getEffectOnCache(final HtmlAttributeChangeEvent event) {
-                    final HtmlElement node = event.getHtmlElement();
-                    if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
-                        return EffectOnCache.RESET;
-                    }
-                    return EffectOnCache.NONE;
-                }
+            nodes_.setEffectOnCacheFunction(
+                    (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
+                    event -> {
+                        final HtmlElement node = event.getHtmlElement();
+                        if (node instanceof HtmlLink && "rel".equalsIgnoreCase(event.getName())) {
+                            return EffectOnCache.RESET;
+                        }
+                        return EffectOnCache.NONE;
+                    });
 
-                private boolean isStyleSheetLink(final DomNode domNode) {
-                    if (domNode instanceof HtmlLink) {
-                        return ((HtmlLink) domNode).isStyleSheetLink();
-                    }
-                    return false;
-                }
-
-            };
+            nodes_.setIsMatchingPredicate(
+                    (Predicate<DomNode> & Serializable)
+                    node -> {
+                        if (node instanceof HtmlStyle) {
+                            return true;
+                        }
+                        if (onlyActive) {
+                            return isActiveStyleSheetLink(node);
+                        }
+                        return node instanceof HtmlLink && ((HtmlLink) node).isStyleSheetLink();
+                    });
         }
         else {
             nodes_ = HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());

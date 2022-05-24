@@ -181,6 +181,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private String overriddenMimeType_;
     private final boolean caseSensitiveProperties_;
     private boolean withCredentials_;
+    private boolean isSameOrigin_;
     private int timeout_;
     private boolean aborted_;
     private String responseType_;
@@ -344,18 +345,35 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         if (RESPONSE_TYPE_ARRAYBUFFER.equals(responseType_)) {
-            final NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(webResponse_.getContentLength());
+            long contentLength = webResponse_.getContentLength();
+            NativeArrayBuffer nativeArrayBuffer = new NativeArrayBuffer(contentLength);
 
             try {
-                final int bufferLength = 1;
+                final int bufferLength = Math.min(1024, (int) contentLength);
                 final byte[] buffer = new byte[bufferLength];
+                int offset = 0;
                 try (InputStream inputStream = webResponse_.getContentAsStream()) {
-                    int offset = 0;
                     int readLen;
                     while ((readLen = inputStream.read(buffer, 0, bufferLength)) != -1) {
+                        final long newLength = offset + readLen;
+                        // gzip content and the unzipped content is larger
+                        if (newLength > contentLength) {
+                            final NativeArrayBuffer expanded = new NativeArrayBuffer(newLength);
+                            System.arraycopy(nativeArrayBuffer.getBuffer(), 0,
+                                    expanded.getBuffer(), 0, (int) contentLength);
+                            contentLength = newLength;
+                            nativeArrayBuffer = expanded;
+                        }
                         System.arraycopy(buffer, 0, nativeArrayBuffer.getBuffer(), offset, readLen);
-                        offset += readLen;
+                        offset = (int) newLength;
                     }
+                }
+
+                // for small responses the gzipped content might be larger than the original
+                if (offset < contentLength) {
+                    final NativeArrayBuffer shrinked = new NativeArrayBuffer(offset);
+                    System.arraycopy(nativeArrayBuffer.getBuffer(), 0, shrinked.getBuffer(), 0, offset);
+                    nativeArrayBuffer = shrinked;
                 }
 
                 nativeArrayBuffer.setParentScope(getParentScope());
@@ -682,16 +700,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             request.setCharset(UTF_8);
             request.setRefererlHeader(containingPage.getUrl());
 
-            final URL pageRequestUrl = containingPage.getUrl();
-            if (!isSameOrigin(pageRequestUrl, fullUrl)) {
-                final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
-                        .append(pageRequestUrl.getHost());
-                if (pageRequestUrl.getPort() != -1) {
-                    origin.append(':').append(pageRequestUrl.getPort());
-                }
-                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
-            }
-
             try {
                 request.setHttpMethod(HttpMethod.valueOf(method.toUpperCase(Locale.ROOT)));
             }
@@ -700,6 +708,21 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     LOG.info("Incorrect HTTP Method '" + method + "'");
                 }
                 return;
+            }
+
+            final URL pageRequestUrl = containingPage.getUrl();
+            isSameOrigin_ = isSameOrigin(pageRequestUrl, fullUrl);
+            final boolean alwaysAddOrigin = !getBrowserVersion().hasFeature(XHR_NO_CROSS_ORIGIN_TO_ABOUT)
+                                            && HttpMethod.GET != request.getHttpMethod()
+                                            && HttpMethod.PATCH != request.getHttpMethod()
+                                            && HttpMethod.HEAD != request.getHttpMethod();
+            if (alwaysAddOrigin || !isSameOrigin_) {
+                final StringBuilder origin = new StringBuilder().append(pageRequestUrl.getProtocol()).append("://")
+                        .append(pageRequestUrl.getHost());
+                if (pageRequestUrl.getPort() != -1) {
+                    origin.append(':').append(pageRequestUrl.getPort());
+                }
+                request.setAdditionalHeader(HttpHeader.ORIGIN, origin.toString());
             }
 
             // password is ignored if no user defined
@@ -922,12 +945,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
         try {
-            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-            if (originHeaderValue != null && isPreflight()) {
+            if (!isSameOrigin_ && isPreflight()) {
                 preflighted = true;
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
 
                 // header origin
+                final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
                 preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
 
                 // header request-method
@@ -980,9 +1003,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             webResponse_.defaultCharsetUtf8();
 
             boolean allowOriginResponse = true;
-            if (originHeaderValue != null) {
+            if (!isSameOrigin_) {
                 String value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN);
-                allowOriginResponse = originHeaderValue.equals(value);
+                allowOriginResponse = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(value);
                 if (isWithCredentials()) {
                     // second step: check the allow-credentials header for true
                     value = webResponse_.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_CREDENTIALS);

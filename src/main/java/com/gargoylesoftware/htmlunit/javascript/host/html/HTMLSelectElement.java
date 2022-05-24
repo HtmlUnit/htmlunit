@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -52,7 +52,7 @@ public class HTMLSelectElement extends HTMLElement {
     private HTMLOptionsCollection optionsArray_;
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
-    private AbstractList labels_;
+    private NodeList labels_;
 
     /**
      * Creates an instance.
@@ -304,9 +304,9 @@ public class HTMLSelectElement extends HTMLElement {
      * @return the labels associated with the element
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
-    public AbstractList getLabels() {
+    public NodeList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie());
+            labels_ = new LabelsNodeList(getDomNodeOrDie());
         }
         return labels_;
     }

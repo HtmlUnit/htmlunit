@@ -57,7 +57,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.file.FileList;
@@ -82,7 +82,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class HTMLInputElement extends HTMLElement {
 
     /** "Live" labels collection; has to be a member to have equality (==) working. */
-    private AbstractList labels_;
+    private NodeList labels_;
 
     /**
      * Creates an instance.
@@ -912,9 +912,9 @@ public class HTMLInputElement extends HTMLElement {
      * @return the labels associated with the element
      */
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
-    public AbstractList getLabels() {
+    public NodeList getLabels() {
         if (labels_ == null) {
-            labels_ = new LabelsHelper(getDomNodeOrDie());
+            labels_ = new LabelsNodeList(getDomNodeOrDie());
         }
         return labels_;
     }
@@ -1009,5 +1009,23 @@ public class HTMLInputElement extends HTMLElement {
     @JsxFunction
     public void setCustomValidity(final String message) {
         getDomNodeOrDie().setCustomValidity(message);
+    }
+
+    /**
+     * Returns the value of the property {@code formnovalidate}.
+     * @return the value of this property
+     */
+    @JsxGetter
+    public boolean isFormNoValidate() {
+        return getDomNodeOrDie().isFormNoValidate();
+    }
+
+    /**
+     * Sets the value of the property {@code formnovalidate}.
+     * @param value the new value
+     */
+    @JsxSetter
+    public void setFormNoValidate(final boolean value) {
+        getDomNodeOrDie().setFormNoValidate(value);
     }
 }

@@ -26,6 +26,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * Tests the result of <code>document.createElement()</code>.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class ElementCreationTest extends WebDriverTestCase {
@@ -1662,9 +1663,9 @@ public class ElementCreationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "[object HTMLUnknownElement]",
-            CHROME = "[object HTMLDialogElement]",
-            EDGE = "[object HTMLDialogElement]")
+    @Alerts(DEFAULT = "[object HTMLDialogElement]",
+            FF_ESR = "[object HTMLUnknownElement]",
+            IE = "[object HTMLUnknownElement]")
     public void dialog() throws Exception {
         test("dialog");
     }

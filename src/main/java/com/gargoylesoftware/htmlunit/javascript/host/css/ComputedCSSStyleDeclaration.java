@@ -108,6 +108,7 @@ import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -1212,7 +1213,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final Element elem = getElement();
-        final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
+        final WebWindow webWindow = elem.getWindow().getWebWindow();
+        final int windowHeight = webWindow.getInnerHeight();
 
         if (elem instanceof HTMLBodyElement) {
             height2_ = windowHeight;
@@ -1237,8 +1239,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else if (elem.getFirstChild() == null) {
             if (node instanceof HtmlRadioButtonInput || node instanceof HtmlCheckBoxInput) {
-                final BrowserVersion browser = getBrowserVersion();
-                if (browser.hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_10)) {
+                if (webWindow.getWebClient().getBrowserVersion().hasFeature(JS_CLIENTHEIGHT_RADIO_CHECKBOX_10)) {
                     defaultHeight = 10;
                 }
                 else {
@@ -1249,7 +1250,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 defaultHeight = 20;
             }
             else if (node instanceof HtmlInput && !(node instanceof HtmlHiddenInput)) {
-                final BrowserVersion browser = getBrowserVersion();
+                final BrowserVersion browser = webWindow.getWebClient().getBrowserVersion();
                 if (browser.hasFeature(JS_CLIENTHEIGHT_INPUT_17)) {
                     defaultHeight = 17;
                 }
@@ -1275,7 +1276,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             final String fontSize = getFontSize();
-            defaultHeight = getBrowserVersion().getFontHeight(fontSize);
+            defaultHeight = webWindow.getWebClient().getBrowserVersion().getFontHeight(fontSize);
 
             if (node instanceof HtmlDivision
                     || node instanceof HtmlSpan) {
@@ -1901,7 +1902,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getPropertyValue(final String name) {
         // need to invoke the getter to take care of the default value
-        final Object property = getProperty(this, camelize(name));
+        final Object property = getProperty(this, com.gargoylesoftware.htmlunit.util.StringUtils.cssCamelize(name));
         if (property == NOT_FOUND) {
             return super.getPropertyValue(name);
         }

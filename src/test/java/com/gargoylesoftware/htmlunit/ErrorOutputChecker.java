@@ -20,8 +20,8 @@ import java.io.PrintStream;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
+import org.junit.rules.MethodRule;
+import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
 /**
@@ -34,52 +34,10 @@ import org.junit.runners.model.Statement;
  * @author Ahmed Ashour
  * @author Frank Danek
  */
-public class ErrorOutputChecker implements TestRule {
+public class ErrorOutputChecker implements MethodRule {
     private PrintStream originalErr_;
     private final ByteArrayOutputStream baos_ = new ByteArrayOutputStream();
     private static final Pattern[] PATTERNS = {
-            // Chrome
-            Pattern.compile("Starting ChromeDriver "
-                    + ExternalTest.CHROME_DRIVER_.replace(".", "\\.")
-                    + " \\(.*\\) on port \\d*\r?\n"
-                    + "Only local connections are allowed\\.\r?\n"
-                    + "Please see https://chromedriver.chromium.org/security-considerations"
-                        + " for suggestions on keeping ChromeDriver safe\\.\r?\n"
-                    + "ChromeDriver was started successfully\\.\r?\n"),
-            Pattern.compile(".*\\sorg.openqa.selenium.remote.ProtocolHandshake createSession\r?\n"),
-            Pattern.compile("INFO(RMATION)?: Detected dialect: W3C\r?\n"),
-
-            Pattern.compile("JavaScript error: , line [0-9]*: EncodingError: "
-                    + "The given encoding is not supported.\r?\n"),
-            Pattern.compile("JavaScript error: http://localhost:[0-9]*/, line [0-9]*: "
-                    + "SyntaxError: missing \\( before formal parameters\r?\n"),
-
-            // Edge
-            Pattern.compile("Starting MSEdgeDriver "
-                    + ExternalTest.EDGE_DRIVER_.replace(".", "\\.")
-                    + " \\(.*\\) on port \\d*\r?\n"
-                    + "Only local connections are allowed\\.\r?\n"
-                    + "Please see https://chromedriver.chromium.org/security-considerations"
-                        + " for suggestions on keeping MSEdgeDriver safe\\.\r?\n"
-                    + "MSEdgeDriver was started successfully\\.\r?\n"),
-
-            // FF
-            Pattern.compile("[0-9]*\\sgeckodriver\\sINFO\\sListening on 127.0.0.1:[0-9]*(\\n)*"),
-
-            Pattern.compile("[0-9]*\\smozrunner::runner\\sINFO\\sRunning command:"
-                    + ".*\\n"
-                    + "(.*\\r\\n)*"),
-
-            Pattern.compile("Unable to read VR Path Registry from .*\\r\\n"
-                    + ".*\\r\\n"),
-            Pattern.compile("JavaScript warning: .*\\r\\n"),
-
-            // ie
-            Pattern.compile("Started InternetExplorerDriver server \\(\\d\\d\\-bit\\)\r?\n"
-                    + ExternalTest.IE_DRIVER_.replace(".", "\\.") + "\r?\n"
-                    + "Listening on port \\d*\r?\n"
-                    + "Only local connections are allowed\r?\n"),
-
             // jetty
             Pattern.compile(".*Logging initialized .* to org.eclipse.jetty.util.log.StdErrLog.*\r?\n"),
 
@@ -96,12 +54,18 @@ public class ErrorOutputChecker implements TestRule {
      * {@inheritDoc}
      */
     @Override
-    public Statement apply(final Statement base, final Description description) {
-        wrapSystemErr();
+    public Statement apply(final Statement base, final FrameworkMethod method, final Object target) {
+        if (target instanceof WebDriverTestCase) {
+            final WebDriverTestCase testCase = (WebDriverTestCase) target;
+            if (testCase.useRealBrowser()) {
+                return base;
+            }
+        }
 
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
+                wrapSystemErr();
                 try {
                     base.evaluate();
                     verifyNoOutput();

@@ -24,6 +24,7 @@ import java.net.IDN;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,6 +36,7 @@ import java.util.regex.Pattern;
 import org.apache.hc.client5.http.auth.Credentials;
 import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 
+import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -94,6 +96,18 @@ public class WebRequest implements Serializable {
             setAdditionalHeader(HttpHeader.ACCEPT_ENCODING, acceptEncodingHeader);
         }
         timeout_ = -1;
+    }
+
+    /**
+     * Instantiates a {@link WebRequest} for the specified URL.
+     * @param url the target URL
+     * @param charset the charset to use
+     * @param refererUrl the url be used by the referer header
+     */
+    public WebRequest(final URL url, final Charset charset, final URL refererUrl) {
+        setUrl(url);
+        setCharset(charset);
+        setRefererlHeader(refererUrl);
     }
 
     /**
@@ -312,6 +326,71 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * Retrieves the request parameters in use. Similar to the servlet api this will
+     * work depending on the request type and check the url parameters and
+     * the body. The value is also normalized - null is converted to an empty string.
+     * @return the request parameters to use
+     */
+    public List<NameValuePair> getParameters() {
+        // developer note:
+        // this has to be in sync with
+        // com.gargoylesoftware.htmlunit.HttpWebConnection.makeHttpMethod(WebRequest, HttpClientBuilder)
+
+        if (HttpMethod.POST != getHttpMethod() && HttpMethod.PUT != getHttpMethod()
+                && HttpMethod.PATCH != getHttpMethod()) {
+
+            if (!getRequestParameters().isEmpty()) {
+                return normalize(getRequestParameters());
+            }
+
+            return normalize(HttpClientConverter.parseUrlQuery(getUrl().getQuery(), getCharset()));
+
+        }
+
+        if (getEncodingType() == FormEncodingType.URL_ENCODED && HttpMethod.POST == getHttpMethod()) {
+            if (getRequestBody() == null) {
+                return normalize(getRequestParameters());
+            }
+
+            return normalize(HttpClientConverter.parseUrlQuery(getRequestBody(), getCharset()));
+        }
+
+        if (getEncodingType() == FormEncodingType.TEXT_PLAIN  && HttpMethod.POST == getHttpMethod()) {
+            if (getRequestBody() == null) {
+                return normalize(getRequestParameters());
+            }
+
+            return Collections.emptyList();
+        }
+
+        if (FormEncodingType.MULTIPART == getEncodingType()) {
+            return normalize(getRequestParameters());
+        }
+
+        // for instance a PUT or PATCH request
+        return Collections.emptyList();
+    }
+
+    private static List<NameValuePair> normalize(final List<NameValuePair> pairs) {
+        if (pairs == null || pairs.isEmpty()) {
+            return pairs;
+        }
+
+        final List<NameValuePair> resultingPairs = new ArrayList<>();
+        for (final NameValuePair pair : pairs) {
+            String value = pair.getValue();
+            if (value == null) {
+                value = "";
+            }
+            resultingPairs.add(new NameValuePair(pair.getName(), value));
+        }
+
+        return resultingPairs;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Retrieves the request parameters to use. If set, these request parameters will overwrite any
      * request parameters which may be present in the {@link #getUrl() URL}. Should not be used in
      * combination with the {@link #setRequestBody(String) request body}.
@@ -322,6 +401,8 @@ public class WebRequest implements Serializable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Sets the request parameters to use. If set, these request parameters will overwrite any request
      * parameters which may be present in the {@link #getUrl() URL}. Should not be used in combination
      * with the {@link #setRequestBody(String) request body}.

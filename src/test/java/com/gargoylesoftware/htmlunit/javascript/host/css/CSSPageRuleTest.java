@@ -394,12 +394,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = {":first", ":first"},
-            EDGE = {":first", ":first"},
-            IE = {"", ""},
+    @HtmlUnitNYI(IE = {"", ""},
             FF = {"undefined", ":left"},
             FF_ESR = {"undefined", ":left"})
-    // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSet() throws Exception {
         final String html
@@ -435,12 +432,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = {":first", ":first"},
-            EDGE = {":first", ":first"},
-            IE = {"", ""},
+    @HtmlUnitNYI(IE = {"", ""},
             FF = {"undefined", "null"},
             FF_ESR = {"undefined", "null"})
-    // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetNull() throws Exception {
         final String html
@@ -476,12 +470,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = {":first", ":first"},
-            EDGE = {":first", ":first"},
-            IE = {"", ""},
+    @HtmlUnitNYI(IE = {"", ""},
             FF = {"undefined", ""},
             FF_ESR = {"undefined", ""})
-    // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetEmpty() throws Exception {
         final String html
@@ -555,12 +546,9 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF = "exception",
             FF_ESR = "exception")
-    @HtmlUnitNYI(CHROME = {":first", ":first"},
-            EDGE = {":first", ":first"},
-            IE = {"", ""},
+    @HtmlUnitNYI(IE = {"", ""},
             FF = {"undefined", ":LeFt"},
             FF_ESR = {"undefined", ":LeFt"})
-    // FIXME [CSSPARSER] no CSSPageRuleImpl.setSelectorText(String)
     // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
     public void selectorTextSetCaseInsensitive() throws Exception {
         final String html

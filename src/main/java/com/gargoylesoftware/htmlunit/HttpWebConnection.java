@@ -341,8 +341,11 @@ public class HttpWebConnection implements WebConnection {
         final SimpleHttpRequest httpMethod = buildHttpMethod(webRequest.getHttpMethod(), uri);
         setProxy(httpMethod, webRequest, httpClientBuilder);
 
+        // POST, PUT and PATCH
         if (StringUtils.equalsAny(httpMethod.getMethod(), Method.POST.name(), Method.PUT.name(), Method.PATCH.name())) {
-            // POST as well as PUT and PATCH
+            // developer note:
+            // this has to be in sync with
+            // com.gargoylesoftware.htmlunit.WebRequest.getRequestParameters()
 
             if (webRequest.getEncodingType()
                     == FormEncodingType.URL_ENCODED && httpMethod.getMethod().equals(Method.POST.name())) {

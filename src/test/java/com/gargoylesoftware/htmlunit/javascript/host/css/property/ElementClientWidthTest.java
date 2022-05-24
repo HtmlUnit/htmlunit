@@ -911,9 +911,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "0",
-            CHROME = "-16",
-            EDGE = "-16")
+    @Alerts("0")
     public void layer() throws Exception {
         loadPageVerifyTitle2(test("layer"));
     }
@@ -1367,7 +1365,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "22",
-            FF = "26",
+            FF = "43",
             FF_ESR = "26",
             IE = "23")
     @HtmlUnitNYI(CHROME = "0",
@@ -1600,8 +1598,8 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "166",
-            FF = "181",
+    @Alerts(DEFAULT = "168",
+            FF = "161",
             FF_ESR = "181",
             IE = "164")
     @HtmlUnitNYI(CHROME = "100",

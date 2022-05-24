@@ -30,10 +30,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.LogFactory;
@@ -250,24 +252,18 @@ public class Element extends Node {
         }
 
         final DomNode node = getDomNodeOrDie();
+        collection = new HTMLCollection(node, false);
         if ("*".equals(tagName)) {
-            collection = new HTMLCollection(node, false) {
-                @Override
-                protected boolean isMatching(final DomNode nodeToMatch) {
-                    return true;
-                }
-            };
+            collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) nodeToMatch -> true);
         }
         else {
-            collection = new HTMLCollection(node, false) {
-                @Override
-                protected boolean isMatching(final DomNode nodeToMatch) {
-                    if (caseSensitive) {
-                        return searchTagName.equals(nodeToMatch.getNodeName());
-                    }
-                    return searchTagName.equalsIgnoreCase(nodeToMatch.getNodeName());
-                }
-            };
+            collection.setIsMatchingPredicate(
+                    nodeToMatch -> {
+                        if (caseSensitive) {
+                            return searchTagName.equals(nodeToMatch.getNodeName());
+                        }
+                        return searchTagName.equalsIgnoreCase(nodeToMatch.getNodeName());
+                    });
         }
 
         elementsByTagName_.put(tagName, collection);
@@ -300,13 +296,12 @@ public class Element extends Node {
      */
     @JsxFunction
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
-        return new HTMLCollection(getDomNodeOrDie(), false) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                return ("*".equals(namespaceURI) || Objects.equals(namespaceURI, node.getNamespaceURI()))
-                        && ("*".equals(localName) || Objects.equals(localName, node.getLocalName()));
-            }
-        };
+        final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
+        elements.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> ("*".equals(namespaceURI) || Objects.equals(namespaceURI, node.getNamespaceURI()))
+                                && ("*".equals(localName) || Objects.equals(localName, node.getLocalName())));
+        return elements;
     }
 
     /**
@@ -671,26 +666,29 @@ public class Element extends Node {
         final DomElement elt = getDomNodeOrDie();
         final String[] classNames = CLASS_NAMES_SPLIT_PATTERN.split(className, 0);
 
-        return new HTMLCollection(elt, true) {
-            @Override
-            protected boolean isMatching(final DomNode node) {
-                if (!(node instanceof HtmlElement)) {
-                    return false;
-                }
-                String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
-                if (ATTRIBUTE_NOT_DEFINED == classAttribute) {
-                    return false; // probably better performance as most of elements won't have a class attribute
-                }
+        final HTMLCollection elements = new HTMLCollection(elt, true);
 
-                classAttribute = " " + classAttribute + " ";
-                for (final String aClassName : classNames) {
-                    if (!classAttribute.contains(" " + aClassName + " ")) {
+        elements.setIsMatchingPredicate(
+                (Predicate<DomNode> & Serializable)
+                node -> {
+                    if (!(node instanceof HtmlElement)) {
                         return false;
                     }
-                }
-                return true;
-            }
-        };
+                    String classAttribute = ((HtmlElement) node).getAttributeDirect("class");
+                    if (ATTRIBUTE_NOT_DEFINED == classAttribute) {
+                        return false; // probably better performance as most of elements won't have a class attribute
+                    }
+
+                    classAttribute = " " + classAttribute + " ";
+                    for (final String aClassName : classNames) {
+                        if (!classAttribute.contains(" " + aClassName + " ")) {
+                            return false;
+                        }
+                    }
+                    return true;
+                });
+
+        return elements;
     }
 
     /**

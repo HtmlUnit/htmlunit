@@ -1428,6 +1428,31 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "true")
+    @HtmlUnitNYI(CHROME = "true",
+            EDGE = "true",
+            FF = "true",
+            FF_ESR = "true")
+    public void getComputedStyleCached() throws Exception {
+        final String html = "<html><body>\n"
+            + "<div id='myDiv'></div>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var e = document.getElementById('myDiv');\n"
+            + "  var cs1 = window.getComputedStyle(e, null);\n"
+            + "  var cs2 = window.getComputedStyle(e, null);\n"
+            + "  log(cs1 === cs2);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * The reason was that "top" evaluate to WindowProxy and "Object(top)" was setting the top scope as parentScope
      * of the WindowProxy which was setting it on the Window where it should always be null.
      * @throws Exception if the test fails
@@ -1892,204 +1917,6 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                       "origin: ", "source: [object Window]", "lastEventId: "},
-            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
-                  "origin: ", "source: [object Window]", "lastEventId: undefined"})
-    public void postMessage() throws Exception {
-        final String[] expectedAlerts = getExpectedAlerts();
-        expectedAlerts[4] += "http://localhost:" + PORT;
-        setExpectedAlerts(expectedAlerts);
-
-        final String html
-            = "<html>\n"
-            + "<head></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function receiveMessage(event) {\n"
-            + "    log('type: ' + event.type);\n"
-            + "    log('bubbles: ' + event.bubbles);\n"
-            + "    log('cancelable: ' + event.cancelable);\n"
-            + "    log('data: ' + event.data);\n"
-            + "    log('origin: ' + event.origin);\n"
-            + "    log('source: ' + event.source);\n"
-            + "    log('lastEventId: ' + event.lastEventId);\n"
-            + "  }\n"
-
-            + "  window.addEventListener('message', receiveMessage, false);\n"
-            + "</script>\n"
-            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
-            + "</body></html>";
-
-        final String iframe = "<html><body><script>\n"
-            + "  top.postMessage('hello', '*');\n"
-            + "</script></body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * Test for #1589 NullPointerException because of missing context.
-     *
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("data: hello")
-    public void postMessageFromClick() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head><title>foo</title></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + "  function receiveMessage(event) {\n"
-            + "    alert('data: ' + event.data);\n"
-            + "  }\n"
-
-            + "  window.addEventListener('message', receiveMessage, false);\n"
-            + "</script>\n"
-            + "  <iframe id='myFrame' src='" + URL_SECOND + "'></iframe>\n"
-            + "</body></html>";
-
-        final String iframe = "<html><body>\n"
-            + "  <button id='clickme' onclick='top.postMessage(\"hello\", \"*\");'>Click me</a>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
-        final WebDriver driver = loadPage2(html);
-        driver.switchTo().frame("myFrame");
-        driver.findElement(By.id("clickme")).click();
-
-        verifyAlerts(driver, getExpectedAlerts());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("sync: false")
-    public void postMessageSyncOrAsync() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  var sync = true;\n"
-            + "  function receiveMessage(event) {\n"
-            + "    log('sync: ' + sync);\n"
-            + "  }\n"
-            + "  window.addEventListener('message', receiveMessage, false);\n"
-            + "</script>\n"
-            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
-            + "</body></html>";
-
-        final String iframe = "<html><body><script>\n"
-            + "  top.postMessage('hello', '*');\n"
-            + "  top.sync = false;\n"
-            + "</script></body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("posted received")
-    public void postMessage_exactURL() throws Exception {
-        postMessage(URL_FIRST.toExternalForm());
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("posted received")
-    public void postMessage_slash() throws Exception {
-        postMessage("/");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("posted")
-    public void postMessage_otherHost() throws Exception {
-        postMessage("http://127.0.0.1:" + PORT + "/");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("posted")
-    public void postMessage_otherPort() throws Exception {
-        postMessage("http://localhost:" + (PORT + 1) + "/");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("posted")
-    public void postMessage_otherProtocol() throws Exception {
-        postMessage("https://localhost:" + PORT + "/");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("exception")
-    public void postMessage_invalidTargetOrigin() throws Exception {
-        postMessage("abcdefg");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("exception")
-    public void postMessage_emptyTargetOrigin() throws Exception {
-        postMessage("");
-    }
-
-    private void postMessage(final String url) throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head></head>\n"
-            + "<body>\n"
-            + "<script>\n"
-            + "  function receiveMessage(event) {\n"
-            + "    document.title += ' received';\n"
-            + "  }\n"
-            + "  window.addEventListener('message', receiveMessage, false);\n"
-            + "</script>\n"
-            + "  <iframe src='" + URL_SECOND + "'></iframe>\n"
-            + "</body></html>";
-
-        final String iframe = "<html><body><script>\n"
-            + "  try {\n"
-            + "    top.postMessage('hello', '" + url + "');\n"
-            + "    top.document.title += ' posted';\n"
-            + "  } catch (e) {\n"
-            + "    top.document.title += ' exception';\n"
-            + "  }\n"
-            + "</script></body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, iframe);
-        final WebDriver driver = loadPage2(html);
-
-        assertTitle(driver, getExpectedAlerts()[0]);
-    }
-
-    /**
      * Regression test to reproduce a known bug.
      * @throws Exception if the test fails
      */
@@ -2479,7 +2306,7 @@ public class Window2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("exception")
+    @Alerts("exception true")
     public void constructor() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -2487,6 +2314,32 @@ public class Window2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    try {\n"
             + "      log(new Window());\n"
+            + "    } catch(e) {log('exception ' + (e instanceof TypeError));}\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Test case for {@link https://github.com/HtmlUnit/htmlunit/issues/482}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "0",
+            IE = "exception")
+    public void constructorError() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var divs = document.querySelectorAll('div');\n"
+            + "      var a = Array.from.call(window, divs);\n"
+            + "      log(a.length);\n"
             + "    } catch(e) {log('exception')}\n"
             + "  }\n"
             + "</script>\n"

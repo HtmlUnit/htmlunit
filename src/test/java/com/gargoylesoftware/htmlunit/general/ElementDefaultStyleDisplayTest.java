@@ -865,9 +865,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "block"},
-            FF = {"", "inline"},
-            FF_ESR = {"", "inline"},
+    @Alerts(DEFAULT = {"", "inline"},
             IE = {"inline", "inline"})
     public void layer() throws Exception {
         test("layer");

@@ -35,13 +35,17 @@ public class NoOpRenderingBackend implements RenderingBackend {
     private static int ID_GENERATOR_;
     private final int id_;
 
+    private static synchronized int nextId() {
+        return ID_GENERATOR_++;
+    }
+
     /**
      * Constructor.
      * @param imageWidth the width
      * @param imageHeight the height
      */
     public NoOpRenderingBackend(final int imageWidth, final int imageHeight) {
-        id_ = ID_GENERATOR_++;
+        id_ = nextId();
     }
 
     /**

@@ -18,11 +18,15 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
+import java.util.zip.GZIPOutputStream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,6 +48,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Tries;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -983,6 +988,227 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void originHeaderGet() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('get', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§",
+            IE = "null")
+    public void originHeaderPost() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('post', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§",
+            IE = "null")
+    public void originHeaderPut() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('put', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§",
+            IE = "null")
+    public void originHeaderDelete() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('delete', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    @NotYetImplemented
+    public void originHeaderPatch() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('patch', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(URL_FIRST, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void originHeaderTrace() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('trace', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(URL_FIRST, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("null")
+    public void originHeaderHead() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('head', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
+     * Tests that the <tt>origin</tt> header is set correctly.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "§§URL§§",
+            IE = "null")
+    public void originHeaderOptions() throws Exception {
+        final String html = "<html><head><script>\n"
+            + "function test() {\n"
+            + "  req = new XMLHttpRequest();\n"
+            + "  req.open('options', 'foo.xml', false);\n"
+            + "  req.send('');\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'></body></html>";
+
+        final URL urlPage2 = new URL(URL_FIRST, "foo.xml");
+        getMockWebConnection().setResponse(urlPage2, "<foo/>\n", MimeType.TEXT_XML);
+        expandExpectedAlertsVariables(urlPage2.getProtocol() + "://" + urlPage2.getHost() + ":" + urlPage2.getPort());
+        loadPage2(html);
+
+        final WebRequest request = getMockWebConnection().getLastWebRequest();
+        assertEquals(urlPage2, request.getUrl());
+        assertEquals(getExpectedAlerts()[0], "" + request.getAdditionalHeaders().get(HttpHeader.ORIGIN));
+        assertEquals(null, request.getAdditionalHeaders().get(HttpHeader.ACCESS_CONTROL_ALLOW_ORIGIN));
+    }
+
+    /**
      * Test for bug
      * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1784330&group_id=47038">issue 515</a>.
      * @throws Exception if an error occurs
@@ -1047,8 +1273,8 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]"},
-            IE = {"null", "myID", "blah", "span", "[object XMLDocument]"})
+    @Alerts(DEFAULT = {"[object Element]", "myID", "blah", "span", "[object XMLDocument]", "[object XMLDocument]"},
+            IE = {"null", "myID", "blah", "span", "[object XMLDocument]", "-"})
     public void responseXML_getElementById2() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1068,6 +1294,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "          log(request.responseXML.getElementById('myID').innerHTML);\n"
             + "          log(request.responseXML.getElementById('myID').tagName);\n"
             + "          log(request.responseXML.getElementById('myID').ownerDocument);\n"
+            + "          if (request.responseXML.getElementById('myID').getRootNode) {\n"
+            + "            log(request.responseXML.getElementById('myID').getRootNode());\n"
+            + "          } else log('-');\n"
             + "        } else  {\n"
             + "          log('responseXML.getElementById not available');\n"
             + "        }\n"
@@ -1096,8 +1325,10 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"[object Element]", "[object Element]", "[object HTMLBodyElement]",
-                "[object HTMLSpanElement]", "[object XMLDocument]", "undefined"})
+    @Alerts(DEFAULT = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                       "[object HTMLSpanElement]", "[object XMLDocument]", "[object XMLDocument]", "undefined"},
+            IE = {"[object Element]", "[object Element]", "[object HTMLBodyElement]",
+                  "[object HTMLSpanElement]", "[object XMLDocument]", "-", "undefined"})
     public void responseXML_getElementById() throws Exception {
         // TODO [IE]SINGLE-VS-BULK test runs when executed as single but breaks as bulk
         shutDownRealIE();
@@ -1118,6 +1349,9 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
             + "        if (doc.getElementById) {\n"
             + "          log(doc.getElementById('out'));\n"
             + "          log(doc.getElementById('out').ownerDocument);\n"
+            + "          if (doc.getElementById('out').getRootNode) {\n"
+            + "            log(doc.getElementById('out').getRootNode());\n"
+            + "          } else log('-');\n"
             + "        }\n"
             + "        log(doc.documentElement.childNodes[1].xml);\n"
             + "      }\n"
@@ -2617,6 +2851,117 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
         verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "36"})
+    public void responseResponseTypeArrayBufferGzipIncrease() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blah</content>\n"
+            + "</xml>";
+
+        final byte[] bytes = xml.getBytes(UTF_8);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final GZIPOutputStream gout = new GZIPOutputStream(bos);
+        gout.write(bytes);
+        gout.finish();
+
+        final byte[] encoded = bos.toByteArray();
+        assertTrue(encoded.length > xml.length());
+
+        final List<NameValuePair> headers = new LinkedList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setResponse(URL_SECOND, encoded, 200, "OK", MimeType.TEXT_XML, headers);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    @Test
+    @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "72"})
+    public void responseResponseTypeArrayBufferGzipDecrease() throws Exception {
+        final String html =
+              "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      var xhr;\n"
+            + "      function test() {\n"
+            + "        xhr = new XMLHttpRequest();\n"
+            + "        log(xhr.responseText);\n"
+
+            + "        xhr.open('GET', '" + URL_SECOND + "', true);\n"
+            + "        xhr.responseType = 'arraybuffer';\n"
+            + "        log(xhr.responseType);\n"
+
+            + "        xhr.onreadystatechange = onStateChange;\n"
+            + "        xhr.send('');\n"
+            + "      }\n"
+
+            + "      function onStateChange(e) {\n"
+            + "        if (xhr.readyState == 4) {\n"
+            + "          try {\n"
+            + "            log(xhr.response);\n"
+            + "            log(xhr.response.byteLength);\n"
+            + "          } catch(ex) { log('exception'); }\n"
+            + "        }\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String xml =
+              "<xml>\n"
+            + "<content>blahblahblahblahblahblahblahblahblahblah</content>\n"
+            + "</xml>";
+
+        final byte[] bytes = xml.getBytes(UTF_8);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final GZIPOutputStream gout = new GZIPOutputStream(bos);
+        gout.write(bytes);
+        gout.finish();
+
+        final byte[] encoded = bos.toByteArray();
+        assertTrue(encoded.length < xml.length());
+
+        final List<NameValuePair> headers = new LinkedList<NameValuePair>();
+        headers.add(new NameValuePair("Content-Encoding", "gzip"));
+        getMockWebConnection().setResponse(URL_SECOND, encoded, 200, "OK", MimeType.TEXT_XML, headers);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
 
     @Test
     @Alerts({"", "arraybuffer", "[object ArrayBuffer]", "0"})

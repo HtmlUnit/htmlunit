@@ -30,7 +30,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.Cache;
 import com.gargoylesoftware.htmlunit.javascript.host.CacheStorage;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRect;
 import com.gargoylesoftware.htmlunit.javascript.host.ClientRectList;
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.External;
 import com.gargoylesoftware.htmlunit.javascript.host.FontFace;
@@ -137,6 +136,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSSupportsRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CaretPosition;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheet;
@@ -166,7 +166,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentType;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.IdleDeadline;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationObserver;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.MutationRecord;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
@@ -506,7 +505,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CanvasGradient.class, CanvasPattern.class, CanvasRenderingContext2D.class, CaretPosition.class,
         CDATASection.class, ChannelMergerNode.class, ChannelSplitterNode.class, CharacterData.class, ClientRect.class,
         ClientRectList.class, ClipboardEvent.class,
-        CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class, Console.class,
+        CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class,
         ConstantSourceNode.class,
         ConvolverNode.class, Coordinates.class, Credential.class, CredentialsContainer.class, Crypto.class,
         CryptoKey.class, CSS.class, CSS2Properties.class, CSSConditionRule.class,

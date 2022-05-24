@@ -262,11 +262,12 @@ public class EventTarget extends HtmlUnitScriptable {
     @JsxFunction
     public boolean dispatchEvent(final Event event) {
         event.setTarget(this);
-        final DomElement element = (DomElement) getDomNodeOrNull();
+
         ScriptResult result = null;
-        if (event.getType().equals(MouseEvent.TYPE_CLICK)) {
+        final DomNode domNode = getDomNodeOrNull();
+        if (event.getType().equals(MouseEvent.TYPE_CLICK) && (domNode instanceof DomElement)) {
             try {
-                element.click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
+                ((DomElement) domNode).click(event, event.isShiftKey(), event.isCtrlKey(), event.isAltKey(), true);
             }
             catch (final IOException e) {
                 throw Context.reportRuntimeError("Error calling click(): " + e.getMessage());

@@ -175,4 +175,12 @@ public class DocumentFragment extends Node {
         }
         return null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getRootNode() {
+        return this;
+    }
 }

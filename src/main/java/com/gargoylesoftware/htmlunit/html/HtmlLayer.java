@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "layer".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlLayer extends HtmlElement {
 
@@ -40,4 +41,11 @@ public class HtmlLayer extends HtmlElement {
         super(qualifiedName, page, attributes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DisplayStyle getDefaultStyleDisplay() {
+        return DisplayStyle.INLINE;
+    }
 }

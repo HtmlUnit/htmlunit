@@ -744,9 +744,9 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CLIENTWIDTH_RADIO_CHECKBOX_10,
 
-    /** Is window can be used as Console. */
+    /** Console has timeStamp() method. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_CONSOLE_HANDLE_WINDOW,
+    JS_CONSOLE_TIMESTAMP,
 
     /** item is enumerated before length property of CSSRuleList. */
     @BrowserFeature({FF, FF_ESR})

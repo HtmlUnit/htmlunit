@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -63,7 +64,7 @@ public final class DOMStringMap extends HtmlUnitScriptable {
     public Object get(final String name, final Scriptable start) {
         final HtmlElement e = (HtmlElement) getDomNodeOrNull();
         if (e != null) {
-            final String value = e.getAttribute("data-" + decamelize(name));
+            final String value = e.getAttribute("data-" + StringUtils.cssDeCamelize(name));
             if (ATTRIBUTE_NOT_DEFINED != value) {
                 return value;
             }
@@ -82,34 +83,8 @@ public final class DOMStringMap extends HtmlUnitScriptable {
         else {
             final HtmlElement e = (HtmlElement) getDomNodeOrNull();
             if (e != null) {
-                e.setAttribute("data-" + decamelize(name), Context.toString(value));
+                e.setAttribute("data-" + StringUtils.cssDeCamelize(name), Context.toString(value));
             }
         }
-    }
-
-    /**
-     * Transforms the specified string from camel-cased (e.g. <tt>fontSize</tt>)
-     * to delimiter-separated (e.g. <tt>font-size</tt>).
-     * to camel-cased .
-     * @param string the string to decamelize
-     * @return the transformed string
-     * @see com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration#camelize
-     */
-    public static String decamelize(final String string) {
-        if (string == null || string.isEmpty()) {
-            return string;
-        }
-
-        final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < string.length(); i++) {
-            final char ch = string.charAt(i);
-            if (Character.isUpperCase(ch)) {
-                builder.append('-').append(Character.toLowerCase(ch));
-            }
-            else {
-                builder.append(ch);
-            }
-        }
-        return builder.toString();
     }
 }

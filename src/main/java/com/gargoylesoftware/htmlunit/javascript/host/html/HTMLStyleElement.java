@@ -21,6 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.htmlunit.Cache;
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -69,11 +70,11 @@ public class HTMLStyleElement extends HTMLElement {
         final String uri = getDomNodeOrDie().getPage().getWebResponse().getWebRequest()
                 .getUrl().toExternalForm();
         if (cached != null) {
-            sheet_ = new CSSStyleSheet(this, window, cached, uri);
+            sheet_ = new CSSStyleSheet(this, window, new CssStyleSheet(style, cached, uri));
         }
         else {
             sheet_ = new CSSStyleSheet(this, css, uri);
-            cache.cache(css, sheet_.getWrappedSheet());
+            cache.cache(css, sheet_.getCssStyleSheet().getWrappedSheet());
         }
 
         return sheet_;

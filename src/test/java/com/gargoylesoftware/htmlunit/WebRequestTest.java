@@ -235,4 +235,186 @@ public class WebRequestTest {
         final WebRequest request = new WebRequest(url);
         assertEquals(url.toExternalForm(), request.getUrl().toExternalForm());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersNone() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        assertEquals(0, request.getParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromUrlGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("u", request.getParameters().get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromUrlKeyEqualsOnlyGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=");
+        final WebRequest request = new WebRequest(url);
+
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("", request.getParameters().get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromUrlKeyOnlyGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x");
+        final WebRequest request = new WebRequest(url);
+
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("", request.getParameters().get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromRequestParametersGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+
+        final List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+        request.setRequestParameters(pairs);
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("u", request.getParameters().get(0).getValue());
+
+        pairs.add(new NameValuePair("hello", "world"));
+        assertEquals(1, request.getParameters().size());
+        assertEquals("hello", request.getParameters().get(0).getName());
+        assertEquals("world", request.getParameters().get(0).getValue());
+
+        // test for our internal conversation
+        String query = URLEncodedUtils.
+                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        assertEquals("http://localhost/test?hello=world", UrlUtils.toURI(url, query).toString());
+
+        pairs.add(new NameValuePair("empty", ""));
+        assertEquals(2, request.getParameters().size());
+        assertEquals("empty", request.getParameters().get(1).getName());
+        assertEquals("", request.getParameters().get(1).getValue());
+
+        // test for our internal conversation
+        query = URLEncodedUtils.
+                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        assertEquals("http://localhost/test?hello=world&empty=", UrlUtils.toURI(url, query).toString());
+
+        pairs.add(new NameValuePair("null", null));
+        assertEquals(3, request.getParameters().size());
+        assertEquals("null", request.getParameters().get(2).getName());
+        assertEquals("", request.getParameters().get(2).getValue());
+
+        // test for our internal conversation
+        query = URLEncodedUtils.
+                format(HttpClientConverter.nameValuePairsToHttpClient(pairs), StandardCharsets.UTF_8);
+        assertEquals("http://localhost/test?hello=world&empty=&null", UrlUtils.toURI(url, query).toString());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromUrlPost() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+
+        assertEquals(0, request.getParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getParametersFromUrlEncodedBodyPost() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+        request.setEncodingType(FormEncodingType.URL_ENCODED);
+        request.setRequestBody("x=u");
+
+        assertEquals(1, request.getParameters().size());
+        assertEquals("x", request.getParameters().get(0).getName());
+        assertEquals("u", request.getParameters().get(0).getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersNone() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+
+        // parameters are not parsed from the url
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlKeyOnlyGet() throws Exception {
+        final URL url = new URL("http://localhost/test?x=");
+        final WebRequest request = new WebRequest(url);
+
+        // parameters are not parsed from the url
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlPost() throws Exception {
+        final URL url = new URL("http://localhost/test?x=u");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+
+        assertEquals(0, request.getRequestParameters().size());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getRequestParametersFromUrlEncodedBodyPost() throws Exception {
+        final URL url = new URL("http://localhost/test");
+        final WebRequest request = new WebRequest(url);
+        request.setHttpMethod(HttpMethod.POST);
+        request.setEncodingType(FormEncodingType.URL_ENCODED);
+        request.setRequestBody("x=u");
+
+        assertEquals(0, request.getRequestParameters().size());
+    }
 }

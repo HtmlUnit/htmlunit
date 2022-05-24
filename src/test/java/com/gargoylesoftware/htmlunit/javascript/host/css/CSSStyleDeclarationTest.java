@@ -3653,4 +3653,31 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception true")
+    public void ctor() throws Exception {
+        final String html =
+                "<html>\n"
+                + "</head>\n"
+                + "  <style type='text/css'>div {position: absolute;}</style>\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "  <div id='tester'></div>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    try {"
+                + "      var c = new CSSStyleDeclaration();\n"
+                + "      log(c);\n"
+                + "    } catch(e) {\n"
+                + "      log('exception ' + (e instanceof TypeError));\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

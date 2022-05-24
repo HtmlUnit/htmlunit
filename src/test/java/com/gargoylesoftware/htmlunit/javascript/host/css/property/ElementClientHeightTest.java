@@ -1728,10 +1728,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "32",
+    @Alerts(DEFAULT = "34",
             FF = "51",
-            FF_ESR = "51",
-            IE = "34")
+            FF_ESR = "51")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
             FF = "18",

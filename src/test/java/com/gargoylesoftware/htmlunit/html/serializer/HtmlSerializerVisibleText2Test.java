@@ -1822,6 +1822,15 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         getVisibleTextFormatedAfterTyping("<p id='tester'>x<input id='inpt' type='number' value=''/>y</p>", "ab");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("demo")
+    public void getVisibleEm() throws Exception {
+        getVisibleTextFormated("<em id='tester'>demo</em>");
+    }
+
     private void getVisibleTextFormatedAfterTyping(final String htmlTesterSnipped,
                         final String... typed) throws Exception {
         final String htmlContent

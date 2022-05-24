@@ -413,4 +413,32 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
 
         assertTitle(driver, getExpectedAlerts()[0]);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"false", "false", "true", "false"})
+    public void formNoValidate() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var b = document.createElement('button');\n"
+            + "    log(b.formNoValidate);\n"
+
+            + "    b.formNoValidate = '';\n"
+            + "    log(b.formNoValidate);\n"
+
+            + "    b.formNoValidate = 'yes';\n"
+            + "    log(b.formNoValidate);\n"
+
+            + "    b.removeAttribute('formNoValidate');\n"
+            + "    log(b.formNoValidate);\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

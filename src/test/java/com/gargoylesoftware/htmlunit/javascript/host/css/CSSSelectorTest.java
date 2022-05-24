@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
@@ -1455,12 +1456,92 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  log(found[0].id);\n"
             + "}\n"
             + "</script></head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input id='id1'>\n"
-            + "  <input id='id2'>\n"
+            + "<body onload='setTimeout(test, 10);'>\n"
+            + "  <form id='id0'>\n"
+            + "    <input id='id1'>\n"
+            + "    <input id='id2'>\n"
+            + "  </form>\n"
             + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined",
+                       "4", "[object HTMLHtmlElement]", "[object HTMLBodyElement]",
+                       "[object HTMLFormElement]", "id0",
+                       "[object HTMLInputElement]", "id2"},
+            IE = {})
+    public void focusWithin() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  found = document.querySelectorAll(':focus-within');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "\n"
+            + "  document.getElementById('id2').focus();\n"
+            + "\n"
+            + "  found = document.querySelectorAll(':focus-within');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "  log(found[1]);\n"
+            + "  log(found[2]);\n"
+            + "  log(found[2].id);\n"
+            + "  log(found[3]);\n"
+            + "  log(found[3].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='setTimeout(test, 10);'>\n"
+            + "  <form id='id0'>\n"
+            + "    <input id='id1'>\n"
+            + "    <input id='id2'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "undefined", "1", "[object HTMLInputElement]", "id2"},
+            IE = {})
+    public void focusVisible() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  found = document.querySelectorAll(':focus-visible');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "\n"
+            + "  document.getElementById('id2').focus();\n"
+            + "\n"
+            + "  found = document.querySelectorAll(':focus-visible');\n"
+            + "  log(found.length);\n"
+            + "  log(found[0]);\n"
+            + "  log(found[0].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='setTimeout(test, 10);'>\n"
+            + "  <form id='id0'>\n"
+            + "    <input id='id1'>\n"
+            + "    <input id='id2'>\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -1971,6 +2052,30 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"exception", "exception", "exception"})
+    @HtmlUnitNYI(IE = {"null", "exception", "null"})
+    public void focusWithinEmptyDetached() throws Exception {
+        emptyAndDetached("*:focus-within");
+        emptyAndDetached(":focus-within");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"null", "null", "null"},
+            IE = {"exception", "exception", "exception"})
+    @HtmlUnitNYI(IE = {"null", "exception", "null"})
+    public void focusVisibleEmptyDetached() throws Exception {
+        emptyAndDetached("*:focus-visible");
+        emptyAndDetached(":focus-visible");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"null", "null", "null"})
     public void hoverEmptyDetached() throws Exception {
         emptyAndDetached("*:hover");
@@ -2246,6 +2351,35 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
             + "  } catch(e) {log('exception ' + e)}\n"
             + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"exception", "exception"})
+    public void querySelector_invalid() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    log(document.querySelectorAll('#foo > :not(:first)'));\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "  try {\n"
+            + "    log(document.querySelector('#foo > :not(:first)'));\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<ul id='foo'>\n"
+            + "  <li id='li1'></li>\n"
+            + "  <li id='li2'></li>\n"
+            + "  <li id='li3'></li>\n"
+            + "</ul>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }

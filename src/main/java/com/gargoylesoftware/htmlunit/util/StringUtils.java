@@ -15,6 +15,8 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -48,6 +50,8 @@ public final class StringUtils {
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*,"
                                 + "\\s*((0|[1-9]\\d?|100)(.\\d*)?)%\\s*\\)");
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
+
+    private static final Map<String, String> CamelizeCache_ = new HashMap<>();
 
     /**
      * Disallow instantiation of this class.
@@ -314,5 +318,72 @@ public final class StringUtils {
      */
     public static String sanitizeForFileName(final String toSanitize) {
         return ILLEGAL_FILE_NAME_CHARS.matcher(toSanitize).replaceAll("_");
+    }
+
+    /**
+     * Transforms the specified string from delimiter-separated (e.g. <tt>font-size</tt>)
+     * to camel-cased (e.g. <tt>fontSize</tt>).
+     * @param string the string to camelize
+     * @return the transformed string
+     */
+    public static String cssCamelize(final String string) {
+        if (string == null) {
+            return null;
+        }
+
+        String result = CamelizeCache_.get(string);
+        if (null != result) {
+            return result;
+        }
+
+        // not found in CamelizeCache_; convert and store in cache
+        final int pos = string.indexOf('-');
+        if (pos == -1 || pos == string.length() - 1) {
+            // cache also this strings for performance
+            CamelizeCache_.put(string, string);
+            return string;
+        }
+
+        final StringBuilder builder = new StringBuilder(string);
+        builder.deleteCharAt(pos);
+        builder.setCharAt(pos, Character.toUpperCase(builder.charAt(pos)));
+
+        int i = pos + 1;
+        while (i < builder.length() - 1) {
+            if (builder.charAt(i) == '-') {
+                builder.deleteCharAt(i);
+                builder.setCharAt(i, Character.toUpperCase(builder.charAt(i)));
+            }
+            i++;
+        }
+        result = builder.toString();
+        CamelizeCache_.put(string, result);
+
+        return result;
+    }
+
+    /**
+     * Transforms the specified string from camel-cased (e.g. <tt>fontSize</tt>)
+     * to delimiter-separated (e.g. <tt>font-size</tt>).
+     * to camel-cased .
+     * @param string the string to decamelize
+     * @return the transformed string
+     */
+    public static String cssDeCamelize(final String string) {
+        if (string == null || string.isEmpty()) {
+            return string;
+        }
+
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < string.length(); i++) {
+            final char ch = string.charAt(i);
+            if (Character.isUpperCase(ch)) {
+                builder.append('-').append(Character.toLowerCase(ch));
+            }
+            else {
+                builder.append(ch);
+            }
+        }
+        return builder.toString();
     }
 }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_FETCH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_API_PROXY;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
@@ -64,6 +65,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.PropertyInfo;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
+import com.gargoylesoftware.htmlunit.javascript.host.ConsoleCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.DateCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.NumberCustom;
 import com.gargoylesoftware.htmlunit.javascript.host.Reflect;
@@ -80,6 +82,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.NativeConsole;
 import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
 import net.sourceforge.htmlunit.corejs.javascript.Script;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
@@ -454,6 +457,12 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         configureRhino(webClient, browserVersion, window);
 
+        // only for window / IE
+        if (!browserVersion.hasFeature(JS_CONSOLE_TIMESTAMP)) {
+            final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(window, "console");
+            ScriptableObject.defineProperty(window, "Console", console, ScriptableObject.DONTENUM);
+        }
+
         window.setPrototypes(prototypes, prototypesPerJSName);
         window.initialize(webWindow, page);
 
@@ -469,6 +478,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public static void configureRhino(final WebClient webClient,
             final BrowserVersion browserVersion, final HtmlUnitScriptable scriptable) {
+
+        NativeConsole.init(scriptable, false, webClient.getWebConsole());
+        if (browserVersion.hasFeature(JS_CONSOLE_TIMESTAMP)) {
+            final ScriptableObject console = (ScriptableObject) ScriptableObject.getProperty(scriptable, "console");
+            console.defineFunctionProperties(new String[] {"timeStamp"}, ConsoleCustom.class, ScriptableObject.DONTENUM);
+        }
+
         // Rhino defines too much methods for us, particularly since implementation of ECMAScript5
         final ScriptableObject stringPrototype = (ScriptableObject) ScriptableObject.getClassPrototype(scriptable, "String");
         deleteProperties(stringPrototype, "equals", "equalsIgnoreCase", "toSource");

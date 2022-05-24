@@ -87,16 +87,51 @@ public class DomNode2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts({"true", "true", "true"})
+    @Alerts({"true", "true", "true", "true"})
     public void ownerDocument() throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      log(document == document.body.ownerDocument);\n"
-            + "      log(document == document.getElementById('foo').ownerDocument);\n"
-            + "      log(document == document.body.firstChild.ownerDocument);\n"
+            + "      log(document === document.body.ownerDocument);\n"
+            + "      log(document === document.getElementById('foo').ownerDocument);\n"
+            + "      log(document === document.body.firstChild.ownerDocument);\n"
+
+            + "      var div = document.createElement('div');"
+            + "      log(document === div.ownerDocument);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>bla\n"
+            + "<div id='foo'>bla</div>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "true", "true", "true"},
+            IE = "-")
+    public void getRootNode() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (!document.body.getRootNode) {\n"
+            + "        log('-'); return;\n"
+            + "      }\n"
+            + "      log(document === document.body.getRootNode());\n"
+            + "      log(document === document.getElementById('foo').getRootNode());\n"
+            + "      log(document === document.body.firstChild.getRootNode());\n"
+
+            + "      var div = document.createElement('div');"
+            + "      log(div.getRootNode() === div);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"

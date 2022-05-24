@@ -24,6 +24,7 @@ import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterab
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ieNotIterable;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,7 +40,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public final class StyleAttributes {
+public final class StyleAttributes implements Serializable {
     private static final Map<String, Definition> styles_ = new HashMap<>();
 
     static {
@@ -299,6 +300,9 @@ public final class StyleAttributes {
         /** The style property {@code background-size}. */
         BACKGROUND_SIZE_("background-size", "background-size", ff("auto")),
 
+        /** The style property {@code basePalette}. */
+        BASE_PALETTE("basePalette", "base-palette", chromeAndEdge("")),
+
         /** The style property {@code baselineShift}. */
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie("baseline"),
                 chromeAndEdge("0px")),
@@ -307,7 +311,7 @@ public final class StyleAttributes {
         BEHAVIOR("behavior", "behavior"),
 
         /** The style property {@code blockSize}. */
-        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("322px"),
+        BLOCK_SIZE("blockSize", "block-size", chromeAndEdge("324px"),
                 ff("345px")),
 
         /** The style property {@code block-size}. */
@@ -1121,6 +1125,9 @@ public final class StyleAttributes {
         /** The style property {@code font-optical-sizing}. */
         FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
 
+        /** The style property {@code fontPalette}. */
+        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdge("normal")),
+
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),
 
@@ -1344,6 +1351,12 @@ public final class StyleAttributes {
 
         /** The style property {@code height}. */
         HEIGHT("height", "height", chromeAndEdge(""), ff(""), ie("")),
+
+        /** The style property {@code hyphenateCharacter}. */
+        HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ffLatest("auto")),
+
+        /** The style property {@code hyphenate-character}. */
+        HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ffLatest("auto")),
 
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff("manual"), chromeAndEdge("manual")),
@@ -2576,6 +2589,9 @@ public final class StyleAttributes {
         /** The style property {@code overflow-y}. */
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
+        /** The style property {@code overrideColors}. */
+        OVERRIDE_COLOR("overrideColors", "override-colors", chromeAndEdge("")),
+
         /** The style property {@code overscrollBehavior}. */
         OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chromeAndEdge("auto"),
                 ffEsr(""), ffLatest("auto")),
@@ -2720,7 +2736,7 @@ public final class StyleAttributes {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("622px 172.5px")),
@@ -3399,7 +3415,7 @@ public final class StyleAttributes {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 161px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("622px 172.5px")),
@@ -4025,7 +4041,7 @@ public final class StyleAttributes {
         WEBKIT_LOCALE("webkitLocale", "webkit-locale", chromeAndEdge("auto")),
 
         /** The style property {@code webkitLogicalHeight}. */
-        WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("322px")),
+        WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("324px")),
 
         /** The style property {@code webkitLogicalWidth}. */
         WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chromeAndEdge("1240px")),
@@ -4204,7 +4220,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                chromeAndEdge("620px 161px"), ff("622px 172.5px")),
+                chromeAndEdge("620px 162px"), ff("622px 172.5px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
@@ -4335,7 +4351,7 @@ public final class StyleAttributes {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                chromeAndEdge("620px 161px"), ff("622px 172.5px")),
+                chromeAndEdge("620px 162px"), ff("622px 172.5px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",

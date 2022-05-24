@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import java.util.List;
 
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -27,8 +26,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for <a href="https://htmx.org/">htmx</a>.
@@ -36,20 +33,10 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmxTest extends WebDriverTestCase {
+public abstract class HtmxTest extends WebDriverTestCase {
 
-    /**
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "passes:412failures:0",
-            IE = "passes:17failures:396")
-    @HtmlUnitNYI(CHROME = "passes:411failures:1",
-            EDGE = "passes:411failures:1",
-            FF = "passes:411failures:1",
-            FF_ESR = "passes:411failures:1")
-    public void htmx() throws Exception {
-        startWebServer("src/test/resources/libraries/htmx/htmx-1.6.1", null, null);
+    protected void htmx(final String subDir) throws Exception {
+        startWebServer("src/test/resources/libraries/htmx/" + subDir, null, null);
 
         final long runTime = 42 * DEFAULT_WAIT_TIME;
         final long endTime = System.currentTimeMillis() + runTime;

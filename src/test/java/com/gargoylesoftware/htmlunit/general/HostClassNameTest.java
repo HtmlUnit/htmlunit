@@ -3436,7 +3436,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function HTMLDialogElement() { [native code] }",
-            EDGE = "function HTMLDialogElement() { [native code] }")
+            EDGE = "function HTMLDialogElement() { [native code] }",
+            FF = "function HTMLDialogElement() {\n    [native code]\n}")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
     }
@@ -5461,7 +5462,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.MediaList}.
      *
      * @throws Exception if an error occurs
      */

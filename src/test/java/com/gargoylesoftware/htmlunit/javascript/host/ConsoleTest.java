@@ -28,9 +28,10 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
- * Tests for {@link Console}.
+ * Tests for Console.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
@@ -134,8 +135,32 @@ public class ConsoleTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    @HtmlUnitNYI(IE = "true")
+    public void windowProperty() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    var x = Object.getOwnPropertyNames(window).indexOf('console');\n"
+            + "    log(x >= 0);\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "success",
             IE = "exception")
+    @HtmlUnitNYI(IE = "success")
     public void fromWindow() throws Exception {
         final String html
             = "<html>\n"
@@ -251,7 +276,7 @@ public class ConsoleTest extends WebDriverTestCase {
             = "<html>\n"
             + "<body>\n"
             + "<script>\n"
-            + "  number = 1;\n"
+            + "  var number = 1;\n"
             + "  console.assert(number % 2 === 0, {number: number, errorMsg: 'the # is not even'});\n"
             + "</script>\n"
             + "</body></html>";
@@ -266,7 +291,7 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         assertTrue(logEntry.getMessage(), logEntry.getMessage()
-                .contains("Assertion failed: ({number: 1.0, errorMsg: \"the # is not even\"})"));
+                .contains("Assertion failed: {\"number\":1,\"errorMsg\":\"the # is not even\"}"));
     }
 
     /**
@@ -294,7 +319,7 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         assertTrue(logEntry.getMessage(), logEntry.getMessage()
-                .contains("Assertion failed: ({number: 1.0}) ({errorMsg: \"the # is not even\"})"));
+                .contains("Assertion failed: {\"number\":1} {\"errorMsg\":\"the # is not even\"}"));
     }
 
     /**
@@ -354,12 +379,10 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         final String logMsg = logEntry.getMessage();
-        System.out.println(logMsg);
         assertTrue(logMsg, logMsg
                 .matches("bar\\(\\)@script in http.*:6\\n"
                         + "foo\\(\\)@script in http.*:8\\n"
-                        + "@script in http.*:10\\n"
-                        + ".*"));
+                        + "@script in http.*:10"));
     }
 
     /**
@@ -389,7 +412,6 @@ public class ConsoleTest extends WebDriverTestCase {
 
         final LogEntry logEntry = logEntryList.get(0);
         final String logMsg = logEntry.getMessage();
-        System.out.println(logMsg);
         assertTrue(logMsg, logMsg.contains("he ho"));
     }
 }

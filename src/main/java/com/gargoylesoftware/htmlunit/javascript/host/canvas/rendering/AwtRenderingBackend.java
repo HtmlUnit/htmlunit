@@ -234,13 +234,17 @@ public class AwtRenderingBackend implements RenderingBackend {
         knownColors.put("rebeccapurple", Color.decode("#663399"));
     }
 
+    private static synchronized int nextId() {
+        return ID_GENERATOR_++;
+    }
+
     /**
      * Constructor.
      * @param imageWidth the width
      * @param imageHeight the height
      */
     public AwtRenderingBackend(final int imageWidth, final int imageHeight) {
-        id_ = ID_GENERATOR_++;
+        id_ = nextId();
         if (LOG.isDebugEnabled()) {
             LOG.debug("[" + id_ + "] AwtRenderingBackend(" + imageWidth + ", " + imageHeight + ")");
         }

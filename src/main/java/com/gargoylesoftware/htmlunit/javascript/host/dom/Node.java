@@ -22,8 +22,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -497,17 +499,17 @@ public class Node extends EventTarget {
     public NodeList getChildNodes() {
         if (childNodes_ == null) {
             final DomNode node = getDomNodeOrDie();
-            childNodes_ = new NodeList(node, false) {
-                @Override
-                protected List<DomNode> computeElements() {
-                    final List<DomNode> response = new ArrayList<>();
-                    for (final DomNode child : node.getChildren()) {
-                        response.add(child);
-                    }
+            childNodes_ = new NodeList(node, false);
+            childNodes_.setElementsSupplier(
+                    (Supplier<List<DomNode>> & Serializable)
+                    () -> {
+                        final List<DomNode> response = new ArrayList<>();
+                        for (final DomNode child : node.getChildren()) {
+                            response.add(child);
+                        }
 
-                    return response;
-                }
-            };
+                        return response;
+                    });
         }
         return childNodes_;
     }
@@ -597,6 +599,22 @@ public class Node extends EventTarget {
             return ((SgmlPage) document).getScriptableObject();
         }
         return null;
+    }
+
+    /**
+     * Returns the owner document.
+     * @return the document
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public Object getRootNode() {
+        Node parent = this;
+        while (parent != null) {
+            if (parent instanceof Document || parent instanceof DocumentFragment) {
+                return parent;
+            }
+            parent = parent.getParent();
+        }
+        return this;
     }
 
     /**
@@ -808,18 +826,19 @@ public class Node extends EventTarget {
      */
     protected HTMLCollection getChildren() {
         final DomNode node = getDomNodeOrDie();
-        return new HTMLCollection(node, false) {
-            @Override
-            protected List<DomNode> computeElements() {
-                final List<DomNode> children = new ArrayList<>();
-                for (final DomNode domNode : node.getChildNodes()) {
-                    if (domNode instanceof DomElement) {
-                        children.add(domNode);
+        final HTMLCollection childrenColl = new HTMLCollection(node, false);
+        childrenColl.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
+                () -> {
+                    final List<DomNode> children = new ArrayList<>();
+                    for (final DomNode domNode : node.getChildNodes()) {
+                        if (domNode instanceof DomElement) {
+                            children.add(domNode);
+                        }
                     }
-                }
-                return children;
-            }
-        };
+                    return children;
+                });
+        return childrenColl;
     }
 
     /**

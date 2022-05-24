@@ -2106,9 +2106,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function")
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined",
+            IE = "undefined")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
     }
@@ -3519,7 +3519,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.MediaList}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.MediaList}.
      *
      * @throws Exception if an error occurs
      */

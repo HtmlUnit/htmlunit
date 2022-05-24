@@ -61,7 +61,7 @@ public class WorkerTest extends WebDriverTestCase {
             + "  myWorker.onmessage = function(e) {\n"
             + "    log('Received:' + e.data);\n"
             + "  };\n"
-            + "} catch(e) { lob('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         final String workerJs = "postMessage('worker loaded');\n";

@@ -14,11 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLCOLLECTION_NULL_IF_NOT_FOUND;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -29,14 +31,18 @@ import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSymbol;
 
+import net.sourceforge.htmlunit.corejs.javascript.Callable;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArrayIterator;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
@@ -52,7 +58,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Ronald Brill
  */
 @JsxClass
-public class NodeList extends AbstractList {
+public class NodeList extends AbstractList implements Callable {
 
     /**
      * Creates an instance.
@@ -69,7 +75,7 @@ public class NodeList extends AbstractList {
      * of a descendant node of parentScope changes (attribute added, modified or removed)
      */
     public NodeList(final DomNode domNode, final boolean attributeChangeSensitive) {
-        super(domNode, attributeChangeSensitive);
+        super(domNode, attributeChangeSensitive, null);
     }
 
     /**
@@ -78,7 +84,7 @@ public class NodeList extends AbstractList {
      * @param initialElements the initial content for the cache
      */
     public NodeList(final DomNode domNode, final List<DomNode> initialElements) {
-        super(domNode, initialElements);
+        super(domNode, true, new ArrayList<>(initialElements));
     }
 
     /**
@@ -160,5 +166,56 @@ public class NodeList extends AbstractList {
             return null;
         };
         cf.call(contextAction);
+    }
+
+    /**
+     * Returns the length.
+     * @return the length
+     */
+    @JsxGetter
+    @Override
+    public final int getLength() {
+        return super.getLength();
+    }
+
+    /**
+     * Returns the item or items corresponding to the specified index or key.
+     * @param index the index or key corresponding to the element or elements to return
+     * @return the element or elements corresponding to the specified index or key
+     * @see <a href="http://msdn.microsoft.com/en-us/library/ms536460.aspx">MSDN doc</a>
+     */
+    @JsxFunction
+    public Object item(final Object index) {
+        final Object object = getIt(index);
+        if (object == NOT_FOUND) {
+            return null;
+        }
+        return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
+        if (args.length == 0) {
+            throw Context.reportRuntimeError("Zero arguments; need an index or a key.");
+        }
+        final Object object = getIt(args[0]);
+        if (object == NOT_FOUND) {
+            if (getBrowserVersion().hasFeature(HTMLCOLLECTION_NULL_IF_NOT_FOUND)) {
+                return null;
+            }
+            return Undefined.instance;
+        }
+        return object;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected AbstractList create(final DomNode parentScope, final List<DomNode> initialElements) {
+        return new NodeList(parentScope, new ArrayList<>(initialElements));
     }
 }

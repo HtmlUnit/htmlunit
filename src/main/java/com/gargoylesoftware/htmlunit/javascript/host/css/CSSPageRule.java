@@ -25,6 +25,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -83,8 +84,12 @@ public class CSSPageRule extends CSSRule {
      */
     @JsxSetter({CHROME, EDGE})
     public void setSelectorText(final String selectorText) {
-        // FIXME [CSSPARSER] implement CSSPageRuleImpl.setSelectorText(String)
-        // getPageRule().setSelectorText(selectorText);
+        try {
+            getPageRule().setSelectorText(selectorText);
+        }
+        catch (final DOMException e) {
+            // ignore
+        }
     }
 
     /**

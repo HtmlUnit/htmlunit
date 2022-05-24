@@ -301,7 +301,8 @@ public class HTMLElementTest extends WebDriverTestCase {
                        "nodeName=custom_attribute",
                        "nodeType=2",
                        "nodeValue=bleh",
-                       "(ownerDocument == document) = true",
+                       "(ownerDocument === document) = true",
+                       "(getRootNode() === att) = true",
                        "parentNode=null",
                        "previousSibling=null",
                        "specified=true",
@@ -315,7 +316,8 @@ public class HTMLElementTest extends WebDriverTestCase {
                   "nodeName=custom_attribute",
                   "nodeType=2",
                   "nodeValue=bleh",
-                  "(ownerDocument == document) = true",
+                  "(ownerDocument === document) = true",
+                  "-",
                   "parentNode=null",
                   "previousSibling=null",
                   "specified=true",
@@ -341,7 +343,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      log('nodeName=' + att.nodeName);\n"
             + "      log('nodeType=' + att.nodeType);\n"
             + "      log('nodeValue=' + att.nodeValue);\n"
-            + "      log('(ownerDocument == document) = ' + (att.ownerDocument == document));\n"
+            + "      log('(ownerDocument === document) = ' + (att.ownerDocument === document));\n"
+            + "      if(att.getRootNode) {\n"
+            + "        log('(getRootNode() === att) = ' + (att.getRootNode() === att));\n"
+            + "      } else log('-');\n"
             + "      log('parentNode=' + att.parentNode);\n"
             + "      log('previousSibling=' + att.previousSibling);\n"
             + "      log('specified=' + att.specified);\n"
