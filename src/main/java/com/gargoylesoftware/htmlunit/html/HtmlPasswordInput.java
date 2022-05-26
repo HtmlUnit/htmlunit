@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input".
@@ -34,10 +32,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Frank Danek
  * @author Anton Demydenko
  */
-public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput, LabelableElement {
-
-    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+public class HtmlPasswordInput extends HtmlSelectableTextInput implements LabelableElement {
 
     /**
      * Creates an instance.
@@ -71,22 +66,6 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput,
      * {@inheritDoc}
      */
     @Override
-    public void select() {
-        selectionDelegate_.select();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSelectedText() {
-        return selectionDelegate_.getSelectedText();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getText() {
         return getValueAttribute();
     }
@@ -97,64 +76,6 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput,
     @Override
     public void setText(final String text) {
         setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionStart() {
-        return selectionDelegate_.getSelectionStart();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionStart(final int selectionStart) {
-        selectionDelegate_.setSelectionStart(selectionStart);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionEnd() {
-        return selectionDelegate_.getSelectionEnd();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionEnd(final int selectionEnd) {
-        selectionDelegate_.setSelectionEnd(selectionEnd);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doType(final char c, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doType(final int keyCode, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-        }
     }
 
     /**
@@ -185,28 +106,6 @@ public class HtmlPasswordInput extends HtmlInput implements SelectableTextInput,
     public void setDefaultValue(final String defaultValue) {
         final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
         setDefaultValue(defaultValue, modifyValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see HtmlInput#reset()
-     */
-    @Override
-    public void reset() {
-        super.reset();
-        setSelectionEnd(0);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlPasswordInput newnode = (HtmlPasswordInput) super.cloneNode(deep);
-        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
-        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
-
-        return newnode;
     }
 
     /**

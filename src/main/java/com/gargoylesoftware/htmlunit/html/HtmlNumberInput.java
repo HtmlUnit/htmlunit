@@ -27,8 +27,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input" with type is "number".
@@ -40,12 +38,9 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Raik Bieniek
  * @author Michael Lueck
  */
-public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, LabelableElement {
+public class HtmlNumberInput extends HtmlSelectableTextInput implements LabelableElement {
 
     private static final char[] VALID_INT_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
-
-    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
 
     /**
      * Creates an instance.
@@ -67,22 +62,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
                 setValueAttribute("");
             }
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doType(final char c, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doType(final int keyCode, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
     }
 
     /**
@@ -114,7 +93,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
             catch (final NumberFormatException e) {
                 // ignore
             }
-
         }
     }
 
@@ -124,22 +102,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     protected boolean isSubmittableByEnter() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void select() {
-        selectionDelegate_.select();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSelectedText() {
-        return selectionDelegate_.getSelectedText();
     }
 
     /**
@@ -156,38 +118,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
     @Override
     public void setText(final String text) {
         setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionStart() {
-        return selectionDelegate_.getSelectionStart();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionStart(final int selectionStart) {
-        selectionDelegate_.setSelectionStart(selectionStart);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionEnd() {
-        return selectionDelegate_.getSelectionEnd();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionEnd(final int selectionEnd) {
-        selectionDelegate_.setSelectionEnd(selectionEnd);
     }
 
     /**
@@ -244,28 +174,6 @@ public class HtmlNumberInput extends HtmlInput implements SelectableTextInput, L
         catch (final ParseException e) {
             // ignore
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see HtmlInput#reset()
-     */
-    @Override
-    public void reset() {
-        super.reset();
-        setSelectionEnd(0);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlNumberInput newnode = (HtmlNumberInput) super.cloneNode(deep);
-        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
-        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
-
-        return newnode;
     }
 
     /**

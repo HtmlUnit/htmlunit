@@ -31,8 +31,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
-public class HtmlTimeInput extends HtmlInput implements LabelableElement {
+public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableElement {
 
     private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 
@@ -54,6 +55,22 @@ public class HtmlTimeInput extends HtmlInput implements LabelableElement {
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setText(final String text) {
+        setValueAttribute(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getText() {
+        return getValueAttribute();
     }
 
     /**

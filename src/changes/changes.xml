@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 102, Bugfixes">
+            <action> type="add" dev="rbri">
+                Introduce new abstract class HtmlSelectableTextInput to to share text selection and typing support.
+            </action>
             <action type="fix" dev="rbri">
                 Correct the length of the resulting ArrayBuffer for XMLHttpRequest having a response type of 'arraybuffer'
                 if the response is gzip compressed. This also fixes an ArrayIndexOutOfBounds exception.
