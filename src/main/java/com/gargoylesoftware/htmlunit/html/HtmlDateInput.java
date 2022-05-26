@@ -62,22 +62,6 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    public String getText() {
-        return getValueAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setText(final String text) {
-        setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,

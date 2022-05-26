@@ -70,22 +70,6 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
         super.setValueAttribute(newValue);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setText(final String text) {
-        setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getText() {
-        return getValueAttribute();
-    }
-
     @Override
     public boolean isValid() {
         final boolean isValid = super.isValid();

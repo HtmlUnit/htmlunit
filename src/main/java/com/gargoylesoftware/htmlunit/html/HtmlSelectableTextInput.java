@@ -73,6 +73,22 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      * {@inheritDoc}
      */
     @Override
+    public void setText(final String text) {
+        setValueAttribute(text);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getText() {
+        return getValueAttribute();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void select() {
         selectionDelegate_.select();
     }

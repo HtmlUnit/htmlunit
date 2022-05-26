@@ -61,22 +61,6 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    public void setText(final String text) {
-        setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getText() {
-        return getValueAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setValueAttribute(final String newValue) {
         try {
             if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)

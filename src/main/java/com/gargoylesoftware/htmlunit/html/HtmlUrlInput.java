@@ -67,22 +67,6 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      * {@inheritDoc}
      */
     @Override
-    public void setText(final String text) {
-        setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getText() {
-        return getValueAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isPatternSupported() {
         return true;
     }
