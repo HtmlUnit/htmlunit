@@ -210,7 +210,6 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"1", "1--null-true", "1", "1--null-true", "1.2", "1.2--null-false"},
-            FF = {"1", "1--null-true", "", "--null-false", "1.2", "1.2--null-false"},
             IE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"})
     @HtmlUnitNYI(CHROME = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},
             EDGE = {"1", "1--null-true", "1.", "1.--null-true", "1.2", "1.2--null-false"},

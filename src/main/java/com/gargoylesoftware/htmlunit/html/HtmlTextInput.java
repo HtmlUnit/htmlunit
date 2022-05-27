@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -53,27 +51,6 @@ public class HtmlTextInput extends HtmlSelectableTextInput implements LabelableE
     @Override
     protected boolean isSubmittableByEnter() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-        if ("value".equals(qualifiedName)) {
-            final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
-                int pos = 0;
-                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                    pos = attributeValue.length();
-                }
-                setSelectionStart(pos);
-                setSelectionEnd(pos);
-            }
-        }
     }
 
     /**
