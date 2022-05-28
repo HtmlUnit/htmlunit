@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 102, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Rural Hunter">
+                core-js: Fix Object.getOwnPropertyDescriptors by fixing missing scope definitions.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix ClassCastException when using StringBuilder/Buffer.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Fix typeof for native classes with shared global scope.
+            </action>
             <action> type="add" dev="rbri">
                 Introduce new abstract class HtmlSelectableTextInput to to share text selection and typing support.
             </action>
