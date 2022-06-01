@@ -238,7 +238,7 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public void setValue(final Object newValue) {
         if (null == newValue) {
-            getDomNodeOrDie().setValueAttribute("");
+            getDomNodeOrDie().setValue("");
             getDomNodeOrDie().valueModifiedByJavascript();
             return;
         }
@@ -252,7 +252,7 @@ public class HTMLInputElement extends HTMLElement {
             return;
         }
 
-        getDomNodeOrDie().setValueAttribute(val);
+        getDomNodeOrDie().setValue(val);
         getDomNodeOrDie().valueModifiedByJavascript();
     }
 

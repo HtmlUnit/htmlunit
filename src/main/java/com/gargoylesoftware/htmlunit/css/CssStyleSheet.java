@@ -786,14 +786,14 @@ public class CssStyleSheet implements Serializable {
             case "placeholder-shown":
                 if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
                     return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
                             && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
 
             case "-ms-input-placeholder":
                 if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
                     return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
                             && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
 
