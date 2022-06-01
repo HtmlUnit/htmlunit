@@ -34,7 +34,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -669,22 +668,9 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public String getValue() {
         final HtmlInput htmlInput = getDomNodeOrDie();
-        if (htmlInput instanceof HtmlFileInput) {
-            final File[] files = ((HtmlFileInput) htmlInput).getFiles();
-            if (files == null || files.length == 0) {
-                return ATTRIBUTE_NOT_DEFINED;
-            }
-            final File first = files[0];
-            final String name = first.getName();
-            if (name.isEmpty()) {
-                return name;
-            }
-            return "C:\\fakepath\\" + name;
-        }
 
         if (htmlInput instanceof HtmlNumberInput) {
-            final HtmlNumberInput htmlNumberInput = (HtmlNumberInput) htmlInput;
-            final String valueAttr = htmlInput.getAttributeDirect("value");
+            final String valueAttr = htmlInput.getValue();
             if (!valueAttr.isEmpty()) {
                 if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
                     return "";
@@ -692,7 +678,7 @@ public class HTMLInputElement extends HTMLElement {
 
                 final int lastPos = valueAttr.length() - 1;
                 if (lastPos >= 0 && valueAttr.charAt(lastPos) == '.') {
-                    if (htmlNumberInput.hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
+                    if (htmlInput.hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
                         return "";
                     }
                 }
@@ -705,7 +691,7 @@ public class HTMLInputElement extends HTMLElement {
             }
         }
 
-        return htmlInput.getAttributeDirect("value");
+        return htmlInput.getValue();
     }
 
     /**
