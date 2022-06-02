@@ -8,7 +8,7 @@
 
     <body>
         <release version="2.62.0" date="June 02, 2022" description="Chrome/Edge 102, Firefox 101, Bugfixes">
-            <action> type="add" dev="rbri">
+            <action type="add" dev="rbri">
                 Introduce HtmlInput.getValue() and HtmlInput.setValue(String).
             </action>
             <action type="fix" dev="rbri" due-to="Rural Hunter">
@@ -20,7 +20,7 @@
             <action type="fix" dev="RhinoTeam">
                 core-js: Fix typeof for native classes with shared global scope.
             </action>
-            <action> type="add" dev="rbri">
+            <action type="add" dev="rbri">
                 Introduce new abstract class HtmlSelectableTextInput to to share text selection and typing support.
             </action>
             <action type="fix" dev="rbri">
