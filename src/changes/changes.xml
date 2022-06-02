@@ -7,9 +7,9 @@
     </properties>
 
     <body>
-        <release version="2.62.0" date="May xx, 2022" description="Chrome/Edge 102, Firefox 101, Bugfixes">
+        <release version="2.62.0" date="June 02, 2022" description="Chrome/Edge 102, Firefox 101, Bugfixes">
             <action> type="add" dev="rbri">
-                Introduce HtmlInput.getValue() & HtmlInput.setValue(String).
+                Introduce HtmlInput.getValue() and HtmlInput.setValue(String).
             </action>
             <action type="fix" dev="rbri" due-to="Rural Hunter">
                 core-js: Fix Object.getOwnPropertyDescriptors by fixing missing scope definitions.
