@@ -39,7 +39,7 @@
         <spotbugs.version>4.7.0</spotbugs.version>
         <pmd.version>6.46.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
-        <dependencycheck.version>7.1.0</dependencycheck.version>
+        <dependencycheck.version>7.1.1</dependencycheck.version>
     </properties>
 
     <build>
@@ -89,7 +89,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.16.0</version>
+                <version>3.17.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.pmd</groupId>
@@ -228,7 +228,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.1.0</version>
                 <executions>
                     <execution>
                         <configuration>
