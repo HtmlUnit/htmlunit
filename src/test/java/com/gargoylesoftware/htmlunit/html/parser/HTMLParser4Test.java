@@ -650,9 +650,9 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    <script>\n"
             + "    document.getElementById('outerDiv').innerHTML ="
             + "        '<html><head>"
-                            + "<title>Inner Html</title>"
-                            + "<meta name=\"author\" content=\"John Doe\">"
-                        + "</head>"
+            + "            <title>Inner Html</title>"
+            + "            <meta name=\"author\" content=\"John Doe\">"
+            + "        </head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
             + "    </script>\n"
             + LOG_TEXTAREA
