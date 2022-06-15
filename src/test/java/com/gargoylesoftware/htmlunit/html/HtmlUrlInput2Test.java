@@ -70,6 +70,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input = (HtmlUrlInput) input.cloneNode(true);
         input.type("4711");
         assertEquals("4711", input.getValueAttribute());
+        assertEquals("4711", input.getValue());
     }
 
     /**
@@ -95,6 +96,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -120,6 +122,33 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='url' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlUrlInput input = (HtmlUrlInput) page.getElementById("foo");
+
+        input.type("4711");
+        input.setValue("");
+        input.type("0815");
+
+        assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -143,10 +172,10 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("https://sourceforge.net/projects/htmlunit/");
+        input.setValue("https://sourceforge.net/projects/htmlunit/");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("https://github.com/HtmlUnit/htmlunit");
+        input.setValue("https://github.com/HtmlUnit/htmlunit");
         assertTrue(input.isValid());
     }
 
@@ -174,6 +203,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("/HtmlUnit/htmlunit");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 
     /**
@@ -201,5 +231,6 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("/HtmlUnit/htmlunit");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 }

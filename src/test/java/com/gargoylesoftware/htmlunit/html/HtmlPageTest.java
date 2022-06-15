@@ -101,7 +101,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlInput textInput = form.getInputByName("textInput1");
-        textInput.setValueAttribute("foo");
+        textInput.setValue("foo");
 
         final HtmlSubmitInput button = form.getInputByName("submitInput1");
         final HtmlPage secondPage = button.click();

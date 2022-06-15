@@ -100,6 +100,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
+        assertEquals("foo", textInput.getValue());
     }
 
     /**
@@ -125,6 +126,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
+        assertEquals("blue", textInput.getValue());
     }
 
     /**
@@ -579,7 +581,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getFormByName("form1");
         final HtmlTextInput textInput = form.getInputByName("text1");
-        textInput.setValueAttribute("flintstone");
+        textInput.setValue("flintstone");
 
         final HtmlButtonInput button = form.getInputByName("button1");
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);

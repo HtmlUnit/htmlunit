@@ -95,6 +95,7 @@ public class GWT250Test extends WebServerTestCase {
         else if (child instanceof HtmlInput) {
             final HtmlInput input = (HtmlInput) child;
             assertEquals(expectedValue, input.getValueAttribute());
+            assertEquals(expectedValue, input.getValue());
         }
         else if (child instanceof DomText) {
             final DomText text = (DomText) child;

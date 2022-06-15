@@ -67,6 +67,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.select();
         input.type("Bye World");
         assertEquals("Bye World", input.getValueAttribute());
+        assertEquals("Bye World", input.getValue());
     }
 
     /**
@@ -81,12 +82,16 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         t.type('e');
         t.type('t');
         assertEquals("tet", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("tet", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
         t.type('s');
         assertEquals("test", t.getValueAttribute());
+        assertEquals("test", t.getValue());
         t.type(KeyboardEvent.DOM_VK_SPACE);
         assertEquals("tes t", t.getValueAttribute());
+        assertEquals("tes t", t.getValue());
     }
 
     /**
@@ -101,11 +106,14 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         t.type('e');
         t.type('t');
         assertEquals("tet", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
         t.type(KeyboardEvent.DOM_VK_LEFT);
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("tet", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("tt", t.getValueAttribute());
+        assertEquals("tt", t.getValue());
     }
 
     /**
@@ -128,6 +136,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input = (HtmlPasswordInput) input.cloneNode(true);
         input.type("4711");
         assertEquals("4711", input.getValueAttribute());
+        assertEquals("4711", input.getValue());
     }
 
     /**
@@ -153,6 +162,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -178,6 +188,33 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='password' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlPasswordInput input = (HtmlPasswordInput) page.getElementById("foo");
+
+        input.type("4711");
+        input.setValue("");
+        input.type("0815");
+
+        assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -201,10 +238,10 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("0987654321!");
+        input.setValue("0987654321!");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("68746d6c756e69742072756c657a21");
+        input.setValue("68746d6c756e69742072756c657a21");
         assertTrue(input.isValid());
     }
 
@@ -232,6 +269,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.type("bar");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 
     /**
@@ -259,5 +297,6 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
         input.type("bar");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 }

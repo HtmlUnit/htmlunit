@@ -1107,6 +1107,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlForm form = page.getForms().get(0);
 
         assertEquals("val1", form.getInputByName("field3").getValueAttribute());
+        assertEquals("val1", form.getInputByName("field3").getValue());
         assertEquals(2, form.getInputsByName("radio1").size());
 
         assertEquals(3, form.getInputsByValue("val2").size());

@@ -50,6 +50,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input = (HtmlTelInput) input.cloneNode(true);
         input.type("4711");
         assertEquals("4711", input.getValueAttribute());
+        assertEquals("4711", input.getValue());
     }
 
     /**
@@ -75,6 +76,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -100,6 +102,33 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='tel' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlTelInput input = (HtmlTelInput) page.getElementById("foo");
+
+        input.type("4711");
+        input.setValue("");
+        input.type("0815");
+
+        assertEquals("0815", input.getValueAttribute());
+        assertEquals("0815", input.getValue());
     }
 
     /**
@@ -123,10 +152,10 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("123-456-78901");
+        input.setValue("123-456-78901");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("123-456-7890");
+        input.setValue("123-456-7890");
         assertTrue(input.isValid());
     }
 
@@ -154,6 +183,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("67890");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 
     /**
@@ -181,5 +211,6 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("567890");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 }

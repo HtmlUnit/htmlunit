@@ -51,10 +51,10 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("qwerty");
+        input.setValue("qwerty");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("AB1234");
+        input.setValue("AB1234");
         assertTrue(input.isValid());
     }
 
@@ -82,6 +82,7 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
         input.type("bar");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 
     /**
@@ -109,5 +110,6 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
         input.type("bar");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[3], input.getValue());
     }
 }
