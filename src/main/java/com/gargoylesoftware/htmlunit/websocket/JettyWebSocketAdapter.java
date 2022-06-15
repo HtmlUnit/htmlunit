@@ -46,7 +46,7 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
 
         if (webClient.getOptions().isUseInsecureSSL()) {
             client_ = new WebSocketClient(new SslContextFactory(true), null, null);
-            // still use the deprecated method here to be backward compatible with older jersey versions
+            // still use the deprecated method here to be backward compatible with older jetty versions
             // see https://github.com/HtmlUnit/htmlunit/issues/36
             // client_ = new WebSocketClient(new SslContextFactory.Client(true), null, null);
         }
