@@ -280,7 +280,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     }
 
     @Override
-    Object getInternalValue() {
+    protected Object getInternalValue() {
         return isChecked();
     }
 
