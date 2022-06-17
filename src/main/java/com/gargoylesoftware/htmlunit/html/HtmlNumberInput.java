@@ -108,15 +108,6 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
-        setDefaultValue(defaultValue, modifyValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }

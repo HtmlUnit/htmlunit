@@ -161,6 +161,16 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc}
+     * Also sets the default value.
+     */
+    @Override
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+        super.setDefaultValue(newValue);
+    }
+
+    /**
+     * {@inheritDoc}
      * @see SubmittableElement#setDefaultChecked(boolean)
      */
     @Override

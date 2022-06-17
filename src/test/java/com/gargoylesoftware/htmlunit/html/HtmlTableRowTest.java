@@ -304,10 +304,12 @@ public class HtmlTableRowTest extends SimpleWebTestCase {
         final String cmd = "document.getElementById('foo').value = 'Input!';document.getElementById('foo')";
         page_.executeJavaScript(cmd);
 
-        final HtmlElement input = (HtmlElement) cell_.getFirstChild();
-        assertEquals("Input!", input.getAttribute("value"));
+        final HtmlInput input = (HtmlInput) cell_.getFirstChild();
+        assertEquals("", input.getValueAttribute());
+        assertEquals("Input!", input.getValue());
 
-        final HtmlElement inputClone = (HtmlElement) cellClone_.getFirstChild();
-        assertFalse("Input!".equals(inputClone.getAttribute("value")));
+        final HtmlInput inputClone = (HtmlInput) cellClone_.getFirstChild();
+        assertEquals("", inputClone.getValueAttribute());
+        assertFalse("Input!".equals(inputClone.getValue()));
     }
 }

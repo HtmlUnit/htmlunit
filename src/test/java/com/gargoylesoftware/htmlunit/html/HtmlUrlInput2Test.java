@@ -122,7 +122,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("0815");
 
         assertEquals("", input.getValueAttribute());
-        assertEquals("0815", input.getValue());
+        assertEquals("47110815", input.getValue());
     }
 
     /**
