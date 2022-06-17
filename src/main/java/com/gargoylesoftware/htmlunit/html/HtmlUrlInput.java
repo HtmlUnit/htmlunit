@@ -61,17 +61,11 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
-        if (hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
-            if (StringUtils.isBlank(newValue)) {
-                super.setValueAttribute("");
-                return;
-            }
-            super.setValueAttribute(newValue.trim());
-            return;
+    public void setValue(String newValue) {
+        if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+            newValue = "";
         }
-
-        super.setValueAttribute(newValue);
+        super.setValue(newValue);
     }
 
     /**

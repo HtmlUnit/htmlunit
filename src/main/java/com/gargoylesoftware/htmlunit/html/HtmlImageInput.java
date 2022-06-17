@@ -89,13 +89,13 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
         if (wasPositionSpecified_) {
             final NameValuePair valueX = new NameValuePair(prefix + 'x', Integer.toString(xPosition_));
             final NameValuePair valueY = new NameValuePair(prefix + 'y', Integer.toString(yPosition_));
-            if (!prefix.isEmpty() && hasFeature(HTMLIMAGE_NAME_VALUE_PARAMS) && !getValueAttribute().isEmpty()) {
+            if (!prefix.isEmpty() && hasFeature(HTMLIMAGE_NAME_VALUE_PARAMS) && !getRawValue().isEmpty()) {
                 return new NameValuePair[] {valueX, valueY,
-                    new NameValuePair(getNameAttribute(), getValueAttribute()) };
+                    new NameValuePair(getNameAttribute(), getRawValue()) };
             }
             return new NameValuePair[] {valueX, valueY};
         }
-        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getRawValue())};
     }
 
     /**
@@ -182,20 +182,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
     @Override
     public void setDefaultValue(final String defaultValue) {
         super.setDefaultValue(defaultValue);
-        setValueAttribute(defaultValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if ("value".equals(qualifiedName)) {
-            setDefaultValue(attributeValue, false);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
+        setValue(defaultValue);
     }
 
     /**

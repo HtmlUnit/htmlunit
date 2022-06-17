@@ -125,14 +125,14 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         try {
             if (!newValue.isEmpty()) {
                 final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
                 final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
                 format.parse(newValue);
             }
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
         }
         catch (final ParseException e) {
             // ignore
@@ -148,15 +148,15 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final String valueAttr = getValueAttribute();
-        if (!valueAttr.isEmpty()) {
-            if ("-".equals(valueAttr) || "+".equals(valueAttr)) {
+        final String rawValue = getRawValue();
+        if (!rawValue.isEmpty()) {
+            if ("-".equals(rawValue) || "+".equals(rawValue)) {
                 return false;
             }
 
             // if we have no step, the value has to be an integer
             if (getStep().isEmpty()) {
-                String val = valueAttr;
+                String val = rawValue;
                 final int lastPos = val.length() - 1;
                 if (lastPos >= 0 && val.charAt(lastPos) == '.') {
                     if (hasFeature(JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE)) {
@@ -171,7 +171,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
 
             final BigDecimal value;
             try {
-                value = new BigDecimal(valueAttr);
+                value = new BigDecimal(rawValue);
             }
             catch (final NumberFormatException e) {
                 return false;

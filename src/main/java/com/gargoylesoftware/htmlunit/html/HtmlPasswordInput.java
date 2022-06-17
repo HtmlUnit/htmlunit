@@ -64,15 +64,6 @@ public class HtmlPasswordInput extends HtmlSelectableTextInput implements Labela
      * {@inheritDoc}
      */
     @Override
-    public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
-        setDefaultValue(defaultValue, modifyValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isPatternSupported() {
         return true;
     }

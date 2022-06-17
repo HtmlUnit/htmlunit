@@ -60,12 +60,12 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         try {
             if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
         }
         catch (final DateTimeParseException e) {
             // ignore
@@ -90,7 +90,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
     private boolean isMinValid() {
         if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && !getMin().isEmpty()) {
             try {
-                final YearMonth dateValue = YearMonth.parse(getValueAttribute(), FORMATTER_);
+                final YearMonth dateValue = YearMonth.parse(getRawValue(), FORMATTER_);
                 final YearMonth minDate = YearMonth.parse(getMin(), FORMATTER_);
                 return minDate.equals(dateValue) || minDate.isBefore(dateValue);
             }
@@ -111,7 +111,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
     private boolean isMaxValid() {
         if (hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED) && !getMax().isEmpty()) {
             try {
-                final YearMonth dateValue = YearMonth.parse(getValueAttribute(), FORMATTER_);
+                final YearMonth dateValue = YearMonth.parse(getRawValue(), FORMATTER_);
                 final YearMonth maxDate = YearMonth.parse(getMax(), FORMATTER_);
                 return maxDate.equals(dateValue) || maxDate.isAfter(dateValue);
             }

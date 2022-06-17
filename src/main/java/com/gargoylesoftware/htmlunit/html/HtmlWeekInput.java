@@ -60,16 +60,16 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         if (!hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED)
                 || StringUtils.isEmpty(newValue)) {
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
             return;
         }
 
         try {
             FORMATTER_.parse(newValue);
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
         }
         catch (final DateTimeParseException e) {
             // ignore
@@ -94,7 +94,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
     private boolean isMinValid() {
         if (hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED) && !getMin().isEmpty()) {
             try {
-                final LocalDate dateValue = LocalDate.parse(getValueAttribute() + "-1",
+                final LocalDate dateValue = LocalDate.parse(getRawValue() + "-1",
                         DateTimeFormatter.ISO_WEEK_DATE);
                 final LocalDate minDate = LocalDate.parse(getMin() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
                 return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
@@ -116,7 +116,7 @@ public class HtmlWeekInput extends HtmlInput implements LabelableElement {
     private boolean isMaxValid() {
         if (hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED) && !getMax().isEmpty()) {
             try {
-                final LocalDate dateValue = LocalDate.parse(getValueAttribute() + "-1",
+                final LocalDate dateValue = LocalDate.parse(getRawValue() + "-1",
                         DateTimeFormatter.ISO_WEEK_DATE);
                 final LocalDate maxDate = LocalDate.parse(getMax() + "-1", DateTimeFormatter.ISO_WEEK_DATE);
                 return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
