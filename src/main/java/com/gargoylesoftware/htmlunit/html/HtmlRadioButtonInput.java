@@ -65,7 +65,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         super(qualifiedName, page, attributes);
 
         if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
-            setRawValue(DEFAULT_VALUE);
+            setValue(DEFAULT_VALUE);
         }
 
         defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);
