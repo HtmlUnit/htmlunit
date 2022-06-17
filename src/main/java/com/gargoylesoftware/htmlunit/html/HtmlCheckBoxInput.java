@@ -64,7 +64,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
         super(qualifiedName, page, attributes);
 
         if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
-            setValue(DEFAULT_VALUE);
+            setRawValue(DEFAULT_VALUE);
         }
 
         defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);

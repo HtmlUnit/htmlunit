@@ -908,14 +908,15 @@ public class HtmlElementTest extends SimpleWebTestCase {
             + "  <input id='myInput' onclick='test()'>\n"
             + "</body></html>";
 
-        final String[] expectedAlerts = {"Hello Cruel World"};
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.type("Hello Cruel World");
-        assertEquals("Hello Cruel World", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("Hello Cruel World", input.getValue());
         page.getHtmlElementById("myButton").click();
+
+        final String[] expectedAlerts = {"Hello Cruel World"};
         assertEquals(expectedAlerts, collectedAlerts);
     }
 
