@@ -461,17 +461,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public void setDefaultValue(final String defaultValue) {
         final String oldDefaultValue = getDefaultValue();
-        final HtmlAttributeChangeEvent event;
-        if (ATTRIBUTE_NOT_DEFINED == oldDefaultValue) {
-            event = new HtmlAttributeChangeEvent(this, "value", defaultValue);
-        }
-        else {
-            event = new HtmlAttributeChangeEvent(this, "value", oldDefaultValue);
-        }
-
         setValueAttribute(defaultValue);
-        setRawValue(defaultValue);
-        notifyAttributeChangeListeners(event, this, oldDefaultValue, true);
+
+        if (oldDefaultValue.equals(getValue())) {
+            setRawValue(defaultValue);
+        }
     }
 
     /**

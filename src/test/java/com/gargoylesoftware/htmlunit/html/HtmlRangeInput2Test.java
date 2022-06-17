@@ -51,13 +51,13 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         final HtmlRangeInput third = (HtmlRangeInput) page.getElementById("third");
         final HtmlRangeInput forth = (HtmlRangeInput) page.getElementById("forth");
 
-        assertEquals("50", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("50", first.getValue());
-        assertEquals("0", second.getValueAttribute());
+        assertEquals("", second.getValueAttribute());
         assertEquals("0", second.getValue());
-        assertEquals("35", third.getValueAttribute());
+        assertEquals("", third.getValueAttribute());
         assertEquals("35", third.getValue());
-        assertEquals("50", forth.getValueAttribute());
+        assertEquals("", forth.getValueAttribute());
         assertEquals("50", forth.getValue());
     }
 
@@ -89,32 +89,32 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         // invalid
         first.setValue("foo");
         assertTrue(first.isValid());
-        assertEquals(defaultFirstValue, first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals(defaultFirstValue, first.getValue());
         // lesser
         first.setValue("1");
         assertTrue(first.isValid());
-        assertEquals("10", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("10", first.getValue());
         // equal
         first.setValue("10");
         assertTrue(first.isValid());
-        assertEquals("10", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("10", first.getValue());
         // bigger
         first.setValue("100");
         assertTrue(first.isValid());
-        assertEquals("100", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("100", first.getValue());
 
         second.setValue("0");
         assertTrue(second.isValid());
-        assertEquals("0", second.getValueAttribute());
+        assertEquals("", second.getValueAttribute());
         assertEquals("0", second.getValue());
 
         third.setValue("0");
         assertTrue(third.isValid());
-        assertEquals("0", third.getValueAttribute());
+        assertEquals("", third.getValueAttribute());
         assertEquals("0", third.getValue());
     }
 
@@ -146,32 +146,32 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         // invalid
         first.setValue("foo");
         assertTrue(first.isValid());
-        assertEquals(defaultFirstValue, first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals(defaultFirstValue, first.getValue());
         // lesser
         first.setValue("1");
         assertTrue(first.isValid());
-        assertEquals("1", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("1", first.getValue());
         // equal
         first.setValue("10");
         assertTrue(first.isValid());
-        assertEquals("10", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("10", first.getValue());
         // bigger
         first.setValue("100");
         assertTrue(first.isValid());
-        assertEquals("10", first.getValueAttribute());
+        assertEquals("", first.getValueAttribute());
         assertEquals("10", first.getValue());
 
         second.setValue("0");
         assertTrue(second.isValid());
-        assertEquals("0", second.getValueAttribute());
+        assertEquals("", second.getValueAttribute());
         assertEquals("0", second.getValue());
 
         third.setValue("0");
         assertTrue(third.isValid());
-        assertEquals("0", third.getValueAttribute());
+        assertEquals("", third.getValueAttribute());
         assertEquals("0", third.getValue());
     }
 }
