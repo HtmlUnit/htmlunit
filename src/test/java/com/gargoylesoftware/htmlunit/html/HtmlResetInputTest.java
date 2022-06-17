@@ -81,7 +81,7 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         assertFalse(page.<HtmlOption>getHtmlElementById("option1").isSelected());
         assertTrue(page.<HtmlOption>getHtmlElementById("option2").isSelected());
         assertEquals("Flintstone", page.<HtmlTextArea>getHtmlElementById("textarea1").getText());
-        assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValueAttribute());
+        assertEquals("foo", page.<HtmlTextInput>getHtmlElementById("textfield1").getValueAttribute());
         assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValue());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValue());
