@@ -65,7 +65,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         super(qualifiedName, page, attributes);
 
         if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
-            setValue(DEFAULT_VALUE);
+            setRawValue(DEFAULT_VALUE);
         }
 
         defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);
@@ -208,6 +208,16 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     public void setDefaultValue(final String defaultValue) {
         super.setDefaultValue(defaultValue);
         setValue(defaultValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     * Also sets the default value.
+     */
+    @Override
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+        super.setDefaultValue(newValue);
     }
 
     /**
