@@ -164,7 +164,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts({"true", "true", "true", "12345"})
+    @Alerts({"true", "true", "true", "", "12345"})
     public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
@@ -183,7 +183,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("67890");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
-        assertEquals(getExpectedAlerts()[3], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
     }
 
     /**
@@ -191,8 +191,8 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "1234567890"},
-            IE = {"true", "true", "true", "1234567890"})
+    @Alerts(DEFAULT = {"false", "false", "true", "", "1234567890"},
+            IE = {"true", "true", "true", "", "1234567890"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
@@ -211,6 +211,6 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
         input.type("567890");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
-        assertEquals(getExpectedAlerts()[3], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
     }
 }
