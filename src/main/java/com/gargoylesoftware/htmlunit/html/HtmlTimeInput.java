@@ -61,13 +61,13 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         try {
             if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                     && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
         }
         catch (final DateTimeParseException e) {
             // ignore
@@ -93,7 +93,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                 && !getMin().isEmpty()) {
             try {
-                final LocalTime timeValue = LocalTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalTime timeValue = LocalTime.parse(getRawValue(), FORMATTER_);
                 final LocalTime minTime = LocalTime.parse(getMin(), FORMATTER_);
                 return minTime.equals(timeValue) || minTime.isBefore(timeValue);
             }
@@ -115,7 +115,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                 && !getMax().isEmpty()) {
             try {
-                final LocalTime timeValue = LocalTime.parse(getValueAttribute(), FORMATTER_);
+                final LocalTime timeValue = LocalTime.parse(getRawValue(), FORMATTER_);
                 final LocalTime maxTime = LocalTime.parse(getMax(), FORMATTER_);
                 return maxTime.equals(timeValue) || maxTime.isAfter(timeValue);
             }

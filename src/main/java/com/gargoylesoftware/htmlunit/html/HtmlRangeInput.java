@@ -46,15 +46,15 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
             final double min = getMinNumeric();
             final double max = getMaxNumeric();
             if (max < min) {
-                setValueAttribute(min);
+                setValue(min);
                 return;
             }
 
             final double val = min + ((max - min) / 2);
-            setValueAttribute(val);
+            setValue(val);
         }
         else {
-            setValueAttribute(value);
+            setValue(value);
         }
     }
 
@@ -118,26 +118,17 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
-        setDefaultValue(defaultValue, modifyValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         try {
             if (StringUtils.isNotEmpty(newValue)) {
-                setValueAttribute(Double.parseDouble(newValue));
+                setValue(Double.parseDouble(newValue));
             }
             else {
                 final double min = getMinNumeric();
                 final double max = getMaxNumeric();
 
                 // place in the middle
-                setValueAttribute(min + ((max - min) / 2));
+                setValue(min + ((max - min) / 2));
             }
         }
         catch (final NumberFormatException e) {
@@ -145,7 +136,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         }
     }
 
-    private void setValueAttribute(final double newValue) {
+    private void setValue(final double newValue) {
         double value = newValue;
 
         final double min = getMinNumeric();
@@ -170,10 +161,10 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         value = min + step * fact;
 
         if (!Double.isInfinite(value) && (value == Math.floor(value))) {
-            super.setValueAttribute(Integer.toString((int) value));
+            super.setValue(Integer.toString((int) value));
         }
         else {
-            super.setValueAttribute(Double.toString(value));
+            super.setValue(Double.toString(value));
         }
     }
 
@@ -201,9 +192,9 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      * @return if the input element has a valid min value
      */
     private boolean isMinValid() {
-        if (!getValueAttribute().isEmpty() && !getMin().isEmpty()) {
+        if (!getRawValue().isEmpty() && !getMin().isEmpty()) {
             try {
-                final double value = Double.parseDouble(getValueAttribute());
+                final double value = Double.parseDouble(getRawValue());
                 return getMinNumeric() <= value;
             }
             catch (final NumberFormatException e) {
@@ -221,9 +212,9 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
      * @return if the input element has a valid max value
      */
     private boolean isMaxValid() {
-        if (!getValueAttribute().isEmpty() && !getMax().isEmpty()) {
+        if (!getRawValue().isEmpty() && !getMax().isEmpty()) {
             try {
-                final int value = Integer.parseInt(getValueAttribute());
+                final int value = Integer.parseInt(getRawValue());
                 return getMaxNumeric() >= value;
             }
             catch (final NumberFormatException e) {

@@ -62,36 +62,14 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      */
     HtmlRadioButtonInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, addValueIfNeeded(page, attributes));
+        super(qualifiedName, page, attributes);
 
-        // fix the default value in case we have set it
-        if (getAttributeDirect("value") == DEFAULT_VALUE) {
-            setDefaultValue(ATTRIBUTE_NOT_DEFINED, false);
+        if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
+            setRawValue(DEFAULT_VALUE);
         }
 
         defaultCheckedState_ = hasAttribute(ATTRIBUTE_CHECKED);
         checkedState_ = defaultCheckedState_;
-    }
-
-    /**
-     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
-     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
-     * parent.
-     */
-    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
-
-        for (final String key : attributes.keySet()) {
-            if ("value".equalsIgnoreCase(key)) {
-                return attributes; // value attribute was specified
-            }
-        }
-
-        // value attribute was not specified, add it
-        final DomAttr newAttr = new DomAttr(page, null, "value", DEFAULT_VALUE, true);
-        attributes.put("value", newAttr);
-
-        return attributes;
     }
 
     /**
@@ -229,7 +207,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     @Override
     public void setDefaultValue(final String defaultValue) {
         super.setDefaultValue(defaultValue);
-        setValueAttribute(defaultValue);
+        setValue(defaultValue);
     }
 
     /**
@@ -284,9 +262,6 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if ("value".equals(qualifiedName)) {
-            setDefaultValue(attributeValue, false);
-        }
         if (ATTRIBUTE_CHECKED.equals(qualifiedName)) {
             checkedState_ = true;
         }
