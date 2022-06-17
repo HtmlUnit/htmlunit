@@ -123,7 +123,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @NotYetImplemented(IE)
     public void type() throws Exception {
         final String htmlContent
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html><head></head><body>\n"
             + "<form id='form1'>\n"
             + "  <input type='time' id='foo'>\n"
             + "</form></body></html>";
