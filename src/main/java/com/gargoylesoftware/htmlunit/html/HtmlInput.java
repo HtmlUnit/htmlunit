@@ -985,7 +985,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             return true;
         }
 
-        final String value = getValueAttribute();
+        final String value = getValue();
         if (StringUtils.isEmpty(value)) {
             return true;
         }
