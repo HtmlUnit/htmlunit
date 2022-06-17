@@ -48,6 +48,15 @@ public class HtmlHiddenInput extends HtmlInput {
      * {@inheritDoc}
      */
     @Override
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+        setDefaultValue(newValue);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }

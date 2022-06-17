@@ -49,31 +49,14 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
      */
     HtmlResetInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, addValueIfNeeded(page, attributes));
-    }
+        super(qualifiedName, page, attributes);
 
-    /**
-     * Add missing attribute if needed by fixing attribute map rather to add it afterwards as this second option
-     * triggers the instantiation of the script object at a time where the DOM node has not yet been added to its
-     * parent.
-     */
-    private static Map<String, DomAttr> addValueIfNeeded(final SgmlPage page,
-            final Map<String, DomAttr> attributes) {
-
-        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)) {
-            for (final String key : attributes.keySet()) {
-                if ("value".equalsIgnoreCase(key)) {
-                    return attributes; // value attribute was specified
-                }
+        if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
+            final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)) {
+                setValue(DEFAULT_VALUE);
             }
-
-            // value attribute was not specified, add it
-            final DomAttr newAttr = new DomAttr(page, null, "value", DEFAULT_VALUE, true);
-            attributes.put("value", newAttr);
         }
-
-        return attributes;
     }
 
     /**
@@ -90,6 +73,15 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
         }
         super.doClickStateUpdate(shiftKey, ctrlKey);
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+        setDefaultValue(newValue);
     }
 
     /**
