@@ -166,7 +166,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
                         scriptStack.append(msg);
 
                         for (final ScriptStackElement scriptStackElement : stack) {
-                            if (msg.length() > 0) {
+                            if (scriptStack.length() > 0) {
                                 scriptStack.append('\n');
                             }
                             scriptStack.append(scriptStackElement);
