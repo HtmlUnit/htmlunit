@@ -157,7 +157,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlCheckBoxInput input = form.getInputByName("checkbox1");
-        assertEquals("on", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("on", input.getValue());
     }
 
