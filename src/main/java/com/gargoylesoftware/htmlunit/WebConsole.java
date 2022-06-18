@@ -162,12 +162,17 @@ public class WebConsole implements ConsolePrinter, Serializable {
                 if (logger_.isInfoEnabled()) {
                     String msg = NativeConsole.format(cx, scope, args);
                     if (stack != null) {
+                        final StringBuilder scriptStack = new StringBuilder();
+                        scriptStack.append(msg);
+
                         for (final ScriptStackElement scriptStackElement : stack) {
                             if (msg.length() > 0) {
-                                msg += "\n";
+                                scriptStack.append('\n');
                             }
-                            msg += scriptStackElement;
+                            scriptStack.append(scriptStackElement);
                         }
+
+                        msg = scriptStack.toString();
                     }
                     logger_.info(msg);
                 }
