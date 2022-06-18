@@ -922,7 +922,7 @@ public class KeyboardEvent extends UIEvent {
             return;
         }
 
-        int keyCode = 0;
+        final int keyCode;
         if (getType().equals(Event.TYPE_KEY_PRESS)) {
             keyCode = Integer.valueOf(character);
         }
