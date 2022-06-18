@@ -70,7 +70,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         HtmlNumberInput input = (HtmlNumberInput) page.getElementById("foo");
         input = (HtmlNumberInput) input.cloneNode(true);
         input.type("4711");
-        assertEquals("4711", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("4711", input.getValue());
     }
 
@@ -96,7 +96,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.reset();
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
     }
 
@@ -122,8 +122,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.setValueAttribute("");
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
-        assertEquals("0815", input.getValue());
+        assertEquals("", input.getValueAttribute());
+        assertEquals("47110815", input.getValue());
     }
 
     /**
@@ -148,7 +148,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         input.setValue("");
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
     }
 

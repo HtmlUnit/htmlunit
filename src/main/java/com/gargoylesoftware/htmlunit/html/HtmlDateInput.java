@@ -62,27 +62,6 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-        if ("value".equals(qualifiedName)) {
-            final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
-                int pos = 0;
-                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                    pos = attributeValue.length();
-                }
-                setSelectionStart(pos);
-                setSelectionEnd(pos);
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
