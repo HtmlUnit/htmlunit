@@ -183,7 +183,7 @@ public class EventTarget extends HtmlUnitScriptable {
                 // eventPhase = 3 (tested in Chrome)
                 event.setEventPhase(Event.BUBBLING_PHASE);
 
-                final int size = propagationPath.size()
+                final int size = propagationPath.size();
                 for (int i = 1; i < size; i++) {
                     final EventTarget jsNode = propagationPath.get(i);
                     final EventListenersContainer elc = jsNode.eventListenersContainer_;
