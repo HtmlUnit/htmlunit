@@ -454,8 +454,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "  <frame id='frame2' src='javascript:parent.f2'/>\n"
             + "</frameset></html>";
 
-        final List<String> emptyList = Collections.emptyList();
-        createTestPageForRealBrowserIfNeeded(htmlContent, emptyList);
         final HtmlPage page = loadPage(htmlContent, null);
 
         final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();

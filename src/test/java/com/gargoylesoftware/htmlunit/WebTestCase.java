@@ -23,13 +23,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -38,15 +34,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Locale;
 
 import javax.imageio.ImageIO;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.After;
@@ -54,7 +47,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.MethodRule;
 import org.junit.rules.TestName;
 
@@ -146,29 +138,15 @@ public abstract class WebTestCase {
      */
     public static final URL URL_CROSS_ORIGIN_BASE;
 
-    /**
-     * The name of the system property used to determine if files should be generated
-     * or not in {@link #createTestPageForRealBrowserIfNeeded(String,List)}.
-     */
-    public static final String PROPERTY_GENERATE_TESTPAGES
-        = "com.gargoylesoftware.htmlunit.WebTestCase.GenerateTestpages";
-
     /** To be documented. */
     protected static final BrowserVersion FLAG_ALL_BROWSERS
         = new BrowserVersion.BrowserVersionBuilder(BrowserVersion.BEST_SUPPORTED)
                     .setApplicationName("FLAG_ALL_BROWSERS")
                     .build();
 
-    /** To be documented. */
-    protected static final ThreadLocal<BrowserVersion> generateTest_browserVersion_ = new ThreadLocal<>();
-
     private BrowserVersion browserVersion_;
     private String[] expectedAlerts_;
     private MockWebConnection mockWebConnection_;
-    private String generateTest_content_;
-    private List<String> generateTest_expectedAlerts_;
-    private boolean generateTest_notYetImplemented_;
-    private String generateTest_testName_;
 
     /**
      * JUnit 4 {@link Rule} controlling System.err.
@@ -195,7 +173,6 @@ public abstract class WebTestCase {
      * Constructor.
      */
     protected WebTestCase() {
-        generateTest_browserVersion_.remove();
     }
 
     /**
@@ -447,125 +424,6 @@ public abstract class WebTestCase {
     }
 
     /**
-     * Generates an instrumented HTML file in the temporary dir to easily make a manual test in a real browser.
-     * The file is generated only if the system property {@link #PROPERTY_GENERATE_TESTPAGES} is set.
-     * @param content the content of the HTML page
-     * @param expectedAlerts the expected alerts
-     * @throws IOException if writing file fails
-     */
-    protected void createTestPageForRealBrowserIfNeeded(final String content, final List<String> expectedAlerts)
-        throws IOException {
-
-        // save the information to create a test for WebDriver
-        generateTest_content_ = content;
-        generateTest_expectedAlerts_ = expectedAlerts;
-        final Method testMethod = findRunningJUnitTestMethod();
-        generateTest_testName_ = testMethod.getDeclaringClass().getSimpleName() + "_" + testMethod.getName() + ".html";
-
-        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null) {
-            // should be optimized....
-
-            // calls to alert() should be replaced by call to custom function
-            String newContent = StringUtils.replace(content, "alert(", "htmlunitReserved_caughtAlert(");
-
-            final String instrumentationJS = createInstrumentationScript(expectedAlerts);
-
-            // first version, we assume that there is a <head> and a </body> or a </frameset>
-            if (newContent.indexOf("<head>") > -1) {
-                newContent = StringUtils.replaceOnce(newContent, "<head>", "<head>" + instrumentationJS);
-            }
-            else {
-                newContent = StringUtils.replaceOnce(newContent, "<html>",
-                        "<html>\n<head>\n" + instrumentationJS + "\n</head>\n");
-            }
-            final String endScript = "\n<script>htmlunitReserved_addSummaryAfterOnload();</script>\n";
-            if (newContent.contains("</body>")) {
-                newContent = StringUtils.replaceOnce(newContent, "</body>", endScript + "</body>");
-            }
-            else {
-                LOG.info("No test generated: currently only content with a <head> and a </body> is supported");
-            }
-
-            final File f = File.createTempFile("TEST" + '_', ".html");
-            FileUtils.writeStringToFile(f, newContent, "ISO-8859-1");
-            LOG.info("Test file written: " + f.getAbsolutePath());
-        }
-        else {
-            if (LOG.isDebugEnabled()) {
-                LOG.debug("System property \"" + PROPERTY_GENERATE_TESTPAGES
-                    + "\" not set, don't generate test HTML page for real browser");
-            }
-        }
-    }
-
-    /**
-     * @param expectedAlerts the list of the expected alerts
-     * @return the script to be included at the beginning of the generated HTML file
-     * @throws IOException in case of problem
-     */
-    private String createInstrumentationScript(final List<String> expectedAlerts) throws IOException {
-        // generate the js code
-        final String baseJS = getFileContent("alertVerifier.js");
-
-        final StringBuilder sb = new StringBuilder();
-        sb.append("\n<script type='text/javascript'>\n");
-        sb.append("var htmlunitReserved_tab = [");
-        for (final ListIterator<String> iter = expectedAlerts.listIterator(); iter.hasNext();) {
-            if (iter.hasPrevious()) {
-                sb.append(", ");
-            }
-            String message = iter.next();
-            message = StringUtils.replace(message, "\\", "\\\\");
-            message = message.replaceAll("\n", "\\\\n").replaceAll("\r", "\\\\r");
-            sb.append("{expected: \"").append(message).append("\"}");
-        }
-        sb.append("];\n\n");
-        sb.append(baseJS);
-        sb.append("</script>\n");
-        return sb.toString();
-    }
-
-    /**
-     * Finds from the call stack the active running JUnit test case
-     * @return the test case method
-     * @throws RuntimeException if no method could be found
-     */
-    private Method findRunningJUnitTestMethod() {
-        final Class<?> cl = getClass();
-        final Class<?>[] args = {};
-
-        // search the initial junit test
-        final Throwable t = new Exception();
-        for (int i = t.getStackTrace().length - 1; i >= 0; i--) {
-            final StackTraceElement element = t.getStackTrace()[i];
-            if (element.getClassName().equals(cl.getName())) {
-                try {
-                    final Method m = cl.getMethod(element.getMethodName(), args);
-                    if (isPublicTestMethod(m)) {
-                        return m;
-                    }
-                }
-                catch (final Exception e) {
-                    // can't access, ignore it
-                }
-            }
-        }
-        throw new RuntimeException("No JUnit test case method found in call stack");
-    }
-
-    /**
-     * From Junit. Test if the method is a junit test.
-     * @param method the method
-     * @return {@code true} if this is a junit test
-     */
-    private static boolean isPublicTestMethod(final Method method) {
-        return method.getParameterTypes().length == 0
-            && (method.getName().startsWith("test") || method.getAnnotation(Test.class) != null)
-            && method.getReturnType() == Void.TYPE
-            && Modifier.isPublic(method.getModifiers());
-    }
-
-    /**
      * Sets the browser version.
      * @param browserVersion the browser version
      */
@@ -646,58 +504,6 @@ public abstract class WebTestCase {
     @AfterClass
     public static void afterClass() {
         Locale.setDefault(SAVE_LOCALE);
-    }
-
-    /**
-     * Generates an HTML file that can be loaded and understood as a test.
-     * @throws IOException in case of problem
-     */
-    @After
-    public void generateTestForWebDriver() throws IOException {
-        // cleanup
-        expectedAlerts_ = null;
-        mockWebConnection_ = null;
-
-        if (generateTest_content_ != null && !generateTest_notYetImplemented_) {
-            final File targetDir = new File("target/generated_tests");
-            FileUtils.forceMkdir(targetDir);
-
-            final File outFile = new File(targetDir, generateTest_testName_);
-
-            FileUtils.writeStringToFile(outFile, generateTest_content_, ISO_8859_1);
-
-            // write the expected alerts
-            final String suffix;
-            BrowserVersion browser = generateTest_browserVersion_.get();
-            if (browser == null) {
-                browser = getBrowserVersion();
-            }
-            if (browser == FLAG_ALL_BROWSERS) {
-                suffix = ".expected";
-            }
-            else {
-                suffix = "." + browser.getNickname() + ".expected";
-            }
-
-            final File expectedLog = new File(outFile.getParentFile(), outFile.getName() + suffix);
-
-            try (FileOutputStream fos = new FileOutputStream(expectedLog)) {
-                try (ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                    oos.writeObject(generateTest_expectedAlerts_);
-                }
-            }
-        }
-        generateTest_content_ = null;
-        generateTest_expectedAlerts_ = null;
-        generateTest_testName_ = null;
-    }
-
-    /**
-     * To be documented.
-     * @param status the status
-     */
-    protected void setGenerateTest_notYetImplemented(final boolean status) {
-        generateTest_notYetImplemented_ = status;
     }
 
     /**
