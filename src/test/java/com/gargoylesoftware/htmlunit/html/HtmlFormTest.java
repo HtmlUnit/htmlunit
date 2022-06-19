@@ -1179,7 +1179,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final List<DomElement> quantities = page.getElementsByName("Quantity");
         assertEquals(3, quantities.size());
         for (final DomElement quantity : quantities) {
-            assertEquals("1", quantity.getAttribute("value"));
+            assertEquals("1", ((HtmlInput) quantity).getValue());
         }
     }
 

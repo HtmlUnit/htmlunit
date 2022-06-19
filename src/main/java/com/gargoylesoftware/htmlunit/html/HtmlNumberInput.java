@@ -63,7 +63,6 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
         }
     }
 
-
     /**
      * {@inheritDoc}
      */
