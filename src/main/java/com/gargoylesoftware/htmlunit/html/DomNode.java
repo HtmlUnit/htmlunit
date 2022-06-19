@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -242,6 +243,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public SgmlPage getPage() {
         return page_;
     }
@@ -250,6 +252,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public HtmlPage getHtmlPageOrNull() {
         if (page_ == null || !page_.isHtmlPage()) {
             return null;
@@ -281,6 +284,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
@@ -293,6 +297,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getParentNode() {
         return parent_;
     }
@@ -321,6 +326,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
@@ -333,6 +339,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getNextSibling() {
         return nextSibling_;
     }
@@ -341,6 +348,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getFirstChild() {
         return firstChild_;
     }
@@ -386,6 +394,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * @param next set the nextSibling field value
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public void setNextSibling(final DomNode next) {
         nextSibling_ = next;
     }
@@ -1308,16 +1317,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {
-        return () -> new ChildIterator();
+        return () -> new ChildIterator(firstChild_);
     }
 
     /**
      * An iterator over all children of this node.
      */
-    protected class ChildIterator implements Iterator<DomNode> {
+    protected static class ChildIterator implements Iterator<DomNode> {
 
-        private DomNode nextNode_ = firstChild_;
+        private DomNode nextNode_;
         private DomNode currentNode_;
+
+        public ChildIterator(final DomNode nextNode) {
+            nextNode_ = nextNode;
+        }
 
         /** {@inheritDoc} */
         @Override
