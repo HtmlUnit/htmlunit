@@ -1319,7 +1319,7 @@
             <groupId>com.github.spotbugs</groupId>
             <artifactId>spotbugs-annotations</artifactId>
             <version>${spotbugs.version}</version>
-            <optional>true</optional>
+            <scope>test</scope>
         </dependency>
 
         <!-- for some test cases we use log4j to check the output -->

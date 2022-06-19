@@ -14,11 +14,17 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.URL;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Represents options of a {@link WebClient}.
@@ -167,6 +173,7 @@ public class WebClientOptions implements Serializable {
      * Gets the SSLClientCertificateStore.
      * @return the KeyStore for use on SSL connections
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public KeyStore getSSLClientCertificateStore() {
         return sslClientCertificateStore_;
     }
@@ -175,6 +182,7 @@ public class WebClientOptions implements Serializable {
      * Gets the SSLClientCertificatePassword.
      * @return the password
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public char[] getSSLClientCertificatePassword() {
         return sslClientCertificatePassword_;
     }
@@ -184,6 +192,7 @@ public class WebClientOptions implements Serializable {
      * @return the protocol versions enabled for use on SSL connections
      * @see #setSSLClientProtocols(String...)
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public String[] getSSLClientProtocols() {
         return sslClientProtocols_;
     }
@@ -205,6 +214,7 @@ public class WebClientOptions implements Serializable {
      * @return the cipher suites enabled for use on SSL connections
      * @see #setSSLClientCipherSuites(String...)
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public String[] getSSLClientCipherSuites() {
         return sslClientCipherSuites_;
     }
@@ -435,6 +445,7 @@ public class WebClientOptions implements Serializable {
      * Returns the proxy configuration for this client.
      * @return the proxy configuration for this client
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public ProxyConfig getProxyConfig() {
         return proxyConfig_;
     }
@@ -535,12 +546,14 @@ public class WebClientOptions implements Serializable {
      * Gets the SSL TrustStore.
      * @return the SSL TrustStore for insecure SSL connections
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public KeyStore getSSLTrustStore() {
         return sslTrustStore_;
     }
 
     private static KeyStore getKeyStore(final InputStream inputStream, final String keystorePassword,
-            final String keystoreType) throws Exception {
+            final String keystoreType)
+                    throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
         if (inputStream == null) {
             return null;
         }
@@ -619,6 +632,7 @@ public class WebClientOptions implements Serializable {
      *
      * @return the local address
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public InetAddress getLocalAddress() {
         return localAddress_;
     }
