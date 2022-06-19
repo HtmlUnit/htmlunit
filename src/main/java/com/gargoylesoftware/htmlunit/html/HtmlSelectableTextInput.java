@@ -85,7 +85,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setValue(newValue);
+            setRawValue(newValue);
         }
     }
 
