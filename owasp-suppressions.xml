@@ -2,7 +2,7 @@
 <suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
     <suppress>
         <notes><![CDATA[
-        file name: htmlunit-cssparser-1.12.0.jar
+        the CVE are for HtmlUnit itself or for Neko
         ]]></notes>
         <packageUrl regex="true">^pkg:maven/net\.sourceforge\.htmlunit/htmlunit\-cssparser@.*$</packageUrl>
         <vulnerabilityName>CVE-2020-5529</vulnerabilityName>
