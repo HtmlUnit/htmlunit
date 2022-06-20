@@ -702,7 +702,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @throws Exception if the test fails
      */
-    protected void startWebServer(final String resourceBase, final String[] classpath,
+    protected static void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
         startWebServer(resourceBase, classpath, servlets, null);
     }
@@ -717,7 +717,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param servlets map of {String, Class} pairs: String is the path spec, while class is the class
      * @throws Exception if the test fails
      */
-    protected void startWebServer2(final String resourceBase, final String[] classpath,
+    protected static void startWebServer2(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         if (STATIC_SERVER2_ != null) {
@@ -738,7 +738,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param handler wrapper for handler (can be null)
      * @throws Exception if the test fails
      */
-    protected void startWebServer(final String resourceBase, final String[] classpath,
+    protected static void startWebServer(final String resourceBase, final String[] classpath,
             final Map<String, Class<? extends Servlet>> servlets, final HandlerWrapper handler) throws Exception {
         stopWebServers();
         LAST_TEST_UsesMockWebConnection_ = Boolean.FALSE;

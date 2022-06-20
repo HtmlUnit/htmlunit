@@ -32,7 +32,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -321,9 +321,8 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
     /**
      * Starts the web server.
      */
-    @Override
-    @Before
-    public void beforeTest() {
+    @BeforeClass
+    public static void before() {
         try {
             final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
             servlets.put("/upload1", Upload1Servlet.class);
