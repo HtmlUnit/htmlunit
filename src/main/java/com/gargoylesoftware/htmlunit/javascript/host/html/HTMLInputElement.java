@@ -210,6 +210,8 @@ public class HTMLInputElement extends HTMLElement {
                     newInput.markAsCreatedByJavascript();
                 }
 
+                newInput.setValue(input.getValue());
+
                 if (input.getParentNode() == null) {
                     // the input hasn't yet been inserted into the DOM tree (likely has been
                     // created via document.createElement()), so simply replace it with the

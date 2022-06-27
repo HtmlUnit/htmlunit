@@ -30,14 +30,14 @@
         <htmlunitcorejs.version>2.63.0-SNAPSHOT</htmlunitcorejs.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
-        <jetty.version>9.4.46.v20220331</jetty.version>
+        <jetty.version>9.4.48.v20220622</jetty.version>
         <log4j.version>2.17.2</log4j.version>
         <selenium.version>3.141.59</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
         <spotbugs.version>4.7.0</spotbugs.version>
-        <pmd.version>6.46.0</pmd.version>
+        <pmd.version>6.47.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
         <dependencycheck.version>7.1.1</dependencycheck.version>
     </properties>
@@ -331,7 +331,7 @@
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
                 <artifactId>wagon-ssh</artifactId>
-                <version>3.5.1</version>
+                <version>3.5.2</version>
             </extension>
         </extensions>
     </build>

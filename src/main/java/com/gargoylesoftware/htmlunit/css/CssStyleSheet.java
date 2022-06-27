@@ -127,9 +127,9 @@ public class CssStyleSheet implements Serializable {
     private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
-    private String uri_;
+    private final String uri_;
 
-    private boolean enabled_ = true;
+    private final boolean enabled_ = true;
 
     /**
      * Set of CSS2 pseudo class names.

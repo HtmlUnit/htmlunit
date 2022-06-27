@@ -67,7 +67,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     public static final class NativeParamsIterator extends ES6Iterator {
         private final Type type_;
         private final String className_;
-        private transient Iterator<NameValuePair> iterator_;
+        private final transient Iterator<NameValuePair> iterator_;
         enum Type { KEYS, VALUES, BOTH }
 
         public static void init(final ScriptableObject scope, final String className) {

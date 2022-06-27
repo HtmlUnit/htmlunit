@@ -111,10 +111,10 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(102, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(103, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(102, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(103, "Chrome");
 
     /**
      * Array with all supported browsers
@@ -231,9 +231,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.5005.63 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.5005.63 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -264,8 +264,8 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        CHROME.secClientHintUserAgentHeader_ = "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Google Chrome\";v=\""
+        CHROME.secClientHintUserAgentHeader_ = "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\""
+                        + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
                         + CHROME.getBrowserVersionNumeric() + "\"";
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -277,11 +277,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.5005.63 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1245.30";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1264.37";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.5005.63 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1245.30";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1264.37";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -312,8 +312,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        EDGE.secClientHintUserAgentHeader_ = "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Microsoft Edge\";v=\""
+        EDGE.secClientHintUserAgentHeader_ = "\".Not/A)Brand\";v=\"99\", \"Microsoft Edge\";v=\""
+                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
                 + EDGE.getBrowserVersionNumeric() + "\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,

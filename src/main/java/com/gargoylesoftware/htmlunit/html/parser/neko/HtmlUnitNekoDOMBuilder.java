@@ -178,7 +178,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private final int initialSize_;
     private DomNode currentNode_;
     private final boolean createdByJavascript_;
-    private StringBuilder characters_ = new StringBuilder();
+    private final StringBuilder characters_ = new StringBuilder();
     private HtmlUnitNekoDOMBuilder.HeadParsed headParsed_ = HeadParsed.NO;
     private HtmlElement body_;
     private boolean lastTagWasSynthesized_;
