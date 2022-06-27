@@ -583,7 +583,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
-                + "previousElementSibling,role,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
                 + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,toggleAttribute(),webkitMatchesSelector()",
@@ -598,7 +598,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
                 + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
-                + "previousElementSibling,role,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
                 + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,toggleAttribute(),webkitMatchesSelector()",
