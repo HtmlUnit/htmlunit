@@ -7,8 +7,13 @@
     </properties>
 
     <body>
-        <release version="2.63.0" date="xx, 2022" description="Chrome/Edge 103, Bugfixes">
+        <release version="2.63.0" date="xx, 2022" description="Chrome/Edge 103, Firefox 102">
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.18.0.
+            </action>
         </release>
+
+
         <release version="2.62.0" date="June 02, 2022" description="Chrome/Edge 102, Firefox 101, Bugfixes">
             <action type="add" dev="rbri">
                 Introduce HtmlInput.getValue() and HtmlInput.setValue(String).

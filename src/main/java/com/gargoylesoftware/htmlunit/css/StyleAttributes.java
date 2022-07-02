@@ -2563,7 +2563,10 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_BLOCK_("overflow-block", "overflow-block", ff("visible")),
 
         /** The style property {@code overflowClipMargin}. */
-        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdge("0px")),
+        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdge("0px"), ffLatest("")),
+
+        /** The style property {@code overflow-clip-margin}. */
+        OVERFLOW_CLIP_MARGIN_("overflow-clip-margin", "overflow-clip-margin", ffLatest("")),
 
         /** The style property {@code overflowInline}. */
         OVERFLOW_INLINE("overflowInline", "overflow-inline", ff("visible")),

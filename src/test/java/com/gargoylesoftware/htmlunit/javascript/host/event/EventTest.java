@@ -969,7 +969,6 @@ public class EventTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "activeElement BODY",
-            FF = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             FF_ESR = {"activeElement BODY", "focus #document", "handler: activeElement BODY"},
             IE = {"activeElement BODY", "focus BODY", "handler: activeElement BODY"})
     // http://code.google.com/p/selenium/issues/detail?id=4665
