@@ -854,7 +854,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
 
     /**
      * Test that changing type doesn't throw.
-     * Test must be extended when setting type really does something.
      * @throws Exception if the test fails
      */
     @Test
