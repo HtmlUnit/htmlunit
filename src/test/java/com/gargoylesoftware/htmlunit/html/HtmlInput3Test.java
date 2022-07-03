@@ -500,4 +500,248 @@ public final class HtmlInput3Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "1234--null"})
+    public void detached_button() throws Exception {
+        changeTypeDetached("1234", "button");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "on--null"})
+    public void detached_checkbox() throws Exception {
+        changeTypeDetached("1234", "checkbox");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"#aaaaaa--null", "#aaaaaa--null"},
+            IE = {"#aaaaaa--null", "error"})
+    public void detached_color() throws Exception {
+        changeTypeDetached("#aaaaaa", "color");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2019-07-11--null", "2019-07-11--null"},
+            IE = {"2019-07-11--null", "error"})
+    public void detached_date() throws Exception {
+        changeTypeDetached("2019-07-11", "date");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2019-07-11T4:16--null",
+                       "--null"},
+            FF_ESR = {"2019-07-11T4:16--null",
+                      "2019-07-11T4:16--null"},
+            IE = {"2019-07-11T4:16--null", "error"})
+    @HtmlUnitNYI(FF_ESR = {"2019-07-11T4:16--null",
+                           "--null"})
+    public void detached_datetimelocal() throws Exception {
+        changeTypeDetached("2019-07-11T4:16", "datetime-local");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "--null"})
+    public void detached_file() throws Exception {
+        changeTypeDetached("1234", "file");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "1234--null"})
+    public void detached_hidden() throws Exception {
+        changeTypeDetached("1234", "hidden");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "--null"})
+    public void detached_image() throws Exception {
+        changeTypeDetached("1234", "image");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"12--null", "12--null"},
+            CHROME = {"12--null", "--null"},
+            EDGE = {"12--null", "--null"},
+            IE = {"12--null", "error"})
+    public void detached_month() throws Exception {
+        changeTypeDetached("12", "month");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "1234--null"})
+    public void detached_number() throws Exception {
+        changeTypeDetached("1234", "number");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "1234--null"})
+    public void detached_password() throws Exception {
+        changeTypeDetached("1234", "password");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "on--null"})
+    public void detached_radio() throws Exception {
+        changeTypeDetached("1234", "radio");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"7--null", "7--null"})
+    public void detached_range() throws Exception {
+        changeTypeDetached("7", "range");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "Reset-Reset-Reset"})
+    public void detached_reset() throws Exception {
+        changeTypeDetached("1234", "reset");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "1234--null"})
+    public void detached_search() throws Exception {
+        changeTypeDetached("1234", "search");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234--null", "1234-1234-1234"},
+            IE = {"1234--null", "Submit Query-Submit Query-Submit Query"})
+    public void detached_submit() throws Exception {
+        changeTypeDetached("1234", "submit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "1234--null"})
+    public void detached_tel() throws Exception {
+        changeTypeDetached("1234", "tel");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1234--null", "1234--null"})
+    public void detached_text() throws Exception {
+        changeTypeDetached("1234", "text");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"4:16--null", "--null"},
+            IE = {"4:16--null", "error"})
+    public void detached_time() throws Exception {
+        changeTypeDetached("4:16", "time");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"https://www.wetator.org--null",
+             "https://www.wetator.org--null"})
+    public void detached_url() throws Exception {
+        changeTypeDetached("https://www.wetator.org", "url");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"24--null", "24--null"},
+            CHROME = {"24--null", "--null"},
+            EDGE = {"24--null", "--null"},
+            IE = {"24--null", "error"})
+    public void detached_week() throws Exception {
+        changeTypeDetached("24", "week");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2020-04-7T1:13--null",
+                       "2020-04-7T1:13--null"},
+            IE = {"2020-04-7T1:13--null", "error"})
+    public void detached_datetime() throws Exception {
+        changeTypeDetached("2020-04-7T1:13", "datetime");
+    }
+
+    private void changeTypeDetached(final String value, final String targetType) throws Exception {
+        final String html =
+                "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    var input = document.createElement('input');\n"
+                + "    input.value = '" + value + "';\n"
+                + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+                + "    try {\n"
+                + "      input.type = '" + targetType + "';\n"
+                + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+                + "    } catch(e) { log('error'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head><body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
