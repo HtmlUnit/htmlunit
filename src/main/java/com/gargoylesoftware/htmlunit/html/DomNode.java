@@ -983,13 +983,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (firstChild_ == null) {
             firstChild_ = node;
         }
-		else {
-        	final DomNode last = getLastChild();
-        	node.previousSibling_ = last;
-        	node.nextSibling_ = null; // safety first
+        else {
+            final DomNode last = getLastChild();
+            node.previousSibling_ = last;
+            node.nextSibling_ = null; // safety first
 
-	        last.nextSibling_ = node;
-	    }
+            last.nextSibling_ = node;
+        }
         firstChild_.previousSibling_ = node;
     }
 
