@@ -975,18 +975,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
+        // try to make the node setup as complete as possible
+        // before the node is reachable
         node.setPage(getPage());
+        node.parent_ = this;
+
         if (firstChild_ == null) {
             firstChild_ = node;
         }
-        else {
-            final DomNode last = getLastChild();
-            last.nextSibling_ = node;
-            node.previousSibling_ = last;
-            node.nextSibling_ = null; // safety first
-        }
+		else {
+        	final DomNode last = getLastChild();
+        	node.previousSibling_ = last;
+        	node.nextSibling_ = null; // safety first
+
+	        last.nextSibling_ = node;
+	    }
         firstChild_.previousSibling_ = node;
-        node.parent_ = this;
     }
 
     /**
@@ -1046,17 +1050,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to insert before this node
      */
     private void basicInsertBefore(final DomNode node) {
+        // try to make the node setup as complete as possible
+        // before the node is reachable
         node.setPage(page_);
+        node.parent_ = parent_;
+        node.previousSibling_ = previousSibling_;
+        node.nextSibling_ = this;
+
         if (parent_.firstChild_ == this) {
             parent_.firstChild_ = node;
         }
         else {
             previousSibling_.nextSibling_ = node;
         }
-        node.previousSibling_ = previousSibling_;
-        node.nextSibling_ = this;
         previousSibling_ = node;
-        node.parent_ = parent_;
     }
 
     private void fireAddition(final DomNode domNode) {
