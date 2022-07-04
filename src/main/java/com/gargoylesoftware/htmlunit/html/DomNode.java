@@ -400,20 +400,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     }
 
     /**
-     * Returns this node's node type.
-     * @return this node's node type
-     */
-    @Override
-    public abstract short getNodeType();
-
-    /**
-     * Returns this node's node name.
-     * @return this node's node name
-     */
-    @Override
-    public abstract String getNodeName();
-
-    /**
      * {@inheritDoc}
      */
     @Override

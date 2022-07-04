@@ -33,12 +33,6 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      * {@inheritDoc}
      */
     @Override
-    public abstract T getDelegee();
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object get(final int index, Scriptable start) {
         if (start instanceof HtmlUnitScriptableProxy<?>) {
             start = ((HtmlUnitScriptableProxy<?>) start).getDelegee();
