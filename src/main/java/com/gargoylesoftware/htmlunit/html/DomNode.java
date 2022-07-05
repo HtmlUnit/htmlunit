@@ -974,18 +974,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             for (final DomNode child : fragment.getChildren()) {
                 insertBefore(child, refChild);
             }
+            return newChild;
         }
-        else {
-            if (refChild == null) {
-                appendChild(newChild);
-            }
-            else {
-                if (refChild.getParentNode() != this) {
-                    throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
-                }
-                ((DomNode) refChild).insertBefore((DomNode) newChild);
-            }
+
+        if (refChild == null) {
+            appendChild(newChild);
+            return newChild;
         }
+
+        if (refChild.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
+        }
+
+        ((DomNode) refChild).insertBefore((DomNode) newChild);
         return newChild;
     }
 
