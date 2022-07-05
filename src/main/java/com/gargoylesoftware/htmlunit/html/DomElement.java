@@ -109,25 +109,22 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes a map ready initialized with the attributes for this element, or
-     * {@code null}.
+     * {@code null}. The map will be stored as is, not copied.
      */
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
 
         if (attributes != null && !attributes.isEmpty()) {
-            // try to make the attributes setup as complete as possible
-            // before they are reachable
-            final NamedAttrNodeMapImpl attribs = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
-            for (final DomAttr domAttr : attribs.values()) {
-                domAttr.setParentNode(this);
-                final String attrNamespaceURI = domAttr.getNamespaceURI();
-                final String prefix = domAttr.getPrefix();
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
+            for (final DomAttr entry : attributes_.values()) {
+                entry.setParentNode(this);
+                final String attrNamespaceURI = entry.getNamespaceURI();
+                final String prefix = entry.getPrefix();
                 if (attrNamespaceURI != null && prefix != null) {
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
-            attributes_ = attribs;
         }
     }
 
