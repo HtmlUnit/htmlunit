@@ -384,21 +384,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         return false;
     }
 
-    /** @param previous set the previousSibling field value */
-    protected void setPreviousSibling(final DomNode previous) {
-        previousSibling_ = previous;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * @param next set the nextSibling field value
-     */
-    @SuppressFBWarnings("EI_EXPOSE_REP")
-    public void setNextSibling(final DomNode next) {
-        nextSibling_ = next;
-    }
-
     /**
      * {@inheritDoc}
      */

@@ -615,7 +615,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                         }
                     }
                     else if (currentNode_ instanceof HtmlImage) {
-                        currentNode_.setNextSibling(text);
+                        currentNode_.getParentNode().appendChild(text);
                     }
                     else {
                         appendChild(currentNode_, text);
