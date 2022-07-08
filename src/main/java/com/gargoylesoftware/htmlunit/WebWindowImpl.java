@@ -60,7 +60,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private static final Log LOG = LogFactory.getLog(WebWindowImpl.class);
 
     private final WebClient webClient_;
-    private Screen screen_;
+    private final Screen screen_;
     private Page enclosedPage_;
     private transient Object scriptObject_;
     private JavaScriptJobManager jobManager_;

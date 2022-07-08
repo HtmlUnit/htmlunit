@@ -1349,7 +1349,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         if (!dialogPage.getUrl().equals(URL_FIRST)) {
             final HtmlInput input = dialogPage.getHtmlElementById("name");
-            input.setValueAttribute("a");
+            input.setValue("a");
 
             final HtmlButtonInput button2 = (HtmlButtonInput) dialogPage.getHtmlElementById("b");
             button2.click();

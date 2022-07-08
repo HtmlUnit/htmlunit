@@ -52,9 +52,13 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         final HtmlRangeInput forth = (HtmlRangeInput) page.getElementById("forth");
 
         assertEquals("50", first.getValueAttribute());
+        assertEquals("50", first.getValue());
         assertEquals("0", second.getValueAttribute());
+        assertEquals("0", second.getValue());
         assertEquals("35", third.getValueAttribute());
+        assertEquals("35", third.getValue());
         assertEquals("50", forth.getValueAttribute());
+        assertEquals("50", forth.getValue());
     }
 
     /**
@@ -78,34 +82,40 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         final HtmlRangeInput second = (HtmlRangeInput) page.getElementById("second");
         final HtmlRangeInput third = (HtmlRangeInput) page.getElementById("third");
 
-        final String defaultFirstValue = first.getValueAttribute();
+        final String defaultFirstValue = first.getValue();
 
         // empty
         assertTrue(first.isValid());
         // invalid
-        first.setValueAttribute("foo");
+        first.setValue("foo");
         assertTrue(first.isValid());
         assertEquals(defaultFirstValue, first.getValueAttribute());
+        assertEquals(defaultFirstValue, first.getValue());
         // lesser
-        first.setValueAttribute("1");
+        first.setValue("1");
         assertTrue(first.isValid());
         assertEquals("10", first.getValueAttribute());
+        assertEquals("10", first.getValue());
         // equal
-        first.setValueAttribute("10");
+        first.setValue("10");
         assertTrue(first.isValid());
         assertEquals("10", first.getValueAttribute());
+        assertEquals("10", first.getValue());
         // bigger
-        first.setValueAttribute("100");
+        first.setValue("100");
         assertTrue(first.isValid());
         assertEquals("100", first.getValueAttribute());
+        assertEquals("100", first.getValue());
 
-        second.setValueAttribute("0");
+        second.setValue("0");
         assertTrue(second.isValid());
         assertEquals("0", second.getValueAttribute());
+        assertEquals("0", second.getValue());
 
-        third.setValueAttribute("0");
+        third.setValue("0");
         assertTrue(third.isValid());
         assertEquals("0", third.getValueAttribute());
+        assertEquals("0", third.getValue());
     }
 
     /**
@@ -129,33 +139,39 @@ public class HtmlRangeInput2Test extends SimpleWebTestCase {
         final HtmlRangeInput second = (HtmlRangeInput) page.getElementById("second");
         final HtmlRangeInput third = (HtmlRangeInput) page.getElementById("third");
 
-        final String defaultFirstValue = first.getValueAttribute();
+        final String defaultFirstValue = first.getValue();
 
         // empty
         assertTrue(first.isValid());
         // invalid
-        first.setValueAttribute("foo");
+        first.setValue("foo");
         assertTrue(first.isValid());
         assertEquals(defaultFirstValue, first.getValueAttribute());
+        assertEquals(defaultFirstValue, first.getValue());
         // lesser
-        first.setValueAttribute("1");
+        first.setValue("1");
         assertTrue(first.isValid());
         assertEquals("1", first.getValueAttribute());
+        assertEquals("1", first.getValue());
         // equal
-        first.setValueAttribute("10");
+        first.setValue("10");
         assertTrue(first.isValid());
         assertEquals("10", first.getValueAttribute());
+        assertEquals("10", first.getValue());
         // bigger
-        first.setValueAttribute("100");
+        first.setValue("100");
         assertTrue(first.isValid());
         assertEquals("10", first.getValueAttribute());
+        assertEquals("10", first.getValue());
 
-        second.setValueAttribute("0");
+        second.setValue("0");
         assertTrue(second.isValid());
         assertEquals("0", second.getValueAttribute());
+        assertEquals("0", second.getValue());
 
-        third.setValueAttribute("0");
+        third.setValue("0");
         assertTrue(third.isValid());
         assertEquals("0", third.getValueAttribute());
+        assertEquals("0", third.getValue());
     }
 }

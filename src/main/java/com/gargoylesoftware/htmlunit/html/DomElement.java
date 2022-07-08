@@ -114,6 +114,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public DomElement(final String namespaceURI, final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(namespaceURI, qualifiedName, page);
+
         if (attributes != null && !attributes.isEmpty()) {
             attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive(), attributes);
             for (final DomAttr entry : attributes_.values()) {

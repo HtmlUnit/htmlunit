@@ -22,7 +22,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -320,8 +319,6 @@ public class NativeNumberTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("12,345")
-    @BuggyWebDriver(FF = "12.345",
-            FF_ESR = "12.345")
     public void toLocaleStringNoParam() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

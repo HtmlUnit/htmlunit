@@ -147,6 +147,23 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
+    public String getValue() {
+        final File[] files = getFiles();
+        if (files == null || files.length == 0) {
+            return ATTRIBUTE_NOT_DEFINED;
+        }
+        final File first = files[0];
+        final String name = first.getName();
+        if (name.isEmpty()) {
+            return name;
+        }
+        return "C:\\fakepath\\" + name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public void setValueAttribute(final String newValue) {
         if (StringUtils.isEmpty(newValue)) {
             setFiles();

@@ -246,7 +246,7 @@ public class HtmlSerializerNormalizedText {
      */
     protected void appendInput(final HtmlSerializerTextBuilder builder, final HtmlInput htmlInput) {
         builder.append(" ", Mode.NORMALIZE);
-        builder.append(htmlInput.getValueAttribute(), Mode.NORMALIZE);
+        builder.append(htmlInput.getValue(), Mode.NORMALIZE);
         builder.append(" ", Mode.NORMALIZE);
     }
 

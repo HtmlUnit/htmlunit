@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCHANG
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_CHECKBOX_DOES_NOT_CLICK_SURROUNDING_ANCHOR;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.Page;
@@ -176,29 +175,19 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      * Select the specified radio button in the page (outside any &lt;form&gt;).
      */
     private void setCheckedForPage(final HtmlPage htmlPage) {
-        // May be done in single XPath search?
-        final List<HtmlRadioButtonInput> pageInputs =
-            htmlPage.getByXPath("//input[lower-case(@type)='radio' "
-                + "and @name='" + getNameAttribute() + "']");
-        final List<HtmlRadioButtonInput> formInputs =
-            htmlPage.getByXPath("//form//input[lower-case(@type)='radio' "
-                + "and @name='" + getNameAttribute() + "']");
-
-        pageInputs.removeAll(formInputs);
-
-        boolean foundInPage = false;
-        for (final HtmlRadioButtonInput input : pageInputs) {
-            if (input == this) {
-                setCheckedInternal(true);
-                foundInPage = true;
+        final String name = getNameAttribute();
+        for (final DomNode domNode : htmlPage.getDescendants()) {
+            if (domNode instanceof HtmlRadioButtonInput) {
+                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) domNode;
+                if (name.equals(radioInput.getAttribute("name")) && radioInput.getEnclosingForm() == null) {
+                    if (radioInput == this) {
+                        setCheckedInternal(true);
+                    }
+                    else {
+                        radioInput.setCheckedInternal(false);
+                    }
+                }
             }
-            else {
-                input.setCheckedInternal(false);
-            }
-        }
-
-        if (!foundInPage && !formInputs.contains(this)) {
-            setCheckedInternal(true);
         }
     }
 
@@ -280,7 +269,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     }
 
     @Override
-    Object getInternalValue() {
+    protected Object getInternalValue() {
         return isChecked();
     }
 
@@ -323,12 +312,15 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
             return !isChecked();
         }
 
-        final List<HtmlRadioButtonInput> pageInputs = getPage()
-                .getByXPath("//input[lower-case(@type)='radio' and @name='" + getNameAttribute() + "']");
-
-        for (final HtmlRadioButtonInput input : pageInputs) {
-            if (input.isChecked()) {
-                return false;
+        final String name = getNameAttribute();
+        for (final DomNode domNode : getPage().getDescendants()) {
+            if (domNode instanceof HtmlRadioButtonInput) {
+                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) domNode;
+                if (name.equals(radioInput.getAttribute("name"))) {
+                    if (radioInput.isChecked()) {
+                        return false;
+                    }
+                }
             }
         }
         return true;

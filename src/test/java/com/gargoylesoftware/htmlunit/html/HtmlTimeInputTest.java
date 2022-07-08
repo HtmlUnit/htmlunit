@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.InvalidElementStateException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -26,6 +27,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -114,10 +116,12 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "",
-            IE = "8:04")
+    @Alerts(DEFAULT = {"", "20:04"},
+            IE = {"0804", "0804PM"})
+    @BuggyWebDriver(FF = {"", ""},
+            FF_ESR = {"", ""})
     @NotYetImplemented(IE)
-    public void typing() throws Exception {
+    public void type() throws Exception {
         final String htmlContent
             = "<html><head><title>foo</title></head><body>\n"
             + "<form id='form1'>\n"
@@ -127,8 +131,85 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
-        input.sendKeys("8:04");
+        input.sendKeys("0804");
         assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
+
+        input.sendKeys("PM");
+        assertEquals(getExpectedAlerts()[1], input.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ex: ",
+            FF = "no ex: ",
+            FF_ESR = "no ex: ")
+    public void typeWhileDisabled() throws Exception {
+        final String html = "<html><body><input type='time' id='p' disabled='disabled'/></body></html>";
+        final WebDriver driver = loadPage2(html);
+        final WebElement p = driver.findElement(By.id("p"));
+        try {
+            p.sendKeys("804PM");
+            assertEquals(getExpectedAlerts()[0], "no ex: " + p.getAttribute("value"));
+            return;
+        }
+        catch (final InvalidElementStateException e) {
+            // as expected
+        }
+        assertEquals(getExpectedAlerts()[0], "ex: " + p.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"null", "null"})
+    public void typeDoesNotChangeValueAttribute() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='time' id='t'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
+
+        t.sendKeys("0804PM");
+        check.click();
+        verifyAlerts(driver, getExpectedAlerts()[1]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"20:04", "20:04"})
+    public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
+        final String html = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "  <input type='time' id='t' value='20:04'/>\n"
+                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                        + "DoIt</button>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(html);
+        final WebElement t = driver.findElement(By.id("t"));
+
+        final WebElement check = driver.findElement(By.id("check"));
+        check.click();
+        verifyAlerts(driver, getExpectedAlerts()[0]);
+
+        t.sendKeys("0905AM");
+        check.click();
+        verifyAlerts(driver, getExpectedAlerts()[1]);
     }
 
     /**

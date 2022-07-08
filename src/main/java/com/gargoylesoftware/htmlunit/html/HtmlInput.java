@@ -169,6 +169,22 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     /**
+     * @return the value
+     */
+    public String getValue() {
+        return getValueAttribute();
+    }
+
+    /**
+     * Sets the value.
+     *
+     * @param newValue the new value
+     */
+    public void setValue(final String newValue) {
+        setValueAttribute(newValue);
+    }
+
+    /**
      * Returns the value of the attribute {@code checked}. Refer to the
      * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
      * documentation for details on the use of this attribute.
@@ -699,7 +715,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         executeOnChangeHandlerIfAppropriate(this);
     }
 
-    Object getInternalValue() {
+    protected Object getInternalValue() {
         return getValueAttribute();
     }
 

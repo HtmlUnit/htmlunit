@@ -50,6 +50,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input = (HtmlEmailInput) input.cloneNode(true);
         input.type("abc@email.com");
         assertEquals("abc@email.com", input.getValueAttribute());
+        assertEquals("abc@email.com", input.getValue());
     }
 
     /**
@@ -75,6 +76,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.type("xyz@email.com");
 
         assertEquals("xyz@email.com", input.getValueAttribute());
+        assertEquals("xyz@email.com", input.getValue());
     }
 
     /**
@@ -100,6 +102,33 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.type("xyz@email.com");
 
         assertEquals("xyz@email.com", input.getValueAttribute());
+        assertEquals("xyz@email.com", input.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typingAndSetValue() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' id='foo'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
+
+        input.type("abc@email.com");
+        input.setValue("");
+        input.type("xyz@email.com");
+
+        assertEquals("xyz@email.com", input.getValueAttribute());
+        assertEquals("xyz@email.com", input.getValue());
     }
 
     /**
@@ -123,10 +152,10 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("abc@eemail.com");
+        input.setValue("abc@eemail.com");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("abc@email.com");
+        input.setValue("abc@email.com");
         assertTrue(input.isValid());
     }
 
@@ -153,10 +182,10 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         // empty
         assertTrue(input.isValid());
         // invalid
-        input.setValueAttribute("abc");
+        input.setValue("abc");
         assertFalse(input.isValid());
         // valid
-        input.setValueAttribute("abc@email.com");
+        input.setValue("abc@email.com");
         assertTrue(input.isValid());
     }
 }

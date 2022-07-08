@@ -127,9 +127,9 @@ public class CssStyleSheet implements Serializable {
     private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
 
     /** This stylesheet's URI (used to resolved contained @import rules). */
-    private String uri_;
+    private final String uri_;
 
-    private boolean enabled_ = true;
+    private final boolean enabled_ = true;
 
     /**
      * Set of CSS2 pseudo class names.
@@ -786,14 +786,14 @@ public class CssStyleSheet implements Serializable {
             case "placeholder-shown":
                 if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN)) {
                     return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
                             && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
 
             case "-ms-input-placeholder":
                 if (browserVersion.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER)) {
                     return element instanceof HtmlInput
-                            && StringUtils.isEmpty(((HtmlInput) element).getValueAttribute())
+                            && StringUtils.isEmpty(((HtmlInput) element).getValue())
                             && StringUtils.isNotEmpty(((HtmlInput) element).getPlaceholder());
                 }
 

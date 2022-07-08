@@ -80,6 +80,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
 
         assertTrue(radio.isChecked());
         assertEquals(getExpectedAlerts()[0], radio.getValueAttribute());
+        assertEquals(getExpectedAlerts()[0], radio.getValue());
     }
 
     /**
@@ -104,6 +105,7 @@ public class HtmlRadioButtonInputTest extends SimpleWebTestCase {
         assertFalse(radio.isChecked());
 
         assertEquals("on", radio.getValueAttribute());
+        assertEquals("on", radio.getValue());
     }
 
     /**

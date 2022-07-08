@@ -556,7 +556,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
     /**
      * Test for a case where complete HTML page is set in innerHTML of DIV tag.
      * Behavior is same for any TAG inside body including BODY tag.
-     * Browsers ignore only HTML, HEAD and BODY tags. Contents of HEAD and BODY are added to
+     * Browsers ignore only HTML, HEAD and BODY tags. Contents of BODY are added to
      * the current node (DIV tag in test case).
      *
      * @throws Exception failure
@@ -597,6 +597,62 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "    <script>\n"
             + "    document.getElementById('outerDiv').innerHTML ="
             + "        '<html><head><title>Inner Html</title></head>"
+            + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
+            + "    </script>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
+            + "</html>\n";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * Test for a case where complete HTML page is set in innerHTML of DIV tag.
+     * Behavior is same for any TAG inside body including BODY tag.
+     * Browsers ignore only HTML, HEAD and BODY tags. Contents of BODY are added to
+     * the current node (DIV tag in test case).
+     *
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"titles", "HEAD", "Outer Html", "DIV", "Inner Html",
+                "bodyTitles", "DIV", "Inner Html",
+                "innerDiv", "outerDiv"})
+    public void setCompleteHtmlToDIV2_innerHTML() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "  <title>Outer Html</title>\n"
+            + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "    function test() {\n"
+            + "      log('titles');\n"
+            + "      var titles = document.getElementsByTagName('title');\n"
+            + "      for(var i = 0; i < titles.length; i++) {\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
+            + "      }\n"
+            + "      log('bodyTitles');\n"
+            + "      var bodyTitles = document.body.getElementsByTagName('title');\n"
+            + "      for(var i = 0; i < bodyTitles.length; i++) {\n"
+            + "        log(bodyTitles[i].parentNode.nodeName);\n"
+            + "        log(bodyTitles[i].text);\n"
+            + "      }\n"
+            + "      log('innerDiv');\n"
+            + "      var innerDiv = document.getElementById('innerDiv');\n"
+            + "      log(innerDiv.parentNode.id);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <DIV id=outerDiv>\n"
+            + "     Outer DIV\n"
+            + "  </DIV>\n"
+            + "    <script>\n"
+            + "    document.getElementById('outerDiv').innerHTML ="
+            + "        '<html><head>"
+            + "            <title>Inner Html</title>"
+            + "            <meta name=\"author\" content=\"John Doe\">"
+            + "        </head>"
             + "        <body><DIV id=innerDiv>Inner DIV</DIV></body></html>';\n"
             + "    </script>\n"
             + LOG_TEXTAREA

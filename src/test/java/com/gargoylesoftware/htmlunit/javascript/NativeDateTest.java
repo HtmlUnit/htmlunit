@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 
 /**
  * Date is a native JavaScript object and therefore provided by Rhino but behavior should be
@@ -140,7 +139,6 @@ public class NativeDateTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1/1/2000",
             IE = "\u200E1\u200E/\u200E1\u200E/\u200E2000")
-    @BuggyWebDriver(FF = "1.1.2000")
     public void toLocaleDateString() throws Exception {
         final String html
             = "<html><head><script>\n"
@@ -245,7 +243,6 @@ public class NativeDateTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"12:00:00 AM", "7:08:09 AM"},
             IE = {"\u200E12\u200E:\u200E00\u200E:\u200E00\u200E \u200EAM",
                   "\u200E7\u200E:\u200E08\u200E:\u200E09\u200E \u200EAM"})
-    @BuggyWebDriver(FF = {"00:00:00", "07:08:09"})
     public void toLocaleTimeString() throws Exception {
         final String html
             = "<html><head><script>\n"

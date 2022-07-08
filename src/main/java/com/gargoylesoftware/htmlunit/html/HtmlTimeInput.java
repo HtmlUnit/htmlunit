@@ -31,8 +31,9 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Anton Demydenko
+ * @author Ronald Brill
  */
-public class HtmlTimeInput extends HtmlInput implements LabelableElement {
+public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableElement {
 
     private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,7 +66,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     public final HtmlPage loadPage(final String html, final List<String> collectedAlerts) throws Exception {
-        generateTest_browserVersion_.set(FLAG_ALL_BROWSERS);
         return loadPage(getBrowserVersion(), html, collectedAlerts, URL_FIRST);
     }
 
@@ -212,8 +210,6 @@ public abstract class SimpleWebTestCase extends WebTestCase {
 
         // expand variables in expected alerts
         expandExpectedAlertsVariables(url);
-
-        createTestPageForRealBrowserIfNeeded(html, Arrays.asList(getExpectedAlerts()));
 
         final WebClient client = getWebClientWithMockWebConnection();
         final List<String> collectedAlerts = new ArrayList<>();

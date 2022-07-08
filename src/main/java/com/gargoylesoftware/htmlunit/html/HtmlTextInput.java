@@ -14,13 +14,9 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
-import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
 
 /**
  * Wrapper for the HTML element "input" with type="text".
@@ -35,10 +31,7 @@ import com.gargoylesoftware.htmlunit.html.impl.SelectableTextSelectionDelegate;
  * @author Frank Danek
  * @author Anton Demydenko
  */
-public class HtmlTextInput extends HtmlInput implements SelectableTextInput, LabelableElement {
-
-    private SelectableTextSelectionDelegate selectionDelegate_ = new SelectableTextSelectionDelegate(this);
-    private DoTypeProcessor doTypeProcessor_ = new DoTypeProcessor(this);
+public class HtmlTextInput extends HtmlSelectableTextInput implements LabelableElement {
 
     /**
      * Creates an instance.
@@ -56,119 +49,8 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput, Lab
      * {@inheritDoc}
      */
     @Override
-    protected void doType(final char c, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void doType(final int keyCode, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isSubmittableByEnter() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void select() {
-        selectionDelegate_.select();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getSelectedText() {
-        return selectionDelegate_.getSelectedText();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getText() {
-        return getValueAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setText(final String text) {
-        setValueAttribute(text);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionStart() {
-        return selectionDelegate_.getSelectionStart();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionStart(final int selectionStart) {
-        selectionDelegate_.setSelectionStart(selectionStart);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getSelectionEnd() {
-        return selectionDelegate_.getSelectionEnd();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setSelectionEnd(final int selectionEnd) {
-        selectionDelegate_.setSelectionEnd(selectionEnd);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-        if ("value".equals(qualifiedName)) {
-            final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
-                int pos = 0;
-                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                    pos = attributeValue.length();
-                }
-                setSelectionStart(pos);
-                setSelectionEnd(pos);
-            }
-        }
     }
 
     /**
@@ -186,28 +68,6 @@ public class HtmlTextInput extends HtmlInput implements SelectableTextInput, Lab
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     * @see HtmlInput#reset()
-     */
-    @Override
-    public void reset() {
-        super.reset();
-        setSelectionEnd(0);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DomNode cloneNode(final boolean deep) {
-        final HtmlTextInput newnode = (HtmlTextInput) super.cloneNode(deep);
-        newnode.selectionDelegate_ = new SelectableTextSelectionDelegate(newnode);
-        newnode.doTypeProcessor_ = new DoTypeProcessor(newnode);
-
-        return newnode;
     }
 
     /**

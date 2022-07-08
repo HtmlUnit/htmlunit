@@ -201,7 +201,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
     }
 
     @Override
-    Object getInternalValue() {
+    protected Object getInternalValue() {
         return isChecked();
     }
 

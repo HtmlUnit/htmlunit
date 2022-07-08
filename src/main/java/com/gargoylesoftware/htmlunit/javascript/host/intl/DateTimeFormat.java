@@ -153,7 +153,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("nl-BE", ddSlash);
 
         FF_FORMATS_.putAll(commonFormats);
-        FF_FORMATS_.put("ban", ddDot);
         FF_FORMATS_.put("da", ddDot);
         FF_FORMATS_.put("en-PH", mmSlash);
         FF_FORMATS_.put("lv", ddDotDot);

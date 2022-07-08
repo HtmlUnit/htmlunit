@@ -66,9 +66,9 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
         page.<HtmlOption>getHtmlElementById("option1").setSelected(false);
         page.<HtmlOption>getHtmlElementById("option2").setSelected(true);
         page.<HtmlTextArea>getHtmlElementById("textarea1").setText("Flintstone");
-        page.<HtmlTextInput>getHtmlElementById("textfield1").setValueAttribute("Flintstone");
-        page.<HtmlHiddenInput>getHtmlElementById("hidden1").setValueAttribute("Flintstone");
-        page.<HtmlPasswordInput>getHtmlElementById("password1").setValueAttribute("Flintstone");
+        page.<HtmlTextInput>getHtmlElementById("textfield1").setValue("Flintstone");
+        page.<HtmlHiddenInput>getHtmlElementById("hidden1").setValue("Flintstone");
+        page.<HtmlPasswordInput>getHtmlElementById("password1").setValue("Flintstone");
         HtmlElement elem = page.getHtmlElementById("isindex1");
         if (elem instanceof HtmlIsIndex) {
             ((HtmlIsIndex) elem).setValue("Flintstone");
@@ -76,12 +76,15 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
 
         // Check to make sure they did get changed
         assertEquals("bar", form.getCheckedRadioButton("radioButton").getValueAttribute());
+        assertEquals("bar", form.getCheckedRadioButton("radioButton").getValue());
         assertTrue(form.<HtmlCheckBoxInput>getInputByName("checkBox").isChecked());
         assertFalse(page.<HtmlOption>getHtmlElementById("option1").isSelected());
         assertTrue(page.<HtmlOption>getHtmlElementById("option2").isSelected());
         assertEquals("Flintstone", page.<HtmlTextArea>getHtmlElementById("textarea1").getText());
         assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValueAttribute());
+        assertEquals("Flintstone", page.<HtmlTextInput>getHtmlElementById("textfield1").getValue());
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+        assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValue());
         elem = page.getHtmlElementById("isindex1");
         if (elem instanceof HtmlIsIndex) {
             assertEquals("Flintstone", ((HtmlIsIndex) elem).getValue());
@@ -92,17 +95,21 @@ public class HtmlResetInputTest extends SimpleWebTestCase {
 
         // Check to make sure all the values have been set back to their original values.
         assertEquals("foo", form.getCheckedRadioButton("radioButton").getValueAttribute());
+        assertEquals("foo", form.getCheckedRadioButton("radioButton").getValue());
         assertFalse(form.<HtmlCheckBoxInput>getInputByName("checkBox").isChecked());
         assertTrue(page.<HtmlOption>getHtmlElementById("option1").isSelected());
         assertFalse(page.<HtmlOption>getHtmlElementById("option2").isSelected());
         assertEquals("Foobar", page.<HtmlTextArea>getHtmlElementById("textarea1").getText());
         assertEquals("foo", page.<HtmlTextInput>getHtmlElementById("textfield1").getValueAttribute());
+        assertEquals("foo", page.<HtmlTextInput>getHtmlElementById("textfield1").getValue());
 
         // this is strange but this is the way the browsers are working
         // com.gargoylesoftware.htmlunit.html.HtmlHiddenInputTest.reset()
         assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValueAttribute());
+        assertEquals("Flintstone", page.<HtmlHiddenInput>getHtmlElementById("hidden1").getValue());
 
         assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValueAttribute());
+        assertEquals("foo", page.<HtmlPasswordInput>getHtmlElementById("password1").getValue());
         elem = page.getHtmlElementById("isindex1");
         if (elem instanceof HtmlIsIndex) {
             assertEquals("", ((HtmlIsIndex) elem).getValue());

@@ -68,6 +68,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
@@ -242,6 +243,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public SgmlPage getPage() {
         return page_;
     }
@@ -250,6 +252,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Returns the page that contains this node.
      * @return the page that contains this node
      */
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public HtmlPage getHtmlPageOrNull() {
         if (page_ == null || !page_.isHtmlPage()) {
             return null;
@@ -281,6 +284,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getLastChild() {
         if (firstChild_ != null) {
             // last child is stored as the previous sibling of first child
@@ -293,6 +297,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getParentNode() {
         return parent_;
     }
@@ -321,6 +326,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getPreviousSibling() {
         if (parent_ == null || this == parent_.firstChild_) {
             // previous sibling of first child points to last child
@@ -333,6 +339,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getNextSibling() {
         return nextSibling_;
     }
@@ -341,6 +348,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * {@inheritDoc}
      */
     @Override
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public DomNode getFirstChild() {
         return firstChild_;
     }
@@ -375,34 +383,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
         return false;
     }
-
-    /** @param previous set the previousSibling field value */
-    protected void setPreviousSibling(final DomNode previous) {
-        previousSibling_ = previous;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * @param next set the nextSibling field value
-     */
-    public void setNextSibling(final DomNode next) {
-        nextSibling_ = next;
-    }
-
-    /**
-     * Returns this node's node type.
-     * @return this node's node type
-     */
-    @Override
-    public abstract short getNodeType();
-
-    /**
-     * Returns this node's node name.
-     * @return this node's node name
-     */
-    @Override
-    public abstract String getNodeName();
 
     /**
      * {@inheritDoc}
@@ -966,18 +946,22 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to append to this node's children
      */
     private void basicAppend(final DomNode node) {
+        // try to make the node setup as complete as possible
+        // before the node is reachable
         node.setPage(getPage());
+        node.parent_ = this;
+
         if (firstChild_ == null) {
             firstChild_ = node;
         }
         else {
             final DomNode last = getLastChild();
-            last.nextSibling_ = node;
             node.previousSibling_ = last;
             node.nextSibling_ = null; // safety first
+
+            last.nextSibling_ = node;
         }
         firstChild_.previousSibling_ = node;
-        node.parent_ = this;
     }
 
     /**
@@ -990,18 +974,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             for (final DomNode child : fragment.getChildren()) {
                 insertBefore(child, refChild);
             }
+            return newChild;
         }
-        else {
-            if (refChild == null) {
-                appendChild(newChild);
-            }
-            else {
-                if (refChild.getParentNode() != this) {
-                    throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
-                }
-                ((DomNode) refChild).insertBefore((DomNode) newChild);
-            }
+
+        if (refChild == null) {
+            appendChild(newChild);
+            return newChild;
         }
+
+        if (refChild.getParentNode() != this) {
+            throw new DOMException(DOMException.NOT_FOUND_ERR, "Reference node is not a child of this node.");
+        }
+
+        ((DomNode) refChild).insertBefore((DomNode) newChild);
         return newChild;
     }
 
@@ -1037,17 +1022,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param node the node to insert before this node
      */
     private void basicInsertBefore(final DomNode node) {
+        // try to make the node setup as complete as possible
+        // before the node is reachable
         node.setPage(page_);
+        node.parent_ = parent_;
+        node.previousSibling_ = previousSibling_;
+        node.nextSibling_ = this;
+
         if (parent_.firstChild_ == this) {
             parent_.firstChild_ = node;
         }
         else {
             previousSibling_.nextSibling_ = node;
         }
-        node.previousSibling_ = previousSibling_;
-        node.nextSibling_ = this;
         previousSibling_ = node;
-        node.parent_ = parent_;
     }
 
     private void fireAddition(final DomNode domNode) {
@@ -1308,16 +1296,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @return an {@link Iterable} over the children of this node
      */
     public final Iterable<DomNode> getChildren() {
-        return () -> new ChildIterator();
+        return () -> new ChildIterator(firstChild_);
     }
 
     /**
      * An iterator over all children of this node.
      */
-    protected class ChildIterator implements Iterator<DomNode> {
+    protected static class ChildIterator implements Iterator<DomNode> {
 
-        private DomNode nextNode_ = firstChild_;
+        private DomNode nextNode_;
         private DomNode currentNode_;
+
+        public ChildIterator(final DomNode nextNode) {
+            nextNode_ = nextNode;
+        }
 
         /** {@inheritDoc} */
         @Override

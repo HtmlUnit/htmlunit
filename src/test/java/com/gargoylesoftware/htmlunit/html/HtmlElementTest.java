@@ -914,6 +914,7 @@ public class HtmlElementTest extends SimpleWebTestCase {
         final HtmlTextInput input = page.getHtmlElementById("myInput");
         input.type("Hello Cruel World");
         assertEquals("Hello Cruel World", input.getValueAttribute());
+        assertEquals("Hello Cruel World", input.getValue());
         page.getHtmlElementById("myButton").click();
         assertEquals(expectedAlerts, collectedAlerts);
     }

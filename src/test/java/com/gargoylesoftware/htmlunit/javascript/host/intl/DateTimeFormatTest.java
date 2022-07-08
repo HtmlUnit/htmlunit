@@ -168,7 +168,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "12/20/2013",
             IE = "\u200E12\u200E/\u200E20\u200E/\u200E2013")
-    @BuggyWebDriver(FF = "20.12.2013")
     public void format_default() throws Exception {
         test("new Intl.DateTimeFormat().format(date)");
     }
@@ -200,7 +199,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "12/20/2013",
-            FF = "20.12.2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_ban() throws Exception {
         test("new Intl.DateTimeFormat('ban').format(date)");
@@ -244,7 +242,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Freitag, 20. Dezember 2013 n. Chr., 04:00:00",
+    @Alerts(CHROME = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
+            EDGE = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
+            FF = "Freitag, 20. Dezember 2013 n. Chr. um 04:00:00",
+            FF_ESR = "Freitag, 20. Dezember 2013 n. Chr., 04:00:00",
             IE = "\u200EFreitag\u200E,"
                 + " \u200E20\u200E. \u200EDezember\u200E \u200E2013\u200E \u200E04\u200E:\u200E00\u200E:\u200E00")
     @NotYetImplemented
@@ -282,8 +283,8 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "20. 12 2013 n. Chr.",
-            FF = "20.12.2013 n. Chr.",
+    @Alerts(DEFAULT = "20.12.2013 n. Chr.",
+            FF_ESR = "20. 12 2013 n. Chr.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
     public void format_weekday_long_era() throws Exception {
@@ -322,10 +323,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c 20 \u062f\u064a\u0633\u0645\u0628\u0631 2013 "
-                + "\u0645\u064a\u0644\u0627\u062f\u064a, 4:00:00 \u0635",
+                + "\u0645\u064a\u0644\u0627\u062f\u064a \u0641\u064a 4:00:00 \u0635",
             FF = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
-                + ", \u0664:\u0660\u0660:\u0660\u0660 \u0635",
+                + " \u0641\u064a \u0664:\u0660\u0660:\u0660\u0660 \u0635",
             FF_ESR = "\u0627\u0644\u062c\u0645\u0639\u0629\u060c \u0662\u0660 \u062f\u064a\u0633\u0645\u0628\u0631"
                 + " \u0662\u0660\u0661\u0663 \u0645\u064a\u0644\u0627\u062f\u064a"
                 + ", \u0664:\u0660\u0660:\u0660\u0660 \u0635",
@@ -343,7 +344,10 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "Friday, December 20, 2013, UTC",
+    @Alerts(CHROME = "Friday, December 20, 2013 at UTC",
+            EDGE = "Friday, December 20, 2013 at UTC",
+            FF = "Friday, December 20, 2013 at UTC",
+            FF_ESR = "Friday, December 20, 2013, UTC",
             IE = "\u200EFriday\u200E, \u200EDecember\u200E \u200E20\u200E, \u200E2013")
     @NotYetImplemented
     public void format_utc_short() throws Exception {

@@ -31,6 +31,9 @@ import java.util.function.Supplier;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
+import com.gargoylesoftware.htmlunit.html.HtmlTableBody;
+import com.gargoylesoftware.htmlunit.html.HtmlTableFooter;
+import com.gargoylesoftware.htmlunit.html.HtmlTableHeader;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -271,13 +274,18 @@ public class HTMLTableElement extends RowContainer {
     @Override
     public Object insertRow(final int index) {
         // check if a tbody should be created
-        final List<?> rowContainers =
-            getDomNodeOrDie().getByXPath("//tbody | //thead | //tfoot");
-        if (rowContainers.isEmpty() || index == 0) {
-            final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");
-            return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
+        if (index != 0) {
+            for (final DomNode domNode : getDomNodeOrDie().getDescendants()) {
+                if (domNode instanceof HtmlTableBody
+                        || domNode instanceof HtmlTableHeader
+                        || domNode instanceof HtmlTableFooter) {
+                    return super.insertRow(index);
+                }
+            }
         }
-        return super.insertRow(index);
+
+        final HtmlElement tBody = getDomNodeOrDie().appendChildIfNoneExists("tbody");
+        return ((RowContainer) getScriptableFor(tBody)).insertRow(0);
     }
 
     /**

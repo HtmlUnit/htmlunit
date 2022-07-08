@@ -100,6 +100,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("foo", textInput.getValueAttribute());
+        assertEquals("foo", textInput.getValue());
     }
 
     /**
@@ -125,6 +126,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
         assertEquals("blue", textInput.getValueAttribute());
+        assertEquals("blue", textInput.getValue());
     }
 
     /**
@@ -452,8 +454,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
             + "  <frame id='frame2' src='javascript:parent.f2'/>\n"
             + "</frameset></html>";
 
-        final List<String> emptyList = Collections.emptyList();
-        createTestPageForRealBrowserIfNeeded(htmlContent, emptyList);
         final HtmlPage page = loadPage(htmlContent, null);
 
         final HtmlPage page1 = (HtmlPage) ((HtmlFrame) page.getHtmlElementById("frame1")).getEnclosedPage();
@@ -579,7 +579,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
 
         final HtmlForm form = page.getFormByName("form1");
         final HtmlTextInput textInput = form.getInputByName("text1");
-        textInput.setValueAttribute("flintstone");
+        textInput.setValue("flintstone");
 
         final HtmlButtonInput button = form.getInputByName("button1");
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);

@@ -369,7 +369,7 @@ public final class WebAssert {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
-        final String s = input.getValueAttribute();
+        final String s = input.getValue();
         if (!s.equals(value)) {
             throw new AssertionError("The input element named '" + name + "' contains the value '" + s
                             + "', not the expected value '" + value + "'.");
@@ -391,7 +391,7 @@ public final class WebAssert {
             throw new AssertionError("Unable to find an input element named '" + name + "'.");
         }
         final HtmlInput input = (HtmlInput) list.get(0);
-        final String s = input.getValueAttribute();
+        final String s = input.getValue();
         if (s.equals(value)) {
             throw new AssertionError("The input element named '" + name + "' contains the value '" + s
                             + "', not the expected value '" + value + "'.");

@@ -118,7 +118,7 @@ public abstract class PrototypeTestBase extends WebDriverTestCase {
         actual = actual.replaceAll("\r\n", "\n");
 
         // dump the result page if not ok
-        if (System.getProperty(PROPERTY_GENERATE_TESTPAGES) != null && !expected.equals(actual)) {
+        if (!expected.equals(actual)) {
             final File tmpDir = new File(System.getProperty("java.io.tmpdir"));
             final File f = new File(tmpDir, "prototype" + getVersion() + "_result_" + filename);
             FileUtils.writeStringToFile(f, driver.getPageSource(), UTF_8);

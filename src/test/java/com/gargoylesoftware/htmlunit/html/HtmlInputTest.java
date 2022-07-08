@@ -139,6 +139,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
 
         assertEquals(Collections.EMPTY_LIST, collectedAlerts);
         input.setValueAttribute("foo");
+        input.setValue("foo");
         assertNotEquals(Arrays.asList("changed").toString(), collectedAlerts.toString());
     }
 
@@ -157,6 +158,7 @@ public final class HtmlInputTest extends SimpleWebTestCase {
         final HtmlForm form = page.getHtmlElementById("form1");
         final HtmlCheckBoxInput input = form.getInputByName("checkbox1");
         assertEquals("on", input.getValueAttribute());
+        assertEquals("on", input.getValue());
     }
 
     /**
