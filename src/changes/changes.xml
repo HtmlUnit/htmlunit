@@ -8,16 +8,22 @@
 
     <body>
         <release version="2.63.0" date="xx, 2022" description="Chrome/Edge 103, Firefox 102">
-            <action type="update" dev="rbri">
-                Upgrade Apache log4j-api to 2.18.0.
+            <action type="fix" dev="rbri" issue="487">
+                window.event is a replaceable property
+            </action>
+            <action type="fix" dev="rbri">
+                window.event should return undefined if called outside an event handler
+            </action>
+            <action type="fix" dev="rbri" issue="#385">
+                Replace all XPath usages from our code because this might be called during dom tree
+                consturction and XPath sometimes fails if the tree got changed during xpath evaluation.
             </action>
             <action type="update" dev="rbri">
                 A bunch of code refactorings to avoid making inconsistent dom nodes visible in the 
                 dom tree.
             </action>
-            <action type="fix" dev="rbri" issue="#385">
-                Replace all XPath usages from our code because this might be called during dom tree
-                consturction and XPath sometimes fails if the tree got changed during xpath evaluation.
+            <action type="update" dev="rbri">
+                Upgrade Apache log4j-api to 2.18.0.
             </action>
         </release>
 

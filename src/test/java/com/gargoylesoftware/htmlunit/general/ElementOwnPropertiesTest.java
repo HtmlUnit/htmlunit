@@ -714,7 +714,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented,eventPhase,initEvent(),preventDefault(),srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type")
     public void event() throws Exception {
-        testString("", "event ? event : window.event");
+        testString("", "event");
     }
 
     /**

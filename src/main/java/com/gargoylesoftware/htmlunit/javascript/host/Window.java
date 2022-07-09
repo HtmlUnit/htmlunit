@@ -111,6 +111,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import net.sourceforge.htmlunit.corejs.javascript.AccessorSlot;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
 import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
@@ -121,6 +122,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.Level;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Slot;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -373,6 +375,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxGetter
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public Object getEvent() {
+        if (currentEvent_ == null) {
+            return Undefined.instance;
+        }
         return currentEvent_;
     }
 
@@ -4148,6 +4153,19 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @Override
     public BrowserVersion getBrowserVersion() {
         return getWebWindow().getWebClient().getBrowserVersion();
+    }
+
+    @Override
+    public void put(final String name, final Scriptable start, final Object value) {
+        // see https://dom.spec.whatwg.org/#window-current-event
+        // because event is replaceable we need this hack here
+        if ("event".equals(name)) {
+            final Slot slot = querySlot(Context.getCurrentContext(), "event");
+            if (slot instanceof AccessorSlot) {
+                delete("event");
+            }
+        }
+        super.put(name, start, value);
     }
 }
 
