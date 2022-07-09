@@ -2619,6 +2619,7 @@ public class Window2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
