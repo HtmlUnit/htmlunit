@@ -19,8 +19,7 @@
                 consturction and XPath sometimes fails if the tree got changed during xpath evaluation.
             </action>
             <action type="update" dev="rbri">
-                A bunch of code refactorings to avoid making inconsistent dom nodes visible in the 
-                dom tree.
+                A bunch of code refactorings to avoid making inconsistent dom nodes visible in the dom tree.
             </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.18.0.
