@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.63.0" date="xx, 2022" description="Chrome/Edge 103, Firefox 102">
+        <release version="2.63.0" date="July 10, 2022" description="Chrome/Edge 103, Firefox 102">
             <action type="fix" dev="rbri" issue="487">
                 window.event is a replaceable property
             </action>
