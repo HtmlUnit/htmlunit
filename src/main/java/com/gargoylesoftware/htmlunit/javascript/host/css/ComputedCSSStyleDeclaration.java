@@ -1873,7 +1873,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         String value = super.getStyleAttribute(style, getDefaultValueIfEmpty);
         if (value.isEmpty()) {
             final Element parent = getElement().getParentElement();
-            if (INHERITABLE_DEFINITIONS.contains(style) && parent != null) {
+            if (parent != null && INHERITABLE_DEFINITIONS.contains(style)) {
                 value = getWindow().getComputedStyle(parent, null).getStyleAttribute(style, getDefaultValueIfEmpty);
             }
             else if (getDefaultValueIfEmpty) {

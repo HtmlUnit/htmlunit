@@ -1042,7 +1042,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final boolean wasAlreadyAttached = domNode.isAttachedToPage();
         domNode.attachedToPage_ = isAttachedToPage();
 
-        if (isAttachedToPage()) {
+        if (domNode.attachedToPage_) {
             // trigger events
             final Page page = getPage();
             if (null != page && page.isHtmlPage()) {
