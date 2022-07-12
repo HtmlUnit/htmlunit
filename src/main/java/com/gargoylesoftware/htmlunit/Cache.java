@@ -262,7 +262,7 @@ public class Cache implements Serializable {
     }
 
     /**
-     * Gets the current time stamp. As method to allow overriding it, when simulating an other time.
+     * Gets the current time stamp. As method to allow overriding it, when simulating another time.
      * @return the current time stamp
      */
     protected long getCurrentTimestamp() {

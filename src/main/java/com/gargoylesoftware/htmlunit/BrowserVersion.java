@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this new one still behaves like a FF, only the stuff reported to the
+ * <p>But keep in mind this new one still behaves like an FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -568,7 +568,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Internet Explorer.
-     * @return whether or not this version is a version of IE
+     * @return whether version is a version of IE
      */
     public boolean isIE() {
         return getNickname().startsWith("IE");
@@ -578,7 +578,7 @@ public final class BrowserVersion implements Serializable {
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
-     * @return whether or not this version is a version of a Chrome browser
+     * @return whether this version is a version of a Chrome browser
      */
     public boolean isChrome() {
         return getNickname().startsWith("Chrome");
@@ -587,7 +587,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Microsoft Edge.
-     * @return whether or not this version is a version of a Chrome browser
+     * @return whether this version is a version of a Chrome browser
      */
     public boolean isEdge() {
         return getNickname().startsWith("Edge");
@@ -596,7 +596,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Firefox.
-     * @return whether or not this version is a version of a Firefox browser
+     * @return whether this version is a version of a Firefox browser
      */
     public boolean isFirefox() {
         return getNickname().startsWith("FF");
@@ -604,7 +604,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether or not this version version 60 of a Firefox browser
+     * @return whether this is version 78  of a Firefox browser
      */
     public boolean isFirefox78() {
         return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;
