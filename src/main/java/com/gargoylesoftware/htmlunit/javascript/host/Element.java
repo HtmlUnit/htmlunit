@@ -885,12 +885,7 @@ public class Element extends Node {
         try {
             target.getPage().getWebClient().getPageCreator().getHtmlParser().parseFragment(target, source);
         }
-        catch (final IOException e) {
-            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
-            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
-                    + e.getMessage());
-        }
-        catch (final SAXException e) {
+        catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
             throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
                     + e.getMessage());
@@ -932,7 +927,7 @@ public class Element extends Node {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setInnerHTML(final Object value) {
-        final DomNode domNode;
+        final DomElement domNode;
         try {
             domNode = getDomNodeOrDie();
         }
@@ -942,7 +937,7 @@ public class Element extends Node {
         }
 
         domNode.removeAllChildren();
-        getDomNodeOrDie().getPage().clearComputedStylesUpToRoot((DomElement) domNode);
+        getDomNodeOrDie().getPage().clearComputedStylesUpToRoot(domNode);
 
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
