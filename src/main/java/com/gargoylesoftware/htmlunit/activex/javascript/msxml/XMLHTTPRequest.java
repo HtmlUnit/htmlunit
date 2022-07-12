@@ -721,7 +721,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }
-        else if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
+        if (nameLowerCase.startsWith("proxy-") || nameLowerCase.startsWith("sec-")) {
             return false;
         }
         return true;

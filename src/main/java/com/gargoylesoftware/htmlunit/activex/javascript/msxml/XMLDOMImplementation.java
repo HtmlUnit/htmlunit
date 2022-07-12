@@ -46,10 +46,10 @@ public class XMLDOMImplementation extends MSXMLScriptable {
         if ("XML".equals(feature) && "1.0".equals(version)) {
             return true;
         }
-        else if ("DOM".equals(feature) && "1.0".equals(version)) {
+        if ("DOM".equals(feature) && "1.0".equals(version)) {
             return true;
         }
-        else if ("MS-DOM".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
+        if ("MS-DOM".equals(feature) && ("1.0".equals(version) || "2.0".equals(version))) {
             return true;
         }
         return false;

@@ -1174,12 +1174,9 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     private static boolean isPreflightHeader(final String name, final String value) {
         if (HttpHeader.CONTENT_TYPE_LC.equals(name)) {
             final String lcValue = value.toLowerCase(Locale.ROOT);
-            if (lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
-                || lcValue.startsWith(FormEncodingType.MULTIPART.getName())
-                || lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName())) {
-                return false;
-            }
-            return true;
+            return !lcValue.startsWith(FormEncodingType.URL_ENCODED.getName())
+                    && !lcValue.startsWith(FormEncodingType.MULTIPART.getName())
+                    && !lcValue.startsWith(FormEncodingType.TEXT_PLAIN.getName());
         }
         if (HttpHeader.ACCEPT_LC.equals(name)
                 || HttpHeader.ACCEPT_LANGUAGE_LC.equals(name)
