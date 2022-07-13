@@ -1565,21 +1565,40 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if (ABSOLUTE.equals(p) && !AUTO.equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-            final int parentWidth = style.getCalculatedWidth(false, false);
+            final int parentWidth;
+            if (parent == null) {
+                parentWidth = getWindow().getInnerWidth();
+            }
+            else {
+                final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
+                parentWidth = parentStyle.getCalculatedWidth(false, false);
+            }
             left = parentWidth - pixelValue(r);
         }
         else if (FIXED.equals(p) && !AUTO.equals(r)) {
-            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final ComputedCSSStyleDeclaration style = getWindow().getComputedStyle(getElement(), null);
-            final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
-            left = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth()) - pixelValue(r);
+
+            final HTMLElement parent = (HTMLElement) getElement().getParentElement();
+            final int parentWidth;
+            if (parent == null) {
+                parentWidth = getWindow().getInnerWidth();
+            }
+            else {
+                final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
+                parentWidth = pixelValue(parentStyle.getWidth()) - pixelValue(style.getWidth());
+            }
+            left = parentWidth - pixelValue(r);
         }
         else if (FIXED.equals(p) && AUTO.equals(l)) {
             // Fixed to the location at which the browser puts it via normal element flowing.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
-            final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
-            left = pixelValue(style.getLeftWithInheritance());
+            if (parent == null) {
+                left = 0;
+            }
+            else {
+                final ComputedCSSStyleDeclaration style = parent.getWindow().getComputedStyle(parent, null);
+                left = pixelValue(style.getLeftWithInheritance());
+            }
         }
         else if (STATIC.equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
