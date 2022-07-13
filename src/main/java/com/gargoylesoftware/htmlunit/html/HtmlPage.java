@@ -2692,10 +2692,7 @@ public class HtmlPage extends SgmlPage {
     public CSS2Properties getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
         final CSS2Properties styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
-        if (styleFromCache != null) {
-            return styleFromCache;
-        }
-        return null;
+        return styleFromCache;
     }
 
     /**

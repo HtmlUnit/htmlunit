@@ -177,10 +177,7 @@ public class HTMLCollection extends AbstractList implements Callable {
             if (getBrowserVersion().hasFeature(HTMLCOLLECTION_ITEM_SUPPORTS_DOUBLE_INDEX_ALSO)) {
                 final double doubleValue = Context.toNumber(name);
                 if (!Double.isNaN(doubleValue)) {
-                    final Object object = get((int) doubleValue, this);
-                    if (object != NOT_FOUND) {
-                        return object;
-                    }
+                    return get((int) doubleValue, this);
                 }
             }
             return NOT_FOUND;

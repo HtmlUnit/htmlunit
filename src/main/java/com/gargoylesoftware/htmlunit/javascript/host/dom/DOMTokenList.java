@@ -277,7 +277,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         // whitespace before
-        if (pos != 0 && !isWhitespache(value.charAt(pos - 1))) {
+        if (pos != 0 && !isWhitespace(value.charAt(pos - 1))) {
             return -1;
         }
 
