@@ -104,6 +104,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.SerializableLock;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -164,7 +165,7 @@ public class HtmlPage extends SgmlPage {
 
     private HTMLParserDOMBuilder domBuilder_;
     private transient Charset originalCharset_;
-    private transient Object lock_ = new Object(); // used for synchronization
+    private final Object lock_ = new SerializableLock(); // used for synchronization
 
     private Map<String, SortedSet<DomElement>> idMap_
             = Collections.synchronizedMap(new HashMap<>());
@@ -2626,8 +2627,6 @@ public class HtmlPage extends SgmlPage {
         if (charsetName != null) {
             originalCharset_ = Charset.forName(charsetName);
         }
-
-        lock_ = new Object();
     }
 
     /**

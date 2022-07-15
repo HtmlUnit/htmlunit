@@ -103,7 +103,7 @@ public class Element extends Node {
     static final String POSITION_AFTER_END = "afterend";
 
     private static final Pattern CLASS_NAMES_SPLIT_PATTERN = Pattern.compile("\\s");
-    private static final Pattern PRINT_NODE_PATTERN = Pattern.compile("  ");
+    private static final Pattern PRINT_NODE_PATTERN = Pattern.compile(" {2}");
     private static final Pattern PRINT_NODE_QUOTE_PATTERN = Pattern.compile("\"");
 
     private NamedNodeMap attributes_;

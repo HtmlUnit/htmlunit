@@ -144,7 +144,7 @@ public abstract class HtmlElement extends DomElement {
     protected static final String ATTRIBUTE_CHECKED = "checked";
 
     /** The listeners which are to be notified of attribute changes. */
-    private Collection<HtmlAttributeChangeListener> attributeListeners_;
+    private final Collection<HtmlAttributeChangeListener> attributeListeners_;
 
     /** The owning form for lost form children. */
     private HtmlForm owningForm_;
@@ -1394,11 +1394,14 @@ public abstract class HtmlElement extends DomElement {
      */
     @Override
     public DomNode cloneNode(final boolean deep) {
-        final HtmlElement newnode = (HtmlElement) super.cloneNode(deep);
-        synchronized (attributeListeners_) {
-            newnode.attributeListeners_ = new LinkedHashSet<>(attributeListeners_);
+        final HtmlElement newNode = (HtmlElement) super.cloneNode(deep);
+        if (!deep) {
+            synchronized (attributeListeners_) {
+                newNode.attributeListeners_.clear();
+                newNode.attributeListeners_.addAll(attributeListeners_);
+            }
         }
 
-        return newnode;
+        return newNode;
     }
 }

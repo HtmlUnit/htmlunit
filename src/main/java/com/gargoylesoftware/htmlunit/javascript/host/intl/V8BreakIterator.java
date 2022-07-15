@@ -164,7 +164,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
                 if (token.matches(".*[a-zA-Z]+.*")) {
                     return "letter";
                 }
-                if (token.matches("[0-9]+")) {
+                if (token.matches("\\d+")) {
                     return "number";
                 }
             }

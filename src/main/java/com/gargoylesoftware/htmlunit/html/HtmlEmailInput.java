@@ -36,8 +36,8 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
 
     // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#validation
     private static final Pattern DEFAULT_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
-                                + "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+            Pattern.compile("^[a-zA-Z\\d.!#$%&'*+/=?^_`{|\\}~-]+@[a-zA-Z\\d](?:[a-zA-Z\\d-]{0,61}[a-zA-Z\\d])?"
+                                + "(?:\\.[a-zA-Z\\d](?:[a-zA-Z\\d-]{0,61}[a-zA-Z\\d])?)*$");
 
     /**
      * Creates an instance.
