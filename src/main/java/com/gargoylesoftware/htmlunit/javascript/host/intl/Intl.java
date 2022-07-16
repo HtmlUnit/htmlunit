@@ -52,9 +52,6 @@ public class Intl extends HtmlUnitScriptable {
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(c.getSimpleName(), config.getJsConstructor(), this, browserVersion);
-            if (c == V8BreakIterator.class) {
-                prototype.setClassName("v8BreakIterator");
-            }
             functionObject.addAsConstructor(this, prototype);
         }
         catch (final Exception e) {
