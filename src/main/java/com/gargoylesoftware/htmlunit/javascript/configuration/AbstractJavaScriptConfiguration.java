@@ -92,26 +92,26 @@ public abstract class AbstractJavaScriptConfiguration {
      * Returns the class configuration of the given {@code klass}.
      *
      * @param klass the class
-     * @param browser the browser version
+     * @param browserVersion the browser version
      * @return the class configuration
      */
     public static ClassConfiguration getClassConfiguration(final Class<? extends HtmlUnitScriptable> klass,
-        final BrowserVersion browser) {
-        if (browser != null) {
+        final BrowserVersion browserVersion) {
+        if (browserVersion != null) {
             final SupportedBrowser expectedBrowser;
-            if (browser.isChrome()) {
+            if (browserVersion.isChrome()) {
                 expectedBrowser = CHROME;
             }
-            else if (browser.isEdge()) {
+            else if (browserVersion.isEdge()) {
                 expectedBrowser = EDGE;
             }
-            else if (browser.isIE()) {
+            else if (browserVersion.isIE()) {
                 expectedBrowser = IE;
             }
-            else if (browser.isFirefox78()) {
+            else if (browserVersion.isFirefox78()) {
                 expectedBrowser = FF_ESR;
             }
-            else if (browser.isFirefox()) {
+            else if (browserVersion.isFirefox()) {
                 expectedBrowser = FF;
             }
             else {

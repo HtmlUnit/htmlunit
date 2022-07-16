@@ -27,9 +27,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
@@ -42,15 +40,19 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  */
 public class RecursiveFunctionObject extends FunctionObject {
 
+    private final BrowserVersion browserVersion_;
+
     /**
      * The constructor.
      * @param name the name of the function
      * @param methodOrConstructor a {@link Member} that defines the object
      * @param scope the enclosing scope of function
+     * @param browserVersion the browserVersion
      */
     public RecursiveFunctionObject(final String name, final Executable methodOrConstructor,
-            final Scriptable scope) {
+            final Scriptable scope, final BrowserVersion browserVersion) {
         super(name, methodOrConstructor, scope);
+        browserVersion_ = browserVersion;
     }
 
     /**
@@ -85,18 +87,6 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         return objects.toArray(new Object[0]);
-    }
-
-    /**
-     * Gets the browser version currently used.
-     * @return the browser version
-     */
-    public BrowserVersion getBrowserVersion() {
-        Scriptable parent = getParentScope();
-        while (!(parent instanceof Window)) {
-            parent = parent.getParentScope();
-        }
-        return ((Window) parent).getBrowserVersion();
     }
 
     /**
@@ -156,13 +146,12 @@ public class RecursiveFunctionObject extends FunctionObject {
 
         if (value == NOT_FOUND && !"Image".equals(superFunctionName) && !"Option".equals(superFunctionName)
                 && (!"WebGLContextEvent".equals(superFunctionName)
-                        || getBrowserVersion().hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS))) {
+                        || browserVersion_.hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS))) {
             Class<?> klass = getPrototypeProperty().getClass();
 
-            final BrowserVersion browserVersion = getBrowserVersion();
             while (value == NOT_FOUND && HtmlUnitScriptable.class.isAssignableFrom(klass)) {
                 final ClassConfiguration config = AbstractJavaScriptConfiguration.getClassConfiguration(
-                        klass.asSubclass(HtmlUnitScriptable.class), browserVersion);
+                        klass.asSubclass(HtmlUnitScriptable.class), browserVersion_);
                 if (config != null) {
                     final List<ConstantInfo> constants = config.getConstants();
                     if (constants != null) {
@@ -178,29 +167,5 @@ public class RecursiveFunctionObject extends FunctionObject {
             }
         }
         return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-        final Object object = super.call(cx, scope, thisObj, args);
-        if (object instanceof Scriptable) {
-            final Scriptable result = (Scriptable) object;
-            if (result.getPrototype() == null) {
-                final Scriptable proto = getClassPrototype();
-                if (result != proto) {
-                    result.setPrototype(proto);
-                }
-            }
-            if (result.getParentScope() == null) {
-                final Scriptable parent = getParentScope();
-                if (result != parent) {
-                    result.setParentScope(parent);
-                }
-            }
-        }
-        return object;
     }
 }
