@@ -30,12 +30,14 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
 
 /**
@@ -318,15 +320,25 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
             }
         }
-        for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
-            final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
-                classConfiguration.addConstant(field.getName());
-            }
-        }
         for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
             final String property = getterEntry.getKey();
             classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
+        }
+
+        // JsxConstant
+        for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
+            final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
+            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
+                try {
+                    classConfiguration.addConstant(field.getName(), field.get(null));
+                }
+                catch (final IllegalAccessException e) {
+                    throw Context.reportRuntimeError(
+                            "Cannot get field '" + field.getName()
+                            + "' for type: " + classConfiguration.getHostClass().getName()
+                            + "reason: " + e.getMessage());
+                }
+            }
         }
     }
 
