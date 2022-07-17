@@ -96,9 +96,6 @@ public class RecursiveFunctionObject extends FunctionObject {
     public String getFunctionName() {
         final String functionName = super.getFunctionName();
         switch (functionName) {
-            case "V8BreakIterator":
-                return "v8BreakIterator";
-
             case "webkitRTCPeerConnection":
                 return "RTCPeerConnection";
 
