@@ -253,42 +253,6 @@ public class CSSStyleSheet extends StyleSheet {
     }
 
     /**
-     * Returns {@code true} if the specified selector selects the specified element.
-     *
-     * @param browserVersion the browser version
-     * @param selector the selector to test
-     * @param element the element to test
-     * @param pseudoElement the pseudo element to match, (can be {@code null})
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)}
-     * @return {@code true} if it does apply, {@code false} if it doesn't apply
-     *
-     * @deprecated since 2.61.0; please use
-     * {@link CssStyleSheet#selects(BrowserVersion, Selector, DomElement, String, boolean, boolean)} instead
-     */
-    @Deprecated
-    public static boolean selects(final BrowserVersion browserVersion, final Selector selector,
-            final DomElement element, final String pseudoElement, final boolean fromQuerySelectorAll) {
-        return CssStyleSheet.selects(browserVersion, selector, element, pseudoElement, fromQuerySelectorAll, true);
-    }
-
-    /**
-     * Returns {@code true} if the specified condition selects the specified element.
-     *
-     * @param browserVersion the browser version
-     * @param condition the condition to test
-     * @param element the element to test
-     * @param fromQuerySelectorAll whether this is called from {@link DomNode#querySelectorAll(String)
-     * @return {@code true} if it does apply, {@code false} if it doesn't apply
-     *
-     * @deprecated since 2.61.0
-     */
-    @Deprecated
-    static boolean selects(final BrowserVersion browserVersion, final Condition condition, final DomElement element,
-            final boolean fromQuerySelectorAll) {
-        return CssStyleSheet.selects(browserVersion, condition, element, fromQuerySelectorAll, true);
-    }
-
-    /**
      * Parses the selectors at the specified input source. If anything at all goes wrong, this
      * method returns an empty selector list.
      *

@@ -8,6 +8,19 @@
 
     <body>
         <release version="2.64.0" date="xx, 2022" description="">
+            <action type="update" dev="rbri">
+                Various minor optimizations and some code cleanup.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated class SimpleScriptable removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated constant BrowserVersion.FIREFOX_78 removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated methods CSSStyleSheet.selects(BrowserVersion, Selector, DomElement, String, boolean) 
+                and CSSStyleSheet.selects(BrowserVersion, Condition, DomElement, boolean) removed.
+            </action>
             <action type="fix" dev="rbri" issue="488">
                 Various NullPointerExceptions fixed when calculation style properties for the html node itself.
             </action>
