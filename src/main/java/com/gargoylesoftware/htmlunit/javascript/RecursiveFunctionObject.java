@@ -133,15 +133,13 @@ public class RecursiveFunctionObject extends FunctionObject {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        final String superFunctionName = super.getFunctionName();
-        if ("prototype".equals(name)) {
-            if ("Proxy".equals(superFunctionName)) {
-                return NOT_FOUND;
-            }
-        }
         Object value = super.get(name, start);
+        if (value != NOT_FOUND) {
+            return value;
+        }
 
-        if (value == NOT_FOUND && !"Image".equals(superFunctionName) && !"Option".equals(superFunctionName)
+        final String superFunctionName = super.getFunctionName();
+        if (!"Image".equals(superFunctionName) && !"Option".equals(superFunctionName)
                 && (!"WebGLContextEvent".equals(superFunctionName)
                         || browserVersion_.hasFeature(JS_WEBGL_CONTEXT_EVENT_CONSTANTS))) {
             Class<?> klass = getPrototypeProperty().getClass();
