@@ -22,7 +22,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.w3c.dom.DOMException;
@@ -46,9 +46,10 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class Storage extends HtmlUnitScriptable {
 
-    private static final List<String> RESERVED_NAMES_ = Arrays.asList("clear", "key", "getItem", "length", "removeItem",
+    private static final HashSet<String> RESERVED_NAMES_ = new HashSet<String>(Arrays.asList(
+        "clear", "key", "getItem", "length", "removeItem",
         "setItem", "constructor", "toString", "toLocaleString", "valueOf", "hasOwnProperty", "propertyIsEnumerable",
-        "isPrototypeOf", "__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__");
+        "isPrototypeOf", "__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"));
 
     private static final long STORE_SIZE_KIMIT = 5_200_000;
 

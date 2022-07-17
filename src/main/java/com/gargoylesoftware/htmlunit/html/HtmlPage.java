@@ -188,10 +188,14 @@ public class HtmlPage extends SgmlPage {
 
     private transient ComputedStylesCache computedStylesCache_;
 
-    private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
-            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
-    private static final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
-            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME);
+    private static final HashSet<String> TABBABLE_TAGS =
+            new HashSet<String>(Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+                    HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME,
+                    HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME));
+    private static final HashSet<String> ACCEPTABLE_TAG_NAMES =
+            new HashSet<String>(Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+                    HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME,
+                    HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME));
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
     private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(

@@ -44,9 +44,9 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Deque;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -165,12 +165,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
 
-    private static final Collection<String> PROHIBITED_HEADERS_ = Arrays.asList(
+    private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<String>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
         HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
         "content-transfer-encoding", "date", "expect",
         HttpHeader.HOST_LC, "keep-alive", HttpHeader.REFERER_LC, "te", "trailer", "transfer-encoding",
-        "upgrade", HttpHeader.USER_AGENT_LC, "via");
+        "upgrade", HttpHeader.USER_AGENT_LC, "via"));
 
     private int state_;
     private WebRequest webRequest_;
