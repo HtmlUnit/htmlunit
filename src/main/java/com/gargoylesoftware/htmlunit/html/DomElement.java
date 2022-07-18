@@ -88,7 +88,7 @@ public class DomElement extends DomNamespaceNode implements Element {
     public static final String ATTRIBUTE_VALUE_EMPTY = new String();
 
     /** The map holding the attributes, keyed by name. */
-    private NamedAttrNodeMapImpl attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
+    private NamedAttrNodeMapImpl attributes_;
 
     /** The map holding the namespaces, keyed by URI. */
     private final Map<String, String> namespaces_ = new HashMap<>();
@@ -125,6 +125,9 @@ public class DomElement extends DomNamespaceNode implements Element {
                     namespaces_.put(attrNamespaceURI, prefix);
                 }
             }
+        }
+        else {
+            attributes_ = new NamedAttrNodeMapImpl(this, isAttributeCaseSensitive());
         }
     }
 
@@ -1610,8 +1613,8 @@ public class DomElement extends DomNamespaceNode implements Element {
  * The {@link NamedNodeMap} to store the node attributes.
  */
 class NamedAttrNodeMapImpl implements Map<String, DomAttr>, NamedNodeMap, Serializable {
-    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
     private static final DomAttr[] EMPTY_ARRAY = new DomAttr[0];
+    protected static final NamedAttrNodeMapImpl EMPTY_MAP = new NamedAttrNodeMapImpl();
 
     private final Map<String, DomAttr> map_ = new LinkedHashMap<>();
     private boolean dirty_;
