@@ -328,10 +328,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     prototype = prototypesPerJSName.get("MutationObserver");
                     break;
 
-                case "WebkitURL":
-                    prototype = prototypesPerJSName.get("URL");
-                    break;
-
                 default:
             }
             if (prototype != null && config.isJsObject()) {
@@ -357,7 +353,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
 
                     if ("WebKitMutationObserver".equals(hostClassSimpleName)
-                            || "WebkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());

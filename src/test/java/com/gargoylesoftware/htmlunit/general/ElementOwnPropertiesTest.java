@@ -10721,6 +10721,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URL}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            EDGE = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF_ESR = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            IE = "exception")
+    public void webkitURL() throws Exception {
+        testString("", "new webkitURL('http://developer.mozilla.org')");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
      *
      * @throws Exception if the test fails
