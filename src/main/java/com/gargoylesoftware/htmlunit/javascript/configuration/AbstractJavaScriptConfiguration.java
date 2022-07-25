@@ -61,7 +61,14 @@ public abstract class AbstractJavaScriptConfiguration {
      * @param browser the browser version to use
      */
     protected AbstractJavaScriptConfiguration(final BrowserVersion browser) {
-        configuration_ = buildUsageMap(browser);
+        configuration_ = new ConcurrentHashMap<>(getClasses().length);
+
+        for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
+            final ClassConfiguration config = getClassConfiguration(klass, browser);
+            if (config != null) {
+                configuration_.put(config.getClassName(), config);
+            }
+        }
     }
 
     /**
@@ -75,18 +82,6 @@ public abstract class AbstractJavaScriptConfiguration {
      */
     public Iterable<ClassConfiguration> getAll() {
         return configuration_.values();
-    }
-
-    private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap = new ConcurrentHashMap<>(getClasses().length);
-
-        for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
-            final ClassConfiguration config = getClassConfiguration(klass, browser);
-            if (config != null) {
-                classMap.put(config.getClassName(), config);
-            }
-        }
-        return classMap;
     }
 
     /**
@@ -371,12 +366,12 @@ public abstract class AbstractJavaScriptConfiguration {
                     new ConcurrentHashMap<>(configuration_.size());
 
             final boolean debug = LOG.isDebugEnabled();
-            for (final String hostClassName : configuration_.keySet()) {
-                final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
+            for (final Map.Entry<String, ClassConfiguration> entry : configuration_.entrySet()) {
+                final ClassConfiguration classConfig = entry.getValue();
                 for (final Class<?> domClass : classConfig.getDomClasses()) {
                     // preload and validate that the class exists
                     if (debug) {
-                        LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
+                        LOG.debug("Mapping " + domClass.getName() + " to " + entry.getKey());
                     }
                     map.put(domClass, classConfig.getHostClass());
                 }

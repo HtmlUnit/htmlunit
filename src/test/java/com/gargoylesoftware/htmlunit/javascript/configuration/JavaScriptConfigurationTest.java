@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.host.worker.DedicatedWorkerGlobalScope;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -141,7 +140,8 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                     continue;
                 }
                 if ("com.gargoylesoftware.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
-                        || "Reflect".equals(klass.getSimpleName())) {
+                        || "Reflect".equals(klass.getSimpleName())
+                        || "DedicatedWorkerGlobalScope".equals(klass.getSimpleName())) {
                     continue;
                 }
                 if (klass.getAnnotation(JsxClasses.class) != null) {
@@ -152,7 +152,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 }
             }
         }
-        foundJsxClasses.remove(DedicatedWorkerGlobalScope.class.getName());
+
         final List<String> definedClasses = new ArrayList<>();
         for (final Class<?> klass : JavaScriptConfiguration.CLASSES_) {
             definedClasses.add(klass.getName());
