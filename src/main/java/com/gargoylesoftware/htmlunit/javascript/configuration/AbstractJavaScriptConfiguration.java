@@ -135,8 +135,8 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 boolean isJsObject = false;
                 String className = null;
-                String extendedClassName;
 
+                final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
                 if (superClass == HtmlUnitScriptable.class) {
                     extendedClassName = "";
@@ -153,14 +153,6 @@ public abstract class AbstractJavaScriptConfiguration {
                         }
                         if (!jsxClass.className().isEmpty()) {
                             className = jsxClass.className();
-                        }
-                        if (jsxClass.extendedClass() != Object.class) {
-                            if (jsxClass.extendedClass() == HtmlUnitScriptable.class) {
-                                extendedClassName = "";
-                            }
-                            else {
-                                extendedClassName = jsxClass.extendedClass().getSimpleName();
-                            }
                         }
                     }
                 }
@@ -186,17 +178,14 @@ public abstract class AbstractJavaScriptConfiguration {
                 if (className.isEmpty()) {
                     className = null;
                 }
-                String extendedClassName;
 
+                final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass != HtmlUnitScriptable.class) {
-                    extendedClassName = superClass.getSimpleName();
-                }
-                else {
+                if (superClass == HtmlUnitScriptable.class) {
                     extendedClassName = "";
                 }
-                if (jsxClass.extendedClass() != Object.class) {
-                    extendedClassName = jsxClass.extendedClass().getSimpleName();
+                else {
+                    extendedClassName = superClass.getSimpleName();
                 }
 
                 final ClassConfiguration classConfiguration
