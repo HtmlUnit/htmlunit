@@ -18,7 +18,7 @@
                 Deprecated constant BrowserVersion.FIREFOX_78 removed.
             </action>
             <action type="remove" dev="rbri">
-                Deprecated methods CSSStyleSheet.selects(BrowserVersion, Selector, DomElement, String, boolean) 
+                Deprecated methods CSSStyleSheet.selects(BrowserVersion, Selector, DomElement, String, boolean)
                 and CSSStyleSheet.selects(BrowserVersion, Condition, DomElement, boolean) removed.
             </action>
             <action type="fix" dev="rbri" issue="488">

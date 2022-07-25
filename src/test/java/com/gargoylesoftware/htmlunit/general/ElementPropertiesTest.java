@@ -2743,6 +2743,40 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link Performance}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),clearMarks(),clearMeasures(),clearResourceTimings(),dispatchEvent(),"
+                + "eventCounts,getEntries(),getEntriesByName(),getEntriesByType(),mark(),measure(),memory,"
+                + "navigation,now(),onresourcetimingbufferfull,removeEventListener(),setResourceTimingBufferSize(),"
+                + "timeOrigin,timing,toJSON()",
+            EDGE = "addEventListener(),clearMarks(),clearMeasures(),clearResourceTimings(),dispatchEvent(),"
+                + "eventCounts,getEntries(),getEntriesByName(),getEntriesByType(),mark(),measure(),memory,"
+                + "navigation,now(),onresourcetimingbufferfull,removeEventListener(),setResourceTimingBufferSize(),"
+                + "timeOrigin,timing,toJSON()",
+            FF = "addEventListener(),clearMarks(),clearMeasures(),clearResourceTimings(),dispatchEvent(),"
+                + "eventCounts,getEntries(),getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,"
+                + "now(),onresourcetimingbufferfull,removeEventListener(),setResourceTimingBufferSize(),"
+                + "timeOrigin,timing,toJSON()",
+            FF_ESR = "addEventListener(),clearMarks(),clearMeasures(),clearResourceTimings(),dispatchEvent(),"
+                + "eventCounts,getEntries(),getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,"
+                + "now(),onresourcetimingbufferfull,removeEventListener(),setResourceTimingBufferSize(),"
+                + "timeOrigin,timing,toJSON()",
+            IE = "clearMarks(),clearMeasures(),clearResourceTimings(),getEntries(),getEntriesByName(),"
+                + "getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),navigation,now(),"
+                + "setResourceTimingBufferSize(),timing,toJSON()")
+    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
+            EDGE = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
+            FF = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
+            FF_ESR = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
+            IE = "navigation,now(),timing")
+    public void performance() throws Exception {
+        testString("", "performance");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPlainText}.
      *
      * @throws Exception if the test fails

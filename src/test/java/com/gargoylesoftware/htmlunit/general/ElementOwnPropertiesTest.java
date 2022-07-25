@@ -7298,6 +7298,36 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link Performance}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),memory,navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            EDGE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),memory,navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            FF = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            FF_ESR = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            IE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),"
+                + "navigation,now(),setResourceTimingBufferSize(),timing,toJSON()")
+    @HtmlUnitNYI(CHROME = "constructor(),navigation,now(),timing",
+            EDGE = "constructor(),navigation,now(),timing",
+            FF = "constructor(),navigation,now(),timing",
+            FF_ESR = "constructor(),navigation,now(),timing",
+            IE = "constructor,navigation,now(),timing")
+    public void performance() throws Exception {
+        testString("", "performance");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPlainText}.
      *
      * @throws Exception if the test fails
