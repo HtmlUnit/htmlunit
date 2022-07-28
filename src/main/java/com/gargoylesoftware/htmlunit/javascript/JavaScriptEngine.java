@@ -319,17 +319,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             if ("Image".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
             }
-            if ("Option".equals(hostClassSimpleName)) {
+            else if ("Option".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
-
-            switch (hostClassSimpleName) {
-                case "WebKitMutationObserver":
-                    prototype = prototypesPerJSName.get("MutationObserver");
-                    break;
-
-                default:
+            else if ("WebKitMutationObserver".equals(hostClassSimpleName)) {
+                prototype = prototypesPerJSName.get("MutationObserver");
             }
+            else if ("webkitURL".equals(hostClassSimpleName)) {
+                prototype = prototypesPerJSName.get("URL");
+            }
+
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor == null) {
                     final ScriptableObject constructor;
@@ -353,6 +352,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
 
                     if ("WebKitMutationObserver".equals(hostClassSimpleName)
+                            || "webkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
