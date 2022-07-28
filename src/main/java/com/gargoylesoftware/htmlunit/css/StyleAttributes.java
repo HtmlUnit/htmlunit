@@ -206,7 +206,10 @@ public final class StyleAttributes implements Serializable {
         AZIMUTH("azimuth", "azimuth"),
 
         /** The style property {@code backdropFilter}. */
-        BACKDROP_FILTER("backdropFilter", "backdrop-filter", chromeAndEdge("none")),
+        BACKDROP_FILTER("backdropFilter", "backdrop-filter", chromeAndEdge("none"), ffLatest("none")),
+
+//        /** The style property {@code backdrop-filter}. */
+//        BACKDROP_FILTER_("backdrop-filter", "backdrop-filter", chromeAndEdge("none"), ffLatest("none")),
 
         /** The style property {@code backfaceVisibility}. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility", ie("visible"),

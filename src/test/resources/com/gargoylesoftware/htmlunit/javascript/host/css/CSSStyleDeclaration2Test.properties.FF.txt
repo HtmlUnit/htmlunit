@@ -138,6 +138,7 @@ animationPlayState
 animationTimingFunction
 appearance
 aspectRatio
+backdropFilter
 backfaceVisibility
 background
 backgroundAttachment
@@ -458,6 +459,7 @@ scrollPaddingLeft
 scrollPaddingRight
 scrollPaddingTop
 scrollSnapAlign
+scrollSnapStop
 scrollSnapType
 scrollbarColor
 scrollbarGutter

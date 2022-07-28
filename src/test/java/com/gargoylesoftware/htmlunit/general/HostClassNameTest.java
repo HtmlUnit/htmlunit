@@ -4642,7 +4642,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function IDBMutableFile() {\n    [native code]\n}",
             FF_ESR = "function IDBMutableFile() {\n    [native code]\n}")
     public void idbMutableFile() throws Exception {
         test("IDBMutableFile");
@@ -4906,7 +4905,7 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "[object InstallTriggerImpl]",
+            FF = "null",
             FF_ESR = "[object InstallTriggerImpl]")
     public void installTrigger() throws Exception {
         test("InstallTrigger");

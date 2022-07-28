@@ -143,7 +143,6 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ex: ",
-            FF = "no ex: ",
             FF_ESR = "no ex: ")
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='time' id='p' disabled='disabled'/></body></html>";
