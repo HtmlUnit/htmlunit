@@ -1491,6 +1491,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
+    /** Javascript InstallTrigger property set to null. */
+    @BrowserFeature(FF)
+    JS_WINDOW_INSTALL_TRIGGER_NULL,
+
     /**
      * Difference of window.outer/inner height is 131.
      */
