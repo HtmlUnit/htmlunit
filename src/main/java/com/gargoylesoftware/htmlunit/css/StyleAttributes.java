@@ -18,11 +18,13 @@ import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEd
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAuto;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNone;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNormal;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ff;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffEsr;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffLatest;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNone;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNormal;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ffNotIterable;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ie;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.ieNotIterable;
@@ -114,13 +116,13 @@ public final class StyleAttributes implements Serializable {
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), chromeAndEdgeAndFirefox("normal")),
 
         /** The style property {@code align-content}. */
-        ALIGN_CONTENT_("align-content", "align-content", ff("normal")),
+        ALIGN_CONTENT_("align-content", "align-content", ffNormal()),
 
         /** The style property {@code alignItems}. */
         ALIGN_ITEMS("alignItems", "align-items",  ie("stretch"), chromeAndEdgeAndFirefox("normal")),
 
         /** The style property {@code align-items}. */
-        ALIGN_ITEMS_("align-items", "align-items", ff("normal")),
+        ALIGN_ITEMS_("align-items", "align-items", ffNormal()),
 
         /** The style property {@code alignSelf}. */
         ALIGN_SELF("alignSelf", "align-self", ie("auto"), chromeAndEdgeAndFirefox("auto")),
@@ -149,7 +151,7 @@ public final class StyleAttributes implements Serializable {
                 chromeAndEdgeAndFirefox("normal")),
 
         /** The style property {@code animation-direction}. */
-        ANIMATION_DIRECTION_("animation-direction", "animation-direction", ff("normal")),
+        ANIMATION_DIRECTION_("animation-direction", "animation-direction", ffNormal()),
 
         /** The style property {@code animationDuration}. */
         ANIMATION_DURATION("animationDuration", "animation-duration", ie("0s"), chromeAndEdgeAndFirefox("0s")),
@@ -212,7 +214,7 @@ public final class StyleAttributes implements Serializable {
         BACKDROP_FILTER("backdropFilter", "backdrop-filter", chromeAndEdgeNone(), ffLatest("none")),
 
         /** The style property {@code backdrop-filter}. */
-        BACKDROP_FILTER_("backdrop-filter", "backdrop-filter", chromeAndEdgeNone(), ffLatest("none")),
+        BACKDROP_FILTER_("backdrop-filter", "backdrop-filter", ffLatest("none")),
 
         /** The style property {@code backfaceVisibility}. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility", ie("visible"),
@@ -236,7 +238,7 @@ public final class StyleAttributes implements Serializable {
         BACKGROUND_BLEND_MODE("backgroundBlendMode", "background-blend-mode", chromeAndEdgeAndFirefox("normal")),
 
         /** The style property {@code background-blend-mode}. */
-        BACKGROUND_BLEND_MODE_("background-blend-mode", "background-blend-mode", ff("normal")),
+        BACKGROUND_BLEND_MODE_("background-blend-mode", "background-blend-mode", ffNormal()),
 
         /** The style property {@code backgroundClip}. */
         BACKGROUND_CLIP("backgroundClip", "background-clip",
@@ -850,7 +852,7 @@ public final class StyleAttributes implements Serializable {
         COLOR_RENDERING("colorRendering", "color-rendering", chromeAndEdgeAuto()),
 
         /** The style property {@code colorScheme}. */
-        COLOR_SCHEME("colorScheme", "color-scheme", chromeAndEdge("normal"), ffLatest("normal")),
+        COLOR_SCHEME("colorScheme", "color-scheme", chromeAndEdgeNormal(), ffLatest("normal")),
 
         /** The style property {@code color-scheme}. */
         COLOR_SCHEME_("color-scheme", "color-scheme", ffLatest("normal")),
@@ -868,10 +870,10 @@ public final class StyleAttributes implements Serializable {
         COLUMN_FILL_("column-fill", "column-fill", ff("balance")),
 
         /** The style property {@code columnGap}. */
-        COLUMN_GAP("columnGap", "column-gap", chromeAndEdge("normal"), ie("normal"), ff("normal")),
+        COLUMN_GAP("columnGap", "column-gap", chromeAndEdgeNormal(), ie("normal"), ffNormal()),
 
         /** The style property {@code column-gap}. */
-        COLUMN_GAP_("column-gap", "column-gap", ff("normal")),
+        COLUMN_GAP_("column-gap", "column-gap", ffNormal()),
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
@@ -936,7 +938,7 @@ public final class StyleAttributes implements Serializable {
         CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdgeNone()),
 
         /** The style property {@code content}. */
-        CONTENT("content", "content", ie("normal"), chromeAndEdge("normal"), ff("normal")),
+        CONTENT("content", "content", ie("normal"), chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code contentVisibility}. */
         CONTENT_VISISBILITY("contentVisibility", "content-visibility", chromeAndEdge("visible")),
@@ -1108,10 +1110,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code fontFeatureSettings}. */
         FONT_FEATURE_SETTINGS("fontFeatureSettings", "font-feature-settings",
-                ie("normal"), ff("normal"), chromeAndEdge("normal")),
+                ie("normal"), ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code font-feature-settings}. */
-        FONT_FEATURE_SETTINGS_("font-feature-settings", "font-feature-settings", ff("normal")),
+        FONT_FEATURE_SETTINGS_("font-feature-settings", "font-feature-settings", ffNormal()),
 
         /** The style property {@code fontKerning}. */
         FONT_KERNING("fontKerning", "font-kerning", ff("auto"), chromeAndEdgeAuto()),
@@ -1120,10 +1122,10 @@ public final class StyleAttributes implements Serializable {
         FONT_KERNING_("font-kerning", "font-kerning", ff("auto")),
 
         /** The style property {@code fontLanguageOverride}. */
-        FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ff("normal")),
+        FONT_LANGUAGE_OVERRIDE("fontLanguageOverride", "font-language-override", ffNormal()),
 
         /** The style property {@code font-language-override}. */
-        FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ff("normal")),
+        FONT_LANGUAGE_OVERRIDE_("font-language-override", "font-language-override", ffNormal()),
 
         /** The style property {@code fontOpticalSizing}. */
         FONT_OPTICAL_SIZING("fontOpticalSizing", "font-optical-sizing", chromeAndEdgeAuto(), ff("auto")),
@@ -1132,7 +1134,7 @@ public final class StyleAttributes implements Serializable {
         FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
 
         /** The style property {@code fontPalette}. */
-        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdge("normal")),
+        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdgeNormal()),
 
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),
@@ -1154,10 +1156,10 @@ public final class StyleAttributes implements Serializable {
         FONT_STRETCH_("font-stretch", "font-stretch", ff("100%")),
 
         /** The style property {@code fontStyle}. */
-        FONT_STYLE("fontStyle", "font-style", chromeAndEdge("normal"), ff("normal"), ie("normal")),
+        FONT_STYLE("fontStyle", "font-style", chromeAndEdgeNormal(), ffNormal(), ie("normal")),
 
         /** The style property {@code font-style}. */
-        FONT_STYLE_("font-style", "font-style", ff("normal")),
+        FONT_STYLE_("font-style", "font-style", ffNormal()),
 
         /** The style property {@code fontSynthesis}. */
         FONT_SYNTHESIS("fontSynthesis", "font-synthesis", chromeAndEdge("weight style small-caps"),
@@ -1176,54 +1178,54 @@ public final class StyleAttributes implements Serializable {
         FONT_SYNTHESIS_WEIGHT("fontSynthesisWeight", "fontSynthesisWeight", chromeAndEdgeAuto()),
 
         /** The style property {@code fontVariant}. */
-        FONT_VARIANT("fontVariant", "font-variant", chromeAndEdge("normal"), ff("normal"), ie("normal")),
+        FONT_VARIANT("fontVariant", "font-variant", chromeAndEdgeNormal(), ffNormal(), ie("normal")),
 
         /** The style property {@code font-variant}. */
-        FONT_VARIANT_("font-variant", "font-variant", ff("normal")),
+        FONT_VARIANT_("font-variant", "font-variant", ffNormal()),
 
         /** The style property {@code fontVariantAlternates}. */
-        FONT_VARIANT_ALTERNATES("fontVariantAlternates", "font-variant-alternates", ff("normal")),
+        FONT_VARIANT_ALTERNATES("fontVariantAlternates", "font-variant-alternates", ffNormal()),
 
         /** The style property {@code font-variant-alternates}. */
-        FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ff("normal")),
+        FONT_VARIANT_ALTERNATES_("font-variant-alternates", "font-variant-alternates", ffNormal()),
 
         /** The style property {@code fontVariantCaps}. */
-        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ff("normal"), chromeAndEdge("normal")),
+        FONT_VARIANT_CAPS("fontVariantCaps", "font-variant-caps", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code font-variant-caps}. */
-        FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ff("normal")),
+        FONT_VARIANT_CAPS_("font-variant-caps", "font-variant-caps", ffNormal()),
 
         /** The style property {@code fontVariantEastAsian}. */
-        FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ff("normal"),
-                chromeAndEdge("normal")),
+        FONT_VARIANT_EAST_ASIAN("fontVariantEastAsian", "font-variant-east-asian", ffNormal(),
+                chromeAndEdgeNormal()),
 
         /** The style property {@code font-variant-east-asian}. */
-        FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ff("normal")),
+        FONT_VARIANT_EAST_ASIAN_("font-variant-east-asian", "font-variant-east-asian", ffNormal()),
 
         /** The style property {@code fontVariantLigatures}. */
-        FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ff("normal"), chromeAndEdge("normal")),
+        FONT_VARIANT_LIGATURES("fontVariantLigatures", "font-variant-ligatures", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code font-variant-ligatures}. */
-        FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ff("normal")),
+        FONT_VARIANT_LIGATURES_("font-variant-ligatures", "font-variant-ligatures", ffNormal()),
 
         /** The style property {@code fontVariantNumeric}. */
-        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ff("normal"), chromeAndEdge("normal")),
+        FONT_VARIANT_NUMERIC("fontVariantNumeric", "font-variant-numeric", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code font-variant-numeric}. */
-        FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ff("normal")),
+        FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ffNormal()),
 
         /** The style property {@code fontVariantPosition}. */
-        FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ff("normal")),
+        FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ffNormal()),
 
         /** The style property {@code font-variant-position}. */
-        FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ff("normal")),
+        FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ffNormal()),
 
         /** The style property {@code fontVariationSettings}. */
         FONT_VARIATION_SETTING("fontVariationSettings", "font-variation-settings",
-                chromeAndEdge("normal"), ff("normal")),
+                chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code font-variation-settings}. */
-        FONT_VARIATION_SETTING_("font-variation-settings", "font-variation-settings", ff("normal")),
+        FONT_VARIATION_SETTING_("font-variation-settings", "font-variation-settings", ffNormal()),
 
         /** The style property {@code fontWeight}. */
         FONT_WEIGHT("fontWeight", "font-weight", chromeAndEdge("400"), ff("400"), ie("400")),
@@ -1236,7 +1238,7 @@ public final class StyleAttributes implements Serializable {
                 chromeAndEdgeAuto()),
 
         /** The style property {@code gap}. */
-        GAP("gap", "gap", chromeAndEdge("normal"), ffEsr(""), ffLatest("normal")),
+        GAP("gap", "gap", chromeAndEdgeNormal(), ffEsr(""), ffLatest("normal")),
 
         /** The style property {@code glyphOrientationHorizontal}. */
         GLYPH_ORIENTATION_HORIZONTAL("glyphOrientationHorizontal", "glyph-orientation-horizontal",
@@ -1287,10 +1289,10 @@ public final class StyleAttributes implements Serializable {
         GRID_COLUMN_END_("grid-column-end", "grid-column-end", ff("auto")),
 
         /** The style property {@code gridColumnGap}. */
-        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chromeAndEdge("normal"), ff("normal")),
+        GRID_COLUMN_GAP("gridColumnGap", "grid-column-gap", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code grid-column-gap}. */
-        GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ff("normal")),
+        GRID_COLUMN_GAP_("grid-column-gap", "grid-column-gap", ffNormal()),
 
         /** The style property {@code gridColumnStart}. */
         GRID_COLUMN_START("gridColumnStart", "grid-column-start", chromeAndEdgeAuto(), ff("auto")),
@@ -1317,10 +1319,10 @@ public final class StyleAttributes implements Serializable {
         GRID_ROW_END_("grid-row-end", "grid-row-end", ff("auto")),
 
         /** The style property {@code gridRowGap}. */
-        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chromeAndEdge("normal"), ff("normal")),
+        GRID_ROW_GAP("gridRowGap", "grid-row-gap", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code grid-row-gap}. */
-        GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ff("normal")),
+        GRID_ROW_GAP_("grid-row-gap", "grid-row-gap", ffNormal()),
 
         /** The style property {@code gridRowStart}. */
         GRID_ROW_START("gridRowStart", "grid-row-start", chromeAndEdgeAuto(), ff("auto")),
@@ -1443,17 +1445,17 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code justifyContent}. */
         JUSTIFY_CONTENT("justifyContent", "justify-content",
-                ff("normal"),
-                ie("flex-start"), chromeAndEdge("normal")),
+                ffNormal(),
+                ie("flex-start"), chromeAndEdgeNormal()),
 
         /** The style property {@code justify-content}. */
-        JUSTIFY_CONTENT_("justify-content", "justify-content", ff("normal")),
+        JUSTIFY_CONTENT_("justify-content", "justify-content", ffNormal()),
 
         /** The style property {@code justifyItems}. */
-        JUSTIFY_ITEMS("justifyItems", "justify-items", ff("normal"), chromeAndEdge("normal")),
+        JUSTIFY_ITEMS("justifyItems", "justify-items", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code justify-items}. */
-        JUSTIFY_ITEMS_("justify-items", "justify-items", ff("normal")),
+        JUSTIFY_ITEMS_("justify-items", "justify-items", ffNormal()),
 
         /** The style property {@code justifySelf}. */
         JUSTIFY_SELF("justifySelf", "justify-self", ff("auto"), chromeAndEdgeAuto()),
@@ -1486,10 +1488,10 @@ public final class StyleAttributes implements Serializable {
         LEFT("left", "left", chromeAndEdgeAuto(), ff(""), ie("")),
 
         /** The style property {@code letterSpacing}. */
-        LETTER_SPACING("letterSpacing", "letter-spacing", chromeAndEdge("normal"), ff(""), ie("")),
+        LETTER_SPACING("letterSpacing", "letter-spacing", chromeAndEdgeNormal(), ff(""), ie("")),
 
         /** The style property {@code letter-spacing}. */
-        LETTER_SPACING_("letter-spacing", "letter-spacing", ff("normal")),
+        LETTER_SPACING_("letter-spacing", "letter-spacing", ffNormal()),
 
         /** The style property {@code lightingColor}. */
         LIGHTING_COLOR("lightingColor", "lighting-color",
@@ -1508,11 +1510,11 @@ public final class StyleAttributes implements Serializable {
         LINE_GAP_OVERRIDE("lineGapOverride", "line-gap-oOverride", chromeAndEdge("")),
 
         /** The style property {@code lineHeight}. */
-        LINE_HEIGHT("lineHeight", "line-height", ff("normal"),
-                ie("normal"), chromeAndEdge("normal")),
+        LINE_HEIGHT("lineHeight", "line-height", ffNormal(),
+                ie("normal"), chromeAndEdgeNormal()),
 
         /** The style property {@code line-height}. */
-        LINE_HEIGHT_("line-height", "line-height", ff("normal")),
+        LINE_HEIGHT_("line-height", "line-height", ffNormal()),
 
         /** The style property {@code listStyle}. */
         LIST_STYLE("listStyle", "list-style", chromeAndEdge("outside none disc"), ie(""),
@@ -1754,10 +1756,10 @@ public final class StyleAttributes implements Serializable {
         MIN_ZOOM("minZoom", "min-zoom", chromeAndEdge("")),
 
         /** The style property {@code mixBlendMode}. */
-        MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ff("normal"), chromeAndEdge("normal")),
+        MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code mix-blend-mode}. */
-        MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ff("normal")),
+        MIX_BLEND_MODE_("mix-blend-mode", "mix-blend-mode", ffNormal()),
 
         /** The style property {@code MozAnimation}. */
         MOZ_ANIMATION("MozAnimation", "-moz-animation",
@@ -1774,10 +1776,10 @@ public final class StyleAttributes implements Serializable {
         MOZ_ANIMATION_DELAY__("-moz-animation-delay", "-moz-animation-delay", ff("0s")),
 
         /** The style property {@code MozAnimationDirection}. */
-        MOZ_ANIMATION_DIRECTION("MozAnimationDirection", "-moz-animation-direction", ff("normal")),
+        MOZ_ANIMATION_DIRECTION("MozAnimationDirection", "-moz-animation-direction", ffNormal()),
 
         /** The style property {@code -moz-animation-direction}. */
-        MOZ_ANIMATION_DIRECTION__("-moz-animation-direction", "-moz-animation-direction", ff("normal")),
+        MOZ_ANIMATION_DIRECTION__("-moz-animation-direction", "-moz-animation-direction", ffNormal()),
 
         /** The style property {@code MozAnimationDuration}. */
         MOZ_ANIMATION_DURATION("MozAnimationDuration", "-moz-animation-duration", ff("0s")),
@@ -1950,10 +1952,10 @@ public final class StyleAttributes implements Serializable {
         MOZ_BOX_ALIGN__("-moz-box-align", "-moz-box-align", ff("stretch")),
 
         /** The style property {@code MozBoxDirection}. */
-        MOZ_BOX_DIRECTION("MozBoxDirection", "-moz-box-direction", ff("normal")),
+        MOZ_BOX_DIRECTION("MozBoxDirection", "-moz-box-direction", ffNormal()),
 
         /** The style property {@code -moz-box-direction}. */
-        MOZ_BOX_DIRECTION__("-moz-box-direction", "-moz-box-direction", ff("normal")),
+        MOZ_BOX_DIRECTION__("-moz-box-direction", "-moz-box-direction", ffNormal()),
 
         /** The style property {@code MozBoxFlex}. */
         MOZ_BOX_FLEX("MozBoxFlex", "-moz-box-flex", ff("0")),
@@ -1996,19 +1998,19 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code MozFontFeatureSettings}. */
         MOZ_FONT_FEATURE_SETTINGS("MozFontFeatureSettings", "-moz-font-feature-settings",
-                ff("normal")),
+                ffNormal()),
 
         /** The style property {@code -moz-font-feature-settings}. */
         MOZ_FONT_FEATURE_SETTINGS__("-moz-font-feature-settings", "-moz-font-feature-settings",
-                ff("normal")),
+                ffNormal()),
 
         /** The style property {@code MozFontLanguageOverride}. */
         MOZ_FONT_LANGUAGE_OVERRIDE("MozFontLanguageOverride", "-moz-font-language-override",
-                ff("normal")),
+                ffNormal()),
 
         /** The style property {@code -moz-font-language-override}. */
         MOZ_FONT_LANGUAGE_OVERRIDE__("-moz-font-language-override", "-moz-font-language-override",
-                ff("normal")),
+                ffNormal()),
 
         /** The style property {@code MozForceBrokenImageIcon}. */
         MOZ_FORCE_BROKEN_IMAGE_ICON("MozForceBrokenImageIcon", "-moz-force-broken-image-icon",
@@ -2581,10 +2583,10 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_INLINE_("overflow-inline", "overflow-inline", ff("visible")),
 
         /** The style property {@code overflowWrap}. */
-        OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chromeAndEdge("normal"), ff("normal")),
+        OVERFLOW_WRAP("overflowWrap", "overflow-wrap", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code overflow-wrap}. */
-        OVERFLOW_WRAP_("overflow-wrap", "overflow-wrap", ff("normal")),
+        OVERFLOW_WRAP_("overflow-wrap", "overflow-wrap", ffNormal()),
 
         /** The style property {@code overflowX}. */
         OVERFLOW_X("overflowX", "overflow-x", chromeAndEdge("visible"), ff("visible"), ie("visible")),
@@ -2726,10 +2728,10 @@ public final class StyleAttributes implements Serializable {
         PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdge("")),
 
         /** The style property {@code paintOrder}. */
-        PAINT_ORDER("paintOrder", "paint-order", ff("normal"), chromeAndEdge("normal")),
+        PAINT_ORDER("paintOrder", "paint-order", ffNormal(), chromeAndEdgeNormal()),
 
         /** The style property {@code paint-order}. */
-        PAINT_ORDER_("paint-order", "paint-order", ff("normal")),
+        PAINT_ORDER_("paint-order", "paint-order", ffNormal()),
 
         /** The style property {@code pause}. */
         PAUSE("pause", "pause"),
@@ -2775,13 +2777,13 @@ public final class StyleAttributes implements Serializable {
         PIXEL_WIDTH("pixelWidth", "pixel-width", ie("")),
 
         /** The style property {@code placeContent}. */
-        PLACE_CONTENT("placeContent", "place-content", chromeAndEdge("normal"), ffEsr(""), ffLatest("normal")),
+        PLACE_CONTENT("placeContent", "place-content", chromeAndEdgeNormal(), ffEsr(""), ffLatest("normal")),
 
         /** The style property {@code place-content}. */
         PLACE_CONTENT_("place-content", "place-content", ffEsr(""), ffLatest("normal")),
 
         /** The style property {@code placeItems}. */
-        PLACE_ITEMS("placeItems", "place-items", chromeAndEdge("normal"), ffEsr(""), ffLatest("normal legacy")),
+        PLACE_ITEMS("placeItems", "place-items", chromeAndEdgeNormal(), ffEsr(""), ffLatest("normal legacy")),
 
         /** The style property {@code place-items}. */
         PLACE_ITEMS_("place-items", "place-items", ffEsr(""), ffLatest("normal legacy")),
@@ -2850,10 +2852,10 @@ public final class StyleAttributes implements Serializable {
         ROTATE("rotate", "rotate", ffNone()),
 
         /** The style property {@code rowGap}. */
-        ROW_GAP("rowGap", "row-gap", chromeAndEdge("normal"), ff("normal")),
+        ROW_GAP("rowGap", "row-gap", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code row-gap}. */
-        ROW_GAP_("row-gap", "row-gap", ff("normal")),
+        ROW_GAP_("row-gap", "row-gap", ffNormal()),
 
         /** The style property {@code rubyAlign}. */
         RUBY_ALIGN("rubyAlign", "ruby-align", ff("space-around"), ie("")),
@@ -3037,10 +3039,10 @@ public final class StyleAttributes implements Serializable {
         SCROLL_SNAP_ALIGN_("scroll-snap-align", "scroll-snap-align", ffNone()),
 
         /** The style property {@code scrollSnapStop}. */
-        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdge("normal"), ffLatest("none")),
+        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdgeNormal(), ffLatest("normal")),
 
         /** The style property {@code scroll-snap-stop}. */
-        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ffLatest("none")),
+        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ffLatest("normal")),
 
         /** The style property {@code scrollSnapType}. */
         SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", chromeAndEdgeNone(), ffNone()),
@@ -3121,7 +3123,7 @@ public final class StyleAttributes implements Serializable {
         SIZE_ADJUST("sizeAdjust", "sizeAdjust", chromeAndEdge("")),
 
         /** The style property {@code speak}. */
-        SPEAK("speak", "speak", chromeAndEdge("normal")),
+        SPEAK("speak", "speak", chromeAndEdgeNormal()),
 
         /** The style property {@code speakAs}. */
         SPEAK_AS("speakAs", "speak-as", chromeAndEdge("")),
@@ -3476,7 +3478,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",
-                ff("isolate"), ie("normal"), chromeAndEdge("normal")),
+                ff("isolate"), ie("normal"), chromeAndEdgeNormal()),
 
         /** The style property {@code unicode-bidi}. */
         UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff("isolate")),
@@ -3515,22 +3517,22 @@ public final class StyleAttributes implements Serializable {
         VOLUME("volume", "volume"),
 
         /** The style property {@code webkitAlignContent}. */
-        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", chromeAndEdge("normal"), ff("normal")),
+        WEBKIT_ALIGN_CONTENT("webkitAlignContent", "webkit-align-content", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code WebkitAlignContent}. */
-        WEBKIT_ALIGN_CONTENT_("WebkitAlignContent", "webkit-align-content", ff("normal")),
+        WEBKIT_ALIGN_CONTENT_("WebkitAlignContent", "webkit-align-content", ffNormal()),
 
         /** The style property {@code -webkit-align-content}. */
-        WEBKIT_ALIGN_CONTENT__("-webkit-align-content", "webkit-align-content", ff("normal")),
+        WEBKIT_ALIGN_CONTENT__("-webkit-align-content", "webkit-align-content", ffNormal()),
 
         /** The style property {@code webkitAlignItems}. */
-        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", chromeAndEdge("normal"), ff("normal")),
+        WEBKIT_ALIGN_ITEMS("webkitAlignItems", "webkit-align-items", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code WebkitAlignItems}. */
-        WEBKIT_ALIGN_ITEMS_("WebkitAlignItems", "webkit-align-items", ff("normal")),
+        WEBKIT_ALIGN_ITEMS_("WebkitAlignItems", "webkit-align-items", ffNormal()),
 
         /** The style property {@code -webkit-align-items}. */
-        WEBKIT_ALIGN_ITEMS__("-webkit-align-items", "webkit-align-items", ff("normal")),
+        WEBKIT_ALIGN_ITEMS__("-webkit-align-items", "webkit-align-items", ffNormal()),
 
         /** The style property {@code webkitAlignSelf}. */
         WEBKIT_ALIGN_SELF("webkitAlignSelf", "webkit-align-self", chromeAndEdgeAuto(), ff("auto")),
@@ -3565,13 +3567,13 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitAnimationDirection}. */
         WEBKIT_ANIMATION_DIRECTION("webkitAnimationDirection", "webkit-animation-direction",
-                chromeAndEdge("normal"), ff("normal")),
+                chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code WebkitAnimationDirection}. */
-        WEBKIT_ANIMATION_DIRECTION_("WebkitAnimationDirection", "webkit-animation-direction", ff("normal")),
+        WEBKIT_ANIMATION_DIRECTION_("WebkitAnimationDirection", "webkit-animation-direction", ffNormal()),
 
         /** The style property {@code -webkit-animation-direction}. */
-        WEBKIT_ANIMATION_DIRECTION__("-webkit-animation-direction", "webkit-animation-direction", ff("normal")),
+        WEBKIT_ANIMATION_DIRECTION__("-webkit-animation-direction", "webkit-animation-direction", ffNormal()),
 
         /** The style property {@code webkitAnimationDuration}. */
         WEBKIT_ANIMATION_DURATION("webkitAnimationDuration", "webkit-animation-duration",
@@ -3832,13 +3834,13 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_BOX_DECORATION_BREAK("webkitBoxDecorationBreak", "webkit-box-decoration-break", chromeAndEdge("slice")),
 
         /** The style property {@code webkitBoxDirection}. */
-        WEBKIT_BOX_DIRECTION("webkitBoxDirection", "webkit-box-direction", chromeAndEdge("normal"), ff("normal")),
+        WEBKIT_BOX_DIRECTION("webkitBoxDirection", "webkit-box-direction", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code WebkitBoxDirection}. */
-        WEBKIT_BOX_DIRECTION_("WebkitBoxDirection", "webkit-box-direction", ff("normal")),
+        WEBKIT_BOX_DIRECTION_("WebkitBoxDirection", "webkit-box-direction", ffNormal()),
 
         /** The style property {@code -webkit-box-direction}. */
-        WEBKIT_BOX_DIRECTION__("-webkit-box-direction", "webkit-box-direction", ff("normal")),
+        WEBKIT_BOX_DIRECTION__("-webkit-box-direction", "webkit-box-direction", ffNormal()),
 
         /** The style property {@code webkitBoxFlex}. */
         WEBKIT_BOX_FLEX("webkitBoxFlex", "webkit-box-flex", chromeAndEdge("0"), ff("0")),
@@ -3919,7 +3921,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_COLUMN_COUNT("webkitColumnCount", "webkit-column-count", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitColumnGap}. */
-        WEBKIT_COLUMN_GAP("webkitColumnGap", "webkit-column-gap", chromeAndEdge("normal")),
+        WEBKIT_COLUMN_GAP("webkitColumnGap", "webkit-column-gap", chromeAndEdgeNormal()),
 
         /** The style property {@code webkitColumnRule}. */
         WEBKIT_COLUMN_RULE("webkitColumnRule", "webkit-column-rule", chromeAndEdge("0px none rgb(0, 0, 0)")),
@@ -4017,7 +4019,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitFontFeatureSettings}. */
         WEBKIT_FONT_FEATURE_SETTINGS("webkitFontFeatureSettings", "webkit-font-feature-settings",
-                chromeAndEdge("normal")),
+                chromeAndEdgeNormal()),
 
         /** The style property {@code webkitFontSmoothing}. */
         WEBKIT_FONT_SMOOTHING("webkitFontSmoothing", "webkit-font-smoothing", chromeAndEdgeAuto()),
@@ -4029,13 +4031,13 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_HYPHENATE_CHARACTER("webkitHyphenateCharacter", "webkit-hyphenate-character", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CONTENT("webkitJustifyContent", "webkit-justify-content", chromeAndEdge("normal"), ff("normal")),
+        WEBKIT_JUSTIFY_CONTENT("webkitJustifyContent", "webkit-justify-content", chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code WebkitJustifyContent}. */
-        WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ff("normal")),
+        WEBKIT_JUSTIFY_CONTENT_("WebkitJustifyContent", "webkit-justify-content", ffNormal()),
 
         /** The style property {@code -webkit-justify-content}. */
-        WEBKIT_JUSTIFY_CONTENT__("-webkit-justify-content", "webkit-justify-content", ff("normal")),
+        WEBKIT_JUSTIFY_CONTENT__("-webkit-justify-content", "webkit-justify-content", ffNormal()),
 
         /** The style property {@code webkitLineBreak}. */
         WEBKIT_LINE_BREAK("webkitLineBreak", "webkit-line-break", chromeAndEdgeAuto()),
@@ -4463,10 +4465,10 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_WRITING_MODE("webkitWritingMode", "webkit-writing-mode", chromeAndEdge("horizontal-tb")),
 
         /** The style property {@code whiteSpace}. */
-        WHITE_SPACE("whiteSpace", "white-space", chromeAndEdge("normal"), ff("normal"), ie("normal")),
+        WHITE_SPACE("whiteSpace", "white-space", chromeAndEdgeNormal(), ffNormal(), ie("normal")),
 
         /** The style property {@code white-space}. */
-        WHITE_SPACE_("white-space", "white-space", ff("normal")),
+        WHITE_SPACE_("white-space", "white-space", ffNormal()),
 
         /** The style property {@code widows}. */
         WIDOWS("widows", "widows", ie("2"), chromeAndEdge("2")),
@@ -4481,10 +4483,10 @@ public final class StyleAttributes implements Serializable {
         WILL_CHANGE_("will-change", "will-change", ff("auto")),
 
         /** The style property {@code wordBreak}. */
-        WORD_BREAK("wordBreak", "word-break", ff("normal"), ie("normal"), chromeAndEdge("normal")),
+        WORD_BREAK("wordBreak", "word-break", ffNormal(), ie("normal"), chromeAndEdgeNormal()),
 
         /** The style property {@code word-break}. */
-        WORD_BREAK_("word-break", "word-break", ff("normal")),
+        WORD_BREAK_("word-break", "word-break", ffNormal()),
 
         /** The style property {@code wordSpacing}. */
         WORD_SPACING("wordSpacing", "word-spacing", chromeAndEdge("0px"), ff("0px"), ie("0px")),
@@ -4493,10 +4495,10 @@ public final class StyleAttributes implements Serializable {
         WORD_SPACING_("word-spacing", "word-spacing", ff("0px")),
 
         /** The style property {@code wordWrap}. */
-        WORD_WRAP("wordWrap", "word-wrap", ie(""), chromeAndEdge("normal"), ff("normal")),
+        WORD_WRAP("wordWrap", "word-wrap", ie(""), chromeAndEdgeNormal(), ffNormal()),
 
         /** The style property {@code word-wrap}. */
-        WORD_WRAP_("word-wrap", "word-wrap", ff("normal")),
+        WORD_WRAP_("word-wrap", "word-wrap", ffNormal()),
 
         /** The style property {@code writingMode}. */
         WRITING_MODE("writingMode", "writing-mode", ie("undefined"), chromeAndEdge("horizontal-tb"),
