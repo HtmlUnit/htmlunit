@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.64.0" date="xx, 2022" description="">
+        <release version="2.64.0" date="xx, 2022" description="Firefox 103">
             <action type="update" dev="rbri">
                 Various minor optimizations and some code cleanup.
             </action>

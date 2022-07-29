@@ -57,6 +57,14 @@ abstract class BrowserConfiguration {
         return null;
     }
 
+    static BrowserConfiguration chromeAndEdgeNone() {
+        return new ChromeAndEdge("none");
+    }
+
+    static BrowserConfiguration chromeAndEdgeAuto() {
+        return new ChromeAndEdge("auto");
+    }
+
     static BrowserConfiguration chromeAndEdge(final String defaultValue) {
         return new ChromeAndEdge(defaultValue);
     }
@@ -71,6 +79,10 @@ abstract class BrowserConfiguration {
 
     static BrowserConfiguration chromeAndEdgeNotIterable(final String defaultValue) {
         return new ChromeAndEdgeNotIterable(defaultValue);
+    }
+
+    static BrowserConfiguration ffNone() {
+        return new FF("none");
     }
 
     static BrowserConfiguration ff(final String defaultValue) {
