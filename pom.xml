@@ -37,7 +37,7 @@
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
         <spotbugs.version>4.7.1</spotbugs.version>
-        <pmd.version>6.47.0</pmd.version>
+        <pmd.version>6.48.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
         <dependencycheck.version>7.1.1</dependencycheck.version>
     </properties>
@@ -303,7 +303,7 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <version>5.1.7</version>
+                <version>5.1.8</version>
                 <extensions>true</extensions>
                 <configuration>
                     <instructions>
