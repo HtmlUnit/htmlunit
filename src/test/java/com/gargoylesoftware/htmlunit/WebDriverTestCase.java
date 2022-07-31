@@ -93,6 +93,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitWindow;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -1660,7 +1661,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
         final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
         field.setAccessible(true);
-        return (WebWindow) field.get(driver);
+        return ((HtmlUnitWindow) field.get(driver)).getWebWindow();
     }
 
     /**
