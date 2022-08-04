@@ -289,8 +289,7 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts("false")
-    @HtmlUnitNYI(FF = "true",
-            FF_ESR = "true")
+    @HtmlUnitNYI(FF_ESR = "true")
     public void _InstallTrigger_InstallTrigger() throws Exception {
         test("InstallTrigger", "InstallTrigger");
     }
