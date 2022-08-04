@@ -125,7 +125,6 @@ public class HostParentOfITest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF_ESR = "true")
     public void _IDBMutableFile_IDBMutableFile() throws Exception {
         test("IDBMutableFile", "IDBMutableFile");
