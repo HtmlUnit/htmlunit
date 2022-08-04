@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -12721,5 +12722,55 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent,top,verticalAlign,widows,width,wordSpacing,zIndex")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,"
+                + "isExtended,onchange,orientation,pixelDepth,width",
+            EDGE = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,"
+                + "isExtended,onchange,orientation,pixelDepth,width",
+            FF = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozLockOrientation(),mozOrientation,mozUnlockOrientation(),"
+                + "onmozorientationchange,orientation,pixelDepth,top,width",
+            FF_ESR = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozLockOrientation(),mozOrientation,mozUnlockOrientation(),"
+                + "onmozorientationchange,orientation,pixelDepth,top,width",
+            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,constructor,"
+                + "deviceXDPI,deviceYDPI,dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,"
+                + "msLockOrientation(),msOrientation,msUnlockOrientation(),onmsorientationchange,"
+                + "pixelDepth,removeEventListener(),systemXDPI,systemYDPI,width")
+    @HtmlUnitNYI(FF = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
+            FF_ESR = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
+            IE = "availHeight,availWidth,bufferDepth,colorDepth,constructor,deviceXDPI,deviceYDPI,"
+                + "fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,onchange,pixelDepth,"
+                + "systemXDPI,systemYDPI,width")
+    public void screen() throws Exception {
+        testString("", "window.screen");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "angle,constructor(),lock(),onchange,type,unlock()",
+            EDGE = "angle,constructor(),lock(),onchange,type,unlock()",
+            FF = "angle,constructor(),lock(),onchange,type,unlock()",
+            FF_ESR = "angle,constructor(),lock(),onchange,type,unlock()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "angle,constructor(),type",
+            EDGE = "angle,constructor(),type",
+            FF = "angle,constructor(),type",
+            FF_ESR = "angle,constructor(),type")
+    public void screenOrientation() throws Exception {
+        testString("", "window.screen.orientation");
     }
 }

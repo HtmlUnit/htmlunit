@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.64.0" date="xx, 2022" description="Firefox 103">
+            <action type="add" dev="rbri">
+                Screen property isExtended (Chrome/Edge) added.
+            </action>
+            <action type="add" dev="rbri">
+                Screen property orientation (and mozOrientation for FF) added.
+            </action>
+            <action type="add" dev="rbri">
+                ScreenOrientation properties angle and type added.
+            </action>
             <action type="update" dev="rbri">
                 Various minor optimizations and some code cleanup.
             </action>

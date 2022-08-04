@@ -20,11 +20,14 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code Screen}.
@@ -41,7 +44,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
  * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref.html">Mozilla documentation</a>
  */
 @JsxClass
-public class Screen extends HtmlUnitScriptable {
+public class Screen extends EventTarget {
 
     private com.gargoylesoftware.htmlunit.Screen screen_;
 
@@ -382,5 +385,45 @@ public class Screen extends HtmlUnitScriptable {
     @JsxSetter
     public void setWidth(final int width) {
         screen_.setWidth(width);
+    }
+
+    /**
+     * Returns the {@code orientation} property.
+     * @return the {@code orientation} property
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public ScreenOrientation getOrientation() {
+        final ScreenOrientation screenOrientation = new ScreenOrientation();
+        screenOrientation.setPrototype(getPrototype(screenOrientation.getClass()));
+        screenOrientation.setParentScope(getParentScope());
+
+        return screenOrientation;
+    }
+
+    /**
+     * Returns the {@code orientation} property.
+     * @return the {@code orientation} property
+     */
+    @JsxGetter({FF, FF_ESR})
+    public String getMozOrientation() {
+        return "landscape-primary";
+    }
+
+    /**
+     * Returns the {@code orientation} property.
+     * @return the {@code orientation} property
+     */
+    @JsxGetter({CHROME, EDGE})
+    public boolean getIsExtended() {
+        return false;
+    }
+
+    /**
+     * Returns the {@code onchange} event handler for this element.
+     * @return the {@code onchange} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnchange() {
+        return getEventHandler(Event.TYPE_CHANGE);
     }
 }

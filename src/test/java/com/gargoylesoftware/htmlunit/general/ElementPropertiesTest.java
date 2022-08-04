@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -7973,5 +7974,55 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "zoom")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,"
+                + "dispatchEvent(),height,isExtended,onchange,orientation,pixelDepth,removeEventListener(),width",
+            EDGE = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,"
+                + "dispatchEvent(),height,isExtended,onchange,orientation,pixelDepth,removeEventListener(),width",
+            FF = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),height,"
+                + "left,mozLockOrientation(),mozOrientation,mozUnlockOrientation(),onmozorientationchange,"
+                + "orientation,pixelDepth,removeEventListener(),top,width",
+            FF_ESR = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),height,"
+                + "left,mozLockOrientation(),mozOrientation,mozUnlockOrientation(),onmozorientationchange,"
+                + "orientation,pixelDepth,removeEventListener(),top,width",
+            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,deviceXDPI,deviceYDPI,"
+                + "dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,msLockOrientation(),"
+                + "msOrientation,msUnlockOrientation(),onmsorientationchange,pixelDepth,removeEventListener(),"
+                + "systemXDPI,systemYDPI,width")
+    @HtmlUnitNYI(FF = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
+                + "height,left,mozOrientation,onchange,orientation,pixelDepth,removeEventListener(),top,width",
+            FF_ESR = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
+                + "height,left,mozOrientation,onchange,orientation,pixelDepth,removeEventListener(),top,width",
+            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,deviceXDPI,deviceYDPI,"
+                + "dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,onchange,pixelDepth,"
+                + "removeEventListener(),systemXDPI,systemYDPI,width")
+    public void screen() throws Exception {
+        testString("", "window.screen");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
+            EDGE = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
+            FF = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
+            FF_ESR = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
+            IE = "-")
+    @HtmlUnitNYI(CHROME = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
+            EDGE = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
+            FF = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
+            FF_ESR = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type")
+    public void screenOrientation() throws Exception {
+        testString("", "window.screen.orientation");
     }
 }
