@@ -16,6 +16,15 @@ Version 2.63.0 / July 10, 2022
 
 [HtmlUnit Kanban Board][6]
 
+> **Check out HtmlUnit [satellite projects](https://github.com/orgs/HtmlUnit/repositories)**,
+such as:
+> * [HtmlUnit on android](https://github.com/HtmlUnit/htmlunit-android)
+> * [HtmlUnit for .Net](https://github.com/HtmlUnit/NHtmlUnit)
+> * or [our Rhino fork](https://github.com/HtmlUnit/htmlunit-rhino-fork) (the JS engine)
+>
+> Note as well that you can use HtmlUnit with [Selenium](https://www.selenium.dev/) via
+> their [htmlunit-driver](https://github.com/SeleniumHQ/htmlunit-driver)!
+
 ## Get it!
 
 [Download from Sourceforge][1]
