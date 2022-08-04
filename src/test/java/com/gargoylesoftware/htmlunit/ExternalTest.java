@@ -323,22 +323,11 @@ public class ExternalTest {
             return true;
         }
 
-        if ("org.seleniumhq.selenium".equals(groupId) && (version.startsWith("4."))) {
-            return true;
-        }
-
         if ("commons-codec".equals(groupId)
                 && "commons-codec".equals(artifactId)
                 && "20041127.091804".equals(version)) {
             return true;
         }
-
-        if ("org.seleniumhq.selenium".equals(groupId)
-                && "htmlunit-driver".equals(artifactId)
-                && (version.startsWith("3."))) {
-            return true;
-        }
-
 
         // there is a serious bug
         // https://issues.apache.org/jira/browse/IO-744
