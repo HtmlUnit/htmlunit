@@ -22,7 +22,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
+
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code ScreenOrientation}.
@@ -56,5 +59,14 @@ public class ScreenOrientation extends EventTarget {
     @JsxGetter
     public String getType() {
         return "landscape-primary";
+    }
+
+    /**
+     * Returns the {@code onchange} event handler for this element.
+     * @return the {@code onchange} event handler for this element
+     */
+    @JsxGetter
+    public Function getOnchange() {
+        return getEventHandler(Event.TYPE_CHANGE);
     }
 }

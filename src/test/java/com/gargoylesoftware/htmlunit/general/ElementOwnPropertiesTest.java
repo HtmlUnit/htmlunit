@@ -12766,10 +12766,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "angle,constructor(),lock(),onchange,type,unlock()",
             FF_ESR = "angle,constructor(),lock(),onchange,type,unlock()",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "angle,constructor(),type",
-            EDGE = "angle,constructor(),type",
-            FF = "angle,constructor(),type",
-            FF_ESR = "angle,constructor(),type")
+    @HtmlUnitNYI(CHROME = "angle,constructor(),onchange,type",
+            EDGE = "angle,constructor(),onchange,type",
+            FF = "angle,constructor(),onchange,type",
+            FF_ESR = "angle,constructor(),onchange,type")
     public void screenOrientation() throws Exception {
         testString("", "window.screen.orientation");
     }

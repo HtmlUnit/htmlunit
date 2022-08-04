@@ -8018,10 +8018,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
             FF_ESR = "addEventListener(),angle,dispatchEvent(),lock(),onchange,removeEventListener(),type,unlock()",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
-            EDGE = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
-            FF = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type",
-            FF_ESR = "addEventListener(),angle,dispatchEvent(),removeEventListener(),type")
+    @HtmlUnitNYI(CHROME = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
+            EDGE = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
+            FF = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type",
+            FF_ESR = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type")
     public void screenOrientation() throws Exception {
         testString("", "window.screen.orientation");
     }
