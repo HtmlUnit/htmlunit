@@ -766,6 +766,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Adds a header which will be sent with EVERY request from this client.
+     * This list is empty per default; use this to add specific headers for your
+     * case.
      * @param name the name of the header to add
      * @param value the value of the header to add
      * @see #removeRequestHeader(String)
@@ -779,6 +781,10 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Removes a header from being sent with EVERY request from this client.
+     * This list is empty per default; use this method to remove specific headers
+     * your have added using {{@link #addRequestHeader(String, String)} before.<br></br>
+     * You can't use this to avoid sending standard headers like "Accept-Language"
+     * or "Sec-Fetch-Dest".
      * @param name the name of the header to remove
      * @see #addRequestHeader
      */
