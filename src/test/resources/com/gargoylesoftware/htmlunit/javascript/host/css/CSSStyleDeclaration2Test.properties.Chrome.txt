@@ -264,6 +264,7 @@ mixBlendMode
 negative
 objectFit
 objectPosition
+objectViewBox
 offset
 offsetDistance
 offsetPath
@@ -320,10 +321,12 @@ r
 range
 resize
 right
+rotate
 rowGap
 rubyPosition
 rx
 ry
+scale
 scrollBehavior
 scrollMargin
 scrollMarginBlock
@@ -410,6 +413,7 @@ transitionDelay
 transitionDuration
 transitionProperty
 transitionTimingFunction
+translate
 unicodeBidi
 unicodeRange
 userSelect

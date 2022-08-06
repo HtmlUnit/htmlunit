@@ -200,7 +200,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"8", "16", "1229", "0"},
+    @Alerts(DEFAULT = {"8", "16", "1227", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"},
             IE = {"687", "16", "0", "0"})
@@ -240,7 +240,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"8", "16", "1229", "0"},
+    @Alerts(DEFAULT = {"8", "16", "1227", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"},
             IE = {"687", "16", "0", "0"})

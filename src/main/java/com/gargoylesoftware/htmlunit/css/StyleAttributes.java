@@ -2487,6 +2487,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code object-position}. */
         OBJECT_POSITION_("object-position", "object-position", ff("50% 50%")),
 
+        /** The style property {@code objectViewBox}. */
+        OBJECT_VIEWBOX("objectViewBox", "object-view-box", chromeAndEdgeNone()),
+
         /** The style property {@code offset}. */
         OFFSET("offset", "offset", chromeAndEdge("none 0px auto 0deg"), ffEsr(""), ffLatest("none")),
 
@@ -2849,7 +2852,7 @@ public final class StyleAttributes implements Serializable {
         RIGHT("right", "right", chromeAndEdgeAuto(), ff(""), ie("")),
 
         /** The style property {@code rotate}. */
-        ROTATE("rotate", "rotate", ffNone()),
+        ROTATE("rotate", "rotate", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code rowGap}. */
         ROW_GAP("rowGap", "row-gap", chromeAndEdgeNormal(), ffNormal()),
@@ -2880,7 +2883,7 @@ public final class StyleAttributes implements Serializable {
         RY("ry", "ry", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code scale}. */
-        SCALE("scale", "scale", ffNone()),
+        SCALE("scale", "scale", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code scrollBehavior}. */
         SCROLL_BEHAVIOR("scrollBehavior", "scroll-behavior", ff("auto"), chromeAndEdgeAuto()),
@@ -3474,7 +3477,7 @@ public final class StyleAttributes implements Serializable {
                 ff("ease")),
 
         /** The style property {@code translate}. */
-        TRANSLATE("translate", "translate", ffNone()),
+        TRANSLATE("translate", "translate", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code unicodeBidi}. */
         UNICODE_BIDI("unicodeBidi", "unicode-bidi",

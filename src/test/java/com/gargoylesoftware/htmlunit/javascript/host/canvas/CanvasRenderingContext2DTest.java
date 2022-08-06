@@ -1855,9 +1855,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHZJREFUOE/tlLENgDAMBM8TwVQUMARh"
-                + "CCiYCiYyCgVCKE4RDFXS+965vCI4H3HmUYHvjeYdBnqUDqE5o5QdYSWwWNE2MMJgNgYHC2oDR7Zrsyc1bjrRpsJyG2rWaEhX"
-                + "7kfgB1d2fpQo0LU2hR2vn0OhuNuYu8MD87geFZXKqbQAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAHBJREFUOE/tlLENgDAMBC8TwVQUsISX"
+                + "gIKpyEQgBEWEYhfhRUV63yfnVxLik8Q8fuB7o7FDYwQGoLujMrBiLF60D7xgszM4edAIuBU3e3IzRl8Li4B7aNTqlfsUKH+y"
+                + "eCmnQGltGjv+fw6N4ooxucMDD8oYFfh+l9MAAAAASUVORK5CYII=",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlElEQVQ4T2NkoDJgpLJ5DKMGUh6i+MOwgUEAaEU9EDsAMYh9"
                 + "AIgbGRoYHuCyGreBEMPuQw1C1v8ByDHEZSg+A+cDNSbgcMkCoIGJ2OTwGQhynQIOAz8ADRQccAPxeXkD0IWBpLoQFCnvsWgC"
@@ -1882,11 +1882,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAQdJREFUOE/N1EtKA0EUheGvxYUoug4F"
-                + "0W0IKuguTCnuwVY0iCNnLkDBx8QFOFIh2YMjQTFiV4e0bSfpNEG8UFCDUz+nbt1TiSlXMmWe4cB9yz6tYwlzmEUXtzgT3FeZ"
-                + "qQYGJ9ga4/5YsFPW/AYGV1it2YprwVpR+xMYHGG7JqwvawuD2wyAIevV3YSwKE+saLmJ234FbWw0AsZHys4WgR3MNwR2BAtl"
-                + "YK8hLB4L0VzR4Xs+a5NyL8xI7cb+F4EvWKxJe0PqQ+rAU/XYBKfYHAlMdPWk2drzOjopMWrfsaqqhxxyPu4G5cEuR+5S4lAr"
-                + "S0+tGha957zRj7UoBdEffl+TWsv1/9/hF69VORUKbHjwAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAQdJREFUOE/N1E1KA0EQxfHfiAdR9BwK"
+                + "otcQVNBbmEK8g6NoCK7ceQAFPzYewJUKyR1cCUoUZxIyjpNkEoJYq168+vO6ul4nZlzJjHmGAw+s6trEChYwjw5u0RLuq8xU"
+                + "A8Mpdsa4PxH2yprfwHCF9ZqjuBY2itqfwHCM3ZqwvqwpBrcZACOb1d2EsFyeWNNwkx/7FZrYmgqYP1LWWwS2sTglsC0slYGf"
+                + "U8LytsjNFR2+93ZtUu6FOan9fP5F4AuWa9LekPqQOvRUvTbhDNsjgYmOrlQiFV5HJyWP2nesquohcxTOx92gvNjlyF1KHGlk"
+                + "6alVw6L33Bv0Yy1KQfSH39ek1nr6/+/wC1AdNxWqbJODAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA/klEQVQ4T82U/RGCMAzFywa6AW7gCG6gbqAb6ASGCZQJZANx"
                 + "Ah2BDXQDGcGXYjEUqqXHeebu/UE/fn1JWiI1cEQD85QbSCrGYQtoDk2hEiqgO5Qo0t+t6AaS2mDlDhp9yGAL6MGebwJJA/bQ"
