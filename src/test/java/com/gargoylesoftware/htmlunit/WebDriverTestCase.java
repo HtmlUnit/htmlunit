@@ -1394,7 +1394,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
-        final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
+        final Field field = HtmlUnitWebElement.class.getDeclaredField("element_");
         field.setAccessible(true);
         return (HtmlElement) field.get(webElement);
     }
