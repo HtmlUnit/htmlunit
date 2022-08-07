@@ -60,7 +60,7 @@ public class SvgScriptTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertType(getExpectedAlerts()[0], page.getElementById("myId"));
         }
     }
@@ -100,7 +100,7 @@ public class SvgScriptTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertType(getExpectedAlerts()[0], page.getElementById("id1"));
             assertType(getExpectedAlerts()[1], page.getElementById("id2"));
         }

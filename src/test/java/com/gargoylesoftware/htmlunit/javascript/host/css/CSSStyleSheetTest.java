@@ -1690,7 +1690,7 @@ public class CSSStyleSheetTest extends WebDriverTestCase {
 
         int maxInMemory = 0;
         if (driver instanceof HtmlUnitDriver) {
-            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+            final WebClient webClient = getWebClient();
             maxInMemory = webClient.getOptions().getMaxInMemory();
         }
 

@@ -66,7 +66,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final XmlPage page = (XmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final XmlPage page = (XmlPage) getEnclosedPage();
             final DomNode node = page.getFirstByXPath("//foo");
             assertEquals(getExpectedAlerts()[0], node.getVisibleText());
         }
@@ -145,7 +145,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -228,7 +228,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -308,7 +308,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -388,7 +388,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -468,7 +468,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -548,7 +548,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -628,7 +628,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -708,7 +708,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -789,7 +789,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -903,7 +903,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -986,7 +986,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1013,7 +1013,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1040,7 +1040,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1067,7 +1067,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1094,7 +1094,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1177,7 +1177,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1260,7 +1260,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1343,7 +1343,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1435,7 +1435,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1527,7 +1527,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1798,7 +1798,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }
@@ -1851,7 +1851,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getElementById("tester").getVisibleText());
             assertEquals(getExpectedAlerts()[0], page.getVisibleText());
         }

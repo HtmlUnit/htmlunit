@@ -56,7 +56,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));
@@ -89,7 +89,7 @@ public class HtmlUnknownElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId1")));
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId2")));
             assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId3")));

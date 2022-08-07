@@ -56,7 +56,7 @@ public class HtmlOptionGroup2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver && getExpectedAlerts()[0].contains("HTMLOptGroupElement")) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlOptionGroup.class.isInstance(page.getHtmlElementById("myId")));
         }
     }

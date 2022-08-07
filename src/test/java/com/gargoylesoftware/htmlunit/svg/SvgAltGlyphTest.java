@@ -56,7 +56,7 @@ public class SvgAltGlyphTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object SVGAltGlyphElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgAltGlyph.class.isInstance(page.getElementById("myId")));
             }

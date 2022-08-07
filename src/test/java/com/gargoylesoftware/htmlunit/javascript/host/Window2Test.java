@@ -1278,8 +1278,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1305,8 +1304,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1333,8 +1331,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1358,8 +1355,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }

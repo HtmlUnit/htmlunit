@@ -50,8 +50,7 @@ public final class SgmlPage2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
-            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(2, page.getElementsByTagName("h1").size());
             assertEquals(2, page.getElementsByTagName("H1").size());
         }

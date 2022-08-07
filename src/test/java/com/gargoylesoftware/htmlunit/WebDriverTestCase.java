@@ -22,7 +22,6 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -93,7 +92,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitWebElement;
-import org.openqa.selenium.htmlunit.HtmlUnitWindow;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
@@ -1394,9 +1392,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
-        final Field field = HtmlUnitWebElement.class.getDeclaredField("element_");
-        field.setAccessible(true);
-        return (HtmlElement) field.get(webElement);
+        return (HtmlElement) ((HtmlUnitWebElement) webElement).getElement();
     }
 
     /**
@@ -1588,7 +1584,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             boolean rhino = false;
             if (webDriver_ != null) {
                 try {
-                    rhino = getWebWindowOf(webDriver_).getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
+                    rhino = webDriver_.getCurrentWindow().getWebWindow()
+                            .getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
                 }
                 catch (final Exception e) {
                     throw new RuntimeException(e);
@@ -1649,22 +1646,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
-     * Returns the underlying WebWindow of the specified driver.
-     *
-     * <b>Your test shouldn't depend primarily on WebClient</b>
-     *
-     * @param driver the driver
-     * @return the current web window
-     * @throws Exception if an error occurs
-     * @see #toHtmlElement(WebElement)
-     */
-    protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow_");
-        field.setAccessible(true);
-        return ((HtmlUnitWindow) field.get(driver)).getWebWindow();
-    }
-
-    /**
      * Whether {@link WebClient} is cached or not, defaults to {@code false}.
      *
      * <p>This is needed to be {@code true} for huge test class, as we could run out of sockets.
@@ -1682,6 +1663,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected Integer getWebClientTimeout() {
         return null;
+    }
+
+    protected Page getEnclosedPage() {
+        return webDriver_.getCurrentWindow().getWebWindow().getEnclosedPage();
+    }
+
+    protected WebClient getWebClient() {
+        return webDriver_.getCurrentWindow().getWebWindow().getWebClient();
     }
 
     /**

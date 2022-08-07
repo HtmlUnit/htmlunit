@@ -369,8 +369,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
         verifyTitle2(driver, getExpectedAlerts());
@@ -419,8 +418,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
         verifyTitle2(driver, getExpectedAlerts());
@@ -465,8 +463,7 @@ public class HTMLStyleElementTest extends WebDriverTestCase {
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }

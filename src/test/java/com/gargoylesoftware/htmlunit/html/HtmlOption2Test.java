@@ -86,7 +86,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[4], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[4], page.getElementById("tester").getVisibleText());
         }
     }
@@ -113,7 +113,7 @@ public class HtmlOption2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlOption.class.isInstance(page.getHtmlElementById("myId")));
         }
     }

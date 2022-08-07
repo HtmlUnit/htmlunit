@@ -55,7 +55,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
@@ -112,7 +112,7 @@ public class HtmlTable2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlTable.class.isInstance(page.getHtmlElementById("myId")));
         }
     }

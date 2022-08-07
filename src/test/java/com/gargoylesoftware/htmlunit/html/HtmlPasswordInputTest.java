@@ -63,7 +63,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
@@ -638,7 +638,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
             + "</body></html>";
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlPasswordInput.class.isInstance(page.getHtmlElementById("myId")));
         }
     }

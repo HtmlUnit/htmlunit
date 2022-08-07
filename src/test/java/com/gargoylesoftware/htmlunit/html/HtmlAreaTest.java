@@ -394,7 +394,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getEnclosedPage();
         }
         else {
             page = null;
@@ -406,7 +406,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyAlerts(driver, "clicked");
         if (driver instanceof HtmlUnitDriver) {
-            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final Page secondPage = getEnclosedPage();
             assertSame(page, secondPage);
         }
     }
@@ -436,7 +436,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getEnclosedPage();
         }
         else {
             page = null;
@@ -448,7 +448,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
-            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final Page secondPage = getEnclosedPage();
             assertSame(page, secondPage);
         }
     }
@@ -477,7 +477,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getEnclosedPage();
         }
         else {
             page = null;
@@ -489,7 +489,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
-            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final Page secondPage = getEnclosedPage();
             assertSame(page, secondPage);
         }
     }
@@ -519,7 +519,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         final Page page;
         if (driver instanceof HtmlUnitDriver) {
-            page = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            page = getEnclosedPage();
         }
         else {
             page = null;
@@ -531,7 +531,7 @@ public class HtmlAreaTest extends WebDriverTestCase {
 
         verifyAlerts(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver) {
-            final Page secondPage = getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final Page secondPage = getEnclosedPage();
             assertSame(page, secondPage);
         }
     }

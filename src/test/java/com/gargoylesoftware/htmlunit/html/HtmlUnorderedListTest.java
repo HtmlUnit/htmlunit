@@ -56,7 +56,7 @@ public class HtmlUnorderedListTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }

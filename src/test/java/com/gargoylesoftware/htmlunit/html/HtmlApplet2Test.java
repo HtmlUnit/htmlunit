@@ -63,11 +63,11 @@ public class HtmlApplet2Test extends WebDriverTestCase {
             if (getBrowserVersion().isChrome()
                     || getBrowserVersion().isFirefox()
                     || getBrowserVersion().isEdge()) {
-                final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+                final HtmlPage page = (HtmlPage) getEnclosedPage();
                 assertTrue(HtmlUnknownElement.class.isInstance(page.getHtmlElementById("myId")));
             }
             else {
-                final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+                final HtmlPage page = (HtmlPage) getEnclosedPage();
                 assertTrue(HtmlApplet.class.isInstance(page.getHtmlElementById("myId")));
             }
         }
