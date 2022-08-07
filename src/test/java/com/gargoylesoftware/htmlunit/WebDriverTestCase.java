@@ -1659,7 +1659,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
+        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow_");
         field.setAccessible(true);
         return ((HtmlUnitWindow) field.get(driver)).getWebWindow();
     }
