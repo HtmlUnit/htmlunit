@@ -19,7 +19,6 @@ import static org.junit.Assert.fail;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.time.Duration;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
@@ -127,7 +126,8 @@ public class HttpWebConnection3Test extends WebDriverTestCase {
             driver.get("http://localhost:" + primitiveWebServer.getPort());
             driver.findElement(By.linkText("Click me")).click();
 
-            final Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            // final Wait<WebDriver> wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+            final Wait<WebDriver> wait = new WebDriverWait(driver, 5);
             wait.until(currentUrlContains("2.html"));
 
             int index = 1;

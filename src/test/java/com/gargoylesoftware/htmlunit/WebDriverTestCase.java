@@ -1584,8 +1584,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             boolean rhino = false;
             if (webDriver_ != null) {
                 try {
-                    rhino = webDriver_.getCurrentWindow().getWebWindow()
-                            .getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
+                    rhino = getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
                 }
                 catch (final Exception e) {
                     throw new RuntimeException(e);
@@ -1646,6 +1645,18 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     /**
+     * Returns the underlying WebWindow of the specified driver.
+     *
+     * <b>Your test shouldn't depend primarily on WebClient</b>
+     *
+     * @return the current web window
+     * @see #toHtmlElement(WebElement)
+     */
+    protected WebWindow getWebWindow() {
+        return webDriver_.getCurrentWindow();
+    }
+
+    /**
      * Whether {@link WebClient} is cached or not, defaults to {@code false}.
      *
      * <p>This is needed to be {@code true} for huge test class, as we could run out of sockets.
@@ -1666,11 +1677,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
     }
 
     protected Page getEnclosedPage() {
-        return webDriver_.getCurrentWindow().getWebWindow().getEnclosedPage();
+        return getWebWindow().getEnclosedPage();
     }
 
     protected WebClient getWebClient() {
-        return webDriver_.getCurrentWindow().getWebWindow().getWebClient();
+        return webDriver_.getWebClient();
     }
 
     /**
