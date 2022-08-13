@@ -1653,7 +1653,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #toHtmlElement(WebElement)
      */
     protected WebWindow getWebWindow() {
-        return webDriver_.getCurrentWindow();
+        return webDriver_.getCurrentWindow().getWebWindow();
     }
 
     /**
