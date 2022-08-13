@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.64.0" date="xx, 2022" description="Chrome/Edge 104, Firefox 103">
+            <action type="update" dev="rbri">
+                Upgrade salvation lib to salvation2 3.0.1.
+            </action>
             <action type="add" dev="rbri">
                 Screen/ScreenOrientation property onchange added.
             </action>
