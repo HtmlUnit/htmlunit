@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlEmailInput}.
@@ -305,6 +306,11 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='email' minlength='10' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -323,8 +329,31 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationInvalidInitial() throws Exception {
         validation("<input type='email' minlength='10' id='e1' name='k' value='a@b.com'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
+    public void minLengthValidationInvalidNoInitial() throws Exception {
+        validation("<input type='email' minlength='10' id='e1' name='k'>\n", "", null);
     }
 
     /**
@@ -341,6 +370,11 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
     public void minLengthValidationValid() throws Exception {
         validation("<input type='email' minlength='5' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -359,6 +393,11 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@b.c", "2"})
+    @HtmlUnitNYI(IE = {"a@b.c",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.c", "2"})
     public void maxLengthValidationValid() throws Exception {
         validation("<input type='email' maxlength='5' id='e1' name='k'>\n", "", "a@b.com");
     }
@@ -395,6 +434,11 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=a@email.com", "2"})
+    @HtmlUnitNYI(IE = {"a@email.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40email.com", "2"})
     public void maxLengthValidationInvalidInitial() throws Exception {
         validation("<input type='email' maxlength='5' id='e1' name='k' value='a@email.com'>\n", "", null);
     }
@@ -536,6 +580,11 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=test@abc.edu", "2"})
+    @HtmlUnitNYI(IE = {"",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=test%40abc.edu", "2"})
     public void validationRequiredValueSet() throws Exception {
         validation("<input type='email' id='e1' name='k' required>\n", "elem.value='test@abc.edu';", null);
     }

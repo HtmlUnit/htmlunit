@@ -99,4 +99,12 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
     protected boolean isBlankPatternValidated() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isMinMaxLengthSupported() {
+        return true;
+    }
 }

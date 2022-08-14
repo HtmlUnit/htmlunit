@@ -191,7 +191,7 @@ public class HtmlTelInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "true", "1234567890"},
+    @Alerts(DEFAULT = {"true", "false", "true", "1234567890"},
             IE = {"true", "true", "true", "1234567890"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"

@@ -196,18 +196,18 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"ab",
+    @Alerts(DEFAULT = {"",
                        "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "true",
-                       "§§URL§§?k=ab", "2"},
-            IE = {"ab",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
                   "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
-                  "§§URL§§?k=ab", "2"})
-    public void minLengthValidationInvalidInitial() throws Exception {
-        validation("<input type='search' minlength='5' id='e1' name='k' value='ab'>\n", "", null);
+                  "§§URL§§?k=", "2"})
+    public void minLengthValidationInvalidNoInitial() throws Exception {
+        validation("<input type='search' minlength='5' id='e1' name='k'>\n", "", null);
     }
 
     /**

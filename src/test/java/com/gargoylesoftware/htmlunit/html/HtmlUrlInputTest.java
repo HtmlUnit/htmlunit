@@ -236,6 +236,24 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
+    public void minLengthValidationInvalidNoInitial() throws Exception {
+        validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"http://example.com/test",
                        "true",
                        "false-false-false-false-false-false-false-false-false-true-false",

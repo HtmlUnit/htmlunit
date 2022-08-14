@@ -90,7 +90,7 @@ public class HtmlSearchInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"false", "false", "true", "foobar"},
+    @Alerts(DEFAULT = {"true", "false", "true", "foobar"},
             IE = {"true", "true", "true", "foobar"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
