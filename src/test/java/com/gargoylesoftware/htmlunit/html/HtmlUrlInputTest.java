@@ -157,7 +157,7 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
-        validation("<input type='url' pattern='.*test.*' id='e1' value='' name='k'>\n", "", null);
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=''>\n", "", null);
     }
 
     /**
@@ -175,7 +175,7 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationBlank() throws Exception {
-        validation("<input type='url' pattern='.*test.*' id='e1' value=' ' name='k'>\n", "", null);
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' '>\n", "", null);
     }
 
     /**
@@ -193,7 +193,43 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationWhitespace() throws Exception {
-        validation("<input type='url' pattern='.*test.*' id='e1' value='  \t' name='k'>\n", "", null);
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http://test.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Ftest.com", "2"},
+            IE = {"",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' http://test.com '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" http://test.com ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k'>\n", "", " http://test.com ");
     }
 
     /**

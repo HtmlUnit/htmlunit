@@ -683,7 +683,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationInvalid() throws Exception {
-        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' value='0987654321!' name='k'>\n",
+        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value='0987654321!'>\n",
                     "", null);
     }
 
@@ -703,7 +703,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                   "§§URL§§?k=68746d6c756e69742072756c657a21", "2"})
     public void patternValidationValid() throws Exception {
         validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' "
-                + "id='e1' value='68746d6c756e69742072756c657a21' name='k'>\n", "", null);
+                + "id='e1' name='k' value='68746d6c756e69742072756c657a21'>\n", "", null);
     }
 
     /**
@@ -721,7 +721,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
-        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' value='' name='k'>\n", "", null);
+        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value=''>\n", "", null);
     }
 
     /**
@@ -739,7 +739,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationBlank() throws Exception {
-        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' value=' ' name='k'>\n", "", null);
+        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value=' '>\n", "", null);
     }
 
     /**
@@ -757,7 +757,43 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationWhitespace() throws Exception {
-        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' value='  \t' name='k'>\n", "", null);
+        validation("<input type='password' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" 210 ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+210+", "2"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+210+", "2"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='password' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" 210 ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+210+", "2"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+210+", "2"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='password' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
 
     /**
@@ -777,6 +813,7 @@ public class HtmlPasswordInputTest extends WebDriverTestCase {
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='password' minlength='5' id='e1' name='k'>\n", "", "abcd");
     }
+
 
     /**
      * @throws Exception if an error occurs

@@ -215,7 +215,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "true",
                   "§§URL§§", "1"})
     public void patternValidationInvalid() throws Exception {
-        validation("<input type='email' pattern='.+@email.com' id='e1' value='abc@eemail.com' name='k'>\n",
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value='abc@eemail.com'>\n",
                     "", null);
     }
 
@@ -290,6 +290,52 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "§§URL§§", "1"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+            IE = {"",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=' abc@email.com '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+            FF = {" abc@email.com",
+                  "true",
+                  "false-false-false-false-false-false-false-false-false-true-false",
+                  "true",
+                  "§§URL§§?k=abc%40email.com", "2"},
+            FF_ESR = {" abc@email.com",
+                      "true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true",
+                      "§§URL§§?k=abc%40email.com", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k'>\n", "", " abc@email.com");
     }
 
     /**

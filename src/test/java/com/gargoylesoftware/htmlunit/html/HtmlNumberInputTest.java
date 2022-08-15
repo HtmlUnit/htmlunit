@@ -1643,7 +1643,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "§§URL§§?k=123456789", "2"})
     // real ie clicks the wrong button
     public void patternValidationInvalid() throws Exception {
-        validation("<input type='number' pattern='[0-7]{10,40}' id='e1' value='123456789' name='k'>\n",
+        validation("<input type='number' pattern='[0-7]{10,40}' id='e1' name='k' value='123456789'>\n",
                     "", null);
     }
 
@@ -1664,7 +1664,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     // real ie clicks the wrong button
     public void patternValidationValid() throws Exception {
         validation("<input type='number' pattern='[0-7]{10,40}' "
-                + "id='e1' value='123456701234567012345670' name='k'>\n", "", null);
+                + "id='e1' name='k' value='123456701234567012345670'>\n", "", null);
     }
 
     /**
@@ -1683,7 +1683,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "§§URL§§?k=", "2"})
     // real ie clicks the wrong button
     public void patternValidationEmpty() throws Exception {
-        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' value='' name='k'>\n", "", null);
+        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value=''>\n", "", null);
     }
 
     /**
@@ -1702,7 +1702,7 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "§§URL§§?k=", "2"})
     // real ie clicks the wrong button
     public void patternValidationBlank() throws Exception {
-        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' value=' ' name='k'>\n", "", null);
+        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value=' '>\n", "", null);
     }
 
     /**
@@ -1721,7 +1721,55 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "§§URL§§?k=", "2"})
     // real ie clicks the wrong button
     public void patternValidationWhitespace() throws Exception {
-        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' value='  \t' name='k'>\n", "", null);
+        validation("<input type='number' pattern='[0-9]{10,40}' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+210+", "1"})
+    // real ie clicks the wrong button
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"210",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=210", "2"},
+            FF = {"",
+                  "false",
+                  "true-false-false-false-false-false-false-false-false-false-false",
+                  "true",
+                  "§§URL§§", "1"},
+            FF_ESR = {"",
+                      "false",
+                      "true-false-false-false-false-false-false-false-false-false-false",
+                      "true",
+                      "§§URL§§", "1"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "1"})
+    // real ie clicks the wrong button
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
 
     /**
