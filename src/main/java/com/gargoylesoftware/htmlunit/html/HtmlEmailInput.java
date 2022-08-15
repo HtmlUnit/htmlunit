@@ -49,6 +49,11 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
     HtmlEmailInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        final String value = getValueAttribute();
+        if (!value.isEmpty()) {
+            setValueAttribute(value);
+        }
     }
 
     /**
@@ -63,10 +68,16 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(String newValue) {
-        if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
-            newValue = "";
+    public void setValueAttribute(final String newValue) {
+        if (hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
+            if (StringUtils.isBlank(newValue)) {
+                super.setValueAttribute("");
+                return;
+            }
+            super.setValueAttribute(newValue.trim());
+            return;
         }
+
         super.setValueAttribute(newValue);
     }
 
