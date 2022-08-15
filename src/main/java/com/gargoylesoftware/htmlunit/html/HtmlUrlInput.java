@@ -42,6 +42,11 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
     HtmlUrlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        final String value = getValueAttribute();
+        if (!value.isEmpty()) {
+            setValueAttribute(value);
+        }
     }
 
     /**
@@ -56,10 +61,16 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(String newValue) {
-        if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
-            newValue = "";
+    public void setValueAttribute(final String newValue) {
+        if (hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+            if (StringUtils.isBlank(newValue)) {
+                super.setValueAttribute("");
+                return;
+            }
+            super.setValueAttribute(newValue.trim());
+            return;
         }
+
         super.setValueAttribute(newValue);
     }
 
