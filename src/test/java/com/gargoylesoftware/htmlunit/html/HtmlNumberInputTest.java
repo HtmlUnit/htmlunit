@@ -1738,6 +1738,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=+210+", "1"})
+    @HtmlUnitNYI(IE = {"",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"})
     // real ie clicks the wrong button
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
@@ -1767,6 +1772,21 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=", "1"})
+    @HtmlUnitNYI(FF = {" 210 ",
+                       "false",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§", "1"},
+                 FF_ESR = {" 210 ",
+                           "false",
+                           "false-false-false-false-false-false-false-false-false-true-false",
+                           "true",
+                           "§§URL§§", "1"},
+                 IE = {" 210 ",
+                       "false",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§", "1"})
     // real ie clicks the wrong button
     public void patternValidationTrimType() throws Exception {
         validation("<input type='number' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
@@ -1881,6 +1901,11 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true",
                   "§§URL§§?k=12345", "2"})
+    @HtmlUnitNYI(IE = {"123456789",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=123456789", "2"})
     // real ie clicks the wrong button
     public void maxLengthValidationInvalid() throws Exception {
         validation("<input type='number' maxlength='5' id='e1' name='k'>\n", "", "123456789");

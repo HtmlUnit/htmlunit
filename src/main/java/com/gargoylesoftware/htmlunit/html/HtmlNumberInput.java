@@ -24,6 +24,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
@@ -54,10 +55,7 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
 
         final String value = getValueAttribute();
         if (!value.isEmpty()) {
-            try {
-                Double.parseDouble(value.trim());
-            }
-            catch (final NumberFormatException e) {
+            if (!NumberUtils.isCreatable(value)) {
                 setValueAttribute("");
             }
         }
@@ -68,30 +66,33 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      */
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (newValue.length() <= getMaxLength()) {
-            if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-                return;
-            }
+        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            return;
+        }
 
-            if (StringUtils.isBlank(newValue) || "-".equals(newValue) || "+".equals(newValue)) {
-                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-                return;
-            }
+        if (StringUtils.isBlank(newValue)) {
+            setAttributeNS(null, "value", "", notifyAttributeChangeListeners, false);
+            return;
+        }
 
-            String parseValue = newValue;
-            final int lastPos = parseValue.length() - 1;
-            if (parseValue.charAt(lastPos) == '.') {
-                parseValue = parseValue.substring(0, lastPos);
-            }
+        if ("-".equals(newValue) || "+".equals(newValue)) {
+            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            return;
+        }
 
-            try {
-                Double.parseDouble(parseValue);
-                setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-            }
-            catch (final NumberFormatException e) {
-                // ignore
-            }
+        String parseValue = newValue;
+        final int lastPos = parseValue.length() - 1;
+        if (parseValue.charAt(lastPos) == '.') {
+            parseValue = parseValue.substring(0, lastPos);
+        }
+
+        try {
+            Double.parseDouble(parseValue);
+            setAttributeNS(null, "value", newValue.trim(), notifyAttributeChangeListeners, false);
+        }
+        catch (final NumberFormatException e) {
+            // ignore
         }
     }
 
