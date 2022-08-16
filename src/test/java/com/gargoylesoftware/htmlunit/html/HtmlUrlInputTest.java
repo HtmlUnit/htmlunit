@@ -24,6 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlUrlInput}.
@@ -174,6 +175,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+", "2"})
     public void patternValidationBlank() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' '>\n", "", null);
     }
@@ -192,6 +198,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {"  \t",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=++%09", "2"})
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value='  \t'>\n", "", null);
     }
@@ -210,6 +221,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" http://test.com ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
     public void patternValidationTrimInitial() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' http://test.com '>\n", "", null);
     }
@@ -228,6 +244,11 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                   "undefined-false-true-false-false-false-false-undefined-true-false-false",
                   "true",
                   "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" http://test.com ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
     public void patternValidationTrimType() throws Exception {
         validation("<input type='url' pattern='.*test.*' id='e1' name='k'>\n", "", " http://test.com ");
     }
