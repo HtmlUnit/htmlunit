@@ -68,17 +68,21 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
-        if (hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
-            if (StringUtils.isBlank(newValue)) {
-                super.setValueAttribute("");
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        if ("value".equals(qualifiedName) && hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
+            if (StringUtils.isBlank(attributeValue)) {
+                super.setAttributeNS(namespaceURI, qualifiedName,
+                        "", notifyAttributeChangeListeners, notifyMutationObservers);
                 return;
             }
-            super.setValueAttribute(newValue.trim());
+            super.setAttributeNS(namespaceURI, qualifiedName,
+                    attributeValue.trim(), notifyAttributeChangeListeners, notifyMutationObservers);
             return;
         }
 
-        super.setValueAttribute(newValue);
+        super.setAttributeNS(namespaceURI, qualifiedName,
+                attributeValue, notifyAttributeChangeListeners, notifyMutationObservers);
     }
 
     @Override
