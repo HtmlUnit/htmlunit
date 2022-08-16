@@ -49,7 +49,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *                     .setUserAgent(userAgent)
  *                     .build();
  * </pre>
- * <p>But keep in mind this new one still behaves like a FF, only the stuff reported to the
+ * <p>But keep in mind this new one still behaves like an FF, only the stuff reported to the
  * outside is changed. This is more or less the same you can do with real browsers installing
  * plugins like UserAgentSwitcher.
  *
@@ -89,27 +89,21 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(102, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(103, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 91;
+
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
-
-    /**
-     * Firefox 78 ESR.
-     * @deprecated since 2.56.0; please use FIREFOX_ESR instead
-     */
-    @Deprecated
-    public static final BrowserVersion FIREFOX_78 = FIREFOX_ESR;
 
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge */
-    public static final BrowserVersion EDGE = new BrowserVersion(103, "Edge");
+    public static final BrowserVersion EDGE = new BrowserVersion(104, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(103, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(104, "Chrome");
 
     /**
      * Array with all supported browsers
@@ -226,9 +220,9 @@ public final class BrowserVersion implements Serializable {
 
         // CHROME (Win10 64bit)
         CHROME.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.5112.81 Safari/537.36";
         CHROME.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + CHROME.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36";
+                                        + CHROME.getBrowserVersionNumeric() + ".0.5112.81 Safari/537.36";
 
         CHROME.applicationCodeName_ = "Mozilla";
         CHROME.vendor_ = "Google Inc.";
@@ -259,9 +253,9 @@ public final class BrowserVersion implements Serializable {
         CHROME.imgAcceptHeader_ = "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         CHROME.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         CHROME.scriptAcceptHeader_ = "*/*";
-        CHROME.secClientHintUserAgentHeader_ = "\".Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
-                        + CHROME.getBrowserVersionNumeric() + "\"";
+        CHROME.secClientHintUserAgentHeader_ = "\"Chromium\";v=\""
+                        + CHROME.getBrowserVersionNumeric() + "\", \" Not A;Brand\";v=\"99\","
+                        + " \"Google Chrome\";v=\"" + CHROME.getBrowserVersionNumeric() + "\"";
         CHROME.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
             27, 28, 30, 31, 32, 33, 34, 36, 37, 37, 38, 40, 42, 43, 44, 45, 47, 48, 48, 49, 51, 52, 53, 54, 55, 57,
@@ -272,11 +266,11 @@ public final class BrowserVersion implements Serializable {
 
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1264.37";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.5112.81 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1293.47";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.5060.53 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1264.37";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.5112.81 Safari/537.36 Edg/"
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1293.47";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";
@@ -307,8 +301,8 @@ public final class BrowserVersion implements Serializable {
         EDGE.imgAcceptHeader_ = "image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8";
         EDGE.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         EDGE.scriptAcceptHeader_ = "*/*";
-        EDGE.secClientHintUserAgentHeader_ = "\".Not/A)Brand\";v=\"99\", \"Microsoft Edge\";v=\""
-                + EDGE.getBrowserVersionNumeric() + "\", \"Chromium\";v=\""
+        EDGE.secClientHintUserAgentHeader_ = "\"Chromium\";v=\"" + EDGE.getBrowserVersionNumeric()
+                + "\", \" Not A;Brand\";v=\"99\", \"Microsoft Edge\";v=\""
                 + EDGE.getBrowserVersionNumeric() + "\"";
         EDGE.fontHeights_ = new int[] {
             0, 1, 2, 4, 5, 5, 6, 8, 9, 10, 11, 12, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26,
@@ -568,7 +562,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Internet Explorer.
-     * @return whether or not this version is a version of IE
+     * @return whether version is a version of IE
      */
     public boolean isIE() {
         return getNickname().startsWith("IE");
@@ -578,7 +572,7 @@ public final class BrowserVersion implements Serializable {
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Google Chrome. Note that Google Chrome does not return 'Chrome'
      * in the application name, we have to look in the nickname.
-     * @return whether or not this version is a version of a Chrome browser
+     * @return whether this version is a version of a Chrome browser
      */
     public boolean isChrome() {
         return getNickname().startsWith("Chrome");
@@ -587,7 +581,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Microsoft Edge.
-     * @return whether or not this version is a version of a Chrome browser
+     * @return whether this version is a version of a Chrome browser
      */
     public boolean isEdge() {
         return getNickname().startsWith("Edge");
@@ -596,7 +590,7 @@ public final class BrowserVersion implements Serializable {
     /**
      * Returns {@code true} if this <tt>BrowserVersion</tt> instance represents some
      * version of Firefox.
-     * @return whether or not this version is a version of a Firefox browser
+     * @return whether this version is a version of a Firefox browser
      */
     public boolean isFirefox() {
         return getNickname().startsWith("FF");
@@ -604,7 +598,7 @@ public final class BrowserVersion implements Serializable {
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     * @return whether or not this version version 60 of a Firefox browser
+     * @return whether this is version 78  of a Firefox browser
      */
     public boolean isFirefox78() {
         return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;

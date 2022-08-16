@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -23,11 +21,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlUrlInput}.
@@ -60,7 +57,7 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
@@ -109,195 +106,278 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    @Alerts("true-false")
-    public void patternValidation() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='url' pattern='.*test.*' id='foo' value='http://test.com'>\n"
-            + "  <input type='url' pattern='.*test.*' id='bar' value='http://example.com'>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"http://example.com",
+                       "false",
+                       "false-false-true-false-false-false-false-false-false-false-false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"http://example.com",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationInvalid() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' value='http://example.com' name='k'>\n",
+                    "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    @Alerts(DEFAULT = "true-true-true",
-            IE = "true-false-false")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = {"http://test.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Ftest.com", "2"},
+            IE = {"http://test.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Ftest.com", "2"})
+    public void patternValidationValid() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' value='http://test.com' name='k'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    var bar2 = document.getElementById('bar2');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='url' pattern='.*test.*' id='foo' value=''>\n"
-            + "  <input type='url' pattern='.*test.*' id='bar' value=' '>\n"
-            + "  <input type='url' pattern='.*test.*' id='bar2' value='  \t'>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=''>\n", "", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"http://example.com", "§§URL§§", "1"},
-            IE = {"http://example.com", "§§URL§§second/", "2"})
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {" ",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+", "2"})
+    public void patternValidationBlank() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {"  \t",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=++%09", "2"})
+    public void patternValidationWhitespace() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http://test.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Ftest.com", "2"},
+            IE = {"",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" http://test.com ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k' value=' http://test.com '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" http://test.com ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" http://test.com ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+http%3A%2F%2Ftest.com+", "2"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='url' pattern='.*test.*' id='e1' name='k'>\n", "", " http://test.com ");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http://example.com",
+                       "false",
+                       "false-false-false-false-false-false-false-true-false-false-false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"http://example.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void minLengthValidationInvalid() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
-            + "<html><head></head>\n"
-            + "<body>\n"
-            + "  <form id='myForm' action='" + URL_SECOND
-                    + "' method='" + HttpMethod.POST + "'>\n"
-            + "    <input type='url' minlength='20' id='foo'>\n"
-            + "    <button id='myButton' type='submit'>Submit</button>\n"
-            + "  </form>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        expandExpectedAlertsVariables(URL_FIRST);
-
-        final WebDriver driver = loadPage2(html, URL_FIRST);
-
-        final WebElement foo = driver.findElement(By.id("foo"));
-        foo.sendKeys("http://example.com");
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
-        //invalid data
-        driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
-
-        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
+        validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", "http://example.com");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"http://example.com/test", "§§URL§§second/", "2"})
+    @Alerts(DEFAULT = {"http://example.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
+            IE = {"http://example.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
+    public void minLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='url' minlength='20' id='e1' name='k' value='http://example.com'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
+    public void minLengthValidationInvalidNoInitial() throws Exception {
+        validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http://example.com/test",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"},
+            IE = {"http://example.com/test",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
     public void minLengthValidationValid() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
-            + "<html><head></head>\n"
-            + "<body>\n"
-            + "  <form id='myForm' action='" + URL_SECOND
-                    + "' method='" + HttpMethod.POST + "'>\n"
-            + "    <input type='url' minlength='20' id='foo'>\n"
-            + "    <button id='myButton' type='submit'>Submit</button>\n"
-            + "  </form>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        expandExpectedAlertsVariables(URL_FIRST);
-
-        final WebDriver driver = loadPage2(html, URL_FIRST);
-
-        final WebElement foo = driver.findElement(By.id("foo"));
-        foo.sendKeys("http://example.com/test");
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
-        //valid data
-        driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
-
-        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
+        validation("<input type='url' minlength='20' id='e1' name='k'>\n", "", "http://example.com/test");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"http://example.com", "§§URL§§second/", "2"})
+    @Alerts(DEFAULT = {"http://example.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
+            IE = {"http://example.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void maxLengthValidationValid() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
-            + "<html><head></head>\n"
-            + "<body>\n"
-            + "  <form id='myForm' action='" + URL_SECOND
-                    + "' method='" + HttpMethod.POST + "'>\n"
-            + "    <input type='url' maxlength='20' id='foo'>\n"
-            + "    <button id='myButton' type='submit'>Submit</button>\n"
-            + "  </form>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
-
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        expandExpectedAlertsVariables(URL_FIRST);
-
-        final WebDriver driver = loadPage2(html, URL_FIRST);
-
-        final WebElement foo = driver.findElement(By.id("foo"));
-        foo.sendKeys("http://example.com");
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
-        //invalid data
-        driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
-
-        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
+        validation("<input type='url' maxlength='20' id='e1' name='k'>\n", "", "http://example.com");
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"http://example.com/t", "§§URL§§second/", "2"})
+    @Alerts(DEFAULT = {"http://example.com/t",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ft", "2"},
+            IE = {"http://example.com/t",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ft", "2"})
     public void maxLengthValidationInvalid() throws Exception {
-        final String html = "<!DOCTYPE html>\n"
-            + "<html><head></head>\n"
-            + "<body>\n"
-            + "  <form id='myForm' action='" + URL_SECOND
-                    + "' method='" + HttpMethod.POST + "'>\n"
-            + "    <input type='url' maxlength='20' id='foo'>\n"
-            + "    <button id='myButton' type='submit'>Submit</button>\n"
-            + "  </form>\n"
-            + "</body></html>";
-        final String secondContent
-            = "<html><head><title>second</title></head><body>\n"
-            + "  <p>hello world</p>\n"
-            + "</body></html>";
+        validation("<input type='url' maxlength='20' id='e1' name='k'>\n", "", "http://example.com/test");
+    }
 
-        getMockWebConnection().setResponse(URL_SECOND, secondContent);
-        expandExpectedAlertsVariables(URL_FIRST);
-
-        final WebDriver driver = loadPage2(html, URL_FIRST);
-
-        final WebElement foo = driver.findElement(By.id("foo"));
-        foo.sendKeys("http://example.com/test");
-        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
-        //valid data
-        driver.findElement(By.id("myButton")).click();
-        assertEquals(getExpectedAlerts()[1], getMockWebConnection().getLastWebRequest().getUrl());
-
-        assertEquals(Integer.parseInt(getExpectedAlerts()[2]), getMockWebConnection().getRequestCount());
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"http://example.com/test",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"},
+            IE = {"http://example.com/test",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com%2Ftest", "2"})
+    public void maxLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='url' maxlength='20' "
+                    + "id='e1' name='k' value='http://example.com/test'>\n", "", null);
     }
 
     /**
@@ -336,102 +416,131 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
-        validation("<input type='url' id='e1'>\n", "");
+        validation("<input type='url' id='e1' name='k'>\n", "", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationCustomValidity() throws Exception {
-        validation("<input type='url' id='e1'>\n", "elem.setCustomValidity('Invalid');");
+        validation("<input type='url' id='e1' name='k'>\n", "elem.setCustomValidity('Invalid');", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationBlankCustomValidity() throws Exception {
-        validation("<input type='url' id='e1'>\n", "elem.setCustomValidity(' ');\n");
+        validation("<input type='url' id='e1' name='k'>\n", "elem.setCustomValidity(' ');\n", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void validationResetCustomValidity() throws Exception {
-        validation("<input type='url' id='e1'>\n",
-                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+        validation("<input type='url' id='e1' name='k'>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-false-false-false-false-false-false-false-false-false-true",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationRequired() throws Exception {
-        validation("<input type='url' id='e1' required>\n", "");
+        validation("<input type='url' id='e1' name='k' required>\n", "", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=http%3A%2F%2Fexample.com", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=http%3A%2F%2Fexample.com", "2"})
     public void validationRequiredValueSet() throws Exception {
-        validation("<input type='url' id='e1' required>\n", "elem.value='http://example.com';");
+        validation("<input type='url' id='e1' name='k' required>\n", "elem.value='http://example.com';", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-false-true-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationPattern() throws Exception {
-        validation("<input type='url' id='e1' pattern='.*test.*' value='http://example.com'>\n", "");
+        validation("<input type='url' id='e1' name='k' pattern='.*test.*'>\n",
+                    "elem.value='http://example.com';", null);
     }
 
-    private void validation(final String htmlPart, final String jsPart) throws Exception {
+    private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
         final String html =
                 "<html><head>\n"
                 + "  <script>\n"
@@ -458,12 +567,35 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "  <form>\n"
                 + htmlPart
+                + "    <button id='myTest' type='button' onclick='test()'>Test</button>\n"
+                + "    <button id='myButton' type='submit'>Submit</button>\n"
                 + "  </form>\n"
                 + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+
+        final WebElement foo = driver.findElement(By.id("e1"));
+        if (sendKeys != null) {
+            foo.sendKeys(sendKeys);
+        }
+        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+
+        driver.findElement(By.id("myTest")).click();
+        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+
+        driver.findElement(By.id("myButton")).click();
+        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
     }
 }

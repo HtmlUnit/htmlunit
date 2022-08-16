@@ -63,7 +63,7 @@ class XPathAdapter {
      * @param locator the location of the expression, may be {@code null}
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param errorListener the error listener, or {@code null} if default should be used
-     * @param caseSensitive whether or not the attributes should be case-sensitive
+     * @param caseSensitive whether the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
     XPathAdapter(final String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
@@ -223,16 +223,17 @@ class XPathAdapter {
                 throw te;
             }
         }
-        catch (Exception e) {
-            while (e instanceof WrappedRuntimeException) {
-                e = ((WrappedRuntimeException) e).getException();
+        catch (final Exception e) {
+            Exception unwrapped = e;
+            while (unwrapped instanceof WrappedRuntimeException) {
+                unwrapped = ((WrappedRuntimeException) unwrapped).getException();
             }
-            String msg = e.getMessage();
+            String msg = unwrapped.getMessage();
 
             if (msg == null || msg.isEmpty()) {
                 msg = XPATHMessages.createXPATHMessage(XPATHErrorResources.ER_XPATH_ERROR, null);
             }
-            final TransformerException te = new TransformerException(msg, mainExp_, e);
+            final TransformerException te = new TransformerException(msg, mainExp_, unwrapped);
             final ErrorListener el = xpathContext.getErrorListener();
             if (null != el) {
                 el.fatalError(te);

@@ -964,12 +964,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         if (!isMinMaxLengthSupported()
                 || valueModifiedByJavascript_
                 || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
-                || getMaxLength() == Integer.MAX_VALUE) {
+                || getMaxLength() == Integer.MAX_VALUE
+                || getDefaultValue().equals(getValue())) {
             return true;
         }
-        else {
-            return getValueAttribute().length() <= getMaxLength();
-        }
+
+        return getValue().length() <= getMaxLength();
     }
 
     /**
@@ -983,12 +983,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         if (!isMinMaxLengthSupported()
                 || valueModifiedByJavascript_
                 || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
-                || getMinLength() == Integer.MIN_VALUE) {
+                || getMinLength() == Integer.MIN_VALUE
+                || getDefaultValue().equals(getValue())) {
             return true;
         }
-        else {
-            return getValueAttribute().length() >= getMinLength();
-        }
+
+        return getValue().length() >= getMinLength();
     }
 
     /**
@@ -1086,7 +1086,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     @Override
     public boolean isTooShortValidityState() {
-        return false;
+        if (!isMinMaxLengthSupported()
+                || valueModifiedByJavascript_
+                || !hasFeature(HTMLINPUT_ATTRIBUTE_MIN_MAX_LENGTH_SUPPORTED)
+                || getMinLength() == Integer.MIN_VALUE
+                || getDefaultValue().equals(getValue())) {
+            return false;
+        }
+
+        return getValue().length() < getMinLength();
     }
 
     @Override
@@ -1108,6 +1116,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState()
                 && !isValueMissingValidityState()
+                && !isTooLongValidityState()
+                && !isTooShortValidityState()
                 && !hasPatternMismatchValidityState();
     }
 

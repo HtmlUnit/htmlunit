@@ -261,4 +261,80 @@ public class ScreenTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object ScreenOrientation]", "landscape-primary", "0"},
+            IE = {"undefined", "exception"})
+    public void orientation() throws Exception {
+        final String html = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var o = window.screen.orientation;"
+            + "        log(o);\n"
+            + "        log(o.type);\n"
+            + "        log(o.angle);\n"
+            + "      } catch(e) { log('exception') }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            FF = "landscape-primary",
+            FF_ESR = "landscape-primary")
+    public void mozOrientation() throws Exception {
+        final String html = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        var o = window.screen.mozOrientation;"
+            + "        log(o);\n"
+            + "      } catch(e) { log('exception') }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            FF = "undefined",
+            FF_ESR = "undefined",
+            IE = "undefined")
+    public void isExtended() throws Exception {
+        final String html = "<html><head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function doTest() {\n"
+            + "      try {\n"
+            + "        log(window.screen.isExtended);\n"
+            + "      } catch(e) { log('exception') }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

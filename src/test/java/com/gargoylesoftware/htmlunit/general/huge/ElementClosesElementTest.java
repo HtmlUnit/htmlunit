@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.general.huge;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = new ArrayList<>(DefaultElementFactory.SUPPORTED_TAGS_);
+        final List<String> strings = Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_);
         for (final String parent : strings) {
             for (final String child : strings) {
                 list.add(new Object[] {parent, child});

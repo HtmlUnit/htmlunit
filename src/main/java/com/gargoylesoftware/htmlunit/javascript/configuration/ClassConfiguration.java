@@ -24,7 +24,6 @@ import java.util.Map;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Symbol;
 
@@ -117,29 +116,19 @@ public final class ClassConfiguration {
 
     /**
      * Add the constant to the configuration.
-     * @param name - Name of the configuration
+     * @param name Name of the constant
+     * @param value Value of the constant
      */
-    public void addConstant(final String name) {
+    public void addConstant(final String name, final Object value) {
         if (constants_ == null) {
             constants_ = new ArrayList<>();
         }
-        try {
-            final Object value = getHostClass().getField(name).get(null);
-            int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
-            // https://code.google.com/p/chromium/issues/detail?id=500633
-            if (getClassName().endsWith("Array")) {
-                flag |= ScriptableObject.DONTENUM;
-            }
-            constants_.add(new ConstantInfo(name, value, flag));
+        int flag = ScriptableObject.READONLY | ScriptableObject.PERMANENT;
+        // https://code.google.com/p/chromium/issues/detail?id=500633
+        if (getClassName().endsWith("Array")) {
+            flag |= ScriptableObject.DONTENUM;
         }
-        catch (final NoSuchFieldException e) {
-            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: " + getHostClass().getName()
-                    + "reason: " + e.getMessage());
-        }
-        catch (final IllegalAccessException e) {
-            throw Context.reportRuntimeError("Cannot get field '" + name + "' for type: " + getHostClass().getName()
-                    + "reason: " + e.getMessage());
-        }
+        constants_.add(new ConstantInfo(name, value, flag));
     }
 
     /**

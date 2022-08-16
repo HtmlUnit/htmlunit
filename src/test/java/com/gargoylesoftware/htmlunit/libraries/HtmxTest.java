@@ -45,8 +45,7 @@ public abstract class HtmxTest extends WebDriverTestCase {
             final WebDriver webDriver = getWebDriver();
 
             if (getWebDriver() instanceof HtmlUnitDriver) {
-                getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+                getWebClient().getOptions().setThrowExceptionOnScriptError(false);
             }
 
             final String url = URL_FIRST + "test/index.html";

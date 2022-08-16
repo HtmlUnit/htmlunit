@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -714,7 +715,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "defaultPrevented,eventPhase,initEvent(),preventDefault(),srcElement,stopImmediatePropagation(),"
                 + "stopPropagation(),target,timeStamp,type")
     public void event() throws Exception {
-        testString("", "event ? event : window.event");
+        testString("", "event");
     }
 
     /**
@@ -7298,6 +7299,36 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link Performance}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),memory,navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            EDGE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),memory,navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            FF = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            FF_ESR = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor(),eventCounts,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),mark(),measure(),navigation,now(),"
+                + "onresourcetimingbufferfull,setResourceTimingBufferSize(),timeOrigin,timing,toJSON()",
+            IE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor,getEntries(),"
+                + "getEntriesByName(),getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),"
+                + "navigation,now(),setResourceTimingBufferSize(),timing,toJSON()")
+    @HtmlUnitNYI(CHROME = "constructor(),navigation,now(),timing",
+            EDGE = "constructor(),navigation,now(),timing",
+            FF = "constructor(),navigation,now(),timing",
+            FF_ESR = "constructor(),navigation,now(),timing",
+            IE = "constructor,navigation,now(),timing")
+    public void performance() throws Exception {
+        testString("", "performance");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPlainText}.
      *
      * @throws Exception if the test fails
@@ -10721,6 +10752,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URL}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            EDGE = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            FF_ESR = "constructor(),hash,host,hostname,href,origin,password,pathname,"
+                 + "port,protocol,search,searchParams,toJSON(),toString(),username",
+            IE = "exception")
+    public void webkitURL() throws Exception {
+        testString("", "new webkitURL('http://developer.mozilla.org')");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.DragEvent}.
      *
      * @throws Exception if the test fails
@@ -11743,6 +11793,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "animation-iteration-count,animation-name,animation-play-state,animation-timing-function,"
                 + "animationDelay,animationDirection,animationDuration,animationFillMode,animationIterationCount,"
                 + "animationName,animationPlayState,animationTimingFunction,appearance,aspect-ratio,aspectRatio,"
+                + "backdrop-filter,backdropFilter,"
                 + "backface-visibility,backfaceVisibility,background,background-attachment,background-blend-mode,"
                 + "background-clip,background-color,background-image,background-origin,background-position,"
                 + "background-position-x,background-position-y,background-repeat,background-size,"
@@ -11850,13 +11901,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scroll-padding,scroll-padding-block,scroll-padding-block-end,scroll-padding-block-start,"
                 + "scroll-padding-bottom,scroll-padding-inline,scroll-padding-inline-end,"
                 + "scroll-padding-inline-start,scroll-padding-left,scroll-padding-right,scroll-padding-top,"
-                + "scroll-snap-align,scroll-snap-type,scrollbar-color,scrollbar-gutter,scrollbar-width,"
+                + "scroll-snap-align,scroll-snap-stop,scroll-snap-type,"
+                + "scrollbar-color,scrollbar-gutter,scrollbar-width,"
                 + "scrollbarColor,scrollbarGutter,scrollbarWidth,scrollBehavior,scrollMargin,scrollMarginBlock,"
                 + "scrollMarginBlockEnd,scrollMarginBlockStart,scrollMarginBottom,scrollMarginInline,"
                 + "scrollMarginInlineEnd,scrollMarginInlineStart,scrollMarginLeft,scrollMarginRight,scrollMarginTop,"
                 + "scrollPadding,scrollPaddingBlock,scrollPaddingBlockEnd,scrollPaddingBlockStart,"
                 + "scrollPaddingBottom,scrollPaddingInline,scrollPaddingInlineEnd,scrollPaddingInlineStart,"
-                + "scrollPaddingLeft,scrollPaddingRight,scrollPaddingTop,scrollSnapAlign,scrollSnapType,"
+                + "scrollPaddingLeft,scrollPaddingRight,scrollPaddingTop,scrollSnapAlign,scrollSnapStop,scrollSnapType,"
                 + "shape-image-threshold,shape-margin,shape-outside,shape-rendering,shapeImageThreshold,shapeMargin,"
                 + "shapeOutside,shapeRendering,stop-color,stop-opacity,stopColor,stopOpacity,stroke,"
                 + "stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,"
@@ -12243,6 +12295,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "animation-iteration-count,animation-name,animation-play-state,animation-timing-function,"
                 + "animationDelay,animationDirection,animationDuration,animationFillMode,animationIterationCount,"
                 + "animationName,animationPlayState,animationTimingFunction,appearance,aspect-ratio,aspectRatio,"
+                + "backdrop-filter,backdropFilter,"
                 + "backface-visibility,backfaceVisibility,background,background-attachment,background-blend-mode,"
                 + "background-clip,background-color,background-image,background-origin,background-position,"
                 + "background-position-x,background-position-y,background-repeat,background-size,"
@@ -12350,13 +12403,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scroll-padding,scroll-padding-block,scroll-padding-block-end,scroll-padding-block-start,"
                 + "scroll-padding-bottom,scroll-padding-inline,scroll-padding-inline-end,"
                 + "scroll-padding-inline-start,scroll-padding-left,scroll-padding-right,scroll-padding-top,"
-                + "scroll-snap-align,scroll-snap-type,scrollbar-color,scrollbar-gutter,scrollbar-width,"
+                + "scroll-snap-align,scroll-snap-stop,scroll-snap-type,"
+                + "scrollbar-color,scrollbar-gutter,scrollbar-width,"
                 + "scrollbarColor,scrollbarGutter,scrollbarWidth,scrollBehavior,scrollMargin,scrollMarginBlock,"
                 + "scrollMarginBlockEnd,scrollMarginBlockStart,scrollMarginBottom,scrollMarginInline,"
                 + "scrollMarginInlineEnd,scrollMarginInlineStart,scrollMarginLeft,scrollMarginRight,scrollMarginTop,"
                 + "scrollPadding,scrollPaddingBlock,scrollPaddingBlockEnd,scrollPaddingBlockStart,"
                 + "scrollPaddingBottom,scrollPaddingInline,scrollPaddingInlineEnd,scrollPaddingInlineStart,"
-                + "scrollPaddingLeft,scrollPaddingRight,scrollPaddingTop,scrollSnapAlign,scrollSnapType,"
+                + "scrollPaddingLeft,scrollPaddingRight,scrollPaddingTop,scrollSnapAlign,scrollSnapStop,scrollSnapType,"
                 + "shape-image-threshold,shape-margin,shape-outside,shape-rendering,shapeImageThreshold,shapeMargin,"
                 + "shapeOutside,shapeRendering,stop-color,stop-opacity,stopColor,stopOpacity,stroke,"
                 + "stroke-dasharray,stroke-dashoffset,stroke-linecap,stroke-linejoin,stroke-miterlimit,"
@@ -12668,5 +12722,55 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent,top,verticalAlign,widows,width,wordSpacing,zIndex")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,"
+                + "isExtended,onchange,orientation,pixelDepth,width",
+            EDGE = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,"
+                + "isExtended,onchange,orientation,pixelDepth,width",
+            FF = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozLockOrientation(),mozOrientation,mozUnlockOrientation(),"
+                + "onmozorientationchange,orientation,pixelDepth,top,width",
+            FF_ESR = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozLockOrientation(),mozOrientation,mozUnlockOrientation(),"
+                + "onmozorientationchange,orientation,pixelDepth,top,width",
+            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,constructor,"
+                + "deviceXDPI,deviceYDPI,dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,"
+                + "msLockOrientation(),msOrientation,msUnlockOrientation(),onmsorientationchange,"
+                + "pixelDepth,removeEventListener(),systemXDPI,systemYDPI,width")
+    @HtmlUnitNYI(FF = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
+            FF_ESR = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
+                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
+            IE = "availHeight,availWidth,bufferDepth,colorDepth,constructor,deviceXDPI,deviceYDPI,"
+                + "fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,onchange,pixelDepth,"
+                + "systemXDPI,systemYDPI,width")
+    public void screen() throws Exception {
+        testString("", "window.screen");
+    }
+
+    /**
+     * Test {@link Screen}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "angle,constructor(),lock(),onchange,type,unlock()",
+            EDGE = "angle,constructor(),lock(),onchange,type,unlock()",
+            FF = "angle,constructor(),lock(),onchange,type,unlock()",
+            FF_ESR = "angle,constructor(),lock(),onchange,type,unlock()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "angle,constructor(),onchange,type",
+            EDGE = "angle,constructor(),onchange,type",
+            FF = "angle,constructor(),onchange,type",
+            FF_ESR = "angle,constructor(),onchange,type")
+    public void screenOrientation() throws Exception {
+        testString("", "window.screen.orientation");
     }
 }

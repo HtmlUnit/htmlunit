@@ -22,7 +22,6 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -1393,9 +1392,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
-        final Field field = HtmlUnitWebElement.class.getDeclaredField("element");
-        field.setAccessible(true);
-        return (HtmlElement) field.get(webElement);
+        return (HtmlElement) ((HtmlUnitWebElement) webElement).getElement();
     }
 
     /**
@@ -1587,7 +1584,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             boolean rhino = false;
             if (webDriver_ != null) {
                 try {
-                    rhino = getWebWindowOf(webDriver_).getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
+                    rhino = getWebClient().getJavaScriptEngine() instanceof JavaScriptEngine;
                 }
                 catch (final Exception e) {
                     throw new RuntimeException(e);
@@ -1652,15 +1649,11 @@ public abstract class WebDriverTestCase extends WebTestCase {
      *
      * <b>Your test shouldn't depend primarily on WebClient</b>
      *
-     * @param driver the driver
      * @return the current web window
-     * @throws Exception if an error occurs
      * @see #toHtmlElement(WebElement)
      */
-    protected WebWindow getWebWindowOf(final HtmlUnitDriver driver) throws Exception {
-        final Field field = HtmlUnitDriver.class.getDeclaredField("currentWindow");
-        field.setAccessible(true);
-        return (WebWindow) field.get(driver);
+    protected WebWindow getWebWindow() {
+        return webDriver_.getCurrentWindow().getWebWindow();
     }
 
     /**
@@ -1681,6 +1674,14 @@ public abstract class WebDriverTestCase extends WebTestCase {
      */
     protected Integer getWebClientTimeout() {
         return null;
+    }
+
+    protected Page getEnclosedPage() {
+        return getWebWindow().getEnclosedPage();
+    }
+
+    protected WebClient getWebClient() {
+        return webDriver_.getWebClient();
     }
 
     /**

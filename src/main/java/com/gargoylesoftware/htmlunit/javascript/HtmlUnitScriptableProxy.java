@@ -20,11 +20,12 @@ import net.sourceforge.htmlunit.corejs.javascript.Delegator;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
- * Proxy for a {@link SimpleScriptable}.
+ * Proxy for a {@link HtmlUnitScriptable}.
  *
  * @param <T> the type of scriptable object being wrapped
  * @author Marc Guillemot
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
 public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> extends Delegator
         implements Serializable {

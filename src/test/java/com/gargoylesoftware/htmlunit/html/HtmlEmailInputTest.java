@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -26,7 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlEmailInput}.
@@ -130,7 +128,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
@@ -202,79 +200,333 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    @Alerts("false-true-true")
-    public void defaultPatternValidation() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    var empty = document.getElementById('empty');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() + '-' + empty.checkValidity() );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='email' id='foo' value='abc'>\n"
-            + "  <input type='email' id='bar' value='abc@email.com'>\n"
-            + "  <input type='email' id='empty' value=''>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"abc@eemail.com",
+                       "false",
+                       "false-false-true-false-false-false-false-false-false-false-false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"abc@eemail.com",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-false-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    public void patternValidationInvalid() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value='abc@eemail.com'>\n",
+                    "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    @Alerts("false-true")
-    public void patternValidation() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() );\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='email' pattern='.+@email.com' id='foo' value='abc@eemail.com'>\n"
-            + "  <input type='email' pattern='.+@email.com' id='bar' value='abc@email.com'>\n"
-            + "</body>\n"
-            + "</html>";
-
-        loadPageVerifyTitle2(html);
+    @Alerts(DEFAULT = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+            IE = {"abc@email.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=abc@email.com", "2"})
+    @HtmlUnitNYI(IE = {"abc@email.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"})
+    public void patternValidationValid() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' "
+                + "id='e1' name='k' value='abc@email.com'>\n", "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
-    @Alerts(DEFAULT = "true-true-true",
-            IE = "true-false-false")
-    @NotYetImplemented(IE)
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void patternValidationEmpty() throws Exception {
-        final String html = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    var foo = document.getElementById('foo');\n"
-            + "    var bar = document.getElementById('bar');\n"
-            + "    var bar2 = document.getElementById('bar2');\n"
-            + "    log(foo.checkValidity() + '-' + bar.checkValidity() + '-' + bar2.checkValidity());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "  <input type='email' pattern='.+@email.com' id='foo' value=''>\n"
-            + "  <input type='email' pattern='.+@email.com' id='bar' value=' '>\n"
-            + "  <input type='email' pattern='.+@email.com' id='bar2' value='  \t'>\n"
-            + "</body>\n"
-            + "</html>";
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=''>\n", "", null);
+    }
 
-        loadPageVerifyTitle2(html);
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {" ",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" ",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=+", "2"})
+    public void patternValidationBlank() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=' '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {"  \t",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=++%09", "2"})
+    public void patternValidationWhitespace() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value='  \t'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+            IE = {"",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(IE = {" abc@email.com ",
+                       "false",
+                       "undefined-false-true-false-false-false-false-undefined-false-false-false",
+                       "true",
+                       "§§URL§§", "1"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k' value=' abc@email.com '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+            FF = {" abc@email.com",
+                  "true",
+                  "false-false-false-false-false-false-false-false-false-true-false",
+                  "true",
+                  "§§URL§§?k=abc%40email.com", "2"},
+            FF_ESR = {" abc@email.com",
+                      "true",
+                      "false-false-false-false-false-false-false-false-false-true-false",
+                      "true",
+                      "§§URL§§?k=abc%40email.com", "2"},
+            IE = {"  \t",
+                  "false",
+                  "undefined-false-true-false-false-false-false-undefined-true-false-false",
+                  "true",
+                  "§§URL§§", "1"})
+    @HtmlUnitNYI(FF = {"abc@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=abc%40email.com", "2"},
+                 FF_ESR = {"abc@email.com",
+                           "true",
+                           "false-false-false-false-false-false-false-false-false-true-false",
+                           "true",
+                           "§§URL§§?k=abc%40email.com", "2"},
+                 IE = {" abc@email.com",
+                       "false",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§", "1"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='email' pattern='.+@email.com' id='e1' name='k'>\n", "", " abc@email.com");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@b.com",
+                       "false",
+                       "false-false-false-false-false-false-false-true-false-false-false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"a@b.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
+    public void minLengthValidationInvalid() throws Exception {
+        validation("<input type='email' minlength='10' id='e1' name='k'>\n", "", "a@b.com");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@b.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"},
+            IE = {"a@b.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
+    public void minLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='email' minlength='10' id='e1' name='k' value='a@b.com'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=", "2"})
+    public void minLengthValidationInvalidNoInitial() throws Exception {
+        validation("<input type='email' minlength='10' id='e1' name='k'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@b.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"},
+            IE = {"a@b.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@b.com", "2"})
+    @HtmlUnitNYI(IE = {"a@b.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.com", "2"})
+    public void minLengthValidationValid() throws Exception {
+        validation("<input type='email' minlength='5' id='e1' name='k'>\n", "", "a@b.com");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@b.c",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.c", "2"},
+            IE = {"a@b.c",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@b.c", "2"})
+    @HtmlUnitNYI(IE = {"a@b.c",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40b.c", "2"})
+    public void maxLengthValidationValid() throws Exception {
+        validation("<input type='email' maxlength='5' id='e1' name='k'>\n", "", "a@b.com");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@ema",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40ema", "2"},
+            IE = {"a@ema",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@ema", "2"})
+    @HtmlUnitNYI(IE = {"a@ema",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40ema", "2"})
+    public void maxLengthValidationInvalid() throws Exception {
+        validation("<input type='email' maxlength='5' id='e1' name='k'>\n", "", "a@email.com");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"a@email.com",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40email.com", "2"},
+            IE = {"a@email.com",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=a@email.com", "2"})
+    @HtmlUnitNYI(IE = {"a@email.com",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=a%40email.com", "2"})
+    public void maxLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='email' maxlength='5' id='e1' name='k' value='a@email.com'>\n", "", null);
     }
 
     /**
@@ -313,118 +565,152 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void validationEmpty() throws Exception {
-        validation("<input type='email' id='e1'>\n", "");
+        validation("<input type='email' id='e1' name='k'>\n", "", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationCustomValidity() throws Exception {
-        validation("<input type='email' id='e1'>\n", "elem.setCustomValidity('Invalid');");
+        validation("<input type='email' id='e1' name='k'>\n", "elem.setCustomValidity('Invalid');", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-true-false-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-true-false-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationBlankCustomValidity() throws Exception {
-        validation("<input type='email' id='e1'>\n", "elem.setCustomValidity(' ');\n");
+        validation("<input type='email' id='e1' name='k'>\n", "elem.setCustomValidity(' ');\n", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=", "2"})
     public void validationResetCustomValidity() throws Exception {
-        validation("<input type='email' id='e1'>\n",
-                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');");
+        validation("<input type='email' id='e1' name='k'>\n",
+                "elem.setCustomValidity('Invalid');elem.setCustomValidity('');", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-false-false-false-false-false-false-false-false-false-true",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationRequired() throws Exception {
-        validation("<input type='email' id='e1' required>\n", "");
+        validation("<input type='email' id='e1' name='k' required>\n", "", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true",
+    @Alerts(DEFAULT = {"",
+                       "true",
                        "false-false-false-false-false-false-false-false-false-true-false",
-                       "true"},
-            IE = {"true",
+                       "true",
+                       "§§URL§§?k=test%40abc.edu", "2"},
+            IE = {"",
+                  "true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
-                  "true"})
+                  "true",
+                  "§§URL§§?k=test@abc.edu", "2"})
+    @HtmlUnitNYI(IE = {"",
+                       "true",
+                       "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                       "true",
+                       "§§URL§§?k=test%40abc.edu", "2"})
     public void validationRequiredValueSet() throws Exception {
-        validation("<input type='email' id='e1' required>\n", "elem.value='test@abc.edu';");
+        validation("<input type='email' id='e1' name='k' required>\n", "elem.value='test@abc.edu';", null);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
+    @Alerts(DEFAULT = {"",
+                       "false",
                        "false-false-true-false-false-false-false-false-false-false-false",
-                       "true"},
-            IE = {"false",
+                       "true",
+                       "§§URL§§", "1"},
+            IE = {"",
+                  "false",
                   "undefined-false-true-false-false-false-false-undefined-false-false-false",
-                  "true"})
+                  "true",
+                  "§§URL§§", "1"})
     public void validationPattern() throws Exception {
-        validation("<input type='email' id='e1' pattern='.+@email.com' value='abc@eemail.com'>\n", "");
+        validation("<input type='email' id='e1' name='k' pattern='.+@email.com'>\n",
+                    "elem.value='abc@eemail.com';", null);
     }
 
-    private void validation(final String htmlPart, final String jsPart) throws Exception {
+    private void validation(final String htmlPart, final String jsPart, final String sendKeys) throws Exception {
         final String html =
                 "<html><head>\n"
                 + "  <script>\n"
                 + LOG_TITLE_FUNCTION
                 + "    function logValidityState(s) {\n"
                 + "      log(s.badInput"
-                        + "+ '-' + s.customError "
-                        + "+ '-' + s.patternMismatch "
-                        + "+ '-' + s.rangeOverflow "
-                        + "+ '-' + s.rangeUnderflow "
-                        + "+ '-' + s.stepMismatch "
-                        + "+ '-' + s.tooLong "
-                        + "+ '-' + s.tooShort "
-                        + "+ '-' + s.typeMismatch "
-                        + "+ '-' + s.valid "
-                        + "+ '-' + s.valueMissing);\n"
+                        + "+ '-' + s.customError"
+                        + "+ '-' + s.patternMismatch"
+                        + "+ '-' + s.rangeOverflow"
+                        + "+ '-' + s.rangeUnderflow"
+                        + "+ '-' + s.stepMismatch"
+                        + "+ '-' + s.tooLong"
+                        + "+ '-' + s.tooShort"
+                        + " + '-' + s.typeMismatch"
+                        + " + '-' + s.valid"
+                        + " + '-' + s.valueMissing);\n"
                 + "    }\n"
                 + "    function test() {\n"
                 + "      var elem = document.getElementById('e1');\n"
@@ -435,12 +721,35 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
-                + "<body onload='test()'>\n"
+                + "<body>\n"
                 + "  <form>\n"
                 + htmlPart
+                + "    <button id='myTest' type='button' onclick='test()'>Test</button>\n"
+                + "    <button id='myButton' type='submit'>Submit</button>\n"
                 + "  </form>\n"
                 + "</body></html>";
 
-        loadPageVerifyTitle2(html);
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+                + "  <p>hello world</p>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final WebDriver driver = loadPage2(html, URL_FIRST);
+
+        final WebElement foo = driver.findElement(By.id("e1"));
+        if (sendKeys != null) {
+            foo.sendKeys(sendKeys);
+        }
+        assertEquals(getExpectedAlerts()[0], foo.getAttribute("value"));
+
+        driver.findElement(By.id("myTest")).click();
+        verifyTitle2(driver, getExpectedAlerts()[1], getExpectedAlerts()[2], getExpectedAlerts()[3]);
+
+        driver.findElement(By.id("myButton")).click();
+        assertEquals(getExpectedAlerts()[4], getMockWebConnection().getLastWebRequest().getUrl());
+        assertEquals(Integer.parseInt(getExpectedAlerts()[5]), getMockWebConnection().getRequestCount());
     }
 }

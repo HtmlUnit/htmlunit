@@ -644,7 +644,7 @@ public class CookieManagerTest extends WebDriverTestCase {
                     && lastCookies.contains("; "));
 
         if (driver instanceof HtmlUnitDriver) {
-            final CookieManager mgr = getWebWindowOf((HtmlUnitDriver) driver).getWebClient().getCookieManager();
+            final CookieManager mgr = getWebClient().getCookieManager();
             assertEquals(2, mgr.getCookies().size());
             assertTrue(mgr.getCookie("first").isHttpOnly());
             assertFalse(mgr.getCookie("second").isHttpOnly());

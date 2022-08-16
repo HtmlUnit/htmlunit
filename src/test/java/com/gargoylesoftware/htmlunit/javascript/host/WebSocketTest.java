@@ -665,7 +665,7 @@ public class WebSocketTest extends WebDriverTestCase {
             final int[] webSocketCreated = {0};
 
             if (driver instanceof HtmlUnitDriver) {
-                final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+                final WebClient webClient = getWebClient();
                 final WebClientInternals internals = webClient.getInternals();
 
                 internals.addListener(new WebClientInternals.Listener() {

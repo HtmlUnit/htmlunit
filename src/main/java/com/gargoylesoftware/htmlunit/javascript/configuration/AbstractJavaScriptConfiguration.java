@@ -36,6 +36,7 @@ import org.apache.commons.logging.LogFactory;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
 
 /**
@@ -60,7 +61,14 @@ public abstract class AbstractJavaScriptConfiguration {
      * @param browser the browser version to use
      */
     protected AbstractJavaScriptConfiguration(final BrowserVersion browser) {
-        configuration_ = buildUsageMap(browser);
+        configuration_ = new ConcurrentHashMap<>(getClasses().length);
+
+        for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
+            final ClassConfiguration config = getClassConfiguration(klass, browser);
+            if (config != null) {
+                configuration_.put(config.getClassName(), config);
+            }
+        }
     }
 
     /**
@@ -76,42 +84,30 @@ public abstract class AbstractJavaScriptConfiguration {
         return configuration_.values();
     }
 
-    private Map<String, ClassConfiguration> buildUsageMap(final BrowserVersion browser) {
-        final Map<String, ClassConfiguration> classMap = new ConcurrentHashMap<>(getClasses().length);
-
-        for (final Class<? extends HtmlUnitScriptable> klass : getClasses()) {
-            final ClassConfiguration config = getClassConfiguration(klass, browser);
-            if (config != null) {
-                classMap.put(config.getClassName(), config);
-            }
-        }
-        return classMap;
-    }
-
     /**
      * Returns the class configuration of the given {@code klass}.
      *
      * @param klass the class
-     * @param browser the browser version
+     * @param browserVersion the browser version
      * @return the class configuration
      */
     public static ClassConfiguration getClassConfiguration(final Class<? extends HtmlUnitScriptable> klass,
-        final BrowserVersion browser) {
-        if (browser != null) {
+        final BrowserVersion browserVersion) {
+        if (browserVersion != null) {
             final SupportedBrowser expectedBrowser;
-            if (browser.isChrome()) {
+            if (browserVersion.isChrome()) {
                 expectedBrowser = CHROME;
             }
-            else if (browser.isEdge()) {
+            else if (browserVersion.isEdge()) {
                 expectedBrowser = EDGE;
             }
-            else if (browser.isIE()) {
+            else if (browserVersion.isIE()) {
                 expectedBrowser = IE;
             }
-            else if (browser.isFirefox78()) {
+            else if (browserVersion.isFirefox78()) {
                 expectedBrowser = FF_ESR;
             }
-            else if (browser.isFirefox()) {
+            else if (browserVersion.isFirefox()) {
                 expectedBrowser = FF;
             }
             else {
@@ -134,8 +130,8 @@ public abstract class AbstractJavaScriptConfiguration {
 
                 boolean isJsObject = false;
                 String className = null;
-                String extendedClassName;
 
+                final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
                 if (superClass == HtmlUnitScriptable.class) {
                     extendedClassName = "";
@@ -152,14 +148,6 @@ public abstract class AbstractJavaScriptConfiguration {
                         }
                         if (!jsxClass.className().isEmpty()) {
                             className = jsxClass.className();
-                        }
-                        if (jsxClass.extendedClass() != Object.class) {
-                            if (jsxClass.extendedClass() == HtmlUnitScriptable.class) {
-                                extendedClassName = "";
-                            }
-                            else {
-                                extendedClassName = jsxClass.extendedClass().getSimpleName();
-                            }
                         }
                     }
                 }
@@ -185,17 +173,14 @@ public abstract class AbstractJavaScriptConfiguration {
                 if (className.isEmpty()) {
                     className = null;
                 }
-                String extendedClassName;
 
+                final String extendedClassName;
                 final Class<?> superClass = klass.getSuperclass();
-                if (superClass != HtmlUnitScriptable.class) {
-                    extendedClassName = superClass.getSimpleName();
-                }
-                else {
+                if (superClass == HtmlUnitScriptable.class) {
                     extendedClassName = "";
                 }
-                if (jsxClass.extendedClass() != Object.class) {
-                    extendedClassName = jsxClass.extendedClass().getSimpleName();
+                else {
+                    extendedClassName = superClass.getSimpleName();
                 }
 
                 final ClassConfiguration classConfiguration
@@ -318,15 +303,25 @@ public abstract class AbstractJavaScriptConfiguration {
                 }
             }
         }
-        for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
-            final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
-                classConfiguration.addConstant(field.getName());
-            }
-        }
         for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
             final String property = getterEntry.getKey();
             classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
+        }
+
+        // JsxConstant
+        for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
+            final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
+            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
+                try {
+                    classConfiguration.addConstant(field.getName(), field.get(null));
+                }
+                catch (final IllegalAccessException e) {
+                    throw Context.reportRuntimeError(
+                            "Cannot get field '" + field.getName()
+                            + "' for type: " + classConfiguration.getHostClass().getName()
+                            + "reason: " + e.getMessage());
+                }
+            }
         }
     }
 
@@ -371,12 +366,12 @@ public abstract class AbstractJavaScriptConfiguration {
                     new ConcurrentHashMap<>(configuration_.size());
 
             final boolean debug = LOG.isDebugEnabled();
-            for (final String hostClassName : configuration_.keySet()) {
-                final ClassConfiguration classConfig = getClassConfiguration(hostClassName);
+            for (final Map.Entry<String, ClassConfiguration> entry : configuration_.entrySet()) {
+                final ClassConfiguration classConfig = entry.getValue();
                 for (final Class<?> domClass : classConfig.getDomClasses()) {
                     // preload and validate that the class exists
                     if (debug) {
-                        LOG.debug("Mapping " + domClass.getName() + " to " + hostClassName);
+                        LOG.debug("Mapping " + domClass.getName() + " to " + entry.getKey());
                     }
                     map.put(domClass, classConfig.getHostClass());
                 }

@@ -71,7 +71,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlLink.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
@@ -96,7 +96,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
@@ -397,7 +397,7 @@ public class HtmlLink2Test extends WebDriverTestCase {
 
         int maxInMemory = 0;
         if (driver instanceof HtmlUnitDriver) {
-            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+            final WebClient webClient = getWebClient();
             maxInMemory = webClient.getOptions().getMaxInMemory();
         }
 
@@ -418,9 +418,9 @@ public class HtmlLink2Test extends WebDriverTestCase {
         loadPage2(html);
 
         if (driver instanceof HtmlUnitDriver) {
-            final WebClient webClient = getWebWindowOf((HtmlUnitDriver) driver).getWebClient();
+            final WebClient webClient = getWebClient();
 
-            final HtmlPage page = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             final HtmlLink link = page.getFirstByXPath("//link");
 
             assertTrue(webClient.getCache().getSize() == 0);

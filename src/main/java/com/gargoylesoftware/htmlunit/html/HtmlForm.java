@@ -32,6 +32,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -90,8 +91,8 @@ public class HtmlForm extends HtmlElement {
     /** The "formnovalidate" attribute name. */
     public static final String ATTRIBUTE_FORMNOVALIDATE = "formnovalidate";
 
-    private static final Collection<String> SUBMITTABLE_ELEMENT_NAMES = Arrays.asList(HtmlInput.TAG_NAME,
-        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME);
+    private static final HashSet<String> SUBMITTABLE_ELEMENT_NAMES = new HashSet<>(Arrays.asList(HtmlInput.TAG_NAME,
+        HtmlButton.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME, HtmlIsIndex.TAG_NAME));
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 

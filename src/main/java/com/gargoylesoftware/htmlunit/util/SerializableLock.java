@@ -12,21 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package com.gargoylesoftware.htmlunit.util;
+
+import java.io.Serializable;
 
 /**
- * Base class for Rhino host objects in HtmlUnit.
+ * Helper because we need a serializable lock object for our serializable classes.
  *
- * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
- * @author David K. Taylor
- * @author Marc Guillemot
- * @author Chris Erskine
- * @author Daniel Gredler
- * @author Ahmed Ashour
  * @author Ronald Brill
- *
- * @deprecated since 2.56.0; please use HtmlUnitScriptable instead
  */
-@Deprecated
-public class SimpleScriptable extends HtmlUnitScriptable implements Cloneable {
+public final class SerializableLock implements Serializable {
+
 }

@@ -7,7 +7,58 @@
     </properties>
 
     <body>
-        <release version="2.63.0" date="xx, 2022" description="Chrome/Edge 103, Firefox 102">
+        <release version="2.64.0" date="xx, 2022" description="Chrome/Edge 104, Firefox 103">
+            <action type="update" dev="rbri">
+                Upgrade salvation lib to salvation2 3.0.1.
+            </action>
+            <action type="add" dev="rbri">
+                Screen/ScreenOrientation property onchange added.
+            </action>
+            <action type="add" dev="rbri">
+                Screen property isExtended (Chrome/Edge) added.
+            </action>
+            <action type="add" dev="rbri">
+                Screen property orientation (and mozOrientation for FF) added.
+            </action>
+            <action type="add" dev="rbri">
+                ScreenOrientation properties angle and type added.
+            </action>
+            <action type="update" dev="rbri">
+                Various minor optimizations and some code cleanup.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated class SimpleScriptable removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated constant BrowserVersion.FIREFOX_78 removed.
+            </action>
+            <action type="remove" dev="rbri">
+                Deprecated methods CSSStyleSheet.selects(BrowserVersion, Selector, DomElement, String, boolean)
+                and CSSStyleSheet.selects(BrowserVersion, Condition, DomElement, boolean) removed.
+            </action>
+            <action type="fix" dev="rbri" issue="488">
+                Various NullPointerExceptions fixed when calculation style properties for the html node itself.
+            </action>
+        </release>
+
+
+        <release version="2.63.0" date="July 10, 2022" description="Chrome/Edge 103, Firefox 102">
+            <action type="fix" dev="rbri" issue="487">
+                window.event is a replaceable property
+            </action>
+            <action type="fix" dev="rbri">
+                window.event should return undefined if called outside an event handler
+            </action>
+            <action type="fix" dev="rbri" issue="#385">
+                Replace all XPath usages from our code because this might be called during dom tree
+                consturction and XPath sometimes fails if the tree got changed during xpath evaluation.
+            </action>
+            <action type="update" dev="rbri">
+                A bunch of code refactorings to avoid making inconsistent dom nodes visible in the dom tree.
+            </action>
+            <action type="update" dev="rbri">
+                Spotbugs annotations used in the code to supress some warnings.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache log4j-api to 2.18.0.
             </action>

@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -122,7 +123,7 @@ public class AttributesTest extends TestCase {
             "HtmlWordBreak", "HtmlExample"
         };
 
-        final HashSet<String> supportedTags = new HashSet<>(DefaultElementFactory.SUPPORTED_TAGS_);
+        final HashSet<String> supportedTags = new HashSet<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
 
         for (final String testClass : classesToTest) {
             final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);

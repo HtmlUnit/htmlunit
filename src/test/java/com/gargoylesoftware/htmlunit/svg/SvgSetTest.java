@@ -57,7 +57,7 @@ public class SvgSetTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object SVGSetElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(SvgSet.class.isInstance(page.getElementById("myId")));
             }

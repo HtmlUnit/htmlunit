@@ -1278,8 +1278,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</script>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1305,8 +1304,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1333,8 +1331,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -1358,8 +1355,7 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
-            getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient()
-                    .getOptions().setThrowExceptionOnScriptError(false);
+            getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         loadPageVerifyTitle2(html);
     }
@@ -2579,6 +2575,66 @@ public class Window2Test extends WebDriverTestCase {
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'></body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"undefined", "{\"enumerable\":false,\"configurable\":true}",
+                       "[object Event]", "{\"enumerable\":false,\"configurable\":true}"},
+            FF = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
+                  "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
+            FF_ESR = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
+                      "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
+            IE = {"undefined", "undefined", "[object Event]", "undefined"})
+    @HtmlUnitNYI(CHROME = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
+                           "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
+            EDGE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
+                    "[object Event]", "{\"enumerable\":true,\"configurable\":true}"},
+            IE = {"undefined", "{\"enumerable\":true,\"configurable\":true}",
+                  "[object Event]", "{\"enumerable\":true,\"configurable\":true}"})
+    public void eventProperty() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log(window.event);\n"
+                + "    log(JSON.stringify(Object.getOwnPropertyDescriptor(window, 'event')));\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "<script>\n"
+                + "  log(window.event);\n"
+                + "  log(JSON.stringify(Object.getOwnPropertyDescriptor(window, 'event')));\n"
+                + "</script>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}",
+            IE = "undefined")
+    @HtmlUnitNYI(IE = "{\"value\":7,\"writable\":true,\"enumerable\":true,\"configurable\":true}")
+    public void eventPropertyReplaced() throws Exception {
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log(JSON.stringify(Object.getOwnPropertyDescriptor(window, 'event')));\n"
+                + "  }\n"
+                + "</script></head>\n"
+                + "<body onload='test()'></body>\n"
+                + "<script>\n"
+                + "  event = 7;\n"
+                + "</script>\n"
                 + "</html>";
 
         loadPageVerifyTitle2(html);

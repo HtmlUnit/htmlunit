@@ -36,8 +36,8 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
 
     // see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email#validation
     private static final Pattern DEFAULT_PATTERN =
-            Pattern.compile("^[a-zA-Z0-9.!#$%&'*+\\/=?^_`\\{|\\}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
-                                + "(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$");
+            Pattern.compile("^[a-zA-Z\\d.!#$%&'*+/=?^_`{|\\}~-]+@[a-zA-Z\\d](?:[a-zA-Z\\d-]{0,61}[a-zA-Z\\d])?"
+                                + "(?:\\.[a-zA-Z\\d](?:[a-zA-Z\\d-]{0,61}[a-zA-Z\\d])?)*$");
 
     /**
      * Creates an instance.
@@ -49,6 +49,11 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
     HtmlEmailInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        final String value = getValueAttribute();
+        if (!value.isEmpty()) {
+            setValueAttribute(value);
+        }
     }
 
     /**
@@ -63,11 +68,21 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(String newValue) {
-        if (StringUtils.isBlank(newValue) && hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
-            newValue = "";
+    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
+            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        if ("value".equals(qualifiedName) && hasFeature(JS_INPUT_SET_VALUE_EMAIL_TRIMMED)) {
+            if (StringUtils.isBlank(attributeValue)) {
+                super.setAttributeNS(namespaceURI, qualifiedName,
+                        "", notifyAttributeChangeListeners, notifyMutationObservers);
+                return;
+            }
+            super.setAttributeNS(namespaceURI, qualifiedName,
+                    attributeValue.trim(), notifyAttributeChangeListeners, notifyMutationObservers);
+            return;
         }
-        super.setValueAttribute(newValue);
+
+        super.setAttributeNS(namespaceURI, qualifiedName,
+                attributeValue, notifyAttributeChangeListeners, notifyMutationObservers);
     }
 
     @Override
@@ -98,5 +113,13 @@ public class HtmlEmailInput extends HtmlSelectableTextInput implements Labelable
     @Override
     protected boolean isBlankPatternValidated() {
         return false;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected boolean isMinMaxLengthSupported() {
+        return true;
     }
 }

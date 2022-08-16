@@ -70,6 +70,9 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
      * @return the name of the js executor thread
      */
     protected String getThreadName() {
+        if (shutdown_.get()) {
+            return "Stopped JS executor for " + webClient_.get();
+        }
         return "JS executor for " + webClient_.get();
     }
 

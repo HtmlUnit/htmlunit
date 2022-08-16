@@ -29,6 +29,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_REPEAT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_STARTS_ENDS_WITH;
@@ -223,7 +224,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final ClassConfiguration windowConfig = jsConfig_.getClassConfiguration("Window");
         if (windowConfig.getJsConstructor() != null) {
             final FunctionObject functionObject = new RecursiveFunctionObject("Window",
-                    windowConfig.getJsConstructor(), window);
+                    windowConfig.getJsConstructor(), window, browserVersion);
             ScriptableObject.defineProperty(window, "constructor", functionObject,
                     ScriptableObject.DONTENUM  | ScriptableObject.PERMANENT | ScriptableObject.READONLY);
         }
@@ -280,6 +281,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
         }
 
+        // strange but this is the reality for browsers
+        // because there will be still some sites using this for browser detection the property is
+        // set to null
+        // https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browsers
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=1442035
+        if (browserVersion.hasFeature(JS_WINDOW_INSTALL_TRIGGER_NULL)) {
+            window.put("InstallTrigger", window, null);
+        }
+
         final Map<Class<? extends Scriptable>, Scriptable> prototypes = new HashMap<>();
         final Map<String, Scriptable> prototypesPerJSName = new HashMap<>();
 
@@ -319,21 +329,16 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             if ("Image".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLImageElement");
             }
-            if ("Option".equals(hostClassSimpleName)) {
+            else if ("Option".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("HTMLOptionElement");
             }
-
-            switch (hostClassSimpleName) {
-                case "WebKitMutationObserver":
-                    prototype = prototypesPerJSName.get("MutationObserver");
-                    break;
-
-                case "webkitURL":
-                    prototype = prototypesPerJSName.get("URL");
-                    break;
-
-                default:
+            else if ("WebKitMutationObserver".equals(hostClassSimpleName)) {
+                prototype = prototypesPerJSName.get("MutationObserver");
             }
+            else if ("webkitURL".equals(hostClassSimpleName)) {
+                prototype = prototypesPerJSName.get("URL");
+            }
+
             if (prototype != null && config.isJsObject()) {
                 if (jsConstructor == null) {
                     final ScriptableObject constructor;
@@ -353,7 +358,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         function = (BaseFunction) ScriptableObject.getProperty(window, "constructor");
                     }
                     else {
-                        function = new RecursiveFunctionObject(jsClassName, jsConstructor, window);
+                        function = new RecursiveFunctionObject(jsClassName, jsConstructor, window, browserVersion);
                     }
 
                     if ("WebKitMutationObserver".equals(hostClassSimpleName)

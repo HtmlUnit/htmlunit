@@ -15,6 +15,7 @@
 package com.gargoylesoftware.htmlunit.archunit;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
+import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
@@ -23,11 +24,13 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaMethod;
+import com.tngtech.archunit.core.domain.JavaModifier;
 import com.tngtech.archunit.core.importer.ImportOption;
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
@@ -81,6 +84,19 @@ public class ArchitectureTest {
     public static final ArchRule jsxClassAnnotationPackages = classes()
             .that().areAnnotatedWith(JsxClass.class)
             .should().resideInAPackage("..javascript..");
+
+    /**
+     * Every JsxGetter with propertyName defined has to end in '_js'.
+     *
+     * AbstractJavaScriptConfiguration.process(ClassConfiguration, String, SupportedBrowser)
+     * stores the value.
+     */
+    @ArchTest
+    public static final ArchRule jsxConstant = fields()
+            .that().areAnnotatedWith(JsxConstant.class)
+            .should().haveModifier(JavaModifier.PUBLIC)
+            .andShould().haveModifier(JavaModifier.STATIC)
+            .andShould().haveModifier(JavaModifier.FINAL);
 
     /**
      * JsxGetter/Setter/Functions are always in the javascript package.

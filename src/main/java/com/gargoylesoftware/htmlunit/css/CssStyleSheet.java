@@ -611,11 +611,8 @@ public class CssStyleSheet implements Serializable {
             return false;
         }
         if (attribLength > conditionLength) {
-            if ('-' == attribute.charAt(conditionLength)
-                    && attribute.startsWith(condition)) {
-                return true;
-            }
-            return false;
+            return '-' == attribute.charAt(conditionLength)
+                    && attribute.startsWith(condition);
         }
         return attribute.equals(condition);
     }

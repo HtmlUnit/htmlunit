@@ -55,10 +55,10 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "103.0.5060.53";
+    static String CHROME_DRIVER_ = "104.0.5112.79";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "103.0.1264.37";
+    static String EDGE_DRIVER_ = "104.0.1293.54";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
@@ -323,22 +323,11 @@ public class ExternalTest {
             return true;
         }
 
-        if ("org.seleniumhq.selenium".equals(groupId) && (version.startsWith("4."))) {
-            return true;
-        }
-
         if ("commons-codec".equals(groupId)
                 && "commons-codec".equals(artifactId)
                 && "20041127.091804".equals(version)) {
             return true;
         }
-
-        if ("org.seleniumhq.selenium".equals(groupId)
-                && "htmlunit-driver".equals(artifactId)
-                && (version.startsWith("3."))) {
-            return true;
-        }
-
 
         // there is a serious bug
         // https://issues.apache.org/jira/browse/IO-744

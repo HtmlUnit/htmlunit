@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
  *     }
  * }
  * </pre>
+ *
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill

@@ -24,7 +24,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
@@ -60,8 +59,7 @@ public final class DomElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
-            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(2, page.getForms().get(0).getElementsByTagName("input").size());
             assertEquals(2, page.getForms().get(0).getElementsByTagName("INPUT").size());
         }

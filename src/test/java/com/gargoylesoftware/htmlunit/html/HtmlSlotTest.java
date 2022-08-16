@@ -51,7 +51,7 @@ public class HtmlSlotTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             if ("[object HTMLSlotElement]".equals(getExpectedAlerts()[0])) {
                 assertTrue(HtmlSlot.class.isInstance(page.getElementById("myId")));
             }

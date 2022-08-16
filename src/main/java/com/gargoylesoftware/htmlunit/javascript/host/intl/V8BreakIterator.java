@@ -34,8 +34,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * A JavaScript object for {@code V8BreakIterator}.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-@JsxClass({CHROME, EDGE})
+@JsxClass(value = {CHROME, EDGE}, className = "v8BreakIterator")
 public class V8BreakIterator extends HtmlUnitScriptable {
 
     private transient BreakIterator breakIterator_;
@@ -164,7 +165,7 @@ public class V8BreakIterator extends HtmlUnitScriptable {
                 if (token.matches(".*[a-zA-Z]+.*")) {
                     return "letter";
                 }
-                if (token.matches("[0-9]+")) {
+                if (token.matches("\\d+")) {
                     return "number";
                 }
             }

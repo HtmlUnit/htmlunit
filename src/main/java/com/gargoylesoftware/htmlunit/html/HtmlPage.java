@@ -104,6 +104,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.SerializableLock;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -164,7 +165,7 @@ public class HtmlPage extends SgmlPage {
 
     private HTMLParserDOMBuilder domBuilder_;
     private transient Charset originalCharset_;
-    private transient Object lock_ = new Object(); // used for synchronization
+    private final Object lock_ = new SerializableLock(); // used for synchronization
 
     private Map<String, SortedSet<DomElement>> idMap_
             = Collections.synchronizedMap(new HashMap<>());
@@ -187,10 +188,14 @@ public class HtmlPage extends SgmlPage {
 
     private transient ComputedStylesCache computedStylesCache_;
 
-    private static final List<String> TABBABLE_TAGS = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
-            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME, HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME);
-    private static final List<String> ACCEPTABLE_TAG_NAMES = Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
-            HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME, HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME);
+    private static final HashSet<String> TABBABLE_TAGS =
+            new HashSet<String>(Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+                    HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlObject.TAG_NAME,
+                    HtmlSelect.TAG_NAME, HtmlTextArea.TAG_NAME));
+    private static final HashSet<String> ACCEPTABLE_TAG_NAMES =
+            new HashSet<String>(Arrays.asList(HtmlAnchor.TAG_NAME, HtmlArea.TAG_NAME,
+                    HtmlButton.TAG_NAME, HtmlInput.TAG_NAME, HtmlLabel.TAG_NAME,
+                    HtmlLegend.TAG_NAME, HtmlTextArea.TAG_NAME));
 
     /** Definition of special cases for the smart DomHtmlAttributeChangeListenerImpl */
     private static final Set<String> ATTRIBUTES_AFFECTING_PARENT = new HashSet<>(Arrays.asList(
@@ -2626,8 +2631,6 @@ public class HtmlPage extends SgmlPage {
         if (charsetName != null) {
             originalCharset_ = Charset.forName(charsetName);
         }
-
-        lock_ = new Object();
     }
 
     /**
@@ -2692,10 +2695,7 @@ public class HtmlPage extends SgmlPage {
     public CSS2Properties getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
         final CSS2Properties styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
-        if (styleFromCache != null) {
-            return styleFromCache;
-        }
-        return null;
+        return styleFromCache;
     }
 
     /**

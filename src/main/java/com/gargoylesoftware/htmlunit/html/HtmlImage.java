@@ -937,7 +937,7 @@ public class HtmlImage extends HtmlElement {
     public ScriptResult fireEvent(final Event event) {
         if (event instanceof MouseEvent) {
             final MouseEvent mouseEvent = (MouseEvent) event;
-            final HTMLElement scriptableObject = (HTMLElement) getScriptableObject();
+            final HTMLElement scriptableObject = getScriptableObject();
             if (lastClickX_ >= 0) {
                 mouseEvent.setClientX(scriptableObject.getPosX() + lastClickX_);
             }

@@ -33,8 +33,8 @@ public final class HeaderUtils {
     private static final String CACHE_CONTROL_NO_CACHE = "no-cache";
     private static final String CACHE_CONTROL_MAX_AGE = "max-age";
     private static final String CACHE_CONTROL_S_MAXAGE = "s-maxage";
-    private static final Pattern MAX_AGE_HEADER_PATTERN = Pattern.compile("^.*max-age=([\\d]+).*$");
-    private static final Pattern S_MAXAGE_HEADER_PATTERN = Pattern.compile("^.*s-maxage=([\\d]+).*$");
+    private static final Pattern MAX_AGE_HEADER_PATTERN = Pattern.compile("^.*max-age=(\\d+).*$");
+    private static final Pattern S_MAXAGE_HEADER_PATTERN = Pattern.compile("^.*s-maxage=(\\d+).*$");
 
     private HeaderUtils() {
         // utility class

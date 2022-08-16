@@ -36,7 +36,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -275,8 +274,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final WebWindow webWindow = getWebWindowOf((HtmlUnitDriver) driver);
-            final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals("BackCompat".equals(getExpectedAlerts()[0]), page.isQuirksMode());
         }
     }
@@ -2526,7 +2524,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPageWithAlerts2(html);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2549,7 +2547,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST.toString() + "details/abc");
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2572,7 +2570,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final URL url = new URL(URL_FIRST.toString() + "?x=y&z=zz");
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }
@@ -2595,7 +2593,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPageWithAlerts2(html, url);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
         }
     }

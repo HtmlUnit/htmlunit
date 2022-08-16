@@ -43,12 +43,7 @@ public class Handler extends URLStreamHandler {
         try {
             return new DataURLConnection(url);
         }
-        catch (final UnsupportedEncodingException e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception decoding " + url, e);
-            }
-        }
-        catch (final DecoderException e) {
+        catch (final UnsupportedEncodingException | DecoderException e) {
             if (LOG.isErrorEnabled()) {
                 LOG.error("Exception decoding " + url, e);
             }

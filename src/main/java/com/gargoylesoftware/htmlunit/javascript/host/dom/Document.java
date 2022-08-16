@@ -47,12 +47,10 @@ import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -260,7 +258,7 @@ public class Document extends Node {
 
     static {
         // commands
-        List<String> cmds = Arrays.asList(
+        String[] cmds = {
             "2D-Position", "AbsolutePosition",
             "BlockDirLTR", "BlockDirRTL", "BrowseMode",
             "ClearAuthenticationCache", "CreateBookmark", "Copy", "Cut",
@@ -277,12 +275,12 @@ public class Document extends Node {
             "SizeToControl", "SizeToControlHeight", "SizeToControlWidth", "Stop", "StopImage",
             "UnBookmark",
             "Paste"
-        );
+        };
         for (final String cmd : cmds) {
             EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
         }
 
-        cmds = Arrays.asList(
+        cmds = new String[] {
             "BackColor", "BackgroundImageCache" /* Undocumented */,
             "Bold",
             "CreateLink", "Delete",
@@ -296,7 +294,7 @@ public class Document extends Node {
             "Redo", "RemoveFormat",
             "SelectAll", "StrikeThrough", "Subscript", "Superscript",
             "Underline", "Undo", "Unlink", "Unselect"
-        );
+        };
         for (final String cmd : cmds) {
             EXECUTE_CMDS_IE.add(cmd.toLowerCase(Locale.ROOT));
             if (!"Bold".equals(cmd)) {
@@ -304,7 +302,7 @@ public class Document extends Node {
             }
         }
 
-        cmds = Arrays.asList(
+        cmds = new String[] {
             "backColor", "bold", "contentReadOnly", "copy", "createLink", "cut", "decreaseFontSize", "delete",
             "fontName", "fontSize", "foreColor", "formatBlock", "heading", "hiliteColor", "increaseFontSize",
             "indent", "insertHorizontalRule", "insertHTML", "insertImage", "insertOrderedList", "insertUnorderedList",
@@ -312,7 +310,7 @@ public class Document extends Node {
             "justifyCenter", "JustifyFull", "justifyLeft", "justifyRight", "outdent", "paste", "redo",
             "removeFormat", "selectAll", "strikeThrough", "subscript", "superscript", "underline", "undo", "unlink",
             "useCSS", "styleWithCSS"
-        );
+        };
         for (final String cmd : cmds) {
             EXECUTE_CMDS_FF.add(cmd.toLowerCase(Locale.ROOT));
             if (!"bold".equals(cmd)) {

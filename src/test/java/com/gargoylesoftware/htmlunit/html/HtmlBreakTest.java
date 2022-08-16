@@ -52,7 +52,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertTrue(HtmlBreak.class.isInstance(page.getHtmlElementById("myId")));
         }
     }
@@ -69,7 +69,7 @@ public class HtmlBreakTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals("Hello\nworld", page.getBody().asNormalizedText());
         }
     }

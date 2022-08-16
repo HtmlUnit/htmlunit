@@ -118,16 +118,16 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public void add(final String token) {
         if (StringUtils.isEmpty(token)) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
         if (StringUtils.containsAny(token, whitespaceChars())) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
 
         String value = getDefaultValue(null);
         boolean changed = false;
         if (position(value, token) < 0) {
-            if (value.length() != 0 && !isWhitespache(value.charAt(value.length() - 1))) {
+            if (value.length() != 0 && !isWhitespace(value.charAt(value.length() - 1))) {
                 value = value + " ";
             }
             value = value + token;
@@ -150,10 +150,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
     @JsxFunction
     public void remove(final String token) {
         if (StringUtils.isEmpty(token)) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
         if (StringUtils.containsAny(token, whitespaceChars())) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
 
         String value = getDefaultValue(null);
@@ -163,10 +163,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
             int from = pos;
             int to = pos + token.length();
 
-            while (from > 0 && isWhitespache(value.charAt(from - 1))) {
+            while (from > 0 && isWhitespace(value.charAt(from - 1))) {
                 from = from - 1;
             }
-            while (to < value.length() - 1 && isWhitespache(value.charAt(to))) {
+            while (to < value.length() - 1 && isWhitespace(value.charAt(to))) {
                 to = to + 1;
             }
 
@@ -222,10 +222,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         if (StringUtils.isEmpty(token)) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
         if (StringUtils.containsAny(token, whitespaceChars())) {
-            throw Context.reportRuntimeError("Empty imput not allowed");
+            throw Context.reportRuntimeError("Empty input not allowed");
         }
         return position(getDefaultValue(null), token) > -1;
     }
@@ -277,13 +277,13 @@ public class DOMTokenList extends HtmlUnitScriptable {
         }
 
         // whitespace before
-        if (pos != 0 && !isWhitespache(value.charAt(pos - 1))) {
+        if (pos != 0 && !isWhitespace(value.charAt(pos - 1))) {
             return -1;
         }
 
         // whitespace after
         final int end = pos + token.length();
-        if (end != value.length() && !isWhitespache(value.charAt(end))) {
+        if (end != value.length() && !isWhitespace(value.charAt(end))) {
             return -1;
         }
         return pos;
@@ -296,7 +296,7 @@ public class DOMTokenList extends HtmlUnitScriptable {
         return WHITESPACE_CHARS;
     }
 
-    private boolean isWhitespache(final int ch) {
+    private boolean isWhitespace(final int ch) {
         return whitespaceChars().indexOf(ch) > -1;
     }
 }

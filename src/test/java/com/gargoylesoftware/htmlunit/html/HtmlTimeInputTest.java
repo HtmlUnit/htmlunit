@@ -143,7 +143,6 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "ex: ",
-            FF = "no ex: ",
             FF_ESR = "no ex: ")
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='time' id='p' disabled='disabled'/></body></html>";
@@ -233,7 +232,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], text);
 
         if (driver instanceof HtmlUnitDriver) {
-            final HtmlPage page = (HtmlPage) getWebWindowOf((HtmlUnitDriver) driver).getEnclosedPage();
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
     }
