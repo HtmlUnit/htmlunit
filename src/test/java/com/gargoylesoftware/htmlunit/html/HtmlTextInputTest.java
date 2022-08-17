@@ -795,7 +795,6 @@ public class HtmlTextInputTest extends WebDriverTestCase {
         validation("<input type='text' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value='  \t'>\n", "", null);
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
