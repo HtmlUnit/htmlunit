@@ -18,6 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
 public class HostTypeOfTest extends WebDriverTestCase {
@@ -957,7 +960,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
+     * Test {@link CSSStyleRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -969,7 +972,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet}.
+     * Test {@link CSSStyleSheet}.
      *
      * @throws Exception if an error occurs
      */

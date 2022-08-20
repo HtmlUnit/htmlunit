@@ -20,6 +20,19 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.MediaList;
+import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.AlertsStandards;
@@ -1131,7 +1144,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     * Test {@link ComputedCSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -1307,7 +1320,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     * Test {@link CSS2Properties}.
      *
      * @throws Exception if an error occurs
      */
@@ -1355,7 +1368,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule}.
+     * Test {@link CSSFontFaceRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -1382,7 +1395,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule}.
+     * Test {@link CSSImportRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -1431,7 +1444,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule}.
+     * Test {@link CSSMediaRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -1458,7 +1471,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSPageRule}.
+     * Test {@link CSSPageRule}.
      *
      * @throws Exception if the test fails
      */
@@ -1484,7 +1497,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule}.
+     * Test {@link CSSRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -1499,7 +1512,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList}.
+     * Test {@link CSSRuleList}.
      *
      * @throws Exception if an error occurs
      */
@@ -1513,7 +1526,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     * Test {@link CSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -1527,7 +1540,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
+     * Test {@link CSSStyleRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -1545,7 +1558,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet}.
+     * Test {@link CSSStyleSheet}.
      *
      * @throws Exception if an error occurs
      */
@@ -5461,7 +5474,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.MediaList}.
+     * Test {@link MediaList}.
      *
      * @throws Exception if an error occurs
      */
@@ -6249,8 +6262,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -6272,8 +6283,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
-     *
      * @throws Exception if an error occurs
      */
     @Test
@@ -8493,7 +8502,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList}.
+     * Test {@link StyleSheetList}.
      *
      * @throws Exception if an error occurs
      */
