@@ -169,4 +169,12 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public Element getElementOrNull() {
         return domElement_.getScriptableObject();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getDomElementOrNull() {
+        return domElement_;
+    }
 }

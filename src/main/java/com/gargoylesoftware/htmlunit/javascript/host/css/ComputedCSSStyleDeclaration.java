@@ -359,7 +359,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     private String defaultIfEmpty(final String str, final StyleAttributes.Definition definition,
             final boolean isPixel) {
-        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+        if (!getDomElement().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
             return EMPTY_FINAL;
         }
@@ -378,7 +378,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the string, or {@code toReturnIfEmptyOrDefault}
      */
     String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
-        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+        if (!getDomElement().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
             return EMPTY_FINAL;
         }
@@ -569,7 +569,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     public String getDisplay() {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
-        final DomElement domElem = getElement().getDomNodeOrDie();
+        final DomElement domElem = getDomElement();
         if (!domElem.isAttachedToPage()) {
             final BrowserVersion browserVersion = getBrowserVersion();
             if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
@@ -592,7 +592,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     @Override
     public String getFont() {
         if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY)
-                && getElement().getDomNodeOrDie().isAttachedToPage()) {
+                && getDomElement().isAttachedToPage()) {
             return super.getFont();
         }
         return "";
@@ -968,7 +968,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's width in pixels, possibly including its padding and border
      */
     public int getCalculatedWidth(final boolean includeBorder, final boolean includePadding) {
-        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
+        if (!getDomElement().isAttachedToPage()) {
             return 0;
         }
         int width = getCalculatedWidth();
@@ -976,8 +976,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (includeBorder) {
                 width += getBorderHorizontal();
             }
-            else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)
-                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+            else if (isScrollable(true, true) && !(getElement() instanceof HTMLBodyElement)) {
                 width -= 17;
             }
 
@@ -1138,7 +1137,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's height, possibly including its padding and border
      */
     public int getCalculatedHeight(final boolean includeBorder, final boolean includePadding) {
-        if (!getElement().getDomNodeOrNull().isAttachedToPage()) {
+        if (!getDomElement().isAttachedToPage()) {
             return 0;
         }
         int height = getCalculatedHeight();
@@ -1146,8 +1145,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             if (includeBorder) {
                 height += getBorderVertical();
             }
-            else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)
-                    && getElement().getDomNodeOrDie().isAttachedToPage()) {
+            else if (isScrollable(false, true) && !(getElement() instanceof HTMLBodyElement)) {
                 height -= 17;
             }
 
@@ -1200,7 +1198,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height2_.intValue();
         }
 
-        final DomNode node = getElement().getDomNodeOrDie();
+        final DomNode node = getDomElement();
         if (!node.mayBeDisplayed()) {
             height2_ = Integer.valueOf(0);
             return 0;
@@ -1362,7 +1360,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         //  - elements with position:static or position:relative (elements that flow and build on each other)
         //  - elements with position:absolute (independent elements)
 
-        final DomNode node = getElement().getDomNodeOrDie();
+        final DomNode node = getDomElement();
         if (!node.mayBeDisplayed()) {
             return 0;
         }
@@ -1446,7 +1444,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else {
                 // Calculate the vertical displacement caused by *previous* siblings.
-                DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
+                DomNode prev = getDomElement().getPreviousSibling();
                 boolean prevHadComputedTop = false;
                 while (prev != null && !prevHadComputedTop) {
                     if (prev instanceof HtmlElement) {
@@ -1531,7 +1529,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // This is very rough, and doesn't even take position or display types into account.
             // It also doesn't take into account the fact that the parent's height may be hardcoded in CSS.
             int top = 0;
-            DomNode child = getElement().getDomNodeOrDie().getParentNode().getFirstChild();
+            DomNode child = getDomElement().getParentNode().getFirstChild();
             while (child != null) {
                 if (child instanceof HtmlElement && child.mayBeDisplayed()) {
                     top += 20;
@@ -1603,7 +1601,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         else if (STATIC.equals(p)) {
             // We need to calculate the horizontal displacement caused by *previous* siblings.
             left = 0;
-            DomNode prev = getElement().getDomNodeOrDie().getPreviousSibling();
+            DomNode prev = getDomElement().getPreviousSibling();
             while (prev != null) {
                 final Scriptable prevScriptable = prev.getScriptableObject();
                 if (prevScriptable instanceof HTMLElement) {
@@ -1885,7 +1883,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getStyleAttribute(final Definition style, final boolean getDefaultValueIfEmpty) {
-        if (!getElement().getDomNodeOrDie().isAttachedToPage()
+        if (!getDomElement().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
             return EMPTY_FINAL;
         }

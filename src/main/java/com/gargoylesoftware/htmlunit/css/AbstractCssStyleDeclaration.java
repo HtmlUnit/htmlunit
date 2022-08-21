@@ -22,6 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
@@ -133,6 +134,11 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the element to which this style belongs
      */
     public abstract Element getElementOrNull();
+
+    /**
+     * @return the dom element to which this style belongs
+     */
+    public abstract DomElement getDomElementOrNull();
 
     protected String getStyleAttribute(final Definition name, final String value) {
         final String[] values = StringUtils.split(value);

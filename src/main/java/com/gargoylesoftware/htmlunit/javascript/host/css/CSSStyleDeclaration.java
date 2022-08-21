@@ -120,6 +120,7 @@ import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -306,6 +307,16 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     protected Element getElement() {
         if (styleDeclaration_ != null) {
             return styleDeclaration_.getElementOrNull();
+        }
+        return null;
+    }
+
+    /**
+     * @return the dom element to which this style belongs
+     */
+    protected DomElement getDomElement() {
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getDomElementOrNull();
         }
         return null;
     }
@@ -594,7 +605,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 if (isComputed) {
                     try {
                         value = value.substring(5, value.length() - 2);
-                        return "url(\"" + getElement().getDomNodeOrDie().getHtmlPageOrNull()
+                        return "url(\"" + getDomElement().getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + "\")";
                     }
                     catch (final Exception e) {
@@ -2991,11 +3002,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     public String toString() {
-        if (styleDeclaration_ != null || getElement() == null) {
+        if (styleDeclaration_ != null || getDomElement() == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
 
-        final String style = getElement().getDomNodeOrDie().getAttributeDirect("style");
+        final String style = getDomElement().getAttributeDirect("style");
         return "CSSStyleDeclaration for '" + style + "'";
     }
 

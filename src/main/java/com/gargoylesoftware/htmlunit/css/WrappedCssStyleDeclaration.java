@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
@@ -165,4 +166,13 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public Element getElementOrNull() {
         return null;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DomElement getDomElementOrNull() {
+        return null;
+    }
+
 }
