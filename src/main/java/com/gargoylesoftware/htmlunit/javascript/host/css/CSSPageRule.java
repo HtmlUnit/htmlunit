@@ -29,7 +29,6 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -99,9 +98,7 @@ public class CSSPageRule extends CSSRule {
      */
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        final WrappedCssStyleDeclaration cssStyleDeclaration =
-                new WrappedCssStyleDeclaration(getPageRule().getStyle());
-        return new CSSStyleDeclaration(getParentScope(), cssStyleDeclaration);
+        return new CSSStyleDeclaration(getParentScope(), getPageRule().getStyle());
     }
 
     /**

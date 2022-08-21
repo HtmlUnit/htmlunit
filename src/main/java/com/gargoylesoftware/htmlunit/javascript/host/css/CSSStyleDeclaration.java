@@ -113,10 +113,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebAssert;
-import com.gargoylesoftware.htmlunit.css.CssStyleDeclaration;
-import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
@@ -221,7 +220,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     /** The element to which this style belongs. */
     private Element jsElement_;
 
-    private CssStyleDeclaration cssStyleDeclaration_;
+    /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
+    private CSSStyleDeclarationImpl styleDeclaration_;
 
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
@@ -264,23 +264,31 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param element the element to which this style is bound
      */
     public CSSStyleDeclaration(final Element element) {
-        this(element.getParentScope(), new ElementCssStyleDeclaration(element.getDomNodeOrDie()));
-
-        // Initialize.
-        WebAssert.notNull("htmlElement", element);
-        jsElement_ = element;
-        setDomNode(element.getDomNodeOrNull(), false);
+        setParentScope(element.getParentScope());
+        setPrototype(getPrototype(getClass()));
+        initialize(element);
     }
 
     /**
      * Creates an instance which wraps the specified style declaration.
      * @param parentScope the parent scope to use
-     * @param cssStyleDeclaration the style declaration to wrap
+     * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final CssStyleDeclaration cssStyleDeclaration) {
+    CSSStyleDeclaration(final Scriptable parentScope, final CSSStyleDeclarationImpl styleDeclaration) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
-        cssStyleDeclaration_ = cssStyleDeclaration;
+        styleDeclaration_ = styleDeclaration;
+    }
+
+    /**
+     * Initializes the object.
+     * @param element the element that this style describes
+     */
+    private void initialize(final Element element) {
+        // Initialize.
+        WebAssert.notNull("htmlElement", element);
+        jsElement_ = element;
+        setDomNode(element.getDomNodeOrNull(), false);
     }
 
     /**
@@ -315,7 +323,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStylePriority(final String name) {
-        return cssStyleDeclaration_.getStylePriority(name);
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getPropertyPriority(name);
+        }
+        final StyleElement element = getStyleElement(name);
+        if (element != null && element.getValue() != null) {
+            return element.getPriority();
+        }
+        return "";
     }
 
     /**
@@ -325,7 +340,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     protected StyleElement getStyleElement(final String name) {
-        return cssStyleDeclaration_.getStyleElement(name);
+        if (jsElement_ == null) {
+            return null;
+        }
+        return jsElement_.getDomNodeOrDie().getStyleElement(name);
     }
 
     /**
@@ -336,7 +354,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
-        return cssStyleDeclaration_.getStyleElementCaseInSensitive(name);
+        if (jsElement_ == null) {
+            return null;
+        }
+        return jsElement_.getDomNodeOrDie().getStyleElementCaseInSensitive(name);
     }
 
     /**
@@ -359,7 +380,79 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the value of one of the two named style attributes
      */
     private String getStyleAttribute(final Definition name1, final Definition name2) {
-        return cssStyleDeclaration_.getStyleAttribute(name1, name2);
+        final String value;
+        if (styleDeclaration_ == null) {
+            final StyleElement element1 = getStyleElement(name1.getAttributeName());
+            final StyleElement element2 = getStyleElement(name2.getAttributeName());
+
+            if (element2 == null) {
+                if (element1 == null) {
+                    return "";
+                }
+                return element1.getValue();
+            }
+            if (element1 != null) {
+                if (element1.compareTo(element2) > 0) {
+                    return element1.getValue();
+                }
+            }
+            value = element2.getValue();
+        }
+        else {
+            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
+            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
+
+            if ("".equals(value1) && "".equals(value2)) {
+                return "";
+            }
+            if (!"".equals(value1) && "".equals(value2)) {
+                return value1;
+            }
+            value = value2;
+        }
+
+        final String[] values = StringUtils.split(value);
+        if (name1.name().contains("TOP")) {
+            if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (name1.name().contains("RIGHT")) {
+            if (values.length > 1) {
+                return values[1];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (name1.name().contains("BOTTOM")) {
+            if (values.length > 2) {
+                return values[2];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (name1.name().contains("LEFT")) {
+            if (values.length > 3) {
+                return values[3];
+            }
+            else if (values.length > 1) {
+                return values[1];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            else {
+                return "";
+            }
+        }
+        else {
+            throw new IllegalStateException("Unsupported definition: " + name1);
+        }
     }
 
     /**
@@ -381,8 +474,12 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (null == newValue || "null".equals(newValue)) {
             newValue = "";
         }
+        if (styleDeclaration_ != null) {
+            styleDeclaration_.setProperty(name, newValue, important);
+            return;
+        }
 
-        cssStyleDeclaration_.setStyleAttribute(name, newValue, important);
+        jsElement_.getDomNodeOrDie().replaceStyleAttribute(name, newValue, important);
     }
 
     /**
@@ -390,7 +487,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
-        return cssStyleDeclaration_.removeStyleAttribute(name);
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.removeProperty(name);
+        }
+
+        return jsElement_.getDomNodeOrDie().removeStyleAttribute(name);
     }
 
     /**
@@ -1087,7 +1188,14 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getCssText() {
-        return cssStyleDeclaration_.getCssText();
+        if (styleDeclaration_ != null) {
+            final String text = styleDeclaration_.getCssText();
+            if (styleDeclaration_.getLength() > 0) {
+                return text + ";";
+            }
+            return text;
+        }
+        return jsElement_.getDomNodeOrDie().getAttributeDirect("style");
     }
 
     /**
@@ -1101,7 +1209,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             fixedValue = "";
         }
 
-        cssStyleDeclaration_.setCssText(fixedValue);
+        if (styleDeclaration_ != null) {
+            styleDeclaration_.setCssText(fixedValue);
+            return;
+        }
+        jsElement_.getDomNodeOrDie().setAttribute("style", fixedValue);
     }
 
     /**
@@ -1275,7 +1387,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        return cssStyleDeclaration_.getLength();
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().size();
+        }
+
+        return getStyleMap().size();
     }
 
     /**
@@ -1285,7 +1401,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        return cssStyleDeclaration_.item(index);
+        if (null != styleDeclaration_) {
+            return styleDeclaration_.getProperties().get(index);
+        }
+
+        return getStyleMap().get(index);
     }
 
     /**
@@ -1536,7 +1656,22 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the value
      */
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
-        return cssStyleDeclaration_.getStyleAttribute(definition.getAttributeName());
+        return getStyleAttributeImpl(definition.getAttributeName());
+    }
+
+    private String getStyleAttributeImpl(final String string) {
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getPropertyValue(string);
+        }
+        final StyleElement element = getStyleElement(string);
+        if (element != null && element.getValue() != null) {
+            final String value = element.getValue();
+            if (!value.contains("url")) {
+                return value.toLowerCase(Locale.ROOT);
+            }
+            return value;
+        }
+        return "";
     }
 
     @Override
@@ -1817,9 +1952,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public CSSRule getParentRule() {
-        final AbstractCSSRuleImpl parentRule = cssStyleDeclaration_.getParentRule();
-        if (parentRule != null) {
-            return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
+        if (null != styleDeclaration_ && getParentScope() instanceof CSSStyleSheet) {
+            final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
+            if (parentRule != null) {
+                return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);
+            }
         }
         return null;
     }
@@ -2435,8 +2572,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 return (String) value;
             }
         }
-
-        return cssStyleDeclaration_.getStyleAttribute(name);
+        return getStyleAttributeImpl(name);
     }
 
     /**
