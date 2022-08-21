@@ -26,6 +26,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
+import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
@@ -101,7 +102,9 @@ public class CSSStyleRule extends CSSRule {
      */
     @JsxGetter
     public CSSStyleDeclaration getStyle() {
-        return new CSSStyleDeclaration(getParentScope(), ((CSSStyleRuleImpl) getRule()).getStyle());
+        final WrappedCssStyleDeclaration cssStyleDeclaration =
+                new WrappedCssStyleDeclaration(((CSSStyleRuleImpl) getRule()).getStyle());
+        return new CSSStyleDeclaration(getParentScope(), cssStyleDeclaration);
     }
 
     /**
