@@ -40,7 +40,7 @@
         <spotbugs.version>4.7.1</spotbugs.version>
         <pmd.version>6.48.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
-        <dependencycheck.version>7.1.1</dependencycheck.version>
+        <dependencycheck.version>7.1.2</dependencycheck.version>
     </properties>
 
     <build>
@@ -711,7 +711,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1347,7 +1347,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.8.2</version>
+            <version>3.8.3</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
