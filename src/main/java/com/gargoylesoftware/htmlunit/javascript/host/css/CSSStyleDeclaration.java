@@ -113,12 +113,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebAssert;
+import com.gargoylesoftware.htmlunit.css.AbstractCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
+import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -217,11 +218,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();
 
-    /** The element to which this style belongs. */
-    private Element jsElement_;
-
-    /** The wrapped CSSStyleDeclaration (if created from CSSStyleRule). */
-    private CSSStyleDeclarationImpl styleDeclaration_;
+    /** The wrapped CSSStyleDeclaration */
+    private AbstractCssStyleDeclaration styleDeclaration_;
 
     static {
         CSSColors_.put("aqua", "rgb(0, 255, 255)");
@@ -266,7 +264,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     public CSSStyleDeclaration(final Element element) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
-        initialize(element);
+
+        setDomNode(element.getDomNodeOrNull(), false);
+
+        styleDeclaration_ = new ElementCssStyleDeclaration(element.getDomNodeOrDie());
     }
 
     /**
@@ -274,21 +275,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param parentScope the parent scope to use
      * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final CSSStyleDeclarationImpl styleDeclaration) {
+    CSSStyleDeclaration(final Scriptable parentScope, final WrappedCssStyleDeclaration styleDeclaration) {
         setParentScope(parentScope);
         setPrototype(getPrototype(getClass()));
         styleDeclaration_ = styleDeclaration;
-    }
-
-    /**
-     * Initializes the object.
-     * @param element the element that this style describes
-     */
-    private void initialize(final Element element) {
-        // Initialize.
-        WebAssert.notNull("htmlElement", element);
-        jsElement_ = element;
-        setDomNode(element.getDomNodeOrNull(), false);
     }
 
     /**
@@ -298,7 +288,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     protected Object getWithPreemption(final String name) {
-        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER) && null != jsElement_) {
+        if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)
+                && styleDeclaration_ instanceof ElementCssStyleDeclaration) {
             final StyleElement element = getStyleElement(name);
             if (element != null && element.getValue() != null) {
                 return element.getValue();
@@ -313,7 +304,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the element to which this style belongs
      */
     protected Element getElement() {
-        return jsElement_;
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getElementOrNull();
+        }
+        return null;
     }
 
     /**
@@ -323,14 +317,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStylePriority(final String name) {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getPropertyPriority(name);
-        }
-        final StyleElement element = getStyleElement(name);
-        if (element != null && element.getValue() != null) {
-            return element.getPriority();
-        }
-        return "";
+        return styleDeclaration_.getStylePriority(name);
     }
 
     /**
@@ -340,10 +327,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     protected StyleElement getStyleElement(final String name) {
-        if (jsElement_ == null) {
-            return null;
-        }
-        return jsElement_.getDomNodeOrDie().getStyleElement(name);
+        return styleDeclaration_.getStyleElement(name);
     }
 
     /**
@@ -354,10 +338,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
-        if (jsElement_ == null) {
-            return null;
-        }
-        return jsElement_.getDomNodeOrDie().getStyleElementCaseInSensitive(name);
+        return styleDeclaration_.getStyleElementCaseInSensitive(name);
     }
 
     /**
@@ -381,7 +362,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     private String getStyleAttribute(final Definition name1, final Definition name2) {
         final String value;
-        if (styleDeclaration_ == null) {
+        if (styleDeclaration_ instanceof ElementCssStyleDeclaration) {
             final StyleElement element1 = getStyleElement(name1.getAttributeName());
             final StyleElement element2 = getStyleElement(name2.getAttributeName());
 
@@ -399,8 +380,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             value = element2.getValue();
         }
         else {
-            final String value1 = styleDeclaration_.getPropertyValue(name1.getAttributeName());
-            final String value2 = styleDeclaration_.getPropertyValue(name2.getAttributeName());
+            final String value1 = styleDeclaration_.getStyleAttribute(name1.getAttributeName());
+            final String value2 = styleDeclaration_.getStyleAttribute(name2.getAttributeName());
 
             if ("".equals(value1) && "".equals(value2)) {
                 return "";
@@ -474,12 +455,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (null == newValue || "null".equals(newValue)) {
             newValue = "";
         }
-        if (styleDeclaration_ != null) {
-            styleDeclaration_.setProperty(name, newValue, important);
-            return;
-        }
 
-        jsElement_.getDomNodeOrDie().replaceStyleAttribute(name, newValue, important);
+        styleDeclaration_.setStyleAttribute(name, newValue, important);
     }
 
     /**
@@ -487,11 +464,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
-        if (null != styleDeclaration_) {
-            return styleDeclaration_.removeProperty(name);
-        }
-
-        return jsElement_.getDomNodeOrDie().removeStyleAttribute(name);
+        return styleDeclaration_.removeStyleAttribute(name);
     }
 
     /**
@@ -501,10 +474,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return a sorted map containing style elements, keyed on style element name
      */
     private Map<String, StyleElement> getStyleMap() {
-        if (jsElement_ == null) {
-            return Collections.emptyMap();
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getStyleMap();
         }
-        return jsElement_.getDomNodeOrDie().getStyleMap();
+        return Collections.emptyMap();
     }
 
     /**
@@ -621,7 +594,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 if (isComputed) {
                     try {
                         value = value.substring(5, value.length() - 2);
-                        return "url(\"" + jsElement_.getDomNodeOrDie().getHtmlPageOrNull()
+                        return "url(\"" + getElement().getDomNodeOrDie().getHtmlPageOrNull()
                             .getFullyQualifiedUrl(value) + "\")";
                     }
                     catch (final Exception e) {
@@ -1188,14 +1161,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getCssText() {
-        if (styleDeclaration_ != null) {
-            final String text = styleDeclaration_.getCssText();
-            if (styleDeclaration_.getLength() > 0) {
-                return text + ";";
-            }
-            return text;
-        }
-        return jsElement_.getDomNodeOrDie().getAttributeDirect("style");
+        return styleDeclaration_.getCssText();
     }
 
     /**
@@ -1209,11 +1175,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             fixedValue = "";
         }
 
-        if (styleDeclaration_ != null) {
-            styleDeclaration_.setCssText(fixedValue);
-            return;
-        }
-        jsElement_.getDomNodeOrDie().setAttribute("style", fixedValue);
+        styleDeclaration_.setCssText(fixedValue);
     }
 
     /**
@@ -1387,11 +1349,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        if (null != styleDeclaration_) {
-            return styleDeclaration_.getProperties().size();
-        }
-
-        return getStyleMap().size();
+        return styleDeclaration_.getLength();
     }
 
     /**
@@ -1401,11 +1359,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
-        if (null != styleDeclaration_) {
-            return styleDeclaration_.getProperties().get(index);
-        }
-
-        return getStyleMap().get(index);
+        return styleDeclaration_.item(index);
     }
 
     /**
@@ -1660,8 +1614,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     private String getStyleAttributeImpl(final String string) {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getPropertyValue(string);
+        if (styleDeclaration_ instanceof WrappedCssStyleDeclaration) {
+            return styleDeclaration_.getStyleAttribute(string);
         }
         final StyleElement element = getStyleElement(string);
         if (element != null && element.getValue() != null) {
@@ -3037,10 +2991,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @Override
     public String toString() {
-        if (jsElement_ == null) {
+        if (styleDeclaration_ != null || getElement() == null) {
             return "CSSStyleDeclaration for 'null'"; // for instance on prototype
         }
-        final String style = jsElement_.getDomNodeOrDie().getAttributeDirect("style");
+
+        final String style = getElement().getDomNodeOrDie().getAttributeDirect("style");
         return "CSSStyleDeclaration for '" + style + "'";
     }
 
