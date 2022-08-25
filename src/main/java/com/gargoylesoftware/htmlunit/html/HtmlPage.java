@@ -95,7 +95,7 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -2692,9 +2692,9 @@ public class HtmlPage extends SgmlPage {
      * @param normalizedPseudo the pseudo attribute
      * @return the cached CSS2Properties object or null
      */
-    public CSS2Properties getStyleFromCache(final DomElement element,
+    public ComputedCSSStyleDeclaration getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
-        final CSS2Properties styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
+        final ComputedCSSStyleDeclaration styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
         return styleFromCache;
     }
 
@@ -2706,7 +2706,8 @@ public class HtmlPage extends SgmlPage {
      * @param normalizedPseudo the pseudo attribute
      * @param style the CSS2Properties to cache
      */
-    public void putStyleIntoCache(final DomElement element, final String normalizedPseudo, final CSS2Properties style) {
+    public void putStyleIntoCache(final DomElement element, final String normalizedPseudo,
+            final ComputedCSSStyleDeclaration style) {
         getCssPropertiesCache().put(element, normalizedPseudo, style);
     }
 
@@ -2830,14 +2831,15 @@ public class HtmlPage extends SgmlPage {
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
     private static final class ComputedStylesCache implements Serializable {
-        private transient WeakHashMap<DomElement, Map<String, CSS2Properties>> computedStyles_ = new WeakHashMap<>();
+        private transient WeakHashMap<DomElement, Map<String, ComputedCSSStyleDeclaration>>
+                    computedStyles_ = new WeakHashMap<>();
 
         ComputedStylesCache() {
         }
 
-        public synchronized CSS2Properties get(final DomElement element,
+        public synchronized ComputedCSSStyleDeclaration get(final DomElement element,
                 final String normalizedPseudo) {
-            final Map<String, CSS2Properties> elementMap = computedStyles_.get(element);
+            final Map<String, ComputedCSSStyleDeclaration> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
                 return elementMap.get(normalizedPseudo);
             }
@@ -2845,17 +2847,17 @@ public class HtmlPage extends SgmlPage {
         }
 
         public synchronized void put(final DomElement element,
-                final String normalizedPseudo, final CSS2Properties style) {
-            final Map<String, CSS2Properties>
+                final String normalizedPseudo, final ComputedCSSStyleDeclaration style) {
+            final Map<String, ComputedCSSStyleDeclaration>
                     elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
             elementMap.put(normalizedPseudo, style);
         }
 
         public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
-            final Iterator<Map.Entry<DomElement, Map<String, CSS2Properties>>>
+            final Iterator<Map.Entry<DomElement, Map<String, ComputedCSSStyleDeclaration>>>
                     i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
-                final Map.Entry<DomElement, Map<String, CSS2Properties>> entry = i.next();
+                final Map.Entry<DomElement, Map<String, ComputedCSSStyleDeclaration>> entry = i.next();
                 final DomElement node = entry.getKey();
                 if (changed == node
                     || changed.getParentNode() == node.getParentNode()
@@ -2898,7 +2900,7 @@ public class HtmlPage extends SgmlPage {
             computedStyles_.clear();
         }
 
-        public synchronized Map<String, CSS2Properties> remove(
+        public synchronized Map<String, ComputedCSSStyleDeclaration> remove(
                 final DomNode element) {
             return computedStyles_.remove(element);
         }

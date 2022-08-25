@@ -18,7 +18,7 @@ import java.io.Serializable;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * An interface that represents one window in a browser. It could be a top level window or a frame.
@@ -197,5 +197,5 @@ public interface WebWindow extends Serializable {
      * e.g. ':before'
      * @return the computed style
      */
-    CSS2Properties getComputedStyle(DomElement element, String pseudoElement);
+    ComputedCSSStyleDeclaration getComputedStyle(DomElement element, String pseudoElement);
 }

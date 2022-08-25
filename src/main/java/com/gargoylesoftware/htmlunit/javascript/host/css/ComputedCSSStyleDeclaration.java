@@ -134,6 +134,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
+import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.Text;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -163,7 +164,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * @author Frank Danek
  * @author Alex Gorbatovsky
  */
-@JsxClass(isJSObject = false, value = {FF, FF_ESR})
+@JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
     /** Denotes a value which should be returned as is. */
@@ -252,6 +253,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     /**
      * Creates an instance.
      */
+    @JsxConstructor
     public ComputedCSSStyleDeclaration() {
     }
 

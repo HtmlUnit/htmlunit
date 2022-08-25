@@ -89,7 +89,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaQueryList;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleMedia;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
@@ -1636,7 +1636,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @return the computed style
      */
     @JsxFunction
-    public CSS2Properties getComputedStyle(final Object element, final String pseudoElement) {
+    public ComputedCSSStyleDeclaration getComputedStyle(final Object element, final String pseudoElement) {
         if (!(element instanceof Element)) {
             throw ScriptRuntime.typeError("parameter 1 is not of type 'Element'");
         }

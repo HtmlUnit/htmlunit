@@ -36,8 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
@@ -381,7 +381,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public CSS2Properties getComputedStyle(final DomElement element, final String pseudoElement) {
+    public ComputedCSSStyleDeclaration getComputedStyle(final DomElement element, final String pseudoElement) {
         String normalizedPseudo = pseudoElement;
         if (normalizedPseudo != null) {
             if (normalizedPseudo.startsWith("::")) {
@@ -395,14 +395,15 @@ public abstract class WebWindowImpl implements WebWindow {
 
         final SgmlPage sgmlPage = element.getPage();
         if (sgmlPage instanceof HtmlPage) {
-            final CSS2Properties styleFromCache = ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
+            final ComputedCSSStyleDeclaration styleFromCache =
+                    ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
             if (styleFromCache != null) {
                 return styleFromCache;
             }
         }
 
         final Element e = element.getScriptableObject();
-        final CSS2Properties style = new CSS2Properties(e);
+        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e);
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();

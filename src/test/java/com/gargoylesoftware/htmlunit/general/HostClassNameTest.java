@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule;
