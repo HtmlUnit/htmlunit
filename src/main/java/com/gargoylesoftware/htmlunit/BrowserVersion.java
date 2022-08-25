@@ -89,7 +89,7 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(103, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(104, "FF");
 
     private static final int FIREFOX_ESR_NUMERIC = 91;
 
@@ -120,7 +120,6 @@ public final class BrowserVersion implements Serializable {
 
     /** Register plugins for the browser versions. */
     static {
-        // FF68
         FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
                                     + FIREFOX_ESR.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
@@ -155,7 +154,6 @@ public final class BrowserVersion implements Serializable {
             120, 122, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 137, 138, 139,
             140, 141, 143, 143, 144, 145, 146, 148};
 
-        // FF
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
         FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0) Gecko/20100101 Firefox/"
@@ -168,8 +166,8 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.ACCEPT_ENCODING,
-            HttpHeader.CONNECTION,
             HttpHeader.REFERER,
+            HttpHeader.CONNECTION,
             HttpHeader.COOKIE,
             HttpHeader.UPGRADE_INSECURE_REQUESTS,
             HttpHeader.SEC_FETCH_DEST,
@@ -191,7 +189,6 @@ public final class BrowserVersion implements Serializable {
             120, 122, 122, 123, 124, 126, 127, 128, 129, 130, 132, 132, 133, 134, 137, 138, 139,
             140, 141, 143, 143, 144, 145, 146, 148};
 
-        // IE
         INTERNET_EXPLORER.applicationVersion_ = "5.0 (Windows NT 10.0; WOW64; Trident/7.0; Zoom 3.6.0; rv:"
                                                     + INTERNET_EXPLORER.getBrowserVersionNumeric() + ".0) like Gecko";
         INTERNET_EXPLORER.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; Zoom 3.6.0; rv:11.0) like Gecko";

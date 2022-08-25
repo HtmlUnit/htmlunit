@@ -7,6 +7,9 @@
     </properties>
 
     <body>
+        <release version="2.65.0" date="xxxx, 2022" description="Firefox 104">
+        </release>
+
         <release version="2.64.0" date="August 18, 2022" description="Chrome/Edge 104, Firefox 103, client side validation">
             <action type="update" dev="rbri">
                 CSS pseudo selector :invalid improvements.
