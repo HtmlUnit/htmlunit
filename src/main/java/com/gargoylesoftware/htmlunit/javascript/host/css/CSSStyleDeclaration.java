@@ -305,20 +305,20 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the element to which this style belongs
      */
     protected Element getElement() {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getElementOrNull();
+        if (styleDeclaration_ == null) {
+            return null;
         }
-        return null;
+        return styleDeclaration_.getElementOrNull();
     }
 
     /**
      * @return the dom element to which this style belongs
      */
     protected DomElement getDomElement() {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getDomElementOrNull();
+        if (styleDeclaration_ == null) {
+            return null;
         }
-        return null;
+        return styleDeclaration_.getDomElementOrNull();
     }
 
     /**
@@ -328,6 +328,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the named style attribute value, or an empty string if it is not found
      */
     protected String getStylePriority(final String name) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.getStylePriority(name);
     }
 
@@ -338,6 +341,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     protected StyleElement getStyleElement(final String name) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.getStyleElement(name);
     }
 
@@ -349,6 +355,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the StyleElement or null if not found
      */
     private StyleElement getStyleElementCaseInSensitive(final String name) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.getStyleElementCaseInSensitive(name);
     }
 
@@ -475,6 +484,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param name the attribute name (delimiter-separated, not camel-cased)
      */
     private String removeStyleAttribute(final String name) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.removeStyleAttribute(name);
     }
 
@@ -485,10 +497,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return a sorted map containing style elements, keyed on style element name
      */
     private Map<String, StyleElement> getStyleMap() {
-        if (styleDeclaration_ != null) {
-            return styleDeclaration_.getStyleMap();
+        if (styleDeclaration_ == null) {
+            return Collections.emptyMap();
         }
-        return Collections.emptyMap();
+        return styleDeclaration_.getStyleMap();
     }
 
     /**
@@ -1172,6 +1184,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getCssText() {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.getCssText();
     }
 
@@ -1360,6 +1375,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
+        if (styleDeclaration_ == null) {
+            return 0;
+        }
         return styleDeclaration_.getLength();
     }
 
@@ -1370,6 +1388,9 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object item(final int index) {
+        if (styleDeclaration_ == null) {
+            return null;
+        }
         return styleDeclaration_.item(index);
     }
 
