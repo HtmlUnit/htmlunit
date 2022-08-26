@@ -17,9 +17,6 @@ package com.gargoylesoftware.htmlunit.css;
 import java.util.Collections;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -42,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  */
 public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
-    private static final Log LOG = LogFactory.getLog(WrappedCssStyleDeclaration.class);
+    // private static final Log LOG = LogFactory.getLog(WrappedCssStyleDeclaration.class);
 
     /** The wrapped CSSStyleDeclaration. */
     private CSSStyleDeclarationImpl cssStyleDeclarationImpl_;
@@ -53,10 +50,6 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     public WrappedCssStyleDeclaration(final CSSStyleDeclarationImpl cssStyleDeclarationImpl) {
         cssStyleDeclarationImpl_ = cssStyleDeclarationImpl;
-    }
-
-    public CSSStyleDeclarationImpl getCSSStyleDeclarationImpl() {
-        return cssStyleDeclarationImpl_;
     }
 
     /**

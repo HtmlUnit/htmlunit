@@ -253,7 +253,7 @@ public class History2Test extends WebDriverTestCase {
 
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
-        final long waitTime = 2 * DEFAULT_WAIT_TIME;
+        final long waitTime = 4 * DEFAULT_WAIT_TIME;
         if (expectedAlerts.length != 0) {
             driver.findElement(By.id("myId")).click();
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
