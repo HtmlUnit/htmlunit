@@ -136,8 +136,10 @@ e.g.
                     String content = response.getContentAsString();
 
                     // intercept and/or change content
+                    ....
 
-                    WebResponseData data = new WebResponseData(content.getBytes(),
+                    // construct replacement response
+                    WebResponseData data = new WebResponseData(content.getBytes(response.getContentCharset()),
                             response.getStatusCode(), response.getStatusMessage(), response.getResponseHeaders());
                     response = new WebResponse(data, request, response.getLoadTime());
                 }
