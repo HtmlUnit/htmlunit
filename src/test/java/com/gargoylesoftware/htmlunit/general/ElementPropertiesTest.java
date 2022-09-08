@@ -3034,6 +3034,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             CHROME = "blocking,disabled,media,sheet,type",
             EDGE = "blocking,disabled,media,sheet,type",
             IE = "media,sheet,type")
+    @HtmlUnitNYI(
+            CHROME = "disabled,media,sheet,type",
+            EDGE = "disabled,media,sheet,type")
     public void style() throws Exception {
         test("style");
     }
@@ -6643,7 +6646,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "boxShadow,boxSizing,breakAfter,breakBefore,breakInside,bufferedRendering,captionSide,caretColor,"
                 + "clear,clip,clipPath,clipRule,color,colorInterpolation,colorInterpolationFilters,colorRendering,"
                 + "colorScheme,columnCount,columnFill,columnGap,columnRule,columnRuleColor,columnRuleStyle,"
-                + "columnRuleWidth,columns,columnSpan,columnWidth,contain,containIntrinsicBlockSize,"
+                + "columnRuleWidth,columns,columnSpan,columnWidth,contain,"
+                + "container,containerName,containerType,"
+                + "containIntrinsicBlockSize,"
                 + "containIntrinsicHeight,containIntrinsicInlineSize,containIntrinsicSize,containIntrinsicWidth,"
                 + "content,contentVisibility,counterIncrement,counterReset,counterSet,cssFloat,cssText,cursor,cx,cy,"
                 + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,fill,fillOpacity,"
@@ -6750,7 +6755,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "boxShadow,boxSizing,breakAfter,breakBefore,breakInside,bufferedRendering,captionSide,caretColor,"
                 + "clear,clip,clipPath,clipRule,color,colorInterpolation,colorInterpolationFilters,colorRendering,"
                 + "colorScheme,columnCount,columnFill,columnGap,columnRule,columnRuleColor,columnRuleStyle,"
-                + "columnRuleWidth,columns,columnSpan,columnWidth,contain,containIntrinsicBlockSize,"
+                + "columnRuleWidth,columns,columnSpan,columnWidth,contain,"
+                + "container,containerName,containerType,containIntrinsicBlockSize,"
                 + "containIntrinsicHeight,containIntrinsicInlineSize,containIntrinsicSize,containIntrinsicWidth,"
                 + "content,contentVisibility,counterIncrement,counterReset,counterSet,cssFloat,cssText,cursor,cx,cy,"
                 + "d,descentOverride,direction,display,dominantBaseline,emptyCells,fallback,fill,fillOpacity,"

@@ -8863,7 +8863,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),disabled,media,sheet,type",
             FF_ESR = "constructor(),disabled,media,sheet,type",
             IE = "constructor,media,sheet,type")
-    @HtmlUnitNYI(IE = "constructor,disabled,media,sheet,type")
+    @HtmlUnitNYI(
+            CHROME = "constructor(),disabled,media,sheet,type",
+            EDGE = "constructor(),disabled,media,sheet,type",
+            IE = "constructor,disabled,media,sheet,type")
     public void style() throws Exception {
         test("style");
     }
