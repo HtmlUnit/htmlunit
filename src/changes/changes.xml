@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.65.0" date="xxxx, 2022" description="Firefox 104">
+        <release version="2.65.0" date="xxxx, 2022" description="Chrome/Edge 105, Firefox 104">
             <action type="fix" dev="rbri">
                 A bug in one faq sample code that might result in wrong encoding is fixed.
             </action>

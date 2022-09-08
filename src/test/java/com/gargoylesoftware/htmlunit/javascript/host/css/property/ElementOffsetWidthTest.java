@@ -822,9 +822,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "25",
-            CHROME = "19",
-            EDGE = "19")
+    @Alerts(DEFAULT = "25")
     @HtmlUnitNYI(CHROME = "0",
             EDGE = "0",
             FF = "0",

@@ -165,15 +165,17 @@ final class TestCaseCorrector {
     }
 
     private static String getActualString(final ComparisonFailure failure) {
+        final int lineLength = 96;
+
         String actual = failure.getActual();
-        actual = actual.substring(1, actual.length() - 1);
+        actual = actual.substring(0, actual.length() - 1);
         actual = StringEscapeUtils.escapeJava(actual);
-        if (actual.length() > 96) {
+        if (actual.length() > lineLength) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {
-                int length = actual.lastIndexOf(',', 96) + 1;
+                int length = actual.lastIndexOf(',', lineLength) + 1;
                 if (length == 0 && !actual.isEmpty()) {
-                    length = Math.min(96, actual.length());
+                    length = Math.min(lineLength, actual.length());
                 }
                 if (builder.length() != 0) {
                     builder.append(System.lineSeparator()).append("                + ");

@@ -58,7 +58,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     /** jQuery selectors that aren't CSS selectors. */
     static final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
         "*#__sizzle__ div.submenu-last:last", "div:animated", "div:animated", "*:button", "*:checkbox", "div:even",
-        "*:file", "div:first", "td:gt(4)", "div:has(p)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
+        "*:file", "div:first", "td:gt(4)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
         ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
     };
 

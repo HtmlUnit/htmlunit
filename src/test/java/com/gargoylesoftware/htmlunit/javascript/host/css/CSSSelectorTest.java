@@ -1834,6 +1834,35 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLHeadingElement]"},
+            FF = "exception",
+            FF_ESR = "exception",
+            IE = "exception")
+    public void has() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var list = document.querySelectorAll('h1:has(p)');\n"
+            + "    log(list.length);\n"
+            + "    log(list[0]);\n"
+            + "  } catch(e) {log('exception')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "<h1>abc</h1>\n"
+            + "<h1><p>de</p></h1>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"first", "second"})
     public void escapedAttributeValue() throws Exception {
         final String html = "<html><head>\n"

@@ -1339,7 +1339,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "try {\n"
             + "  document.getElementById('it').querySelector('" + selector + "');\n"
-            + "  log('working');\n"
+            + "  log('working " + selector + "');\n"
             + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>";
 
