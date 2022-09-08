@@ -940,10 +940,10 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code container}. */
         CONTAINER("container", "container", chromeAndEdgeNone()),
 
-        /** The style property {@code container-name}. */
+        /** The style property {@code containerName}. */
         CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone()),
 
-        /** The style property {@code container-type}. */
+        /** The style property {@code containerType}. */
         CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal()),
 
         /** The style property {@code content}. */

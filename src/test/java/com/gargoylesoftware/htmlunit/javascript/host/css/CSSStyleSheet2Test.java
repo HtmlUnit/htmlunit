@@ -237,7 +237,7 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         final NodeList list = htmlPage.getElementsByTagName("body");
         final HtmlElement element = (HtmlElement) list.item(0);
         final ComputedCSSStyleDeclaration style = ((HTMLElement) element.getScriptableObject()).getCurrentStyle();
-        assertEquals("CSSStyleDeclaration for ''", style.toString());
+        assertEquals("CSSStyleDeclaration for 'null'", style.toString());
     }
 
 }

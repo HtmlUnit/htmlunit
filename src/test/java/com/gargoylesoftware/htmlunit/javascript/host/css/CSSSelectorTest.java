@@ -1838,6 +1838,8 @@ public class CSSSelectorTest extends WebDriverTestCase {
             FF = "exception",
             FF_ESR = "exception",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception")
     public void has() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
