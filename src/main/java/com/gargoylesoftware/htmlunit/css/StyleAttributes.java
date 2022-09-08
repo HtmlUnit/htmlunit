@@ -937,6 +937,15 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code containIntrinsicWidth}. */
         CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdgeNone()),
 
+        /** The style property {@code container}. */
+        CONTAINER("container", "container", chromeAndEdgeNone()),
+
+        /** The style property {@code container-name}. */
+        CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone()),
+
+        /** The style property {@code container-type}. */
+        CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal()),
+
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdgeNormal(), ffNormal()),
 
