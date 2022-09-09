@@ -115,6 +115,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.AbstractCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
@@ -292,7 +293,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     @Override
     protected Object getWithPreemption(final String name) {
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)
-                && styleDeclaration_ instanceof ElementCssStyleDeclaration) {
+                && (styleDeclaration_ instanceof ElementCssStyleDeclaration
+                        || styleDeclaration_ instanceof ComputedCssStyleDeclaration)) {
             final StyleElement element = getStyleElement(name);
             if (element != null && element.getValue() != null) {
                 return element.getValue();
@@ -384,7 +386,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     private String getStyleAttribute(final Definition name1, final Definition name2) {
         final String value;
-        if (styleDeclaration_ instanceof ElementCssStyleDeclaration) {
+        if (styleDeclaration_ instanceof ElementCssStyleDeclaration
+                || styleDeclaration_ instanceof ComputedCssStyleDeclaration) {
             final StyleElement element1 = getStyleElement(name1.getAttributeName());
             final StyleElement element2 = getStyleElement(name2.getAttributeName());
 
