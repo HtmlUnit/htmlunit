@@ -473,11 +473,6 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     }
 
     @Override
-    public boolean hasBadInputValidityState() {
-        return false;
-    }
-
-    @Override
     public boolean isCustomErrorValidityState() {
         if (hasFeature(JS_HTML_OBJECT_VALIDITYSTATE_ISVALID_IGNORES_CUSTOM_ERROR)) {
             return false;
@@ -487,48 +482,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
     }
 
     @Override
-    public boolean hasPatternMismatchValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean isStepMismatchValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean isTooLongValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean isTooShortValidityState() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public boolean hasTypeMismatchValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean hasRangeOverflowValidityState() {
-        return false;
-    }
-
-    @Override
-    public boolean hasRangeUnderflowValidityState() {
-        return false;
-    }
-
-    @Override
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState();
-    }
-
-    @Override
-    public boolean isValueMissingValidityState() {
-        return false;
     }
 }

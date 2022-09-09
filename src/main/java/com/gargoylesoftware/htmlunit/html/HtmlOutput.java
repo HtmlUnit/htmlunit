@@ -83,84 +83,12 @@ public class HtmlOutput extends HtmlElement implements LabelableElement, Validat
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBadInputValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isCustomErrorValidityState() {
         return !StringUtils.isEmpty(customValidity_);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasPatternMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isStepMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isTooLongValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isTooShortValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasTypeMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasRangeOverflowValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasRangeUnderflowValidityState() {
-        return false;
     }
 
     @Override
     public boolean isValidValidityState() {
         return !isCustomErrorValidityState();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isValueMissingValidityState() {
-        return false;
     }
 }
