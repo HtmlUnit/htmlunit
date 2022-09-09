@@ -33,6 +33,7 @@ import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -134,26 +135,32 @@ public class CssStyleSheet implements Serializable {
     /**
      * Set of CSS2 pseudo class names.
      */
-    public static final Set<String> CSS2_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "link", "visited", "hover", "active",
-            "focus", "lang", "first-child"));
+    public static final Set<String> CSS2_PSEUDO_CLASSES;
 
-    private static final Set<String> CSS3_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
-            "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
-            "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
-            "optional", "required", "valid", "invalid"));
+    private static final Set<String> CSS3_PSEUDO_CLASSES;
 
     /**
      * Set of CSS4 pseudo class names.
      */
-    public static final Set<String> CSS4_PSEUDO_CLASSES = new HashSet<>(Arrays.asList(
-            // only what is supported at the moment
-            "focus-within", "focus-visible"));
+    public static final Set<String> CSS4_PSEUDO_CLASSES;
 
     static {
-        CSS3_PSEUDO_CLASSES.addAll(CSS2_PSEUDO_CLASSES);
-        CSS4_PSEUDO_CLASSES.addAll(CSS3_PSEUDO_CLASSES);
+        CSS2_PSEUDO_CLASSES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
+                "link", "visited", "hover", "active", "focus", "lang", "first-child")));
+
+        final Set<String> css3 = new HashSet<>(Arrays.asList(
+                "checked", "disabled", "enabled", "indeterminated", "root", "target", "not()",
+                "nth-child()", "nth-last-child()", "nth-of-type()", "nth-last-of-type()",
+                "last-child", "first-of-type", "last-of-type", "only-child", "only-of-type", "empty",
+                "optional", "required", "valid", "invalid"));
+        css3.addAll(CSS2_PSEUDO_CLASSES);
+        CSS3_PSEUDO_CLASSES = Collections.unmodifiableSet(css3);
+
+        final Set<String> css4 = new HashSet<>(Arrays.asList(
+                // only what is supported at the moment
+                "focus-within", "focus-visible"));
+        css4.addAll(CSS3_PSEUDO_CLASSES);
+        CSS4_PSEUDO_CLASSES = Collections.unmodifiableSet(css4);
     }
 
     /**
