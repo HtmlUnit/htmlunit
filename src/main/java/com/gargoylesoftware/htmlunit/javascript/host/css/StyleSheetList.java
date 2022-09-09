@@ -27,6 +27,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -85,9 +86,11 @@ public class StyleSheetList extends HtmlUnitScriptable {
                 if (StringUtils.isBlank(media)) {
                     return true;
                 }
-                final WebClient webClient = getWindow().getWebWindow().getWebClient();
-                final MediaListImpl mediaList = CSSStyleSheet.parseMedia(webClient.getCssErrorHandler(), media);
-                return CSSStyleSheet.isActive(this, mediaList);
+
+                final WebWindow webWindow = getWindow().getWebWindow();
+                final MediaListImpl mediaList =
+                        CSSStyleSheet.parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
+                return CSSStyleSheet.isActive(mediaList, webWindow);
             }
         }
         return false;
