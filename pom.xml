@@ -37,8 +37,8 @@
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
-        <spotbugs.version>4.7.1</spotbugs.version>
-        <pmd.version>6.48.0</pmd.version>
+        <spotbugs.version>4.7.2</spotbugs.version>
+        <pmd.version>6.49.0</pmd.version>
         <archunit.version>0.23.1</archunit.version>
         <dependencycheck.version>7.1.2</dependencycheck.version>
     </properties>
@@ -75,7 +75,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.1.1</version>
+                <version>4.7.2.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
@@ -90,7 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.17.0</version>
+                <version>3.19.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>net.sourceforge.pmd</groupId>
