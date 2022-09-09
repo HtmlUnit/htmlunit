@@ -261,14 +261,15 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     /**
      * Creates an instance and sets its parent scope to the one of the provided element.
      * @param element the element to which this style is bound
+     * @param styleDeclaration the style declaration to be based on
      */
-    public CSSStyleDeclaration(final Element element) {
+    public CSSStyleDeclaration(final Element element, final AbstractCssStyleDeclaration styleDeclaration) {
         setParentScope(element.getParentScope());
         setPrototype(getPrototype(getClass()));
 
         setDomNode(element.getDomNodeOrNull(), false);
 
-        styleDeclaration_ = new ElementCssStyleDeclaration(element.getDomNodeOrDie());
+        styleDeclaration_ = styleDeclaration;
     }
 
     /**
@@ -276,9 +277,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @param parentScope the parent scope to use
      * @param styleDeclaration the style declaration to wrap
      */
-    CSSStyleDeclaration(final Scriptable parentScope, final WrappedCssStyleDeclaration styleDeclaration) {
-        setParentScope(parentScope);
+    CSSStyleDeclaration(final CSSStyleSheet parentStyleSheet, final WrappedCssStyleDeclaration styleDeclaration) {
+        setParentScope(parentStyleSheet);
         setPrototype(getPrototype(getClass()));
+
         styleDeclaration_ = styleDeclaration;
     }
 
@@ -1938,7 +1940,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public CSSRule getParentRule() {
-        if (null != styleDeclaration_ && getParentScope() instanceof CSSStyleSheet) {
+        if (null != styleDeclaration_) {
             final AbstractCSSRuleImpl parentRule = styleDeclaration_.getParentRule();
             if (parentRule != null) {
                 return CSSRule.create((CSSStyleSheet) getParentScope(), parentRule);

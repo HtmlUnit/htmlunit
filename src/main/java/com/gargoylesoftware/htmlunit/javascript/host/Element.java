@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
 import com.gargoylesoftware.htmlunit.html.DomComment;
@@ -130,7 +131,7 @@ public class Element extends Node {
 
         setParentScope(getWindow().getDocument());
         // CSSStyleDeclaration uses the parent scope
-        style_ = new CSSStyleDeclaration(this);
+        style_ = new CSSStyleDeclaration(this, new ElementCssStyleDeclaration(getDomNodeOrDie()));
 
         // Convert JavaScript snippets defined in the attribute map to executable event handlers.
         //Should be called only on construction.

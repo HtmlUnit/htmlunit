@@ -104,7 +104,7 @@ public class CSSStyleRule extends CSSRule {
     public CSSStyleDeclaration getStyle() {
         final WrappedCssStyleDeclaration styleDeclaration
                 = new WrappedCssStyleDeclaration(((CSSStyleRuleImpl) getRule()).getStyle());
-        return new CSSStyleDeclaration(getParentScope(), styleDeclaration);
+        return new CSSStyleDeclaration(getParentStyleSheet(), styleDeclaration);
     }
 
     /**
