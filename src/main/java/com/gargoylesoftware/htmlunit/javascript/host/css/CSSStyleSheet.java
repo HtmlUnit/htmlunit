@@ -30,9 +30,7 @@ import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,9 +40,7 @@ import org.w3c.dom.DOMException;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
-import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
@@ -104,14 +100,6 @@ public class CSSStyleSheet extends StyleSheet {
     /** The collection of rules defined in this style sheet. */
     private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
     private List<Integer> cssRulesIndexFix_;
-
-    /** The CSS import rules and their corresponding stylesheets. */
-    private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
-
-    /** cache parsed media strings */
-    private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
-
-    private boolean enabled_ = true;
 
     /**
      * Creates a new empty stylesheet.
@@ -208,38 +196,6 @@ public class CSSStyleSheet extends StyleSheet {
             selectors = new SelectorListImpl();
         }
         return selectors;
-    }
-
-    /**
-     * Parses the given media string. If anything at all goes wrong, this
-     * method returns an empty MediaList list.
-     *
-     * @param source the source from which to retrieve the media to be parsed
-     * @return the media parsed from the specified input source
-     */
-    static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
-        MediaListImpl media = media_.get(mediaString);
-        if (media != null) {
-            return media;
-        }
-
-        try {
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-
-            media = new MediaListImpl(parser.parseMedia(mediaString));
-            media_.put(mediaString, media);
-            return media;
-        }
-        catch (final Exception e) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS media from '" + mediaString + "': " + e.getMessage(), e);
-            }
-        }
-
-        media = new MediaListImpl(null);
-        media_.put(mediaString, media);
-        return media;
     }
 
     /**
@@ -463,22 +419,6 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public String getUri() {
         return getCssStyleSheet().getUri();
-    }
-
-    /**
-     * Returns {@code true} if this stylesheet is enabled.
-     * @return {@code true} if this stylesheet is enabled
-     */
-    public boolean isEnabled() {
-        return enabled_;
-    }
-
-    /**
-     * Sets whether this sheet is enabled or not.
-     * @param enabled enabled or not
-     */
-    public void setEnabled(final boolean enabled) {
-        enabled_ = enabled;
     }
 
     /**

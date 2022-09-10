@@ -73,7 +73,7 @@ public class MediaQueryList extends EventTarget {
     public boolean isMatches() {
         final WebWindow webWindow = getWindow().getWebWindow();
         final CSSErrorHandler errorHandler = webWindow.getWebClient().getCssErrorHandler();
-        final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media_);
+        final MediaListImpl mediaList = CssStyleSheet.parseMedia(errorHandler, media_);
         return CssStyleSheet.isActive(mediaList, webWindow);
     }
 

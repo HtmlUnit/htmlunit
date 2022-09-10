@@ -29,6 +29,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -403,23 +405,28 @@ public abstract class WebWindowImpl implements WebWindow {
         }
 
         final Element e = element.getScriptableObject();
-        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e);
+        final ComputedCssStyleDeclaration computedsStyleDeclaration =
+                new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element));
+
+        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e, computedsStyleDeclaration);
+
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
             final boolean trace = LOG.isTraceEnabled();
             for (int i = 0; i < sheets.getLength(); i++) {
                 final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-                if (sheet.getCssStyleSheet().isActive() && sheet.isEnabled()) {
+                if (sheet.getCssStyleSheet().isActive() && sheet.getCssStyleSheet().isEnabled()) {
                     if (trace) {
-                        LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
+                        LOG.trace("modifyIfNecessary: " + sheet + ", " + computedsStyleDeclaration + ", " + e);
                     }
-                    sheet.getCssStyleSheet().modifyIfNecessary(style, element, normalizedPseudo);
+                    sheet.getCssStyleSheet().modifyIfNecessary(computedsStyleDeclaration, element, normalizedPseudo);
                 }
             }
 
             ((HtmlPage) element.getPage()).putStyleIntoCache(element, normalizedPseudo, style);
         }
+
         return style;
     }
 }

@@ -104,7 +104,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
@@ -148,7 +147,7 @@ public class CssStyleSheet implements Serializable {
     /** This stylesheet's URI (used to resolved contained @import rules). */
     private final String uri_;
 
-    private final boolean enabled_ = true;
+    private boolean enabled_ = true;
 
     /**
      * Set of CSS2 pseudo class names.
@@ -247,6 +246,22 @@ public class CssStyleSheet implements Serializable {
      */
     public String getUri() {
         return uri_;
+    }
+
+    /**
+     * Returns {@code true} if this stylesheet is enabled.
+     * @return {@code true} if this stylesheet is enabled
+     */
+    public boolean isEnabled() {
+        return enabled_;
+    }
+
+    /**
+     * Sets whether this sheet is enabled or not.
+     * @param enabled enabled or not
+     */
+    public void setEnabled(final boolean enabled) {
+        enabled_ = enabled;
     }
 
     /**
@@ -1017,10 +1032,11 @@ public class CssStyleSheet implements Serializable {
      * Parses the given media string. If anything at all goes wrong, this
      * method returns an empty MediaList list.
      *
-     * @param source the source from which to retrieve the media to be parsed
+     * @param mediaString the source from which to retrieve the media to be parsed
+     * @param errorHandler the {@link CSSErrorHandler} to be used
      * @return the media parsed from the specified input source
      */
-    static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
+    public static MediaListImpl parseMedia(final CSSErrorHandler errorHandler, final String mediaString) {
         MediaListImpl media = media_.get(mediaString);
         if (media != null) {
             return media;
@@ -1474,7 +1490,7 @@ public class CssStyleSheet implements Serializable {
      *        the specified style
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
      */
-    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final DomElement element,
+    public void modifyIfNecessary(final ComputedCssStyleDeclaration style, final DomElement element,
             final String pseudoElement) {
 
         final BrowserVersion browser = element.getPage().getWebClient().getBrowserVersion();

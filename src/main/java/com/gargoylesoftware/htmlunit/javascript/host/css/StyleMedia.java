@@ -61,7 +61,7 @@ public class StyleMedia extends HtmlUnitScriptable {
     public boolean matchMedium(final String media) {
         final WebWindow webWindow = getWindow().getWebWindow();
         final CSSErrorHandler errorHandler = webWindow.getWebClient().getCssErrorHandler();
-        final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
+        final MediaListImpl mediaList = CssStyleSheet.parseMedia(errorHandler, media);
         return CssStyleSheet.isActive(mediaList, webWindow);
     }
 

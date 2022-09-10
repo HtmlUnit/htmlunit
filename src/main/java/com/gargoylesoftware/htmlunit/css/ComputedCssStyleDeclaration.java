@@ -15,8 +15,14 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.Property;
+import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
@@ -33,6 +39,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @author cd alexndr
  */
 public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
+    /**
+     * Local modifications maintained here rather than in the element. We use a sorted
+     * map so that results are deterministic and thus easily testable.
+     */
+    private final SortedMap<String, StyleElement> localModifications_ = new TreeMap<>();
 
     /** The wrapped CSSStyleDeclaration */
     private ElementCssStyleDeclaration elementStyleDeclaration_;
@@ -119,7 +130,34 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public StyleElement getStyleElement(final String name) {
-        return elementStyleDeclaration_.getStyleElement(name);
+        final StyleElement existent = elementStyleDeclaration_.getStyleElement(name);
+
+        if (localModifications_ != null) {
+            final StyleElement localStyleMod = localModifications_.get(name);
+            if (localStyleMod == null) {
+                return existent;
+            }
+
+            if (existent == null) {
+                // Local modifications represent either default style elements or style elements
+                // defined in stylesheets; either way, they shouldn't overwrite any style
+                // elements derived directly from the HTML element's "style" attribute.
+                return localStyleMod;
+            }
+
+            // replace if !IMPORTANT
+            if (StyleElement.PRIORITY_IMPORTANT.equals(localStyleMod.getPriority())) {
+                if (existent.isImportant()) {
+                    if (existent.getSpecificity().compareTo(localStyleMod.getSpecificity()) < 0) {
+                        return localStyleMod;
+                    }
+                }
+                else {
+                    return localStyleMod;
+                }
+            }
+        }
+        return existent;
     }
 
     /**
@@ -152,5 +190,50 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public DomElement getDomElementOrNull() {
         return elementStyleDeclaration_.getDomElementOrNull();
+    }
+    /**
+     * Makes a local, "computed", modification to this CSS style.
+     *
+     * @param declaration the style declaration
+     * @param selector the selector determining that the style applies to this element
+     */
+    public void applyStyleFromSelector(final CSSStyleDeclarationImpl declaration, final Selector selector) {
+        final SelectorSpecificity specificity = selector.getSelectorSpecificity();
+        for (final Property prop : declaration.getProperties()) {
+            final String name = prop.getName();
+            final String value = declaration.getPropertyValue(name);
+            final String priority = declaration.getPropertyPriority(name);
+            applyLocalStyleAttribute(name, value, priority, specificity);
+        }
+    }
+
+    private void applyLocalStyleAttribute(final String name, final String newValue, final String priority,
+            final SelectorSpecificity specificity) {
+        if (!StyleElement.PRIORITY_IMPORTANT.equals(priority)) {
+            final StyleElement existingElement = localModifications_.get(name);
+            if (existingElement != null) {
+                if (existingElement.isImportant()) {
+                    return; // can't override a !important rule by a normal rule. Ignore it!
+                }
+                else if (specificity.compareTo(existingElement.getSpecificity()) < 0) {
+                    return; // can't override a rule with a rule having higher specificity
+                }
+            }
+        }
+        final StyleElement element = new StyleElement(name, newValue, priority, specificity);
+        localModifications_.put(name, element);
+    }
+
+    /**
+     * Makes a local, "computed", modification to this CSS style that won't override other
+     * style attributes of the same name. This method should be used to set default values
+     * for style attributes.
+     *
+     * @param name the name of the style attribute to set
+     * @param newValue the value of the style attribute to set
+     */
+    public void setDefaultLocalStyleAttribute(final String name, final String newValue) {
+        final StyleElement element = new StyleElement(name, newValue, "", SelectorSpecificity.DEFAULT_STYLE_ATTRIBUTE);
+        localModifications_.put(name, element);
     }
 }

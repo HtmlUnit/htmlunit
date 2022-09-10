@@ -89,7 +89,7 @@ public class StyleSheetList extends HtmlUnitScriptable {
                 }
                 final WebWindow webWindow = getWindow().getWebWindow();
                 final MediaListImpl mediaList =
-                        CSSStyleSheet.parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
+                        CssStyleSheet.parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
                 return CssStyleSheet.isActive(mediaList, webWindow);
             }
         }
