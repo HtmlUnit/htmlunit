@@ -91,7 +91,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -112,6 +111,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 public class CSSStyleSheet extends StyleSheet {
 
     private static final Log LOG = LogFactory.getLog(CSSStyleSheet.class);
+
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
 
@@ -126,7 +126,7 @@ public class CSSStyleSheet extends StyleSheet {
     private List<Integer> cssRulesIndexFix_;
 
     /** The CSS import rules and their corresponding stylesheets. */
-    private final Map<CSSImportRuleImpl, CSSStyleSheet> imports_ = new HashMap<>();
+    private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
     /** cache parsed media strings */
     private static final transient Map<String, MediaListImpl> media_ = new HashMap<>();
@@ -220,34 +220,6 @@ public class CSSStyleSheet extends StyleSheet {
         for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
             final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
             style.applyStyleFromSelector(dec, entry.getSelector());
-        }
-    }
-
-    /**
-     * Loads the stylesheet at the specified link or href.
-     * @param element the parent DOM element
-     * @param link the stylesheet's link (may be {@code null} if a <tt>url</tt> is specified)
-     * @param url the stylesheet's url (may be {@code null} if a <tt>link</tt> is specified)
-     * @return the loaded stylesheet
-     */
-    public static CSSStyleSheet loadStylesheet(final HTMLElement element, final HtmlLink link, final String url) {
-        try {
-            final CssStyleSheet css = CssStyleSheet.loadStylesheet(element.getDomNodeOrDie(), link, url);
-            return new CSSStyleSheet(element, element.getWindow(), css);
-        }
-        catch (final RuntimeException e) {
-            // Got something unexpected; we can throw an exception in this case.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("RuntimeException loading " + url, e);
-            }
-            throw Context.reportRuntimeError("Exception: " + e);
-        }
-        catch (final Exception e) {
-            // Got something unexpected; we can throw an exception in this case.
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Exception loading " + url, e);
-            }
-            throw Context.reportRuntimeError("Exception: " + e);
         }
     }
 
@@ -990,10 +962,10 @@ public class CSSStyleSheet extends StyleSheet {
             else if (rule instanceof CSSImportRuleImpl) {
                 final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
 
-                final CSSStyleSheet sheet = getImportedStyleSheet(importRule);
+                final CssStyleSheet sheet = getCssStyleSheet().getImportedStyleSheet(importRule);
 
                 if (!alreadyProcessing.contains(sheet.getUri())) {
-                    final CSSRuleListImpl sheetRuleList = sheet.getCssStyleSheet().getWrappedSheet().getCssRules();
+                    final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
                     alreadyProcessing.add(sheet.getUri());
 
                     final MediaListImpl mediaList = importRule.getMedia();
@@ -1048,16 +1020,5 @@ public class CSSStyleSheet extends StyleSheet {
         }
 
         return matchingRules;
-    }
-
-    public CSSStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
-        CSSStyleSheet sheet = imports_.get(importRule);
-        if (sheet == null) {
-            final String href = importRule.getHref();
-            final String url = UrlUtils.resolveUrl(getUri(), href);
-            sheet = loadStylesheet(ownerNode_, null, url);
-            imports_.put(importRule, sheet);
-        }
-        return sheet;
     }
 }

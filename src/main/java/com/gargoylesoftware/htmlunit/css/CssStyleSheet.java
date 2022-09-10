@@ -92,6 +92,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * A css StyleSheet.
@@ -1164,5 +1165,16 @@ public class CssStyleSheet implements Serializable {
                 }
                 return true;
         }
+    }
+
+    public CssStyleSheet getImportedStyleSheet(final CSSImportRuleImpl importRule) {
+        CssStyleSheet sheet = imports_.get(importRule);
+        if (sheet == null) {
+            final String href = importRule.getHref();
+            final String url = UrlUtils.resolveUrl(getUri(), href);
+            sheet = loadStylesheet(owner_, null, url);
+            imports_.put(importRule, sheet);
+        }
+        return sheet;
     }
 }
