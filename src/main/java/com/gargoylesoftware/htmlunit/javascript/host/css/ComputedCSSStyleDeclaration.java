@@ -51,7 +51,6 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.COLOR
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CSS_FLOAT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CURSOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DIRECTION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DISPLAY;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ELEVATION;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.EMPTY_CELLS;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT;
@@ -116,7 +115,6 @@ import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlButtonInput;
@@ -494,37 +492,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
-        String x = getX();
-        String y = getCssStyleDeclaration().getDisplay();
-
-        if (!x.equals(y)) {
-            x = getX();
-            y = getCssStyleDeclaration().getDisplay();
-
-            throw new RuntimeException();
-        }
-
         return getCssStyleDeclaration().getDisplay();
-    }
-
-    private String getX() {
-        // don't use defaultIfEmpty for performance
-        // (no need to calculate the default if not empty)
-        final DomElement domElem = getDomElement();
-        if (!domElem.isAttachedToPage()) {
-            final BrowserVersion browserVersion = getBrowserVersion();
-            if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-        }
-        final String value = super.getStyleAttribute(DISPLAY, false);
-        if (StringUtils.isEmpty(value)) {
-            if (domElem instanceof HtmlElement) {
-                return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
-            }
-            return "";
-        }
-        return value;
     }
 
     /**
