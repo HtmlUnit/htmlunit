@@ -75,7 +75,6 @@ import com.gargoylesoftware.css.parser.selector.SelectorList;
 import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -558,9 +557,9 @@ public class CSSStyleSheet extends StyleSheet {
             return true;
         }
 
-        final WebClient webClient = getWindow().getWebWindow().getWebClient();
-        final MediaListImpl mediaList = parseMedia(webClient.getCssErrorHandler(), media);
-        return isActive(this, mediaList);
+        final WebWindow webWindow = getWindow().getWebWindow();
+        final MediaListImpl mediaList = parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
+        return isActive(mediaList, webWindow);
     }
 
     /**
@@ -581,18 +580,18 @@ public class CSSStyleSheet extends StyleSheet {
 
     /**
      * Returns whether the specified {@link MediaList} is active or not.
-     * @param scriptable the scriptable
      * @param mediaList the media list
+     * @param webWindow the {@link WebWindow} for some basic data
      * @return whether the specified {@link MediaList} is active or not
      */
-    static boolean isActive(final HtmlUnitScriptable scriptable, final MediaListImpl mediaList) {
+    static boolean isActive(final MediaListImpl mediaList, final WebWindow webWindow) {
         if (mediaList.getLength() == 0) {
             return true;
         }
 
         for (int i = 0; i < mediaList.getLength(); i++) {
             final MediaQuery mediaQuery = mediaList.mediaQuery(i);
-            boolean isActive = isActive(scriptable, mediaQuery);
+            boolean isActive = isActive(mediaQuery, webWindow);
             if (mediaQuery.isNot()) {
                 isActive = !isActive;
             }
@@ -603,64 +602,64 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static boolean isActive(final HtmlUnitScriptable scriptable, final MediaQuery mediaQuery) {
+    private static boolean isActive(final MediaQuery mediaQuery, final WebWindow webWindow) {
         final String mediaType = mediaQuery.getMedia();
         if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
             for (final Property property : mediaQuery.getProperties()) {
                 final double val;
                 switch (property.getName()) {
                     case "max-width":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-width":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-width":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val < scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-width":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val > scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-height":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val < scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-height":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val > scriptable.getWindow().getWebWindow().getInnerWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getInnerWidth()) {
                             return false;
                         }
                         break;
 
                     case "max-device-height":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val < scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getScreen().getWidth()) {
                             return false;
                         }
                         break;
 
                     case "min-device-height":
-                        val = pixelValue(property.getValue(), scriptable);
-                        if (val == -1 || val > scriptable.getWindow().getScreen().getWidth()) {
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getScreen().getWidth()) {
                             return false;
                         }
                         break;
@@ -671,21 +670,21 @@ public class CSSStyleSheet extends StyleSheet {
                         if (propValue == null) {
                             return true;
                         }
-                        if (val == -1 || Math.round(val) != scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (val == -1 || Math.round(val) != webWindow.getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "max-resolution":
                         val = resolutionValue(property.getValue());
-                        if (val == -1 || val < scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (val == -1 || val < webWindow.getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
 
                     case "min-resolution":
                         val = resolutionValue(property.getValue());
-                        if (val == -1 || val > scriptable.getWindow().getScreen().getDeviceXDPI()) {
+                        if (val == -1 || val > webWindow.getScreen().getDeviceXDPI()) {
                             return false;
                         }
                         break;
@@ -700,14 +699,13 @@ public class CSSStyleSheet extends StyleSheet {
                         }
 
                         final String orient = cssValue.getCssText();
-                        final WebWindow window = scriptable.getWindow().getWebWindow();
                         if ("portrait".equals(orient)) {
-                            if (window.getInnerWidth() > window.getInnerHeight()) {
+                            if (webWindow.getInnerWidth() > webWindow.getInnerHeight()) {
                                 return false;
                             }
                         }
                         else if ("landscape".equals(orient)) {
-                            if (window.getInnerWidth() < window.getInnerHeight()) {
+                            if (webWindow.getInnerWidth() < webWindow.getInnerHeight()) {
                                 return false;
                             }
                         }
@@ -728,7 +726,7 @@ public class CSSStyleSheet extends StyleSheet {
         return false;
     }
 
-    private static double pixelValue(final CSSValueImpl cssValue, final HtmlUnitScriptable scriptable) {
+    private static double pixelValue(final CSSValueImpl cssValue, final WebWindow webWindow) {
         if (cssValue == null) {
             if (LOG.isWarnEnabled()) {
                 LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
@@ -772,17 +770,17 @@ public class CSSStyleSheet extends StyleSheet {
                     // hard coded default for the moment 16px = 100%
                     return 0.16f * cssValue.getDoubleValue();
                 case MILLIMETER:
-                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    dpi = webWindow.getScreen().getDeviceXDPI();
                     return (dpi / 25.4f) * cssValue.getDoubleValue();
                 case QUATER:
                     // One quarter of a millimeter. 1Q = 1/40th of 1cm.
-                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    dpi = webWindow.getScreen().getDeviceXDPI();
                     return ((dpi / 25.4f) * cssValue.getDoubleValue()) / 4d;
                 case CENTIMETER:
-                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    dpi = webWindow.getScreen().getDeviceXDPI();
                     return (dpi / 254f) * cssValue.getDoubleValue();
                 case POINT:
-                    dpi = scriptable.getWindow().getScreen().getDeviceXDPI();
+                    dpi = webWindow.getScreen().getDeviceXDPI();
                     return (dpi / 72f) * cssValue.getDoubleValue();
                 default:
                     break;
@@ -1028,7 +1026,7 @@ public class CSSStyleSheet extends StyleSheet {
 
         final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
 
-        if (CSSStyleSheet.isActive(scriptable, index.getMediaList())) {
+        if (CSSStyleSheet.isActive(index.getMediaList(), getWindow().getWebWindow())) {
             final String elementName = element.getLowercaseName();
             final String[] classes = StringUtils.split(element.getAttributeDirect("class"), null, -1);
             final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
