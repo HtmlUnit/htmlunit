@@ -410,11 +410,11 @@ public abstract class WebWindowImpl implements WebWindow {
             final boolean trace = LOG.isTraceEnabled();
             for (int i = 0; i < sheets.getLength(); i++) {
                 final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-                if (sheet.isActive() && sheet.isEnabled()) {
+                if (sheet.getCssStyleSheet().isActive() && sheet.isEnabled()) {
                     if (trace) {
                         LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
                     }
-                    sheet.modifyIfNecessary(style, element, normalizedPseudo);
+                    sheet.getCssStyleSheet().modifyIfNecessary(style, element, normalizedPseudo);
                 }
             }
 

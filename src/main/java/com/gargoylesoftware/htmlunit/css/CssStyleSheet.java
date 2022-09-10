@@ -32,10 +32,12 @@ import java.io.Serializable;
 import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -50,16 +52,27 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
+import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
+import com.gargoylesoftware.css.dom.CSSRuleListImpl;
+import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl;
+import com.gargoylesoftware.css.dom.CSSValueImpl.CSSPrimitiveValueType;
 import com.gargoylesoftware.css.dom.MediaListImpl;
+import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
+import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
+import com.gargoylesoftware.css.parser.media.MediaQuery;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
@@ -77,6 +90,7 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.html.DisabledElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -88,7 +102,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.css.MediaList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.util.EncodingSniffer;
 import com.gargoylesoftware.htmlunit.util.MimeType;
@@ -1176,5 +1193,401 @@ public class CssStyleSheet implements Serializable {
             imports_.put(importRule, sheet);
         }
         return sheet;
+    }
+
+    /**
+     * Returns {@code true} if this stylesheet is active, based on the media types it is associated with (if any).
+     * @return {@code true} if this stylesheet is active, based on the media types it is associated with (if any)
+     */
+    public boolean isActive() {
+        final String media;
+        if (owner_ instanceof HtmlStyle) {
+            final HtmlStyle style = (HtmlStyle) owner_;
+            media = style.getMediaAttribute();
+        }
+        else if (owner_ instanceof HtmlLink) {
+            final HtmlLink link = (HtmlLink) owner_;
+            media = link.getMediaAttribute();
+        }
+        else {
+            return true;
+        }
+
+        if (StringUtils.isBlank(media)) {
+            return true;
+        }
+
+        final WebWindow webWindow = owner_.getPage().getEnclosingWindow();
+        final MediaListImpl mediaList = parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
+        return isActive(mediaList, webWindow);
+    }
+
+    /**
+     * Returns whether the specified {@link MediaList} is active or not.
+     * @param mediaList the media list
+     * @param webWindow the {@link WebWindow} for some basic data
+     * @return whether the specified {@link MediaList} is active or not
+     */
+    public static boolean isActive(final MediaListImpl mediaList, final WebWindow webWindow) {
+        if (mediaList.getLength() == 0) {
+            return true;
+        }
+
+        for (int i = 0; i < mediaList.getLength(); i++) {
+            final MediaQuery mediaQuery = mediaList.mediaQuery(i);
+            boolean isActive = isActive(mediaQuery, webWindow);
+            if (mediaQuery.isNot()) {
+                isActive = !isActive;
+            }
+            if (isActive) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isActive(final MediaQuery mediaQuery, final WebWindow webWindow) {
+        final String mediaType = mediaQuery.getMedia();
+        if ("screen".equalsIgnoreCase(mediaType) || "all".equalsIgnoreCase(mediaType)) {
+            for (final Property property : mediaQuery.getProperties()) {
+                final double val;
+                switch (property.getName()) {
+                    case "max-width":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-width":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-width":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-width":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-height":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-height":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getInnerWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-device-height":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val < webWindow.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-device-height":
+                        val = pixelValue(property.getValue(), webWindow);
+                        if (val == -1 || val > webWindow.getScreen().getWidth()) {
+                            return false;
+                        }
+                        break;
+
+                    case "resolution":
+                        final CSSValueImpl propValue = property.getValue();
+                        val = resolutionValue(propValue);
+                        if (propValue == null) {
+                            return true;
+                        }
+                        if (val == -1 || Math.round(val) != webWindow.getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "max-resolution":
+                        val = resolutionValue(property.getValue());
+                        if (val == -1 || val < webWindow.getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "min-resolution":
+                        val = resolutionValue(property.getValue());
+                        if (val == -1 || val > webWindow.getScreen().getDeviceXDPI()) {
+                            return false;
+                        }
+                        break;
+
+                    case "orientation":
+                        final CSSValueImpl cssValue = property.getValue();
+                        if (cssValue == null) {
+                            if (LOG.isWarnEnabled()) {
+                                LOG.warn("CSSValue is null not supported for feature 'orientation'");
+                            }
+                            return true;
+                        }
+
+                        final String orient = cssValue.getCssText();
+                        if ("portrait".equals(orient)) {
+                            if (webWindow.getInnerWidth() > webWindow.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else if ("landscape".equals(orient)) {
+                            if (webWindow.getInnerWidth() < webWindow.getInnerHeight()) {
+                                return false;
+                            }
+                        }
+                        else {
+                            if (LOG.isWarnEnabled()) {
+                                LOG.warn("CSSValue '" + property.getValue().getCssText()
+                                            + "' not supported for feature 'orientation'.");
+                            }
+                            return false;
+                        }
+                        break;
+
+                    default:
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private static double pixelValue(final CSSValueImpl cssValue, final WebWindow webWindow) {
+        if (cssValue == null) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("CSSValue is null but has to be a 'px', 'em', '%', 'ex', 'ch', "
+                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
+            }
+            return -1;
+        }
+
+        final LexicalUnit.LexicalUnitType luType = cssValue.getLexicalUnitType();
+        if (luType != null) {
+            final int dpi;
+
+            switch (luType) {
+                case PIXEL:
+                    return cssValue.getDoubleValue();
+                case EM:
+                    // hard coded default for the moment 16px = 1 em
+                    return 16f * cssValue.getDoubleValue();
+                case PERCENTAGE:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case EX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case CH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VW:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VH:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VMIN:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case VMAX:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case REM:
+                    // hard coded default for the moment 16px = 100%
+                    return 0.16f * cssValue.getDoubleValue();
+                case MILLIMETER:
+                    dpi = webWindow.getScreen().getDeviceXDPI();
+                    return (dpi / 25.4f) * cssValue.getDoubleValue();
+                case QUATER:
+                    // One quarter of a millimeter. 1Q = 1/40th of 1cm.
+                    dpi = webWindow.getScreen().getDeviceXDPI();
+                    return ((dpi / 25.4f) * cssValue.getDoubleValue()) / 4d;
+                case CENTIMETER:
+                    dpi = webWindow.getScreen().getDeviceXDPI();
+                    return (dpi / 254f) * cssValue.getDoubleValue();
+                case POINT:
+                    dpi = webWindow.getScreen().getDeviceXDPI();
+                    return (dpi / 72f) * cssValue.getDoubleValue();
+                default:
+                    break;
+            }
+        }
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSSValue '" + cssValue.getCssText()
+                        + "' has to be a 'px', 'em', '%', 'ex', 'ch', "
+                        + "'vw', 'vh', 'vmin', 'vmax', 'rem', 'mm', 'cm', 'Q', or 'pt' value.");
+        }
+        return -1;
+    }
+
+    private static double resolutionValue(final CSSValueImpl cssValue) {
+        if (cssValue == null) {
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("CSSValue is null but has to be a 'dpi', 'dpcm', or 'dppx' value.");
+            }
+            return -1;
+        }
+
+        if (cssValue.getPrimitiveType() == CSSPrimitiveValueType.CSS_DIMENSION) {
+            final String text = cssValue.getCssText();
+            if (text.endsWith("dpi")) {
+                return cssValue.getDoubleValue();
+            }
+            if (text.endsWith("dpcm")) {
+                return 2.54f * cssValue.getDoubleValue();
+            }
+            if (text.endsWith("dppx")) {
+                return 96 * cssValue.getDoubleValue();
+            }
+        }
+
+        if (LOG.isWarnEnabled()) {
+            LOG.warn("CSSValue '" + cssValue.getCssText() + "' has to be a 'dpi', 'dpcm', or 'dppx' value.");
+        }
+        return -1;
+    }
+
+    /**
+     * Modifies the specified style object by adding any style rules which apply to the specified
+     * element.
+     *
+     * @param style the style to modify
+     * @param element the element to which style rules must apply in order for them to be added to
+     *        the specified style
+     * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null})
+     */
+    public void modifyIfNecessary(final ComputedCSSStyleDeclaration style, final DomElement element,
+            final String pseudoElement) {
+
+        final BrowserVersion browser = element.getPage().getWebClient().getBrowserVersion();
+        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules =
+                selects(getRuleIndex(), browser, element, pseudoElement, false);
+        for (final CSSStyleSheetImpl.SelectorEntry entry : matchingRules) {
+            final CSSStyleDeclarationImpl dec = entry.getRule().getStyle();
+            style.applyStyleFromSelector(dec, entry.getSelector());
+        }
+    }
+
+    private CSSStyleSheetImpl.CSSStyleSheetRuleIndex getRuleIndex() {
+        final CSSStyleSheetImpl styleSheet = getWrappedSheet();
+        CSSStyleSheetImpl.CSSStyleSheetRuleIndex index = styleSheet.getRuleIndex();
+
+        if (index == null) {
+            index = new CSSStyleSheetImpl.CSSStyleSheetRuleIndex();
+            final CSSRuleListImpl ruleList = styleSheet.getCssRules();
+            index(index, ruleList, new HashSet<>());
+
+            styleSheet.setRuleIndex(index);
+        }
+        return index;
+    }
+
+    private void index(final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index, final CSSRuleListImpl ruleList,
+            final Set<String> alreadyProcessing) {
+
+        for (final AbstractCSSRuleImpl rule : ruleList.getRules()) {
+            if (rule instanceof CSSStyleRuleImpl) {
+                final CSSStyleRuleImpl styleRule = (CSSStyleRuleImpl) rule;
+                final SelectorList selectors = styleRule.getSelectors();
+                for (final Selector selector : selectors) {
+                    final SimpleSelector simpleSel = selector.getSimpleSelector();
+                    if (SelectorType.ELEMENT_NODE_SELECTOR == simpleSel.getSelectorType()) {
+                        final ElementSelector es = (ElementSelector) simpleSel;
+                        boolean wasClass = false;
+                        final List<Condition> conds = es.getConditions();
+                        if (conds != null && conds.size() == 1) {
+                            final Condition c = conds.get(0);
+                            if (ConditionType.CLASS_CONDITION == c.getConditionType()) {
+                                index.addClassSelector(es, c.getValue(), selector, styleRule);
+                                wasClass = true;
+                            }
+                        }
+                        if (!wasClass) {
+                            index.addElementSelector(es, selector, styleRule);
+                        }
+                    }
+                    else {
+                        index.addOtherSelector(selector, styleRule);
+                    }
+                }
+            }
+            else if (rule instanceof CSSImportRuleImpl) {
+                final CSSImportRuleImpl importRule = (CSSImportRuleImpl) rule;
+
+                final CssStyleSheet sheet = getImportedStyleSheet(importRule);
+
+                if (!alreadyProcessing.contains(sheet.getUri())) {
+                    final CSSRuleListImpl sheetRuleList = sheet.getWrappedSheet().getCssRules();
+                    alreadyProcessing.add(sheet.getUri());
+
+                    final MediaListImpl mediaList = importRule.getMedia();
+                    if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                        index(index, sheetRuleList, alreadyProcessing);
+                    }
+                    else {
+                        index(index.addMedia(mediaList), sheetRuleList, alreadyProcessing);
+                    }
+                }
+            }
+            else if (rule instanceof CSSMediaRuleImpl) {
+                final CSSMediaRuleImpl mediaRule = (CSSMediaRuleImpl) rule;
+                final MediaListImpl mediaList = mediaRule.getMediaList();
+                if (mediaList.getLength() == 0 && index.getMediaList().getLength() == 0) {
+                    index(index, mediaRule.getCssRules(), alreadyProcessing);
+                }
+                else {
+                    index(index.addMedia(mediaList), mediaRule.getCssRules(), alreadyProcessing);
+                }
+            }
+        }
+    }
+
+    private List<CSSStyleSheetImpl.SelectorEntry> selects(
+                            final CSSStyleSheetImpl.CSSStyleSheetRuleIndex index,
+                            final BrowserVersion browserVersion, final DomElement element,
+                            final String pseudoElement, final boolean fromQuerySelectorAll) {
+
+        final List<CSSStyleSheetImpl.SelectorEntry> matchingRules = new ArrayList<>();
+
+        if (isActive(index.getMediaList(), element.getPage().getEnclosingWindow())) {
+            final String elementName = element.getLowercaseName();
+            final String[] classes = StringUtils.split(element.getAttributeDirect("class"), null, -1);
+            final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
+                    index.getSelectorEntriesIteratorFor(elementName, classes);
+
+            CSSStyleSheetImpl.SelectorEntry entry = iter.next();
+            while (null != entry) {
+                if (CssStyleSheet.selects(browserVersion, entry.getSelector(),
+                                            element, pseudoElement, fromQuerySelectorAll, false)) {
+                    matchingRules.add(entry);
+                }
+                entry = iter.next();
+            }
+
+            for (final CSSStyleSheetImpl.CSSStyleSheetRuleIndex child : index.getChildren()) {
+                matchingRules.addAll(selects(child, browserVersion,
+                                                    element, pseudoElement, fromQuerySelectorAll));
+            }
+        }
+
+        return matchingRules;
     }
 }
