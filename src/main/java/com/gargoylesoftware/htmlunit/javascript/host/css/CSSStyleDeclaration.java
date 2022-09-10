@@ -1630,17 +1630,15 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /**
      * Get the value for the style attribute.
+     * This impl ignores the default getDefaultValueIfEmpty flag, but there is a overload
+     * in {@link ComputedCSSStyleDeclaration}.
      * @param definition the definition
      * @param getDefaultValueIfEmpty whether to get the default value if empty or not
      * @return the value
      */
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
-        return getStyleAttributeImpl(definition.getAttributeName());
-    }
-
-    private String getStyleAttributeImpl(final String string) {
         if (styleDeclaration_ != null) {
-            return styleDeclaration_.getStyleAttribute(string);
+            return styleDeclaration_.getStyleAttribute(definition.getAttributeName());
         }
         return "";
     }
@@ -2543,7 +2541,11 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                 return (String) value;
             }
         }
-        return getStyleAttributeImpl(name);
+
+        if (styleDeclaration_ != null) {
+            return styleDeclaration_.getStyleAttribute(name);
+        }
+        return "";
     }
 
     /**

@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.FIXED;
 import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
@@ -1394,7 +1396,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if ("absolute".equals(position)) {
+        if (ABSOLUTE.equals(position)) {
             return left;
         }
 
@@ -1493,7 +1495,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if ("absolute".equals(position)) {
+        if (ABSOLUTE.equals(position)) {
             return top;
         }
 
@@ -1550,7 +1552,8 @@ public class HTMLElement extends Element {
         }
 
         final HTMLElement htmlElement = currentElement.getScriptableObject();
-        if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
+        if (returnNullIfFixed
+                && FIXED.equals(htmlElement.getStyle().getStyleAttribute(
                 StyleAttributes.Definition.POSITION, true))) {
             return null;
         }

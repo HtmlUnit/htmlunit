@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.BLOCK;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -204,7 +206,7 @@ public class HtmlSerializerVisibleText {
         else if (domNode instanceof DomElement) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
             final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
-            block = "block".equals(display);
+            block = BLOCK.equals(display);
         }
         else {
             block = false;

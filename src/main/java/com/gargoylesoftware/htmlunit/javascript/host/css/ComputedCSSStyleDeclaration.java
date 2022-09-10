@@ -919,7 +919,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final DomNode parent = node.getParentNode();
 
         // width is ignored for inline elements
-        if (("inline".equals(display) || StringUtils.isEmpty(styleWidth)) && parent instanceof HtmlElement) {
+        if ((INLINE.equals(display) || StringUtils.isEmpty(styleWidth)) && parent instanceof HtmlElement) {
             // hack: TODO find a way to specify default values for different tags
             if (element instanceof HTMLCanvasElement) {
                 return 300;
@@ -1081,7 +1081,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return height_;
         }
 
-        final boolean isInline = "inline".equals(getDisplay()) && !(element instanceof HTMLIFrameElement);
+        final boolean isInline = INLINE.equals(getDisplay()) && !(element instanceof HTMLIFrameElement);
         // height is ignored for inline elements
         if (isInline || super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();
@@ -1128,7 +1128,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return windowHeight;
         }
 
-        final boolean isInline = "inline".equals(display) && !(node instanceof HtmlInlineFrame);
+        final boolean isInline = INLINE.equals(display) && !(node instanceof HtmlInlineFrame);
         // height is ignored for inline elements
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
