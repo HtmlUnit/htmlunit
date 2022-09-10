@@ -23,6 +23,15 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_ZINDEX_TY
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_UNSUPPORTED_PROPERTY_GETTER;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WORD_SPACING_ACCEPTS_PERCENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_STYLE_WRONG_INDEX_RETURNS_UNDEFINED;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.AUTO;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.FIXED;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.INHERIT;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.INITIAL;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.NONE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.RELATIVE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.REPEAT;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.STATIC;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
@@ -204,18 +213,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     private static final String[] ALIGN_KEYWORDS =
         {"baseline", "sub", "super", "text-top", "text-bottom", "middle", "top", "bottom",
          "inherit", "initial", "revert", "unset"};
-
-    static final String NONE = "none";
-    static final String AUTO = "auto";
-    static final String STATIC = "static";
-    static final String INHERIT = "inherit";
-    private static final String INITIAL = "initial";
-    static final String RELATIVE = "relative";
-    static final String FIXED = "fixed";
-    static final String ABSOLUTE = "absolute";
-    private static final String REPEAT = "repeat";
-    static final String BLOCK = "block";
-    static final String INLINE = "inline";
 
     // private static final Log LOG = LogFactory.getLog(CSSStyleDeclaration.class);
     private static final Map<String, String> CSSColors_ = new HashMap<>();

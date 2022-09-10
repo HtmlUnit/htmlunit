@@ -123,7 +123,31 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  */
 public class CssStyleSheet implements Serializable {
 
+    /** "none". */
+    public static final String NONE = "none";
+    /** "auto". */
+    public static final String AUTO = "auto";
+    /** "static". */
+    public static final String STATIC = "static";
+    /** "inherit". */
+    public static final String INHERIT = "inherit";
+    /** "initial". */
+    public static final String INITIAL = "initial";
+    /** "relative". */
+    public static final String RELATIVE = "relative";
+    /** "fixed". */
+    public static final String FIXED = "fixed";
+    /** "absolute". */
+    public static final String ABSOLUTE = "absolute";
+    /** "repeat". */
+    public static final String REPEAT = "repeat";
+    /** "block". */
+    public static final String BLOCK = "block";
+    /** "inline". */
+    public static final String INLINE = "inline";
+
     private static final Log LOG = LogFactory.getLog(CssStyleSheet.class);
+
     private static final Pattern NTH_NUMERIC = Pattern.compile("\\d+");
     private static final Pattern NTH_COMPLEX = Pattern.compile("[+-]?\\d*n\\w*([+-]\\w\\d*)?");
     private static final Pattern UNESCAPE_SELECTOR = Pattern.compile("\\\\([\\[\\].:])");

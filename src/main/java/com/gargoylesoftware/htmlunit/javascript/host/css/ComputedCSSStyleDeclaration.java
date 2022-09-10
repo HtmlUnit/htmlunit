@@ -22,6 +22,15 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIG
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.AUTO;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.BLOCK;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.FIXED;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.INHERIT;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.INLINE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.NONE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.RELATIVE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.STATIC;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
