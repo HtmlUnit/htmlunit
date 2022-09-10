@@ -29,8 +29,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
-import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -405,8 +403,7 @@ public abstract class WebWindowImpl implements WebWindow {
         }
 
         final Element e = element.getScriptableObject();
-        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e,
-                new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element)));
+        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e);
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();

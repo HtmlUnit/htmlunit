@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -58,10 +57,9 @@ public class StyleMedia extends HtmlUnitScriptable {
      */
     @JsxFunction
     public boolean matchMedium(final String media) {
-        final WebWindow webWindow = getWindow().getWebWindow();
-        final CSSErrorHandler errorHandler = webWindow.getWebClient().getCssErrorHandler();
+        final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
         final MediaListImpl mediaList = CSSStyleSheet.parseMedia(errorHandler, media);
-        return CSSStyleSheet.isActive(mediaList, webWindow);
+        return CSSStyleSheet.isActive(this, mediaList);
     }
 
 }
