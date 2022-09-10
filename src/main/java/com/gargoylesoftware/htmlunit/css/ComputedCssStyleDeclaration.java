@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -73,7 +74,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getStyleAttribute(final String name) {
-        return elementStyleDeclaration_.getStyleAttribute(name);
+        final StyleElement element = getStyleElement(name);
+        if (element != null && element.getValue() != null) {
+            final String value = element.getValue();
+            if (!value.contains("url")) {
+                return value.toLowerCase(Locale.ROOT);
+            }
+            return value;
+        }
+        return "";
     }
 
     /**
@@ -191,6 +200,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     public DomElement getDomElementOrNull() {
         return elementStyleDeclaration_.getDomElementOrNull();
     }
+
     /**
      * Makes a local, "computed", modification to this CSS style.
      *

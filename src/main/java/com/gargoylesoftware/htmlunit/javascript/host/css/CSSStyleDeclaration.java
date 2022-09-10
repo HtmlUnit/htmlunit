@@ -295,7 +295,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         if (getBrowserVersion().hasFeature(JS_STYLE_UNSUPPORTED_PROPERTY_GETTER)
                 && (styleDeclaration_ instanceof ElementCssStyleDeclaration
                         || styleDeclaration_ instanceof ComputedCssStyleDeclaration)) {
-            final StyleElement element = getStyleElement(name);
+            final StyleElement element = styleDeclaration_.getStyleElement(name);
             if (element != null && element.getValue() != null) {
                 return element.getValue();
             }
@@ -340,19 +340,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /**
      * Determines the StyleElement for the given name.
-     *
-     * @param name the name of the requested StyleElement
-     * @return the StyleElement or null if not found
-     */
-    protected StyleElement getStyleElement(final String name) {
-        if (styleDeclaration_ == null) {
-            return null;
-        }
-        return styleDeclaration_.getStyleElement(name);
-    }
-
-    /**
-     * Determines the StyleElement for the given name.
      * This ignores the case of the name.
      *
      * @param name the name of the requested StyleElement
@@ -388,8 +375,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         final String value;
         if (styleDeclaration_ instanceof ElementCssStyleDeclaration
                 || styleDeclaration_ instanceof ComputedCssStyleDeclaration) {
-            final StyleElement element1 = getStyleElement(name1.getAttributeName());
-            final StyleElement element2 = getStyleElement(name2.getAttributeName());
+            final StyleElement element1 = styleDeclaration_.getStyleElement(name1.getAttributeName());
+            final StyleElement element2 = styleDeclaration_.getStyleElement(name2.getAttributeName());
 
             if (element2 == null) {
                 if (element1 == null) {
@@ -1651,16 +1638,8 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     private String getStyleAttributeImpl(final String string) {
-        if (styleDeclaration_ instanceof WrappedCssStyleDeclaration) {
+        if (styleDeclaration_ != null) {
             return styleDeclaration_.getStyleAttribute(string);
-        }
-        final StyleElement element = getStyleElement(string);
-        if (element != null && element.getValue() != null) {
-            final String value = element.getValue();
-            if (!value.contains("url")) {
-                return value.toLowerCase(Locale.ROOT);
-            }
-            return value;
         }
         return "";
     }
