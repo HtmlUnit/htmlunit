@@ -79,7 +79,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getStyleAttribute(final String name) {
-        final StyleElement element = domElement_.getStyleElement(name);
+        final StyleElement element = getStyleElement(name);
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
             if (!value.contains("url")) {
