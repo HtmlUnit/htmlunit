@@ -256,6 +256,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         element.setDefaults(cssStyleDeclaration);
     }
 
+    @Override
+    protected ComputedCssStyleDeclaration getCssStyleDeclaration() {
+        return (ComputedCssStyleDeclaration) super.getCssStyleDeclaration();
+    }
+
     /**
      * {@inheritDoc}
      *
@@ -480,6 +485,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getDisplay() {
+        String x = getX();
+        String y = getCssStyleDeclaration().getDisplay();
+
+        if (!x.equals(y)) {
+            x = getX();
+            y = getCssStyleDeclaration().getDisplay();
+
+            throw new RuntimeException();
+        }
+
+        return getCssStyleDeclaration().getDisplay();
+    }
+
+    private String getX() {
         // don't use defaultIfEmpty for performance
         // (no need to calculate the default if not empty)
         final DomElement domElem = getDomElement();

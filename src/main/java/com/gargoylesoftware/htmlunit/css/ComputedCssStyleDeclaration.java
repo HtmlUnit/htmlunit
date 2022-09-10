@@ -14,17 +14,24 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DISPLAY;
+
 import java.util.Locale;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
 /**
@@ -199,6 +206,30 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public DomElement getDomElementOrNull() {
         return elementStyleDeclaration_.getDomElementOrNull();
+    }
+
+    /**
+     * @return the display setting
+     */
+    public String getDisplay() {
+        final DomElement domElem = getDomElementOrNull();
+        if (!domElem.isAttachedToPage()) {
+            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+                return "";
+            }
+        }
+
+        // don't use defaultIfEmpty for performance
+        // (no need to calculate the default if not empty)
+        final String value = getStyleAttribute(DISPLAY.getAttributeName());
+        if (StringUtils.isEmpty(value)) {
+            if (domElem instanceof HtmlElement) {
+                return ((HtmlElement) domElem).getDefaultStyleDisplay().value();
+            }
+            return "";
+        }
+        return value;
     }
 
     /**

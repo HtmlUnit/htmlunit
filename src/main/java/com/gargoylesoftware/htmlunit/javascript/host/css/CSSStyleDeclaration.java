@@ -285,6 +285,10 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
         styleDeclaration_ = styleDeclaration;
     }
 
+    protected AbstractCssStyleDeclaration getCssStyleDeclaration() {
+        return styleDeclaration_;
+    }
+
     /**
      * IE makes unknown style properties accessible.
      * @param name the name of the requested property
