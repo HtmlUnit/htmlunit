@@ -32,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.NONE;
 import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.RELATIVE;
 import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.STATIC;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ACCELERATOR;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_ATTACHMENT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_COLOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKGROUND_IMAGE;
@@ -41,57 +40,22 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BACKG
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_COLOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_STYLE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_BOTTOM_WIDTH;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_COLOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_LEFT_STYLE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_SPACING;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BOX_SIZING;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CAPTION_SIDE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.COLOR;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CSS_FLOAT;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CURSOR;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DIRECTION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ELEVATION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.EMPTY_CELLS;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_FAMILY;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_SIZE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_STYLE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_VARIANT;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_WEIGHT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.HEIGHT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LEFT;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LETTER_SPACING;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LINE_HEIGHT;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_IMAGE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.MARGIN;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.MARGIN_LEFT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.MARGIN_RIGHT;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ORPHANS;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.OVERFLOW;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PADDING;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH_RANGE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.POSITION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.QUOTES;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.RICHNESS;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_HEADER;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_NUMERAL;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_PUNCTUATION;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEECH_RATE;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.STRESS;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_ALIGN;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_INDENT;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_TRANSFORM;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TOP;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VISIBILITY;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOICE_FAMILY;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOLUME;
-import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WHITE_SPACE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDOWS;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
@@ -102,7 +66,6 @@ import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
 import java.awt.font.TextAttribute;
 import java.text.AttributedString;
-import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -170,50 +133,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
-    /** The set of 'inheritable' definitions. */
-    private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
-        AZIMUTH,
-        BORDER_COLLAPSE,
-        BORDER_SPACING,
-        CAPTION_SIDE,
-        COLOR,
-        CURSOR,
-        DIRECTION,
-        ELEVATION,
-        EMPTY_CELLS,
-        FONT_FAMILY,
-        FONT_SIZE,
-        FONT_STYLE,
-        FONT_VARIANT,
-        FONT_WEIGHT,
-        FONT,
-        LETTER_SPACING,
-        LINE_HEIGHT,
-        LIST_STYLE_IMAGE,
-        LIST_STYLE_POSITION,
-        LIST_STYLE_TYPE,
-        LIST_STYLE,
-        ORPHANS,
-        PITCH_RANGE,
-        PITCH,
-        QUOTES,
-        RICHNESS,
-        SPEAK_HEADER,
-        SPEAK_NUMERAL,
-        SPEAK_PUNCTUATION,
-        SPEAK,
-        SPEECH_RATE,
-        STRESS,
-        TEXT_ALIGN,
-        TEXT_INDENT,
-        TEXT_TRANSFORM,
-        VISIBILITY,
-        VOICE_FAMILY,
-        VOLUME,
-        WHITE_SPACE,
-        WIDOWS,
-        WORD_SPACING);
-
     /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
     private Integer width_;
 
@@ -263,7 +182,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     @Override
-    protected ComputedCssStyleDeclaration getCssStyleDeclaration() {
+    // todo reduce visibility
+    public ComputedCssStyleDeclaration getCssStyleDeclaration() {
         return (ComputedCssStyleDeclaration) super.getCssStyleDeclaration();
     }
 
@@ -555,7 +475,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
         return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, windowHeight) {
             @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
+            public String get(final ComputedCssStyleDeclaration style) {
                 final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
                 return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, AUTO);
             }
@@ -575,8 +495,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final Element elem = getElement();
         return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, 0) {
             @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
-                if (style.getElement() == elem) {
+            public String get(final ComputedCssStyleDeclaration style) {
+                if (style.getElementOrNull() == elem) {
                     return style.getStyleAttribute(LEFT, true);
                 }
                 return style.getStyleAttribute(WIDTH, true);
@@ -637,8 +557,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
         return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, windowWidth) {
             @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
-                if (style.getElement() == elem) {
+            public String get(final ComputedCssStyleDeclaration style) {
+                if (style.getElementOrNull() == elem) {
                     return style.getStyleAttribute(definition, true);
                 }
                 return style.getStyleAttribute(WIDTH, true);
@@ -775,8 +695,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, 0) {
             @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
-                if (style.getElement() == elem) {
+            public String get(final ComputedCssStyleDeclaration style) {
+                if (style.getElementOrNull() == elem) {
                     return style.getStyleAttribute(TOP, true);
                 }
                 return style.getStyleAttribute(HEIGHT, true);
@@ -821,52 +741,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     @Override
     public String getWidth() {
-        if (NONE.equals(getDisplay())) {
-            return AUTO;
-        }
-
-        final Element elem = getElement();
-        if (!elem.getDomNodeOrDie().isAttachedToPage()) {
-            if (getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-                return "";
-            }
-            if (getStyleAttribute(WIDTH, true).isEmpty()) {
-                return AUTO;
-            }
-        }
-
-        final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
-        return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, windowWidth) {
-            @Override
-            public String get(final ComputedCSSStyleDeclaration style) {
-                final String value = style.getStyleAttribute(WIDTH, true);
-                if (StringUtils.isEmpty(value)) {
-                    if (ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
-                        final String content = getDomNodeOrDie().getVisibleText();
-                        // do this only for small content
-                        // at least for empty div's this is more correct
-                        if (null != content && content.length() < 13) {
-                            return (content.length() * 7) + "px";
-                        }
-                    }
-
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (elem instanceof HTMLBodyElement) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-                else if (AUTO.equals(value)) {
-                    int windowDefaultValue = getWindowDefaultValue();
-                    if (elem instanceof HTMLBodyElement) {
-                        windowDefaultValue -= 16;
-                    }
-                    return windowDefaultValue + "px";
-                }
-
-                return value;
-            }
-        });
+        return getCssStyleDeclaration().getWidth();
     }
 
     /**
@@ -940,7 +815,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     // Block elements take up 100% of the parent's width.
                     final HTMLElement parentJS = parent.getScriptableObject();
                     width = ValueUtils.pixelValue(parentJS, new ValueUtils.CssValue(0, windowWidth) {
-                        @Override public String get(final ComputedCSSStyleDeclaration style) {
+                        @Override public String get(final ComputedCssStyleDeclaration style) {
                             return style.getWidth();
                         }
                     }) - (getBorderHorizontal() + getPaddingHorizontal());
@@ -992,7 +867,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
             width = ValueUtils.pixelValue(element,
                     new ValueUtils.CssValue(0, element.getWindow().getWebWindow().getInnerWidth()) {
-                    @Override public String get(final ComputedCSSStyleDeclaration style) {
+                    @Override public String get(final ComputedCssStyleDeclaration style) {
                         return style.getStyleAttribute(WIDTH, true);
                     }
                 });
@@ -1239,8 +1114,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int defaultWindowHeight = elem instanceof HTMLCanvasElement ? 150 : windowHeight;
 
         int height = ValueUtils.pixelValue(elem, new ValueUtils.CssValue(defaultHeight, defaultWindowHeight) {
-            @Override public String get(final ComputedCSSStyleDeclaration style) {
-                final Element element = style.getElement();
+            @Override public String get(final ComputedCssStyleDeclaration style) {
+                final Element element = style.getElementOrNull();
                 if (element instanceof HTMLBodyElement) {
                     return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
                 }

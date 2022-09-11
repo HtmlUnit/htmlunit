@@ -21,7 +21,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
 
@@ -64,7 +63,8 @@ public final class ValueUtils {
      * @see #pixelString(String)
      */
     public static String pixelString(final Element element, final CssValue value) {
-        final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+        final ComputedCssStyleDeclaration style =
+                element.getWindow().getComputedStyle(element, null).getCssStyleDeclaration();
         final String s = value.get(style);
         if (s.endsWith("px")) {
             return s;
@@ -118,7 +118,8 @@ public final class ValueUtils {
     }
 
     private static int pixelValue(final Element element, final CssValue value, final boolean percentMode) {
-        final ComputedCSSStyleDeclaration style = element.getWindow().getComputedStyle(element, null);
+        final ComputedCssStyleDeclaration style =
+                element.getWindow().getComputedStyle(element, null).getCssStyleDeclaration();
         final String s = value.get(style);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
             final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(s).replaceAll("$1"), 100);
@@ -189,6 +190,6 @@ public final class ValueUtils {
          * @param style the computed style from which to retrieve the CSS attribute value
          * @return the CSS attribute value from the specified computed style
          */
-        public abstract String get(ComputedCSSStyleDeclaration style);
+        public abstract String get(ComputedCssStyleDeclaration style);
     }
 }

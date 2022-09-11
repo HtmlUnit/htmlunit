@@ -15,6 +15,9 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.AUTO;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.NONE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_SPACING;
@@ -40,6 +43,7 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ORPHANS;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH_RANGE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.POSITION;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.QUOTES;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.RICHNESS;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK;
@@ -56,6 +60,7 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOICE
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOLUME;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WHITE_SPACE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDOWS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 
 import java.util.EnumSet;
@@ -75,6 +80,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
@@ -351,6 +357,59 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return "";
         }
         return value;
+    }
+
+    /**
+     * @return the width
+     */
+    public String getWidth() {
+        if (NONE.equals(getDisplay())) {
+            return AUTO;
+        }
+
+        final DomElement domElem = getDomElementOrNull();
+        if (!domElem.isAttachedToPage()) {
+            final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
+            if (browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+                return "";
+            }
+            if (getStyleAttribute(WIDTH, true).isEmpty()) {
+                return AUTO;
+            }
+        }
+
+        final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
+        return ValueUtils.pixelString(getElementOrNull(), new ValueUtils.CssValue(0, windowWidth) {
+            @Override
+            public String get(final ComputedCssStyleDeclaration style) {
+                final String value = style.getStyleAttribute(WIDTH, true);
+                if (StringUtils.isEmpty(value)) {
+                    if (ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
+                        final String content = domElem.getVisibleText();
+                        // do this only for small content
+                        // at least for empty div's this is more correct
+                        if (null != content && content.length() < 13) {
+                            return (content.length() * 7) + "px";
+                        }
+                    }
+
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (domElem instanceof HtmlBody) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
+                }
+                else if (AUTO.equals(value)) {
+                    int windowDefaultValue = getWindowDefaultValue();
+                    if (domElem instanceof HtmlBody) {
+                        windowDefaultValue -= 16;
+                    }
+                    return windowDefaultValue + "px";
+                }
+
+                return value;
+            }
+        });
     }
 
     /**
