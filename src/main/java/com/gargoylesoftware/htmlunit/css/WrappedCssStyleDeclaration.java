@@ -19,6 +19,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -142,7 +143,12 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public StyleElement getStyleElement(final String name) {
-        return null;
+        final String value = cssStyleDeclarationImpl_.getPropertyValue(name);
+        if (value.isEmpty()) {
+            return null;
+        }
+        final String priority = cssStyleDeclarationImpl_.getPropertyPriority(name);
+        return new StyleElement(name, value, priority, SelectorSpecificity.FROM_STYLE_ATTRIBUTE);
     }
 
     /**

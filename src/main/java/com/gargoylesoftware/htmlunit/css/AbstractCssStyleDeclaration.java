@@ -75,6 +75,87 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public abstract String getStyleAttribute(Definition definition, boolean getDefaultValueIfEmpty);
 
     /**
+     * <p>Returns the value of one of the two named style attributes. If both attributes exist,
+     * the value of the attribute that was declared last is returned. If only one of the
+     * attributes exists, its value is returned. If neither attribute exists, an empty string
+     * is returned.</p>
+     *
+     * <p>The second named attribute may be shorthand for a the actual desired property.
+     * The following formats are possible:</p>
+     * <ol>
+     *   <li><tt>top right bottom left</tt>: All values are explicit.</li>
+     *   <li><tt>top right bottom</tt>: Left is implicitly the same as right.</li>
+     *   <li><tt>top right</tt>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
+     *   <li><tt>top</tt>: Left, bottom and right are implicitly the same as top.</li>
+     * </ol>
+     *
+     * @param definition1 the name of the first style attribute
+     * @param definition2 the name of the second style attribute
+     * @return the value of one of the two named style attributes
+     */
+    public String getStyleAttribute(final Definition definition1, final Definition definition2) {
+        final String value;
+        final StyleElement element1 = getStyleElement(definition1.getAttributeName());
+        final StyleElement element2 = getStyleElement(definition2.getAttributeName());
+
+        if (element2 == null) {
+            if (element1 == null) {
+                return "";
+            }
+            return element1.getValue();
+        }
+        if (element1 != null) {
+            if (element1.compareTo(element2) > 0) {
+                return element1.getValue();
+            }
+        }
+        value = element2.getValue();
+
+        final String[] values = StringUtils.split(value);
+        if (definition1.name().contains("TOP")) {
+            if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (definition1.name().contains("RIGHT")) {
+            if (values.length > 1) {
+                return values[1];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (definition1.name().contains("BOTTOM")) {
+            if (values.length > 2) {
+                return values[2];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            return "";
+        }
+        else if (definition1.name().contains("LEFT")) {
+            if (values.length > 3) {
+                return values[3];
+            }
+            else if (values.length > 1) {
+                return values[1];
+            }
+            else if (values.length > 0) {
+                return values[0];
+            }
+            else {
+                return "";
+            }
+        }
+        else {
+            throw new IllegalStateException("Unsupported definition: " + definition1);
+        }
+    }
+
+    /**
      * Sets the actual text of the style.
      * @param value the new text
      */

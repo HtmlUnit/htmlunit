@@ -351,102 +351,6 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
     }
 
     /**
-     * <p>Returns the value of one of the two named style attributes. If both attributes exist,
-     * the value of the attribute that was declared last is returned. If only one of the
-     * attributes exists, its value is returned. If neither attribute exists, an empty string
-     * is returned.</p>
-     *
-     * <p>The second named attribute may be shorthand for a the actual desired property.
-     * The following formats are possible:</p>
-     * <ol>
-     *   <li><tt>top right bottom left</tt>: All values are explicit.</li>
-     *   <li><tt>top right bottom</tt>: Left is implicitly the same as right.</li>
-     *   <li><tt>top right</tt>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
-     *   <li><tt>top</tt>: Left, bottom and right are implicitly the same as top.</li>
-     * </ol>
-     *
-     * @param name1 the name of the first style attribute
-     * @param name2 the name of the second style attribute
-     * @return the value of one of the two named style attributes
-     */
-    private String getStyleAttribute(final Definition name1, final Definition name2) {
-        final String value;
-        if (styleDeclaration_ instanceof ElementCssStyleDeclaration
-                || styleDeclaration_ instanceof ComputedCssStyleDeclaration) {
-            final StyleElement element1 = styleDeclaration_.getStyleElement(name1.getAttributeName());
-            final StyleElement element2 = styleDeclaration_.getStyleElement(name2.getAttributeName());
-
-            if (element2 == null) {
-                if (element1 == null) {
-                    return "";
-                }
-                return element1.getValue();
-            }
-            if (element1 != null) {
-                if (element1.compareTo(element2) > 0) {
-                    return element1.getValue();
-                }
-            }
-            value = element2.getValue();
-        }
-        else {
-            final String value1 = styleDeclaration_.getStyleAttribute(name1.getAttributeName());
-            final String value2 = styleDeclaration_.getStyleAttribute(name2.getAttributeName());
-
-            if ("".equals(value1) && "".equals(value2)) {
-                return "";
-            }
-            if (!"".equals(value1) && "".equals(value2)) {
-                return value1;
-            }
-            value = value2;
-        }
-
-        final String[] values = StringUtils.split(value);
-        if (name1.name().contains("TOP")) {
-            if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name1.name().contains("RIGHT")) {
-            if (values.length > 1) {
-                return values[1];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name1.name().contains("BOTTOM")) {
-            if (values.length > 2) {
-                return values[2];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            return "";
-        }
-        else if (name1.name().contains("LEFT")) {
-            if (values.length > 3) {
-                return values[3];
-            }
-            else if (values.length > 1) {
-                return values[1];
-            }
-            else if (values.length > 0) {
-                return values[0];
-            }
-            else {
-                return "";
-            }
-        }
-        else {
-            throw new IllegalStateException("Unsupported definition: " + name1);
-        }
-    }
-
-    /**
      * Sets the specified style attribute.
      * @param name the attribute name (camel-cased)
      * @param newValue the attribute value
@@ -1427,7 +1331,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMarginBottom() {
-        return getStyleAttribute(MARGIN_BOTTOM, MARGIN);
+        return getCssStyleDeclaration().getStyleAttribute(MARGIN_BOTTOM, MARGIN);
     }
 
     /**
@@ -1445,7 +1349,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMarginLeft() {
-        return getStyleAttribute(MARGIN_LEFT, MARGIN);
+        return getCssStyleDeclaration().getStyleAttribute(MARGIN_LEFT, MARGIN);
     }
 
     /**
@@ -1463,7 +1367,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMarginRight() {
-        return getStyleAttribute(MARGIN_RIGHT, MARGIN);
+        return getCssStyleDeclaration().getStyleAttribute(MARGIN_RIGHT, MARGIN);
     }
 
     /**
@@ -1481,7 +1385,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getMarginTop() {
-        return getStyleAttribute(MARGIN_TOP, MARGIN);
+        return getCssStyleDeclaration().getStyleAttribute(MARGIN_TOP, MARGIN);
     }
 
     /**
@@ -1844,7 +1748,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingBottom() {
-        return getStyleAttribute(PADDING_BOTTOM, PADDING);
+        return getCssStyleDeclaration().getStyleAttribute(PADDING_BOTTOM, PADDING);
     }
 
     /**
@@ -1862,7 +1766,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingLeft() {
-        return getStyleAttribute(PADDING_LEFT, PADDING);
+        return getCssStyleDeclaration().getStyleAttribute(PADDING_LEFT, PADDING);
     }
 
     /**
@@ -1880,7 +1784,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingRight() {
-        return getStyleAttribute(PADDING_RIGHT, PADDING);
+        return getCssStyleDeclaration().getStyleAttribute(PADDING_RIGHT, PADDING);
     }
 
     /**
@@ -1898,7 +1802,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter
     public String getPaddingTop() {
-        return getStyleAttribute(PADDING_TOP, PADDING);
+        return getCssStyleDeclaration().getStyleAttribute(PADDING_TOP, PADDING);
     }
 
     /**
