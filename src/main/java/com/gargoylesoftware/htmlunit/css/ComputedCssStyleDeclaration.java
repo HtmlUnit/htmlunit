@@ -80,6 +80,7 @@ import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
@@ -206,10 +207,12 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         String value = getStyleAttribute(definition.getAttributeName());
         if (value.isEmpty()) {
-            final Element parent = getElementOrNull().getParentElement();
-            if (parent != null && INHERITABLE_DEFINITIONS.contains(definition)) {
+            final DomNode parent = domElem.getParentNode();
+            if (parent instanceof DomElement && INHERITABLE_DEFINITIONS.contains(definition)) {
                 final Window window = domElem.getPage().getEnclosingWindow().getScriptableObject();
-                value = window.getComputedStyle(parent, null).getStyleAttribute(definition, getDefaultValueIfEmpty);
+                value = window.getWebWindow()
+                        .getComputedStyle((DomElement) parent, null)
+                        .getStyleAttribute(definition, getDefaultValueIfEmpty);
             }
             else if (getDefaultValueIfEmpty) {
                 value = definition.getDefaultComputedValue(browserVersion);
@@ -379,7 +382,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
-        return ValueUtils.pixelString(getElementOrNull(), new ValueUtils.CssValue(0, windowWidth) {
+        return ValueUtils.pixelString(domElem, new ValueUtils.CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH, true);

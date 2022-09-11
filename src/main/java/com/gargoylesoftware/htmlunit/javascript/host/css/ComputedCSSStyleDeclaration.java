@@ -473,7 +473,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
-        return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, windowHeight) {
+        return ValueUtils.pixelString(elem.getDomNodeOrDie(), new ValueUtils.CssValue(0, windowHeight) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
@@ -493,7 +493,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final Element elem = getElement();
-        return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, 0) {
+        return ValueUtils.pixelString(elem.getDomNodeOrDie(), new ValueUtils.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 if (style.getElementOrNull() == elem) {
@@ -555,7 +555,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
-        return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, windowWidth) {
+        return ValueUtils.pixelString(elem.getDomNodeOrDie(), new ValueUtils.CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 if (style.getElementOrNull() == elem) {
@@ -693,7 +693,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             return defaultIfEmpty(superTop, TOP);
         }
 
-        return ValueUtils.pixelString(elem, new ValueUtils.CssValue(0, 0) {
+        return ValueUtils.pixelString(elem.getDomNodeOrDie(), new ValueUtils.CssValue(0, 0) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 if (style.getElementOrNull() == elem) {
@@ -814,7 +814,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 else {
                     // Block elements take up 100% of the parent's width.
                     final HTMLElement parentJS = parent.getScriptableObject();
-                    width = ValueUtils.pixelValue(parentJS, new ValueUtils.CssValue(0, windowWidth) {
+                    width = ValueUtils.pixelValue(parentJS.getDomNodeOrDie(), new ValueUtils.CssValue(0, windowWidth) {
                         @Override public String get(final ComputedCssStyleDeclaration style) {
                             return style.getWidth();
                         }
@@ -865,7 +865,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
         else {
             // Width explicitly set in the style attribute, or there was no parent to provide guidance.
-            width = ValueUtils.pixelValue(element,
+            width = ValueUtils.pixelValue(element.getDomNodeOrDie(),
                     new ValueUtils.CssValue(0, element.getWindow().getWebWindow().getInnerWidth()) {
                     @Override public String get(final ComputedCssStyleDeclaration style) {
                         return style.getStyleAttribute(WIDTH, true);
@@ -1113,19 +1113,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         final int defaultWindowHeight = elem instanceof HTMLCanvasElement ? 150 : windowHeight;
 
-        int height = ValueUtils.pixelValue(elem, new ValueUtils.CssValue(defaultHeight, defaultWindowHeight) {
-            @Override public String get(final ComputedCssStyleDeclaration style) {
-                final Element element = style.getElementOrNull();
-                if (element instanceof HTMLBodyElement) {
-                    return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
+        int height = ValueUtils.pixelValue(elem.getDomNodeOrDie(),
+                new ValueUtils.CssValue(defaultHeight, defaultWindowHeight) {
+                @Override public String get(final ComputedCssStyleDeclaration style) {
+                    final Element element = style.getElementOrNull();
+                    if (element instanceof HTMLBodyElement) {
+                        return String.valueOf(element.getWindow().getWebWindow().getInnerHeight());
+                    }
+                    // height is ignored for inline elements
+                    if (isInline) {
+                        return "";
+                    }
+                    return style.getStyleAttribute(HEIGHT, true);
                 }
-                // height is ignored for inline elements
-                if (isInline) {
-                    return "";
-                }
-                return style.getStyleAttribute(HEIGHT, true);
-            }
-        });
+            });
 
         if (height == 0 && !explicitHeightSpecified) {
             height = defaultHeight;

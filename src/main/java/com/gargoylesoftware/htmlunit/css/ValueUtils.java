@@ -20,9 +20,10 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
+import com.gargoylesoftware.htmlunit.html.DomElement;
+import com.gargoylesoftware.htmlunit.html.DomNode;
+import com.gargoylesoftware.htmlunit.html.HtmlCanvas;
+import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 
 /**
  * Utilities for css value handling.
@@ -49,7 +50,7 @@ public final class ValueUtils {
      * @return the integer number of pixels corresponding to the specified length CSS attribute value
      * @see #pixelValue(String)
      */
-    public static int pixelValue(final Element element, final CssValue value) {
+    public static int pixelValue(final DomElement element, final CssValue value) {
         return pixelValue(element, value, false);
     }
 
@@ -62,9 +63,9 @@ public final class ValueUtils {
      * @return the specified length CSS attribute value as a pixel length value
      * @see #pixelString(String)
      */
-    public static String pixelString(final Element element, final CssValue value) {
-        final ComputedCssStyleDeclaration style =
-                element.getWindow().getComputedStyle(element, null).getCssStyleDeclaration();
+    public static String pixelString(final DomElement element, final CssValue value) {
+        final ComputedCssStyleDeclaration style = element.getPage().getEnclosingWindow()
+                .getComputedStyle(element, null).getCssStyleDeclaration();
         final String s = value.get(style);
         if (s.endsWith("px")) {
             return s;
@@ -117,34 +118,34 @@ public final class ValueUtils {
         return Math.round(i);
     }
 
-    private static int pixelValue(final Element element, final CssValue value, final boolean percentMode) {
-        final ComputedCssStyleDeclaration style =
-                element.getWindow().getComputedStyle(element, null).getCssStyleDeclaration();
+    private static int pixelValue(final DomElement element, final CssValue value, final boolean percentMode) {
+        final ComputedCssStyleDeclaration style = element.getPage().getEnclosingWindow()
+                .getComputedStyle(element, null).getCssStyleDeclaration();
         final String s = value.get(style);
-        if (s.endsWith("%") || (s.isEmpty() && element instanceof HTMLHtmlElement)) {
+        if (s.endsWith("%") || (s.isEmpty() && element instanceof HtmlHtml)) {
             final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(s).replaceAll("$1"), 100);
 
-            final Element parent = element.getParentElement();
-            final int absoluteValue = (parent == null)
-                            ? value.getWindowDefaultValue() : pixelValue(parent, value, true);
+            final DomNode parent = element.getParentNode();
+            final int absoluteValue = (parent instanceof DomElement)
+                            ? pixelValue((DomElement) parent, value, true) : value.getWindowDefaultValue();
             return  Math.round((i / 100f) * absoluteValue);
         }
         if (AUTO.equals(s)) {
             return value.getDefaultValue();
         }
         if (s.isEmpty()) {
-            if (element instanceof HTMLCanvasElement) {
+            if (element instanceof HtmlCanvas) {
                 return value.getWindowDefaultValue();
             }
 
             // if the call was originated from a percent value we have to go up until
             // we can provide some kind of base value for percent calculation
             if (percentMode) {
-                final Element parent = element.getParentElement();
-                if (parent == null || parent instanceof HTMLHtmlElement) {
+                final DomNode parent = element.getParentNode();
+                if (parent == null || parent instanceof HtmlHtml) {
                     return value.getWindowDefaultValue();
                 }
-                return pixelValue(parent, value, true);
+                return pixelValue((DomElement) parent, value, true);
             }
 
             return 0;
