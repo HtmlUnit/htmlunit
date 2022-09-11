@@ -76,6 +76,7 @@ ses from the server should throw exceptions or should be returned as pages of th
 You can start here: 
 * [Getting Started][7]
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+* [The Complete Guide to Web Scraping with Java] A small straightforward guide to web scraping with Java.
 
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
@@ -152,3 +153,4 @@ This project is licensed under the Apache 2.0 License
 [6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
 [7]: https://htmlunit.sourceforge.io/gettingStarted.html
 [8]: https://www.scrapingbee.com/java-webscraping-book/
+[9]: https://www.webscrapingapi.com/java-web-scraping/
