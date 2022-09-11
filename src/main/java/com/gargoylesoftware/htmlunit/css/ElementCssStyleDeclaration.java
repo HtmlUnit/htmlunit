@@ -17,10 +17,8 @@ package com.gargoylesoftware.htmlunit.css;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
@@ -41,7 +39,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  */
 public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
-    private static final Log LOG = LogFactory.getLog(ElementCssStyleDeclaration.class);
+    // private static final Log LOG = LogFactory.getLog(ElementCssStyleDeclaration.class);
 
     /** The DomElement. */
     private DomElement domElement_;
@@ -88,6 +86,14 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return value;
         }
         return "";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
+        return getStyleAttribute(definition.getAttributeName());
     }
 
     /**

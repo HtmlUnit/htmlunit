@@ -19,6 +19,7 @@ import java.util.Map;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 
@@ -78,6 +79,14 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String getStyleAttribute(final String name) {
         return cssStyleDeclarationImpl_.getPropertyValue(name);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
+        return getStyleAttribute(definition.getAttributeName());
     }
 
     /**

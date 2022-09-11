@@ -15,10 +15,53 @@
 package com.gargoylesoftware.htmlunit.css;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_SPACING;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CAPTION_SIDE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.COLOR;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.CURSOR;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DIRECTION;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.DISPLAY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ELEVATION;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.EMPTY_CELLS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_FAMILY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_SIZE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_STYLE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_VARIANT;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.FONT_WEIGHT;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LETTER_SPACING;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LINE_HEIGHT;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_IMAGE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_POSITION;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.LIST_STYLE_TYPE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.ORPHANS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.PITCH_RANGE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.QUOTES;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.RICHNESS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_HEADER;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_NUMERAL;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEAK_PUNCTUATION;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.SPEECH_RATE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.STRESS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_ALIGN;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_INDENT;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.TEXT_TRANSFORM;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VISIBILITY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOICE_FAMILY;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.VOLUME;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WHITE_SPACE;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDOWS;
+import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 
+import java.util.EnumSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -30,9 +73,11 @@ import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -47,6 +92,54 @@ import com.gargoylesoftware.htmlunit.javascript.host.Element;
  * @author cd alexndr
  */
 public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
+
+    /** The set of 'inheritable' definitions. */
+    private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
+        AZIMUTH,
+        BORDER_COLLAPSE,
+        BORDER_SPACING,
+        CAPTION_SIDE,
+        COLOR,
+        CURSOR,
+        DIRECTION,
+        ELEVATION,
+        EMPTY_CELLS,
+        FONT_FAMILY,
+        FONT_SIZE,
+        FONT_STYLE,
+        FONT_VARIANT,
+        FONT_WEIGHT,
+        FONT,
+        LETTER_SPACING,
+        LINE_HEIGHT,
+        LIST_STYLE_IMAGE,
+        LIST_STYLE_POSITION,
+        LIST_STYLE_TYPE,
+        LIST_STYLE,
+        ORPHANS,
+        PITCH_RANGE,
+        PITCH,
+        QUOTES,
+        RICHNESS,
+        SPEAK_HEADER,
+        SPEAK_NUMERAL,
+        SPEAK_PUNCTUATION,
+        SPEAK,
+        SPEECH_RATE,
+        STRESS,
+        TEXT_ALIGN,
+        TEXT_INDENT,
+        TEXT_TRANSFORM,
+        VISIBILITY,
+        VOICE_FAMILY,
+        VOLUME,
+        WHITE_SPACE,
+        WIDOWS,
+        WORD_SPACING);
+
+    /** Denotes a value which should be returned as is. */
+    public static final String EMPTY_FINAL = new String("");
+
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
@@ -90,6 +183,34 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             return value;
         }
         return "";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
+        final DomElement domElem = getDomElementOrNull();
+        final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
+
+        if (!domElem.isAttachedToPage()
+                && browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+            return EMPTY_FINAL;
+        }
+
+        String value = getStyleAttribute(definition.getAttributeName());
+        if (value.isEmpty()) {
+            final Element parent = getElementOrNull().getParentElement();
+            if (parent != null && INHERITABLE_DEFINITIONS.contains(definition)) {
+                final Window window = domElem.getPage().getEnclosingWindow().getScriptableObject();
+                value = window.getComputedStyle(parent, null).getStyleAttribute(definition, getDefaultValueIfEmpty);
+            }
+            else if (getDefaultValueIfEmpty) {
+                value = definition.getDefaultComputedValue(browserVersion);
+            }
+        }
+
+        return value;
     }
 
     /**

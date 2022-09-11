@@ -1635,7 +1635,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
         if (styleDeclaration_ != null) {
-            return styleDeclaration_.getStyleAttribute(definition.getAttributeName());
+            return styleDeclaration_.getStyleAttribute(definition, getDefaultValueIfEmpty);
         }
         return "";
     }

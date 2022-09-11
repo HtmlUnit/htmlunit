@@ -24,6 +24,7 @@ import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * A css StyleDeclaration.
@@ -62,6 +63,16 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * @return the value
      */
     public abstract String getStyleAttribute(String name);
+
+    /**
+     * Get the value for the style attribute.
+     * This impl ignores the default getDefaultValueIfEmpty flag, but there is a overload
+     * in {@link ComputedCSSStyleDeclaration}.
+     * @param definition the definition
+     * @param getDefaultValueIfEmpty whether to get the default value if empty or not
+     * @return the value
+     */
+    public abstract String getStyleAttribute(Definition definition, boolean getDefaultValueIfEmpty);
 
     /**
      * Sets the actual text of the style.

@@ -170,9 +170,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
-    /** Denotes a value which should be returned as is. */
-    private static final String EMPTY_FINAL = new String("");
-
     /** The set of 'inheritable' definitions. */
     private static final Set<Definition> INHERITABLE_DEFINITIONS = EnumSet.of(
         AZIMUTH,
@@ -288,7 +285,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final boolean isPixel) {
         if (!getDomElement().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return EMPTY_FINAL;
+            return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
         if (str == null || str.isEmpty()) {
             return definition.getDefaultComputedValue(getBrowserVersion());
@@ -307,7 +304,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     private String defaultIfEmpty(final String str, final String toReturnIfEmptyOrDefault, final String defaultValue) {
         if (!getDomElement().isAttachedToPage()
                 && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return EMPTY_FINAL;
+            return ComputedCssStyleDeclaration.EMPTY_FINAL;
         }
         if (str == null || str.isEmpty() || str.equals(defaultValue)) {
             return toReturnIfEmptyOrDefault;
@@ -1794,29 +1791,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public String getStyleAttribute(final Definition style, final boolean getDefaultValueIfEmpty) {
-        if (!getDomElement().isAttachedToPage()
-                && getBrowserVersion().hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
-            return EMPTY_FINAL;
-        }
-        String value = super.getStyleAttribute(style, getDefaultValueIfEmpty);
-        if (value.isEmpty()) {
-            final Element parent = getElement().getParentElement();
-            if (parent != null && INHERITABLE_DEFINITIONS.contains(style)) {
-                value = getWindow().getComputedStyle(parent, null).getStyleAttribute(style, getDefaultValueIfEmpty);
-            }
-            else if (getDefaultValueIfEmpty) {
-                value = style.getDefaultComputedValue(getBrowserVersion());
-            }
-        }
-
-        return value;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public Object getZIndex() {
         final Object response = super.getZIndex();
         if (response.toString().isEmpty()) {
@@ -1847,7 +1821,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @see #pixelString(Element, CSSStyleDeclaration.CssValue)
      */
     private static String pixelString(final String value) {
-        if (EMPTY_FINAL == value || value.endsWith("px")) {
+        if (ComputedCssStyleDeclaration.EMPTY_FINAL == value || value.endsWith("px")) {
             return value;
         }
         return ValueUtils.pixelValue(value) + "px";
