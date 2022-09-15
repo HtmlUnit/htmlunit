@@ -61,7 +61,7 @@ public final class ValueUtils {
      * @param element the element for which the CSS attribute value is to be retrieved
      * @param value the CSS attribute value which is to be retrieved
      * @return the specified length CSS attribute value as a pixel length value
-     * @see #pixelString(String)
+     * @see #pixelValue(DomElement, CssValue)
      */
     public static String pixelString(final DomElement element, final CssValue value) {
         final ComputedCssStyleDeclaration style = element.getPage().getEnclosingWindow()
@@ -75,12 +75,12 @@ public final class ValueUtils {
 
     /**
      * Converts the specified length string value into an integer number of pixels. This method does
-     * <b>NOT</b> handle percentages correctly; use {@link #pixelValue(Element, CssValue)} if you
+     * <b>NOT</b> handle percentages correctly; use {@link #pixelString(DomElement, CssValue)} if you
      * need percentage support).
      * @param value the length string value to convert to an integer number of pixels
      * @return the integer number of pixels corresponding to the specified length string value
      * @see <a href="http://htmlhelp.com/reference/css/units.html">CSS Units</a>
-     * @see #pixelValue(Element, CssValue)
+     * @see #pixelString(DomElement, CssValue)
      */
     public static int pixelValue(final String value) {
         float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(value).replaceAll("$1"), 0);
