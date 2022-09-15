@@ -133,36 +133,6 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
-    /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
-    private Integer width_;
-
-    /**
-     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
-     * taking child elements into account.
-     */
-    private Integer height_;
-
-    /**
-     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
-     * <b>not</b> taking child elements into account.
-     */
-    private Integer height2_;
-
-    /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
-    private Integer paddingHorizontal_;
-
-    /** The computed, cached vertical padding (top + bottom) of the element to which this computed style belongs. */
-    private Integer paddingVertical_;
-
-    /** The computed, cached horizontal border (left + right) of the element to which this computed style belongs. */
-    private Integer borderHorizontal_;
-
-    /** The computed, cached vertical border (top + bottom) of the element to which this computed style belongs. */
-    private Integer borderVertical_;
-
-    /** The computed, cached top of the element to which this computed style belongs. */
-    private Integer top_;
-
     /**
      * Creates an instance.
      */
@@ -771,21 +741,20 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private int getCalculatedWidth() {
-        if (width_ != null) {
-            return width_.intValue();
+        final Integer cachedWidth = getCssStyleDeclaration().getCachedWidth();
+        if (cachedWidth != null) {
+            return cachedWidth.intValue();
         }
 
         final Element element = getElement();
         final DomNode node = element.getDomNodeOrDie();
         if (!node.mayBeDisplayed()) {
-            width_ = Integer.valueOf(0);
-            return 0;
+            return getCssStyleDeclaration().setCachedWidth(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            width_ = Integer.valueOf(0);
-            return 0;
+            return getCssStyleDeclaration().setCachedWidth(0);
         }
 
         final int width;
@@ -873,8 +842,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 });
         }
 
-        width_ = Integer.valueOf(width);
-        return width;
+        return getCssStyleDeclaration().setCachedWidth(width);
     }
 
     /**
@@ -945,15 +913,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the element's calculated height, taking both relevant CSS and the element's children into account
      */
     private int getCalculatedHeight() {
-        if (height_ != null) {
-            return height_.intValue();
+        final Integer cachedHeight = getCssStyleDeclaration().getCachedHeight();
+        if (cachedHeight != null) {
+            return cachedHeight.intValue();
         }
 
         final Element element = getElement();
 
         if (element instanceof HTMLImageElement) {
-            height_ = ((HtmlImage) element.getDomNodeOrDie()).getHeightOrDefault();
-            return height_;
+            return getCssStyleDeclaration()
+                    .setCachedHeight(((HtmlImage) element.getDomNodeOrDie()).getHeightOrDefault());
         }
 
         final boolean isInline = INLINE.equals(getDisplay()) && !(element instanceof HTMLIFrameElement);
@@ -961,13 +930,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         if (isInline || super.getHeight().isEmpty()) {
             final int contentHeight = getContentHeight();
             if (contentHeight > 0) {
-                height_ = Integer.valueOf(contentHeight);
-                return height_;
+                return getCssStyleDeclaration().setCachedHeight(contentHeight);
             }
         }
 
-        height_ = Integer.valueOf(getEmptyHeight());
-        return height_;
+        return getCssStyleDeclaration().setCachedHeight(getEmptyHeight());
     }
 
     /**
@@ -978,20 +945,19 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      *         elements
      */
     private int getEmptyHeight() {
-        if (height2_ != null) {
-            return height2_.intValue();
+        final Integer cachedHeight2 = getCssStyleDeclaration().getCachedHeight2();
+        if (cachedHeight2 != null) {
+            return cachedHeight2.intValue();
         }
 
         final DomNode node = getDomElement();
         if (!node.mayBeDisplayed()) {
-            height2_ = Integer.valueOf(0);
-            return 0;
+            return getCssStyleDeclaration().setCachedHeight2(0);
         }
 
         final String display = getDisplay();
         if (NONE.equals(display)) {
-            height2_ = Integer.valueOf(0);
-            return 0;
+            return getCssStyleDeclaration().setCachedHeight2(0);
         }
 
         final Element elem = getElement();
@@ -999,8 +965,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final int windowHeight = webWindow.getInnerHeight();
 
         if (elem instanceof HTMLBodyElement) {
-            height2_ = windowHeight;
-            return windowHeight;
+            return getCssStyleDeclaration().setCachedHeight2(windowHeight);
         }
 
         final boolean isInline = INLINE.equals(display) && !(node instanceof HtmlInlineFrame);
@@ -1132,8 +1097,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             height = defaultHeight;
         }
 
-        height2_ = Integer.valueOf(height);
-        return height;
+        return getCssStyleDeclaration().setCachedHeight2(height);
     }
 
     /**
@@ -1221,8 +1185,10 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      * @return the computed top (Y coordinate), relative to the node's parent's top edge
      */
     public int getTop(final boolean includeMargin, final boolean includeBorder, final boolean includePadding) {
+        Integer cachedTop = getCssStyleDeclaration().getCachedTop();
+
         int top = 0;
-        if (null == top_) {
+        if (null == cachedTop) {
             final String p = getPositionWithInheritance();
             if (ABSOLUTE.equals(p)) {
                 top = getTopForAbsolutePositionWithInheritance();
@@ -1240,7 +1206,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         final String display = style.getDisplay();
                         if (isBlock(display)) {
                             int prevTop = 0;
-                            if (style.top_ == null) {
+                            final Integer eCachedTop = getCssStyleDeclaration().getCachedTop();
+                            if (eCachedTop == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
                                 if (ABSOLUTE.equals(prevPosition)) {
                                     prevTop += style.getTopForAbsolutePositionWithInheritance();
@@ -1254,7 +1221,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                             }
                             else {
                                 prevHadComputedTop = true;
-                                prevTop += style.top_;
+                                prevTop += eCachedTop.intValue();
                             }
                             prevTop += style.getCalculatedHeight(true, true);
                             final int margin = ValueUtils.pixelValue(style.getMarginTop());
@@ -1270,10 +1237,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     top += ValueUtils.pixelValue(t);
                 }
             }
-            top_ = Integer.valueOf(top);
+            cachedTop = Integer.valueOf(top);
+            getCssStyleDeclaration().setCachedTop(cachedTop);
         }
         else {
-            top = top_.intValue();
+            top = cachedTop.intValue();
         }
 
         if (includeMargin) {
@@ -1592,19 +1560,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private int getPaddingHorizontal() {
-        if (paddingHorizontal_ == null) {
-            paddingHorizontal_ =
-                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue());
+        final Integer paddingHorizontal = getCssStyleDeclaration().getCachedPaddingHorizontal();
+        if (paddingHorizontal != null) {
+            return paddingHorizontal.intValue();
         }
-        return paddingHorizontal_.intValue();
+
+        final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingLeftValue() + getPaddingRightValue();
+        return getCssStyleDeclaration().setCachedPaddingHorizontal(padding);
     }
 
     private int getPaddingVertical() {
-        if (paddingVertical_ == null) {
-            paddingVertical_ =
-                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue());
+        final Integer paddingVertical = getCssStyleDeclaration().getCachedPaddingVertical();
+        if (paddingVertical != null) {
+            return paddingVertical.intValue();
         }
-        return paddingVertical_.intValue();
+
+        final int padding = NONE.equals(getDisplay()) ? 0 : getPaddingTopValue() + getPaddingBottomValue();
+        return getCssStyleDeclaration().setCachedPaddingVertical(padding);
     }
 
     /**
@@ -1640,19 +1612,23 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
     }
 
     private int getBorderHorizontal() {
-        if (borderHorizontal_ == null) {
-            borderHorizontal_ =
-                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue());
+        final Integer borderHorizontal = getCssStyleDeclaration().getCachedBorderHorizontal();
+        if (borderHorizontal != null) {
+            return borderHorizontal.intValue();
         }
-        return borderHorizontal_.intValue();
+
+        final int border = NONE.equals(getDisplay()) ? 0 : getBorderLeftValue() + getBorderRightValue();
+        return getCssStyleDeclaration().setCachedBorderHorizontal(border);
     }
 
     private int getBorderVertical() {
-        if (borderVertical_ == null) {
-            borderVertical_ =
-                Integer.valueOf(NONE.equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue());
+        final Integer borderVertical = getCssStyleDeclaration().getCachedBorderVertical();
+        if (borderVertical != null) {
+            return borderVertical.intValue();
         }
-        return borderVertical_.intValue();
+
+        final int border = NONE.equals(getDisplay()) ? 0 : getBorderTopValue() + getBorderBottomValue();
+        return getCssStyleDeclaration().setCachedBorderVertical(border);
     }
 
     /**

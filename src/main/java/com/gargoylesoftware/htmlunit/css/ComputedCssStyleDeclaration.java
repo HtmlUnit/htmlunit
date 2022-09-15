@@ -147,6 +147,36 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     /** Denotes a value which should be returned as is. */
     public static final String EMPTY_FINAL = new String("");
 
+    /** The computed, cached width of the element to which this computed style belongs (no padding, borders, etc.). */
+    private Integer width_;
+
+    /**
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
+     * taking child elements into account.
+     */
+    private Integer height_;
+
+    /**
+     * The computed, cached height of the element to which this computed style belongs (no padding, borders, etc.),
+     * <b>not</b> taking child elements into account.
+     */
+    private Integer height2_;
+
+    /** The computed, cached horizontal padding (left + right) of the element to which this computed style belongs. */
+    private Integer paddingHorizontal_;
+
+    /** The computed, cached vertical padding (top + bottom) of the element to which this computed style belongs. */
+    private Integer paddingVertical_;
+
+    /** The computed, cached horizontal border (left + right) of the element to which this computed style belongs. */
+    private Integer borderHorizontal_;
+
+    /** The computed, cached vertical border (top + bottom) of the element to which this computed style belongs. */
+    private Integer borderVertical_;
+
+    /** The computed, cached top of the element to which this computed style belongs. */
+    private Integer top_;
+
     /**
      * Local modifications maintained here rather than in the element. We use a sorted
      * map so that results are deterministic and thus easily testable.
@@ -413,6 +443,148 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
                 return value;
             }
         });
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached width
+     */
+    public Integer getCachedWidth() {
+        return width_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param width the new value
+     * @return the param width
+     */
+    public int setCachedWidth(final int width) {
+        width_ = Integer.valueOf(width);
+        return width;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached height
+     */
+    public Integer getCachedHeight() {
+        return height_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param height the new value
+     * @return the param height
+     */
+    public int setCachedHeight(final int height) {
+        height_ = Integer.valueOf(height);
+        return height;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached height2
+     */
+    public Integer getCachedHeight2() {
+        return height2_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param height the new value
+     * @return the param height2
+     */
+    public int setCachedHeight2(final int height) {
+        height2_ = Integer.valueOf(height);
+        return height;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached top
+     */
+    public Integer getCachedTop() {
+        return top_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param top the new value
+     */
+    public void setCachedTop(final Integer top) {
+        top_ = top;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached padding horizontal
+     */
+    public Integer getCachedPaddingHorizontal() {
+        return paddingHorizontal_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param paddingHorizontal the new value
+     * @return the param paddingHorizontal
+     */
+    public int setCachedPaddingHorizontal(final int paddingHorizontal) {
+        paddingHorizontal_ = Integer.valueOf(paddingHorizontal);
+        return paddingHorizontal;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached padding vertical
+     */
+    public Integer getCachedPaddingVertical() {
+        return paddingVertical_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param paddingVertical the new value
+     * @return the param paddingVertical
+     */
+    public int setCachedPaddingVertical(final int paddingVertical) {
+        paddingVertical_ = Integer.valueOf(paddingVertical);
+        return paddingVertical;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached border horizontal
+     */
+    public Integer getCachedBorderHorizontal() {
+        return borderHorizontal_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param borderHorizontal the new value
+     * @return the param borderHorizontal
+     */
+    public int setCachedBorderHorizontal(final int borderHorizontal) {
+        borderHorizontal_ = Integer.valueOf(borderHorizontal);
+        return borderHorizontal;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @return the cached border vertical
+     */
+    public Integer getCachedBorderVertical() {
+        return borderVertical_;
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span>
+     * @param borderVertical the new value
+     * @return the param borderVertical
+     */
+    public int setCachedBorderVertical(final int borderVertical) {
+        borderVertical_ = Integer.valueOf(borderVertical);
+        return borderVertical;
     }
 
     /**
