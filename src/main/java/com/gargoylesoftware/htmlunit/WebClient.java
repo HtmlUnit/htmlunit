@@ -181,6 +181,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
     private ClipboardHandler clipboardHandler_;
+    private PrintHandler printHandler_;
     private WebStartHandler webStartHandler_;
     private FrameContentHandler frameContentHandler_;
     private AppletConfirmHandler appletConfirmHandler_;
@@ -2002,6 +2003,14 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * Returns the current clipboard handler.
+     * @return the current clipboard handler
+     */
+    public ClipboardHandler getClipboardHandler() {
+        return clipboardHandler_;
+    }
+
+    /**
      * Sets the clipboard handler.
      * @param handler the new clipboard handler
      */
@@ -2010,11 +2019,19 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the current clipboard handler.
-     * @return the current clipboard handler
+     * Returns the current print handler.
+     * @return the current print handler
      */
-    public ClipboardHandler getClipboardHandler() {
-        return clipboardHandler_;
+    public PrintHandler getPrintHandler() {
+        return printHandler_;
+    }
+
+    /**
+     * Sets the print handler.
+     * @param handler the new print handler
+     */
+    public void setPrintHandler(final PrintHandler handler) {
+        printHandler_ = handler;
     }
 
     /**

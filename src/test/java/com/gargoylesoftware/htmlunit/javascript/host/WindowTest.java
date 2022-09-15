@@ -33,6 +33,7 @@ import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.OnbeforeunloadHandler;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.PrintHandler;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.StatusHandler;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -1582,5 +1583,49 @@ public class WindowTest extends SimpleWebTestCase {
 
         final HtmlPage page = loadPageWithAlerts(html);
         assertEquals("hello", page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void printHandler() throws Exception {
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        final String firstContent
+            = "<html><head>\n"
+            + "<script>\n"
+            + "function doTest() {\n"
+            + "  window.print();\n"
+            + "  alert('printed');\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='doTest()'>\n"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, firstContent);
+        webClient.setWebConnection(webConnection);
+
+        final List<String> collectedAlerts = new ArrayList<>();
+        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+
+        webClient.getPage(URL_FIRST);
+        String[] expectedAlerts = {"printed"};
+        assertEquals("alerts", expectedAlerts, collectedAlerts);
+
+        collectedAlerts.clear();
+        webClient.setPrintHandler(new PrintHandler() {
+            @Override
+            public void handlePrint(final WebWindow webWindow) {
+                collectedAlerts.add("print handled");
+            }
+        });
+
+        webClient.getPage(URL_FIRST);
+        expectedAlerts = new String[] {"print handled", "printed"};
+        assertEquals("alerts", expectedAlerts, collectedAlerts);
     }
 }

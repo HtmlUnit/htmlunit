@@ -49,6 +49,7 @@ import com.gargoylesoftware.htmlunit.ConfirmHandler;
 import com.gargoylesoftware.htmlunit.DialogWindow;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.PrintHandler;
 import com.gargoylesoftware.htmlunit.PromptHandler;
 import com.gargoylesoftware.htmlunit.ScriptException;
 import com.gargoylesoftware.htmlunit.ScriptResult;
@@ -1592,9 +1593,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      */
     @JsxFunction
     public void print() {
-        if (LOG.isDebugEnabled()) {
-            LOG.debug("window.print() not implemented");
+        final PrintHandler handler = getWebWindow().getWebClient().getPrintHandler();
+        if (handler == null) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("window.print() not implemented");
+            }
+            return;
         }
+
+        handler.handlePrint(getWebWindow());
     }
 
     /**
