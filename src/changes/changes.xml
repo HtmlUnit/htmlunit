@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.65.0" date="xxxx, 2022" description="Chrome/Edge 105, Firefox 104">
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.49.v20220914.
+            </action>
             <action type="add" dev="rbri" issue="501">
                 Introducing a PrintHandler configurable at the WebClient. You can provide your
                 own Window.print() implementations if required.
