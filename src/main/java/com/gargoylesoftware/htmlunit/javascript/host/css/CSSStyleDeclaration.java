@@ -128,7 +128,7 @@ import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
-import com.gargoylesoftware.htmlunit.css.ValueUtils;
+import com.gargoylesoftware.htmlunit.css.CssPixelValueConverter;
 import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.impl.Color;
@@ -1845,7 +1845,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelBottom() {
-        return ValueUtils.pixelValue(getBottom());
+        return CssPixelValueConverter.pixelValue(getBottom());
     }
 
     /**
@@ -1863,7 +1863,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelHeight() {
-        return ValueUtils.pixelValue(getHeight());
+        return CssPixelValueConverter.pixelValue(getHeight());
     }
 
     /**
@@ -1881,7 +1881,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelLeft() {
-        return ValueUtils.pixelValue(getLeft());
+        return CssPixelValueConverter.pixelValue(getLeft());
     }
 
     /**
@@ -1899,7 +1899,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelRight() {
-        return ValueUtils.pixelValue(getRight());
+        return CssPixelValueConverter.pixelValue(getRight());
     }
 
     /**
@@ -1917,7 +1917,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelTop() {
-        return ValueUtils.pixelValue(getTop());
+        return CssPixelValueConverter.pixelValue(getTop());
     }
 
     /**
@@ -1935,7 +1935,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      */
     @JsxGetter(IE)
     public int getPixelWidth() {
-        return ValueUtils.pixelValue(getWidth());
+        return CssPixelValueConverter.pixelValue(getWidth());
     }
 
     /**

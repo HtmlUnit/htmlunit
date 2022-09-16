@@ -412,7 +412,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         }
 
         final int windowWidth = domElem.getPage().getEnclosingWindow().getInnerWidth();
-        return ValueUtils.pixelString(domElem, new ValueUtils.CssValue(0, windowWidth) {
+        return CssPixelValueConverter.pixelString(domElem, new CssPixelValueConverter.CssValue(0, windowWidth) {
             @Override
             public String get(final ComputedCssStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH, true);

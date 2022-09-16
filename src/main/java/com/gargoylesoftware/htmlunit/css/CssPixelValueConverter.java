@@ -30,14 +30,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
  *
  * @author Ronald Brill
  */
-public final class ValueUtils {
+public final class CssPixelValueConverter {
 
     private static final Pattern TO_FLOAT_PATTERN = Pattern.compile("(\\d+(?:\\.\\d+)?).*");
 
     /**
      * Disallow instantiation of this class.
      */
-    private ValueUtils() {
+    private CssPixelValueConverter() {
         // Empty.
     }
 
