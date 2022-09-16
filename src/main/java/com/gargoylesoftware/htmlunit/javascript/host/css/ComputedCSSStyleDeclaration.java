@@ -443,13 +443,14 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
         }
         final int windowHeight = elem.getWindow().getWebWindow().getInnerHeight();
-        return CssPixelValueConverter.pixelString(elem.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowHeight) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
-                return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, AUTO);
-            }
-        });
+        return CssPixelValueConverter
+                .pixelString(elem.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowHeight) {
+                    @Override
+                    public String get(final ComputedCssStyleDeclaration style) {
+                        final String offsetHeight = ((HTMLElement) elem).getOffsetHeight() + "px";
+                        return defaultIfEmpty(style.getStyleAttribute(HEIGHT, true), offsetHeight, AUTO);
+                    }
+                });
     }
 
     /**
@@ -525,15 +526,16 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         }
 
         final int windowWidth = elem.getWindow().getWebWindow().getInnerWidth();
-        return CssPixelValueConverter.pixelString(elem.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowWidth) {
-            @Override
-            public String get(final ComputedCssStyleDeclaration style) {
-                if (style.getElementOrNull() == elem) {
-                    return style.getStyleAttribute(definition, true);
-                }
-                return style.getStyleAttribute(WIDTH, true);
-            }
-        });
+        return CssPixelValueConverter
+                .pixelString(elem.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowWidth) {
+                    @Override
+                    public String get(final ComputedCssStyleDeclaration style) {
+                        if (style.getElementOrNull() == elem) {
+                            return style.getStyleAttribute(definition, true);
+                        }
+                        return style.getStyleAttribute(WIDTH, true);
+                    }
+                });
     }
 
     /**
@@ -783,11 +785,12 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 else {
                     // Block elements take up 100% of the parent's width.
                     final HTMLElement parentJS = parent.getScriptableObject();
-                    width = CssPixelValueConverter.pixelValue(parentJS.getDomNodeOrDie(), new CssPixelValueConverter.CssValue(0, windowWidth) {
-                        @Override public String get(final ComputedCssStyleDeclaration style) {
-                            return style.getWidth();
-                        }
-                    }) - (getBorderHorizontal() + getPaddingHorizontal());
+                    width = CssPixelValueConverter.pixelValue(parentJS.getDomNodeOrDie(),
+                                        new CssPixelValueConverter.CssValue(0, windowWidth) {
+                            @Override public String get(final ComputedCssStyleDeclaration style) {
+                                return style.getWidth();
+                            }
+                        }) - (getBorderHorizontal() + getPaddingHorizontal());
                 }
             }
             else if (node instanceof HtmlSubmitInput || node instanceof HtmlResetInput
@@ -1336,7 +1339,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             }
             else {
                 final ComputedCSSStyleDeclaration parentStyle = parent.getWindow().getComputedStyle(parent, null);
-                parentWidth = CssPixelValueConverter.pixelValue(parentStyle.getWidth()) - CssPixelValueConverter.pixelValue(style.getWidth());
+                parentWidth = CssPixelValueConverter.pixelValue(parentStyle.getWidth())
+                                - CssPixelValueConverter.pixelValue(style.getWidth());
             }
             left = parentWidth - CssPixelValueConverter.pixelValue(r);
         }
