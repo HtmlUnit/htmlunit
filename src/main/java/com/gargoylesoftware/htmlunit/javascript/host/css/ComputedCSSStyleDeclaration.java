@@ -979,7 +979,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final boolean explicitHeightSpecified = !isInline && !super.getHeight().isEmpty();
 
         int defaultHeight;
-        if ((element.getClass() == HtmlElement.class
+        if ((element.getScriptableObject().getClass() == HTMLElement.class
                 || element instanceof HtmlDivision
                 || element instanceof HtmlUnknownElement
                 || element instanceof HtmlData
