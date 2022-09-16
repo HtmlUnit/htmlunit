@@ -1429,10 +1429,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @HtmlUnitNYI(IE = "false")
     public void getComputedStyleCached() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
