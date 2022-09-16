@@ -147,7 +147,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
      */
     public ComputedCSSStyleDeclaration(final Element element, final ComputedCssStyleDeclaration cssStyleDeclaration) {
         super(element, cssStyleDeclaration);
-        element.setDefaults(cssStyleDeclaration);
     }
 
     @Override

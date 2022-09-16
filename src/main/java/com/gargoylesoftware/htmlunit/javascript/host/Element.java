@@ -43,7 +43,6 @@ import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomCharacterData;
@@ -428,17 +427,6 @@ public class Element extends Node {
             parent = parent.getParent();
         }
         return (Element) parent;
-    }
-
-    /**
-     * Callback method which allows different HTML element types to perform custom
-     * initialization of computed styles. For example, body elements in most browsers
-     * have default values for their margins.
-     *
-     * @param style the style to initialize
-     */
-    public void setDefaults(final ComputedCssStyleDeclaration style) {
-        // Empty by default; override as necessary.
     }
 
     /**

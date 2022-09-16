@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
@@ -161,5 +164,22 @@ public class HtmlBody extends HtmlElement {
             return true;
         }
         return super.handles(event);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaults(final ComputedCssStyleDeclaration style) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
+            style.setDefaultLocalStyleAttribute("margin", "8px");
+            style.setDefaultLocalStyleAttribute("padding", "0px");
+        }
+        else {
+            style.setDefaultLocalStyleAttribute("margin-left", "8px");
+            style.setDefaultLocalStyleAttribute("margin-right", "8px");
+            style.setDefaultLocalStyleAttribute("margin-top", "8px");
+            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
+        }
     }
 }
