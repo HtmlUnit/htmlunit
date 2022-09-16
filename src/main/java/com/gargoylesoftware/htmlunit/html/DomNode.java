@@ -54,6 +54,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
@@ -61,7 +62,6 @@ import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedTex
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import com.gargoylesoftware.htmlunit.html.xpath.XPathHelper;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -705,7 +705,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // display: iterate top to bottom, because if a parent is display:none,
             // there's nothing that a child can do to override it
             final List<Node> ancestors = getAncestors();
-            final ArrayList<CSSStyleDeclaration> styles = new ArrayList<>(ancestors.size());
+            final ArrayList<ComputedCssStyleDeclaration> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
                 if (node instanceof HtmlElement && ((HtmlElement) node).isHidden()) {
@@ -713,7 +713,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                 }
 
                 if (node instanceof HtmlElement) {
-                    final CSSStyleDeclaration style = window.getComputedStyle((HtmlElement) node, null);
+                    final ComputedCssStyleDeclaration style = window.getComputedStyle((HtmlElement) node, null);
                     if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
                         return false;
                     }
@@ -724,8 +724,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             // visibility: iterate bottom to top, because children can override
             // the visibility used by parent nodes
             for (int i = styles.size() - 1; i >= 0; i--) {
-                final CSSStyleDeclaration style = styles.get(i);
-                final String visibility = style.getStyleAttribute(StyleAttributes.Definition.VISIBILITY);
+                final ComputedCssStyleDeclaration style = styles.get(i);
+                final String visibility = style.getStyleAttribute(StyleAttributes.Definition.VISIBILITY, true);
                 if (visibility.length() > 5) {
                     if ("visible".equals(visibility)) {
                         return true;
