@@ -39,7 +39,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
@@ -383,7 +382,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public ComputedCSSStyleDeclaration getComputedStyle(final DomElement element, final String pseudoElement) {
+    public ComputedCssStyleDeclaration getComputedStyle(final DomElement element, final String pseudoElement) {
         String normalizedPseudo = pseudoElement;
         if (normalizedPseudo != null) {
             if (normalizedPseudo.startsWith("::")) {
@@ -397,7 +396,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
         final SgmlPage sgmlPage = element.getPage();
         if (sgmlPage instanceof HtmlPage) {
-            final ComputedCSSStyleDeclaration styleFromCache =
+            final ComputedCssStyleDeclaration styleFromCache =
                     ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
             if (styleFromCache != null) {
                 return styleFromCache;
@@ -407,8 +406,6 @@ public abstract class WebWindowImpl implements WebWindow {
         final Element e = element.getScriptableObject();
         final ComputedCssStyleDeclaration computedsStyleDeclaration =
                 new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element));
-
-        final ComputedCSSStyleDeclaration style = new ComputedCSSStyleDeclaration(e, computedsStyleDeclaration);
 
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
@@ -424,9 +421,9 @@ public abstract class WebWindowImpl implements WebWindow {
                 }
             }
 
-            ((HtmlPage) element.getPage()).putStyleIntoCache(element, normalizedPseudo, style);
+            ((HtmlPage) element.getPage()).putStyleIntoCache(element, normalizedPseudo, computedsStyleDeclaration);
         }
 
-        return style;
+        return computedsStyleDeclaration;
     }
 }

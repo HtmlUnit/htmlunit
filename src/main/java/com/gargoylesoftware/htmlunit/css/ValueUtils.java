@@ -64,8 +64,8 @@ public final class ValueUtils {
      * @see #pixelValue(DomElement, CssValue)
      */
     public static String pixelString(final DomElement element, final CssValue value) {
-        final ComputedCssStyleDeclaration style = element.getPage().getEnclosingWindow()
-                .getComputedStyle(element, null).getCssStyleDeclaration();
+        final ComputedCssStyleDeclaration style =
+                element.getPage().getEnclosingWindow().getComputedStyle(element, null);
         final String s = value.get(style);
         if (s.endsWith("px")) {
             return s;
@@ -119,8 +119,8 @@ public final class ValueUtils {
     }
 
     private static int pixelValue(final DomElement element, final CssValue value, final boolean percentMode) {
-        final ComputedCssStyleDeclaration style = element.getPage().getEnclosingWindow()
-                .getComputedStyle(element, null).getCssStyleDeclaration();
+        final ComputedCssStyleDeclaration style =
+                element.getPage().getEnclosingWindow().getComputedStyle(element, null);
         final String s = value.get(style);
         if (s.endsWith("%") || (s.isEmpty() && element instanceof HtmlHtml)) {
             final float i = NumberUtils.toFloat(TO_FLOAT_PATTERN.matcher(s).replaceAll("$1"), 100);

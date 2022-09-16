@@ -85,6 +85,7 @@ import com.gargoylesoftware.htmlunit.WebClientOptions;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.FrameWindow.PageDenied;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.html.impl.SimpleRange;
@@ -95,7 +96,6 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
@@ -2692,9 +2692,9 @@ public class HtmlPage extends SgmlPage {
      * @param normalizedPseudo the pseudo attribute
      * @return the cached CSS2Properties object or null
      */
-    public ComputedCSSStyleDeclaration getStyleFromCache(final DomElement element,
+    public ComputedCssStyleDeclaration getStyleFromCache(final DomElement element,
             final String normalizedPseudo) {
-        final ComputedCSSStyleDeclaration styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
+        final ComputedCssStyleDeclaration styleFromCache = getCssPropertiesCache().get(element, normalizedPseudo);
         return styleFromCache;
     }
 
@@ -2707,7 +2707,7 @@ public class HtmlPage extends SgmlPage {
      * @param style the CSS2Properties to cache
      */
     public void putStyleIntoCache(final DomElement element, final String normalizedPseudo,
-            final ComputedCSSStyleDeclaration style) {
+            final ComputedCssStyleDeclaration style) {
         getCssPropertiesCache().put(element, normalizedPseudo, style);
     }
 
@@ -2831,15 +2831,15 @@ public class HtmlPage extends SgmlPage {
      * nodes are kept around in the JVM, if all other references to them are gone.
      */
     private static final class ComputedStylesCache implements Serializable {
-        private transient WeakHashMap<DomElement, Map<String, ComputedCSSStyleDeclaration>>
+        private transient WeakHashMap<DomElement, Map<String, ComputedCssStyleDeclaration>>
                     computedStyles_ = new WeakHashMap<>();
 
         ComputedStylesCache() {
         }
 
-        public synchronized ComputedCSSStyleDeclaration get(final DomElement element,
+        public synchronized ComputedCssStyleDeclaration get(final DomElement element,
                 final String normalizedPseudo) {
-            final Map<String, ComputedCSSStyleDeclaration> elementMap = computedStyles_.get(element);
+            final Map<String, ComputedCssStyleDeclaration> elementMap = computedStyles_.get(element);
             if (elementMap != null) {
                 return elementMap.get(normalizedPseudo);
             }
@@ -2847,17 +2847,17 @@ public class HtmlPage extends SgmlPage {
         }
 
         public synchronized void put(final DomElement element,
-                final String normalizedPseudo, final ComputedCSSStyleDeclaration style) {
-            final Map<String, ComputedCSSStyleDeclaration>
+                final String normalizedPseudo, final ComputedCssStyleDeclaration style) {
+            final Map<String, ComputedCssStyleDeclaration>
                     elementMap = computedStyles_.computeIfAbsent(element, k -> new WeakHashMap<>());
             elementMap.put(normalizedPseudo, style);
         }
 
         public synchronized void nodeChanged(final DomNode changed, final boolean clearParents) {
-            final Iterator<Map.Entry<DomElement, Map<String, ComputedCSSStyleDeclaration>>>
+            final Iterator<Map.Entry<DomElement, Map<String, ComputedCssStyleDeclaration>>>
                     i = computedStyles_.entrySet().iterator();
             while (i.hasNext()) {
-                final Map.Entry<DomElement, Map<String, ComputedCSSStyleDeclaration>> entry = i.next();
+                final Map.Entry<DomElement, Map<String, ComputedCssStyleDeclaration>> entry = i.next();
                 final DomElement node = entry.getKey();
                 if (changed == node
                     || changed.getParentNode() == node.getParentNode()
@@ -2900,7 +2900,7 @@ public class HtmlPage extends SgmlPage {
             computedStyles_.clear();
         }
 
-        public synchronized Map<String, ComputedCSSStyleDeclaration> remove(
+        public synchronized Map<String, ComputedCssStyleDeclaration> remove(
                 final DomNode element) {
             return computedStyles_.remove(element);
         }

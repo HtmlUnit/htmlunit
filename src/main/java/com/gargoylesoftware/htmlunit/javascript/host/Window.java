@@ -62,6 +62,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebConsole;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.WebWindowNotFoundException;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -1649,7 +1650,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
         final Element e = (Element) element;
 
-        return getWebWindow().getComputedStyle(e.getDomNodeOrDie(), pseudoElement);
+        final ComputedCssStyleDeclaration style = getWebWindow().getComputedStyle(e.getDomNodeOrDie(), pseudoElement);
+        return new ComputedCSSStyleDeclaration(e, style);
     }
 
     /**

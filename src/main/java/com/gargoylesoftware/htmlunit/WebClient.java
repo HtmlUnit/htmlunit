@@ -76,6 +76,7 @@ import org.apache.http.util.CharArrayBuffer;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -92,6 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -2169,7 +2171,12 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (webClient_.isJavaScriptEnabled() && frameElement.isDisplayed()) {
-                    final ComputedCSSStyleDeclaration style = fw.getComputedStyle(frameElement, null);
+                    // todo move getCalculatedWidth() and getCalculatedHeight() to ComputedCssStyleDeclaration
+                    final ComputedCssStyleDeclaration computedCssStyleDeclaration =
+                            fw.getComputedStyle(frameElement, null);
+                    final Element elem = frameElement.getScriptableObject();
+                    final ComputedCSSStyleDeclaration style =
+                            new ComputedCSSStyleDeclaration(elem, computedCssStyleDeclaration);
                     use = style.getCalculatedWidth(false, false) != 0
                             && style.getCalculatedHeight(false, false) != 0;
                 }

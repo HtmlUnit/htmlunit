@@ -23,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -41,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.ScriptElement;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerInnerOuterText.HtmlSerializerTextBuilder.Mode;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.svg.SvgTitle;
 
 /**
@@ -256,7 +256,7 @@ public class HtmlSerializerInnerOuterText {
                     DomNode node = domNode;
                     while (node != null) {
                         if (node instanceof DomElement) {
-                            final ComputedCSSStyleDeclaration style =
+                            final ComputedCssStyleDeclaration style =
                                     window.getComputedStyle((DomElement) domNode, null);
                             final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                             if (StringUtils.isNoneEmpty(value)) {
