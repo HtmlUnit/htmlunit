@@ -1206,7 +1206,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                         final String display = style.getDisplay();
                         if (isBlock(display)) {
                             int prevTop = 0;
-                            final Integer eCachedTop = getCssStyleDeclaration().getCachedTop();
+                            final Integer eCachedTop = style.getCssStyleDeclaration().getCachedTop();
                             if (eCachedTop == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
                                 if (ABSOLUTE.equals(prevPosition)) {
