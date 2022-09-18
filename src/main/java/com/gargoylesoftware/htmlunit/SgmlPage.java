@@ -42,7 +42,6 @@ import com.gargoylesoftware.htmlunit.html.DomNodeIterator;
 import com.gargoylesoftware.htmlunit.html.DomNodeList;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
