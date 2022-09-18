@@ -20,7 +20,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A handler for JavaScript Window.print()
- * (<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#printing>Printing Spec</a>).
+ * (<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#printing">Printing Spec</a>).
  * All js execution on page containing the document is blocked during the execution of the print method.
  * <p>If the {@link PrintHandler} for the {@link WebClient} is null Window.print() will be a nopp including
  * not triggering any print events.</p>
