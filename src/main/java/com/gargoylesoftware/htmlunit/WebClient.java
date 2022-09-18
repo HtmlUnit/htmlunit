@@ -2021,16 +2021,20 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the current print handler.
-     * @return the current print handler
+     * Returns the current {@link PrintHandler}.
+     * @return the current {@link PrintHandler} or null if print
+     * requests are ignored
      */
     public PrintHandler getPrintHandler() {
         return printHandler_;
     }
 
     /**
-     * Sets the print handler.
-     * @param handler the new print handler
+     * Sets the {@link PrintHandler} to be used if Windoe.print() is called
+     * (<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#printing>Printing Spec</a>).
+     *
+     * @param handler the new {@link PrintHandler} or null if you like to
+     * ignore print requests (default is null)
      */
     public void setPrintHandler(final PrintHandler handler) {
         printHandler_ = handler;

@@ -50,8 +50,10 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -1589,43 +1591,283 @@ public class WindowTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"before print§printed§from timeout§", "before print§print handled§printed§from timeout§"})
     public void printHandler() throws Exception {
+        // we have to test this manually
+
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
         final String firstContent
             = "<html><head>\n"
             + "<script>\n"
-            + "function doTest() {\n"
-            + "  window.print();\n"
-            + "  alert('printed');\n"
-            + "}\n"
+            + "  function log(msg) { window.document.title += msg + '§'; }\n"
+
+            + "  function doTest() {\n"
+            + "    setTimeout(() => { log('from timeout'); }, 100)\n"
+            + "    log('before print');\n"
+            + "    window.print();\n"
+            + "    log('printed');\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
-            + "<body onload='doTest()'>\n"
+            + "<body>\n"
+            + "  <button id='click' onclick='doTest()'>Print</button>\n"
             + "</body></html>";
 
         final URL url = URL_FIRST;
         webConnection.setResponse(url, firstContent);
         webClient.setWebConnection(webConnection);
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
+        HtmlPage page = webClient.getPage(URL_FIRST);
+        page.getElementById("click").click();
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
 
-        webClient.getPage(URL_FIRST);
-        String[] expectedAlerts = {"printed"};
-        assertEquals("alerts", expectedAlerts, collectedAlerts);
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
 
-        collectedAlerts.clear();
         webClient.setPrintHandler(new PrintHandler() {
             @Override
-            public void handlePrint(final WebWindow webWindow) {
-                collectedAlerts.add("print handled");
+            public void handlePrint(final Document document) {
+                try {
+                    Thread.sleep(DEFAULT_WAIT_TIME);
+                }
+                catch (final InterruptedException e) {
+                    ((HtmlPage) document.getPage()).executeJavaScript("log('" + e.getMessage() + "');");
+                }
+                ((HtmlPage) document.getPage()).executeJavaScript("log('print handled');");
             }
         });
 
-        webClient.getPage(URL_FIRST);
-        expectedAlerts = new String[] {"print handled", "printed"};
-        assertEquals("alerts", expectedAlerts, collectedAlerts);
+        page = webClient.getPage(URL_FIRST);
+        page.getElementById("click").click();
+        webClient.waitForBackgroundJavaScript(200000 * DEFAULT_WAIT_TIME);
+
+        assertEquals(getExpectedAlerts()[1], page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-true-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-true-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            IE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
+                        + "-false-2-true-undefined-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
+                        + "-false-2-true-undefined-[object Window]-[object Window]-afterprint"
+                    + "§printed§")
+    @HtmlUnitNYI(CHROME = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            EDGE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            FF = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            FF_ESR = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            IE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
+                        + "-false-2-undefined-undefined-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
+                        + "-false-2-undefined-undefined-[object Window]-[object Window]-afterprint"
+                    + "§printed§")
+    public void printEvent() throws Exception {
+        // we have to test this manually
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        // without an print handler set the print method is a noop
+        webClient.setPrintHandler(new PrintHandler() {
+            @Override
+            public void handlePrint(final Document document) {
+            }
+        });
+
+
+        final String firstContent
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) { window.document.title += msg + '§'; }\n"
+
+            + "  function dumpEvent(event) {\n"
+            + "    var msg = event;\n"
+            + "    msg = msg + event.type;\n"
+            + "    msg = msg + '-' + event.bubbles;\n"
+            + "    msg = msg + '-' + event.cancelable;\n"
+            + "    msg = msg + '-' + event.composed;\n"
+            + "    msg = msg + '-' + event.currentTarget;\n"
+            + "    msg = msg + '-' + event.defaultPrevented;\n"
+            + "    msg = msg + '-' + event.eventPhase;\n"
+            + "    msg = msg + '-' + event.isTrusted;\n"
+            + "    msg = msg + '-' + event.returnValue;\n"
+            + "    msg = msg + '-' + event.srcElement;\n"
+            + "    msg = msg + '-' + event.target;\n"
+            // + "    msg = msg + '-' + event.timeStamp;\n"
+            + "    msg = msg + '-' + event.type;\n"
+            + "    log(msg);\n"
+            + "  }\n"
+
+            + "  function doTest() {\n"
+            + "    addEventListener('beforeprint', function(e) { log('event beforeprint'); dumpEvent(e); })\n"
+            + "    addEventListener('afterprint', function(e) { log('event afterprint'); dumpEvent(e); })\n"
+
+            + "    log('before print');\n"
+            + "    window.print();\n"
+            + "    log('printed');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <button id='click' onclick='doTest()'>Print</button>\n"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, firstContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        page.getElementById("click").click();
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-true-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-true-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            IE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
+                        + "-false-2-true-undefined-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
+                        + "-false-2-true-undefined-[object Window]-[object Window]-afterprint"
+                    + "§printed§")
+    @HtmlUnitNYI(CHROME = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            EDGE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            FF = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            FF_ESR = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-false-[object Window]"
+                        + "-false-2-undefined-true-[object Window]-[object Window]-afterprint"
+                    + "§printed§",
+            IE = "before print"
+                    + "§event beforeprint"
+                    + "§[object Event]beforeprint-false-false-undefined-[object Window]"
+                        + "-false-2-undefined-undefined-[object Window]-[object Window]-beforeprint"
+                    + "§event afterprint"
+                    + "§[object Event]afterprint-false-false-undefined-[object Window]"
+                        + "-false-2-undefined-undefined-[object Window]-[object Window]-afterprint"
+                    + "§printed§")
+    public void printEventCancel() throws Exception {
+        // we have to test this manually
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        // without an print handler set the print method is a noop
+        webClient.setPrintHandler(new PrintHandler() {
+            @Override
+            public void handlePrint(final Document document) {
+            }
+        });
+
+
+        final String firstContent
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) { window.document.title += msg + '§'; }\n"
+
+            + "  function doTest() {\n"
+            + "    addEventListener('beforeprint', function(e) { log('event beforeprint'); })\n"
+            + "    addEventListener('afterprint', function(e) { log('event afterprint'); })\n"
+
+            + "    log('before print');\n"
+            + "    window.print();\n"
+            + "    log('printed');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <button id='click' onclick='doTest()'>Print</button>\n"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, firstContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        page.getElementById("click").click();
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 }

@@ -642,7 +642,11 @@ public class Event extends HtmlUnitScriptable {
             // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error
             bubbles_ = false;
         }
-        else if (TYPE_FOCUS.equals(type) || TYPE_BLUR.equals(type)) {
+        else if (
+                TYPE_FOCUS.equals(type)
+                || TYPE_BLUR.equals(type)
+                || TYPE_BEFOREPRINT.equals(type)
+                || TYPE_AFTERPRINT.equals(type)) {
             bubbles_ = false;
             cancelable_ = false;
         }

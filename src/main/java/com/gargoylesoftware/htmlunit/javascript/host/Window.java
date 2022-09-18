@@ -1587,7 +1587,8 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Prints the current page. The current implementation does nothing.
+     * Prints the current page. The current implementation uses the {@link PrintHandler}
+     * defined for the {@link WebClient} to process the window.
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_window_ref85.html">
      * Mozilla documentation</a>
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536672.aspx">MSDN documentation</a>
@@ -1602,7 +1603,14 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             return;
         }
 
-        handler.handlePrint(getWebWindow());
+        Event event = new Event(this, Event.TYPE_BEFOREPRINT);
+        fireEvent(event);
+
+        handler.handlePrint(getDocument());
+
+        event = new Event(this, Event.TYPE_AFTERPRINT);
+        fireEvent(event);
+
     }
 
     /**
