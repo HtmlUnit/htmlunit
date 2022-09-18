@@ -1870,4 +1870,58 @@ public class WindowTest extends SimpleWebTestCase {
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("block§none§block§")
+    public void printCssMediaRule() throws Exception {
+        // we have to test this manually
+
+        final WebClient webClient = getWebClient();
+        final MockWebConnection webConnection = new MockWebConnection();
+
+        // without an print handler set the print method is a noop
+        webClient.setPrintHandler(new PrintHandler() {
+            @Override
+            public void handlePrint(final Document document) {
+                ((HtmlPage) document.getPage()).executeJavaScript(
+                        "log(window.getComputedStyle(document.getElementById('tester') ,null)"
+                                + ".getPropertyValue('display'))");
+            }
+        });
+
+
+        final String firstContent
+            = "<html><head>\n"
+            + "<script>\n"
+            + "  function log(msg) { window.document.title += msg + '§'; }\n"
+
+            + "  function doTest() {\n"
+            + "    log(window.getComputedStyle(document.getElementById('tester') ,null)"
+                        + ".getPropertyValue('display'));\n"
+            + "    window.print();\n"
+            + "    log(window.getComputedStyle(document.getElementById('tester') ,null)"
+                        + ".getPropertyValue('display'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "<style type='text/css'>\n"
+            + "  @media print { p { display: none }}\n"
+            + "</style>"
+            + "</head>\n"
+            + "<body>\n"
+            + "  <p id='tester'>HtmlUnit</p>\n"
+            + "  <button id='click' onclick='doTest()'>Print</button>\n"
+            + "</body></html>";
+
+        final URL url = URL_FIRST;
+        webConnection.setResponse(url, firstContent);
+        webClient.setWebConnection(webConnection);
+
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        page.getElementById("click").click();
+        webClient.waitForBackgroundJavaScript(DEFAULT_WAIT_TIME);
+
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
+    }
 }

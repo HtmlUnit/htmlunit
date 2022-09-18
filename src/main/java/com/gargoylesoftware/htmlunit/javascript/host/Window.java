@@ -1606,8 +1606,14 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         Event event = new Event(this, Event.TYPE_BEFOREPRINT);
         fireEvent(event);
 
-        handler.handlePrint(getDocument());
-
+        final Document document = getDocument();
+        document.getPage().setPrinting(true);
+        try {
+            handler.handlePrint(document);
+        }
+        finally {
+            document.getPage().setPrinting(false);
+        }
         event = new Event(this, Event.TYPE_AFTERPRINT);
         fireEvent(event);
 

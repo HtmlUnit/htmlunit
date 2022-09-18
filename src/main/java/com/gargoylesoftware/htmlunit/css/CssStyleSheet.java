@@ -87,6 +87,8 @@ import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
+import com.gargoylesoftware.htmlunit.Page;
+import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.WebResponse;
@@ -1406,6 +1408,12 @@ public class CssStyleSheet implements Serializable {
                 }
             }
             return true;
+        }
+        else if ("print".equalsIgnoreCase(mediaType)) {
+            final Page page = webWindow.getEnclosedPage();
+            if (page instanceof SgmlPage) {
+                return ((SgmlPage) page).isPrinting();
+            }
         }
         return false;
     }
