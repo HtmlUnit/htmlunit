@@ -1869,6 +1869,7 @@ public class WindowTest extends SimpleWebTestCase {
 
         assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
+
     /**
      * @throws Exception if the test fails
      */
