@@ -152,7 +152,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Function used in many tests.
      */
     public static final String LOG_TITLE_FUNCTION =
-            "  function log(msg) { window.document.title += msg + '§';}\n";
+            "  function log(msg) { window.document.title += msg + '§'; }\n";
 
     /**
      * Function used in many tests.
