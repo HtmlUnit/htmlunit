@@ -50,7 +50,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -1627,14 +1626,14 @@ public class WindowTest extends SimpleWebTestCase {
 
         webClient.setPrintHandler(new PrintHandler() {
             @Override
-            public void handlePrint(final Document document) {
+            public void handlePrint(final HtmlPage page) {
                 try {
                     Thread.sleep(DEFAULT_WAIT_TIME);
                 }
                 catch (final InterruptedException e) {
-                    ((HtmlPage) document.getPage()).executeJavaScript("log('" + e.getMessage() + "');");
+                    page.executeJavaScript("log('" + e.getMessage() + "');");
                 }
-                ((HtmlPage) document.getPage()).executeJavaScript("log('print handled');");
+                page.executeJavaScript("log('print handled');");
             }
         });
 
@@ -1714,7 +1713,7 @@ public class WindowTest extends SimpleWebTestCase {
         // without an print handler set the print method is a noop
         webClient.setPrintHandler(new PrintHandler() {
             @Override
-            public void handlePrint(final Document document) {
+            public void handlePrint(final HtmlPage page) {
             }
         });
 
@@ -1836,7 +1835,7 @@ public class WindowTest extends SimpleWebTestCase {
         // without an print handler set the print method is a noop
         webClient.setPrintHandler(new PrintHandler() {
             @Override
-            public void handlePrint(final Document document) {
+            public void handlePrint(final HtmlPage page) {
             }
         });
 
@@ -1884,8 +1883,8 @@ public class WindowTest extends SimpleWebTestCase {
         // without an print handler set the print method is a noop
         webClient.setPrintHandler(new PrintHandler() {
             @Override
-            public void handlePrint(final Document document) {
-                ((HtmlPage) document.getPage()).executeJavaScript(
+            public void handlePrint(final HtmlPage page) {
+                page.executeJavaScript(
                         "log(window.getComputedStyle(document.getElementById('tester') ,null)"
                                 + ".getPropertyValue('display'))");
             }

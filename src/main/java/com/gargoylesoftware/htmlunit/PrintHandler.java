@@ -16,7 +16,7 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
  * A handler for JavaScript Window.print()
@@ -31,7 +31,7 @@ public interface PrintHandler extends Serializable {
 
     /**
      * Handle a call to Window.print().
-     * @param document the {@link Document} to print
+     * @param page the {@link HtmlPage} to print
      */
-    void handlePrint(Document document);
+    void handlePrint(HtmlPage page);
 }

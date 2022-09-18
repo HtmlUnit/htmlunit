@@ -1597,8 +1597,16 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     public void print() {
         final PrintHandler handler = getWebWindow().getWebClient().getPrintHandler();
         if (handler == null) {
+            if (LOG.isInfoEnabled()) {
+                LOG.info("No PrintHandler installed - window.print() ignored");
+            }
+            return;
+        }
+
+        final SgmlPage sgmlPage = getDocument().getPage();
+        if (!(sgmlPage instanceof HtmlPage)) {
             if (LOG.isDebugEnabled()) {
-                LOG.debug("window.print() not implemented");
+                LOG.debug("Page is not an HtmlPage - window.print() ignored");
             }
             return;
         }
@@ -1606,17 +1614,16 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         Event event = new Event(this, Event.TYPE_BEFOREPRINT);
         fireEvent(event);
 
-        final Document document = getDocument();
-        document.getPage().setPrinting(true);
+        final HtmlPage page = (HtmlPage) sgmlPage;
+        page.setPrinting(true);
         try {
-            handler.handlePrint(document);
+            handler.handlePrint(page);
         }
         finally {
-            document.getPage().setPrinting(false);
+            page.setPrinting(false);
         }
         event = new Event(this, Event.TYPE_AFTERPRINT);
         fireEvent(event);
-
     }
 
     /**
