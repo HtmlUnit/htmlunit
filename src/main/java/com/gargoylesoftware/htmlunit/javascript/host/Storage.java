@@ -46,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 @JsxClass
 public class Storage extends HtmlUnitScriptable {
 
-    private static final HashSet<String> RESERVED_NAMES_ = new HashSet<String>(Arrays.asList(
+    private static final HashSet<String> RESERVED_NAMES_ = new HashSet<>(Arrays.asList(
         "clear", "key", "getItem", "length", "removeItem",
         "setItem", "constructor", "toString", "toLocaleString", "valueOf", "hasOwnProperty", "propertyIsEnumerable",
         "isPrototypeOf", "__defineGetter__", "__defineSetter__", "__lookupGetter__", "__lookupSetter__"));

@@ -28,10 +28,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * A JavaScript object for {@code Comment}.
- *
- * JavaScript: in IE, Comment is Element, but in FF: Comment is CharacterDataImpl.
- *
- * However, in DOM, Comment is CharacterDataImpl.
+ * <p>JavaScript: in IE, Comment is Element, but in FF: Comment is CharacterDataImpl.
+ * However, in DOM, Comment is CharacterDataImpl.</p>
  *
  * @author Mirko Friedenhagen
  * @author Ahmed Ashour

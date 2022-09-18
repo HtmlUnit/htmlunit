@@ -202,8 +202,7 @@ public class HtmlSerializerNormalizedText {
         if (!(domNode instanceof HtmlBody)) {
             final SgmlPage page = domNode.getPage();
             final WebWindow window = page.getEnclosingWindow();
-            if (page != null
-                    && page.getWebClient().isJavaScriptEngineEnabled()  // TODO
+            if (page.getWebClient().isJavaScriptEngineEnabled()  // TODO
                     && window.getWebClient().getOptions().isCssEnabled()) {
                 if (domNode instanceof DomElement) {
                     final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();

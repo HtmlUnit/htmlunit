@@ -930,9 +930,8 @@ public class Document extends Node {
 
     /**
      * JavaScript function {@code close}.
-     *
-     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
-     * a good description of the semantics of open(), write(), writeln() and close().
+     * <p>See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * a good description of the semantics of open(), write(), writeln() and close().</p>
      *
      * @throws IOException if an IO problem occurs
      */
@@ -1381,8 +1380,8 @@ public class Document extends Node {
     /**
      * Sets the domain of this document.
      *
-     * Domains can only be set to suffixes of the existing domain
-     * with the exception of setting the domain to itself.
+     * <p>Domains can only be set to suffixes of the existing domain
+     * with the exception of setting the domain to itself.</p>
      * <p>
      * The domain will be set according to the following rules:
      * <ol>

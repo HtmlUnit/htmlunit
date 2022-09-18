@@ -90,10 +90,7 @@ public class CSSRuleList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        if (rules_ != null) {
-            return rules_.size();
-        }
-        return 0;
+        return rules_.size();
     }
 
     /**

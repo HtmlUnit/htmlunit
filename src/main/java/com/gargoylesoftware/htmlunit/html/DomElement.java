@@ -1503,7 +1503,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * This method is called if the current fired event is canceled by <tt>preventDefault()</tt> in FireFox,
      * or by returning {@code false} in Internet Explorer.
      *
-     * The default implementation does nothing.
+     * <p>The default implementation does nothing.</p>
      */
     protected void preventDefault() {
         // Empty by default; override as needed.

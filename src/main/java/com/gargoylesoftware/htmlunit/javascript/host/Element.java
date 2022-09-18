@@ -1074,8 +1074,7 @@ public class Element extends Node {
             }
             builder.append('>');
             // Add the children.
-            final boolean isHtml = html
-                    && !(scriptObject instanceof HTMLScriptElement)
+            final boolean isHtml = !(scriptObject instanceof HTMLScriptElement)
                     && !(scriptObject instanceof HTMLStyleElement);
             printChildren(builder, node, isHtml);
             if (null == htmlElement || !htmlElement.isEndTagForbidden()) {

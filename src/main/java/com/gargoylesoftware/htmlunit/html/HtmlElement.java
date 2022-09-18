@@ -912,7 +912,7 @@ public abstract class HtmlElement extends DomElement {
         for (final HtmlElement next : getHtmlElementDescendants()) {
             if (next.getTagName().equals(lowerCaseTagName)) {
                 final String attValue = next.getAttribute(attributeName);
-                if (attValue != null && attValue.equals(attributeValue)) {
+                if (attValue.equals(attributeValue)) {
                     list.add((E) next);
                 }
             }

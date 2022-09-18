@@ -868,10 +868,10 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.
+     * <p>Returns the JavaScript object that corresponds to this node, lazily initializing a new one if necessary.</p>
      *
-     * The logic of when and where the JavaScript object is created needs a clean up: functions using
-     * a DOM node's JavaScript object should not have to check if they should create it first.
+     * <p>The logic of when and where the JavaScript object is created needs a clean up: functions using
+     * a DOM node's JavaScript object should not have to check if they should create it first.</p>
      *
      * @param <T> the object type
      * @return the JavaScript object that corresponds to this node
@@ -1690,7 +1690,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Support for reporting DOM changes. This method can be called when a node has been added, and it
      * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
-     * Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomChangeEvent)}.
+     * <p>Note that this method recursively calls this node's parent's {@link #fireNodeAdded(DomChangeEvent)}.</p>
      *
      * @param event the DomChangeEvent to be propagated
      */
@@ -1746,7 +1746,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     /**
      * Support for reporting Character Data changes.
      *
-     * Note that this method recursively calls this node's parent's {@link #fireCharacterDataChanged}.
+     * <p>Note that this method recursively calls this node's parent's {@link #fireCharacterDataChanged}.</p>
      *
      * @param event the CharacterDataChangeEvent to be propagated
      */
@@ -1766,7 +1766,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Support for reporting DOM changes. This method can be called when a node has been deleted, and it
      * will send the appropriate {@link DomChangeEvent} to any registered {@link DomChangeListener}s.
      *
-     * Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomChangeEvent)}.
+     * <p>Note that this method recursively calls this node's parent's {@link #fireNodeDeleted(DomChangeEvent)}.</p>
      *
      * @param event the DomChangeEvent to be propagated
      */
