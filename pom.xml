@@ -29,6 +29,7 @@
         <htmlunitcssparser.version>1.12.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.64.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.64.0</htmlunitcorejs.version>
+        <htmlunitxpath.version>1.0.0-SNAPSHOT</htmlunitxpath.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.49.v20220914</jetty.version>
@@ -1225,6 +1226,11 @@
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-cssparser</artifactId>
             <version>${htmlunitcssparser.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit-xpath</artifactId>
+            <version>${htmlunitxpath.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>

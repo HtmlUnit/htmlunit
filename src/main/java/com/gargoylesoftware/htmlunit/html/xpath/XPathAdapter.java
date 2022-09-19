@@ -18,18 +18,18 @@ import javax.xml.transform.ErrorListener;
 import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xml.utils.DefaultErrorHandler;
-import org.apache.xml.utils.PrefixResolver;
-import org.apache.xml.utils.WrappedRuntimeException;
-import org.apache.xpath.Expression;
-import org.apache.xpath.ExpressionNode;
-import org.apache.xpath.XPathContext;
-import org.apache.xpath.compiler.Compiler;
-import org.apache.xpath.compiler.FunctionTable;
-import org.apache.xpath.compiler.XPathParser;
-import org.apache.xpath.objects.XObject;
-import org.apache.xpath.res.XPATHErrorResources;
-import org.apache.xpath.res.XPATHMessages;
+import net.sourceforge.htmlunit.xpath.Expression;
+import net.sourceforge.htmlunit.xpath.ExpressionNode;
+import net.sourceforge.htmlunit.xpath.XPathContext;
+import net.sourceforge.htmlunit.xpath.compiler.Compiler;
+import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
+import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
+import net.sourceforge.htmlunit.xpath.objects.XObject;
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
+import net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
+import net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
 /**
  * XPath adapter implementation for HtmlUnit.

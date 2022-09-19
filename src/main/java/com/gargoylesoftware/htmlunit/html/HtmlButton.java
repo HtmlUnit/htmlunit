@@ -283,7 +283,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the normalized type value (submit|reset|button).
      */
     public String getType() {
-        String type = getTypeAttribute().toLowerCase(Locale.ROOT);
+        final String type = getTypeAttribute().toLowerCase(Locale.ROOT);
         if (TYPE_RESET.equals(type)) {
             return TYPE_RESET;
         }
