@@ -17,8 +17,9 @@ package com.gargoylesoftware.htmlunit.protocol.javascript;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.charset.StandardCharsets;
 
-import com.gargoylesoftware.htmlunit.util.TextUtils;
+import org.apache.commons.io.IOUtils;
 
 /**
  * A URLConnection for supporting JavaScript URLs.
@@ -56,7 +57,7 @@ public class JavaScriptURLConnection extends URLConnection {
      */
     @Override
     public InputStream getInputStream() {
-        return TextUtils.toInputStream(content_);
+        return IOUtils.toInputStream(content_, StandardCharsets.ISO_8859_1);
     }
 
 }

@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.util.MimeType;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link DomText}.
@@ -161,7 +161,7 @@ public class DomTextTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtils.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
+        webConnection.setDefaultResponse(StringUtils.toByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

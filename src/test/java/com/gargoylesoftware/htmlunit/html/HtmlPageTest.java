@@ -22,6 +22,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +61,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -998,7 +1000,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertNotNull("xml document could not be parsed", page.asXml());
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        builder.parse(TextUtils.toInputStream(page.asXml()));
+        builder.parse(IOUtils.toInputStream(page.asXml(), StandardCharsets.ISO_8859_1));
     }
 
     /**
@@ -1014,7 +1016,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtils.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
+        webConnection.setDefaultResponse(StringUtils.toByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);

@@ -106,7 +106,6 @@ import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
 import com.shapesecurity.salvation2.Policy;
@@ -1424,7 +1423,8 @@ public class WebClient implements Serializable, AutoCloseable {
             compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML));
             final WebResponseData responseData =
                 new WebResponseData(
-                    TextUtils.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
+                        com.gargoylesoftware.htmlunit.util.StringUtils
+                            .toByteArray("File: " + file.getAbsolutePath(), UTF_8),
                     404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
         }

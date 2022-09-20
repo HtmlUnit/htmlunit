@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.util;
 
+import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -384,5 +385,20 @@ public final class StringUtils {
             }
         }
         return builder.toString();
+    }
+
+    /**
+     * Converts a string into a byte array using the specified encoding.
+     *
+     * @param charset the charset
+     * @param content the string to convert
+     * @return the String as a byte[]; if the specified encoding is not supported an empty byte[] will be returned
+     */
+    public static byte[] toByteArray(final String content, final Charset charset) {
+        if (content ==  null || content.isEmpty()) {
+            return new byte[0];
+        }
+
+        return content.getBytes(charset);
     }
 }
