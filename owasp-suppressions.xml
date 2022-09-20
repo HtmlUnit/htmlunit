@@ -10,19 +10,21 @@
         <vulnerabilityName>CVE-2022-29546</vulnerabilityName>
     </suppress>
     <suppress>
+        <notes><![CDATA[
+        xalan is used by batik
+        ]]></notes>
         <packageUrl regex="true">^pkg:maven/xerces/xercesImpl@.*$</packageUrl>
         <vulnerabilityName>CVE-2017-10355</vulnerabilityName>
     </suppress>
     <suppress>
+        <notes><![CDATA[
+        xalan is used by batik
+        ]]></notes>
         <packageUrl regex="true">^pkg:maven/xalan/xalan@.*$</packageUrl>
         <vulnerabilityName>CVE-2022-34169</vulnerabilityName>
     </suppress>
     <suppress>
         <packageUrl regex="true">^pkg:maven/xalan/serializer@.*$</packageUrl>
         <vulnerabilityName>CVE-2022-34169</vulnerabilityName>
-    </suppress>
-    <suppress>
-        <packageUrl regex="true">^pkg:maven/.*jetty.io.9\.4\.48\.v20220622.*$</packageUrl>
-        <vulnerabilityName>CVE-2022-2191</vulnerabilityName>
     </suppress>
 </suppressions>
