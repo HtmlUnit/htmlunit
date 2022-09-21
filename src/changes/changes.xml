@@ -9,7 +9,7 @@
     <body>
         <release version="2.65.0" date="xxxx, 2022" description="Chrome/Edge 105, Firefox 104">
             <action type="remove" dev="rbri">
-              com.gargoylesoftware.htmlunit.util.TextUtils removed.
+                com.gargoylesoftware.htmlunit.util.TextUtils removed.
             </action>
             <action type="update" dev="rbri">
                 Switch from xalan to htmlunit-xpath.
