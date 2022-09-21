@@ -55,4 +55,155 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
 
         loadPageWithAlerts2(content);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "[object HTMLParagraphElement][object HTMLDivElement]",
+            IE = "error")
+    public void pipe() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';"
+            + "    var expr = '//p | //div';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    while (node = result.iterateNext()) {\n"
+            + "      res += node;\n"
+            + "    }\n"
+            + "    log(res);\n"
+            + "  } catch (e) {log('error')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <p></p>\n"
+            + "  <div></div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "a",
+            IE = "error")
+    public void math() throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';"
+            + "    var expr = '//p[position()=(1+5-(2*2))div 2]';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    while (node = result.iterateNext()) {\n"
+            + "      res += node.id;\n"
+            + "    }\n"
+            + "    log(res);\n"
+            + "  } catch (e) {log('error')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <p id='a'></p>\n"
+            + "    <p id='b'></p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b",
+            IE = "error")
+    public void gt() throws Exception {
+        compare("//p[position()>1]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ab",
+            IE = "error")
+    public void gte() throws Exception {
+        compare("//p[position()>=1]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "a",
+            IE = "error")
+    public void lt() throws Exception {
+        compare("//p[position()<2]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ab",
+            IE = "error")
+    public void lte() throws Exception {
+        compare("//p[position()<=2]");
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b",
+            IE = "error")
+    public void eq() throws Exception {
+        compare("//p[position()=2]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b",
+            IE = "error")
+    public void neq() throws Exception {
+        compare("//p[position()!=1]");
+    }
+
+    private void compare(final String xpath) throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';"
+            + "    var expr = '" + xpath + "';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    while (node = result.iterateNext()) {\n"
+            + "      res += node.id;\n"
+            + "    }\n"
+            + "    log(res);\n"
+            + "  } catch (e) {log('error')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <p id='a'></p>\n"
+            + "    <p id='b'></p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
 }
