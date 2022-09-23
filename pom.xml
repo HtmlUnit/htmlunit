@@ -1369,7 +1369,7 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.14</version>
+            <version>1.15</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

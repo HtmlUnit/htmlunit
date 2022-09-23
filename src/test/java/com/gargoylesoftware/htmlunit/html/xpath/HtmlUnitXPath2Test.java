@@ -159,6 +159,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     public void lte() throws Exception {
         compare("//p[position()<=2]");
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -179,6 +180,56 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
         compare("//p[position()!=1]");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "a",
+            IE = "error")
+    public void and() throws Exception {
+        compare("//p[@x>= 0 and @y=7]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ab",
+            IE = "error")
+    public void or() throws Exception {
+        compare("//p[@x>= 0 or @y>4]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ab",
+            IE = "error")
+    public void mod() throws Exception {
+        compare("//p[@y mod 6 = 1]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "b",
+            IE = "error")
+    public void number() throws Exception {
+        compare("//p[@y=number(\"  13\t \")]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "a",
+            IE = "error")
+    public void attrib() throws Exception {
+        compare("//p[@x=1]");
+    }
+
     private void compare(final String xpath) throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
@@ -193,13 +244,13 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error')}\n"
+            + "  } catch (e) {log('error' + e)}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "  <div>\n"
-            + "    <p id='a'></p>\n"
-            + "    <p id='b'></p>\n"
+            + "    <p id='a' x='1' y='7'></p>\n"
+            + "    <p id='b' y='13'></p>\n"
             + "  </div>\n"
             + "</body></html>";
 
