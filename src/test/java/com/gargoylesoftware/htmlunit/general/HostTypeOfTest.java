@@ -2110,7 +2110,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined",
             IE = "undefined")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
@@ -4242,7 +4241,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined")
     public void offscreenCanvas() throws Exception {
@@ -6303,7 +6303,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function",
             IE = "object")
     public void svgPathSegList() throws Exception {
         test("SVGPathSegList");

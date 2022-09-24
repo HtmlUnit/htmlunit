@@ -2295,7 +2295,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the {@code onanimationiteration} event handler.
      * @return the {@code onanimationiteration} event handler
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnanimationiteration() {
         return getEventHandler(Event.TYPE_ANIMATIONITERATION);
     }
@@ -2304,7 +2304,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets the {@code onanimationiteration} event handler.
      * @param onanimationiteration the {@code onanimationiteration} event handler
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnanimationiteration(final Object onanimationiteration) {
         setHandlerForJavaScript(Event.TYPE_ANIMATIONITERATION, onanimationiteration);
     }
@@ -2889,7 +2889,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the {@code onanimationend} event handler.
      * @return the {@code onanimationend} event handler
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnanimationend() {
         return getEventHandler(Event.TYPE_ANIMATIONEND);
     }
@@ -2898,7 +2898,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets the {@code onanimationend} event handler.
      * @param onanimationend the {@code onanimationend} event handler
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnanimationend(final Object onanimationend) {
         setHandlerForJavaScript(Event.TYPE_ANIMATIONEND, onanimationend);
     }
@@ -3555,7 +3555,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the {@code onanimationstart} event handler.
      * @return the {@code onanimationstart} event handler
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnanimationstart() {
         return getEventHandler(Event.TYPE_ANIMATIONSTART);
     }
@@ -3564,7 +3564,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Sets the {@code onanimationstart} event handler.
      * @param onanimationstart the {@code onanimationstart} event handler
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnanimationstart(final Object onanimationstart) {
         setHandlerForJavaScript(Event.TYPE_ANIMATIONSTART, onanimationstart);
     }

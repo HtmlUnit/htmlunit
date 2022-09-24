@@ -104,10 +104,10 @@ public final class StyleAttributes implements Serializable {
         ACCELERATOR("accelerator", "accelerator", ie("undefined")),
 
         /** The style property {@code accentColor}. */
-        ACCENT_COLOR("accentColor", "accent-color", chromeAndEdgeAuto(), ffLatest("auto")),
+        ACCENT_COLOR("accentColor", "accent-color", chromeAndEdgeAndFirefox("auto")),
 
         /** The style property {@code accent-color}. */
-        ACCENT_COLOR_("accent-color", "accent-color", ffLatest("auto")),
+        ACCENT_COLOR_("accent-color", "accent-color", ff("auto")),
 
         /** The style property {@code additiveSymbols}. */
         ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
@@ -852,10 +852,10 @@ public final class StyleAttributes implements Serializable {
         COLOR_RENDERING("colorRendering", "color-rendering", chromeAndEdgeAuto()),
 
         /** The style property {@code colorScheme}. */
-        COLOR_SCHEME("colorScheme", "color-scheme", chromeAndEdgeNormal(), ffLatest("normal")),
+        COLOR_SCHEME("colorScheme", "color-scheme", chromeAndEdgeAndFirefox("normal")),
 
         /** The style property {@code color-scheme}. */
-        COLOR_SCHEME_("color-scheme", "color-scheme", ffLatest("normal")),
+        COLOR_SCHEME_("color-scheme", "color-scheme", ff("normal")),
 
         /** The style property {@code columnCount}. */
         COLUMN_COUNT("columnCount", "column-count", chromeAndEdgeAuto(), ff("auto"), ie("auto")),
@@ -996,7 +996,7 @@ public final class StyleAttributes implements Serializable {
         CY("cy", "cy", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code d}. */
-        D("d", "d", chromeAndEdgeNone(), ffLatest("none")),
+        D("d", "d", chromeAndEdgeAndFirefox("none")),
 
         /** The style property {@code descentOverride}. */
         DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdge("")),
@@ -1370,10 +1370,10 @@ public final class StyleAttributes implements Serializable {
         HEIGHT("height", "height", chromeAndEdge(""), ff(""), ie("")),
 
         /** The style property {@code hyphenateCharacter}. */
-        HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ffLatest("auto")),
+        HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ff("auto")),
 
         /** The style property {@code hyphenate-character}. */
-        HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ffLatest("auto")),
+        HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ff("auto")),
 
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff("manual"), chromeAndEdge("manual")),
@@ -2583,10 +2583,10 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_BLOCK_("overflow-block", "overflow-block", ff("visible")),
 
         /** The style property {@code overflowClipMargin}. */
-        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdge("0px"), ffLatest("0px")),
+        OVERFLOW_CLIP_MARGIN("overflowClipMargin", "overflow-clip-margin", chromeAndEdgeAndFirefox("0px")),
 
         /** The style property {@code overflow-clip-margin}. */
-        OVERFLOW_CLIP_MARGIN_("overflow-clip-margin", "overflow-clip-margin", ffLatest("0px")),
+        OVERFLOW_CLIP_MARGIN_("overflow-clip-margin", "overflow-clip-margin", ff("0px")),
 
         /** The style property {@code overflowInline}. */
         OVERFLOW_INLINE("overflowInline", "overflow-inline", ff("visible")),
@@ -2837,10 +2837,10 @@ public final class StyleAttributes implements Serializable {
         PREFIX("prefix", "prefix", chromeAndEdge("")),
 
         /** The style property {@code printColorAdjust}. */
-        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ffLatest("economy")),
+        PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ff("economy")),
 
         /** The style property {@code print-color-adjust}. */
-        PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ffLatest("economy")),
+        PRINT_COLOR_ADJUST_("print-color-adjust", "print-color-adjust", ff("economy")),
 
         /** The style property {@code quotes}. */
         QUOTES("quotes", "quotes", ff("auto"), ie(""), chromeAndEdgeAuto()),
@@ -3084,10 +3084,10 @@ public final class StyleAttributes implements Serializable {
         SCROLLBAR_FACE_COLOR("scrollbarFaceColor", "scrollbar-face-color", ie("undefined")),
 
         /** The style property {@code scrollbarGutter}. */
-        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbar-gutter", chromeAndEdgeAuto(), ffLatest("auto")),
+        SCROLLBAR_GUTTER("scrollbarGutter", "scrollbar-gutter", chromeAndEdgeAndFirefox("auto")),
 
         /** The style property {@code scrollbar-gutter}. */
-        SCROLLBAR_GUTTER_("scrollbar-gutter", "scrollbar-gutter", ffLatest("auto")),
+        SCROLLBAR_GUTTER_("scrollbar-gutter", "scrollbar-gutter", ff("auto")),
 
         /** The style property {@code scrollbarHighlightColor}. */
         SCROLLBAR_HIGHLIGHT_COLOR("scrollbarHighlightColor", "scrollbar-highlight-color", ie("undefined")),

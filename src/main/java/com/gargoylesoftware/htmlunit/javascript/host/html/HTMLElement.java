@@ -726,7 +726,6 @@ public class HTMLElement extends Element {
      * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
      * @return the contents of this node as text
      */
-    @JsxGetter({CHROME, EDGE, FF, IE})
     public String getOuterText() {
         // as first hack
         return getInnerText();
@@ -3594,7 +3593,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onselectionchange} event handler for this element.
      * @return the {@code onselectionchange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnselectionchange() {
         return getEventHandler(Event.TYPE_SELECTIONCHANGE);
     }
@@ -3603,7 +3602,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onselectionchange} event handler for this element.
      * @param onselectionchange the {@code onselectionchange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnselectionchange(final Object onselectionchange) {
         setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }

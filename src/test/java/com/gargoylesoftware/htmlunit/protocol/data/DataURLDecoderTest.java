@@ -79,8 +79,9 @@ public class DataURLDecoderTest extends WebDriverTestCase {
                 + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
                 + "7K5a/QKe8pnRes1vRwAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAUElEQVQ4jWP4TyFgIFsjAwN5BjAwMMA1oxgAkyAGY/UCugQu"
-                + "m/G6gBhnE2UAhiJ8coQUYTOMKC/gDDS6GYBPjORYINoAchITAzbTB84AcgAA8YbvLfsmafwAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAcElEQVQ4T62SSQ4AIAgD7f8frZKIQUTEhSsw0KbItdJD4RYA"
+                + "INHtYwAtUvHjHcCNiBqpegB4dugD5gcrgHzbldCpWmczjOQdA6YFz8TBnDYoHQ9/IAevAQzRxoY88LLwJUhmErXuXSKnIH0B"
+                + "7K5a/QKe8pnRes1vRwAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABwSURBVDhP"
                 + "pZPbDsAgCENh///P27qsxhFEGCcxPiht8aLnjTQ43rmMqj5zWQCFGAw+WqBihrnrj8C8YLEG3JtqgcWegSuAgpWjZZvACllc"

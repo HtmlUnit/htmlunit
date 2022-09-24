@@ -89,9 +89,9 @@ public final class BrowserVersion implements Serializable {
     private static final String PLATFORM_WIN32 = "Win32";
 
     /** Latest Firefox. */
-    public static final BrowserVersion FIREFOX = new BrowserVersion(104, "FF");
+    public static final BrowserVersion FIREFOX = new BrowserVersion(105, "FF");
 
-    private static final int FIREFOX_ESR_NUMERIC = 91;
+    private static final int FIREFOX_ESR_NUMERIC = 102;
 
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
@@ -132,18 +132,18 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.ACCEPT_ENCODING,
-            HttpHeader.CONNECTION,
             HttpHeader.REFERER,
+            HttpHeader.CONNECTION,
             HttpHeader.COOKIE,
             HttpHeader.UPGRADE_INSECURE_REQUESTS,
             HttpHeader.SEC_FETCH_DEST,
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER};
-        FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8";
+        FIREFOX_ESR.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
         FIREFOX_ESR.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX_ESR.xmlHttpRequestAcceptHeader_ = "*/*";
-        FIREFOX_ESR.imgAcceptHeader_ = "image/webp,*/*";
+        FIREFOX_ESR.imgAcceptHeader_ = "image/avif,image/webp,*/*";
         FIREFOX_ESR.cssAcceptHeader_ = "text/css,*/*;q=0.1";
         FIREFOX_ESR.fontHeights_ = new int[] {
             0, 2, 3, 5, 6, 6, 7, 9, 10, 11, 12, 13, 15, 16, 16, 17, 18, 20, 21, 22, 23, 25, 26, 26, 28, 29,
@@ -174,7 +174,6 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.SEC_FETCH_MODE,
             HttpHeader.SEC_FETCH_SITE,
             HttpHeader.SEC_FETCH_USER};
-        FIREFOX.acceptEncodingHeader_ = "gzip, deflate, br";
         FIREFOX.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8";
         FIREFOX.acceptLanguageHeader_ = "en-US,en;q=0.5";
         FIREFOX.xmlHttpRequestAcceptHeader_ = "*/*";
@@ -202,6 +201,7 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.DNT,
             HttpHeader.CONNECTION,
             HttpHeader.COOKIE};
+        INTERNET_EXPLORER.acceptEncodingHeader_ = "gzip, deflate";
         INTERNET_EXPLORER.htmlAcceptHeader_ = "text/html, application/xhtml+xml, image/jxr, */*";
         INTERNET_EXPLORER.acceptLanguageHeader_ = "en-US,en;q=0.9";
         INTERNET_EXPLORER.imgAcceptHeader_ = "image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5";
@@ -242,7 +242,6 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
-        CHROME.acceptEncodingHeader_ = "gzip, deflate, br";
         CHROME.acceptLanguageHeader_ = "en-US,en;q=0.9";
         CHROME.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/avif,image/webp,image/apng,*/*;"
@@ -290,7 +289,6 @@ public final class BrowserVersion implements Serializable {
             HttpHeader.ACCEPT_ENCODING,
             HttpHeader.ACCEPT_LANGUAGE,
             HttpHeader.COOKIE};
-        EDGE.acceptEncodingHeader_ = "gzip, deflate, br";
         EDGE.acceptLanguageHeader_ = "en-US,en;q=0.9";
         EDGE.htmlAcceptHeader_ = "text/html,application/xhtml+xml,application/xml;"
                                             + "q=0.9,image/webp,image/apng,*/*;"
@@ -485,7 +483,7 @@ public final class BrowserVersion implements Serializable {
         nickname_ = nickname;
 
         applicationName_ = NETSCAPE;
-        acceptEncodingHeader_ = "gzip, deflate";
+        acceptEncodingHeader_ = "gzip, deflate, br";
         htmlAcceptHeader_ = "*/*";
         imgAcceptHeader_ = "*/*";
         cssAcceptHeader_ = "*/*";

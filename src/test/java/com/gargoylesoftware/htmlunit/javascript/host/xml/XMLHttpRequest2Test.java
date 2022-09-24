@@ -517,8 +517,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("hello in timeout")
-    @BuggyWebDriver(FF_ESR = "in timeouthello",
-                    IE = "in timeouthello")
+    @BuggyWebDriver(IE = "in timeouthello")
     // IEDriver catches "in timeout", "hello" but real IE gets the correct order
     public void xhrCallbackBeforeTimeout() throws Exception {
         final String html = "<html><head><script>\n"

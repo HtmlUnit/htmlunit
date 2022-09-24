@@ -107,7 +107,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "false", "false", "false"},
-            FF_ESR = {"true", "true", "true", "true", "true"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void willValidate() throws Exception {
         final String html =
@@ -143,9 +142,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "false"},
-            FF_ESR = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
-                      "true"},
             IE = "no checkValidity")
     public void validationEmpty() throws Exception {
         validation("<output id='e1'>o1</output>\n", "");
@@ -158,9 +154,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true",
                        "false-true-false-false-false-false-false-false-false-false-false",
                        "false"},
-            FF_ESR = {"false",
-                      "false-true-false-false-false-false-false-false-false-false-false",
-                      "true"},
             IE = "no checkValidity")
     @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
     public void validationCustomValidity() throws Exception {
@@ -174,9 +167,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true",
                        "false-true-false-false-false-false-false-false-false-false-false",
                        "false"},
-            FF_ESR = {"false",
-                      "false-true-false-false-false-false-false-false-false-false-false",
-                      "true"},
             IE = "no checkValidity")
     @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
     public void validationBlankCustomValidity() throws Exception {
@@ -190,9 +180,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "false"},
-            FF_ESR = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
-                      "true"},
             IE = "no checkValidity")
     public void validationResetCustomValidity() throws Exception {
         validation("<output id='e1'>o1</output>\n",
@@ -206,9 +193,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true",
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "false"},
-            FF_ESR = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
-                      "true"},
             IE = "no checkValidity")
     public void validationRequired() throws Exception {
         validation("<output id='e1' required></output>\n", "");

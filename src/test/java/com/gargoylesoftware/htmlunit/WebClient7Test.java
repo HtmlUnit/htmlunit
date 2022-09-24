@@ -285,6 +285,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/test.gif?k%F6nig",
             FF = "/test.gif?k%EF%BF%BDnig",
+            FF_ESR = "/test.gif?k%EF%BF%BDnig",
             IE = "/test.gif?k\u00f6nig")
     @HtmlUnitNYI(FF = "/test.gif?k%F6nig",
             IE = "/test.gif?k%F6nig")
@@ -298,6 +299,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/test.gif?k%F6nig",
             FF = "/test.gif?k%EF%BF%BDnig",
+            FF_ESR = "/test.gif?k%EF%BF%BDnig",
             IE = "/test.gif?k\u00f6nig")
     @HtmlUnitNYI(FF = "/test.gif?k%F6nig",
             IE = "/test.gif?k%F6nig")
@@ -333,6 +335,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/test.css?k%F6nig",
             FF = "/test.css?k%EF%BF%BDnig",
+            FF_ESR = "/test.css?k%EF%BF%BDnig",
             IE = "/test.css?k\u00f6nig")
     @HtmlUnitNYI(FF = "/test.css?k%F6nig",
             IE = "/test.css?k%F6nig")
@@ -346,6 +349,7 @@ public class WebClient7Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "/test.css?k%F6nig",
             FF = "/test.css?k%EF%BF%BDnig",
+            FF_ESR = "/test.css?k%EF%BF%BDnig",
             IE = "/test.css?k\u00f6nig")
     @HtmlUnitNYI(FF = "/test.css?k%F6nig",
             IE = "/test.css?k%F6nig")

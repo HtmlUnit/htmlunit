@@ -1664,7 +1664,6 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLDialogElement]",
-            FF_ESR = "[object HTMLUnknownElement]",
             IE = "[object HTMLUnknownElement]")
     public void dialog() throws Exception {
         test("dialog");

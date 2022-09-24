@@ -410,10 +410,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception"},
-            FF_ESR = {"exception",
-                      "keydown, true, true, true, true, true, true, 65, 0",
-                      "keyup, false, false, false, false, false, false, 32, 0"})
+    @Alerts(DEFAULT = {"exception", "exception"})
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

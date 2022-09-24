@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.javascript.host.html;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.html.HtmlDialog;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -28,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(domClass = HtmlDialog.class, value = {CHROME, EDGE, FF})
+@JsxClass(domClass = HtmlDialog.class, value = {CHROME, EDGE, FF, FF_ESR})
 public class HTMLDialogElement extends HTMLElement {
 
     /**

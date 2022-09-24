@@ -51,7 +51,9 @@ final class TestCaseCorrector {
     static void correct(final FrameworkMethod method, final boolean realBrowser, final BrowserVersion browserVersion,
             final boolean notYetImplemented, final Throwable t) throws IOException {
         final String testRoot = "src/test/java/";
-        final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
+        String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
+        browserString = browserString.replace('-', '_'); // FF-ESR-> FF_ESR
+
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
         final List<String> lines = FileUtils.readLines(file, UTF_8);
         final String methodLine = "    public void " + method.getName() + "()";
