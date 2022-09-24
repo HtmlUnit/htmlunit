@@ -15,11 +15,9 @@
 package com.gargoylesoftware.htmlunit.html.xpath;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
 import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.ExpressionNode;
 import net.sourceforge.htmlunit.xpath.XPathContext;
 import net.sourceforge.htmlunit.xpath.compiler.Compiler;
 import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
@@ -66,7 +64,7 @@ class XPathAdapter {
      * @param caseSensitive whether the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
-    XPathAdapter(final String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
+    XPathAdapter(final String exprString, final PrefixResolver prefixResolver,
         final ErrorListener errorListener, final boolean caseSensitive)
                 throws TransformerException {
 
@@ -76,18 +74,14 @@ class XPathAdapter {
         if (errListener == null) {
             errListener = new DefaultErrorHandler();
         }
-        final XPathParser parser = new XPathParser(errListener, locator);
-        final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
+        final XPathParser parser = new XPathParser(errListener);
+        final Compiler compiler = new Compiler(errorListener, funcTable_);
 
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);
 
         final Expression expr = compiler.compile(0);
         mainExp_ = expr;
-
-        if (locator instanceof ExpressionNode) {
-            expr.exprSetParent((ExpressionNode) locator);
-        }
     }
 
     /**

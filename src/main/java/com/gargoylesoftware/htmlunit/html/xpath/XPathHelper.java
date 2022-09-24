@@ -134,7 +134,7 @@ public final class XPathHelper {
 
         final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
 
-        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive);
+        final XPathAdapter xpath = new XPathAdapter(str, resolver, null, caseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }
