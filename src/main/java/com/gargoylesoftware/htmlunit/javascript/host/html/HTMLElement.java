@@ -726,6 +726,7 @@ public class HTMLElement extends Element {
      * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
      * @return the contents of this node as text
      */
+    @JsxGetter
     public String getOuterText() {
         // as first hack
         return getInnerText();
