@@ -23,7 +23,6 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlOutput}.
@@ -155,7 +154,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
                        "false-true-false-false-false-false-false-false-false-false-false",
                        "false"},
             IE = "no checkValidity")
-    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
     public void validationCustomValidity() throws Exception {
         validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity('Invalid');");
     }
@@ -168,7 +166,6 @@ public class HtmlOutputTest extends WebDriverTestCase {
                        "false-true-false-false-false-false-false-false-false-false-false",
                        "false"},
             IE = "no checkValidity")
-    @HtmlUnitNYI(FF_ESR = {"true", "false-true-false-false-false-false-false-false-false-false-false", "true"})
     public void validationBlankCustomValidity() throws Exception {
         validation("<output id='e1'>o1</output>\n", "elem.setCustomValidity(' ');\n");
     }

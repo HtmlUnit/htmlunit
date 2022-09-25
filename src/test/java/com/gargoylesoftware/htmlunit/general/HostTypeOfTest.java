@@ -4244,7 +4244,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
             EDGE = "function",
             FF = "function")
     @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined")
+            EDGE = "undefined",
+            FF = "undefined")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }

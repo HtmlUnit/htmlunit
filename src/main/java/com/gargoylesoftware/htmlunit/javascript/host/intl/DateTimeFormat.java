@@ -84,12 +84,13 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("bg", ddDot + "\u200E \u0433.");
         commonFormats.put("ca", ddSlash);
         commonFormats.put("cs", ddDotBlank);
-        commonFormats.put("da", ddSlash);
+        commonFormats.put("da", ddDot);
         commonFormats.put("de", ddDot);
         commonFormats.put("el", ddSlash);
         commonFormats.put("en-NZ", ddSlash);
         commonFormats.put("en-PA", ddSlash);
         commonFormats.put("en-PR", ddSlash);
+        commonFormats.put("en-PH", mmSlash);
         commonFormats.put("en-AU", ddSlash);
         commonFormats.put("en-GB", ddSlash);
         commonFormats.put("en-IE", ddSlash);
@@ -119,7 +120,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("ja-JP-u-ca-japanese", "'H'yy/MM/dd");
         commonFormats.put("ko", yyyyDotBlankDot);
         commonFormats.put("lt", yyyyDash);
-        commonFormats.put("lv", yyyyDotDot);
+        commonFormats.put("lv", ddDotDot);
         commonFormats.put("mk", ddDot);
         commonFormats.put("ms", ddSlash);
         commonFormats.put("mt", mmSlash);
@@ -140,55 +141,27 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("zh", yyyySlash);
         commonFormats.put("zh-HK", ddSlash);
         commonFormats.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
+        commonFormats.put("en-CA", yyyyDash);
+        commonFormats.put("es-US", ddSlash);
+        commonFormats.put("fr-CH", ddDot);
 
         CHROME_FORMATS_.putAll(commonFormats);
         EDGE_FORMATS_.putAll(commonFormats);
 
         IE_FORMATS_.putAll(commonFormats);
 
-        commonFormats.put("en-CA", yyyyDash);
-        commonFormats.put("en-PH", ddSlash);
-        commonFormats.put("es-US", ddSlash);
-        commonFormats.put("fr-CH", ddDot);
         commonFormats.put("nl-BE", ddSlash);
 
         FF_FORMATS_.putAll(commonFormats);
-        FF_FORMATS_.put("da", ddDot);
-        FF_FORMATS_.put("en-PH", mmSlash);
-        FF_FORMATS_.put("lv", ddDotDot);
-
         FF_ESR_FORMATS_.putAll(commonFormats);
-        FF_ESR_FORMATS_.put("da", ddDot);
 
         CHROME_FORMATS_.put("be", mmSlash);
-        CHROME_FORMATS_.put("da", ddDot);
-        CHROME_FORMATS_.put("en-CA", yyyyDash);
-        CHROME_FORMATS_.put("en-IE", ddSlash);
-        CHROME_FORMATS_.put("en-MT", ddSlash);
-        CHROME_FORMATS_.put("en-PH", mmSlash);
-        CHROME_FORMATS_.put("es-US", ddSlash);
-        CHROME_FORMATS_.put("fr-CH", ddDot);
         CHROME_FORMATS_.put("ga", mmSlash);
-        CHROME_FORMATS_.put("hr", ddDotBlankDot);
-        CHROME_FORMATS_.put("in-ID", ddSlash);
         CHROME_FORMATS_.put("is", mmSlash);
-        CHROME_FORMATS_.put("iw", ddDot);
-        CHROME_FORMATS_.put("lv", ddDotDot);
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sq", mmSlash);
 
-        EDGE_FORMATS_.put("da", ddDot);
-        EDGE_FORMATS_.put("en-CA", yyyyDash);
-        EDGE_FORMATS_.put("en-IE", ddSlash);
-        EDGE_FORMATS_.put("en-MT", ddSlash);
-        EDGE_FORMATS_.put("en-PH", mmSlash);
-        EDGE_FORMATS_.put("es-US", ddSlash);
-        EDGE_FORMATS_.put("fr-CH", ddDot);
-        EDGE_FORMATS_.put("hr", ddDotBlankDot);
-        EDGE_FORMATS_.put("in-ID", ddSlash);
-        EDGE_FORMATS_.put("iw", ddDot);
-        EDGE_FORMATS_.put("lv", ddDotDot);
         EDGE_FORMATS_.put("nl-BE", ddSlash);
 
         IE_FORMATS_.put("ar", rightToLeft);

@@ -493,10 +493,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
 
-    /** willValidate returns always true. */
-    @BrowserFeature(FF_ESR)
-    HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE,
-
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLSCRIPT_TRIM_TYPE,

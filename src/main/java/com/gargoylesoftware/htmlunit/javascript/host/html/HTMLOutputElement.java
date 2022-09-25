@@ -29,7 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 
 /**
- * The JavaScript object {@code HTMLOutputElement}.
+ * The JavaScript object for {@code HtmlOutput}.
  *
  * @author Ronald Brill
  * @author Ahmed Ashour

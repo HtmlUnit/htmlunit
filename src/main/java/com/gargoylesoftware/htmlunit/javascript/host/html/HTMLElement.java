@@ -3490,7 +3490,7 @@ public class HTMLElement extends Element {
      *
      * @return the value of this attribute
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getEnterKeyHint() {
         String value = getDomNodeOrDie().getAttributeDirect("enterkeyhint");
         if (ATTRIBUTE_NOT_DEFINED == value || ATTRIBUTE_VALUE_EMPTY == value) {
@@ -3509,7 +3509,7 @@ public class HTMLElement extends Element {
      *
      * @param enterKeyHint the new value
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setEnterKeyHint(final Object enterKeyHint) {
         if (enterKeyHint == null || Undefined.isUndefined(enterKeyHint)) {
             getDomNodeOrDie().removeAttribute("enterkeyhint");
