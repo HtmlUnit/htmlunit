@@ -45,7 +45,8 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
     @Alerts({"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"})
     @HtmlUnitNYI(CHROME = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
             EDGE = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
-            FF = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"})
+            FF = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
+            FF_ESR = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"})
     public void defaultPaddingAndMargins() throws Exception {
         final String html =
             "<html>\n"
