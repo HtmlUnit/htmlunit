@@ -1020,7 +1020,7 @@ public class HTMLElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"MyTitlevar i;", "MyTitlevar i;"})
+    @Alerts({"MyTitlevar i;", "MyTitlevar i;"})
     public void innerText_Head() throws Exception {
         final String html = "<html><head>"
             + "<title>MyTitle</title>"

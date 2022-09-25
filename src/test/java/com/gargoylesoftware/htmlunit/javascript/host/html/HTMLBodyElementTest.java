@@ -42,7 +42,7 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"})
+    @Alerts({"0px,0px,0px,0px,0px", ",,,,", "8px,8px,8px,8px,8px", ",,,,"})
     @HtmlUnitNYI(CHROME = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
             EDGE = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"},
             FF = {"0px,0px,0px,0px,0px", ",,,,", "0px,8px,8px,8px,8px", ",,,,"})
