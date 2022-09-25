@@ -812,7 +812,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmessage,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmozfullscreenchange,onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,"
                 + "onplay,onplaying,onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,"
                 + "parent,performance,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),"
                 + "resizeBy(),resizeTo(),screen,scroll(),scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),"
@@ -831,7 +832,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmessage,onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmozfullscreenchange,onmozfullscreenerror,onoffline,ononline,onpagehide,onpageshow,onpause,"
                 + "onplay,onplaying,onpopstate,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onstorage,onsubmit,onsuspend,ontimeupdate,onunload,onuserproximity,"
                 + "onvolumechange,onwaiting,onwheel,open(),opener,outerHeight,outerWidth,pageXOffset,pageYOffset,"
                 + "parent,performance,postMessage(),print(),prompt(),releaseEvents(),requestAnimationFrame(),"
                 + "resizeBy(),resizeTo(),screen,scroll(),scrollBy(),scrollByLines(),scrollByPages(),scrollTo(),"
@@ -1069,7 +1071,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -1087,9 +1089,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void abbr() throws Exception {
@@ -1220,7 +1222,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1236,9 +1239,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void acronym() throws Exception {
         test("acronym");
@@ -1410,7 +1414,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -1428,9 +1432,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "clear,constructor,width")
     public void address() throws Exception {
@@ -1627,7 +1631,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
@@ -1644,10 +1648,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
@@ -1813,7 +1817,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF_ESR = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,focus(),"
@@ -1829,9 +1834,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
                 + "contentEditable,currentStyle,dataset,dir,disabled,focus(),getElementsByClassName(),"
                 + "hidden,id,innerHTML,innerText,insertAdjacentElement(),insertAdjacentHTML(),"
@@ -1897,7 +1903,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
@@ -1914,9 +1920,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             IE = "constructor")
     public void bgsound() throws Exception {
@@ -2065,9 +2071,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
                 + "onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2083,7 +2089,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
                 + "onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title")
@@ -2218,7 +2224,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -2236,9 +2242,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void bdi() throws Exception {
@@ -2368,7 +2374,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -2386,9 +2392,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             IE = "constructor")
     public void bdo() throws Exception {
@@ -2518,9 +2524,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2536,7 +2542,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -2740,9 +2746,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2758,7 +2764,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -2981,9 +2987,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -2999,7 +3005,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -3130,9 +3136,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3147,7 +3153,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,"
@@ -3280,9 +3286,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3298,7 +3304,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -3464,9 +3470,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3481,7 +3487,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,"
@@ -3613,9 +3619,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -3630,7 +3636,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
@@ -3684,6 +3690,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "constructor()",
             EDGE = "constructor()",
             FF = "constructor()",
+            FF_ESR = "constructor()",
             IE = "constructor")
     public void dialog() throws Exception {
         test("dialog");
@@ -3864,9 +3871,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,"
-                + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -3881,7 +3889,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,"
                 + "onprogress,onratechange,onreset,onresize,"
-                + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,onstalled,"
+                + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title")
     public void dt() throws Exception {
@@ -4033,9 +4042,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4051,7 +4060,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -4228,9 +4237,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -4243,7 +4253,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
@@ -4409,9 +4420,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
                 + "onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4427,7 +4438,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,"
                 + "onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -4646,9 +4657,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4663,7 +4674,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
@@ -4919,9 +4930,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -4936,7 +4947,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
@@ -5210,9 +5221,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5228,7 +5239,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -5391,9 +5402,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5409,7 +5420,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -5541,9 +5552,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5559,7 +5570,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -5878,9 +5889,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
            FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -5895,7 +5906,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,"
@@ -6061,9 +6072,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6079,7 +6090,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -6347,9 +6358,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,offsetTop,"
@@ -6362,7 +6373,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -6524,9 +6535,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,"
                 + "title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6541,7 +6552,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,"
@@ -6692,9 +6703,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6710,7 +6721,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -6874,9 +6885,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -6891,7 +6902,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,"
@@ -7146,9 +7157,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,"
-                + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -7162,7 +7174,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,onresize,"
-                + "onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "accessKey,blur(),children,classList,className,clearAttributes(),click(),constructor,contains(),"
@@ -7483,9 +7496,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -7500,7 +7513,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
@@ -8017,9 +8030,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8035,7 +8048,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -8171,9 +8184,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8189,7 +8202,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -8370,10 +8383,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,"
-                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
+                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,"
+                + "onvolumechange,onwaiting,outerText,spellcheck,"
                 + "style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,"
@@ -8388,7 +8402,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,"
                 + "onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,"
                 + "onpointerup,onprogress,"
-                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,"
+                + "onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,"
                 + "onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,"
@@ -8578,9 +8593,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -8593,7 +8609,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
@@ -8758,9 +8775,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -8775,7 +8792,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
@@ -8908,9 +8925,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -8926,7 +8943,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -9077,9 +9094,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -9095,7 +9112,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -9230,9 +9247,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -9246,7 +9264,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,"
                 + "onpointerenter,onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,"
                 + "onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
@@ -9377,9 +9396,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -9395,7 +9414,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -9821,9 +9840,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,spellcheck,style,tabIndex,title",
+                + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
                 + "offsetTop,offsetWidth,onabort,"
@@ -9837,7 +9857,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,"
                 + "onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
-                + "onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,spellcheck,style,tabIndex,title",
             IE = "constructor")
@@ -10016,9 +10037,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -10034,7 +10055,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -10190,9 +10211,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -10208,7 +10229,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -10394,9 +10415,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,"
                 + "onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,"
                 + "onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
-                + "onvolumechange,onwaiting,"
+                + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
             FF = "accessKey,blur(),click(),constructor(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,lang,offsetHeight,offsetLeft,offsetParent,"
@@ -10412,7 +10433,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onpaste,onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,"
                 + "onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,onreset,"
                 + "onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,"
+                + "onseeking,onselect,onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,ontimeupdate,"
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
@@ -11242,7 +11263,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style",
             EDGE = "constructor(),onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,onclose,oncontextmenu,oncopy,oncuechange,oncut,"
@@ -11253,7 +11275,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmousewheel,onpaste,onpause,onplay,onplaying,"
                 + "onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,onprogress,onratechange,onreset,onresize,onscroll,onseeked,"
-                + "onseeking,onselect,onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
+                + "onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,onvolumechange,"
                 + "onwaiting,onwheel,style",
             FF_ESR = "constructor(),onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,"
                 + "oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -11261,14 +11284,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
             FF = "constructor(),onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,"
                 + "oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
                 + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
             IE = "attributes,childElementCount,clientHeight,clientLeft,clientTop,clientWidth,constructor,"
                 + "firstElementChild,getAttribute(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByTagName(),getElementsByTagNameNS(),"

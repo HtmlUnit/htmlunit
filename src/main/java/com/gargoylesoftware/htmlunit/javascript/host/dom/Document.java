@@ -3393,7 +3393,7 @@ public class Document extends Node {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Function getOnselectstart() {
         return getEventHandler(Event.TYPE_SELECTSTART);
     }
@@ -3402,7 +3402,7 @@ public class Document extends Node {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
     }
