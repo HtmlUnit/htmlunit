@@ -244,7 +244,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + "      res += node.id;\n"
             + "    }\n"
             + "    log(res);\n"
-            + "  } catch (e) {log('error' + e)}\n"
+            + "  } catch (e) {log('error')}\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
