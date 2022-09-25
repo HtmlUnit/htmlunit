@@ -2356,6 +2356,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = {"0px", "0", "16"},
             EDGE = {"0px", "0", "16"},
             FF = {"0px", "0", "16"},
+            FF_ESR = {"0px", "0", "16"},
             IE = {"8px", "0", "16"})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"

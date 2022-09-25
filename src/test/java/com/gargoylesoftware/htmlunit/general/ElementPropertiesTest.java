@@ -594,9 +594,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
-                + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,spellcheck,style,"
+                + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
             FF = "accessKey,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,"
@@ -611,7 +612,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,"
                 + "onplaying,onpointercancel,onpointerdown,onpointerenter,onpointerleave,onpointermove,onpointerout,"
                 + "onpointerover,onpointerup,"
-                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
+                + "onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
+                + "onselect,onselectionchange,onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,"
                 + "ontransitionrun,ontransitionstart,onvolumechange,onwaiting,outerText,spellcheck,style,"
                 + "tabIndex,title",
@@ -1237,7 +1239,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "length,localStorage,location,log(),matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,netscape,onabort,"
+                + "onafterprint,onanimationend,onanimationiteration,onanimationstart,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -1259,7 +1262,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,innerHeight,innerWidth,"
                 + "InstallTrigger,"
                 + "length,localStorage,location,log(),matchMedia(),moveBy(),moveTo(),mozInnerScreenX,mozInnerScreenY,"
-                + "name,navigator,netscape,onabort,onafterprint,onbeforeprint,onbeforeunload,"
+                + "name,navigator,netscape,onabort,"
+                + "onafterprint,onanimationend,onanimationiteration,onanimationstart,onbeforeprint,onbeforeunload,"
                 + "onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,ondblclick,"
                 + "ondevicelight,ondevicemotion,ondeviceorientation,ondeviceproximity,ondrag,ondragend,"
                 + "ondragenter,ondragleave,ondragover,ondragstart,ondrop,ondurationchange,onemptied,onended,"
@@ -1816,7 +1820,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "close(),open,returnValue,show(),showModal()",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "-", EDGE = "-", FF = "-")
+    @HtmlUnitNYI(CHROME = "-", EDGE = "-", FF = "-", FF_ESR = "-")
     public void dialog() throws Exception {
         test("dialog");
     }
@@ -4753,6 +4757,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,"
                 + "onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
+                + "onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),releaseEvents(),rootElement,"
@@ -4774,6 +4779,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmousedown,onmouseenter,onmouseleave,onmousemove,onmouseout,onmouseover,onmouseup,"
                 + "onmozfullscreenchange,onmozfullscreenerror,onpaste,onpause,onplay,onplaying,onprogress,"
                 + "onratechange,onreadystatechange,onreset,onresize,onscroll,onseeked,onseeking,onselect,"
+                + "onselectstart,"
                 + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,onwheel,"
                 + "plugins,queryCommandEnabled(),queryCommandSupported(),"
                 + "querySelector(),querySelectorAll(),readyState,referrer,releaseCapture(),releaseEvents(),rootElement,"
@@ -4883,7 +4889,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseup,onmousewheel,onpaste,"
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style",
             EDGE = "onabort,onauxclick,onblur,oncancel,oncanplay,oncanplaythrough,onchange,onclick,onclose,"
                 + "oncontextmenu,oncopy,oncuechange,oncut,"
@@ -4894,7 +4901,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmouseup,onmousewheel,onpaste,"
                 + "onpause,onplay,onplaying,onpointercancel,onpointerdown,onpointerenter,"
                 + "onpointerleave,onpointermove,onpointerout,onpointerover,onpointerup,onprogress,onratechange,"
-                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onstalled,onsubmit,onsuspend,"
+                + "onreset,onresize,onscroll,onseeked,onseeking,onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,onvolumechange,onwaiting,onwheel,style",
             FF_ESR = "onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
@@ -4902,14 +4910,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style",
             FF = "onabort,onblur,oncanplay,oncanplaythrough,onchange,onclick,oncontextmenu,oncopy,oncut,"
                 + "ondblclick,ondrag,ondragend,ondragenter,ondragleave,ondragover,ondragstart,ondrop,"
                 + "ondurationchange,onemptied,onended,onerror,onfocus,oninput,oninvalid,onkeydown,onkeypress,"
                 + "onkeyup,onload,onloadeddata,onloadedmetadata,onloadstart,onmousedown,onmouseenter,onmouseleave,"
                 + "onmousemove,onmouseout,onmouseover,onmouseup,onmozfullscreenchange,onmozfullscreenerror,onpaste,"
                 + "onpause,onplay,onplaying,onprogress,onratechange,onreset,onresize,onscroll,onseeked,onseeking,"
-                + "onselect,onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style")
+                + "onselect,onselectionchange,onselectstart,"
+                + "onstalled,onsubmit,onsuspend,ontimeupdate,onvolumechange,onwaiting,style")
     public void svgElement() throws Exception {
         testString("", "svg, element");
     }

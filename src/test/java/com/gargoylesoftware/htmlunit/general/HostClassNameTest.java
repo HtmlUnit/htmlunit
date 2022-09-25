@@ -6715,7 +6715,8 @@ public class HostClassNameTest extends WebDriverTestCase {
             EDGE = "function OffscreenCanvas() { [native code] }",
             FF = "function OffscreenCanvas() {\n    [native code]\n}")
     @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
+            EDGE = "exception",
+            FF = "exception")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
