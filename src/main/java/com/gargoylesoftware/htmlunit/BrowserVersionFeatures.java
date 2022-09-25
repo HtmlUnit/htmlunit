@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
     /** For disconnected items style font property is blank. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
     /** 'auto' is supported when setting vertical-align style. */
