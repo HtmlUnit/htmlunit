@@ -458,7 +458,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
