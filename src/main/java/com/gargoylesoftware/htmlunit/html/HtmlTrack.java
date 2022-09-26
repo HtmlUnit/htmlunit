@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_TRACK_DISPLAY_NONE;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -22,6 +24,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "track".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTrack extends HtmlElement {
 
@@ -45,6 +48,9 @@ public class HtmlTrack extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
+        if (hasFeature(CSS_TRACK_DISPLAY_NONE)) {
+            return DisplayStyle.EMPTY;
+        }
         return DisplayStyle.INLINE;
     }
 }
