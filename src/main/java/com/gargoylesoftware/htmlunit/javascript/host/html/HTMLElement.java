@@ -2302,7 +2302,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onclose} event handler for this element.
      * @return the {@code onclose} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -2311,7 +2311,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onclose} event handler for this element.
      * @param onclose the {@code onclose} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnclose(final Object onclose) {
         setEventHandler(Event.TYPE_CLOSE, onclose);
     }

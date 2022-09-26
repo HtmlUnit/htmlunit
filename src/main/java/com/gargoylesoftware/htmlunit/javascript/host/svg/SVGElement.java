@@ -927,7 +927,7 @@ public class SVGElement extends Element {
      * Returns the {@code onclose} event handler.
      * @return the {@code onclose} event handler
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -936,7 +936,7 @@ public class SVGElement extends Element {
      * Sets the {@code onclose} event handler.
      * @param close the {@code onclose} event handler
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnclose(final Object close) {
         setEventHandler(Event.TYPE_CLOSE, close);
     }
