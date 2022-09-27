@@ -344,10 +344,8 @@ public class HostParentOfNTest extends HostParentOf {
      *             if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Node_HTMLDialogElement() throws Exception {
         test("Node", "HTMLDialogElement");
     }
