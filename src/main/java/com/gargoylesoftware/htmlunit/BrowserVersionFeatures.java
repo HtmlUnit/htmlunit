@@ -119,10 +119,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     CSS_SET_NULL_THROWS,
 
-    /** The default value of the display property for the 'source' tag is 'none'. */
-    @BrowserFeature(FF)
-    CSS_SOURCE_DISPLAY_NONE,
-
     /** For disconnected items style properties are blank. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
@@ -130,10 +126,6 @@ public enum BrowserVersionFeatures {
     /** For disconnected items style font property is blank. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
-
-    /** The default value of the display property for the 'track' tag is 'none'. */
-    @BrowserFeature(FF)
-    CSS_TRACK_DISPLAY_NONE,
 
     /** 'auto' is supported when setting vertical-align style. */
     @BrowserFeature(IE)

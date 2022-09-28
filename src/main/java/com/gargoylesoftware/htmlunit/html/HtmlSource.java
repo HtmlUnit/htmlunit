@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_SOURCE_DISPLAY_NONE;
-
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -49,9 +47,6 @@ public class HtmlSource extends HtmlElement {
      */
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
-        if (hasFeature(CSS_SOURCE_DISPLAY_NONE)) {
-            return DisplayStyle.EMPTY;
-        }
         return DisplayStyle.INLINE;
     }
 }
