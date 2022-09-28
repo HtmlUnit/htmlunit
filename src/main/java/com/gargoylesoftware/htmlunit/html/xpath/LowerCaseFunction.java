@@ -38,6 +38,6 @@ public class LowerCaseFunction extends FunctionDef1Arg {
      */
     @Override
     public XObject execute(final XPathContext xctxt) throws TransformerException {
-        return new XString(((XString) getArg0AsString(xctxt)).str().toLowerCase(Locale.ROOT));
+        return new XString(getArg0AsString(xctxt).str().toLowerCase(Locale.ROOT));
     }
 }
