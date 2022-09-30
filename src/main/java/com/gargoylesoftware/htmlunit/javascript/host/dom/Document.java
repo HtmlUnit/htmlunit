@@ -133,7 +133,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -356,13 +355,6 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setLocation(final String location) throws IOException {
-        final Object event = getWindow().getEvent();
-        if (event instanceof UIEvent) {
-            final Object target = ((UIEvent) event).getTarget();
-            if (target instanceof HTMLAnchorElement) {
-                final String href = ((HTMLAnchorElement) target).getHref();
-            }
-        }
         window_.setLocation(location);
     }
 

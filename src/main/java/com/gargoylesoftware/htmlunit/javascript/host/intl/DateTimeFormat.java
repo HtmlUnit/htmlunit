@@ -71,7 +71,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final String yyyyDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
         final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
         final String yyyyDotBlankDotIE = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd\u200E.";
-        final String yyyyDotDot = "\u200EYYYY\u200E.\u200EMM\u200E.\u200Edd\u200E.";
         final String yyyyMinus = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
         final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
