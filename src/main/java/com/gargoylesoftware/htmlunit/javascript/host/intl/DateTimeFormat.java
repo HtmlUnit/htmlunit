@@ -71,7 +71,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final String yyyyDash = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
         final String yyyyDotBlankDot = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd.";
         final String yyyyDotBlankDotIE = "\u200EYYYY\u200E. \u200EMM\u200E. \u200Edd\u200E.";
-        final String yyyyMinus = "\u200EYYYY\u200E-\u200EMM\u200E-\u200Edd";
         final String rightToLeft = "\u200Fdd\u200F/\u200FMM\u200F/\u200FYYYY";
 
         final Map<String, String> commonFormats = new HashMap<>();
@@ -124,6 +123,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("ms", ddSlash);
         commonFormats.put("mt", mmSlash);
         commonFormats.put("nl", ddDash);
+        commonFormats.put("nl-BE", ddSlash);
         commonFormats.put("pl", ddDot);
         commonFormats.put("pt", ddSlash);
         commonFormats.put("ro", ddDot);
@@ -149,8 +149,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
 
         IE_FORMATS_.putAll(commonFormats);
 
-        commonFormats.put("nl-BE", ddSlash);
-
         FF_FORMATS_.putAll(commonFormats);
         FF_ESR_FORMATS_.putAll(commonFormats);
 
@@ -158,59 +156,32 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.put("ga", mmSlash);
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("mk", mmSlash);
-        CHROME_FORMATS_.put("nl-BE", ddSlash);
         CHROME_FORMATS_.put("sq", mmSlash);
-
-        EDGE_FORMATS_.put("nl-BE", ddSlash);
 
         IE_FORMATS_.put("ar", rightToLeft);
         IE_FORMATS_.put("ar-AE", rightToLeft);
         IE_FORMATS_.put("ar-BH", rightToLeft);
         IE_FORMATS_.put("ar-DZ", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-LY", rightToLeft);
         IE_FORMATS_.put("ar-MA", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-TN", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
-        IE_FORMATS_.put("ar-EG", rightToLeft);
-        IE_FORMATS_.put("ar-IQ", rightToLeft);
-        IE_FORMATS_.put("ar-JO", rightToLeft);
-        IE_FORMATS_.put("ar-KW", rightToLeft);
-        IE_FORMATS_.put("ar-LB", rightToLeft);
-        IE_FORMATS_.put("ar-OM", rightToLeft);
-        IE_FORMATS_.put("ar-QA", rightToLeft);
         IE_FORMATS_.put("ar-SA", rightToLeft);
-        IE_FORMATS_.put("ar-SD", rightToLeft);
-        IE_FORMATS_.put("ar-SY", rightToLeft);
-        IE_FORMATS_.put("ar-YE", rightToLeft);
+        IE_FORMATS_.put("ar-TN", "\u200Fdd\u200F-\u200FMM\u200F-\u200FYYYY");
         IE_FORMATS_.put("ban", ddDot);
         IE_FORMATS_.put("cs", ddDot);
         IE_FORMATS_.put("da", ddDash);
         IE_FORMATS_.put("en-IN", ddDash);
-        IE_FORMATS_.put("en-MT", ddSlash);
-        IE_FORMATS_.put("en-CA", yyyyMinus);
         IE_FORMATS_.put("en-PH", ddSlash);
-        IE_FORMATS_.put("es-PH", ddSlash);
-        IE_FORMATS_.put("es-PR", mmSlash);
         IE_FORMATS_.put("es-US", mmSlash);
-        IE_FORMATS_.put("fr-CH", ddDot);
-        IE_FORMATS_.put("ga", ddSlash);
         IE_FORMATS_.put("hi", ddDash);
         IE_FORMATS_.put("hr", ddDotDot);
         IE_FORMATS_.put("hu", yyyyDotBlankDotIE);
-        IE_FORMATS_.put("hu-HU", yyyyDotBlankDotIE);
-        IE_FORMATS_.put("iw", ddSlash);
         IE_FORMATS_.put("it-CH", ddDot);
+        IE_FORMATS_.put("iw", ddSlash);
         IE_FORMATS_.put("ja", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
         IE_FORMATS_.put("ja-JP-u-ca-japanese", "\u200Eyy\u200E/\u200EMM\u200E/\u200Edd");
         IE_FORMATS_.put("ko", "\u200EYYYY\u200E\uB144 \u200EMM\u200E\uC6D4 \u200Edd\u200E\uC77C");
-        IE_FORMATS_.put("lt", yyyyMinus);
         IE_FORMATS_.put("lv", ddDot);
         IE_FORMATS_.put("mt", ddSlash);
-        IE_FORMATS_.put("nl-BE", ddSlash);
         IE_FORMATS_.put("no", ddDot);
-        IE_FORMATS_.put("pl", ddDot);
-        IE_FORMATS_.put("pt-PT", ddSlash);
-        IE_FORMATS_.put("sl", ddDotBlank);
-        IE_FORMATS_.put("sq", ddDot);
         IE_FORMATS_.put("sr-BA", ddDot);
         IE_FORMATS_.put("sr-CS", ddDot);
         IE_FORMATS_.put("sr-ME", ddDot);
