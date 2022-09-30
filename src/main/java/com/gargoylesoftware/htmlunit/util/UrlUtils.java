@@ -688,7 +688,7 @@ public final class UrlUtils {
         if (relativeUrl == null) {
             throw new IllegalArgumentException("Relative URL must not be null");
         }
-        final Url url = resolveUrl(parseUrl(baseUrl.trim()), relativeUrl.trim());
+        final Url url = resolveUrl(parseUrl(baseUrl), relativeUrl.trim());
 
         return url.toString();
     }
@@ -727,10 +727,68 @@ public final class UrlUtils {
      * @param spec The specification to parse.
      * @return the parsed specification.
      */
-    private static Url parseUrl(final String spec) {
+    private static Url parseUrl(String spec) {
         final Url url = new Url();
         int startIndex = 0;
         int endIndex = spec.length();
+
+        // see https://url.spec.whatwg.org/#concept-basic-url-parser
+        //   * If input contains any leading or trailing C0 control or space, validation error.
+        //     Remove any leading and trailing C0 control or space from input.
+        //   * If input contains any ASCII tab or newline, validation error.
+        //     Remove all ASCII tab or newline from input.
+
+        if (endIndex > startIndex) {
+            StringBuilder sb = null;
+            boolean before = true;
+            int trailing = 0;
+
+            for (int i = 0; i < endIndex; i++) {
+                final char c = spec.charAt(i);
+                boolean remove = false;
+
+                if (c == '\t' | c == '\r' | c == '\n') {
+                    remove = true;
+                }
+                else if ('\u0000' <= c && c <= '\u001f') {
+                    if (before) {
+                        remove = true;
+                    }
+                    else {
+                        trailing++;
+                    }
+                }
+                else {
+                    before &= false;
+                    trailing = 0;
+                }
+
+                if (remove) {
+                    if (sb == null) {
+                        sb = new StringBuilder(spec.substring(0, i));
+                    }
+                }
+                else if (sb != null) {
+                    sb.append(c);
+                }
+            }
+
+            if (sb == null) {
+                if (trailing > 0) {
+                    endIndex = spec.length() - trailing;
+                    spec = spec.substring(0, endIndex);
+                }
+            }
+            else {
+                if (trailing > 0) {
+                    spec = sb.substring(0, sb.length() - trailing);
+                }
+                else {
+                    spec = sb.toString();
+                }
+                endIndex = spec.length();
+            }
+        }
 
         // Section 2.4.1: Parsing the Fragment Identifier
         //
