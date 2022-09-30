@@ -428,6 +428,20 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithTrailingSpace() {
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org ", "/x"));
+        assertEquals("http://www.htmlunit.org/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.org    ", "/x"));
+
+        assertEquals("http://www.htmlunit.o rg/x",    UrlUtils.resolveUrl("http://www.htmlunit.o rg", "/x"));
+        assertEquals("http://www.htmlunit.o rg/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.o rg ", "/x"));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

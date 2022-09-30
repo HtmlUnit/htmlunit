@@ -18,6 +18,7 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 
 import org.apache.commons.io.ByteOrderMark;
@@ -33,6 +34,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link HtmlScript}, but as WebDriverTestCase.
@@ -856,4 +858,83 @@ public class HtmlScript2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
+    /**
+     * Verifies that we're lenient about whitespace before and after URLs in the "src" attribute.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("ok")
+    public void whitespaceInSrc() throws Exception {
+        final String html = "<html><head><script src=' " + URL_SECOND + " '></script></head><body>abc</body></html>";
+        final String js = "alert('ok')";
+
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that we're lenient about control characters before and after URLs in the "src" attribute.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("ok")
+    public void controlCharsInSrc() throws Exception {
+        final String html = "<html><head>"
+                + "<script src='\u0011" + URL_SECOND + "\u001d'></script></head><body>abc</body></html>";
+        final String js = "alert('ok')";
+
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that we're lenient about control characters before and after URLs in the "src" attribute.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("ok")
+    public void tabCharInSrc() throws Exception {
+        String url = URL_SECOND.toExternalForm();
+        url = url.replace("http", "http\t");
+
+        final String html = "<html><head>"
+                + "<script src='" + url + "'></script></head><body>abc</body></html>";
+        final String js = "alert('ok')";
+
+        getMockWebConnection().setResponse(URL_SECOND, js);
+
+        loadPageWithAlerts2(html);
+    }
+
+    /**
+     * Verifies that we're lenient about empty "src" attributes.
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void emptySrc() throws Exception {
+        final String html1 = "<html><head><script src=''></script></head><body>abc</body></html>";
+        final String html2 = "<html><head><script src='  '></script></head><body>abc</body></html>";
+
+        loadPageWithAlerts2(html1);
+        loadPageWithAlerts2(html2);
+    }
+
+    /**
+     * Verifies that 204 (No Content) responses for script resources are handled gracefully.
+     * @throws Exception on test failure
+     * @see <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=2815903&group_id=47038">2815903</a>
+     */
+    @Test
+    public void noContent() throws Exception {
+        final String html = "<html><body><script src='" + URL_SECOND + "'/></body></html>";
+
+        final ArrayList<NameValuePair> headers = new ArrayList<>();
+        getMockWebConnection().setResponse(URL_SECOND, (String) null, WebResponse.NO_CONTENT, "No Content",
+                MimeType.APPLICATION_JAVASCRIPT,
+                headers);
+
+        loadPageWithAlerts2(html);
+    }
 }

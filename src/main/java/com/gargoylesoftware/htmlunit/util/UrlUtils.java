@@ -688,7 +688,7 @@ public final class UrlUtils {
         if (relativeUrl == null) {
             throw new IllegalArgumentException("Relative URL must not be null");
         }
-        final Url url = resolveUrl(parseUrl(baseUrl), relativeUrl.trim());
+        final Url url = resolveUrl(parseUrl(baseUrl), relativeUrl);
 
         return url.toString();
     }
@@ -750,7 +750,7 @@ public final class UrlUtils {
                 if (c == '\t' | c == '\r' | c == '\n') {
                     remove = true;
                 }
-                else if ('\u0000' <= c && c <= '\u001f') {
+                else if ('\u0000' <= c && c <= '\u0020') {
                     if (before) {
                         remove = true;
                     }
