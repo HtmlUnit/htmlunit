@@ -1550,11 +1550,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                         if (namespaces != null) {
                             prefixResolver = new PrefixResolver() {
                                 @Override
-                                public String getBaseIdentifier() {
-                                    return namespaces.get("");
-                                }
-
-                                @Override
                                 public String getNamespaceForPrefix(final String prefix) {
                                     return namespaces.get(prefix);
                                 }

@@ -68,14 +68,6 @@ public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolve
      * {@inheritDoc}
      */
     @Override
-    public String getBaseIdentifier() {
-        return XmlUtils.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), "");
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getNamespaceForPrefix(final String prefix) {
         return lookupNamespaceURI(prefix);
     }
