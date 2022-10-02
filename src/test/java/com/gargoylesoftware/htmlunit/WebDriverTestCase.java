@@ -97,7 +97,7 @@ import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -547,7 +547,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         if (webDriver_ == null) {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(BrowserType.HTMLUNIT);
+            capabilities.setBrowserName(Browser.HTMLUNIT.browserName());
             capabilities.setVersion(getBrowserName(getBrowserVersion()));
             webDriver_ = new HtmlUnitDriver(capabilities) {
                 @Override
@@ -590,18 +590,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
         if (browserVersion == BrowserVersion.FIREFOX) {
-            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
+            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
         }
         if (browserVersion == BrowserVersion.FIREFOX_ESR) {
-            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
+            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
         }
-        if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-            return BrowserType.IE;
-        }
-        if (browserVersion == BrowserVersion.EDGE) {
-            return BrowserType.EDGE;
-        }
-        return BrowserType.CHROME;
+        return browserVersion.getNickname();
     }
 
     /**
