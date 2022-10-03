@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 2.64.0 / August 18, 2022
+Version 2.65.0 / October 03, 2022
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -37,7 +37,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.64.0</version>
+    <version>2.65.0</version>
 </dependency>
 ```
 
@@ -46,7 +46,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.64.0'
+implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.65.0'
 ```
 
 ## Overview
@@ -114,7 +114,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>net.sourceforge.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>2.65.0-SNAPSHOT</version>
+          <version>2.66.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -133,7 +133,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.64.0-SNAPSHOT'
+    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.66.0-SNAPSHOT'
   // ...
 }
 ```
@@ -146,7 +146,7 @@ dependencies {
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.64.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.65.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"

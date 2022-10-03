@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.65.0" date="xxxx, 2022" description="Chrome/Edge 105, Firefox 104">
+        <release version="2.65.0" date="October 03, 2022" description="Chrome/Edge 105, Firefox 105">
+            <action type="update" dev="rbri">
+                FF_ESR updatade from version 91 to 102.
+            </action>
             <action type="remove" dev="rbri">
                 com.gargoylesoftware.htmlunit.util.TextUtils removed.
             </action>

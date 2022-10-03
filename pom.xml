@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.65.0-SNAPSHOT</version>
+    <version>2.65.0</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -25,16 +25,17 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>3.65.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.12.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.65.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.65.0</htmlunitcorejs.version>
         <htmlunitxpath.version>2.65.0-SNAPSHOT</htmlunitxpath.version>
 
+        <htmlunitdriver.version>4.5.0</htmlunitdriver.version>
+        <selenium.version>4.5.0</selenium.version>
+
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.49.v20220914</jetty.version>
         <log4j.version>2.19.0</log4j.version>
-        <selenium.version>4.5.0</selenium.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
@@ -86,28 +87,6 @@
                 </dependencies>
                 <configuration>
                     <excludeFilterFile>spotbugs-exclude.xml</excludeFilterFile>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.19.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-core</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-java</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <rulesets>
-                        <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
-                    </rulesets>
                 </configuration>
             </plugin>
             <plugin>
@@ -182,7 +161,6 @@
                     <quiet>true</quiet>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>https://commons.apache.org/logging/apidocs/</link>
@@ -249,49 +227,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <additionalBuildcommands>
-                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
-                    </additionalProjectnatures>
-                    <useProjectReferences>false</useProjectReferences>
-                    <additionalConfig>
-                        <file>
-                            <name>.checkstyle</name>
-                            <content>
-<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
-    <local-check-config name="HtmlUnit" location="checkstyle.xml" type="project" description="HtmlUnit">
-        <property name="checkstyle.suppressions.file" value="$${project_loc}/checkstyle_suppressions.xml"/>
-        <additional-data name="protect-config-file" value="false"/>
-    </local-check-config>
-    <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
-        <file-match-pattern match-pattern="^src/.*\.java$" include-pattern="true"/>
-        <file-match-pattern match-pattern="^src/.*general/huge/.*\.java$" include-pattern="false"/>
-    </fileset>
-</fileset-config>
-]]>
-                            </content>
-                        </file>
-                    </additionalConfig>
-                    <additionalConfig>
-                        <file>
-                            <name>.settings/org.eclipse.core.resources.prefs</name>
-                            <content>
-                                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
-                            </content>
-                        </file>
-                    </additionalConfig>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -695,7 +630,6 @@
                     <quiet>true</quiet>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
                     <links>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>
                         <link>https://commons.apache.org/logging/apidocs/</link>
