@@ -11,20 +11,9 @@
     </suppress>
     <suppress>
         <notes><![CDATA[
-        xalan is used by batik
+        no new version at the moment
         ]]></notes>
         <packageUrl regex="true">^pkg:maven/xerces/xercesImpl@.*$</packageUrl>
         <vulnerabilityName>CVE-2017-10355</vulnerabilityName>
-    </suppress>
-    <suppress>
-        <notes><![CDATA[
-        xalan is used by batik
-        ]]></notes>
-        <packageUrl regex="true">^pkg:maven/xalan/xalan@.*$</packageUrl>
-        <vulnerabilityName>CVE-2022-34169</vulnerabilityName>
-    </suppress>
-    <suppress>
-        <packageUrl regex="true">^pkg:maven/xalan/serializer@.*$</packageUrl>
-        <vulnerabilityName>CVE-2022-34169</vulnerabilityName>
     </suppress>
 </suppressions>

@@ -103,7 +103,7 @@ public final class BrowserVersion implements Serializable {
     public static final BrowserVersion EDGE = new BrowserVersion(105, "Edge");
 
     /** Latest Chrome. */
-    public static final BrowserVersion CHROME = new BrowserVersion(105, "Chrome");
+    public static final BrowserVersion CHROME = new BrowserVersion(106, "Chrome");
 
     /**
      * Array with all supported browsers
