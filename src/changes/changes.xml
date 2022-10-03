@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="2.66.0" date="xxxx, 2022" description="Chrome/Edge 106, Bugfixes">
+        <release version="2.65.1" date="October 03, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Wrong dependency to htmlunit-xpath snapshot
+            </action>
             <action type="fix" dev="rbri">
                 There was still a dependency to Xalan.
             </action>
