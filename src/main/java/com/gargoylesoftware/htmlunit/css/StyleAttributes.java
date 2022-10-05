@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chrome;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.edge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAuto;
+import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeEmpty;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNone;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNormal;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeNotIterable;
@@ -110,7 +113,7 @@ public final class StyleAttributes implements Serializable {
         ACCENT_COLOR_("accent-color", "accent-color", ff("auto")),
 
         /** The style property {@code additiveSymbols}. */
-        ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdge("")),
+        ADDITIVE_SYMBOLS("additiveSymbols", "additive-symbols", chromeAndEdgeEmpty()),
 
         /** The style property {@code alignContent}. */
         ALIGN_CONTENT("alignContent", "align-content", ie("stretch"), chromeAndEdgeAndFirefox("normal")),
@@ -199,7 +202,7 @@ public final class StyleAttributes implements Serializable {
         APPEARANCE("appearance", "appearance", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code ascentOverride}. */
-        ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdge("")),
+        ASCENT_OVERRIDE("ascentOverride", "ascent-override", chromeAndEdgeEmpty()),
 
         /** The style property {@code aspectRatio}. */
         ASPECT_RATIO("aspectRatio", "aspect-ratio", chromeAndEdgeAuto(), ff("auto")),
@@ -297,10 +300,10 @@ public final class StyleAttributes implements Serializable {
         BACKGROUND_REPEAT_("background-repeat", "background-repeat", ff("repeat")),
 
         /** The style property {@code backgroundRepeatX}. */
-        BACKGROUND_REPEAT_X("backgroundRepeatX", "background-repeat-x", chromeAndEdge("")),
+        BACKGROUND_REPEAT_X("backgroundRepeatX", "background-repeat-x", chromeAndEdgeEmpty()),
 
         /** The style property {@code backgroundRepeatY}. */
-        BACKGROUND_REPEAT_Y("backgroundRepeatY", "background-repeat-y", chromeAndEdge("")),
+        BACKGROUND_REPEAT_Y("backgroundRepeatY", "background-repeat-y", chromeAndEdgeEmpty()),
 
         /** The style property {@code backgroundSize}. */
         BACKGROUND_SIZE("backgroundSize", "background-size", ff("auto"),
@@ -310,7 +313,7 @@ public final class StyleAttributes implements Serializable {
         BACKGROUND_SIZE_("background-size", "background-size", ff("auto")),
 
         /** The style property {@code basePalette}. */
-        BASE_PALETTE("basePalette", "base-palette", chromeAndEdge("")),
+        BASE_PALETTE("basePalette", "base-palette", chromeAndEdgeEmpty()),
 
         /** The style property {@code baselineShift}. */
         BASELINE_SHIFT("baselineShift", "baseline-shift", ie("baseline"),
@@ -976,7 +979,7 @@ public final class StyleAttributes implements Serializable {
 
         //TODO: seems to be a combination of all other properties.
         /** The style property {@code cssText}. */
-        CSS_TEXT("cssText", "css-text", chromeAndEdge(""), ff(""), ie("")),
+        CSS_TEXT("cssText", "css-text", chromeAndEdgeEmpty(), ff(""), ie("")),
 
         /** The style property {@code cue}. */
         CUE("cue", "cue"),
@@ -1000,7 +1003,7 @@ public final class StyleAttributes implements Serializable {
         D("d", "d", chromeAndEdgeAndFirefox("none")),
 
         /** The style property {@code descentOverride}. */
-        DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdge("")),
+        DESCENT_OVERRIDE("descentOverride", "descent-dverride", chromeAndEdgeEmpty()),
 
         /** The style property {@code direction}. */
         DIRECTION("direction", "direction", chromeAndEdge("ltr"), ff("ltr"), ie("ltr")),
@@ -1028,7 +1031,7 @@ public final class StyleAttributes implements Serializable {
         ENABLE_BACKGROUND("enableBackground", "enable-background", ie("accumulate")),
 
         /** The style property {@code fallback}. */
-        FALLBACK("fallback", "fallback", chromeAndEdge("")),
+        FALLBACK("fallback", "fallback", chromeAndEdgeEmpty()),
 
         /** The style property {@code fill}. */
         FILL("fill", "fill", ff("rgb(0, 0, 0)"), ie("black"), chromeAndEdge("rgb(0, 0, 0)")),
@@ -1109,7 +1112,7 @@ public final class StyleAttributes implements Serializable {
                 ff("400 16px serif")),
 
         /** The style property {@code fontDisplay}. */
-        FONT_DISPLAY("fontDisplay", "font-display", chromeAndEdge("")),
+        FONT_DISPLAY("fontDisplay", "font-display", chromeAndEdgeEmpty()),
 
         /** The style property {@code fontFamily}. */
         FONT_FAMILY("fontFamily", "font-family", chromeAndEdge("\"Times New Roman\""),
@@ -1368,10 +1371,10 @@ public final class StyleAttributes implements Serializable {
         GRID_TEMPLATE_ROWS_("grid-template-rows", "grid-template-rows", ffNone()),
 
         /** The style property {@code height}. */
-        HEIGHT("height", "height", chromeAndEdge(""), ff(""), ie("")),
+        HEIGHT("height", "height", chromeAndEdgeEmpty(), ff(""), ie("")),
 
         /** The style property {@code hyphenateCharacter}. */
-        HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ff("auto")),
+        HYPHENATE_CHARACTER("hyphenateCharacter", "hyphenate-character", ff("auto"), chromeAndEdgeAuto()),
 
         /** The style property {@code hyphenate-character}. */
         HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ff("auto")),
@@ -1400,13 +1403,13 @@ public final class StyleAttributes implements Serializable {
         IME_MODE_("ime-mode", "ime-mode", ff("auto")),
 
         /** The style property {@code inherits}. */
-        INHERITS("inherits", "inherits", chromeAndEdge("")),
+        INHERITS("inherits", "inherits", chromeAndEdgeEmpty()),
 
         /** The style property {@code initialValue}. */
-        INITIAL_VALUE("initialValue", "initial-value", chromeAndEdge("")),
+        INITIAL_VALUE("initialValue", "initial-value", chromeAndEdgeEmpty()),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chromeAndEdge("1240px")),
+        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chrome("1240px"), edge("1239px")),
 
         /** The style property {@code inline-size}. */
         INLINE_SIZE_("inline-size", "inline-size", ff("1244px")),
@@ -1517,7 +1520,7 @@ public final class StyleAttributes implements Serializable {
         LINE_BREAK_("line-break", "line-break", ff("auto")),
 
         /** The style property {@code lineGapOverride}. */
-        LINE_GAP_OVERRIDE("lineGapOverride", "line-gap-oOverride", chromeAndEdge("")),
+        LINE_GAP_OVERRIDE("lineGapOverride", "line-gap-oOverride", chromeAndEdgeEmpty()),
 
         /** The style property {@code lineHeight}. */
         LINE_HEIGHT("lineHeight", "line-height", ffNormal(),
@@ -1736,7 +1739,7 @@ public final class StyleAttributes implements Serializable {
         MAX_WIDTH_("max-width", "max-width", ffNone()),
 
         /** The style property {@code maxZoom}. */
-        MAX_ZOOM("maxZoom", "max-zoom", chromeAndEdge("")),
+        MAX_ZOOM("maxZoom", "max-zoom", chromeAndEdgeEmpty()),
 
         /** The style property {@code minBlockSize}. */
         MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff("0px"), chromeAndEdge("0px")),
@@ -1763,7 +1766,7 @@ public final class StyleAttributes implements Serializable {
         MIN_WIDTH_("min-width", "min-width", ff("0px")),
 
         /** The style property {@code minZoom}. */
-        MIN_ZOOM("minZoom", "min-zoom", chromeAndEdge("")),
+        MIN_ZOOM("minZoom", "min-zoom", chromeAndEdgeEmpty()),
 
         /** The style property {@code mixBlendMode}. */
         MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ffNormal(), chromeAndEdgeNormal()),
@@ -2477,7 +2480,7 @@ public final class StyleAttributes implements Serializable {
         MS_WRAP_THROUGH("msWrapThrough", "-ms-wrap-through", ie("wrap")),
 
         /** The style property {@code negative}. */
-        NEGATIVE("negative", "negative", chromeAndEdge("")),
+        NEGATIVE("negative", "negative", chromeAndEdgeEmpty()),
 
         /** The style property {@code objectFit}. */
         OBJECT_FIT("objectFit", "object-fit", ff("fill"), chromeAndEdge("fill")),
@@ -2528,7 +2531,7 @@ public final class StyleAttributes implements Serializable {
         ORDER("order", "order", ff("0"), ie("0"), chromeAndEdge("0")),
 
         /** The style property {@code orientation}. */
-        ORIENTATION("orientation", "orientation", chromeAndEdge("")),
+        ORIENTATION("orientation", "orientation", chromeAndEdgeEmpty()),
 
         /** The style property {@code orphans}. */
         ORPHANS("orphans", "orphans", ie("2"), chromeAndEdge("2")),
@@ -2608,7 +2611,7 @@ public final class StyleAttributes implements Serializable {
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
         /** The style property {@code overrideColors}. */
-        OVERRIDE_COLOR("overrideColors", "override-colors", chromeAndEdge("")),
+        OVERRIDE_COLOR("overrideColors", "override-colors", chromeAndEdgeEmpty()),
 
         /** The style property {@code overscrollBehavior}. */
         OVERSCROLL_BEHAVIOR("overscrollBehavior", "overscroll-behavior", chromeAndEdgeAuto(),
@@ -2644,7 +2647,7 @@ public final class StyleAttributes implements Serializable {
         OVERSCROLL_BEHAVIOR_Y_("overscroll-behavior-y", "overscroll-behavior-y", ff("auto")),
 
         /** The style property {@code pad}. */
-        PAD("pad", "pad", chromeAndEdge("")),
+        PAD("pad", "pad", chromeAndEdgeEmpty()),
 
         /** The style property {@code padding}. */
         PADDING("padding", "padding", chromeAndEdge("0px"), ie(""), ff("0px")),
@@ -2732,7 +2735,7 @@ public final class StyleAttributes implements Serializable {
         PAGE_BREAK_INSIDE_("page-break-inside", "page-break-inside", ff("auto")),
 
         /** The style property {@code pageOrientation}. */
-        PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdge("")),
+        PAGE_ORIENTATION("pageOrientation", "page-orientation", chromeAndEdgeEmpty()),
 
         /** The style property {@code paintOrder}. */
         PAINT_ORDER("paintOrder", "paint-order", ffNormal(), chromeAndEdgeNormal()),
@@ -2754,7 +2757,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 162px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chrome("620px 162px"), edge("619.5px 162px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("622px 172.5px")),
@@ -2829,7 +2832,7 @@ public final class StyleAttributes implements Serializable {
         POSITION("position", "position", chromeAndEdge("static"), ff("static"), ie("static")),
 
         /** The style property {@code prefix}. */
-        PREFIX("prefix", "prefix", chromeAndEdge("")),
+        PREFIX("prefix", "prefix", chromeAndEdgeEmpty()),
 
         /** The style property {@code printColorAdjust}. */
         PRINT_COLOR_ADJUST("printColorAdjust", "print-color-adjust", ff("economy")),
@@ -2844,7 +2847,7 @@ public final class StyleAttributes implements Serializable {
         R("r", "r", chromeAndEdge("0px"), ff("0px")),
 
         /** The style property {@code range}. */
-        RANGE("range", "range", chromeAndEdge("")),
+        RANGE("range", "range", chromeAndEdgeEmpty()),
 
         /** The style property {@code resize}. */
         RESIZE("resize", "resize", ffNone(), chromeAndEdgeNone()),
@@ -3124,16 +3127,16 @@ public final class StyleAttributes implements Serializable {
         SHAPE_RENDERING_("shape-rendering", "shape-rendering", ff("auto")),
 
         /** The style property {@code size}. */
-        SIZE("size", "size", chromeAndEdge("")),
+        SIZE("size", "size", chromeAndEdgeEmpty()),
 
         /** The style property {@code sizeAdjust}. */
-        SIZE_ADJUST("sizeAdjust", "sizeAdjust", chromeAndEdge("")),
+        SIZE_ADJUST("sizeAdjust", "sizeAdjust", chromeAndEdgeEmpty()),
 
         /** The style property {@code speak}. */
         SPEAK("speak", "speak", chromeAndEdgeNormal()),
 
         /** The style property {@code speakAs}. */
-        SPEAK_AS("speakAs", "speak-as", chromeAndEdge("")),
+        SPEAK_AS("speakAs", "speak-as", chromeAndEdgeEmpty()),
 
         /** The style property {@code speakHeader}. */
         SPEAK_HEADER("speakHeader", "speak-header"),
@@ -3148,7 +3151,7 @@ public final class StyleAttributes implements Serializable {
         SPEECH_RATE("speechRate", "speech-rate"),
 
         /** The style property {@code src}. */
-        SRC("src", "src", chromeAndEdge("")),
+        SRC("src", "src", chromeAndEdgeEmpty()),
 
         /** The style property {@code stopColor}. */
         STOP_COLOR("stopColor", "stop-color", ff("rgb(0, 0, 0)"), ie(""), chromeAndEdge("rgb(0, 0, 0)")),
@@ -3214,16 +3217,16 @@ public final class StyleAttributes implements Serializable {
         STYLE_FLOAT("styleFloat", "style-float", ie("undefined")),
 
         /** The style property {@code suffix}. */
-        SUFFIX("suffix", "suffix", chromeAndEdge("")),
+        SUFFIX("suffix", "suffix", chromeAndEdgeEmpty()),
 
         /** The style property {@code symbols}. */
-        SYMBOLS("symbols", "symbols", chromeAndEdge("")),
+        SYMBOLS("symbols", "symbols", chromeAndEdgeEmpty()),
 
         /** The style property {@code syntax}. */
-        SYNTAX("syntax", "syntax", chromeAndEdge("")),
+        SYNTAX("syntax", "syntax", chromeAndEdgeEmpty()),
 
         /** The style property {@code system}. */
-        SYSTEM("system", "system", chromeAndEdge("")),
+        SYSTEM("system", "system", chromeAndEdgeEmpty()),
 
         /** The style property {@code tabSize}. */
         TAB_SIZE("tabSize", "tab-size", chromeAndEdge("8"), ff("8")),
@@ -3436,7 +3439,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chromeAndEdge("620px 162px")),
+                ff("622px 172.5px"), ie("620px 163.2px"), chrome("620px 162px"), edge("619.5px 162px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("622px 172.5px")),
@@ -3491,7 +3494,7 @@ public final class StyleAttributes implements Serializable {
         UNICODE_BIDI_("unicode-bidi", "unicode-bidi", ff("isolate")),
 
         /** The style property {@code unicodeRange}. */
-        UNICODE_RANGE("unicodeRange", "unicode-range", chromeAndEdge("")),
+        UNICODE_RANGE("unicodeRange", "unicode-range", chromeAndEdgeEmpty()),
 
         /** The style property {@code userSelect}. */
         USER_SELECT("userSelect", "user-select", chromeAndEdgeAuto(), ff("auto")),
@@ -3500,7 +3503,7 @@ public final class StyleAttributes implements Serializable {
         USER_SELECT_("user-select", "user-select", ff("auto")),
 
         /** The style property {@code userZoom}. */
-        USER_ZOOM("userZoom", "user-zoom", chromeAndEdge("")),
+        USER_ZOOM("userZoom", "user-zoom", chromeAndEdgeEmpty()),
 
         /** The style property {@code vectorEffect}. */
         VECTOR_EFFECT("vectorEffect", "vector-effect", ffNone(), chromeAndEdgeNone()),
@@ -4062,7 +4065,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("324px")),
 
         /** The style property {@code webkitLogicalWidth}. */
-        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chromeAndEdge("1240px")),
+        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px"), edge("1239px")),
 
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chromeAndEdge("0px")),
@@ -4077,7 +4080,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_MARGIN_START("webkitMarginStart", "webkit-margin-start", chromeAndEdge("0px")),
 
         /** The style property {@code webkitMask}. */
-        WEBKIT_MASK("webkitMask", "webkit-mask", chromeAndEdge(""), ffNone()),
+        WEBKIT_MASK("webkitMask", "webkit-mask", chromeAndEdgeEmpty(), ffNone()),
 
         /** The style property {@code WebkitMask}. */
         WEBKIT_MASK_("WebkitMask", "webkit-mask", ffNone()),
@@ -4177,10 +4180,10 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_MASK_REPEAT__("-webkit-mask-repeat", "webkit-mask-repeat", ff("repeat")),
 
         /** The style property {@code webkitMaskRepeatX}. */
-        WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chromeAndEdge("")),
+        WEBKIT_MASK_REPEAT_X("webkitMaskRepeatX", "webkit-mask-repeat-x", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitMaskRepeatY}. */
-        WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chromeAndEdge("")),
+        WEBKIT_MASK_REPEAT_Y("webkitMaskRepeatY", "webkit-mask-repeat-y", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitMaskSize}. */
         WEBKIT_MASK_SIZE("webkitMaskSize", "webkit-mask-size", chromeAndEdgeAuto(), ff("auto")),
@@ -4238,7 +4241,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                chromeAndEdge("620px 162px"), ff("622px 172.5px")),
+                ff("622px 172.5px"), chrome("620px 162px"), edge("619.5px 162px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
@@ -4249,10 +4252,10 @@ public final class StyleAttributes implements Serializable {
                 ff("622px 172.5px")),
 
         /** The style property {@code webkitPerspectiveOriginX}. */
-        WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chromeAndEdge("")),
+        WEBKIT_PERSPECTIVE_ORIGIN_X("webkitPerspectiveOriginX", "webkit-perspective-origin-x", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitPerspectiveOriginY}. */
-        WEBKIT_PERSPECTIVE_ORIGIN_Y("webkitPerspectiveOriginY", "webkit-perspective-origin-y", chromeAndEdge("")),
+        WEBKIT_PERSPECTIVE_ORIGIN_Y("webkitPerspectiveOriginY", "webkit-perspective-origin-y", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitPrintColorAdjust}. */
         WEBKIT_PRINT_COLOR_ADJUST("webkitPrintColorAdjust", "webkit-print-color-adjust", chromeAndEdge("economy")),
@@ -4326,7 +4329,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_TEXT_SIZE_ADJUST__("-webkit-text-size-adjust", "webkit-text-size-adjust", ff("auto")),
 
         /** The style property {@code webkitTextStroke}. */
-        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chromeAndEdge(""), ff("0px rgb(0, 0, 0)")),
+        WEBKIT_TEXT_STROKE("webkitTextStroke", "webkit-text-stroke", chromeAndEdgeEmpty(), ff("0px rgb(0, 0, 0)")),
 
         /** The style property {@code WebkitTextStroke}. */
         WEBKIT_TEXT_STROKE_("WebkitTextStroke", "webkit-text-stroke", ff("0px rgb(0, 0, 0)")),
@@ -4366,7 +4369,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                chromeAndEdge("620px 162px"), ff("622px 172.5px")),
+                ff("622px 172.5px"), chrome("620px 162px"), edge("619.5px 162px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",
@@ -4377,13 +4380,13 @@ public final class StyleAttributes implements Serializable {
                 ff("622px 172.5px")),
 
         /** The style property {@code webkitTransformOriginX}. */
-        WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chromeAndEdge("")),
+        WEBKIT_TRANSFORM_ORIGIN_X("webkitTransformOriginX", "webkit-transform-origin-x", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitTransformOriginY}. */
-        WEBKIT_TRANSFORM_ORIGIN_Y("webkitTransformOriginY", "webkit-transform-origin-y", chromeAndEdge("")),
+        WEBKIT_TRANSFORM_ORIGIN_Y("webkitTransformOriginY", "webkit-transform-origin-y", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitTransformOriginZ}. */
-        WEBKIT_TRANSFORM_ORIGIN_Z("webkitTransformOriginZ", "webkit-transform-origin-z", chromeAndEdge("")),
+        WEBKIT_TRANSFORM_ORIGIN_Z("webkitTransformOriginZ", "webkit-transform-origin-z", chromeAndEdgeEmpty()),
 
         /** The style property {@code webkitTransformStyle}. */
         WEBKIT_TRANSFORM_STYLE("webkitTransformStyle", "webkit-transform-style", chromeAndEdge("flat"), ff("flat")),
@@ -4473,7 +4476,7 @@ public final class StyleAttributes implements Serializable {
         WIDOWS("widows", "widows", ie("2"), chromeAndEdge("2")),
 
         /** The style property {@code width}. */
-        WIDTH("width", "width", chromeAndEdge(""), ff(""), ie("")),
+        WIDTH("width", "width", chromeAndEdgeEmpty(), ff(""), ie("")),
 
         /** The style property {@code willChange}. */
         WILL_CHANGE("willChange", "will-change", ff("auto"), chromeAndEdgeAuto()),

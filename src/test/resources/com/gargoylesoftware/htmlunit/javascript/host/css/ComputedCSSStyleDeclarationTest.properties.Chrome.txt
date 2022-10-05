@@ -208,6 +208,7 @@ gridTemplateAreas=:none
 gridTemplateColumns=:none
 gridTemplateRows=:none
 height=:skipped
+hyphenateCharacter=:auto
 hyphens=:manual
 imageOrientation=:from-image
 imageRendering=:auto

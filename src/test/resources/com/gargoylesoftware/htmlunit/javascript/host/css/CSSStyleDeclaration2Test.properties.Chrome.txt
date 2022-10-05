@@ -208,6 +208,7 @@ gridTemplateAreas
 gridTemplateColumns
 gridTemplateRows
 height
+hyphenateCharacter
 hyphens
 imageOrientation
 imageRendering
