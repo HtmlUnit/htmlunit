@@ -126,14 +126,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             final DomNode xsltDomNode = style_.getDomNodeOrDie();
             final Source xsltSource = new DOMSource(xsltDomNode);
 
-            final Transformer transformer = TransformerFactory.newInstance().newTransformer(xsltSource);
-            for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
-                transformer.setParameter(entry.getKey(), entry.getValue());
-            }
+            final TransformerFactory transformerFactory = TransformerFactory.newInstance();
 
-            // hack to preserve indention
-            // the transformer only accepts the OutputKeys.INDENT setting if
-            // the StreamResult is used
             final SgmlPage page = sourceDomNode.getPage();
             if (page != null && page.getWebClient().getBrowserVersion()
                                             .hasFeature(JS_XSLT_TRANSFORM_INDENT)) {
@@ -141,9 +135,16 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                 if (outputNode != null) {
                     final org.w3c.dom.Node indentNode = outputNode.getAttributes().getNamedItem("indent");
                     if (indentNode != null && "yes".equalsIgnoreCase(indentNode.getNodeValue())) {
+                        transformerFactory.setAttribute("indent-number", new Integer(2));
+                        final Transformer transformer = transformerFactory.newTransformer(xsltSource);
                         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+                        for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
+                            transformer.setParameter(entry.getKey(), entry.getValue());
+                        }
 
+                        // hack to preserve indention
+                        // the transformer only accepts the OutputKeys.INDENT setting if
+                        // the StreamResult is used
                         try (ByteArrayOutputStream out = new ByteArrayOutputStream()) {
                             transformer.transform(xmlSource, new StreamResult(out));
                             final WebResponseData data =
@@ -153,6 +154,11 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                         }
                     }
                 }
+            }
+
+            final Transformer transformer = transformerFactory.newTransformer(xsltSource);
+            for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
+                transformer.setParameter(entry.getKey(), entry.getValue());
             }
 
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
