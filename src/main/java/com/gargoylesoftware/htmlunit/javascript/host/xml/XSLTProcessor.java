@@ -135,9 +135,21 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                 if (outputNode != null) {
                     final org.w3c.dom.Node indentNode = outputNode.getAttributes().getNamedItem("indent");
                     if (indentNode != null && "yes".equalsIgnoreCase(indentNode.getNodeValue())) {
-                        transformerFactory.setAttribute("indent-number", new Integer(2));
+                        try {
+                            transformerFactory.setAttribute("indent-number", new Integer(2));
+                        }
+                        catch (final IllegalArgumentException e) {
+                            // ignore
+                        }
                         final Transformer transformer = transformerFactory.newTransformer(xsltSource);
                         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                        try {
+                            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+                        }
+                        catch (final IllegalArgumentException e) {
+                            // ignore
+                        }
+
                         for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
                             transformer.setParameter(entry.getKey(), entry.getValue());
                         }
