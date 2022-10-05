@@ -131,7 +131,7 @@ public class ArchitectureTest {
     private static final DescribedPredicate<JavaMethod> haveJsxGetterWithNonDefaultPropertyName =
             new DescribedPredicate<JavaMethod>("@JsxGetter has a non default propertyName") {
                 @Override
-                public boolean apply(final JavaMethod method) {
+                public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxGetter.class).propertyName());
                 }
             };
@@ -156,7 +156,7 @@ public class ArchitectureTest {
     private static final DescribedPredicate<JavaMethod> haveJsxSetterWithNonDefaultPropertyName =
             new DescribedPredicate<JavaMethod>("@JsxSetter has a non default propertyName") {
                 @Override
-                public boolean apply(final JavaMethod method) {
+                public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxSetter.class).propertyName());
                 }
             };
