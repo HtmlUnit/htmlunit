@@ -145,7 +145,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Sets the new value of this text area.
-     *
+     * <p>
      * Note that this acts like 'pasting' the text, but to simulate characters entry
      * you should use {@link #type(String)}.
      *

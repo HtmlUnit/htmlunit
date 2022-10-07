@@ -17,7 +17,7 @@ package netscape.javascript;
 /**
  * Stub for the JSException. This is part of the Applet
  * LiveConnect simulation.
- *
+ * <p>
  * TODO: we have to evaluate if it is possible to use plugin.jar from jdk
  *
  * @author Ronald Brill

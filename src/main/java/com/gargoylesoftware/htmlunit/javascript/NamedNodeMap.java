@@ -70,7 +70,7 @@ public class NamedNodeMap extends HtmlUnitScriptable {
 
     /**
      * Returns the element at the specified index, or {@link #NOT_FOUND} if the index is invalid.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

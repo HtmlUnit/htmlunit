@@ -588,7 +588,8 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Whether or not the event bubbles. The value of this attribute depends on the event type. To
-     * determine if a certain event type bubbles, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * determine if a certain event type bubbles, see
+     * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">events</a>
      * Most event types do bubble, so this is true by default; event types which do not bubble should
      * overwrite this value in their constructors.
      */
@@ -596,7 +597,9 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Whether or not the event can be canceled. The value of this attribute depends on the event type. To
-     * determine if a certain event type can be canceled, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * determine if a certain event type can be canceled, see
+     * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">
+     * http://www.w3.org/TR/DOM-Level-2-Events/events.html</a>
      * The more common event types are cancelable, so this is true by default; event types which cannot be
      * canceled should overwrite this value in their constructors.
      */

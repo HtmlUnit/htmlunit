@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *         final String applicationName = "APPNAME";
  *         final String applicationVersion = "APPVERSION";
  *         final String userAgent = "USERAGENT";
- *
+ * <p>
  *         final BrowserVersion browser =
  *                 new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
  *                     .setApplicationName(applicationName)
@@ -118,7 +118,7 @@ public final class BrowserVersion implements Serializable {
     /** The default browser version. */
     private static BrowserVersion DefaultBrowserVersion_ = BEST_SUPPORTED;
 
-    /** Register plugins for the browser versions. */
+    /* Register plugins for the browser versions. */
     static {
         FIREFOX_ESR.applicationVersion_ = "5.0 (Windows)";
         FIREFOX_ESR.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"

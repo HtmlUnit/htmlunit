@@ -2206,7 +2206,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Closes all opened windows, stopping all background JavaScript processing.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

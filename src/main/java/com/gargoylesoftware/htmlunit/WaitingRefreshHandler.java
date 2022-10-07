@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  * This refresh handler waits the specified number of seconds (or a user defined maximum)
  * before refreshing the specified page, using the specified URL. Waiting happens
  * on the current thread
- *
+ * <p>
  * If you want a refresh handler that ignores the wait time, see
  * {@link ImmediateRefreshHandler}.
  *

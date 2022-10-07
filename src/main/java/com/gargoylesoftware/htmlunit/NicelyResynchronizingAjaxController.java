@@ -54,7 +54,7 @@ public class NicelyResynchronizingAjaxController extends AjaxController {
 
     /**
      * Resynchronizes calls performed from the thread where this instance has been created.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

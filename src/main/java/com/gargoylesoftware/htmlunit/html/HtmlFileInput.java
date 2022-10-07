@@ -175,7 +175,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * Used to specify {@code multiple} files to upload.
-     *
+     * <p>
      * We may follow WebDriver solution, once made,
      * see https://code.google.com/p/selenium/issues/detail?id=2239
      * @param files the list of files to upload

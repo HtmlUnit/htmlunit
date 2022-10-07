@@ -193,13 +193,13 @@ public class Document extends Node {
     /** Contains all supported vendor specific events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
-    /**
-     * Initializes the supported event type map.
-     * Map<String, Class> which maps strings a caller may use when calling into
-     * {@link #createEvent(String)} to the associated event class. To support a new
-     * event creation type, the event type and associated class need to be added into this map in
-     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
-     * have a no-arg constructor.
+    /*
+      Initializes the supported event type map.
+      Map<String, Class> which maps strings a caller may use when calling into
+      {@link #createEvent(String)} to the associated event class. To support a new
+      event creation type, the event type and associated class need to be added into this map in
+      the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
+      have a no-arg constructor.
      */
     static {
         final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
@@ -922,7 +922,8 @@ public class Document extends Node {
 
     /**
      * JavaScript function {@code close}.
-     * <p>See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
+     * <p>See <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html">
+     * http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html</a> for
      * a good description of the semantics of open(), write(), writeln() and close().</p>
      *
      * @throws IOException if an IO problem occurs
@@ -1386,7 +1387,7 @@ public class Document extends Node {
      *          d2.d3.gargoylesoftware.com
      *             d3.gargoylesoftware.com
      *                gargoylesoftware.com
-     *
+     * <p>
      *        transformation to:        com
      *        will fail
      * </li>
@@ -1940,7 +1941,7 @@ public class Document extends Node {
 
     /**
      * Returns all HTML elements that have a {@code name} attribute with the specified value.
-     *
+     * <p>
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
      *

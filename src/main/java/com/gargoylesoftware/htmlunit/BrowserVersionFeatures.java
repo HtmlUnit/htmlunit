@@ -1462,7 +1462,8 @@ public enum BrowserVersionFeatures {
 
     /**
      * The window.ActiveXObject is special in IE
-     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx.
+     * <a href="http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx">
+     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx</a>.
      */
     @BrowserFeature(IE)
     JS_WINDOW_ACTIVEXOBJECT_HIDDEN,

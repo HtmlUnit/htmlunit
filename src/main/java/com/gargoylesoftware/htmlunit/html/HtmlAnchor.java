@@ -383,7 +383,7 @@ public class HtmlAnchor extends HtmlElement {
     /**
      * Open this link in a new window, much as web browsers do when you shift-click a link or use the context
      * menu to open in a new window.
-     *
+     * <p>
      * It should be noted that even web browsers will sometimes not give the expected result when using this
      * method of following links. Links that have no real href and rely on JavaScript to do their work will
      * fail.

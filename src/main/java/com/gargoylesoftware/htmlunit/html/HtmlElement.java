@@ -341,7 +341,7 @@ public abstract class HtmlElement extends DomElement {
      * Support for reporting HTML attribute changes. This method can be called when an attribute
      * has been added and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
-     *
+     * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeAdded(HtmlAttributeChangeEvent)} method.
      *
@@ -359,7 +359,7 @@ public abstract class HtmlElement extends DomElement {
      * Support for reporting HTML attribute changes. This method can be called when an attribute
      * has been replaced and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
-     *
+     * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeReplaced(HtmlAttributeChangeEvent)} method.
      *
@@ -377,7 +377,7 @@ public abstract class HtmlElement extends DomElement {
      * Support for reporting HTML attribute changes. This method can be called when an attribute
      * has been removed and it will send the appropriate {@link HtmlAttributeChangeEvent} to any
      * registered {@link HtmlAttributeChangeListener}s.
-     *
+     * <p>
      * Note that this method recursively calls this element's parent's
      * {@link #fireHtmlAttributeRemoved(HtmlAttributeChangeEvent)} method.
      *
@@ -622,7 +622,7 @@ public abstract class HtmlElement extends DomElement {
      * by this element's window after typing. Note that it may or may not be the same as the original page,
      * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <tt>XXXXXXXXXXX</tt>
      * submits the enclosed form.
-     *
+     * <p>
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code to simulate typing
@@ -796,7 +796,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Performs the effective type action, called after the keyPress event and before the keyUp event.
-     *
+     * <p>
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
      * @param keyCode the key code wish to simulate typing

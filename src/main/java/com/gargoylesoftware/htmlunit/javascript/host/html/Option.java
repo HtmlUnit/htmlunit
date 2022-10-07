@@ -27,7 +27,7 @@ public class Option extends HTMLOptionElement {
 
     /**
      * JavaScript constructor.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

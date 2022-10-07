@@ -270,7 +270,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -288,7 +288,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -324,7 +324,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -342,7 +342,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected

@@ -227,7 +227,7 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "write".
-     *
+     * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
@@ -472,7 +472,7 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "open".
-     *
+     * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
@@ -649,7 +649,7 @@ public class HTMLDocument extends Document {
     /**
      * Calls to <tt>document.XYZ</tt> should first look at elements named <tt>XYZ</tt> before
      * using standard functions.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

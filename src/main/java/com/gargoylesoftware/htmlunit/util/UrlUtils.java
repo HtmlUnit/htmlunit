@@ -69,8 +69,8 @@ public final class UrlUtils {
     private static final BitSet ANCHOR_ALLOWED_CHARS = new BitSet(256);
     private static final BitSet HASH_ALLOWED_CHARS = new BitSet(256);
 
-    /**
-     * URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
+    /*
+      URI allowed char initialization; based on HttpClient 3.1's URI bit sets.
      */
     static {
         // make sure the handlers are available first (before calling toUrlSafe())
@@ -712,9 +712,9 @@ public final class UrlUtils {
     /**
      * Parses a given specification using the algorithm depicted in
      * <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>:
-     *
+     * <p>
      * Section 2.4: Parsing a URL
-     *
+     * <p>
      *   An accepted method for parsing URLs is useful to clarify the
      *   generic-RL syntax of Section 2.2 and to describe the algorithm for
      *   resolving relative URLs presented in Section 4. This section
@@ -921,9 +921,9 @@ public final class UrlUtils {
 
     /**
      * Returns true if specified string is a valid scheme name.
-     *
+     * <p>
      * https://tools.ietf.org/html/rfc1738
-     *
+     * <p>
      * Scheme names consist of a sequence of characters. The lower case
      * letters "a"--"z", digits, and the characters plus ("+"), period
      * ("."), and hyphen ("-") are allowed. For resiliency, programs
@@ -964,9 +964,9 @@ public final class UrlUtils {
     /**
      * Resolves a given relative URL against a base URL using the algorithm
      * depicted in <a href="http://www.faqs.org/rfcs/rfc1808.html">RFC1808</a>:
-     *
+     * <p>
      * Section 4: Resolving Relative URLs
-     *
+     * <p>
      *   This section describes an example algorithm for resolving URLs within
      *   a context in which the URLs may be relative, such that the result is
      *   always a URL in absolute form. Although this algorithm cannot

@@ -673,7 +673,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * from a terminal, output sent to dump() will appear in the terminal.
      * Output from dump() is not sent to the browser's developer tools console.
      * To log to the developer tools console, use console.log().
-     *
+     * <p>
      * HtmlUnit always uses the WebConsole.
      *
      * @param message the message to log

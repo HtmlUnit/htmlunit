@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit.html;
 /**
  * An interface to allow the user to specify which element to return for the javascript
  * {@code document.elementFromPoint()}.
- *
+ * <p>
  * This is needed since calculating the element location is outside the current scope of HtmlUnit.
  * @author Ahmed Ashour
  */
