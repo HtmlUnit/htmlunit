@@ -182,7 +182,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             transformer.transform(xmlSource, result);
 
             final org.w3c.dom.Node transformedNode = result.getNode();
-            if (transformedNode.getFirstChild().getNodeType() == Node.ELEMENT_NODE) {
+            final org.w3c.dom.Node transformedFirstChild = transformedNode.getFirstChild();
+            if (transformedFirstChild != null && transformedFirstChild.getNodeType() == Node.ELEMENT_NODE) {
                 return transformedNode;
             }
 
