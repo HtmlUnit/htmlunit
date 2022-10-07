@@ -17,7 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 /**
  * An element that supports client side validation based on
  * the Constraint validation API.
- * see https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation
+ * see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation">
+ * https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation</a>
  *
  * @author Ronald Brill
  */

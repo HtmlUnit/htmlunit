@@ -77,7 +77,8 @@ public final class StringUtils {
 
     /**
      * Escape the string to be used as attribute value.
-     * Only {@code <}, {@code &} and {@code "} have to be escaped (see http://www.w3.org/TR/REC-xml/#d0e888).
+     * Only {@code <}, {@code &} and {@code "} have to be escaped (see
+     * <a href="http://www.w3.org/TR/REC-xml/#d0e888">http://www.w3.org/TR/REC-xml/#d0e888</a>).
      * @param attValue the attribute value
      * @return the escaped value
      */

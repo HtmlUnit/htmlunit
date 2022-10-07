@@ -551,7 +551,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
@@ -561,7 +561,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code size}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
@@ -589,7 +589,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code multiple}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code multiple} or an empty string if that attribute isn't defined
      */
@@ -623,7 +623,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
@@ -633,7 +633,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
@@ -643,7 +643,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
@@ -653,7 +653,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onchange}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */

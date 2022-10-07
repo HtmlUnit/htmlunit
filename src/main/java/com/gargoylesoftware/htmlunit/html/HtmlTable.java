@@ -231,7 +231,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code summary}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code summary}
@@ -243,7 +243,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code width}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
@@ -255,7 +255,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code border}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border}
@@ -267,7 +267,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code frame}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code frame}
@@ -279,7 +279,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code rules}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rules}
@@ -291,7 +291,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code cellspacing}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cellspacing}
@@ -303,7 +303,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code cellpadding}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cellpadding}
@@ -315,7 +315,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
@@ -327,7 +327,7 @@ public class HtmlTable extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code bgcolor}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
