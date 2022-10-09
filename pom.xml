@@ -159,6 +159,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <doclint>html,missing,reference,syntax</doclint>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
                     <links>
@@ -628,6 +629,7 @@
                 <version>3.4.1</version>
                 <configuration>
                     <quiet>true</quiet>
+                    <doclint>html,missing,reference,syntax</doclint>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
                     <links>

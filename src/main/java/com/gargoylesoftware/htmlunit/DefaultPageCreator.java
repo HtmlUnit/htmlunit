@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
  * <p>
  * The following table shows the type of {@link Page} created depending on the content type:<br>
  * <br>
- *  <table border="1" style="width:50%;" summary="Page Types">
+ *  <table border="1" style="width:50%;">
  *    <tr>
  *      <th>Content type</th>
  *      <th>Type of page</th>
