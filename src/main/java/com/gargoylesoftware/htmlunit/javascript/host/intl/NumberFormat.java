@@ -82,14 +82,14 @@ public class NumberFormat extends HtmlUnitScriptable {
         IE_FORMATS_.put("fr-BE", ".");
         IE_FORMATS_.put("ban", ".,");
 
-        commonFormats.put("ar-AE", ",.");
+        commonFormats.put("ar-AE", ",.0");
         commonFormats.put("fr", "\u202f,");
         commonFormats.put("fr-CA", "\u00a0,");
 
         FF_FORMATS_.putAll(commonFormats);
         FF_ESR_FORMATS_.putAll(commonFormats);
 
-        commonFormats.put("ar", ",.");
+        commonFormats.put("ar", ",.0");
         commonFormats.put("ar-BH", "\u066c\u066b\u0660");
         commonFormats.put("ar-EG", "\u066c\u066b\u0660");
         commonFormats.put("ar-IQ", "\u066c\u066b\u0660");
@@ -110,8 +110,6 @@ public class NumberFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.put("mk", ",.");
         CHROME_FORMATS_.put("is", ",.");
         CHROME_FORMATS_.put("sq", ",.");
-
-        // IE_FORMATS_.put("ar", rightToLeft);
     }
 
     /**
