@@ -527,7 +527,7 @@ public class HTMLElement extends Element {
      * An IE-only method which copies all custom attributes from the specified source element
      * to this element.
      * @param source the source element from which to copy the custom attributes
-     * @param preserveIdentity if {@code false}, the <tt>name</tt> and <tt>id</tt> attributes are not copied
+     * @param preserveIdentity if {@code false}, the <code>name</code> and <code>id</code> attributes are not copied
      */
     @JsxFunction(IE)
     public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
@@ -830,10 +830,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding
+     * Returns this element's <code>offsetHeight</code>, which is the element height plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
-     * @return this element's <tt>offsetHeight</tt>
+     * @return this element's <code>offsetHeight</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534199.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
@@ -852,10 +852,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetWidth</tt>, which is the element width plus the element's padding
+     * Returns this element's <code>offsetWidth</code>, which is the element width plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
-     * @return this element's <tt>offsetWidth</tt>
+     * @return this element's <code>offsetWidth</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534304.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
@@ -1123,10 +1123,10 @@ public class HTMLElement extends Element {
     /**
      * Returns the value of the specified attribute (width or height).
      * @return the value of the specified attribute (width or height)
-     * @param attributeName the name of the attribute to return (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param attributeName the name of the attribute to return (<code>"width"</code> or <code>"height"</code>)
      * @param returnNegativeValues if {@code true}, negative values are returned;
      *        if {@code false}, this method returns an empty string in lieu of negative values;
-     *        if {@code null}, this method returns <tt>0</tt> in lieu of negative values
+     *        if {@code null}, this method returns <code>0</code> in lieu of negative values
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
@@ -1163,7 +1163,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the value of the specified attribute (width or height).
-     * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param attributeName the name of the attribute to set (<code>"width"</code> or <code>"height"</code>)
      * @param value the value of the specified attribute (width or height)
      * @param allowNegativeValues if {@code true}, negative values will be stored;
      *        if {@code false}, negative values cause an exception to be thrown;<br>
@@ -1372,10 +1372,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
-     * element relative to the <tt>offsetParent</tt>.
+     * Returns this element's <code>offsetLeft</code>, which is the calculated left position of this
+     * element relative to the <code>offsetParent</code>.
      *
-     * @return this element's <tt>offsetLeft</tt>
+     * @return this element's <code>offsetLeft</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
@@ -1528,10 +1528,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and
-     * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
+     * Returns this element's <code>offsetParent</code>. The <code>offsetLeft</code> and
+     * <code>offsetTop</code> attributes are relative to the <code>offsetParent</code>.
      *
-     * @return this element's <tt>offsetParent</tt>. This may be <code>undefined</code> when this node is
+     * @return this element's <code>offsetParent</code>. This may be <code>undefined</code> when this node is
      * not attached or {@code null} for <code>body</code>.
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>

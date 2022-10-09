@@ -36,7 +36,7 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
  * <p>
  * In order to enable the debugging output, call
  * {@link HtmlUnitContextFactory#setDebugger(net.sourceforge.htmlunit.corejs.javascript.debug.Debugger)}, passing in
- * an instance of this class, and make sure your loggers are configured to output <tt>TRACE</tt> level log messages.
+ * an instance of this class, and make sure your loggers are configured to output <code>TRACE</code> level log messages.
  * </p>
  *
  * @author Daniel Gredler

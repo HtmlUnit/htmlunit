@@ -291,7 +291,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
-     * windows are allowed. When set to {@code true}, <tt>window.open()</tt> has no effect and
+     * windows are allowed. When set to {@code true}, <code>window.open()</code> has no effect and
      * returns {@code null}.
      *
      * @param enabled {@code true} to enable the popup window blocker

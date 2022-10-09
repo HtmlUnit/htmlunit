@@ -124,7 +124,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     /**
-     * Only needed to make collections like <tt>document.all</tt> available but "invisible" when simulating Firefox.
+     * Only needed to make collections like <code>document.all</code> available but "invisible" when simulating Firefox.
      * {@inheritDoc}
      */
     @Override

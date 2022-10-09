@@ -151,7 +151,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
+     * If setting the <code>src</code> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
      */
     @Override
@@ -182,7 +182,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
+     * Executes the <code>onreadystatechange</code> handler when simulating IE, as well as executing
      * the script itself, if necessary.
      * {@inheritDoc}
      */

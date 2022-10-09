@@ -2065,11 +2065,11 @@ public class Element extends Node {
     }
 
     /**
-     * The <tt>toggleAttribute()</tt> method of the Element interface toggles a
+     * The <code>toggleAttribute()</code> method of the Element interface toggles a
      * Boolean attribute (removing it if it is present and adding it if it is not
-     * present) on the given element. If <tt>force</tt> is <tt>true</tt>, adds
-     * boolean attribute with <tt>name</tt>. If <tt>force</tt> is <tt>false</tt>,
-     * removes attribute with <tt>name</tt>.
+     * present) on the given element. If <code>force</code> is <code>true</code>, adds
+     * boolean attribute with <code>name</code>. If <code>force</code> is <code>false</code>,
+     * removes attribute with <code>name</code>.
      *
      * @param name the name of the attribute to be toggled.
      * The attribute name is automatically converted to all lower-case when toggleAttribute()

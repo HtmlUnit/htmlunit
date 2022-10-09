@@ -36,7 +36,7 @@ public class HtmlBody extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "body";
 
-    /** Whether or not this body is temporary (created because the <tt>body</tt> tag has not yet been parsed). */
+    /** Whether or not this body is temporary (created because the <code>body</code> tag has not yet been parsed). */
     private final boolean temporary_;
 
     /**
@@ -45,7 +45,7 @@ public class HtmlBody extends HtmlElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
-     * @param temporary whether or not this body is temporary (created because the <tt>body</tt>
+     * @param temporary whether or not this body is temporary (created because the <code>body</code>
      *        tag does not exist or has not yet been parsed)
      */
     public HtmlBody(final String qualifiedName, final SgmlPage page,
@@ -145,10 +145,10 @@ public class HtmlBody extends HtmlElement {
     }
 
     /**
-     * Returns {@code true} if this body is temporary (created because the <tt>body</tt> tag
+     * Returns {@code true} if this body is temporary (created because the <code>body</code> tag
      * has not yet been parsed).
      *
-     * @return {@code true} if this body is temporary (created because the <tt>body</tt> tag
+     * @return {@code true} if this body is temporary (created because the <code>body</code> tag
      *         has not yet been parsed)
      */
     public final boolean isTemporary() {

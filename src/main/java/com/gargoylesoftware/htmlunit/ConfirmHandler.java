@@ -17,8 +17,8 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 
 /**
- * A handler for the JavaScript function <tt>window.confirm()</tt>. Confirms
- * are triggered when the JavaScript function <tt>window.confirm()</tt> is invoked.
+ * A handler for the JavaScript function <code>window.confirm()</code>. Confirms
+ * are triggered when the JavaScript function <code>window.confirm()</code> is invoked.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  */

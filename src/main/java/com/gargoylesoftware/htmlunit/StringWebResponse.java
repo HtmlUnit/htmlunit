@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
- * A simple WebResponse created from a string. Content is assumed to be of type <tt>text/html</tt>.
+ * A simple WebResponse created from a string. Content is assumed to be of type <code>text/html</code>.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Marc Guillemot
@@ -64,8 +64,8 @@ public class StringWebResponse extends WebResponse {
      * Helper method for constructors. Converts the specified string into {@link WebResponseData}
      * with other defaults specified.
      *
-     * @param contentString the string to be converted to a <tt>WebResponseData</tt>
-     * @return a simple <tt>WebResponseData</tt> with defaults specified
+     * @param contentString the string to be converted to a <code>WebResponseData</code>
+     * @return a simple <code>WebResponseData</code> with defaults specified
      */
     private static WebResponseData getWebResponseData(final String contentString, final Charset charset) {
         final byte[] content = StringUtils.toByteArray(contentString, charset);

@@ -17,19 +17,19 @@ package com.gargoylesoftware.htmlunit;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * A window opened in JavaScript via either <tt>window.showModalDialog</tt> or <tt>window.showModelessDialog</tt>.
+ * A window opened in JavaScript via either <code>window.showModalDialog</code> or <code>window.showModelessDialog</code>.
  * @author Daniel Gredler
  * @author Ronald Brill
  */
 public class DialogWindow extends WebWindowImpl {
 
-    /** The arguments object exposed via the <tt>dialogArguments</tt> JavaScript property. */
+    /** The arguments object exposed via the <code>dialogArguments</code> JavaScript property. */
     private final Object arguments_;
 
     /**
      * Creates a new instance.
      * @param webClient the web client that "owns" this window
-     * @param arguments the arguments object exposed via the <tt>dialogArguments</tt> JavaScript property
+     * @param arguments the arguments object exposed via the <code>dialogArguments</code> JavaScript property
      */
     protected DialogWindow(final WebClient webClient, final Object arguments) {
         super(webClient);

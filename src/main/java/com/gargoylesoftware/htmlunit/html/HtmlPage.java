@@ -394,8 +394,8 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the <tt>body</tt> element (or <tt>frameset</tt> element), or {@code null} if it does not yet exist.
-     * @return the <tt>body</tt> element (or <tt>frameset</tt> element), or {@code null} if it does not yet exist
+     * Returns the <code>body</code> element (or <code>frameset</code> element), or {@code null} if it does not yet exist.
+     * @return the <code>body</code> element (or <code>frameset</code> element), or {@code null} if it does not yet exist
      */
     public HtmlElement getBody() {
         final DomElement doc = getDocumentElement();
@@ -717,7 +717,7 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Given a relative URL (ie <tt>/foo</tt>), returns a fully-qualified URL based on
+     * Given a relative URL (ie <code>/foo</code>), returns a fully-qualified URL based on
      * the URL that was used to load this page.
      *
      * @param relativeUrl the relative URL
@@ -798,7 +798,7 @@ public class HtmlPage extends SgmlPage {
      * Additionally, the value of tabindex must be within 0 and 32767. Any
      * values outside this range will be ignored.<p>
      *
-     * The following elements support the <tt>tabindex</tt> attribute: A, AREA, BUTTON,
+     * The following elements support the <code>tabindex</code> attribute: A, AREA, BUTTON,
      * INPUT, OBJECT, SELECT, and TEXTAREA.<p>
      *
      * @return all the tabbable elements in proper tab order
@@ -865,7 +865,7 @@ public class HtmlPage extends SgmlPage {
      * access key (aka mnemonic key) is used for keyboard navigation of the
      * page.<p>
      *
-     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
+     * Only the following HTML elements may have <code>accesskey</code>s defined: A, AREA,
      * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
      *
      * @param accessKey the key to look for
@@ -891,7 +891,7 @@ public class HtmlPage extends SgmlPage {
      * access key so you are making your HTML browser specific if you rely on this
      * feature.<p>
      *
-     * Only the following HTML elements may have <tt>accesskey</tt>s defined: A, AREA,
+     * Only the following HTML elements may have <code>accesskey</code>s defined: A, AREA,
      * BUTTON, INPUT, LABEL, LEGEND, and TEXTAREA.
      *
      * @param accessKey the key to look for
@@ -1258,7 +1258,7 @@ public class HtmlPage extends SgmlPage {
     /**
      * Looks for and executes any appropriate event handlers. Looks for body and frame tags.
      * @param eventType either {@link Event#TYPE_LOAD}, {@link Event#TYPE_UNLOAD}, or {@link Event#TYPE_BEFORE_UNLOAD}
-     * @return {@code true} if user accepted <tt>onbeforeunload</tt> (not relevant to other events)
+     * @return {@code true} if user accepted <code>onbeforeunload</code> (not relevant to other events)
      */
     private boolean executeEventHandlersIfNeeded(final String eventType) {
         // If JavaScript isn't enabled, there's nothing for us to do.
@@ -2169,9 +2169,9 @@ public class HtmlPage extends SgmlPage {
      *
      * Returns {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      * to this page. Non-inline content is content that is parsed for the page, but not in the
-     * same stream as the page itself -- basically anything other than <tt>document.write()</tt>
-     * or <tt>document.writeln()</tt>: <tt>innerHTML</tt>, <tt>outerHTML</tt>,
-     * <tt>document.createElement()</tt>, etc.
+     * same stream as the page itself -- basically anything other than <code>document.write()</code>
+     * or <code>document.writeln()</code>: <code>innerHTML</code>, <code>outerHTML</code>,
+     * <code>document.createElement()</code>, etc.
      *
      * @return {@code true} if an HTML parser is parsing a non-inline HTML snippet to add content
      *         to this page
@@ -2203,7 +2203,7 @@ public class HtmlPage extends SgmlPage {
      *
      * Returns {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      * to this page. Inline content is content inserted into the parser stream dynamically
-     * while the page is being parsed (i.e. <tt>document.write()</tt> or <tt>document.writeln()</tt>).
+     * while the page is being parsed (i.e. <code>document.write()</code> or <code>document.writeln()</code>).
      *
      * @return {@code true} if an HTML parser is parsing an inline HTML snippet to add content
      *         to this page
@@ -2742,7 +2742,7 @@ public class HtmlPage extends SgmlPage {
      *   <li><em>Child</em> (i.e. "div &gt; span"): Affected by changes to SN or to its parent.</li>
      *   <li><em>Adjacent Sibling</em> (i.e. "table + p"): Affected by changes to SN or its previous sibling.</li>
      *   <li><em>Attribute</em> (i.e. "div.up, div[class~=up]"): Affected by changes to an attribute of SN.</li>
-     *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <tt>id</tt> attribute of SN.</li>
+     *   <li><em>ID</em> (i.e. "#header): Affected by changes to the <code>id</code> attribute of SN.</li>
      *   <li><em>Pseudo-Elements and Pseudo-Classes</em> (i.e. "p:first-child"): Affected by changes to parent.</li>
      * </ol>
      *
@@ -2756,7 +2756,7 @@ public class HtmlPage extends SgmlPage {
      *   <li>are descendants of the node that changed</li>
      * </ul>
      *
-     * <p>Additionally, whenever a <tt>style</tt> node or a <tt>link</tt> node with <tt>rel=stylesheet</tt> is added or
+     * <p>Additionally, whenever a <code>style</code> node or a <code>link</code> node with <code>rel=stylesheet</code> is added or
      * removed, all elements should be removed from the computed style cache.</p>
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {

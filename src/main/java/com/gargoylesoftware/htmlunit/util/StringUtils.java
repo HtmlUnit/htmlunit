@@ -120,7 +120,7 @@ public final class StringUtils {
      * @param searchChar the character to search for
      * @param beginIndex the index at which to start the search
      * @param endIndex the index at which to stop the search
-     * @return the index of the first occurrence of the character in the string or <tt>-1</tt>
+     * @return the index of the first occurrence of the character in the string or <code>-1</code>
      */
     public static int indexOf(final String s, final char searchChar, final int beginIndex, final int endIndex) {
         for (int i = beginIndex; i < endIndex; i++) {
@@ -322,8 +322,8 @@ public final class StringUtils {
     }
 
     /**
-     * Transforms the specified string from delimiter-separated (e.g. <tt>font-size</tt>)
-     * to camel-cased (e.g. <tt>fontSize</tt>).
+     * Transforms the specified string from delimiter-separated (e.g. <code>font-size</code>)
+     * to camel-cased (e.g. <code>fontSize</code>).
      * @param string the string to camelize
      * @return the transformed string
      */
@@ -364,8 +364,8 @@ public final class StringUtils {
     }
 
     /**
-     * Transforms the specified string from camel-cased (e.g. <tt>fontSize</tt>)
-     * to delimiter-separated (e.g. <tt>font-size</tt>).
+     * Transforms the specified string from camel-cased (e.g. <code>fontSize</code>)
+     * to delimiter-separated (e.g. <code>font-size</code>).
      * to camel-cased .
      * @param string the string to decamelize
      * @return the transformed string

@@ -70,7 +70,7 @@ public final class ScriptElementSupport {
      * parsing of the HTML. Intended to be overridden by nodes which need to perform custom logic
      * after they and all their child nodes have been processed by the HTML parser. This method is
      * not recursive, and the default implementation is empty, so there is no need to call
-     * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
+     * <code>super.onAllChildrenAddedToPage()</code> if you implement this method.
      * @param element the element
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */

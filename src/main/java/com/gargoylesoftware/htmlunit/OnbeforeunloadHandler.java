@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 
 /**
- * A handler for <tt>onbeforeunload</tt> events.
+ * A handler for <code>onbeforeunload</code> events.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
@@ -25,9 +25,9 @@ import java.io.Serializable;
 public interface OnbeforeunloadHandler extends Serializable {
 
     /**
-     * Handles an <tt>onbeforeunload</tt> event for the specified page.
+     * Handles an <code>onbeforeunload</code> event for the specified page.
      * @param page the page on which the event occurred
-     * @param returnValue the event's <tt>returnValue</tt>
+     * @param returnValue the event's <code>returnValue</code>
      * @return {@code true} to accept the event, {@code false} otherwise
      */
     boolean handleEvent(Page page, String returnValue);

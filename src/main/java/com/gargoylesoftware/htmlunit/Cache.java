@@ -197,8 +197,8 @@ public class Cache implements Serializable {
      * responses requires checking dynamically (see {@link #isCacheableContent(WebResponse)}), and headers often
      * aren't set up correctly, disallowing caching when in fact it should be allowed.
      *
-     * @param css the CSS snippet from which <tt>styleSheet</tt> is derived
-     * @param styleSheet the parsed version of <tt>css</tt>
+     * @param css the CSS snippet from which <code>styleSheet</code> is derived
+     * @param styleSheet the parsed version of <code>css</code>
      */
     public void cache(final String css, final CSSStyleSheetImpl styleSheet) {
         final Entry entry = new Entry(css, null, styleSheet);
@@ -241,10 +241,10 @@ public class Cache implements Serializable {
      *
      * <p>"Since origin servers do not always provide explicit expiration times, HTTP caches typically
      * assign heuristic expiration times, employing algorithms that use other header values (such as the
-     * <tt>Last-Modified</tt> time) to estimate a plausible expiration time".</p>
+     * <code>Last-Modified</code> time) to estimate a plausible expiration time".</p>
      *
      * <p>The current implementation considers as dynamic content everything except responses with a
-     * <tt>Last-Modified</tt> header with a date older than 10 minutes or with an <tt>Expires</tt> header
+     * <code>Last-Modified</code> header with a date older than 10 minutes or with an <code>Expires</code> header
      * specifying expiration in more than 10 minutes.</p>
      *
      * @see <a href="https://tools.ietf.org/html/rfc7234">RFC 7234</a>
@@ -371,7 +371,7 @@ public class Cache implements Serializable {
 
     /**
      * Returns the cache's maximum size. This is the maximum number of files that will
-     * be cached. The default is <tt>25</tt>.
+     * be cached. The default is <code>25</code>.
      *
      * @return the cache's maximum size
      */
@@ -381,7 +381,7 @@ public class Cache implements Serializable {
 
     /**
      * Sets the cache's maximum size. This is the maximum number of files that will
-     * be cached. The default is <tt>25</tt>.
+     * be cached. The default is <code>25</code>.
      *
      * @param maxSize the cache's maximum size (must be &gt;= 0)
      */

@@ -45,10 +45,10 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * An array of elements. Used for the element arrays returned by <tt>document.all</tt>,
- * <tt>document.all.tags('x')</tt>, <tt>document.forms</tt>, <tt>window.frames</tt>, etc.
+ * An array of elements. Used for the element arrays returned by <code>document.all</code>,
+ * <code>document.all.tags('x')</code>, <code>document.forms</code>, <code>window.frames</code>, etc.
  * Note that this class must not be used for collections that can be modified, for example
- * <tt>map.areas</tt> and <tt>select.options</tt>.
+ * <code>map.areas</code> and <code>select.options</code>.
  *
  * @author Daniel Gredler
  * @author Marc Guillemot

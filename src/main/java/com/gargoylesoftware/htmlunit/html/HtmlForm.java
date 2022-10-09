@@ -115,8 +115,8 @@ public class HtmlForm extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * <p>Submits this form to the server. If <tt>submitElement</tt> is {@code null}, then
-     * the submission is treated as if it was triggered by JavaScript, and the <tt>onsubmit</tt>
+     * <p>Submits this form to the server. If <code>submitElement</code> is {@code null}, then
+     * the submission is treated as if it was triggered by JavaScript, and the <code>onsubmit</code>
      * handler will not be executed.</p>
      *
      * <p><b>IMPORTANT:</b> Using this method directly is not the preferred way of submitting forms.

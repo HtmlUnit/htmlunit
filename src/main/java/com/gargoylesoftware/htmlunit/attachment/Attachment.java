@@ -49,7 +49,7 @@ public class Attachment {
     }
 
     /**
-     * Returns the attachment's filename, as suggested by the <tt>Content-Disposition</tt>
+     * Returns the attachment's filename, as suggested by the <code>Content-Disposition</code>
      * header, or {@code null} if no filename was suggested.
      * @return the attachment's suggested filename, or {@code null} if none was suggested
      */

@@ -293,8 +293,8 @@ public class CssStyleSheet implements Serializable {
     /**
      * Loads the stylesheet at the specified link or href.
      * @param element the parent DOM element
-     * @param link the stylesheet's link (may be {@code null} if a <tt>url</tt> is specified)
-     * @param url the stylesheet's url (may be {@code null} if a <tt>link</tt> is specified)
+     * @param link the stylesheet's link (may be {@code null} if a <code>url</code> is specified)
+     * @param url the stylesheet's url (may be {@code null} if a <code>link</code> is specified)
      * @return the loaded stylesheet
      */
     public static CssStyleSheet loadStylesheet(final HtmlElement element, final HtmlLink link, final String url) {

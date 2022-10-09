@@ -183,7 +183,7 @@ public class Document extends Node {
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
-    /** The format to use for the <tt>lastModified</tt> attribute. */
+    /** The format to use for the <code>lastModified</code> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
     /** Contains all supported DOM level 2 events. */
@@ -1069,7 +1069,7 @@ public class Document extends Node {
     }
 
     /**
-     * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
+     * Indicates if the command can be successfully executed using <code>execCommand</code>, given
      * the current state of the document.
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed

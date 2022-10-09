@@ -371,7 +371,7 @@ public class Selection extends HtmlUnitScriptable {
      * Returns the scriptable object corresponding to the specified HtmlUnit DOM object.
      * @param object the HtmlUnit DOM object whose scriptable object is to be returned (may be {@code null})
      * @return the scriptable object corresponding to the specified HtmlUnit DOM object, or {@code null} if
-     *         <tt>object</tt> was {@code null}
+     *         <code>object</code> was {@code null}
      */
     private HtmlUnitScriptable getScriptableNullSafe(final Object object) {
         final HtmlUnitScriptable scriptable;

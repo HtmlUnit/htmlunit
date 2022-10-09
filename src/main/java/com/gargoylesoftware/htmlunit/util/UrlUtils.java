@@ -201,8 +201,8 @@ public final class UrlUtils {
 
     /**
      * <p>Constructs a URL instance based on the specified URL string, taking into account the fact that the
-     * specified URL string may represent an <tt>"about:..."</tt> URL, a <tt>"javascript:..."</tt> URL, or
-     * a <tt>data:...</tt> URL.</p>
+     * specified URL string may represent an <code>"about:..."</code> URL, a <code>"javascript:..."</code> URL, or
+     * a <code>data:...</code> URL.</p>
      *
      * <p>The caller should be sure that URL strings passed to this method will parse correctly as URLs, as
      * this method never expects to have to handle {@link MalformedURLException}s.</p>
@@ -222,8 +222,8 @@ public final class UrlUtils {
 
     /**
      * <p>Constructs a URL instance based on the specified URL string, taking into account the fact that the
-     * specified URL string may represent an <tt>"about:..."</tt> URL, a <tt>"javascript:..."</tt> URL, or
-     * a <tt>data:...</tt> URL.</p>
+     * specified URL string may represent an <code>"about:..."</code> URL, a <code>"javascript:..."</code> URL, or
+     * a <code>data:...</code> URL.</p>
      *
      * <p>Unlike {@link #toUrlSafe(String)}, the caller need not be sure that URL strings passed to this
      * method will parse correctly as URLs.</p>
@@ -268,7 +268,7 @@ public final class UrlUtils {
      * <p>Encodes illegal characters in the specified URL's path, query string and anchor according to the URL
      * encoding rules observed in real browsers.</p>
      *
-     * <p>For example, this method changes <tt>"http://first/?a=b c"</tt> to <tt>"http://first/?a=b%20c"</tt>.</p>
+     * <p>For example, this method changes <code>"http://first/?a=b c"</code> to <code>"http://first/?a=b%20c"</code>.</p>
      *
      * @param url the URL to encode
      * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does
@@ -365,7 +365,7 @@ public final class UrlUtils {
     }
 
     /**
-     * Escapes and encodes the specified string. Based on HttpClient 3.1's <tt>URIUtil.encode()</tt> method.
+     * Escapes and encodes the specified string. Based on HttpClient 3.1's <code>URIUtil.encode()</code> method.
      *
      * @param unescaped the string to encode
      * @param allowed allowed characters that shouldn't be escaped
@@ -584,10 +584,10 @@ public final class UrlUtils {
      * @param protocol the protocol to use (may not be {@code null})
      * @param userInfo the user info to use (may be {@code null})
      * @param host the host to use (may not be {@code null})
-     * @param port the port to use (may be <tt>-1</tt> if no port is specified)
-     * @param path the path to use (may be {@code null} and may omit the initial <tt>'/'</tt>)
-     * @param ref the reference to use (may be {@code null} and must not include the <tt>'#'</tt>)
-     * @param query the query to use (may be {@code null} and must not include the <tt>'?'</tt>)
+     * @param port the port to use (may be <code>-1</code> if no port is specified)
+     * @param path the path to use (may be {@code null} and may omit the initial <code>'/'</code>)
+     * @param ref the reference to use (may be {@code null} and must not include the <code>'#'</code>)
+     * @param query the query to use (may be {@code null} and must not include the <code>'?'</code>)
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */
@@ -625,9 +625,9 @@ public final class UrlUtils {
      * Creates a new URL based on the specified fragments.
      * @param protocol the protocol to use (may not be {@code null})
      * @param authority the authority to use (may not be {@code null})
-     * @param path the path to use (may be {@code null} and may omit the initial <tt>'/'</tt>)
-     * @param ref the reference to use (may be {@code null} and must not include the <tt>'#'</tt>)
-     * @param query the query to use (may be {@code null} and must not include the <tt>'?'</tt>)
+     * @param path the path to use (may be {@code null} and may omit the initial <code>'/'</code>)
+     * @param ref the reference to use (may be {@code null} and must not include the <code>'#'</code>)
+     * @param query the query to use (may be {@code null} and must not include the <code>'?'</code>)
      * @return a new URL based on the specified fragments
      * @throws MalformedURLException if there is a problem creating the new URL
      */
@@ -1126,7 +1126,7 @@ public final class UrlUtils {
     }
 
     /**
-     * Class <tt>Url</tt> represents a Uniform Resource Locator.
+     * Class <code>Url</code> represents a Uniform Resource Locator.
      *
      * @author Martin Tamme
      */
@@ -1140,16 +1140,16 @@ public final class UrlUtils {
         private String fragment_;
 
         /**
-         * Creates a <tt>Url</tt> object.
+         * Creates a <code>Url</code> object.
          */
         Url() {
         }
 
         /**
-         * Creates a <tt>Url</tt> object from the specified
-         * <tt>Url</tt> object.
+         * Creates a <code>Url</code> object from the specified
+         * <code>Url</code> object.
          *
-         * @param url a <tt>Url</tt> object.
+         * @param url a <code>Url</code> object.
          */
         Url(final Url url) {
             scheme_ = url.scheme_;
@@ -1161,9 +1161,9 @@ public final class UrlUtils {
         }
 
         /**
-         * Returns a string representation of the <tt>Url</tt> object.
+         * Returns a string representation of the <code>Url</code> object.
          *
-         * @return a string representation of the <tt>Url</tt> object.
+         * @return a string representation of the <code>Url</code> object.
          */
         @Override
         public String toString() {

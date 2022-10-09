@@ -741,7 +741,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns {@code true} if nodes of this type can ever be displayed, {@code false} otherwise. Examples of nodes
-     * that can never be displayed are <tt>&lt;head&gt;</tt>, <tt>&lt;meta&gt;</tt>, <tt>&lt;script&gt;</tt>, etc.
+     * that can never be displayed are <code>&lt;head&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;script&gt;</code>, etc.
      * @return {@code true} if nodes of this type can ever be displayed, {@code false} otherwise
      * @see #isDisplayed()
      */
@@ -1256,7 +1256,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Lifecycle method invoked whenever a node is added to a page. Intended to
      * be overridden by nodes which need to perform custom logic when they are
      * added to a page. This method is recursive, so if you override it, please
-     * be sure to call <tt>super.onAddedToPage()</tt>.
+     * be sure to call <code>super.onAddedToPage()</code>.
      */
     protected void onAddedToPage() {
         if (firstChild_ != null) {
@@ -1271,7 +1271,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * parsing of the HTML. Intended to be overridden by nodes which need to perform custom logic
      * after they and all their child nodes have been processed by the HTML parser. This method is
      * not recursive, and the default implementation is empty, so there is no need to call
-     * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
+     * <code>super.onAllChildrenAddedToPage()</code> if you implement this method.
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
     public void onAllChildrenAddedToPage(final boolean postponed) {
@@ -1282,7 +1282,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * Lifecycle method invoked whenever a node is added to a document fragment. Intended to
      * be overridden by nodes which need to perform custom logic when they are
      * added to a fragment. This method is recursive, so if you override it, please
-     * be sure to call <tt>super.onAddedToDocumentFragment()</tt>.
+     * be sure to call <code>super.onAddedToDocumentFragment()</code>.
      */
     protected void onAddedToDocumentFragment() {
         if (firstChild_ != null) {
@@ -1621,7 +1621,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * <p>Returns the canonical XPath expression which identifies this node, for instance
-     * <tt>"/html/body/table[3]/tbody/tr[5]/td[2]/span/a[3]"</tt>.</p>
+     * <code>"/html/body/table[3]/tbody/tr[5]/td[2]/span/a[3]"</code>.</p>
      *
      * <p><span style="color:red">WARNING:</span> This sort of automated XPath expression
      * is often quite bad at identifying a node, as it is highly sensitive to changes in

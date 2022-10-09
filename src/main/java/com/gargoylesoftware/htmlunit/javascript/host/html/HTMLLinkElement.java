@@ -49,7 +49,7 @@ public class HTMLLinkElement extends HTMLElement {
 
     /**
      * The associated style sheet (only valid for links of type
-     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
      */
     private CSSStyleSheet sheet_;
 
@@ -144,7 +144,7 @@ public class HTMLLinkElement extends HTMLElement {
 
     /**
      * Returns the associated style sheet (only valid for links of type
-     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
      * @return the associated style sheet
      */
     public CSSStyleSheet getSheet() {

@@ -46,7 +46,7 @@ public class HtmlMeta extends HtmlElement {
         super(qualifiedName, page, attributes);
 
         // Handles the cookies specified in meta tags,
-        // like <tt>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</tt>.
+        // like <code>&lt;meta http-equiv='set-cookie' content='webm=none; path=/;'&gt;</code>.
         if ("set-cookie".equalsIgnoreCase(getHttpEquivAttribute())) {
             final WebClient client = page.getWebClient();
             final URL url = page.getUrl();

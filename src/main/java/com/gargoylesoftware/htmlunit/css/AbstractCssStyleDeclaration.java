@@ -82,10 +82,10 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
      * <p>The second named attribute may be shorthand for a the actual desired property.
      * The following formats are possible:</p>
      * <ol>
-     *   <li><tt>top right bottom left</tt>: All values are explicit.</li>
-     *   <li><tt>top right bottom</tt>: Left is implicitly the same as right.</li>
-     *   <li><tt>top right</tt>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
-     *   <li><tt>top</tt>: Left, bottom and right are implicitly the same as top.</li>
+     *   <li><code>top right bottom left</code>: All values are explicit.</li>
+     *   <li><code>top right bottom</code>: Left is implicitly the same as right.</li>
+     *   <li><code>top right</code>: Left is implicitly the same as right, bottom is implicitly the same as top.</li>
+     *   <li><code>top</code>: Left, bottom and right are implicitly the same as top.</li>
      * </ol>
      *
      * @param definition1 the name of the first style attribute

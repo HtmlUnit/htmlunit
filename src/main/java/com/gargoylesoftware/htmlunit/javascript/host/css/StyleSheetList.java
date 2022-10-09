@@ -50,7 +50,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
- * <p>An ordered list of stylesheets, accessible via <tt>document.styleSheets</tt>, as specified by the
+ * <p>An ordered list of stylesheets, accessible via <code>document.styleSheets</code>, as specified by the
  * <a href="http://www.w3.org/TR/DOM-Level-2-Style/stylesheets.html#StyleSheets-StyleSheetList">DOM
  * Level 2 Style spec</a> and the <a href="https://developer.mozilla.org/en-US/docs/DOM/document.styleSheets">Gecko
  * DOM Guide</a>.</p>

@@ -29,12 +29,12 @@ import com.gargoylesoftware.htmlunit.WebResponse;
  * user to either save the linked page, or open it outside of the current window, but does not
  * load the page in the current window.</p>
  *
- * <p>HtmlUnit complies with the semantics described above when an <tt>AttachmentHandler</tt> has
+ * <p>HtmlUnit complies with the semantics described above when an <code>AttachmentHandler</code> has
  * been registered with the {@link com.gargoylesoftware.htmlunit.WebClient} via
  * {@link com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler)}. When
- * no attachment handler has been registered with the <tt>WebClient</tt>, the semantics described
- * above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
- * are not registered with new <tt>WebClient</tt> instances.</p>
+ * no attachment handler has been registered with the <code>WebClient</code>, the semantics described
+ * above to not apply, and attachments are loaded inline. By default, <code>AttachmentHandler</code>s
+ * are not registered with new <code>WebClient</code> instances.</p>
  *
  * @author Bruce Chapman
  * @author Sudhan Moghe

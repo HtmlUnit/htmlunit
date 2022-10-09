@@ -55,7 +55,7 @@ public final class ScriptResult {
     /**
      * Utility method testing if a script result is {@code false}.
      * @param scriptResult a script result (may be {@code null})
-     * @return {@code true} if <tt>scriptResult</tt> is {@code false}
+     * @return {@code true} if <code>scriptResult</code> is {@code false}
      */
     public static boolean isFalse(final ScriptResult scriptResult) {
         return scriptResult != null && Boolean.FALSE.equals(scriptResult.getJavaScriptResult());
@@ -64,7 +64,7 @@ public final class ScriptResult {
     /**
      * Utility method testing if a script result is undefined (there was no return value).
      * @param scriptResult a script result (may be {@code null})
-     * @return {@code true} if <tt>scriptResult</tt> is undefined (there was no return value)
+     * @return {@code true} if <code>scriptResult</code> is undefined (there was no return value)
      */
     public static boolean isUndefined(final ScriptResult scriptResult) {
         return scriptResult != null && Undefined.isUndefined(scriptResult.getJavaScriptResult());

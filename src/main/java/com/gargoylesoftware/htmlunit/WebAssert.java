@@ -399,13 +399,13 @@ public final class WebAssert {
     }
 
     /**
-     * <p>Many HTML elements are "tabbable" and can have a <tt>tabindex</tt> attribute
+     * <p>Many HTML elements are "tabbable" and can have a <code>tabindex</code> attribute
      * that determines the order in which the components are navigated when
      * pressing the tab key. To ensure good usability for keyboard navigation,
-     * all tabbable elements should have the <tt>tabindex</tt> attribute set.</p>
+     * all tabbable elements should have the <code>tabindex</code> attribute set.</p>
      *
      * <p>This method verifies that all tabbable elements have a valid value set for
-     * the <tt>tabindex</tt> attribute.</p>
+     * the <code>tabindex</code> attribute.</p>
      *
      * @param page the page to check
      */
@@ -425,8 +425,8 @@ public final class WebAssert {
     }
 
     /**
-     * Many HTML components can have an <tt>accesskey</tt> attribute which defines a hot key for
-     * keyboard navigation. This method verifies that all the <tt>accesskey</tt> attributes on the
+     * Many HTML components can have an <code>accesskey</code> attribute which defines a hot key for
+     * keyboard navigation. This method verifies that all the <code>accesskey</code> attributes on the
      * specified page are unique.
      *
      * @param page the page to check

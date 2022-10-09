@@ -1190,7 +1190,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Sets the specified header to the specified value. The <tt>open</tt> method must be
+     * Sets the specified header to the specified value. The <code>open</code> method must be
      * called before this method, or an error will occur.
      * @param name the name of the header being set
      * @param value the value of the header being set

@@ -119,7 +119,7 @@ public class SvgScript extends SvgElement implements ScriptElement {
     }
 
     /**
-     * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
+     * Executes the <code>onreadystatechange</code> handler when simulating IE, as well as executing
      * the script itself, if necessary. {@inheritDoc}
      */
     @Override

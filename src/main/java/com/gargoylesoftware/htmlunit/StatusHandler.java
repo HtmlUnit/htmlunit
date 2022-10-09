@@ -17,7 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import java.io.Serializable;
 
 /**
- * A handler for changes to <tt>window.status</tt>.
+ * A handler for changes to <code>window.status</code>.
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ronald Brill
@@ -25,7 +25,7 @@ import java.io.Serializable;
 public interface StatusHandler extends Serializable {
 
     /**
-     * Handles a change to <tt>window.status</tt>.
+     * Handles a change to <code>window.status</code>.
      * @param page the page on which the status change occurred
      * @param message the new status message
      */

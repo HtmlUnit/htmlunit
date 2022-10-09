@@ -206,7 +206,7 @@ public class ApplicationCache extends EventTarget {
      *
      * @param event the event to be dispatched
      * @return {@code false} if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; {@code true} otherwise
+     *         called <code>preventDefault</code>; {@code true} otherwise
      */
     @Override
     @JsxFunction

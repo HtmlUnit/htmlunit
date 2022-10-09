@@ -190,7 +190,7 @@ public interface WebWindow extends Serializable {
     *
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
-     * that of <tt>element.style</tt>, but the value returned by this method is read-only.
+     * that of <code>element.style</code>, but the value returned by this method is read-only.
      *
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});

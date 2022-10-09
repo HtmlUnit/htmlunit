@@ -931,7 +931,7 @@ public class Event extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code true} if both <tt>cancelable</tt> is {@code true} and <tt>preventDefault()</tt> has been
+     * Returns {@code true} if both <code>cancelable</code> is {@code true} and <code>preventDefault()</code> has been
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
@@ -1033,8 +1033,8 @@ public class Event extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code true} if this event has been aborted via <tt>preventDefault()</tt> in
-     * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
+     * Returns {@code true} if this event has been aborted via <code>preventDefault()</code> in
+     * standards-compliant browsers, or via the event's <code>returnValue</code> property in IE, or
      * by the event handler returning {@code false}.
      *
      * @param result the event handler result (if {@code false}, the event is considered aborted)

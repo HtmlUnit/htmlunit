@@ -598,7 +598,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Returns the window property. This is a synonym for {@code self}.
-     * @return the window property (a reference to <tt>this</tt>)
+     * @return the window property (a reference to <code>this</code>)
      */
     @JsxGetter(propertyName = "window")
     public Window getWindow_js() {
@@ -1657,7 +1657,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * Returns computed style of the element. Computed style represents the final computed values
      * of all CSS properties for the element. This method's return value is of the same type as
-     * that of <tt>element.style</tt>, but the value returned by this method is read-only.
+     * that of <code>element.style</code>, but the value returned by this method is read-only.
      *
      * @param element the element
      * @param pseudoElement a string specifying the pseudo-element to match (may be {@code null});
@@ -1710,7 +1710,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * Creates a modal dialog box that displays the specified HTML document.
      * @param url the URL of the document to load and display
-     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param arguments object to be made available via <code>window.dialogArguments</code> in the dialog window
      * @param features string that specifies the window ornaments for the dialog window
      * @return the value of the {@code returnValue} property as set by the modal dialog's window
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536759.aspx">MSDN Documentation</a>
@@ -1738,7 +1738,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     /**
      * Creates a modeless dialog box that displays the specified HTML document.
      * @param url the URL of the document to load and display
-     * @param arguments object to be made available via <tt>window.dialogArguments</tt> in the dialog window
+     * @param arguments object to be made available via <code>window.dialogArguments</code> in the dialog window
      * @param features string that specifies the window ornaments for the dialog window
      * @return a reference to the new window object created for the modeless dialog
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536761.aspx">MSDN Documentation</a>

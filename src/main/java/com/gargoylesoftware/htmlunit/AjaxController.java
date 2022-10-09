@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 /**
  * This class is notified when AJAX calls are made, and has the ability to influence these calls.
  * For instance, it can turn asynchronous AJAX calls into synchronous AJAX calls, making test code
- * deterministic and avoiding calls to <tt>Thread.sleep()</tt>.
+ * deterministic and avoiding calls to <code>Thread.sleep()</code>.
  *
  * @author Marc Guillemot
  */

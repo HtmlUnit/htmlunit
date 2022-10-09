@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public class HtmlResetInput extends HtmlInput implements LabelableElement {
 
     /**
-     * Value to use if no specified <tt>value</tt> attribute.
+     * Value to use if no specified <code>value</code> attribute.
      */
     public static final String DEFAULT_VALUE = "Reset";
 

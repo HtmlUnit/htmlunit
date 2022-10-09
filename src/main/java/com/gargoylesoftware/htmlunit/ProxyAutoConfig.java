@@ -46,7 +46,7 @@ public final class ProxyAutoConfig {
     }
 
     /**
-     * Evaluates the <tt>FindProxyForURL</tt> method of the specified content.
+     * Evaluates the <code>FindProxyForURL</code> method of the specified content.
      * @param content the JavaScript content
      * @param url the URL to be retrieved
      * @return semicolon-separated result

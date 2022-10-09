@@ -577,7 +577,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
      * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
      * the page is loaded into a new window, and attachment handling is delegated to the registered
-     * <tt>AttachmentHandler</tt>.</p>
+     * <code>AttachmentHandler</code>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
@@ -601,7 +601,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
      * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
      * the page is loaded into a new window, and attachment handling is delegated to the registered
-     * <tt>AttachmentHandler</tt>.</p>
+     * <code>AttachmentHandler</code>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
@@ -977,7 +977,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns the "current" window for this client. This window (or its top window) will be used
-     * when <tt>getPage(...)</tt> is called without specifying a window.
+     * when <code>getPage(...)</code> is called without specifying a window.
      * @return the "current" window for this client
      */
     public WebWindow getCurrentWindow() {
@@ -986,7 +986,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Sets the "current" window for this client. This is the window that will be used when
-     * <tt>getPage(...)</tt> is called without specifying a window.
+     * <code>getPage(...)</code> is called without specifying a window.
      * @param window the new "current" window for this client
      */
     public void setCurrentWindow(final WebWindow window) {
@@ -1209,7 +1209,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * Opens a new dialog window.
      * @param url the URL of the document to load and display
      * @param opener the web window that is opening the dialog
-     * @param dialogArguments the object to make available inside the dialog via <tt>window.dialogArguments</tt>
+     * @param dialogArguments the object to make available inside the dialog via <code>window.dialogArguments</code>
      * @return the new dialog window
      * @throws IOException if there is an IO error
      */
@@ -1704,7 +1704,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Adds the headers that are sent with every request to the specified {@link WebRequest} instance.
-     * @param wrs the <tt>WebRequestSettings</tt> instance to modify
+     * @param wrs the <code>WebRequestSettings</code> instance to modify
      */
     private void addDefaultHeaders(final WebRequest wrs) {
         // Add user-specified headers to the web request if not present there yet.
@@ -2270,12 +2270,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks have finished executing. Background
-     * JavaScript tasks are JavaScript tasks scheduled for execution via <tt>window.setTimeout</tt>,
-     * <tt>window.setInterval</tt> or asynchronous <tt>XMLHttpRequest</tt>.</p>
+     * JavaScript tasks are JavaScript tasks scheduled for execution via <code>window.setTimeout</code>,
+     * <code>window.setInterval</code> or asynchronous <code>XMLHttpRequest</code>.</p>
      *
-     * <p>If a job is scheduled to begin executing after <tt>(now + timeoutMillis)</tt>, this method will
-     * wait for <tt>timeoutMillis</tt> milliseconds and then return a value greater than <tt>0</tt>. This
-     * method will never block longer than <tt>timeoutMillis</tt> milliseconds.</p>
+     * <p>If a job is scheduled to begin executing after <code>(now + timeoutMillis)</code>, this method will
+     * wait for <code>timeoutMillis</code> milliseconds and then return a value greater than <code>0</code>. This
+     * method will never block longer than <code>timeoutMillis</code> milliseconds.</p>
      *
      * <p>Use this method instead of {@link #waitForBackgroundJavaScriptStartingBefore(long)} if you
      * don't know when your background JavaScript is supposed to start executing, but you're fairly sure
@@ -2283,7 +2283,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScript(final long timeoutMillis) {
         int count = 0;
@@ -2320,13 +2320,13 @@ public class WebClient implements Serializable, AutoCloseable {
      * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
-     * <tt>(now + delayMillis)</tt> have finished executing. Background JavaScript tasks are JavaScript
-     * tasks scheduled for execution via <tt>window.setTimeout</tt>, <tt>window.setInterval</tt> or
-     * asynchronous <tt>XMLHttpRequest</tt>.</p>
+     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks are JavaScript
+     * tasks scheduled for execution via <code>window.setTimeout</code>, <code>window.setInterval</code> or
+     * asynchronous <code>XMLHttpRequest</code>.</p>
      *
      * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
      * task scheduled to start executing within the specified time, this method returns immediately -- even
-     * if there are tasks scheduled to be executed after <tt>(now + delayMillis)</tt>.</p>
+     * if there are tasks scheduled to be executed after <code>(now + delayMillis)</code>.</p>
      *
      * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
      * time, so this method makes no guarantees as to how long it will block.</p>
@@ -2337,7 +2337,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
         int count = 0;

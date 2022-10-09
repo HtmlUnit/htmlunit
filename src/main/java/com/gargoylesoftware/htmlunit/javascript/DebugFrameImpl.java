@@ -33,7 +33,7 @@ import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
 /**
  * <p>
  * HtmlUnit's implementation of the {@link net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame} interface,
- * which logs stack entries as well as exceptions. All logging is done at the <tt>TRACE</tt> level. This class does
+ * which logs stack entries as well as exceptions. All logging is done at the <code>TRACE</code> level. This class does
  * a fairly good job of guessing names for anonymous functions when they are referenced by name from an existing
  * object. See <a href="http://www.mozilla.org/rhino/rhino15R4-debugger.html">the Rhino documentation</a> or
  * <a href="http://lxr.mozilla.org/mozilla/source/js/rhino/src/org/mozilla/javascript/debug/DebugFrame.java">the
@@ -177,7 +177,7 @@ public class DebugFrameImpl extends DebugFrameAdapter {
      * a name. If the function does not have a name, this method will try to return the name under
      * which it was referenced. See <a
      * href="http://www.digital-web.com/articles/scope_in_javascript/">this page</a> for a good
-     * explanation of how the <tt>thisObj</tt> plays into this guess.
+     * explanation of how the <code>thisObj</code> plays into this guess.
      *
      * @param thisObj the object via which the function was referenced, used to try to guess a
      *        function name if the function is anonymous
@@ -242,11 +242,11 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     }
 
     /**
-     * Returns the name of the parameter at the specified index, or <tt>???</tt> if there is no
+     * Returns the name of the parameter at the specified index, or <code>???</code> if there is no
      * corresponding name.
      *
      * @param index the index of the parameter whose name is to be returned
-     * @return the name of the parameter at the specified index, or <tt>???</tt> if there is no corresponding name
+     * @return the name of the parameter at the specified index, or <code>???</code> if there is no corresponding name
      */
     private String getParamName(final int index) {
         if (index >= 0 && functionOrScript_.getParamCount() > index) {
@@ -273,10 +273,10 @@ public class DebugFrameImpl extends DebugFrameAdapter {
     }
 
     /**
-     * Returns the line number of the first line in this frame's function or script, or <tt>???</tt>
+     * Returns the line number of the first line in this frame's function or script, or <code>???</code>
      * if it cannot be determined. This is necessary because the line numbers provided by Rhino are unordered.
      *
-     * @return the line number of the first line in this frame's function or script, or <tt>???</tt>
+     * @return the line number of the first line in this frame's function or script, or <code>???</code>
      *         if it cannot be determined
      */
     private static String getFirstLine(final Context cx) {

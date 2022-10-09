@@ -77,7 +77,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * If we were given an invalid <tt>size</tt> attribute, normalize it.
+     * If we were given an invalid <code>size</code> attribute, normalize it.
      * Then set a default selected option if none was specified and the size is 1 or less
      * and this isn't a multiple selection input.
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
