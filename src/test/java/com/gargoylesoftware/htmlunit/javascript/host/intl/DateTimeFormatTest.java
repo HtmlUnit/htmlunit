@@ -176,16 +176,6 @@ public class DateTimeFormatTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "\u0662\u0660\u200F\u002f\u0661\u0662\u200F\u002f\u0662\u0660\u0661\u0663",
-            IE = "\u200F\u0662\u0660\u200F\u002f\u200F\u0661\u0662\u200F\u002f\u200F\u0662\u0660\u0661\u0663")
-    public void format_ar_EG() throws Exception {
-        test("new Intl.DateTimeFormat('ar-EG').format(date)");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts(DEFAULT = "H25/12/20",
             IE = "\u200e25\u200e/\u200e12\u200e/\u200e20")
     public void format_ja_jp_u_ca_japanese() throws Exception {
