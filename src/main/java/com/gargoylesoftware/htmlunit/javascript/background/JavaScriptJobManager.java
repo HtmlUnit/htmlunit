@@ -94,7 +94,8 @@ public interface JavaScriptJobManager extends Serializable {
     int waitForJobs(long timeoutMillis);
 
     /**
-     * Blocks until all jobs scheduled to start executing before <code>(now + delayMillis)</code> have finished executing.
+     * Blocks until all jobs scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing.
      * If there is no background JavaScript task currently executing, and there is no background JavaScript task
      * scheduled to start executing within the specified time, this method returns immediately -- even if there are
      * tasks scheduled to be executed after <code>(now + delayMillis)</code>.
@@ -106,7 +107,8 @@ public interface JavaScriptJobManager extends Serializable {
     int waitForJobsStartingBefore(long delayMillis);
 
     /**
-     * Blocks until all jobs scheduled to start executing before <code>(now + delayMillis)</code> have finished executing.
+     * Blocks until all jobs scheduled to start executing before
+     * <code>(now + delayMillis)</code> have finished executing.
      * If there is no background JavaScript task currently executing, and there is no background JavaScript task
      * scheduled to start executing within the specified time, this method returns immediately -- even if there are
      * tasks scheduled to be executed after <code>(now + delayMillis)</code>.

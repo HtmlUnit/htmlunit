@@ -17,7 +17,8 @@ package com.gargoylesoftware.htmlunit;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
- * A window opened in JavaScript via either <code>window.showModalDialog</code> or <code>window.showModelessDialog</code>.
+ * A window opened in JavaScript via either <code>window.showModalDialog</code>
+ * or <code>window.showModelessDialog</code>.
  * @author Daniel Gredler
  * @author Ronald Brill
  */

@@ -394,8 +394,10 @@ public class HtmlPage extends SgmlPage {
     }
 
     /**
-     * Returns the <code>body</code> element (or <code>frameset</code> element), or {@code null} if it does not yet exist.
-     * @return the <code>body</code> element (or <code>frameset</code> element), or {@code null} if it does not yet exist
+     * Returns the <code>body</code> element (or <code>frameset</code> element),
+     * or {@code null} if it does not yet exist.
+     * @return the <code>body</code> element (or <code>frameset</code> element),
+     * or {@code null} if it does not yet exist
      */
     public HtmlElement getBody() {
         final DomElement doc = getDocumentElement();
@@ -2756,7 +2758,8 @@ public class HtmlPage extends SgmlPage {
      *   <li>are descendants of the node that changed</li>
      * </ul>
      *
-     * <p>Additionally, whenever a <code>style</code> node or a <code>link</code> node with <code>rel=stylesheet</code> is added or
+     * <p>Additionally, whenever a <code>style</code> node or a <code>link</code> node
+     * with <code>rel=stylesheet</code> is added or
      * removed, all elements should be removed from the computed style cache.</p>
      */
     private class DomHtmlAttributeChangeListenerImpl implements DomChangeListener, HtmlAttributeChangeListener {

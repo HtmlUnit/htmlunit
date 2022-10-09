@@ -268,7 +268,8 @@ public final class UrlUtils {
      * <p>Encodes illegal characters in the specified URL's path, query string and anchor according to the URL
      * encoding rules observed in real browsers.</p>
      *
-     * <p>For example, this method changes <code>"http://first/?a=b c"</code> to <code>"http://first/?a=b%20c"</code>.</p>
+     * <p>For example, this method changes
+     * <code>"http://first/?a=b c"</code> to <code>"http://first/?a=b%20c"</code>.</p>
      *
      * @param url the URL to encode
      * @param minimalQueryEncoding whether or not to perform minimal query encoding, like IE does

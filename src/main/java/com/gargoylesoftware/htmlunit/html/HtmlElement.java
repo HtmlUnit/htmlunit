@@ -620,7 +620,8 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Simulates typing the specified key code while this element has focus, returning the page contained
      * by this element's window after typing. Note that it may or may not be the same as the original page,
-     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <code>XXXXXXXXXXX</code>
+     * depending on the JavaScript event handlers, etc.
+     * Note also that for some elements, typing <code>XXXXXXXXXXX</code>
      * submits the enclosed form.
      * <p>
      * An example of predefined values is {@link KeyboardEvent#DOM_VK_PAGE_DOWN}.
@@ -635,7 +636,8 @@ public abstract class HtmlElement extends DomElement {
     /**
      * Simulates typing the specified {@link Keyboard} while this element has focus, returning the page contained
      * by this element's window after typing. Note that it may or may not be the same as the original page,
-     * depending on the JavaScript event handlers, etc. Note also that for some elements, typing <code>XXXXXXXXXXX</code>
+     * depending on the JavaScript event handlers, etc.
+     * Note also that for some elements, typing <code>XXXXXXXXXXX</code>
      * submits the enclosed form.
      *
      * @param keyboard the keyboard

@@ -34,14 +34,15 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
  * The default implementation of {@link PageCreator}. Designed to be extended for easier handling of new content
- * types. Just check the content type in <code>createPage()</code> and call <code>super(createPage())</code> if your custom
+ * types. Just check the content type in <code>createPage()</code>
+ * and call <code>super(createPage())</code> if your custom
  * type isn't found. There are also protected <code>createXXXXPage()</code> methods for creating the {@link Page} types
  * which HtmlUnit already knows about for your custom content types.
  *
  * <p>
  * The following table shows the type of {@link Page} created depending on the content type:<br>
  * <br>
- *  <table border="1" width="50%" summary="Page Types">
+ *  <table border="1" style="width:50%;" summary="Page Types">
  *    <tr>
  *      <th>Content type</th>
  *      <th>Type of page</th>

@@ -741,7 +741,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * Returns {@code true} if nodes of this type can ever be displayed, {@code false} otherwise. Examples of nodes
-     * that can never be displayed are <code>&lt;head&gt;</code>, <code>&lt;meta&gt;</code>, <code>&lt;script&gt;</code>, etc.
+     * that can never be displayed are <code>&lt;head&gt;</code>,
+     * <code>&lt;meta&gt;</code>, <code>&lt;script&gt;</code>, etc.
      * @return {@code true} if nodes of this type can ever be displayed, {@code false} otherwise
      * @see #isDisplayed()
      */
