@@ -1383,7 +1383,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param webElement the webElement
      * @return the HtmlElement
      * @throws Exception if an error occurs
-     * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
         return (HtmlElement) ((HtmlUnitWebElement) webElement).getElement();

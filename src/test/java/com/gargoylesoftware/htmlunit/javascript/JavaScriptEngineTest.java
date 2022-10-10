@@ -172,7 +172,6 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     /**
      * If a reference has been hold on a page and the page is not
      * anymore the one contained in "its" window, JavaScript should not be executed.
-     * (see {@link com.gargoylesoftware.htmlunit.javascript.host.WindowConcurrencyTest#cleanSetTimeout}).
      * @throws Exception if the test fails
      */
     @Test
@@ -524,7 +523,9 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
     }
 
     /**
-     * Regression test for https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038.
+     * Regression test for
+     * <a href="https://sourceforge.net/tracker/?func=detail&atid=448266&aid=1552746&group_id=47038">
+     * https://sourceforge.net/tracker/?func=detail&amp;atid=448266&amp;aid=1552746&amp;group_id=47038</a>.
      * @throws Exception if the test fails
      */
     @Test

@@ -2317,7 +2317,8 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test case for {@link https://github.com/HtmlUnit/htmlunit/issues/482}.
+     * Test case for <a href="https://github.com/HtmlUnit/htmlunit/issues/482">
+     * https://github.com/HtmlUnit/htmlunit/issues/482</a>.
      *
      * @throws Exception if an error occurs
      */

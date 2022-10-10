@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Test for {@link IEConditionalCompilationScriptPreProcessor}.
+ * Test for special IE Scripts.
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot

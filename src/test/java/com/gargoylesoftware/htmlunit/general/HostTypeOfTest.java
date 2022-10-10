@@ -691,7 +691,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Console}.
+     * Test Console.
      *
      * @throws Exception if an error occurs
      */

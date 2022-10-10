@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.general;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.w3c.dom.css.CSS2Properties;
 
 import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
@@ -1163,7 +1164,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Console}.
+     * Test Console.
      *
      * @throws Exception if an error occurs
      */

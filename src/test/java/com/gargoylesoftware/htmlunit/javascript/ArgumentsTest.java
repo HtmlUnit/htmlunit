@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link org.mozilla.javascript.Arguments}, which is the object for "function.arguments".
+ * Tests for org.mozilla.javascript.Arguments, which is the object for "function.arguments".
  *
  * @author Ahmed Ashour
  * @author Marc Guillemot
