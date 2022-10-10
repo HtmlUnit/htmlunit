@@ -345,6 +345,14 @@ public class ExternalTest {
             return true;
         }
 
+        // https://issues.apache.org/jira/browse/MJAVADOC-700
+        // https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
+        // <sourcepath>${basedir}/src/main/java</sourcepath>
+        if ("maven-javadoc-plugin".equals(artifactId)
+                && (version.startsWith("3.3.") || version.startsWith("3.4."))) {
+            return true;
+        }
+
         // really old common versions
         if ("commons-io".equals(artifactId) && (version.startsWith("2003"))) {
             return true;

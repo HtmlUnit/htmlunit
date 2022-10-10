@@ -156,12 +156,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <quiet>true</quiet>
                     <doclint>html,missing,reference,syntax</doclint>
-                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
@@ -622,12 +620,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <quiet>true</quiet>
                     <doclint>html,missing,reference,syntax</doclint>
-                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
