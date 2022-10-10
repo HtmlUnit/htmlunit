@@ -575,6 +575,7 @@ public class CodeStyleTest {
                 && !relativePath.contains("BrowserVersionFeatures.java")
                 && !relativePath.contains("BrowserConfiguration.java")
                 && !relativePath.contains("DateTimeFormat.java")
+                && !relativePath.contains("NumberFormat.java")
                 && !relativePath.contains("Document.java")
                 && !relativePath.contains("HTMLDocument2.java")) {
             int index = 1;

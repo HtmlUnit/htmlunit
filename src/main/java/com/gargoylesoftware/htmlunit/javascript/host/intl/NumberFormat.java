@@ -129,7 +129,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         else if (browserVersion.isIE()) {
             formats = IE_FORMATS_;
         }
-        else if (browserVersion.isFirefox78()) {
+        else if (browserVersion.isFirefoxESR()) {
             formats = FF_ESR_FORMATS_;
         }
         else {

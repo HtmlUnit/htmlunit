@@ -9,8 +9,7 @@
     <body>
         <release version="2.66.0" date="xxxx, 2022" description="Bugfixes">
             <action type="add" dev="rbri" issue="501">
-                First simple implementation of NumberFormat.format() and 
-                NumberFormat.resolvedOptions() added.
+                First simple implementation of NumberFormat.format() and NumberFormat.resolvedOptions() added.
             </action>
             <action type="fix" dev="rbri">
                 Fix one more xsl transform issue when running without Xalan.

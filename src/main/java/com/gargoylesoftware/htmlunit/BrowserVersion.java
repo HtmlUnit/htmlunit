@@ -507,7 +507,7 @@ public final class BrowserVersion implements Serializable {
         else if (isEdge()) {
             expectedBrowser = SupportedBrowser.EDGE;
         }
-        else if (isFirefox78()) {
+        else if (isFirefoxESR()) {
             expectedBrowser = SupportedBrowser.FF_ESR;
         }
         else if (isFirefox()) {
@@ -595,7 +595,7 @@ public final class BrowserVersion implements Serializable {
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      * @return whether this is version 78  of a Firefox browser
      */
-    public boolean isFirefox78() {
+    public boolean isFirefoxESR() {
         return isFirefox() && getBrowserVersionNumeric() == FIREFOX_ESR_NUMERIC;
     }
 
