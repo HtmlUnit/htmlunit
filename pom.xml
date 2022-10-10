@@ -162,12 +162,8 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>https://commons.apache.org/logging/apidocs/</link>
-                        <link>https://commons.apache.org/codec/apidocs/</link>
-                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
-                    </links>
+                    <detectLinks>true</detectLinks>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
                 <executions>
                     <execution>
@@ -632,12 +628,8 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
                     <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>https://commons.apache.org/logging/apidocs/</link>
-                        <link>https://commons.apache.org/codec/apidocs/</link>
-                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
-                    </links>
+                    <detectLinks>true</detectLinks>
+                    <detectJavaApiLink>true</detectJavaApiLink>
                 </configuration>
             </plugin>
             <plugin>
