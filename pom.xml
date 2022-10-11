@@ -162,6 +162,7 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
+                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
                 </configuration>
                 <executions>
                     <execution>
@@ -626,6 +627,7 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
+                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
                 </configuration>
             </plugin>
             <plugin>
