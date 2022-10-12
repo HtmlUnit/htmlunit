@@ -16,6 +16,8 @@ package com.gargoylesoftware.htmlunit.html;
 
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -44,6 +46,17 @@ public class HtmlMedia extends HtmlElement {
      * @return "probably", "maybe", or "". The current implementation returns ""
      */
     public String canPlayType(final String type) {
-        return "";
+        if (StringUtils.isAllBlank(type)) {
+            return "";
+        }
+
+        final int semPos = type.indexOf(';');
+        final int codecPos = type.indexOf("codec");
+
+        if (semPos > 0 && codecPos > semPos) {
+            return "probably";
+        }
+
+        return "maybe";
     }
 }
