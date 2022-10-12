@@ -27,7 +27,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
@@ -127,7 +127,11 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false",
+            IE = "false")
     public void Audio_HTMLAudioElement() throws Exception {
         parentOf("Audio", "HTMLAudioElement");
     }
@@ -167,7 +171,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLAudioElement]", "maybe", "done"},
             IE = {"[object HTMLAudioElement]", "", "done"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"[object HTMLAudioElement]", "maybe", "done"})
     public void nullConstructor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -218,7 +222,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioOgg() throws Exception {
         canPlayType("audio/ogg");
     }
@@ -229,7 +233,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_VideoOgg() throws Exception {
         canPlayType("video/ogg");
     }
@@ -240,7 +244,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_ApplicationOgg() throws Exception {
         canPlayType("application/ogg");
     }
@@ -250,7 +254,6 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("maybe")
-    @NotYetImplemented
     public void canPlayType_Mp4() throws Exception {
         canPlayType("video/mp4");
     }
@@ -262,7 +265,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioWave() throws Exception {
         canPlayType("audio/wave");
     }
@@ -273,7 +278,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioWav() throws Exception {
         canPlayType("audio/wav");
     }
@@ -284,7 +289,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioXWav() throws Exception {
         canPlayType("audio/x-wav");
     }
@@ -296,7 +301,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioPnWav() throws Exception {
         canPlayType("audio/x-pn-wav");
     }
@@ -307,7 +314,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioWebm() throws Exception {
         canPlayType("audio/webm");
     }
@@ -318,7 +325,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_VideoWebm() throws Exception {
         canPlayType("video/webm");
     }
@@ -330,7 +337,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "maybe",
             CHROME = "probably",
             EDGE = "probably")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe")
     public void canPlayType_AudioMpeg() throws Exception {
         canPlayType("audio/mpeg");
     }
@@ -343,7 +351,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             FF = "maybe",
             FF_ESR = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");
     }
@@ -355,7 +365,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioXFlac() throws Exception {
         canPlayType("audio/x-flac");
     }
