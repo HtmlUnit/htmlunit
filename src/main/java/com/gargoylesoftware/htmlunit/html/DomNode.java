@@ -1117,7 +1117,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Parses the specified HTML source code, appending the resulting content at the specified target location.
      * @param source the HTML code extract to parse
-     * @throws IOExceptionin in case of error
+     * @throws IOException in case of error
      * @throws SAXException in case of error
      */
     public void parseHtmlSnippet(final String source) throws SAXException, IOException {
