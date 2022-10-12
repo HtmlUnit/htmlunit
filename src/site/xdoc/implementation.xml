@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Implementation hints</title>
+        <author email="rbri@rbri.de">Ronald Brill</author>
+    </properties>
+
+    <body>
+        <section name="Introduction">
+            <p>
+                In most cases the implementation of HtmlUnit follows a test driven approach.
+            </p>
+            <p>
+                To be able to stay in sync with the development of real browsers, we try to write
+                tests in a way that enables us to compare the results of executing the tests with real
+                browsers to our own results. This also directy leads to a test firsts approach - write
+                the test; run the test with all real browsers and adjust the expectations, run the test
+                with HtmlUnit and finally fix the implementation if needed. Additionally we try to make the
+                test as small as possible to make the connetion between a failing test and the related
+                implementation as direct as possible.
+            </p>
+            <p>
+                The most important part for this approach is the class
+                <a href="https://htmlunit.sourceforge.io/testapidocs/com/gargoylesoftware/htmlunit/WebDriverTestCase.html">WebDriverTestCase</a>.
+                Please have a look at the javadoc to learn how you can switch between real browsers and HtmlUnit when running your tests.
+            </p>
+        </section>
+    </body>
+</document>
