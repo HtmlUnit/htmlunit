@@ -44,6 +44,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
+import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.Property;
@@ -1619,6 +1620,20 @@ public class DomElement extends DomNamespaceNode implements Element {
     public void setDefaults(final ComputedCssStyleDeclaration style) {
         // Empty by default; override as necessary.
     }
+
+    /**
+     * Replaces all child elements of this element with the supplied value parsed as html.
+     * @param source the new value for the contents of this element
+     */
+    public void setInnerHtml(final String source) throws SAXException, IOException {
+        removeAllChildren();
+        getPage().clearComputedStylesUpToRoot(this);
+
+        if (source != null) {
+            parseHtmlSnippet(source);
+        }
+    }
+
 }
 
 /**

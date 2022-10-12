@@ -37,6 +37,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.UserDataHandler;
+import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
@@ -1109,6 +1110,18 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         while (getFirstChild() != null) {
             getFirstChild().remove();
         }
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Parses the specified HTML source code, appending the resulting content at the specified target location.
+     * @param source the HTML code extract to parse
+     * @throws IOExceptionin in case of error
+     * @throws SAXException in case of error
+     */
+    public void parseHtmlSnippet(final String source) throws SAXException, IOException {
+        getPage().getWebClient().getPageCreator().getHtmlParser().parseFragment(this, source);
     }
 
     /**

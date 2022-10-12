@@ -873,7 +873,7 @@ public class Element extends Node {
      */
     private static void parseHtmlSnippet(final DomNode target, final String source) {
         try {
-            target.getPage().getWebClient().getPageCreator().getHtmlParser().parseFragment(target, source);
+            target.parseHtmlSnippet(source);
         }
         catch (final IOException | SAXException e) {
             LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
@@ -926,13 +926,19 @@ public class Element extends Node {
             return;
         }
 
-        domNode.removeAllChildren();
-        getDomNodeOrDie().getPage().clearComputedStylesUpToRoot(domNode);
-
+        String html = null;
         final boolean addChildForNull = getBrowserVersion().hasFeature(JS_INNER_HTML_ADD_CHILD_FOR_NULL_VALUE);
         if ((value == null && addChildForNull) || (value != null && !"".equals(value))) {
-            final String valueAsString = Context.toString(value);
-            parseHtmlSnippet(domNode, valueAsString);
+            html = Context.toString(value);
+        }
+
+        try {
+            domNode.setInnerHtml(html);
+        }
+        catch (final IOException | SAXException e) {
+            LogFactory.getLog(HtmlElement.class).error("Unexpected exception occurred while parsing HTML snippet", e);
+            throw Context.reportRuntimeError("Unexpected exception occurred while parsing HTML snippet: "
+                    + e.getMessage());
         }
     }
 

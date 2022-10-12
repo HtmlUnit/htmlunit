@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.66.0" date="xxxx, 2022" description="Bugfixes">
+            <action type="add" dev="rbri" issue="505">
+                Method DomElement.setInnerHtml(String) added.
+            </action>
             <action type="fix" dev="rbri">
                 Fix generation of test-javadoc.
             </action>
