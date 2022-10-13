@@ -27,16 +27,16 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmxTest1x8x1 extends HtmxTest {
+public class HtmxTest1x8x2 extends HtmxTest {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:479failures:0",
+    @Alerts(DEFAULT = "passes:480failures:0",
             IE = "passes:1failures:467")
-    @HtmlUnitNYI(IE = "passes:17failures:463")
+    @HtmlUnitNYI(IE = "passes:17failures:464")
     public void htmx() throws Exception {
-        htmx("htmx-1.8.1");
+        htmx("htmx-1.8.2");
     }
 }
