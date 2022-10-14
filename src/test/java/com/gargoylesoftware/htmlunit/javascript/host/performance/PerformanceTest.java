@@ -91,7 +91,7 @@ public class PerformanceTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("function")
+    @Alerts({"function", "function", "function", "function"})
     public void methods() throws Exception {
         final String html
                 = "<html>\n"
@@ -99,6 +99,9 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
                 + "  log(typeof performance.now);\n"
+                + "  log(typeof performance.getEntries);\n"
+                + "  log(typeof performance.getEntriesByName);\n"
+                + "  log(typeof performance.getEntriesByType);\n"
                 + "</script>\n"
                 + "</body></html>";
 
