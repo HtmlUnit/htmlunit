@@ -173,9 +173,13 @@ public class HTMLMediaElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getNodeName() {
+        return getNodeNameCustomize();
+    }
+
+    protected String getNodeNameCustomize() {
         final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
         if (element == null) {
-            return "AUDIO";
+            return "MEDIA";
         }
         return element.getNodeName();
     }

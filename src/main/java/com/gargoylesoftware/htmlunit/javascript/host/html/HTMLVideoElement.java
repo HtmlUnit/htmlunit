@@ -88,4 +88,8 @@ public class HTMLVideoElement extends HTMLMediaElement {
         getDomNodeOrDie().setAttribute("height", Integer.toString(height));
     }
 
+    @Override
+    protected String getNodeNameCustomize() {
+        return "VIDEO";
+    }
 }

@@ -39,4 +39,9 @@ public class HTMLAudioElement extends HTMLMediaElement {
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLAudioElement() {
     }
+
+    @Override
+    protected String getNodeNameCustomize() {
+        return "AUDIO";
+    }
 }
