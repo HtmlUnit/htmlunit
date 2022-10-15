@@ -7,7 +7,16 @@
     </properties>
 
     <body>
-        <release version="2.66.0" date="xxxx, 2022" description="Bugfixes">
+        <release version="2.66.0" date="xxxx, 2022" description="Bugfixes, NumberFormat, HTMLMediaElement">
+            <action type="add" dev="rbri" issue="504">
+                HTMLMediaElement.load() implemented as NoOp.
+            </action>
+            <action type="add" dev="rbri" issue="504">
+                Support for HTMLMediaElement.src and HTMLMediaElement.currentSrc properties added.
+            </action>
+            <action type="fix" dev="rbri" issue="504">
+                nodeType and nodeName moved to HTMLMediaElement.
+            </action>
             <action type="add" dev="rbri">
                 Simple mock for Performance getEntries()/getEntriesByName()/getEntriesByType() added.
             </action>

@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.net.MalformedURLException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 public class HtmlMedia extends HtmlElement {
 
@@ -58,5 +60,53 @@ public class HtmlMedia extends HtmlElement {
         }
 
         return "maybe";
+    }
+
+    /**
+     * Returns the value of the attribute {@code src}. Refer to the
+     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
+     */
+    public final String getSrcAttribute() {
+        return getSrcAttributeNormalized();
+    }
+
+    /**
+     * @return the value of the {@code src} value
+     */
+    public String getSrc() {
+        final String src = getSrcAttribute();
+        if ("".equals(src)) {
+            return src;
+        }
+        try {
+            final HtmlPage page = (HtmlPage) getPage();
+            return page.getFullyQualifiedUrl(src).toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            final String msg = "Unable to create fully qualified URL for src attribute of media " + e.getMessage();
+            throw new RuntimeException(msg, e);
+        }
+    }
+
+    /**
+     * Sets the value of the {@code src} attribute.
+     * @param src the value of the {@code src} attribute
+     */
+    public void setSrc(final String src) {
+        setAttribute(SRC_ATTRIBUTE, src);
+    }
+
+    /**
+     * Returns the absolute URL of the chosen media resource.
+     * This could happen, for example, if the web server selects a
+     * media file based on the resolution of the user's display.
+     * The value is an empty string if the networkState property is EMPTY.
+     * @return the absolute URL of the chosen media resource
+     */
+    public String getCurrentSrc() {
+        return "";
     }
 }

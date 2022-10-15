@@ -37,6 +37,26 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("false")
+    public void prototype() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "log(HTMLAudioElement.prototype == null);\n"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = {"[object HTMLAudioElement]", "function HTMLAudioElement() { [native code] }"},
             IE = {"[object HTMLAudioElement]", "[object HTMLAudioElement]"})
     public void type() throws Exception {
@@ -55,6 +75,28 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <audio id='a1'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "AUDIO"})
+    public void nodeTypeName() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  log(audio.nodeType);"
+            + "  log(audio.nodeName);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -428,6 +470,154 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "§§URL§§horse.mp3", "§§URL§§cow.mp3",
+             "<audio id=\"a\" src=\"cow.mp3\"></audio>"})
+    public void src() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  var src = audio.src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "  audio.src = 'cow.mp3';\n"
+            + "  log(audio.src);"
+            + "  log(audio.outerHTML);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "", "§§URL§§cow.mp3",
+             "<audio id=\"a\" src=\"cow.mp3\"><source src=\"horse.mp3\" type=\"audio/mpeg\"></audio>"})
+    public void srcChild() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  var src = audio.src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "  audio.src = 'cow.mp3';\n"
+            + "  log(audio.src);"
+            + "  log(audio.outerHTML);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void srcNotDefined() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var src = document.getElementById('a').src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"string", ""},
+            IE = {"string", "§§URL§§horse.mp3"})
+    @HtmlUnitNYI(IE = {"string", ""})
+    public void currentSrc() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void currentSrcChild() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void currentSrcNotDefined() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

@@ -1873,11 +1873,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF_ESR = "constructor()",
             IE = "constructor")
-    @HtmlUnitNYI(CHROME = "constructor(),nodeName,nodeType",
-            EDGE = "constructor(),nodeName,nodeType",
-            FF = "constructor(),nodeName,nodeType",
-            FF_ESR = "constructor(),nodeName,nodeType",
-            IE = "constructor,nodeName,nodeType")
     public void audio() throws Exception {
         test("audio");
     }
@@ -7364,11 +7359,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "clearMarks(),clearMeasures(),clearResourceTimings(),constructor,getEntries(),"
                 + "getEntriesByName(),getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),"
                 + "navigation,now(),setResourceTimingBufferSize(),timing,toJSON()")
-    @HtmlUnitNYI(CHROME = "constructor(),navigation,now(),timing",
-            EDGE = "constructor(),navigation,now(),timing",
-            FF = "constructor(),navigation,now(),timing",
-            FF_ESR = "constructor(),navigation,now(),timing",
-            IE = "constructor,navigation,now(),timing")
+    @HtmlUnitNYI(CHROME = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),navigation,now(),timing",
+            EDGE = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),navigation,now(),timing",
+            FF = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),navigation,now(),timing",
+            FF_ESR = "constructor(),getEntries(),getEntriesByName(),getEntriesByType(),navigation,now(),timing",
+            IE = "constructor,getEntries(),getEntriesByName(),getEntriesByType(),navigation,now(),timing")
     public void performance() throws Exception {
         testString("", "performance");
     }

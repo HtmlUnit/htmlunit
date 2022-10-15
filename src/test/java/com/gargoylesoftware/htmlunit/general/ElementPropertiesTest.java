@@ -1468,16 +1468,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "NETWORK_NO_SOURCE,networkState,onmsneedkey,"
                 + "pause(),paused,play(),playbackRate,played,preload,readyState,"
                 + "seekable,seeking,src,textTracks,volume")
-    @HtmlUnitNYI(CHROME = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
-            EDGE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
-            FF_ESR = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
-                + "NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
-            FF = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
-                + "NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()",
-            IE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play()")
+    @HtmlUnitNYI(CHROME = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src",
+            EDGE = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src",
+            FF_ESR = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src",
+            FF = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src",
+            IE = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),play(),src")
     public void audio() throws Exception {
         test("audio");
     }
@@ -2764,11 +2769,16 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "clearMarks(),clearMeasures(),clearResourceTimings(),getEntries(),getEntriesByName(),"
                 + "getEntriesByType(),getMarks(),getMeasures(),mark(),measure(),navigation,now(),"
                 + "setResourceTimingBufferSize(),timing,toJSON()")
-    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
-            EDGE = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
-            FF = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
-            FF_ESR = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing",
-            IE = "addEventListener(),dispatchEvent(),navigation,now(),removeEventListener(),timing")
+    @HtmlUnitNYI(CHROME = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
+                + "navigation,now(),removeEventListener(),timing",
+            EDGE = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
+                + "navigation,now(),removeEventListener(),timing",
+            FF = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
+                + "navigation,now(),removeEventListener(),timing",
+            FF_ESR = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
+                + "navigation,now(),removeEventListener(),timing",
+            IE = "addEventListener(),dispatchEvent(),getEntries(),getEntriesByName(),getEntriesByType(),"
+                + "navigation,now(),removeEventListener(),timing")
     public void performance() throws Exception {
         testString("", "performance");
     }
@@ -3430,21 +3440,26 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onmsneedkey,pause(),paused,play(),playbackRate,played,poster,"
                 + "preload,readyState,seekable,seeking,src,textTracks,videoHeight,videoWidth,volume,"
                 + "width")
-    @HtmlUnitNYI(CHROME = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
-                + "play(),width",
-            EDGE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
-                + "play(),width",
-            FF_ESR = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
-                + "play(),width",
-            FF = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
-                + "play(),width",
-            IE = "canPlayType(),HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,"
-                + "HAVE_NOTHING,height,NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
-                + "play(),width")
+    @HtmlUnitNYI(CHROME = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "height,load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
+                + "play(),src,width",
+            EDGE = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "height,load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
+                + "play(),src,width",
+            FF_ESR = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "height,load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
+                + "play(),src,width",
+            FF = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "height,load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
+                + "play(),src,width",
+            IE = "canPlayType(),currentSrc,"
+                + "HAVE_CURRENT_DATA,HAVE_ENOUGH_DATA,HAVE_FUTURE_DATA,HAVE_METADATA,HAVE_NOTHING,"
+                + "height,load(),NETWORK_EMPTY,NETWORK_IDLE,NETWORK_LOADING,NETWORK_NO_SOURCE,pause(),"
+                + "play(),src,width")
     public void video() throws Exception {
         test("video");
     }
