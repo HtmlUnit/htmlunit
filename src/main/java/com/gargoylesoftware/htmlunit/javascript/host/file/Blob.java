@@ -25,7 +25,6 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -120,7 +119,7 @@ public class Blob extends HtmlUnitScriptable {
                 else {
                     final String bits = Context.toString(fileBits.get(i));
                     // Todo normalize line breaks
-                    final byte[] bytes = bits.getBytes(StandardCharsets.UTF_8);
+                    final byte[] bytes = bits.getBytes(UTF_8);
                     out.write(bytes, 0, bytes.length);
                 }
             }
@@ -152,7 +151,7 @@ public class Blob extends HtmlUnitScriptable {
 
         @Override
         public String getText() throws IOException {
-            return new String(bytes_, StandardCharsets.UTF_8);
+            return new String(bytes_, UTF_8);
         }
 
         @Override

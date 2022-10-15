@@ -52,7 +52,6 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
@@ -1757,7 +1756,7 @@ public class HTMLElement extends Element {
         if (ATTRIBUTE_NOT_DEFINED == attribute) {
             return "inherit";
         }
-        if (attribute == DomElement.ATTRIBUTE_VALUE_EMPTY) {
+        if (attribute == ATTRIBUTE_VALUE_EMPTY) {
             return "true";
         }
         return attribute;

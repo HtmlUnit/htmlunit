@@ -98,7 +98,7 @@ public class CSSStyleSheet extends StyleSheet {
     private final HTMLElement ownerNode_;
 
     /** The collection of rules defined in this style sheet. */
-    private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
+    private CSSRuleList cssRules_;
     private List<Integer> cssRulesIndexFix_;
 
     /**
@@ -221,7 +221,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @return the collection of rules defined in this style sheet
      */
     @JsxGetter({CHROME, EDGE, IE})
-    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getRules() {
+    public CSSRuleList getRules() {
         return getCssRules();
     }
 
@@ -230,7 +230,7 @@ public class CSSStyleSheet extends StyleSheet {
      * @return the collection of rules defined in this style sheet
      */
     @JsxGetter
-    public com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList getCssRules() {
+    public CSSRuleList getCssRules() {
         initCssRules();
         return cssRules_;
     }
@@ -319,8 +319,7 @@ public class CSSStyleSheet extends StyleSheet {
                 continue;
             }
 
-            final com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule cssRule
-                        = com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule.create(this, rule);
+            final CSSRule cssRule = com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule.create(this, rule);
             if (null == cssRule) {
                 cssRulesIndexFix_.add(pos);
             }
@@ -538,7 +537,7 @@ public class CSSStyleSheet extends StyleSheet {
 
     private void initCssRules() {
         if (cssRules_ == null) {
-            cssRules_ = new com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList(this);
+            cssRules_ = new CSSRuleList(this);
             cssRulesIndexFix_ = new ArrayList<>();
             refreshCssRules();
         }

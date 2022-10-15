@@ -1826,7 +1826,7 @@ public class HtmlPage extends SgmlPage {
             final String attribute, final boolean recurse) {
         final String value = getAttributeValue(element, attribute);
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
+        if (ATTRIBUTE_NOT_DEFINED != value) {
             SortedSet<DomElement> elements = map.get(value);
             if (elements == null) {
                 elements = new TreeSet<>(documentPositionComparator);
@@ -1848,7 +1848,7 @@ public class HtmlPage extends SgmlPage {
         // first try real attributes
         String value = element.getAttribute(attribute);
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED == value
+        if (ATTRIBUTE_NOT_DEFINED == value
                 && getWebClient().isJavaScriptEngineEnabled()
                 && !(element instanceof HtmlApplet)
                 && !(element instanceof HtmlObject)) {
@@ -1895,7 +1895,7 @@ public class HtmlPage extends SgmlPage {
             final String attribute, final boolean recurse) {
         final String value = getAttributeValue(element, attribute);
 
-        if (DomElement.ATTRIBUTE_NOT_DEFINED != value) {
+        if (ATTRIBUTE_NOT_DEFINED != value) {
             final SortedSet<DomElement> elements = map.remove(value);
             if (elements != null && (elements.size() != 1 || !elements.contains(element))) {
                 elements.remove(element);

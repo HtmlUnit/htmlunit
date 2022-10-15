@@ -37,7 +37,7 @@ public class AwtClipboardHandler implements ClipboardHandler {
     @Override
     public String getClipboardContent() {
         String result = "";
-        final java.awt.datatransfer.Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         final Transferable contents = clipboard.getContents(null);
         if (contents != null && contents.isDataFlavorSupported(DataFlavor.stringFlavor)) {
             try {
@@ -54,7 +54,7 @@ public class AwtClipboardHandler implements ClipboardHandler {
      */
     @Override
     public void setClipboardContent(final String string) {
-        final java.awt.datatransfer.Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        final Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         final StringSelection stringSelection = new StringSelection(string);
         clipboard.setContents(stringSelection, null);
     }
