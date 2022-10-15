@@ -1624,6 +1624,8 @@ public class DomElement extends DomNamespaceNode implements Element {
     /**
      * Replaces all child elements of this element with the supplied value parsed as html.
      * @param source the new value for the contents of this element
+     * @throws SAXException in case of error
+     * @throws IOException in case of error
      */
     public void setInnerHtml(final String source) throws SAXException, IOException {
         removeAllChildren();
