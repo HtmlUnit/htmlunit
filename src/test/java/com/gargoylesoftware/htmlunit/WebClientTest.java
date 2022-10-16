@@ -16,10 +16,6 @@ package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.util.Arrays.asList;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.fail;
 
@@ -2547,16 +2543,28 @@ public class WebClientTest extends SimpleWebTestCase {
      */
     @Test
     public void closeToClearCache() throws Exception {
-        final Cache cache = createMock(Cache.class);
+        final CacheMock cache = new CacheMock();
         try (WebClient webClient = getWebClient()) {
             webClient.setCache(cache);
-            cache.clear();
-            expectLastCall().atLeastOnce();
-
-            replay(cache);
         }
-        verify(cache);
+
+        assertEquals(1, cache.getClearCallCount());
     }
+
+    private static final class CacheMock extends Cache {
+        private int clearCallCount_;
+
+        @Override
+        public void clear() {
+            clearCallCount_++;
+            super.clear();
+        }
+
+        public int getClearCallCount() {
+            return clearCallCount_;
+        }
+    }
+
 
     /**
      * @throws Exception if an error occurs
