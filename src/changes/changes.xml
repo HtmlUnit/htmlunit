@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.66.0" date="xxxx, 2022" description="Bugfixes, NumberFormat, HTMLMediaElement">
+            <action type="update" dev="rbri">
+                NamedNodeMap moved from com.gargoylesoftware.htmlunit.javascript to com.gargoylesoftware.htmlunit.javascript.host.
+            </action>
             <action type="add" dev="rbri" issue="504">
                 HTMLMediaElement.load() implemented as NoOp.
             </action>
