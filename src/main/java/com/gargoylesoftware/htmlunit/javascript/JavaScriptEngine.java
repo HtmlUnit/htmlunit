@@ -37,7 +37,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_TRIM_L
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.lang.reflect.Executable;
+import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -321,7 +321,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         }
 
         for (final ClassConfiguration config : jsConfig_.getAll()) {
-            final Executable jsConstructor = config.getJsConstructor();
+            final Member jsConstructor = config.getJsConstructor();
             final String jsClassName = config.getClassName();
             Scriptable prototype = prototypesPerJSName.get(jsClassName);
             final String hostClassSimpleName = config.getHostClassSimpleName();

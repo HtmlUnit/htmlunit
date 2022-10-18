@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WEBGL_CONTEXT_EVENT_CONSTANTS;
 
-import java.lang.reflect.Executable;
 import java.lang.reflect.Member;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
@@ -49,7 +48,7 @@ public class RecursiveFunctionObject extends FunctionObject {
      * @param scope the enclosing scope of function
      * @param browserVersion the browserVersion
      */
-    public RecursiveFunctionObject(final String name, final Executable methodOrConstructor,
+    public RecursiveFunctionObject(final String name, final Member methodOrConstructor,
             final Scriptable scope, final BrowserVersion browserVersion) {
         super(name, methodOrConstructor, scope);
         browserVersion_ = browserVersion;

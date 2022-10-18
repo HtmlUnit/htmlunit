@@ -19,6 +19,8 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
+import java.lang.reflect.Executable;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
 
@@ -205,4 +207,11 @@ public class ArchitectureTest {
     public static final ArchRule jsToString = methods()
             .that().areAnnotatedWith(JsxFunction.class)
             .should().haveNameNotMatching("toString");
+
+    /**
+     * Make sure to not use java.lang.reflect.Executable.
+     */
+    @ArchTest
+    public static final ArchRule android7 = noClasses()
+            .should().dependOnClassesThat().haveFullyQualifiedName(Executable.class.getName());
 }

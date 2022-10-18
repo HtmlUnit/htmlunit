@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
-import java.lang.reflect.Executable;
+import java.lang.reflect.Member;
 
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -29,7 +29,7 @@ class HiddenFunctionObject extends FunctionObject {
     /**
      * Constructor.
      */
-    HiddenFunctionObject(final String name, final Executable methodOrConstructor, final Scriptable scope) {
+    HiddenFunctionObject(final String name, final Member methodOrConstructor, final Scriptable scope) {
         super(name, methodOrConstructor, scope);
     }
 
