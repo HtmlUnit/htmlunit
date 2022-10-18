@@ -38,7 +38,10 @@ public class WebResponseMock extends WebResponse {
     public WebResponseMock(final WebRequest request, final Map<String, String> headers) {
         super(null, request, 0);
 
-        if (headers != null) {
+        if (headers == null) {
+            headers_ = new HashMap<>();
+        }
+        else {
             headers_ = headers;
         }
     }
