@@ -83,7 +83,7 @@ You can start here:
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
 
-## Latest CI build
+## Last CI build
 The latest builds are available from our
 [Jenkins CI build server][2]
 
