@@ -526,7 +526,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setHTML(),setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            FF = "after(),animate(),append(),assignedSlot,attachShadow(),attributes,before(),childElementCount,"
+            FF = "after(),animate(),append(),assignedSlot,attachShadow(),attributes,before(),checkVisibility(),"
+                + "childElementCount,"
                 + "children,classList,className,clientHeight,clientLeft,clientTop,clientWidth,closest(),"
                 + "constructor(),firstElementChild,getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
@@ -6178,9 +6179,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "constructor(),content,httpEquiv,name,scheme",
-            CHROME = "constructor(),content,httpEquiv,media,name,scheme",
-            EDGE = "constructor(),content,httpEquiv,media,name,scheme",
+    @Alerts(DEFAULT = "constructor(),content,httpEquiv,media,name,scheme",
+            FF_ESR = "constructor(),content,httpEquiv,name,scheme",
             IE = "charset,constructor,content,httpEquiv,name,scheme,url")
     public void meta() throws Exception {
         test("meta");
