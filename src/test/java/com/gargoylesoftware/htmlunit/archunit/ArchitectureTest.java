@@ -20,6 +20,7 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
 import java.lang.reflect.Executable;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
@@ -214,4 +215,12 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule android7 = noClasses()
             .should().dependOnClassesThat().haveFullyQualifiedName(Executable.class.getName());
+
+    /**
+     * Make sure to not use {@link ThreadLocal#withInitial(java.util.function.Supplier)}.
+     */
+    @ArchTest
+    public static final ArchRule android7ThreadLocalWithInitial = noClasses()
+            .should().callMethod(ThreadLocal.class, "withInitial", Supplier.class);
+
 }
