@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
-import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chrome;
-import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.edge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdge;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAndFirefox;
 import static com.gargoylesoftware.htmlunit.css.BrowserConfiguration.chromeAndEdgeAuto;
@@ -1409,7 +1407,7 @@ public final class StyleAttributes implements Serializable {
         INITIAL_VALUE("initialValue", "initial-value", chromeAndEdgeEmpty()),
 
         /** The style property {@code inlineSize}. */
-        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chrome("1240px"), edge("1239px")),
+        INLINE_SIZE("inlineSize", "inline-size", ff("1244px"), chromeAndEdge("1240px")),
 
         /** The style property {@code inline-size}. */
         INLINE_SIZE_("inline-size", "inline-size", ff("1244px")),
@@ -2386,7 +2384,7 @@ public final class StyleAttributes implements Serializable {
         MS_PERSPECTIVE("msPerspective", "-ms-perspective", ie("none")),
 
         /** The style property {@code msPerspectiveOrigin}. */
-        MS_PERSPECTIVE_ORIGIN("msPerspectiveOrigin", "-ms-perspective-origin", ie("620px 163.2px")),
+        MS_PERSPECTIVE_ORIGIN("msPerspectiveOrigin", "-ms-perspective-origin", ie("745.605px 163.2px")),
 
         /** The style property {@code msScrollChaining}. */
         MS_SCROLL_CHAINING("msScrollChaining", "-ms-scroll-chaining", ie("chained")),
@@ -2443,7 +2441,7 @@ public final class StyleAttributes implements Serializable {
         MS_TRANSFORM("msTransform", "-ms-transform", ie("none")),
 
         /** The style property {@code msTransformOrigin}. */
-        MS_TRANSFORM_ORIGIN("msTransformOrigin", "-ms-transform-origin", ie("620px 163.2px")),
+        MS_TRANSFORM_ORIGIN("msTransformOrigin", "-ms-transform-origin", ie("745.605px 163.2px")),
 
         /** The style property {@code msTransformStyle}. */
         MS_TRANSFORM_STYLE("msTransformStyle", "-ms-transform-style", ie("flat")),
@@ -2538,7 +2536,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chromeAndEdge("rgb(0, 0, 0) none 0px"), ie(""),
-                ff("rgb(0, 0, 0) none 0px")),
+                ffEsr("rgb(0, 0, 0) none 0px"), ffLatest("rgb(0, 0, 0) 0px")),
 
         /** The style property {@code outlineColor}. */
         OUTLINE_COLOR("outlineColor", "outline-color", ie("transparent"), chromeAndEdge("rgb(0, 0, 0)"),
@@ -2757,7 +2755,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code perspectiveOrigin}. */
         PERSPECTIVE_ORIGIN("perspectiveOrigin", "perspective-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chrome("620px 162px"), edge("619.5px 162px")),
+                ff("622px 172.5px"), ie("745.605px 163.2px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code perspective-origin}. */
         PERSPECTIVE_ORIGIN_("perspective-origin", "perspective-origin", ff("622px 172.5px")),
@@ -3439,7 +3437,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
-                ff("622px 172.5px"), ie("620px 163.2px"), chrome("620px 162px"), edge("619.5px 162px")),
+                ff("622px 172.5px"), ie("745.605px 163.2px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code transform-origin}. */
         TRANSFORM_ORIGIN_("transform-origin", "transform-origin", ff("622px 172.5px")),
@@ -4065,7 +4063,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_LOGICAL_HEIGHT("webkitLogicalHeight", "webkit-logical-height", chromeAndEdge("324px")),
 
         /** The style property {@code webkitLogicalWidth}. */
-        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chrome("1240px"), edge("1239px")),
+        WEBKIT_LOGICAL_WIDTH("webkitLogicalWidth", "webkit-logical-width", chromeAndEdge("1240px")),
 
         /** The style property {@code webkitMarginAfter}. */
         WEBKIT_MARGIN_AFTER("webkitMarginAfter", "webkit-margin-after", chromeAndEdge("0px")),
@@ -4241,7 +4239,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN("webkitPerspectiveOrigin", "webkit-perspective-origin",
-                ff("622px 172.5px"), chrome("620px 162px"), edge("619.5px 162px")),
+                ff("622px 172.5px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code WebkitPerspectiveOrigin}. */
         WEBKIT_PERSPECTIVE_ORIGIN_("WebkitPerspectiveOrigin", "webkit-perspective-origin",
@@ -4369,7 +4367,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN("webkitTransformOrigin", "webkit-transform-origin",
-                ff("622px 172.5px"), chrome("620px 162px"), edge("619.5px 162px")),
+                ff("622px 172.5px"), chromeAndEdge("620px 162px")),
 
         /** The style property {@code WebkitTransformOrigin}. */
         WEBKIT_TRANSFORM_ORIGIN_("WebkitTransformOrigin", "webkit-transform-origin",

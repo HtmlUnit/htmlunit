@@ -690,7 +690,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            FF = "animate(),append(),attachShadow(),attributes,childElementCount,children,classList,className,"
+            FF = "animate(),append(),attachShadow(),attributes,checkVisibility(),"
+                + "childElementCount,children,classList,className,"
                 + "clientHeight,clientLeft,clientTop,clientWidth,closest(),firstElementChild,getAnimations(),"
                 + "getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
                 + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
@@ -840,7 +841,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setHTML(),setPointerCapture(),"
                 + "shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            FF = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),classList,className,clientHeight,"
+            FF = "after(),animate(),assignedSlot,attachShadow(),attributes,before(),"
+                + "checkVisibility(),classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),getAnimations(),getAttribute(),getAttributeNames(),"
                 + "getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
@@ -2513,9 +2515,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "content,httpEquiv,name,scheme",
-            CHROME = "content,httpEquiv,media,name,scheme",
-            EDGE = "content,httpEquiv,media,name,scheme",
+    @Alerts(DEFAULT = "content,httpEquiv,media,name,scheme",
+            FF_ESR = "content,httpEquiv,name,scheme",
             IE = "charset,content,httpEquiv,name,scheme,url")
     public void meta() throws Exception {
         test("meta");

@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.66.0" date="xxxx, 2022" description="Bugfixes, NumberFormat, HTMLMediaElement">
+        <release version="2.66.0" date="xxxx, 2022" description="Chrome/Edge 106, Firefox 106, Bugfixes, NumberFormat, HTMLMediaElement">
             <action type="update" dev="rbri">
                 NamedNodeMap moved from com.gargoylesoftware.htmlunit.javascript to com.gargoylesoftware.htmlunit.javascript.host.
             </action>

@@ -37,7 +37,6 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", ""},
-            FF = {"undefined", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "undefined", "undefined"},
             FF_ESR = {"undefined", "text/html; charset=utf-8",
                       HttpHeader.CONTENT_TYPE, "", "", "undefined", "undefined"},
             IE = {"", "text/html; charset=utf-8", HttpHeader.CONTENT_TYPE, "", "", "", "undefined"})
@@ -71,7 +70,6 @@ public class HTMLMetaElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "only screen and (max-width: 600px)",
-            FF = "undefined",
             FF_ESR = "undefined",
             IE = "undefined")
     public void media() throws Exception {
