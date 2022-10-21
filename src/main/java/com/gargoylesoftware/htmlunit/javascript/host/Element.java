@@ -258,7 +258,7 @@ public class Element extends Node {
         }
         else {
             collection.setIsMatchingPredicate(
-                    nodeToMatch -> {
+                    (Predicate<DomNode> & Serializable) nodeToMatch -> {
                         if (caseSensitive) {
                             return searchTagName.equals(nodeToMatch.getNodeName());
                         }
