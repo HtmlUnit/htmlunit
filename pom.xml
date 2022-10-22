@@ -31,7 +31,7 @@
         <htmlunitxpath.version>2.66.0-SNAPSHOT</htmlunitxpath.version>
 
         <htmlunitdriver.version>4.5.0</htmlunitdriver.version>
-        <selenium.version>4.5.0</selenium.version>
+        <selenium.version>4.5.2</selenium.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.49.v20220914</jetty.version>
@@ -42,7 +42,7 @@
         <spotbugs.version>4.7.3</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
         <archunit.version>1.0.0</archunit.version>
-        <dependencycheck.version>7.2.1</dependencycheck.version>
+        <dependencycheck.version>7.3.0</dependencycheck.version>
     </properties>
 
     <build>
@@ -1251,7 +1251,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.9.0</version>
+            <version>3.9.3</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
