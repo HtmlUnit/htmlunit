@@ -28,6 +28,9 @@
                 FunctionWrapper has to be serializable.
             </action>
             <action type="update" dev="rbri">
+                Avoid usage of ThreadLocal#withInitial for Android 7.
+            </action>
+            <action type="update" dev="rbri">
                 NamedNodeMap moved from com.gargoylesoftware.htmlunit.javascript to com.gargoylesoftware.htmlunit.javascript.host.
             </action>
             <action type="add" dev="rbri" issue="504">
