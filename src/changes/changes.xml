@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.66.0" date="xxxx, 2022" description="Chrome/Edge 106, Firefox 106, Bugfixes, NumberFormat, HTMLMediaElement">
+        <release version="2.66.0" date="October 22, 2022" description="Chrome/Edge 106, Firefox 106, Bugfixes, NumberFormat, HTMLMediaElement">
             <action type="fix" dev="rbri">
                 core-js: RegEx - fix the error message in case the quantifier maximum (second value) is smaller than the minimum (first value)
             </action>
