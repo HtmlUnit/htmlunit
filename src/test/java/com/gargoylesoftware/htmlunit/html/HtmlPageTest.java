@@ -1345,6 +1345,35 @@ public class HtmlPageTest extends SimpleWebTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serializationStaticDomNodeList() throws Exception {
+        final String content =
+              "<html><body>\n"
+            + "<div id='myId'>Hello there!</div>\n"
+            + "<form name='f' id='f'></form>\n"
+            + "<script>var y = document.querySelectorAll('*');</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page1 = loadPage(content);
+        final byte[] bytes = SerializationUtils.serialize(page1);
+
+        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+
+        final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
+        final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
+        while (iterator1.hasNext()) {
+            assertTrue(iterator2.hasNext());
+            final HtmlElement element1 = iterator1.next();
+            final HtmlElement element2 = iterator2.next();
+            assertEquals(element1.getNodeName(), element2.getNodeName());
+        }
+        assertFalse(iterator2.hasNext());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
+    }
+
+    /**
      * Verifies that a cloned HtmlPage has its own "idMap_".
      * @throws Exception if the test fails
      */
