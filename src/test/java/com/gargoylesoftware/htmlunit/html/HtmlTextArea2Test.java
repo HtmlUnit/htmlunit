@@ -43,26 +43,27 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByClick() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.value = 'newValue';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.getElementById('testReset').click;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.defaultValue = 'newDefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -72,7 +73,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -81,26 +82,27 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Test
     @Alerts({"-", "-", "newValue-", "newValue-", "newValue-newDefault", "newValue-newDefault"})
     public void resetByJS() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.value = 'newValue';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.defaultValue = 'newDefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    document.forms[0].reset;\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -109,7 +111,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -119,19 +121,21 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"-", "default-default", "some text-default", "some text-newdefault"},
             IE = {"-", "-default", "some text-default", "some text-newdefault"})
     public void defaultValue() throws Exception {
-        final String html = "<!DOCTYPE HTML>\n<html><head><title>foo</title>\n"
+        final String html = "<!DOCTYPE HTML>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.defaultValue = 'default';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
 
             + "    text.value = 'some text';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
             + "    text.defaultValue = 'newdefault';\n"
-            + "    alert(text.value + '-' + text.defaultValue);\n"
+            + "    log(text.value + '-' + text.defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -140,7 +144,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -150,7 +154,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
     public void defaultValue2() throws Exception {
         final String html
-            = "<html><head><title>foo</title>\n"
+            = "<html><head>\n"
             + "<script>\n"
             + "  function test() {\n"
             + "    alert(document.getElementById('textArea1').defaultValue);\n"
@@ -162,6 +166,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<p>html snippet</p>\n"
             + "</textarea>\n"
             + "</form></body></html>";
+
         loadPageWithAlerts2(html);
     }
 
@@ -172,14 +177,15 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "7",
             IE = "textLength not available")
     public void textLength() throws Exception {
-        final String html = "<html><head><title>foo</title>\n"
+        final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var text = document.getElementById('testId');\n"
             + "    if(text.textLength) {\n"
-            + "      alert(text.textLength);\n"
+            + "      log(text.textLength);\n"
             + "    } else {\n"
-            + "      alert('textLength not available');\n"
+            + "      log('textLength not available');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -189,7 +195,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -200,8 +206,9 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
     public void selection() throws Exception {
         final String html =
               "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(getSelection(document.getElementById('text1')).length);\n"
+            + "    log(getSelection(document.getElementById('text1')).length);\n"
             + "  }\n"
             + "  function getSelection(element) {\n"
             + "    return element.value.substring(element.selectionStart, element.selectionEnd);\n"
@@ -210,7 +217,8 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <textarea id='text1'></textarea>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -248,18 +256,20 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myTextInput'>Bonjour</textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.value = 'Hello there';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.selectionStart = " + selectionStart + ";\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.selectionEnd = " + selectionEnd + ";\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -273,27 +283,29 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myTextInput'>Hello</textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var input = document.getElementById('myTextInput');\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.selectionStart = 4;\n"
             + "  input.selectionEnd = 5;\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "  input.value = 'abcdefghif';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.value = 'abcd';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
 
             + "  input.selectionStart = 0;\n"
             + "  input.selectionEnd = 4;\n"
 
             + "  input.value = 'a';\n"
-            + "  alert(input.selectionStart + ',' + input.selectionEnd);\n"
+            + "  log(input.selectionStart + ',' + input.selectionEnd);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -436,30 +448,32 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<textarea id='myTextComment'><!--comment-->2</textarea>\n"
             + "<textarea id='myTextCommentOnly'><!--comment--></textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var text = document.getElementById('myText');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
             + "  text.value = 'a';\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  text = document.getElementById('myTextEmpty');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
             + "  text.value = 'b';\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  text = document.getElementById('myTextComment');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
             + "  text.value = 'c';\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  text = document.getElementById('myTextCommentOnly');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
             + "  text.value = 'd';\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -472,21 +486,23 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myText'></textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var text = document.getElementById('myText');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  var txt = document.createTextNode('xyz');\n"
             + "  text.appendChild(txt);\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
 
             + "  text.value = 'a';\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -500,22 +516,24 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myText'></textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var text = document.getElementById('myText');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  var span = document.createElement('span');\n"
             + "  span.innerHTML = '123';\n"
             + "  text.appendChild(span);\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
 
             + "  text.value = 'a';\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -529,27 +547,29 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myText'></textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var text = document.getElementById('myText');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  var span = document.createElement('span');\n"
             + "  span.innerHTML = '123';\n"
             + "  text.appendChild(span);\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
 
             + "  var txt = document.createTextNode('xyz');\n"
             + "  text.appendChild(txt);\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
 
             + "  text.value = 'a';\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -562,21 +582,23 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "<body>\n"
             + "<textarea id='myText'></textarea>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  var text = document.getElementById('myText');\n"
-            + "  alert(text.value);\n"
+            + "  log(text.value);\n"
 
             + "  var comment = document.createComment('comment');\n"
             + "  text.appendChild(comment);\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
 
             + "  text.value = 'a';\n"
-            + "  alert(text.value);\n"
-            + "  alert(text.childNodes.length);\n"
+            + "  log(text.value);\n"
+            + "  log(text.childNodes.length);\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -589,6 +611,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    debug(document.getElementById('e1'));\n"
             + "    debug(document.getElementById('e2'));\n"
@@ -597,10 +620,10 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "    var labels = document.getElementById('e4').labels;\n"
             + "    document.body.removeChild(document.getElementById('l4'));\n"
             + "    debug(document.getElementById('e4'));\n"
-            + "    alert(labels ? labels.length : labels);\n"
+            + "    log(labels ? labels.length : labels);\n"
             + "  }\n"
             + "  function debug(e) {\n"
-            + "    alert(e.labels ? e.labels.length : e.labels);\n"
+            + "    log(e.labels ? e.labels.length : e.labels);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -613,7 +636,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "  <label> this<textarea id='e4'>e 4</textarea></label><br>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
