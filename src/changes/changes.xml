@@ -12,7 +12,7 @@
                 core-js: RegEx - fix the error message in case the quantifier maximum (second value) is smaller than the minimum (first value)
             </action>
             <action type="fix" dev="RhinoTeam">
-                core-js: Remove usage of putIfAbsent() in the Hashmap class. This method does not exist on 
+                core-js: Remove usage of putIfAbsent() in the Hashmap class. This method does not exist on
                 many old Android releases and there's no real downside to removing it.
             </action>
             <action type="fix" dev="RhinoTeam">
