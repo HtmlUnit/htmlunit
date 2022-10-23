@@ -1034,7 +1034,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code lang}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code lang} or an empty string if that attribute isn't defined
@@ -1045,7 +1045,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code xml:lang}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code xml:lang} or an empty string if that attribute isn't defined
@@ -1056,7 +1056,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code dir}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code dir} or an empty string if that attribute isn't defined
@@ -1067,7 +1067,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onclick}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onclick} or an empty string if that attribute isn't defined
@@ -1078,7 +1078,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code ondblclick}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code ondblclick} or an empty string if that attribute isn't defined
@@ -1089,7 +1089,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onmousedown}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onmousedown} or an empty string if that attribute isn't defined
@@ -1100,7 +1100,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onmouseup}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onmouseup} or an empty string if that attribute isn't defined
@@ -1111,7 +1111,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onmouseover}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onmouseover} or an empty string if that attribute isn't defined
@@ -1122,7 +1122,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onmousemove}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onmousemove} or an empty string if that attribute isn't defined
@@ -1133,7 +1133,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onmouseout}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onmouseout} or an empty string if that attribute isn't defined
@@ -1144,7 +1144,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onkeypress}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onkeypress} or an empty string if that attribute isn't defined
@@ -1155,7 +1155,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onkeydown}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onkeydown} or an empty string if that attribute isn't defined
@@ -1166,7 +1166,7 @@ public abstract class HtmlElement extends DomElement {
 
     /**
      * Returns the value of the attribute {@code onkeyup}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onkeyup} or an empty string if that attribute isn't defined

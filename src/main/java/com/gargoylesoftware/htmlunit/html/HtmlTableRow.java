@@ -87,7 +87,7 @@ public class HtmlTableRow extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
@@ -99,7 +99,7 @@ public class HtmlTableRow extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code char}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
@@ -111,7 +111,7 @@ public class HtmlTableRow extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code charoff}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
@@ -123,7 +123,7 @@ public class HtmlTableRow extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code valign}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
@@ -143,7 +143,7 @@ public class HtmlTableRow extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code bgcolor}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}

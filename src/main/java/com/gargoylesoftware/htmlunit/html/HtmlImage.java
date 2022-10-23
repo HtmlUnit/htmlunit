@@ -323,7 +323,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code src}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
@@ -353,7 +353,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code alt}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
@@ -364,7 +364,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -375,7 +375,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code longdesc}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
@@ -386,7 +386,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code height}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height} or an empty string if that attribute isn't defined
@@ -397,7 +397,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code width}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
@@ -408,7 +408,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code usemap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap} or an empty string if that attribute isn't defined
@@ -419,7 +419,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code ismap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code ismap} or an empty string if that attribute isn't defined
@@ -430,7 +430,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
@@ -441,7 +441,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code border}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border} or an empty string if that attribute isn't defined
@@ -452,7 +452,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code hspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hspace} or an empty string if that attribute isn't defined
@@ -463,7 +463,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code vspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code vspace} or an empty string if that attribute isn't defined

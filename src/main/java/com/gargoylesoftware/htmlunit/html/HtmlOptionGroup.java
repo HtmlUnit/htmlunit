@@ -72,7 +72,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
     /**
      * Returns the value of the attribute {@code label}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
@@ -83,7 +83,7 @@ public class HtmlOptionGroup extends HtmlElement implements DisabledElement {
 
     /**
      * Sets the value of the attribute {@code label}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @param newLabel the value of the attribute {@code label}

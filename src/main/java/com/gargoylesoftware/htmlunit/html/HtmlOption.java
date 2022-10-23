@@ -156,7 +156,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
     /**
      * Returns the value of the attribute {@code selected}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code selected}
@@ -203,7 +203,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
     /**
      * Returns the value of the attribute {@code label}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code label} or an empty string if that attribute isn't defined
@@ -214,7 +214,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
     /**
      * Sets the value of the attribute {@code label}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @param newLabel the value of the attribute {@code label}
@@ -225,7 +225,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
     /**
      * Returns the value of the attribute {@code value}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      * @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-value-OPTION">
      * initial value if value attribute is not set</a>
@@ -241,7 +241,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
 
     /**
      * Sets the value of the attribute {@code value}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @param newValue the value of the attribute {@code value}

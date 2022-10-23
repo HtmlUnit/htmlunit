@@ -64,7 +64,7 @@ public class HtmlMeta extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code http-equiv}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code http-equiv}
@@ -76,7 +76,7 @@ public class HtmlMeta extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
@@ -88,7 +88,7 @@ public class HtmlMeta extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code content}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code content}
@@ -100,7 +100,7 @@ public class HtmlMeta extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code scheme}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scheme}

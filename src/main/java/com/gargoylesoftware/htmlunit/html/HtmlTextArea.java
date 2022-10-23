@@ -273,7 +273,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -284,7 +284,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code rows}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rows} or an empty string if that attribute isn't defined
@@ -295,7 +295,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code cols}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code cols} or an empty string if that attribute isn't defined
@@ -322,7 +322,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code readonly}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code readonly} or an empty string if that attribute isn't defined
@@ -333,7 +333,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
@@ -344,7 +344,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code accesskey}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
@@ -355,7 +355,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
@@ -366,7 +366,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
@@ -377,7 +377,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code onselect}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onselect} or an empty string if that attribute isn't defined
@@ -388,7 +388,7 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
 
     /**
      * Returns the value of the attribute {@code onchange}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined

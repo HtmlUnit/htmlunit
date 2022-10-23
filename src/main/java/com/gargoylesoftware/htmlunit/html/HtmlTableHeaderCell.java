@@ -46,7 +46,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code abbr}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code abbr}
@@ -58,7 +58,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code axis}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code axis}
@@ -70,7 +70,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code headers}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code headers}
@@ -82,7 +82,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code scope}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scope}
@@ -94,7 +94,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code rowspan}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rowspan}
@@ -106,7 +106,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code colspan}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code colspan}
@@ -118,7 +118,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
@@ -130,7 +130,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code char}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code char}
@@ -142,7 +142,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code charoff}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charoff}
@@ -154,7 +154,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code valign}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code valign}
@@ -166,7 +166,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code nowrap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code nowrap}
@@ -178,7 +178,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code bgcolor}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor}
@@ -190,7 +190,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code width}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
@@ -202,7 +202,7 @@ public class HtmlTableHeaderCell extends HtmlTableCell {
 
     /**
      * Returns the value of the attribute {@code height}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height}

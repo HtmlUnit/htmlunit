@@ -230,7 +230,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -241,7 +241,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code value}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
@@ -270,7 +270,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type} or the default value if that attribute isn't defined
@@ -295,7 +295,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code disabled}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code disabled} or an empty string if that attribute isn't defined
@@ -307,7 +307,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
@@ -318,7 +318,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code accesskey}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
@@ -329,7 +329,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
@@ -340,7 +340,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined

@@ -80,7 +80,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code declare}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code declare}
@@ -92,7 +92,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code classid}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code classid}
@@ -104,7 +104,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute "codebase". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute "codebase"
@@ -116,7 +116,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code data}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code data}
@@ -128,7 +128,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
@@ -140,7 +140,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute "codetype". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute "codetype"
@@ -152,7 +152,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code archive}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code archive}
@@ -164,7 +164,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code standby}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code standby}
@@ -176,7 +176,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code height}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height}
@@ -188,7 +188,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code width}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width}
@@ -200,7 +200,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code usemap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap}
@@ -212,7 +212,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name}
@@ -224,7 +224,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex}
@@ -236,7 +236,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
@@ -248,7 +248,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code border}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border}
@@ -260,7 +260,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code hspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hspace}
@@ -272,7 +272,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
 
     /**
      * Returns the value of the attribute {@code vspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code vspace}
