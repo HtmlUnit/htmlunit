@@ -50,12 +50,14 @@ public class History2Test extends WebDriverTestCase {
     @Test
     @Alerts("here")
     public void goShouldIgnoreOutOfBoundIndex() throws Exception {
-        final String html = "<html><body><script>\n"
+        final String html = "<html><body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "history.go(1);\n"
-                + "alert('here');\n"
+                + "log('here');\n"
                 + "</script></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
 
@@ -67,18 +69,18 @@ public class History2Test extends WebDriverTestCase {
     public void pushStateSimple() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "<title></title>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    if (!window.history.pushState) { log('no pushState'); return }\n"
                 + "    var stateObj = { hi: 'there' };\n"
                 + "    window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
                 + "  }\n"
 
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
-                + "    alert(e);\n"
-                + "    alert(e.state);\n"
+                + "    log(e);\n"
+                + "    log(e.state);\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -94,7 +96,7 @@ public class History2Test extends WebDriverTestCase {
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
             driver.navigate().back();
         }
-        verifyAlerts(driver, expectedAlerts);
+        verifyTitle2(driver, expectedAlerts);
     }
 
     /**
@@ -572,15 +574,19 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("undefined")
     public void previous() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "<a name='itemZero' href='' onclick='alert(history.previous); return false;'>item zero</a>\n"
+                + "<a name='itemZero' href='' onclick='log(history.previous); return false;'>item zero</a>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -592,15 +598,19 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("undefined")
     public void current() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "<a name='itemZero' href='' onclick='alert(history.current); return false;'>item zero</a>\n"
+                + "<a name='itemZero' href='' onclick='log(history.current); return false;'>item zero</a>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -612,15 +622,19 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("undefined")
     public void next() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "<a name='itemZero' href='' onclick='alert(history.next); return false;'>item zero</a>\n"
+                + "<a name='itemZero' href='' onclick='log(history.next); return false;'>item zero</a>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -632,15 +646,19 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("undefined")
     public void item() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "<a name='itemZero' href='' onclick='alert(history.item); return false;'>item zero</a>\n"
+                + "<a name='itemZero' href='' onclick='log(history.item); return false;'>item zero</a>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("itemZero")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -676,15 +694,19 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("undefined")
     public void arrayAccess() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
-                + "<a name='arrayAccess' href='' onclick='alert(history[0]);return false;'>array access</a><br>\n"
+                + "<a name='arrayAccess' href='' onclick='log(history[0]);return false;'>array access</a><br>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("arrayAccess")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -694,14 +716,15 @@ public class History2Test extends WebDriverTestCase {
     @Alerts("null")
     public void state() throws Exception {
         final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(history.state);\n"
+                + "    log(history.state);\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -713,6 +736,7 @@ public class History2Test extends WebDriverTestCase {
             IE = {"back", "forward", "go", "length", "pushState", "replaceState", "state"})
     public void properties() throws Exception {
         final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var props = [];\n"
                 + "    var i = 0;\n"
@@ -721,14 +745,14 @@ public class History2Test extends WebDriverTestCase {
                 + "    }\n"
                 + "    props.sort();\n"
                 + "    for (i = 0; i < props.length; i++) {\n"
-                + "      alert(props[i]);\n"
+                + "      log(props[i]);\n"
                 + "    }\n"
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -770,30 +794,31 @@ public class History2Test extends WebDriverTestCase {
             IE = {"undefined", "manual", "auto", "MaNUaL", "unknown", "undefined"})
     public void scrollRestoration() throws Exception {
         final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "    history.scrollRestoration = 'manual';\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "    history.scrollRestoration = 'auto';\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "    history.scrollRestoration = 'MaNUaL';\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "    history.scrollRestoration = 'unknown';\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "    history.scrollRestoration = undefined;\n"
-                + "    alert(history.scrollRestoration);\n"
+                + "    log(history.scrollRestoration);\n"
 
                 + "  }\n"
                 + "</script></head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
