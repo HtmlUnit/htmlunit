@@ -38,22 +38,25 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = {"102", "111", "111", "160", "97", "110", "100", "160", "102", "111", "111"},
             IE = "error")
     public void optionText() throws Exception {
-        final String content = "<html><head><title>foo</title><script>\n"
+        final String content = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
             + "    var expr = 'string(//option)';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
             + "    var value = result.stringValue;\n"
             + "    for (var i = 0; i < value.length; i++) {\n"
-            + "      alert(value.charCodeAt(i));\n"
+            + "      log(value.charCodeAt(i));\n"
             + "    }\n"
-            + "  } catch (e) {alert('error')}\n"
+            + "  } catch (e) {log('error')}\n"
             + "}\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <select name='test'><option value='1'>foo&nbsp;and&nbsp;foo</option></select>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(content);
+        loadPageVerifyTitle2(content);
     }
 
     /**
@@ -296,6 +299,36 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             IE = "error")
     public void substringNegativeStartWithLength() throws Exception {
         compareStringValue("substring(\"HtmlUnit\", -50, 20)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "'Unit'",
+            IE = "error")
+    public void substringAfter() throws Exception {
+        compareStringValue("substring-after(\"HtmlUnit\", \"tml\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "'Html'",
+            IE = "error")
+    public void substringBefore() throws Exception {
+        compareStringValue("substring-before(\"HtmlUnit\", \"Uni\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "error")
+    public void not() throws Exception {
+        compareBooleanValue("not(\"HtmlUnit\")");
     }
 
     /**
