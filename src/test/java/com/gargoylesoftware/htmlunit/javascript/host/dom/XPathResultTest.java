@@ -351,4 +351,149 @@ public class XPathResultTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "not boolean", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeAny() throws Exception {
+        emptySetType("XPathResult.ANY_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "NaN", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeNumber() throws Exception {
+        emptySetType("XPathResult.NUMBER_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "not boolean", "not number", "", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeString() throws Exception {
+        emptySetType("XPathResult.STRING_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "false", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeBoolean() throws Exception {
+        emptySetType("XPathResult.BOOLEAN_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "not boolean", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeUnorderedNodeIterator() throws Exception {
+        emptySetType("XPathResult.UNORDERED_NODE_ITERATOR_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"5", "not boolean", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeOrderedNodeIterator() throws Exception {
+        emptySetType("XPathResult.ORDERED_NODE_ITERATOR_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"6", "not boolean", "not number", "not string", "not node", "0"},
+            IE = "evaluate not supported")
+    public void emptySetTypeUnorderedNodeSnapshot() throws Exception {
+        emptySetType("XPathResult.UNORDERED_NODE_SNAPSHOT_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"7", "not boolean", "not number", "not string", "not node", "0"},
+            IE = "evaluate not supported")
+    public void emptySetTypeOrderedNodeSnapshot() throws Exception {
+        emptySetType("XPathResult.ORDERED_NODE_SNAPSHOT_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"8", "not boolean", "not number", "not string", "null", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeAnyOrderedNode() throws Exception {
+        emptySetType("XPathResult.ANY_UNORDERED_NODE_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"9", "not boolean", "not number", "not string", "null", "not length"},
+            IE = "evaluate not supported")
+    public void emptySetTypeFirstOrderedNode() throws Exception {
+        emptySetType("XPathResult.FIRST_ORDERED_NODE_TYPE");
+    }
+
+    private void emptySetType(final String type) throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    if (document.evaluate && XPathResult) {\n"
+            + "      try {\n"
+            + "        var result = document.evaluate('//unknown', document, null, "
+                            + type + ", null);\n"
+            + "        log(result.resultType);\n"
+            + "        try {\n"
+            + "          log(result.booleanValue);\n"
+            + "        } catch (e) { log('not boolean'); }\n"
+
+            + "        try {\n"
+            + "          log(result.numberValue);\n"
+            + "        } catch (e) { log('not number'); }\n"
+
+            + "        try {\n"
+            + "          log(result.stringValue);\n"
+            + "        } catch (e) { log('not string'); }\n"
+
+            + "        try {\n"
+            + "          log(result.singleNodeValue);\n"
+            + "        } catch (e) { log('not node'); }\n"
+
+            + "        try {\n"
+            + "          log(result.snapshotLength);\n"
+            + "        } catch (e) { log('not length'); }\n"
+            + "      } catch (e) { log(e); }\n"
+            + "    } else {\n"
+            + "      log('evaluate not supported');\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div attr=\"false\">false</span>\n"
+            + "  <span attr=\"true\">true</span>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

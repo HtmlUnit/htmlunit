@@ -254,7 +254,15 @@ public class XPathResult extends HtmlUnitScriptable {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return Boolean.parseBoolean(asString());
+
+        if (result_.size() == 1) {
+            final Object o = result_.get(0);
+            if (o instanceof Boolean) {
+                return ((Boolean) o).booleanValue();
+            }
+        }
+
+        return result_.size() > 0;
     }
 
     /**
@@ -270,6 +278,10 @@ public class XPathResult extends HtmlUnitScriptable {
     }
 
     private String asString() {
+        if (result_.size() < 1) {
+            return "";
+        }
+
         final Object resultObj = result_.get(0);
         if (resultObj instanceof DomAttr) {
             return ((DomAttr) resultObj).getValue();
