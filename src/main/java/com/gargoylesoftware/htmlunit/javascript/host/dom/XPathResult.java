@@ -250,11 +250,11 @@ public class XPathResult extends HtmlUnitScriptable {
      * @return the value of this boolean result
      */
     @JsxGetter
-    public boolean isBooleanValue() {
+    public boolean getBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return !result_.isEmpty();
+        return Boolean.parseBoolean(asString());
     }
 
     /**

@@ -9,6 +9,12 @@
     <body>
         <release version="2.67.0" date="xxxx, 2022" description="Bugfixes">
             <action type="fix" dev="rbri">
+                XPathResult.booleanValue() fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                xpath: correct return value when substring() is used with a negative length
+            </action>
+            <action type="fix" dev="rbri">
                 xpath: fix error handling for invalid function arg count
             </action>
         </release>

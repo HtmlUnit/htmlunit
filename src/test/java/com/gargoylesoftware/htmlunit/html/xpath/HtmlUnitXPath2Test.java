@@ -214,10 +214,88 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "'adc'",
+            IE = "error")
+    public void translate() throws Exception {
+        compareStringValue("translate(\"abc\", \"b\", \"d\")");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "error")
+    public void trueTest() throws Exception {
+        compareBooleanValue("true()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "error")
+    public void falseTest() throws Exception {
+        compareBooleanValue("false()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "error")
+    public void booleanTest() throws Exception {
+        compareBooleanValue("boolean(7)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "error")
+    public void booleanTestFalse() throws Exception {
+        compareBooleanValue("boolean(0)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "b",
             IE = "error")
     public void number() throws Exception {
         compare("//p[@y=number(\"  13\t \")]");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "'tml'",
+            IE = "error")
+    public void substring() throws Exception {
+        compareStringValue("substring(\"HtmlUnit\", 2, 3)");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "''",
+            IE = "error")
+    public void substringWithNegativeLength() throws Exception {
+        compareStringValue("substring(\"HtmlUnit\", 2, -1)");
+    }
+
+    /** @throws Exception in case of problems */
+    @Test
+    @Alerts(DEFAULT = "''",
+            IE = "error")
+    public void substringNegativeStartWithLength() throws Exception {
+        compareStringValue("substring(\"HtmlUnit\", -50, 20)");
     }
 
     /**
@@ -237,7 +315,7 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  try {\n"
-            + "    var res = '';"
+            + "    var res = '';\n"
             + "    var expr = '" + xpath + "';\n"
             + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
             + "    while (node = result.iterateNext()) {\n"
@@ -257,4 +335,51 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
         loadPageVerifyTitle2(content);
     }
 
+    private void compareStringValue(final String xpath) throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';\n"
+            + "    var expr = '" + xpath + "';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    log(\"'\" + result.stringValue + \"'\");\n"
+            + "  } catch (e) {log('error')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <p id='a' x='1' y='7'></p>\n"
+            + "    <p id='b' y='13'></p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
+
+    private void compareBooleanValue(final String xpath) throws Exception {
+        final String content = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  try {\n"
+            + "    var res = '';\n"
+            + "    var expr = '" + xpath + "';\n"
+            + "    var result = document.evaluate(expr, document.documentElement, null, XPathResult.ANY_TYPE, null);\n"
+            + "    log(result.booleanValue);\n"
+            + "  } catch (e) {log('error')}\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div>\n"
+            + "    <p id='a' x='1' y='7'></p>\n"
+            + "    <p id='b' y='13'></p>\n"
+            + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(content);
+    }
 }
