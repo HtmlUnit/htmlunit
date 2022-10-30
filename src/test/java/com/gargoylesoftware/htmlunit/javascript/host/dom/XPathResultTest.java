@@ -453,6 +453,158 @@ public class XPathResultTest extends WebDriverTestCase {
     }
 
     private void emptySetType(final String type) throws Exception {
+        type("//unknown", type);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "false", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void zeroTypeBoolean() throws Exception {
+        typeBoolean("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void minusOneTypeBoolean() throws Exception {
+        typeBoolean("-1");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void infTypeBoolean() throws Exception {
+        typeBoolean("1.0 div 0.0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void minusInfTypeBoolean() throws Exception {
+        typeBoolean("-1.0 div 0.0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "true", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void stringTypeBoolean() throws Exception {
+        typeBoolean("\"abc\"");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "false", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptyStringTypeBoolean() throws Exception {
+        typeBoolean("\"\"");
+    }
+
+    private void typeBoolean(final String xpath) throws Exception {
+        type(xpath, "XPathResult.BOOLEAN_TYPE");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "0", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void zeroTypeNumber() throws Exception {
+        typeNumber("0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "Infinity", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void infTypeNumber() throws Exception {
+        typeNumber("1.0 div 0.0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "-Infinity", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void minusInfTypeNumber() throws Exception {
+        typeNumber("-1.0 div 0.0");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "NaN", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void stringTypeNumber() throws Exception {
+        typeNumber("\"abc\"");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "123.4", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void numberStringTypeNumber() throws Exception {
+        typeNumber("\"123.4\"");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"3", "false", "not number", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void emptyStringTypeNumber() throws Exception {
+        typeBoolean("\"\"");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "1", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void trueTypeNumber() throws Exception {
+        typeNumber("true()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "not boolean", "0", "not string", "not node", "not length"},
+            IE = "evaluate not supported")
+    public void falseTypeNumber() throws Exception {
+        typeNumber("false()");
+    }
+
+    private void typeNumber(final String xpath) throws Exception {
+        type(xpath, "XPathResult.NUMBER_TYPE");
+    }
+
+    private void type(final String xpath, final String type) throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
@@ -460,7 +612,7 @@ public class XPathResultTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    if (document.evaluate && XPathResult) {\n"
             + "      try {\n"
-            + "        var result = document.evaluate('//unknown', document, null, "
+            + "        var result = document.evaluate('" + xpath + "', document, null, "
                             + type + ", null);\n"
             + "        log(result.resultType);\n"
             + "        try {\n"
