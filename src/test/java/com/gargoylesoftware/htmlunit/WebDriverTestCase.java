@@ -1065,25 +1065,25 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final String... expectedAlerts) throws Exception {
         if (expectedAlerts.length == 0) {
             assertEquals("", driver.getTitle());
+            return driver;
         }
-        else {
-            final StringBuilder expected = new StringBuilder();
-            for (int i = 0; i < expectedAlerts.length; i++) {
-                expected.append(expectedAlerts[i]).append('§');
-            }
 
-            final String title = driver.getTitle();
-            try {
-                assertEquals(expected.toString(), title);
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i]).append('§');
+        }
+
+        final String title = driver.getTitle();
+        try {
+            assertEquals(expected.toString(), title);
+        }
+        catch (final AssertionError e) {
+            if (useRealBrowser() && StringUtils.isEmpty(title)) {
+                Thread.sleep(42);
+                assertEquals(expected.toString(), driver.getTitle());
+                return driver;
             }
-            catch (final AssertionError e) {
-                if (useRealBrowser() && StringUtils.isEmpty(title)) {
-                    Thread.sleep(42);
-                    assertEquals(expected.toString(), driver.getTitle());
-                    return driver;
-                }
-                throw e;
-            }
+            throw e;
         }
         return driver;
     }
