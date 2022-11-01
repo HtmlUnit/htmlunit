@@ -425,12 +425,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    try {\n"
             + "      document.forms[0].enctype = '" + enctype + "';\n"
-            + "      alert(document.forms[0].enctype);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(document.forms[0].encoding);\n"
+            + "      log(document.forms[0].enctype);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(document.forms[0].encoding);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -443,7 +444,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         driver.findElement(By.name("submit1")).click();
         assertTitle(driver, "Response");
@@ -466,12 +467,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    try {\n"
             + "      document.forms[0].encoding = '" + encoding + "';\n"
-            + "      alert(document.forms[0].encoding);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(document.forms[0].enctype);\n"
+            + "      log(document.forms[0].encoding);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(document.forms[0].enctype);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -484,7 +486,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         driver.findElement(By.name("submit1")).click();
         assertTitle(driver, "Response");
@@ -2113,7 +2115,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         final String page1 = "<html><body>\n"
             + "<form action='page2' id='theForm'><span id='foo'/></form>\n"
             + "<script>\n"
-            + LOG_TITLE_FUNCTION
             + "function listener(e) {\n"
             + "  alert('in listener');\n"
             + "}\n"

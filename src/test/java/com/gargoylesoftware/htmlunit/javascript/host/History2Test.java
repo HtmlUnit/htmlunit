@@ -115,6 +115,7 @@ public class History2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi: 'there' };\n"
@@ -131,8 +132,8 @@ public class History2Test extends WebDriverTestCase {
 
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
-                + "    alert(e);\n"
-                + "    alert(JSON.stringify(e.state));\n"
+                + "    log(e);\n"
+                + "    log(JSON.stringify(e.state));\n"
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
@@ -167,25 +168,29 @@ public class History2Test extends WebDriverTestCase {
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
         driver.navigate().back();
-        verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+        i = i + 4;
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
         assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
         driver.navigate().back();
-        verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+        i = i + 4;
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
         assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
         driver.navigate().forward();
-        verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+        i = i + 4;
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
         assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
         driver.navigate().forward();
-        verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+        i = i + 4;
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
         assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
@@ -214,6 +219,7 @@ public class History2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi: 'there' };\n"
@@ -230,9 +236,9 @@ public class History2Test extends WebDriverTestCase {
 
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
-                + "    alert(e);\n"
-                + "    alert(JSON.stringify(e.state));\n"
-                + "    alert(e.state == history.state);\n"
+                + "    log(e);\n"
+                + "    log(JSON.stringify(e.state));\n"
+                + "    log(e.state == history.state);\n"
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
@@ -268,29 +274,29 @@ public class History2Test extends WebDriverTestCase {
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
-            verifyAlerts(waitTime, driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = 6;
+            verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.navigate().back();
-            verifyAlerts(waitTime, driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 6;
+            verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
-            verifyAlerts(waitTime, driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 6;
+            verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.navigate().forward();
-            verifyAlerts(waitTime, driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 6;
+            verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
@@ -312,22 +318,23 @@ public class History2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    if (!window.history.pushState) { log('no pushState'); return }\n"
                 + "    try {\n"
                 + "      var stateObj = { hi: 'there' };\n"
                 + "      window.history.pushState(stateObj, 'page 2', 'bar.html');\n"
-                + "      alert(location.href.indexOf('bar.html') > -1);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(location.href.indexOf('bar.html') > -1);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
 
                 + "  function test2() {\n"
-                + "    if (!window.history.pushState) { alert('no pushState'); return }\n"
+                + "    if (!window.history.pushState) { log('no pushState'); return }\n"
                 + "    try {\n"
                 + "      var stateObj = { hi2: 'there2' };\n"
                 + "      window.history.pushState(stateObj, 'page 3', 'bar2.html');\n"
-                + "      alert(location.href.indexOf('bar2.html') > -1);\n"
-                + "    } catch(e) { alert('exception'); }\n"
+                + "      log(location.href.indexOf('bar2.html') > -1);\n"
+                + "    } catch(e) { log('exception'); }\n"
                 + "  }\n"
 
                 + "</script>\n"
@@ -340,12 +347,12 @@ public class History2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myId")).click();
-        verifyAlerts(driver, expectedAlerts[0]);
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, 1));
 
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
         assertEquals(URL_FIRST + "bar.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
         driver.findElement(By.id("myId2")).click();
-        verifyAlerts(driver, expectedAlerts[1]);
+        verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, 2));
 
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
         assertEquals(URL_FIRST + "bar2.html", ((JavascriptExecutor) driver).executeScript("return location.href"));
@@ -371,6 +378,7 @@ public class History2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi: 'there' };\n"
@@ -387,8 +395,8 @@ public class History2Test extends WebDriverTestCase {
 
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
-                + "    alert(e);\n"
-                + "    alert(JSON.stringify(e.state));\n"
+                + "    log(e);\n"
+                + "    log(JSON.stringify(e.state));\n"
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
@@ -423,13 +431,15 @@ public class History2Test extends WebDriverTestCase {
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
-            verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 4;
+            verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
-            verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 4;
+            verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
@@ -455,6 +465,7 @@ public class History2Test extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    if (window.history.pushState) {\n"
                 + "      var stateObj = { hi: 'there' };\n"
@@ -471,9 +482,9 @@ public class History2Test extends WebDriverTestCase {
 
                 + "  function popMe(event) {\n"
                 + "    var e = event ? event : window.event;\n"
-                + "    alert(e);\n"
-                + "    alert(JSON.stringify(e.state));\n"
-                + "    alert(e.state == history.state);\n"
+                + "    log(e);\n"
+                + "    log(JSON.stringify(e.state));\n"
+                + "    log(e.state == history.state);\n"
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
@@ -508,15 +519,15 @@ public class History2Test extends WebDriverTestCase {
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
-            verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 6;
+            verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
-            verifyAlerts(driver, expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++], expectedAlerts[i++],
-                    expectedAlerts[i++], expectedAlerts[i++]);
+            i = i + 6;
+            verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
             assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
@@ -668,23 +679,27 @@ public class History2Test extends WebDriverTestCase {
     @Alerts({"false", "false", "false", "false", "false", "false"})
     public void byIndex() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "</head>\n"
                 + "<body>\n"
                 + "<a name='hasNegativeOne' href='' onclick="
-                    + "'alert(\"-1\" in history);alert(-1 in history);return false;'>has negative one</a><br>\n"
+                    + "'log(\"-1\" in history);log(-1 in history);return false;'>has negative one</a><br>\n"
                 + "<a name='hasZero' href='' onclick="
-                    + "'alert(\"0\" in history);alert(0 in history);return false;'>has zero</a><br>\n"
+                    + "'log(\"0\" in history);log(0 in history);return false;'>has zero</a><br>\n"
                 + "<a name='hasPositiveOne' href='' onclick="
-                    + "'alert(\"1\" in history);alert(1 in history);return false;'>has positive one</a><br>\n"
+                    + "'log(\"1\" in history);log(1 in history);return false;'>has positive one</a><br>\n"
                 + "</body></html>\n";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.name("hasNegativeOne")).click();
-        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 2));
         driver.findElement(By.name("hasZero")).click();
-        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 2, 4));
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 4));
         driver.findElement(By.name("hasPositiveOne")).click();
-        verifyAlerts(driver, Arrays.copyOfRange(getExpectedAlerts(), 4, 6));
+        verifyTitle2(driver, Arrays.copyOfRange(getExpectedAlerts(), 0, 6));
     }
 
     /**
