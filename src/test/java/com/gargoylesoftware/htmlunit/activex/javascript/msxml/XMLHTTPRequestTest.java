@@ -165,7 +165,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"orsc:1", "opened\\s1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent 1", "opened 2", "sent 2"})
+            IE = {"orsc:1", "opened\\s1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent\\s1", "opened\\s2", "sent\\s2"})
     public void onreadystatechange_sync() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -190,7 +190,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "no\\sActiveX",
-            IE = {"orsc:1", "opened\\s1", "orsc:1", "sent 1", "orsc:2", "orsc:3", "orsc:4"})
+            IE = {"orsc:1", "opened\\s1", "orsc:1", "sent\\s1", "orsc:2", "orsc:3", "orsc:4"})
     public void onreadystatechange_async() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
