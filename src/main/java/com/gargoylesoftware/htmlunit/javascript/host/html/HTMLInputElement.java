@@ -226,7 +226,10 @@ public class HTMLInputElement extends HTMLElement {
                         newInput.setValue("");
                     }
                     else {
-                        newInput.setValue(input.getValue());
+                        final String originalValue = input.getValue();
+                        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
+                            newInput.setValue(originalValue);
+                        }
                     }
                 }
 
