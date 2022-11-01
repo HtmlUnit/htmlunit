@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  *
  * @author Ahmed Ashour
  * @author Frank Danek
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLMediaElementTest extends WebDriverTestCase {
@@ -171,19 +172,20 @@ public class HTMLMediaElementTest extends WebDriverTestCase {
     @Alerts({"[object HTMLAudioElement]", "done"})
     public void pause() throws Exception {
         final String html = ""
-                + "<html><head><title>foo</title>\n"
+                + "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var a = new Audio('1.mp3');\n"
-                + "    alert(a);\n"
+                + "    log(a);\n"
                 + "    a.pause();\n"
-                + "    alert('done');\n"
+                + "    log('done');\n"
                 + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

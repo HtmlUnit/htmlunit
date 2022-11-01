@@ -240,7 +240,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Hello\nworld\n")
+    @Alerts("Hello\\nworld\\n")
     public void value_ignoreFirstNewLine() throws Exception {
         value("\nHello\nworld\n");
     }
@@ -249,7 +249,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(" \nHello\nworld\n")
+    @Alerts("\\s\\nHello\\nworld\\n")
     public void value_spaceBeforeFirstNewLine() throws Exception {
         value(" \nHello\nworld\n");
     }
@@ -259,8 +259,9 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "    function doTest() {\n"
-            + "      alert(document.form1.textarea1.value);\n"
+            + "      log(document.form1.textarea1.value);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -271,23 +272,24 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({" foo \n bar ", " foo \n bar "})
+    @Alerts({"\\sfoo\\s\\n\\sbar\\s", "\\sfoo\\s\\n\\sbar\\s"})
     public void defaultValue() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "    function test() {\n"
             + "      var t = document.getElementById('textArea');\n"
-            + "      alert(t.defaultValue);\n"
-            + "      alert(t.value);\n"
+            + "      log(t.defaultValue);\n"
+            + "      log(t.value);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -297,7 +299,7 @@ public class HTMLTextAreaElementTest extends WebDriverTestCase {
             + "  </form>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
