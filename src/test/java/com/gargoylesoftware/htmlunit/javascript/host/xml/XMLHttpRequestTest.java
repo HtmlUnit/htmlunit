@@ -95,7 +95,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        log(request.readyState);\n"
@@ -1869,7 +1869,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "      var request;\n"
             + "      function testAsync() {\n"
             + "        request = new XMLHttpRequest();\n"
@@ -2465,7 +2465,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        log(request.responseType);\n"
@@ -2525,7 +2525,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', false);\n"
@@ -2604,7 +2604,7 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION
             + "      function testSync() {\n"
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', '" + URL_SECOND + "', true);\n"

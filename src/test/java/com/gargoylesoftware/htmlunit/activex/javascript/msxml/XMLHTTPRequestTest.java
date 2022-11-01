@@ -126,8 +126,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = "[object\\sObject]")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(xhr));\n");
     }
@@ -154,7 +154,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "undefined")
     public void onreadystatechange_created() throws Exception {
         property("onreadystatechange");
@@ -164,8 +164,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"orsc:1", "opened 1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent 1", "opened 2", "sent 2"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"orsc:1", "opened\\s1", "orsc:1", "orsc:2", "orsc:3", "orsc:4", "sent 1", "opened 2", "sent 2"})
     public void onreadystatechange_sync() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -189,8 +189,8 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"orsc:1", "opened 1", "orsc:1", "sent 1", "orsc:2", "orsc:3", "orsc:4"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"orsc:1", "opened\\s1", "orsc:1", "sent 1", "orsc:2", "orsc:3", "orsc:4"})
     public void onreadystatechange_async() throws Exception {
         final String test = ""
             + "xhr.onreadystatechange = onStateChange;\n"
@@ -209,7 +209,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "1", "4", "1", "4"})
     public void readyState_sync() throws Exception {
         property_lifecycleSync("readyState");
@@ -219,7 +219,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:1", "1:1", "2:2", "3:3", "4:4"})
     public void readyState_async() throws Exception {
         property_lifecycleAsync("readyState");
@@ -229,7 +229,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "exception-opened",
                   "<root/>",
@@ -243,7 +243,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:exception-async",
                   "1:exception-async",
                   "2:exception-async",
@@ -370,7 +370,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "",
                   "<root/>\\r\\n",
@@ -384,7 +384,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:", "1:", "2:", "3:", "4:<root/>\\r\\n"})
     public void responseXML_async() throws Exception {
         property_lifecycleAsync("responseXML.xml");
@@ -448,11 +448,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "<root/>\\r\\n")
     public void responseXML_contentTypeApplicationXML() throws Exception {
         final String html = ""
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -476,11 +476,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "<root>ol\u00E9</root>\\r\\n")
     public void responseXML_defaultEncodingIsUTF8() throws Exception {
         final String html = ""
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK
@@ -507,7 +507,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "exception-opened",
                   "200",
@@ -521,7 +521,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:exception-async",
                   "1:exception-async",
                   "2:exception-async",
@@ -535,7 +535,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "exception-opened",
                   "OK",
@@ -549,7 +549,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:exception-async",
                   "1:exception-async",
                   "2:exception-async",
@@ -563,9 +563,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"0:ex status ex text ex xml",
-                  "0:ex status ex text ex xml"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"0:ex\\sstatus\\sex\\stext\\sex\\sxml",
+                  "0:ex\\sstatus\\sex\\stext\\sex\\sxml"})
     public void abort_created() throws Exception {
         final String test = ""
             + "debugRequest(xhr);\n"
@@ -581,9 +581,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1:ex status ex text ",
-                  "0:ex status ex text ex xml"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"1:ex\\sstatus\\sex\\stext\\s",
+                  "0:ex\\sstatus\\sex\\stext\\sex\\sxml"})
     public void abort_opened() throws Exception {
         final String test = ""
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
@@ -600,9 +600,9 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"4:200 <root/> <root/>\\r\\n",
-                  "0:ex status ex text ex xml"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"4:200\\s<root/>\\s<root/>\\r\\n",
+                  "0:ex\\sstatus\\sex\\stext\\sex\\sxml"})
     public void abort_sentSync() throws Exception {
         final String test = ""
             + "xhr.open(\"GET\", \"" + URL_SECOND + "\", false);\n"
@@ -620,11 +620,11 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"1:ex status ex text ",
-                  "1:ex status ex text ",
-                  "2:ex status ex text ",
-                  "0:ex status ex text ex xml"})
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"1:ex\\sstatus\\sex\\stext\\s",
+                  "1:ex\\sstatus\\sex\\stext\\s",
+                  "2:ex\\sstatus\\sex\\stext\\s",
+                  "0:ex\\sstatus\\sex\\stext\\sex\\sxml"})
     // currently the started asynchronous request is not interrupted on abortion
     public void abort_sentAsync() throws Exception {
         final String test = ""
@@ -645,12 +645,12 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "exception-opened",
-                  "Date XYZ GMT\\r\\n"
-                      + "Content-Type: text/xml;charset=iso-8859-1\\r\\n"
-                      + "Transfer-Encoding: chunked\\r\\nServer: Jetty(XXX)\\r\\n\\r\\n"})
+                  "Date\\sXYZ\\sGMT\\r\\n"
+                      + "Content-Type:\\stext/xml;charset=iso-8859-1\\r\\n"
+                      + "Transfer-Encoding:\\schunked\\r\\nServer:\\sJetty(XXX)\\r\\n\\r\\n"})
     public void getAllResponseHeaders() throws Exception {
         final String test = ""
             // create
@@ -680,7 +680,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"exception-created",
                   "exception-opened",
                   "text/xml;charset=iso-8859-1",
@@ -1181,7 +1181,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"*/*",
                   "gzip, deflate",
                   "null",
@@ -1217,7 +1217,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"*/*",
                   "gzip, deflate",
                   "4",
@@ -1255,14 +1255,14 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "text/html,application/xhtml+xml,application/xml;"
                         + "q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                       "null", "null", "no ActiveX"},
+                       "null", "null", "no\\sActiveX"},
             EDGE = {"null", "text/html,application/xhtml+xml,application/xml;"
                         + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
-                    "null", "null", "no ActiveX"},
+                    "null", "null", "no\\sActiveX"},
             FF = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-                  "null", "null", "no ActiveX"},
+                  "null", "null", "no\\sActiveX"},
             FF_ESR = {"null", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-                      "null", "null", "no ActiveX"},
+                      "null", "null", "no\\sActiveX"},
             IE = {"bar",
                   "application/javascript",
                   "null",
@@ -1329,7 +1329,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {})
     public void setRequestHeader_contentLength() throws Exception {
         setRequestHeader_contentLength(null, null);
@@ -1432,7 +1432,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  var xhr;\n"
             + "  function test() {\n"
             + ACTIVEX_CHECK

@@ -44,8 +44,8 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = "[object\\sObject]")
     public void scriptableToString() throws Exception {
         tester("log(Object.prototype.toString.call(comment));\n");
     }
@@ -54,7 +54,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void attributes() throws Exception {
         property("attributes");
@@ -64,7 +64,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void baseName() throws Exception {
         property("baseName");
@@ -74,7 +74,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "0")
     public void childNodes() throws Exception {
         tester("log(comment.childNodes.length);\n");
@@ -84,7 +84,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"", "", "",
                   "exception-setNull",
                   "", "", "",
@@ -133,7 +133,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void dataType() throws Exception {
         property("dataType");
@@ -143,7 +143,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void definition() throws Exception {
         property("definition");
@@ -153,7 +153,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void firstChild() throws Exception {
         property("firstChild");
@@ -163,7 +163,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void lastChild() throws Exception {
         property("lastChild");
@@ -173,7 +173,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "0", "4", "9", "6"})
     public void length() throws Exception {
         final String test = ""
@@ -203,7 +203,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void namespaceURI() throws Exception {
         property("namespaceURI");
@@ -213,7 +213,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "#comment")
     public void nodeName() throws Exception {
         property("nodeName");
@@ -223,7 +223,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "8")
     public void nodeType() throws Exception {
         property("nodeType");
@@ -233,7 +233,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"", "", "",
                   "exception-setNull",
                   "", "", "",
@@ -282,7 +282,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void ownerDocument() throws Exception {
         tester("log(comment.ownerDocument === doc);\n");
@@ -314,7 +314,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void parentNode() throws Exception {
         tester("log(root === comment.parentNode);\n");
@@ -346,7 +346,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void prefix() throws Exception {
         property("prefix");
@@ -356,7 +356,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"", "", "",
                   "exception-setNull",
                   "", "", "",
@@ -405,7 +405,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"<!---->", "<!--##-->", "<!--text-->", "<!--text\\r\\ntext-->", "<!--##text##text##-->"})
     public void xml() throws Exception {
         final String test =
@@ -472,7 +472,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"myComment", "myComment-appended", "exception-appendNull", "myComment-appended", "myComment-appended\\n"})
     public void appendData() throws Exception {
         final String test = ""
@@ -498,7 +498,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"myComment", "myCommen", "myCen", "yCen",
                   "exception-deletePosNegative", "yCen",
                   "exception-deletePosTooHigh", "yCen",
@@ -546,7 +546,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"myComment", "myComment-b", "myCom-m-ment-b", "f-myCom-m-ment-b",
                   "exception-insertNull", "f-myCom-m-ment-b", "\\nf-myCom-m-ment-b",
                   "\\nf-myCom-m-ment-b",
@@ -599,7 +599,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"myComment", "myCommen-b", "myC-m-en-b", "f-yC-m-en-b",
                   "exception-replaceNull", "f-yCen-b", "f-y\\nn-b",
                   "exception-replacePosNegative", "f-y\\nn-b",
@@ -658,7 +658,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"myComment", "t", "myComment", "omm", "myComment", "m", "myComment",
                   "exception-substringPosNegative", "myComment",
                   "exception-substringPosTooHigh", "myComment",
@@ -714,7 +714,7 @@ public class XMLDOMCommentTest extends WebDriverTestCase {
 
     private void tester(final String test, final String xml) throws Exception {
         final String html = ""
-            + LOG_TITLE_NORMALIZE_FUNCTION
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callLoadXMLDOMDocumentFromURL("'second.xml'") + ";\n"
