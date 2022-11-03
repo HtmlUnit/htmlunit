@@ -646,7 +646,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "animate(),append(),ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
+    @Alerts(CHROME = "animate(),append(),ariaAtomic,ariaAutoComplete,"
+                + "ariaBrailleLabel,ariaBrailleRoleDescription,"
+                + "ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
                 + "ariaColSpan,ariaCurrent,ariaDescription,ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,"
                 + "ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLevel,ariaLive,ariaModal,ariaMultiLine,"
                 + "ariaMultiSelectable,ariaOrientation,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,"
@@ -668,7 +670,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setPointerCapture(),shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),"
                 + "webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            EDGE = "animate(),append(),ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
+            EDGE = "animate(),append(),ariaAtomic,ariaAutoComplete,"
+                + "ariaBrailleLabel,ariaBrailleRoleDescription,"
+                + "ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
                 + "ariaColSpan,ariaCurrent,ariaDescription,ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,"
                 + "ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLevel,ariaLive,ariaModal,ariaMultiLine,"
                 + "ariaMultiSelectable,ariaOrientation,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,"
@@ -799,7 +803,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "after(),animate(),ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
+    @Alerts(CHROME = "after(),animate(),ariaAtomic,ariaAutoComplete,"
+                + "ariaBrailleLabel,ariaBrailleRoleDescription,"
+                + "ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
                 + "ariaColSpan,ariaCurrent,ariaDescription,ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,"
                 + "ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLevel,ariaLive,ariaModal,ariaMultiLine,"
                 + "ariaMultiSelectable,ariaOrientation,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,"
@@ -820,7 +826,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),setHTML(),setPointerCapture(),"
                 + "shadowRoot,slot,tagName,toggleAttribute(),webkitMatchesSelector(),webkitRequestFullScreen(),"
                 + "webkitRequestFullscreen()",
-            EDGE = "after(),animate(),ariaAtomic,ariaAutoComplete,ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
+            EDGE = "after(),animate(),ariaAtomic,ariaAutoComplete,"
+                + "ariaBrailleLabel,ariaBrailleRoleDescription,"
+                + "ariaBusy,ariaChecked,ariaColCount,ariaColIndex,"
                 + "ariaColSpan,ariaCurrent,ariaDescription,ariaDisabled,ariaExpanded,ariaHasPopup,ariaHidden,"
                 + "ariaInvalid,ariaKeyShortcuts,ariaLabel,ariaLevel,ariaLive,ariaModal,ariaMultiLine,"
                 + "ariaMultiSelectable,ariaOrientation,ariaPlaceholder,ariaPosInSet,ariaPressed,ariaReadOnly,"

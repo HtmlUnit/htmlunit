@@ -416,6 +416,10 @@ public abstract class WebServerTestCase extends WebTestCase {
                     Thread.sleep(200);
                 }
                 else {
+                    // destroy the server to free all associated resources
+                    server.stop();
+                    server.destroy();
+
                     throw e;
                 }
             }

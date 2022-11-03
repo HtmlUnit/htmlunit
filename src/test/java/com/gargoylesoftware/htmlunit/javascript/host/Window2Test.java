@@ -773,7 +773,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "133", "true", "true", "16"},
-            EDGE = {"true", "true", "131", "true", "true", "17"},
+            EDGE = {"true", "true", "131", "true", "true", "63"},
             FF = {"true", "true", "91", "true", "true", "12"},
             FF_ESR = {"true", "true", "91", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
@@ -884,7 +884,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"635", "1256", "618", "1239"},
-            EDGE = {"637", "1255", "620", "1238"},
+            EDGE = {"637", "1209", "620", "1192"},
             FF = {"677", "1260", "660", "1243"},
             FF_ESR = {"677", "1260", "660", "1243"},
             IE = {"682", "1256", "665", "1239"})
