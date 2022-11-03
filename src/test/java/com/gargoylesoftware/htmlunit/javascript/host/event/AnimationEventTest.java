@@ -70,7 +70,8 @@ public class AnimationEventTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object AnimationEvent]", "", "false", "false", "false"},
             FF = "exception",
-            FF_ESR = "exception")
+            FF_ESR = "exception",
+            IE = {"[object AnimationEvent]", "", "false", "false", "undefined"})
     public void create_createEvent() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head><script>\n"
