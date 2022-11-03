@@ -917,9 +917,21 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + html;
             }
         }
-        final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(url, html, contentType, charset);
-        startWebServer(mockWebConnection, serverCharset);
+        getMockWebConnection().setResponse(url, html, contentType, charset);
+
+        return loadPage2(url, serverCharset);
+    }
+
+
+    /**
+     * Load the page from the url.
+     * @param url the url to use to load the page
+     * @param serverCharset the charset at the server side.
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final URL url, final Charset serverCharset) throws Exception {
+        startWebServer(getMockWebConnection(), serverCharset);
 
         WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
