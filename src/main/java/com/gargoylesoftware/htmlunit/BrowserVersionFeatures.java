@@ -167,6 +167,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     EVENT_MOUSE_ON_DISABLED,
 
+    /** <code>AnimationEvent</code> can not be created by calling document.createEvent('AnimationEvent'). */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
+
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_ONCHANGE_AFTER_ONCLICK,

@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code AnimationEvent}.
  *
@@ -35,7 +37,18 @@ public class AnimationEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public AnimationEvent() {
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }

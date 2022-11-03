@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.67.0" date="xxxx, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                AnimationEvent construction fixed.
+            </action>
             <action type="fix" dev="RhinoTeam">
                 core-js: classCastException in hasOwnProperty on NativeJavaObject fixed.
             </action>
