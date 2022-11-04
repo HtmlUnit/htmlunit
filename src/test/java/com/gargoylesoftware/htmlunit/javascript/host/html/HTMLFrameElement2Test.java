@@ -253,7 +253,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String frameContent
             = "<html><head></head><body>\n"
             + "<script>\n"
-            + "log(top.document.getElementById('aButton').tagName);\n"
+            + "parent.log(top.document.getElementById('aButton').tagName);\n"
             + "</script>\n"
             + "</body></html>";
 
