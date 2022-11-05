@@ -19,10 +19,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.hc.client5.http.auth.BasicUserPrincipal;
 import org.apache.hc.client5.http.auth.Credentials;
+import org.apache.hc.core5.net.URLEncodedUtils;
 import org.junit.Test;
+
+import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
  * Tests for {@link WebRequest}.

@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.HttpHeader.CACHE_CONTROL;
 import static com.gargoylesoftware.htmlunit.HttpHeader.EXPIRES;
 import static com.gargoylesoftware.htmlunit.HttpHeader.LAST_MODIFIED;
 import static org.apache.hc.client5.http.utils.DateUtils.formatDate;
-import static org.apache.http.client.utils.DateUtils.formatDate;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;

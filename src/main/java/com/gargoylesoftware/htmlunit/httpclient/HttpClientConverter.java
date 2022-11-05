@@ -14,10 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.httpclient;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.hc.core5.net.URLEncodedUtils;
 
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
@@ -53,10 +55,10 @@ public final class HttpClientConverter {
      * @return the name/value pairs
      */
     public static List<NameValuePair> parseUrlQuery(final String query, final Charset charset) {
-        final List<org.apache.http.NameValuePair> pairs = URLEncodedUtils.parse(query, charset);
+        final List<org.apache.hc.core5.http.NameValuePair> pairs = URLEncodedUtils.parse(query, charset);
 
         final List<NameValuePair> resultingPairs = new ArrayList<>();
-        for (final org.apache.http.NameValuePair pair : pairs) {
+        for (final org.apache.hc.core5.http.NameValuePair pair : pairs) {
             resultingPairs.add(new NameValuePair(pair.getName(), pair.getValue()));
         }
         return resultingPairs;
