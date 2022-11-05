@@ -15,21 +15,19 @@
 package com.gargoylesoftware.htmlunit.html.xpath;
 
 import javax.xml.transform.ErrorListener;
-import javax.xml.transform.SourceLocator;
 import javax.xml.transform.TransformerException;
 
-import org.apache.xml.utils.DefaultErrorHandler;
-import org.apache.xml.utils.PrefixResolver;
-import org.apache.xml.utils.WrappedRuntimeException;
-import org.apache.xpath.Expression;
-import org.apache.xpath.ExpressionNode;
-import org.apache.xpath.XPathContext;
-import org.apache.xpath.compiler.Compiler;
-import org.apache.xpath.compiler.FunctionTable;
-import org.apache.xpath.compiler.XPathParser;
-import org.apache.xpath.objects.XObject;
-import org.apache.xpath.res.XPATHErrorResources;
-import org.apache.xpath.res.XPATHMessages;
+import net.sourceforge.htmlunit.xpath.Expression;
+import net.sourceforge.htmlunit.xpath.XPathContext;
+import net.sourceforge.htmlunit.xpath.compiler.Compiler;
+import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
+import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
+import net.sourceforge.htmlunit.xpath.objects.XObject;
+import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
+import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
+import net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
+import net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
 /**
  * XPath adapter implementation for HtmlUnit.
@@ -66,7 +64,7 @@ class XPathAdapter {
      * @param caseSensitive whether the attributes should be case-sensitive
      * @throws TransformerException if a syntax or other error occurs
      */
-    XPathAdapter(final String exprString, final SourceLocator locator, final PrefixResolver prefixResolver,
+    XPathAdapter(final String exprString, final PrefixResolver prefixResolver,
         final ErrorListener errorListener, final boolean caseSensitive)
                 throws TransformerException {
 
@@ -76,18 +74,14 @@ class XPathAdapter {
         if (errListener == null) {
             errListener = new DefaultErrorHandler();
         }
-        final XPathParser parser = new XPathParser(errListener, locator);
-        final Compiler compiler = new Compiler(errorListener, locator, funcTable_);
+        final XPathParser parser = new XPathParser(errListener);
+        final Compiler compiler = new Compiler(errorListener, funcTable_);
 
         final String expression = preProcessXPath(exprString, caseSensitive);
         parser.initXPath(compiler, expression, prefixResolver);
 
         final Expression expr = compiler.compile(0);
         mainExp_ = expr;
-
-        if (locator instanceof ExpressionNode) {
-            expr.exprSetParent((ExpressionNode) locator);
-        }
     }
 
     /**
@@ -206,7 +200,7 @@ class XPathAdapter {
         final PrefixResolver namespaceContext) throws TransformerException {
         xpathContext.pushNamespaceContext(namespaceContext);
 
-        xpathContext.pushCurrentNodeAndExpression(contextNode, contextNode);
+        xpathContext.pushCurrentNodeAndExpression(contextNode);
 
         XObject xobj = null;
 

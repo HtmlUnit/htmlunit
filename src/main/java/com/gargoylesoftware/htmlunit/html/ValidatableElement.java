@@ -17,7 +17,8 @@ package com.gargoylesoftware.htmlunit.html;
 /**
  * An element that supports client side validation based on
  * the Constraint validation API.
- * see https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation
+ * see <a href="https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation">
+ * https://developer.mozilla.org/en-US/docs/Web/API/Constraint_validation</a>
  *
  * @author Ronald Brill
  */
@@ -38,7 +39,9 @@ public interface ValidatableElement {
      * @return a boolean value boolean value that is true if the user
      * has provided input that the browser is unable to convert.
      */
-    boolean hasBadInputValidityState();
+    default boolean hasBadInputValidityState() {
+        return false;
+    }
 
     /**
      * @return a boolean value indicating whether the element's custom validity message
@@ -51,7 +54,9 @@ public interface ValidatableElement {
      * and false if it does match.
      * If true, the element matches the :invalid CSS pseudo-class
      */
-    boolean hasPatternMismatchValidityState();
+    default boolean hasPatternMismatchValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value does not fit the rules determined by the step attribute
@@ -59,42 +64,54 @@ public interface ValidatableElement {
      * or false if it does fit the step rule.
      * If true, the element matches the :invalid and :out-of-range CSS pseudo-classes.
      */
-    boolean isStepMismatchValidityState();
+    default boolean isStepMismatchValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value is longer than the maximum length specified
      * by the maxlength attribute, or false if it is shorter than or equal to the maximum.
      * If true, the element matches the :invalid CSS pseudo-class
      */
-    boolean isTooLongValidityState();
+    default boolean isTooLongValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value is shorter than the minimum length specified
      * by the minlength attribute, or false if it is greater than or equal to the minimum.
      * If true, the element matches the :invalid CSS pseudo-class
      */
-    boolean isTooShortValidityState();
+    default boolean isTooShortValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value is not in the required syntax (when type is email or url),
      * or false if the syntax is correct.
      * If true, the element matches the :invalid CSS pseudo-class.
      */
-    boolean hasTypeMismatchValidityState();
+    default boolean hasTypeMismatchValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value is greater than the maximum specified by the max attribute,
      * or false if it is less than or equal to the maximum.
      * If true, the element matches the :invalid and :out-of-range CSS pseudo-classes.
      */
-    boolean hasRangeOverflowValidityState();
+    default boolean hasRangeOverflowValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the value is less than the minimum specified by the min attribute,
      * or false if it is greater than or equal to the minimum.
      * If true, the element matches the :invalid and :out-of-range CSS pseudo-classes.
      */
-    boolean hasRangeUnderflowValidityState();
+    default boolean hasRangeUnderflowValidityState() {
+        return false;
+    }
 
     /**
      * @return true if the element meets all its validation constraints, and is therefore
@@ -107,5 +124,7 @@ public interface ValidatableElement {
      * @return true if the element has a required attribute, but no value, or false otherwise.
      * If true, the element matches the :invalid CSS pseudo-class.
      */
-    boolean isValueMissingValidityState();
+    default boolean isValueMissingValidityState() {
+        return false;
+    }
 }

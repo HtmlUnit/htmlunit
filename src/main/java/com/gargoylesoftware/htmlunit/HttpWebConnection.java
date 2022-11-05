@@ -315,12 +315,11 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates an <tt>HttpMethod</tt> instance according to the specified parameters.
+     * Creates an <code>HttpMethod</code> instance according to the specified parameters.
      * @param webRequest the request
      * @param httpClientBuilder the httpClientBuilder that will be configured
-     * @return the <tt>HttpMethod</tt> instance constructed according to the specified parameters
-     * @throws IOException
-     * @throws URISyntaxException
+     * @return the <code>HttpMethod</code> instance constructed according to the specified parameters
+     * @throws URISyntaxException in case of syntax problems
      */
     private SimpleHttpRequest makeHttpMethod(final WebRequest webRequest,
             final HttpAsyncClientBuilder httpClientBuilder)
@@ -641,12 +640,12 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Creates the <tt>HttpClientBuilder</tt> that will be used by this WebClient.
+     * Creates the <code>HttpClientBuilder</code> that will be used by this WebClient.
      * Extensions may override this method in order to create a customized
-     * <tt>HttpClientBuilder</tt> instance (e.g. with a custom
-     * {@link org.apache.hc.client5.http.io.HttpClientConnectionManager} to perform
+     * <code>HttpClientBuilder</code> instance (e.g. with a custom
+     * {@link org.apache.http.conn.ClientConnectionManager} to perform
      * some tracking; see feature request 1438216).
-     * @return the <tt>HttpClientBuilder</tt> that will be used by this WebConnection
+     * @return the <code>HttpClientBuilder</code> that will be used by this WebConnection
      */
     protected HttpAsyncClientBuilder createHttpClientBuilder() {
         final HttpAsyncClientBuilder builder = HttpAsyncClientBuilder.create();

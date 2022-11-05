@@ -68,7 +68,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code charset}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charset}
@@ -80,7 +80,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code href}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code href}
@@ -92,7 +92,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code hreflang}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hreflang}
@@ -104,7 +104,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
@@ -116,7 +116,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code rel}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rel}
@@ -128,7 +128,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code rev}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rev}
@@ -140,7 +140,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code media}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code media}
@@ -152,7 +152,7 @@ public class HtmlLink extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code target}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code target}

@@ -48,7 +48,7 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             EDGE = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,"
                     + "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             IE = "Accept: text/html, application/xhtml+xml, image/jxr, */*")
     public void acceptHeaderGetUrl() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -68,7 +68,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             EDGE = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
-            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
+                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
             IE = {"2", "Accept: text/html, application/xhtml+xml, image/jxr, */*"})
     public void acceptHeaderWindowOpen() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -101,7 +102,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             EDGE = {"2", "Accept: text/html,application/xhtml+xml,"
                     + "application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"},
             FF = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
-            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"},
+            FF_ESR = {"2", "Accept: text/html,application/xhtml+xml,"
+                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8"},
             IE = {"2", "Accept: text/html, application/xhtml+xml, image/jxr, */*"})
     public void acceptHeaderAnchorClick() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -130,7 +132,8 @@ public class BrowserVersion2Test extends WebDriverTestCase {
             EDGE = "Accept: text/html,application/xhtml+xml,application/xml;"
                     + "q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
             FF = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
-            FF_ESR = "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+            FF_ESR = "Accept: text/html,application/xhtml+xml,"
+                    + "application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
             IE = "Accept: text/html, application/xhtml+xml, image/jxr, */*")
     public void acceptHeaderAnchorClickWithType() throws Exception {
         String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -156,10 +159,10 @@ public class BrowserVersion2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Accept: image/webp,*/*",
-            CHROME = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+    @Alerts(CHROME = "Accept: image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             EDGE = "Accept: image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
             FF = "Accept: image/avif,image/webp,*/*",
+            FF_ESR = "Accept: image/avif,image/webp,*/*",
             IE = "Accept: image/png, image/svg+xml, image/jxr, image/*;q=0.8, */*;q=0.5")
     public void acceptHeaderImage() throws Exception {
         final String html

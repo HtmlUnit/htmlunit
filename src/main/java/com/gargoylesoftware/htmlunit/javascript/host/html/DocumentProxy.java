@@ -24,7 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
  * without a proxy, by reusing (with appropriate cleanup and re-initialization) a single {@link Document}
  * instance across various pages. However, we allow users to keep references to old pages as they navigate
  * across a series of pages, and all of these pages need to be usable -- so we can't just leave these old
- * pages without a <tt>window.document</tt> object.
+ * pages without a <code>window.document</code> object.
  *
  * @author Daniel Gredler
  */

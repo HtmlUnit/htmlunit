@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.BLOCK;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 
 import java.util.Iterator;
@@ -34,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlBreak;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDetails;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
+import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInlineFrame;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
@@ -60,7 +62,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.html.TableRowGroup;
-import com.gargoylesoftware.htmlunit.html.HtmlElement.DisplayStyle;
 import com.gargoylesoftware.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
 
 /**
@@ -201,12 +202,11 @@ public class HtmlSerializerNormalizedText {
         if (!(domNode instanceof HtmlBody)) {
             final SgmlPage page = domNode.getPage();
             final WebWindow window = page.getEnclosingWindow();
-            if (page != null
-                    && page.getWebClient().isJavaScriptEngineEnabled()  // TODO
+            if (page.getWebClient().isJavaScriptEngineEnabled()  // TODO
                     && window.getWebClient().getOptions().isCssEnabled()) {
                 if (domNode instanceof DomElement) {
                     final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
-                    block = "block".equals(display);
+                    block = BLOCK.equals(display);
                 }
             }
             else if (domNode instanceof HtmlElement) {

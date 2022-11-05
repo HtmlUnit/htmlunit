@@ -34,7 +34,8 @@ public class RhinoTest extends WebDriverTestCase {
 
     /**
      * Some samples from
-     * {@link https://stackoverflow.com/questions/10480108/is-there-any-way-to-check-if-strict-mode-is-enforced}.
+     * <a href="https://stackoverflow.com/questions/10480108/is-there-any-way-to-check-if-strict-mode-is-enforced">
+     * https://stackoverflow.com/questions/10480108/is-there-any-way-to-check-if-strict-mode-is-enforced</a>.
      * @throws Exception if the test fails
      */
     @Test

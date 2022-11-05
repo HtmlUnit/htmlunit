@@ -19,13 +19,13 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.apache.xml.utils.PrefixResolver;
-
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.util.XmlUtils;
+
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A JavaScript object for {@code XPathNSResolver}.
@@ -62,14 +62,6 @@ public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolve
     @JsxFunction
     public String lookupNamespaceURI(final String prefix) {
         return XmlUtils.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), prefix);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBaseIdentifier() {
-        return XmlUtils.lookupNamespaceURI((DomElement) element_.getDomNodeOrDie(), "");
     }
 
     /**

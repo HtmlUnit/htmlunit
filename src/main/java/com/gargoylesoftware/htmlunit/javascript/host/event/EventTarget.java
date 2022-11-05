@@ -258,7 +258,7 @@ public class EventTarget extends HtmlUnitScriptable {
      *
      * @param event the event to be dispatched
      * @return {@code false} if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; {@code true} otherwise
+     *         called <code>preventDefault</code>; {@code true} otherwise
      */
     @JsxFunction
     public boolean dispatchEvent(final Event event) {

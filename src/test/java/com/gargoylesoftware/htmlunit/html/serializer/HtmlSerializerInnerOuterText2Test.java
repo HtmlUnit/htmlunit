@@ -811,6 +811,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = " A B C D EF G H I  Second ")
     @HtmlUnitNYI(CHROME = "A B C D EF G H\nI Second",
             EDGE = "A B C D EF G H\nI Second",
@@ -828,6 +829,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = " A B C D EF G H I  Second ")
     @HtmlUnitNYI(CHROME = "A B C D EF G H\nI Second",
             EDGE = "A B C D EF G H\nI Second",
@@ -845,6 +847,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = " A B C D EF G H I  Second ")
     @HtmlUnitNYI(CHROME = "A B C D EF G H\nI Second",
             EDGE = "A B C D EF G H\nI Second",
@@ -862,6 +865,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
     @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H  \n I  \n      Second\n    ",
             EDGE = "        A B  C\t \t  D \nEF\nG \n H  \n I  \n      Second\n    ",
@@ -879,6 +883,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = "   A B  C\t \t  D \nEF\nG \n H   I  Second")
     @HtmlUnitNYI(CHROME = "        A B  C\t \t  D \nEF\nG \n H  \n I  \n      Second\n    ",
             EDGE = "        A B  C\t \t  D \nEF\nG \n H  \n I  \n      Second\n    ",
@@ -896,6 +901,7 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "A B C D EF G H I\nSecond",
             FF = "",
+            FF_ESR = "",
             IE = " A B C D EF G H I  Second ")
     @HtmlUnitNYI(CHROME = "A B C D\nEF\nG\nH\n I\nSecond\n",
             EDGE = "A B C D\nEF\nG\nH\n I\nSecond\n",
@@ -1989,7 +1995,6 @@ public class HtmlSerializerInnerOuterText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "text",
-            FF_ESR = "null",
             IE = "textvar x = 'invisible';")
     public void getOuterTextWithScript() throws Exception {
         getOuterTextFormated("<div id='tester'>"

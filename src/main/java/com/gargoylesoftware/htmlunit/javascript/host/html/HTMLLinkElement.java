@@ -21,6 +21,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.net.MalformedURLException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -29,6 +33,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
+
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLLinkElement}.
@@ -39,9 +45,11 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList;
 @JsxClass(domClass = HtmlLink.class)
 public class HTMLLinkElement extends HTMLElement {
 
+    private static final Log LOG = LogFactory.getLog(HTMLLinkElement.class);
+
     /**
      * The associated style sheet (only valid for links of type
-     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
      */
     private CSSStyleSheet sheet_;
 
@@ -136,12 +144,30 @@ public class HTMLLinkElement extends HTMLElement {
 
     /**
      * Returns the associated style sheet (only valid for links of type
-     * <tt>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</tt>).
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
      * @return the associated style sheet
      */
     public CSSStyleSheet getSheet() {
         if (sheet_ == null) {
-            sheet_ = CSSStyleSheet.loadStylesheet(this, (HtmlLink) getDomNodeOrDie(), null);
+            try {
+                final CssStyleSheet sheet =
+                        CssStyleSheet.loadStylesheet(getDomNodeOrDie(), (HtmlLink) getDomNodeOrDie(), null);
+                sheet_ = new CSSStyleSheet(this, this.getWindow(), sheet);
+            }
+            catch (final RuntimeException e) {
+                // Got something unexpected; we can throw an exception in this case.
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("RuntimeException loading stylesheet", e);
+                }
+                throw Context.reportRuntimeError("Exception: " + e);
+            }
+            catch (final Exception e) {
+                // Got something unexpected; we can throw an exception in this case.
+                if (LOG.isErrorEnabled()) {
+                    LOG.error("Exception loading stylesheet", e);
+                }
+                throw Context.reportRuntimeError("Exception: " + e);
+            }
         }
         return sheet_;
     }

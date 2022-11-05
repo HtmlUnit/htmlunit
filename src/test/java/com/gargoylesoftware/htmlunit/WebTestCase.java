@@ -40,8 +40,6 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -76,7 +74,7 @@ public abstract class WebTestCase {
     public TestName testMethodName_ = new TestName();
 
     /** Logging support. */
-    private static final Log LOG = LogFactory.getLog(WebTestCase.class);
+    // private static final Log LOG = LogFactory.getLog(WebTestCase.class);
 
     /** save the environment */
     private static final Locale SAVE_LOCALE = Locale.getDefault();

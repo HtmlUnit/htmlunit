@@ -283,6 +283,44 @@ public class HtmlTelInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {" 123-456-7890",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+123-456-7890", "2"},
+            IE = {" 123-456-7890",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+123-456-7890", "2"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='tel' pattern='\\s[0-9]{3}-[0-9]{3}-[0-9]{4}' "
+                + "id='e1' name='k' value=' 123-456-7890'>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" 123-456-7890",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+123-456-7890", "2"},
+            IE = {" 123-456-7890",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+123-456-7890", "2"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='tel' pattern='\\s[0-9]{3}-[0-9]{3}-[0-9]{4}' "
+                + "id='e1' name='k'>\n", "", " 123-456-7890");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"1234",
                        "false",
                        "false-false-false-false-false-false-false-true-false-false-false",

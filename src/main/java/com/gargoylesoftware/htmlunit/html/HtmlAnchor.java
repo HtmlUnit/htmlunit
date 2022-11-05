@@ -228,7 +228,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code charset}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code charset} or an empty string if that attribute isn't defined
@@ -239,7 +239,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
@@ -250,7 +250,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -261,7 +261,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code href}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code href} or an empty string if that attribute isn't defined
@@ -272,7 +272,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code hreflang}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hreflang} or an empty string if that attribute isn't defined
@@ -283,7 +283,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code rel}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
@@ -294,7 +294,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code rev}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code rev} or an empty string if that attribute isn't defined
@@ -305,7 +305,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code accesskey}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey} or an empty string if that attribute isn't defined
@@ -316,7 +316,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code shape}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code shape} or an empty string if that attribute isn't defined
@@ -327,7 +327,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code coords}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code coords} or an empty string if that attribute isn't defined
@@ -338,7 +338,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
@@ -349,7 +349,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
@@ -360,7 +360,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
@@ -371,7 +371,7 @@ public class HtmlAnchor extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code target}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code target} or an empty string if that attribute isn't defined
@@ -383,7 +383,7 @@ public class HtmlAnchor extends HtmlElement {
     /**
      * Open this link in a new window, much as web browsers do when you shift-click a link or use the context
      * menu to open in a new window.
-     *
+     * <p>
      * It should be noted that even web browsers will sometimes not give the expected result when using this
      * method of following links. Links that have no real href and rely on JavaScript to do their work will
      * fail.

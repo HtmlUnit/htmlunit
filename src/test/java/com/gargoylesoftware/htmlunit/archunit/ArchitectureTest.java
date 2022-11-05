@@ -19,6 +19,9 @@ import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.methods;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;
 
+import java.lang.reflect.Executable;
+import java.util.function.Supplier;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
 
@@ -131,7 +134,7 @@ public class ArchitectureTest {
     private static final DescribedPredicate<JavaMethod> haveJsxGetterWithNonDefaultPropertyName =
             new DescribedPredicate<JavaMethod>("@JsxGetter has a non default propertyName") {
                 @Override
-                public boolean apply(final JavaMethod method) {
+                public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxGetter.class).propertyName());
                 }
             };
@@ -156,7 +159,7 @@ public class ArchitectureTest {
     private static final DescribedPredicate<JavaMethod> haveJsxSetterWithNonDefaultPropertyName =
             new DescribedPredicate<JavaMethod>("@JsxSetter has a non default propertyName") {
                 @Override
-                public boolean apply(final JavaMethod method) {
+                public boolean test(final JavaMethod method) {
                     return StringUtils.isNotEmpty(method.getAnnotationOfType(JsxSetter.class).propertyName());
                 }
             };
@@ -205,4 +208,19 @@ public class ArchitectureTest {
     public static final ArchRule jsToString = methods()
             .that().areAnnotatedWith(JsxFunction.class)
             .should().haveNameNotMatching("toString");
+
+    /**
+     * Make sure to not use java.lang.reflect.Executable.
+     */
+    @ArchTest
+    public static final ArchRule android7 = noClasses()
+            .should().dependOnClassesThat().haveFullyQualifiedName(Executable.class.getName());
+
+    /**
+     * Make sure to not use {@link ThreadLocal#withInitial(java.util.function.Supplier)}.
+     */
+    @ArchTest
+    public static final ArchRule android7ThreadLocalWithInitial = noClasses()
+            .should().callMethod(ThreadLocal.class, "withInitial", Supplier.class);
+
 }

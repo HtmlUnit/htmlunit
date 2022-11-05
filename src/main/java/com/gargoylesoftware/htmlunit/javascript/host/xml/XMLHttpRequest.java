@@ -166,7 +166,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         "status", "statusText", "abort", "getAllResponseHeaders", "getResponseHeader", "open", "send",
         "setRequestHeader"};
 
-    private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<String>(Arrays.asList(
+    private static final HashSet<String> PROHIBITED_HEADERS_ = new HashSet<>(Arrays.asList(
         "accept-charset", HttpHeader.ACCEPT_ENCODING_LC,
         HttpHeader.CONNECTION_LC, HttpHeader.CONTENT_LENGTH_LC, HttpHeader.COOKIE_LC, "cookie2",
         "content-transfer-encoding", "date", "expect",
@@ -1191,7 +1191,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
     }
 
     /**
-     * Sets the specified header to the specified value. The <tt>open</tt> method must be
+     * Sets the specified header to the specified value. The <code>open</code> method must be
      * called before this method, or an error will occur.
      * @param name the name of the header being set
      * @param value the value of the header being set

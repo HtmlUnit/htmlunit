@@ -124,7 +124,7 @@ public enum BrowserVersionFeatures {
     CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY,
 
     /** For disconnected items style font property is blank. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     CSS_STYLE_PROP_FONT_DISCONNECTED_IS_EMPTY,
 
     /** 'auto' is supported when setting vertical-align style. */
@@ -166,6 +166,10 @@ public enum BrowserVersionFeatures {
     /** Mouse events are triggered on disabled elements also. */
     @BrowserFeature({FF, FF_ESR})
     EVENT_MOUSE_ON_DISABLED,
+
+    /** <code>AnimationEvent</code> can not be created by calling document.createEvent('AnimationEvent'). */
+    @BrowserFeature({FF, FF_ESR})
+    EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED,
 
     /** Triggers "onchange" event handler after "onclick" event handler. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -458,7 +462,7 @@ public enum BrowserVersionFeatures {
     HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED,
 
     /** HTMLInputElement datetime-local type is supported. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED,
 
     /** HTMLInputElement date and time types are supported. */
@@ -492,10 +496,6 @@ public enum BrowserVersionFeatures {
     /** Removing the selected attribute, de selects the option. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLOPTION_REMOVE_SELECTED_ATTRIB_DESELECTS,
-
-    /** willValidate returns always true. */
-    @BrowserFeature(FF_ESR)
-    HTMLOUTPUT_WILL_VALIDATE_ALWAYS_TRUE,
 
     /** Trims the value of the type attribute before to verify it. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
@@ -1466,7 +1466,8 @@ public enum BrowserVersionFeatures {
 
     /**
      * The window.ActiveXObject is special in IE
-     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx.
+     * <a href="http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx">
+     * http://msdn.microsoft.com/en-us/library/ie/dn423948%28v=vs.85%29.aspx</a>.
      */
     @BrowserFeature(IE)
     JS_WINDOW_ACTIVEXOBJECT_HIDDEN,

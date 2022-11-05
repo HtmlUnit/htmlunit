@@ -58,7 +58,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     /** jQuery selectors that aren't CSS selectors. */
     static final String[] JQUERY_CUSTOM_SELECTORS = {"div.submenu-last:last",
         "*#__sizzle__ div.submenu-last:last", "div:animated", "div:animated", "*:button", "*:checkbox", "div:even",
-        "*:file", "div:first", "td:gt(4)", "div:has(p)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
+        "*:file", "div:first", "td:gt(4)", ":header", ":hidden", ":image", ":input", "td:lt(4)",
         ":odd", ":password", ":radio", ":reset", ":selected", ":submit", ":text", ":visible"
     };
 
@@ -712,17 +712,20 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(DateUtils.formatDate(new Date()).substring(0, 17));
         final String html = "<html><head><script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function doTest() {\n"
-                + "  alert(typeof document.lastModified);\n"
+                + "  log(typeof document.lastModified);\n"
                 + "  var d = new Date(document.lastModified);\n"
-                + "  alert(d.toGMTString().substr(0, 17));\n" // to have results not depending on the user's time zone
+                + "  log(d.toGMTString().substr(0, 17));\n" // to have results not depending on the user's time zone
                 + "}\n"
                 + "</script></head>\n"
                 + "<body onload='doTest()'>\n"
                 + "</body></html>";
 
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
-        loadPageWithAlerts2(URL_FIRST);
+
+        final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
 
         // for some strange reasons, the selenium driven browser is in an invalid
         // state after this test
@@ -732,10 +735,11 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
     private void testLastModified(final List<NameValuePair> responseHeaders) throws Exception {
         final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(typeof document.lastModified);\n"
+            + "  log(typeof document.lastModified);\n"
             + "  var d = new Date(document.lastModified);\n"
-            + "  alert(d.toGMTString());\n" // to have results not depending on the user's time zone
+            + "  log(d.toGMTString());\n" // to have results not depending on the user's time zone
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -743,7 +747,8 @@ public class HTMLDocumentTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeaders);
 
-        loadPageWithAlerts2(URL_FIRST);
+        final WebDriver driver = loadPage2(URL_FIRST, ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1299,9 +1304,12 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     public void equalityViaDifferentPaths() throws Exception {
         final String html
             = "<html><body>\n"
-            + "<script>alert(document.body.parentNode.parentNode === document)</script>\n"
+            + "<script>"
+            + LOG_TITLE_FUNCTION
+            + "log(document.body.parentNode.parentNode === document)\n"
+            + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2517,12 +2525,13 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
@@ -2539,13 +2548,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
         final URL url = new URL(URL_FIRST.toString() + "details/abc");
-        final WebDriver driver = loadPageWithAlerts2(html, url);
+        final WebDriver driver = loadPage2(html, url);
+        verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
@@ -2562,13 +2573,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
         final URL url = new URL(URL_FIRST.toString() + "?x=y&z=zz");
-        final WebDriver driver = loadPageWithAlerts2(html, url);
+        final WebDriver driver = loadPage2(html, url);
+        verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
@@ -2585,13 +2598,15 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         final String html = "<html>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         final URL url = new URL(URL_FIRST.toString() + "details/abc;jsessionid=42?x=y&z=zz");
         expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPageWithAlerts2(html, url);
+        final WebDriver driver = loadPage2(html, url);
+        verifyTitle2(driver, getExpectedAlerts());
         if (driver instanceof HtmlUnitDriver && !"undefined".equals(getExpectedAlerts()[0])) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBaseURL().toString());
@@ -2650,12 +2665,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2671,12 +2688,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2692,12 +2711,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2713,12 +2734,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2734,12 +2757,14 @@ public class HTMLDocumentTest extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script>\n"
-                + "  alert(document.baseURI);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.baseURI);\n"
                 + "</script>\n"
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        loadPage2(html, new URL("http://localhost:" + PORT + "/path/to/page.html"));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**

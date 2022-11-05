@@ -42,7 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
 
     /**
-     * Value to use if no specified <tt>value</tt> attribute.
+     * Value to use if no specified <code>value</code> attribute.
      */
     private static final String DEFAULT_VALUE = "on";
 

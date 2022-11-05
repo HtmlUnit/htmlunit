@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
+ * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.NamedNodeMap}.
  *
  * @author Marc Guillemot
  * @author Daniel Gredler

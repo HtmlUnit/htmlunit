@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.EVENT_TYPE_BEFOREUNLOADEVENT;
@@ -61,7 +62,6 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.xml.utils.PrefixResolver;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.DocumentType;
@@ -110,6 +110,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.FontFaceSet;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import com.gargoylesoftware.htmlunit.javascript.host.animations.AnimationEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent;
@@ -134,7 +135,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.event.WheelEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.DocumentProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -152,6 +152,7 @@ import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A JavaScript object for {@code Document}.
@@ -184,7 +185,7 @@ public class Document extends Node {
     /** https://developer.mozilla.org/en/Rich-Text_Editing_in_Mozilla#Executing_Commands */
     private static final Set<String> EXECUTE_CMDS_FF = new HashSet<>();
     private static final Set<String> EXECUTE_CMDS_CHROME = new HashSet<>();
-    /** The format to use for the <tt>lastModified</tt> attribute. */
+    /** The format to use for the <code>lastModified</code> attribute. */
     private static final String LAST_MODIFIED_DATE_FORMAT = "MM/dd/yyyy HH:mm:ss";
 
     /** Contains all supported DOM level 2 events. */
@@ -194,13 +195,13 @@ public class Document extends Node {
     /** Contains all supported vendor specific events. */
     private static final Map<String, Class<? extends Event>> SUPPORTED_VENDOR_EVENT_TYPE_MAP;
 
-    /**
-     * Initializes the supported event type map.
-     * Map<String, Class> which maps strings a caller may use when calling into
-     * {@link #createEvent(String)} to the associated event class. To support a new
-     * event creation type, the event type and associated class need to be added into this map in
-     * the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
-     * have a no-arg constructor.
+    /*
+      Initializes the supported event type map.
+      Map<String, Class> which maps strings a caller may use when calling into
+      {@link #createEvent(String)} to the associated event class. To support a new
+      event creation type, the event type and associated class need to be added into this map in
+      the static initializer. The map is unmodifiable. Any class that is a value in this map MUST
+      have a no-arg constructor.
      */
     static {
         final Map<String, Class<? extends Event>> dom2EventMap = new HashMap<>();
@@ -236,6 +237,7 @@ public class Document extends Node {
         additionalEventMap.put("FocusEvent", FocusEvent.class);
         additionalEventMap.put("WheelEvent", WheelEvent.class);
         additionalEventMap.put("SVGZoomEvent", SVGZoomEvent.class);
+        additionalEventMap.put("AnimationEvent", AnimationEvent.class);
         SUPPORTED_VENDOR_EVENT_TYPE_MAP = Collections.unmodifiableMap(additionalEventMap);
     }
 
@@ -356,13 +358,6 @@ public class Document extends Node {
      */
     @JsxSetter
     public void setLocation(final String location) throws IOException {
-        final Object event = getWindow().getEvent();
-        if (event instanceof UIEvent) {
-            final Object target = ((UIEvent) event).getTarget();
-            if (target instanceof HTMLAnchorElement) {
-                final String href = ((HTMLAnchorElement) target).getHref();
-            }
-        }
         window_.setLocation(location);
     }
 
@@ -930,9 +925,9 @@ public class Document extends Node {
 
     /**
      * JavaScript function {@code close}.
-     *
-     * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
-     * a good description of the semantics of open(), write(), writeln() and close().
+     * <p>See <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html">
+     * http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html</a> for
+     * a good description of the semantics of open(), write(), writeln() and close().</p>
      *
      * @throws IOException if an IO problem occurs
      */
@@ -1077,7 +1072,7 @@ public class Document extends Node {
     }
 
     /**
-     * Indicates if the command can be successfully executed using <tt>execCommand</tt>, given
+     * Indicates if the command can be successfully executed using <code>execCommand</code>, given
      * the current state of the document.
      * @param cmd the command identifier
      * @return {@code true} if the command can be successfully executed
@@ -1222,11 +1217,16 @@ public class Document extends Node {
                         && getBrowserVersion().hasFeature(EVENT_TYPE_PROGRESSEVENT)
                 || "FocusEvent".equals(eventType)
                 || "WheelEvent".equals(eventType)
-                        && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT))) {
+                        && getBrowserVersion().hasFeature(EVENT_TYPE_WHEELEVENT)
+                || "AnimationEvent".equals(eventType))) {
             clazz = SUPPORTED_VENDOR_EVENT_TYPE_MAP.get(eventType);
 
             if (PopStateEvent.class == clazz
                     && getBrowserVersion().hasFeature(EVENT_ONPOPSTATE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
+                clazz = null;
+            }
+            if (AnimationEvent.class == clazz
+                    && getBrowserVersion().hasFeature(EVENT_ONANIMATION_DOCUMENT_CREATE_NOT_SUPPORTED)) {
                 clazz = null;
             }
         }
@@ -1381,8 +1381,8 @@ public class Document extends Node {
     /**
      * Sets the domain of this document.
      *
-     * Domains can only be set to suffixes of the existing domain
-     * with the exception of setting the domain to itself.
+     * <p>Domains can only be set to suffixes of the existing domain
+     * with the exception of setting the domain to itself.</p>
      * <p>
      * The domain will be set according to the following rules:
      * <ol>
@@ -1395,7 +1395,7 @@ public class Document extends Node {
      *          d2.d3.gargoylesoftware.com
      *             d3.gargoylesoftware.com
      *                gargoylesoftware.com
-     *
+     * <p>
      *        transformation to:        com
      *        will fail
      * </li>
@@ -1949,7 +1949,7 @@ public class Document extends Node {
 
     /**
      * Returns all HTML elements that have a {@code name} attribute with the specified value.
-     *
+     * <p>
      * Refer to <a href="http://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-71555259">
      * The DOM spec</a> for details.
      *
@@ -3394,7 +3394,7 @@ public class Document extends Node {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Function getOnselectstart() {
         return getEventHandler(Event.TYPE_SELECTSTART);
     }
@@ -3403,7 +3403,7 @@ public class Document extends Node {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
     }

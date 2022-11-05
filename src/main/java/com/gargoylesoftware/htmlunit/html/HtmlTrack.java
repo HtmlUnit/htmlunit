@@ -22,6 +22,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  * Wrapper for the HTML element "track".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlTrack extends HtmlElement {
 

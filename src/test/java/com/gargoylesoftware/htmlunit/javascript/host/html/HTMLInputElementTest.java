@@ -90,7 +90,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "abc",
                   "abc", "", "50", "abc", "abc", "abc", "abc"},
             FF_ESR = {"error.fileupload1", "abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
-                      "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "abc", "", "abc",
+                      "abc", "abc", "abc", "abc", "abc", "abc", "#000000", "", "abc", "", "", "abc",
                       "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                   "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
@@ -117,10 +117,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
-    @Alerts(DEFAULT = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
-                       ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", ". ", "", ". ",
-                       ". ", "", "50", ". ", "", ". ", ""},
-            CHROME = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+    @Alerts(CHROME = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
                       ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", "",
                       "", "", "50", ". ", "", ". ", ""},
             EDGE = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
@@ -129,6 +126,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             FF = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
                   ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", ". ",
                   ". ", "", "50", ". ", "", ". ", ""},
+            FF_ESR = {"error.fileupload1", ". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                      ". ", ". ", ". ", ". ", ". ", ". ", "#000000", "", ". ", "", "", ". ",
+                      ". ", "", "50", ". ", "", ". ", ""},
             IE = {". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
                   ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ",
                   ". ", "", "50", ". ", ". ", ". ", ". "})
@@ -147,7 +147,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "12",
                   "12", "12", "12", "12", "12", "12", "12"},
             FF_ESR = {"error.fileupload1", "12", "12", "12", "", "12", "", "", "12", "12",
-                      "12", "12", "12", "12", "12", "12", "#000000", "", "12", "12", "", "12",
+                      "12", "12", "12", "12", "12", "12", "#000000", "", "12", "", "", "12",
                       "12", "12", "12", "12", "12", "12", "12"},
             IE = {"12", "12", "12", "", "12", "", "", "12", "12",
                   "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
@@ -293,7 +293,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             FF_ESR = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
                       "password", "radio", "reset", "reset",
                       "submit", "submit", "text", "textarea", "color", "date", "text",
-                      "text", "time", "text", "text", "number", "range",
+                      "datetime-local", "time", "text", "text", "number", "range",
                       "search", "email", "tel", "url"},
             IE = {"button", "button", "checkbox", "file", "hidden", "select-one", "select-multiple",
                   "password", "radio", "reset", "reset",
@@ -384,7 +384,7 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             FF_ESR = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                       "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                      "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+                      "", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
             IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                   "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
                   "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
@@ -868,9 +868,11 @@ public class HTMLInputElementTest extends WebDriverTestCase {
                   "text, checkbox, date, datetime-local, text, time, text, color, "
                     + "email, text, submit, radio, hidden, password, "
                     + "image, reset, button, file, number, range, search, tel, url, text, text"},
-            FF_ESR = {"text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, "
+            FF_ESR = {"text, checkbox, date, datetime-local, text, time, "
+                    + "text, color, email, text, submit, radio, hidden, "
                     + "password, image, reset, button, file, number, range, search, tel, url, text, text",
-                "text, checkbox, date, text, text, time, text, color, email, text, submit, radio, hidden, password, "
+                      "text, checkbox, date, datetime-local, text, time, text, color, "
+                    + "email, text, submit, radio, hidden, password, "
                     + "image, reset, button, file, number, range, search, tel, url, text, text"},
             IE = {"text, checkbox, error, error, error, error, error, error, email, text, submit, radio, hidden, "
                     + "password, image, reset, button, file, number, range, search, tel, url, error, text",

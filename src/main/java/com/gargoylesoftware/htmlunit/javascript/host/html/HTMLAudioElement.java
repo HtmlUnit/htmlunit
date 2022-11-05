@@ -20,11 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.html.HtmlAudio;
-import com.gargoylesoftware.htmlunit.html.HtmlMedia;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.host.dom.Node;
 
 /**
  * The JavaScript object {@code HTMLAudioElement}.
@@ -43,26 +40,8 @@ public class HTMLAudioElement extends HTMLMediaElement {
     public HTMLAudioElement() {
     }
 
-    /**
-     * Gets the JavaScript property {@code nodeType} for the current node.
-     * @return the node type
-     */
-    @JsxGetter
     @Override
-    public short getNodeType() {
-        return Node.ELEMENT_NODE;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @JsxGetter
-    @Override
-    public String getNodeName() {
-        final HtmlMedia element = (HtmlMedia) getDomNodeOrNull();
-        if (element == null) {
-            return "AUDIO";
-        }
-        return element.getNodeName();
+    protected String getNodeNameCustomize() {
+        return "AUDIO";
     }
 }

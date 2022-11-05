@@ -5180,7 +5180,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "go", "", "enter", "done",  "go", "next", "previous", "search", "send"},
-            FF_ESR = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"},
             IE = {"undefined", "GO", "run", "enter", "done",  "go", "next", "previous", "search", "send"})
     public void enterKeyHint() throws Exception {
         final String html =
@@ -5232,7 +5231,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "go", "", "", ""},
-            FF_ESR = {"undefined", "GO", "run", "undefined", "null"},
             IE = {"undefined", "GO", "run", "undefined", "null"})
     public void enterKeyHint2() throws Exception {
         final String html =
@@ -5268,7 +5266,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"go", "go", "", "", ""},
-            FF_ESR = {"undefined", "undefined", "undefined", "undefined", "undefined"},
             IE = {"undefined", "undefined", "undefined", "undefined", "undefined"})
     public void enterKeyHintDefaults() throws Exception {
         final String html =

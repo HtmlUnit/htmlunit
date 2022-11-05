@@ -18,7 +18,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.mutable.MutableInt;
-import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +39,7 @@ public class JavaScriptJobManagerMinimalTest {
     private WebClient client_;
     private WebWindow window_;
     private Page page_;
-    private JavaScriptJobManagerImpl manager_;
+    private JavaScriptJobManager manager_;
     private DefaultJavaScriptExecutor eventLoop_;
     enum WaitingMode {
         WAIT_STARTING_BEFORE, WAIT_TIMELIMIT,
@@ -52,12 +51,9 @@ public class JavaScriptJobManagerMinimalTest {
     @Before
     public void before() {
         client_ = new WebClient();
-        window_ = EasyMock.createNiceMock(WebWindow.class);
-        page_ = EasyMock.createNiceMock(Page.class);
-        manager_ = new JavaScriptJobManagerImpl(window_);
-        EasyMock.expect(window_.getEnclosedPage()).andReturn(page_).anyTimes();
-        EasyMock.expect(window_.getJobManager()).andReturn(manager_).anyTimes();
-        EasyMock.replay(window_, page_);
+        window_ = client_.getCurrentWindow();
+        page_ = window_.getEnclosedPage();
+        manager_ = window_.getJobManager();
         eventLoop_ = new DefaultJavaScriptExecutor(client_);
         eventLoop_.addWindow(window_);
     }

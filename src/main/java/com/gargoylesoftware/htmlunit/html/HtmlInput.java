@@ -133,7 +133,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
@@ -148,7 +148,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -159,7 +159,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * <p>Return the value of the attribute "value". Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.</p>
      *
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
@@ -186,7 +186,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code checked}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code checked} or an empty string if that attribute isn't defined
@@ -213,7 +213,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code readonly}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code readonly}
@@ -225,7 +225,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code size}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code size}
@@ -237,7 +237,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code maxlength}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code maxlength}
@@ -267,7 +267,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code minlength}. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code minlength}
@@ -297,7 +297,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code src}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src}
@@ -341,7 +341,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code alt}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code alt}
@@ -353,7 +353,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code usemap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap}
@@ -365,7 +365,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex}
@@ -377,7 +377,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code accesskey}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey}
@@ -389,7 +389,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus}
@@ -401,7 +401,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur}
@@ -413,7 +413,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code onselect}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onselect}
@@ -425,7 +425,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code onchange}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onchange}
@@ -437,7 +437,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code accept}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accept}
@@ -449,7 +449,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align}
@@ -917,7 +917,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns if the input element supports pattern validation. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a> documentation
      * for details.
      * @return if the input element supports pattern validation
      */
@@ -934,7 +934,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns if the input element supports maxlength minlength validation. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a> documentation
      * for details.
      * @return if the input element supports pattern validation
      */
@@ -955,7 +955,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns if the input element has a maximum allowed value length. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a>
      * documentation for details.
      *
      * @return if the input element has a maximum allowed value length
@@ -974,7 +974,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns if the input element has a minimum allowed value length. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a>
      * documentation for details.
      *
      * @return if the input element has a minimum allowed value length
@@ -993,7 +993,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     /**
      * Returns if the input element has a valid value pattern. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a> documentation
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a> documentation
      * for details.
      *
      * @return if the input element has a valid value pattern

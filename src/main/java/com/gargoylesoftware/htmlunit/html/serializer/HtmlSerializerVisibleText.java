@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.html.serializer;
 
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.BLOCK;
+
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,6 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebWindow;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomComment;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -56,7 +59,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlTextArea;
 import com.gargoylesoftware.htmlunit.html.HtmlTitle;
 import com.gargoylesoftware.htmlunit.html.HtmlUnorderedList;
 import com.gargoylesoftware.htmlunit.html.TableRowGroup;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 
 /**
  * Special serializer to generate the output we need
@@ -204,7 +206,7 @@ public class HtmlSerializerVisibleText {
         else if (domNode instanceof DomElement) {
             final WebWindow window = domNode.getPage().getEnclosingWindow();
             final String display = window.getComputedStyle((DomElement) domNode, null).getDisplay();
-            block = "block".equals(display);
+            block = BLOCK.equals(display);
         }
         else {
             block = false;
@@ -698,7 +700,7 @@ public class HtmlSerializerVisibleText {
                 DomNode node = domNode;
                 while (node != null) {
                     if (node instanceof DomElement) {
-                        final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
+                        final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) node, null);
                         final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                         if (StringUtils.isNoneEmpty(value)) {
                             if ("normal".equalsIgnoreCase(value)) {
@@ -731,7 +733,7 @@ public class HtmlSerializerVisibleText {
             final WebWindow window = page.getEnclosingWindow();
             if (window.getWebClient().getOptions().isCssEnabled()) {
                 if (domNode instanceof DomElement) {
-                    final ComputedCSSStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
+                    final ComputedCssStyleDeclaration style = window.getComputedStyle((DomElement) domNode, null);
                     final String value = style.getStyleAttribute(Definition.WHITE_SPACE, false);
                     if (StringUtils.isNoneEmpty(value)) {
                         if ("normal".equalsIgnoreCase(value)) {

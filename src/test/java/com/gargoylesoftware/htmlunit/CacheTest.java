@@ -18,16 +18,9 @@ import static com.gargoylesoftware.htmlunit.HttpHeader.CACHE_CONTROL;
 import static com.gargoylesoftware.htmlunit.HttpHeader.EXPIRES;
 import static com.gargoylesoftware.htmlunit.HttpHeader.LAST_MODIFIED;
 import static org.apache.hc.client5.http.utils.DateUtils.formatDate;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.expectLastCall;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
-import static org.junit.Assert.assertTrue;
+import static org.apache.http.client.utils.DateUtils.formatDate;
 
-import java.io.InputStream;
 import java.net.URL;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,6 +38,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import com.gargoylesoftware.htmlunit.util.mocks.WebResponseMock;
 
 /**
  * Tests for {@link Cache}.
@@ -73,7 +67,7 @@ public class CacheTest extends SimpleWebTestCase {
     public void isCacheableContent() {
         final Cache cache = new Cache();
         final Map<String, String> headers = new HashMap<>();
-        final WebResponse response = new HeaderResponse(headers);
+        final WebResponse response = new WebResponseMock(null, headers);
 
         assertFalse(cache.isCacheableContent(response));
 
@@ -110,70 +104,80 @@ public class CacheTest extends SimpleWebTestCase {
 
     @Test
     public void contentWithNoHeadersIsNotCached() {
-        assertFalse(Cache.isWithinCacheWindow(new HeaderResponse(), now_, now_));
+        assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, null), now_, now_));
     }
 
     @Test
     public void contentWithExpiryDateIsCached() {
-        assertTrue(Cache.isWithinCacheWindow(new HeaderResponse(EXPIRES, tomorrow_),
-                now_, now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(EXPIRES, tomorrow_);
+
+        assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
     @Test
     public void contentWithExpiryDateInFutureButShortMaxAgeIsNotInCacheWindow() {
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(EXPIRES, tomorrow_);
         // max age is 1 second, so will have expired after a minute
-        assertFalse(Cache.isWithinCacheWindow(new HeaderResponse(
-                EXPIRES, tomorrow_,
-                        CACHE_CONTROL, "some-other-value, max-age=1"),
-                now_ + ONE_MINUTE, now_));
+        headers.put(CACHE_CONTROL, "some-other-value, max-age=1");
+
+        assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
     @Test
     public void contentWithExpiryDateInFutureButShortSMaxAgeIsNotInCacheWindow() {
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(EXPIRES, tomorrow_);
         // s max age is 1 second, so will have expired after a minute
-        assertFalse(Cache.isWithinCacheWindow(new HeaderResponse(
-                EXPIRES, tomorrow_,
-                        CACHE_CONTROL, "some-other-value, s-maxage=1"),
-                now_ + ONE_MINUTE, now_));
+        headers.put(CACHE_CONTROL, "some-other-value, s-maxage=1");
+
+        assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
     @Test
     public void contentWithBothMaxAgeAndSMaxUsesSMaxAsPriority() {
-        assertFalse(Cache.isWithinCacheWindow(new HeaderResponse(
-                        CACHE_CONTROL, "some-other-value, max-age=1200, s-maxage=1"),
-                now_ + ONE_MINUTE, now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(CACHE_CONTROL, "some-other-value, max-age=1200, s-maxage=1");
+
+        assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
     @Test
     public void contentWithMaxAgeInFutureWillBeCached() {
-        assertTrue(Cache.isWithinCacheWindow(new HeaderResponse(
-                        CACHE_CONTROL, "some-other-value, max-age=1200"),
-                now_, now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(CACHE_CONTROL, "some-other-value, max-age=1200");
 
-        assertTrue(Cache.isWithinCacheWindow(new HeaderResponse(
-                        CACHE_CONTROL, "some-other-value, max-age=1200"),
-                now_ + ONE_MINUTE, now_));
+        assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
+
+        headers.clear();
+        headers.put(CACHE_CONTROL, "some-other-value, max-age=1200");
+
+        assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_MINUTE, now_));
     }
 
     @Test
     public void contentWithLongLastModifiedTimeComparedToNowIsCachedOnDownload() {
-        assertTrue(Cache.isWithinCacheWindow(new HeaderResponse(
-                        LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1))),
-                now_, now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1)));
+
+        assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_, now_));
     }
 
     @Test
     public void contentWithLastModifiedTimeIsCachedAfterAFewPercentOfCreationAge() {
-        assertTrue(Cache.isWithinCacheWindow(new HeaderResponse(
-                        LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1))),
-                now_ + ONE_HOUR, now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1)));
+
+        assertTrue(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + ONE_HOUR, now_));
     }
 
     @Test
     public void contentWithLastModifiedTimeIsNotCachedAfterALongerPeriod() {
-        assertFalse(Cache.isWithinCacheWindow(new HeaderResponse(
-                        LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1))),
-                now_ + (ONE_HOUR * 5), now_));
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(LAST_MODIFIED, formatDate(DateUtils.addDays(new Date(), -1)));
+
+        assertFalse(Cache.isWithinCacheWindow(new WebResponseMock(null, headers), now_ + (ONE_HOUR * 5), now_));
     }
 
     /**
@@ -762,42 +766,29 @@ public class CacheTest extends SimpleWebTestCase {
     @Test
     public void cleanUpOverflow() throws Exception {
         final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
-        final WebResponse response1 = createMock(WebResponse.class);
-        expect(response1.getWebRequest()).andReturn(request1);
-        expectLastCall().atLeastOnce();
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
-        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
+
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(HttpHeader.EXPIRES, formatDate(DateUtils.addHours(new Date(), 1)));
+
+        final WebResponseMock response1 = new WebResponseMock(request1, headers);
 
         final WebRequest request2 = new WebRequest(URL_SECOND, HttpMethod.GET);
-        final WebResponse response2 = createMock(WebResponse.class);
-        expect(response2.getWebRequest()).andReturn(request2);
-        expectLastCall().atLeastOnce();
-        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response2.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response2.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
-        expect(response2.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
-
-        response1.cleanUp();
-
-        replay(response1, response2);
+        final WebResponseMock response2 = new WebResponseMock(request2, headers);
 
         final Cache cache = new Cache();
         cache.setMaxSize(1);
         cache.cacheIfPossible(request1, response1, null);
+        assertEquals(0, response1.getCallCount("cleanUp"));
+        assertEquals(0, response2.getCallCount("cleanUp"));
+        assertEquals(6, response1.getCallCount("getResponseHeaderValue"));
+        assertEquals(0, response2.getCallCount("getResponseHeaderValue"));
+
         Thread.sleep(10);
         cache.cacheIfPossible(request2, response2, null);
-
-        verify(response1);
+        assertEquals(1, response1.getCallCount("cleanUp"));
+        assertEquals(0, response2.getCallCount("cleanUp"));
+        assertEquals(6, response1.getCallCount("getResponseHeaderValue"));
+        assertEquals(6, response2.getCallCount("getResponseHeaderValue"));
     }
 
     /**
@@ -806,110 +797,20 @@ public class CacheTest extends SimpleWebTestCase {
     @Test
     public void cleanUpOnClear() {
         final WebRequest request1 = new WebRequest(URL_FIRST, HttpMethod.GET);
-        final WebResponse response1 = createMock(WebResponse.class);
-        expect(response1.getWebRequest()).andReturn(request1);
-        expectLastCall().atLeastOnce();
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.CACHE_CONTROL)).andReturn(null);
-        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
-        expect(response1.getResponseHeaderValue(HttpHeader.EXPIRES)).andReturn(
-                formatDate(DateUtils.addHours(new Date(), 1)));
 
-        response1.cleanUp();
+        final Map<String, String> headers = new HashMap<>();
+        headers.put(HttpHeader.EXPIRES, formatDate(DateUtils.addHours(new Date(), 1)));
 
-        replay(response1);
+        final WebResponseMock response1 = new WebResponseMock(request1, headers);
 
         final Cache cache = new Cache();
         cache.cacheIfPossible(request1, response1, null);
+        assertEquals(0, response1.getCallCount("cleanUp"));
+        assertEquals(6, response1.getCallCount("getResponseHeaderValue"));
 
         cache.clear();
 
-        verify(response1);
-    }
-}
-
-class DummyWebResponse extends WebResponse {
-
-    DummyWebResponse() {
-        super(null, null, 0);
-    }
-
-    @Override
-    public InputStream getContentAsStream() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public String getContentAsString() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public Charset getContentCharset() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public Charset getContentCharsetOrNull() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public String getContentType() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public long getLoadTime() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public List<NameValuePair> getResponseHeaders() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public String getResponseHeaderValue(final String headerName) {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public int getStatusCode() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public String getStatusMessage() {
-        throw new RuntimeException("not implemented");
-    }
-
-    @Override
-    public WebRequest getWebRequest() {
-        throw new RuntimeException("not implemented");
-    }
-}
-
-class HeaderResponse extends DummyWebResponse {
-    private Map<String, String> headers_;
-
-    HeaderResponse(final Map<String, String> headers) {
-        headers_ = headers;
-    }
-
-    HeaderResponse(final String... headers) {
-        assertTrue(headers.length % 2 == 0);
-        headers_ = new HashMap<>();
-        for (int i = 0; i < headers.length; i += 2) {
-            headers_.put(headers[i], headers[i + 1]);
-        }
-    }
-
-    @Override
-    public String getResponseHeaderValue(final String headerName) {
-        return headers_.get(headerName);
+        assertEquals(1, response1.getCallCount("cleanUp"));
+        assertEquals(6, response1.getCallCount("getResponseHeaderValue"));
     }
 }

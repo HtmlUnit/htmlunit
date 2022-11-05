@@ -121,6 +121,7 @@ WebkitTransitionDuration
 WebkitTransitionProperty
 WebkitTransitionTimingFunction
 WebkitUserSelect
+accentColor
 alignContent
 alignItems
 alignSelf
@@ -229,6 +230,7 @@ color
 colorAdjust
 colorInterpolation
 colorInterpolationFilters
+colorScheme
 columnCount
 columnFill
 columnGap
@@ -249,6 +251,7 @@ cssText
 cursor
 cx
 cy
+d
 direction
 display
 dominantBaseline
@@ -307,6 +310,7 @@ gridTemplateAreas
 gridTemplateColumns
 gridTemplateRows
 height
+hyphenateCharacter
 hyphens
 imageOrientation
 imageRendering
@@ -386,6 +390,7 @@ outlineWidth
 overflow
 overflowAnchor
 overflowBlock
+overflowClipMargin
 overflowInline
 overflowWrap
 overflowX
@@ -417,6 +422,7 @@ placeItems
 placeSelf
 pointerEvents
 position
+printColorAdjust
 quotes
 r
 resize
@@ -454,6 +460,7 @@ scrollPaddingTop
 scrollSnapAlign
 scrollSnapType
 scrollbarColor
+scrollbarGutter
 scrollbarWidth
 shapeImageThreshold
 shapeMargin

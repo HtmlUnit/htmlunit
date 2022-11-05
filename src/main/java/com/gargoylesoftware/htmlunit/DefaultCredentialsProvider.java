@@ -31,7 +31,7 @@ import org.apache.hc.client5.http.auth.UsernamePasswordCredentials;
 import org.apache.hc.core5.http.protocol.HttpContext;
 
 /**
- * Default HtmlUnit implementation of the <tt>CredentialsProvider</tt> interface. Provides
+ * Default HtmlUnit implementation of the <code>CredentialsProvider</code> interface. Provides
  * credentials for both web servers and proxies. Supports Digest
  * authentication, Socks authentication and Basic HTTP authentication.
  *
@@ -122,7 +122,7 @@ public class DefaultCredentialsProvider implements CredentialsStore, Serializabl
     /**
      * Adds NTLM credentials for the specified username/password on the specified host/port.
      * @param username the username for the new credentials; should not include the domain to authenticate with;
-     *        for example: <tt>"user"</tt> is correct whereas <tt>"DOMAIN\\user"</tt> is not
+     *        for example: <code>"user"</code> is correct whereas <code>"DOMAIN\\user"</code> is not
      * @param password the password for the new credentials
      * @param host the host to which to the new credentials apply ({@code null} if applicable to any host)
      * @param port the port to which to the new credentials apply (negative if applicable to any port)

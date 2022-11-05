@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import java.io.Serializable;
 import java.util.AbstractList;
 import java.util.List;
 
@@ -23,8 +24,9 @@ import org.w3c.dom.Node;
  * An implementation of DomNodeList that is static.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<DomNode> {
+class StaticDomNodeList extends AbstractList<DomNode> implements DomNodeList<DomNode>, Serializable {
 
     private final List<DomNode> elements_;
 

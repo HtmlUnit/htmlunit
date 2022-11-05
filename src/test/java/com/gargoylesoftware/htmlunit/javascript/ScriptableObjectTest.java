@@ -34,9 +34,8 @@ public class ScriptableObjectTest extends WebDriverTestCase {
 
     /**
      * Tests that writing a property which is a read-only in the prototype
-     * behaves as expected.
-     *
-     * @see https://sourceforge.net/p/htmlunit/bugs/1633/
+     * behaves as expected (<a href="https://sourceforge.net/p/htmlunit/bugs/1633/">
+     * https://sourceforge.net/p/htmlunit/bugs/1633/</a>.
      * @throws Exception on failure
      */
     @Test

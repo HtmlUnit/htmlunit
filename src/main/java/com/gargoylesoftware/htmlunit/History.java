@@ -197,7 +197,7 @@ public class History implements Serializable {
 
     /**
      * Goes forward or backwards in the navigation history, according to whether the specified relative index
-     * is positive or negative. If the specified index is <tt>0</tt>, this method reloads the current page.
+     * is positive or negative. If the specified index is <code>0</code>, this method reloads the current page.
      * @param relativeIndex the index to move to, relative to the current index
      * @return this navigation history, after going forwards or backwards the specified number of steps
      * @throws IOException in case of error

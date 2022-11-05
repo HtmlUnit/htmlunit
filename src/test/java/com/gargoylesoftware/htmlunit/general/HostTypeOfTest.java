@@ -18,6 +18,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
+import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
@@ -27,6 +29,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author cd alexndr
  */
 @RunWith(BrowserRunner.class)
 public class HostTypeOfTest extends WebDriverTestCase {
@@ -688,7 +691,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Console}.
+     * Test Console.
      *
      * @throws Exception if an error occurs
      */
@@ -957,7 +960,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule}.
+     * Test {@link CSSStyleRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -969,7 +972,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet}.
+     * Test {@link CSSStyleSheet}.
      *
      * @throws Exception if an error occurs
      */
@@ -2107,7 +2110,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
-            FF_ESR = "undefined",
             IE = "undefined")
     public void htmlDialogElement() throws Exception {
         test("HTMLDialogElement");
@@ -4017,7 +4019,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.NamedNodeMap}.
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.NamedNodeMap}.
      *
      * @throws Exception if an error occurs
      */
@@ -4239,9 +4241,11 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined")
+            EDGE = "undefined",
+            FF = "undefined")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }
@@ -6300,7 +6304,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function",
             IE = "object")
     public void svgPathSegList() throws Exception {
         test("SVGPathSegList");

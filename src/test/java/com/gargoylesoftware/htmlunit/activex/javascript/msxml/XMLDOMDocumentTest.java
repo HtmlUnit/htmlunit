@@ -111,8 +111,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = "[object Object]")
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = "[object\\sObject]")
     public void scriptableToString() throws Exception {
         tester_create("log(Object.prototype.toString.call(doc));\n");
     }
@@ -121,7 +121,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "false"})
     public void async() throws Exception {
         final String test = ""
@@ -141,7 +141,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void attributes() throws Exception {
         property_create("attributes");
@@ -151,7 +151,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void baseName() throws Exception {
         property_create("baseName");
@@ -161,7 +161,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"4", "#comment(8)=child-comment", "true", "child-element(1)=null", "true",
                   "child-instr(7)=", "true", "xml(7)=version=\"1.0\"", "true"})
     public void childNodes() throws Exception {
@@ -198,7 +198,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "0")
     public void childNodes_none() throws Exception {
         tester_create("log(doc.childNodes.length);\n");
@@ -208,7 +208,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void dataType() throws Exception {
         property_create("dataType");
@@ -218,7 +218,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "null")
     public void definition() throws Exception {
         property_create("definition");
@@ -229,7 +229,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "exception-write"})
     public void doctype_created() throws Exception {
         final String test = ""
@@ -269,7 +269,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "true", "exception-setNull"})
     public void documentElement() throws Exception {
         final String test = ""
@@ -290,7 +290,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "<new/>\\r\\n"})
     public void documentElement_replaceExisting() throws Exception {
         final String test = ""
@@ -415,7 +415,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void firstChild() throws Exception {
         final String test = ""
@@ -524,7 +524,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"false", "exception-write"})
     public void implementation() throws Exception {
         final String test = ""
@@ -542,7 +542,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"true", "exception-setNull", "exception-setEmpty", "exception-set"})
     public void lastChild() throws Exception {
         final String test = ""
@@ -651,7 +651,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void namespaceURI() throws Exception {
         property_create("namespaceURI");
@@ -671,7 +671,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void nextSibling_created() throws Exception {
         tester_create("log(doc.nextSibling == null);\n");
@@ -681,7 +681,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "#document")
     public void nodeName() throws Exception {
         property_create("nodeName");
@@ -691,7 +691,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "9")
     public void nodeType() throws Exception {
         property_create("nodeType");
@@ -736,7 +736,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void ownerDocument_created() throws Exception {
         tester_create("log(doc.ownerDocument == null);\n");
@@ -756,7 +756,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void parentNode_created() throws Exception {
         tester_create("log(doc.parentNode == null);\n");
@@ -767,7 +767,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"false", "exception-write"})
     public void parseError() throws Exception {
         final String test = ""
@@ -785,7 +785,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void prefix() throws Exception {
         property_create("prefix");
@@ -795,7 +795,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"false", "<root><test><element/></test></root>\\r\\n",
                   "true", "<root><test><element/></test></root>\\r\\n"})
     public void preserveWhiteSpace() throws Exception {
@@ -828,7 +828,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"false", "false", "<root>\\r\\n\\t<test>\\r\\n\\t\\t<element/>\\r\\n\\t</test>\\r\\nA#B##C\\tD\\r\\n</root>\\r\\n",
                   "false", "true", "<root>\\r\\n\\t<test>\\r\\n\\t\\t<element/>\\r\\n\\t</test>\\r\\nA#B##C\\tD\\r\\n</root>\\r\\n",
                   "true", "false", "<root>\\r\\n<test>\\r\\n##<element/>\\r\\n</test>\\r\\nA#B##C\\tD\\r\\n</root>\\r\\n",
@@ -902,7 +902,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "true")
     public void previousSibling_created() throws Exception {
         tester_create("log(doc.previousSibling == null);\n");
@@ -931,7 +931,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "", "exception-set", "exception-setEmpty", "exception-setNull"})
     public void text_set() throws Exception {
         final String test = ""
@@ -957,7 +957,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void text_created() throws Exception {
         tester_create("log(doc.text);\n");
@@ -1016,7 +1016,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = "")
     public void url_created() throws Exception {
         tester_create("log(doc.url);\n");
@@ -1027,7 +1027,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"", "<foo/>\\r\\n"})
     public void xml() throws Exception {
         final String test = ""
@@ -1049,7 +1049,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-appendNull",
                   "exception-appendEmpty"})
@@ -1073,7 +1073,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true", "exception-appendCDATA1"})
     public void appendChild_cdata() throws Exception {
         final String test = ""
@@ -1091,7 +1091,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true"})
@@ -1123,7 +1123,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "0", "true", "true", "true",
                   "1", "true", "true", "true"})
@@ -1155,7 +1155,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-appendFragment",
                   "0", "true", "true", "true"})
@@ -1180,7 +1180,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-appendFragment",
                   "0", "true", "true", "true"})
@@ -1205,7 +1205,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-appendFragment",
                   "0", "true", "true", "true"})
@@ -1231,7 +1231,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "exception-appendElement2",
@@ -1268,7 +1268,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true", "exception-appendText1"})
     public void appendChild_text() throws Exception {
         final String test = ""
@@ -1286,7 +1286,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true"})
@@ -1318,7 +1318,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true"})
@@ -1350,8 +1350,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"[object Object]", "foo(2)=", "true", "true",
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"[object\\sObject]", "foo(2)=", "true", "true",
                   "exception-createNull", "exception-createEmpty", "exception-createBlank", "exception-createXML"})
     public void createAttribute() throws Exception {
         final String test = ""
@@ -1385,7 +1385,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"FOO", "fOo", "Foo"})
     public void createAttribute_caseSensitive() throws Exception {
         final String test = ""
@@ -1403,8 +1403,8 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
-            IE = {"[object Object]", "foo(1)=null", "true", "true",
+    @Alerts(DEFAULT = "no\\sActiveX",
+            IE = {"[object\\sObject]", "foo(1)=null", "true", "true",
                   "exception-createNull", "exception-createEmpty", "exception-createBlank", "exception-createXML"})
     public void createElement() throws Exception {
         final String test = ""
@@ -1438,7 +1438,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"FOO", "fOo", "Foo"})
     public void createElement_caseSensitive() throws Exception {
         final String test = ""
@@ -1456,7 +1456,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-insertNull",
                   "exception-insertEmpty"})
@@ -1480,7 +1480,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true", "exception-insertCDATA1"})
     public void insertBefore_cdata() throws Exception {
         final String test = ""
@@ -1498,7 +1498,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true",
@@ -1545,7 +1545,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "0", "true", "true", "true",
                   "1", "true", "true", "true",
@@ -1606,7 +1606,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-insertFragment",
                   "0", "true", "true", "true"})
@@ -1631,7 +1631,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-insertFragment",
                   "0", "true", "true", "true"})
@@ -1656,7 +1656,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "exception-insertFragment",
                   "0", "true", "true", "true"})
@@ -1682,7 +1682,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "exception-insertElement2",
@@ -1729,7 +1729,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true", "exception-insertText1"})
     public void insertBefore_text() throws Exception {
         final String test = ""
@@ -1747,7 +1747,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true",
@@ -1794,7 +1794,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"0", "true",
                   "1", "true", "true", "true",
                   "2", "true", "true", "true", "true", "true",
@@ -1842,7 +1842,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "no ActiveX",
+    @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"", "<foo><bar/></foo>\\r\\n", "foo"})
     public void loadXML() throws Exception {
         final String test = ""
@@ -1892,7 +1892,7 @@ public class XMLDOMDocumentTest extends WebDriverTestCase {
     }
 
     private void tester_create(final String test) throws Exception {
-        final String html = LOG_TITLE_NORMALIZE_FUNCTION
+        final String html = LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + ACTIVEX_CHECK
             + "    var doc = " + callCreateXMLDOMDocument() + ";\n"

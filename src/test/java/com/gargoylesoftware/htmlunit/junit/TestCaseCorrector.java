@@ -51,7 +51,9 @@ final class TestCaseCorrector {
     static void correct(final FrameworkMethod method, final boolean realBrowser, final BrowserVersion browserVersion,
             final boolean notYetImplemented, final Throwable t) throws IOException {
         final String testRoot = "src/test/java/";
-        final String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
+        String browserString = browserVersion.getNickname().toUpperCase(Locale.ROOT);
+        browserString = browserString.replace('-', '_'); // FF-ESR-> FF_ESR
+
         final File file = new File(testRoot + method.getDeclaringClass().getName().replace('.', '/') + ".java");
         final List<String> lines = FileUtils.readLines(file, UTF_8);
         final String methodLine = "    public void " + method.getName() + "()";
@@ -165,15 +167,17 @@ final class TestCaseCorrector {
     }
 
     private static String getActualString(final ComparisonFailure failure) {
+        final int lineLength = 96;
+
         String actual = failure.getActual();
-        actual = actual.substring(1, actual.length() - 1);
+        actual = actual.substring(0, actual.length() - 1);
         actual = StringEscapeUtils.escapeJava(actual);
-        if (actual.length() > 96) {
+        if (actual.length() > lineLength) {
             final StringBuilder builder = new StringBuilder();
             while (!actual.isEmpty()) {
-                int length = actual.lastIndexOf(',', 96) + 1;
+                int length = actual.lastIndexOf(',', lineLength) + 1;
                 if (length == 0 && !actual.isEmpty()) {
-                    length = Math.min(96, actual.length());
+                    length = Math.min(lineLength, actual.length());
                 }
                 if (builder.length() != 0) {
                     builder.append(System.lineSeparator()).append("                + ");

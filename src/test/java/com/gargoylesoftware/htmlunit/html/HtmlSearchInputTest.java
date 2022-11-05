@@ -178,6 +178,43 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {" 210 ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+210+", "2"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+210+", "2"})
+    public void patternValidationTrimInitial() throws Exception {
+        validation("<input type='search' pattern='[ 012]{3,10}' id='e1' name='k' value=' 210 '>\n", "", null);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {" 210 ",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=+210+", "2"},
+            IE = {" 210 ",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=+210+", "2"})
+    public void patternValidationTrimType() throws Exception {
+        validation("<input type='search' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
+    }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"abcd",
                        "false",
                        "false-false-false-false-false-false-false-true-false-false-false",

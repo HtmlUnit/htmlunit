@@ -251,7 +251,8 @@ public class CSSRule extends HtmlUnitScriptable {
     }
 
     /**
-     * See https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText.
+     * See <a href="https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText">
+     * https://developer.mozilla.org/en-US/docs/Web/API/CSSRule/cssText</a>.
      * @param cssText ignored
      */
     @JsxSetter

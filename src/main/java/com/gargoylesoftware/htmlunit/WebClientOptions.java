@@ -120,7 +120,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the SSL client certificate to use. The needed parameters are used to
      * construct a {@link java.security.KeyStore}.
-     *
+     * <p>
      * If the web server requires Renegotiation, you have to set system property
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
@@ -144,7 +144,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the SSL client certificate to use.
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
-     *
+     * <p>
      * If the web server requires Renegotiation, you have to set system property
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
@@ -291,7 +291,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Enable/disable the popup window blocker. By default, the popup blocker is disabled, and popup
-     * windows are allowed. When set to {@code true}, <tt>window.open()</tt> has no effect and
+     * windows are allowed. When set to {@code true}, <code>window.open()</code> has no effect and
      * returns {@code null}.
      *
      * @param enabled {@code true} to enable the popup window blocker
@@ -521,7 +521,7 @@ public class WebClientOptions implements Serializable {
     /**
      * Sets the SSL server certificate trust store. All server certificates will be validated against
      * this trust store.
-     *
+     * <p>
      * The needed parameters are used to construct a {@link java.security.KeyStore}.
      *
      * @param sslTrustStoreUrl the URL which locates the trust store
@@ -624,10 +624,10 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Returns local address to be used for request execution.
-     *
+     * <p>
      * On machines with multiple network interfaces, this parameter can be used to select the network interface
      * from which the connection originates.
-     *
+     * <p>
      * Default: {@code null}
      *
      * @return the local address
@@ -639,7 +639,7 @@ public class WebClientOptions implements Serializable {
 
     /**
      * Sets the local address to be used for request execution.
-     *
+     * <p>
      * On machines with multiple network interfaces, this parameter can be used to select the network interface
      * from which the connection originates.
      *

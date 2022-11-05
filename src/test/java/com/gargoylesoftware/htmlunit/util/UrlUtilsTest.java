@@ -370,6 +370,78 @@ public class UrlUtilsTest extends SimpleWebTestCase {
     }
 
     /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithWhitespace() {
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org\t", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.or\tg", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlu\tnit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://\twww.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http:\t//www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("http\t://www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("\thttp://www.htmlunit.org", "/x"));
+
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org\n", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.or\ng", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlu\nnit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://\nwww.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http:\n//www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("http\n://www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("\nhttp://www.htmlunit.org", "/x"));
+
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org\r", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.or\rg", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlu\rnit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://\rwww.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http:\r//www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("http\r://www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",     UrlUtils.resolveUrl("\rhttp://www.htmlunit.org", "/x"));
+    }
+
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithLeadingControl() {
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("\u0005http://www.htmlunit.org", "/x"));
+        assertEquals("http://www.htmlunit.org/x",
+                UrlUtils.resolveUrl("\u0005\u0004\u0003\u0002\u0000http://www.htmlunit.org", "/x"));
+
+        assertEquals("http://www.htmlunit.o\u0005rg/x",    UrlUtils.resolveUrl("http://www.htmlunit.o\u0005rg", "/x"));
+        assertEquals("http://www.htmlunit.o\u0005rg/x",
+                UrlUtils.resolveUrl("\u0011http://www.htmlunit.o\u0005rg", "/x"));
+    }
+
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithTrailingControl() {
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org\u0005", "/x"));
+        assertEquals("http://www.htmlunit.org/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.org\u0005\u0004\u0003\u0002\u0000", "/x"));
+
+        assertEquals("http://www.htmlunit.o\u0005rg/x",    UrlUtils.resolveUrl("http://www.htmlunit.o\u0005rg", "/x"));
+        assertEquals("http://www.htmlunit.o\u0005rg/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.o\u0005rg\u0011", "/x"));
+    }
+
+    /**
+     * Test {@link UrlUtils#resolveUrl(String, String)} with extra examples.
+     */
+    @Test
+    public void resolveUrlWithTrailingSpace() {
+        assertEquals("http://www.htmlunit.org/x",    UrlUtils.resolveUrl("http://www.htmlunit.org ", "/x"));
+        assertEquals("http://www.htmlunit.org/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.org    ", "/x"));
+
+        assertEquals("http://www.htmlunit.o rg/x",    UrlUtils.resolveUrl("http://www.htmlunit.o rg", "/x"));
+        assertEquals("http://www.htmlunit.o rg/x",
+                UrlUtils.resolveUrl("http://www.htmlunit.o rg ", "/x"));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -243,7 +243,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code longdesc}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
@@ -254,7 +254,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -274,7 +274,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code src}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
@@ -285,7 +285,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code frameborder}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code frameborder} or an empty string if that attribute isn't defined
@@ -296,7 +296,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code marginwidth}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code marginwidth} or an empty string if that attribute isn't defined
@@ -307,7 +307,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code marginheight}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code marginheight} or an empty string if that attribute isn't defined
@@ -318,7 +318,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code noresize}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code noresize} or an empty string if that attribute isn't defined
@@ -329,7 +329,7 @@ public abstract class BaseFrameElement extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code scrolling}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code scrolling} or an empty string if that attribute isn't defined

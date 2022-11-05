@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit.javascript;
 
+import java.io.Serializable;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -23,8 +25,9 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  *
  * @author Marc Guillemot
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
-public class FunctionWrapper implements Function {
+public class FunctionWrapper implements Function, Serializable {
     private final Function wrapped_;
 
     /**

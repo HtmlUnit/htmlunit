@@ -19,8 +19,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.apache.xml.utils.PrefixResolver;
-
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -29,6 +27,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.NativeFunctionPrefixResolve
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A JavaScript object for {@code XPathEvaluator}.

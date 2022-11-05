@@ -425,12 +425,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    try {\n"
             + "      document.forms[0].enctype = '" + enctype + "';\n"
-            + "      alert(document.forms[0].enctype);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(document.forms[0].encoding);\n"
+            + "      log(document.forms[0].enctype);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(document.forms[0].encoding);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -443,7 +444,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         driver.findElement(By.name("submit1")).click();
         assertTitle(driver, "Response");
@@ -466,12 +467,13 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function doTest() {\n"
             + "    try {\n"
             + "      document.forms[0].encoding = '" + encoding + "';\n"
-            + "      alert(document.forms[0].encoding);\n"
-            + "    } catch(e) { alert('exception'); }\n"
-            + "    alert(document.forms[0].enctype);\n"
+            + "      log(document.forms[0].encoding);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "    log(document.forms[0].enctype);\n"
             + "  }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -484,7 +486,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse("<html><title>Response</title></html>");
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0], getExpectedAlerts()[1]});
 
         driver.findElement(By.name("submit1")).click();
         assertTitle(driver, "Response");
@@ -656,8 +658,10 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts("foo")
     public void findInputWithoutTypeDefined() throws Exception {
         final String html
-            = "<html><head></head>\n"
-            + "<body onload='alert(document.simple_form.login.value);'>\n"
+            = "<html><head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(document.simple_form.login.value);'>\n"
             + "<p>hello world</p><table><tr><td>\n"
             + "<form action='login.jsp' name='simple_form'>\n"
             + "  <input name='msg' type='hidden' value='0'>\n"
@@ -666,7 +670,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</form></td></tr></table>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -754,15 +758,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void getFormFromFormsById() throws Exception {
         final String html =
             "<html>\n"
-            + "<head></head>\n"
-            + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload=\"log(document.forms['myForm'].action)\">\n"
             + "<form id='myForm' action='foo.html'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -774,15 +780,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void action() throws Exception {
         final String html =
             "<html>\n"
-            + "<head></head>\n"
-            + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload=\"log(document.forms['myForm'].action)\">\n"
             + "<form id='myForm'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -793,15 +801,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void actionEmpty() throws Exception {
         final String html =
             "<html>\n"
-            + "<head></head>\n"
-            + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload=\"log(document.forms['myForm'].action)\">\n"
             + "<form id='myForm' action=''>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -812,15 +822,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void actionBlank() throws Exception {
         final String html =
             "<html>\n"
-            + "<head></head>\n"
-            + "<body onload=\"alert(document.forms['myForm'].action)\">\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload=\"log(document.forms['myForm'].action)\">\n"
             + "<form id='myForm' action='  '>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -831,15 +843,17 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     public void getFieldNamedLikeForm() throws Exception {
         final String html =
             "<html>\n"
-            + "<head></head>\n"
-            + "<body onload='alert(document.login.login.type)'>\n"
+            + "<head>\n"
+            + "<script>" + LOG_TITLE_FUNCTION + "</script>\n"
+            + "</head>\n"
+            + "<body onload='log(document.login.login.type)'>\n"
             + "<form name='login' action='foo.html'>\n"
             + "<input name='login' type='text'>\n"
             + "</form>\n"
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

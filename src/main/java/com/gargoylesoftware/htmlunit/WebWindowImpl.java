@@ -29,6 +29,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
+import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -36,7 +38,6 @@ import com.gargoylesoftware.htmlunit.javascript.background.BackgroundJavaScriptF
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
@@ -98,7 +99,7 @@ public abstract class WebWindowImpl implements WebWindow {
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131)) {
             outerHeight_ = innerHeight_ + 131;
-            outerWidth_ = innerWidth_ + 16;
+            outerWidth_ = innerWidth_ + 63;
         }
         else if (webClient.getBrowserVersion().hasFeature(JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_133)) {
             outerHeight_ = innerHeight_ + 133;
@@ -381,7 +382,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public CSS2Properties getComputedStyle(final DomElement element, final String pseudoElement) {
+    public ComputedCssStyleDeclaration getComputedStyle(final DomElement element, final String pseudoElement) {
         String normalizedPseudo = pseudoElement;
         if (normalizedPseudo != null) {
             if (normalizedPseudo.startsWith("::")) {
@@ -395,30 +396,34 @@ public abstract class WebWindowImpl implements WebWindow {
 
         final SgmlPage sgmlPage = element.getPage();
         if (sgmlPage instanceof HtmlPage) {
-            final CSS2Properties styleFromCache = ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
+            final ComputedCssStyleDeclaration styleFromCache =
+                    ((HtmlPage) sgmlPage).getStyleFromCache(element, normalizedPseudo);
             if (styleFromCache != null) {
                 return styleFromCache;
             }
         }
 
         final Element e = element.getScriptableObject();
-        final CSS2Properties style = new CSS2Properties(e);
+        final ComputedCssStyleDeclaration computedsStyleDeclaration =
+                new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element));
+
         final Object ownerDocument = e.getOwnerDocument();
         if (ownerDocument instanceof HTMLDocument) {
             final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
             final boolean trace = LOG.isTraceEnabled();
             for (int i = 0; i < sheets.getLength(); i++) {
                 final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-                if (sheet.isActive() && sheet.isEnabled()) {
+                if (sheet.getCssStyleSheet().isActive() && sheet.getCssStyleSheet().isEnabled()) {
                     if (trace) {
-                        LOG.trace("modifyIfNecessary: " + sheet + ", " + style + ", " + e);
+                        LOG.trace("modifyIfNecessary: " + sheet + ", " + computedsStyleDeclaration + ", " + e);
                     }
-                    sheet.modifyIfNecessary(style, element, normalizedPseudo);
+                    sheet.getCssStyleSheet().modifyIfNecessary(computedsStyleDeclaration, element, normalizedPseudo);
                 }
             }
 
-            ((HtmlPage) element.getPage()).putStyleIntoCache(element, normalizedPseudo, style);
+            ((HtmlPage) element.getPage()).putStyleIntoCache(element, normalizedPseudo, computedsStyleDeclaration);
         }
-        return style;
+
+        return computedsStyleDeclaration;
     }
 }

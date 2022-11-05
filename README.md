@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 2.63.0 / July 10, 2022
+Version 2.66.0 / October 22, 2022
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -37,7 +37,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.63.0</version>
+    <version>2.66.0</version>
 </dependency>
 ```
 
@@ -46,7 +46,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.63.0'
+implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.66.0'
 ```
 
 ## Overview
@@ -76,12 +76,14 @@ ses from the server should throw exceptions or should be returned as pages of th
 You can start here: 
 * [Getting Started][7]
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
+* [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
+* [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
 
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
 Every contribution - from bug reports to feature requests, typos to full new features - are greatly appreciated.
 
-## Latest CI build
+## Last CI build
 The latest builds are available from our
 [Jenkins CI build server][2]
 
@@ -112,7 +114,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>net.sourceforge.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>2.64.0-SNAPSHOT</version>
+          <version>2.66.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -131,7 +133,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.64.0-SNAPSHOT'
+    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.66.0-SNAPSHOT'
   // ...
 }
 ```
@@ -144,7 +146,7 @@ dependencies {
 This project is licensed under the Apache 2.0 License
 
 
-[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.63.0/ "HtmlUnit on sourceforge"
+[1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.66.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
 [4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
@@ -152,3 +154,5 @@ This project is licensed under the Apache 2.0 License
 [6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
 [7]: https://htmlunit.sourceforge.io/gettingStarted.html
 [8]: https://www.scrapingbee.com/java-webscraping-book/
+[9]: https://www.innoq.com/en/blog/webscraping/
+[10]: https://www.webscrapingapi.com/java-web-scraping/

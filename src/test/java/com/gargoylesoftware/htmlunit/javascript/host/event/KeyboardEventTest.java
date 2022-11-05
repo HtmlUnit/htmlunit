@@ -410,10 +410,7 @@ public class KeyboardEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"exception", "exception"},
-            FF_ESR = {"exception",
-                      "keydown, true, true, true, true, true, true, 65, 0",
-                      "keyup, false, false, false, false, false, false, 32, 0"})
+    @Alerts({"exception", "exception"})
     public void initKeyEvent() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
@@ -439,6 +436,64 @@ public class KeyboardEventTest extends WebDriverTestCase {
             + "      dumpEvent(keyEvent);\n"
             + "      keyEvent = document.createEvent('KeyboardEvent');\n"
             + "      keyEvent.initKeyEvent('keyup', false, false, null, false, false, false, false, 32, 32);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "    } catch(e) {log('exception')}\n"
+            + "  }\n"
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"exception",
+                       "keydown, true, true, , 0, true, true, true, true, 0, 0",
+                       "keyup, false, false, , 7, false, false, false, false, 0, 0"},
+            FF = {"exception",
+                  "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
+                  "keyup, false, false, , 7, false, false, false, false, 0, 0"},
+            FF_ESR = {"exception",
+                      "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
+                      "keyup, false, false, , 7, false, false, false, false, 0, 0"},
+            IE = {"exception",
+                  "keydown, true, true, Fn, 0, false, false, false, false, 0, 0",
+                  "keyup, false, false, , 7, false, false, false, false, 0, 0"})
+    @HtmlUnitNYI(CHROME = {"exception",
+                           "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
+                           "keyup, false, false, , 7, false, false, false, false, 0, 0"},
+                 EDGE = {"exception",
+                         "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
+                         "keyup, false, false, , 7, false, false, false, false, 0, 0"},
+                 IE = {"exception",
+                       "keydown, true, true, Fn, 0, true, true, true, true, 0, 0",
+                       "keyup, false, false, , 7, false, false, false, false, 0, 0"})
+    public void initKeyboardEvent() throws Exception {
+        final String html = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var properties = ['type', 'bubbles', 'cancelable', /*'view',*/ 'key', 'location',"
+            + "        'ctrlKey', 'altKey', 'shiftKey', 'metaKey', 'keyCode', 'charCode'];\n"
+            + "  function dumpEvent(e) {\n"
+            + "    var str = '';\n"
+            + "    for (var i = 0; i < properties.length; i++) str += ', ' + e[properties[i]];\n"
+            + "    log(str.substring(2));\n"
+            + "  }\n"
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var keyEvent = document.createEvent('KeyEvents');\n"
+            + "      keyEvent.initKeyboardEvent('keydown', true, true, null, 'Fn', 0, true, true, true, true);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "      keyEvent = document.createEvent('KeyEvents');\n"
+            + "      keyEvent.initKeyboardEvent('keyup', false, false, null, '', 7, false, false, false, false);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "    } catch(e) {log('exception')}\n"
+            + "    try {\n"
+            + "      var keyEvent = document.createEvent('KeyboardEvent');\n"
+            + "      keyEvent.initKeyboardEvent('keydown', true, true, null, 'Fn', 0, true, true, true, true);\n"
+            + "      dumpEvent(keyEvent);\n"
+            + "      keyEvent = document.createEvent('KeyboardEvent');\n"
+            + "      keyEvent.initKeyboardEvent('keyup', false, false, null, '', 7, false, false, false, false);\n"
             + "      dumpEvent(keyEvent);\n"
             + "    } catch(e) {log('exception')}\n"
             + "  }\n"
@@ -705,18 +760,18 @@ public class KeyboardEventTest extends WebDriverTestCase {
                             "keydown:13,0,13,Enter,undefined,Enter,false",
                             "keypress:13,13,13,Enter,undefined,Enter,false",
                             "keyup:13,0,13,Enter,undefined,Enter,false"},
-                    FF_ESR = {"keydown:65,0,65,A,undefined,,false",
-                              "keypress:65,65,65,A,undefined,,false",
-                              "keyup:65,0,65,A,undefined,,false",
-                              "keydown:65,0,65,a,undefined,,false",
-                              "keypress:97,97,97,a,undefined,,false",
-                              "keyup:65,0,65,a,undefined,,false",
-                              "keydown:190,0,190,.,undefined,,false",
-                              "keypress:46,46,46,.,undefined,,false",
-                              "keyup:190,0,190,.,undefined,,false",
-                              "keydown:13,0,13,Enter,undefined,,false",
-                              "keypress:13,13,13,Enter,undefined,,false",
-                              "keyup:13,0,13,Enter,undefined,,false"},
+                    FF_ESR = {"keydown:65,0,65,A,undefined,KeyA,false",
+                              "keypress:65,65,65,A,undefined,KeyA,false",
+                              "keyup:65,0,65,A,undefined,KeyA,false",
+                              "keydown:65,0,65,a,undefined,KeyA,false",
+                              "keypress:97,97,97,a,undefined,KeyA,false",
+                              "keyup:65,0,65,a,undefined,KeyA,false",
+                              "keydown:190,0,190,.,undefined,Period,false",
+                              "keypress:46,46,46,.,undefined,Period,false",
+                              "keyup:190,0,190,.,undefined,Period,false",
+                              "keydown:13,0,13,Enter,undefined,Enter,false",
+                              "keypress:13,13,13,Enter,undefined,Enter,false",
+                              "keyup:13,0,13,Enter,undefined,Enter,false"},
                     FF = {"keydown:65,0,65,A,undefined,KeyA,false",
                           "keypress:65,65,65,A,undefined,KeyA,false",
                           "keyup:65,0,65,A,undefined,KeyA,false",

@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 /**
  * Class which centralizes proxy configuration, in an effort to reduce clutter in the {@link WebClient}
- * class. One instance of this class exists for each <tt>WebClient</tt> instance.
+ * class. One instance of this class exists for each <code>WebClient</code> instance.
  *
  * @author Daniel Gredler
  * @author Ronald Brill

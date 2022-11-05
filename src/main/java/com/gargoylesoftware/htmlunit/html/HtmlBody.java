@@ -14,9 +14,12 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
+
 import java.util.Map;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 /**
@@ -33,7 +36,7 @@ public class HtmlBody extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "body";
 
-    /** Whether or not this body is temporary (created because the <tt>body</tt> tag has not yet been parsed). */
+    /** Whether or not this body is temporary (created because the <code>body</code> tag has not yet been parsed). */
     private final boolean temporary_;
 
     /**
@@ -42,7 +45,7 @@ public class HtmlBody extends HtmlElement {
      * @param qualifiedName the qualified name of the element type to instantiate
      * @param page the page that contains this element
      * @param attributes the initial attributes
-     * @param temporary whether or not this body is temporary (created because the <tt>body</tt>
+     * @param temporary whether or not this body is temporary (created because the <code>body</code>
      *        tag does not exist or has not yet been parsed)
      */
     public HtmlBody(final String qualifiedName, final SgmlPage page,
@@ -55,7 +58,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onload}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onload} or an empty string if that attribute isn't defined
@@ -66,7 +69,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onunload}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onunload} or an empty string if that attribute isn't defined
@@ -77,7 +80,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code background}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code background} or an empty string if that attribute isn't defined
@@ -88,7 +91,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code bgcolor}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code bgcolor} or an empty string if that attribute isn't defined
@@ -99,7 +102,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code text}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code text} or an empty string if that attribute isn't defined
@@ -110,7 +113,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code link}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code link} or an empty string if that attribute isn't defined
@@ -121,7 +124,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code vlink}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code vlink} or an empty string if that attribute isn't defined
@@ -132,7 +135,7 @@ public class HtmlBody extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code alink}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code alink} or an empty string if that attribute isn't defined
@@ -142,10 +145,10 @@ public class HtmlBody extends HtmlElement {
     }
 
     /**
-     * Returns {@code true} if this body is temporary (created because the <tt>body</tt> tag
+     * Returns {@code true} if this body is temporary (created because the <code>body</code> tag
      * has not yet been parsed).
      *
-     * @return {@code true} if this body is temporary (created because the <tt>body</tt> tag
+     * @return {@code true} if this body is temporary (created because the <code>body</code> tag
      *         has not yet been parsed)
      */
     public final boolean isTemporary() {
@@ -161,5 +164,22 @@ public class HtmlBody extends HtmlElement {
             return true;
         }
         return super.handles(event);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDefaults(final ComputedCssStyleDeclaration style) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
+            style.setDefaultLocalStyleAttribute("margin", "8px");
+            style.setDefaultLocalStyleAttribute("padding", "0px");
+        }
+        else {
+            style.setDefaultLocalStyleAttribute("margin-left", "8px");
+            style.setDefaultLocalStyleAttribute("margin-right", "8px");
+            style.setDefaultLocalStyleAttribute("margin-top", "8px");
+            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
+        }
     }
 }

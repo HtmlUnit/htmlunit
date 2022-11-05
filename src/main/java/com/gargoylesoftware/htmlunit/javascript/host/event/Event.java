@@ -588,7 +588,8 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Whether or not the event bubbles. The value of this attribute depends on the event type. To
-     * determine if a certain event type bubbles, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * determine if a certain event type bubbles, see
+     * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">events</a>
      * Most event types do bubble, so this is true by default; event types which do not bubble should
      * overwrite this value in their constructors.
      */
@@ -596,7 +597,9 @@ public class Event extends HtmlUnitScriptable {
 
     /**
      * Whether or not the event can be canceled. The value of this attribute depends on the event type. To
-     * determine if a certain event type can be canceled, see http://www.w3.org/TR/DOM-Level-2-Events/events.html
+     * determine if a certain event type can be canceled, see
+     * <a href="http://www.w3.org/TR/DOM-Level-2-Events/events.html">
+     * http://www.w3.org/TR/DOM-Level-2-Events/events.html</a>
      * The more common event types are cancelable, so this is true by default; event types which cannot be
      * canceled should overwrite this value in their constructors.
      */
@@ -642,7 +645,11 @@ public class Event extends HtmlUnitScriptable {
             // https://www.w3.org/TR/DOM-Level-3-Events/#event-type-error
             bubbles_ = false;
         }
-        else if (TYPE_FOCUS.equals(type) || TYPE_BLUR.equals(type)) {
+        else if (
+                TYPE_FOCUS.equals(type)
+                || TYPE_BLUR.equals(type)
+                || TYPE_BEFOREPRINT.equals(type)
+                || TYPE_AFTERPRINT.equals(type)) {
             bubbles_ = false;
             cancelable_ = false;
         }
@@ -924,7 +931,7 @@ public class Event extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code true} if both <tt>cancelable</tt> is {@code true} and <tt>preventDefault()</tt> has been
+     * Returns {@code true} if both <code>cancelable</code> is {@code true} and <code>preventDefault()</code> has been
      * called for this event. Otherwise this attribute must return {@code false}.
      * @return {@code true} if this event has been cancelled or not
      */
@@ -1026,8 +1033,8 @@ public class Event extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns {@code true} if this event has been aborted via <tt>preventDefault()</tt> in
-     * standards-compliant browsers, or via the event's <tt>returnValue</tt> property in IE, or
+     * Returns {@code true} if this event has been aborted via <code>preventDefault()</code> in
+     * standards-compliant browsers, or via the event's <code>returnValue</code> property in IE, or
      * by the event handler returning {@code false}.
      *
      * @param result the event handler result (if {@code false}, the event is considered aborted)

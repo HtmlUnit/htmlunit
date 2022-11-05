@@ -624,6 +624,37 @@ public class CSSImportRuleTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void styleSheetSameObject() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  @import 'imp.css' print;\n"
+            + "</style>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var styleSheet = document.styleSheets[0];\n"
+            + "  var rule = styleSheet.cssRules[0];\n"
+            + "  var sheet = rule.styleSheet;\n"
+            + "  log(rule.styleSheet === sheet);\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        final String css = "div { color: green }";
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "imp.css"), css, MimeType.TEXT_CSS);
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * Regression test for Bug #789.
      * @throws Exception if an error occurs

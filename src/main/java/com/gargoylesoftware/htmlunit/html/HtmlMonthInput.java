@@ -82,7 +82,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
 
     /**
      * Returns if the input element has a valid min value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a>
      * documentation for details.
      *
      * @return if the input element has a valid min value
@@ -103,7 +103,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
 
     /**
      * Returns if the input element has a valid max value. Refer to the
-     * <a href='https://www.w3.org/TR/html5/sec-forms.html'>HTML 5</a>
+     * <a href="https://www.w3.org/TR/html5/sec-forms.html">HTML 5</a>
      * documentation for details.
      *
      * @return if the input element has a valid max value

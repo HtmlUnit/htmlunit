@@ -56,6 +56,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     private final WebResponse webResponse_;
     private WebWindow enclosingWindow_;
     private final WebClient webClient_;
+    private boolean printing_;
 
     /**
      * Creates an instance of SgmlPage.
@@ -392,5 +393,20 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      */
     public void clearComputedStylesUpToRoot(final DomElement element) {
         // nothing to do here, overwritten in HtmlPage
+    }
+
+    /**
+     * @return whether or not this is currently printing
+     */
+    public boolean isPrinting() {
+        return printing_;
+    }
+
+    /**
+     * @param printing the printing state to set
+     */
+    public void setPrinting(final boolean printing) {
+        printing_ = printing;
+        clearComputedStyles();
     }
 }

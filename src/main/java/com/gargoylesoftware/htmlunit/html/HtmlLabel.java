@@ -52,7 +52,7 @@ public class HtmlLabel extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code for}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code for}
@@ -64,7 +64,7 @@ public class HtmlLabel extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code accesskey}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code accesskey}
@@ -76,7 +76,7 @@ public class HtmlLabel extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus}
@@ -88,7 +88,7 @@ public class HtmlLabel extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur}

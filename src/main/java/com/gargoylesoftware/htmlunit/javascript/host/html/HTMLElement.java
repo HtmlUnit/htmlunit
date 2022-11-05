@@ -21,6 +21,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OFFSET_PARENT_NULL_IF_FIXED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_VALIGN_CONVERTS_TO_LOWERCASE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WIDTH_HEIGHT_ACCEPTS_ARBITRARY_VALUES;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.FIXED;
 import static com.gargoylesoftware.htmlunit.html.DisabledElement.ATTRIBUTE_DISABLED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static com.gargoylesoftware.htmlunit.html.DomElement.ATTRIBUTE_VALUE_EMPTY;
@@ -50,7 +52,6 @@ import org.xml.sax.helpers.AttributesImpl;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
-import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.HtmlAbbreviated;
@@ -525,7 +526,7 @@ public class HTMLElement extends Element {
      * An IE-only method which copies all custom attributes from the specified source element
      * to this element.
      * @param source the source element from which to copy the custom attributes
-     * @param preserveIdentity if {@code false}, the <tt>name</tt> and <tt>id</tt> attributes are not copied
+     * @param preserveIdentity if {@code false}, the <code>name</code> and <code>id</code> attributes are not copied
      */
     @JsxFunction(IE)
     public void mergeAttributes(final HTMLElement source, final Object preserveIdentity) {
@@ -724,7 +725,7 @@ public class HTMLElement extends Element {
      * (see https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/outerText)
      * @return the contents of this node as text
      */
-    @JsxGetter({CHROME, EDGE, FF, IE})
+    @JsxGetter
     public String getOuterText() {
         // as first hack
         return getInnerText();
@@ -828,10 +829,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetHeight</tt>, which is the element height plus the element's padding
+     * Returns this element's <code>offsetHeight</code>, which is the element height plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
-     * @return this element's <tt>offsetHeight</tt>
+     * @return this element's <code>offsetHeight</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534199.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
@@ -850,10 +851,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetWidth</tt>, which is the element width plus the element's padding
+     * Returns this element's <code>offsetWidth</code>, which is the element width plus the element's padding
      * plus the element's border. This method returns a dummy value compatible with mouse event coordinates
      * during mouse events.
-     * @return this element's <tt>offsetWidth</tt>
+     * @return this element's <code>offsetWidth</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534304.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      */
@@ -1121,10 +1122,10 @@ public class HTMLElement extends Element {
     /**
      * Returns the value of the specified attribute (width or height).
      * @return the value of the specified attribute (width or height)
-     * @param attributeName the name of the attribute to return (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param attributeName the name of the attribute to return (<code>"width"</code> or <code>"height"</code>)
      * @param returnNegativeValues if {@code true}, negative values are returned;
      *        if {@code false}, this method returns an empty string in lieu of negative values;
-     *        if {@code null}, this method returns <tt>0</tt> in lieu of negative values
+     *        if {@code null}, this method returns <code>0</code> in lieu of negative values
      */
     protected String getWidthOrHeight(final String attributeName, final Boolean returnNegativeValues) {
         String value = getDomNodeOrDie().getAttribute(attributeName);
@@ -1161,7 +1162,7 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the value of the specified attribute (width or height).
-     * @param attributeName the name of the attribute to set (<tt>"width"</tt> or <tt>"height"</tt>)
+     * @param attributeName the name of the attribute to set (<code>"width"</code> or <code>"height"</code>)
      * @param value the value of the specified attribute (width or height)
      * @param allowNegativeValues if {@code true}, negative values will be stored;
      *        if {@code false}, negative values cause an exception to be thrown;<br>
@@ -1370,10 +1371,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetLeft</tt>, which is the calculated left position of this
-     * element relative to the <tt>offsetParent</tt>.
+     * Returns this element's <code>offsetLeft</code>, which is the calculated left position of this
+     * element relative to the <code>offsetParent</code>.
      *
-     * @return this element's <tt>offsetLeft</tt>
+     * @return this element's <code>offsetLeft</code>
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534200.aspx">MSDN Documentation</a>
      * @see <a href="http://www.quirksmode.org/js/elementdimensions.html">Element Dimensions</a>
      * @see <a href="http://dump.testsuite.org/2006/dom/style/offset/spec">Reverse Engineering by Anne van Kesteren</a>
@@ -1394,7 +1395,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if ("absolute".equals(position)) {
+        if (ABSOLUTE.equals(position)) {
             return left;
         }
 
@@ -1493,7 +1494,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if ("absolute".equals(position)) {
+        if (ABSOLUTE.equals(position)) {
             return top;
         }
 
@@ -1526,10 +1527,10 @@ public class HTMLElement extends Element {
     }
 
     /**
-     * Returns this element's <tt>offsetParent</tt>. The <tt>offsetLeft</tt> and
-     * <tt>offsetTop</tt> attributes are relative to the <tt>offsetParent</tt>.
+     * Returns this element's <code>offsetParent</code>. The <code>offsetLeft</code> and
+     * <code>offsetTop</code> attributes are relative to the <code>offsetParent</code>.
      *
-     * @return this element's <tt>offsetParent</tt>. This may be <code>undefined</code> when this node is
+     * @return this element's <code>offsetParent</code>. This may be <code>undefined</code> when this node is
      * not attached or {@code null} for <code>body</code>.
      * @see <a href="http://msdn2.microsoft.com/en-us/library/ms534302.aspx">MSDN Documentation</a>
      * @see <a href="http://www.mozilla.org/docs/dom/domref/dom_el_ref20.html">Gecko DOM Reference</a>
@@ -1550,7 +1551,8 @@ public class HTMLElement extends Element {
         }
 
         final HTMLElement htmlElement = currentElement.getScriptableObject();
-        if (returnNullIfFixed && "fixed".equals(htmlElement.getStyle().getStyleAttribute(
+        if (returnNullIfFixed
+                && FIXED.equals(htmlElement.getStyle().getStyleAttribute(
                 StyleAttributes.Definition.POSITION, true))) {
             return null;
         }
@@ -1754,7 +1756,7 @@ public class HTMLElement extends Element {
         if (ATTRIBUTE_NOT_DEFINED == attribute) {
             return "inherit";
         }
-        if (attribute == DomElement.ATTRIBUTE_VALUE_EMPTY) {
+        if (attribute == ATTRIBUTE_VALUE_EMPTY) {
             return "true";
         }
         return attribute;
@@ -2299,7 +2301,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onclose} event handler for this element.
      * @return the {@code onclose} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -2308,7 +2310,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onclose} event handler for this element.
      * @param onclose the {@code onclose} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnclose(final Object onclose) {
         setEventHandler(Event.TYPE_CLOSE, onclose);
     }
@@ -3432,7 +3434,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onselectstart} event handler for this element.
      * @return the {@code onselectstart} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Function getOnselectstart() {
         return getEventHandler(Event.TYPE_SELECTSTART);
     }
@@ -3441,7 +3443,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onselectstart} event handler for this element.
      * @param onselectstart the {@code onselectstart} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE, IE})
+    @JsxSetter
     public void setOnselectstart(final Object onselectstart) {
         setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
     }
@@ -3487,7 +3489,7 @@ public class HTMLElement extends Element {
      *
      * @return the value of this attribute
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getEnterKeyHint() {
         String value = getDomNodeOrDie().getAttributeDirect("enterkeyhint");
         if (ATTRIBUTE_NOT_DEFINED == value || ATTRIBUTE_VALUE_EMPTY == value) {
@@ -3506,7 +3508,7 @@ public class HTMLElement extends Element {
      *
      * @param enterKeyHint the new value
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setEnterKeyHint(final Object enterKeyHint) {
         if (enterKeyHint == null || Undefined.isUndefined(enterKeyHint)) {
             getDomNodeOrDie().removeAttribute("enterkeyhint");
@@ -3591,7 +3593,7 @@ public class HTMLElement extends Element {
      * Returns the {@code onselectionchange} event handler for this element.
      * @return the {@code onselectionchange} event handler for this element
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnselectionchange() {
         return getEventHandler(Event.TYPE_SELECTIONCHANGE);
     }
@@ -3600,7 +3602,7 @@ public class HTMLElement extends Element {
      * Sets the {@code onselectionchange} event handler for this element.
      * @param onselectionchange the {@code onselectionchange} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnselectionchange(final Object onselectionchange) {
         setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
     }

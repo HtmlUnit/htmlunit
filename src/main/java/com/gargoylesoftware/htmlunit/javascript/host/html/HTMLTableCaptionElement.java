@@ -36,7 +36,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 @JsxClass(domClass = HtmlCaption.class)
 public class HTMLTableCaptionElement extends HTMLElement {
 
-    /** The valid <tt>vAlign</tt> values for this element, when emulating IE. */
+    /** The valid <code>vAlign</code> values for this element, when emulating IE. */
     private static final String[] VALIGN_VALID_VALUES_IE = {"top", "bottom"};
 
     /** The default value of the "vAlign" property. */

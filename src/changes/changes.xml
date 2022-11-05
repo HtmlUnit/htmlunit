@@ -7,7 +7,143 @@
     </properties>
 
     <body>
-        <release version="2.64.0" date="xx, 2022" description="Chrome/Edge 104, Firefox 103">
+        <release version="2.67.0" date="xxxx, 2022" description="Chrome/Edge 107, Bugfixes">
+            <action type="fix" dev="rbri">
+                AnimationEvent construction fixed.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: classCastException in hasOwnProperty on NativeJavaObject fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                XPathResult determination of the resultType fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                numberValue() and stringValue() for an empty XPathResult fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                XPathResult.booleanValue() fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                xpath: correct return value when substring() is used with a negative length
+            </action>
+            <action type="fix" dev="rbri">
+                xpath: fix error handling for invalid function arg count
+            </action>
+        </release>
+
+        <release version="2.66.0" date="October 22, 2022" description="Chrome/Edge 106, Firefox 106, Bugfixes, NumberFormat, HTMLMediaElement">
+            <action type="fix" dev="rbri">
+                core-js: RegEx - fix the error message in case the quantifier maximum (second value) is smaller than the minimum (first value)
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Remove usage of putIfAbsent() in the Hashmap class. This method does not exist on
+                many old Android releases and there's no real downside to removing it.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: parent relationship in TaggedTemplateLiteral fixed.
+            </action>
+            <action type="fix" dev="rbri" issue="513">
+                StaticDomNodeList has to be serializable.
+            </action>
+            <action type="fix" dev="rbri" issue="513">
+                Lambda functions used by Element have to be serializable.
+            </action>
+            <action type="fix" dev="rbri" issue="511">
+                FunctionWrapper has to be serializable.
+            </action>
+            <action type="update" dev="rbri">
+                Avoid usage of ThreadLocal#withInitial for Android 7.
+            </action>
+            <action type="update" dev="rbri">
+                NamedNodeMap moved from com.gargoylesoftware.htmlunit.javascript to com.gargoylesoftware.htmlunit.javascript.host.
+            </action>
+            <action type="add" dev="rbri" issue="504">
+                HTMLMediaElement.load() implemented as NoOp.
+            </action>
+            <action type="add" dev="rbri" issue="504">
+                Support for HTMLMediaElement.src and HTMLMediaElement.currentSrc properties added.
+            </action>
+            <action type="fix" dev="rbri" issue="504">
+                nodeType and nodeName moved to HTMLMediaElement.
+            </action>
+            <action type="add" dev="rbri">
+                Simple mock for Performance getEntries()/getEntriesByName()/getEntriesByType() added.
+            </action>
+            <action type="add" dev="rbri">
+                htmx version 1.8.2 testsuite added.
+            </action>
+            <action type="fix" dev="rbri" issue="504">
+                HTMLMediaElement.canPlayType() now returns more realistic results. This might
+                help for some pages where the player src attribut is set from js only if the
+                media type is supported.
+            </action>
+            <action type="add" dev="rbri" issue="505">
+                Method DomElement.setInnerHtml(String) added.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix generation of test-javadoc.
+            </action>
+            <action type="add" dev="rbri" issue="501">
+                First simple implementation of NumberFormat.format() and NumberFormat.resolvedOptions() added.
+            </action>
+            <action type="fix" dev="rbri">
+                Fix one more xsl transform issue when running without Xalan.
+            </action>
+        </release>
+
+        <release version="2.65.1" date="October 03, 2022" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Wrong dependency to htmlunit-xpath snapshot
+            </action>
+            <action type="fix" dev="rbri">
+                There was still a dependency to Xalan.
+            </action>
+        </release>
+
+        <release version="2.65.0" date="October 03, 2022" description="Chrome/Edge 105, Firefox 105">
+            <action type="update" dev="rbri">
+                FF_ESR updatade from version 91 to 102.
+            </action>
+            <action type="remove" dev="rbri">
+                com.gargoylesoftware.htmlunit.util.TextUtils removed.
+            </action>
+            <action type="update" dev="rbri">
+                Switch from xalan to htmlunit-xpath.
+            </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.49.v20220914.
+            </action>
+            <action type="add" dev="rbri" issue="501">
+                Introducing a PrintHandler configurable at the WebClient. You can provide your
+                own Window.print() implementations if required.
+            </action>
+            <action type="fix" dev="rbri">
+                A bug in one faq sample code that might result in wrong encoding is fixed.
+            </action>
+            <action type="update" dev="rbri">
+                Bunch of code cleanup for CSS handling.
+            </action>
+        </release>
+
+        <release version="2.64.0" date="August 18, 2022" description="Chrome/Edge 104, Firefox 103, client side validation">
+            <action type="update" dev="rbri">
+                CSS pseudo selector :invalid improvements.
+            </action>
+            <action type="fix" dev="rbri">
+                Number control processing of whitespace fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                Url/Email control processing of whitespace fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                Email control takes care of the min/max length property during validation.
+            </action>
+            <action type="fix" dev="rbri">
+                Improved implementation of the ValidityState.isTooShort property.
+            </action>
+            <action type="fix" dev="rbri" issue="496">
+                Fix maxlenght validation if the initial value is longer.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade salvation lib to salvation2 3.0.1.
             </action>
@@ -123,7 +259,7 @@
                 ValidityState.patternMismatch fixed.
             </action>
             <action type="fix" dev="rbri">
-                Dispatching custion events now works for all DomNode's. This fixes also a NPE when running
+                Dispatching custom events now works for all DomNode's. This fixes also a NPE when running
                 the htmx 1.7.0 test suite.
             </action>
             <action type="add" dev="rbri">

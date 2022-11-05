@@ -14,11 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import org.apache.xml.utils.PrefixResolver;
-
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A special {@link PrefixResolver} for {@link NativeFunction}s.
@@ -39,15 +38,6 @@ public class NativeFunctionPrefixResolver implements PrefixResolver {
     public NativeFunctionPrefixResolver(final NativeFunction resolverFn, final Scriptable scope) {
         resolverFn_ = resolverFn;
         scope_ = scope;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getBaseIdentifier() {
-        final Object result = Context.call(null, resolverFn_, scope_, null, new Object[]{});
-        return result == null ? null : result.toString();
     }
 
     /**

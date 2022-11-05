@@ -14,12 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,7 +21,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
@@ -38,6 +32,26 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLAudioElementTest extends WebDriverTestCase {
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("false")
+    public void prototype() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "log(HTMLAudioElement.prototype == null);\n"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
 
     /**
      * @throws Exception if the test fails
@@ -61,6 +75,28 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <audio id='a1'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"1", "AUDIO"})
+    public void nodeTypeName() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  log(audio.nodeType);"
+            + "  log(audio.nodeName);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -127,7 +163,11 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("true")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "false",
+            EDGE = "false",
+            FF = "false",
+            FF_ESR = "false",
+            IE = "false")
     public void Audio_HTMLAudioElement() throws Exception {
         parentOf("Audio", "HTMLAudioElement");
     }
@@ -167,7 +207,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"[object HTMLAudioElement]", "maybe", "done"},
             IE = {"[object HTMLAudioElement]", "", "done"})
-    @NotYetImplemented(IE)
+    @HtmlUnitNYI(IE = {"[object HTMLAudioElement]", "maybe", "done"})
     public void nullConstructor() throws Exception {
         final String html = ""
             + "<html><head>\n"
@@ -218,7 +258,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioOgg() throws Exception {
         canPlayType("audio/ogg");
     }
@@ -229,7 +269,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_VideoOgg() throws Exception {
         canPlayType("video/ogg");
     }
@@ -240,7 +280,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_ApplicationOgg() throws Exception {
         canPlayType("application/ogg");
     }
@@ -250,7 +290,6 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("maybe")
-    @NotYetImplemented
     public void canPlayType_Mp4() throws Exception {
         canPlayType("video/mp4");
     }
@@ -262,7 +301,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioWave() throws Exception {
         canPlayType("audio/wave");
     }
@@ -273,7 +314,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioWav() throws Exception {
         canPlayType("audio/wav");
     }
@@ -284,7 +325,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioXWav() throws Exception {
         canPlayType("audio/x-wav");
     }
@@ -296,7 +337,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioPnWav() throws Exception {
         canPlayType("audio/x-pn-wav");
     }
@@ -307,7 +350,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_AudioWebm() throws Exception {
         canPlayType("audio/webm");
     }
@@ -318,7 +361,7 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = "maybe")
     public void canPlayType_VideoWebm() throws Exception {
         canPlayType("video/webm");
     }
@@ -330,7 +373,8 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "maybe",
             CHROME = "probably",
             EDGE = "probably")
-    @NotYetImplemented
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe")
     public void canPlayType_AudioMpeg() throws Exception {
         canPlayType("audio/mpeg");
     }
@@ -343,7 +387,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             FF = "maybe",
             FF_ESR = "maybe",
             IE = "")
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioFlac() throws Exception {
         canPlayType("audio/flac");
     }
@@ -355,7 +401,9 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "",
             FF = "maybe",
             FF_ESR = "maybe")
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(CHROME = "maybe",
+            EDGE = "maybe",
+            IE = "maybe")
     public void canPlayType_AudioXFlac() throws Exception {
         canPlayType("audio/x-flac");
     }
@@ -422,6 +470,154 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "§§URL§§horse.mp3", "§§URL§§cow.mp3",
+             "<audio id=\"a\" src=\"cow.mp3\"></audio>"})
+    public void src() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  var src = audio.src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "  audio.src = 'cow.mp3';\n"
+            + "  log(audio.src);"
+            + "  log(audio.outerHTML);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", "", "§§URL§§cow.mp3",
+             "<audio id=\"a\" src=\"cow.mp3\"><source src=\"horse.mp3\" type=\"audio/mpeg\"></audio>"})
+    public void srcChild() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var audio = document.getElementById('a');\n"
+            + "  var src = audio.src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "  audio.src = 'cow.mp3';\n"
+            + "  log(audio.src);"
+            + "  log(audio.outerHTML);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void srcNotDefined() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var src = document.getElementById('a').src;\n"
+            + "  log(typeof src);"
+            + "  log(src);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"string", ""},
+            IE = {"string", "§§URL§§horse.mp3"})
+    @HtmlUnitNYI(IE = {"string", ""})
+    public void currentSrc() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a' src='horse.mp3'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void currentSrcChild() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'><source src='horse.mp3' type='audio/mpeg'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"string", ""})
+    public void currentSrcNotDefined() throws Exception {
+        final String html
+            = "<html><body>\n"
+            + "<audio id='a'></audio>"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "try {\n"
+            + "  var currentSrc = document.getElementById('a').currentSrc;\n"
+            + "  log(typeof currentSrc);"
+            + "  log(currentSrc);"
+            + "} catch (e) { log('exception'); }\n"
+            + "</script>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

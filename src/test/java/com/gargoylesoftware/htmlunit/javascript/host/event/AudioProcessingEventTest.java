@@ -22,7 +22,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link AudioProcessingEvent}.
@@ -163,39 +162,5 @@ public class AudioProcessingEventTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * Test for feature-request #229.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("[object AnimationEvent]")
-    @NotYetImplemented
-    public void end() throws Exception {
-        final String html
-            = "<html><head>\n"
-            + "<style>\n"
-            + "  .animate {  animation: identifier .1s ; }\n"
-            + "  @keyframes identifier {\n"
-            + "    0% { width: 0px; }\n"
-            + "    100% { width: 30px; }\n"
-            + "  }\n"
-            + "</style>\n"
-            + "<script>\n"
-            + "function test() {\n"
-            + "  var el = document.getElementById('div1');\n"
-            + "  el.addEventListener('animationend', function(e) {\n"
-            + "    alert(e);\n"
-            + "  });\n"
-            + "  el.className = 'animate';\n"
-            + "}\n"
-            + "</script>\n"
-            + "</head><body onload='test()'>\n"
-            + "<div id='div1'>TXT</div>\n"
-            + "</body></html>";
-
-        loadPageWithAlerts2(html);
     }
 }

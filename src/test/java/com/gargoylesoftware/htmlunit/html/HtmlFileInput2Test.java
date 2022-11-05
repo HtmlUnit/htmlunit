@@ -589,7 +589,6 @@ public class HtmlFileInput2Test extends WebServerTestCase {
         servlets.put("/upload2", PrintRequestServlet.class);
         startWebServer("./", null, servlets);
 
-        final String filename1 = "HtmlFileInputTest_one.txt";
         final File dir = new File("src/test/resources/pjl-comp-filter");
         assertTrue(dir.exists());
         assertTrue(dir.isDirectory());

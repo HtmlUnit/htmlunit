@@ -18,6 +18,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -51,13 +52,17 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts("Frame2")
     public void frameName() throws Exception {
         final String html
-            = "<html><head><title>first</title></head>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<frameset cols='20%,80%'>\n"
             + "  <frame id='frame1'>\n"
-            + "  <frame name='Frame2' onload='alert(this.name)' id='frame2'>\n"
+            + "  <frame name='Frame2' onload='log(this.name)' id='frame2'>\n"
             + "</frameset></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -70,11 +75,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html>\n"
             + "<head>\n"
-            + "  <title>first</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.getElementById('myFrame').contentDocument);\n"
-            + "      alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
+            + "      log(document.getElementById('myFrame').contentDocument);\n"
+            + "      log(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -83,7 +88,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</frameset>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -93,18 +98,20 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts("true")
     public void contentWindow() throws Exception {
         final String html
-            = "<html><head><title>first</title>\n"
+            = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  alert(document.getElementById('myFrame').contentWindow == frames.foo);\n"
+                + "  log(document.getElementById('myFrame').contentWindow == frames.foo);\n"
                 + "}\n"
-                + "</script></head>\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<frameset rows='*' onload='test()'>\n"
                 + "<frame name='foo' id='myFrame' src='about:blank'/>\n"
                 + "</frameset>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -117,14 +124,15 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String html
             = "<html>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var root=this;\n"
             + "function listframes(frame) {\n"
             + "  if (frame == null) {\n"
-            + "    alert('frame=null');\n"
+            + "    log('frame=null');\n"
             + "  } else {\n"
-            + "    alert('frame=OK');\n"
+            + "    log('frame=OK');\n"
             + "    var len = frame.frames.length;\n"
-            + "    alert('frames.length=' + len);\n"
+            + "    log('frames.length=' + len);\n"
             + "    for (var i = 0; i < len; i++) {\n"
             + "      listframes(frame.frames[i]);\n"
             + "    }\n"
@@ -138,7 +146,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -152,24 +160,25 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function handler() {}\n"
             + "  function test() {\n"
             + "    var iframe = document.getElementById('myFrame');\n"
             + "    iframe.onload = handler;\n"
-            + "    alert(iframe.onload);\n"
+            + "    log(iframe.onload);\n"
             + "    iframe.onload = null;\n"
-            + "    alert(iframe.onload);\n"
+            + "    log(iframe.onload);\n"
             + "    try {\n"
             + "      iframe.onload = undefined;\n"
-            + "      alert(iframe.onload);\n"
-            + "    } catch(e) { alert('exception'); }\n"
+            + "      log(iframe.onload);\n"
+            + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload=test()>\n"
             + "  <iframe id='myFrame'></iframe>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -212,16 +221,17 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     public void writeFrameset() throws Exception {
         final String content1 = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "    document.write('<frameset>');\n"
             + "    document.write('<frame src=\"page2.html\" name=\"leftFrame\">');\n"
             + "    document.write('</frameset>');\n"
             + "</script>\n"
             + "</head></html>";
-        final String content2 = "<html><head><script>alert(2)</script></head></html>";
+        final String content2 = "<html><head><script>parent.log(2)</script></head></html>";
 
         getMockWebConnection().setDefaultResponse(content2);
 
-        loadPageWithAlerts2(content1);
+        loadPageVerifyTitle2(content1);
     }
 
     /**
@@ -232,19 +242,23 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts("DIV")
     public void frameLoadedAfterParent() throws Exception {
         final String html
-            = "<html><head><title>first</title></head><body>\n"
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head><body>\n"
             + "<iframe name='testFrame' src='testFrame.html'></iframe>\n"
             + "<div id='aButton'>test text</div>\n"
             + "</body></html>";
         final String frameContent
             = "<html><head></head><body>\n"
             + "<script>\n"
-            + "alert(top.document.getElementById('aButton').tagName);\n"
+            + "parent.log(top.document.getElementById('aButton').tagName);\n"
             + "</script>\n"
             + "</body></html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "testFrame.html"), frameContent);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -256,17 +270,19 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     @Alerts({"about:blank", "oFrame.foo: undefined", "/frame1.html", "oFrame.foo: foo of frame 1",
              "/frame2.html", "oFrame.foo: foo of frame 2"})
     public void changingFrameDocumentLocation() throws Exception {
-        final String firstHtml = "<html><head><script>\n"
+        final String firstHtml = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "var oFrame;\n"
             + "function init() {\n"
             + "  oFrame = self.frames['theFrame'];\n"
             + "}\n"
             + "function test(fileName) {\n"
             + "  if (oFrame.document.location == 'about:blank')\n" // to avoid different expectations for IE and FF
-            + "    alert('about:blank');\n"
+            + "    log('about:blank');\n"
             + "  else\n"
-            + "    alert(oFrame.document.location.pathname);\n"
-            + "  alert('oFrame.foo: ' + oFrame.foo);\n"
+            + "    log(oFrame.document.location.pathname);\n"
+            + "  log('oFrame.foo: ' + oFrame.foo);\n"
             + "  oFrame.document.location.href = fileName;\n"
             + "}\n"
             + "</script>\n"
@@ -287,15 +303,14 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "frame2.html"), frame2Html);
 
         final String[] alerts = getExpectedAlerts();
-        int i = 0;
 
         final WebDriver driver = loadPage2(firstHtml);
         driver.findElement(By.id("btn1")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, ArrayUtils.subarray(alerts, 0, 2));
         driver.findElement(By.id("btn2")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, ArrayUtils.subarray(alerts, 0, 4));
         driver.findElement(By.id("btn3")).click();
-        verifyAlerts(driver, alerts[i++], alerts[i++]);
+        verifyTitle2(driver, ArrayUtils.subarray(alerts, 0, 6));
     }
 
     /**
@@ -306,8 +321,12 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             IE = "[object Window]")
     public void frames_framesetOnLoad() throws Exception {
         final String mainHtml =
-            "<html><head><title>frames</title></head>\n"
-            + "<frameset onload=\"alert(window.frames['f1'])\">\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>"
+            + "</head>\n"
+            + "<frameset onload=\"log(window.frames['f1'])\">\n"
             + "<frame id='f1' src='1.html'/>\n"
             + "<frame id='f2' src='1.html'/>\n"
             + "</frameset>\n"
@@ -319,7 +338,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(mainHtml);
+        loadPageVerifyTitle2(mainHtml);
     }
 
     /**
@@ -330,19 +349,23 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             IE = "[object Window]")
     public void frames_bodyOnLoad() throws Exception {
         final String mainHtml =
-            "<html><head><title>frames</title></head>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<frameset>\n"
             + "<frame id='f1' src='1.html'/>\n"
             + "</frameset>\n"
             + "</html>";
 
         final String frame1 = "<html><head><title>1</title></head>\n"
-            + "<body onload=\"alert(parent.frames['f1'])\"></body>\n"
+            + "<body onload=\"parent.log(parent.frames['f1'])\"></body>\n"
             + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(mainHtml);
+        loadPageVerifyTitle2(mainHtml);
     }
 
     /**
@@ -353,7 +376,11 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             IE = "[object Window]")
     public void parent_frames() throws Exception {
         final String mainHtml =
-            "<html><head><title>frames</title></head>\n"
+            "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
+            + "</head>\n"
             + "<frameset>\n"
             + "<frame id='f1' src='1.html'/>\n"
             + "</frameset>\n"
@@ -362,7 +389,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         final String frame1 = "<html><head><title>f1</title>\n"
             + "<script type='text/javascript'>\n"
             + "  function test() {\n"
-            + "    alert(parent.frames['f1']);\n"
+            + "    parent.log(parent.frames['f1']);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -371,7 +398,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "1.html"), frame1);
 
-        loadPageWithAlerts2(mainHtml);
+        loadPageVerifyTitle2(mainHtml);
     }
 
     /**
@@ -675,13 +702,13 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
     public void domain() throws Exception {
         final String html = "<html>\n"
                 + "<head>\n"
-                + "  <title>OnloadTest</title>\n"
                 + "  <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "    function doTest() {\n"
-                + "      alert(document.domain);\n"
-                + "      alert(document.getElementById('left').contentWindow.document.domain);\n"
-                + "      alert(document.getElementById('center').contentWindow.document.domain);\n"
-                + "      alert(document.getElementById('right').contentWindow.document.domain);\n"
+                + "      log(document.domain);\n"
+                + "      log(document.getElementById('left').contentWindow.document.domain);\n"
+                + "      log(document.getElementById('center').contentWindow.document.domain);\n"
+                + "      log(document.getElementById('right').contentWindow.document.domain);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -698,7 +725,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "left.html"), left);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -713,18 +740,18 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Deny</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function check() {\n"
             + "      try {\n"
-            + "        alert(document.getElementById(\"frame1\").contentDocument);\n"
-            + "      } catch (e) { alert('error'); }\n"
+            + "        log(document.getElementById(\"frame1\").contentDocument);\n"
+            + "      } catch (e) { log('error'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<frameset cols='42%' >\n"
             + "  <frame name='frame1' id='frame1' src='content.html' "
-                      + "onLoad='alert(\"loaded\");check()' onError='alert(\"error\")'>\n"
+                      + "onLoad='log(\"loaded\");check()' onError='log(\"error\")'>\n"
             + "</frameset>\n"
             + "</html>";
 
@@ -738,7 +765,7 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left,
                 200, "OK", MimeType.TEXT_HTML, headers);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 }

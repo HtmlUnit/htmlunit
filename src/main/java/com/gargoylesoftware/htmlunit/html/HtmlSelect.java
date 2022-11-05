@@ -77,7 +77,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * If we were given an invalid <tt>size</tt> attribute, normalize it.
+     * If we were given an invalid <code>size</code> attribute, normalize it.
      * Then set a default selected option if none was specified and the size is 1 or less
      * and this isn't a multiple selection input.
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
@@ -270,7 +270,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -288,7 +288,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -324,7 +324,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
     /**
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -342,7 +342,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      *
      * Sets the "selected" state of the specified option. If this "select" element
      * is single-select, then calling this method will deselect all other options.
-     *
+     * <p>
      * Only options that are actually in the document may be selected.
      *
      * @param isSelected true if the option is to become selected
@@ -551,7 +551,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
@@ -561,7 +561,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code size}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for
      * details on the use of this attribute.
      *
      * @return the value of the attribute {@code size} or an empty string if that attribute isn't defined
@@ -589,7 +589,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code multiple}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code multiple} or an empty string if that attribute isn't defined
      */
@@ -623,7 +623,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code tabindex}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code tabindex} or an empty string if that attribute isn't defined
      */
@@ -633,7 +633,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onfocus}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onfocus} or an empty string if that attribute isn't defined
      */
@@ -643,7 +643,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onblur}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onblur} or an empty string if that attribute isn't defined
      */
@@ -653,7 +653,7 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
 
     /**
      * Returns the value of the attribute {@code onchange}. Refer to the <a
-     * href='http://www.w3.org/TR/html401/'>HTML 4.01</a> documentation for details on the use of this attribute.
+     * href="http://www.w3.org/TR/html401/">HTML 4.01</a> documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code onchange} or an empty string if that attribute isn't defined
      */
@@ -807,72 +807,8 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * {@inheritDoc}
      */
     @Override
-    public boolean hasBadInputValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isCustomErrorValidityState() {
         return !StringUtils.isEmpty(customValidity_);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasPatternMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isStepMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isTooLongValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isTooShortValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasTypeMismatchValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasRangeOverflowValidityState() {
-        return false;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean hasRangeUnderflowValidityState() {
-        return false;
     }
 
     @Override

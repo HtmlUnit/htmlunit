@@ -55,14 +55,14 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "104.0.5112.79";
+    static String CHROME_DRIVER_ = "107.0.5304.62";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "104.0.1293.54";
+    static String EDGE_DRIVER_ = "107.0.1418.26";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
-    static String GECKO_DRIVER_ = "0.31.0";
+    static String GECKO_DRIVER_ = "0.32.0";
     static String GECKO_DRIVER_URL_ = "https://github.com/mozilla/geckodriver/releases/latest";
 
     /** IE driver. */
@@ -342,6 +342,14 @@ public class ExternalTest {
         // version 3.11.x seem to requires JDK11
         if ("maven-site-plugin".equals(artifactId)
                 && (version.startsWith("3.11.") || version.startsWith("3.12."))) {
+            return true;
+        }
+
+        // https://issues.apache.org/jira/browse/MJAVADOC-700
+        // https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
+        // <sourcepath>${basedir}/src/main/java</sourcepath>
+        if ("maven-javadoc-plugin".equals(artifactId)
+                && (version.startsWith("3.3.") || version.startsWith("3.4."))) {
             return true;
         }
 

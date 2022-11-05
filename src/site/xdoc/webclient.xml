@@ -127,6 +127,12 @@ public void homePage_Firefox() throws Exception {
             </p>
             </subsection>
 
+            <subsection name="PrintHandler">
+            <p>
+                A handler for providing Window.print() implementations.
+            </p>
+            </subsection>
+
             <subsection name="WebStartHandler">
             <p>
                 A handler for webstart support.

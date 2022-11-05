@@ -18,6 +18,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Collections;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -113,10 +114,14 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Alerts({"null", "null"})
     public void typeDoesNotChangeValueAttribute() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>"
+                + "</head>\n"
                 + "<body>\n"
                 + "  <input type='text' id='t'/>\n"
-                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                + "  <button id='check' onclick='log(document.getElementById(\"t\").getAttribute(\"value\"));'>"
                         + "DoIt</button>\n"
                 + "</body></html>";
 
@@ -125,11 +130,11 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebElement check = driver.findElement(By.id("check"));
         check.click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         t.sendKeys("abc");
         check.click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -139,10 +144,14 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Alerts({"HtmlUnit", "HtmlUnit"})
     public void typeDoesNotChangeValueAttributeWithInitialValue() throws Exception {
         final String html = "<html>\n"
-                + "<head></head>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>"
+                + "</head>\n"
                 + "<body>\n"
                 + "  <input type='text' id='t' value='HtmlUnit'/>\n"
-                + "  <button id='check' onclick='alert(document.getElementById(\"t\").getAttribute(\"value\"));'>"
+                + "  <button id='check' onclick='log(document.getElementById(\"t\").getAttribute(\"value\"));'>"
                         + "DoIt</button>\n"
                 + "</body></html>";
 
@@ -151,11 +160,11 @@ public class HtmlTextInputTest extends WebDriverTestCase {
 
         final WebElement check = driver.findElement(By.id("check"));
         check.click();
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         t.sendKeys("abc");
         check.click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -218,32 +227,38 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     @Test
     public void typeOnChange() throws Exception {
         final String html =
-              "<html><head></head><body>\n"
+              "<html><head>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
+            + "</script>"
+            + "</head>\n"
+            + "<body>\n"
             + "<input type='text' id='p' value='Hello world'"
-                + " onChange='alert(\"foo\");alert(event.type);'"
-                + " onBlur='alert(\"boo\");alert(event.type);'>\n"
+                + " onChange='log(\"foo\");log(event.type);'"
+                + " onBlur='log(\"boo\");log(event.type);'>\n"
             + "<button id='b'>some button</button>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         final WebElement p = driver.findElement(By.id("p"));
         p.sendKeys("HtmlUnit");
 
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTextArea2(driver);
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
         final String[] expectedAlerts1 = {"foo", "change", "boo", "blur"};
-        assertEquals(expectedAlerts1, getCollectedAlerts(driver, 4));
+        verifyTextArea2(driver, expectedAlerts1);
 
         // set only the focus but change nothing
         p.click();
-        assertTrue(getCollectedAlerts(driver, 1).isEmpty());
+        verifyTextArea2(driver, expectedAlerts1);
 
         // trigger lost focus
         driver.findElement(By.id("b")).click();
         final String[] expectedAlerts2 = {"boo", "blur"};
-        assertEquals(expectedAlerts2, getCollectedAlerts(driver, 2));
+        verifyTextArea2(driver, ArrayUtils.addAll(expectedAlerts1, expectedAlerts2));
     }
 
     /**
@@ -794,7 +809,6 @@ public class HtmlTextInputTest extends WebDriverTestCase {
     public void patternValidationWhitespace() throws Exception {
         validation("<input type='text' pattern='[0-9a-zA-Z]{10,40}' id='e1' name='k' value='  \t'>\n", "", null);
     }
-
 
     /**
      * @throws Exception if an error occurs

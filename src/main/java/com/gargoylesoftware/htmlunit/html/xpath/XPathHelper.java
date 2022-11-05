@@ -19,28 +19,35 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
-import org.apache.xml.utils.PrefixResolver;
-import org.apache.xpath.XPathContext;
-import org.apache.xpath.objects.XBoolean;
-import org.apache.xpath.objects.XNodeSet;
-import org.apache.xpath.objects.XNumber;
-import org.apache.xpath.objects.XObject;
-import org.apache.xpath.objects.XString;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 
+import net.sourceforge.htmlunit.xpath.XPathContext;
+import net.sourceforge.htmlunit.xpath.objects.XBoolean;
+import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
+import net.sourceforge.htmlunit.xpath.objects.XNumber;
+import net.sourceforge.htmlunit.xpath.objects.XObject;
+import net.sourceforge.htmlunit.xpath.objects.XString;
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
+
 /**
  * Collection of XPath utility methods.
  *
  * @author Ahmed Ashour
  * @author Chuck Dumont
+ * @author Ronald Brill
  */
 public final class XPathHelper {
 
-    private static final ThreadLocal<Boolean> PROCESS_XPATH_ = ThreadLocal.withInitial(() -> Boolean.FALSE);
+    private static final ThreadLocal<Boolean> PROCESS_XPATH_ = new ThreadLocal<Boolean>() {
+        @Override
+        protected synchronized Boolean initialValue() {
+            return Boolean.FALSE;
+        }
+    };
 
     /**
      * Private to avoid instantiation.
@@ -132,7 +139,7 @@ public final class XPathHelper {
 
         final boolean caseSensitive = contextNode.getPage().hasCaseSensitiveTagNames();
 
-        final XPathAdapter xpath = new XPathAdapter(str, null, resolver, null, caseSensitive);
+        final XPathAdapter xpath = new XPathAdapter(str, resolver, null, caseSensitive);
         final int ctxtNode = xpathSupport.getDTMHandleFromNode(contextNode);
         return xpath.execute(xpathSupport, ctxtNode, prefixResolver);
     }

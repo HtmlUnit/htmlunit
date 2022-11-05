@@ -902,8 +902,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"inline", "inline", "none", "block", "inline-block", "inline",
                        "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+            FF = {"inline", "inline", "none", "block", "inline-block", "inline",
+                  "", "inline", "inline", "inline", "inline", "block", "inline"},
             IE = {"inline", "inline", "none", "block", "inline-block", "inline",
                   "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
+    @HtmlUnitNYI(FF = {"inline", "inline", "none", "block", "inline-block", "inline",
+                       "inline", "inline", "inline", "inline", "inline", "block", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -962,8 +966,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-             "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
+    @Alerts(DEFAULT = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+            FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+                  "table-cell", "table-header-group", "inline", "table-row", "", "inline"})
+    @HtmlUnitNYI(FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"
@@ -1171,7 +1179,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "7.55px",
             CHROME = "7.536px",
-            EDGE = "7.536px",
+            EDGE = "7.254px",
             IE = "0px")
     @HtmlUnitNYI(CHROME = "1px",
             EDGE =  "1px",
@@ -2347,13 +2355,12 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"", "0", "16"},
-            FF = {"8px", "0", "16"},
-            CHROME = {"8px", "0", "16"},
-            EDGE = {"8px", "0", "16"})
+    @Alerts(DEFAULT = {"8px", "0", "16"},
+            IE = {"", "0", "16"})
     @HtmlUnitNYI(CHROME = {"0px", "0", "16"},
             EDGE = {"0px", "0", "16"},
             FF = {"0px", "0", "16"},
+            FF_ESR = {"0px", "0", "16"},
             IE = {"8px", "0", "16"})
     public void bodyOffsetWidth() throws Exception {
         final String html = "<html><head><script>\n"

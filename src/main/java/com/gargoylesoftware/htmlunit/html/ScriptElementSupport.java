@@ -70,7 +70,7 @@ public final class ScriptElementSupport {
      * parsing of the HTML. Intended to be overridden by nodes which need to perform custom logic
      * after they and all their child nodes have been processed by the HTML parser. This method is
      * not recursive, and the default implementation is empty, so there is no need to call
-     * <tt>super.onAllChildrenAddedToPage()</tt> if you implement this method.
+     * <code>super.onAllChildrenAddedToPage()</code> if you implement this method.
      * @param element the element
      * @param postponed whether to use {@link com.gargoylesoftware.htmlunit.javascript.PostponedAction} or no
      */
@@ -306,7 +306,8 @@ public final class ScriptElementSupport {
      * According to <a href="http://www.w3.org/TR/REC-html40/types.html#h-6.7">W3C recommendation</a>
      * are content types case insensitive.<br>
      * IE supports only a limited number of values for the type attribute. For testing you can
-     * use http://www.robinlionheart.com/stds/html4/scripts.
+     * use <a href="http://www.robinlionheart.com/stds/html4/scripts">
+     * http://www.robinlionheart.com/stds/html4/scripts</a>.
      * @param element the element
      * @param typeAttribute the type attribute specified in the script tag
      * @param languageAttribute the language attribute specified in the script tag

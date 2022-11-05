@@ -44,6 +44,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
+import org.xml.sax.SAXException;
 
 import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
 import com.gargoylesoftware.css.dom.Property;
@@ -56,6 +57,7 @@ import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.css.StyleElement;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
@@ -1499,10 +1501,10 @@ public class DomElement extends DomNamespaceNode implements Element {
     }
 
     /**
-     * This method is called if the current fired event is canceled by <tt>preventDefault()</tt> in FireFox,
+     * This method is called if the current fired event is canceled by <code>preventDefault()</code> in FireFox,
      * or by returning {@code false} in Internet Explorer.
      *
-     * The default implementation does nothing.
+     * <p>The default implementation does nothing.</p>
      */
     protected void preventDefault() {
         // Empty by default; override as needed.
@@ -1607,6 +1609,33 @@ public class DomElement extends DomNamespaceNode implements Element {
     public void setNodeValue(final String value) {
         // Default behavior is to do nothing, overridden in some subclasses
     }
+
+    /**
+     * Callback method which allows different HTML element types to perform custom
+     * initialization of computed styles. For example, body elements in most browsers
+     * have default values for their margins.
+     *
+     * @param style the style to initialize
+     */
+    public void setDefaults(final ComputedCssStyleDeclaration style) {
+        // Empty by default; override as necessary.
+    }
+
+    /**
+     * Replaces all child elements of this element with the supplied value parsed as html.
+     * @param source the new value for the contents of this element
+     * @throws SAXException in case of error
+     * @throws IOException in case of error
+     */
+    public void setInnerHtml(final String source) throws SAXException, IOException {
+        removeAllChildren();
+        getPage().clearComputedStylesUpToRoot(this);
+
+        if (source != null) {
+            parseHtmlSnippet(source);
+        }
+    }
+
 }
 
 /**

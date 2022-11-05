@@ -25,22 +25,24 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitdriver.version>3.64.0-SNAPSHOT</htmlunitdriver.version>
         <htmlunitcssparser.version>1.12.0</htmlunitcssparser.version>
-        <htmlunitneko.version>2.63.0</htmlunitneko.version>
-        <htmlunitcorejs.version>2.63.0</htmlunitcorejs.version>
+        <htmlunitneko.version>2.66.0</htmlunitneko.version>
+        <htmlunitcorejs.version>2.67.0-SNAPSHOT</htmlunitcorejs.version>
+        <htmlunitxpath.version>2.67.0-SNAPSHOT</htmlunitxpath.version>
+
+        <htmlunitdriver.version>4.5.3-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.5.3</selenium.version>
 
         <httpclient5.version>5.1.3</httpclient5.version>
-        <jetty.version>9.4.48.v20220622</jetty.version>
-        <log4j.version>2.18.0</log4j.version>
-        <selenium.version>4.4.0</selenium.version>
+        <jetty.version>9.4.49.v20220914</jetty.version>
+        <log4j.version>2.19.0</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
-        <spotbugs.version>4.7.1</spotbugs.version>
-        <pmd.version>6.48.0</pmd.version>
-        <archunit.version>0.23.1</archunit.version>
-        <dependencycheck.version>7.1.1</dependencycheck.version>
+        <spotbugs.version>4.7.3</spotbugs.version>
+        <pmd.version>6.50.0</pmd.version>
+        <archunit.version>1.0.0</archunit.version>
+        <dependencycheck.version>7.3.0</dependencycheck.version>
     </properties>
 
     <build>
@@ -58,7 +60,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>3.2.0</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
@@ -75,7 +77,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.1.1</version>
+                <version>4.7.2.1</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
@@ -89,30 +91,8 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-pmd-plugin</artifactId>
-                <version>3.17.0</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-core</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>net.sourceforge.pmd</groupId>
-                        <artifactId>pmd-java</artifactId>
-                        <version>${pmd.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <rulesets>
-                        <ruleset>${basedir}/pmd-ruleset.xml</ruleset>
-                    </rulesets>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.3.0</version>
                 <configuration>
                     <archive>
                         <manifest>
@@ -176,18 +156,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <quiet>true</quiet>
-                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>https://commons.apache.org/logging/apidocs/</link>
-                        <link>https://commons.apache.org/codec/apidocs/</link>
-                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
-                    </links>
+                    <doclint>html,missing,reference,syntax</doclint>
+                    <detectLinks>true</detectLinks>
+                    <detectJavaApiLink>true</detectJavaApiLink>
+                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
                 </configuration>
                 <executions>
                     <execution>
@@ -248,49 +223,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <additionalBuildcommands>
-                        <buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
-                    </additionalBuildcommands>
-                    <additionalProjectnatures>
-                        <projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
-                    </additionalProjectnatures>
-                    <useProjectReferences>false</useProjectReferences>
-                    <additionalConfig>
-                        <file>
-                            <name>.checkstyle</name>
-                            <content>
-<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
-    <local-check-config name="HtmlUnit" location="checkstyle.xml" type="project" description="HtmlUnit">
-        <property name="checkstyle.suppressions.file" value="$${project_loc}/checkstyle_suppressions.xml"/>
-        <additional-data name="protect-config-file" value="false"/>
-    </local-check-config>
-    <fileset name="all" enabled="true" check-config-name="HtmlUnit" local="true">
-        <file-match-pattern match-pattern="^src/.*\.java$" include-pattern="true"/>
-        <file-match-pattern match-pattern="^src/.*general/huge/.*\.java$" include-pattern="false"/>
-    </fileset>
-</fileset-config>
-]]>
-                            </content>
-                        </file>
-                    </additionalConfig>
-                    <additionalConfig>
-                        <file>
-                            <name>.settings/org.eclipse.core.resources.prefs</name>
-                            <content>
-                                <![CDATA[eclipse.preferences.version=1${line.separator}encoding/<project>=${project.build.sourceEncoding}${line.separator}]]>
-                            </content>
-                        </file>
-                    </additionalConfig>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -689,18 +621,13 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.4.1</version>
+                <version>3.2.0</version>
                 <configuration>
                     <quiet>true</quiet>
-                    <!-- see https://stackoverflow.com/questions/69320220/maven-javadoc-listed-classes-twice -->
-                    <sourcepath>${basedir}/src/main/java</sourcepath>
-                    <additionalparam>--allow-script-in-comments</additionalparam>
-                    <links>
-                        <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>https://commons.apache.org/logging/apidocs/</link>
-                        <link>https://commons.apache.org/codec/apidocs/</link>
-                        <link>https://hc.apache.org/httpcomponents-client-4.5.x/current/httpclient/apidocs/</link>
-                    </links>
+                    <doclint>html,missing,reference,syntax</doclint>
+                    <detectLinks>true</detectLinks>
+                    <detectJavaApiLink>true</detectJavaApiLink>
+                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
                 </configuration>
             </plugin>
             <plugin>
@@ -711,7 +638,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jxr-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.3.0</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -1183,21 +1110,6 @@
     </contributors>
     <dependencies>
         <dependency>
-            <groupId>xalan</groupId>
-            <artifactId>xalan</artifactId>
-            <version>2.7.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>xerces</groupId>
-                    <artifactId>xercesImpl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>xml-apis</groupId>
-                    <artifactId>xml-apis</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.apache.httpcomponents.client5</groupId>
             <artifactId>httpclient5</artifactId>
             <version>${httpclient5.version}</version>
@@ -1219,6 +1131,11 @@
             <version>${htmlunitcssparser.version}</version>
         </dependency>
         <dependency>
+            <groupId>net.sourceforge.htmlunit</groupId>
+            <artifactId>htmlunit-xpath</artifactId>
+            <version>${htmlunitxpath.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
@@ -1226,7 +1143,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.9</version>
+            <version>1.10.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
@@ -1285,18 +1202,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.easymock</groupId>
-            <artifactId>easymock</artifactId>
-            <version>4.3</version>
-            <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>junit</groupId>
-                    <artifactId>junit</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>com.tngtech.archunit</groupId>
             <artifactId>archunit-junit4</artifactId>
             <version>${archunit.version}</version>
@@ -1343,7 +1248,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.8.2</version>
+            <version>3.9.3</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -1359,7 +1264,7 @@
         <dependency>
             <groupId>org.apache.xmlgraphics</groupId>
             <artifactId>batik-transcoder</artifactId>
-            <version>1.14</version>
+            <version>1.16</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 
 import java.util.Map;
 
-import org.apache.xml.utils.PrefixResolverDefault;
 import org.w3c.dom.Node;
 
 import com.gargoylesoftware.htmlunit.html.DomAttr;
@@ -24,10 +23,13 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
+import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolverDefault;
+
 /**
  * Custom {@link PrefixResolverDefault} extension.
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 final class HtmlUnitPrefixResolver extends PrefixResolverDefault {
 

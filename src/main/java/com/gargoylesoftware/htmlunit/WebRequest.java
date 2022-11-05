@@ -419,9 +419,9 @@ public class WebRequest implements Serializable {
     }
 
     /**
-     * Returns the body content to be submitted if this is a <tt>POST</tt> request. Ignored for all other request
+     * Returns the body content to be submitted if this is a <code>POST</code> request. Ignored for all other request
      * types. Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
-     * @return the body content to be submitted if this is a <tt>POST</tt> request
+     * @return the body content to be submitted if this is a <code>POST</code> request
      */
     public String getRequestBody() {
         return requestBody_;

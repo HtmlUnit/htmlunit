@@ -37,7 +37,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code MessageEvent}.
- *
+ * <p>
  * For general information on which properties and functions should be supported, see
  * <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/comms.html#messageevent">
  * Event definitions</a>.

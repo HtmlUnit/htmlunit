@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Contains information about a plugin as available in JavaScript via <tt>document.navigator.plugins</tt>,
+ * Contains information about a plugin as available in JavaScript via <code>document.navigator.plugins</code>,
  * as well as the associated mime types.
  *
  * @author Marc Guillemot

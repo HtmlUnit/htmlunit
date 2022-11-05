@@ -24,7 +24,7 @@ import org.apache.commons.logging.LogFactory;
  * This refresh handler waits the specified number of seconds (or a user defined maximum)
  * before refreshing the specified page, using the specified URL. Waiting happens
  * on the current thread
- *
+ * <p>
  * If you want a refresh handler that ignores the wait time, see
  * {@link ImmediateRefreshHandler}.
  *
@@ -40,7 +40,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
 
     /**
      * Creates a new refresh handler that will wait whatever time the server or content asks, unless
-     * it it longer than <tt>maxwait</tt>. A value of <tt>maxwait</tt> that is less than <tt>1</tt>
+     * it it longer than <code>maxwait</code>. A value of <code>maxwait</code> that is less than <code>1</code>
      * will cause the refresh handler to always wait for whatever time the server or content requests.
      *
      * @param maxwait the maximum wait time before the refresh (in seconds)
@@ -61,7 +61,7 @@ public class WaitingRefreshHandler implements RefreshHandler {
      * @param page the page that is going to be refreshed
      * @param url the URL where the new page will be loaded
      * @param requestedWait the number of seconds to wait before reloading the page; if this is
-     *        greater than <tt>maxwait</tt> then <tt>maxwait</tt> will be used instead
+     *        greater than <code>maxwait</code> then <code>maxwait</code> will be used instead
      * @throws IOException if the refresh fails
      */
     @Override

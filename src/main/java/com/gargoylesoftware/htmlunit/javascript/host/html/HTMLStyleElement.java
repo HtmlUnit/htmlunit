@@ -127,7 +127,7 @@ public class HTMLStyleElement extends HTMLElement {
     @Override
     @JsxGetter
     public boolean isDisabled() {
-        return !getSheet().isEnabled();
+        return !getSheet().getCssStyleSheet().isEnabled();
     }
 
     /**
@@ -137,7 +137,7 @@ public class HTMLStyleElement extends HTMLElement {
     @Override
     @JsxSetter
     public void setDisabled(final boolean disabled) {
-        final CSSStyleSheet sheet = getSheet();
+        final CssStyleSheet sheet = getSheet().getCssStyleSheet();
         final boolean modified = disabled == sheet.isEnabled();
         sheet.setEnabled(!disabled);
 

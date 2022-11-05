@@ -40,7 +40,7 @@ import com.gargoylesoftware.htmlunit.util.StringUtils;
 public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
 
     /**
-     * Value to use if no specified <tt>value</tt> attribute.
+     * Value to use if no specified <code>value</code> attribute.
      */
     public static final String DEFAULT_VALUE = "Submit Query";
 
@@ -114,7 +114,7 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
     }
 
     /**
-     * {@inheritDoc} Doesn't print the attribute if it is <tt>value="Submit Query"</tt>.
+     * {@inheritDoc} Doesn't print the attribute if it is <code>value="Submit Query"</code>.
      */
     @Override
     protected void printOpeningTagContentAsXml(final PrintWriter printWriter) {
@@ -136,7 +136,7 @@ public class HtmlSubmitInput extends HtmlInput implements LabelableElement {
     /**
      * {@inheritDoc}
      *
-     * Returns "Submit Query" if <tt>name</tt> attribute is defined and <tt>value</tt> attribute is not defined.
+     * Returns "Submit Query" if <code>name</code> attribute is defined and <code>value</code> attribute is not defined.
      */
     @Override
     public NameValuePair[] getSubmitNameValuePairs() {

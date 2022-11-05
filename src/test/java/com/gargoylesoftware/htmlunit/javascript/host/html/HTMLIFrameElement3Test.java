@@ -63,13 +63,17 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void style() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.getElementById('myIFrame').style == undefined);\n"
+            + "  log(document.getElementById('myIFrame').style == undefined);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
-            + "<iframe id='myIFrame' src='about:blank'></iframe></body></html>";
-        loadPageWithAlerts2(html);
+            + "<iframe id='myIFrame' src='about:blank'></iframe>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -80,14 +84,17 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void referenceFromJavaScript() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(window.frames.length);\n"
-            + "  alert(window.frames['myIFrame'].name);\n"
+            + "  log(window.frames.length);\n"
+            + "  log(window.frames['myIFrame'].name);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<iframe name='myIFrame' src='about:blank'></iframe></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -99,16 +106,19 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void directAccessPerName() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function doTest() {\n"
-            + "  alert(myIFrame.location);\n"
-            + "  alert(Frame.location);\n"
+            + "  log(myIFrame.location);\n"
+            + "  log(Frame.location);\n"
             + "}\n</script></head>\n"
             + "<body onload='doTest()'>\n"
             + "<iframe name='myIFrame' src='about:blank'></iframe>\n"
             + "<iframe name='Frame' src='about:blank'></iframe>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -150,18 +160,18 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "<head>\n"
-            + "  <title>first</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.getElementById('myFrame').contentDocument);\n"
-            + "      alert(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
+            + "      log(document.getElementById('myFrame').contentDocument);\n"
+            + "      log(document.getElementById('myFrame').contentDocument == frames.foo.document);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "  <iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -172,16 +182,18 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void frameElement() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>first</title>\n"
+            + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.getElementById('myFrame') == frames.foo.frameElement);\n"
+            + "  log(document.getElementById('myFrame') == frames.foo.frameElement);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
             + "<iframe name='foo' id='myFrame' src='about:blank'></iframe>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -200,30 +212,32 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
         final String html
             = "<!DOCTYPE html>\n"
             + "<html><body onload='test()'><script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var frame = document.createElement('iframe');\n"
             + "    document.body.appendChild(frame);\n"
             + "    var win = frame.contentWindow;\n"
             + "    var doc = frame.contentWindow.document;\n"
-            + "    alert(win == window);\n"
-            + "    alert(doc == document);\n"
+            + "    log(win == window);\n"
+            + "    log(doc == document);\n"
             + "    \n"
             + "    doc.open();\n"
             + "    doc.write(\"<html><body><input type='text'/></body></html>\");\n"
             + "    doc.close();\n"
             + "    var win2 = frame.contentWindow;\n"
             + "    var doc2 = frame.contentWindow.document;\n"
-            + "    alert(win == win2);\n"
-            + "    alert(doc == doc2);\n"
+            + "    log(win == win2);\n"
+            + "    log(doc == doc2);\n"
             + "    \n"
             + "    var input = doc.getElementsByTagName('input')[0];\n"
             + "    var input2 = doc2.getElementsByTagName('input')[0];\n"
-            + "    alert(input == input2);\n"
-            + "    alert(typeof input);\n"
-            + "    alert(typeof input2);\n"
+            + "    log(input == input2);\n"
+            + "    log(typeof input);\n"
+            + "    log(typeof input2);\n"
             + "  }\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -269,10 +283,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
     public void setSrc_JavascriptUrl() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
-            + "<html><head><title>First</title><script>\n"
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    document.getElementById('iframe1').src = 'javascript:void(0)';\n"
-            + "    alert(window.frames[0].location);\n"
+            + "    log(window.frames[0].location);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -284,7 +300,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             Assert.fail("Blocks real IE");
         }
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -304,11 +320,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<iframe id='i5' width='-5'></iframe>\n"
             + "<iframe id='i6' width='30.2'></iframe>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function set(e, value) {\n"
             + "  try {\n"
             + "    e.width = value;\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
             + "}\n"
             + "var i1 = document.getElementById('i1');\n"
@@ -317,27 +334,28 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "var i4 = document.getElementById('i4');\n"
             + "var i5 = document.getElementById('i5');\n"
             + "var i6 = document.getElementById('i6');\n"
-            + "alert(i1.width);\n"
-            + "alert(i2.width);\n"
-            + "alert(i3.width);\n"
-            + "alert(i4.width);\n"
-            + "alert(i5.width);\n"
-            + "alert(i6.width);\n"
+            + "log(i1.width);\n"
+            + "log(i2.width);\n"
+            + "log(i3.width);\n"
+            + "log(i4.width);\n"
+            + "log(i5.width);\n"
+            + "log(i6.width);\n"
             + "set(i1, '400');\n"
             + "set(i2, 'abc');\n"
             + "set(i3, -5);\n"
             + "set(i4, 100.2);\n"
             + "set(i5, '10%');\n"
             + "set(i6, -12.56);\n"
-            + "alert(i1.width);\n"
-            + "alert(i2.width);\n"
-            + "alert(i3.width);\n"
-            + "alert(i4.width);\n"
-            + "alert(i5.width);\n"
-            + "alert(i6.width);\n"
+            + "log(i1.width);\n"
+            + "log(i2.width);\n"
+            + "log(i3.width);\n"
+            + "log(i4.width);\n"
+            + "log(i5.width);\n"
+            + "log(i6.width);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -357,11 +375,12 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<iframe id='i5' height='-5'></iframe>\n"
             + "<iframe id='i6' height='30.2'></iframe>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function set(e, value) {\n"
             + "  try {\n"
             + "    e.height = value;\n"
             + "  } catch (e) {\n"
-            + "    alert('error');\n"
+            + "    log('error');\n"
             + "  }\n"
             + "}\n"
             + "var i1 = document.getElementById('i1');\n"
@@ -370,27 +389,28 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "var i4 = document.getElementById('i4');\n"
             + "var i5 = document.getElementById('i5');\n"
             + "var i6 = document.getElementById('i6');\n"
-            + "alert(i1.height);\n"
-            + "alert(i2.height);\n"
-            + "alert(i3.height);\n"
-            + "alert(i4.height);\n"
-            + "alert(i5.height);\n"
-            + "alert(i6.height);\n"
+            + "log(i1.height);\n"
+            + "log(i2.height);\n"
+            + "log(i3.height);\n"
+            + "log(i4.height);\n"
+            + "log(i5.height);\n"
+            + "log(i6.height);\n"
             + "set(i1, '400');\n"
             + "set(i2, 'abc');\n"
             + "set(i3, -5);\n"
             + "set(i4, 100.2);\n"
             + "set(i5, '10%');\n"
             + "set(i6, -12.56);\n"
-            + "alert(i1.height);\n"
-            + "alert(i2.height);\n"
-            + "alert(i3.height);\n"
-            + "alert(i4.height);\n"
-            + "alert(i5.height);\n"
-            + "alert(i6.height);\n"
+            + "log(i1.height);\n"
+            + "log(i2.height);\n"
+            + "log(i3.height);\n"
+            + "log(i4.height);\n"
+            + "log(i5.height);\n"
+            + "log(i6.height);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -413,15 +433,16 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "  <body>\n"
             + "    <iframe id='i'></iframe>\n"
             + "    <script>\n"
-            + "      alert(document.getElementById('i').contentWindow.document.readyState);\n"
+            + LOG_TITLE_FUNCTION
+            + "      log(document.getElementById('i').contentWindow.document.readyState);\n"
             + "      window.onload = function() {\n"
-            + "        alert(document.getElementById('i').contentWindow.document.readyState);\n"
+            + "        log(document.getElementById('i').contentWindow.document.readyState);\n"
             + "      };\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -457,16 +478,18 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var iframe = document.getElementById('myFrame');\n"
             + "    iframe.width = '128px';\n"
-            + "    alert(iframe.width);\n"
+            + "    log(iframe.width);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
             + "  <iframe id='myFrame'></iframe>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -482,17 +505,19 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(myFrame);\n"
-            + "    alert(document.getElementById('myFrame'));\n"
-            + "    alert(myFrame.width);\n"
-            + "    alert(document.getElementById('myFrame').width);\n"
+            + "    log(myFrame);\n"
+            + "    log(document.getElementById('myFrame'));\n"
+            + "    log(myFrame.width);\n"
+            + "    log(document.getElementById('myFrame').width);\n"
             + "  }\n"
             + "</script>\n"
             + "<body onload='test()'>\n"
             + "  <iframe id='myFrame'></iframe>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -617,20 +642,20 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html>\n"
             + "<head>\n"
-            + "  <title>OnloadTest</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      var docDomain = document.domain;\n"
             + "      var frame1Domain = document.getElementById('frame1').contentWindow.document.domain;\n"
             + "      var frame2Domain = document.getElementById('frame2').contentWindow.document.domain;\n"
             + "      var frame3Domain = document.getElementById('frame3').contentWindow.document.domain;\n"
-            + "      alert(docDomain);\n"
-            + "      alert(frame1Domain);\n"
-            + "      alert(frame2Domain);\n"
-            + "      alert(frame3Domain);\n"
-            + "      alert(docDomain === frame1Domain);\n"
-            + "      alert(docDomain === frame2Domain);\n"
-            + "      alert(docDomain === frame3Domain);\n"
+            + "      log(docDomain);\n"
+            + "      log(frame1Domain);\n"
+            + "      log(frame2Domain);\n"
+            + "      log(frame3Domain);\n"
+            + "      log(docDomain === frame1Domain);\n"
+            + "      log(docDomain === frame2Domain);\n"
+            + "      log(docDomain === frame3Domain);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -647,7 +672,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "content.html"), left);
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         assertEquals(2, getMockWebConnection().getRequestCount());
     }
 
@@ -661,8 +686,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html>\n"
             + "<head>\n"
-            + "  <title>OnloadTest</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function doTest() {\n"
             + "      var myFrame = document.createElement('iframe');\n"
             + "      myFrame.id = 'idMyFrame';\n"
@@ -672,9 +697,9 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "      var docDomain = document.domain;\n"
             + "      var myFrameDomain = myFrame.contentDocument.domain;\n"
 
-            + "      alert(docDomain);\n"
-            + "      alert(myFrameDomain);\n"
-            + "      alert(docDomain === myFrameDomain);\n"
+            + "      log(docDomain);\n"
+            + "      log(myFrameDomain);\n"
+            + "      log(docDomain === myFrameDomain);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -682,7 +707,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
         assertEquals(1, getMockWebConnection().getRequestCount());
     }
 
@@ -699,10 +724,11 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             + "<html>\n"
             + "<head>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function check() {\n"
-            + "      alert(document.getElementById('frame').contentWindow);\n"
-            + "      alert(document.activeElement.id);\n"
-            + "      alert(window.frame.window.document.activeElement.id);\n"
+            + "      log(document.getElementById('frame').contentWindow);\n"
+            + "      log(document.activeElement.id);\n"
+            + "      log(window.frame.window.document.activeElement.id);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
@@ -735,7 +761,7 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
 
         driver.switchTo().defaultContent();
         jsExecutor.executeScript("check();");
-        verifyAlerts(driver, alerts[i++], alerts[i++], alerts[i++]);
+        verifyTitle2(driver, alerts[i++], alerts[i++], alerts[i++]);
     }
 
     /**
@@ -831,7 +857,6 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
             = "<!DOCTYPE html>\n"
             + "<html>\n"
             + "<head>\n"
-            + "  <title>Deny</title>\n"
             + "  <script>\n"
             + "    function check() {\n"
             + "      try {\n"

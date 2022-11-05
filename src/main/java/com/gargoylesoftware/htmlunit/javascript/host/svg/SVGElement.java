@@ -294,6 +294,42 @@ public class SVGElement extends Element {
     }
 
     /**
+     * Returns the {@code onselectstart} event handler for this element.
+     * @return the {@code onselectstart} event handler for this element
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public Function getOnselectstart() {
+        return getEventHandler(Event.TYPE_SELECTSTART);
+    }
+
+    /**
+     * Sets the {@code onselectstart} event handler for this element.
+     * @param onselectstart the {@code onselectstart} event handler for this element
+     */
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    public void setOnselectstart(final Object onselectstart) {
+        setEventHandler(Event.TYPE_SELECTSTART, onselectstart);
+    }
+
+    /**
+     * Returns the {@code onselectionchange} event handler for this element.
+     * @return the {@code onselectionchange} event handler for this element
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public Function getOnselectionchange() {
+        return getEventHandler(Event.TYPE_SELECTIONCHANGE);
+    }
+
+    /**
+     * Sets the {@code onselectionchange} event handler for this element.
+     * @param onselectionchange the {@code onselectionchange} event handler for this element
+     */
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    public void setOnselectionchange(final Object onselectionchange) {
+        setEventHandler(Event.TYPE_SELECTIONCHANGE, onselectionchange);
+    }
+
+    /**
      * Returns the {@code onauxclick} event handler.
      * @return the {@code onauxclick} event handler
      */
@@ -891,7 +927,7 @@ public class SVGElement extends Element {
      * Returns the {@code onclose} event handler.
      * @return the {@code onclose} event handler
      */
-    @JsxGetter({CHROME, EDGE})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Function getOnclose() {
         return getEventHandler(Event.TYPE_CLOSE);
     }
@@ -900,7 +936,7 @@ public class SVGElement extends Element {
      * Sets the {@code onclose} event handler.
      * @param close the {@code onclose} event handler
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnclose(final Object close) {
         setEventHandler(Event.TYPE_CLOSE, close);
     }

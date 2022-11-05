@@ -1600,7 +1600,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "168",
             FF = "161",
-            FF_ESR = "181",
+            FF_ESR = "161",
             IE = "164")
     @HtmlUnitNYI(CHROME = "100",
             EDGE = "100",

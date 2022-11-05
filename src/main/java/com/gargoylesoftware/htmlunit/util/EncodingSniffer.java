@@ -61,7 +61,7 @@ public final class EncodingSniffer {
         new byte[] {'-'}
     };
 
-    /** Sequence(s) of bytes indicating the beginning of a <tt>meta</tt> HTML tag. */
+    /** Sequence(s) of bytes indicating the beginning of a <code>meta</code> HTML tag. */
     private static final byte[][] META_START = {
         new byte[] {'<'},
         new byte[] {'m', 'M'},
@@ -415,7 +415,7 @@ public final class EncodingSniffer {
     private static final byte[] XML_DECLARATION_PREFIX = "<?xml ".getBytes(US_ASCII);
 
     /**
-     * The number of HTML bytes to sniff for encoding info embedded in <tt>meta</tt> tags;
+     * The number of HTML bytes to sniff for encoding info embedded in <code>meta</code> tags;
      * relatively large because we don't have a fallback.
      */
     private static final int SIZE_OF_HTML_CONTENT_SNIFFED = 4096;
@@ -443,7 +443,7 @@ public final class EncodingSniffer {
      * from the specified XML content and/or the corresponding HTTP headers using a custom algorithm.</p>
      *
      * <p>Otherwise, this method sniffs encoding settings from the specified content of unknown type by looking for
-     * <tt>Content-Type</tt> information in the HTTP headers and
+     * <code>Content-Type</code> information in the HTTP headers and
      * <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a> information in the content.</p>
      *
      * <p>Note that if an encoding is found but it is not supported on the current platform, this method returns
@@ -496,12 +496,12 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Returns {@code true} if the specified HTTP response headers contain a <tt>Content-Type</tt> that
+     * Returns {@code true} if the specified HTTP response headers contain a <code>Content-Type</code> that
      * ends with one of the specified strings.
      *
      * @param headers the HTTP response headers
      * @param contentTypeEndings the content type endings to search for
-     * @return {@code true} if the specified HTTP response headers contain a <tt>Content-Type</tt> that
+     * @return {@code true} if the specified HTTP response headers contain a <code>Content-Type</code> that
      *         ends with one of the specified strings
      */
     static boolean contentTypeEndsWith(final List<NameValuePair> headers, final String... contentTypeEndings) {
@@ -591,7 +591,7 @@ public final class EncodingSniffer {
     }
 
     /**
-     * <p>Sniffs encoding settings from the specified content of unknown type by looking for <tt>Content-Type</tt>
+     * <p>Sniffs encoding settings from the specified content of unknown type by looking for <code>Content-Type</code>
      * information in the HTTP headers and <a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">Byte Order Mark</a>
      * information in the content.</p>
      *
@@ -683,9 +683,9 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to sniff an encoding from an HTML <tt>meta</tt> tag in the specified byte array.
+     * Attempts to sniff an encoding from an HTML <code>meta</code> tag in the specified byte array.
      *
-     * @param bytes the bytes to check for an HTML <tt>meta</tt> tag
+     * @param bytes the bytes to check for an HTML <code>meta</code> tag
      * @return the encoding sniffed from the specified bytes, or {@code null} if the encoding
      *         could not be determined
      */
@@ -865,12 +865,12 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Extracts an encoding from the specified <tt>Content-Type</tt> value using
+     * Extracts an encoding from the specified <code>Content-Type</code> value using
      * <a href="http://ietfreport.isoc.org/idref/draft-abarth-mime-sniff/">the IETF algorithm</a>; if
      * no encoding is found, this method returns {@code null}.
      *
-     * @param s the <tt>Content-Type</tt> value to search for an encoding
-     * @return the encoding found in the specified <tt>Content-Type</tt> value, or {@code null} if no
+     * @param s the <code>Content-Type</code> value to search for an encoding
+     * @return the encoding found in the specified <code>Content-Type</code> value, or {@code null} if no
      *         encoding was found
      */
     static Charset extractEncodingFromContentType(final String s) {
@@ -1034,7 +1034,7 @@ public final class EncodingSniffer {
 
     /**
      * Skips ahead to the first occurrence of any of the specified targets within the specified array,
-     * starting at the specified index. This method returns <tt>-1</tt> if none of the targets are found.
+     * starting at the specified index. This method returns <code>-1</code> if none of the targets are found.
      *
      * @param bytes the array to search through
      * @param i the index to start looking at
@@ -1056,7 +1056,7 @@ public final class EncodingSniffer {
 
     /**
      * Finds the first index of the specified sub-array inside the specified array, starting at the
-     * specified index. This method returns <tt>-1</tt> if the specified sub-array cannot be found.
+     * specified index. This method returns <code>-1</code> if the specified sub-array cannot be found.
      *
      * @param array the array to traverse for looking for the sub-array
      * @param subarray the sub-array to find
@@ -1085,8 +1085,8 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to read <tt>size</tt> bytes from the specified input stream. Note that this method is not guaranteed
-     * to be able to read <tt>size</tt> bytes; however, the returned byte array will always be the exact length of the
+     * Attempts to read <code>size</code> bytes from the specified input stream. Note that this method is not guaranteed
+     * to be able to read <code>size</code> bytes; however, the returned byte array will always be the exact length of the
      * number of bytes read.
      *
      * @param content the input stream to read from
@@ -1108,9 +1108,9 @@ public final class EncodingSniffer {
     }
 
     /**
-     * Attempts to read <tt>size</tt> bytes from the specified input stream and then prepends the specified prefix to
+     * Attempts to read <code>size</code> bytes from the specified input stream and then prepends the specified prefix to
      * the bytes read, returning the resultant byte array. Note that this method is not guaranteed to be able to read
-     * <tt>size</tt> bytes; however, the returned byte array will always be the exact length of the number of bytes
+     * <code>size</code> bytes; however, the returned byte array will always be the exact length of the number of bytes
      * read plus the length of the prefix array.
      *
      * @param content the input stream to read from

@@ -1134,31 +1134,33 @@ public class KeyboardEvent extends UIEvent {
      * @param bubbles can the event bubble
      * @param cancelable can the event be canceled
      * @param view the view to use for this event
+     * @param key the value of the key attribute. Defaults to ""
+     * @param location the value of the location attribute. Defaults to 0
      * @param ctrlKey is the control key pressed
      * @param altKey is the alt key pressed
      * @param shiftKey is the shift key pressed
      * @param metaKey is the meta key pressed
-     * @param keyCode the virtual key code value of the key which was depressed, otherwise zero
-     * @param charCode the Unicode character associated with the depressed key otherwise zero
      */
-    @JsxFunction(FF_ESR)
-    public void initKeyEvent(
+    @JsxFunction
+    public void initKeyboardEvent(
             final String type,
             final boolean bubbles,
             final boolean cancelable,
             final Object view,
+            final String key,
+            final int location,
             final boolean ctrlKey,
             final boolean altKey,
             final boolean shiftKey,
-            final boolean metaKey,
-            final int keyCode,
-            final int charCode) {
+            final boolean metaKey) {
 
         initUIEvent(type, bubbles, cancelable, view, 0);
+        setKey(key);
+        setLocation(location);
         setCtrlKey(ctrlKey);
         setAltKey(altKey);
         setShiftKey(shiftKey);
-        setKeyCode(keyCode);
+        setKeyCode(0);
         setMetaKey(metaKey);
         charCode_ = 0;
     }

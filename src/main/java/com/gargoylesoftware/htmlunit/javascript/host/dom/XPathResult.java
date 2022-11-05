@@ -132,28 +132,25 @@ public class XPathResult extends HtmlUnitScriptable {
      */
     void init(final List<?> result, final int type) {
         result_ = result;
-        resultType_ = -1;
-        if (result_.size() == 1) {
-            final Object o = result_.get(0);
-            if (o instanceof Number) {
-                resultType_ = NUMBER_TYPE;
-            }
-            else if (o instanceof String) {
-                resultType_ = STRING_TYPE;
-            }
-            else if (o instanceof Boolean) {
-                resultType_ = BOOLEAN_TYPE;
+        resultType_ = type;
+
+        if (type == ANY_TYPE) {
+            resultType_ = UNORDERED_NODE_ITERATOR_TYPE;
+
+            if (result_.size() == 1) {
+                final Object o = result_.get(0);
+                if (o instanceof Number) {
+                    resultType_ = NUMBER_TYPE;
+                }
+                else if (o instanceof String) {
+                    resultType_ = STRING_TYPE;
+                }
+                else if (o instanceof Boolean) {
+                    resultType_ = BOOLEAN_TYPE;
+                }
             }
         }
 
-        if (resultType_ == -1) {
-            if (type != ANY_TYPE) {
-                resultType_ = type;
-            }
-            else {
-                resultType_ = UNORDERED_NODE_ITERATOR_TYPE;
-            }
-        }
         iteratorIndex_ = 0;
     }
 
@@ -234,6 +231,17 @@ public class XPathResult extends HtmlUnitScriptable {
         if (resultType_ != NUMBER_TYPE) {
             throw Context.reportRuntimeError("Cannot get numberValue for type: " + resultType_);
         }
+
+        if (result_.size() == 1) {
+            final Object o = result_.get(0);
+            if (o instanceof Number) {
+                return ((Double) o).doubleValue();
+            }
+            if (o instanceof Boolean) {
+                return ((Boolean) o).booleanValue() ? 1 : 0;
+            }
+        }
+
         final String asString = asString();
         double answer;
         try {
@@ -250,11 +258,30 @@ public class XPathResult extends HtmlUnitScriptable {
      * @return the value of this boolean result
      */
     @JsxGetter
-    public boolean isBooleanValue() {
+    public boolean getBooleanValue() {
         if (resultType_ != BOOLEAN_TYPE) {
             throw Context.reportRuntimeError("Cannot get booleanValue for type: " + resultType_);
         }
-        return !result_.isEmpty();
+
+        if (result_.size() == 1) {
+            final Object o = result_.get(0);
+            if (o instanceof Number) {
+                final double d = ((Double) o).doubleValue();
+                if (Double.isNaN(d) || Double.isInfinite(d)) {
+                    return true;
+                }
+
+                return 0.0 != d;
+            }
+            if (o instanceof String) {
+                return !((String) o).isEmpty();
+            }
+            if (o instanceof Boolean) {
+                return ((Boolean) o).booleanValue();
+            }
+        }
+
+        return result_.size() > 0;
     }
 
     /**
@@ -270,6 +297,10 @@ public class XPathResult extends HtmlUnitScriptable {
     }
 
     private String asString() {
+        if (result_.size() < 1) {
+            return "";
+        }
+
         final Object resultObj = result_.get(0);
         if (resultObj instanceof DomAttr) {
             return ((DomAttr) resultObj).getValue();

@@ -192,7 +192,7 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Returns the current document instance, using <tt>thisObj</tt> as a hint.
+     * Returns the current document instance, using <code>thisObj</code> as a hint.
      * @param thisObj a hint as to the current document (may be the prototype when function is used without "this")
      * @return the current document instance
      */
@@ -227,7 +227,7 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "write".
-     *
+     * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
@@ -472,7 +472,7 @@ public class HTMLDocument extends Document {
 
     /**
      * JavaScript function "open".
-     *
+     * <p>
      * See http://www.whatwg.org/specs/web-apps/current-work/multipage/section-dynamic.html for
      * a good description of the semantics of open(), write(), writeln() and close().
      *
@@ -553,7 +553,7 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Closes the document implicitly, i.e. flushes the <tt>document.write</tt> buffer (IE only).
+     * Closes the document implicitly, i.e. flushes the <code>document.write</code> buffer (IE only).
      */
     private void implicitCloseIfNecessary() {
         if (!writeInCurrentDocument_) {
@@ -647,9 +647,9 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Calls to <tt>document.XYZ</tt> should first look at elements named <tt>XYZ</tt> before
+     * Calls to <code>document.XYZ</code> should first look at elements named <code>XYZ</code> before
      * using standard functions.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override
@@ -820,7 +820,7 @@ public class HTMLDocument extends Document {
      *
      * @param event the event to be dispatched
      * @return {@code false} if at least one of the event handlers which handled the event
-     *         called <tt>preventDefault</tt>; {@code true} otherwise
+     *         called <code>preventDefault</code>; {@code true} otherwise
      */
     @Override
     @JsxFunction

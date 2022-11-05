@@ -55,7 +55,8 @@ public final class MimeType {
     private static final Map<String, String> type2extension = buildMap();
 
     /**
-     * See https://mimesniff.spec.whatwg.org/#javascript-mime-type.
+     * See <a href="https://mimesniff.spec.whatwg.org/#javascript-mime-type">
+     * https://mimesniff.spec.whatwg.org/#javascript-mime-type</a>.
      *
      * @param mimeType the type to check
      * @return true if the mime type is for js

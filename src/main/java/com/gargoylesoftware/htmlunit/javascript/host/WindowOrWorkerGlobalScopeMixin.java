@@ -44,7 +44,8 @@ public final class WindowOrWorkerGlobalScopeMixin {
     /**
      * The minimum delay that can be used with setInterval() or setTimeout(). Browser minimums are
      * usually in the 10ms to 15ms range, but there's really no reason for us to waste that much time.
-     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability
+     * <a href="http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability">
+     * http://jsninja.com/Timers#Minimum_Timer_Delay_and_Reliability</a>
      */
     private static final int MIN_TIMER_DELAY = 1;
 

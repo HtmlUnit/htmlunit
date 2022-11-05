@@ -240,7 +240,7 @@ public class HtmlImage extends HtmlElement {
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
-     * <p>Executes this element's <tt>onload</tt> or <tt>onerror</tt> handler. This method downloads the image
+     * <p>Executes this element's <code>onload</code> or <code>onerror</code> handler. This method downloads the image
      * if either of these handlers are present (prior to invoking the resulting handler), because applications
      * sometimes use images to send information to the server and use these handlers to get notified when the
      * information has been received by the server.</p>
@@ -249,8 +249,8 @@ public class HtmlImage extends HtmlElement {
      * <a href="http://www.nabble.com/Image-Onload-Support-td18895781.html">here</a> for the discussion which
      * lead up to this method.</p>
      *
-     * <p>This method may be called multiple times, but will only attempt to execute the <tt>onload</tt> or
-     * <tt>onerror</tt> handler the first time it is invoked.</p>
+     * <p>This method may be called multiple times, but will only attempt to execute the <code>onload</code> or
+     * <code>onerror</code> handler the first time it is invoked.</p>
      */
     public void doOnLoad() {
         if (onloadProcessed_) {
@@ -323,7 +323,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code src}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code src} or an empty string if that attribute isn't defined
@@ -353,7 +353,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code alt}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code alt} or an empty string if that attribute isn't defined
@@ -364,7 +364,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code name}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
@@ -375,7 +375,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code longdesc}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code longdesc} or an empty string if that attribute isn't defined
@@ -386,7 +386,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code height}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code height} or an empty string if that attribute isn't defined
@@ -397,7 +397,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code width}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code width} or an empty string if that attribute isn't defined
@@ -408,7 +408,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code usemap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code usemap} or an empty string if that attribute isn't defined
@@ -419,7 +419,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code ismap}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code ismap} or an empty string if that attribute isn't defined
@@ -430,7 +430,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code align}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code align} or an empty string if that attribute isn't defined
@@ -441,7 +441,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code border}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code border} or an empty string if that attribute isn't defined
@@ -452,7 +452,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code hspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code hspace} or an empty string if that attribute isn't defined
@@ -463,7 +463,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the value of the attribute {@code vspace}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code vspace} or an empty string if that attribute isn't defined
@@ -608,11 +608,11 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <p>Returns the <tt>ImageReader</tt> which can be used to read the image contained by this image element.</p>
+     * <p>Returns the <code>ImageReader</code> which can be used to read the image contained by this image element.</p>
      * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
      * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
      *
-     * @return the <tt>ImageReader</tt> which can be used to read the image contained by this image element
+     * @return the <code>ImageReader</code> which can be used to read the image contained by this image element
      * @throws IOException if an error occurs while downloading or reading the image
      */
     public ImageReader getImageReader() throws IOException {
@@ -634,9 +634,9 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * <p>Returns the <tt>WebResponse</tt> for the image contained by this image element.</p>
+     * <p>Returns the <code>WebResponse</code> for the image contained by this image element.</p>
      * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
-     * <p>If the image has not already been downloaded and <tt>downloadIfNeeded</tt> is {@code true}, this method
+     * <p>If the image has not already been downloaded and <code>downloadIfNeeded</code> is {@code true}, this method
      * triggers a download and caches the image.</p>
      *
      * @param downloadIfNeeded whether or not the image should be downloaded (if it hasn't already been downloaded)
@@ -740,7 +740,7 @@ public class HtmlImage extends HtmlElement {
     }
 
     /**
-     * Simulates clicking this element at the position <tt>(0, 0)</tt>. This method returns
+     * Simulates clicking this element at the position <code>(0, 0)</code>. This method returns
      * the page contained by this image's window after the click, which may or may not be the
      * same as the original page, depending on JavaScript event handlers, etc.
      *
@@ -911,7 +911,7 @@ public class HtmlImage extends HtmlElement {
 
     /**
      * Returns the original element qualified name,
-     * this is needed to differentiate between <tt>img</tt> and <tt>image</tt>.
+     * this is needed to differentiate between <code>img</code> and <code>image</code>.
      * @return the original element qualified name
      */
     public String getOriginalQualifiedName() {

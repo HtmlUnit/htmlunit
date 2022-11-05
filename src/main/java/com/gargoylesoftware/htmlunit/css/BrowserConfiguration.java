@@ -69,8 +69,16 @@ abstract class BrowserConfiguration {
         return new ChromeAndEdge("normal");
     }
 
+    static BrowserConfiguration chromeAndEdgeEmpty() {
+        return new ChromeAndEdge("");
+    }
+
     static BrowserConfiguration chromeAndEdge(final String defaultValue) {
         return new ChromeAndEdge(defaultValue);
+    }
+
+    static BrowserConfiguration chrome(final String defaultValue) {
+        return new Chrome(defaultValue);
     }
 
     static BrowserConfiguration edge(final String defaultValue) {
@@ -130,6 +138,17 @@ abstract class BrowserConfiguration {
         @Override
         public boolean isIteratable() {
             return false;
+        }
+    }
+
+    private static class Chrome extends BrowserConfiguration {
+        Chrome(final String defaultValue) {
+            super(defaultValue);
+        }
+
+        @Override
+        public boolean matches(final BrowserVersion browserVersion) {
+            return browserVersion.isChrome();
         }
     }
 

@@ -31,7 +31,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
  * can be a message-object containing format specifiers such as ("%o", "%s",
  * "%d", "%i", "%f"). The logging methods are null-safe, so if the number of
  * format specifiers and the numbers of parameters don't match, no exception is thrown.
- *
+ * <p>
  * The default logger uses Apache Commons Logging.
  *
  * @author Andrea Martino

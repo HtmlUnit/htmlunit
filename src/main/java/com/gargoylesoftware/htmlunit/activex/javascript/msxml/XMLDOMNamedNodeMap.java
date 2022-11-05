@@ -67,7 +67,7 @@ public class XMLDOMNamedNodeMap extends MSXMLScriptable {
 
     /**
      * Returns the element at the specified index, or <code>NOT_FOUND</code> if the index is invalid.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override

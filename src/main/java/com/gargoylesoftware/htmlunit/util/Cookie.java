@@ -111,7 +111,7 @@ public class Cookie implements Serializable {
      * @param name the cookie name
      * @param value the cookie name
      * @param path the path to which this cookie applies
-     * @param maxAge the number of seconds for which this cookie is valid; <tt>-1</tt> indicates that the
+     * @param maxAge the number of seconds for which this cookie is valid; <code>-1</code> indicates that the
      *        cookie should never expire; other negative numbers are not allowed
      * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
      */

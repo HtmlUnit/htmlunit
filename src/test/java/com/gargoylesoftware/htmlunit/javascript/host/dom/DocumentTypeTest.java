@@ -48,16 +48,16 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">\n"
             + "<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\">\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function test() {\n"
             + "      var t = document.doctype;\n"
-            + "      alert(t);\n"
+            + "      log(t);\n"
             + "      if (t != null) {\n"
-            + "        alert(t == document.firstChild);\n"
-            + "        alert(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "
+            + "        log(t == document.firstChild);\n"
+            + "        log(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "
             + "+ ',' + t.localName + ',' + t.namespaceURI);\n"
-            + "        alert(t.name + ',' + t.publicId + ',' + t.systemId + ',' + t.internalSubset"
+            + "        log(t.name + ',' + t.publicId + ',' + t.systemId + ',' + t.internalSubset"
             + " + ',' + t.entities + ',' + t.notations);\n"
             + "      }\n"
             + "    }\n"
@@ -67,7 +67,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -84,16 +84,17 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + "      function test() {\n"
+            + LOG_TITLE_FUNCTION
             + "        var request = new XMLHttpRequest();\n"
             + "        request.open('GET', 'foo.xml', false);\n"
             + "        request.send('');\n"
             + "        var doc = request.responseXML;\n"
             + "        var t = doc.doctype;\n"
-            + "        alert(t);\n"
+            + "        log(t);\n"
             + "        if (t != null) {\n"
-            + "          alert(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "
+            + "          log(t.nodeName + ',' + t.nodeType + ',' + t.nodeValue + ',' + t.prefix "
             + "+ ',' + t.localName + ',' + t.namespaceURI);\n"
-            + "          alert(t.name + ',' + t.publicId + ',' + t.systemId + ',' + t.internalSubset"
+            + "          log(t.name + ',' + t.publicId + ',' + t.systemId + ',' + t.internalSubset"
             + " + ',' + t.entities + ',' + t.notations);\n"
             + "        }\n"
             + "      }\n"
@@ -107,7 +108,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
               + "<greeting/>";
 
         getMockWebConnection().setDefaultResponse(xml, MimeType.TEXT_XML);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

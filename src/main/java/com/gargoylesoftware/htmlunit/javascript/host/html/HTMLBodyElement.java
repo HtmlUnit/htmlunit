@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_BODY_MARGINS_8;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -30,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
@@ -74,23 +72,6 @@ public class HTMLBodyElement extends HTMLElement {
     @Override
     protected boolean isEventHandlerOnWindow() {
         return true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDefaults(final ComputedCSSStyleDeclaration style) {
-        if (getBrowserVersion().hasFeature(JS_BODY_MARGINS_8)) {
-            style.setDefaultLocalStyleAttribute("margin", "8px");
-            style.setDefaultLocalStyleAttribute("padding", "0px");
-        }
-        else {
-            style.setDefaultLocalStyleAttribute("margin-left", "8px");
-            style.setDefaultLocalStyleAttribute("margin-right", "8px");
-            style.setDefaultLocalStyleAttribute("margin-top", "8px");
-            style.setDefaultLocalStyleAttribute("margin-bottom", "8px");
-        }
     }
 
     /**

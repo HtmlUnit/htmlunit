@@ -58,8 +58,6 @@ public class DocumentationTests {
                     .build();
 
 
-        final WebClient webClient = new WebClient(browser);
-
         assertEquals("de-CH", browser.getAcceptLanguageHeader());
     }
 }

@@ -438,7 +438,8 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     }
 
     /**
-     * Regression test for bug https://sf.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038.
+     * Regression test for bug <a href="https://sf.net/tracker/?func=detail&atid=448266&aid=1609944&group_id=47038">
+     * https://sf.net/tracker/?func=detail&amp;atid=448266&amp;aid=1609944&amp;group_id=47038</a>.
      * @throws Exception if the test fails
      */
     @Test

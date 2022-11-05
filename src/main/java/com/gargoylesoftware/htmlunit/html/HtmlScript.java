@@ -76,7 +76,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     /**
      * Returns the value of the attribute {@code type}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code type}
@@ -88,7 +88,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     /**
      * Returns the value of the attribute {@code language}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code language}
@@ -124,7 +124,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
 
     /**
      * Returns the value of the attribute {@code defer}. Refer to the
-     * <a href='http://www.w3.org/TR/html401/'>HTML 4.01</a>
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
      *
      * @return the value of the attribute {@code defer}
@@ -151,7 +151,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * If setting the <tt>src</tt> attribute, this method executes the new JavaScript if necessary
+     * If setting the <code>src</code> attribute, this method executes the new JavaScript if necessary
      * (behavior varies by browser version). {@inheritDoc}
      */
     @Override
@@ -182,7 +182,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     }
 
     /**
-     * Executes the <tt>onreadystatechange</tt> handler when simulating IE, as well as executing
+     * Executes the <code>onreadystatechange</code> handler when simulating IE, as well as executing
      * the script itself, if necessary.
      * {@inheritDoc}
      */

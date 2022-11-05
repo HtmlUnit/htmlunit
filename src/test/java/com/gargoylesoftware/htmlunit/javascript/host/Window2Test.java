@@ -773,7 +773,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"true", "true", "133", "true", "true", "16"},
-            EDGE = {"true", "true", "131", "true", "true", "16"},
+            EDGE = {"true", "true", "131", "true", "true", "63"},
             FF = {"true", "true", "91", "true", "true", "12"},
             FF_ESR = {"true", "true", "91", "true", "true", "12"},
             IE = {"true", "true", "86", "true", "true", "16"})
@@ -884,7 +884,7 @@ public class Window2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"635", "1256", "618", "1239"},
-            EDGE = {"637", "1256", "620", "1239"},
+            EDGE = {"637", "1209", "620", "1192"},
             FF = {"677", "1260", "660", "1243"},
             FF_ESR = {"677", "1260", "660", "1243"},
             IE = {"682", "1256", "665", "1239"})
@@ -1429,10 +1429,7 @@ public class Window2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
-    @HtmlUnitNYI(CHROME = "true",
-            EDGE = "true",
-            FF = "true",
-            FF_ESR = "true")
+    @HtmlUnitNYI(IE = "false")
     public void getComputedStyleCached() throws Exception {
         final String html = "<html><body>\n"
             + "<div id='myDiv'></div>\n"
@@ -2320,7 +2317,8 @@ public class Window2Test extends WebDriverTestCase {
     }
 
     /**
-     * Test case for {@link https://github.com/HtmlUnit/htmlunit/issues/482}.
+     * Test case for <a href="https://github.com/HtmlUnit/htmlunit/issues/482">
+     * https://github.com/HtmlUnit/htmlunit/issues/482</a>.
      *
      * @throws Exception if an error occurs
      */

@@ -53,7 +53,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 /**
  * Customized BrowserCompatSpec for HtmlUnit.
- *
+ * <p>
  * Workaround for <a href="https://issues.apache.org/jira/browse/HTTPCLIENT-1006">HttpClient bug 1006</a>:
  * quotes are wrongly removed in cookie's values.
 

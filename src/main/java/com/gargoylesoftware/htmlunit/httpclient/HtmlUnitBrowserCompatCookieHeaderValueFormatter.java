@@ -23,7 +23,7 @@ import org.apache.hc.core5.util.CharArrayBuffer;
 
 /**
  * Customized BasicHeaderValueFormatter for HtmlUnit.
- *
+ * <p>
  * We use our own class because browsers do not automatically quote version1 cookies
  * if the value contains special chars.
  * I guess this is something special for HttpClient because HttpClient also removes

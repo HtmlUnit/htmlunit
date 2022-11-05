@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingB
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
@@ -63,7 +62,7 @@ public class ImageData extends HtmlUnitScriptable {
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public static Scriptable jsConstructor(
+    public static ImageData jsConstructor(
             final Context cx, final Object[] args, final Function ctorObj,
             final boolean inNewExpr) {
 

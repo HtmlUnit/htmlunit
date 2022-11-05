@@ -613,10 +613,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _Element_HTMLDialogElement() throws Exception {
         test("Element", "HTMLDialogElement");
     }
@@ -3029,10 +3027,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "false",
-            CHROME = "true",
-            EDGE = "true",
-            FF = "true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void _EventTarget_HTMLDialogElement() throws Exception {
         test("EventTarget", "HTMLDialogElement");
     }

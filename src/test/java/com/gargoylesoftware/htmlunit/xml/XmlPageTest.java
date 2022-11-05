@@ -41,7 +41,7 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.util.MimeType;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link XmlPage}.
@@ -177,7 +177,7 @@ public class XmlPageTest extends WebServerTestCase {
              + "\u0434\n"
              + "</foo>";
 
-        final byte[] bytes = TextUtils.stringToByteArray(content, UTF_8);
+        final byte[] bytes = StringUtils.toByteArray(content, UTF_8);
 
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();

@@ -19,7 +19,6 @@ import java.util.WeakHashMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject;
 import com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache;
 import com.gargoylesoftware.htmlunit.javascript.host.AudioScheduledSourceNode;
@@ -44,6 +43,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.MessageChannel;
 import com.gargoylesoftware.htmlunit.javascript.host.MessagePort;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeType;
 import com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray;
+import com.gargoylesoftware.htmlunit.javascript.host.NamedNodeMap;
 import com.gargoylesoftware.htmlunit.javascript.host.Namespace;
 import com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.Navigator;
@@ -117,7 +117,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.CryptoKey;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSS;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSS2Properties;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSConditionRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSCounterStyleRule;
 import com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule;
@@ -508,7 +507,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         CloseEvent.class, Comment.class, CompositionEvent.class, ComputedCSSStyleDeclaration.class,
         ConstantSourceNode.class,
         ConvolverNode.class, Coordinates.class, Credential.class, CredentialsContainer.class, Crypto.class,
-        CryptoKey.class, CSS.class, CSS2Properties.class, CSSConditionRule.class,
+        CryptoKey.class, CSS.class, CSSConditionRule.class,
         CSSCounterStyleRule.class, CSSFontFaceRule.class, CSSGroupingRule.class, CSSImportRule.class,
         CSSKeyframeRule.class, CSSKeyframesRule.class, CSSMediaRule.class, CSSNamespaceRule.class, CSSPageRule.class,
         CSSRule.class, CSSRuleList.class, CSSStyleDeclaration.class, CSSStyleRule.class,

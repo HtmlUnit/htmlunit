@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
@@ -39,11 +40,12 @@ public class History2Test extends SimpleWebTestCase {
     public void historyCacheLimit() throws Exception {
         final String content = "<html><head>\n"
                 + "<script>\n"
+                + "function log(msg) { window.document.title = msg; }\n"
                 + "function test() {\n"
                 + "  for(var idx = 0; idx < 100; idx++) {\n"
                 + "    history.pushState({}, 'Page '+idx, 'page_'+idx+'.html');\n"
                 + "  }\n"
-                + "  alert(history.length);\n"
+                + "  log(history.length);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -51,7 +53,8 @@ public class History2Test extends SimpleWebTestCase {
 
         final WebClient webClient = getWebClientWithMockWebConnection();
         webClient.getOptions().setHistorySizeLimit(5);
-        loadPageWithAlerts(content);
+        final HtmlPage page = loadPage(content);
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
     /**

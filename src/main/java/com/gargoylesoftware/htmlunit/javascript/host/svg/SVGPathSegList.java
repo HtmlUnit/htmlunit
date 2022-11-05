@@ -14,12 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.svg;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
  * A JavaScript object for {@code SVGPathSegList}.
@@ -27,13 +25,12 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass({FF_ESR, IE})
+@JsxClass(IE)
 public class SVGPathSegList extends HtmlUnitScriptable {
 
     /**
      * Creates an instance.
      */
-    @JsxConstructor(FF_ESR)
     public SVGPathSegList() {
     }
 

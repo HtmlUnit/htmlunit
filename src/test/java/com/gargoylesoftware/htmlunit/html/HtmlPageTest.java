@@ -22,6 +22,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,6 +34,7 @@ import java.util.Set;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,7 +61,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Tests for {@link HtmlPage}.
@@ -998,7 +1000,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         assertNotNull("xml document could not be parsed", page.asXml());
         final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         final DocumentBuilder builder = factory.newDocumentBuilder();
-        builder.parse(TextUtils.toInputStream(page.asXml()));
+        builder.parse(IOUtils.toInputStream(page.asXml(), StandardCharsets.ISO_8859_1));
     }
 
     /**
@@ -1014,7 +1016,7 @@ public class HtmlPageTest extends SimpleWebTestCase {
         final WebClient client = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
 
-        webConnection.setDefaultResponse(TextUtils.stringToByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
+        webConnection.setDefaultResponse(StringUtils.toByteArray(html, UTF_8), 200, "OK", MimeType.TEXT_HTML);
         client.setWebConnection(webConnection);
 
         final HtmlPage page = client.getPage(URL_FIRST);
@@ -1296,6 +1298,65 @@ public class HtmlPageTest extends SimpleWebTestCase {
         expectedAlerts.add("foo");
 
         final HtmlPage page1 = loadPage(content, expectedAlerts);
+        final byte[] bytes = SerializationUtils.serialize(page1);
+
+        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+
+        final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
+        final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
+        while (iterator1.hasNext()) {
+            assertTrue(iterator2.hasNext());
+            final HtmlElement element1 = iterator1.next();
+            final HtmlElement element2 = iterator2.next();
+            assertEquals(element1.getNodeName(), element2.getNodeName());
+        }
+        assertFalse(iterator2.hasNext());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
+    }
+
+    /**
+     * Test issue 513.
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serializationLambda() throws Exception {
+        final String content =
+              "<html><body>\n"
+            + "<div id='myId'>Hello there!</div>\n"
+            + "<form name='f' id='f'></form>\n"
+            + "<script>var y = document.body.getElementsByTagName('form').elements;</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page1 = loadPage(content);
+        final byte[] bytes = SerializationUtils.serialize(page1);
+
+        final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);
+
+        final Iterator<HtmlElement> iterator1 = page1.getHtmlElementDescendants().iterator();
+        final Iterator<HtmlElement> iterator2 = page2.getHtmlElementDescendants().iterator();
+        while (iterator1.hasNext()) {
+            assertTrue(iterator2.hasNext());
+            final HtmlElement element1 = iterator1.next();
+            final HtmlElement element2 = iterator2.next();
+            assertEquals(element1.getNodeName(), element2.getNodeName());
+        }
+        assertFalse(iterator2.hasNext());
+        assertEquals("Hello there!", page2.getHtmlElementById("myId").getFirstChild().getNodeValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void serializationStaticDomNodeList() throws Exception {
+        final String content =
+              "<html><body>\n"
+            + "<div id='myId'>Hello there!</div>\n"
+            + "<form name='f' id='f'></form>\n"
+            + "<script>var y = document.querySelectorAll('*');</script>\n"
+            + "</body></html>";
+
+        final HtmlPage page1 = loadPage(content);
         final byte[] bytes = SerializationUtils.serialize(page1);
 
         final HtmlPage page2 = (HtmlPage) SerializationUtils.deserialize(bytes);

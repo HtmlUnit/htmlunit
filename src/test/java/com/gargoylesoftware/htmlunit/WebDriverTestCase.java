@@ -97,7 +97,7 @@ import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
-import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
@@ -152,7 +152,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Function used in many tests.
      */
     public static final String LOG_TITLE_FUNCTION =
-            "  function log(msg) { window.document.title += msg + '§';}\n";
+            "  function log(msg) { window.document.title += msg + '§'; }\n";
 
     /**
      * Function used in many tests.
@@ -165,15 +165,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     + "msg = msg.replace(/\\r/g, '\\\\r'); "
                     + "msg = msg.replace(/\\t/g, '\\\\t'); "
                     + "window.document.title += msg + '§';}\n";
-
-    /**
-     * Function used in many tests.
-     */
-    public static final String LOG_TITLE_NORMALIZE_FUNCTION = "  function log(msg) { "
-            + "msg = ('' + msg).replace(/\\t/g, '\\\\t');"
-            + "msg = msg.replace(/\\r/g, '\\\\r');"
-            + "msg = msg.replace(/\\n/g, '\\\\n');"
-            + "window.document.title += msg + '§';}\n";
 
     /**
      * Function used in many tests.
@@ -547,7 +538,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         }
         if (webDriver_ == null) {
             final DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setBrowserName(BrowserType.HTMLUNIT);
+            capabilities.setBrowserName(Browser.HTMLUNIT.browserName());
             capabilities.setVersion(getBrowserName(getBrowserVersion()));
             webDriver_ = new HtmlUnitDriver(capabilities) {
                 @Override
@@ -590,18 +581,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
 
     private static String getBrowserName(final BrowserVersion browserVersion) {
         if (browserVersion == BrowserVersion.FIREFOX) {
-            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
+            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
         }
         if (browserVersion == BrowserVersion.FIREFOX_ESR) {
-            return BrowserType.FIREFOX + '-' + browserVersion.getBrowserVersionNumeric();
+            return browserVersion.getNickname() + '-' + browserVersion.getBrowserVersionNumeric();
         }
-        if (browserVersion == BrowserVersion.INTERNET_EXPLORER) {
-            return BrowserType.IE;
-        }
-        if (browserVersion == BrowserVersion.EDGE) {
-            return BrowserType.EDGE;
-        }
-        return BrowserType.CHROME;
+        return browserVersion.getNickname();
     }
 
     /**
@@ -932,9 +917,21 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 html = HtmlPageTest.STANDARDS_MODE_PREFIX_ + html;
             }
         }
-        final MockWebConnection mockWebConnection = getMockWebConnection();
-        mockWebConnection.setResponse(url, html, contentType, charset);
-        startWebServer(mockWebConnection, serverCharset);
+        getMockWebConnection().setResponse(url, html, contentType, charset);
+
+        return loadPage2(url, serverCharset);
+    }
+
+
+    /**
+     * Load the page from the url.
+     * @param url the url to use to load the page
+     * @param serverCharset the charset at the server side.
+     * @return the web driver
+     * @throws Exception if something goes wrong
+     */
+    protected final WebDriver loadPage2(final URL url, final Charset serverCharset) throws Exception {
+        startWebServer(getMockWebConnection(), serverCharset);
 
         WebDriver driver = getWebDriver();
         if (!(driver instanceof HtmlUnitDriver)) {
@@ -1389,7 +1386,6 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param webElement the webElement
      * @return the HtmlElement
      * @throws Exception if an error occurs
-     * @see #getWebWindowOf(HtmlUnitDriver)
      */
     protected HtmlElement toHtmlElement(final WebElement webElement) throws Exception {
         return (HtmlElement) ((HtmlUnitWebElement) webElement).getElement();

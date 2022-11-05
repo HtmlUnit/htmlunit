@@ -193,17 +193,18 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                     + "R3yQCr1ZpUV9/QfsBkDN/uNPlPsCf3d6bb7d5obrp1c2FhYVI+1tLSona5XJqgcyxiY3c37N71/Py8vJGcnMzX1dVt/QNcN"
                     + "Toga4nOWgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                    + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACtUlEQVQ4jXXPz2vTdxzH8e/BMfwfKoLDgwcP23l0dGy3zcsO"
-                    + "Hj0LDtaLRTvaMlkPQztBBauwH3VOJSZt2oT8WKt+Eym2DekPutgkjbTNj+/vH/kmMc332/j0IGbEdB943T7vB6+XIAiCkM/n"
-                    + "P44/TQ4lFlPjz1+kxp8vp8cXD0lkXjwnHPbCMbFf1U0qsoak6MiqjqIaqJqJqptohoWmmximxVz0yc0ewB+KDsiqTrGiUJbU"
-                    + "bkgzOkjVcTAti5m52C89gKIZlCSlc5wuyMQzMvGMwkpBQTdtdoslXm5lyW8X3kQXEp91Ae8n7FU0HqZK/LFRxZ9zeZxrEctZ"
-                    + "hDfKlFQLy3aw7Sq+2fA3XYCmm0iKTiC1y60llT83m8ztvWFF8VgvO4hZmakXuzi1Os3mfjcQDEUHNMMiV1S4OJdleKHMnbUa"
-                    + "0wWPSr3NmvSaRE5hajHPZtGgud/qbaAbFslMke8DmwxFX3FFVJjasJGcFrVGk5VtiR8C68ysFtlvufhmY92AYVok/t3j18gq"
-                    + "m9s7XBN3uBB6xfnZbeYzZaaXc3xxI8FMeo+W6/Y2MCybnbLCd7ef8XRplbO/L/H1nWW+mlziamSNC/eSfH7tH7aKGq77QYNg"
-                    + "KDpgWjZlSeb6TJIz1yMcGw5yYjTMidEQn/wY5ORIkMsPEhiGiet5vRNMu4qmm7zcyvGzT+TTn4Icv+Tn2NBjTo1MM/xAJJsv"
-                    + "UG808LyD7gn3/cEBy3awbAfDtCmWKqxnsvjFNL5naVYzeSRZpt5o4LouBwdt/vIF/gNu3P3tS7vqYDs1nFqdWr3xLrU69UaD"
-                    + "180m+60WruvheQe0220mbt3+tgP09/efvP/3IzEcjac6icVT4dh8KhybT0U+yCNfINnX13e6A4yNjR0ZHBw8+i4TRycm/j/v"
-                    + "/01OTn4kCILwFgqgq1utHBHHAAAAAElFTkSuQmCC",
+                    + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAC6UlEQVQ4T12TXUgUURTH//s57rqj7Yq5VKaWgpbRl7p+rl+"
+                    + "ZWihi6VP1qqREJvTsey9FBIIS9CBEZbVpqJkTihgKpSSlsYWa2ppu6u7sjrs6M9ud2davGc69d+7c8+Occ/9HAfLY7XZqZm"
+                    + "Hpdhili1QqyQYZpGn/43Kz38sv5D/Zva+QPt72DVrTz58a5HkBCoWCGEBGeU2m4BwIEK4CI2PjjyrKihpDEBnQ2d1bmJORx"
+                    + "mwRgFIGhCzoHDKtRgVBEDA0PHavqqL0ruS7Dci1pBMATwBK2cHh4eH0B48YKSCBDF6vB5zXC7VaHfg5t5hWVmz9vA3Iy8xg"
+                    + "pBR4ERj57YdPS4MO0yFAXhoceB+H02Y9wrUqggygf2i4oqbycvc2wCoBBBEf571wCDoYwmmYIiiYKQFafgPrHg5za35UnYy"
+                    + "CRq1Gd//ADsBGapCdZWHWuE20T6xDozcgLioC0XQYLDFKLLN+uFkWs043zsWacDzagO537/dGkE8AU388eDbtgl6vh0EXjj"
+                    + "iSd0k8iUYlYtqxjo4vyyhIMKHsRAy6+j4QQOlOCgXZFuarg8WnX39RkmRE3yIww4oQRBFXEnVgPV7cH11CU048ylPNeNPbv"
+                    + "zeCgpxMhuX8aO6aQuPZSLR+28TqFikXuf+yoxQJn8XEsg/ttWdwLCYStt5dEUg1yCOADZ8Pz0ftYGY9GF/ZlItFFAQFuXtJ"
+                    + "oTUpRjRfTAUdQcPWw+xNoTA3ixHINTqdTrycdODF1DpWN3iIYgAGSoXqFBNupB3B4UNmUFoKr3v6dlLo6LQVXiouZCTZiCR"
+                    + "njuOw6mbxY8UL4o/EgzTMJqILmoZWoyHRqPD0la3iWk11sIgP2x4XXa+9OiA1QUjKstZJ/gqif6XUXJL9V6nUEw9a2yrvNN"
+                    + "R3yQCr1ZpUV9/QfsBkDN/uNPlPsCf3d6bb7d5obrp1c2FhYVI+1tLSona5XJqgcyxiY3c37N71/Py8vJGcnMzX1dVt/QNcN"
+                    + "Toga4nOWgAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                     + "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAKeSURBVDhP"
                     + "jVJNTxNRFD3zTSm1UyKlCsEIRCC6EVFijC5MFE1kqTv1B+jChXsSE6Nx48qYsDPRxI0rjR8JGDFGhRBRdiAhliKlLVRmhmk7"
@@ -289,7 +290,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
@@ -314,7 +315,7 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQIW2P4z8DwHwAFAAH/F1FwBgAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAANSURBVBhXY"
                 + "/jPwPAfAAUAAf+mXJtdAAAAAElFTkSuQmCC")
@@ -335,8 +336,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
-                + "ggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
+                + "SUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
                 + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
@@ -357,8 +358,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
                 + "AABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
-                + "QmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
+                + "AABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
                 + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
@@ -380,8 +381,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAL0lEQVQIWzXI0REAEBAD0Y1OVCqd6kQ4w/vaWQXS0lmaCCTb"
                 + "GTbljoocd5Q/XmoDijQRBTzmAeYAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJklEQVQImVXKwQkAIBDAsDiKm97m9SOIfYaKVrsIzEzxALp94B4H"
-                + "kskZi4OAPRUAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAL0lEQVQIWzXI0REAEBAD0Y1OVCqd6kQ4w/vaWQXS0lmaCCTb"
+                + "GTbljoocd5Q/XmoDijQRBTzmAeYAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVBhXY/jP"
                 + "AET/Ff+DaRBoaGgAc+ACIPAfCkBsJrAIEDAyMgJJBgYAY/AUlK91orEAAAAASUVORK5CYII=")
@@ -402,8 +403,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0"
                 + "Lcf9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0"
+                + "Lcf9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2B"
                 + "Q+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
@@ -424,8 +425,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEElEQVQImWP4z8Dwn4EyAACCwQH/cCTq6QAAAABJRU5ErkJ"
-                + "ggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAF0lEQVQIW2P8z8Dwn5GBAYggAM4gXgAAg+YCBUgKw5EAAAAA"
+                + "SUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAQSURBVBh"
                 + "XY/jPAEIUAAYGAILBAf8lQkk6AAAAAElFTkSuQmCC")
@@ -446,8 +447,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
                 + "AABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEklEQVQImWNgIAr8Z2D4j1MSADcNAf/wu82GAAAAAElFTkSu"
-                + "QmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGUlEQVQIW2NkQAOMWAX+MzD8B8qAJTFUAAA35gIFxQ+VugAA"
+                + "AABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhX"
                 + "YyAO/AcjrICBAQA3DQH/+OkmUAAAAABJRU5ErkJggg==")
@@ -468,8 +469,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJElEQVQIW2P8f4PhP6MGAyMDFDD+ZwAKMOAV+P//PyMQwLQAAJ81"
                 + "CwUd8tccAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGElEQVQImWP4f4PhPwMy+M9AUOD/fxQBAJOmCs946ShRAAAAAElF"
-                + "TkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAJElEQVQIW2P8f4PhP6MGAyMDFDD+ZwAKMOAV+P//PyMQwLQAAJ81"
+                + "CwUd8tccAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAfSURBVBhXY/h"
                 + "/g+E/AzIA8lAEmKA0HDAx/EdWwMAAADhoBtfglrXyAAAAAElFTkSuQmCC")
@@ -490,8 +491,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQIW2P8z8AARAjAiMwBsQkLAACDawID+0h1rgAAAABJ"
                 + "RU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAEUlEQVQImWP4z8DwHxkzkA4A2ncH+YHCac0AAAAASUVORK5CY"
-                + "II=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAFklEQVQIW2P8z8AARAjAiMwBsQkLAACDawID+0h1rgAAAABJ"
+                + "RU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAARSURBVBhXY/z"
                 + "PwABEFAAGBgCDBQIA1ym4lAAAAABJRU5ErkJggg==")
@@ -512,8 +513,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0Lcf"
                 + "9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAJklEQVQImUXIsREAMAjEMDMKTeb8MdnGVFxUCp4KIuggZf9JImc"
-                + "B04ARksgoEOwAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAK0lEQVQIWy3IsRUAEBQEwd1SJOr8uvQkOnECJhzpSZYYCBM0Lcf"
+                + "9ZlQh3wWKWA5Xk6MBwQAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVBhXY2B"
                 + "Q+///PwPDf0YQwXCDAQj+KyJEGhsaQEIgwMAAAI7uDpdlPpgpAAAAAElFTkSuQmCC")
@@ -536,9 +537,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "+AE/s3ai04GExAMrkbPWeLVh+rE4uaO73I3qoil1X7OHlocRIE7Q40x4nIf9ZfTQmPNpgOwHn+1JVW/dse66I7Rg/ubYSqGr"
                 + "SAKzGZXW1vQruP2PI26Y4fYtFEdtocw7QDMTVSX0zn6C3/T/wRfzizALwpK/7gAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlb2OsQnDQAAD5c4eweDi03gE1xrlRzNZRGu48yiXxjw"
-                + "PTgJpIlBxcAhJP2UFLyGTyWS8pDESzUOCTfC8unV8dOLAA2cmHolHnLnxbfEshb1W9lo5SwGp9e1dwEDo8lVMgm30afF/eQHveW"
-                + "Ud7tvRzAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAkUlEQVQYV62PwQ0CMQwE7RIQDYQPooL7nguih8g9UJDpJA2c"
+                + "+AE/s3ai04GExAMrkbPWeLVh+rE4uaO73I3qoil1X7OHlocRIE7Q40x4nIf9ZfTQmPNpgOwHn+1JVW/dse66I7Rg/ubYSqGr"
+                + "SAKzGZXW1vQruP2PI26Y4fYtFEdtocw7QDMTVSX0zn6C3/T/wRfzizALwpK/7gAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACCSURBVChTvY7"
                 + "BDcIwDEV/OLUjIHFIL6gTcMXZh3HYx2GTTBL327SoUrlw4SmO/3esr+A3rmZyUdNRolxv3gAeIPkV5kbxcEeea3fPeZrfe1ybTP"
@@ -561,8 +562,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQYV2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFE"
                 + "YYPAf/sDBgwHHS4w1Dd8AKnCrhCm8z8QNDY2AjU24FeIz7kYOnEpHgoKAc8UFQug8KnwAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAANUlEQVQYlWNgIAU0CDf8/5/D8B9G41bYIPB/v4PD/4YGgf//GfA"
-                + "ohIH/////b2hoIKxwxAAAo0AXzo4A4+UAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAATklEQVQYV2NkIBIwgtQ1CDf8r49sYGhc3sAAohmnMIDFkQFE"
+                + "YYPAf/sDBgwHHS4w1Dd8AKnCrhCm8z8QNDY2AjU24FeIz7kYOnEpHgoKAc8UFQug8KnwAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA1SURBVChTYyA"
                 + "JNAg3/P+fw/AfRkOFUQATmMydwHDgigOYZpgCFsEP/gNBQ0MDVhNHImBgAADHvxPYgDOEzgAAAABJRU5ErkJggg==")
@@ -583,8 +584,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAANElEQVQIW2NkUPv/3+HbAQZGB5n9/w3YLzAw7ud0+C+g/gHI"
                 + "cOD4LyDxDyi1X/K/wb1fDACPgxG6JQ+97QAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAOElEQVQImQEtANL/AAAm//9AHL//AEAcv/9wI4//AL8JQP/PMDD"
-                + "/AL9ACP/PWAb/AEC/Gf9wnRP/0o0VF9N8H0sAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAANElEQVQIW2NkUPv/3+HbAQZGB5n9/w3YLzAw7ud0+C+g/gHI"
+                + "cOD4LyDxDyi1X/K/wb1fDACPgxG6JQ+97QAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAIAAAAFCAYAAABvsz2cAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAA0SURBVBhXY2R"
                 + "Q+//f4dsBBiYQYcB+gYFxP6fDfwH1DwwsDOYnGBgk/jEwOuyX/G9w7xcDAHxREIP4we06AAAAAElFTkSuQmCC")
@@ -607,8 +608,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "GXbDEoPiIIc/wCxpI5iFKxFfoQBhddNiO1k6IJV0cMekhJafG5daMdtNXfB5j5u6hUEretk7bODNhOAJzrgfCzJhsNQAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAO0lEQVQYldWMqREAIBDEQikY6rwy6SYIHscNlpiY7MIPNBU8viFo"
-                + "x+1rWKwKbqePETEfs/AMFk8hyeMAl2Uvlc+P3zcAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV7WQQQqAMBADE3/SS+kvrb8UL/7EmIp62kovBkJg"
+                + "GXbDEoPiIIc/wCxpI5iFKxFfoQBhddNiO1k6IJV0cMekhJafG5daMdtNXfB5j5u6hUEretk7bODNhOAJzrgfCzJhsNQAAAAA"
+                + "SUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABHSURBVChTYxgS"
                 + "QO3///8MDP/hNC4Akvx/A4ihNFQYC/ivCDEJRuMCIMmGhgaIifgUwgDQhWAA5WIAJigNBoyMjFAWOmBgAAAEXSqdGQ47LgAAAABJ"
@@ -633,8 +635,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "sAxNiLuipI1gFKqjTHt6VoCw+pK8dqYHkAo6uGNSQPHXH5ecMXtb5Dj6quGmbuFoa9ixB3um0l/0I3gCu8YfCw1yrNcAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlc2Mqw0AIBTEyigY5nxjsk0RfAQJBElNzV1hp6jg8glB"
-                + "K04fh8ms4PS1GBG9eBuuw+BpyEvxIxoamS+VaAm+LAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV8WOQQqAMBADE3/SS+kvrb8UL/7EmJYKRap4M+w2"
+                + "sAxNiLuipI1gFKqjTHt6VoCw+pK8dqYHkAo6uGNSQPHXH5ecMXtb5Dj6quGmbuFoa9ixB3um0l/0I3gCu8YfCw1yrNcAAAAA"
+                + "SUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY8AA"
                 + "av///2dg+A+ncQGQ5P8bQAylocJYwH9FiEkwGhcASTY0NEBMxKcQBoAuBAMol4EJSmMFjIyMUNZQAAwMAKgVKp2FLYz1AAAAAElF"
@@ -658,8 +661,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "S3QWOzmUYJS0EozCpbiZAhQgLJ6MbivHBkgF7dwwKODUz41zSpjcj2Xd+j3OSZ3C1q5qxhzMmR/vaTz2AM0wHwuiBt/PAAAAAElF"
                 + "TkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPUlEQVQYlbWMuw0AIBSEcBQb53xjug0WfjqNMZGG5g74T1HB5R2C"
-                + "VpzeDpNZweljMSJ68TRch8HVkJviMw3cQS+VAulsRwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAY0lEQVQYV6WQXQqAMAyDE2+yl+EtnbcUX7yJMf7BYJsMLJQ89KNJ"
+                + "S3QWOzmUYJS0EozCpbiZAhQgLJ6MbivHBkgF7dwwKODUz41zSpjcj2Xd+j3OSZ3C1q5qxhzMmR/vaTz2AM0wHwuiBt/PAAAAAElF"
+                + "TkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABGSURBVChTY6AD"
                 + "UPv//z8Dw384jQuAJP/fAGIoDRXGAv4rQkyC0bgASLKhoQFiIj6FMAB0IRhAuQxMUBorYGRkhLKoDxgYAAFaKp1TOe14AAAAAElF"
@@ -683,9 +687,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "wgsGgQ8fGBIWfMGucEFCwhVWDg5u+2vXRKXfvuVmvHoVh8L4eG3TiAhTFQmJLDZWVlNGHR3sCkHW/v//3wFI1T948MBBUVGR"
                 + "sMIDBw44ODo64laIzZcYviZGEUgNVmuwhiOxJgIAFNAnC2GN/IoAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAbUlEQVQYlWM4FcD+/1QA+/+EFaL/E1aI/mfABTYEmPzfEGDyf0KB"
-                + "zP8FCTy4FS5ISLiyNCPj/hM7uy//tbXxKIyP1766fXvCz/PnT/2/cgW3QgYGBob///87/P//f//9+/eJU7h//378Cgc5AABrbToy"
-                + "XSlG0gAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAiUlEQVQYV2M8FcD+nwEIpkXwgSiGBRGvGcEMNMC4IcAErPCB"
+                + "wgsGgQ8fGBIWfMGucEFCwhVWDg5u+2vXRKXfvuVmvHoVh8L4eG3TiAhTFQmJLDZWVlNGHR3sCkHW/v//3wFI1T948MBBUVGR"
+                + "sMIDBw44ODo64laIzZcYviZGEUgNVmuwhiOxJgIAFNAnC2GN/IoAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABzSURBVChTYzwV"
                 + "wP6fAQimRfCBKIYFEa8ZwQw0wPSUQZcBhPVPsDPY7/gOFcYETB8EdK5+lTB5EHJW8WvCaXmoMBawIC5O+8r27Qk/zp8/9f/KFbAz"
@@ -709,8 +713,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "xuqZbPGpq8wlT4R6KW1jEFn3FqwGq8IDjpyrxFX+hCoY/mHgzPqPW6H4K7lVQWt+hhZM+MagfuszWCEAHxEcC87YTb4AAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAARUlEQVQYlWNgGAUwoP4/P1F8wcz7rAoz8arLFp+6apFB7P83QcL/"
-                + "8So84Mi56noq6//v0xjxKxR/Jbcqc5r4/5tqvHCFALEhF41FNwM8AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAX0lEQVQYV2NkIBIwEqmOYegqVP+fn/hhoVbduwYGxd8P0kEe"
+                + "xuqZbPGpq8wlT4R6KW1jEFn3FqwGq8IDjpyrxFX+hCoY/mHgzPqPW6H4K7lVQWt+hhZM+MagfuszWCEAHxEcC87YTb4AAAAA"
+                + "SUVORK5CYII=",
             IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
             + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAPklEQVR42mNgGAUwoPb/f4LE/P//GRj+41WXJTb1/yL92P//Iwko"
@@ -732,7 +737,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYV2NkIBIwEqmOYVQh3pAiOngACmkAC8i6MuwAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVQYlWNgGAWDEwAAAZoAARbK02kAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAF0lEQVQYV2NkIBIwEqmOYVQh3pAiOngACmkAC8i6MuwAAAAA"
+                + "SUVORK5CYII=",
             IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAADklEQVR42mNgGAWDEwAAAZoAAQDqGN4AAAAASUVORK5CYII=")
@@ -753,8 +759,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2Ocr5nwnwEIEq8vYATRuADjgmoesMKE1i/4FR5w"
                 + "cNhvz8DgwHjgAH6FINPmz5//PzExkbBCfG6DyeE1BdmAoaAQAGtwEAvm0nZdAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYlWOYr5nwf75mwn8GQmBBNc//BdU8hBUecHDY/9/BgbBC"
-                + "BgYGhvnz5xOncMQBAL0KD/QH8JFiAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAASElEQVQYV2Ocr5nwnwEIEq8vYATRuADjgmoesMKE1i/4FR5w"
+                + "cNhvz8DgwHjgAH6FINPmz5//PzExkbBCfG6DyeE1BdmAoaAQAGtwEAvm0nZdAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAvSURBVChTY5iv"
                 + "mfAfhBkIACaGoDUMYEwIHHBw2P/fwYGgiWAwf/584hSOMMDAAAB1Kw2mrjRWYgAAAABJRU5ErkJggg==")
@@ -777,8 +783,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "EnlALArEi4CSE3EpfAuU4Abiv0B8GajQAkMh0DQboOBKqGm/gfRFIPYBKn4HUoxudTVQLBSIzwFxCUwRhkJ8IUB+8OAyFQDU"
                 + "0xILsSkm0QAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAUUlEQVQYlb3KsQ1FYABG0TODHbQmMIFl3gB2MYcJRCOxhFIp"
-                + "Ec2n0f665ya3O/y9UD83b6gLY1jC7w3u4QxHmEuoDVu4HjiFqoT7sIahiL7vBt20ISfDuXmqAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAaklEQVQYV2NkIBIwEqmOAUPhfwYGVahmTqDkJZhBKAqBiryA"
+                + "EnlALArEi4CSE3EpfAuU4Abiv0B8GajQAkMh0DQboOBKqGm/gfRFIPYBKn4HUoxudTVQLBSIzwFxCUwRhkJ8IUB+8OAyFQDU"
+                + "0xILsSkm0QAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABdSURBVChT"
                 + "Y6A6YITScPCPgUEVyuRkYmC4BGWjAqAiLyDeAcRngTgfKowJgJJvgfgHEH8F4hNQYTAAmg4B/xkYbIDUDyCGif0DKhaCslEB"
@@ -829,9 +836,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
                 + "gg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjElEQVQ4je3SMQrCQBBA0dckZltLrxEkVxEUUudiqaw8l5VWw"
-                + "ZXYRFSI4mrKPJj2M8Muryo0w1T+EAJtxmXDcccpIy7ZI6TXaEtiT/885SOapMpHYvfJiRLPb7ac3wVrutQNvwk2KcHJTxZo1y"
-                + "OxkrjikBQbFIE2J9Z0Nd2C6/DCxS/Bu8k+9mw2++QGj8thmtPon2MAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA6ElEQVQ4T+2SzQoBURiGH5F/NyIrKQv3YOOnJpStnetwA1aU"
+                + "klixcgcWJLdgx05ZYTLlO2OmmGiOWDqb03e+9zy930+A55OXMOs8beReevK+YcBRxGLQu0KlBMcQhCcQT8HsAA3RnHxJjsAG"
+                + "CmyUhuoago8fc2Bt79DyJ8B8GBYXD8wFRARqQkG3fOWwVYPOEJKvXDTBHIBw9Y4usC24rg5SAX9esj2UDBgrjwU1lD3Md1DU"
+                + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
+                + "gg==",
             IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzUlEQVR42u2SvwpBYRyGn8Eiyqos/kxGVrkDo8VkJYNcgUtwD"
@@ -946,10 +955,12 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "2Kh6JiZqomoCaj1n1ETVBNR6zqiJqgmo9ZxRE1UTUOs5oyaqJqDWc0ZNVE1AreeMmqiagFrPGTVRNQG13hX4a00ZAyWoGQAA"
                 + "AABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAqElEQVRYhe2SwQ3DIAxF/yzMw"
-                + "SCeJKN0lg6TXeihRHKNacIh6qHvSUgI8OclWPqkSnqGta0PSXroOubOn+We1Q98C8z27hSNXsPCLHCX1Prlh0Tro7q5L"
-                + "Ypa3zvqt6R+z0RbMuIfNVfs59WFr4pKUgm5vn4QvfL0MSQT8mfKJNc09uJPRaX3y5QgVO8QLRp7dEU0tlXWizNR/4EAA"
-                + "AAAAAAAAAAAAP/AC/GNUlQypcRWAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAABOUlEQVRYR+2UMW7CUBBE4R5UhGMALTlCSEWFBAeAJiUVB0iu"
+                + "QMEJUgYppzAUXARmpHW0WHYSKyORYiyt/jf2DvPfjtzt3F5D3L6gHtPPq9hvsb6ilpWeptsnPBjH+z/p1mnk/k63hdHPmkN8"
+                + "5/mvRrP2sI3ROTofUG+oj6C1CLUR1kPsp1h3qN8aPePdGWoS/WusnF7uL+qMln+YT8TmTJQiG9QgBMs9R/wc425rlHHro96T"
+                + "7ld02hCtGs35K83lLGajNMB8V7NPmrxKLe6LexqlgQuK0TmFORriyHtqo3sIHlE5o/wC5HE3EaU3PsuxqstiE9F+dfRx2P+3"
+                + "2Kh6JiZqomoCaj1n1ETVBNR6zqiJqgmo9ZxRE1UTUOs5oyaqJqDWc0ZNVE1AreeMmqiagFrPGTVRNQG13hX4a00ZAyWoGQAA"
+                + "AABJRU5ErkJggg==",
             IE = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACoAAAAqCAYAAADFw8lbAAAAAXNSR0I"
                 + "Ars4c6QAAAARnQU1BAACxjwv8YQUAAADvSURBVFhH7ZJBDsFAFIbLURrHwBJHwMqWA3AGDmBtxxGwsHE"
                 + "NbUTcg/+v92QibdKRWPm/5PNPTeZ15nWSD9pw/xq+mZtkbVmHhyXrsW6Iz1Xh80NYrG3yJ4Kp5a9pWE4"
@@ -1096,8 +1107,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAP0lEQVQoU2NkoDJghJrnAKRBmBJwAKj5AMzABiDHHogPkmki"
                 + "TG8DsoEgs0AGkwNg+ka6gVSNFKonG3JiFqseAAklEgtbZz3HAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAOElEQVQokWNgoBFwYGBgaKAQOyAb2MDAwLCfAsNgelEMRBEg"
-                + "EWDoH6EGUjVSHCgwDIYdiPQNaQAAWucr/QQSzQIAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAP0lEQVQoU2NkoDJghJrnAKRBmBJwAKj5AMzABiDHHogPkmki"
+                + "TG8DsoEgs0AGkwNg+ka6gVSNFKonG3JiFqseAAklEgtbZz3HAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABTSURBVDhP"
                 + "Y6A2YITSDlBMCTgAwkwQNtgwewiTLADSi+KgBigmF8D1w1xINTD4DYTFMsj/oIA9COaRDmB6G5jBXAiAGU4OeAjEoGTzAMyj"
@@ -1118,8 +1129,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAKElEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
                 + "TPV0CAA8pwYL+jNAvAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAFklEQVQokWNgGErgP4V41MChYODgBADEpF+hDnSEnAAAAABJ"
-                + "RU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAKElEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
+                + "TPV0CAA8pwYL+jNAvAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAhSURBVDhP"
                 + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOPwBAwMAkWIBDOc7sxkAAAAASUVORK5CYII=")
@@ -1139,8 +1150,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALElEQVQ4T2NkgID/UJpSipFx1MDRMCQ5BEaTDclBhqFhNAxH"
                 + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAHklEQVQ4jWNggID/VMJwMGrgqIGjBo4aOGrgiDMQAMu0Zqj6"
-                + "rPAwAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAALElEQVQ4T2NkgID/UJpSipFx1MDRMCQ5BEaTDclBhqFhNAxH"
+                + "w5CMEKB+sgEAGQQUFQfPo6sAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAArSURBVDhP"
                 + "Y2SAgP9QmlLAyARlUA2MGkg5GDWQcjBqIOVg1EDKwWA3kIEBAND2AShZ31fQAAAAAElFTkSuQmCC")
@@ -1160,8 +1171,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
-                + "AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
                 + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
@@ -1185,9 +1196,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "hdVABSDMSYypQDULgDgRXS16pIgBFVQBcT4RhroA1ewlZCBMXgvq2igcBq8EikcQ8jI2eXuowa5okvpA/iVyDITpCYEGhSGQ"
                 + "ngrEObiChNTCIQ1o0HIg/kwtAwnGFakuHAYGAgBd6xwVKif+GwAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkElEQVQ4je3MrRIBYQCF4ecCqLqgCJosaJKgqi5A1WVBEyQz"
-                + "GlmWZRchq6vsznyDWd/+aPvOnJmTHpr+Ua9ObIgE5/RX7pSC2XbolsUmb1i4NVpFwWsOmOCBZSw2/YGFu2Meg67wLADvY9AO"
-                + "NpHgOAbM6uOQgx2LYGEjXL6Ag7Jg1gy3FNtWxcIWaNcJNn32Ann7R7XCBLW+AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA0ElEQVQ4T2NkoDJgpLJ5DEPTQFVgMNwmNyjQvWwKNOgUEG8E"
+                + "4lYgPk2qwegGrgcaEIBkyBwguw2I7xNrMLKBXkBNW3FobIca/IWQwcgGHgEqtsaj4S3U0D58hsIMBHkT5F1iwE1o+C7GphjZ"
+                + "hdVABSDMSYypQDULgDgRXS16pIgBFVQBcT4RhroA1ewlZCBMXgvq2igcBq8EikcQ8jI2eXuowa5okvpA/iVyDITpCYEGhSGQ"
+                + "ngrEObiChNTCIQ1o0HIg/kwtAwnGFakuHAYGAgBd6xwVKif+GwAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACWSURBVDhP"
                 + "7cytDoJQGIfxcwFY6QSLwUY20EwGK5ULoNrNBJqBxEaTbDabuQgyFZ4zDxtj78Z349l+O+9O+Ku9TTqad5Vc1MjNvbg39GDr"
@@ -1209,8 +1221,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
-                + "AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
                 + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
@@ -1230,8 +1242,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVQ4T2NkoDJgpLJ5DKMGUh6iuMLwP7lGjxoID7nBH4bk"
                 + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGAUjF/ynAI8aOFQMHAWjgJ4AABYtWaeYl32X"
-                + "AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAMUlEQVQ4T2NkoDJgpLJ5DKMGUh6iuMLwP7lGjxoID7nBH4bk"
+                + "RvJo1iM75BAaR2DxBQB5vAYPhQt4egAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVDhP"
                 + "YxgFIwAwQml08B9KkwyYoDTVwKiBo2AUDAfAwAAAf3YBCwCfFioAAAAASUVORK5CYII=")
@@ -1255,10 +1267,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "y4DsSAoMXA3UG4ZsYDOQ4wrExkDMQobBFUA9ncgGwswAuRhkqBGUBrFBmBBwAyrYjc1AbBpZ0SwAWWaAplAYyH9HrIHYLOFA"
                 + "8okCkF2M7EVC3iFJnuqFAwBzIx8VNVMmtgAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoklEQVQ4je3QsQpBARiG4ceglDKYlTKalcFkMBmUizAom7IZ"
-                + "yOgCDFaDTRlcgkGZbDaDcgsGFsNJ54RDMnjrW5/+fv79+62KKHwS3OGCE1YYoYl8HCxzw6J2xBIDNJB7BFYfgGE7YIE+6kgH"
-                + "wW4MMLj9/YWzN8H5PTjEGueYYC/qlwmU0MIEmyfBWhQYVhJltDHFNgTMvgKGlUIFHYzfxb7bFf97X7D//5t+AAAAAElFTkSu"
-                + "QmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysMtYAe/gHE9yjxOLKX"
+                + "rwINAhn6GojPAfFZJPyQWEtgBvIBNXzEo+kF1HBki55gUw8z0BEouY9YV0DVgQxEtuAAkP8VZmAJkNNNooHIyu8COSogAZiB"
+                + "y4DsSAoMXA3UG4ZsYDOQ4wrExkDMQobBFUA9ncgGwswAuRhkqBGUBrFBmBBwAyrYjc1AbBpZ0SwAWWaAplAYyH9HrIHYLOFA"
+                + "8okCkF2M7EVC3iFJnuqFAwBzIx8VNVMmtgAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC3SURBVDhP"
                 + "7dIxCsIwFIDhqAgudvECzk6iXsChV/ECehkvI66CurnpIHQQBMXBTdD/vSYQNEKsi0J/+EiyvLSlpqzsB6rZVeqgibOeClax"
@@ -1284,9 +1296,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iB0I6cYhrwiKUFzpMAAoaQDE+lCamLAtBKqdQErCJmTJAaCBjqQYiM2n6JYYUmoghiWD30AAk4cbJe1EwXcAAAAASUVORK5C"
                 + "YII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZUlEQVQ4jWNgGAWjgGwgQG0DExgYGP4zMDCsZ2Bg6IfyDSgx"
-                + "UABqIDZMtiX38RhKliUNJBiIjueT6m1C+D0uV+6nwFAFXIYyMDAwBECDYD0D8WFbgM9AcizZT6qBxFhC9QwyBAAApwtZ2OX4"
-                + "JhcAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAoUlEQVQ4T2NkoDJgpLJ5DKMGUh6iNAtDAaDbPlDuPgZ4LCcA"
+                + "DZsPxBuA+AEQXwTiC1BMkj0wL4Nc+B6HTpIsQQ7D+0ADFYh0Dk5LkA1sABpWT6SB6MoWAAUSQYLIBuLzNiF7QBEqiG4giL8f"
+                + "iB0I6cYhrwiKUFzpMAAoaQDE+lCamLAtBKqdQErCJmTJAaCBjqQYiM2n6JYYUmoghiWD30AAk4cbJe1EwXcAAAAASUVORK5C"
+                + "YII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACgSURBVDhP"
                 + "YxgFo4B8IAClKQbMUDoCiM8DsQEQWwCxJBCDwAsoTTRghNIgF76HMDHABiB+AMQXgfgCFOMEMANB4D4QK0CYBAFRljQA8X8y"
@@ -1308,8 +1321,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
-                + "AABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
                 + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
@@ -1329,8 +1342,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
-                + "AABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
                 + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
@@ -1350,8 +1363,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
                 + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGDLgDAPDf0rwqIFDwcBBCwBFCqwhIMBRvAAA"
-                + "AABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DHADzzAw/KfEcBMGiFmjBpIfirQP"
+                + "Q/LdhqqT6ukQACo9DAtpppU3AAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAlSURBVDhP"
                 + "Yxj0gBFKM5xhYPgPZZIFTKBmMYF5VASjBg5/wMAAAAOPAgybsqQOAAAAAElFTkSuQmCC")
@@ -1371,8 +1384,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZdDEQVzAQ8gFOF44g"
                 + "AymMZIh2qqdDAD9SCgsSO8biAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAGUlEQVQokWNgGErgP4WYfgaS64NRAwcrAACGL0e5XiFXSgAA"
-                + "AABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAALUlEQVQoU2NkoDJgpLJ5DMgG/qfQcLBZdDEQVzAQ8gFOF44g"
+                + "AymMZIh2qqdDAD9SCgsSO8biAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAtSURBVDhP"
                 + "Yxj0gBFKg8B/KE0uAJvFBGZSEWBzIbIYMiDkA9q4cPAbONgBAwMAI5ADC8QrQ2IAAAAASUVORK5CYII=")
@@ -1395,9 +1408,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "g8SRDcTpbUKW/HcARigLw3t0A0F8R6ArDxAyAEdY3wdFKK6EvQGo6QLQGxcZWBkuEBO2wNTSD9RTQEpOwWsJ0EAHoIH7STEQ"
                 + "m09RLGH4w3CeUgMxLBn8BgIAZv1hLbrWWZAAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAi0lEQVQ4je2TwQ2DMAxF3wiMwCiRbKQeGYER2IAROgIjdBRG"
-                + "YARG+BwBQSgpuVStJV/fi51v5Chn8wf+EHDKCzR6ABm1nFZGL2e49UIilSpZdvigjEFTJOtP6a4Cd4KK5ggYHfstMFDEYhM+"
-                + "hhrjWQ5fcjoZ9dXdynmmBvtUIifkuJSNRM70PbecrWcimdKSONB+gwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxUlEQVQ4T2P878Lwn4GKgHHUQIpDc+iE4QegXwUo9i/QAIiX"
+                + "/zMsYNzLkPjfmSGAgZFBAcjXB9IGQHkQJgnAwvAD4x4GQWw6SbUEESksDIqMOxgeEOMcfJYgx3ID0JWNxBiIrua/K0MCMJjm"
+                + "g8SRDcTpbUKW/HcARigLw3t0A0F8R6ArDxAyAEdY3wdFKK6EvQGo6QLQGxcZWBkuEBO2wNTSD9RTQEpOwWsJ0EAHoIH7STEQ"
+                + "m09RLGH4w3CeUgMxLBn8BgIAZv1hLbrWWZAAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAADcSURBVDhP"
                 + "7ZTRDYJADIb/kviuG+gEMoIRfdcN3EDdwA1cwREYgMQ4gbiBI/CskVrOItEQ4XLHm19y4b9e0vZKr8QzMDwS6Ncbf4fudONQ"
@@ -1424,8 +1438,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "4l1AfIhUw5ENhOm1hxrsBqSVoQaDDN8NxE8IWYDNQGQ9MkiGgyy4C7UAZPhBbIYTMhBdjx1QAGSwOxArQV0dgayIVAOR9UoD"
                 + "OXJAfJxaBmINTkpcSB8DAS8zEQuBFGGjAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAUklEQVQokdXQQRGAMBAEwfYRjMCDaMFLvAQtQUs88MhJOB6s"
-                + "gN6q4cMdKJngjYkHDWcWXAMccdBxYcvAt8B64CPOagbOytCsLNPKlLaCPRP86V4K4A4qOXwp8AAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAe0lEQVQoU2NkoDJgRDLPCsh+CMRPKbED2cAVQINcgfgeEO8E"
+                + "4l1AfIhUw5ENhOm1hxrsBqSVoQaDDN8NxE8IWYDNQGQ9MkiGgyy4C7UAZPhBbIYTMhBdjx1QAGSwOxArQV0dgayIVAOR9UoD"
+                + "OXJAfJxaBmINTkpcSB8DAS8zEQuBFGGjAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAYAAAC0VX7mAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABZSURBVDhP"
                 + "Y6A2YIbSIOALxF+B+DOYRyEQAeLlQPwGiE8BcQsQ2wExVQDIIJCBIIPfAjHIokQglgZiigHIEJBhIENBhtPU9aDgAVkECi6q"
@@ -1451,9 +1466,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "sQIaYg/EDkBsDMSLgHgmEN/EZzixWU8VaEgcEBcA8XIg7of6AMNsYg2EaeQHMgqBuBKIu4G4DohBOQwOSDUQplEOyABlV1CQ"
                 + "VADxKpgEuQbC9LtBvX8U6vKvlBoIMpgJiCcAMSiFKFPDQJSIGfwGAgAmkSMVCV26awAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAkklEQVQ4jdXTqw0CURCG0ZOVrKADHNlsCxSARGLQiC2BkPAI"
-                + "aASGBEMLWJrAkWCgAgxBEBziUsII7lfAEX9myKUF5pHgMgtw9tfgFOtIsMEuEqzwxAg1WhHoGEdc8cYZGwwicOhhghMeP7yK"
-                + "wrtY4YW9NEtIbelNP9JVFFFwBwfcMYxCoY+LNEMZhRbY4hYFZtYXWq4ZzM6yLlgAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA3ElEQVQ4T2NkoDJgpLJ5DDADG4AG/wfiRkotgBkIMujfoDfw"
+                + "L9CFTdT0MlUNrAa6jBOIa6jlwkygQXpADKIpArBYVgeacgqIs4D4HBA/BOJv5JiMnLBTgQZ4A7EGEMsD8XUgPgDFm4g1HF9O"
+                + "sQIaYg/EDkBsDMSLgHgmEN/EZzixWU8VaEgcEBcA8XIg7of6AMNsYg2EaeQHMgqBuBKIu4G4DohBOQwOSDUQplEOyABlV1CQ"
+                + "VADxKpgEuQbC9LtBvX8U6vKvlBoIMpgJiCcAMSiFKFPDQJSIGfwGAgAmkSMVCV26awAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC1SURBVDhP"
                 + "5dOhCgJBEMbx1QOLwWC/JuIrWGxGo2/gQ1wTNBuMFl/BavQFbMIVLVaxCHecCvqfu12wzwiCH/yY3Q3D3jLnfj6Rr1MMsCt3"
@@ -1480,9 +1496,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "VUBGGRCHA/FOZEPJNRBkhj8QLwZiFyA+BTOUEgNBZiQCcQMQGwPxG5AApQaCzJgAdV0BtQwUgUaOJZC+Qg0XghxWB8R8QFxC"
                 + "LQPNgYbNAWJdahkIciUoNzlR08DtQAMnUdPAhUAD91HTQFDiXk1NA8HJcfAbCABA6CBYte9o5AAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmElEQVQ4jdXNoY4BAADG8d88g2BTKJJ8NlGxu3JdMU1QBEXw"
-                + "BBc0mSdQkFXbJVmwCUyx8wIKb/Bd8N+++vv4pwoYoIVSCpxhiyvOWKKPSuKgjA4WuOAXvQT86gsrHDBMwk2sn3g1CY9xQzuJ"
-                + "fuMPH0m0hyOKSXT6XKwi7qgn0Ql+kmAD+yQIJ9SS4AafSXCObhLcYZQE36QH4bUZnfYO4BkAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA4klEQVQ4T2NkoDJghJrHBKSzgPgaFL8g1x5kA6cCDdGC4r9A"
+                + "+gQQ74DiB8RaADMQXb00UMAeiD2A2B2InwDxFCCeT8hgXAai6/MCCmQDsQbU4H5cBhNrIEy/FZBRA8T/gTgHiO+jG0yqgTD9"
+                + "VUBGGRCHA/FOZEPJNRBkhj8QLwZiFyA+BTOUEgNBZiQCcQMQGwPxG5AApQaCzJgAdV0BtQwUgUaOJZC+Qg0XghxWB8R8QFxC"
+                + "LQPNgYbNAWJdahkIciUoNzlR08DtQAMnUdPAhUAD91HTQFDiXk1NA8HJcfAbCABA6CBYte9o5AAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAC8SURBVDhP"
                 + "5dOxCkFRHMfxg2xG3cVCSpGZMliVxW4zm6zewwt4B5InsChlVpSFSYhJ+f7OPV7g3v/mW5/uOWf4d+re66zLhWcWYxTwxhOJ"
@@ -1504,8 +1521,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAANElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysM/1PoYbBvkb08Ag2k"
                 + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGklEQVQ4jWNgGAWjYHCB/xTiUQNHwSgYOAAAZ/s/wXgqXt0A"
-                + "AAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAANElEQVQ4T2NkoDJgpLJ5DKMGUh6iQysM/1PoYbBvkb08Ag2k"
+                + "MAgh2odWshn1MnkhQPVYBgBiiQQV+ctw0AAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAoSURBVDhP"
                 + "YxgFo2AQAEYoDQL/oTS5AGwWE5hJRTD4DRwFo2DgAQMDAN0JAQjYZYmBAAAAAElFTkSuQmCC")
@@ -1529,9 +1546,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
                 + "TkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4jWNgGAUMDAwO1DbwPgMDw38ovZ6BgaGBUkv6oQZi"
-                + "w8iWEA0M8BiIjBVIMRTmbXy4gBQD8Xkbhs+TYmAAEQaS5G0BBgaG/UQYSJK3YUAB6uIGLJasJ8dAfJaQ5cJRMArQAACZ8kHB"
-                + "SAvL+gAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApUlEQVQ4T2NkoDJgpLJ5DHQx0AHo6gPkuhybC+8DDVMA4gdA"
+                + "fAGIL0ItIMoSbAb2Aw0owOFCZEsasKnBZqABUOF5IrysCPUFilJckQLzNj5zC4GSE9AV4DIQn7dhZoDC15BYAwOACteT421c"
+                + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
+                + "TkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACKSURBVDhP"
                 + "7dHBDUAwFMbxikWM4OhoBKMYwQZGMQJHN0yAmy34XrwmTRVP49h/8kudXltVISrn1auIV7MZElhghAk65lUN+w3arIEKxKXg"
@@ -1557,9 +1575,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
                 + "TkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4jWNgGAUMDAwO1DbwPgMDw38ovZ6BgaGBUkv6oQZi"
-                + "w8iWEA0M8BiIjBVIMRTmbXy4gBQD8Xkbhs+TYmAAEQaS5G0BBgaG/UQYSJK3YUAB6uIGLJasJ8dAfJaQ5cJRMArQAACZ8kHB"
-                + "SAvL+gAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAApUlEQVQ4T2NkoDJgpLJ5DHQx0AHo6gPkuhybC+8DDVMA4gdA"
+                + "fAGIL0ItIMoSbAb2Aw0owOFCZEsasKnBZqABUOF5IrysCPUFilJckQLzNj5zC4GSE9AV4DIQn7dhZoDC15BYAwOACteT421c"
+                + "LhSAGghKQiR5m5iEDUpCoIgCYXsgRrZkA5AfiGwjMQZicyHMEhCNEjHkGogzGEYNJCLlEVAy+MMQAEwqFxVGqYQqAAAAAElF"
+                + "TkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACKSURBVDhP"
                 + "7dHBDUAwFMbxikWM4OhoBKMYwQZGMQJHN0yAmy34XrwmTRVP49h/8kudXltVISrn1auIV7MZElhghAk65lUN+w3arIEKxKXg"
@@ -1581,8 +1600,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAPUlEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMG0gIQZxqkcMQpIif"
                 + "SEMbgeo+YFM7wiOFyODDr2w0DCkPRqqHIQCa5QMVIJiVTAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAIUlEQVQ4jWNgGAWjYJiDBhIw0Qb2E4kFKHD4KBgFQw8AACnP"
-                + "C6czPZCAAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAPUlEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMG0gIQZxqkcMQpIif"
+                + "SEMbgeo+YFM7wiOFyODDr2w0DCkPRqqHIQCa5QMVIJiVTAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAqSURBVDhP"
                 + "YxgFo2A4AkYoDQINUJoYgFMtE5SGAX4isQAQj4JRMFIAAwMAXz4BqtdD7oMAAAAASUVORK5CYII=")
@@ -1605,8 +1624,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QAMPAPEDID4IxBegbIL24IsUB6BuBSDWB2IDIAbxNxCyhNRYRrcEZJEgsrNJNRCbl1HCnBoGolgyaiDBZEZQAdXDEABMtg0V"
                 + "HTQi5gAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAQklEQVQ4jWNgGAWjYIQAAVoY+p6BgWE9AwNDPwMDQwADA4MC"
-                + "NQx1YGBgSIAaup+BgeE/PSx5Tw1D0QFNwnwUDGYAAER6Cjb+yQ7RAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZ0lEQVQ4T2NkoDJgpLJ5DKMGUh6io2EIDkMBIP5AbmjiCsP3"
+                + "QAMPAPEDID4IxBegbIL24IsUB6BuBSDWB2IDIAbxNxCyhNRYRrcEZJEgsrNJNRCbl1HCnBoGolgyaiDBZEZQAdXDEABMtg0V"
+                + "HTQi5gAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABWSURBVDhP"
                 + "YxgFo2CkAAEoTRZghtLI4AcQvwdiCyjmhIp9AGKCgBFKYwMOQKwAxPpAbADlbwDiB0B8EIgvQNkoAJ+B2AC6JSAsCMRUBRSF"
@@ -1628,8 +1648,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAM0lEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMGygMQbB+5DCkuoEU"
                 + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGklEQVQ4jWNgGAWjYJiDBgox7Q0cBaNg2AAAkUIQAVuzCpUA"
-                + "AAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAM0lEQVQ4T2NkoDJgpLJ5DKMGUh6iIzwMGygMQbB+5DCkuoEU"
+                + "OhCifYTH8mgYkhcCVE82AJYgAhXAytwXAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAkSURBVDhP"
                 + "YxgFo2A4AkYoDQINUJpcANbPBGaOglEwCvABBgYAX1ABBKc2Rr8AAAAASUVORK5CYII=")
@@ -1653,9 +1673,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "rwRiUMQ9wWYwKQaC9PNBXVsCdW0duqGkGgjTrwR17WIgfQDZUHINxBmMowYSk3TxqxkNw0EYhgB8LRYV8M9b/wAAAABJRU5E"
                 + "rkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAdklEQVQ4je3MsQ0BAQAF0NdKxAQicRtco1YpjKAxgsIGl4tY"
-                + "4HISuQk0RlAYQXMjaEwgYomvcm+Axw80OGGWCsc44IMao1Q8xxlP7FIpLHDFA5tkvMYdN6yS8RY9LiiT8R4vtJim0gmOeKNK"
-                + "pVCgwzKZDgb/4wtTphDgBFZFZQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAo0lEQVQ4T2NkoDJgBJo3FYiZgbgNiB9Raj7IQB4grgLiCqih"
+                + "rUD6O7kGgwyEAUWowX5QgyeSYyiygTD9ZlCDVaAGLyPFYGwGwvR7QQ3+AzV4FzEG4zMQpj8eavAlqMHn8RlMjIEw/cVARjUQ"
+                + "rwRiUMQ9wWYwKQaC9PNBXVsCdW0duqGkGgjTrwR17WIgfQDZUHINxBmMowYSk3TxqxkNw0EYhgB8LRYV8M9b/wAAAABJRU5E"
+                + "rkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACESURBVDhP"
                 + "7cixCYNQFIXhV9hIIK2NhJANUjiChbiBRVZIkQ0UQiYQCeICFq5gkRFSZAULNxDJf91AOOX74btwj6PIjrIODU7bJ+iAJ1ZU"
@@ -1677,8 +1698,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
                 + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAG0lEQVQ4jWNgGErgP4V41MChYOAoGAWjYOgCAGnPX6Ee+YVU"
-                + "AAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4T2NkoDJgpLJ5DMgG/qfQcLBZowZSFIq0D0OKnAfT"
+                + "TNN0OOpC8kJgNFLICzdkXYM/DAFt+QYVhcRJbAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAnSURBVDhP"
                 + "Yxj0gBFKg8B/KE0uAJvFBGZSEYwaOApGwSgYBSDAwAAA4YcBDBgCJpwAAAAASUVORK5CYII=")
@@ -1704,9 +1725,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QU7XKXSTssIUhriLUSeUSZnADUq27dvMcgtZGpqwNFVrIxSHHFQVrjAFmfEIdEA6eYWt8Jkg9zQFMuMXGMHbVLkKTR3/539o"
                 + "rEK34A43YyQVd6W5xwAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAm0lEQVQ4je3UsRWCMBRG4W8AqZ2JFg+sYOci2OkaqC0DoNbO"
-                + "wgAWL5VHPSLp9FZpcpP38r/wByU69NijnisbsU7rDQZc0Xwj7JLskQo3tFOFfbrZM4p04HGKcCfKfMdyirDGecqGT7hglVPY"
-                + "iAcockq3OOQUwknkLxsLEZFO5vJb0dMqp7QR5Q8ip6WYqHGuuBYfRi9a8Wqqfok70oEc6oUScX0AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABAElEQVQ4T72UPQuBURSAfazMTAblP4jBKCOF1eAPIJvB7iMx"
+                + "KYMyIbKJzeRH2GxmVvKcQrlxP0pOPcP7vvc8nXPvPa/X8+Pw/tjn+YswQ9VlCMABdjC37UStUGSSXIMjxKAIfujCzCRWhQsS"
+                + "tjBUEnM8N2EDdZ1UFUpCD9YfkoK8G4MPst+kqnDw2Le+pooQ3062wjwLK5Aw7ZWtUNbtoQ2yn87x6R4WsDQgCWdX47eLLRVG"
+                + "QU7XKXSTssIUhriLUSeUSZnADUq27dvMcgtZGpqwNFVrIxSHHFQVrjAFmfEIdEA6eYWt8Jkg9zQFMuMXGMHbVLkKTR3/539o"
+                + "rEK34A43YyQVd6W5xwAAAABJRU5ErkJggg==",
             IE = "context.ellipse not supported")
     public void ellipseStroke() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -1731,9 +1754,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "QJmwxREEWKxt7mWgrE9UmtNJbRMckgGu8JvbMk17wtc+pumLwQQmyKl4SztmNmgs+JX+D60U2vUf7SQ5FX401SMAAAAASUVO"
                 + "RK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAi0lEQVQ4je3TTQ2AMAyG4U/CJCBhEpCAJBwgAQlIQAISkICE"
-                + "l0tJduCnGzsRmvT6pF/TSn9JEqgBtbWwAbSBsJ5B3ZvJUiztqQSMF9jRCyjmgOEBBLTlTrk4UP9OHbEBjblTzrVjB0f0vFOy"
-                + "E6oX29AIWqvETtBws9OyDzK4O5m2LwYTuDHc/zHfrh1q4TK9oNRCpgAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7ElEQVQ4T73UgQ2CMBQE0HYD3aAjOIIjwAayiU5g3MANYAPd"
+                + "QDfQDXQDvEtKUuH3/5IQmhBMgMddafVu4eEX9tw6YN+7gOTBe3ef22CSENgZyAHHJmJEL8C7EvwPjMkeCZYaHdDaQsfgDg8Q"
+                + "zI0nLjSAeRbHGGTNj5HiC3BbBPIm1GZCJtVGnZtT6aNYtfmiK8BGeqO4DpHyhpv3SsRs7RzIuSSqVRdrZ3dKXEIvJaVYW916"
+                + "QJmwxREEWKxt7mWgrE9UmtNJbRMckgGu8JvbMk17wtc+pumLwQQmyKl4SztmNmgs+JX+D60U2vUf7SQ5FX401SMAAAAASUVO"
+                + "RK5CYII=",
             IE = "context.ellipse not supported")
     public void ellipseFill() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -1757,9 +1782,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "BKlbAMRaQGyGpukUkH8NiBOwWYYvljmhXgoD0kuBGKQ2CohBsQ8Kku+kGghTD/K+EZQDCjcMbyIbTChh4whC3MKjBpIcZBga"
                 + "AFvHFRVbN/HSAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbklEQVQ4je3QsQ2AIBCF4b81LuAmzGNJ6xxuIAWtVs7BOBbU"
-                + "FpydIUKusLivIrzjJQcYswKLVtkBnMCoUTYBl0bRYwZ2zUIPhEq+ycxnDsiVPMtMkwikl/skWbNBHmbKikHOUbJujvJfno41"
-                + "zQ/codMRZHZFRf8AAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAtElEQVQ4T2NkoDJgpLJ5DKMGUh6ihMKwB2jFMyDuI9YqfAau"
+                + "AhrCBsTRQPyVUgMlgAbcAmI+Yg2CqcPlwkSgAg8gDqeWgZlAg4yBOAWHgbOB4ueAeDq6PC4XmgMV7gdiLhwGfgOKOwLxSWIN"
+                + "BKlbAMRaQGyGpukUkH8NiBOwWYYvljmhXgoD0kuBGKQ2CohBsQ8Kku+kGghTD/K+EZQDCjcMbyIbTChh4whC3MKjBpIcZBga"
+                + "AFvHFRVbN/HSAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACPSURBVDhP"
                 + "YxgFIwAwQ2lsgBOI5wGxABBfAAlQChYD8SkIk3JgAsRXIUzSABOURgdOQLwXwiQN4DLwExCzQ5hYwUwgzoYwiQM2QHwPwsQK"
@@ -1785,9 +1811,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "AcUdSfA+2IVngdgYh4FzgOIppLoQFAGwyEDXOxsoAJKfTqShYBdS3ctUjxRQ8c8HxDpAfAmIQa7WBeIrQLwViP8Q6V2QMnsA"
                 + "0W80k6fnBs0AAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAf0lEQVQ4je3SsQnDMBAF0NdmIs+ULVRkC7vwJiKtIfY2bty4"
-                + "0JEqCJSoChYcHOjz4HSCjNSpsmh6nXSBF/j34IB71PAL+MCMHRPG6GfcvgE3LB8ul0CbwaMS2LWNn+BVCUwN2BtcK4FRWVIT"
-                + "2H3k7kt5Bnoo77lGvylfKjVUPgEr0zlzAxnltAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAs0lEQVQ4T2NkYGDYD8QHgZgawJ4RaEoDFFPDwIZRAykOxtEw"
+                + "pDgIGWgbhuZABxpBHXkOSJ8kw8FgF7YAsQwQhwHxMiD+D8TRQLwKiDOB+DsJBoMNPA/Ev4HYDE3jKSD/GhAnkGogyDBWHJq+"
+                + "AcUdSfA+2IVngdgYh4FzgOIppLoQFAGwyEDXOxsoAJKfTqShYBdS3ctUjxRQ8c8HxDpAfAmIQa7WBeIrQLwViP8Q6V2QMnsA"
+                + "0W80k6fnBs0AAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACjSURBVDhP"
                 + "Y2RgYNgPxAeBmBrAHkQ0gJnUAQ1MUAbVwKiBlINRAykHyAYqAnEyFIPYZAGYgfOA+BgQO0ExiA0SIxmADPQHYl4glgTiaCgG"
@@ -1811,8 +1838,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "hGEx0AAtIP4HxNFAvAqIM4H4OzaDiTEQXd8poMA1IE6gloEgc74BsSM275PjQpCBc4D4LBBPR3cluQbijJdRAykvKkbDcBCG"
                 + "IQDFswwV4F8onAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAR0lEQVQ4je3QMQ2AMBRF0bNWBDqwVGbkAAl6KqgzA9RA8xeS"
-                + "fwTc5D3SLy2o2LBGBHdcONBxo0SEh/ZFQ3VB84fT+2lKacoDTsgIDIbBFacAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbUlEQVQ4T2NkoDJgpLJ5DKMGYg1RWaCoNxCDguccEJ/EF+7E"
+                + "hGEx0AAtIP4HxNFAvAqIM4H4OzaDiTEQXd8poMA1IE6gloEgc74BsSM275PjQpCBc4D4LBBPR3cluQbijJdRAykvKkbDcBCG"
+                + "IQDFswwV4F8onAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABUSURBVDhP"
                 + "YxgFgw8wQ2l8QBKI/YHYA4hfAvF7IMYJmKA0PpAAxL5ArAzEJ4B4NRBTFSwH4jkQJvXAQyBWgzBRATFhiA0YQ+lzUHoUjIJR"
@@ -1837,9 +1865,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "+FlokKAowWegMVBlCh4DscrhMpDqXgY5jKqRAjIQOdksBfJBvomiJNnAgo9qCRtHfOAXHi1tyAo2FE0ArxceFbIaufkAAAAA"
                 + "SUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAaUlEQVQ4je2SQQrAIAwE59oX5U2+yRzyHh/kuQfTQ6FSgoFS"
-                + "cEAIblhcXNj8EgGKH1kxOgADOqBA9dlcC2NAe7hvroUQf82MTjB+YUScob4TMtQXwxDpkSH5U+Bem8qIuVSbi7Ribz7iBHkE"
-                + "GXFzGcnHAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAp0lEQVQ4T2NkoDJgpLJ5DKMGYg1Rc6CoEVTmHJA+iS/c8YUh"
+                + "J1DjdCAOA+JlQPwfiKOBeBUQZwLxd2wG4zNwAVCDFhCboWk8BeRfA+IEUgwEeXM/EHPh8N43oLgjNu/jciHIS6BwS8Vh4Byg"
+                + "+FlokKAowWegMVBlCh4DscrhMpDqXgY5jKqRAjIQOdksBfJBvomiJNnAgo9qCRtHfOAXHi1tyAo2FE0ArxceFbIaufkAAAAA"
+                + "SUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACJSURBVDhP"
                 + "YxgFgw8wQml8wByIjSBMhnNAfBLCJB1wAvECIP4GxHOAeDaUDRIDyZEMQBpPQZgoACQGkiMJgLwJcg0uAJIDqcEAzFAaHfgB"
@@ -1863,9 +1892,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "AIgbGRoYHuCyGreBEMPuQw1C1v8ByDHEZSg+A+cDNSbgcMkCoIGJ2OTwGQhynQIOAz8ADRQccAPxeXkD0IWBpLoQFCnvsWgC"
                 + "RYoj0MALpBkIUg2J6X4gDoBqBhmSSF6ywZXQCIiPFg5kBhySNqqHIQBu3hwVauHmwwAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZElEQVQ4jWNgGAUjHTQwCDA0MPQzNDCcZ2hguM/QwDCfoYFB"
-                + "gRLD3jM0MPxHw+/JMxTiGnTDYHg+OQbex2Pg+0FhID4vryfHQAGcrmtgMCDdQISh86GGvGdoYNhPfrIZBcMHAABnQk69XCBV"
-                + "ZwAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlElEQVQ4T2NkoDJgpLJ5DKMGUh6i+MOwgUEAaEU9EDsAMYh9"
+                + "AIgbGRoYHuCyGreBEMPuQw1C1v8ByDHEZSg+A+cDNSbgcMkCoIGJ2OTwGQhynQIOAz8ADRQccAPxeXkD0IWBpLoQFCnvsWgC"
+                + "RYoj0MALpBkIUg2J6X4gDoBqBhmSSF6ywZXQCIiPFg5kBhySNqqHIQBu3hwVauHmwwAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAClSURBVDhP"
                 + "YxgFIwAwQmnsoJ5BAEgWAFX5A2kQewPDf4ZGIPwAksYGcBsIMoyRYT+QZQARgIMHQEMNcRnKBKWxgQIgRjcMBBSAFvVD2RgA"
@@ -1894,9 +1923,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Gl7wPfN0yJc6h1ID6uqyT1MYlEKZ6aptwL42D4dDTuv8AnU+ubZDHiH9Qo4CyqAEKlxv1+3QzJAGxrLQnnXVy374++pjS6z9"
                 + "f4dPi7M2FSLXHwIAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmUlEQVQ4je3TawnDMBSG4VdCJFRCJVRKJUTC52ASKqESIqUS"
-                + "ImH9kQ46dtJcGINBD5x/4eHcAv8bYkB4REBExIZYEQ+Ea8X8gTwv0tdADrEUoHOuNZXVYq+cr6ortZnLwQLViWXmmTbYCxqz"
-                + "TGfRC8ZvggExWmBoqiidlwG1LSUe74ytfoKu0Jan48vNBjS1Q+/okh/0Hb+IHUTl6U4n5uMBAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA/klEQVQ4T82U/RGCMAzFywa6AW7gCG6gbqAb6ASGCZQJZANx"
+                + "Ah2BDXQDGcGXYjEUqqXHeebu/UE/fn1JWiI1cEQD85QbSCrGYQtoDk2hEiqgO5Qo0t+t6AaS2mDlDhp9yGAL6MGebwJJA/bQ"
+                + "yrMUOaBLudYGsjMG9ok1oJnZ8AZW7m5f0nQdNAGUayuaQhiq6hYSdT2lwxNI3NWQqGspgZxuHELDnhL5je2UQ4FXgDhlvqON"
+                + "Gl7wPfN0yJc6h1ID6uqyT1MYlEKZ6aptwL42D4dDTuv8AnU+ubZDHiH9Qo4CyqAEKlxv1+3QzJAGxrLQnnXVy374++pjS6z9"
+                + "f4dPi7M2FSLXHwIAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAECSURBVDhP"
                 + "7ZPtEYIwDIaDLsAIuIFOoE4gI+gE4gTABI4gG3hOoG7ACG4gG+CbNkC1BZQ77/zhwzUfUN42JdDP44m3iWkKG2LGCj7AKDBu"
@@ -1924,9 +1955,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "oCCYU9ANIBRZBA0EpRaYISA2RrpDT06EvAxSD3MliE0wwRNjIMigm1CXqBPKksQaCHIlCMDzLC6DiTWQkMPg8oPfQAB2pSIV"
                 + "qh5VTAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVQ4je2PsREAIAgDM6QDOZ07WLuIDTR6aEA7/Tu6JL7A"
-                + "8+TgmSQAzTHUpLOkMCHJFCJHB9mHqTBtxxZcdruS225XDNlZ5bCdNXBkN44c2yk6dMVOqXLX0C9/ZjqpYSbR+dDHYAAAAABJ"
-                + "RU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAr0lEQVQ4T2NkoDJgpLJ5DDQ3sIFMF8P1obswBGhgPxDPJdLg"
+                + "ZKC6QiBeA1OPzcvHgJJ9yIpwGA6yvAiIrZDlsRmIVSEWQ7FajCtSCLkSp6W4DCTkSpwW4ks2uDThtQyfgbg04g0OQgkbXTOh"
+                + "oCCYU9ANIBRZBA0EpRaYISA2RrpDT06EvAxSD3MliE0wwRNjIMigm1CXqBPKksQaCHIlCMDzLC6DiTWQkMPg8oPfQAB2pSIV"
+                + "qh5VTAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACASURBVDhP"
                 + "7c7BCYAwDAXQqiu6gYs4mUcnEMENHMOkzVcotElbb/ogpEISv/ueTjrM0kvde7102Kim8DThWd7JWqnG8MziGZ5VWQetP/a0"
@@ -1948,8 +1980,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
-                + "TkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
                 + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
@@ -1969,8 +2001,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
-                + "TkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
                 + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
@@ -1990,8 +2022,8 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
                 + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAFUlEQVQ4jWNgGAWjYBSMglEwCqgDAAZUAAHyXCJfAAAAAElF"
-                + "TkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAKElEQVQ4T2NkoDJgpLJ5DKMGUh6io2E4GoZkhMBosiEj0NC0"
+                + "jMAwBABIxgAVO+SUsAAAAABJRU5ErkJggg==",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAWSURBVDhP"
                 + "YxgFo2AUjIJRMAqoAhgYAAZUAAE6HI5PAAAAAElFTkSuQmCC")
@@ -2014,9 +2046,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "uwFxPxDPRZNPBvILgXgNTBzZhSDNfUiSIUB2EZIlhOTBZiIbSKoB6BZgGAgSgCkCsZFdB/MRIXkUF4I0wVwJYiN7H2YgIXkM"
                 + "A0Eab0J1q6NFAIyLVx5bsgG5AgTgMYdmMF55YtMhDsdiCo8aSHRQ4VQ4GoYjIQwBM+0eFQy1UnkAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAWElEQVQ4jWNgGCDQQABjAD4GBoZjWMSPQeVCGBgYHmMx6DFU"
-                + "Dis4hiYZgmYJIXkMQKoB6PJ4XYnLdkLyOF2Jy3ZC8ljBTSgmVx6rK/DZTkh+FIyCUUB/AADnCiBrRndbagAAAABJRU5ErkJg"
-                + "gg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAm0lEQVQ4T2NkoDJgJNK8BgLq4PIwA/mAGnYAsRWaxmNAvgcQ"
+                + "uwFxPxDPRZNPBvILgXgNTBzZhSDNfUiSIUB2EZIlhOTBZiIbSKoB6BZgGAgSgCkCsZFdB/MRIXkUF4I0wVwJYiN7H2YgIXkM"
+                + "A0Eab0J1q6NFAIyLVx5bsgG5AgTgMYdmMF55YtMhDsdiCo8aSHRQ4VQ4GoYjIQwBM+0eFQy1UnkAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAB2SURBVDhP"
                 + "Y6A2YITShEADlMYF4PJMUJoPiI9BmCgAJAaSuwLEySABNAASA8lhBSDNIRAmGIDYyJYQkscApBqALo8VwBSha4YBQvIYAKYQ"
@@ -2041,8 +2073,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "C9H1M1LdQHgQURqWUIMQEUBtAyn1OsyncBdS3UBCyY1YedISMRGmjhpIRCARUDISwhCjPKQ02KhtIEZ5SLED0QpoADR/JhX5"
                 + "NimNAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAN0lEQVQ4jWNg2Mf8HwWTCjD0U9vAfQzM/5Exyeah66e6gTid"
-                + "TjGgtoGUep32Bo6CUTCkwWgZAADAuXABXILcxAAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZklEQVQ4T2Nk2Mf8nwEZOP1lROET4qDpZ6S6gfsYUF3oxECa"
+                + "C9H1M1LdQHgQURqWUIMQEUBtAyn1OsyncBdS3UBCyY1YedISMRGmjhpIRCARUDISwhCjPKQ02KhtIEZ5SLED0QpoADR/JhX5"
+                + "NimNAAAAAElFTkSuQmCC",
             IE = "no ctor")
     public void putImageDataInside() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -2075,8 +2108,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "kFwXobubkeoGwm2AhiWc70RuGMJMoLaBMK/DzCc3TOFJg+oGEpfKCKsiK/HiM3bUQMKBTkjFaBgSCiHC8tQLQ2jhQnUDAUAL"
                 + "HZUFr6Y/AAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAOklEQVQ4jWNg2Mf8n2Ef8/99DKiYgWxAbQMpdxGtDUSYDPE6"
-                + "HA86A6kXy7QycBSMglFAF0C1UgrNQAAO0T8Blr60fgAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAaUlEQVQ4T2Nk2Mf8nwEI9jmBSARwYvjLiCpCHI+R6gbuY4C4"
+                + "kFwXobubkeoGwm2AhiWc70RuGMJMoLaBMK/DzCc3TOFJg+oGEpfKCKsiK/HiM3bUQMKBTkjFaBgSCiHC8tQLQ2jhQnUDAUAL"
+                + "HZUFr6Y/AAAAAElFTkSuQmCC",
             IE = "no ctor")
     public void putImageDataOutside() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -2109,8 +2143,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "UXk1dwNWyb1Ic8OV44asH9KBCqcmPAI1th5+nW4J6cCtRrMKtit3LcAO6cDH5uOEAUQGwiEyhO90hwOflBRVULNh6QAAAABJ"
                 + "RU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAOElEQVQ4jWNgGNRgH/N/CM0AZVBqHpXMoZ2B9AH7GJj/U9Xp"
-                + "VDcQ0wbm//DkMDgNHAWjYBQwMAAACd4VASBR1nMAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAXklEQVQ4T+2SQQoAIAgEjX7Ww/tZVHoKCrZyj3pUGNZhk5An"
+                + "UXk1dwNWyb1Ic8OV44asH9KBCqcmPAI1th5+nW4J6cCtRrMKtit3LcAO6cDH5uOEAUQGwiEyhO90hwOflBRVULNh6QAAAABJ"
+                + "RU5ErkJggg==",
             IE = "no ctor")
     public void putImageDataDirty() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -2151,11 +2186,13 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "lPw/6tovvV4G6NZJaso7XRLL/kD/clD96m6MNR1TbTokU4d/Y6uuVfCKnCJYbQSqolo4BF0k0evrG77KVhVrq+aXAAAAAElF"
                 + "TkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABCElEQVQ4jb3UP07DUAzH8c+AGLlCl54B1Dt0LBI7EwNbB8TA"
-                + "RXoBlhwAqROIbqBuiIETwFKCVP6pZcCRovS1JG3FT/Jgx/7mOX4O/6weuusU7mGUiD/gFe11oKM4EezgDE/IMI5YI/VwF4AZ"
-                + "3jDEAC+Yx7NWXeAxvnGJI4uf4BZXmETun7Ac5wEqt1+ojWf0I3cptBVv7YT/GJZSN6CHUZNsP8NFye8lTldWHzdRk6USZtgt"
-                + "+fOGtjD9+4rfBDbFQRU42AA4k9ikTYCfONlmyzn2q8CtD6V6bZoM5LoKY/Fi1wW+W7HXxep1asK+cLoMVoZOarQ5rQMr1PL7"
-                + "yyom+BGWR2y4qk34AQ9nqmQoAfOBAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABfUlEQVQ4T62UTytFQRiH3UIWsrG0sKDs3JKFLKSULETiG8jm"
+                + "LtBNykrZyEbKQkK+ALKwULL07yphI6XwHST/wvOrmdsYM53DvVNP5547M8/MnPd9J1NR5pZJ8I3Q/wJ7ade1wjom7EOnN/GG"
+                + "9wZog7s0UneHx0xYhC2ohCkYg0tognb4SJK6Qh1vBh5gCJ7hFO7Nez3PHcjDY0zsCkcZtGp2uMtz3PsER7w/QYeRboSkVijZ"
+                + "EsxDvxloj2/nNfPjBBZgFibhl1TCRriGPjPh1hhaAjvQYpuQg3Vo9Y8v4TZcwZwR6FuqKTihpmANwgFkYdgdJOEn1MCb6fiK"
+                + "iGJ/V9FRjL6EF6A8s+0vQiV9N5zZyRKugfLtP0ItPgDFSipV+I5sAlbcHZZyZOVlDxRcYdmD4qdN2qAoIOfQ5YY/lNhpha+I"
+                + "lPw/6tovvV4G6NZJaso7XRLL/kD/clD96m6MNR1TbTokU4d/Y6uuVfCKnCJYbQSqolo4BF0k0evrG77KVhVrq+aXAAAAAElF"
+                + "TkSuQmCC",
             IE = "no ctor")
     public void clip() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -2180,9 +2217,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "2MDAwFRPnoGMExjf5BSiGijQr8DAwnKfDAM/APUEAl14AMVAEOe/yKQCYCj0I+cQwmH4r5HxTT7QdxAwhJINerKAFF9/ApC9"
                 + "Qyjt4PUyMZqxqSGprCPGEgABn2EVn+gHngAAAABJRU5ErkJggg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAbklEQVQ4jWNgGLLgv+hUg/8ikwqoZ6DI5Pf/RSb/p6aB/0cN"
-                + "HG4G/heech9mCLJByGJ48HtsBs6nwMD9WLw4sYF8A6f0Yxoo0K9ApoHv/4tMdsAejiKTCkg3cGID4RhiGIzJBsNA0akGRHtn"
-                + "SAEAyuPmw0SBrRQAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAxElEQVQ4T2NkoDJgpLJ5DDgN/C861YDh/18Hxjd5E0ixFLeB"
+                + "IpPfAw0SYHyTS5Iv8Bn4H+SyUQMJxs8QCsP/wlPuMzD+V4D5CRa7/0Umg2ObAPgAVC8IThUwhUAD5wMNTCDTwANAAx1RDRSZ"
+                + "2MDAwFRPnoGMExjf5BSiGijQr8DAwnKfDAM/APUEAl14AMVAEOe/yKQCYCj0I+cQwmH4r5HxTT7QdxAwhJINerKAFF9/ApC9"
+                + "Qyjt4PUyMZqxqSGprCPGEgABn2EVn+gHngAAAABJRU5ErkJggg==",
             IE = "no ctor")
     public void clipWindingEvenOdd() throws Exception {
         draw("<canvas id='myCanvas' width='20', height='20' style='border: 1px solid red;'></canvas>\n",
@@ -2208,9 +2246,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "cSFjBNTAI0A6D6jkHMwFUAMtgJrAaoD8R4QMJMaFBA0EpT1gwm6SYWCIZmdgUJKFuGjOTgaG1BPI4TObgcFCn4FBxoyBYQ1I"
                 + "/D0DQ6EgA0M/ehgiGejxk4HBDKyYXIAnDMkzcjTrjZY2ZKQcqicbAN2xPZWYt5iSAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAlklEQVQ4je2SsQnDMBBF30yezCOI1NlAC3gEdW5cuXYX0miB"
-                + "4Am+GyWWDwXFxKSJDz7ow7/H3SEAB/RJ7gCBNUfUfwJ9AHUgJbU2JGgFg9bQtQaMWbveAdO7EUSbKUz4ah9ATQHYZb4K/GTC"
-                + "KtABPVxucI/reXzAfFoPYYTp6R8w24wBjlMhsFeblbMbflcb+gk8gT8GLkqKbVBaXVuaAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA20lEQVQ4T2NkYGBoAGJ7IAaBg1CabIoRqhNkKAjA6FEDiQ8B"
+                + "pDCcbcHAkPIBqDUcqr2QgYFxArJR/xkYCoD8ECC2hor3Ag0oQVaDbqAW0BA5iIL/QP2MMHmICNRAoKANkG0EFNoAZEPVQ3Rh"
+                + "cSFjBNTAI0A6D6jkHMwFUAMtgJrAaoD8R4QMJMaFBA0EpT1gwm6SYWCIZmdgUJKFuGjOTgaG1BPI4TObgcFCn4FBxoyBYQ1I"
+                + "/D0DQ6EgA0M/ehgiGejxk4HBDKyYXIAnDMkzcjTrjZY2ZKQcqicbAN2xPZWYt5iSAAAAAElFTkSuQmCC",
             IE = "no ctor")
     @HtmlUnitNYI(FF_ESR = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAcElEQVR42mNgYGD4T2UMBygcaoCRaeB/EJ4NxO+AOBCPopVA"
@@ -2252,9 +2291,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "NITr4YecFk9e3Et18JL4HvzBKfsO7K2DiCEaGcQQbYL4jiiLTgtGlEWnBWeVjc4KzigbnRVklZ3OCzLKTucFR0pVNwp6SlU3"
                 + "ClpKU8cENaWpY4J/patjg7XS1bHBT3nLy3ujeMPeh1Bu8uDIS4KjTllnhXTwAVWiHxW3nihqAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAZElEQVQ4jdXOwQkAIQxE0SnJEuzcEizJPUjAg2aTSUD8MNfh"
-                + "AS/VAQxybXdYAoc1U7nVRZRHHaNUdYzyV+dRmnQepVlnUbp0FqVbpykpnaakddKqDOmkVVkzDoGpTNFJBYm6u30fnn+BCcsO"
-                + "DQAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAmUlEQVQ4T63U0Q2AIAxFUdjAUVzBzd3AVRzBPhMJSFseDU1M"
+                + "NITr4YecFk9e3Et18JL4HvzBKfsO7K2DiCEaGcQQbYL4jiiLTgtGlEWnBWeVjc4KzigbnRVklZ3OCzLKTucFR0pVNwp6SlU3"
+                + "ClpKU8cENaWpY4J/patjg7XS1bHBT3nLy3ujeMPeh1Bu8uDIS4KjTllnhXTwAVWiHxW3nihqAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABvSURBVDhP"
                 + "1c5BCoAwDETRHMkjeHOP4JE0XXwoGNMkLYgfZjeLJ7/q1F3FHbpHm846R7brzCpKU0cV5auOMkpXRxnlUEcRZUhHEWVYR54y"
@@ -2284,9 +2323,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "7SAPZG1b4C7TqDY52/52u0wjYIntQ6YRkLUd1gdNSrL9E39PUJGwPgiotvt/gcdggqhJsRdR2wrUAvtM6UlB5feZFk0KgqZM"
                 + "iycFAW2m4VJAo3dmO2V6uj9uXbDE5spLVqfJJhVVgK1QAAAAAElFTkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAeUlEQVQ4jdWSwQ2AMAwDPUJGZZOOwgiMwgiMAK+KCBE4Iz61"
-                + "1K+bu0QaKaukHb6ZFDZYtkkKUhiwcCJlPW/YCDWHYuOPKLbl1Nk2cupgI6cUG5+PdGIvD4XW+bQ0wZ1T+3wiTXB1aqFW5Z9R"
-                + "q3RsG7VKdvpLstPBcwARMoH8labnlgAAAABJRU5ErkJggg==",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzElEQVQ4T7WU0Q2DQAxDYQNGKJt0BTZgBDpJO0pH6AaMwAgw"
+                + "AonUQyHEnE8CJMQH1ruz5aSuLn7qi3mVBU4Cf5AHfEXXRVoLfItgIICLaFp59Xt4LLCRvzMBfInmg3Q+w5xtaDUd4IGsbX/B"
+                + "7SAPZG1b4C7TqDY52/52u0wjYIntQ6YRkLUd1gdNSrL9E39PUJGwPgiotvt/gcdggqhJsRdR2wrUAvtM6UlB5feZFk0KgqZM"
+                + "iycFAW2m4VJAo3dmO2V6uj9uXbDE5spLVqfJJhVVgK1QAAAAAElFTkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACUSURBVDhP"
                 + "1ZLBCYAwDEULLuAIHl3DjdzEURzBURzBqzf9gQZKSMkPnvzwKIi2fd+UX+UED8kOwmzA+9hygRGEkZe8DSwroBNpU6ptWG1L"
@@ -2325,9 +2365,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "Yt5dZtsMHAHUDTet1k6YCwOoG25aDQNZCGia801Xo5ZXusW2ZKq7+i9QMi0H2Om8eVM8bWi9+R/7A246MhXPMagrAAAAAElF"
                 + "TkSuQmCC",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAh0lEQVQ4jdXQyw2AIBBF0VvC7GzTTijFjf1MCZQwLvzEaAhP"
-                + "cKEvYXvhAH+aAyGeSQkmMZYBU4ImBkcltq/GlqjnHWyHCP0ULzrYSY/lqPypA2F6sPqnT9jSn6rsKvXGHmDuoV7ZGbAAb6We"
-                + "Z2wvCEg91NtifWUztRT1VmopmLqpl6C9Qv3EFlkx1KTcSB3bAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA7UlEQVQ4T62UwQ3CMAxF3Q24caXzcGIDRqCT0FF6YY6OwJUb"
+                + "bADfVhOlrk0MSqWqUvL1nP/ttKPGT9eYRyXwDvghWGCC7mRpS+AVgksA+IKmx8vfzVMCd9h9BoADNKOn0xnWbLtWUwENzLZr"
+                + "ZHXCCSDJVAOz7WigS5Y9QJKpNTZyuGig0A6A5Ewt4C+2s1UvQ16P2pbxSVa/AXlPbO+Jbg+iozMiK6s1INs+8wneRDPDva7q"
+                + "Yt5dZtsMHAHUDTet1k6YCwOoG25aDQNZCGia801Xo5ZXusW2ZKq7+i9QMi0H2Om8eVM8bWi9+R/7A246MhXPMagrAAAAAElF"
+                + "TkSuQmCC",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAACjSURBVDhP"
                 + "1ZLBDYAgDEU7gifndBNG8eI+jMAG6i8JpKkNFPWgL/mBA/36CPQrInI4syJdAmIN6yRkQrrwIatAZ0Hc9LRdqpKqjeYDG1f2"
@@ -2365,8 +2407,9 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "PPgjkICdDbQ3xXvkKSCTj0t+XvI7VdgHVGFi5OklBkul8qk0bbYDbwfZp15VOAj0aZsVVo3pL63CEzkGxLCnoBdVVtgGvMaP"
                 + "J6qNbYVzQCMHpXWFCfAAXsokEVEKzTkAAAAASUVORK5CYII=",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAARUlEQVQ4jWNgGAXUBw0M/1HwoDXwPwMqHkQGQgHCIHSzB4uB"
-                + "SEYPegPRjKdVZFE/9qmVAahuIBygG0ixwVQ3EJfB1DYQACh5i4ny3fVlAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAeklEQVQ4T9WTUQ7AQAREubmbqzS0pdHsCh/dT5K3YwaE5ofN"
+                + "PPgjkICdDbQ3xXvkKSCTj0t+XvI7VdgHVGFi5OklBkul8qk0bbYDbwfZp15VOAj0aZsVVo3pL63CEzkGxLCnoBdVVtgGvMaP"
+                + "J6qNbYVzQCMHpXWFCfAAXsokEVEKzTkAAAAASUVORK5CYII=",
             IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAABpSURBVDhP"
                 + "7ZPRCsAgCEV1X+6fO2ladGkxWDQfdl7MEDmI0s9r2GNDSP11IYOaCYfHZdwaqpSsYoWPTDcYOqZZTBlGaj9T032GDQXFfIY9"
@@ -2410,9 +2453,11 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
                 + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
                 + "gg==",
             FF_ESR = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAjElEQVQ4je3SMQrCQBBA0dckZltLrxEkVxEUUudiqaw8l5VWw"
-                + "ZXYRFSI4mrKPJj2M8Muryo0w1T+EAJtxmXDcccpIy7ZI6TXaEtiT/885SOapMpHYvfJiRLPb7ac3wVrutQNvwk2KcHJTxZo1y"
-                + "OxkrjikBQbFIE2J9Z0Nd2C6/DCxS/Bu8k+9mw2++QGj8thmtPon2MAAAAASUVORK5CYII=",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAA6ElEQVQ4T+2SzQoBURiGH5F/NyIrKQv3YOOnJpStnetwA1aU"
+                + "klixcgcWJLdgx05ZYTLlO2OmmGiOWDqb03e+9zy930+A55OXMOs8beReevK+YcBRxGLQu0KlBMcQhCcQT8HsAA3RnHxJjsAG"
+                + "CmyUhuoago8fc2Bt79DyJ8B8GBYXD8wFRARqQkG3fOWwVYPOEJKvXDTBHIBw9Y4usC24rg5SAX9esj2UDBgrjwU1lD3Md1DU"
+                + "cac07tpEBdq3ZNKGQFRiDKEETGXCdQnPnwJd/c8WW9eAr84t2VeoK/gDdTv1Xvfv4fc9vAGT7zEVBadocQAAAABJRU5ErkJg"
+                + "gg==",
             IE = {})
     @HtmlUnitNYI(IE = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAzUlEQVR42u2SvwpBYRyGn8Eiyqos/kxGVrkDo8VkJYNcgUtwD"

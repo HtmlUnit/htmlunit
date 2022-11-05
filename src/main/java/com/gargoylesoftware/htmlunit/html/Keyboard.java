@@ -54,7 +54,7 @@ public class Keyboard {
 
     /**
      * Press the specified key code (without releasing it).
-     *
+     * <p>
      * An example of predefined values is
      * {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
@@ -69,7 +69,7 @@ public class Keyboard {
 
     /**
      * Releases the specified key code.
-     *
+     * <p>
      * An example of predefined values is
      * {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent#DOM_VK_PAGE_DOWN}.
      *
@@ -88,7 +88,7 @@ public class Keyboard {
 
     /**
      * Returns the keys.
-     *
+     * <p>
      * If the length of the item is 1, then it is a character.
      * If the length of the item is 2, the first is the key code, the second is boolean whether pressing or not
      *

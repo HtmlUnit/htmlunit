@@ -76,6 +76,7 @@ import org.apache.hc.core5.util.CharArrayBuffer;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
+import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.BaseFrameElement;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -92,6 +93,7 @@ import com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptErrorListener;
 import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptJobManager;
+import com.gargoylesoftware.htmlunit.javascript.host.Element;
 import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Window;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
@@ -104,7 +106,6 @@ import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.TextUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.webstart.WebStartHandler;
 import com.shapesecurity.salvation2.Policy;
@@ -181,6 +182,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private StatusHandler statusHandler_;
     private AttachmentHandler attachmentHandler_;
     private ClipboardHandler clipboardHandler_;
+    private PrintHandler printHandler_;
     private WebStartHandler webStartHandler_;
     private FrameContentHandler frameContentHandler_;
     private AppletConfirmHandler appletConfirmHandler_;
@@ -575,7 +577,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
      * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
      * the page is loaded into a new window, and attachment handling is delegated to the registered
-     * <tt>AttachmentHandler</tt>.</p>
+     * <code>AttachmentHandler</code>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
@@ -599,7 +601,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * <p>Note that if the page created is an attachment page, and an {@link AttachmentHandler} has been
      * registered with this client, the page is <b>not</b> loaded into the specified window; in this case,
      * the page is loaded into a new window, and attachment handling is delegated to the registered
-     * <tt>AttachmentHandler</tt>.</p>
+     * <code>AttachmentHandler</code>.</p>
      *
      * @param webResponse the response that will be used to create the new page
      * @param webWindow the window that the new page will be placed within
@@ -975,7 +977,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Returns the "current" window for this client. This window (or its top window) will be used
-     * when <tt>getPage(...)</tt> is called without specifying a window.
+     * when <code>getPage(...)</code> is called without specifying a window.
      * @return the "current" window for this client
      */
     public WebWindow getCurrentWindow() {
@@ -984,7 +986,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Sets the "current" window for this client. This is the window that will be used when
-     * <tt>getPage(...)</tt> is called without specifying a window.
+     * <code>getPage(...)</code> is called without specifying a window.
      * @param window the new "current" window for this client
      */
     public void setCurrentWindow(final WebWindow window) {
@@ -1207,7 +1209,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * Opens a new dialog window.
      * @param url the URL of the document to load and display
      * @param opener the web window that is opening the dialog
-     * @param dialogArguments the object to make available inside the dialog via <tt>window.dialogArguments</tt>
+     * @param dialogArguments the object to make available inside the dialog via <code>window.dialogArguments</code>
      * @return the new dialog window
      * @throws IOException if there is an IO error
      */
@@ -1421,7 +1423,8 @@ public class WebClient implements Serializable, AutoCloseable {
             compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, MimeType.TEXT_HTML));
             final WebResponseData responseData =
                 new WebResponseData(
-                    TextUtils.stringToByteArray("File: " + file.getAbsolutePath(), UTF_8),
+                        com.gargoylesoftware.htmlunit.util.StringUtils
+                            .toByteArray("File: " + file.getAbsolutePath(), UTF_8),
                     404, "Not Found", compiledHeaders);
             return new WebResponse(responseData, webRequest, 0);
         }
@@ -1701,7 +1704,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Adds the headers that are sent with every request to the specified {@link WebRequest} instance.
-     * @param wrs the <tt>WebRequestSettings</tt> instance to modify
+     * @param wrs the <code>WebRequestSettings</code> instance to modify
      */
     private void addDefaultHeaders(final WebRequest wrs) {
         // Add user-specified headers to the web request if not present there yet.
@@ -2002,6 +2005,14 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
+     * Returns the current clipboard handler.
+     * @return the current clipboard handler
+     */
+    public ClipboardHandler getClipboardHandler() {
+        return clipboardHandler_;
+    }
+
+    /**
      * Sets the clipboard handler.
      * @param handler the new clipboard handler
      */
@@ -2010,11 +2021,23 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     /**
-     * Returns the current clipboard handler.
-     * @return the current clipboard handler
+     * Returns the current {@link PrintHandler}.
+     * @return the current {@link PrintHandler} or null if print
+     * requests are ignored
      */
-    public ClipboardHandler getClipboardHandler() {
-        return clipboardHandler_;
+    public PrintHandler getPrintHandler() {
+        return printHandler_;
+    }
+
+    /**
+     * Sets the {@link PrintHandler} to be used if Windoe.print() is called
+     * (<a href="https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#printing">Printing Spec</a>).
+     *
+     * @param handler the new {@link PrintHandler} or null if you like to
+     * ignore print requests (default is null)
+     */
+    public void setPrintHandler(final PrintHandler handler) {
+        printHandler_ = handler;
     }
 
     /**
@@ -2152,7 +2175,12 @@ public class WebClient implements Serializable, AutoCloseable {
                 // now looks at the visibility of the frame window
                 final BaseFrameElement frameElement = fw.getFrameElement();
                 if (webClient_.isJavaScriptEnabled() && frameElement.isDisplayed()) {
-                    final ComputedCSSStyleDeclaration style = fw.getComputedStyle(frameElement, null);
+                    // todo move getCalculatedWidth() and getCalculatedHeight() to ComputedCssStyleDeclaration
+                    final ComputedCssStyleDeclaration computedCssStyleDeclaration =
+                            fw.getComputedStyle(frameElement, null);
+                    final Element elem = frameElement.getScriptableObject();
+                    final ComputedCSSStyleDeclaration style =
+                            new ComputedCSSStyleDeclaration(elem, computedCssStyleDeclaration);
                     use = style.getCalculatedWidth(false, false) != 0
                             && style.getCalculatedHeight(false, false) != 0;
                 }
@@ -2178,7 +2206,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Closes all opened windows, stopping all background JavaScript processing.
-     *
+     * <p>
      * {@inheritDoc}
      */
     @Override
@@ -2242,12 +2270,12 @@ public class WebClient implements Serializable, AutoCloseable {
      * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks have finished executing. Background
-     * JavaScript tasks are JavaScript tasks scheduled for execution via <tt>window.setTimeout</tt>,
-     * <tt>window.setInterval</tt> or asynchronous <tt>XMLHttpRequest</tt>.</p>
+     * JavaScript tasks are JavaScript tasks scheduled for execution via <code>window.setTimeout</code>,
+     * <code>window.setInterval</code> or asynchronous <code>XMLHttpRequest</code>.</p>
      *
-     * <p>If a job is scheduled to begin executing after <tt>(now + timeoutMillis)</tt>, this method will
-     * wait for <tt>timeoutMillis</tt> milliseconds and then return a value greater than <tt>0</tt>. This
-     * method will never block longer than <tt>timeoutMillis</tt> milliseconds.</p>
+     * <p>If a job is scheduled to begin executing after <code>(now + timeoutMillis)</code>, this method will
+     * wait for <code>timeoutMillis</code> milliseconds and then return a value greater than <code>0</code>. This
+     * method will never block longer than <code>timeoutMillis</code> milliseconds.</p>
      *
      * <p>Use this method instead of {@link #waitForBackgroundJavaScriptStartingBefore(long)} if you
      * don't know when your background JavaScript is supposed to start executing, but you're fairly sure
@@ -2255,7 +2283,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param timeoutMillis the maximum amount of time to wait (in milliseconds)
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScript(final long timeoutMillis) {
         int count = 0;
@@ -2292,13 +2320,13 @@ public class WebClient implements Serializable, AutoCloseable {
      * and may not yet work perfectly!</span></p>
      *
      * <p>This method blocks until all background JavaScript tasks scheduled to start executing before
-     * <tt>(now + delayMillis)</tt> have finished executing. Background JavaScript tasks are JavaScript
-     * tasks scheduled for execution via <tt>window.setTimeout</tt>, <tt>window.setInterval</tt> or
-     * asynchronous <tt>XMLHttpRequest</tt>.</p>
+     * <code>(now + delayMillis)</code> have finished executing. Background JavaScript tasks are JavaScript
+     * tasks scheduled for execution via <code>window.setTimeout</code>, <code>window.setInterval</code> or
+     * asynchronous <code>XMLHttpRequest</code>.</p>
      *
      * <p>If there is no background JavaScript task currently executing, and there is no background JavaScript
      * task scheduled to start executing within the specified time, this method returns immediately -- even
-     * if there are tasks scheduled to be executed after <tt>(now + delayMillis)</tt>.</p>
+     * if there are tasks scheduled to be executed after <code>(now + delayMillis)</code>.</p>
      *
      * <p>Note that the total time spent executing a background JavaScript task is never known ahead of
      * time, so this method makes no guarantees as to how long it will block.</p>
@@ -2309,7 +2337,7 @@ public class WebClient implements Serializable, AutoCloseable {
      *
      * @param delayMillis the delay which determines the background tasks to wait for (in milliseconds)
      * @return the number of background JavaScript jobs still executing or waiting to be executed when this
-     *         method returns; will be <tt>0</tt> if there are no jobs left to execute
+     *         method returns; will be <code>0</code> if there are no jobs left to execute
      */
     public int waitForBackgroundJavaScriptStartingBefore(final long delayMillis) {
         int count = 0;
