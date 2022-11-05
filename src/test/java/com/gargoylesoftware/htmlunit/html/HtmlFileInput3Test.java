@@ -367,8 +367,10 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
         }
 
         final String pageSource = driver.getPageSource();
-        assertTrue(pageSource, pageSource.contains(getExpectedAlerts()[0]));
-        assertFalse(pageSource, pageSource.contains(getExpectedAlerts()[1]));
+        assertTrue("\"" + pageSource + "\" does not contain \""
+                + getExpectedAlerts()[0] + "\"", pageSource.contains(getExpectedAlerts()[0]));
+        assertFalse("\"" + pageSource + "\" contains \""
+                + getExpectedAlerts()[0] + "\" but should not", pageSource.contains(getExpectedAlerts()[1]));
     }
 
     /**

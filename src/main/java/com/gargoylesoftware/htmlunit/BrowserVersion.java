@@ -263,10 +263,10 @@ public final class BrowserVersion implements Serializable {
         // EDGE (Win10 64bit)
         EDGE.applicationVersion_ = "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
                                         + EDGE.getBrowserVersionNumeric() + ".0.0.0 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1418.26";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1418.35";
         EDGE.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/"
                                         + EDGE.getBrowserVersionNumeric() + ".0.0.0 Safari/537.36 Edg/"
-                                        + EDGE.getBrowserVersionNumeric() + ".0.1418.26";
+                                        + EDGE.getBrowserVersionNumeric() + ".0.1418.35";
 
         EDGE.applicationCodeName_ = "Mozilla";
         EDGE.vendor_ = "Google Inc.";

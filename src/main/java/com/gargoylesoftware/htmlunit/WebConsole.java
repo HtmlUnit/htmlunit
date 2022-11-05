@@ -157,6 +157,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
     public void print(final Context cx, final Scriptable scope, final Level level,
             final Object[] args, final ScriptStackElement[] stack) {
 
+        System.out.println(NativeConsole.format(cx, scope, args));
         switch (level) {
             case TRACE:
                 if (logger_.isInfoEnabled()) {
