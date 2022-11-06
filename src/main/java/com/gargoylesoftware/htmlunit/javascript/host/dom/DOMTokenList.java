@@ -83,7 +83,11 @@ public class DOMTokenList extends HtmlUnitScriptable {
      */
     @JsxGetter
     public int getLength() {
-        final String value = getDefaultValue(null);
+        final String value = getAttribValue();
+        if (StringUtils.isBlank(value)) {
+            return 0;
+        }
+
         final String[] parts = StringUtils.split(value, whitespaceChars());
         if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_LENGTH_IGNORES_DUPLICATES)) {
             final HashSet<String> elements = new HashSet<>(parts.length);
@@ -91,6 +95,17 @@ public class DOMTokenList extends HtmlUnitScriptable {
             return elements.size();
         }
         return parts.length;
+    }
+
+    private String getAttribValue() {
+        final DomNode node = getDomNodeOrNull();
+        if (node != null) {
+            final DomAttr attr = (DomAttr) node.getAttributes().getNamedItem(attributeName_);
+            if (attr != null) {
+                return attr.getValue();
+            }
+        }
+        return null;
     }
 
     /**
@@ -101,12 +116,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
         if (getPrototype() == null) {
             return (String) super.getDefaultValue(hint);
         }
-        final DomNode node = getDomNodeOrNull();
-        if (node != null) {
-            final DomAttr attr = (DomAttr) node.getAttributes().getNamedItem(attributeName_);
-            if (attr != null) {
-                return String.join(" ", StringUtils.split(attr.getValue(), whitespaceChars()));
-            }
+
+        final String value = getAttribValue();
+        if (value != null) {
+            return String.join(" ", StringUtils.split(value, whitespaceChars()));
         }
         return "";
     }
@@ -124,18 +137,25 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw Context.reportRuntimeError("Empty input not allowed");
         }
 
-        String value = getDefaultValue(null);
         boolean changed = false;
-        if (position(value, token) < 0) {
-            if (value.length() != 0 && !isWhitespace(value.charAt(value.length() - 1))) {
-                value = value + " ";
-            }
-            value = value + token;
+        String value = getAttribValue();
+        if (StringUtils.isEmpty(value)) {
+            value = token;
             changed = true;
         }
-        else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD)) {
+        else {
             value = String.join(" ", StringUtils.split(value, whitespaceChars()));
-            changed = true;
+            if (position(value, token) < 0) {
+                if (value.length() != 0 && !isWhitespace(value.charAt(value.length() - 1))) {
+                    value = value + " ";
+                }
+                value = value + token;
+                changed = true;
+            }
+            else if (getBrowserVersion().hasFeature(JS_DOMTOKENLIST_REMOVE_WHITESPACE_CHARS_ON_ADD)) {
+                value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+                changed = true;
+            }
         }
 
         if (changed) {
@@ -156,7 +176,12 @@ public class DOMTokenList extends HtmlUnitScriptable {
             throw Context.reportRuntimeError("Empty input not allowed");
         }
 
-        String value = getDefaultValue(null);
+        final String oldValue = getAttribValue();
+        if (oldValue == null) {
+            return;
+        }
+
+        String value = String.join(" ", StringUtils.split(oldValue, whitespaceChars()));
         boolean changed = false;
         int pos = position(value, token);
         while (pos != -1) {
@@ -227,7 +252,14 @@ public class DOMTokenList extends HtmlUnitScriptable {
         if (StringUtils.containsAny(token, whitespaceChars())) {
             throw Context.reportRuntimeError("Empty input not allowed");
         }
-        return position(getDefaultValue(null), token) > -1;
+
+        String value = getAttribValue();
+        if (StringUtils.isEmpty(value)) {
+            return false;
+        }
+
+        value = String.join(" ", StringUtils.split(value, whitespaceChars()));
+        return position(value, token) > -1;
     }
 
     /**
@@ -240,11 +272,17 @@ public class DOMTokenList extends HtmlUnitScriptable {
         if (index < 0) {
             return null;
         }
-        final String value = getDefaultValue(null);
+
+        final String value = getAttribValue();
+        if (StringUtils.isEmpty(value)) {
+            return null;
+        }
+
         final String[] values = StringUtils.split(value, whitespaceChars());
         if (index < values.length) {
             return values[index];
         }
+
         return null;
     }
 
@@ -262,10 +300,10 @@ public class DOMTokenList extends HtmlUnitScriptable {
 
     private void updateAttribute(final String value) {
         final DomElement domNode = (DomElement) getDomNodeOrDie();
-        DomAttr attr = (DomAttr) domNode.getAttributes().getNamedItem(attributeName_);
-        if (null == attr) {
-            attr = domNode.getPage().createAttribute(attributeName_);
-        }
+
+        // always create a new one because the old one is used later for the mutation observer
+        // to get the old value from
+        final DomAttr attr = domNode.getPage().createAttribute(attributeName_);
         attr.setValue(value);
         domNode.setAttributeNode(attr);
     }

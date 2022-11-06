@@ -236,6 +236,15 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
             + "    var list = elem.classList;\n"
             + "    if (!list) { log('no list'); return; }\n"
 
@@ -410,6 +419,15 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
             + "    var list = elem.classList;\n"
             + "    if (!list) { log('no list'); return; }\n"
 
@@ -475,7 +493,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a\\sb", "2", "3", "a\\sb\\s\u000B"},
+    @Alerts(DEFAULT = {"a\\sb", "2", "3", "a\\sb\\s\u000B", "class\\schanged\\sold:\\sa\\sb"},
             IE = {"a\\sb", "2", "exception", "2", "a\\sb"})
     public void addVt() throws Exception {
         add("a b", "\u000B");
@@ -485,7 +503,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "0", "1", "a"})
+    @Alerts({"", "0", "1", "a", "class\\schanged\\sold:\\s"})
     public void addToEmpty() throws Exception {
         add("", "a");
     }
@@ -494,7 +512,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "1", "a"})
+    @Alerts({"\\s\\t\\s\\n\\s\\s", "0", "1", "a", "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"})
     public void addToWhitespace() throws Exception {
         add(" \t \r  ", "a");
     }
@@ -503,7 +521,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\s\\s", "1", "2", "a\\sb"})
+    @Alerts({"a\\s\\s", "1", "2", "a\\sb", "class\\schanged\\sold:\\sa\\s\\s"})
     public void addToWhitespaceAtEnd() throws Exception {
         add("a  ", "b");
     }
@@ -512,7 +530,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "3", "a\\sb\\sc"})
+    @Alerts({"a\\sb", "2", "3", "a\\sb\\sc", "class\\schanged\\sold:\\sa\\sb"})
     public void addNotExisting() throws Exception {
         add("a b", "c");
     }
@@ -521,7 +539,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "2", "a\\sb"})
+    @Alerts(DEFAULT = {"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"},
+            IE = {"a\\sb", "2", "2", "a\\sb"})
     public void addExisting() throws Exception {
         add("a b", "a");
     }
@@ -530,7 +549,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"b\\sa", "2", "2", "b\\sa"})
+    @Alerts(DEFAULT = {"b\\sa", "2", "2", "b\\sa", "class\\schanged\\sold:\\sb\\sa"},
+            IE = {"b\\sa", "2", "2", "b\\sa"})
     public void addExisting2() throws Exception {
         add("b a", "a");
     }
@@ -559,7 +579,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "4", "a\\sc\\sd\\se"},
+    @Alerts(DEFAULT = {"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "4", "a\\sc\\sd\\se",
+                       "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"},
             IE = {"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "4", "a\\s\\t\\sc\\s\\n\\sd\\s\\se"})
     public void addToWhitespaceExisting() throws Exception {
         add("a \t c \n d  e", "c");
@@ -572,6 +593,15 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
             + "    var list = elem.classList;\n"
             + "    if (!list) { log('no list'); return; }\n"
 
@@ -701,7 +731,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a\\sb", "2", "2", "a\\sb"},
+    @Alerts(DEFAULT = {"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"},
             IE = {"a\\sb", "2", "exception", "2", "a\\sb"})
     public void removeVt() throws Exception {
         remove("a b", "\u000B");
@@ -711,7 +741,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"", "0", "0", ""})
+    @Alerts(DEFAULT = {"", "0", "0", "", "class\\schanged\\sold:\\s"},
+            IE = {"", "0", "0", ""})
     public void removeFromEmpty() throws Exception {
         remove("", "a");
     }
@@ -720,7 +751,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"\\s\\t\\s\\n\\s\\s", "0", "0", ""},
+    @Alerts(DEFAULT = {"\\s\\t\\s\\n\\s\\s", "0", "0", "", "class\\schanged\\sold:\\s\\s\\t\\s\\n\\s\\s"},
             IE = {"\\s\\t\\s\\n\\s\\s", "0", "0", "\\s\\t\\s\\n\\s\\s"})
     public void removeFromWhitespace() throws Exception {
         remove(" \t \r  ", "a");
@@ -730,7 +761,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\sb", "2", "2", "a\\sb"})
+    @Alerts(DEFAULT = {"a\\sb", "2", "2", "a\\sb", "class\\schanged\\sold:\\sa\\sb"},
+            IE = {"a\\sb", "2", "2", "a\\sb"})
     public void removeNotExisting() throws Exception {
         remove("a b", "c");
     }
@@ -739,8 +771,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"a\\sb\\sa", "2", "1", "b"},
-            IE = {"a\\sb\\sa", "3", "1", "b"})
+    @Alerts(DEFAULT = {"a\\sb\\sa", "2", "1", "b", "class\\schanged\\sold:\\sa\\sb\\sa"},
+            IE = {"a\\sb\\sa", "3", "1", "b", "class\\schanged\\sold:\\sa\\sb\\sa"})
     public void removeDuplicated() throws Exception {
         remove("a b a", "a");
     }
@@ -769,7 +801,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a", "1", "0", ""})
+    @Alerts({"a", "1", "0", "", "class\\schanged\\sold:\\sa"})
     public void removeLast() throws Exception {
         remove("a", "a");
     }
@@ -778,7 +810,8 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "3", "a\\sd\\se"})
+    @Alerts({"a\\s\\t\\sc\\s\\n\\sd\\s\\se", "4", "3", "a\\sd\\se",
+             "class\\schanged\\sold:\\sa\\s\\t\\sc\\s\\n\\sd\\s\\se"})
     public void removeWhitespace() throws Exception {
         remove("a \t c \n d  e", "c");
     }
@@ -790,6 +823,15 @@ public class DOMTokenListTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
             + "    var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
             + "    var list = elem.classList;\n"
             + "    if (!list) { log('no list'); return; }\n"
 
@@ -843,13 +885,24 @@ public class DOMTokenListTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true"})
+    @Alerts({"exception", "exception", "2", "true", "false", "1", "false", "true", "2", "true",
+             "class changed old: a e", "class changed old: a"})
     public void toggle() throws Exception {
         final String html
             = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  var list = document.getElementById('d1').classList;\n"
+            + "  var elem = document.getElementById('d1');\n"
+
+            + "    var config = { attributes: true, attributeOldValue: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.attributeName + ' changed old: ' + mutation.oldValue);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(elem, config);"
+
+            + "  var list = elem.classList;\n"
             + "  try {\n"
             + "    list.toggle('ab e');\n"
             + "  } catch(e) { log('exception');}\n"

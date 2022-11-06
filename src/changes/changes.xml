@@ -9,6 +9,16 @@
     <body>
         <release version="2.67.0" date="xxxx, 2022" description="Chrome/Edge 107, Bugfixes">
             <action type="fix" dev="rbri">
+                Remove some not required string operations frim the DOMTokenList code.
+            </action>
+            <action type="fix" dev="rbri">
+                Fixing change notification for the DOMTokenList in some situations.
+            </action>
+            <action type="fix" dev="rbri">
+                DOMTokenList no longer adds an attribute to the dom node if remove is called an there
+                was no attribute so far.
+            </action>
+            <action type="fix" dev="rbri">
                 AnimationEvent construction fixed.
             </action>
             <action type="fix" dev="RhinoTeam">
