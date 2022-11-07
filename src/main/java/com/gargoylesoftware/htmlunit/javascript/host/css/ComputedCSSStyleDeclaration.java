@@ -1195,7 +1195,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         int top = 0;
         if (null == cachedTop) {
             final String p = getPositionWithInheritance();
-            if (ABSOLUTE.equals(p)) {
+            if (ABSOLUTE.equals(p) || FIXED.equals(p)) {
                 top = getTopForAbsolutePositionWithInheritance();
             }
             else {

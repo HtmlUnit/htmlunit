@@ -1395,7 +1395,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if (ABSOLUTE.equals(position)) {
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
             return left;
         }
 
@@ -1494,7 +1494,7 @@ public class HTMLElement extends Element {
 
         // If this node is absolutely positioned, we're done.
         final String position = style.getPositionWithInheritance();
-        if (ABSOLUTE.equals(position)) {
+        if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
             return top;
         }
 

@@ -9,6 +9,9 @@
     <body>
         <release version="2.67.0" date="xxxx, 2022" description="Chrome/Edge 107, Bugfixes">
             <action type="fix" dev="rbri">
+                Take care of the fixed position style attribute at some places.
+            </action>
+            <action type="fix" dev="rbri">
                 Remove some not required string operations frim the DOMTokenList code.
             </action>
             <action type="fix" dev="rbri">

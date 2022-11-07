@@ -433,6 +433,30 @@ public class HTMLElement2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"400", "50"})
+    public void offsetTopAndLeft_Fixed() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = document.getElementById('innerDiv');\n"
+            + "    log(e.offsetLeft);\n"
+            + "    log(e.offsetTop);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<div id='innerDiv' style='position: fixed; left: 400px; top: 50px;'></div>TEST</div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Minimal flow/layouting test: verifies that the <tt>offsetTop</tt> property changes depending
      * on previous siblings. In the example below, the second div is below the first one, so its
      * offsetTop must be greater than zero. This sort of test is part of the Dojo unit tests, so
