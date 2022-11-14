@@ -27,7 +27,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,7 +37,6 @@ import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FormFieldWithNameHistory;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlButton;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -165,9 +163,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     return response;
                 });
 
-        elements.setEffectOnCacheFunction(
-                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
-                event -> EffectOnCache.NONE);
+        elements.setEffectOnCacheFunction(event -> EffectOnCache.NONE);
 
         return elements;
     }

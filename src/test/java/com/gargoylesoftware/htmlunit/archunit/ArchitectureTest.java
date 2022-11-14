@@ -224,10 +224,10 @@ public class ArchitectureTest {
             .should().callMethod(ThreadLocal.class, "withInitial", Supplier.class);
 
     /**
-     * Make sure to not use java.util.function.Supplier.
+     * Make sure to not use the package java.util.function.
      */
     @ArchTest
-    public static final ArchRule android6Supplier = noClasses()
-            .should().dependOnClassesThat().haveFullyQualifiedName(Supplier.class.getName());
+    public static final ArchRule android6JavaUtilFunction = noClasses()
+            .should().dependOnClassesThat().resideInAPackage("java.util.function..");
 
 }

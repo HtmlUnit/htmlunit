@@ -44,7 +44,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.util.StringUtils.parseHttpDate;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
@@ -56,7 +55,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -85,7 +83,6 @@ import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlEmbed;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
@@ -755,11 +752,10 @@ public class Document extends Node {
         final HTMLCollection collection = new HTMLCollection(getDomNodeOrDie(), false);
 
         if ("*".equals(tagName)) {
-            collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
+            collection.setIsMatchingPredicate(node -> true);
         }
         else {
             collection.setIsMatchingPredicate(
-                    (Predicate<DomNode> & Serializable)
                     node -> tagName.equalsIgnoreCase(node.getNodeName()));
         }
 
@@ -777,7 +773,6 @@ public class Document extends Node {
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
         elements.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node -> localName.equals(node.getLocalName()));
         return elements;
     }
@@ -847,7 +842,6 @@ public class Document extends Node {
         final HTMLCollection anchors = new HTMLCollection(getDomNodeOrDie(), true);
 
         anchors.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node -> {
                     if (!(node instanceof HtmlAnchor)) {
                         return false;
@@ -860,7 +854,6 @@ public class Document extends Node {
                 });
 
         anchors.setEffectOnCacheFunction(
-                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                     event -> {
                         if ("name".equals(event.getName()) || "id".equals(event.getName())) {
                             return EffectOnCache.RESET;
@@ -882,7 +875,7 @@ public class Document extends Node {
     @JsxGetter
     public Object getApplets() {
         final HTMLCollection applets = new HTMLCollection(getDomNodeOrDie(), false);
-        applets.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlApplet);
+        applets.setIsMatchingPredicate(node -> node instanceof HtmlApplet);
         return applets;
     }
 
@@ -1816,7 +1809,6 @@ public class Document extends Node {
         };
 
         forms.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node -> node instanceof HtmlForm && node.getPrefix() == null);
         return forms;
     }
@@ -1838,7 +1830,7 @@ public class Document extends Node {
             }
         };
 
-        embeds.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlEmbed);
+        embeds.setIsMatchingPredicate(node -> node instanceof HtmlEmbed);
         return embeds;
     }
 
@@ -1859,7 +1851,7 @@ public class Document extends Node {
             }
         };
 
-        images.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlImage);
+        images.setIsMatchingPredicate(node -> node instanceof HtmlImage);
         return images;
     }
 
@@ -1880,7 +1872,7 @@ public class Document extends Node {
             }
         };
 
-        scripts.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> node instanceof HtmlScript);
+        scripts.setIsMatchingPredicate(node -> node instanceof HtmlScript);
         return scripts;
     }
 
@@ -1918,7 +1910,6 @@ public class Document extends Node {
         final HTMLCollection links = new HTMLCollection(getDomNodeOrDie(), true);
 
         links.setEffectOnCacheFunction(
-                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> {
                     final HtmlElement node = event.getHtmlElement();
                     if ((node instanceof HtmlAnchor || node instanceof HtmlArea) && "href".equals(event.getName())) {
@@ -1928,7 +1919,6 @@ public class Document extends Node {
                 });
 
         links.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node ->
                     (node instanceof HtmlAnchor || node instanceof HtmlArea)
                     && ((HtmlElement) node).hasAttribute("href"));
@@ -4201,7 +4191,7 @@ public class Document extends Node {
     public HTMLCollection getAll() {
         final HTMLCollection all = new HTMLAllCollection(getDomNodeOrDie());
         all.setAvoidObjectDetection(true);
-        all.setIsMatchingPredicate((Predicate<DomNode> & Serializable) node -> true);
+        all.setIsMatchingPredicate(node -> true);
         return all;
     }
 

@@ -30,12 +30,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.LogFactory;
@@ -254,11 +252,11 @@ public class Element extends Node {
         final DomNode node = getDomNodeOrDie();
         collection = new HTMLCollection(node, false);
         if ("*".equals(tagName)) {
-            collection.setIsMatchingPredicate((Predicate<DomNode> & Serializable) nodeToMatch -> true);
+            collection.setIsMatchingPredicate(nodeToMatch -> true);
         }
         else {
             collection.setIsMatchingPredicate(
-                    (Predicate<DomNode> & Serializable) nodeToMatch -> {
+                    nodeToMatch -> {
                         if (caseSensitive) {
                             return searchTagName.equals(nodeToMatch.getNodeName());
                         }
@@ -298,7 +296,6 @@ public class Element extends Node {
     public Object getElementsByTagNameNS(final Object namespaceURI, final String localName) {
         final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
         elements.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node -> ("*".equals(namespaceURI) || Objects.equals(namespaceURI, node.getNamespaceURI()))
                                 && ("*".equals(localName) || Objects.equals(localName, node.getLocalName())));
         return elements;
@@ -658,7 +655,6 @@ public class Element extends Node {
         final HTMLCollection elements = new HTMLCollection(elt, true);
 
         elements.setIsMatchingPredicate(
-                (Predicate<DomNode> & Serializable)
                 node -> {
                     if (!(node instanceof HtmlElement)) {
                         return false;

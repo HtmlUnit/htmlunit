@@ -29,7 +29,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +48,6 @@ import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.FrameWindow;
 import com.gargoylesoftware.htmlunit.html.HtmlApplet;
-import com.gargoylesoftware.htmlunit.html.HtmlAttributeChangeEvent;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
@@ -633,7 +631,6 @@ public class HTMLDocument extends Document {
                 () -> new ArrayList<>(page.getElementsByName(elementName)));
 
         elements.setEffectOnCacheFunction(
-                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> {
                     if ("name".equals(event.getName())) {
                         return EffectOnCache.RESET;
@@ -701,7 +698,6 @@ public class HTMLDocument extends Document {
                 () -> getItComputeElements(page, name, forIDAndOrName, alsoFrames));
 
         coll.setEffectOnCacheFunction(
-                (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> {
                     final String attributeName = event.getName();
                     if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {

@@ -39,7 +39,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.function.Supplier;
 import java.util.logging.Level;
 
 import javax.servlet.DispatcherType;
@@ -106,6 +105,7 @@ import com.gargoylesoftware.htmlunit.MockWebConnection.RawResponseData;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import com.gargoylesoftware.htmlunit.platform.SerializableSupplier;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -1179,7 +1179,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param expected the expected string
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
+    protected void verifyAlerts(final SerializableSupplier<String> func, final String expected) throws Exception {
         verifyAlerts(func, expected, DEFAULT_WAIT_TIME);
     }
 
@@ -1190,7 +1190,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final Supplier<String> func, final String expected,
+    protected void verifyAlerts(final SerializableSupplier<String> func, final String expected,
             final long maxWaitTime) throws Exception {
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
 
