@@ -21,12 +21,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
@@ -170,7 +168,7 @@ public class HTMLTableElement extends RowContainer {
     public Object getTBodies() {
         final HtmlTable table = (HtmlTable) getDomNodeOrDie();
         final HTMLCollection bodies = new HTMLCollection(table, false);
-        bodies.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(table.getBodies()));
+        bodies.setElementsSupplier(() -> new ArrayList<>(table.getBodies()));
         return bodies;
     }
 

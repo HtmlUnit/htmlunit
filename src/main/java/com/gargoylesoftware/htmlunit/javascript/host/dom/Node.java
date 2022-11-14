@@ -22,10 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomDocumentFragment;
@@ -44,6 +42,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement;
+import com.gargoylesoftware.htmlunit.platform.SerializableSupplier;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
@@ -501,7 +500,7 @@ public class Node extends EventTarget {
             final DomNode node = getDomNodeOrDie();
             childNodes_ = new NodeList(node, false);
             childNodes_.setElementsSupplier(
-                    (Supplier<List<DomNode>> & Serializable)
+                    (SerializableSupplier<List<DomNode>>)
                     () -> {
                         final List<DomNode> response = new ArrayList<>();
                         for (final DomNode child : node.getChildren()) {
@@ -828,7 +827,7 @@ public class Node extends EventTarget {
         final DomNode node = getDomNodeOrDie();
         final HTMLCollection childrenColl = new HTMLCollection(node, false);
         childrenColl.setElementsSupplier(
-                (Supplier<List<DomNode>> & Serializable)
+                (SerializableSupplier<List<DomNode>>)
                 () -> {
                     final List<DomNode> children = new ArrayList<>();
                     for (final DomNode domNode : node.getChildNodes()) {

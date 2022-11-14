@@ -213,7 +213,7 @@ public class ArchitectureTest {
      * Make sure to not use java.lang.reflect.Executable.
      */
     @ArchTest
-    public static final ArchRule android7 = noClasses()
+    public static final ArchRule android7Executable = noClasses()
             .should().dependOnClassesThat().haveFullyQualifiedName(Executable.class.getName());
 
     /**
@@ -222,5 +222,12 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule android7ThreadLocalWithInitial = noClasses()
             .should().callMethod(ThreadLocal.class, "withInitial", Supplier.class);
+
+    /**
+     * Make sure to not use java.util.function.Supplier.
+     */
+    @ArchTest
+    public static final ArchRule android6Supplier = noClasses()
+            .should().dependOnClassesThat().haveFullyQualifiedName(Supplier.class.getName());
 
 }

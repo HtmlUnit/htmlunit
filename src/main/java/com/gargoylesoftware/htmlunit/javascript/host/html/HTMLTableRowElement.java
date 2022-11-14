@@ -21,10 +21,7 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -107,7 +104,7 @@ public class HTMLTableRowElement extends HTMLTableComponent {
         final HtmlTableRow row = (HtmlTableRow) getDomNodeOrDie();
 
         final HTMLCollection cells = new HTMLCollection(row, false);
-        cells.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(row.getCells()));
+        cells.setElementsSupplier(() -> new ArrayList<>(row.getCells()));
         return cells;
     }
 

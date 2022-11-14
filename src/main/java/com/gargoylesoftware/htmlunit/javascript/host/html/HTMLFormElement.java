@@ -32,7 +32,6 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.FormEncodingType;
 import com.gargoylesoftware.htmlunit.WebAssert;
@@ -127,7 +126,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
         };
 
         elements.setElementsSupplier(
-                (Supplier<List<DomNode>> & Serializable)
                 () -> {
                     boolean filterChildrenOfNestedForms = false;
 
@@ -420,7 +418,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
         final List<DomNode> nodes = new ArrayList<>(elements);
 
         final HTMLCollection coll = new HTMLCollection(getHtmlForm(), nodes);
-        coll.setElementsSupplier((Supplier<List<DomNode>> & Serializable) () -> new ArrayList<>(findElements(name)));
+        coll.setElementsSupplier(() -> new ArrayList<>(findElements(name)));
         return coll;
     }
 
