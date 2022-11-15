@@ -114,7 +114,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>net.sourceforge.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>2.66.0-SNAPSHOT</version>
+          <version>2.67.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -133,7 +133,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.66.0-SNAPSHOT'
+    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.67.0-SNAPSHOT'
   // ...
 }
 ```
