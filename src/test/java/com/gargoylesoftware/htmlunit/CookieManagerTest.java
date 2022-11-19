@@ -321,9 +321,11 @@ public class CookieManagerTest extends WebDriverTestCase {
     @Alerts({"cookies: first=1", "cookies: "})
     public void setCookieTimeout() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><script>\n"
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function alertCookies() {\n"
-                + "    alert('cookies: ' + document.cookie);\n"
+                + "    log('cookies: ' + document.cookie);\n"
                 + "  }\n"
 
                 + "  function test() {\n"
@@ -338,7 +340,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         responseHeader1.add(new NameValuePair("Set-Cookie", "first=1; expires=" + expires + ";"));
         getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(URL_FIRST, 4_000);
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -615,9 +618,11 @@ public class CookieManagerTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = {"cookies: first=1", "cookies: "})
     public void setCookieDuring302() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-                + "<html><head><title>foo</title><script>\n"
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function alertCookies() {\n"
-                + "    alert('cookies: ' + document.cookie);\n"
+                + "    log('cookies: ' + document.cookie);\n"
                 + "  }\n"
 
                 + "  function test() {\n"
@@ -636,7 +641,8 @@ public class CookieManagerTest extends WebDriverTestCase {
         responseHeader1.add(new NameValuePair("Location", "/foo/content.html"));
         getMockWebConnection().setResponse(firstUrl, "", 302, "Moved", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl, 4_000);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(DEFAULT_WAIT_TIME * 4, getWebDriver(), getExpectedAlerts());
     }
 
     /**
