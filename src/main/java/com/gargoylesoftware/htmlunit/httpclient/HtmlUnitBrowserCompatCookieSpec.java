@@ -39,7 +39,6 @@ import org.apache.http.cookie.SM;
 import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.impl.cookie.BasicCommentHandler;
 import org.apache.http.impl.cookie.BasicMaxAgeHandler;
-import org.apache.http.impl.cookie.BasicSecureHandler;
 import org.apache.http.impl.cookie.CookieSpecBase;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicHeaderElement;
@@ -108,7 +107,7 @@ public class HtmlUnitBrowserCompatCookieSpec extends CookieSpecBase {
                 new HtmlUnitDomainHandler(browserVersion),
                 new HtmlUnitPathHandler(browserVersion),
                 new BasicMaxAgeHandler(),
-                new BasicSecureHandler(),
+                new HtmlUnitSecureHandler(),
                 new BasicCommentHandler(),
                 new HtmlUnitExpiresHandler(browserVersion),
                 new HtmlUnitHttpOnlyHandler(),
