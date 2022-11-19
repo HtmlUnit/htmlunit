@@ -926,20 +926,43 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code containIntrinsicBlockSize}. */
         CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
-                chromeAndEdgeNone()),
+                chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code contain-intrinsic-block-size}. */
+        CONTAIN_INTRINSIC_BLOCK_SIZE_("contain-intrinsic-block-size", "contain-intrinsic-block-size",
+                ffLatest("none")),
 
         /** The style property {@code containIntrinsicHeight}. */
-        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height", chromeAndEdgeNone()),
+        CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height",
+                chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code contain-intrinsic-height}. */
+        CONTAIN_INTRINSIC_HEIGHT_("contain-intrinsic-height", "contain-intrinsic-height",
+                ffLatest("none")),
 
         /** The style property {@code containIntrinsicInlineSize}. */
         CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
-                chromeAndEdgeNone()),
+                chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code contain-intrinsic-inline-size}. */
+        CONTAIN_INTRINSIC_INLINE_SIZE_("contain-intrinsic-inline-size", "contain-intrinsic-inline-size",
+                ffLatest("none")),
 
         /** The style property {@code containIntrinsicSize}. */
-        CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size", chromeAndEdgeNone()),
+        CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size",
+                chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code contain-intrinsic-size}. */
+        CONTAIN_INTRINSIC_SIZE_("contain-intrinsic-size", "contain-intrinsic-size",
+                ffLatest("none")),
 
         /** The style property {@code containIntrinsicWidth}. */
-        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width", chromeAndEdgeNone()),
+        CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width",
+                chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code contain-intrinsic-width}. */
+        CONTAIN_INTRINSIC_WIDTH_("contain-intrinsic-width", "contain-intrinsic-width",
+                ffLatest("none")),
 
         /** The style property {@code container}. */
         CONTAINER("container", "container", chromeAndEdgeNone()),
@@ -1147,7 +1170,10 @@ public final class StyleAttributes implements Serializable {
         FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
 
         /** The style property {@code fontPalette}. */
-        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdgeNormal()),
+        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code font-palette}. */
+        FONT_PALETTE_("font-palette", "font-palette", ffLatest("normal")),
 
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),

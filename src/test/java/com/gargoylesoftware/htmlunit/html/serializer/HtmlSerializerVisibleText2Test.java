@@ -1745,8 +1745,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Sum")
-    @BuggyWebDriver(FF = "Sum\ndetail",
-            FF_ESR = "Sum\ndetail")
+    @BuggyWebDriver(FF_ESR = "Sum\ndetail")
     @HtmlUnitNYI(IE = "Sum\ndetail")
     public void getVisibleTextDetails() throws Exception {
         getVisibleTextFormated("<details id='tester'>"
@@ -1761,8 +1760,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "Sum\nSum2",
             IE = "SumSum2")
-    @BuggyWebDriver(FF = "Sum\nSum2\ndetail",
-            FF_ESR = "Sum\nSum2\ndetail")
+    @BuggyWebDriver(FF_ESR = "Sum\nSum2\ndetail")
     @HtmlUnitNYI(IE = "SumSum2\ndetail")
     public void getVisibleTextDetailsTwoSums() throws Exception {
         getVisibleTextFormated("<details id='tester'>"

@@ -1301,7 +1301,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
     /** Ignore negative value when setting the length. */
-    @BrowserFeature({CHROME, EDGE})
+    @BrowserFeature({CHROME, EDGE, FF})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** The 'in' operator returns always true for HtmlOptionsCollection. */

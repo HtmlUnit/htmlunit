@@ -243,6 +243,11 @@ columnSpan
 columnWidth
 columns
 contain
+containIntrinsicBlockSize
+containIntrinsicHeight
+containIntrinsicInlineSize
+containIntrinsicSize
+containIntrinsicWidth
 content
 counterIncrement
 counterReset
@@ -277,6 +282,7 @@ fontFeatureSettings
 fontKerning
 fontLanguageOverride
 fontOpticalSizing
+fontPalette
 fontSize
 fontSizeAdjust
 fontStretch

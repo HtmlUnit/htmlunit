@@ -173,6 +173,8 @@ public class HtmlElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("something")
+    @BuggyWebDriver(FF = "")
     @NotYetImplemented
     //TODO: fails because of HTMLElement.getContentEditable doesn't detect DomElement.ATTRIBUTE_VALUE_EMPTY
     // this could be a general attribute issue
@@ -186,7 +188,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
         final WebElement body = driver.findElement(By.xpath("//body"));
         body.clear();
         body.sendKeys("something");
-        assertEquals("something", body.getText());
+        assertEquals(getExpectedAlerts()[0], body.getText());
     }
 
     /**
@@ -412,7 +414,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF = "-worldHello",
+    @BuggyWebDriver(FF = "Hello-world",
             FF_ESR = "-worldHello")
     public void typeAtEndOfEditableDiv() throws Exception {
         final String html = "<html><head><script>\n"
@@ -437,7 +439,7 @@ public class HtmlElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello-world")
-    @BuggyWebDriver(FF = "-worldHello",
+    @BuggyWebDriver(FF = "Hello\n-world",
             FF_ESR = "-worldHello")
     public void typeAtEndOfEditableDivWithParagraphInside() throws Exception {
         final String html = "<html><head><script>\n"
