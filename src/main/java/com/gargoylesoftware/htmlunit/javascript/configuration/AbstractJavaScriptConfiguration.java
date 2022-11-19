@@ -156,7 +156,7 @@ public abstract class AbstractJavaScriptConfiguration {
                         new ClassConfiguration(klass, domClasses.toArray(new Class<?>[0]), isJsObject,
                                 className, extendedClassName);
 
-                process(classConfiguration, hostClassName, expectedBrowser);
+                process(classConfiguration, expectedBrowser);
                 return classConfiguration;
             }
 
@@ -190,138 +190,147 @@ public abstract class AbstractJavaScriptConfiguration {
                             className,
                             extendedClassName);
 
-                process(classConfiguration, hostClassName, expectedBrowser);
+                process(classConfiguration, expectedBrowser);
                 return classConfiguration;
             }
         }
         return null;
     }
 
-    private static void process(final ClassConfiguration classConfiguration,
-            final String hostClassName, final SupportedBrowser expectedBrowser) {
+    private static void process(final ClassConfiguration classConfiguration, final SupportedBrowser expectedBrowser) {
         final Map<String, Method> allGetters = new ConcurrentHashMap<>();
         final Map<String, Method> allSetters = new ConcurrentHashMap<>();
-        for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
-            for (final Annotation annotation : constructor.getAnnotations()) {
-                if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                        expectedBrowser)) {
-                    classConfiguration.setJSConstructor(constructor);
+
+        try {
+            for (final Constructor<?> constructor : classConfiguration.getHostClass().getDeclaredConstructors()) {
+                for (final Annotation annotation : constructor.getAnnotations()) {
+                    if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
+                            expectedBrowser)) {
+                        classConfiguration.setJSConstructor(constructor);
+                    }
                 }
             }
-        }
-        for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
-            for (final Annotation annotation : method.getAnnotations()) {
-                if (annotation instanceof JsxGetter) {
-                    final JsxGetter jsxGetter = (JsxGetter) annotation;
-                    if (isSupported(jsxGetter.value(), expectedBrowser)) {
-                        String property;
-                        if (jsxGetter.propertyName().isEmpty()) {
+            for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
+                for (final Annotation annotation : method.getAnnotations()) {
+                    if (annotation instanceof JsxGetter) {
+                        final JsxGetter jsxGetter = (JsxGetter) annotation;
+                        if (isSupported(jsxGetter.value(), expectedBrowser)) {
+                            String property;
+                            if (jsxGetter.propertyName().isEmpty()) {
+                                final int prefix = method.getName().startsWith("is") ? 2 : 3;
+                                property = method.getName().substring(prefix);
+                                property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                            }
+                            else {
+                                property = jsxGetter.propertyName();
+                            }
+                            allGetters.put(property, method);
+                        }
+                    }
+                    else if (annotation instanceof JsxSetter) {
+                        final JsxSetter jsxSetter = (JsxSetter) annotation;
+                        if (isSupported(jsxSetter.value(), expectedBrowser)) {
+                            String property;
+                            if (jsxSetter.propertyName().isEmpty()) {
+                                property = method.getName().substring(3);
+                                property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                            }
+                            else {
+                                property = jsxSetter.propertyName();
+                            }
+                            allSetters.put(property, method);
+                        }
+                    }
+                    if (annotation instanceof JsxSymbol) {
+                        final JsxSymbol jsxSymbol = (JsxSymbol) annotation;
+                        if (isSupported(jsxSymbol.value(), expectedBrowser)) {
+                            final String symbolKeyName;
+                            if (jsxSymbol.symbolName().isEmpty()) {
+                                symbolKeyName = method.getName();
+                            }
+                            else {
+                                symbolKeyName = jsxSymbol.symbolName();
+                            }
+
+                            final SymbolKey symbolKey;
+                            if ("iterator".equalsIgnoreCase(symbolKeyName)) {
+                                symbolKey = SymbolKey.ITERATOR;
+                            }
+                            else {
+                                throw new RuntimeException("Invalid JsxSymbol annotation; unsupported '"
+                                        + symbolKeyName + "' symbol name.");
+                            }
+                            classConfiguration.addSymbol(symbolKey, method);
+                        }
+                    }
+                    else if (annotation instanceof JsxFunction) {
+                        final JsxFunction jsxFunction = (JsxFunction) annotation;
+                        if (isSupported(jsxFunction.value(), expectedBrowser)) {
+                            final String name;
+                            if (jsxFunction.functionName().isEmpty()) {
+                                name = method.getName();
+                            }
+                            else {
+                                name = jsxFunction.functionName();
+                            }
+                            classConfiguration.addFunction(name, method);
+                        }
+                    }
+                    else if (annotation instanceof JsxStaticGetter) {
+                        final JsxStaticGetter jsxStaticGetter = (JsxStaticGetter) annotation;
+                        if (isSupported(jsxStaticGetter.value(), expectedBrowser)) {
                             final int prefix = method.getName().startsWith("is") ? 2 : 3;
-                            property = method.getName().substring(prefix);
+                            String property = method.getName().substring(prefix);
                             property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
+                            classConfiguration.addStaticProperty(property, method, null);
                         }
-                        else {
-                            property = jsxGetter.propertyName();
+                    }
+                    else if (annotation instanceof JsxStaticFunction) {
+                        final JsxStaticFunction jsxStaticFunction = (JsxStaticFunction) annotation;
+                        if (isSupported(jsxStaticFunction.value(), expectedBrowser)) {
+                            final String name;
+                            if (jsxStaticFunction.functionName().isEmpty()) {
+                                name = method.getName();
+                            }
+                            else {
+                                name = jsxStaticFunction.functionName();
+                            }
+                            classConfiguration.addStaticFunction(name, method);
                         }
-                        allGetters.put(property, method);
+                    }
+                    else if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
+                            expectedBrowser)) {
+                        classConfiguration.setJSConstructor(method);
                     }
                 }
-                else if (annotation instanceof JsxSetter) {
-                    final JsxSetter jsxSetter = (JsxSetter) annotation;
-                    if (isSupported(jsxSetter.value(), expectedBrowser)) {
-                        String property;
-                        if (jsxSetter.propertyName().isEmpty()) {
-                            property = method.getName().substring(3);
-                            property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
-                        }
-                        else {
-                            property = jsxSetter.propertyName();
-                        }
-                        allSetters.put(property, method);
-                    }
-                }
-                if (annotation instanceof JsxSymbol) {
-                    final JsxSymbol jsxSymbol = (JsxSymbol) annotation;
-                    if (isSupported(jsxSymbol.value(), expectedBrowser)) {
-                        final String symbolKeyName;
-                        if (jsxSymbol.symbolName().isEmpty()) {
-                            symbolKeyName = method.getName();
-                        }
-                        else {
-                            symbolKeyName = jsxSymbol.symbolName();
-                        }
+            }
 
-                        final SymbolKey symbolKey;
-                        if ("iterator".equalsIgnoreCase(symbolKeyName)) {
-                            symbolKey = SymbolKey.ITERATOR;
-                        }
-                        else {
-                            throw new RuntimeException("Invalid JsxSymbol annotation; unsupported '"
-                                    + symbolKeyName + "' symbol name.");
-                        }
-                        classConfiguration.addSymbol(symbolKey, method);
+            for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
+                final String property = getterEntry.getKey();
+                classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
+            }
+
+            // JsxConstant
+            for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
+                final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
+                if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
+                    try {
+                        classConfiguration.addConstant(field.getName(), field.get(null));
                     }
-                }
-                else if (annotation instanceof JsxFunction) {
-                    final JsxFunction jsxFunction = (JsxFunction) annotation;
-                    if (isSupported(jsxFunction.value(), expectedBrowser)) {
-                        final String name;
-                        if (jsxFunction.functionName().isEmpty()) {
-                            name = method.getName();
-                        }
-                        else {
-                            name = jsxFunction.functionName();
-                        }
-                        classConfiguration.addFunction(name, method);
+                    catch (final IllegalAccessException e) {
+                        throw Context.reportRuntimeError(
+                                "Cannot get field '" + field.getName()
+                                + "' for type: " + classConfiguration.getHostClass().getName()
+                                + "reason: " + e.getMessage());
                     }
-                }
-                else if (annotation instanceof JsxStaticGetter) {
-                    final JsxStaticGetter jsxStaticGetter = (JsxStaticGetter) annotation;
-                    if (isSupported(jsxStaticGetter.value(), expectedBrowser)) {
-                        final int prefix = method.getName().startsWith("is") ? 2 : 3;
-                        String property = method.getName().substring(prefix);
-                        property = Character.toLowerCase(property.charAt(0)) + property.substring(1);
-                        classConfiguration.addStaticProperty(property, method, null);
-                    }
-                }
-                else if (annotation instanceof JsxStaticFunction) {
-                    final JsxStaticFunction jsxStaticFunction = (JsxStaticFunction) annotation;
-                    if (isSupported(jsxStaticFunction.value(), expectedBrowser)) {
-                        final String name;
-                        if (jsxStaticFunction.functionName().isEmpty()) {
-                            name = method.getName();
-                        }
-                        else {
-                            name = jsxStaticFunction.functionName();
-                        }
-                        classConfiguration.addStaticFunction(name, method);
-                    }
-                }
-                else if (annotation instanceof JsxConstructor && isSupported(((JsxConstructor) annotation).value(),
-                        expectedBrowser)) {
-                    classConfiguration.setJSConstructor(method);
                 }
             }
         }
-        for (final Entry<String, Method> getterEntry : allGetters.entrySet()) {
-            final String property = getterEntry.getKey();
-            classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
-        }
-
-        // JsxConstant
-        for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
-            final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-            if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
-                try {
-                    classConfiguration.addConstant(field.getName(), field.get(null));
-                }
-                catch (final IllegalAccessException e) {
-                    throw Context.reportRuntimeError(
-                            "Cannot get field '" + field.getName()
-                            + "' for type: " + classConfiguration.getHostClass().getName()
-                            + "reason: " + e.getMessage());
-                }
-            }
+        catch (final Throwable e) {
+            throw new RuntimeException(
+                    "Processing classConfiguration for class "
+                            + classConfiguration.getHostClassSimpleName() + "failed."
+                            + " Reason: " + e, e);
         }
     }
 
