@@ -91,7 +91,7 @@ public class CookieManager2Test extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("my_key=")
+    @Alerts("my_key=§")
     public void cookie_nullValue() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -106,15 +106,15 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
 
-        webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("my_name=my_data")
+    @Alerts("my_name=my_data§")
     public void cookie_maxAgeMinusOne() throws Exception {
         final WebClient webClient = getWebClient();
         final MockWebConnection webConnection = new MockWebConnection();
@@ -126,11 +126,8 @@ public class CookieManager2Test extends SimpleWebTestCase {
         final CookieManager mgr = webClient.getCookieManager();
         mgr.addCookie(new Cookie(URL_FIRST.getHost(), "my_name", "my_data", "/", -1, false));
 
-        final List<String> collectedAlerts = new ArrayList<>();
-        webClient.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
-
-        webClient.getPage(URL_FIRST);
-        assertEquals(getExpectedAlerts(), collectedAlerts);
+        final HtmlPage page = webClient.getPage(URL_FIRST);
+        assertEquals(getExpectedAlerts()[0], page.getTitleText());
     }
 
     /**

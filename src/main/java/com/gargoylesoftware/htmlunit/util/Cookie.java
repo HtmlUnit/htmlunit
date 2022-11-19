@@ -60,7 +60,7 @@ public class Cookie implements Serializable {
      */
     public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
         final boolean secure) {
-        this(domain, name, value, path, expires, secure, false);
+        this(domain, name, value, path, expires, secure, false, null);
     }
 
     /**
@@ -76,6 +76,23 @@ public class Cookie implements Serializable {
      */
     public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
         final boolean secure, final boolean httpOnly) {
+        this(domain, name, value, path, expires, secure, httpOnly, null);
+    }
+
+    /**
+     * Creates a new cookie with the specified name and value which applies to the specified domain,
+     * the specified path, and expires on the specified date.
+     * @param domain the domain to which this cookie applies
+     * @param name the cookie name
+     * @param value the cookie name
+     * @param path the path to which this cookie applies
+     * @param expires the date on which this cookie expires
+     * @param secure whether or not this cookie is secure (i.e. HTTPS vs HTTP)
+     * @param httpOnly whether or not this cookie should be only used for HTTP(S) headers
+     * @param sameSite the sameSite attribute
+     */
+    public Cookie(final String domain, final String name, final String value, final String path, final Date expires,
+        final boolean secure, final boolean httpOnly, final String sameSite) {
         if (domain == null) {
             throw new IllegalArgumentException("Cookie domain must be specified");
         }
@@ -87,10 +104,16 @@ public class Cookie implements Serializable {
         cookie.setAttribute(ClientCookie.DOMAIN_ATTR, domain);
 
         cookie.setPath(path);
-        cookie.setExpiryDate(expires);
+        if (expires != null) {
+            cookie.setExpiryDate(expires);
+        }
         cookie.setSecure(secure);
         if (httpOnly) {
             cookie.setAttribute("httponly", "true");
+        }
+
+        if (sameSite != null) {
+            cookie.setAttribute("samesite", sameSite);
         }
 
         httpClientCookie_ = cookie;
@@ -117,20 +140,19 @@ public class Cookie implements Serializable {
      */
     public Cookie(final String domain, final String name, final String value, final String path, final int maxAge,
         final boolean secure) {
+        this(domain, name, value, path, convertToExpiryDate(maxAge), secure);
+    }
 
-        final BasicClientCookie cookie = new BasicClientCookie(name, value == null ? "" : value);
-        cookie.setDomain(domain);
-        cookie.setPath(path);
-        cookie.setSecure(secure);
-
+    private static Date convertToExpiryDate(final int maxAge) {
         if (maxAge < -1) {
             throw new IllegalArgumentException("invalid max age:  " + maxAge);
         }
+
         if (maxAge >= 0) {
-            cookie.setExpiryDate(new Date(System.currentTimeMillis() + (maxAge * 1000L)));
+            return new Date(System.currentTimeMillis() + (maxAge * 1000L));
         }
 
-        httpClientCookie_ = cookie;
+        return null;
     }
 
     /**
@@ -207,7 +229,8 @@ public class Cookie implements Serializable {
             + (getPath() == null ? "" : ";path=" + getPath())
             + (getExpires() == null ? "" : ";expires=" + getExpires())
             + (isSecure() ? ";secure" : "")
-            + (isHttpOnly() ? ";httpOnly" : "");
+            + (isHttpOnly() ? ";httpOnly" : "")
+            + (getSameSite() == null ? "" : ";sameSite=" + getSameSite());
     }
 
     /**

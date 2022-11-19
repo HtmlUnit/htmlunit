@@ -146,7 +146,8 @@ public class CookieManager4Test extends WebDriverTestCase {
                 MimeType.TEXT_HTML, responseHeader);
 
         final URL firstUrl = new URL(URL_HOST1);
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -188,7 +189,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         assertEquals(getExpectedAlerts()[1], driver.manage().getCookieNamed("c1").toString());
         assertEquals(getExpectedAlerts()[2], driver.manage().getCookieNamed("c2").toString());
@@ -227,7 +228,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPage2(new URL(URL_HOST2), StandardCharsets.ISO_8859_1);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         assertEquals(getExpectedAlerts()[1], driver.manage().getCookieNamed("c1").toString());
         assertEquals(getExpectedAlerts()[2], driver.manage().getCookieNamed("c2").toString());
@@ -264,7 +265,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPage2(new URL(URL_HOST3), StandardCharsets.ISO_8859_1);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         assertEquals(getExpectedAlerts()[1], driver.manage().getCookieNamed("c1").toString());
         assertEquals(getExpectedAlerts()[2], driver.manage().getCookieNamed("c2").toString());
@@ -303,7 +304,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 MimeType.TEXT_HTML, responseHeader);
 
         final WebDriver driver = loadPage2(new URL(URL_HOST4), StandardCharsets.ISO_8859_1);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
 
         assertEquals(getExpectedAlerts()[1], driver.manage().getCookieNamed("c12").toString());
         if (driver.manage().getCookieNamed("c11") != null) {
@@ -349,7 +350,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html, new URL(URL_HOST1));
-        verifyAlerts(driver);
+        verifyTitle2(driver);
 
         assertEquals(4, driver.manage().getCookies().size());
         assertEquals(getExpectedAlerts()[0], driver.manage().getCookieNamed("c1").toString());
@@ -391,7 +392,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html, new URL(URL_HOST2));
-        verifyAlerts(driver);
+        verifyTitle2(driver);
 
         assertEquals(2, driver.manage().getCookies().size());
         assertEquals(getExpectedAlerts()[0], driver.manage().getCookieNamed("c1").toString());
@@ -431,7 +432,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html, new URL(URL_HOST3));
-        verifyAlerts(driver);
+        verifyTitle2(driver);
 
         assertEquals(2, driver.manage().getCookies().size());
         assertEquals(getExpectedAlerts()[0], driver.manage().getCookieNamed("c1").toString());
@@ -475,7 +476,7 @@ public class CookieManager4Test extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html, new URL(URL_HOST4));
-        verifyAlerts(driver);
+        verifyTitle2(driver);
 
         final String[] expected = getExpectedAlerts();
         assertEquals(Integer.parseInt(expected[0]), driver.manage().getCookies().size());
@@ -499,7 +500,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         final URL firstUrl = new URL(URL_HOST1);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -516,7 +518,8 @@ public class CookieManager4Test extends WebDriverTestCase {
 
         final URL firstUrl = new URL(URL_HOST1);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -604,7 +607,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -634,7 +638,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST3);
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -660,7 +665,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html, 200, "Ok", MimeType.TEXT_HTML, responseHeader1);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -685,7 +691,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -710,7 +717,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         final URL firstUrl = new URL(URL_HOST1);
         getMockWebConnection().setResponse(firstUrl, html);
 
-        loadPageWithAlerts2(firstUrl);
+        loadPage2(firstUrl, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     private void testCookies(final URL url, final String cookie1, final String cookie2) throws Exception {
@@ -720,7 +728,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setDefaultResponse(CookieManagerTest.HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
                 responseHeader);
 
-        loadPageWithAlerts2(url);
+        loadPage2(url, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -761,7 +770,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST1 + "foo");
 
         final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
@@ -810,7 +820,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST2 + "foo");
 
         final Map<String, String> lastHeaders = getMockWebConnection().getLastAdditionalHeaders();
@@ -839,7 +850,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST1), HTML_ALERT_COOKIE,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST2 + "foo");
         driver.get(URL_HOST1 + "foo");
 
@@ -893,7 +905,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST1 + "include"), html,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST1 + "include");
 
         assertEquals(URL_HOST1 + "css/style.css", getMockWebConnection().getLastWebRequest().getUrl());
@@ -947,7 +960,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST2), html,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST2);
 
         assertEquals(URL_HOST1 + "css/style.css", getMockWebConnection().getLastWebRequest().getUrl());
@@ -1001,7 +1015,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST1 + "include"), html,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST1 + "include");
 
         assertEquals(URL_HOST1 + "iframe.html", getMockWebConnection().getLastWebRequest().getUrl());
@@ -1055,7 +1070,8 @@ public class CookieManager4Test extends WebDriverTestCase {
         getMockWebConnection().setResponse(new URL(URL_HOST2 + "include"), html,
                                         200, "OK", MimeType.TEXT_HTML, responseHeader);
 
-        final WebDriver driver = loadPageWithAlerts2(new URL(URL_HOST1));
+        final WebDriver driver = loadPage2(new URL(URL_HOST1), StandardCharsets.ISO_8859_1);
+        verifyTitle2(driver, getExpectedAlerts());
         driver.get(URL_HOST2 + "include");
 
         assertEquals(URL_HOST1 + "iframe.html", getMockWebConnection().getLastWebRequest().getUrl());
