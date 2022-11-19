@@ -37,18 +37,21 @@ public final class SgmlPage2Test extends WebDriverTestCase {
     @Test
     @Alerts({"2", "2"})
     public void getElementsByTagName() throws Exception {
-        final String html = "<html><head><script>\n"
+        final String html = "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
-                + "  alert(document.getElementsByTagName('h1').length);\n"
-                + "  alert(document.getElementsByTagName('H1').length);\n"
+                + "  log(document.getElementsByTagName('h1').length);\n"
+                + "  log(document.getElementsByTagName('H1').length);\n"
                 + "}\n"
-                + "</script></head>\n"
+                + "</script>\n"
+                + "</head>\n"
                 + "<body onload='test()'>\n"
                 + "  <h1>Test 1</h1>\n"
                 + "  <H1>Test 2</H1>\n"
                 + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(2, page.getElementsByTagName("h1").size());
