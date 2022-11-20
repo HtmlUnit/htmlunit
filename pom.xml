@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.sourceforge.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.67.0</version>
+    <version>2.68.0-SNAPSHOT</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>2.67.0</htmlunitcorejs.version>
         <htmlunitxpath.version>2.67.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.6.1</htmlunitdriver.version>
+        <htmlunitdriver.version>4.6.1-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.6.0</selenium.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>

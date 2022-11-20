@@ -771,8 +771,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
             // Width not explicitly set.
             final String cssFloat = getCssFloat();
+            final String position = getStyleAttribute(POSITION, true);
             if ("right".equals(cssFloat) || "left".equals(cssFloat)
-                    || ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
+                    || ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 // We're floating; simplistic approximation: text content * pixels per character.
                 width = element.getVisibleText().length() * getBrowserVersion().getPixesPerChar();
             }
@@ -1127,11 +1128,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (scriptObj instanceof HTMLElement) {
                     final HTMLElement e = (HTMLElement) scriptObj;
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                    final String pos = style.getPositionWithInheritance();
-                    if (STATIC.equals(pos) || RELATIVE.equals(pos)) {
+                    final String position = style.getPositionWithInheritance();
+                    if (STATIC.equals(position) || RELATIVE.equals(position)) {
                         lastFlowing = style;
                     }
-                    else if (ABSOLUTE.equals(pos)) {
+                    else if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                         styles.add(style);
                     }
                 }
@@ -1194,8 +1195,8 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         int top = 0;
         if (null == cachedTop) {
-            final String p = getPositionWithInheritance();
-            if (ABSOLUTE.equals(p) || FIXED.equals(p)) {
+            final String position = getPositionWithInheritance();
+            if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 top = getTopForAbsolutePositionWithInheritance();
             }
             else {
@@ -1214,7 +1215,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                             final Integer eCachedTop = style.getCssStyleDeclaration().getCachedTop();
                             if (eCachedTop == null) {
                                 final String prevPosition = style.getPositionWithInheritance();
-                                if (ABSOLUTE.equals(prevPosition)) {
+                                if (ABSOLUTE.equals(prevPosition) || FIXED.equals(prevPosition)) {
                                     prevTop += style.getTopForAbsolutePositionWithInheritance();
                                 }
                                 else {
@@ -1237,7 +1238,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                     prev = prev.getPreviousSibling();
                 }
                 // If the position is relative, we also need to add the specified "top" displacement.
-                if (RELATIVE.equals(p)) {
+                if (RELATIVE.equals(position)) {
                     final String t = getTopWithInheritance();
                     top += CssPixelValueConverter.pixelValue(t);
                 }
@@ -1314,11 +1315,11 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
         final String r = getRightWithInheritance();
 
         int left;
-        if (ABSOLUTE.equals(p) && !AUTO.equals(l)) {
+        if ((ABSOLUTE.equals(p) || FIXED.equals(p)) && !AUTO.equals(l)) {
             // No need to calculate displacement caused by sibling nodes.
             left = CssPixelValueConverter.pixelValue(l);
         }
-        else if (ABSOLUTE.equals(p) && !AUTO.equals(r)) {
+        else if ((ABSOLUTE.equals(p) || FIXED.equals(p)) && !AUTO.equals(r)) {
             // Need to calculate the horizontal displacement caused by *all* siblings.
             final HTMLElement parent = (HTMLElement) getElement().getParentElement();
             final int parentWidth;

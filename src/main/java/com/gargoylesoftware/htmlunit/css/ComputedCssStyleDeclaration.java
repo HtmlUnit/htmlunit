@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.css;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY;
 import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.ABSOLUTE;
 import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.AUTO;
+import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.FIXED;
 import static com.gargoylesoftware.htmlunit.css.CssStyleSheet.NONE;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.AZIMUTH;
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.BORDER_COLLAPSE;
@@ -418,7 +419,8 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
             public String get(final ComputedCssStyleDeclaration style) {
                 final String value = style.getStyleAttribute(WIDTH, true);
                 if (StringUtils.isEmpty(value)) {
-                    if (ABSOLUTE.equals(getStyleAttribute(POSITION, true))) {
+                    final String position = getStyleAttribute(POSITION, true);
+                    if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                         final String content = domElem.getVisibleText();
                         // do this only for small content
                         // at least for empty div's this is more correct
