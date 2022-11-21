@@ -19,6 +19,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.io.Serializable;
+import java.util.function.Predicate;
+
+import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlDataList;
 import com.gargoylesoftware.htmlunit.html.HtmlOption;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -51,7 +55,9 @@ public class HTMLDataListElement extends HTMLElement {
     public Object getOptions() {
         if (options_ == null) {
             options_ = new HTMLCollection(getDomNodeOrDie(), false);
-            options_.setIsMatchingPredicate(node -> node instanceof HtmlOption);
+            options_.setIsMatchingPredicate(
+                    (Predicate<DomNode> & Serializable)
+                    node -> node instanceof HtmlOption);
         }
         return options_;
     }

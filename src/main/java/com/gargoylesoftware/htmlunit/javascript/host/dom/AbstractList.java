@@ -14,10 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -29,8 +32,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.platform.SerializableFunction;
-import com.gargoylesoftware.htmlunit.platform.SerializablePredicate;
 import com.gargoylesoftware.htmlunit.platform.SerializableSupplier;
 
 import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
@@ -71,9 +72,9 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
 
     private boolean listenerRegistered_;
 
-    private SerializableFunction<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
-                    event -> EffectOnCache.RESET;
-    private SerializablePredicate<DomNode> isMatchingPredicate_ = domNode -> false;
+    private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
+            (Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable) event -> EffectOnCache.RESET;
+    private Predicate<DomNode> isMatchingPredicate_ = (Predicate<DomNode> & Serializable) domNode -> false;
     private SerializableSupplier<List<DomNode>> elementsSupplier_ =
                 () -> {
                     final List<DomNode> response = new ArrayList<>();
@@ -141,7 +142,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * @param effectOnCacheFunction the new function
      */
     public void setEffectOnCacheFunction(
-            final SerializableFunction<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction) {
+            final Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction) {
         if (effectOnCacheFunction == null) {
             throw new NullPointerException("EffectOnCacheFunction can't be null");
         }
@@ -169,7 +170,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     /**
      * @return isMatchingPredicate
      */
-    protected SerializablePredicate<DomNode> getIsMatchingPredicate() {
+    protected Predicate<DomNode> getIsMatchingPredicate() {
         return isMatchingPredicate_;
     }
 
@@ -177,7 +178,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * Indicates if the node should belong to the collection.
      * @param isMatchingPredicate the new predicate
      */
-    public void setIsMatchingPredicate(final SerializablePredicate<DomNode> isMatchingPredicate) {
+    public void setIsMatchingPredicate(final Predicate<DomNode> isMatchingPredicate) {
         if (isMatchingPredicate == null) {
             throw new NullPointerException("IsMatchingPredicate can't be null");
         }

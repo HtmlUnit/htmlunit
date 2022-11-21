@@ -20,9 +20,6 @@
             <action type="fix" dev="rbri">
                 Treat localhost as secure origin when processing cookies.
             </action>
-            <action type="update" dev="rbri">
-                Avoid usage of interfaces from java.util.function for Android 6.
-            </action>
             <action type="fix" dev="rbri">
                 Take care of the fixed position style attribute at some places.
             </action>
