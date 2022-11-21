@@ -7,6 +7,9 @@
     </properties>
 
     <body>
+        <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes">
+        </release>
+
         <release version="2.67.0" date="November 20, 2022" description="Chrome/Edge 107, Firefox 107, Bugfixes">
             <action type="update" dev="rbri">
                 Support sameSite attribute when constructing a cookie.
