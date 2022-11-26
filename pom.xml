@@ -41,7 +41,7 @@
         <checkstyle.version>9.3</checkstyle.version>
         <spotbugs.version>4.7.3</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
-        <archunit.version>1.0.0</archunit.version>
+        <archunit.version>1.0.1</archunit.version>
         <dependencycheck.version>7.3.2</dependencycheck.version>
     </properties>
 
@@ -1251,7 +1251,7 @@
         <dependency>
             <groupId>com.twelvemonkeys.imageio</groupId>
             <artifactId>imageio-batik</artifactId>
-            <version>3.9.3</version>
+            <version>3.9.4</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
