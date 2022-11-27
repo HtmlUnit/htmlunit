@@ -325,7 +325,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"SGVsbG8gV29ybGQh", "Hello World!"})
+    @Alerts({"SGVsbG8gV29ybGQh", "Hello\\sWorld!"})
     public void atob() throws Exception {
         final String workerJs
             = "  var data = btoa('Hello World!');\n"
@@ -367,7 +367,7 @@ public class WorkerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"CSAe", "\t \u001e"})
+    @Alerts({"CSAe", "\\t\\s\\u001e"})
     public void atobControlChar() throws Exception {
         final String workerJs
             = "  var data = btoa('\\t \\u001e');\n"
@@ -407,7 +407,7 @@ public class WorkerTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"object", "true"},
-            IE = {"undefined", "globalThis is undefined"})
+            IE = {"undefined", "globalThis\\sis\\sundefined"})
     public void globalThis() throws Exception {
         final String workerJs
             = "  try {\n"
@@ -420,17 +420,19 @@ public class WorkerTest extends WebDriverTestCase {
     private void testJs(final String workerJs) throws Exception {
         final String html = "<html><body>\n"
             + "<script async>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "try {\n"
             + "  var myWorker = new Worker('worker.js');\n"
             + "  myWorker.onmessage = function(e) {\n"
-            + "    alert(e.data);\n"
+            + "    log(e.data);\n"
             + "  };\n"
-            + "} catch(e) { alert('exception'); }\n"
+            + "} catch(e) { log('exception'); }\n"
             + "</script></body></html>\n";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "worker.js"), workerJs, MimeType.APPLICATION_JAVASCRIPT);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

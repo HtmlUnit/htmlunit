@@ -164,6 +164,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                     + "msg = msg.replace(/\\n/g, '\\\\n'); "
                     + "msg = msg.replace(/\\r/g, '\\\\r'); "
                     + "msg = msg.replace(/\\t/g, '\\\\t'); "
+                    + "msg = msg.replace(/\\u001e/g, '\\\\u001e'); "
                     + "window.document.title += msg + '§';}\n";
 
     /**
