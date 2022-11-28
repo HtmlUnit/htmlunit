@@ -27,12 +27,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.xerces.util.DefaultErrorHandler;
-import org.apache.xerces.xni.QName;
-import org.apache.xerces.xni.XNIException;
-import org.apache.xerces.xni.parser.XMLErrorHandler;
-import org.apache.xerces.xni.parser.XMLInputSource;
-import org.apache.xerces.xni.parser.XMLParseException;
+import net.sourceforge.htmlunit.xerces.util.DefaultErrorHandler;
+import net.sourceforge.htmlunit.xerces.xni.QName;
+import net.sourceforge.htmlunit.xerces.xni.XNIException;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLErrorHandler;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLParseException;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
