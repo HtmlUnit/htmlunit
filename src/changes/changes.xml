@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes">
+        <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes, neko-html without xerces">
+            <action type="fix" dev="rbri" issue="521">
+                core-js: Descriptor of Function.length should be configurable.
+            </action>
+            <action type="fix" dev="rbri" issue="521">
+                neko: Use our own fork of neke to get rid of some classpath problems because of the xml-api
+                dependency of xerces.
+            </action>
         </release>
 
         <release version="2.67.0" date="November 20, 2022" description="Chrome/Edge 107, Firefox 107, Bugfixes">

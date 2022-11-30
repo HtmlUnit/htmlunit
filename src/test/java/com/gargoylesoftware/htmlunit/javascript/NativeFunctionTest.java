@@ -518,4 +518,30 @@ public class NativeFunctionTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"configurable: true", "enumerable: false", "writable: false"},
+            IE = "no values")
+    @HtmlUnitNYI(IE = {"configurable: true", "enumerable: false", "writable: false"})
+    public void functionLength() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var desc = Object.getOwnPropertyDescriptor(alert, 'length');\n"
+            + "    if (desc === undefined) { log('no values'); return; }\n"
+            + "    log('configurable: ' + desc.configurable);\n"
+            + "    log('enumerable: ' + desc.enumerable);\n"
+            + "    log('writable: ' + desc.writable);"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
