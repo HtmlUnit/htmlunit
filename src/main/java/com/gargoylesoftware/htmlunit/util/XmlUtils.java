@@ -35,8 +35,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import net.sourceforge.htmlunit.xerces.dom.DeferredDocumentImpl;
-import net.sourceforge.htmlunit.xerces.dom.DeferredNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -63,6 +61,9 @@ import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
+
+import net.sourceforge.htmlunit.xerces.dom.DeferredDocumentImpl;
+import net.sourceforge.htmlunit.xerces.dom.DeferredNode;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
