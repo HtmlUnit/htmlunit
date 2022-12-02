@@ -69,6 +69,7 @@ public class HTMLImageElement extends HTMLElement {
     /**
      * JavaScript constructor.
      */
+    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
         throw ScriptRuntime.typeError("Invalid constructor.");

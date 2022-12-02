@@ -29,6 +29,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * The JavaScript object that represents a {@link HtmlButton} (&lt;button type=...&gt;).
  *
@@ -47,8 +49,13 @@ public class HTMLButtonElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLButtonElement() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

@@ -86,8 +86,13 @@ public class HTMLFormElement extends HTMLElement implements Function {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLFormElement() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**
