@@ -33,8 +33,13 @@ public class NetworkInformation extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public NetworkInformation() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

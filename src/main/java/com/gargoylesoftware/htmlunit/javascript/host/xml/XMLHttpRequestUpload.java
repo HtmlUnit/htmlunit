@@ -34,7 +34,12 @@ public class XMLHttpRequestUpload extends XMLHttpRequestEventTarget {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public XMLHttpRequestUpload() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.event;
 
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -45,8 +46,8 @@ public class TimeEvent extends Event {
      * @param details the event details (optional)
      */
     @Override
-    @JsxConstructor
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
-        throw ScriptRuntime.typeError("TimeEvent ctor is not available");
+        super.jsConstructor(type, details);
     }
 }

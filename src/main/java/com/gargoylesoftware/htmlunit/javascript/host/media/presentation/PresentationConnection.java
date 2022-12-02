@@ -33,7 +33,12 @@ public class PresentationConnection extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PresentationConnection() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }
