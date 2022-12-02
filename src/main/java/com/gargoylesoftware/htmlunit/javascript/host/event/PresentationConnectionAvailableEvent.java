@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code PresentationConnectionAvailableEvent}.
  *
@@ -31,7 +33,12 @@ public class PresentationConnectionAvailableEvent extends Event {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PresentationConnectionAvailableEvent() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }

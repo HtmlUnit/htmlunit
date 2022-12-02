@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code SpeechSynthesisErrorEvent}.
  *
@@ -34,7 +36,12 @@ public class SpeechSynthesisErrorEvent extends SpeechSynthesisEvent {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SpeechSynthesisErrorEvent() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }

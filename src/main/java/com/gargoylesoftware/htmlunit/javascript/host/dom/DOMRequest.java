@@ -33,8 +33,12 @@ public class DOMRequest extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public DOMRequest() {
     }
 
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
+    }
 }

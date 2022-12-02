@@ -139,8 +139,8 @@ public class MouseEvent extends UIEvent {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
-    public void jsConstructor(final String type, final ScriptableObject details) {
-        super.jsConstructor(ScriptRuntime.toString(type), details);
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
         if (details != null && !Undefined.isUndefined(details)) {
             final Object screenX = details.get("screenX", details);
             if (NOT_FOUND != screenX) {

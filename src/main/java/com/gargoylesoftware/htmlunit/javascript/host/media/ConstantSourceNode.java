@@ -35,7 +35,12 @@ public class ConstantSourceNode extends AudioScheduledSourceNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public ConstantSourceNode() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

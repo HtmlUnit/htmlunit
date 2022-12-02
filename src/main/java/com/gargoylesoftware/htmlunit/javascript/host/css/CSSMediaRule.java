@@ -46,8 +46,13 @@ public class CSSMediaRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSMediaRule() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

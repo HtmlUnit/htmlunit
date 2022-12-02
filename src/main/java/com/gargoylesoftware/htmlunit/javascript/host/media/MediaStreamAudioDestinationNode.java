@@ -34,7 +34,12 @@ public class MediaStreamAudioDestinationNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaStreamAudioDestinationNode() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

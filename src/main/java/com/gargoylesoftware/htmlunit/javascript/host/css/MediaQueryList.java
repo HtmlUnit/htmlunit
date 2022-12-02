@@ -43,8 +43,13 @@ public class MediaQueryList extends EventTarget {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public MediaQueryList() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

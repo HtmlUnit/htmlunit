@@ -36,7 +36,12 @@ public class SVGGraphicsElement extends SVGElement {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SVGGraphicsElement() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

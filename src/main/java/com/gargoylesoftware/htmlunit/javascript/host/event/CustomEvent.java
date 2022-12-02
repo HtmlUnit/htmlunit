@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
@@ -54,8 +53,8 @@ public class CustomEvent extends Event {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
-    public void jsConstructor(final String type, final ScriptableObject details) {
-        super.jsConstructor(ScriptRuntime.toString(type), details);
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
 
         if (details != null && !Undefined.isUndefined(details)) {
             final Object detail = details.get("detail", details);

@@ -689,7 +689,11 @@ public class Event extends HtmlUnitScriptable {
      * @param details the event details (optional)
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor(final String type, final ScriptableObject details) {
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        if (type == null && details == null) {
+            throw ScriptRuntime.typeError("Illegal constructor.");
+        }
+
         boolean bubbles = false;
         boolean cancelable = false;
 
@@ -697,7 +701,7 @@ public class Event extends HtmlUnitScriptable {
             bubbles = ScriptRuntime.toBoolean(details.get("bubbles"));
             cancelable  = ScriptRuntime.toBoolean(details.get("cancelable"));
         }
-        initEvent(type, bubbles, cancelable);
+        initEvent(ScriptRuntime.toString(type), bubbles, cancelable);
     }
 
     /**

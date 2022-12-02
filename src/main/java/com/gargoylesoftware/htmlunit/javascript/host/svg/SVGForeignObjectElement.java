@@ -36,7 +36,12 @@ public class SVGForeignObjectElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public SVGForeignObjectElement() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

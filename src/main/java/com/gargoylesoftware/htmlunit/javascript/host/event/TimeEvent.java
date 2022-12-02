@@ -46,7 +46,7 @@ public class TimeEvent extends Event {
      */
     @Override
     @JsxConstructor
-    public void jsConstructor(final String type, final ScriptableObject details) {
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
         throw ScriptRuntime.typeError("TimeEvent ctor is not available");
     }
 }

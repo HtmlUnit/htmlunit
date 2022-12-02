@@ -34,7 +34,12 @@ public class SVGFEDropShadowElement extends SVGElement {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public SVGFEDropShadowElement() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

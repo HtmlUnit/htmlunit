@@ -31,8 +31,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * The JavaScript object {@code HTMLUnknownElement}.
  *
@@ -51,7 +49,7 @@ public class HTMLUnknownElement extends HTMLElement {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+        super.jsConstructor();
     }
 
     /**

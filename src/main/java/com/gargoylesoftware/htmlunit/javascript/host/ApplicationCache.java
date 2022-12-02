@@ -69,8 +69,13 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public ApplicationCache() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

@@ -30,6 +30,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * A JavaScript object for {@code MediaList}.
  *
@@ -47,9 +49,13 @@ public class MediaList extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public MediaList() {
         cssMediaList_ = null;
+    }
+
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        throw ScriptRuntime.typeError("Illegal constructor.");
     }
 
     /**

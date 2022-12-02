@@ -23,6 +23,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code WebGLContextEvent}.
  *
@@ -35,7 +37,12 @@ public class WebGLContextEvent extends Event {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public WebGLContextEvent() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
     }
 }

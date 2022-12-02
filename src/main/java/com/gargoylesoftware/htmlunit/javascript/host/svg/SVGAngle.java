@@ -24,6 +24,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * A JavaScript object for {@code SVGAngle}.
  *
@@ -56,7 +58,11 @@ public class SVGAngle extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SVGAngle() {
+    }
+
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        throw ScriptRuntime.typeError("Illegal constructor.");
     }
 }

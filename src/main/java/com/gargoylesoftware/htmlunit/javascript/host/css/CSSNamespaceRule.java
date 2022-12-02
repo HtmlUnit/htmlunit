@@ -35,7 +35,12 @@ public class CSSNamespaceRule extends CSSRule {
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSNamespaceRule() {
+    }
+
+    @Override
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

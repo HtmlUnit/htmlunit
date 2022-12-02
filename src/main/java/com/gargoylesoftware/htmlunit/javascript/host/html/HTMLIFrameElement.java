@@ -35,7 +35,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.WindowProxy;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@link HtmlInlineFrame}.
@@ -60,7 +59,7 @@ public class HTMLIFrameElement extends HTMLElement {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+        super.jsConstructor();
     }
 
     /**

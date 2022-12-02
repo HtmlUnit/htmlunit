@@ -35,8 +35,13 @@ public class OfflineAudioContext extends BaseAudioContext {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public OfflineAudioContext() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

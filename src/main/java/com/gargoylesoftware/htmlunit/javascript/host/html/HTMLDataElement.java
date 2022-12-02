@@ -37,8 +37,13 @@ public class HTMLDataElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public HTMLDataElement() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**

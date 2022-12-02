@@ -34,7 +34,12 @@ public class DelayNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public DelayNode() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

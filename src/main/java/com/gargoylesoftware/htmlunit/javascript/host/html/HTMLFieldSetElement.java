@@ -28,8 +28,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * The JavaScript object {@code HTMLFieldSetElement}.
  *
@@ -48,7 +46,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+        super.jsConstructor();
     }
 
     /**

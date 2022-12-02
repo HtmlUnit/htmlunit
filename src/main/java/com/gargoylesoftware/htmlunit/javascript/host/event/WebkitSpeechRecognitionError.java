@@ -20,6 +20,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code webkitSpeechRecognitionError}.
  *
@@ -32,8 +34,12 @@ public class WebkitSpeechRecognitionError extends Event {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public WebkitSpeechRecognitionError() {
     }
 
+    @Override
+    @JsxConstructor
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
+    }
 }

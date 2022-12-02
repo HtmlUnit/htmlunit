@@ -55,8 +55,8 @@ public class BlobEvent extends Event {
      */
     @JsxConstructor
     @Override
-    public void jsConstructor(final String type, final ScriptableObject details) {
-        super.jsConstructor(ScriptRuntime.toString(type), details);
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+        super.jsConstructor(type, details);
 
         if (details != null && !Undefined.isUndefined(details)) {
             final Object dataObj = details.get("data", details);

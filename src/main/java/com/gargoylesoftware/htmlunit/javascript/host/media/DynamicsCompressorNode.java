@@ -34,7 +34,12 @@ public class DynamicsCompressorNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public DynamicsCompressorNode() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }

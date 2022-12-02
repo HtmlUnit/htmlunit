@@ -84,7 +84,7 @@ public class MessageEvent extends Event {
      */
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor(final String type, final ScriptableObject details) {
+    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
         super.jsConstructor(type, details);
 
         if (getBrowserVersion().hasFeature(EVENT_ONMESSAGE_DEFAULT_DATA_NULL)) {

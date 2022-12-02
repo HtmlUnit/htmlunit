@@ -34,7 +34,12 @@ public class IIRFilterNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public IIRFilterNode() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }
