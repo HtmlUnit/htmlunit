@@ -172,10 +172,6 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
             IE = {"true", "false", "true", "exception"})
-    @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "false"},
-            EDGE = {"true", "false", "true", "ctor", "false"},
-            FF = {"true", "false", "true", "ctor", "false"},
-            FF_ESR = {"true", "false", "true", "ctor", "false"})
     public void ctorChangeableHasNoEffectForTypeOf() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
@@ -207,10 +203,6 @@ public class ScriptableObjectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"true", "false", "true", "ctor", "true"},
             IE = {"true", "false", "true", "exception"})
-    @HtmlUnitNYI(CHROME = {"true", "false", "true", "ctor", "exception"},
-            EDGE = {"true", "false", "true", "ctor", "exception"},
-            FF = {"true", "false", "true", "ctor", "exception"},
-            FF_ESR = {"true", "false", "true", "ctor", "exception"})
     public void ctorChangeableHasNoEffectForTypeOfStrict() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"

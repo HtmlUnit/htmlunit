@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code Intl}.
@@ -52,7 +53,7 @@ public class Intl extends HtmlUnitScriptable {
             final HtmlUnitScriptable prototype = JavaScriptEngine.configureClass(config, this, browserVersion);
             final FunctionObject functionObject =
                     new RecursiveFunctionObject(config.getClassName(), config.getJsConstructor(), this, browserVersion);
-            functionObject.addAsConstructor(this, prototype);
+            functionObject.addAsConstructor(this, prototype, ScriptableObject.DONTENUM);
         }
         catch (final Exception e) {
             throw Context.throwAsScriptRuntimeEx(e);

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes, neko-html without xerces">
+            <action type="fix" dev="rbri" issue="238">
+                core-js: Constructor properties fixes.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.9.0.
             </action>

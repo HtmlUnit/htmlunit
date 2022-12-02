@@ -369,7 +369,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
                         if (function instanceof FunctionObject) {
                             try {
-                                ((FunctionObject) function).addAsConstructor(window, prototype);
+                                ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
                             }
                             catch (final Exception e) {
                                 // TODO see issue #1897
@@ -400,7 +400,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     else {
                         if (function instanceof FunctionObject) {
                             try {
-                                ((FunctionObject) function).addAsConstructor(window, prototype);
+                                ((FunctionObject) function).addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
                             }
                             catch (final Exception e) {
                                 // TODO see issue #1897
@@ -446,7 +446,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                         Context.class, Object[].class, Function.class, boolean.class);
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
                 try {
-                    functionObject.addAsConstructor(window, prototype);
+                    functionObject.addAsConstructor(window, prototype, ScriptableObject.DONTENUM);
                 }
                 catch (final Exception e) {
                     // TODO see issue #1897
