@@ -33,13 +33,6 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
-import net.sourceforge.htmlunit.xerces.parsers.AbstractSAXParser;
-import net.sourceforge.htmlunit.xerces.xni.Augmentations;
-import net.sourceforge.htmlunit.xerces.xni.QName;
-import net.sourceforge.htmlunit.xerces.xni.XMLAttributes;
-import net.sourceforge.htmlunit.xerces.xni.XNIException;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLParserConfiguration;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -82,6 +75,13 @@ import net.sourceforge.htmlunit.cyberneko.HTMLElements;
 import net.sourceforge.htmlunit.cyberneko.HTMLEventInfo;
 import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
 import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
+import net.sourceforge.htmlunit.xerces.parsers.AbstractSAXParser;
+import net.sourceforge.htmlunit.xerces.xni.Augmentations;
+import net.sourceforge.htmlunit.xerces.xni.QName;
+import net.sourceforge.htmlunit.xerces.xni.XMLAttributes;
+import net.sourceforge.htmlunit.xerces.xni.XNIException;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLParserConfiguration;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
