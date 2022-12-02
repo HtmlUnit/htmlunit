@@ -30,8 +30,8 @@
         <htmlunitcorejs.version>2.68.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitxpath.version>2.67.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.6.1-SNAPSHOT</htmlunitdriver.version>
-        <selenium.version>4.6.0</selenium.version>
+        <htmlunitdriver.version>4.7.0</htmlunitdriver.version>
+        <selenium.version>4.7.0</selenium.version>
 
         <httpcomponents.version>4.5.13</httpcomponents.version>
         <jetty.version>9.4.49.v20220914</jetty.version>
@@ -1171,7 +1171,7 @@
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>
-            <version>3.8.0</version>
+            <version>3.9.0</version>
         </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
