@@ -5156,7 +5156,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF_ESR = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
             FF = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width",
-            IE = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width")
+            IE = "align,alt,border,complete,constructor,height,name,naturalHeight,naturalWidth,src,width")
     public void img() throws Exception {
         test("img");
     }
@@ -5246,7 +5246,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,outerText,"
                 + "spellcheck,style,tabIndex,title",
-            IE = "align,alt,border,complete,constructor(),height,name,naturalHeight,naturalWidth,src,width")
+            IE = "align,alt,border,complete,constructor,height,name,naturalHeight,naturalWidth,src,width")
     public void image() throws Exception {
         test("image");
     }
