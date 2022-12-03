@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -35,8 +33,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import net.sourceforge.htmlunit.xerces.dom.DeferredDocumentImpl;
-import net.sourceforge.htmlunit.xerces.dom.DeferredNode;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.DocumentType;
@@ -79,6 +75,27 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public final class XmlUtils {
 
     private static final Log LOG = LogFactory.getLog(XmlUtils.class);
+
+    private static XmlUtilsHelperAPI HelperXerces_;
+    private static XmlUtilsHelperAPI HelperSunXerces_;
+
+    static {
+        try {
+            HelperSunXerces_ = (XmlUtilsHelperAPI)
+                    Class.forName("com.gargoylesoftware.htmlunit.util.XmlUtilsSunXercesHelper").newInstance();
+        }
+        catch (final Exception e) {
+            // ignore
+        }
+
+        try {
+            HelperXerces_ = (XmlUtilsHelperAPI)
+                    Class.forName("com.gargoylesoftware.htmlunit.util.XmlUtilsXercesHelper").newInstance();
+        }
+        catch (final Exception e2) {
+            // ignore
+        }
+    }
 
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
@@ -310,18 +327,19 @@ public final class XmlUtils {
 
     private static int getIndex(final NamedNodeMap namedNodeMap, final Map<Integer, List<String>> attributesOrderMap,
             final Node element, final int requiredIndex) {
-        if (attributesOrderMap != null && element instanceof DeferredNode) {
-            final int elementIndex = ((DeferredNode) element).getNodeIndex();
-            final List<String> attributesOrderList = attributesOrderMap.get(elementIndex);
-            if (attributesOrderList != null) {
-                final String attributeName = attributesOrderList.get(requiredIndex);
-                for (int i = 0; i < namedNodeMap.getLength(); i++) {
-                    if (namedNodeMap.item(i).getNodeName().equals(attributeName)) {
-                        return i;
-                    }
-                }
+        if (HelperXerces_ != null) {
+            final int result = HelperXerces_.getIndex(namedNodeMap, attributesOrderMap, element, requiredIndex);
+            if (result != -1) {
+                return result;
             }
         }
+        if (HelperSunXerces_ != null) {
+            final int result = HelperSunXerces_.getIndex(namedNodeMap, attributesOrderMap, element, requiredIndex);
+            if (result != -1) {
+                return result;
+            }
+        }
+
         return requiredIndex;
     }
 
@@ -428,35 +446,19 @@ public final class XmlUtils {
      * @return the map of an element index with its ordered attribute names
      */
     public static Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
-        final Map<Integer, List<String>> map = new HashMap<>();
-        if (document instanceof DeferredDocumentImpl) {
-            final DeferredDocumentImpl deferredDocument = (DeferredDocumentImpl) document;
-            final int fNodeCount = getPrivate(deferredDocument, "fNodeCount");
-            for (int i = 0; i < fNodeCount; i++) {
-                final int type = deferredDocument.getNodeType(i, false);
-                if (type == Node.ELEMENT_NODE) {
-                    int attrIndex = deferredDocument.getNodeExtra(i, false);
-                    final List<String> attributes = new ArrayList<>();
-                    map.put(i, attributes);
-                    while (attrIndex != -1) {
-                        attributes.add(deferredDocument.getNodeName(attrIndex, false));
-                        attrIndex = deferredDocument.getPrevSibling(attrIndex, false);
-                    }
-                }
+        if (HelperXerces_ != null) {
+            final Map<Integer, List<String>> result = HelperXerces_.getAttributesOrderMap(document);
+            if (result != null) {
+                return result;
             }
         }
-        return map;
-    }
+        if (HelperSunXerces_ != null) {
+            final Map<Integer, List<String>> result = HelperSunXerces_.getAttributesOrderMap(document);
+            if (result != null) {
+                return result;
+            }
+        }
 
-    @SuppressWarnings("unchecked")
-    private static <T> T getPrivate(final Object object, final String fieldName) {
-        try {
-            final Field f = object.getClass().getDeclaredField(fieldName);
-            f.setAccessible(true);
-            return (T) f.get(object);
-        }
-        catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+        return new HashMap<Integer, List<String>>();
     }
 }

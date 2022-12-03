@@ -1133,6 +1133,12 @@
             <version>${htmlunitneko.version}</version>
         </dependency>
         <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>2.12.2</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit-cssparser</artifactId>
             <version>${htmlunitcssparser.version}</version>

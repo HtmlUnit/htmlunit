@@ -230,4 +230,24 @@ public class ArchitectureTest {
     public static final ArchRule android6Supplier = noClasses()
             .should().dependOnClassesThat().haveFullyQualifiedName(Supplier.class.getName());
 
+    /**
+     * Make sure to not use Xerces.
+     */
+    @ArchTest
+    public static final ArchRule xerces = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.util.XmlUtilsXercesHelper")
+        .should().dependOnClassesThat().resideInAnyPackage("org.apache.xerces..");
+
+
+    /**
+     * Make sure to not use jdk - Xerces.
+     */
+    @ArchTest
+    public static final ArchRule jdkXerces = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.util.XmlUtilsSunXercesHelper")
+        .should().dependOnClassesThat().resideInAnyPackage("com.sun.org.apache.xerces..");
 }
