@@ -24,7 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code GainNode}.
@@ -44,12 +43,7 @@ public class GainNode extends AudioNode {
     }
 
     @JsxConstructor
-    public void jsConstructor(final ScriptableObject baCtx) {
-        if (baCtx == null) {
-            super.jsConstructor();
-            return;
-        }
-
+    public void jsConstructor(final Object baCtx) {
         if (!(baCtx instanceof BaseAudioContext)) {
             throw ScriptRuntime.typeError(
                     "Failed to construct 'GainNode': first parameter is not of type 'BaseAudioContext'.");
@@ -58,6 +52,7 @@ public class GainNode extends AudioNode {
         final AudioParam node = new AudioParam();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
+        node.jsConstructor();
         gain_ = node;
     }
 

@@ -30,12 +30,7 @@ public class SourceBufferList extends EventTarget {
     /**
      * Creates an instance.
      */
-    public SourceBufferList() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SourceBufferList() {
     }
 }

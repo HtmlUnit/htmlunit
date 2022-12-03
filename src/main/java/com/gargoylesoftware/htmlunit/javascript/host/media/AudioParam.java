@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * A JavaScript object for {@code AudioParam}.
  *
@@ -42,7 +40,6 @@ public class AudioParam extends HtmlUnitScriptable {
      * Creates a new instance.
      */
     public AudioParam() {
-        value_ = getDefaultValue();
     }
 
     /**
@@ -50,7 +47,7 @@ public class AudioParam extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public void jsConstructor() {
-        throw ScriptRuntime.typeError("Illegal constructor.");
+        value_ = getDefaultValue();
     }
 
     /**

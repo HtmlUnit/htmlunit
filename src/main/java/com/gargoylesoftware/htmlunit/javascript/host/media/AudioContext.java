@@ -47,8 +47,13 @@ public class AudioContext extends BaseAudioContext {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public AudioContext() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**
@@ -98,6 +103,7 @@ public class AudioContext extends BaseAudioContext {
         final GainNode node = new GainNode();
         node.setParentScope(getParentScope());
         node.setPrototype(getPrototype(node.getClass()));
+        node.jsConstructor(this);
         return node;
     }
 }

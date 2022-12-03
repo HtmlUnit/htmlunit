@@ -31,8 +31,13 @@ public class MediaSource extends EventTarget {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public MediaSource() {
+    }
+
+    @Override
+    @JsxConstructor
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**
