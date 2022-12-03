@@ -34,12 +34,7 @@ public class IDBCursorWithValue extends IDBCursor {
     /**
      * Creates a new instance.
      */
-    public IDBCursorWithValue() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public IDBCursorWithValue() {
     }
 }

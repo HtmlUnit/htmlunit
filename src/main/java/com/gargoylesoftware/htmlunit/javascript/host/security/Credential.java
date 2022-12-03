@@ -23,8 +23,6 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * A JavaScript object for {@code Credential}.
  *
@@ -37,11 +35,7 @@ public class Credential extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    public Credential() {
-    }
-
     @JsxConstructor
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Illegal constructor.");
+    public Credential() {
     }
 }

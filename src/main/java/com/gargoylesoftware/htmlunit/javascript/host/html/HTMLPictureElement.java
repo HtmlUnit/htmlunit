@@ -35,12 +35,7 @@ public class HTMLPictureElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLPictureElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLPictureElement() {
     }
 }

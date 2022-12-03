@@ -37,13 +37,8 @@ public class HTMLTimeElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLTimeElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLTimeElement() {
     }
 
     /**
