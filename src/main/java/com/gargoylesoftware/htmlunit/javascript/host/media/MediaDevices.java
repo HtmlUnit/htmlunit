@@ -43,13 +43,8 @@ public class MediaDevices extends EventTarget {
     /**
      * Creates an instance.
      */
-    public MediaDevices() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public MediaDevices() {
     }
 
     @JsxFunction

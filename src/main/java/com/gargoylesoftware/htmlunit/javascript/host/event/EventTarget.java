@@ -40,7 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 
 /**
@@ -59,12 +58,8 @@ public class EventTarget extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
+    @JsxConstructor
     public EventTarget() {
-    }
-
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Illegal constructor.");
     }
 
     /**

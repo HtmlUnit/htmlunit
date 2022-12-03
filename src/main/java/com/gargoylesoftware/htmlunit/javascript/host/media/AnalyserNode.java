@@ -34,12 +34,7 @@ public class AnalyserNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public AnalyserNode() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public AnalyserNode() {
     }
 }

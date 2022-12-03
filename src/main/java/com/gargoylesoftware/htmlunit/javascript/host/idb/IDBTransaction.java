@@ -35,12 +35,7 @@ public class IDBTransaction extends EventTarget {
     /**
      * Creates a new instance.
      */
-    public IDBTransaction() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public IDBTransaction() {
     }
 }

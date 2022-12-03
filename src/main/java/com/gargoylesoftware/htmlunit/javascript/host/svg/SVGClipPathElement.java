@@ -47,12 +47,7 @@ public class SVGClipPathElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGClipPathElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGClipPathElement() {
     }
 }

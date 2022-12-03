@@ -52,12 +52,7 @@ public class SVGFEDisplacementMapElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEDisplacementMapElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFEDisplacementMapElement() {
     }
 }

@@ -42,13 +42,8 @@ public class HTMLFrameSetElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLFrameSetElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLFrameSetElement() {
     }
 
     /**

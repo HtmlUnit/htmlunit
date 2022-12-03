@@ -34,12 +34,7 @@ public class IDBOpenDBRequest extends IDBRequest {
     /**
      * Creates a new instance.
      */
-    public IDBOpenDBRequest() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public IDBOpenDBRequest() {
     }
 }

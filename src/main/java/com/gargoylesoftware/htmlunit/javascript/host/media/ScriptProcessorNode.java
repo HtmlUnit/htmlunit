@@ -34,12 +34,7 @@ public class ScriptProcessorNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public ScriptProcessorNode() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public ScriptProcessorNode() {
     }
 }

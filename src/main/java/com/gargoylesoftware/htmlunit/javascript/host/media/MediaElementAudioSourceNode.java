@@ -34,12 +34,7 @@ public class MediaElementAudioSourceNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public MediaElementAudioSourceNode() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public MediaElementAudioSourceNode() {
     }
 }

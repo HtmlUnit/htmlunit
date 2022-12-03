@@ -43,13 +43,8 @@ public class FontFaceSet extends EventTarget {
     /**
      * Creates an instance.
      */
-    public FontFaceSet() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public FontFaceSet() {
     }
 
     /**

@@ -55,13 +55,8 @@ public class HTMLHeadingElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLHeadingElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLHeadingElement() {
     }
 
     /**

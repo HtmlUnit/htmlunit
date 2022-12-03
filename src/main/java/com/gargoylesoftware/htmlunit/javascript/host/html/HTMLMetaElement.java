@@ -38,13 +38,8 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLMetaElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLMetaElement() {
     }
 
     /**

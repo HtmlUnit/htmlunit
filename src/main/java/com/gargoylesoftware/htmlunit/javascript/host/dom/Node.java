@@ -153,10 +153,9 @@ public class Node extends EventTarget {
     public Node() {
     }
 
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        super.jsConstructor();
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

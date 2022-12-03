@@ -56,13 +56,8 @@ public class HTMLLinkElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLLinkElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLLinkElement() {
     }
 
     /**

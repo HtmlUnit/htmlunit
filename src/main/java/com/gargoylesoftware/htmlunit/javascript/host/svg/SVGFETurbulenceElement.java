@@ -55,12 +55,7 @@ public class SVGFETurbulenceElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFETurbulenceElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFETurbulenceElement() {
     }
 }

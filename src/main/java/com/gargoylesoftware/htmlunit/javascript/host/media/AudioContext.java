@@ -47,13 +47,8 @@ public class AudioContext extends BaseAudioContext {
     /**
      * Creates an instance.
      */
-    public AudioContext() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public AudioContext() {
     }
 
     /**

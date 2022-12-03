@@ -58,13 +58,8 @@ public class CSSGroupingRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    public CSSGroupingRule() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public CSSGroupingRule() {
     }
 
     /**

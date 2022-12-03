@@ -34,12 +34,7 @@ public class CSSKeyframeRule extends CSSRule {
     /**
      * Default constructor.
      */
-    public CSSKeyframeRule() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public CSSKeyframeRule() {
     }
 }

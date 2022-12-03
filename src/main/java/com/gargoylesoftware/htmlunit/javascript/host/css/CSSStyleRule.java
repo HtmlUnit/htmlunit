@@ -48,13 +48,8 @@ public class CSSStyleRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    public CSSStyleRule() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public CSSStyleRule() {
     }
 
     /**

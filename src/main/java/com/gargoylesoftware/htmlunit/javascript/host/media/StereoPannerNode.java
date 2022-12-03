@@ -34,12 +34,7 @@ public class StereoPannerNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    public StereoPannerNode() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public StereoPannerNode() {
     }
 }

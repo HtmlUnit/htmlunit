@@ -34,12 +34,7 @@ public class CSSSupportsRule extends CSSConditionRule {
     /**
      * Creates a new instance.
      */
-    public CSSSupportsRule() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public CSSSupportsRule() {
     }
 }

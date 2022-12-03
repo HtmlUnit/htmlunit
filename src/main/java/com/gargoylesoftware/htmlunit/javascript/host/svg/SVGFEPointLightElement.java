@@ -35,12 +35,7 @@ public class SVGFEPointLightElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEPointLightElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFEPointLightElement() {
     }
 }

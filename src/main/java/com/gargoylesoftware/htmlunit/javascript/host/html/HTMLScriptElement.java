@@ -50,13 +50,8 @@ public class HTMLScriptElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLScriptElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLScriptElement() {
     }
 
     /**

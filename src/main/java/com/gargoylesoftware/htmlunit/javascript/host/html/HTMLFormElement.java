@@ -92,7 +92,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        super.jsConstructor();
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

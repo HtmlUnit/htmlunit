@@ -43,13 +43,8 @@ public class HTMLOutputElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLOutputElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLOutputElement() {
     }
 
     /**

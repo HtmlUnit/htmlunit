@@ -41,6 +41,7 @@ import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeJavaObject;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Wrapper;
@@ -66,7 +67,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        super.jsConstructor();
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
     /**
      * {@inheritDoc}

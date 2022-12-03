@@ -35,13 +35,8 @@ public class HTMLDListElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    public HTMLDListElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLDListElement() {
     }
 
 }

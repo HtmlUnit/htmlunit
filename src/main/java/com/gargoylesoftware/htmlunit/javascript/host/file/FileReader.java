@@ -78,13 +78,8 @@ public class FileReader extends EventTarget {
     /**
      * Creates an instance.
      */
-    public FileReader() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public FileReader() {
     }
 
     /**

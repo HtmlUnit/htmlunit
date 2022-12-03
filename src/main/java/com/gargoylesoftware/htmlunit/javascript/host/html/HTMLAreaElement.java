@@ -42,13 +42,8 @@ public class HTMLAreaElement extends HTMLElement {
     /**
      * The constructor.
      */
-    public HTMLAreaElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLAreaElement() {
     }
 
     /**

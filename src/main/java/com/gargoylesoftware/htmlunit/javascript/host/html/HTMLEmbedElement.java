@@ -37,13 +37,8 @@ public class HTMLEmbedElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLEmbedElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLEmbedElement() {
     }
 
     /**

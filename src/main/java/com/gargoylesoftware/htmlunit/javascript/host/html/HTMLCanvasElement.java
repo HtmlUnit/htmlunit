@@ -47,13 +47,8 @@ public class HTMLCanvasElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLCanvasElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLCanvasElement() {
     }
 
     /**

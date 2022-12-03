@@ -34,12 +34,8 @@ public class RadioNodeList extends NodeList {
     /**
      * Creates an instance.
      */
+    @JsxConstructor
     public RadioNodeList() {
     }
 
-    @Override
-    @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
-    }
 }

@@ -14,9 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.idb;
 
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -35,12 +32,7 @@ public class IDBMutableFile extends EventTarget {
     /**
      * Creates a new instance.
      */
+    @JsxConstructor
     public IDBMutableFile() {
-    }
-
-    @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
     }
 }

@@ -50,7 +50,7 @@ public class AudioProcessingEvent extends Event {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     @Override
-    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+    public void jsConstructor(final String type, final ScriptableObject details) {
         if (getBrowserVersion().hasFeature(JS_AUDIO_PROCESSING_EVENT_CTOR)) {
             if (details == null || Undefined.isUndefined(details)) {
                 throw ScriptRuntime.typeError("AudioProcessingEvent ctor requires two arguments");

@@ -38,13 +38,8 @@ public class HTMLMarqueeElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLMarqueeElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLMarqueeElement() {
     }
 
     /**

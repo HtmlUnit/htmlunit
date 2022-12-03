@@ -34,12 +34,7 @@ public class CSSCounterStyleRule extends CSSRule {
     /**
      * Creates a new instance.
      */
-    public CSSCounterStyleRule() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public CSSCounterStyleRule() {
     }
 }

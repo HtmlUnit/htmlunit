@@ -28,6 +28,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlSpan;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * The JavaScript object {@code HTMLSpanElement}.
  *
@@ -49,7 +51,7 @@ public class HTMLSpanElement extends HTMLElement {
     @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
-        super.jsConstructor();
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

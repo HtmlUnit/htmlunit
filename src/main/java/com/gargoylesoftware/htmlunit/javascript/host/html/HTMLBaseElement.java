@@ -39,13 +39,8 @@ public class HTMLBaseElement extends HTMLElement {
     /**
      * The constructor.
      */
-    public HTMLBaseElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLBaseElement() {
     }
 
     /**

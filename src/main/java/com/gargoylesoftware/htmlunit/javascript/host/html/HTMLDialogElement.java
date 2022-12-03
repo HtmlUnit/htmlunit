@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.html.HtmlDialog;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+
 /**
  * The JavaScript object {@code HTMLDialogElement}.
  *
@@ -41,6 +43,6 @@ public class HTMLDialogElement extends HTMLElement {
     @Override
     @JsxConstructor
     public void jsConstructor() {
-        super.jsConstructor();
+        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 }

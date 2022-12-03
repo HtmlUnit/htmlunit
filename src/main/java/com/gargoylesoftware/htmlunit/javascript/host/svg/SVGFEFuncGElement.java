@@ -35,12 +35,7 @@ public class SVGFEFuncGElement extends SVGComponentTransferFunctionElement {
     /**
      * Creates an instance.
      */
-    public SVGFEFuncGElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFEFuncGElement() {
     }
 }

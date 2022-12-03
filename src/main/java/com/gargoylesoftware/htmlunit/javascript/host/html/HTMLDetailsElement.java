@@ -39,13 +39,8 @@ public class HTMLDetailsElement extends HTMLElement {
     /**
      * Creates a new instance.
      */
-    public HTMLDetailsElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLDetailsElement() {
     }
 
     /**

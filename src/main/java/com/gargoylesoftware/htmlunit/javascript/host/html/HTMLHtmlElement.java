@@ -40,13 +40,8 @@ public class HTMLHtmlElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLHtmlElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLHtmlElement() {
     }
 
     /** {@inheritDoc} */

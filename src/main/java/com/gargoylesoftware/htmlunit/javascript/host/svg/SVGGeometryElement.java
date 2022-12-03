@@ -37,13 +37,8 @@ public class SVGGeometryElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGGeometryElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGGeometryElement() {
     }
 
     /**

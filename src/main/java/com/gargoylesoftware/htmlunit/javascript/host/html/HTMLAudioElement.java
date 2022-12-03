@@ -36,13 +36,8 @@ public class HTMLAudioElement extends HTMLMediaElement {
     /**
      * The constructor.
      */
-    public HTMLAudioElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLAudioElement() {
     }
 
     @Override

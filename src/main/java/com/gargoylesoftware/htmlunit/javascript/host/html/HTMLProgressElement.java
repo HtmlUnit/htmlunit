@@ -42,13 +42,8 @@ public class HTMLProgressElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLProgressElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLProgressElement() {
     }
 
     /**

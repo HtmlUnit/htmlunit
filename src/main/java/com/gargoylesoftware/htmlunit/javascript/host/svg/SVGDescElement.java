@@ -35,12 +35,7 @@ public class SVGDescElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGDescElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGDescElement() {
     }
 }

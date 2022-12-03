@@ -100,13 +100,8 @@ public class HTMLMediaElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLMediaElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLMediaElement() {
     }
 
     /**

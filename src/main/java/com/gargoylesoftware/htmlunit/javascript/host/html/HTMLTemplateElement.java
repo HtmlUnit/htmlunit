@@ -37,13 +37,8 @@ public class HTMLTemplateElement extends HTMLElement {
     /**
      * Creates a new instance.
      */
-    public HTMLTemplateElement() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLTemplateElement() {
     }
 
     /**

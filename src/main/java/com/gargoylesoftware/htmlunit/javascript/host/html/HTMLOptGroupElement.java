@@ -38,13 +38,8 @@ public class HTMLOptGroupElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLOptGroupElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLOptGroupElement() {
     }
 
     /**

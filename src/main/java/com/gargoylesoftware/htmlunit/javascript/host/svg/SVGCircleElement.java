@@ -35,12 +35,7 @@ public class SVGCircleElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGCircleElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGCircleElement() {
     }
 }

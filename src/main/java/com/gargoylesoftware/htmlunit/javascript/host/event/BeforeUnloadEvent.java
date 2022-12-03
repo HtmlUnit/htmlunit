@@ -28,7 +28,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -53,10 +53,12 @@ public class BeforeUnloadEvent extends Event {
         returnValue_ = "";
     }
 
-    @Override
+    /**
+     * The JavaScript constructor. It seems it is not possible to do it from JavaScript code.
+     */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
-        super.jsConstructor(type, details);
+    public void jsConstructor() {
+        Context.throwAsScriptRuntimeEx(new IllegalArgumentException("Illegal Constructor"));
     }
 
     /**

@@ -48,13 +48,8 @@ public class HTMLBodyElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLBodyElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLBodyElement() {
     }
 
     /**

@@ -45,7 +45,7 @@ public class BeforeInstallPromptEvent extends Event {
      */
     @JsxConstructor
     @Override
-    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
+    public void jsConstructor(final String type, final ScriptableObject details) {
         super.jsConstructor(type, details);
     }
 }

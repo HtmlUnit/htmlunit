@@ -36,13 +36,8 @@ public class AudioNode extends EventTarget {
     /**
      * Creates an instance.
      */
-    public AudioNode() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public AudioNode() {
     }
 
     /**

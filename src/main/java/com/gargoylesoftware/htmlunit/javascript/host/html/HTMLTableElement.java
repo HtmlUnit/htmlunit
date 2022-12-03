@@ -61,13 +61,8 @@ public class HTMLTableElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    public HTMLTableElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLTableElement() {
     }
 
     /**

@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * A JavaScript object for {@code CSSRule}.
  *
@@ -149,14 +147,10 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSRule() {
         stylesheet_ = null;
         rule_ = null;
-    }
-
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Illegal constructor.");
     }
 
     /**

@@ -35,12 +35,7 @@ public class SVGRectElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGRectElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGRectElement() {
     }
 }

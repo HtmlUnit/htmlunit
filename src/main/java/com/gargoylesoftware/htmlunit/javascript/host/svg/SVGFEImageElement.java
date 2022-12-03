@@ -35,12 +35,7 @@ public class SVGFEImageElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEImageElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFEImageElement() {
     }
 }

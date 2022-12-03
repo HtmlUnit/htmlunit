@@ -44,13 +44,8 @@ public class SVGElement extends Element {
     /**
      * Creates an instance.
      */
-    public SVGElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGElement() {
     }
 
     /**

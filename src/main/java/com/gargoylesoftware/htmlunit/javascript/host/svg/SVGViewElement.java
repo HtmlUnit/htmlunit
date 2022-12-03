@@ -46,12 +46,7 @@ public class SVGViewElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGViewElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGViewElement() {
     }
 }

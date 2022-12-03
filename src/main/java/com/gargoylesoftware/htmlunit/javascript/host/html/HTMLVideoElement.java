@@ -38,13 +38,8 @@ public class HTMLVideoElement extends HTMLMediaElement {
     /**
      * Creates an instance.
      */
-    public HTMLVideoElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLVideoElement() {
     }
 
     /**

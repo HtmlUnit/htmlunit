@@ -64,12 +64,7 @@ public class SVGMarkerElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMarkerElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGMarkerElement() {
     }
 }

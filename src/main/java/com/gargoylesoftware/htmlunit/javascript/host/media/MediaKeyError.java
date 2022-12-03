@@ -21,8 +21,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 /**
  * A JavaScript object for {@code MediaKeyError}.
  *
@@ -35,12 +33,7 @@ public class MediaKeyError extends Event {
     /**
      * Creates an instance.
      */
-    public MediaKeyError() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor(final ScriptableObject type, final ScriptableObject details) {
-        super.jsConstructor(type, details);
+    public MediaKeyError() {
     }
 }

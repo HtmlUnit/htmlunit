@@ -35,12 +35,7 @@ public class BroadcastChannel extends EventTarget {
     /**
      * Creates a new instance.
      */
-    public BroadcastChannel() {
-    }
-
-    @Override
     @JsxConstructor
-    public void jsConstructor() {
-        super.jsConstructor();
+    public BroadcastChannel() {
     }
 }

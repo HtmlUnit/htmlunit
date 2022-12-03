@@ -38,13 +38,8 @@ public class HTMLLegendElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLLegendElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLLegendElement() {
     }
 
     /**

@@ -53,12 +53,7 @@ public class SVGMaskElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGMaskElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGMaskElement() {
     }
 }

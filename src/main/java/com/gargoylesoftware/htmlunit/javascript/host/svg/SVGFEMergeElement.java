@@ -35,12 +35,7 @@ public class SVGFEMergeElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    public SVGFEMergeElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGFEMergeElement() {
     }
 }

@@ -46,13 +46,8 @@ public class SVGTextContentElement extends SVGGraphicsElement {
     /**
      * Creates an instance.
      */
-    public SVGTextContentElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGTextContentElement() {
     }
 
     /**

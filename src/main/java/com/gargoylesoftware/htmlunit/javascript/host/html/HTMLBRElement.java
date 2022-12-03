@@ -45,13 +45,8 @@ public class HTMLBRElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLBRElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public HTMLBRElement() {
     }
 
     /**

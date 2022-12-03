@@ -36,13 +36,8 @@ public class SVGPathElement extends SVGGeometryElement {
     /**
      * Creates an instance.
      */
-    public SVGPathElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        super.jsConstructor();
+    public SVGPathElement() {
     }
 
     /**
