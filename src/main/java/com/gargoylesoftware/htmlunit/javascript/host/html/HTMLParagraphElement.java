@@ -29,7 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * The JavaScript object {@code HTMLParagraphElement}.
@@ -47,13 +46,8 @@ public class HTMLParagraphElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLParagraphElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+    public HTMLParagraphElement() {
     }
 
     /**

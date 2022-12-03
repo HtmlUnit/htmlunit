@@ -150,12 +150,9 @@ public class Node extends EventTarget {
     /**
      * Creates an instance.
      */
-    public Node() {
-    }
-
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+    public Node() {
+        // Empty.
     }
 
     /**

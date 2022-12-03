@@ -115,14 +115,9 @@ public class Element extends Node {
     /**
      * Default constructor.
      */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public Element() {
         // Empty.
-    }
-
-    @Override
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
     }
 
     /**

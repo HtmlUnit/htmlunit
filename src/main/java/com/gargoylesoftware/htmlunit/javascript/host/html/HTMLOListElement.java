@@ -25,8 +25,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * The JavaScript object {@code HTMLOListElement}.
  *
@@ -39,13 +37,8 @@ public class HTMLOListElement extends HTMLListElement {
     /**
      * Creates an instance.
      */
-    public HTMLOListElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+    public HTMLOListElement() {
     }
 
     /**

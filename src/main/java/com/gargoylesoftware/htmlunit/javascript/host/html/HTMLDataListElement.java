@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * The JavaScript object {@code HTMLDataListElement}.
  *
@@ -45,13 +43,8 @@ public class HTMLDataListElement extends HTMLElement {
     /**
      * Creates an instance.
      */
-    public HTMLDataListElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+    public HTMLDataListElement() {
     }
 
     /**

@@ -29,8 +29,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-
 /**
  * A JavaScript object representing "HTMLTableSectionElement", it is used by
  * {@link HtmlTableBody}, {@link HtmlTableHeader}, and {@link HtmlTableFooter}.
@@ -53,13 +51,8 @@ public class HTMLTableSectionElement extends RowContainer {
     /**
      * Creates an instance.
      */
-    public HTMLTableSectionElement() {
-    }
-
-    @Override
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
-        throw ScriptRuntime.typeError("Invalid constructor.");
+    public HTMLTableSectionElement() {
     }
 
     /**
