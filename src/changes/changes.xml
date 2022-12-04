@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes, neko-html without xerces">
+            <action type="update" dev="rbri">
+                Upgrade Apache HttpComponents to 4.5.14.
+            </action>
             <action type="fix" dev="rbri" issue="238">
                 core-js: Constructor properties fixes.
             </action>
@@ -18,8 +21,7 @@
                 core-js: Descriptor of Function.length should be configurable.
             </action>
             <action type="fix" dev="rbri" issue="521">
-                neko: Use our own fork of neke to get rid of some classpath problems because of the xml-api
-                dependency of xerces.
+                neko: Use our own fork of xerces to get rid of some classpath problems because of the xml-api dependency.
             </action>
         </release>
 
