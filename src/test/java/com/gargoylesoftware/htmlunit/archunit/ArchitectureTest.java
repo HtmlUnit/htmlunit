@@ -230,7 +230,7 @@ public class ArchitectureTest {
     public static final ArchRule xerces = noClasses()
         .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.util.XmlUtilsXercesHelper")
+                    "com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.xerces..");
 
 
@@ -241,6 +241,6 @@ public class ArchitectureTest {
     public static final ArchRule jdkXerces = noClasses()
         .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.util.XmlUtilsSunXercesHelper")
+                    "com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("com.sun.org.apache.xerces..");
 }

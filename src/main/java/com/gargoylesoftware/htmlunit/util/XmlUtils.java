@@ -82,7 +82,7 @@ public final class XmlUtils {
     static {
         try {
             HelperSunXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("com.gargoylesoftware.htmlunit.util.XmlUtilsSunXercesHelper").newInstance();
+                    Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper").newInstance();
         }
         catch (final Exception e) {
             // ignore
@@ -90,7 +90,7 @@ public final class XmlUtils {
 
         try {
             HelperXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("com.gargoylesoftware.htmlunit.util.XmlUtilsXercesHelper").newInstance();
+                    Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
         }
         catch (final Exception e2) {
             // ignore
