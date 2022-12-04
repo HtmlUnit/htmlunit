@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -630,6 +631,7 @@ public class HTMLDocument extends Document {
         final HtmlPage page = getPage();
         final HTMLCollection elements = new HTMLCollection(page, true);
         elements.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
                 () -> new ArrayList<>(page.getElementsByName(elementName)));
 
         elements.setEffectOnCacheFunction(
@@ -698,6 +700,7 @@ public class HTMLDocument extends Document {
         };
 
         coll.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
                 () -> getItComputeElements(page, name, forIDAndOrName, alsoFrames));
 
         coll.setEffectOnCacheFunction(

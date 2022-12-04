@@ -26,8 +26,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -359,6 +361,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
     public NodeList getChildNodes() {
         final NodeList childNodes = new NodeList(htmlSelect_, false);
         childNodes.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
                 () -> {
                     final List<DomNode> response = new ArrayList<>();
                     for (final DomNode child : htmlSelect_.getChildren()) {

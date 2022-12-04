@@ -25,9 +25,11 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -276,6 +278,7 @@ public class HTMLCollection extends AbstractList implements Callable {
     public Object tags(final String tagName) {
         final HTMLCollection tags = new HTMLCollection(getDomNodeOrDie(), false);
         tags.setElementsSupplier(
+                (Supplier<List<DomNode>> & Serializable)
                 () -> {
                     final List<DomNode> list = new ArrayList<>();
                     for (final DomNode elem : this.getElements()) {

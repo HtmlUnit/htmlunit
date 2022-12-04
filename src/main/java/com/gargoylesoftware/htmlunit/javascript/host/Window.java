@@ -37,6 +37,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -108,7 +109,6 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.javascript.host.speech.SpeechSynthesis;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument;
-import com.gargoylesoftware.htmlunit.platform.SerializableSupplier;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
@@ -1453,7 +1453,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         final HTMLCollection coll = new HTMLCollection(page, true);
         coll.setElementsSupplier(
-                (SerializableSupplier<List<DomNode>>)
+                (Supplier<List<DomNode>> & Serializable)
                 () -> {
                     final List<DomElement> expElements = page.getElementsByName(expElementName);
                     final List<DomNode> result = new ArrayList<>(expElements.size());

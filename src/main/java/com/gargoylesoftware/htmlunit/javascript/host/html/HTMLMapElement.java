@@ -19,8 +19,10 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlArea;
@@ -58,6 +60,7 @@ public class HTMLMapElement extends HTMLElement {
             final HtmlMap map = (HtmlMap) getDomNodeOrDie();
             areas_ = new HTMLCollection(map, false);
             areas_.setElementsSupplier(
+                    (Supplier<List<DomNode>> & Serializable)
                     () -> {
                         final List<DomNode> list = new ArrayList<>();
                         for (final DomNode node : map.getChildElements()) {

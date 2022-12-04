@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import com.gargoylesoftware.htmlunit.html.DomChangeEvent;
 import com.gargoylesoftware.htmlunit.html.DomChangeListener;
@@ -32,7 +33,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.platform.SerializableSupplier;
 
 import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -75,7 +75,8 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     private Function<HtmlAttributeChangeEvent, EffectOnCache> effectOnCacheFunction_ =
             (Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable) event -> EffectOnCache.RESET;
     private Predicate<DomNode> isMatchingPredicate_ = (Predicate<DomNode> & Serializable) domNode -> false;
-    private SerializableSupplier<List<DomNode>> elementsSupplier_ =
+    private Supplier<List<DomNode>> elementsSupplier_ =
+            (Supplier<List<DomNode>> & Serializable)
                 () -> {
                     final List<DomNode> response = new ArrayList<>();
                     final DomNode domNode = getDomNodeOrNull();
@@ -152,7 +153,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     /**
      * @return elementSupplier
      */
-    protected SerializableSupplier<List<DomNode>> getElementSupplier() {
+    protected Supplier<List<DomNode>> getElementSupplier() {
         return elementsSupplier_;
     }
 
@@ -160,7 +161,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
      * Returns the elements whose associated host objects are available through this collection.
      * @param elementsSupplier the new supplier
      */
-    public void setElementsSupplier(final SerializableSupplier<List<DomNode>> elementsSupplier) {
+    public void setElementsSupplier(final Supplier<List<DomNode>> elementsSupplier) {
         if (elementsSupplier == null) {
             throw new NullPointerException("ElementsSupplier can't be null");
         }
