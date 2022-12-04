@@ -162,7 +162,7 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
+                    <excludePackageNames>netscape:netscape.*:com.gargoylesoftware.htmlunit.platform.util</excludePackageNames>
                 </configuration>
                 <executions>
                     <execution>
@@ -627,7 +627,7 @@
                     <doclint>html,missing,reference,syntax</doclint>
                     <detectLinks>true</detectLinks>
                     <detectJavaApiLink>true</detectJavaApiLink>
-                    <excludePackageNames>netscape:netscape.*</excludePackageNames>
+                    <excludePackageNames>netscape:netscape.*:com.gargoylesoftware.htmlunit.platform.util</excludePackageNames>
                 </configuration>
             </plugin>
             <plugin>

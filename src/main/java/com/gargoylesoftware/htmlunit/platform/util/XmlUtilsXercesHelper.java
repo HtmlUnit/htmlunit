@@ -12,18 +12,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.util;
+package com.gargoylesoftware.htmlunit.platform.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
-import com.sun.org.apache.xerces.internal.dom.DeferredNode;
+import org.apache.xerces.dom.DeferredDocumentImpl;
+import org.apache.xerces.dom.DeferredNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import com.gargoylesoftware.htmlunit.util.XmlUtilsHelperAPI;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -32,7 +34,7 @@ import org.w3c.dom.Node;
  *
  * @author Ronald Brill
  */
-public final class XmlUtilsSunXercesHelper implements XmlUtilsHelperAPI {
+public final class XmlUtilsXercesHelper implements XmlUtilsHelperAPI {
 
     // private static final Log LOG = LogFactory.getLog(XmlUtilsXerces.class);
 
