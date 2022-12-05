@@ -474,6 +474,68 @@ public class CookieManagerTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("first=1")
+    public void cookieMaxAge() throws Exception {
+        final List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=1000"));
+        responseHeader1.add(new NameValuePair("Set-Cookie", "second=2;max-age=-1"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first=1", ""})
+    public void cookieMaxAge_zeroDeletes() throws Exception {
+        List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=1000"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[0]);
+
+        responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=0"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[1]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"first=1", ""})
+    public void cookieMaxAge_negativeDeletes() throws Exception {
+        List<NameValuePair> responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=1000"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[0]);
+
+        responseHeader1 = new ArrayList<>();
+        responseHeader1.add(new NameValuePair("Set-Cookie", "first=1;max-age=-1"));
+        getMockWebConnection().setResponse(URL_FIRST, HTML_ALERT_COOKIE, 200, "OK", MimeType.TEXT_HTML,
+                responseHeader1);
+
+        loadPage2(URL_FIRST, StandardCharsets.ISO_8859_1);
+        verifyTitle2(getWebDriver(), getExpectedAlerts()[1]);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"", "dog=dalmation"})
     public void trailing_slash() throws Exception {
         final String[] expectedAlerts = getExpectedAlerts();
