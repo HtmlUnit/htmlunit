@@ -36,18 +36,19 @@ public interface XmlUtilsHelperAPI {
      * The id of the returned {@link Map} is the {@code nodeIndex} of an element, and the list
      * is the array of ordered attributes names.
      * @param document the document
-     * @return the map of an element index with its ordered attribute names
+     * @return the map of an element index with its ordered attribute names or null if the
+     * provided document is not supported
      */
     Map<Integer, List<String>> getAttributesOrderMap(Document document);
 
     /**
      * Helper.
      *
-     * @param namedNodeMap
-     * @param attributesOrderMap
-     * @param element
-     * @param requiredIndex
-     * @return the index
+     * @param namedNodeMap the node map
+     * @param attributesOrderMap the order map
+     * @param element the node
+     * @param requiredIndex the required index
+     * @return the index or -1 if the provided element is not supported
      */
     int getIndex(NamedNodeMap namedNodeMap, Map<Integer, List<String>> attributesOrderMap,
             Node element, int requiredIndex);
