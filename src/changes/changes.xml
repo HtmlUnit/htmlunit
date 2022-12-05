@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Bugfixes, neko-html without xerces">
+            <action type="fix" dev="rbri" issue="524">
+                Process cookies with negative max-age values to make sure the cookie store gets updated (in fact
+                this deletes an existing cookie).
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache HttpComponents to 4.5.14.
             </action>
