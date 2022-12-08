@@ -1764,9 +1764,6 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code max-width}. */
         MAX_WIDTH_("max-width", "max-width", ffNone()),
 
-        /** The style property {@code maxZoom}. */
-        MAX_ZOOM("maxZoom", "max-zoom", chromeAndEdgeEmpty()),
-
         /** The style property {@code minBlockSize}. */
         MIN_BLOCK_SIZE("minBlockSize", "min-block-size", ff("0px"), chromeAndEdge("0px")),
 
@@ -1790,9 +1787,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code min-width}. */
         MIN_WIDTH_("min-width", "min-width", ff("0px")),
-
-        /** The style property {@code minZoom}. */
-        MIN_ZOOM("minZoom", "min-zoom", chromeAndEdgeEmpty()),
 
         /** The style property {@code mixBlendMode}. */
         MIX_BLEND_MODE("mixBlendMode", "mix-blend-mode", ffNormal(), chromeAndEdgeNormal()),
@@ -2555,9 +2549,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code order}. */
         ORDER("order", "order", ff("0"), ie("0"), chromeAndEdge("0")),
-
-        /** The style property {@code orientation}. */
-        ORIENTATION("orientation", "orientation", chromeAndEdgeEmpty()),
 
         /** The style property {@code orphans}. */
         ORPHANS("orphans", "orphans", ie("2"), chromeAndEdge("2")),
@@ -3527,9 +3518,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code user-select}. */
         USER_SELECT_("user-select", "user-select", ff("auto")),
-
-        /** The style property {@code userZoom}. */
-        USER_ZOOM("userZoom", "user-zoom", chromeAndEdgeEmpty()),
 
         /** The style property {@code vectorEffect}. */
         VECTOR_EFFECT("vectorEffect", "vector-effect", ffNone(), chromeAndEdgeNone()),
