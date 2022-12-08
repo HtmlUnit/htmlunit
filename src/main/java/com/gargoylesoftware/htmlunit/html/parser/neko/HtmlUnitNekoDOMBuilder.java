@@ -772,7 +772,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private static boolean isSynthesized(final Augmentations augs) {
         final HTMLEventInfo info = (augs == null) ? null
-                : (HTMLEventInfo) augs.getItem(FEATURE_AUGMENTATIONS);
+                : (HTMLEventInfo) augs.get(FEATURE_AUGMENTATIONS);
         return info != null && info.isSynthesized();
     }
 
