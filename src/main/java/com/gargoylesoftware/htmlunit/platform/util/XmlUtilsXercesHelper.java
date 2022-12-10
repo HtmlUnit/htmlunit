@@ -25,7 +25,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import com.gargoylesoftware.htmlunit.util.XmlUtilsHelperAPI;
+import com.gargoylesoftware.htmlunit.platform.XmlUtilsHelperAPI;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

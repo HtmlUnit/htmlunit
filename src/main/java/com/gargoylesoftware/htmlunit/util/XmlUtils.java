@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -58,6 +57,7 @@ import com.gargoylesoftware.htmlunit.html.DomProcessingInstruction;
 import com.gargoylesoftware.htmlunit.html.DomText;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
 import com.gargoylesoftware.htmlunit.html.Html;
+import com.gargoylesoftware.htmlunit.platform.Platform;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 
 /**
@@ -75,27 +75,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 public final class XmlUtils {
 
     private static final Log LOG = LogFactory.getLog(XmlUtils.class);
-
-    private static XmlUtilsHelperAPI HelperXerces_;
-    private static XmlUtilsHelperAPI HelperSunXerces_;
-
-    static {
-        try {
-            HelperSunXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper").newInstance();
-        }
-        catch (final Exception e) {
-            // ignore
-        }
-
-        try {
-            HelperXerces_ = (XmlUtilsHelperAPI)
-                    Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
-        }
-        catch (final Exception e2) {
-            // ignore
-        }
-    }
 
     private static final ErrorHandler DISCARD_MESSAGES_HANDLER = new ErrorHandler() {
         /**
@@ -292,7 +271,7 @@ public final class XmlUtils {
 
         final Map<String, DomAttr> attributes = new LinkedHashMap<>();
         for (int i = 0; i < nodeAttributes.getLength(); i++) {
-            final int orderedIndex = getIndex(nodeAttributes, attributesOrderMap, source, i);
+            final int orderedIndex = Platform.getIndex(nodeAttributes, attributesOrderMap, source, i);
             final Attr attribute = (Attr) nodeAttributes.item(orderedIndex);
             final String attributeNamespaceURI = attribute.getNamespaceURI();
             final String attributeQualifiedName;
@@ -316,31 +295,13 @@ public final class XmlUtils {
         final AttributesImpl attributes = new AttributesImpl();
         final int length = attributesMap.getLength();
         for (int i = 0; i < length; i++) {
-            final int orderedIndex = getIndex(attributesMap, attributesOrderMap, element, i);
+            final int orderedIndex = Platform.getIndex(attributesMap, attributesOrderMap, element, i);
             final Node attr = attributesMap.item(orderedIndex);
             attributes.addAttribute(attr.getNamespaceURI(), attr.getLocalName(),
                 attr.getNodeName(), null, attr.getNodeValue());
         }
 
         return attributes;
-    }
-
-    private static int getIndex(final NamedNodeMap namedNodeMap, final Map<Integer, List<String>> attributesOrderMap,
-            final Node element, final int requiredIndex) {
-        if (HelperXerces_ != null) {
-            final int result = HelperXerces_.getIndex(namedNodeMap, attributesOrderMap, element, requiredIndex);
-            if (result != -1) {
-                return result;
-            }
-        }
-        if (HelperSunXerces_ != null) {
-            final int result = HelperSunXerces_.getIndex(namedNodeMap, attributesOrderMap, element, requiredIndex);
-            if (result != -1) {
-                return result;
-            }
-        }
-
-        return requiredIndex;
     }
 
     /**
@@ -446,19 +407,6 @@ public final class XmlUtils {
      * @return the map of an element index with its ordered attribute names
      */
     public static Map<Integer, List<String>> getAttributesOrderMap(final Document document) {
-        if (HelperXerces_ != null) {
-            final Map<Integer, List<String>> result = HelperXerces_.getAttributesOrderMap(document);
-            if (result != null) {
-                return result;
-            }
-        }
-        if (HelperSunXerces_ != null) {
-            final Map<Integer, List<String>> result = HelperSunXerces_.getAttributesOrderMap(document);
-            if (result != null) {
-                return result;
-            }
-        }
-
-        return new HashMap<Integer, List<String>>();
+        return Platform.getAttributesOrderMap(document);
     }
 }

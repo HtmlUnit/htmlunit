@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.util;
+package com.gargoylesoftware.htmlunit.platform;
 
 import java.lang.reflect.Field;
 import java.util.List;
