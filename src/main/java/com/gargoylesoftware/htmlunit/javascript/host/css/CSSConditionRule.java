@@ -40,8 +40,16 @@ public class CSSConditionRule extends CSSGroupingRule {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public CSSConditionRule() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 
     /**
