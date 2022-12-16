@@ -410,8 +410,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         DomNode parent = currentNode;
 
-        // If the new node is a table element and the current node isn't one search the stack for the
-        // correct parent.
+        // If the new node is a table element and the current node isn't one
+        // then search the stack for the correct parent.
         if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
             parent = findElementOnStack("tbody", "thead", "tfoot");
         }
@@ -431,7 +431,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         if (!"script".equals(newNodeName) // scripts are valid inside tables
                 && (
-                    ("table".equals(parentNodeName) && !isTableChild(newNodeName))
+                    ("table".equals(parentNodeName) && !isTablePart(newNodeName))
                         || (!"tr".equals(newNodeName)
                                 && ("thead".equals(parentNodeName)
                                         || "tbody".equals(parentNodeName)
@@ -502,6 +502,10 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private static boolean isTableCell(final String nodeName) {
         return "td".equals(nodeName) || "th".equals(nodeName);
+    }
+
+    private static boolean isTablePart(final String nodeName) {
+        return isTableCell(nodeName) || "tr".equals(nodeName) || isTableChild(nodeName);
     }
 
     /** {@inheritDoc} */
