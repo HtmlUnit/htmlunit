@@ -795,4 +795,67 @@ public class HTMLParser4Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
+                       "[object HTMLTableElement]", "[object HTMLTableSectionElement]"},
+            IE = {"1", "[object HTMLUnknownElement]", "undefined"})
+    public void tableInsideTemplate_addTBody() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var bodyChildren = document.getElementsByTagName('body')[0].childNodes;\n"
+            + "        log(bodyChildren.length);\n"
+            + "        log(bodyChildren[0]);\n"
+            + "        log(bodyChildren[0].content);\n"
+
+            + "        if(bodyChildren[0].content === undefined) { return; }"
+            + "        var table = bodyChildren[0].content.firstElementChild;\n"
+            + "        log(table);\n"
+            + "        log(table.firstChild);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><template><table><tr><td>42</td></tr></table></template></body>"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "[object HTMLTemplateElement]", "[object DocumentFragment]",
+                       "[object HTMLUListElement]"},
+            IE = {"1", "[object HTMLUnknownElement]", "undefined"})
+    public void tableInsideTemplate_addTBodyMoveUlOut() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var bodyChildren = document.getElementsByTagName('body')[0].childNodes;\n"
+            + "        log(bodyChildren.length);\n"
+            + "        log(bodyChildren[0]);\n"
+            + "        log(bodyChildren[0].content);\n"
+
+            + "        if(bodyChildren[0].content === undefined) { return; }"
+            + "        var ul = bodyChildren[0].content.firstElementChild;\n"
+            + "        log(ul);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'><template><table><ul></ul><tr><td>42</td></tr></table></template></body>"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
