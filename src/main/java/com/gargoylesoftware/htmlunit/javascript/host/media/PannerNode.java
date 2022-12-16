@@ -34,7 +34,15 @@ public class PannerNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public PannerNode() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor(final Object baCtx) {
+        super.jsConstructor(baCtx);
     }
 }

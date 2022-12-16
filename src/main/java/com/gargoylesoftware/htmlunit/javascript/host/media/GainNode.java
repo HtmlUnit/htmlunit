@@ -43,11 +43,9 @@ public class GainNode extends AudioNode {
     }
 
     @JsxConstructor
+    @Override
     public void jsConstructor(final Object baCtx) {
-        if (!(baCtx instanceof BaseAudioContext)) {
-            throw ScriptRuntime.typeError(
-                    "Failed to construct 'GainNode': first parameter is not of type 'BaseAudioContext'.");
-        }
+        super.jsConstructor(baCtx);
 
         final AudioParam node = new AudioParam();
         node.setParentScope(getParentScope());

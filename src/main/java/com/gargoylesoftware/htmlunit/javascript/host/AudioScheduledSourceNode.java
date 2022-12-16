@@ -34,7 +34,15 @@ public class AudioScheduledSourceNode extends AudioNode {
     /**
      * Creates a new instance.
      */
-    @JsxConstructor
     public AudioScheduledSourceNode() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor(final Object baCtx) {
+        super.jsConstructor(baCtx);
     }
 }

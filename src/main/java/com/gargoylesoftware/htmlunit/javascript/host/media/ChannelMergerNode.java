@@ -34,7 +34,15 @@ public class ChannelMergerNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public ChannelMergerNode() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor(final Object baCtx) {
+        super.jsConstructor(baCtx);
     }
 }

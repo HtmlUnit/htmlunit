@@ -25,6 +25,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 
 /**
  * A JavaScript object for {@code AudioNode}.
@@ -43,10 +44,15 @@ public class AudioNode extends EventTarget {
 
     /**
      * Creates an instance.
+     * @param baCtx the required audio context
      */
     @JsxConstructor
-    public void jsConstructor() {
-        throw Context.reportRuntimeError("Illegal constructor.");
+    public void jsConstructor(final Object baCtx) {
+        if (!(baCtx instanceof BaseAudioContext)) {
+            throw ScriptRuntime.typeError(
+                    "Failed to construct '" + getClass().getSimpleName()
+                        + "': first parameter is not of type 'BaseAudioContext'.");
+        }
     }
 
     /**

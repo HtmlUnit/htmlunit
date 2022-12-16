@@ -34,7 +34,15 @@ public class AudioDestinationNode extends AudioNode {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public AudioDestinationNode() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor(final Object baCtx) {
+        super.jsConstructor(baCtx);
     }
 }
