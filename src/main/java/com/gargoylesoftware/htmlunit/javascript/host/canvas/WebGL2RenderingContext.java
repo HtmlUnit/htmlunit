@@ -25,6 +25,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * A JavaScript object for {@code WebGL2RenderingContext}.
  *
@@ -2277,7 +2279,14 @@ public class WebGL2RenderingContext extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public WebGL2RenderingContext() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        throw Context.reportRuntimeError("Illegal constructor.");
     }
 }

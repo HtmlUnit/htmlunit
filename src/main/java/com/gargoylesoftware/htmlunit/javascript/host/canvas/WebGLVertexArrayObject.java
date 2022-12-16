@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * A JavaScript object for {@code WebGLVertexArrayObject}.
  *
@@ -34,7 +36,14 @@ public class WebGLVertexArrayObject extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public WebGLVertexArrayObject() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        throw Context.reportRuntimeError("Illegal constructor.");
     }
 }

@@ -23,6 +23,8 @@ import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+
 /**
  * A JavaScript object for {@code WebGLTransformFeedback}.
  *
@@ -34,7 +36,14 @@ public class WebGLTransformFeedback extends HtmlUnitScriptable {
     /**
      * Default constructor.
      */
-    @JsxConstructor
     public WebGLTransformFeedback() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    public void jsConstructor() {
+        throw Context.reportRuntimeError("Illegal constructor.");
     }
 }
