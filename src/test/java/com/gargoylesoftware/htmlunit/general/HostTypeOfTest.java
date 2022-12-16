@@ -5103,6 +5103,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("undefined")
+    public void speechRecognition() throws Exception {
+        test("SpeechRecognition");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
     public void speechRecognitionAlternative() throws Exception {
         test("SpeechRecognitionAlternative");
     }
