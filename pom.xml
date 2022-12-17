@@ -30,8 +30,8 @@
         <htmlunitcorejs.version>2.68.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitxpath.version>2.67.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.7.0</htmlunitdriver.version>
-        <selenium.version>4.7.0</selenium.version>
+        <htmlunitdriver.version>4.7.2</htmlunitdriver.version>
+        <selenium.version>4.7.2</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.50.v20221201</jetty.version>
@@ -42,7 +42,7 @@
         <spotbugs.version>4.7.3</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
         <archunit.version>1.0.1</archunit.version>
-        <dependencycheck.version>7.4.0</dependencycheck.version>
+        <dependencycheck.version>7.4.1</dependencycheck.version>
     </properties>
 
     <build>
