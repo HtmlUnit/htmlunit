@@ -44,8 +44,15 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public SubtleCrypto() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    public void jsConstructor() {
+        throw Context.reportRuntimeError("Illegal constructor.");
     }
 
     private Object notImplemented() {
@@ -88,6 +95,11 @@ public class SubtleCrypto extends HtmlUnitScriptable {
 
     @JsxFunction
     public Object deriveKey() {
+        return notImplemented();
+    }
+
+    @JsxFunction
+    public Object deriveBits() {
         return notImplemented();
     }
 

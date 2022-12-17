@@ -39,6 +39,35 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 public class SubtleCryptoTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "error"},
+            IE = {"object", "error"})
+    public void ctor() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+
+            + "    function test() {\n"
+            + "      try {\n"
+            + "        log(typeof SubtleCrypto);\n"
+            + "        new SubtleCrypto();\n"
+            + "      } catch(e) { log('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
      * Methods in SubtleCrypto should always wraps errors in a Promise and never throw directly.
      * @throws Exception if the test fails
      */

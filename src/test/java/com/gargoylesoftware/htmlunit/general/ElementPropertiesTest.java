@@ -47,6 +47,8 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
+import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
+import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
@@ -8082,5 +8084,30 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF_ESR = "addEventListener(),angle,dispatchEvent(),onchange,removeEventListener(),type")
     public void screenOrientation() throws Exception {
         testString("", "window.screen.orientation");
+    }
+
+    /**
+     * Test {@link Crypto}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "getRandomValues(),randomUUID(),subtle",
+            IE = "-")
+    public void crypto() throws Exception {
+        testString("", "window.crypto");
+    }
+
+    /**
+     * Test {@link SubtleCrypto}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "decrypt(),deriveBits(),deriveKey(),digest(),encrypt(),exportKey(),"
+                    + "generateKey(),importKey(),sign(),unwrapKey(),verify(),wrapKey()",
+            IE = "exception")
+    public void cryptoSubtle() throws Exception {
+        testString("", "window.crypto.subtle");
     }
 }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Chrome/Edge 108, Bugfixes, neko-html without xerces">
+            <action type="add" dev="rbri">
+                Crypto.randomUUID() added.
+            </action>
             <action type="fix" dev="rbri">
                 neko: Fix handling of parser inserted tbody tags inside templates.
             </action>
