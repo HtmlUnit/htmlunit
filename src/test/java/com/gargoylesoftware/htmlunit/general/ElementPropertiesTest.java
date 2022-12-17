@@ -50,6 +50,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -8109,5 +8110,36 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
+    }
+
+    /**
+     * Test {@link XPathResult}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "ANY_TYPE,ANY_UNORDERED_NODE_TYPE,BOOLEAN_TYPE,booleanValue,FIRST_ORDERED_NODE_TYPE,"
+                + "invalidIteratorState,iterateNext(),NUMBER_TYPE,numberValue,ORDERED_NODE_ITERATOR_TYPE,"
+                + "ORDERED_NODE_SNAPSHOT_TYPE,resultType,singleNodeValue,snapshotItem(),snapshotLength,STRING_TYPE,"
+                + "stringValue,UNORDERED_NODE_ITERATOR_TYPE,"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE",
+            EDGE = "ANY_TYPE,ANY_UNORDERED_NODE_TYPE,BOOLEAN_TYPE,booleanValue,FIRST_ORDERED_NODE_TYPE,"
+                + "invalidIteratorState,iterateNext(),NUMBER_TYPE,numberValue,ORDERED_NODE_ITERATOR_TYPE,"
+                + "ORDERED_NODE_SNAPSHOT_TYPE,resultType,singleNodeValue,snapshotItem(),snapshotLength,STRING_TYPE,"
+                + "stringValue,UNORDERED_NODE_ITERATOR_TYPE,"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE",
+            FF = "ANY_TYPE,ANY_UNORDERED_NODE_TYPE,BOOLEAN_TYPE,booleanValue,FIRST_ORDERED_NODE_TYPE,"
+                + "invalidIteratorState,iterateNext(),NUMBER_TYPE,numberValue,ORDERED_NODE_ITERATOR_TYPE,"
+                + "ORDERED_NODE_SNAPSHOT_TYPE,resultType,singleNodeValue,snapshotItem(),snapshotLength,STRING_TYPE,"
+                + "stringValue,UNORDERED_NODE_ITERATOR_TYPE,"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE",
+            FF_ESR = "ANY_TYPE,ANY_UNORDERED_NODE_TYPE,BOOLEAN_TYPE,booleanValue,FIRST_ORDERED_NODE_TYPE,"
+                + "invalidIteratorState,iterateNext(),NUMBER_TYPE,numberValue,ORDERED_NODE_ITERATOR_TYPE,"
+                + "ORDERED_NODE_SNAPSHOT_TYPE,resultType,singleNodeValue,snapshotItem(),snapshotLength,STRING_TYPE,"
+                + "stringValue,UNORDERED_NODE_ITERATOR_TYPE,"
+                + "UNORDERED_NODE_SNAPSHOT_TYPE",
+            IE = "exception")
+    public void xPathResult() throws Exception {
+        testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
     }
 }

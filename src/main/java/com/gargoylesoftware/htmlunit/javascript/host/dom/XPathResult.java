@@ -26,7 +26,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
@@ -122,7 +121,6 @@ public class XPathResult extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public XPathResult() {
     }
 
@@ -188,6 +186,16 @@ public class XPathResult extends HtmlUnitScriptable {
             return ((DomNode) result_.get(0)).getScriptableObject();
         }
         return null;
+    }
+
+    /**
+     * @return signifies that the iterator has become invalid.
+     * It is true if XPathResult.resultType is UNORDERED_NODE_ITERATOR_TYPE or
+     * ORDERED_NODE_ITERATOR_TYPE and the document has been modified since this result was returned.
+     */
+    @JsxGetter
+    public boolean getInvalidIteratorState() {
+        return false;
     }
 
     /**

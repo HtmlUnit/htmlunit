@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
 import com.gargoylesoftware.htmlunit.javascript.host.performance.Performance;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -12986,5 +12987,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     public void cryptoSubtle() throws Exception {
         testString("", "window.crypto.subtle");
+    }
+
+    /**
+     * Test {@link XPathResult}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception",
+            IE = "exception")
+    public void xPathResult() throws Exception {
+        testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
     }
 }
