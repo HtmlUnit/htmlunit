@@ -16,9 +16,6 @@ package com.gargoylesoftware.htmlunit.javascript.host.media;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -60,6 +57,40 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"function", "[object AudioContext]"},
+            IE = "AudioContext not available")
+    public void ctor() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+
+            + "    function test() {\n"
+            + "      if (!('AudioContext' in window)) {\n"
+            + "        log('AudioContext not available');\n"
+            + "        return;\n"
+            + "      }\n"
+
+            + "      try {\n"
+            + "        log(typeof AudioContext);\n"
+            + "        log(new AudioContext());\n"
+            + "      } catch(e) { log('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "[object AudioBufferSourceNode]",
             IE = "AudioContext not available")
     public void createBufferSource() throws Exception {
@@ -91,17 +122,14 @@ public class AudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available; ")
+    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
+            IE = "AudioContext not available")
     public void decodeAudioData() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function log(msg) {\n"
-            + "      var ta = document.getElementById('myTextArea');\n"
-            + "      ta.value += msg + '; ';\n"
-            + "    }\n"
+            + LOG_TEXTAREA_FUNCTION
 
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
@@ -120,31 +148,25 @@ public class AudioContextTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "AudioContext prep done; Error with decoding audio data; ",
-            IE = "AudioContext not available; ")
+    @Alerts(DEFAULT = {"AudioContext prep done", "Error with decoding audio data"},
+            IE = "AudioContext not available")
     public void decodeAudioData2() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function log(msg) {\n"
-            + "      var ta = document.getElementById('myTextArea');\n"
-            + "      ta.value += msg + '; ';\n"
-            + "    }\n"
+            + LOG_TEXTAREA_FUNCTION
 
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
@@ -163,31 +185,25 @@ public class AudioContextTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "1; -3.4028234663852886e+38; 3.4028234663852886e+38; 1; 0.5; ",
-            IE = "AudioContext not available; ")
+    @Alerts(DEFAULT = {"1", "-3.4028234663852886e+38", "3.4028234663852886e+38", "1", "0.5"},
+            IE = "AudioContext not available")
     public void createGain() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
-            + "    function log(msg) {\n"
-            + "      var ta = document.getElementById('myTextArea');\n"
-            + "      ta.value += msg + '; ';\n"
-            + "    }\n"
+            + LOG_TEXTAREA_FUNCTION
 
             + "    function test() {\n"
             + "      if (!('AudioContext' in window)) {\n"
@@ -208,13 +224,10 @@ public class AudioContextTest extends WebDriverTestCase {
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <textarea id='myTextArea' cols='80' rows='30'></textarea>\n"
+            + LOG_TEXTAREA
             + "</body>\n"
             + "</html>";
 
-        final WebDriver driver = loadPage2(html);
-
-        final WebElement textArea = driver.findElement(By.id("myTextArea"));
-        verifyAlerts(() -> textArea.getAttribute("value"), getExpectedAlerts()[0]);
+        loadPageVerifyTextArea2(html);
     }
 }

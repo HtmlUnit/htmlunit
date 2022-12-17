@@ -61,6 +61,7 @@ public class DocumentType extends Node {
     public void jsConstructor() {
         throw Context.reportRuntimeError("Illegal constructor.");
     }
+
     /**
      * Returns the name.
      * @return the name

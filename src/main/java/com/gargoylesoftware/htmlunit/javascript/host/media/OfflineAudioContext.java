@@ -23,6 +23,9 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 
+import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+
 /**
  * A JavaScript object for {@code OfflineAudioContext}.
  *
@@ -35,8 +38,18 @@ public class OfflineAudioContext extends BaseAudioContext {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public OfflineAudioContext() {
+    }
+
+    /**
+     * Creates an instance.
+     * @param optionsOrNumberOfChannels the input
+     */
+    @JsxConstructor
+    public void jsConstructor(final ScriptableObject optionsOrNumberOfChannels) {
+        if (optionsOrNumberOfChannels == null) {
+            throw Context.reportRuntimeError("Illegal constructor.");
+        }
     }
 
     /**

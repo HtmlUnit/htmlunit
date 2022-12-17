@@ -57,6 +57,40 @@ public class OfflineAudioContextTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"function", "error"},
+            IE = "OfflineAudioContext not available")
+    public void ctor() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TEXTAREA_FUNCTION
+
+            + "    function test() {\n"
+            + "      if (!('OfflineAudioContext' in window)) {\n"
+            + "        log('OfflineAudioContext not available');\n"
+            + "        return;\n"
+            + "      }\n"
+
+            + "      try {\n"
+            + "        log(typeof OfflineAudioContext);\n"
+            + "        log(new OfflineAudioContext());\n"
+            + "      } catch(e) { log('error'); }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + LOG_TEXTAREA
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function startRendering() { [native code] }",
             IE = "OfflineAudioContext not available")
     public void startRendering() throws Exception {
