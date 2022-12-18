@@ -469,8 +469,13 @@ public final class EncodingSniffer {
         }
 
         // this is was browsers do
-        if (charset != null && "GB2312".equals(charset.name())) {
-            return Charset.forName("GBK");
+        if (charset != null) {
+            if ("US-ASCII".equals(charset.name())) {
+                return Charset.forName("windows-1252");
+            }
+            if ("GB2312".equals(charset.name())) {
+                return Charset.forName("GBK");
+            }
         }
         return charset;
     }

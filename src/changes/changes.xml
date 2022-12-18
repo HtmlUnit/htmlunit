@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Chrome/Edge 108, Bugfixes, neko-html without xerces">
+            <action type="fix" dev="rbri" issue="525">
+                Browsers using windows-1252 if the content type header is charset=ascii.
+            </action>
             <action type="add" dev="rbri">
                 Crypto.randomUUID() added.
             </action>

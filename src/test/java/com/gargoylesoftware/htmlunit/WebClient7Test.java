@@ -143,6 +143,52 @@ public class WebClient7Test extends WebDriverTestCase {
         }
     }
 
+    private void contentEncoding(final boolean header,
+            final String charset,
+            final String responseEncodingCharset,
+            final String addHeader,
+            final String addHtml) throws Exception {
+        String html = "<html>\n"
+                + "<head><title>foo</title>\n";
+        if (!header) {
+            html += "  <meta http-equiv='Content-Type' content='text/html; charset=" + charset + "'>\n";
+        }
+        if (addHeader != null) {
+            html += addHeader + "\n";
+        }
+
+        html += "</head>\n"
+                + "<body>\n"
+                + addHtml + "\n"
+                + "</body></html>";
+
+        String firstResponse = "HTTP/1.1 200 OK\r\n"
+                + "Content-Length: " + html.length() + "\r\n"
+                + "Content-Type: text/html";
+        if (header) {
+            firstResponse += "; charset=" + charset;
+        }
+        firstResponse += "\r\n"
+                + "Connection: close\r\n"
+                + "\r\n" + html;
+
+        final String secondResponse = "HTTP/1.1 404 Not Found\r\n"
+                + "Content-Length: 0\r\n"
+                + "Connection: close\r\n"
+                + "\r\n";
+
+        shutDownAll();
+        try (PrimitiveWebServer primitiveWebServer =
+                new PrimitiveWebServer(Charset.forName(responseEncodingCharset), firstResponse, secondResponse)) {
+            final String url = "http://localhost:" + primitiveWebServer.getPort() + "/";
+            final WebDriver driver = getWebDriver();
+
+            driver.get(url);
+            final String content = driver.findElement(By.tagName("body")).getText();
+            assertEquals(getExpectedAlerts()[0], content);
+        }
+    }
+
     /**
      * @throws Exception if the test fails
      */
@@ -394,6 +440,24 @@ public class WebClient7Test extends WebDriverTestCase {
         framesetUrlEncoding("ISO_8859_1");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("!abcd\u20AC\u00F6\u00FF")
+    public void contentEncodingAscii() throws Exception {
+        contentEncoding(true, "ascii", "windows-1252", null, "!abcd\u20AC\u00F6\u00FF");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("!abcd???")
+    public void contentEncodingAsciiAscii() throws Exception {
+        contentEncoding(true, "ascii", "ascii", null, "!abcd\u20AC\u00F6\u00FF");
+    }
+
     private void anchorUrlEncoding(final boolean header, final String charset) throws Exception {
         urlEncoding(header, charset,
                 null,
@@ -543,10 +607,4 @@ public class WebClient7Test extends WebDriverTestCase {
             assertEquals(getExpectedAlerts()[0], reqUrl);
         }
     }
-
-//    HtmlApplet.java
-//    HtmlEmbed.java
-//    HtmlForm.java
-//    HtmlImageInput.java
-//    HtmlObject.java
 }
