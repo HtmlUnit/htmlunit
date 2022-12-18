@@ -34,7 +34,15 @@ public class SVGAnimationElement extends SVGElement {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public SVGAnimationElement() {
+    }
+
+    /**
+     * Creates an instance.
+     */
+    @JsxConstructor
+    @Override
+    public void jsConstructor() {
+        super.jsConstructor();
     }
 }
