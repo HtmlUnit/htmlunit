@@ -162,4 +162,12 @@ public class RecursiveFunctionObject extends FunctionObject {
         }
         return value;
     }
+
+    /**
+     * Make this public.
+     */
+    @Override
+    public Scriptable getClassPrototype() {
+        return super.getClassPrototype();
+    }
 }

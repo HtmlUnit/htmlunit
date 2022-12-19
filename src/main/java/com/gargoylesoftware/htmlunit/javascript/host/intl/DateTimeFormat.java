@@ -31,6 +31,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -274,7 +275,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         final Window window = getWindow(ctorObj);
         final DateTimeFormat format = new DateTimeFormat(locales, window.getBrowserVersion());
         format.setParentScope(window);
-        format.setPrototype(window.getPrototype(format.getClass()));
+        format.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
         return format;
     }
 

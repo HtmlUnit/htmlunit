@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
@@ -197,7 +198,7 @@ public class NumberFormat extends HtmlUnitScriptable {
         final Window window = getWindow(ctorObj);
         final NumberFormat format = new NumberFormat(locales, window.getBrowserVersion());
         format.setParentScope(window);
-        format.setPrototype(window.getPrototype(format.getClass()));
+        format.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
         return format;
     }
 
