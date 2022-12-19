@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
@@ -36,6 +37,32 @@ public class V8BreakIteratorTest extends WebDriverTestCase {
     private static final String LINE_ = "line";
     private static final String CHARACTER_ = "character";
     private static final String SENTENCE_ = "sentence";
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "no support",
+            CHROME = "true",
+            EDGE = "true")
+    public void v8BreakIterator() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html><head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    if (window.Intl && window.Intl.v8BreakIterator) {\n"
+                + "      var iterator = Intl.v8BreakIterator('en');\n"
+                + "      log(iterator instanceof Intl.v8BreakIterator);\n"
+                + "    } else { log('no support'); }\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 
     /**
      * @throws Exception if the test fails

@@ -21,13 +21,17 @@ import java.text.BreakIterator;
 import java.util.Locale;
 
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import com.gargoylesoftware.htmlunit.javascript.RecursiveFunctionObject;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
+import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.NativeObject;
+import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
@@ -50,44 +54,59 @@ public class V8BreakIterator extends HtmlUnitScriptable {
     }
 
     /**
-     * The JavaScript constructor, with optional parameters.
-     * @param locales the locales
-     * @param types the types, can be {@code character}, {@code word}, {@code sentence} or {@code line},
-     *        default is {@code word}
+     * JavaScript constructor.
+     * @param cx the current context
+     * @param args the arguments to the WebSocket constructor
+     * @param ctorObj the function object
+     * @param inNewExpr Is new or not
+     * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public V8BreakIterator(final Object locales, final Object types) {
+    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
+            final boolean inNewExpr) {
         Locale locale = new Locale("en", "US");
-        if (locales instanceof NativeArray) {
-            if (((NativeArray) locales).getLength() != 0) {
-                locale = new Locale(((NativeArray) locales).get(0).toString());
+        if (args.length != 0) {
+            final Object locales = args[0];
+            if (locales instanceof NativeArray) {
+                if (((NativeArray) locales).getLength() != 0) {
+                    locale = new Locale(((NativeArray) locales).get(0).toString());
+                }
             }
-        }
-        else if (locales instanceof String) {
-            locale = new Locale(locales.toString());
-        }
-        else if (!Undefined.isUndefined(locales)) {
-            throw Context.throwAsScriptRuntimeEx(new Exception("Unknown type " + locales.getClass().getName()));
+            else if (locales instanceof String) {
+                locale = new Locale(locales.toString());
+            }
+            else if (!Undefined.isUndefined(locales)) {
+                throw Context.throwAsScriptRuntimeEx(new Exception("Unknown type " + locales.getClass().getName()));
+            }
         }
 
-        if (types instanceof NativeObject) {
-            final Object obj = ((NativeObject) types).get("type", (NativeObject) types);
-            if ("character".equals(obj)) {
-                breakIterator_ = BreakIterator.getCharacterInstance(locale);
-                typeAlwaysNone_ = true;
-            }
-            else if ("line".equals(obj)) {
-                breakIterator_ = BreakIterator.getLineInstance(locale);
-                typeAlwaysNone_ = true;
-            }
-            else if ("sentence".equals(obj)) {
-                breakIterator_ = BreakIterator.getSentenceInstance(locale);
-                typeAlwaysNone_ = true;
+        final V8BreakIterator iterator = new V8BreakIterator();
+        if (args.length > 1) {
+            final Object types = args[1];
+            if (types instanceof NativeObject) {
+                final Object obj = ((NativeObject) types).get("type", (NativeObject) types);
+                if ("character".equals(obj)) {
+                    iterator.breakIterator_ = BreakIterator.getCharacterInstance(locale);
+                    iterator.typeAlwaysNone_ = true;
+                }
+                else if ("line".equals(obj)) {
+                    iterator.breakIterator_ = BreakIterator.getLineInstance(locale);
+                    iterator.typeAlwaysNone_ = true;
+                }
+                else if ("sentence".equals(obj)) {
+                    iterator.breakIterator_ = BreakIterator.getSentenceInstance(locale);
+                    iterator.typeAlwaysNone_ = true;
+                }
             }
         }
-        if (breakIterator_ == null) {
-            breakIterator_ = BreakIterator.getWordInstance(locale);
+        if (iterator.breakIterator_ == null) {
+            iterator.breakIterator_ = BreakIterator.getWordInstance(locale);
         }
+
+        final Window window = getWindow(ctorObj);
+        iterator.setParentScope(window);
+        iterator.setPrototype(((RecursiveFunctionObject) ctorObj).getClassPrototype());
+        return iterator;
     }
 
     /**
