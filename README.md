@@ -78,6 +78,7 @@ You can start here:
 * [The Java Web Scraping Handbook][8] A nice tutorial about webscraping with a lot of background information and details about HtmlUnit.
 * [Web Scraping][9] Examples how to implement web scraping using HtmlUnit, Selenium or jaunt and compares them.
 * [The Complete Guide to Web Scraping with Java][10] A small straightforward guide to web scraping with Java.
+* [How to test Jakarta Faces with HTMLUnit and Arquillian][11]
 
 ## Contributing
 Pull Requests and all other Community Contributions are essential for open source software.
@@ -156,3 +157,4 @@ This project is licensed under the Apache 2.0 License
 [8]: https://www.scrapingbee.com/java-webscraping-book/
 [9]: https://www.innoq.com/en/blog/webscraping/
 [10]: https://www.webscrapingapi.com/java-web-scraping/
+[11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
