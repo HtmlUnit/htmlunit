@@ -3358,10 +3358,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textEmphasisPosition}. */
         TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over"),
-                ff("over right")),
+                ffEsr("over right"), ffLatest("over")),
 
         /** The style property {@code text-emphasis-position}. */
-        TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position", ff("over right")),
+        TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position",
+                ffEsr("over right"), ffLatest("over")),
 
         /** The style property {@code textEmphasisStyle}. */
         TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", chromeAndEdgeNone(), ffNone()),
