@@ -51,6 +51,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "baz",
             CHROME = "",
             EDGE = "",
+            FF = "\n    baz\n  ",
             IE = "<foo>\n<bar>baz</bar>\n</foo>")
     @HtmlUnitNYI(CHROME = "baz",
             EDGE = "baz",

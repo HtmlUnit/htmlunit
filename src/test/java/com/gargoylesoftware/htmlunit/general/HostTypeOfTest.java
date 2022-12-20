@@ -3671,7 +3671,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiAccess() throws Exception {
         test("MIDIAccess");
     }
@@ -3682,7 +3683,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
@@ -3693,7 +3695,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiInput() throws Exception {
         test("MIDIInput");
     }
@@ -3704,7 +3707,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiInputMap() throws Exception {
         test("MIDIInputMap");
     }
@@ -3715,7 +3719,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiMessageEvent() throws Exception {
         test("MIDIMessageEvent");
     }
@@ -3726,7 +3731,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiOutput() throws Exception {
         test("MIDIOutput");
     }
@@ -3737,7 +3743,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiOutputMap() throws Exception {
         test("MIDIOutputMap");
     }
@@ -3748,7 +3755,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             CHROME = "function",
-            EDGE = "function")
+            EDGE = "function",
+            FF = "function")
     public void midiPort() throws Exception {
         test("MIDIPort");
     }

@@ -1307,15 +1307,12 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false",
-                       "false-false-false-false-false-false-false-false-false-false-true",
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
                        "true"},
-            CHROME = {"true",
-                      "false-false-false-false-false-false-false-false-false-true-false",
+            FF_ESR = {"false",
+                      "false-false-false-false-false-false-false-false-false-false-true",
                       "true"},
-            EDGE = {"true",
-                    "false-false-false-false-false-false-false-false-false-true-false",
-                    "true"},
             IE = {"false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
                   "true"})

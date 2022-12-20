@@ -110,7 +110,9 @@ public class Location2Test extends WebDriverTestCase {
             + "</html>";
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), html2);
-        loadPageVerifyTitle2(html1);
+
+        final WebDriver driver = loadPage2(html1);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
