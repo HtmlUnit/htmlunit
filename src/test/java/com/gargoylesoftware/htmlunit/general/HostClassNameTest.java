@@ -5715,7 +5715,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIAccess() { [native code] }",
-            EDGE = "function MIDIAccess() { [native code] }")
+            EDGE = "function MIDIAccess() { [native code] }",
+            FF = "function MIDIAccess() {\n    [native code]\n}")
     public void midiAccess() throws Exception {
         test("MIDIAccess");
     }
@@ -5726,7 +5727,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIConnectionEvent() { [native code] }",
-            EDGE = "function MIDIConnectionEvent() { [native code] }")
+            EDGE = "function MIDIConnectionEvent() { [native code] }",
+            FF = "function MIDIConnectionEvent() {\n    [native code]\n}")
     public void midiConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
@@ -5737,7 +5739,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIInput() { [native code] }",
-            EDGE = "function MIDIInput() { [native code] }")
+            EDGE = "function MIDIInput() { [native code] }",
+            FF = "function MIDIInput() {\n    [native code]\n}")
     public void midiInput() throws Exception {
         test("MIDIInput");
     }
@@ -5748,7 +5751,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIInputMap() { [native code] }",
-            EDGE = "function MIDIInputMap() { [native code] }")
+            EDGE = "function MIDIInputMap() { [native code] }",
+            FF = "function MIDIInputMap() {\n    [native code]\n}")
     public void midiInputMap() throws Exception {
         test("MIDIInputMap");
     }
@@ -5759,7 +5763,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIMessageEvent() { [native code] }",
-            EDGE = "function MIDIMessageEvent() { [native code] }")
+            EDGE = "function MIDIMessageEvent() { [native code] }",
+            FF = "function MIDIMessageEvent() {\n    [native code]\n}")
     public void midiMessageEvent() throws Exception {
         test("MIDIMessageEvent");
     }
@@ -5770,7 +5775,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIOutput() { [native code] }",
-            EDGE = "function MIDIOutput() { [native code] }")
+            EDGE = "function MIDIOutput() { [native code] }",
+            FF = "function MIDIOutput() {\n    [native code]\n}")
     public void midiOutput() throws Exception {
         test("MIDIOutput");
     }
@@ -5781,7 +5787,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIOutputMap() { [native code] }",
-            EDGE = "function MIDIOutputMap() { [native code] }")
+            EDGE = "function MIDIOutputMap() { [native code] }",
+            FF = "function MIDIOutputMap() {\n    [native code]\n}")
     public void midiOutputMap() throws Exception {
         test("MIDIOutputMap");
     }
@@ -5792,7 +5799,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function MIDIPort() { [native code] }",
-            EDGE = "function MIDIPort() { [native code] }")
+            EDGE = "function MIDIPort() { [native code] }",
+            FF = "function MIDIPort() {\n    [native code]\n}")
     public void midiPort() throws Exception {
         test("MIDIPort");
     }
