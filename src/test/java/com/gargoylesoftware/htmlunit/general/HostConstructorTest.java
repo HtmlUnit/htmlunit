@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
@@ -38,6 +39,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * @author Ronald Brill
  */
 @RunWith(BrowserParameterizedRunner.class)
+@Ignore("Work in progress")
 public class HostConstructorTest extends WebDriverTestCase {
 
     private static final HashSet<String> passing = new HashSet<>(Arrays.asList(

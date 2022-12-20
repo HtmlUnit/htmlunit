@@ -52,6 +52,7 @@
 
     <suppress checks="MethodName" files="CSSStyleSheet3Test.java"/>
     <suppress checks="MethodName" files="ElementClosesElementTest.java"/>
+    <suppress checks="MethodName" files="HostConstructorTest.java"/>
     <suppress checks="MethodName" files="HostParentOf.+Test.java"/>
     <suppress checks="MethodName" files="StyleAttributesIterableTest.java"/>
     <suppress checks="MethodName" files="HtmlScript3Test.java"/>
