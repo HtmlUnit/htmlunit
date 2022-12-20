@@ -30,6 +30,7 @@ import java.nio.charset.Charset;
  * @author Mike Bowler
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Michael Lueck
  */
 public class KeyDataPair extends NameValuePair {
 
@@ -158,5 +159,26 @@ public class KeyDataPair extends NameValuePair {
         if (charsetName != null) {
             charset_ = Charset.forName(charsetName);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * specialization of inherited method which will copy all fields
+     * and make sure that the value in the base class is not null, by calling
+     * the constructor with the current value
+     */
+    @Override
+    public KeyDataPair normalized() {
+        final KeyDataPair pair = new KeyDataPair(
+            this.getName(),
+            this.fileObject_ != null ? this.fileObject_ : new File(this.getValue()),
+            this.fileName_,
+            this.mimeType_,
+            this.charset_);
+        if (this.getData() != null) {
+            pair.setData(this.getData());
+        }
+        return pair;
     }
 }
