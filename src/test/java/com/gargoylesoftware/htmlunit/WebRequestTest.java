@@ -18,6 +18,7 @@ import static com.gargoylesoftware.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.io.File;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.junit.Test;
 
 import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
+import com.gargoylesoftware.htmlunit.util.KeyDataPair;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
@@ -40,6 +42,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Rodney Gitzel
  * @author Ronald Brill
  * @author Joerg Werner
+ * @author Michael Lueck
  */
 public class WebRequestTest {
 
@@ -424,5 +427,48 @@ public class WebRequestTest {
         request.setRequestBody("x=u");
 
         assertEquals(0, request.getRequestParameters().size());
+    }
+
+    @Test
+    public void getParametersShouldNotModifyAlreadyNormalizedRequestParams() throws Exception {
+        final WebRequest request = new WebRequest(new URL("http://localhost/test"));
+        request.setHttpMethod(HttpMethod.POST);
+        request.setEncodingType(FormEncodingType.MULTIPART);
+
+        final List<NameValuePair> requestParams = new ArrayList<NameValuePair>();
+        requestParams.add(new NameValuePair("test", "x"));
+        requestParams.add(new KeyDataPair("file",
+                                          new File("test"),
+                                          "test",
+                                          "application/octet-stream",
+                                          StandardCharsets.UTF_8));
+        request.setRequestParameters(requestParams);
+
+        //check that the result of getParams is equal to the requestParams after "normalization"
+        assertEquals(requestParams, request.getParameters());
+    }
+
+    @Test
+    public void getParametersShouldNormalizeMultiPartRequestParams() throws Exception {
+        final WebRequest request = new WebRequest(new URL("http://localhost/test"));
+        request.setHttpMethod(HttpMethod.POST);
+        request.setEncodingType(FormEncodingType.MULTIPART);
+
+        final List<NameValuePair> requestParams = new ArrayList<>();
+        requestParams.add(new NameValuePair("test", null));
+        requestParams.add(new KeyDataPair("file", null, null, null, StandardCharsets.UTF_8));
+        request.setRequestParameters(requestParams);
+
+        final List<NameValuePair> expectedResults = new ArrayList<>();
+        expectedResults.add(new NameValuePair("test", ""));
+        // the constructor of the KeyDataPair already creates normalized object
+        // where the value is set to empty string if the passed file is null.
+        expectedResults.add(new KeyDataPair("file", null, null, null, StandardCharsets.UTF_8));
+
+        final List<NameValuePair> normalizedParams = request.getParameters();
+        assertEquals(expectedResults, normalizedParams);
+
+        // check that the value of the KeyDataPair is really normalized to empty string
+        assertEquals("", normalizedParams.get(1).getValue());
     }
 }

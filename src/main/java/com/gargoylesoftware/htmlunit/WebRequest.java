@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  * @author Adam Afeltowicz
  * @author Joerg Werner
+ * @author Michael Lueck
  */
 public class WebRequest implements Serializable {
 
@@ -378,11 +379,7 @@ public class WebRequest implements Serializable {
 
         final List<NameValuePair> resultingPairs = new ArrayList<>();
         for (final NameValuePair pair : pairs) {
-            String value = pair.getValue();
-            if (value == null) {
-                value = "";
-            }
-            resultingPairs.add(new NameValuePair(pair.getName(), value));
+            resultingPairs.add(pair.normalized());
         }
 
         return resultingPairs;
