@@ -55,6 +55,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
             IE = "<foo>\n<bar>baz</bar>\n</foo>")
     @HtmlUnitNYI(CHROME = "baz",
             EDGE = "baz",
+            FF = "baz",
             IE = "baz")
     public void xmlPage() throws Exception {
         final String xml = "<xml>\n"
