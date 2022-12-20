@@ -1316,10 +1316,28 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             IE = {"false",
                   "undefined-false-false-false-false-false-false-undefined-false-false-true",
                   "true"})
-    @HtmlUnitNYI(CHROME = {"false", "false-false-false-false-false-false-false-false-false-false-true", "true"},
-            EDGE = {"false", "false-false-false-false-false-false-false-false-false-false-true", "true"})
+    @HtmlUnitNYI(FF_ESR = {"true",
+                           "false-false-false-false-false-false-false-false-false-true-false",
+                           "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
     public void validationRequired() throws Exception {
         validation("<input type='radio' id='e1' required>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false",
+                       "false-false-false-false-false-false-false-false-false-false-true",
+                       "true"},
+            IE = {"false",
+                  "undefined-false-false-false-false-false-false-undefined-false-false-true",
+                  "true"})
+    public void validationRequiredWithName() throws Exception {
+        validation("<input type='radio' id='e1' name='r1' required>\n", "");
     }
 
     /**
@@ -1346,8 +1364,36 @@ public class HtmlRadioButtonInput2Test extends WebDriverTestCase {
             IE = {"true",
                   "undefined-false-false-false-false-false-false-undefined-false-true-false",
                   "true"})
+    public void validationRequiredCheckedWithName() throws Exception {
+        validation("<input type='radio' id='e1' name='r1' required checked>\n", "");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
     public void validationRequiredClicked() throws Exception {
         validation("<input type='radio' id='e1' required>\n", "elem.click();");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true"},
+            IE = {"true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true"})
+    public void validationRequiredClickedWithName() throws Exception {
+        validation("<input type='radio' id='e1' name='r1' required>\n", "elem.click();");
     }
 
     /**

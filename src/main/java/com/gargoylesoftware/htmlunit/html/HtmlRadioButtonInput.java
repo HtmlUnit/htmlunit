@@ -309,7 +309,7 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
             return false;
         }
         if (ATTRIBUTE_NOT_DEFINED == getNameAttribute()) {
-            return !isChecked();
+            return false;
         }
 
         final String name = getNameAttribute();
