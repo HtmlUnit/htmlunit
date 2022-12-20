@@ -314,6 +314,36 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <ul id='something'></ul>\n"
             + "  <p></p>\n"
             + "  <ul id='thing1'></ul>\n"
+            + "  <ul id='tHIng2'></ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "thing1", "tHIng2"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"2", "thing1", "tHIng2"})
+    public void prefixAttributeCaseInSensitive() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[id^=\"thing\" i]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing1'></ul>\n"
+            + "  <ul id='tHIng2'></ul>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
@@ -366,6 +396,36 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "  <div></div>\n"
             + "  <ul id='something'></ul>\n"
+            + "  <ul id='AnyThinG'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thing2'></ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "something", "AnyThinG"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"2", "something", "AnyThinG"})
+    public void suffixAttributeCaseInSensitive() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[id$=\"thing\" I]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='something'></ul>\n"
+            + "  <ul id='AnyThinG'></ul>\n"
             + "  <p></p>\n"
             + "  <ul id='thing2'></ul>\n"
             + "</body></html>";
@@ -432,6 +492,34 @@ public class CSSSelectorTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"2", "sometHIng", "thinG2"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"2", "sometHIng", "thinG2"})
+    public void substringAttributeInSensitive() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[id*=\"thin\" i ]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='sometHIng'></ul>\n"
+            + "  <p></p>\n"
+            + "  <ul id='thinG2'></ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts("0")
     public void substringAttributeEmpty() throws Exception {
         final String html = "<html><head>\n"
@@ -477,6 +565,35 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <div></div>\n"
             + "  <ul id='id1' title='w1 w2 w3'></ul>\n"
             + "  <p id='id2' title='w2'></p>\n"
+            + "  <ul id='id3' title='w1w2 w3'></ul>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "id1", "id2"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"2", "id1", "id2"})
+    public void oneOfAttributeInSensitive() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[title~=\"W2\"i]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].id);\n"
+            + "  log(list[1].id);\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='w1 w2 w3'></ul>\n"
+            + "  <p id='id2' title='W2'></p>\n"
             + "  <ul id='id3' title='w1w2 w3'></ul>\n"
             + "</body></html>";
 
@@ -563,6 +680,44 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "  <p id='id5' title='abc- def'></p>\n"
             + "  <p id='id6' title='abc-def gh'></p>\n"
             + "  <p id='id7' title='abc-def-gh'></p>\n"
+            + "  <p id='id8' title='xabc'></p>\n"
+            + "  <ul id='id9' title='abcd'></ul>\n"
+            + "  <p id='id10' title='abc def'></p>\n"
+            + "  <p id='id11' title=' abc-def gh'></p>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"5", "id1", "id2", "id5", "id6", "id7"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"5", "id1", "id2", "id5", "id6", "id7"})
+    public void hyphenSeparatedAttributeValueInSensitive() throws Exception {
+        final String html = "<html><head>\n"
+            + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('[title|=\"Abc\" i]');\n"
+            + "  log(list.length);\n"
+            + "  for (var i = 0 ; i < list.length; i++) {\n"
+            + "    log(list[i].id);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div></div>\n"
+            + "  <ul id='id1' title='abc'></ul>\n"
+            + "  <p id='id2' title='abc-def'></p>\n"
+            + "  <p id='id3' title='x-aBc-def'></p>\n"
+            + "  <p id='id4' title='abc -def'></p>\n"
+            + "  <p id='id5' title='aBc- def'></p>\n"
+            + "  <p id='id6' title='abc-def gh'></p>\n"
+            + "  <p id='id7' title='abC-def-gh'></p>\n"
             + "  <p id='id8' title='xabc'></p>\n"
             + "  <ul id='id9' title='abcd'></ul>\n"
             + "  <p id='id10' title='abc def'></p>\n"

@@ -69,6 +69,7 @@ import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.LexicalUnit;
+import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
@@ -570,39 +571,69 @@ public class CssStyleSheet implements Serializable {
                 return selectsWhitespaceSeparated(v3, a3);
 
             case ATTRIBUTE_CONDITION:
-                String value = condition.getValue();
+                final AttributeCondition attributeCondition = (AttributeCondition) condition;
+                String value = attributeCondition.getValue();
                 if (value != null) {
                     if (value.indexOf('\\') > -1) {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
-                    final String attrValue = element.getAttribute(condition.getLocalName());
+                    final String attrValue = element.getAttribute(attributeCondition.getLocalName());
+                    if (attributeCondition.isCaseInSensitive()) {
+                        return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equalsIgnoreCase(value);
+                    }
                     return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
                 }
                 return element.hasAttribute(condition.getLocalName());
 
             case PREFIX_ATTRIBUTE_CONDITION:
-                final String prefixValue = condition.getValue();
+                final AttributeCondition prefixAttributeCondition = (AttributeCondition) condition;
+                final String prefixValue = prefixAttributeCondition.getValue();
+                if (prefixAttributeCondition.isCaseInSensitive()) {
+                    return !"".equals(prefixValue)
+                            && StringUtils.startsWithIgnoreCase(
+                                    element.getAttribute(prefixAttributeCondition.getLocalName()), prefixValue);
+                }
                 return !"".equals(prefixValue)
-                        && element.getAttribute(condition.getLocalName()).startsWith(prefixValue);
+                        && element.getAttribute(prefixAttributeCondition.getLocalName()).startsWith(prefixValue);
 
             case SUFFIX_ATTRIBUTE_CONDITION:
-                final String suffixValue = condition.getValue();
+                final AttributeCondition suffixAttributeCondition = (AttributeCondition) condition;
+                final String suffixValue = suffixAttributeCondition.getValue();
+                if (suffixAttributeCondition.isCaseInSensitive()) {
+                    return !"".equals(suffixValue)
+                            && StringUtils.endsWithIgnoreCase(
+                                    element.getAttribute(suffixAttributeCondition.getLocalName()), suffixValue);
+                }
                 return !"".equals(suffixValue)
-                        && element.getAttribute(condition.getLocalName()).endsWith(suffixValue);
+                        && element.getAttribute(suffixAttributeCondition.getLocalName()).endsWith(suffixValue);
 
             case SUBSTRING_ATTRIBUTE_CONDITION:
-                final String substringValue = condition.getValue();
+                final AttributeCondition substringAttributeCondition = (AttributeCondition) condition;
+                final String substringValue = substringAttributeCondition.getValue();
+                if (substringAttributeCondition.isCaseInSensitive()) {
+                    return !"".equals(substringValue)
+                            && StringUtils.containsIgnoreCase(
+                                    element.getAttribute(substringAttributeCondition.getLocalName()), substringValue);
+                }
                 return !"".equals(substringValue)
-                        && element.getAttribute(condition.getLocalName()).contains(substringValue);
+                        && element.getAttribute(substringAttributeCondition.getLocalName()).contains(substringValue);
 
             case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-                final String v = condition.getValue();
-                final String a = element.getAttribute(condition.getLocalName());
+                final AttributeCondition beginHyphenAttributeCondition = (AttributeCondition) condition;
+                final String v = beginHyphenAttributeCondition.getValue();
+                final String a = element.getAttribute(beginHyphenAttributeCondition.getLocalName());
+                if (beginHyphenAttributeCondition.isCaseInSensitive()) {
+                    return selectsHyphenSeparated(StringUtils.toRootLowerCase(v), StringUtils.toRootLowerCase(a));
+                }
                 return selectsHyphenSeparated(v, a);
 
             case ONE_OF_ATTRIBUTE_CONDITION:
-                final String v2 = condition.getValue();
-                final String a2 = element.getAttribute(condition.getLocalName());
+                final AttributeCondition oneOfAttributeCondition = (AttributeCondition) condition;
+                final String v2 = oneOfAttributeCondition.getValue();
+                final String a2 = element.getAttribute(oneOfAttributeCondition.getLocalName());
+                if (oneOfAttributeCondition.isCaseInSensitive()) {
+                    return selectsOneOf(StringUtils.toRootLowerCase(v2), StringUtils.toRootLowerCase(a2));
+                }
                 return selectsOneOf(v2, a2);
 
             case LANG_CONDITION:
