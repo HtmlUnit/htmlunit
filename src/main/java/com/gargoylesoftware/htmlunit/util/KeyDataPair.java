@@ -75,7 +75,7 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
-     * private copy constructor
+     * Private constructor setting plain properties.
      *
      * @param name will passed as name to the super constructor
      * @param value will be passed as value to the super constructor
