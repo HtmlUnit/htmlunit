@@ -33,7 +33,7 @@ public class HTMLParser5Test extends WebDriverTestCase {
             "inputs=document.getElementsByTagName('input');for(i=0;i<inputs.length;i++){f=inputs[i].form;log(f?f.name:null)}";
 
     @Test
-    @Alerts("f1§f1") // FIXME: expected: f1§f2
+    @Alerts("f1§f2")
     public void formEnclosure_table() throws Exception {
         final String[] html = {
                 "<html><body>",
@@ -55,7 +55,7 @@ public class HTMLParser5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("f1§f1") // FIXME: expected: f1§f2
+    @Alerts("f1§f2")
     public void formEnclosure_div() throws Exception {
         final String[] html = {
                 "<html><body>",
@@ -141,7 +141,7 @@ public class HTMLParser5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("f1§f1§f1§f1§f1§f1§f1") // FIXME: expected: f1§f1§f1§f1§f1§null
+    @Alerts("f1§f1§f1§f1§f1§f1§null")
     public void formEnclosure_tree1() throws Exception {
         final String[] html = {
                 "<html><body>",
@@ -168,7 +168,7 @@ public class HTMLParser5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("f1§f1§f1§f2§f2§f2§f2§f2") // FIXME: expected: f1§f1§f1§f2§f2§f2§f1§null
+    @Alerts("f1§f1§f1§f2§f2§f2§f1§null")
     public void formEnclosure_tree2() throws Exception {
         final String[] html = {
                 "<html><body>",
@@ -196,7 +196,7 @@ public class HTMLParser5Test extends WebDriverTestCase {
     }
 
     @Test
-    @Alerts("f1§f1") // FIXME: expected: f1§null
+    @Alerts("f1§null")
     public void formEnclosure_tree3() throws Exception {
         final String[] html = {
                 "<html><body>",
