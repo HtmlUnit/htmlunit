@@ -81,6 +81,30 @@ public class KeyDataPair extends NameValuePair {
     }
 
     /**
+     * private copy constructor
+     *
+     * @param name will passed as name to the super constructor
+     * @param value will be passed as value to the super constructor
+     * @param file the file, may be null
+     * @param fileName, the filename, may be null
+     * @param mimeType, the mimetype, may be null
+     * @param charset, the charset, may be null
+     */
+    private KeyDataPair(final String name, final String value, final File file,
+              final String fileName, final String mimeType, final Charset charset,
+              final byte[] data) {
+        super(name, value);
+
+        fileObject_ = file;
+        fileName_ = fileName;
+
+        mimeType_ = mimeType;
+        charset_ = charset;
+
+        data_ = data;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -170,15 +194,13 @@ public class KeyDataPair extends NameValuePair {
      */
     @Override
     public KeyDataPair normalized() {
-        final KeyDataPair pair = new KeyDataPair(
+        return new KeyDataPair(
             this.getName(),
-            this.fileObject_ != null ? this.fileObject_ : new File(this.getValue()),
+            this.getValue(),
+            this.fileObject_,
             this.fileName_,
             this.mimeType_,
-            this.charset_);
-        if (this.getData() != null) {
-            pair.setData(this.getData());
-        }
-        return pair;
+            this.charset_,
+            this.data_);
     }
 }
