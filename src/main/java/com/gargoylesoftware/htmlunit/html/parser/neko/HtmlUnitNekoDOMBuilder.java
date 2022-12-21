@@ -182,7 +182,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private HtmlUnitNekoDOMBuilder.HeadParsed headParsed_ = HeadParsed.NO;
     private HtmlElement body_;
     private boolean lastTagWasSynthesized_;
-    private HtmlForm formWaitingForLostChildren_;
+    private HtmlForm consumingForm_;
+    private boolean formEndingIsAdjusting_;
     private boolean insideSvg_;
 
     private static final String FEATURE_AUGMENTATIONS = "http://cyberneko.org/html/features/augmentations";
@@ -336,12 +337,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             oldBody = (HtmlBody) page_.getBody();
         }
 
-        // Need to reset this at each starting form tag because it could be set from a synthesized
-        // end tag.
-        if ("form".equals(tagLower)) {
-            formWaitingForLostChildren_ = null;
-        }
-
         // Add the new node.
         if (!(page_ instanceof XHtmlPage) && Html.XHTML_NAMESPACE.equals(namespaceURI)) {
             namespaceURI = null;
@@ -358,6 +353,21 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // parse can't replace everything as it does not buffer elements while parsing
         addNodeToRightParent(currentNode_, newElement);
 
+        // Forms own elements simply by enclosing source-wise rather than DOM parent-child relationship
+        // Forms without a </form> will keep consuming forever
+        if ("form".equals(tagLower)) {
+            consumingForm_ = (HtmlForm) newElement;
+            formEndingIsAdjusting_ = false;
+        }
+        else if (consumingForm_ != null) {
+            // If the current form enclosed a suitable element
+            if (newElement instanceof SubmittableElement) {
+                // Let these be owned by the form
+                if (((HtmlElement) newElement).getEnclosingForm() != consumingForm_) {
+                    consumingForm_.addLostChild((HtmlElement) newElement);
+                }
+            }
+        }
         if ("svg".equals(tagLower)) {
             insideSvg_ = true;
         }
@@ -422,11 +432,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             parent = findElementOnStack("tr");
         }
 
-        // If the parent changed and the old parent was a form it is now waiting for lost children.
-        if (parent != currentNode && "form".equals(currentNodeName)) {
-            formWaitingForLostChildren_ = (HtmlForm) currentNode;
-        }
-
         final String parentNodeName = parent.getNodeName();
 
         if (!"script".equals(newNodeName) // scripts are valid inside tables
@@ -438,38 +443,13 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                                         || "tfoot".equals(parentNodeName)))
                         || ("colgroup".equals(parentNodeName) && !"col".equals(newNodeName))
                         || ("tr".equals(parentNodeName) && !isTableCell(newNodeName)))) {
-            // If its a form or submitable just add it even though the resulting DOM is incorrect.
-            // Otherwise insert the element before the table.
-            if ("form".equals(newNodeName)) {
-                formWaitingForLostChildren_ = (HtmlForm) newElement;
-                appendChild(parent, newElement);
-            }
-            else if (newElement instanceof SubmittableElement) {
-                if (formWaitingForLostChildren_ != null) {
-                    formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
-                }
-                appendChild(parent, newElement);
-            }
-            else {
-                parent = findElementOnStack("table");
-                parent.insertBefore(newElement);
-            }
+            parent = findElementOnStack("table");
+            parent.insertBefore(newElement);
         }
-        else if (formWaitingForLostChildren_ != null && "form".equals(parentNodeName)) {
-            // Do not append any children to invalid form. Submittable are inserted after the form,
-            // everything else before the table.
-            if (newElement instanceof SubmittableElement) {
-                formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
-                appendChild(parent.getParentNode(), newElement);
-            }
-            else {
-                parent = findElementOnStack("table");
-                parent.insertBefore(newElement);
-            }
-        }
-        else if (formWaitingForLostChildren_ != null && newElement instanceof SubmittableElement) {
-            formWaitingForLostChildren_.addLostChild((HtmlElement) newElement);
-            appendChild(parent, newElement);
+        else if (formEndingIsAdjusting_ && "form".equals(currentNodeName)) {
+            // This <form> should be ended but HTMLTagBalancer doesn't understand that.
+            // Give this node to the <form>'s parent
+            appendChild(parent.getParentNode(), newElement);
         }
         else {
             appendChild(parent, newElement);
@@ -544,17 +524,13 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             insideSvg_ = false;
         }
 
-        // Need to reset this at each closing form tag because a valid form could start afterwards.
-        if ("form".equals(tagLower)) {
-            formWaitingForLostChildren_ = null;
-        }
-
         final DomNode previousNode = stack_.pop(); //remove currentElement from stack
         previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
-        // special handling for form lost children (malformed HTML code where </form> is synthesized)
-        if (previousNode instanceof HtmlForm && lastTagWasSynthesized_) {
-            formWaitingForLostChildren_ = (HtmlForm) previousNode;
+        if ("form".equals(tagLower) && !lastTagWasSynthesized_) {
+            // This is the end of the form if </form> was layered on the same DOM-tree layer as <form>
+            // otherwise HTMLTagBalancer gives us the end through ignoredEndElement()
+            consumingForm_ = null;
         }
 
         if (!stack_.isEmpty()) {
@@ -719,9 +695,43 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
      */
     @Override
     public void ignoredEndElement(final QName element, final Augmentations augs) {
-        // if real </form> is reached, don't accept fields anymore as lost children
-        if ("form".equals(element.localpart)) {
-            formWaitingForLostChildren_ = null;
+        // HTMLTagBalancer brings us here if </form> appears in a different DOM-tree layer to
+        // <form>, either descendant or ancestor
+        if ("form".equals(element.localpart) && consumingForm_ != null) {
+            consumingForm_ = null;
+
+            // If the end is inside a <table>
+            if (findElementOnStack("table", "form") instanceof HtmlTable) {
+                // Then the </form> just goes missing (really? just table?)
+            } else {
+                /*
+                 * This </form> is ignored by HTMLTagBalancer as it will generate its own
+                 * </form> at the end of the layer that <form> lives in. e.g:
+                 * ---
+                 * <form>
+                 *   <div>
+                 *     </form>
+                 *   </div>
+                 *   <input>
+                 *
+                 * Becomes:
+                 * ---
+                 * <form>
+                 *   <div></div>
+                 *   <input>
+                 * </form>
+                 *
+                 * This isn't suitable for us because this </form> shouldn't be ignored but
+                 * rather moved directly after the end of it descendant tree:
+                 * ---
+                 * <form>
+                 *   <div></div>
+                 * </form>
+                 * <input>
+                 */
+                // We cater for this by moving nodes that end up in this form's children out of it
+                formEndingIsAdjusting_ = true;
+            }
         }
     }
 
