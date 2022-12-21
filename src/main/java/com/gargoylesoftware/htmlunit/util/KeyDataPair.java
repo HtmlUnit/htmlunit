@@ -65,19 +65,13 @@ public class KeyDataPair extends NameValuePair {
      */
     public KeyDataPair(final String key, final File file, final String fileName,
             final String mimeType, final Charset charset) {
-
-        super(key, (file == null) ? "" : file.getName());
-
-        if (file != null && file.exists()) {
-            fileObject_ = file;
-        }
-        else {
-            fileObject_ = null;
-        }
-        fileName_ = fileName;
-
-        mimeType_ = mimeType;
-        charset_ = charset;
+        this(key,
+              (file == null) ? "" : file.getName(),
+              (file != null && file.exists()) ? file : null,
+              fileName,
+              mimeType,
+              charset,
+              null);
     }
 
     /**
@@ -188,7 +182,7 @@ public class KeyDataPair extends NameValuePair {
     /**
      * {@inheritDoc}
      *
-     * specialization of inherited method which will copy all fields
+     * Specialization of inherited method which will copy all fields
      * and make sure that the value in the base class is not null, by calling
      * the constructor with the current value
      */
