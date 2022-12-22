@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Chrome/Edge 108, Firefox 108, Bugfixes, neko-html without xerces">
+            <action type="add" dev="rbri" issue="535">
+                Support for unicode point escapes added when converting regex from js to java.
+            </action>
+            <action type="fix" dev="rbri">
+                Minor fixes for unicode handling when converting regex from js to java.
+            </action>
             <action type="fix" dev="Michael Lueck" issue="533">
                 RequestParameter normalization should not replace KeyDataPair by NameValuePair.
             </action>
