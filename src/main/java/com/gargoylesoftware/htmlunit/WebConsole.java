@@ -160,7 +160,7 @@ public class WebConsole implements ConsolePrinter, Serializable {
         switch (level) {
             case TRACE:
                 if (logger_.isInfoEnabled()) {
-                    String msg = NativeConsole.format(cx, scope, args);
+                    String msg = format(cx, scope, args);
                     if (stack != null) {
                         final StringBuilder scriptStack = new StringBuilder();
                         scriptStack.append(msg);
@@ -179,28 +179,34 @@ public class WebConsole implements ConsolePrinter, Serializable {
                 break;
             case DEBUG:
                 if (logger_.isDebugEnabled()) {
-                    logger_.debug(NativeConsole.format(cx, scope, args));
+                    logger_.debug(format(cx, scope, args));
                 }
                 break;
             case INFO:
                 if (logger_.isInfoEnabled()) {
-                    logger_.info(NativeConsole.format(cx, scope, args));
+                    logger_.info(format(cx, scope, args));
                 }
                 break;
             case WARN:
                 if (logger_.isWarnEnabled()) {
-                    logger_.warn(NativeConsole.format(cx, scope, args));
+                    logger_.warn(format(cx, scope, args));
                 }
                 break;
             case ERROR:
                 if (logger_.isErrorEnabled()) {
-                    logger_.error(NativeConsole.format(cx, scope, args));
+                    logger_.error(format(cx, scope, args));
                 }
                 break;
 
             default:
                 break;
         }
+    }
+
+    private String format(final Context cx, final Scriptable scope, final Object[] args) {
+        String msg = NativeConsole.format(cx, scope, args);
+        msg = msg.replaceAll("\\r?\\n", "\n");
+        return msg;
     }
 
     /**

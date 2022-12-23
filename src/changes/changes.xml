@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Chrome/Edge 108, Firefox 108, Bugfixes, neko-html without xerces">
+            <action type="fix" dev="rbri">
+                Replace \n in console output with real line break.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Make sure the placeholder replacements of console.log() is also done for ConsStrings.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: console.log() ignores %c styling but updates the param count to not disturb further replacements.
+            </action>
             <action type="add" dev="rbri" issue="535">
                 Support for unicode point escapes added when converting regex from js to java.
             </action>
