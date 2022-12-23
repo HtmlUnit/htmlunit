@@ -269,7 +269,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
 
     /**
      * Creates an instance which wraps the specified style declaration.
-     * @param parentScope the parent scope to use
+     * @param parentStyleSheet the parent {@link CSSStyleSheet} to use
      * @param styleDeclaration the style declaration to wrap
      */
     CSSStyleDeclaration(final CSSStyleSheet parentStyleSheet, final WrappedCssStyleDeclaration styleDeclaration) {

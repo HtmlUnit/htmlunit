@@ -770,7 +770,7 @@ public final class EncodingSniffer {
      * attribute algorithm</a>.
      *
      * @param bytes the byte array to extract an attribute from
-     * @param from the index to start searching from
+     * @param startFrom the index to start searching from
      * @return the next attribute in the specified byte array, or {@code null} if one is not available
      */
     static Attribute getAttribute(final byte[] bytes, final int startFrom) {
@@ -1042,9 +1042,9 @@ public final class EncodingSniffer {
      * starting at the specified index. This method returns <code>-1</code> if none of the targets are found.
      *
      * @param bytes the array to search through
-     * @param i the index to start looking at
+     * @param startFrom the index to start looking at
      * @param targets the targets to search for
-     * @return the index of the first occurrence of any of the specified targets within the specified array
+     * @return the index of the first occurrence of the specified targets within the specified array
      */
     static int skipToAnyOf(final byte[] bytes, final int startFrom, final byte[] targets) {
         int i = startFrom;

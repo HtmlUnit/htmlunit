@@ -124,7 +124,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
 
     /**
      * Empties the MutationObserver instance's record queue and returns what was in there.
-     * @return an Array of {@link MutationRecord}s
+     * @return an {@link NativeArray} of {@link MutationRecord}s
      */
     @JsxFunction
     public NativeArray takeRecords() {

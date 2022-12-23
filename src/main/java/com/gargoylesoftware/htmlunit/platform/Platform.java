@@ -103,7 +103,7 @@ public final class Platform {
             }
         }
 
-        return new HashMap<Integer, List<String>>();
+        return new HashMap<>();
     }
 
     private Platform() {

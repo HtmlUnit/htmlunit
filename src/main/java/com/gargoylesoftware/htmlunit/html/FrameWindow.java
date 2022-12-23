@@ -158,7 +158,7 @@ public class FrameWindow extends WebWindowImpl {
     }
 
     /**
-     * @return true if the page was denied
+     * @return PageDenied if the page was denied
      */
     public PageDenied getPageDenied() {
         return pageDenied_;

@@ -1993,7 +1993,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
     /**
      * @param selectorString the selector to test
-     * @return true if the element would be selected by the specified selector string; otherwise, returns false.
+     * @return the selected {@link DomElement} or null.
      */
     public DomElement closest(final String selectorString) {
         try {

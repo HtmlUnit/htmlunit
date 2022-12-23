@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  *
  * @author Daniel Gredler
  * @author Ronald Brill
- * @see MemoryLeakTest
  */
 abstract class JavaScriptExecutionJob extends BasicJavaScriptJob {
 
