@@ -41,7 +41,8 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  *         final String applicationName = "APPNAME";
  *         final String applicationVersion = "APPVERSION";
  *         final String userAgent = "USERAGENT";
- * <p>
+ * </pre>
+ * <pre>
  *         final BrowserVersion browser =
  *                 new BrowserVersion.BrowserVersionBuilder(BrowserVersion.FIREFOX)
  *                     .setApplicationName(applicationName)
