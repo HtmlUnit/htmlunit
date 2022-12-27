@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.68.0" date="Dezember xx, 2022" description="Chrome/Edge 108, Firefox 108, Bugfixes, neko-html without xerces">
+            <action type="fix" dev="RhinoTeam">
+                core-js: Many fixes for Object.assign().
+            </action>
             <action type="fix" dev="rbri">
                 Replace \n in console output with real line break.
             </action>
