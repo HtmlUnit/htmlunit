@@ -420,41 +420,53 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         final String currentNodeName = currentNode.getNodeName();
         final String newNodeName = newElement.getNodeName();
 
-        DomNode parent = currentNode;
-
-        // If the new node is a table element and the current node isn't one
-        // then search the stack for the correct parent.
-        if ("tr".equals(newNodeName) && !isTableChild(currentNodeName)) {
-            parent = findElementOnStack("tbody", "thead", "tfoot");
-        }
-        else if (isTableChild(newNodeName) && !"table".equals(currentNodeName)) {
-            parent = findElementOnStack("table");
-        }
-        else if (isTableCell(newNodeName) && !"tr".equals(currentNodeName)) {
-            parent = findElementOnStack("tr");
-        }
-
-        final String parentNodeName = parent.getNodeName();
-
-        if (!"script".equals(newNodeName) // scripts are valid inside tables
-                && (
-                    ("table".equals(parentNodeName) && !isTablePart(newNodeName))
-                        || (!"tr".equals(newNodeName)
-                                && ("thead".equals(parentNodeName)
-                                        || "tbody".equals(parentNodeName)
-                                        || "tfoot".equals(parentNodeName)))
-                        || ("colgroup".equals(parentNodeName) && !"col".equals(newNodeName))
-                        || ("tr".equals(parentNodeName) && !isTableCell(newNodeName)))) {
-            parent = findElementOnStack("table");
-            parent.insertBefore(newElement);
-        }
-        else if (formEndingIsAdjusting_ && "form".equals(currentNodeName)) {
-            // We cater to HTMLTagBalancer's shortcomings by moving this node out of the <form>
-            appendChild(parent.getParentNode(), newElement);
-        }
-        else {
+        // First ensure table elements are housed correctly
+        if (isTableChild(newNodeName)) {
+            DomNode parent = "table".equals(currentNodeName) ? currentNode
+                    : findElementOnStack("table");
             appendChild(parent, newElement);
+            return;
         }
+        if ("tr".equals(newNodeName)) {
+            DomNode parent = isTableChild(currentNodeName) ? currentNode
+                    : findElementOnStack("tbody", "thead", "tfoot");
+            appendChild(parent, newElement);
+            return;
+        }
+        if (isTableCell(newNodeName)) {
+            DomNode parent = "tr".equals(currentNodeName) ? currentNode
+                    : findElementOnStack("tr");
+            appendChild(parent, newElement);
+            return;
+        }
+
+        // Next ensure non-table elements don't appear in tables
+        if ("table".equals(currentNodeName) || isTableChild(currentNodeName) || "tr".equals(currentNodeName)) {
+            if ("script".equals(newNodeName)) { // Scripts are exempt
+                currentNode.appendChild(newElement);
+            }
+            else if ("col".equals(newNodeName) && "colgroup".equals(currentNodeName)) { // These are good
+                currentNode.appendChild(newElement);
+            }
+            else if ("caption".equals(currentNodeName)) {
+                currentNode.appendChild(newElement);
+            }
+            else {
+                // Move before the table
+                DomNode parent = findElementOnStack("table");
+                parent.insertBefore(newElement);
+            }
+            return;
+        }
+
+        if (formEndingIsAdjusting_ && "form".equals(currentNodeName)) {
+            // We cater to HTMLTagBalancer's shortcomings by moving this node out of the <form>
+            appendChild(currentNode.getParentNode(), newElement);
+            return;
+        }
+
+        // Everything else
+        appendChild(currentNode, newElement);
     }
 
     private DomNode findElementOnStack(final String... searchedElementNames) {
@@ -483,10 +495,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
     private static boolean isTableCell(final String nodeName) {
         return "td".equals(nodeName) || "th".equals(nodeName);
-    }
-
-    private static boolean isTablePart(final String nodeName) {
-        return isTableCell(nodeName) || "tr".equals(nodeName) || isTableChild(nodeName);
     }
 
     /** {@inheritDoc} */
