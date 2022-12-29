@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for changing the type attribute for {@link HtmlInput}.
@@ -114,12 +113,8 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @HtmlUnitNYI(FF_ESR = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
-                           "-2018-06-12T19:30-2018-06-12T19:30"})
     @Alerts(DEFAULT = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
                        "-2018-06-12T19:30-2018-06-12T19:30"},
-            FF_ESR = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30",
-                      "2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30"},
             IE = {"2019-07-11T4:16-2018-06-12T19:30-2018-06-12T19:30", "error"})
     public void none_datetimelocal() throws Exception {
         changeType("value='2018-06-12T19:30'", "2019-07-11T4:16", "datetime-local");
@@ -129,12 +124,8 @@ public final class HtmlInput3Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @HtmlUnitNYI(FF_ESR = {"2019-07-11T4:16--null",
-                           "--null"})
     @Alerts(DEFAULT = {"2019-07-11T4:16--null",
                        "--null"},
-            FF_ESR = {"2019-07-11T4:16--null",
-                      "2019-07-11T4:16--null"},
             IE = {"2019-07-11T4:16--null", "error"})
     public void noneNoValueAttr_datetimelocal() throws Exception {
         changeType("", "2019-07-11T4:16", "datetime-local");
@@ -500,6 +491,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
@@ -546,11 +538,7 @@ public final class HtmlInput3Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2019-07-11T4:16--null",
                        "--null"},
-            FF_ESR = {"2019-07-11T4:16--null",
-                      "2019-07-11T4:16--null"},
             IE = {"2019-07-11T4:16--null", "error"})
-    @HtmlUnitNYI(FF_ESR = {"2019-07-11T4:16--null",
-                           "--null"})
     public void detached_datetimelocal() throws Exception {
         changeTypeDetached("2019-07-11T4:16", "datetime-local");
     }
