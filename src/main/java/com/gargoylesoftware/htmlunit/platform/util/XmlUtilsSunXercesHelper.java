@@ -19,12 +19,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.platform.XmlUtilsHelperAPI;
-import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
-import com.sun.org.apache.xerces.internal.dom.DeferredNode;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import com.gargoylesoftware.htmlunit.platform.XmlUtilsHelperAPI;
+import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
+import com.sun.org.apache.xerces.internal.dom.DeferredNode;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
