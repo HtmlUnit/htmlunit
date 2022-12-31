@@ -28,7 +28,7 @@
         <htmlunitcssparser.version>1.13.0</htmlunitcssparser.version>
         <htmlunitneko.version>2.68.0</htmlunitneko.version>
         <htmlunitcorejs.version>2.68.0</htmlunitcorejs.version>
-        <htmlunitxpath.version>2.68.0</htmlunitxpath.version>
+        <htmlunitxpath.version>2.69.0-SNAPSHOT</htmlunitxpath.version>
 
         <htmlunitdriver.version>4.7.2</htmlunitdriver.version>
         <selenium.version>4.7.2</selenium.version>

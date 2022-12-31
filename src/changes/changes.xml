@@ -9,7 +9,7 @@
     <body>
         <release version="2.69.0" date="xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
-                Xerces detection was broken.
+                Xerces detection fixed.
             </action>
         </release>
 
