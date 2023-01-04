@@ -11,6 +11,9 @@
             <action type="fix" dev="rbri">
                 Xerces detection fixed (regression in 2.68.0).
             </action>
+            <action type="add" dev="rbri" issue="531">"
+                HtmlUnit is now regulary tested by Google OSS-Fuzz.
+            </action>
             <action type="fix" dev="rbri" issue="522">
                 core-js: fix scope for bound functions called inside Promise.then().
             </action>
