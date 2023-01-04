@@ -11,6 +11,9 @@
             <action type="fix" dev="rbri">
                 Xerces detection fixed (regression in 2.68.0).
             </action>
+            <action type="fix" dev="rbri" issue="522">
+                core-js: fix scope for bound functions called inside Promise.then().
+            </action>
             <action type="fix" dev="rbri" issue="523">
                 Cached location.hash was not updated by history.replaceState() / history.pushState().
             </action>
@@ -19,6 +22,12 @@
             </action>
             <action type="fix" dev="rbri">
                 Inconsistent use of UrlUtils.encodeAnchor() / UrlUtils.encodeHash().
+            </action>
+            <action type="update" dev="rbri">
+                neko: more unused code removed.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: again some unused code removed.
             </action>
         </release>
 
