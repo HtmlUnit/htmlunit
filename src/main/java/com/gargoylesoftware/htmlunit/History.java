@@ -105,6 +105,8 @@ public class History implements Serializable {
                 final Page page = getPage();
                 if (page != null) {
                     page.getWebResponse().getWebRequest().setUrl(url);
+                    final Window win = page.getEnclosingWindow().getScriptableObject();
+                    win.getLocation().setHash(null, url.getRef(), false);
                 }
             }
         }

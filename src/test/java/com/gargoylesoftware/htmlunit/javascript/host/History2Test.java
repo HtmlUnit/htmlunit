@@ -544,6 +544,74 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts({"href=§§URL§§", "hash=", "href=§§URL§§#foo", "hash=#foo", "onhashchange #proof"})
+    public void pushStateChangeHash() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                + "    window.history.pushState({ hi: 'there' }, '', '" + URL_FIRST + "#foo');\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                // to make sure we have the event handler registered
+                + "    location.hash = 'proof';"
+                + "  }\n"
+
+                + " function locationHashChanged(event) {\n"
+                + "     log('onhashchange ' + location.hash);\n"
+                + " }\n"
+                + " window.onhashchange = locationHashChanged;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"href=§§URL§§", "hash=", "href=§§URL§§#foo", "hash=#foo", "onhashchange #proof"})
+    public void replaceStateChangeHash() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                + "    window.history.replaceState({ hi: 'there' }, '', '" + URL_FIRST + "#foo');\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+
+                // to make sure we have the event handler registered
+                + "    location.hash = 'proof';"
+                + "  }\n"
+
+                + " function locationHashChanged(event) {\n"
+                + "     log('onhashchange ' + location.hash);\n"
+                + " }\n"
+                + " window.onhashchange = locationHashChanged;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        final WebDriver driver = loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     public void length() throws Exception {
         final String second = "<html>\n"
                 + "<head></head>\n"

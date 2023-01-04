@@ -330,7 +330,7 @@ public class Location extends HtmlUnitScriptable {
     public void setHash(final String hash) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
-        setHash(getHref(), hash);
+        setHash(getHref(), hash, true);
     }
 
     /**
@@ -339,7 +339,20 @@ public class Location extends HtmlUnitScriptable {
      * @param oldURL the old URL
      * @param hash the new hash portion of the location URL
      */
-    public void setHash(final String oldURL, String hash) {
+    public void setHash(final String oldURL, final String hash) {
+        setHash(oldURL, hash, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Sets the hash portion of the location URL (the portion following the '#').
+     *
+     * @param oldURL the old URL
+     * @param hash the new hash portion of the location URL
+     * @param triggerHashChanged option to disable event triggering
+     */
+    public void setHash(final String oldURL, String hash, final boolean triggerHashChanged) {
         // IMPORTANT: This method must not call setUrl(), because
         // we must not hit the server just to change the hash!
         if (hash != null && !hash.isEmpty() && hash.charAt(0) == '#') {
@@ -348,7 +361,7 @@ public class Location extends HtmlUnitScriptable {
         final boolean hasChanged = hash != null && !hash.equals(hash_);
         hash_ = hash;
 
-        if (hasChanged) {
+        if (triggerHashChanged && hasChanged) {
             final Window w = getWindow();
             final Event event;
             if (getBrowserVersion().hasFeature(EVENT_TYPE_HASHCHANGEEVENT)) {
