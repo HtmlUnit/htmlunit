@@ -12,7 +12,7 @@
                 Xerces detection fixed (regression in 2.68.0).
             </action>
             <action type="fix" dev="rbri" issue="523">
-                Cached location.hash was not updated by history.replaceState()/history.pushState().
+                Cached location.hash was not updated by history.replaceState() / history.pushState().
             </action>
             <action type="fix" dev="rbri" issue="523">
                 The url was not encoded by history.replaceState() / history.pushState().
