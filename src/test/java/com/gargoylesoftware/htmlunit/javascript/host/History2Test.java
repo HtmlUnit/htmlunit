@@ -29,6 +29,7 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
@@ -544,6 +545,35 @@ public class History2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§?p=%C3%84"},
+            FF = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            IE = {"href=§§URL§§", "href=§§URL§§?p=\u00c4"})
+    @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            EDGE = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
+    public void pushStateEncoding() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.pushState(null, '', '" + URL_FIRST + "?p=\u00c4');\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"href=§§URL§§", "hash=", "href=§§URL§§#foo", "hash=#foo", "onhashchange #proof"})
     public void pushStateChangeHash() throws Exception {
         final String html = "<html>\n"
@@ -611,6 +641,35 @@ public class History2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(URL_FIRST, null);
         verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"href=§§URL§§", "href=§§URL§§?p=%C3%84"},
+            FF = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            FF_ESR = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            IE = {"href=§§URL§§", "href=§§URL§§?p=\u00c4"})
+    @HtmlUnitNYI(CHROME = {"href=§§URL§§", "href=§§URL§§?p=%C4"},
+            EDGE = {"href=§§URL§§", "href=§§URL§§?p=%C4"})
+    public void replaceStateEncoding() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.replaceState(null, '', '" + URL_FIRST + "?p=\u00c4');\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
     }
 
     /**

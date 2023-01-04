@@ -9,7 +9,16 @@
     <body>
         <release version="2.69.0" date="xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
-                Xerces detection fixed.
+                Xerces detection fixed (regression in 2.68.0).
+            </action>
+            <action type="fix" dev="rbri" issue="523">
+                Cached location.hash was not updated by history.replaceState()/history.pushState().
+            </action>
+            <action type="fix" dev="rbri" issue="523">
+                The url was not encoded by history.replaceState() / history.pushState().
+            </action>
+            <action type="fix" dev="rbri">
+                Inconsistent use of UrlUtils.encodeAnchor() / UrlUtils.encodeHash().
             </action>
         </release>
 

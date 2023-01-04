@@ -14,6 +14,8 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
@@ -101,11 +103,28 @@ public class History implements Serializable {
 
         void setUrl(final URL url, final Page page) {
             if (url != null) {
-                webRequest_.setUrl(url);
+                WebWindow webWindow = null;
+
+                boolean minimalQueryEncoding = false;
                 if (page != null) {
-                    page.getWebResponse().getWebRequest().setUrl(url);
-                    final Window win = page.getEnclosingWindow().getScriptableObject();
-                    win.getLocation().setHash(null, url.getRef(), false);
+                    webWindow = page.getEnclosingWindow();
+                    if (webWindow != null) {
+                        minimalQueryEncoding = webWindow.getWebClient()
+                                    .getBrowserVersion().hasFeature(URL_MINIMAL_QUERY_ENCODING);
+                    }
+                }
+
+                final URL encoded = UrlUtils.encodeUrl(url, minimalQueryEncoding,
+                        webRequest_.getCharset());
+                webRequest_.setUrl(encoded);
+                if (page != null) {
+                    page.getWebResponse().getWebRequest().setUrl(encoded);
+                    if (webWindow != null) {
+                        final Window win = webWindow.getScriptableObject();
+                        if (win != null) {
+                            win.getLocation().setHash(null, encoded.getRef(), false);
+                        }
+                    }
                 }
             }
         }
