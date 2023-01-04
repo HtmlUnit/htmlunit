@@ -367,8 +367,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     public String getHostname() {
         try {
-            final String host = getUrl().getHost();
-            return UrlUtils.encodeAnchor(host);
+            return UrlUtils.encodeAnchor(getUrl().getHost());
         }
         catch (final MalformedURLException e) {
             return "";

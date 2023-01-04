@@ -315,7 +315,7 @@ public class Location extends HtmlUnitScriptable {
             return null;
         }
         if (encoded) {
-            return UrlUtils.encodeAnchor(hash_);
+            return UrlUtils.encodeHash(hash_);
         }
         return hash_;
     }
