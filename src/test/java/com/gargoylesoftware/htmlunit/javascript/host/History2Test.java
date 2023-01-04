@@ -561,7 +561,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + " function locationHashChanged(event) {\n"
-                + "     log('onhashchange ' + location.hash);\n"
+                + "   log('onhashchange ' + location.hash);\n"
                 + " }\n"
                 + " window.onhashchange = locationHashChanged;\n"
                 + "</script>\n"
@@ -571,6 +571,46 @@ public class History2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"href=§§URL§§", "hash=", "href=§§URL§§#foo", "hash=#foo", "onhashchange #proof"})
+    public void pushStateChangeHashNoStore() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                + "    window.history.pushState({ hi: 'there' }, '', '" + URL_FIRST + "#foo');\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                // to make sure we have the event handler registered
+                + "    location.hash = 'proof';"
+                + "  }\n"
+
+                + " function locationHashChanged(event) {\n"
+                + "   log('onhashchange ' + location.hash);\n"
+                + " }\n"
+                + " window.onhashchange = locationHashChanged;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Cache-Control", "no-store"));
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", "text/html;charset=ISO-8859-1",
+            ISO_8859_1, headers);
+
+        final WebDriver driver = loadPage2(URL_FIRST, null);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -595,7 +635,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + " function locationHashChanged(event) {\n"
-                + "     log('onhashchange ' + location.hash);\n"
+                + "   log('onhashchange ' + location.hash);\n"
                 + " }\n"
                 + " window.onhashchange = locationHashChanged;\n"
                 + "</script>\n"
@@ -604,8 +644,48 @@ public class History2Test extends WebDriverTestCase {
                 + "</body></html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final WebDriver driver = loadPage2(html);
-        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"href=§§URL§§", "hash=", "href=§§URL§§#foo", "hash=#foo", "onhashchange #proof"})
+    public void replaceStateChangeHashNoStore() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+                + "    window.history.replaceState({ hi: 'there' }, '', '" + URL_FIRST + "#foo');\n"
+                + "    log('href=' + location.href);\n"
+                + "    log('hash=' + location.hash);\n"
+
+                // to make sure we have the event handler registered
+                + "    location.hash = 'proof';"
+                + "  }\n"
+
+                + " function locationHashChanged(event) {\n"
+                + "   log('onhashchange ' + location.hash);\n"
+                + " }\n"
+                + " window.onhashchange = locationHashChanged;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Cache-Control", "no-store"));
+        getMockWebConnection().setResponse(URL_FIRST, html, 200, "OK", "text/html;charset=ISO-8859-1",
+            ISO_8859_1, headers);
+
+        final WebDriver driver = loadPage2(URL_FIRST, null);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**

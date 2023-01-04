@@ -99,10 +99,9 @@ public class History implements Serializable {
             return webRequest_.getUrl();
         }
 
-        void setUrl(final URL url) {
+        void setUrl(final URL url, final Page page) {
             if (url != null) {
                 webRequest_.setUrl(url);
-                final Page page = getPage();
                 if (page != null) {
                     page.getWebResponse().getWebRequest().setUrl(url);
                     final Window win = page.getEnclosingWindow().getScriptableObject();
@@ -311,7 +310,13 @@ public class History implements Serializable {
     public void replaceState(final Object state, final URL url) {
         if (index_ >= 0 && index_ < entries_.size()) {
             final HistoryEntry entry = entries_.get(index_);
-            entry.setUrl(url);
+
+            Page page = entry.getPage();
+            if (page == null) {
+                page = window_.getEnclosedPage();
+            }
+
+            entry.setUrl(url, page);
             entry.setState(state);
         }
     }
@@ -327,7 +332,7 @@ public class History implements Serializable {
         final HistoryEntry entry = addPage(page);
 
         if (entry != null) {
-            entry.setUrl(url);
+            entry.setUrl(url, page);
             entry.setState(state);
         }
     }
