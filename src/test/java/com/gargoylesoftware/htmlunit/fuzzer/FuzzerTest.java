@@ -35,82 +35,74 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 public class FuzzerTest extends WebTestCase {
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54522.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54522() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54522
         test("test-54522.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54523.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54523() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54523
         test("test-54523.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54524.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54524() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54524
         test("test-54524.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54526.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54526() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54526
         test("test-54526.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54527.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54527() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54527
         test("test-54527.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54528.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54528() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54528
         test("test-54528.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54535.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54535() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54535
         test("test-54535.html");
     }
 
     /**
-     * https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54613.
-     *
      * @throws Exception if the test fails
      */
     @Test
     public void case54613() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54613
         test("test-54613.html");
     }
 
