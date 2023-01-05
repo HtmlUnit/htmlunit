@@ -18,11 +18,8 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
 
 import java.awt.image.BufferedImage;
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -379,46 +376,6 @@ public abstract class WebTestCase {
      */
     protected void assertFalse(final String message, final boolean condition) {
         Assert.assertFalse(message, condition);
-    }
-
-    /**
-     * Returns an input stream for the specified file name. Refer to {@link #getFileObject(String)}
-     * for details on how the file is located.
-     * @param fileName the base file name
-     * @return the input stream
-     * @throws FileNotFoundException if the file cannot be found
-     */
-    public static InputStream getFileAsStream(final String fileName) throws FileNotFoundException {
-        return new BufferedInputStream(new FileInputStream(getFileObject(fileName)));
-    }
-
-    /**
-     * Returns a File object for the specified file name. This is different from just
-     * <code>new File(fileName)</code> because it will adjust the location of the file
-     * depending on how the code is being executed.
-     *
-     * @param fileName the base filename
-     * @return the new File object
-     * @throws FileNotFoundException if the file doesn't exist
-     */
-    public static File getFileObject(final String fileName) throws FileNotFoundException {
-        final String localizedName = fileName.replace('/', File.separatorChar);
-
-        File file = new File(localizedName);
-        if (!file.exists()) {
-            file = new File("../../" + localizedName);
-        }
-
-        if (!file.exists()) {
-            try {
-                System.out.println("currentDir=" + new File(".").getCanonicalPath());
-            }
-            catch (final IOException e) {
-                e.printStackTrace();
-            }
-            throw new FileNotFoundException(localizedName);
-        }
-        return file;
     }
 
     /**
