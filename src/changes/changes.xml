@@ -7,9 +7,9 @@
     </properties>
 
     <body>
-        <release version="2.69.0" date="xx, 2023" description="Bugfixes">
+        <release version="2.69.0" date="January 05, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
-                Xerces detection fixed (regression in 2.68.0).
+                Xerces detection fixed.
             </action>
             <action type="add" dev="rbri" issue="531">"
                 HtmlUnit is now regulary tested by Google OSS-Fuzz.
