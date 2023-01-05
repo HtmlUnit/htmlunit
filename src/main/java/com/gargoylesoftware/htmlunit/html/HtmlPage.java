@@ -1922,18 +1922,16 @@ public class HtmlPage extends SgmlPage {
 
     private void calculateBase() {
         final List<HtmlElement> baseElements = getDocumentElement().getElementsByTagName("base");
-        switch (baseElements.size()) {
-            case 0:
-                base_ = null;
-                break;
 
-            case 1:
-                base_ = (HtmlBase) baseElements.get(0);
-                break;
-
-            default:
-                base_ = (HtmlBase) baseElements.get(0);
-                notifyIncorrectness("Multiple 'base' detected, only the first is used.");
+        base_ = null;
+        for (final HtmlElement baseElement : baseElements) {
+            if (baseElement instanceof HtmlBase) {
+                if (base_ != null) {
+                    notifyIncorrectness("Multiple 'base' detected, only the first is used.");
+                    break;
+                }
+                base_ = (HtmlBase) baseElement;
+            }
         }
     }
 

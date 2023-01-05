@@ -368,7 +368,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             oldBody.quietlyRemoveAndMoveChildrenTo(newElement);
         }
 
-        if ("body".equals(tagLower)) {
+        if (!insideSvg_ && "body".equals(tagLower)) {
             body_ = (HtmlElement) newElement;
         }
         else if ("meta".equals(tagLower) && page_.hasFeature(META_X_UA_COMPATIBLE)) {
