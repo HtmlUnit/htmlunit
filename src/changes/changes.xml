@@ -7,6 +7,15 @@
     </properties>
 
     <body>
+        <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">"
+                neko: Fix Exception when parsing a template tag as first node (oss-fuzz).
+            </action>
+            <action type="fix" dev="rbri">"
+                Fix Exception when parsing documents with ignored head tags (oss-fuzz).
+            </action>
+        </release>
+
         <release version="2.69.0" date="January 05, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
                 Xerces detection fixed.
