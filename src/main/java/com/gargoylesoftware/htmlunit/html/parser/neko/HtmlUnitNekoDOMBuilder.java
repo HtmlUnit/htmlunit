@@ -549,6 +549,13 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             formWaitingForLostChildren_ = null;
         }
 
+        // this only avoids a problem when the stack is empty here
+        // but for this case we made the problem before - the balancing
+        // is broken already
+        if (stack_.isEmpty()) {
+            return;
+        }
+
         final DomNode previousNode = stack_.pop(); //remove currentElement from stack
         previousNode.setEndLocation(locator_.getLineNumber(), locator_.getColumnNumber());
 
