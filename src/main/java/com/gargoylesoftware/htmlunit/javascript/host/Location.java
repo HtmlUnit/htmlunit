@@ -170,27 +170,29 @@ public class Location extends HtmlUnitScriptable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public void jsConstructor() {
+        final int attributes = ScriptableObject.PERMANENT | ScriptableObject.READONLY;
+
         FunctionObject functionObject = new FunctionObject(methodAssign.getName(), methodAssign, this);
-        defineProperty(methodAssign.getName(), functionObject, ScriptableObject.EMPTY);
+        defineProperty(methodAssign.getName(), functionObject, attributes);
 
         functionObject = new FunctionObject(methodReload.getName(), methodReload, this);
-        defineProperty(methodReload.getName(), functionObject, ScriptableObject.EMPTY);
+        defineProperty(methodReload.getName(), functionObject, attributes);
 
         functionObject = new FunctionObject(methodReplace.getName(), methodReplace, this);
-        defineProperty(methodReplace.getName(), functionObject, ScriptableObject.EMPTY);
+        defineProperty(methodReplace.getName(), functionObject, attributes);
 
         functionObject = new FunctionObject(methodToString.getName(), methodToString, this);
-        defineProperty("toString", functionObject, ScriptableObject.EMPTY);
+        defineProperty("toString", functionObject, attributes);
 
-        defineProperty("hash", null, getterHash, setterHash, ScriptableObject.EMPTY);
-        defineProperty("host", null, getterHost, setterHost, ScriptableObject.EMPTY);
-        defineProperty("hostname", null, getterHostname, setterHostname, ScriptableObject.EMPTY);
-        defineProperty("href", null, getterHref, setterHref, ScriptableObject.EMPTY);
-        defineProperty("origin", null, getterOrigin, null, ScriptableObject.EMPTY);
-        defineProperty("pathname", null, getterPathname, setterPathname, ScriptableObject.EMPTY);
-        defineProperty("port", null, getterPort, setterPort, ScriptableObject.EMPTY);
-        defineProperty("protocol", null, getterProtocol, setterProtocol, ScriptableObject.EMPTY);
-        defineProperty("search", null, getterSearch, setterSearch, ScriptableObject.EMPTY);
+        defineProperty("hash", null, getterHash, setterHash, attributes);
+        defineProperty("host", null, getterHost, setterHost, attributes);
+        defineProperty("hostname", null, getterHostname, setterHostname, attributes);
+        defineProperty("href", null, getterHref, setterHref, attributes);
+        defineProperty("origin", null, getterOrigin, null, attributes);
+        defineProperty("pathname", null, getterPathname, setterPathname, attributes);
+        defineProperty("port", null, getterPort, setterPort, attributes);
+        defineProperty("protocol", null, getterProtocol, setterProtocol, attributes);
+        defineProperty("search", null, getterSearch, setterSearch, attributes);
     }
 
     /**

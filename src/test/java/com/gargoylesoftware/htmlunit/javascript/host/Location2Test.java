@@ -1183,4 +1183,53 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"assign - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "hash - {\"enumerable\":true,\"configurable\":false}",
+                       "host - {\"enumerable\":true,\"configurable\":false}",
+                       "hostname - {\"enumerable\":true,\"configurable\":false}",
+                       "href - {\"enumerable\":true,\"configurable\":false}",
+                       "origin - {\"enumerable\":true,\"configurable\":false}",
+                       "pathname - {\"enumerable\":true,\"configurable\":false}",
+                       "port - {\"enumerable\":true,\"configurable\":false}",
+                       "protocol - {\"enumerable\":true,\"configurable\":false}",
+                       "reload - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "replace - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "search - {\"enumerable\":true,\"configurable\":false}",
+                       "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"},
+            IE = {})
+    @HtmlUnitNYI(IE = {"assign - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "hash - {\"enumerable\":true,\"configurable\":false}",
+                       "host - {\"enumerable\":true,\"configurable\":false}",
+                       "hostname - {\"enumerable\":true,\"configurable\":false}",
+                       "href - {\"enumerable\":true,\"configurable\":false}",
+                       "origin - {\"enumerable\":true,\"configurable\":false}",
+                       "pathname - {\"enumerable\":true,\"configurable\":false}",
+                       "port - {\"enumerable\":true,\"configurable\":false}",
+                       "protocol - {\"enumerable\":true,\"configurable\":false}",
+                       "reload - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "replace - {\"writable\":false,\"enumerable\":true,\"configurable\":false}",
+                       "search - {\"enumerable\":true,\"configurable\":false}",
+                       "toString - {\"writable\":false,\"enumerable\":true,\"configurable\":false}"})
+    public void ownPropertyDescriptor() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var props = ['assign', 'hash', 'host', 'hostname', 'href', "
+                    + "'origin', 'pathname', 'port', 'protocol', 'reload', 'replace', 'search', 'toString'];\n"
+            + "  props.forEach("
+            + "    item => log(item + ' - ' + JSON.stringify(Object.getOwnPropertyDescriptor(window.location, item)))"
+            + "  );\n"
+            + "</script></head>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
 }
