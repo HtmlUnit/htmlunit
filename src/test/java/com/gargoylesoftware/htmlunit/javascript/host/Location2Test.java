@@ -1160,6 +1160,7 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if the test fails
      */
