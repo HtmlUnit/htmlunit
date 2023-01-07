@@ -9,6 +9,10 @@
     <body>
         <release version="2.70.0" date="xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">"
+                WebClient#loadHtmlCodeIntoCurrentWindow() now uses the
+                html parser instead of the xhtml parser.
+            </action>
+            <action type="fix" dev="rbri">"
                 neko: Fix Exception when parsing a template tag as first node (oss-fuzz).
             </action>
             <action type="fix" dev="rbri">"
