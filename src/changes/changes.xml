@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+            <action type="add" dev="rbri" issue="528">"
+                Fixed definition of the Location properties (they are defined on the object
+                itself instead on the prototype).
+            </action>
             <action type="fix" dev="rbri">"
                 WebClient#loadHtmlCodeIntoCurrentWindow() now uses the
                 html parser instead of the xhtml parser.

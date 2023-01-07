@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import com.gargoylesoftware.htmlunit.javascript.host.Location;
 import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
@@ -12912,6 +12913,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "textIndent,top,verticalAlign,widows,width,wordSpacing,zIndex")
     public void cssStyleDeclaration() throws Exception {
         testString("", "document.body.style");
+    }
+
+    /**
+     * Test {@link Location}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor()",
+            IE = "assign(),constructor,hash,host,hostname,href,origin,"
+               + "pathname,port,protocol,reload(),replace(),search,toString()")
+    public void location() throws Exception {
+        testString("", "window.location");
+        testString("", "document.location");
     }
 
     /**

@@ -1128,4 +1128,58 @@ public class Location2Test extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[1],
                 ((JavascriptExecutor) driver).executeScript("return document.location.href"));
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "ancestorOrigins,assign,hash,host,hostname,href,origin,"
+                    + "pathname,port,protocol,reload,replace,search,toString",
+            FF = "assign,hash,host,hostname,href,origin,"
+               + "pathname,port,protocol,reload,replace,search,toString",
+            FF_ESR = "assign,hash,host,hostname,href,origin,"
+                   + "pathname,port,protocol,reload,replace,search,toString",
+            IE = "assign,hash,host,hostname,href,origin,"
+               + "pathname,port,protocol,reload,replace,search,toString")
+    @HtmlUnitNYI(CHROME = "assign,hash,host,hostname,href,origin,"
+                        + "pathname,port,protocol,reload,replace,search,toString",
+                 EDGE = "assign,hash,host,hostname,href,origin,"
+                      + "pathname,port,protocol,reload,replace,search,toString")
+    public void keys() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var keys = Object.keys(location);\n"
+            + "  keys.sort();\n"
+            + "  log(keys);\n"
+            + "</script></head>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "",
+            IE = "assign,hash,host,hostname,href,origin,"
+               + "pathname,port,protocol,reload,replace,search,toString")
+    public void protoKeys() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var keys = Object.keys(location.__proto__);\n"
+            + "  keys.sort();\n"
+            + "  log(keys);\n"
+            + "</script></head>\n"
+            + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
 }

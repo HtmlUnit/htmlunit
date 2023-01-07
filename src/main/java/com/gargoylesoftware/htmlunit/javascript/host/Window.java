@@ -816,6 +816,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         location_ = new Location();
         location_.setParentScope(this);
         location_.setPrototype(getPrototype(location_.getClass()));
+        location_.jsConstructor();
         location_.initialize(this, pageToEnclose);
 
         applicationCache_ = new ApplicationCache();
