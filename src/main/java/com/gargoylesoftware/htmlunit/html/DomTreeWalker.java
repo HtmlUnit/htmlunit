@@ -30,6 +30,7 @@ import org.w3c.dom.traversal.TreeWalker;
  *
  * @deprecated as of version 2.70.0; use com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker instead
  */
+@Deprecated
 public class DomTreeWalker implements TreeWalker {
 
     private final com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker domTreeWalker_;

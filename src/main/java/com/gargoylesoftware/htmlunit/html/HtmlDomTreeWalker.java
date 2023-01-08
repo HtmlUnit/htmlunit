@@ -69,42 +69,42 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#getRoot()
+     * @see org.w3c.dom.traversal.TreeWalker#getRoot()
      */
     public DomNode getRoot() {
         return root_;
     }
 
     /**
-     * @see TreeWalker#getWhatToShow()
+     * @see org.w3c.dom.traversal.TreeWalker#getWhatToShow()
      */
     public int getWhatToShow() {
         return whatToShow_;
     }
 
     /**
-     * @see TreeWalker#getFilter()
+     * @see org.w3c.dom.traversal.TreeWalker#getFilter()
      */
     public NodeFilter getFilter() {
         return filter_;
     }
 
     /**
-     * @see TreeWalker#getExpandEntityReferences()
+     * @see org.w3c.dom.traversal.TreeWalker#getExpandEntityReferences()
      */
     public boolean getExpandEntityReferences() {
         return expandEntityReferences_;
     }
 
     /**
-     * @see TreeWalker#getCurrentNode()
+     * @see org.w3c.dom.traversal.TreeWalker#getCurrentNode()
      */
     public DomNode getCurrentNode() {
         return currentNode_;
     }
 
     /**
-     * @see TreeWalker#setCurrentNode(Node)
+     * @see org.w3c.dom.traversal.TreeWalker#setCurrentNode(Node)
      */
     public void setCurrentNode(final Node currentNode) throws DOMException {
         if (currentNode == null) {
@@ -115,7 +115,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#nextNode()
+     * @see org.w3c.dom.traversal.TreeWalker#nextNode()
      */
     public DomNode nextNode() {
         final DomNode leftChild = getEquivalentLogical(currentNode_.getFirstChild(), false);
@@ -316,7 +316,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#nextSibling()
+     * @see org.w3c.dom.traversal.TreeWalker#nextSibling()
      */
     public DomNode nextSibling() {
         if (currentNode_ == root_) {
@@ -333,7 +333,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#parentNode()
+     * @see org.w3c.dom.traversal.TreeWalker#parentNode()
      */
     public DomNode parentNode() {
         if (currentNode_ == root_) {
@@ -355,7 +355,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#previousSibling()
+     * @see org.w3c.dom.traversal.TreeWalker#previousSibling()
      */
     public DomNode previousSibling() {
         if (currentNode_ == root_) {
@@ -372,7 +372,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#lastChild()
+     * @see org.w3c.dom.traversal.TreeWalker#lastChild()
      */
     public DomNode lastChild() {
         final DomNode newNode = getEquivalentLogical(currentNode_.getLastChild(), true);
@@ -385,7 +385,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#previousNode()
+     * @see org.w3c.dom.traversal.TreeWalker#previousNode()
      */
     public DomNode previousNode() {
         final DomNode newNode = getPreviousNode(currentNode_);
@@ -430,7 +430,7 @@ public class HtmlDomTreeWalker {
     }
 
     /**
-     * @see TreeWalker#firstChild()
+     * @see org.w3c.dom.traversal.TreeWalker#firstChild()
      */
     public DomNode firstChild() {
         final DomNode newNode = getEquivalentLogical(currentNode_.getFirstChild(), false);

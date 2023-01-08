@@ -348,6 +348,7 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
      *      #DomTreeWalker(DomNode, int, NodeFilter, boolean)}
      * instead
      */
+    @Deprecated
     @Override
     public DomTreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,
             final boolean entityReferenceExpansion) throws DOMException {
