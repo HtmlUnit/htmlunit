@@ -12,23 +12,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.platform.dom.traversal;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.TreeWalker;
 
+import com.gargoylesoftware.htmlunit.html.DomNode;
+
 /**
- * An implementation of {@link TreeWalker}.
+ * An implementation of {@link TreeWalker} backed by {@link com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker}.
  *
  * @see <a href="http://www.w3.org/TR/DOM-Level-2-Traversal-Range/traversal.html">
  * DOM-Level-2-Traversal-Range</a>
- * @author <a href="mailto:mike@10gen.com">Mike Dirolf</a>
- * @author Frank Danek
- * @author Ahmed Ashour
- *
- * @deprecated as of version 2.70.0; use com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker instead
+ * @author Ronald Brill
  */
 public class DomTreeWalker implements TreeWalker {
 

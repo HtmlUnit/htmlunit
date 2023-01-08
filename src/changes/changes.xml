@@ -8,6 +8,17 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+            <action type="update" dev="rbri">"
+                Class com.gargoylesoftware.htmlunit.html.DomTreeWalker is deprecated (Android compatibility).
+            </action>
+            <action type="update" dev="rbri">"
+                Method com.gargoylesoftware.htmlunit.SgmlPage.createTreeWalker(Node, int, NodeFilter, boolean)
+                is deprecated (Android compatibility).
+            </action>
+            <action type="update" dev="rbri">"
+                New class com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker; this class can only
+                be used with standard jdk - not on Android.
+            </action>
             <action type="add" dev="rbri" issue="528">"
                 Fixed definition of the Location properties (they are defined on the object
                 itself instead on the prototype).

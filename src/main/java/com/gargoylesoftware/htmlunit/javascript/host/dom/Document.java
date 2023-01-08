@@ -1323,7 +1323,7 @@ public class Document extends Node {
 
         final boolean filterFunctionOnly = getBrowserVersion().hasFeature(JS_TREEWALKER_FILTER_FUNCTION_ONLY);
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, filterFunctionOnly);
-        final TreeWalker t = new TreeWalker(getPage(), root, whatToShowI, filterWrapper, expandEntityReferences);
+        final TreeWalker t = new TreeWalker(root, whatToShowI, filterWrapper, expandEntityReferences);
         t.setParentScope(getWindow(this));
         t.setPrototype(staticGetPrototype(getWindow(this), TreeWalker.class));
         return t;

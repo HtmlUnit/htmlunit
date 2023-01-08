@@ -22,9 +22,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import org.w3c.dom.DOMException;
 
-import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNode;
-import com.gargoylesoftware.htmlunit.html.DomTreeWalker;
+import com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -47,7 +46,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
 @JsxClass
 public class TreeWalker extends HtmlUnitScriptable {
 
-    private DomTreeWalker walker_;
+    private HtmlDomTreeWalker walker_;
 
     /**
      * Creates an instance.
@@ -66,7 +65,6 @@ public class TreeWalker extends HtmlUnitScriptable {
     /**
      * Creates an instance.
      *
-     * @param page the page
      * @param root The root node of the TreeWalker. Must not be
      *          {@code null}.
      * @param whatToShow Flag specifying which types of nodes appear in the
@@ -79,7 +77,7 @@ public class TreeWalker extends HtmlUnitScriptable {
      * @throws DOMException on attempt to create a TreeWalker with a root that
      *          is {@code null}.
      */
-    public TreeWalker(final SgmlPage page, final Node root,
+    public TreeWalker(final Node root,
                       final int whatToShow,
                       final org.w3c.dom.traversal.NodeFilter filter,
                       final boolean expandEntityReferences) throws DOMException {
@@ -87,7 +85,7 @@ public class TreeWalker extends HtmlUnitScriptable {
             Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
                                    "root must not be null"));
         }
-        walker_ = page.createTreeWalker(root.getDomNodeOrDie(), whatToShow, filter, expandEntityReferences);
+        walker_ = new HtmlDomTreeWalker(root.getDomNodeOrDie(), whatToShow, filter, expandEntityReferences);
     }
 
     /**

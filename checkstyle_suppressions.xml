@@ -11,9 +11,10 @@
     <suppress checks="AvoidStarImport" files="JavaScriptConfiguration.java"/>
     <suppress checks="AvoidStarImport" files="XMLSerializer.java"/>
     <suppress checks="Header" files=".+.properties"/>
+
     <suppress checks="JavadocPackage" files=".*Test.java|StandardsMode.java|StandardsMode.java|ElementTestSource.java|BrowserStatement.java|Patch.java|BrowserVersionClassRunnerWithParameters.java|ToRunWithRealBrowsers.java|PatchedHtmlUnitKeyboard.java|CanvasRenderingContext2D2Test2.java"/>
-    <!-- checkstyle bug: http://sourceforge.net/tracker/?func=detail&aid=3469410&group_id=29721&atid=397078 -->
-    <suppress checks="JavadocStyle" files="BrowserVersion.java"/>
+    <suppress checks="JavadocMethod" files="HtmlDomTreeWalker.java" />
+
     <suppress checks="LineLength" files="BrowserVersion.java"/>
     <suppress checks="LineLength" files="JavaScriptEngine.java"/>
     <suppress checks="LineLength" files="EncodingSniffer.java"/>

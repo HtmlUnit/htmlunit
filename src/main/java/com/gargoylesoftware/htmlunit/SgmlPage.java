@@ -343,6 +343,10 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
 
     /**
      * {@inheritDoc}
+     * @deprecated as of version 2.70.0; use
+     * {@link com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker
+     *      #DomTreeWalker(DomNode, int, NodeFilter, boolean)}
+     * instead
      */
     @Override
     public DomTreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,

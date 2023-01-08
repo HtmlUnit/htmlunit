@@ -178,7 +178,7 @@ public class DomNodeIterator implements NodeIterator {
     }
 
     private boolean isNodeVisible(final Node node) {
-        return (whatToShow_ & DomTreeWalker.getFlagForNode(node)) != 0;
+        return (whatToShow_ & HtmlDomTreeWalker.getFlagForNode(node)) != 0;
     }
 
     private boolean isAccepted(final Node node) {

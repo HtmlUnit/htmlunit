@@ -224,6 +224,32 @@ public class ArchitectureTest {
             .should().callMethod(ThreadLocal.class, "withInitial", Supplier.class);
 
     /**
+     * Make sure to not use org.w3c.dom.traversal.TreeWalker.
+     */
+    @ArchTest
+    public static final ArchRule androidTreeWalker = noClasses()
+            .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.SgmlPage")
+            .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.TreeWalker");
+
+    /**
+     * Make sure to not use org.w3c.dom.traversal.DocumentTraversal.
+     */
+    @ArchTest
+    public static final ArchRule androidDocumentTraversal = noClasses()
+            .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.SgmlPage")
+            .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.DocumentTraversal");
+
+    /**
      * Make sure to not use Xerces.
      */
     @ArchTest
