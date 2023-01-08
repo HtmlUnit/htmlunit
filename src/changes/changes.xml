@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+            <action type="remove" dev="rbri">
+                Deprecated constants ABOUT_SCHEME, ABOUT_BLANK, and URL_ABOUT_BLANK removed from WebClient.
+            </action>
             <action type="update" dev="rbri">"
                 Class com.gargoylesoftware.htmlunit.html.DomTreeWalker is deprecated (Android compatibility).
             </action>
