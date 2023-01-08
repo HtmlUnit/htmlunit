@@ -100,14 +100,14 @@ public final class BrowserVersion implements Serializable {
     /** Internet Explorer 11. */
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
-    /** Latest Edge */
+    /** Latest Edge. */
     public static final BrowserVersion EDGE = new BrowserVersion(108, "Edge");
 
     /** Latest Chrome. */
     public static final BrowserVersion CHROME = new BrowserVersion(108, "Chrome");
 
     /**
-     * Array with all supported browsers
+     * Array with all supported browsers.
      */
     public static final BrowserVersion[] ALL_SUPPORTED_BROWSERS = {CHROME, EDGE, FIREFOX, FIREFOX_ESR, INTERNET_EXPLORER};
 
@@ -896,7 +896,7 @@ public final class BrowserVersion implements Serializable {
     }
 
     /**
-     * Returns the corresponding height of the specified {@code fontSize}
+     * Returns the corresponding height of the specified {@code fontSize}.
      * @param fontSize the font size
      * @return the corresponding height
      */
