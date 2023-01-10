@@ -86,7 +86,6 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -240,16 +239,15 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         String value = getStyleAttribute(definition.getAttributeName());
         if (value.isEmpty()) {
-            if (getDefaultValueIfEmpty) {
-                return definition.getDefaultComputedValue(browserVersion);
-            }
-
             final DomNode parent = domElem.getParentNode();
             if (parent instanceof DomElement && INHERITABLE_DEFINITIONS.contains(definition)) {
                 final WebWindow window = domElem.getPage().getEnclosingWindow();
-                final ComputedCssStyleDeclaration style =
-                        window.getComputedStyle((DomElement) parent, null);
-                value = style.getStyleAttribute(definition, getDefaultValueIfEmpty);
+                value = window
+                        .getComputedStyle((DomElement) parent, null)
+                        .getStyleAttribute(definition, getDefaultValueIfEmpty);
+            }
+            else if (getDefaultValueIfEmpty) {
+                value = definition.getDefaultComputedValue(browserVersion);
             }
         }
 
