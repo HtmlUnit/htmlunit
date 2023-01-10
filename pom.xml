@@ -1100,6 +1100,9 @@
         <contributor>
             <name>Bharatwaaj Shankaranarayanan</name>
         </contributor>
+        <contributor>
+            <name>Lai Quang Duong</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->

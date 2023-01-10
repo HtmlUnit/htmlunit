@@ -35,6 +35,8 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
+import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for the client's browsing history.
@@ -131,12 +133,7 @@ public class History extends HtmlUnitScriptable {
     public void replaceState(final Object object, final String title, final Object url) {
         final WebWindow w = getWindow().getWebWindow();
         try {
-            URL newStateUrl = null;
-            if (url instanceof String && StringUtils.isNotBlank((String) url)) {
-                final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-                newStateUrl = page.getFullyQualifiedUrl((String) url);
-            }
-            w.getHistory().replaceState(object, newStateUrl);
+            w.getHistory().replaceState(object, buildNewStateUrl(w, url));
         }
         catch (final MalformedURLException e) {
             Context.throwAsScriptRuntimeEx(e);
@@ -153,16 +150,23 @@ public class History extends HtmlUnitScriptable {
     public void pushState(final Object object, final String title, final Object url) {
         final WebWindow w = getWindow().getWebWindow();
         try {
-            URL newStateUrl = null;
-            if (url instanceof String && StringUtils.isNotBlank((String) url)) {
-                final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-                newStateUrl = page.getFullyQualifiedUrl((String) url);
-            }
-            w.getHistory().pushState(object, newStateUrl);
+            w.getHistory().pushState(object, buildNewStateUrl(w, url));
         }
         catch (final IOException e) {
             Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    private static URL buildNewStateUrl(final WebWindow webWindow, final Object url) throws MalformedURLException {
+        URL newStateUrl = null;
+        if (url != null && !Undefined.isUndefined(url)) {
+            final String urlString = ScriptRuntime.toString(url);
+            if (StringUtils.isNotBlank(urlString)) {
+                final HtmlPage page = (HtmlPage) webWindow.getEnclosedPage();
+                newStateUrl = page.getFullyQualifiedUrl(urlString);
+            }
+        }
+        return newStateUrl;
     }
 
     /**
