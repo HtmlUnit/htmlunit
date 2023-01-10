@@ -41,6 +41,7 @@ import com.gargoylesoftware.htmlunit.util.NameValuePair;
  * @author Adam Afeltowicz
  * @author Carsten Steul
  * @author Anton Demydenko
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class History2Test extends WebDriverTestCase {
@@ -594,6 +595,90 @@ public class History2Test extends WebDriverTestCase {
                 + "   log('onhashchange ' + location.hash);\n"
                 + " }\n"
                 + " window.onhashchange = locationHashChanged;\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"href=§§URL§§", "href=§§URL§§"})
+    public void replaceStateUndefinedObj() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.replaceState(null, '', undefined);\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"href=§§URL§§", "href=§§URL§§undefined"})
+    public void replaceStateUndefinedString() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.replaceState(null, '', 'undefined');\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"href=§§URL§§", "href=§§URL§§"})
+    public void pushStateUndefinedObj() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.pushState(null, '', undefined);\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
+    @Alerts({"href=§§URL§§", "href=§§URL§§undefined"})
+    public void pushStateUndefinedString() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  function test() {\n"
+                + "    log('href=' + location.href);\n"
+                + "    window.history.pushState(null, '', 'undefined');\n"
+                + "    log('href=' + location.href);\n"
+                + "  }\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"

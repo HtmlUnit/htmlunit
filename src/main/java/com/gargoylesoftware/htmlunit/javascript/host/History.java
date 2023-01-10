@@ -45,6 +45,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Context;
  * @author Ahmed Ashour
  * @author Ronald Brill
  * @author Adam Afeltowicz
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class History extends HtmlUnitScriptable {
@@ -127,13 +128,13 @@ public class History extends HtmlUnitScriptable {
      * @param url an optional URL
      */
     @JsxFunction
-    public void replaceState(final Object object, final String title, final String url) {
+    public void replaceState(final Object object, final String title, final Object url) {
         final WebWindow w = getWindow().getWebWindow();
         try {
             URL newStateUrl = null;
-            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-            if (StringUtils.isNotBlank(url)) {
-                newStateUrl = page.getFullyQualifiedUrl(url);
+            if (url instanceof String && StringUtils.isNotBlank((String) url)) {
+                final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+                newStateUrl = page.getFullyQualifiedUrl((String) url);
             }
             w.getHistory().replaceState(object, newStateUrl);
         }
@@ -149,13 +150,13 @@ public class History extends HtmlUnitScriptable {
      * @param url an optional URL
      */
     @JsxFunction
-    public void pushState(final Object object, final String title, final String url) {
+    public void pushState(final Object object, final String title, final Object url) {
         final WebWindow w = getWindow().getWebWindow();
         try {
             URL newStateUrl = null;
-            final HtmlPage page = (HtmlPage) w.getEnclosedPage();
-            if (StringUtils.isNotBlank(url)) {
-                newStateUrl = page.getFullyQualifiedUrl(url);
+            if (url instanceof String && StringUtils.isNotBlank((String) url)) {
+                final HtmlPage page = (HtmlPage) w.getEnclosedPage();
+                newStateUrl = page.getFullyQualifiedUrl((String) url);
             }
             w.getHistory().pushState(object, newStateUrl);
         }
