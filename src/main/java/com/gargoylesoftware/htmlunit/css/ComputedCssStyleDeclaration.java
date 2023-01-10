@@ -229,22 +229,40 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
      */
     @Override
     public String getStyleAttribute(final Definition definition, final boolean getDefaultValueIfEmpty) {
-        final DomElement domElem = getDomElementOrNull();
-        final BrowserVersion browserVersion = domElem.getPage().getWebClient().getBrowserVersion();
+        final BrowserVersion browserVersion = getDomElementOrNull().getPage().getWebClient().getBrowserVersion();
+        final boolean feature = browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY);
+        final boolean isDefInheritable = INHERITABLE_DEFINITIONS.contains(definition);
 
-        if (!domElem.isAttachedToPage()
-                && browserVersion.hasFeature(CSS_STYLE_PROP_DISCONNECTED_IS_EMPTY)) {
+        // to make the fuzzer happy the recursion was removed
+        final ComputedCssStyleDeclaration[] queue = new ComputedCssStyleDeclaration[] {this};
+        String value = null;
+        while (queue[0] != null) {
+            value = getStyleAttributeWorker(definition, getDefaultValueIfEmpty,
+                        browserVersion, feature, isDefInheritable, queue);
+        }
+
+        return value;
+    }
+
+    private static String getStyleAttributeWorker(final Definition definition,
+                final boolean getDefaultValueIfEmpty, final BrowserVersion browserVersion,
+                final boolean feature, final boolean isDefInheritable,
+                final ComputedCssStyleDeclaration[] queue) {
+        final ComputedCssStyleDeclaration decl = queue[0];
+        queue[0] = null;
+
+        final DomElement domElem = decl.getDomElementOrNull();
+        if (!domElem.isAttachedToPage() && feature) {
             return EMPTY_FINAL;
         }
 
-        String value = getStyleAttribute(definition.getAttributeName());
+        String value = decl.getStyleAttribute(definition.getAttributeName());
         if (value.isEmpty()) {
             final DomNode parent = domElem.getParentNode();
-            if (parent instanceof DomElement && INHERITABLE_DEFINITIONS.contains(definition)) {
+            if (isDefInheritable && parent instanceof DomElement) {
                 final WebWindow window = domElem.getPage().getEnclosingWindow();
-                value = window
-                        .getComputedStyle((DomElement) parent, null)
-                        .getStyleAttribute(definition, getDefaultValueIfEmpty);
+
+                queue[0] = window.getComputedStyle((DomElement) parent, null);
             }
             else if (getDefaultValueIfEmpty) {
                 value = definition.getDefaultComputedValue(browserVersion);
