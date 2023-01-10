@@ -106,6 +106,15 @@ public class FuzzerTest extends WebTestCase {
         test("test-54613.html");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void case54965() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54965
+        test("test-54965.html");
+    }
+
     private void test(final String inputFileName) throws Exception {
         final InputStream file = getClass().getClassLoader()
                 .getResourceAsStream("com/gargoylesoftware/htmlunit/fuzzer/" + inputFileName);
@@ -113,18 +122,6 @@ public class FuzzerTest extends WebTestCase {
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {
             webClient.loadHtmlCodeIntoCurrentWindow(input);
-
-//            final WebResponse webResponse = new StringWebResponse(input, new URL("http://localhost.edu/index.html"));
-//            final HtmlPage page = new HtmlPage(webResponse, webClient.getCurrentWindow());
-//
-//            /*
-//             * net.sourceforge.htmlunit.corejs.javascript.EvaluatorException
-//             * seems to be fatal
-//             */
-//            webClient.getOptions().setThrowExceptionOnScriptError(false);
-//
-//            webClient.getCurrentWindow().setEnclosedPage(page);
-//            webClient.getPageCreator().getHtmlParser().parse(webResponse, page, false, false);
         }
     }
 }
