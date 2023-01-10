@@ -79,6 +79,7 @@ import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
+import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -239,15 +240,16 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
         String value = getStyleAttribute(definition.getAttributeName());
         if (value.isEmpty()) {
+            if (getDefaultValueIfEmpty) {
+                return definition.getDefaultComputedValue(browserVersion);
+            }
+
             final DomNode parent = domElem.getParentNode();
             if (parent instanceof DomElement && INHERITABLE_DEFINITIONS.contains(definition)) {
-                final Window window = domElem.getPage().getEnclosingWindow().getScriptableObject();
-                value = window.getWebWindow()
-                        .getComputedStyle((DomElement) parent, null)
-                        .getStyleAttribute(definition, getDefaultValueIfEmpty);
-            }
-            else if (getDefaultValueIfEmpty) {
-                value = definition.getDefaultComputedValue(browserVersion);
+                final WebWindow window = domElem.getPage().getEnclosingWindow();
+                final ComputedCssStyleDeclaration style =
+                        window.getComputedStyle((DomElement) parent, null);
+                value = style.getStyleAttribute(definition, getDefaultValueIfEmpty);
             }
         }
 
