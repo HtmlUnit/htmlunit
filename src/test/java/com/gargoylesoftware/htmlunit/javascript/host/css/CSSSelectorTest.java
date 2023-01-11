@@ -1213,10 +1213,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "link_2", "link_3"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(IE = {"2", "link_2", "link_3"})
     public void invalid_not() throws Exception {
         final String html = "<html><head>\n"
             + "<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n"
@@ -1378,10 +1375,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "id2",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(IE = "id2")
     public void notWithFirstOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1409,10 +1403,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2",
                        "3", "id1", "id2", "id3"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(IE = {"2", "id2", "id3", "2", "id1", "id3", "2", "id1", "id2", "3", "id1", "id2", "id3"})
     public void notWithNthOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1458,10 +1449,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "id2",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(IE = "id2")
     public void notWithLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -1489,10 +1477,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3",
                        "3", "id1", "id2", "id3"},
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
+    @HtmlUnitNYI(IE = {"2", "id1", "id2", "2", "id1", "id3", "2", "id2", "id3", "3", "id1", "id2", "id3"})
     public void notWithNthLastOfType() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
@@ -2306,6 +2291,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"null", "null", "[object HTMLSpanElement]"},
             IE = {"null", "exception", "[object HTMLSpanElement]"})
+    @HtmlUnitNYI(IE = {"null", "null", "[object HTMLSpanElement]"})
     public void notEmptyDetached() throws Exception {
         emptyAndDetached("*:not(p)");
         emptyAndDetached(":not(p)");
@@ -2553,7 +2539,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('#foo > :not(:first)'));\n"
-            + "  } catch(e) {log('exception')}\n"
+            + "  } catch(e) {log('exception' + e)}\n"
             + "  try {\n"
             + "    log(document.querySelector('#foo > :not(:first)'));\n"
             + "  } catch(e) {log('exception')}\n"

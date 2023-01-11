@@ -41,7 +41,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 import org.apache.commons.io.ByteOrderMark;
@@ -66,11 +65,11 @@ import com.gargoylesoftware.css.dom.Property;
 import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.CSSParseException;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.LexicalUnit;
 import com.gargoylesoftware.css.parser.condition.AttributeCondition;
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
 import com.gargoylesoftware.css.parser.condition.Condition.ConditionType;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.media.MediaQuery;
@@ -649,6 +648,17 @@ public class CssStyleSheet implements Serializable {
                 }
                 return false;
 
+            case NOT_PSEUDO_CLASS_CONDITION:
+                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
+                final SelectorList selectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : selectorList) {
+                    if (selects(browserVersion, selector, element, null,
+                                    fromQuerySelectorAll, throwOnSyntax)) {
+                        return false;
+                    }
+                }
+                return true;
+
             case PSEUDO_CLASS_CONDITION:
                 return selectsPseudoClass(browserVersion, condition, element, fromQuerySelectorAll, throwOnSyntax);
 
@@ -934,53 +944,6 @@ public class CssStyleSheet implements Serializable {
                     }
                     return getNthElement(nth, index);
                 }
-                else if (value.startsWith("not(")) {
-                    final String selectors = value.substring(value.indexOf('(') + 1, value.length() - 1);
-                    final AtomicBoolean errorOccured = new AtomicBoolean(false);
-                    final CSSErrorHandler errorHandler = new CSSErrorHandler() {
-                        @Override
-                        public void warning(final CSSParseException exception) throws CSSException {
-                            // ignore
-                        }
-
-                        @Override
-                        public void fatalError(final CSSParseException exception) throws CSSException {
-                            errorOccured.set(true);
-                        }
-
-                        @Override
-                        public void error(final CSSParseException exception) throws CSSException {
-                            errorOccured.set(true);
-                        }
-                    };
-                    final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-                    parser.setErrorHandler(errorHandler);
-                    try {
-                        final SelectorList selectorList = parser.parseSelectors(selectors);
-                        if (errorOccured.get() || selectorList == null || selectorList.size() != 1) {
-                            if (throwOnSyntax) {
-                                throw new CSSException("Invalid selectors: " + selectors);
-                            }
-                            return false;
-                        }
-
-                        for (final Selector selector : selectorList) {
-                            if (!isValidSelector(selector, 9, element)) {
-                                if (throwOnSyntax) {
-                                    throw new CSSException("Invalid selector: " + selector);
-                                }
-                                return false;
-                            }
-                        }
-
-                        return !selects(browserVersion, selectorList.get(0), element,
-                                null, fromQuerySelectorAll, throwOnSyntax);
-                    }
-                    catch (final IOException e) {
-                        throw new CSSException("Error parsing CSS selectors from '" + selectors + "': "
-                                + e.getMessage());
-                    }
-                }
                 return false;
         }
     }
@@ -1212,6 +1175,15 @@ public class CssStyleSheet implements Serializable {
             case PREFIX_ATTRIBUTE_CONDITION:
             case SUBSTRING_ATTRIBUTE_CONDITION:
             case SUFFIX_ATTRIBUTE_CONDITION:
+                return true;
+            case NOT_PSEUDO_CLASS_CONDITION:
+                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
+                final SelectorList selectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : selectorList) {
+                    if (!isValidSelector(selector, documentMode, domNode)) {
+                        return false;
+                    }
+                }
                 return true;
             case PSEUDO_CLASS_CONDITION:
                 String value = condition.getValue();
