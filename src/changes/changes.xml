@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+            <action type="update" dev="rbri">
+                cssparser: many, many updates for parsing the :not() pseudo selector done - they are now
+                first class citicens for the parser and also for handling the selectors.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fixed url parameter processing in history.replaceState() / history.pushState().
             </action>
