@@ -46,6 +46,7 @@ import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.condition.Condition;
+import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
 import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
@@ -490,6 +491,15 @@ public class CSSStyleSheet extends StyleSheet {
             case PREFIX_ATTRIBUTE_CONDITION:
             case SUBSTRING_ATTRIBUTE_CONDITION:
             case SUFFIX_ATTRIBUTE_CONDITION:
+                return true;
+            case NOT_PSEUDO_CLASS_CONDITION:
+                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
+                final SelectorList selectorList = notPseudoCondition.getSelectors();
+                for (final Selector selector : selectorList) {
+                    if (!isValidSelector(selector, documentMode, domNode)) {
+                        return false;
+                    }
+                }
                 return true;
             case PSEUDO_CLASS_CONDITION:
                 String value = condition.getValue();

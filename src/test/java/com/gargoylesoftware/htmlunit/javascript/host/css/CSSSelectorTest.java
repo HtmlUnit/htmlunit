@@ -2539,7 +2539,7 @@ public class CSSSelectorTest extends WebDriverTestCase {
             + "function test() {\n"
             + "  try {\n"
             + "    log(document.querySelectorAll('#foo > :not(:first)'));\n"
-            + "  } catch(e) {log('exception' + e)}\n"
+            + "  } catch(e) {log('exception')}\n"
             + "  try {\n"
             + "    log(document.querySelector('#foo > :not(:first)'));\n"
             + "  } catch(e) {log('exception')}\n"
