@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
+import java.time.Duration;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -77,9 +77,9 @@ public class TinyMceTest extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url);
 
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         final WebElement result = driver.findElement(By.id("testresult"));
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
         final WebElement totalSpan = result.findElement(By.xpath("./span[@class='all']"));
         final int total = Integer.parseInt(totalSpan.getText());

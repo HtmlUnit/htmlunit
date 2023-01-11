@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static org.junit.Assert.fail;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -238,14 +238,14 @@ public class YuiTest extends WebDriverTestCase {
             driver.findElement(By.id(buttonToPush)).click();
         }
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         final WebElement logDiv = driver.findElement(By.className("yui-log-bd"));
         final WebElement lastMessage = logDiv.findElement(
             By.xpath("pre[last() and contains(string(.), 'Testing completed')]"));
 
         LOG.info(lastMessage.getText());
 
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
         final List<WebElement> tests = driver.findElements(By.xpath("//p[span[@class='pass' or @class='fail']]"));
         if (tests.isEmpty()) {
             fail("No tests were executed!");

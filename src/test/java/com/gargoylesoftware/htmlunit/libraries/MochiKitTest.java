@@ -14,7 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.libraries;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Before;
@@ -154,10 +154,10 @@ public class MochiKitTest extends WebDriverTestCase {
         driver.get(url);
 
         // make single test results visible
-        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.findElement(By.linkText("Toggle passed tests")).click();
         driver.findElement(By.linkText("Toggle failed tests")).click();
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
 
         String expected = loadExpectation(testName);
         expected = expected.trim();

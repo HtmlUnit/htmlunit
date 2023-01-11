@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.libraries;
 
 import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jetty.server.Server;
 import org.junit.AfterClass;
@@ -83,7 +83,7 @@ public class MooTools121Test extends WebDriverTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(URL_FIRST + "Specs/index.html");
 
-        driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
         driver.findElement(By.xpath("id('progress')[text() = '100']"));
         // usually this need 40s but sometimes our build machine is slower
         // this is not a performance test, we only like to ensure that all
