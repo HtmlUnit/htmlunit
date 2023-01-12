@@ -652,15 +652,14 @@ public class CssStyleSheet implements Serializable {
                 final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
                 final SelectorList selectorList = notPseudoCondition.getSelectors();
                 for (final Selector selector : selectorList) {
-                    if (selects(browserVersion, selector, element, null,
-                                    fromQuerySelectorAll, throwOnSyntax)) {
+                    if (selects(browserVersion, selector, element, null, fromQuerySelectorAll, throwOnSyntax)) {
                         return false;
                     }
                 }
                 return true;
 
             case PSEUDO_CLASS_CONDITION:
-                return selectsPseudoClass(browserVersion, condition, element, fromQuerySelectorAll, throwOnSyntax);
+                return selectsPseudoClass(browserVersion, condition, element);
 
             default:
                 if (LOG.isErrorEnabled()) {
@@ -753,8 +752,7 @@ public class CssStyleSheet implements Serializable {
     }
 
     private static boolean selectsPseudoClass(final BrowserVersion browserVersion,
-            final Condition condition, final DomElement element, final boolean fromQuerySelectorAll,
-            final boolean throwOnSyntax) {
+            final Condition condition, final DomElement element) {
         if (browserVersion.hasFeature(QUERYSELECTORALL_NOT_IN_QUIRKS)) {
             final Object sobj = element.getPage().getScriptableObject();
             if (sobj instanceof HTMLDocument && ((HTMLDocument) sobj).getDocumentMode() < 8) {
