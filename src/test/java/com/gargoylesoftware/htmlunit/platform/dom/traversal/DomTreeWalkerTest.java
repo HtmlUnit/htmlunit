@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package com.gargoylesoftware.htmlunit.platform.dom.traversal;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,9 +21,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.TreeWalker;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import com.gargoylesoftware.htmlunit.html.HtmlHead;
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 
 /**
@@ -53,8 +56,7 @@ public final class DomTreeWalkerTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(html);
         if (driver instanceof HtmlUnitDriver) {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
-            final TreeWalker walker = page.createTreeWalker(page.getDocumentElement(),
-                    org.w3c.dom.traversal.NodeFilter.SHOW_ALL, null, true);
+            final TreeWalker walker = new DomTreeWalker(page.getDocumentElement(), NodeFilter.SHOW_ALL, null, true);
             assertThat(walker.firstChild(), instanceOf(HtmlHead.class));
         }
     }
