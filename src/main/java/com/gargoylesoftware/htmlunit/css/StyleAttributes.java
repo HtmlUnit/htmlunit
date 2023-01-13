@@ -1744,13 +1744,13 @@ public final class StyleAttributes implements Serializable {
         MASK_TYPE_("mask-type", "mask-type", ff("luminance")),
 
         /** The style property {@code mathDepth}. */
-        MATH_DEPTH("mathDepth", "math-depth", chromeAndEdge("")),
+        MATH_DEPTH("mathDepth", "math-depth", chromeAndEdge("0")),
 
         /** The style property {@code mathShift}. */
-        MATH_SHIFT("mathShift", "math-shift", chromeAndEdge("")),
+        MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal()),
 
         /** The style property {@code mathStyle}. */
-        MATH_STYLE("mathStyle", "math-style", chromeAndEdge("")),
+        MATH_STYLE("mathStyle", "math-style", chromeAndEdgeNormal()),
 
         /** The style property {@code maxBlockSize}. */
         MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ffNone(), chromeAndEdgeNone()),
