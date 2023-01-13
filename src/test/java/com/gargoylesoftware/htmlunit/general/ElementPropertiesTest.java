@@ -220,6 +220,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                             .firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
                 }
 
+                final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
+                List<String> simulatedProperties = stringAsArray(String.join(",", expectedAlerts));
+
                 final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
                 String[] nyiAlerts = {};
                 if (htmlUnitNYI != null) {
@@ -238,10 +241,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                     else if (browserVersion == BrowserVersion.CHROME) {
                         nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
                     }
-                }
 
-                final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
-                final List<String> simulatedProperties = stringAsArray(String.join(",", nyiAlerts));
+                    simulatedProperties = stringAsArray(String.join(",", nyiAlerts));
+                }
 
                 final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
                 erroredProperties.removeAll(realProperties);
@@ -5304,6 +5306,51 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "dispatchEvent(),removeEventListener()")
     public void audioContext() throws Exception {
         testString("", "new AudioContext()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "addEventListener(),audioWorklet,createAnalyser(),createBiquadFilter(),createBuffer(),"
+                + "createBufferSource(),createChannelMerger(),createChannelSplitter(),createConstantSource(),"
+                + "createConvolver(),createDelay(),createDynamicsCompressor(),createGain(),createIIRFilter(),"
+                + "createOscillator(),createPanner(),createPeriodicWave(),createScriptProcessor(),"
+                + "createStereoPanner(),createWaveShaper(),currentTime,decodeAudioData(),destination,"
+                + "dispatchEvent(),length,listener,oncomplete,onstatechange,removeEventListener(),resume(),"
+                + "sampleRate,startRendering(),state,suspend()",
+            EDGE = "addEventListener(),audioWorklet,createAnalyser(),createBiquadFilter(),createBuffer(),"
+                + "createBufferSource(),createChannelMerger(),createChannelSplitter(),createConstantSource(),"
+                + "createConvolver(),createDelay(),createDynamicsCompressor(),createGain(),createIIRFilter(),"
+                + "createOscillator(),createPanner(),createPeriodicWave(),createScriptProcessor(),"
+                + "createStereoPanner(),createWaveShaper(),currentTime,decodeAudioData(),destination,"
+                + "dispatchEvent(),length,listener,oncomplete,onstatechange,removeEventListener(),resume(),"
+                + "sampleRate,startRendering(),state,suspend()",
+            FF = "addEventListener(),audioWorklet,createAnalyser(),createBiquadFilter(),createBuffer(),"
+                + "createBufferSource(),createChannelMerger(),createChannelSplitter(),createConstantSource(),"
+                + "createConvolver(),createDelay(),createDynamicsCompressor(),createGain(),createIIRFilter(),"
+                + "createOscillator(),createPanner(),createPeriodicWave(),createScriptProcessor(),"
+                + "createStereoPanner(),createWaveShaper(),currentTime,decodeAudioData(),destination,"
+                + "dispatchEvent(),length,listener,oncomplete,onstatechange,removeEventListener(),"
+                + "resume(),sampleRate,startRendering(),state",
+            FF_ESR = "addEventListener(),audioWorklet,createAnalyser(),createBiquadFilter(),createBuffer(),"
+                + "createBufferSource(),createChannelMerger(),createChannelSplitter(),createConstantSource(),"
+                + "createConvolver(),createDelay(),createDynamicsCompressor(),createGain(),createIIRFilter(),"
+                + "createOscillator(),createPanner(),createPeriodicWave(),createScriptProcessor(),"
+                + "createStereoPanner(),createWaveShaper(),currentTime,decodeAudioData(),destination,"
+                + "dispatchEvent(),length,listener,oncomplete,onstatechange,removeEventListener(),"
+                + "resume(),sampleRate,startRendering(),state",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
+                + "dispatchEvent(),removeEventListener(),startRendering()",
+            EDGE = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
+                + "dispatchEvent(),removeEventListener(),startRendering()",
+            FF_ESR = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
+                + "dispatchEvent(),removeEventListener(),startRendering()",
+            FF = "addEventListener(),createBuffer(),createBufferSource(),createGain(),decodeAudioData(),"
+                + "dispatchEvent(),removeEventListener(),startRendering()")
+    public void offlineAudioContext() throws Exception {
+        testString("", "new OfflineAudioContext({length: 44100 * 1, sampleRate: 44100})");
     }
 
     /**

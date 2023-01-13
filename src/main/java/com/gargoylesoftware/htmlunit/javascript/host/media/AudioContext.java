@@ -19,21 +19,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
-import com.gargoylesoftware.htmlunit.javascript.PostponedAction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
-
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
  * A JavaScript object for {@code AudioContext}.
@@ -49,56 +36,5 @@ public class AudioContext extends BaseAudioContext {
      */
     @JsxConstructor
     public AudioContext() {
-    }
-
-    /**
-     * The decodeAudioData() method of the BaseAudioContext Interface is used to asynchronously
-     * decode audio file data contained in an ArrayBuffer. In this case the ArrayBuffer is
-     * loaded from XMLHttpRequest and FileReader.
-     * The decoded AudioBuffer is resampled to the AudioContext's sampling rate,
-     * then passed to a callback or promise.
-     * @param buffer An ArrayBuffer containing the audio data to be decoded, usually grabbed
-     * from XMLHttpRequest, WindowOrWorkerGlobalScope.fetch() or FileReader
-     * @param success A callback function to be invoked when the decoding successfully finishes.
-     * The single argument to this callback is an AudioBuffer representing the decodedData
-     * (the decoded PCM audio data). Usually you'll want to put the decoded data into
-     * an AudioBufferSourceNode, from which it can be played and manipulated how you want.
-     * @param error An optional error callback, to be invoked if an error occurs
-     * when the audio data is being decoded.
-     * @return the promise or null
-     */
-    @JsxFunction
-    public Object decodeAudioData(final NativeArrayBuffer buffer, final Function success, final Function error) {
-        final Window window = getWindow();
-        final HtmlPage owningPage = (HtmlPage) window.getDocument().getPage();
-        final JavaScriptEngine jsEngine =
-                (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
-
-        if (error != null) {
-            jsEngine.addPostponedAction(new PostponedAction(owningPage, "AudioContext.decodeAudioData") {
-                @Override
-                public void execute() throws Exception {
-                    jsEngine.callFunction(owningPage, error, getParentScope(), AudioContext.this, new Object[] {});
-                }
-            });
-            return null;
-        }
-
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-        return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {});
-    }
-
-    /**
-     * @return a GainNode, which can be used to control the overall gain (or volume) of the audio graph.
-     */
-    @JsxFunction
-    public GainNode createGain() {
-        final GainNode node = new GainNode();
-        node.setParentScope(getParentScope());
-        node.setPrototype(getPrototype(node.getClass()));
-        node.jsConstructor(this);
-        return node;
     }
 }

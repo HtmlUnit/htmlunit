@@ -211,6 +211,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                             .firstDefinedOrGiven(expectedAlerts, alerts.CHROME(), alerts.DEFAULT());
                 }
 
+                final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
+                List<String> simulatedProperties = stringAsArray(String.join(",", expectedAlerts));
+
                 final HtmlUnitNYI htmlUnitNYI = method.getAnnotation(HtmlUnitNYI.class);
                 String[] nyiAlerts = {};
                 if (htmlUnitNYI != null) {
@@ -229,10 +232,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                     else if (browserVersion == BrowserVersion.CHROME) {
                         nyiAlerts = BrowserVersionClassRunner.firstDefinedOrGiven(expectedAlerts, htmlUnitNYI.CHROME());
                     }
-                }
 
-                final List<String> realProperties = stringAsArray(String.join(",", expectedAlerts));
-                final List<String> simulatedProperties = stringAsArray(String.join(",", nyiAlerts));
+                    simulatedProperties = stringAsArray(String.join(",", nyiAlerts));
+                }
 
                 final List<String> erroredProperties = new ArrayList<>(simulatedProperties);
                 erroredProperties.removeAll(realProperties);
@@ -11545,12 +11547,29 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "createMediaStreamSource(),createMediaStreamTrackSource(),getOutputTimestamp(),"
                 + "outputLatency,suspend()",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "constructor(),createGain(),decodeAudioData()",
-            EDGE = "constructor(),createGain(),decodeAudioData()",
-            FF_ESR = "constructor(),createGain(),decodeAudioData()",
-            FF = "constructor(),createGain(),decodeAudioData()")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF_ESR = "constructor()",
+            FF = "constructor()")
     public void audioContext() throws Exception {
         testString("", "new AudioContext()");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),length,oncomplete,resume(),startRendering(),suspend()",
+            EDGE = "constructor(),length,oncomplete,resume(),startRendering(),suspend()",
+            FF = "constructor(),length,oncomplete,startRendering()",
+            FF_ESR = "constructor(),length,oncomplete,startRendering()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor(),startRendering()",
+            EDGE = "constructor(),startRendering()",
+            FF_ESR = "constructor(),startRendering()",
+            FF = "constructor(),startRendering()")
+    public void offlineAudioContext() throws Exception {
+        testString("", "new OfflineAudioContext({length: 44100 * 1, sampleRate: 44100})");
     }
 
     /**
