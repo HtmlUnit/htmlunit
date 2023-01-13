@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="2.70.0" date="xx, 2023" description="Bugfixes">
+        <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Bugfixes">
             <action type="update" dev="rbri">
                 cssparser: many, many updates for parsing the :not() pseudo selector done - they are now
                 first class citicens for the parser and also for handling the selectors.
