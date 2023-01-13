@@ -681,11 +681,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "constructor(),currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,path,preventDefault(),"
+                + "constructor(),currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
                 + "type",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,composedPath(),"
-                + "constructor(),currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,path,preventDefault(),"
+                + "constructor(),currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),"
                 + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
                 + "type",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
