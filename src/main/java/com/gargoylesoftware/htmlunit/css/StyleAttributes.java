@@ -1405,6 +1405,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code hyphenate-character}. */
         HYPHENATE_CHARACTER_("hyphenate-character", "hyphenate-character", ff("auto")),
 
+        /** The style property {@code hyphenateLimitChars}. */
+        HYPHENATE__LIMIT_CHAR("hyphenateLimitChars", "hyphenate-limit-char", chromeAndEdgeAuto()),
+
         /** The style property {@code hyphens}. */
         HYPHENS("hyphens", "hyphens", ff("manual"), chromeAndEdge("manual")),
 
@@ -1739,6 +1742,15 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code mask-type}. */
         MASK_TYPE_("mask-type", "mask-type", ff("luminance")),
+
+        /** The style property {@code mathDepth}. */
+        MATH_DEPTH("mathDepth", "math-depth", chromeAndEdge("")),
+
+        /** The style property {@code mathShift}. */
+        MATH_SHIFT("mathShift", "math-shift", chromeAndEdge("")),
+
+        /** The style property {@code mathStyle}. */
+        MATH_STYLE("mathStyle", "math-style", chromeAndEdge("")),
 
         /** The style property {@code maxBlockSize}. */
         MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ffNone(), chromeAndEdgeNone()),
