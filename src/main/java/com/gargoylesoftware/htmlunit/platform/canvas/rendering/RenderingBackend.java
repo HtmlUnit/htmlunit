@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.platform.canvas.rendering;
 
 import java.io.IOException;
 
-import javax.imageio.ImageReader;
-
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D;
 
@@ -81,7 +79,7 @@ public interface RenderingBackend {
     /**
      * Draws images onto the context.
      *
-     * @param imageReader the reader to read the image from 8the first one)
+     * @param imageData the reader to read the image from 8the first one)
      * @param sx the X coordinate of the top left corner of the sub-rectangle of the source image
      *        to draw into the destination context
      * @param sy the Y coordinate of the top left corner of the sub-rectangle of the source image
@@ -94,7 +92,7 @@ public interface RenderingBackend {
      * @param dHeight the height to draw the image in the destination canvas. This allows scaling of the drawn image
      * @throws IOException in case o problems
      */
-    void drawImage(ImageReader imageReader,
+    void drawImage(com.gargoylesoftware.htmlunit.platform.image.ImageData imageData,
             int sx, int sy, Integer sWidth, Integer sHeight,
             int dx, int dy, Integer dWidth, Integer dHeight) throws IOException;
 

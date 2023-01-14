@@ -14,13 +14,14 @@
  */
 package com.gargoylesoftware.htmlunit.platform;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -28,6 +29,8 @@ import org.w3c.dom.Node;
 import com.gargoylesoftware.htmlunit.platform.canvas.rendering.AwtRenderingBackend;
 import com.gargoylesoftware.htmlunit.platform.canvas.rendering.NoOpRenderingBackend;
 import com.gargoylesoftware.htmlunit.platform.canvas.rendering.RenderingBackend;
+import com.gargoylesoftware.htmlunit.platform.image.ImageData;
+import com.gargoylesoftware.htmlunit.platform.image.NoOpImageData;
 
 /**
  * Singleton to handle JDK specific stuff.
@@ -37,7 +40,7 @@ import com.gargoylesoftware.htmlunit.platform.canvas.rendering.RenderingBackend;
  */
 public final class Platform {
 
-    private static final Log LOG = LogFactory.getLog(Platform.class);
+    // private static final Log LOG = LogFactory.getLog(Platform.class);
 
     private static XmlUtilsHelperAPI HelperXerces_;
     private static XmlUtilsHelperAPI HelperSunXerces_;
@@ -128,6 +131,25 @@ public final class Platform {
         }
         catch (final Exception e) {
             return new NoOpRenderingBackend(imageWidth, imageHeight);
+        }
+    }
+
+    public static ImageData buildImageData(final InputStream inputStream) throws IOException {
+        try {
+            final Class<?> backendClass = Class.forName(
+                        "com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData");
+            return (ImageData) ConstructorUtils.invokeConstructor(backendClass, inputStream);
+        }
+        catch (final InvocationTargetException e) {
+            final Throwable targetEx = e.getTargetException();
+            if (targetEx instanceof IOException) {
+                throw (IOException) e.getTargetException();
+            }
+
+            return new NoOpImageData();
+        }
+        catch (final Exception ex) {
+            return new NoOpImageData();
         }
     }
 

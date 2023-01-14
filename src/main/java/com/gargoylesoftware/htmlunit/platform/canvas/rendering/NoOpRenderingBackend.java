@@ -16,8 +16,6 @@ package com.gargoylesoftware.htmlunit.platform.canvas.rendering;
 
 import java.io.IOException;
 
-import javax.imageio.ImageReader;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -125,7 +123,7 @@ public class NoOpRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void drawImage(final ImageReader imageReader,
+    public void drawImage(final com.gargoylesoftware.htmlunit.platform.image.ImageData imageData,
             final int sx, final int sy, final Integer sWidth, final Integer sHeight,
             final int dx, final int dy, final Integer dWidth, final Integer dHeight) throws IOException {
         if (LOG.isDebugEnabled()) {

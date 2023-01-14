@@ -250,6 +250,21 @@ public class ArchitectureTest {
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.DocumentTraversal");
 
     /**
+     * Make sure to not use javax.imageio.
+     */
+    @ArchTest
+    public static final ArchRule androidImageio = noClasses()
+         .that()
+            .doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData")
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
+            // ToDo
+            .and().doNotHaveFullyQualifiedName(
+                    "com.gargoylesoftware.htmlunit.html.HtmlImage")
+        .should().dependOnClassesThat().resideInAnyPackage("javax.imageio..");
+
+    /**
      * Make sure to not use Xerces.
      */
     @ArchTest

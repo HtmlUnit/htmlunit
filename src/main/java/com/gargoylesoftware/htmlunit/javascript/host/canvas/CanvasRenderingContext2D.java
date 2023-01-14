@@ -21,8 +21,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 
 import java.io.IOException;
 
-import javax.imageio.ImageReader;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -397,12 +395,13 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
         if (image instanceof HTMLImageElement) {
             final HTMLImageElement imageElem = (HTMLImageElement) image;
             try {
-                final ImageReader imageReader = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageReader();
+                final com.gargoylesoftware.htmlunit.platform.image.ImageData imageData
+                            = ((HtmlImage) imageElem.getDomNodeOrDie()).getImageData();
 
                 // 3 arguments
                 //   void ctx.drawImage(image, dx, dy);
                 if (Undefined.isUndefined(sWidth)) {
-                    getRenderingBackend().drawImage(imageReader, 0, 0, null, null, sx, sy, null, null);
+                    getRenderingBackend().drawImage(imageData, 0, 0, null, null, sx, sy, null, null);
                 }
 
                 // 5 arguments
@@ -411,7 +410,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     final int dWidthI = ScriptRuntime.toInt32(sWidth);
                     final int dHeightI = ScriptRuntime.toInt32(sHeight);
 
-                    getRenderingBackend().drawImage(imageReader, 0, 0, null, null, sx, sy, dWidthI, dHeightI);
+                    getRenderingBackend().drawImage(imageData, 0, 0, null, null, sx, sy, dWidthI, dHeightI);
                 }
 
                 // all 9 arguments
@@ -425,7 +424,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
                     final int dWidthI = ScriptRuntime.toInt32(dWidth);
                     final int dHeightI = ScriptRuntime.toInt32(dHeight);
 
-                    getRenderingBackend().drawImage(imageReader,
+                    getRenderingBackend().drawImage(imageData,
                             sx, sy, sWidthI, sHeightI, dxI, dyI, dWidthI, dHeightI);
                 }
             }

@@ -32,12 +32,9 @@ import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Files;
-import java.util.Iterator;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -56,6 +53,10 @@ import com.gargoylesoftware.htmlunit.javascript.host.dom.Document;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
+import com.gargoylesoftware.htmlunit.platform.Platform;
+import com.gargoylesoftware.htmlunit.platform.geom.IntDimension2D;
+import com.gargoylesoftware.htmlunit.platform.image.ImageData;
+import com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 /**
@@ -152,9 +153,11 @@ public class HtmlImage extends HtmlElement {
                 isComplete_ = false;
                 width_ = -1;
                 height_ = -1;
-                if (imageData_ != null) {
-                    imageData_.close();
-                    imageData_ = null;
+                try {
+                    closeImageData();
+                }
+                catch (final Exception e) {
+                    LOG.error(e.getMessage(), e);
                 }
 
                 final String readyState = htmlPage.getReadyState();
@@ -614,21 +617,42 @@ public class HtmlImage extends HtmlElement {
      *
      * @return the <code>ImageReader</code> which can be used to read the image contained by this image element
      * @throws IOException if an error occurs while downloading or reading the image
+     *
+     * @deprecated as of version 2.70.0; use {@link #getImageData()} instead
      */
+    @Deprecated
     public ImageReader getImageReader() throws IOException {
+        return ((ImageIOImageData) getImageData()).getImageReader();
+    }
+
+    public ImageData getImageData() throws IOException {
         readImageIfNeeded();
-        return imageData_.getImageReader();
+        return imageData_;
     }
 
     private void determineWidthAndHeight() throws IOException {
-        final ImageReader imgReader = getImageReader();
-        width_ = imgReader.getWidth(0);
-        height_ = imgReader.getHeight(0);
+        readImageIfNeeded();
+
+        final IntDimension2D dim = imageData_.getWidthHeight();
+        width_ = dim.getWidth();
+        height_ = dim.getHeight();
 
         // ImageIO creates temp files; to save file handles
         // we will cache the values and close this directly to free the resources
+        closeImageData();
+    }
+
+    private void closeImageData() throws IOException {
         if (imageData_ != null) {
-            imageData_.close();
+            try {
+                imageData_.close();
+            }
+            catch (final IOException e) {
+                throw e;
+            }
+            catch (final Exception ex) {
+                throw new IOException("Exception during close()", ex);
+            }
             imageData_ = null;
         }
     }
@@ -679,10 +703,8 @@ public class HtmlImage extends HtmlElement {
                 }
             }
 
-            if (imageData_ != null) {
-                imageData_.close();
-                imageData_ = null;
-            }
+            closeImageData();
+
             downloaded_ = true;
             isComplete_ = hasFeature(JS_IMAGE_COMPLETE_RETURNS_TRUE_FOR_NO_REQUEST)
                     || (imageWebResponse_ != null && imageWebResponse_.getContentType().contains("image"));
@@ -698,21 +720,7 @@ public class HtmlImage extends HtmlElement {
             if (null == imageWebResponse_) {
                 throw new IOException("No image response available (src='" + getSrcAttribute() + "')");
             }
-            @SuppressWarnings("resource")
-            final ImageInputStream iis = ImageIO.createImageInputStream(imageWebResponse_.getContentAsStream());
-            final Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-            if (!iter.hasNext()) {
-                iis.close();
-                throw new IOException("No image detected in response");
-            }
-            final ImageReader imageReader = iter.next();
-            imageReader.setInput(iis);
-            imageData_ = new ImageData(imageReader);
-
-            // dispose all others
-            while (iter.hasNext()) {
-                iter.next().dispose();
-            }
+            imageData_ = Platform.buildImageData(imageWebResponse_.getContentAsStream());
         }
     }
 
@@ -809,53 +817,6 @@ public class HtmlImage extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         return DisplayStyle.INLINE;
-    }
-
-    /**
-     * Wraps the ImageReader for an HtmlImage. This is necessary because an object with a finalize()
-     * method is only garbage collected after the method has been run. Which causes all referenced
-     * objects to also not be garbage collected until this happens. Because a HtmlImage references a lot
-     * of objects which could all be garbage collected without impacting the ImageReader it is better to
-     * wrap it in another class.
-     */
-    static final class ImageData implements AutoCloseable {
-
-        private final ImageReader imageReader_;
-
-        ImageData(final ImageReader imageReader) {
-            imageReader_ = imageReader;
-        }
-
-        public ImageReader getImageReader() {
-            return imageReader_;
-        }
-
-        /**
-         * {@inheritDoc}
-         */
-        @Override
-        protected void finalize() throws Throwable {
-            close();
-            super.finalize();
-        }
-
-        @Override
-        public void close() {
-            if (imageReader_ != null) {
-                try {
-                    try (ImageInputStream stream = (ImageInputStream) imageReader_.getInput()) {
-                        // nothing
-                    }
-                }
-                catch (final IOException e) {
-                    LOG.error(e.getMessage(), e);
-                }
-                finally {
-                    imageReader_.setInput(null);
-                    imageReader_.dispose();
-                }
-            }
-        }
     }
 
     /**

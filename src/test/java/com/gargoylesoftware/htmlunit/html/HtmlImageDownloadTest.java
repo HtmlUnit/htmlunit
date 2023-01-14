@@ -34,6 +34,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebResponse;
 import com.gargoylesoftware.htmlunit.WebServerTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.platform.image.ImageData;
+import com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData;
 
 /**
  * Tests for {@link HtmlImage}.
@@ -89,21 +91,22 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    public void getImageReader() throws Exception {
+    public void getImageData() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
-        assertNotNull("ImageReader should not be null", htmlImage.getImageReader());
+        assertNotNull("ImageData should not be null", htmlImage.getImageData());
+        assertNotNull("ImageReader should not be null", ((ImageIOImageData) htmlImage.getImageData()).getImageReader());
     }
 
     /**
      * @throws Exception if the test fails
      */
     @Test
-    public void getImageReaderNoneSupportedImage() throws Exception {
+    public void getImageDataNoneSupportedImage() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
         final String url = "/HtmlImageDownloadTest.html";
         htmlImage.setAttribute("src", url);
         try {
-            htmlImage.getImageReader();
+            htmlImage.getImageData();
             fail("it was not an image!");
         }
         catch (final IOException ioe) {
@@ -132,8 +135,14 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     @Test
     public void redownloadOnSrcAttributeChanged() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
+
+        final ImageData imageData = htmlImage.getImageData();
         final ImageReader imageReader = htmlImage.getImageReader();
+
         htmlImage.setAttribute("src", htmlImage.getSrcAttribute() + "#changed");
+
+        assertFalse("Src attribute changed but ImageData was not reloaded",
+                imageData.equals(htmlImage.getImageData()));
         assertFalse("Src attribute changed but ImageReader was not reloaded",
                 imageReader.equals(htmlImage.getImageReader()));
     }
@@ -168,6 +177,7 @@ public class HtmlImageDownloadTest extends WebServerTestCase {
     public void serialize() throws Exception {
         final HtmlImage htmlImage = getHtmlElementToTest("image1");
         htmlImage.getImageReader();
+
         try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             try (ObjectOutputStream out = new ObjectOutputStream(baos)) {
                 out.writeObject(htmlImage);

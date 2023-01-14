@@ -48,6 +48,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.gargoylesoftware.htmlunit.javascript.host.canvas.ImageData;
+import com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
@@ -411,7 +412,7 @@ public class AwtRenderingBackend implements RenderingBackend {
      * {@inheritDoc}
      */
     @Override
-    public void drawImage(final ImageReader imageReader,
+    public void drawImage(final com.gargoylesoftware.htmlunit.platform.image.ImageData imageData,
             final int sx, final int sy, final Integer sWidth, final Integer sHeight,
             final int dx, final int dy, final Integer dWidth, final Integer dHeight) throws IOException {
         if (LOG.isDebugEnabled()) {
@@ -419,99 +420,106 @@ public class AwtRenderingBackend implements RenderingBackend {
                     + "," + dx + ", " + dy + ", " + dWidth + ", " + dHeight + ")");
         }
 
-        if (imageReader.getNumImages(true) != 0) {
-            final BufferedImage img = imageReader.read(0);
+        try {
+            final ImageReader imageReader = ((ImageIOImageData) imageData).getImageReader();
 
-            final AffineTransform savedTransform = graphics2D_.getTransform();
-            try {
-                graphics2D_.setTransform(transformation_);
-                graphics2D_.setColor(fillColor_);
+            if (imageReader.getNumImages(true) != 0) {
+                final BufferedImage img = imageReader.read(0);
 
-                final int sx2;
-                if (sWidth == null) {
-                    sx2 = sx + img.getWidth();
-                }
-                else {
-                    sx2 = sx + sWidth;
-                }
+                final AffineTransform savedTransform = graphics2D_.getTransform();
+                try {
+                    graphics2D_.setTransform(transformation_);
+                    graphics2D_.setColor(fillColor_);
 
-                final int sy2;
-                if (sHeight == null) {
-                    sy2 = sy + img.getHeight();
-                }
-                else {
-                    sy2 = sy + sHeight;
-                }
-
-                int dx1 = dx;
-                final int dx2;
-                if (dWidth == null) {
-                    dx2 = dx + img.getWidth();
-                }
-                else {
-                    if (dWidth < 0) {
-                        dx1 = dx1 + dWidth;
-                        dx2 = dx1 - dWidth;
+                    final int sx2;
+                    if (sWidth == null) {
+                        sx2 = sx + img.getWidth();
                     }
                     else {
-                        dx2 = dx1 + dWidth;
+                        sx2 = sx + sWidth;
                     }
-                }
 
-                int dy1 = dy;
-                final int dy2;
-                if (dHeight == null) {
-                    dy2 = dy + img.getHeight();
-                }
-                else {
-                    if (dHeight < 0) {
-                        dy1 = dy1 + dHeight;
-                        dy2 = dy1 - dHeight;
+                    final int sy2;
+                    if (sHeight == null) {
+                        sy2 = sy + img.getHeight();
                     }
                     else {
-                        dy2 = dy1 + dHeight;
-                    }
-                }
-
-                final Object done = new Object();
-                final ImageObserver imageObserver = (img1, flags, x, y, width, height) -> {
-
-                    if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
-                        return true;
+                        sy2 = sy + sHeight;
                     }
 
-                    if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
-                            || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
-                        return true;
+                    int dx1 = dx;
+                    final int dx2;
+                    if (dWidth == null) {
+                        dx2 = dx + img.getWidth();
                     }
+                    else {
+                        if (dWidth < 0) {
+                            dx1 = dx1 + dWidth;
+                            dx2 = dx1 - dWidth;
+                        }
+                        else {
+                            dx2 = dx1 + dWidth;
+                        }
+                    }
+
+                    int dy1 = dy;
+                    final int dy2;
+                    if (dHeight == null) {
+                        dy2 = dy + img.getHeight();
+                    }
+                    else {
+                        if (dHeight < 0) {
+                            dy1 = dy1 + dHeight;
+                            dy2 = dy1 - dHeight;
+                        }
+                        else {
+                            dy2 = dy1 + dHeight;
+                        }
+                    }
+
+                    final Object done = new Object();
+                    final ImageObserver imageObserver = (img1, flags, x, y, width, height) -> {
+
+                        if ((flags & ImageObserver.ALLBITS) == ImageObserver.ALLBITS) {
+                            return true;
+                        }
+
+                        if ((flags & ImageObserver.ABORT) == ImageObserver.ABORT
+                                || (flags & ImageObserver.ERROR) == ImageObserver.ERROR) {
+                            return true;
+                        }
+
+                        synchronized (done) {
+                            done.notify();
+                        }
+
+                        return false;
+                    };
 
                     synchronized (done) {
-                        done.notify();
-                    }
-
-                    return false;
-                };
-
-                synchronized (done) {
-                    final boolean completelyLoaded =
-                            graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, imageObserver);
-                    if (!completelyLoaded) {
-                        while (true) {
-                            try {
-                                done.wait(4 * 1000); // max 4s
-                                break;
-                            }
-                            catch (final InterruptedException e) {
-                                LOG.error("[" + id_ + "] AwtRenderingBackend interrupted "
-                                        + "while waiting for drawImage to finish.", e);
+                        final boolean completelyLoaded =
+                                graphics2D_.drawImage(img, dx1, dy1, dx2, dy2, sx, sy, sx2, sy2, imageObserver);
+                        if (!completelyLoaded) {
+                            while (true) {
+                                try {
+                                    done.wait(4 * 1000); // max 4s
+                                    break;
+                                }
+                                catch (final InterruptedException e) {
+                                    LOG.error("[" + id_ + "] AwtRenderingBackend interrupted "
+                                            + "while waiting for drawImage to finish.", e);
+                                }
                             }
                         }
                     }
                 }
+                finally {
+                    graphics2D_.setTransform(savedTransform);
+                }
             }
-            finally {
-                graphics2D_.setTransform(savedTransform);
-            }
+        }
+        catch (final ClassCastException e) {
+            LOG.error("[" + id_ + "] drawImage(..) failed", e);
         }
     }
 
