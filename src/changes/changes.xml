@@ -20,7 +20,7 @@
                 to package com.gargoylesoftware.htmlunit.platform.canvas.rendering.
             </action>
             <action type="remove" dev="rbri">
-                Methods com.gargoylesoftware.htmlunit.css.CssStyleSheet.parseSelectors(String) and 
+                Methods com.gargoylesoftware.htmlunit.css.CssStyleSheet.parseSelectors(String) and
                 com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet.parseSelectors(String) removed.
             </action>
             <action type="fix" dev="rbri">
