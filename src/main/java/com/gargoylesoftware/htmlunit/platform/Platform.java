@@ -126,7 +126,7 @@ public final class Platform {
         // for Android
         try {
             final Class<?> backendClass = Class.forName(
-                        "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend");
+                        "com.gargoylesoftware.htmlunit.platform.canvas.rendering.AwtRenderingBackend");
             return (RenderingBackend) ConstructorUtils.invokeConstructor(backendClass, imageWidth, imageHeight);
         }
         catch (final Exception e) {
