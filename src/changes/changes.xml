@@ -8,6 +8,10 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Bugfixes">
+            <action type="update" dev="rbri">
+                Package package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering renamed
+                to package com.gargoylesoftware.htmlunit.platform.canvas.rendering.
+            </action>
             <action type="remove" dev="rbri">
                 Methods com.gargoylesoftware.htmlunit.css.CssStyleSheet.parseSelectors(String) and 
                 com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet.parseSelectors(String) removed.

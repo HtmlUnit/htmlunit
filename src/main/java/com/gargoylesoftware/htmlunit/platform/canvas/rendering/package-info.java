@@ -17,4 +17,4 @@
  * Implementations of the canvas rendering backend - users of HtmlUnit shouldn't
  * need anything in this package.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering;
+package com.gargoylesoftware.htmlunit.platform.canvas.rendering;

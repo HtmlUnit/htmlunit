@@ -18,11 +18,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
+
+import com.gargoylesoftware.htmlunit.platform.canvas.rendering.AwtRenderingBackend;
+import com.gargoylesoftware.htmlunit.platform.canvas.rendering.NoOpRenderingBackend;
+import com.gargoylesoftware.htmlunit.platform.canvas.rendering.RenderingBackend;
 
 /**
  * Singleton to handle JDK specific stuff.
@@ -106,6 +111,24 @@ public final class Platform {
         }
 
         return new HashMap<>();
+    }
+
+    /**
+     * @param imageWidth the width of the image this backend is for
+     * @param imageHeight the height of the image this backend is for
+     * @return a new {@link RenderingBackend}. If the {@link AwtRenderingBackend} can't be used a
+     * {@link NoOpRenderingBackend} is used instead.
+     */
+    public static RenderingBackend getRenderingBackend(final int imageWidth, final int imageHeight) {
+        // for Android
+        try {
+            final Class<?> backendClass = Class.forName(
+                        "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend");
+            return (RenderingBackend) ConstructorUtils.invokeConstructor(backendClass, imageWidth, imageHeight);
+        }
+        catch (final Exception e) {
+            return new NoOpRenderingBackend(imageWidth, imageHeight);
+        }
     }
 
     private Platform() {

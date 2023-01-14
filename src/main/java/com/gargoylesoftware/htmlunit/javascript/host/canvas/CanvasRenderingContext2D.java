@@ -24,7 +24,6 @@ import java.io.IOException;
 import javax.imageio.ImageReader;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.reflect.ConstructorUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -35,11 +34,11 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.NoOpRenderingBackend;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend;
-import com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.RenderingBackend.WindingRule;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement;
+import com.gargoylesoftware.htmlunit.platform.Platform;
+import com.gargoylesoftware.htmlunit.platform.canvas.rendering.RenderingBackend;
+import com.gargoylesoftware.htmlunit.platform.canvas.rendering.RenderingBackend.WindingRule;
 import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -88,16 +87,7 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
             final int imageWidth = Math.max(1, canvas_.getWidth());
             final int imageHeight = Math.max(1, canvas_.getHeight());
 
-            // for Android
-            try {
-                final Class<?> backendClass = Class.forName(
-                            "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend");
-                renderingBackend_ = (RenderingBackend) ConstructorUtils
-                        .invokeConstructor(backendClass, imageWidth, imageHeight);
-            }
-            catch (final Exception e) {
-                renderingBackend_ = new NoOpRenderingBackend(imageWidth, imageHeight);
-            }
+            renderingBackend_ = Platform.getRenderingBackend(imageWidth, imageHeight);
         }
         return renderingBackend_;
     }

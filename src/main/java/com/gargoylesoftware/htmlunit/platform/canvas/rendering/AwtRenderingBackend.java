@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering;
+package com.gargoylesoftware.htmlunit.platform.canvas.rendering;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
