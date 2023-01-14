@@ -151,13 +151,14 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(" foo \n bar\n test\n a <p>html snippet</p>\n")
+    @Alerts("\\sfoo\\s\\n\\sbar\\n\\stest\\n\\sa\\s<p>html\\ssnippet</p>\\n")
     public void defaultValue2() throws Exception {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
             + "  function test() {\n"
-            + "    alert(document.getElementById('textArea1').defaultValue);\n"
+            + "    log(document.getElementById('textArea1').defaultValue);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
@@ -167,7 +168,7 @@ public class HtmlTextArea2Test extends WebDriverTestCase {
             + "</textarea>\n"
             + "</form></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
