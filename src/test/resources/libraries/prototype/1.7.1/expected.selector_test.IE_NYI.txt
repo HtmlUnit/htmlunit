@@ -1,4 +1,4 @@
-42 tests, 179 assertions, 1 failures, 1 errors
+42 tests, 191 assertions, 1 failures, 0 errors
 Status Test Message
 testSelectorWithTagName passed 4 assertions, 0 failures, 0 errors
 testSelectorWithId passed 3 assertions, 0 failures, 0 errors
@@ -29,8 +29,7 @@ testSelectorWithNewAttributeOperators passed 9 assertions, 0 failures, 0 errors
 testSelectorWithDuplicates passed 2 assertions, 0 failures, 0 errors
 testSelectorWithFirstLastOnlyNthNthLastChild passed 18 assertions, 0 failures, 0 errors
 testSelectorWithFirstLastNthNthLastOfType passed 5 assertions, 0 failures, 0 errors
-testSelectorWithNot error 0 assertions, 0 failures, 1 errors
-undefined: undefined, error=('Syntax error, unrecognized expression: first-of-type')
+testSelectorWithNot passed 12 assertions, 0 failures, 0 errors
 testSelectorWithEnabledDisabledChecked failed 2 assertions, 1 failures, 0 errors
 Failure: :enabled
 expected: <[<input id="enabled_text_field">, <input id="checked_box">, <input id="unchecked_box">, <input id="checked_radio">, <input id="unchecked_radio">]>, actual: <[<input id="hidden">, <input id="enabled_text_field">, <input id="checked_box">, <input id="unchecked_box">, <input id="checked_radio">, <input id="unchecked_radio">]>
