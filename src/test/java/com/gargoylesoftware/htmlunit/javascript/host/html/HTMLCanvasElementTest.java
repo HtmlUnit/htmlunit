@@ -192,17 +192,19 @@ public class HTMLCanvasElementTest extends WebDriverTestCase {
         final String html =
             "<html>\n"
             + "<body><canvas id='myCanvas'></canvas>\n"
+            + LOG_TEXTAREA
             + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "try {\n"
             + "  var canvas = document.getElementById('myCanvas');\n"
-            + "  alert(canvas.toDataURL());\n"
-            + "  alert(canvas.toDataURL('image/png'));\n"
+            + "  log(canvas.toDataURL());\n"
+            + "  log(canvas.toDataURL('image/png'));\n"
             + "}\n"
-            + "catch (e) { alert('exception'); }\n"
+            + "catch (e) { log('exception'); }\n"
             + "</script>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
