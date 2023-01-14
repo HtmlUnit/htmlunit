@@ -82,7 +82,6 @@ import com.gargoylesoftware.css.parser.selector.PseudoElementSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.Selector.SelectorType;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.css.parser.selector.SimpleSelector;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Cache;
@@ -1016,34 +1015,6 @@ public class CssStyleSheet implements Serializable {
             ss = new CSSStyleSheetImpl();
         }
         return ss;
-    }
-
-    /**
-     * Parses the selectors at the specified input source. If anything at all goes wrong, this
-     * method returns an empty selector list.
-     *
-     * @param source the source from which to retrieve the selectors to be parsed
-     * @return the selectors parsed from the specified input source
-     */
-    public SelectorList parseSelectors(final String source) {
-        SelectorList selectors;
-        try {
-            final CSSErrorHandler errorHandler = owner_.getPage().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-            selectors = parser.parseSelectors(source);
-            // in case of error parseSelectors returns null
-            if (null == selectors) {
-                selectors = new SelectorListImpl();
-            }
-        }
-        catch (final Throwable t) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS selectors from '" + source + "': " + t.getMessage(), t);
-            }
-            selectors = new SelectorListImpl();
-        }
-        return selectors;
     }
 
     /**

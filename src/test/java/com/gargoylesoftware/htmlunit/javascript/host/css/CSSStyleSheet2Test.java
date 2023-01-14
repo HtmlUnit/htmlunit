@@ -18,7 +18,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
+import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import com.gargoylesoftware.css.parser.CSSException;
+import com.gargoylesoftware.css.parser.CSSOMParser;
+import com.gargoylesoftware.css.parser.CSSParseException;
+import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.Selector;
+import com.gargoylesoftware.css.parser.selector.SelectorList;
+import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
@@ -84,8 +91,37 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
         assertFalse(CssStyleSheet.selects(browserVersion, selector, input2, null, false, true));
     }
 
-    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) {
-        return sheet.parseSelectors(rule).get(0);
+    private static Selector parseSelector(final CSSStyleSheet sheet, final String rule) throws Exception {
+        return parseSelectors(rule).get(0);
+    }
+
+    private static SelectorList parseSelectors(final String source) throws Exception {
+        SelectorList selectors;
+        final CSSErrorHandler errorHandler = new CSSErrorHandler() {
+
+            @Override
+            public void warning(final CSSParseException exception) throws CSSException {
+                throw exception;
+            }
+
+            @Override
+            public void fatalError(final CSSParseException exception) throws CSSException {
+                throw exception;
+            }
+
+            @Override
+            public void error(final CSSParseException exception) throws CSSException {
+                throw exception;
+            }
+        };
+        final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
+        parser.setErrorHandler(errorHandler);
+        selectors = parser.parseSelectors(source);
+        // in case of error parseSelectors returns null
+        if (null == selectors) {
+            selectors = new SelectorListImpl();
+        }
+        return selectors;
     }
 
     /**
@@ -149,15 +185,12 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
               + "<div id='d-e'></div>\n"
               + "</body></html>";
         final HtmlPage page = loadPage(html);
-        final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
         final BrowserVersion browserVersion = getBrowserVersion();
-        final CSSStyleSheet sheet = host.getSheet();
 
-        Selector selector = sheet.parseSelectors("#d\\:e").get(0);
+        Selector selector = parseSelectors("#d\\:e").get(0);
         assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d:e"), null, false, true));
 
-        selector = sheet.parseSelectors("#d-e").get(0);
+        selector = parseSelectors("#d-e").get(0);
         assertTrue(CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("d-e"), null, false, true));
     }
 
@@ -210,10 +243,8 @@ public class CSSStyleSheet2Test extends SimpleWebTestCase {
             + "</html>";
         final HtmlPage page = loadPage(html);
         final BrowserVersion browserVersion = getBrowserVersion();
-        final HtmlStyle node = (HtmlStyle) page.getElementsByTagName("style").item(0);
-        final HTMLStyleElement host = (HTMLStyleElement) node.getScriptableObject();
-        final CSSStyleSheet sheet = host.getSheet();
-        final Selector selector = sheet.parseSelectors(css).get(0);
+
+        final Selector selector = parseSelectors(css).get(0);
         assertEquals(selectBody,
                 CssStyleSheet.selects(browserVersion, selector, page.getHtmlElementById("b"), null, false, true));
         assertEquals(selectDivD,

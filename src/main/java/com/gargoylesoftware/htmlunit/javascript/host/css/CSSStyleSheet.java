@@ -41,13 +41,10 @@ import org.w3c.dom.DOMException;
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
 import com.gargoylesoftware.css.dom.CSSRuleListImpl;
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.css.parser.CSSException;
-import com.gargoylesoftware.css.parser.CSSOMParser;
 import com.gargoylesoftware.css.parser.InputSource;
 import com.gargoylesoftware.css.parser.condition.Condition;
 import com.gargoylesoftware.css.parser.condition.NotPseudoClassCondition;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
 import com.gargoylesoftware.css.parser.selector.ChildSelector;
 import com.gargoylesoftware.css.parser.selector.DescendantSelector;
 import com.gargoylesoftware.css.parser.selector.DirectAdjacentSelector;
@@ -55,7 +52,6 @@ import com.gargoylesoftware.css.parser.selector.ElementSelector;
 import com.gargoylesoftware.css.parser.selector.GeneralAdjacentSelector;
 import com.gargoylesoftware.css.parser.selector.Selector;
 import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlLink;
@@ -169,34 +165,6 @@ public class CSSStyleSheet extends StyleSheet {
      */
     public CssStyleSheet getCssStyleSheet() {
         return styleSheet_;
-    }
-
-    /**
-     * Parses the selectors at the specified input source. If anything at all goes wrong, this
-     * method returns an empty selector list.
-     *
-     * @param source the source from which to retrieve the selectors to be parsed
-     * @return the selectors parsed from the specified input source
-     */
-    public SelectorList parseSelectors(final String source) {
-        SelectorList selectors;
-        try {
-            final CSSErrorHandler errorHandler = getWindow().getWebWindow().getWebClient().getCssErrorHandler();
-            final CSSOMParser parser = new CSSOMParser(new CSS3Parser());
-            parser.setErrorHandler(errorHandler);
-            selectors = parser.parseSelectors(source);
-            // in case of error parseSelectors returns null
-            if (null == selectors) {
-                selectors = new SelectorListImpl();
-            }
-        }
-        catch (final Throwable t) {
-            if (LOG.isErrorEnabled()) {
-                LOG.error("Error parsing CSS selectors from '" + source + "': " + t.getMessage(), t);
-            }
-            selectors = new SelectorListImpl();
-        }
-        return selectors;
     }
 
     /**
