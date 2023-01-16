@@ -346,6 +346,8 @@ public class HtmlForm extends HtmlElement {
             request.setEncodingType(FormEncodingType.getInstance(getEnctypeAttribute()));
         }
         request.setCharset(enc);
+
+        // forms are ignoring the rel='noreferrer'
         request.setRefererlHeader(htmlPage.getUrl());
 
         if (HttpMethod.POST == method
@@ -936,6 +938,17 @@ public class HtmlForm extends HtmlElement {
      */
     public final void setTargetAttribute(final String target) {
         setAttribute("target", target);
+    }
+
+    /**
+     * Returns the value of the attribute {@code rel}. Refer to the
+     * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
+     * documentation for details on the use of this attribute.
+     *
+     * @return the value of the attribute {@code rel} or an empty string if that attribute isn't defined
+     */
+    public final String getRelAttribute() {
+        return getAttributeDirect("rel");
     }
 
     /**

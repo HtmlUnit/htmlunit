@@ -776,6 +776,64 @@ public class HtmlAnchorTest extends WebDriverTestCase {
     }
 
     /**
+     * Tests the 'Referer' HTTP header for rel='noreferrer'.
+     * @throws Exception on test failure
+     */
+    @Test
+    public void click_refererHeaderNoReferrer() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body><a href='" + URL_SECOND + "' id='link' rel='noreferrer'>link</a></body>\n"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("link")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Referer' HTTP header for rel='noreferrer'.
+     * @throws Exception on test failure
+     */
+    @Test
+    public void click_refererHeaderNoReferrerCaseSensitive() throws Exception {
+        final String firstContent
+            = "<html><head><title>Page A</title></head>\n"
+            + "<body><a href='" + URL_SECOND + "' id='link' rel='NoReferrer'>link</a></body>\n"
+            + "</html>";
+        final String secondContent
+            = "<html><head><title>Page B</title></head>\n"
+            + "<body></body>\n"
+            + "</html>";
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstContent);
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(firstContent, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("link")).click();
+
+        assertEquals(2, getMockWebConnection().getRequestCount());
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertNull(lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

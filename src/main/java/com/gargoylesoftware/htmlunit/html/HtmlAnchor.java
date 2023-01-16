@@ -20,6 +20,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.ANCHOR_SEND_P
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -171,7 +172,10 @@ public class HtmlAnchor extends HtmlElement {
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
 
-        webRequest.setRefererlHeader(page.getUrl());
+        if (!"noreferrer".equals(getRelAttribute().toLowerCase(Locale.ROOT))) {
+            webRequest.setRefererlHeader(page.getUrl());
+        }
+
         if (LOG.isDebugEnabled()) {
             LOG.debug(
                     "Getting page for " + url.toExternalForm()

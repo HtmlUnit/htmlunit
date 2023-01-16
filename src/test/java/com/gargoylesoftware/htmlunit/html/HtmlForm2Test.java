@@ -1475,4 +1475,139 @@ public class HtmlForm2Test extends WebDriverTestCase {
                     requestedParams.get(i).getName() + '#' + requestedParams.get(i).getValue());
         }
     }
+
+    /**
+     * Tests the 'Referer' HTTP header.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void submit_refererHeader() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='post' action='" + URL_SECOND + "'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("button")).click();
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Referer' HTTP header for rel='noreferrer'.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void submit_refererHeaderNoreferrer() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='post' action='" + URL_SECOND + "' rel='noreferrer'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("button")).click();
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Referer' HTTP header for rel='noreferrer'.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void submit_refererHeaderNoreferrerCaseSensitive() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='post' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("button")).click();
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * Tests the 'Referer' HTTP header for rel='noreferrer'.
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts("§§URL§§index.html?test")
+    public void submit_refererHeaderNoreferrerGet() throws Exception {
+        final String firstHtml
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form method='get' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
+            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
+            + "</body></html>";
+        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
+
+        expandExpectedAlertsVariables(URL_FIRST);
+
+        final URL indexUrl = new URL(URL_FIRST.toString() + "index.html");
+
+        getMockWebConnection().setResponse(indexUrl, firstHtml);
+        getMockWebConnection().setResponse(URL_SECOND, secondHtml);
+
+        final WebDriver driver = loadPage2(firstHtml, new URL(URL_FIRST.toString() + "index.html?test#ref"));
+        driver.findElement(By.id("button")).click();
+
+        final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
+        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "NoReferrer",
+            EDGE = "NoReferrer")
+    public void relAttribute() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<form method='get' action='" + URL_SECOND + "' rel='NoReferrer'>\n"
+            + "  <input name='button' type='submit' value='PushMe' id='button'/>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(document.forms[0].rel);\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

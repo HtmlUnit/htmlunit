@@ -4546,9 +4546,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "length,method,name,namedItem(),noValidate,reset(),submit(),tags(),target,"
                 + "urns()")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,"
-                + "name,noValidate,requestSubmit(),reset(),submit(),target",
+                + "name,noValidate,rel,requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,"
-                + "name,noValidate,requestSubmit(),reset(),submit(),target",
+                + "name,noValidate,rel,requestSubmit(),reset(),submit(),target",
             FF_ESR = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
                 + "noValidate,requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"

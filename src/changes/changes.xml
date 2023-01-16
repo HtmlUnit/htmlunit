@@ -8,6 +8,12 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Bugfixes">
+            <action type="add" dev="rbri" issue="546">"
+                Anchors are now taking care of the rel="noreferrer" attribute.
+            </action>
+            <action type="add" dev="rbri">
+                Form ref attribute implemented (Chrome and Edge)
+            </action>
             <action type="update" dev="rbri">
                 Method com.gargoylesoftware.htmlunit.html.HtmlImage.getImageReader() is depracated (Android compatibility).
             </action>

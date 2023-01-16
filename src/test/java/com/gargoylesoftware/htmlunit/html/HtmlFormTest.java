@@ -25,7 +25,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
@@ -33,7 +32,6 @@ import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
-import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.MockWebConnection;
 import com.gargoylesoftware.htmlunit.Page;
@@ -822,34 +820,6 @@ public class HtmlFormTest extends SimpleWebTestCase {
             new NameValuePair("dispatch", "TAB"),
         });
         assertEquals(expectedParameters, collectedParameters);
-    }
-
-    /**
-     * Tests the 'Referer' HTTP header.
-     * @throws Exception on test failure
-     */
-    @Test
-    public void submit_refererHeader() throws Exception {
-        final String firstHtml
-            = "<html><head><title>First</title></head><body>\n"
-            + "<form method='post' action='" + URL_SECOND + "'>\n"
-            + "<input name='button' type='submit' value='PushMe' id='button'/></form>\n"
-            + "</body></html>";
-        final String secondHtml = "<html><head><title>Second</title></head><body></body></html>";
-
-        final WebClient client = getWebClientWithMockWebConnection();
-
-        final MockWebConnection webConnection = getMockWebConnection();
-        webConnection.setResponse(URL_FIRST, firstHtml);
-        webConnection.setResponse(URL_SECOND, secondHtml);
-
-        final HtmlPage firstPage = client.getPage(URL_FIRST);
-        final HtmlSubmitInput button = firstPage.getHtmlElementById("button");
-
-        button.click();
-
-        final Map<String, String> lastAdditionalHeaders = webConnection.getLastAdditionalHeaders();
-        assertEquals(URL_FIRST.toString(), lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
