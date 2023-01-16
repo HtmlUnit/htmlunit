@@ -70,6 +70,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#getRoot()
+     * @return the root node
      */
     public DomNode getRoot() {
         return root_;
@@ -77,6 +78,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#getWhatToShow()
+     * @return NodeFilter constant
      */
     public int getWhatToShow() {
         return whatToShow_;
@@ -84,6 +86,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#getFilter()
+     * @return the filter
      */
     public NodeFilter getFilter() {
         return filter_;
@@ -91,6 +94,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#getExpandEntityReferences()
+     * @return the ExpandEntityReferences setting
      */
     public boolean getExpandEntityReferences() {
         return expandEntityReferences_;
@@ -98,6 +102,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#getCurrentNode()
+     * @return the current node
      */
     public DomNode getCurrentNode() {
         return currentNode_;
@@ -105,6 +110,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#setCurrentNode(Node)
+     * @param currentNode the current node
      */
     public void setCurrentNode(final Node currentNode) throws DOMException {
         if (currentNode == null) {
@@ -116,6 +122,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#nextNode()
+     * @return the next node
      */
     public DomNode nextNode() {
         final DomNode leftChild = getEquivalentLogical(currentNode_.getFirstChild(), false);
@@ -317,6 +324,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#nextSibling()
+     * @return the next sibling node
      */
     public DomNode nextSibling() {
         if (currentNode_ == root_) {
@@ -334,6 +342,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#parentNode()
+     * @return the parent node
      */
     public DomNode parentNode() {
         if (currentNode_ == root_) {
@@ -356,6 +365,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#previousSibling()
+     * @return the previous sibling node
      */
     public DomNode previousSibling() {
         if (currentNode_ == root_) {
@@ -373,6 +383,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#lastChild()
+     * @return the last child node
      */
     public DomNode lastChild() {
         final DomNode newNode = getEquivalentLogical(currentNode_.getLastChild(), true);
@@ -386,6 +397,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#previousNode()
+     * @return the previous node
      */
     public DomNode previousNode() {
         final DomNode newNode = getPreviousNode(currentNode_);
@@ -431,6 +443,7 @@ public class HtmlDomTreeWalker {
 
     /**
      * @see org.w3c.dom.traversal.TreeWalker#firstChild()
+     * @return the first child node
      */
     public DomNode firstChild() {
         final DomNode newNode = getEquivalentLogical(currentNode_.getFirstChild(), false);
