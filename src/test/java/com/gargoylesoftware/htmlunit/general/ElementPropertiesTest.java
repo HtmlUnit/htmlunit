@@ -1988,9 +1988,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,requestSubmit(),reset(),submit(),target",
+                    + "noValidate,rel,requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,requestSubmit(),reset(),submit(),target",
+                    + "noValidate,rel,requestSubmit(),reset(),submit(),target",
             FF_ESR = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
                     + "noValidate,requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
