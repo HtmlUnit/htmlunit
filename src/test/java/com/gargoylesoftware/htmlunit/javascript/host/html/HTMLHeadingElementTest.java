@@ -45,12 +45,14 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
             + "  <h2 id='h6' ></h2>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  for (var i = 1; i <= 6; i++) {\n"
-            + "    alert(document.getElementById('h' + i).align);\n"
+            + "    log(document.getElementById('h' + i).align);\n"
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -65,11 +67,12 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
             + "  <h2 id='e1' align='left' ></h2>\n"
 
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function setAlign(elem, value) {\n"
             + "    try {\n"
             + "      elem.align = value;\n"
-            + "    } catch (e) { alert('error'); }\n"
-            + "    alert(elem.align);\n"
+            + "    } catch (e) { log('error'); }\n"
+            + "    log(elem.align);\n"
             + "  }\n"
 
             + "  var elem = document.getElementById('e1');\n"
@@ -84,6 +87,7 @@ public class HTMLHeadingElementTest extends WebDriverTestCase {
             + "  setAlign(elem, 'justify');\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 }
