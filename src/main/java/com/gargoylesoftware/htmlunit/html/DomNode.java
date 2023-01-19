@@ -1453,18 +1453,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             if (startingNode == DomNode.this) {
                 return null;
             }
-            final DomNode parent = startingNode.getParentNode();
-            if (parent == null || parent == DomNode.this) {
-                return null;
+
+            DomNode parent = startingNode.getParentNode();
+            while (parent != null && parent != DomNode.this) {
+                DomNode next = parent.getNextSibling();
+                while (next != null && !isAccepted(next)) {
+                    next = next.getNextSibling();
+                }
+                if (next != null) {
+                    return next;
+                }
+                parent = parent.getParentNode();
             }
-            DomNode next = parent.getNextSibling();
-            while (next != null && !isAccepted(next)) {
-                next = next.getNextSibling();
-            }
-            if (next == null) {
-                return getNextElementUpwards(parent);
-            }
-            return next;
+            return null;
         }
 
         private DomNode getFirstChildElement(final DomNode parent) {
@@ -1763,7 +1764,8 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
     protected void fireCharacterDataChanged(final CharacterDataChangeEvent event) {
         DomNode toInform = this;
         while (toInform != null) {
-            final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
+
+            final List<CharacterDataChangeListener> listeners = toInform.safeGetCharacterDataListeners();
             if (listeners != null) {
                 for (final CharacterDataChangeListener listener : listeners) {
                     listener.characterDataChanged(event);
