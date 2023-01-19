@@ -84,6 +84,7 @@ WebkitBoxOrient
 WebkitBoxPack
 WebkitBoxShadow
 WebkitBoxSizing
+WebkitClipPath
 WebkitFilter
 WebkitFlex
 WebkitFlexBasis
@@ -555,6 +556,7 @@ webkitBoxOrient
 webkitBoxPack
 webkitBoxShadow
 webkitBoxSizing
+webkitClipPath
 webkitFilter
 webkitFlex
 webkitFlexBasis

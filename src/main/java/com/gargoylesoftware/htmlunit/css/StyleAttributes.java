@@ -3940,7 +3940,13 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_BOX_SIZING__("-webkit-box-sizing", "webkit-box-sizing", ff("content-box")),
 
         /** The style property {@code webkitClipPath}. */
-        WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chromeAndEdgeNone()),
+        WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code WebkitClipPath}. */
+        WEBKIT_CLIP_PATH_("WebkitClipPath", "webkit-clip-path", ffLatest("none")),
+
+        /** The style property {@code -webkit-clip-path}. */
+        WEBKIT_CLIP_PATH__("-webkit-clip-path", "webkit-clip-path", ffLatest("none")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chromeAndEdgeAuto()),
