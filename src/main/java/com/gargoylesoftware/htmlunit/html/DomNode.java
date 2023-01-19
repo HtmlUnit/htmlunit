@@ -1704,14 +1704,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param event the DomChangeEvent to be propagated
      */
     protected void fireNodeAdded(final DomChangeEvent event) {
-        final List<DomChangeListener> listeners = safeGetDomListeners();
-        if (listeners != null) {
-            for (final DomChangeListener listener : listeners) {
-                listener.nodeAdded(event);
+        DomNode toInform = this;
+        while (toInform != null) {
+            final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
+            if (listeners != null) {
+                for (final DomChangeListener listener : listeners) {
+                    listener.nodeAdded(event);
+                }
             }
-        }
-        if (parent_ != null) {
-            parent_.fireNodeAdded(event);
+            toInform = toInform.getParentNode();
         }
     }
 
@@ -1760,14 +1761,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param event the CharacterDataChangeEvent to be propagated
      */
     protected void fireCharacterDataChanged(final CharacterDataChangeEvent event) {
-        final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
-        if (listeners != null) {
-            for (final CharacterDataChangeListener listener : listeners) {
-                listener.characterDataChanged(event);
+        DomNode toInform = this;
+        while (toInform != null) {
+            final List<CharacterDataChangeListener> listeners = safeGetCharacterDataListeners();
+            if (listeners != null) {
+                for (final CharacterDataChangeListener listener : listeners) {
+                    listener.characterDataChanged(event);
+                }
             }
-        }
-        if (parent_ != null) {
-            parent_.fireCharacterDataChanged(event);
+            toInform = toInform.getParentNode();
         }
     }
 
@@ -1780,14 +1782,15 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param event the DomChangeEvent to be propagated
      */
     protected void fireNodeDeleted(final DomChangeEvent event) {
-        final List<DomChangeListener> listeners = safeGetDomListeners();
-        if (listeners != null) {
-            for (final DomChangeListener listener : listeners) {
-                listener.nodeDeleted(event);
+        DomNode toInform = this;
+        while (toInform != null) {
+            final List<DomChangeListener> listeners = toInform.safeGetDomListeners();
+            if (listeners != null) {
+                for (final DomChangeListener listener : listeners) {
+                    listener.nodeDeleted(event);
+                }
             }
-        }
-        if (parent_ != null) {
-            parent_.fireNodeDeleted(event);
+            toInform = toInform.getParentNode();
         }
     }
 
