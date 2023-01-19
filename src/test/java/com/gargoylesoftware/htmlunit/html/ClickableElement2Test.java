@@ -43,16 +43,16 @@ public class ClickableElement2Test extends WebDriverTestCase {
     @Alerts("1")
     public void clickOnFocus() throws Exception {
         final String html
-            = "<html><head><title>foo</title></head><body>\n"
+            = "<html><head><script>" + LOG_TITLE_FUNCTION + "</script></head><body>\n"
             + "<form>\n"
-            + "  <input type='button' id='textfield1' onfocus='alert(1)'>\n"
+            + "  <input type='button' id='textfield1' onfocus='log(1)'>\n"
             + "</form>\n"
             + "</body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("textfield1")).click();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**

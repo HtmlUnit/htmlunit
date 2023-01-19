@@ -47,18 +47,19 @@ public class HtmlApplet2Test extends WebDriverTestCase {
     public void simpleScriptable() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    alert(document.getElementById('myId'));\n"
-            + "    alert(document.applets);\n"
-            + "    alert(document.applets.length);\n"
-            + "    alert(document.applets[0]);\n"
+            + "    log(document.getElementById('myId'));\n"
+            + "    log(document.applets);\n"
+            + "    log(document.applets.length);\n"
+            + "    log(document.applets[0]);\n"
             + "  }\n"
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "  <applet id='myId'></applet>\n"
             + "</body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPageVerifyTitle2(html);
         if (driver instanceof HtmlUnitDriver) {
             if (getBrowserVersion().isChrome()
                     || getBrowserVersion().isFirefox()
