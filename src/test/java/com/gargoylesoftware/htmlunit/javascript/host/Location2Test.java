@@ -335,14 +335,16 @@ public class Location2Test extends WebDriverTestCase {
     private void checkHash(final String url) throws Exception {
         final String html = "<html><body onload='test()'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function test() {\n"
-            + "  alert(document.location.hash);\n"
+            + "  log(document.location.hash);\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
 
         getMockWebConnection().setDefaultResponse(html);
-        loadPageWithAlerts2(html, new URL(url));
+        loadPage2(html, new URL(url));
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -710,18 +712,19 @@ public class Location2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1  §§URL§§"},
-            IE = {"supported", "onhashchange undefined  undefined"})
+    @Alerts(DEFAULT = {"supported", "onhashchange §§URL§§#1 §§URL§§"},
+            IE = {"supported", "onhashchange undefined undefined"})
     public void onHashChange() throws Exception {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + " if ('onhashchange' in window) { alert('supported') }\n"
+            + LOG_TITLE_FUNCTION
+            + " if ('onhashchange' in window) { log('supported') }\n"
             + " function locationHashChanged(event) {\n"
             + "   if (event) {\n"
-            + "     alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
+            + "     log('onhashchange ' + event.newURL + ' ' + event.oldURL);\n"
             + "   } else {\n"
-            + "     alert('onhashchange -');\n"
+            + "     log('onhashchange -');\n"
             + "   }\n"
             + " }\n"
             + " window.onhashchange = locationHashChanged;\n"
@@ -733,11 +736,11 @@ public class Location2Test extends WebDriverTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts()[0]);
         Thread.sleep(100);
 
         driver.findElement(By.id("click")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
