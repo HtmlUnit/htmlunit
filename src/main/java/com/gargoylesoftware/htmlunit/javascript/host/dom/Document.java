@@ -590,7 +590,7 @@ public class Document extends Node {
         Object result = NOT_FOUND;
         try {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
-            final Object jsElement = getScriptableFor(domNode);
+            final HtmlUnitScriptable jsElement = makeScriptableFor(domNode);
 
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
