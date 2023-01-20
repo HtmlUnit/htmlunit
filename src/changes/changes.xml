@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Firefox 108, Bugfixes">
+            <action type="add" dev="rbri">
+                Missing properties addedNodes, removedNodes, previousSibling, and nextSibling added to MutationRecord.
+            </action>
             <action type="add" dev="rbri" issue="546">"
                 Anchors are now taking care of the rel="noreferrer" attribute.
             </action>
