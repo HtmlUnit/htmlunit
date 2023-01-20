@@ -500,7 +500,7 @@ public class XMLDOMDocument extends XMLDOMNode {
         Object result = NOT_FOUND;
         try {
             final DomText domText = new DomText(getPage(), data);
-            final Object jsElement = getScriptableFor(domText);
+            final HtmlUnitScriptable jsElement = makeScriptableFor(domText);
 
             if (jsElement == NOT_FOUND) {
                 if (LOG.isDebugEnabled()) {
