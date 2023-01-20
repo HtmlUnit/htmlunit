@@ -587,7 +587,6 @@ public class Document extends Node {
      */
     @JsxFunction
     public Object createTextNode(final String newData) {
-        Object result = NOT_FOUND;
         try {
             final DomNode domNode = new DomText(getDomNodeOrDie().getPage(), newData);
             final HtmlUnitScriptable jsElement = makeScriptableFor(domNode);
@@ -599,14 +598,13 @@ public class Document extends Node {
                             + domNode.getClass().getName());
                 }
             }
-            else {
-                result = jsElement;
-            }
+            return jsElement;
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
-        return result;
+
+        return NOT_FOUND;
     }
 
     /**
@@ -659,7 +657,6 @@ public class Document extends Node {
      */
     @JsxFunction
     public Object createElement(String tagName) {
-        Object result = NOT_FOUND;
         try {
             if (tagName.contains("<") || tagName.contains(">")) {
                 if (LOG.isInfoEnabled()) {
@@ -711,14 +708,12 @@ public class Document extends Node {
                         + element.getClass().getName());
                 }
             }
-            else {
-                result = jsElement;
-            }
+            return jsElement;
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
-        return result;
+        return NOT_FOUND;
     }
 
     /**

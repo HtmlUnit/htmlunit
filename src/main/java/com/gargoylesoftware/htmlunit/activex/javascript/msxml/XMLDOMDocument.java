@@ -410,7 +410,6 @@ public class XMLDOMDocument extends XMLDOMNode {
             throw Context.reportRuntimeError("To create a node of type ELEMENT a valid name must be given.");
         }
 
-        Object result = NOT_FOUND;
         try {
             final DomElement domElement = (DomElement) getPage().createElement(tagName);
             final Object jsElement = getScriptableFor(domElement);
@@ -422,14 +421,12 @@ public class XMLDOMDocument extends XMLDOMNode {
                         + domElement.getClass().getName());
                 }
             }
-            else {
-                result = jsElement;
-            }
+            return jsElement;
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
-        return result;
+        return NOT_FOUND;
     }
 
     /**
@@ -497,7 +494,6 @@ public class XMLDOMDocument extends XMLDOMNode {
      */
     @JsxFunction
     public Object createTextNode(final String data) {
-        Object result = NOT_FOUND;
         try {
             final DomText domText = new DomText(getPage(), data);
             final HtmlUnitScriptable jsElement = makeScriptableFor(domText);
@@ -509,14 +505,12 @@ public class XMLDOMDocument extends XMLDOMNode {
                             + domText.getClass().getName());
                 }
             }
-            else {
-                result = jsElement;
-            }
+            return jsElement;
         }
         catch (final ElementNotFoundException e) {
             // Just fall through - result is already set to NOT_FOUND
         }
-        return result;
+        return NOT_FOUND;
     }
 
     /**

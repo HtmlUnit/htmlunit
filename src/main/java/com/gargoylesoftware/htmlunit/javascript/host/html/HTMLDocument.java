@@ -583,28 +583,25 @@ public class HTMLDocument extends Document {
     @Override
     public Object getElementById(final String id) {
         implicitCloseIfNecessary();
-        Object result = null;
         final DomElement domElement = getPage().getElementById(id);
         if (null == domElement) {
             // Just fall through - result is already set to null
             if (LOG.isDebugEnabled()) {
                 LOG.debug("getElementById(" + id + "): no DOM node found with this id");
             }
+            return null;
         }
-        else {
-            final Object jsElement = getScriptableFor(domElement);
-            if (jsElement == NOT_FOUND) {
-                if (LOG.isDebugEnabled()) {
-                    LOG.debug("getElementById(" + id
-                            + ") cannot return a result as there isn't a JavaScript object for the HTML element "
-                            + domElement.getClass().getName());
-                }
+
+        final Object jsElement = getScriptableFor(domElement);
+        if (jsElement == NOT_FOUND) {
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("getElementById(" + id
+                        + ") cannot return a result as there isn't a JavaScript object for the HTML element "
+                        + domElement.getClass().getName());
             }
-            else {
-                result = jsElement;
-            }
+            return null;
         }
-        return result;
+        return jsElement;
     }
 
     /**
