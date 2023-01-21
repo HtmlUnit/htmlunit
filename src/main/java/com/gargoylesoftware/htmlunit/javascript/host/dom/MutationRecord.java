@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
@@ -131,6 +132,7 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code addedNodes} property
      */
     @JsxGetter
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public NodeList getAddedNodes() {
         return addedNodes_;
     }
@@ -147,6 +149,7 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code removedNodes} property
      */
     @JsxGetter
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public NodeList getRemovedNodes() {
         return removedNodes_;
     }
@@ -163,6 +166,7 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code previousSibling} property
      */
     @JsxGetter
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Node getPreviousSibling() {
         return previousSibling_;
     }
@@ -179,6 +183,7 @@ public class MutationRecord extends HtmlUnitScriptable {
      * @return the {@code nextSibling} property
      */
     @JsxGetter
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public Node getNextSibling() {
         return nextSibling_;
     }
