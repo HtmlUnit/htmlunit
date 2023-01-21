@@ -866,6 +866,80 @@ public class Node extends EventTarget {
         }
     }
 
+    /**
+     * Inserts a set of Node objects or string objects after the last child of the Element.
+     * String objects are inserted as equivalent Text nodes.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void append(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+
+        for (final Object arg : args) {
+            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final DomNode newNode = node.getDomNodeOrDie();
+            thisDomNode.appendChild(newNode);
+        }
+    }
+
+    /**
+     * Inserts a set of Node objects or string objects before the first child of the Element.
+     * String objects are inserted as equivalent Text nodes.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        final DomNode firstChild = thisDomNode.getFirstChild();
+        for (final Object arg : args) {
+            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            final DomNode newNode = node.getDomNodeOrDie();
+            if (firstChild == null) {
+                thisDomNode.appendChild(newNode);
+            }
+            else {
+                firstChild.insertBefore(newNode);
+            }
+        }
+    }
+
+    /**
+     * Replaces the existing children of a Node with a specified new set of children.
+     * These can be string or Node objects.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    protected static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
+        thisDomNode.removeAllChildren();
+
+        for (final Object arg : args) {
+            final Node node = toNodeOrTextNode((Node) thisObj, arg);
+            thisDomNode.appendChild(node.getDomNodeOrDie());
+        }
+    }
+
     private static Node toNodeOrTextNode(final Node thisObj, final Object obj) {
         if (obj instanceof Node) {
             return (Node) obj;
@@ -901,6 +975,12 @@ public class Node extends EventTarget {
             final Function function) {
         final DomNode thisDomNode = ((Node) thisObj).getDomNodeOrDie();
         final DomNode parentNode = thisDomNode.getParentNode();
+
+        if (args.length == 0) {
+            parentNode.removeChild(thisDomNode);
+            return;
+        }
+
         final DomNode nextSibling = thisDomNode.getNextSibling();
         boolean isFirst = true;
         for (final Object arg : args) {

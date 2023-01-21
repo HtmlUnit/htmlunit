@@ -51,6 +51,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.Screen;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.Crypto;
 import com.gargoylesoftware.htmlunit.javascript.host.crypto.SubtleCrypto;
 import com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
+import com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection;
@@ -583,7 +584,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),setAttributeNodeNS(),"
                 + "setAttributeNS(),setPointerCapture(),"
                 + "tagName")
-    @HtmlUnitNYI(CHROME = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,"
+    @HtmlUnitNYI(CHROME = "after(),append(),attributes,before(),"
+                + "childElementCount,children,classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),constructor(),"
                 + "firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
@@ -593,12 +595,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
-                + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
+                + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,prepend(),"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,toggleAttribute(),webkitMatchesSelector()",
-            EDGE = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,"
+            EDGE = "after(),append(),attributes,before(),"
+                + "childElementCount,children,classList,className,clientHeight,"
                 + "clientLeft,clientTop,clientWidth,closest(),constructor(),"
                 + "firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
@@ -608,24 +612,28 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "innerHTML,insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild,"
                 + "localName,"
                 + "matches(),namespaceURI,nextElementSibling,onbeforecopy,onbeforecut,onbeforepaste,"
-                + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,"
+                + "onsearch,onwebkitfullscreenchange,onwebkitfullscreenerror,outerHTML,prefix,prepend(),"
                 + "previousElementSibling,querySelector(),querySelectorAll(),remove(),removeAttribute(),"
-                + "removeAttributeNode(),removeAttributeNS(),replaceWith(),scrollHeight,scrollIntoView(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "scrollHeight,scrollIntoView(),"
                 + "scrollIntoViewIfNeeded(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),tagName,toggleAttribute(),webkitMatchesSelector()",
-            FF = "after(),attributes,before(),childElementCount,children,classList,className,clientHeight,clientLeft,"
+            FF = "after(),append(),attributes,before(),"
+                + "childElementCount,children,classList,className,clientHeight,clientLeft,"
                 + "clientTop,clientWidth,closest(),constructor(),"
                 + "firstElementChild,getAttribute(),getAttributeNode(),"
                 + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
                 + "insertAdjacentText(),lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,"
-                + "nextElementSibling,outerHTML,prefix,previousElementSibling,querySelector(),querySelectorAll(),"
+                + "nextElementSibling,outerHTML,prefix,prepend(),previousElementSibling,"
+                + "querySelector(),querySelectorAll(),"
                 + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
-                + "removeAttributeNS(),replaceWith(),"
+                + "removeAttributeNS(),replaceChildren(),replaceWith(),"
                 + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,toggleAttribute(),webkitMatchesSelector()",
-            FF_ESR = "after(),attributes,before(),childElementCount,children,"
+            FF_ESR = "after(),append(),attributes,before(),"
+                + "childElementCount,children,"
                 + "classList,className,clientHeight,clientLeft,"
                 + "clientTop,clientWidth,closest(),constructor(),"
                 + "firstElementChild,getAttribute(),getAttributeNode(),"
@@ -633,8 +641,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
                 + "hasAttributeNS(),hasAttributes(),id,innerHTML,insertAdjacentElement(),insertAdjacentHTML(),"
                 + "insertAdjacentText(),lastElementChild,localName,matches(),mozMatchesSelector(),namespaceURI,"
-                + "nextElementSibling,outerHTML,prefix,previousElementSibling,querySelector(),querySelectorAll(),"
-                + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceWith(),"
+                + "nextElementSibling,outerHTML,prefix,prepend(),previousElementSibling,"
+                + "querySelector(),querySelectorAll(),"
+                + "releaseCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),replaceChildren(),replaceWith(),"
                 + "scrollHeight,scrollIntoView(),scrollLeft,scrollTop,scrollWidth,setAttribute(),setAttributeNode(),"
                 + "setAttributeNS(),setCapture(),tagName,toggleAttribute(),webkitMatchesSelector()",
             IE = "attributes,childElementCount,clientHeight,clientLeft,clientTop,clientWidth,constructor,"
@@ -13036,5 +13046,39 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     public void xPathResult() throws Exception {
         testString("var res = document.evaluate('/html/body', document, null, XPathResult.ANY_TYPE, null);", "res");
+    }
+
+    /**
+     * Test {@link CDATASection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()",
+            IE = "constructor")
+    public void cDATASection() throws Exception {
+        final String setup = " var doc = document.implementation.createDocument('', '', null);\n"
+                + "var root = doc.appendChild(doc.createElement('root'));\n"
+                + "var cdata = root.appendChild(doc.createCDATASection('abcdef'));\n";
+
+        testString(setup, "cdata");
+    }
+
+    /**
+     * Test {@link CDATASection}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "after(),before(),constructor(),name,publicId,remove(),replaceWith(),systemId",
+            EDGE = "after(),before(),constructor(),name,publicId,remove(),replaceWith(),systemId",
+            FF = "after(),before(),constructor(),name,publicId,remove(),replaceWith(),systemId",
+            FF_ESR = "after(),before(),constructor(),name,publicId,remove(),replaceWith(),systemId",
+            IE = "constructor,entities,internalSubset,name,notations,publicId,systemId")
+    public void documentType() throws Exception {
+        testString("", "document.firstChild");
     }
 }

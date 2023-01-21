@@ -115,7 +115,7 @@ public class DocumentType extends Node {
      * Returns entities.
      * @return entities
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public Object getEntities() {
         final NamedNodeMap entities = ((DomDocumentType) getDomNodeOrDie()).getEntities();
         if (null != entities) {
@@ -132,7 +132,7 @@ public class DocumentType extends Node {
      * Returns notations.
      * @return notations
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public Object getNotations() {
         final NamedNodeMap notations = ((DomDocumentType) getDomNodeOrDie()).getNotations();
         if (null != notations) {

@@ -8,7 +8,16 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Firefox 108, Bugfixes">
-            <action type="fix" dev="rbri" issue="541">"
+            <action type="fix" dev="rbri">"
+                DocumentType properties entities and notations are only available in IE.
+            </action>
+            <action type="add" dev="rbri" issue="544">"
+                Methods append/prepend/replaceChildren added to Element.
+            </action>
+            <action type="fix" dev="rbri" >"
+                Element.replaceWith() fixed for the case this was called without any new elements.
+            </action>
+            <action type="fix" dev="rbri" issue="541">
                 Another Xerces detection fix for JDK 17.
             </action>
             <action type="add" dev="rbri">

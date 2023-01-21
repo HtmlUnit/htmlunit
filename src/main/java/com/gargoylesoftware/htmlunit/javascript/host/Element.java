@@ -1962,7 +1962,7 @@ public class Element extends Node {
     }
 
     /**
-     * Replaces the node wit a set of Node or DOMString objects.
+     * Replaces the node with a set of Node or DOMString objects.
      * @param context the context
      * @param thisObj this object
      * @param args the arguments
@@ -2104,5 +2104,59 @@ public class Element extends Node {
             removeAttribute(name);
             return false;
         }
+    }
+
+    /**
+     * Inserts a set of Node objects or string objects after the last child of the Element.
+     * String objects are inserted as equivalent Text nodes.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public static void append(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        Node.append(context, thisObj, args, function);
+    }
+
+    /**
+     * Inserts a set of Node objects or string objects before the first child of the Element.
+     * String objects are inserted as equivalent Text nodes.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        Node.prepend(context, thisObj, args, function);
+    }
+
+    /**
+     * Replaces the existing children of a Node with a specified new set of children.
+     * These can be string or Node objects.
+     * @param context the context
+     * @param thisObj this object
+     * @param args the arguments
+     * @param function the function
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
+            final Function function) {
+        if (!(thisObj instanceof Element)) {
+            throw ScriptRuntime.typeError("Illegal invocation");
+        }
+
+        Node.replaceChildren(context, thisObj, args, function);
     }
 }

@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocumentTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 
@@ -1523,6 +1524,893 @@ public class ElementTest extends WebDriverTestCase {
             + "  <div id='div3' />\n"
             + "  <div id='div4' hidden />\n"
             + "  <div id='div5' />\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "<div id=\"div1\"></div>"},
+            IE = "after missing")
+    public void after_noArgs_empty() throws Exception {
+        modifySiblings("after", "after();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"},
+            IE = "after missing")
+    public void after_noArgs_notEmpty() throws Exception {
+        modifySiblings("after", "after();", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "#HeHo",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
+            EDGE = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
+            FF = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"},
+            FF_ESR = {"1", "2", "<div id=\"div1\"></div>", "#HeHo"})
+    public void after_text_empty() throws Exception {
+        modifySiblings("after", "after('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#HeHo",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#HeHo"},
+            EDGE = {"1", "2", "#HtmlUnit", "#HeHo"},
+            FF = {"1", "2", "#HtmlUnit", "#HeHo"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "#HeHo"})
+    public void after_text_notEmpty() throws Exception {
+        modifySiblings("after", "after('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "<p></p>",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME =  {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
+            EDGE = {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
+            FF = {"1", "2", "<div id=\"div1\"></div>", "<p></p>"},
+            FF_ESR = {"1", "2", "<div id=\"div1\"></div>", "<p></p>"})
+    public void after_p_empty() throws Exception {
+        modifySiblings("after", "after(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "<p></p>",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "<p></p>"},
+            EDGE = {"1", "2", "#HtmlUnit", "<p></p>"},
+            FF = {"1", "2", "#HtmlUnit", "<p></p>"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "<p></p>"})
+    public void after_p_notEmpty() throws Exception {
+        modifySiblings("after", "after(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
+            EDGE = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
+            FF = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"},
+            FF_ESR = {"1", "2", "<div id=\"div1\"></div>", "#[object Object]"})
+    public void after_o_empty() throws Exception {
+        modifySiblings("after", "after({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#[object Object]",
+                       "childList", "1", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            EDGE = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            FF = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "#[object Object]"})
+    public void after_o_notEmpty() throws Exception {
+        modifySiblings("after", "after({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
+                       "childList", "3", "0", "[object HTMLDivElement]", "null"},
+            IE = "after missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            EDGE = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            FF = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            FF_ESR = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"})
+    public void after_many_notEmpty() throws Exception {
+        modifySiblings("after", "after(p0, 'abcd', p0, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "<div id=\"div1\"></div>"},
+            IE = "before missing")
+    public void before_noArgs_empty() throws Exception {
+        modifySiblings("before", "before();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"},
+            IE = "before missing")
+    public void before_noArgs_notEmpty() throws Exception {
+        modifySiblings("before", "before();", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
+            EDGE = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
+            FF = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"},
+            FF_ESR = {"1", "2",  "#HeHo", "<div id=\"div1\"></div>"})
+    public void before_text_empty() throws Exception {
+        modifySiblings("before", "before('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HeHo", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HeHo", "#HtmlUnit"},
+            EDGE = {"1", "2", "#HeHo", "#HtmlUnit"},
+            FF = {"1", "2", "#HeHo", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "#HeHo", "#HtmlUnit"})
+    public void before_text_notEmpty() throws Exception {
+        modifySiblings("before", "before('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
+            EDGE = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
+            FF = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"},
+            FF_ESR = {"1", "2",  "<p></p>", "<div id=\"div1\"></div>"})
+    public void before_p_empty() throws Exception {
+        modifySiblings("before", "before(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "<p></p>", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "<p></p>", "#HtmlUnit"},
+            EDGE = {"1", "2", "<p></p>", "#HtmlUnit"},
+            FF = {"1", "2", "<p></p>", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "<p></p>", "#HtmlUnit"})
+    public void before_p_notEmpty() throws Exception {
+        modifySiblings("before", "before(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
+            EDGE = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
+            FF = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"},
+            FF_ESR = {"1", "2", "#[object Object]", "<div id=\"div1\"></div>"})
+    public void before_o_empty() throws Exception {
+        modifySiblings("before", "before({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            EDGE = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            FF = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "#[object Object]", "#HtmlUnit"})
+    public void before_o_notEmpty() throws Exception {
+        modifySiblings("before", "before({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
+                       "childList", "3", "0", "null", "[object HTMLDivElement]"},
+            IE = "before missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            EDGE = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            FF = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            FF_ESR = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"})
+    public void before_many_notEmpty() throws Exception {
+        modifySiblings("before", "before(p0, 'abcd', p0, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "0",
+                       "childList", "0", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "0"},
+            EDGE = {"1", "0"},
+            FF = {"1", "0"},
+            FF_ESR = {"1", "0"})
+    public void replaceWith_noArgs_empty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HeHo",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
+            EDGE = {"1", "1", "#HeHo"},
+            FF = {"1", "1", "#HeHo"},
+            FF_ESR = {"1", "1", "#HeHo"})
+    public void replaceWith_text_notEmpty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HeHo",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
+            EDGE = {"1", "1", "#HeHo"},
+            FF = {"1", "1", "#HeHo"},
+            FF_ESR = {"1", "1", "#HeHo"})
+    public void replaceWith_text_empty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "<p></p>",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
+            EDGE = {"1", "1", "<p></p>"},
+            FF = {"1", "1", "<p></p>"},
+            FF_ESR = {"1", "1", "<p></p>"})
+    public void replaceWith_p_notEmpty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "<p></p>",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
+            EDGE = {"1", "1", "<p></p>"},
+            FF = {"1", "1", "<p></p>"},
+            FF_ESR = {"1", "1", "<p></p>"})
+    public void replaceWith_p_empty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
+            EDGE = {"1", "1", "#[object Object]"},
+            FF = {"1", "1", "#[object Object]"},
+            FF_ESR = {"1", "1", "#[object Object]"})
+    public void replaceWith_o_notEmpty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
+            EDGE = {"1", "1", "#[object Object]"},
+            FF = {"1", "1", "#[object Object]"},
+            FF_ESR = {"1", "1", "#[object Object]"})
+    public void replaceWith_o_empty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
+                       "childList", "4", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            EDGE = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            FF = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            FF_ESR = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"})
+    public void replaceWith_many_notEmpty() throws Exception {
+        modifySiblings("replaceWith", "replaceWith(p0, 'abcd', div1, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "3", "<p></p>", "#abcd", "<div></div>",
+                       "childList", "3", "1", "null", "null"},
+            IE = "replaceWith missing")
+    @HtmlUnitNYI(CHROME = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
+            EDGE = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF = {"1", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF_ESR = {"1", "3", "<p></p>", "#abcd", "<div></div>"})
+    public void replaceWith_many_many() throws Exception {
+        modifySiblings("replaceWith", "replaceWith(p0, 'abcd', div1);", "<p>a</p><p>b</p>");
+    }
+
+    private void modifySiblings(final String check, final String call, final String content) throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "  <div id='div0'><div id='div1'>" + content + "</div></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+
+            + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.type);\n"
+            + "        log(mutation.addedNodes ? mutation.addedNodes.length : mutation.addedNodes);\n"
+            + "        log(mutation.removedNodes ? mutation.removedNodes.length : mutation.removedNodes);\n"
+            + "        log(mutation.previousSibling);\n"
+            + "        log(mutation.nextSibling);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(document.getElementById('div0'), config);\n"
+
+            + "    var d0 = document.getElementById('div0');\n"
+            + "    var d1 = document.getElementById('div1');\n"
+
+            + "    if (!d1." + check + ") { log('" + check + " missing'); return; }\n"
+
+            + "    var p0 = document.createElement('p');\n"
+            + "    var div1 = document.createElement('div');\n"
+
+            + "    var children = d0.childNodes;\n"
+            + "    log(children.length);\n"
+            + "    d1." + call + "\n"
+            + "    log(children.length);\n"
+            + "    for(var i = 0; i < children.length; i++) {\n"
+            + "        var child = children[i];\n"
+            + "        if (child.textContent) {\n"
+            + "            log('#' + child.textContent);\n"
+            + "        } else {"
+            + "            log(child.outerHTML);\n"
+            + "        }\n"
+            + "    }\n"
+
+            + "  }\n"
+
+            + "  test();"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = "append missing")
+    public void append_noArgs_empty() throws Exception {
+        modifyChildren("append", "append();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"},
+            IE = "append missing")
+    public void append_noArgs_notEmpty() throws Exception {
+        modifyChildren("append", "append();", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#HeHo",
+                       "childList", "1", "0", "null", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
+            EDGE = {"0", "1", "#HeHo"},
+            FF = {"0", "1", "#HeHo"},
+            FF_ESR = {"0", "1", "#HeHo"})
+    public void append_text_empty() throws Exception {
+        modifyChildren("append", "append('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#HeHo",
+                       "childList", "1", "0", "[object Text]", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#HeHo"},
+            EDGE = {"1", "2", "#HtmlUnit", "#HeHo"},
+            FF = {"1", "2", "#HtmlUnit", "#HeHo"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "#HeHo"})
+    public void append_text_notEmpty() throws Exception {
+        modifyChildren("append", "append('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "<p></p>",
+                       "childList", "1", "0", "null", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
+            EDGE = {"0", "1", "<p></p>"},
+            FF = {"0", "1", "<p></p>"},
+            FF_ESR = {"0", "1", "<p></p>"})
+    public void append_p_empty() throws Exception {
+        modifyChildren("append", "append(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "<p></p>",
+                       "childList", "1", "0", "[object Text]", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "<p></p>"},
+            EDGE = {"1", "2", "#HtmlUnit", "<p></p>"},
+            FF = {"1", "2", "#HtmlUnit", "<p></p>"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "<p></p>"})
+    public void append_p_notEmpty() throws Exception {
+        modifyChildren("append", "append(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
+                       "childList", "1", "0", "null", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
+            EDGE = {"0", "1", "#[object Object]"},
+            FF = {"0", "1", "#[object Object]"},
+            FF_ESR = {"0", "1", "#[object Object]"})
+    public void append_o_empty() throws Exception {
+        modifyChildren("append", "append({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HtmlUnit", "#[object Object]",
+                       "childList", "1", "0", "[object Text]", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            EDGE = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            FF = {"1", "2", "#HtmlUnit", "#[object Object]"},
+            FF_ESR = {"1", "2", "#HtmlUnit", "#[object Object]"})
+    public void append_o_notEmpty() throws Exception {
+        modifyChildren("append", "append({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]",
+                       "childList", "3", "0", "[object Text]", "null"},
+            IE = "append missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            EDGE = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            FF = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"},
+            FF_ESR = {"1", "4", "#HtmlUnit", "#abcd", "<p></p>", "#[object Object]"})
+    public void append_many_notEmpty() throws Exception {
+        modifyChildren("append", "append(p0, 'abcd', p0, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = "prepend missing")
+    public void prepend_noArgs_empty() throws Exception {
+        modifyChildren("prepend", "prepend();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HtmlUnit"},
+            IE = "prepend missing")
+    public void prepend_noArgs_notEmpty() throws Exception {
+        modifyChildren("prepend", "prepend();", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#HeHo",
+                       "childList", "1", "0", "null", "null"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
+            EDGE = {"0", "1", "#HeHo"},
+            FF = {"0", "1", "#HeHo"},
+            FF_ESR = {"0", "1", "#HeHo"})
+    public void prepend_text_empty() throws Exception {
+        modifyChildren("prepend", "prepend('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#HeHo", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object Text]"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#HeHo", "#HtmlUnit"},
+            EDGE = {"1", "2", "#HeHo", "#HtmlUnit"},
+            FF = {"1", "2", "#HeHo", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "#HeHo", "#HtmlUnit"})
+    public void prepend_text_notEmpty() throws Exception {
+        modifyChildren("prepend", "prepend('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "<p></p>",
+                       "childList", "1", "0", "null", "null"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
+            EDGE = {"0", "1", "<p></p>"},
+            FF = {"0", "1", "<p></p>"},
+            FF_ESR = {"0", "1", "<p></p>"})
+    public void prepend_p_empty() throws Exception {
+        modifyChildren("prepend", "prepend(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "<p></p>", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object Text]"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "<p></p>", "#HtmlUnit"},
+            EDGE = {"1", "2", "<p></p>", "#HtmlUnit"},
+            FF = {"1", "2", "<p></p>", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "<p></p>", "#HtmlUnit"})
+    public void prepend_p_notEmpty() throws Exception {
+        modifyChildren("prepend", "prepend(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
+                       "childList", "1", "0", "null", "null"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
+            EDGE = {"0", "1", "#[object Object]"},
+            FF = {"0", "1", "#[object Object]"},
+            FF_ESR = {"0", "1", "#[object Object]"})
+    public void prepend_o_empty() throws Exception {
+        modifyChildren("prepend", "prepend({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "2", "#[object Object]", "#HtmlUnit",
+                       "childList", "1", "0", "null", "[object Text]"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            EDGE = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            FF = {"1", "2", "#[object Object]", "#HtmlUnit"},
+            FF_ESR = {"1", "2", "#[object Object]", "#HtmlUnit"})
+    public void prepend_o_notEmpty() throws Exception {
+        modifyChildren("prepend", "prepend({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit",
+                       "childList", "3", "0", "null", "[object Text]"},
+            IE = "prepend missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            EDGE = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            FF = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"},
+            FF_ESR = {"1", "4", "#abcd", "<p></p>", "#[object Object]", "#HtmlUnit"})
+    public void prepend_many_notEmpty() throws Exception {
+        modifyChildren("prepend", "prepend(p0, 'abcd', p0, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "0"},
+            IE = "replaceChildren missing")
+    public void replaceChildren_noArgs_empty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren();", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#HeHo",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#HeHo"},
+            EDGE = {"1", "1", "#HeHo"},
+            FF = {"1", "1", "#HeHo"},
+            FF_ESR = {"1", "1", "#HeHo"})
+    public void replaceChildren_text_notEmpty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren('HeHo');", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#HeHo",
+                       "childList", "1", "0", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#HeHo"},
+            EDGE = {"0", "1", "#HeHo"},
+            FF = {"0", "1", "#HeHo"},
+            FF_ESR = {"0", "1", "#HeHo"})
+    public void replaceChildren_text_empty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren('HeHo');", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "<p></p>",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "<p></p>"},
+            EDGE = {"1", "1", "<p></p>"},
+            FF = {"1", "1", "<p></p>"},
+            FF_ESR = {"1", "1", "<p></p>"})
+    public void replaceChildren_p_notEmpty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren(p0);", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "<p></p>",
+                       "childList", "1", "0", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "<p></p>"},
+            EDGE = {"0", "1", "<p></p>"},
+            FF = {"0", "1", "<p></p>"},
+            FF_ESR = {"0", "1", "<p></p>"})
+    public void replaceChildren_p_empty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren(p0);", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1", "#[object Object]",
+                       "childList", "1", "1", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"1", "1", "#[object Object]"},
+            EDGE = {"1", "1", "#[object Object]"},
+            FF = {"1", "1", "#[object Object]"},
+            FF_ESR = {"1", "1", "#[object Object]"})
+    public void replaceChildren_o_notEmpty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren({o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "1", "#[object Object]",
+                       "childList", "1", "0", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"0", "1", "#[object Object]"},
+            EDGE = {"0", "1", "#[object Object]"},
+            FF = {"0", "1", "#[object Object]"},
+            FF_ESR = {"0", "1", "#[object Object]"})
+    public void replaceChildren_o_empty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren({o: 1});", "");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]",
+                       "childList", "4", "1", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            EDGE = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            FF = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"},
+            FF_ESR = {"1", "4", "<p></p>", "#abcd", "<div></div>", "#[object Object]"})
+    public void replaceChildren_many_notEmpty() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren(p0, 'abcd', div1, {o: 1});", "HtmlUnit");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"2", "3", "<p></p>", "#abcd", "<div></div>",
+                       "childList", "3", "2", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
+            EDGE = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF = {"2", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF_ESR = {"2", "3", "<p></p>", "#abcd", "<div></div>"})
+    public void replaceChildren_many_many() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren(p0, 'abcd', div1);", "<p>a</p><p>b</p>");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "3", "<p></p>", "#abcd", "<div></div>",
+                       "childList", "3", "4", "null", "null"},
+            IE = "replaceChildren missing")
+    @HtmlUnitNYI(CHROME = {"4", "3", "<p></p>", "#abcd", "<div></div>"},
+            EDGE = {"4", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF = {"4", "3", "<p></p>", "#abcd", "<div></div>"},
+            FF_ESR = {"4", "3", "<p></p>", "#abcd", "<div></div>"})
+    public void replaceChildren_many_many2() throws Exception {
+        modifyChildren("replaceChildren", "replaceChildren(p0, 'abcd', div1);", "<p>a</p><p>b</p><p>c</p><p>d</p>");
+    }
+
+    private void modifyChildren(final String check, final String call, final String content) throws Exception {
+        final String html =
+            "<html><head></head>\n"
+            + "<body>\n"
+            + "  <div id='div0'>" + content + "</div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+
+            + "    var config = { attributes: true, childList: true, characterData: true, subtree: true };\n"
+            + "    var observer = new MutationObserver(function(mutations) {\n"
+            + "      mutations.forEach(function(mutation) {\n"
+            + "        log(mutation.type);\n"
+            + "        log(mutation.addedNodes ? mutation.addedNodes.length : mutation.addedNodes);\n"
+            + "        log(mutation.removedNodes ? mutation.removedNodes.length : mutation.removedNodes);\n"
+            + "        log(mutation.previousSibling);\n"
+            + "        log(mutation.nextSibling);\n"
+            + "      });\n"
+            + "    });\n"
+            + "    observer.observe(document.getElementById('div0'), config);\n"
+
+            + "    var d0 = document.getElementById('div0');\n"
+
+            + "    if (!d0." + check + ") { log('" + check + " missing'); return; }\n"
+
+            + "    var p0 = document.createElement('p');\n"
+            + "    var div1 = document.createElement('div');\n"
+
+            + "    var children = d0.childNodes;\n"
+            + "    log(children.length);\n"
+            + "    d0." + call + "\n"
+            + "    log(children.length);\n"
+            + "    for(var i = 0; i < children.length; i++) {\n"
+            + "        var child = children[i];\n"
+            + "        if (child.textContent) {\n"
+            + "            log('#' + child.textContent);\n"
+            + "        } else {"
+            + "            log(child.outerHTML);\n"
+            + "        }\n"
+            + "    }\n"
+
+            + "  }\n"
+
+            + "  test();"
+            + "</script>\n"
+
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
