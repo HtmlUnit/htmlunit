@@ -47,7 +47,6 @@ public final class Platform {
 
     static {
         try {
-            Class.forName("com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl");
             HelperSunXerces_ = (XmlUtilsHelperAPI)
                     Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper").newInstance();
         }
@@ -56,7 +55,6 @@ public final class Platform {
         }
 
         try {
-            Class.forName("org.apache.xerces.dom.DeferredDocumentImpl");
             HelperXerces_ = (XmlUtilsHelperAPI)
                     Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
         }
