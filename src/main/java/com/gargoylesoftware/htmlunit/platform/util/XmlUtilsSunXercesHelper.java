@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -37,6 +38,11 @@ import com.sun.org.apache.xerces.internal.dom.DeferredNode;
 public final class XmlUtilsSunXercesHelper implements XmlUtilsHelperAPI {
 
     // private static final Log LOG = LogFactory.getLog(XmlUtilsXerces.class);
+
+    public XmlUtilsSunXercesHelper() {
+        // Force eager loading of classes in order to flush out any linkage errors early
+        Objects.hash(DeferredDocumentImpl.class, DeferredNode.class);
+    }
 
     /**
      * {@inheritDoc}

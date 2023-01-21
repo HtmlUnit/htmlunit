@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.apache.xerces.dom.DeferredDocumentImpl;
 import org.apache.xerces.dom.DeferredNode;
@@ -37,6 +38,11 @@ import com.gargoylesoftware.htmlunit.platform.XmlUtilsHelperAPI;
 public final class XmlUtilsXercesHelper implements XmlUtilsHelperAPI {
 
     // private static final Log LOG = LogFactory.getLog(XmlUtilsXerces.class);
+
+    public XmlUtilsXercesHelper() {
+        // Force eager loading of classes in order to flush out any linkage errors early
+        Objects.hash(DeferredDocumentImpl.class, DeferredNode.class);
+    }
 
     /**
      * {@inheritDoc}

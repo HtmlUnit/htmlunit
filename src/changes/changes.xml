@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.70.0" date="xx, 2023" description="Chrome/Edge 109, Firefox 108, Bugfixes">
+            <action type="fix" dev="rbri" issue="541">"
+                Another Xerces detection fix for JDK 17.
+            </action>
             <action type="add" dev="rbri">
                 Missing properties addedNodes, removedNodes, previousSibling, and nextSibling added to MutationRecord.
             </action>

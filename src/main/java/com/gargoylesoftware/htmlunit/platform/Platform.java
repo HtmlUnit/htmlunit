@@ -51,7 +51,7 @@ public final class Platform {
             HelperSunXerces_ = (XmlUtilsHelperAPI)
                     Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper").newInstance();
         }
-        catch (final Exception e) {
+        catch (final Exception | LinkageError e) {
             // ignore
         }
 
@@ -60,7 +60,7 @@ public final class Platform {
             HelperXerces_ = (XmlUtilsHelperAPI)
                     Class.forName("com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper").newInstance();
         }
-        catch (final Exception e2) {
+        catch (final Exception | LinkageError e2) {
             // ignore
         }
     }
