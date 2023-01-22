@@ -259,11 +259,12 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <script type='application/javascript'>\n"
-            + "    alert('Hello');\n"
+            + LOG_TITLE_FUNCTION
+            + "    log('Hello');\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -275,11 +276,12 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<body>\n"
             + "  <script type='application/x-javascript'>\n"
-            + "    alert('Hello');\n"
+            + LOG_TITLE_FUNCTION
+            + "    log('Hello');\n"
             + "  </script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -511,15 +513,16 @@ public class HtmlPage3Test extends WebDriverTestCase {
                 "<html>\n"
                 + "  <head>\n"
                 + "    <script>\n"
+                + LOG_TITLE_FUNCTION
                 + "      document.addEventListener('DOMContentLoaded', function () {\n"
-                + "        alert(document.readyState);\n"
+                + "        log(document.readyState);\n"
                 + "      });\n"
                 + "    </script>\n"
                 + "  </head>\n"
                 + "  <body>test</body>\n"
                 + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -590,7 +593,7 @@ public class HtmlPage3Test extends WebDriverTestCase {
             + "  iframesrc += '      var y = squared(5);';\n"
             + "  iframesrc += '      alert(y);';\n"
             + "  iframesrc += '    } catch (e) {';\n"
-            + "  iframesrc += '      alert(\"error\");';\n"
+            + "  iframesrc += '      log(\"error\");';\n"
             + "  iframesrc += '    }';\n"
             + "  iframesrc += '}';\n"
             + "  iframesrc += '</' + 'script>';\n"
