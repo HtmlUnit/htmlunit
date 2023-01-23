@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
+            <action type="add" dev="rbri">
+                Document disabling of website certificate check in the FAQ.
+            </action>
+        </release>
+
         <release version="2.70.0" date="January 22, 2023" description="Chrome/Edge 109, Firefox 109, improved CSS :not() handling, Bugfixes">
             <action type="fix" dev="rbri">
                 neko: Refactor XMLAttributes/XMLAttributesImpl to use a simple ArrayList&lt;Attribute&gt; as backend.

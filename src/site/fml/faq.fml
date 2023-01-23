@@ -53,6 +53,20 @@
             </answer>
         </faq>
 
+        <faq id="configurations">
+            <question>
+                How to accept an old or bad website certificate?
+            </question>
+            <answer>
+                <p>
+            <source><![CDATA[
+    webClient.getOptions().setUseInsecureSSL(true);
+            ]]></source>
+                </p>
+                <p>This can also help if you use a proxy like Charles or Fiddler to analyze traffic.</p>
+            </answer>
+        </faq>
+
         <faq id="clickNotWorking">
             <question>
                 HtmlElement.click() does not triggering anything (e.g. no Javascript event).
