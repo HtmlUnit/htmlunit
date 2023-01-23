@@ -8,19 +8,19 @@
 
     <body>
         <release version="2.70.0" date="January 22, 2023" description="Chrome/Edge 109, Firefox 109, improved CSS :not() handling, Bugfixes">
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 neko: Refactor XMLAttributes/XMLAttributesImpl to use a simple ArrayList&lt;Attribute&gt; as backend.
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 neko: Fix ArrayOutOfBoundsException when parsing using JDK 17 (oss-fuzz).
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 DocumentType properties entities and notations are only available in IE.
             </action>
-            <action type="add" dev="rbri" issue="544">"
+            <action type="add" dev="rbri" issue="544">
                 Methods append/prepend/replaceChildren added to Element.
             </action>
-            <action type="fix" dev="rbri" >"
+            <action type="fix" dev="rbri" >
                 Element.replaceWith() fixed for the case this was called without any new elements.
             </action>
             <action type="fix" dev="rbri" issue="541">
@@ -29,7 +29,7 @@
             <action type="add" dev="rbri">
                 Missing properties addedNodes, removedNodes, previousSibling, and nextSibling added to MutationRecord.
             </action>
-            <action type="add" dev="rbri" issue="546">"
+            <action type="add" dev="rbri" issue="546">
                 Anchors are now taking care of the rel="noreferrer" attribute.
             </action>
             <action type="add" dev="rbri">
@@ -66,29 +66,29 @@
             <action type="remove" dev="rbri">
                 Deprecated constants ABOUT_SCHEME, ABOUT_BLANK, and URL_ABOUT_BLANK removed from WebClient.
             </action>
-            <action type="update" dev="rbri">"
+            <action type="update" dev="rbri">
                 Class com.gargoylesoftware.htmlunit.html.DomTreeWalker is deprecated (Android compatibility).
             </action>
-            <action type="update" dev="rbri">"
+            <action type="update" dev="rbri">
                 Method com.gargoylesoftware.htmlunit.SgmlPage.createTreeWalker(Node, int, NodeFilter, boolean)
                 is deprecated (Android compatibility).
             </action>
-            <action type="update" dev="rbri">"
+            <action type="update" dev="rbri">
                 New class com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker; this class can only
                 be used with standard jdk - not on Android.
             </action>
-            <action type="add" dev="rbri" issue="528">"
+            <action type="add" dev="rbri" issue="528">
                 Fixed definition of the Location properties (they are defined on the object
                 itself instead on the prototype).
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 WebClient#loadHtmlCodeIntoCurrentWindow() now uses the
                 html parser instead of the xhtml parser.
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 neko: Fix Exception when parsing a template tag as first node (oss-fuzz).
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 Fix Exception when parsing documents with ignored head tags (oss-fuzz).
             </action>
         </release>
@@ -97,17 +97,17 @@
             <action type="fix" dev="rbri">
                 Xerces detection fixed.
             </action>
-            <action type="add" dev="rbri" issue="531">"
+            <action type="add" dev="rbri" issue="531">
                 HtmlUnit is now regulary tested by Google OSS-Fuzz.
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 neko: Fix ArrayIndexOutOfBoundsException when parsing a incomplete
                 entity reference at the end (oss-fuzz).
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 Fix ClassCastException when parsing svg body tag (oss-fuzz).
             </action>
-            <action type="fix" dev="rbri">"
+            <action type="fix" dev="rbri">
                 Fix ClassCastException when parsing base element with namespace (oss-fuzz).
             </action>
             <action type="fix" dev="rbri" issue="522">
