@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
@@ -127,6 +128,11 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             final Source xsltSource = new DOMSource(xsltDomNode);
 
             final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+
+            // By default, the JDK turns on FSP for DOM and SAX parsers and XML schema validators,
+            // which sets a number of processing limits on the processors. Conversely, by default,
+            // the JDK turns off FSP for transformers and XPath, which enables extension functions for XSLT and XPath.
+            transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
 
             final SgmlPage page = sourceDomNode.getPage();
             if (page != null && page.getWebClient().getBrowserVersion()

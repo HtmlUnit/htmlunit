@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Enable FEATURE_SECURE_PROCESSING for the XSLT processor.
+            </action>
             <action type="add" dev="rbri">
                 Document disabling of website certificate check in the FAQ.
             </action>
