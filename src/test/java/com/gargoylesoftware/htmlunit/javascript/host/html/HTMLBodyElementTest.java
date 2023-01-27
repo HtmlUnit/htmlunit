@@ -342,13 +342,14 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var target = document.getElementById('target');\n"
             + "        target.onkeydown = function() {\n"
-            + "          alert('keydown (target)');\n"
+            + "          log('keydown (target)');\n"
             + "        };\n"
             + "        document.body.onkeydown = function() {\n"
-            + "          alert('keydown (body)');\n"
+            + "          log('keydown (body)');\n"
             + "        };\n"
             + "      }\n"
             + "    </script>\n"
@@ -357,9 +358,11 @@ public class HTMLBodyElementTest extends WebDriverTestCase {
             + "    <input id='target' type='checkbox'>\n"
             + "  </body>\n"
             + "</html>";
+
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("target")).sendKeys("a");
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
+
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**

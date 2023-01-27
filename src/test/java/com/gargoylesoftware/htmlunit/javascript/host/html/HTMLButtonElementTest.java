@@ -324,8 +324,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>\n"
             + "  <head>\n"
-            + "    <title>Test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "    function dumpEvent(event) {\n"
             + "      // target\n"
             + "      var eTarget;\n"
@@ -344,7 +344,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        msg = msg + ' [' + eTarget.id + ']';\n"
             + "      }\n"
-            + "      alert(msg);\n"
+            + "      log(msg);\n"
             + "    }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -360,7 +360,7 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
         actions.moveToElement(driver.findElement(By.id("btn")));
         actions.perform();
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**

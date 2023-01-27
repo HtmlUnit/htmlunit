@@ -138,11 +138,14 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
      */
     protected void parentOf(final String parent, final String child) throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html><head><title>" + (getBrowserVersion().isIE() ? "Blank Page" : "New Tab") + "</title><script>\n"
+            + "<html><head>\n"
+            + "<title>" + (getBrowserVersion().isIE() ? "Blank Page" : "New Tab") + "</title>\n"
+            + "<script>\n"
+            + LOG_TEXTAREA_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      alert(isParentOf(" + parent + ", " + child + "));\n"
-            + "    } catch(e) { alert('false'); }\n"
+            + "      log(isParentOf(" + parent + ", " + child + "));\n"
+            + "    } catch(e) { log('false'); }\n"
             + "  }\n"
 
             + "  /*\n"
@@ -152,10 +155,12 @@ public class HTMLAudioElementTest extends WebDriverTestCase {
             + "    o1.prototype.myCustomFunction = function() {};\n"
             + "    return o2.prototype.myCustomFunction != undefined;\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + LOG_TEXTAREA
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTextArea2(html);
     }
 
     /**
