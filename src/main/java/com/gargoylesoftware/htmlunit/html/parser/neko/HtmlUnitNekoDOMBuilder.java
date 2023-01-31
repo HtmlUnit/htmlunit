@@ -422,20 +422,20 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // First ensure table elements are housed correctly
         if (isTableChild(newNodeName)) {
-            DomNode parent = "table".equals(currentNodeName) ? currentNode
-                    : findElementOnStack("table");
+            final DomNode parent =
+                    "table".equals(currentNodeName) ? currentNode : findElementOnStack("table");
             appendChild(parent, newElement);
             return;
         }
         if ("tr".equals(newNodeName)) {
-            DomNode parent = isTableChild(currentNodeName) ? currentNode
-                    : findElementOnStack("tbody", "thead", "tfoot");
+            final DomNode parent =
+                    isTableChild(currentNodeName) ? currentNode : findElementOnStack("tbody", "thead", "tfoot");
             appendChild(parent, newElement);
             return;
         }
         if (isTableCell(newNodeName)) {
-            DomNode parent = "tr".equals(currentNodeName) ? currentNode
-                    : findElementOnStack("tr");
+            final DomNode parent =
+                    "tr".equals(currentNodeName) ? currentNode : findElementOnStack("tr");
             appendChild(parent, newElement);
             return;
         }
@@ -453,7 +453,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
             else {
                 // Move before the table
-                DomNode parent = findElementOnStack("table");
+                final DomNode parent = findElementOnStack("table");
                 parent.insertBefore(newElement);
             }
             return;

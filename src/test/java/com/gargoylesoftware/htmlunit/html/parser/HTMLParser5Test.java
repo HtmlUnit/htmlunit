@@ -25,192 +25,222 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
  * Test class for {@link HTMLParser}.
  *
  * @author Atsushi Nakagawa
+ * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
 public class HTMLParser5Test extends WebDriverTestCase {
 
     private static final String LOG_INPUT_FORMS =
-            "inputs=document.getElementsByTagName('input');for(i=0;i<inputs.length;i++){f=inputs[i].form;log(f?f.name:null)}";
+            "inputs = document.getElementsByTagName('input');"
+            + "for(i=0; i<inputs.length; i++) {"
+            + "  var inp = inputs[i];"
+            + "  var f = inp.form;"
+            + "  log(inp.id + '-' + (f?f.name:null))"
+            + "}";
 
     @Test
-    @Alerts("f1§f2")
+    @Alerts({"i1-f1", "i2-f2"})
     public void formEnclosure_table() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<div>",
-                "<form name='f1'>",
-                "  <table>",
-                "    <input>",
-                "</form>",
-                "<form name='f2'>",
-                "  </table>",
-                "</div>",
-                "<input>",
-                "</form>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<div>\n"
+            + "<form name='f1'>\n"
+            + "  <table>\n"
+            + "    <input id='i1'>\n"
+            + "</form>\n"
+            + "<form name='f2'>\n"
+            + "  </table>\n"
+            + "</div>\n"
+            + "<input id='i2'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f2")
+    @Alerts({"i1-f1", "i2-f2"})
     public void formEnclosure_div() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<div>",
-                "<form name='f1'>",
-                "  <div>",
-                "    <input>",
-                "</form>",
-                "<form name='f2'>",
-                "  </div>",
-                "</div>",
-                "<input>",
-                "</form>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<div>\n"
+            + "<form name='f1'>\n"
+            + "  <div>\n"
+            + "    <input id='i1'>\n"
+            + "</form>\n"
+            + "<form name='f2'>\n"
+            + "  </div>\n"
+            + "</div>\n"
+            + "<input id='i2'>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f1")
+    @Alerts({"i1-f1", "i2-f1"})
     public void formEnclosure_table_nestedForms() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<div>",
-                "<form name='f1'>",
-                "  <table>",
-                "    <input>",
-                "<form name='f2'>",
-                "  </table>",
-                "</div>",
-                "<input>",
-                "</form>",
-                "</form>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<div>\n"
+            + "<form name='f1'>\n"
+            + "  <table>\n"
+            + "    <input id='i1'>\n"
+            + "<form name='f2'>\n"
+            + "  </table>\n"
+            + "</div>\n"
+            + "<input id='i2'>\n"
+            + "</form>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f1")
+    @Alerts({"i1-f1", "i2-f1"})
     public void formEnclosure_div_nestedForms() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<div>",
-                "<form name='f1'>",
-                "  <div>",
-                "    <input>",
-                "<form name='f2'>",
-                "  </div>",
-                "</div>",
-                "<input>",
-                "</form>",
-                "</form>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<div>\n"
+            + "<form name='f1'>\n"
+            + "  <div>\n"
+            + "    <input id='i1'>\n"
+            + "<form name='f2'>\n"
+            + "  </div>\n"
+            + "</div>\n"
+            + "<input id='i2'>\n"
+            + "</form>\n"
+            + "</form>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f1§null§null")
+    @Alerts({"i1-f1", "i2-f1", "i3-null", "i4-null"})
     public void formEnclosure_nestedForms() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<form name='f1'>",
-                "<input>",
-                "<form name='f2'>",
-                "<input>",
-                "</form>",
-                "<input>",
-                "</form>",
-                "<input>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<form name='f1'>\n"
+            + "<input id='i1'>\n"
+            + "<form name='f2'>\n"
+            + "<input id='i2'>\n"
+            + "</form>\n"
+            + "<input id='i3'>\n"
+            + "</form>\n"
+            + "<input id='i4'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f1§f1§f1§f1§f1§null")
+    @Alerts({"i1-f1", "i2-f1", "i3-f1", "i4-f1", "i5-f1", "i6-f1", "i7-null"})
     public void formEnclosure_tree1() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<div>",
-                "<form name='f1'>",
-                "  <input>",
-                "  <div>",
-                "    <input>",
-                "    <table>",
-                "      <input>",
-                "</form>",
-                "      <input>",
-                "    </table>",
-                "    <input>",
-                "  </div>",
-                "  <input>",
-                "</div>",
-                "<input>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<div>\n"
 
-        loadPageVerifyTitle2(String.join("\n", html));
+            + "<form name='f1'>\n"
+            + "  <input id='i1'>\n"
+            + "  <div>\n"
+            + "    <input id='i2'>\n"
+
+            + "    <table>\n"
+            + "      <input id='i3'>\n"
+            + "</form>\n"
+
+            + "      <input id='i4'>\n"
+            + "    </table>\n"
+
+            + "    <input id='i5'>\n"
+            + "  </div>\n"
+            + "  <input id='i6'>\n"
+            + "</div>\n"
+            + "<input id='i7'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§f1§f1§f2§f2§f2§f1§null")
+    @Alerts({"i1-f1", "i2-f1", "i3-f1", "i4-f2", "i5-f2", "i6-f2", "i7-f1", "i8-null"})
     public void formEnclosure_tree2() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<form name='f1'>",
-                "  <input>",
-                "  <div>",
-                "    <input>",
-                "</form>",
-                "    <input>",
-                "<form name='f2'>",
-                "    <input>",
-                "    <div>",
-                "      <input>",
-                "</form>",
-                "      <input>",
-                "    </div>",
-                "    <input>",
-                "  </div>",
-                "  <input>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<form name='f1'>\n"
+            + "  <input id='i1'>\n"
+            + "  <div>\n"
+            + "    <input id='i2'>\n"
+            + "</form>\n"
 
-        loadPageVerifyTitle2(String.join("\n", html));
+            + "    <input id='i3'>\n"
+            + "<form name='f2'>\n"
+
+            + "    <input id='i4'>\n"
+            + "    <div>\n"
+            + "      <input id='i5'>\n"
+
+            + "</form>\n"
+
+            + "      <input id='i6'>\n"
+            + "    </div>\n"
+            + "    <input id='i7'>\n"
+            + "  </div>\n"
+            + "  <input id='i8'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
     }
 
     @Test
-    @Alerts("f1§null")
+    @Alerts({"i1-f1", "i2-null"})
     public void formEnclosure_tree3() throws Exception {
-        final String[] html = {
-                "<html><body>",
-                "<form name='f1'>",
-                "  <div>",
-                "    <input>",
-                "</form>",
-                "  </div>",
-                "  <input>",
-                "<script>" + LOG_TITLE_FUNCTION + LOG_INPUT_FORMS + "</script>",
-                "</body></html>",
-        };
+        final String html =
+            "<html><body>\n"
+            + "<form name='f1'>\n"
+            + "  <div>\n"
+            + "    <input id='i1'>\n"
+            + "</form>\n"
+            + "  </div>\n"
+            + "  <input id='i2'>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + LOG_INPUT_FORMS
+            + "</script>\n"
+            + "</body></html>";
 
-        loadPageVerifyTitle2(String.join("\n", html));
+        loadPageVerifyTitle2(html);
     }
 
 }
