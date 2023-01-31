@@ -513,9 +513,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void endElement(final String namespaceURI, final String localName, final String qName)
         throws SAXException {
 
-        handleCharacters();
-
         final String tagLower = localName.toLowerCase(Locale.ROOT);
+
+        if (!"form".equals(tagLower) || !lastTagWasSynthesized_) {
+            handleCharacters();
+        }
 
         if (page_.isParsingHtmlSnippet()) {
             if ("html".equals(tagLower) || "body".equals(tagLower)) {
@@ -802,9 +804,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     }
 
     private static boolean isSynthesized(final Augmentations augs) {
-        final HTMLEventInfo info = (augs == null) ? null
-                : (HTMLEventInfo) augs.get(FEATURE_AUGMENTATIONS);
-        return info != null && info.isSynthesized();
+        return augs instanceof HTMLEventInfo && ((HTMLEventInfo) augs).isSynthesized();
     }
 
     private static void appendChild(final DomNode parent, final DomNode child) {
