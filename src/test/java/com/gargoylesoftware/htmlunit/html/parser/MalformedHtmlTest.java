@@ -479,21 +479,155 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "TABLE", "SCRIPT", "1", "TABLE", "2", "FORM", "TBODY", "0"})
+    @Alerts("<table id=\"t1\"> "
+            + "<tbody>"
+            + "<tr> "
+            + "<td id=\"td0\"> "
+            + "<form id=\"xyz\"> "
+            + "<input type=\"hidden\"> "
+            + "<input type=\"submit\" value=\"Submit\"> "
+            + "</form> "
+            + "</td> "
+            + "</tr> "
+            + "</tbody>"
+            + "</table>"
+            + "<script> function log(msg) { window.document.title += msg + '\\u00a7'; } "
+                + "log(document.getElementById('bdy').innerHTML); </script>")
+    public void formInTableData() throws Exception {
+        final String html = "<html>\n"
+                + "<body id='bdy'>\n"
+                + "<table id='t1'>\n"
+                + "  <tr>\n"
+                + "    <td id='td0'>\n"
+                + "      <form id='xyz'>\n"
+                + "        <input type='hidden'>\n"
+                + "        <input type='submit' value='Submit'>\n"
+                + "      </form>\n"
+                + "    </td>\n"
+                + "  </tr>\n"
+                + "</table>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.getElementById('bdy').innerHTML);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("<input type=\"submit\" value=\"Submit\">"
+            + "<table id=\"t1\"> "
+            + "<tbody>"
+            + "<tr> "
+            + "<td id=\"td0\"> "
+            + "</td> "
+            + "<form id=\"xyz\"></form> "
+            + "<input type=\"hidden\"> "
+            + "</tr> "
+            + "</tbody>"
+            + "</table>"
+            + "<script> function log(msg) { window.document.title += msg + '\\u00a7'; } "
+                + "log(document.getElementById('bdy').innerHTML); </script>")
+    public void formInTableRow() throws Exception {
+        final String html = "<html>\n"
+                + "<body id='bdy'>\n"
+                + "<table id='t1'>\n"
+                + "  <tr>\n"
+                + "    <td id='td0'>\n"
+                + "    </td>\n"
+
+                + "    <form id='xyz'>\n"
+                + "      <input type='hidden'>\n"
+                + "      <input type='submit' value='Submit'>\n"
+                + "    </form>\n"
+
+                + "  </tr>\n"
+                + "</table>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.getElementById('bdy').innerHTML);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("<input type=\"submit\" value=\"Submit\">"
+            + "<table id=\"t1\"> "
+            + "<tbody>"
+            + "<tr> "
+            + "<td id=\"td0\"> "
+            + "</td> "
+            + "</tr> "
+            + "<form id=\"xyz\"></form> "
+            + "<input type=\"hidden\"> "
+            + "</tbody>"
+            + "</table>"
+            + "<script> function log(msg) { window.document.title += msg + '\\u00a7'; } "
+                + "log(document.getElementById('bdy').innerHTML); </script>")
+
+    public void formInTable() throws Exception {
+        final String html = "<html>\n"
+                + "<body id='bdy'>\n"
+                + "<table id='t1'>\n"
+                + "  <tr>\n"
+                + "    <td id='td0'>\n"
+                + "    </td>\n"
+                + "  </tr>\n"
+
+                + "  <form id='xyz'>\n"
+                + "    <input type='hidden'>\n"
+                + "    <input type='submit' value='Submit'>\n"
+                + "  </form>\n"
+                + "</table>"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  log(document.getElementById('bdy').innerHTML);\n"
+                + "</script>\n"
+                + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("<tbody>"
+            + "<tr> "
+            + "<td id=\"td0\"> "
+            + "<table> <tbody><tr> <td id=\"td1\"> <table> "
+            + "<form id=\"xyz\"></form> "
+            + "<tbody><tr> "
+            + "<td> "
+            + "<input type=\"hidden\"> "
+            + "<input type=\"submit\" value=\"Submit\"> "
+            + "</td> "
+            + "</tr> </tbody>"
+            + "</table> "
+            + "</td> </tr> <tr><td></td></tr> "
+            + "</tbody></table> "
+            + "</td> "
+            + "</tr> "
+            + "</tbody>")
     public void formInTable1() throws Exception {
         final String html = "<html>\n"
                 + "<body id='bdy'>\n"
-                + "<table>\n"
+                + "<table id='t1'>\n"
                 + "  <tr>\n"
-                + "    <td>\n"
+                + "    <td id='td0'>\n"
                 + "      <table>\n"
                 + "        <tr>\n"
-                + "          <td id='td0'>\n"
+                + "          <td id='td1'>\n"
                 + "            <table>\n"
                 + "              <form id='xyz'>\n"
                 + "              <tr>\n"
                 + "                <td>\n"
-                + "                  <input type='hidden' name='xyz' value='123'>\n"
+                + "                  <input type='hidden'>\n"
                 + "                  <input type='submit' value='Submit'>\n"
                 + "                </td>\n"
                 + "              </tr>\n"
@@ -508,17 +642,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</table>"
                 + "<script>\n"
                 + LOG_TITLE_FUNCTION
-                + "  log(document.getElementById('bdy').children.length);\n"
-                + "  log(document.getElementById('bdy').children[0].tagName);\n"
-                + "  log(document.getElementById('bdy').children[1].tagName);\n"
-
-                + "  log(document.getElementById('td0').children.length);\n"
-                + "  log(document.getElementById('td0').children[0].tagName);\n"
-                + "  log(document.getElementById('td0').children[0].children.length);\n"
-                + "  log(document.getElementById('td0').children[0].children[0].tagName);\n"
-                + "  log(document.getElementById('td0').children[0].children[1].tagName);\n"
-
-                + "  log(document.getElementById('td0').children[0].children[0].children.length);\n"
+                + "  log(document.getElementById('t1').innerHTML);\n"
                 + "</script>\n"
                 + "</body></html>";
         loadPageVerifyTitle2(html);
@@ -621,7 +745,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"3", "1a", "1b", "", "0", "DIV"})
-    @NotYetImplemented
     public void formInTable4() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"

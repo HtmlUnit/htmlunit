@@ -56,8 +56,11 @@ import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
+import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
@@ -442,13 +445,17 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // Next ensure non-table elements don't appear in tables
         if ("table".equals(currentNodeName) || isTableChild(currentNodeName) || "tr".equals(currentNodeName)) {
-            if ("script".equals(newNodeName)) { // Scripts are exempt
+            if ("script".equals(newNodeName) || "form".equals(newNodeName)) { // Scripts and forms are exempt
                 currentNode.appendChild(newElement);
             }
             else if ("col".equals(newNodeName) && "colgroup".equals(currentNodeName)) { // These are good
                 currentNode.appendChild(newElement);
             }
             else if ("caption".equals(currentNodeName)) {
+                currentNode.appendChild(newElement);
+            }
+            else if (newElement instanceof HtmlInput
+                    && !(newElement instanceof HtmlSubmitInput || newElement instanceof HtmlResetInput)) {
                 currentNode.appendChild(newElement);
             }
             else {
