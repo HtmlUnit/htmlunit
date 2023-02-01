@@ -54,13 +54,11 @@ import com.gargoylesoftware.htmlunit.html.Html;
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
+import com.gargoylesoftware.htmlunit.html.HtmlHiddenInput;
 import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
-import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
-import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
@@ -454,8 +452,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             else if ("caption".equals(currentNodeName)) {
                 currentNode.appendChild(newElement);
             }
-            else if (newElement instanceof HtmlInput
-                    && !(newElement instanceof HtmlSubmitInput || newElement instanceof HtmlResetInput)) {
+            else if (newElement instanceof HtmlHiddenInput) {
                 currentNode.appendChild(newElement);
             }
             else {

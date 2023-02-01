@@ -558,7 +558,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("<input type=\"submit\" value=\"Submit\">"
+    @Alerts("<input value=\"x\">"
+            + "<input type=\"text\">"
+            + "<input type=\"date\">"
+            + "<input type=\"number\">"
+            + "<input type=\"file\">"
+            + "<input type=\"radio\" value=\"on\">"
+            + "<input type=\"submit\" value=\"Submit\">"
+            + "<input type=\"reset\" value=\"Reset\">"
             + "<table id=\"t1\"> "
             + "<tbody>"
             + "<tr> "
@@ -583,7 +590,14 @@ public class MalformedHtmlTest extends WebDriverTestCase {
 
                 + "  <form id='xyz'>\n"
                 + "    <input type='hidden'>\n"
+                + "    <input value='x'>\n"
+                + "    <input type='text'>\n"
+                + "    <input type='date'>\n"
+                + "    <input type='number'>\n"
+                + "    <input type='file'>\n"
+                + "    <input type='radio' value='on'>\n"
                 + "    <input type='submit' value='Submit'>\n"
+                + "    <input type='reset' value='Reset'>\n"
                 + "  </form>\n"
                 + "</table>"
                 + "<script>\n"
