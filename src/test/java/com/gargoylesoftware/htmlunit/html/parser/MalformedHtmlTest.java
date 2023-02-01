@@ -621,7 +621,6 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"3", "1a", "1b", "", "0", "DIV"})
-    @NotYetImplemented
     public void formInTable4() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
