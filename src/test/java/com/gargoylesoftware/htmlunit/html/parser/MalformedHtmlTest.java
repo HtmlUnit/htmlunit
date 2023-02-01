@@ -553,6 +553,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
                 + "</body></html>";
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
