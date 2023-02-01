@@ -12,6 +12,8 @@ Version 2.70.0 / January 22, 2023
 
 **News**
 
+ * HtmlUnit suffers from a remote code execution via XSLT vulnerability on versions 2.70.0 and below. Please update to at least version 2.71.0.
+
 [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
