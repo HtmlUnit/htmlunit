@@ -200,6 +200,9 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             transformer.transform(xmlSource, streamResult);
             return writer.toString();
         }
+        catch (final RuntimeException re) {
+            throw re;
+        }
         catch (final Exception e) {
             throw Context.reportRuntimeError("Exception: " + e);
         }

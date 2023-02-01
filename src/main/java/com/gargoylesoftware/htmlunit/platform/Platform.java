@@ -146,6 +146,9 @@ public final class Platform {
 
             return new NoOpImageData();
         }
+        catch (final RuntimeException re) {
+            throw re;
+        }
         catch (final Exception ex) {
             return new NoOpImageData();
         }
