@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Unit tests for an element to close itself, which is defined in
@@ -32,76 +33,88 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 @RunWith(BrowserRunner.class)
 public class ElementClosesItselfTest extends WebDriverTestCase {
 
-    private static String test(final String tagName) {
+    private void test(final String tagName) throws Exception {
         if ("basefont".equals(tagName) || "isindex".equals(tagName)) {
-            return headElementClosesItself(tagName);
+            loadPageWithAlerts2(headElementClosesItself(tagName));
+            return;
         }
 
         if ("title".equals(tagName)) {
             // title is a bit special, we have to provide at least
             // one closing tab otherwise title spans to the end of the file
-            return "<html><head>\n"
+            loadPageWithAlerts2("<html><head>\n"
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "  alert(e == null ? e : e.children.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "<title id='outer'><title></title>\n"
                     + "</head><body onload='test()'>\n"
-                    + "</body></html>";
+                    + "</body></html>");
+            return;
         }
 
         if ("frame".equals(tagName)) {
-            return "<html><head>\n"
+            loadPageVerifyTitle2("<html><head>\n"
                     + "<script>\n"
+                    + LOG_TITLE_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "  log(e == null ? e : e.childNodes.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
                     + "<frameset onload='test()'>\n"
                     + "<frame id='outer'><frame>\n"
-                    + "</frameset></html>";
+                    + "</frameset></html>");
+            return;
         }
+
         if ("script".equals(tagName)) {
-            return "<html><head>\n"
+            loadPageVerifyTitle2("<html><head>\n"
                     + "<script>\n"
+                    + LOG_TITLE_FUNCTION
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "  log(e == null ? e : e.children.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head><body onload='test()'>\n"
                     + "<script id='outer'>//<script>\n"
                     + "</script>\n"
-                    + "</body></html>";
+                    + "</body></html>");
+            return;
         }
+
         if ("frameset".equals(tagName)) {
-            return "<html><head>\n"
+            loadPageWithAlerts2("<html><head>\n"
                     + "<script>\n"
                     + "function test() {\n"
                     + "  var e = document.getElementById('outer');\n"
-                    + "  alert(e == null ? e : e.childNodes.length);\n"
+                    + "  alert(e == null ? e : e.children.length);\n"
                     + "}\n"
                     + "</script>\n"
                     + "</head>\n"
                     + "<frameset onload='test()' id='outer'>\n"
                     + "<frameset>\n"
-                    + "</frameset></html>";
+                    + "</frameset></html>");
+            return;
         }
 
-        return "<html><head>\n"
+        loadPageVerifyTitle2("<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "  try {\n"
+                + "    log(e == null ? e : e.children.length);\n"
+                + "  } catch(e) { log('exception'); }"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
                 + "<" + tagName + " id='outer'><" + tagName + ">\n"
-                + "</body></html>";
+                + "</body></html>");
     }
 
     private static String headElementClosesItself(final String tagName) {
@@ -110,7 +123,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
                 + "<script>\n"
                 + "function test() {\n"
                 + "  var e = document.getElementById('outer');\n"
-                + "  alert(e == null ? e : e.childNodes.length);\n"
+                + "  alert(e == null ? e : e.children.length);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head><body onload='test()'>\n"
@@ -125,7 +138,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void abbr() throws Exception {
-        loadPageWithAlerts2(test("abbr"));
+        test("abbr");
     }
 
     /**
@@ -136,7 +149,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void acronym() throws Exception {
-        loadPageWithAlerts2(test("acronym"));
+        test("acronym");
     }
 
     /**
@@ -147,7 +160,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void a() throws Exception {
-        loadPageWithAlerts2(test("a"));
+        test("a");
     }
 
     /**
@@ -158,7 +171,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void address() throws Exception {
-        loadPageWithAlerts2(test("address"));
+        test("address");
     }
 
     /**
@@ -169,7 +182,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void applet() throws Exception {
-        loadPageWithAlerts2(test("applet"));
+        test("applet");
     }
 
     /**
@@ -180,7 +193,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void area() throws Exception {
-        loadPageWithAlerts2(test("area"));
+        test("area");
     }
 
     /**
@@ -191,7 +204,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void article() throws Exception {
-        loadPageWithAlerts2(test("article"));
+        test("article");
     }
 
     /**
@@ -202,7 +215,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void aside() throws Exception {
-        loadPageWithAlerts2(test("aside"));
+        test("aside");
     }
 
     /**
@@ -213,7 +226,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void audio() throws Exception {
-        loadPageWithAlerts2(test("audio"));
+        test("audio");
     }
 
     /**
@@ -224,7 +237,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void bgsound() throws Exception {
-        loadPageWithAlerts2(test("bgsound"));
+        test("bgsound");
     }
 
     /**
@@ -235,7 +248,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void base() throws Exception {
-        loadPageWithAlerts2(test("base"));
+        test("base");
     }
 
     /**
@@ -246,7 +259,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void basefont() throws Exception {
-        loadPageWithAlerts2(test("basefont"));
+        test("basefont");
     }
 
     /**
@@ -257,7 +270,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void bdi() throws Exception {
-        loadPageWithAlerts2(test("bdi"));
+        test("bdi");
     }
 
     /**
@@ -268,7 +281,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void bdo() throws Exception {
-        loadPageWithAlerts2(test("bdo"));
+        test("bdo");
     }
 
     /**
@@ -279,7 +292,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void big() throws Exception {
-        loadPageWithAlerts2(test("big"));
+        test("big");
     }
 
     /**
@@ -290,7 +303,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void blink() throws Exception {
-        loadPageWithAlerts2(test("blink"));
+        test("blink");
     }
 
     /**
@@ -301,7 +314,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void blockquote() throws Exception {
-        loadPageWithAlerts2(test("blockquote"));
+        test("blockquote");
     }
 
     /**
@@ -310,9 +323,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void body() throws Exception {
-        loadPageWithAlerts2(test("body"));
+        test("body");
     }
 
     /**
@@ -323,7 +336,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void b() throws Exception {
-        loadPageWithAlerts2(test("b"));
+        test("b");
     }
 
     /**
@@ -334,7 +347,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void br() throws Exception {
-        loadPageWithAlerts2(test("br"));
+        test("br");
     }
 
     /**
@@ -345,7 +358,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void button() throws Exception {
-        loadPageWithAlerts2(test("button"));
+        test("button");
     }
 
     /**
@@ -356,7 +369,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void canvas() throws Exception {
-        loadPageWithAlerts2(test("canvas"));
+        test("canvas");
     }
 
     /**
@@ -367,7 +380,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void caption() throws Exception {
-        loadPageWithAlerts2(test("caption"));
+        test("caption");
     }
 
     /**
@@ -378,7 +391,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void center() throws Exception {
-        loadPageWithAlerts2(test("center"));
+        test("center");
     }
 
     /**
@@ -389,7 +402,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void cite() throws Exception {
-        loadPageWithAlerts2(test("cite"));
+        test("cite");
     }
 
     /**
@@ -400,7 +413,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void code() throws Exception {
-        loadPageWithAlerts2(test("code"));
+        test("code");
     }
 
     /**
@@ -413,7 +426,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
             FF = "1",
             FF_ESR = "1")
     public void command() throws Exception {
-        loadPageWithAlerts2(test("command"));
+        test("command");
     }
 
     /**
@@ -424,7 +437,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void datalist() throws Exception {
-        loadPageWithAlerts2(test("datalist"));
+        test("datalist");
     }
 
     /**
@@ -435,7 +448,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void details() throws Exception {
-        loadPageWithAlerts2(test("details"));
+        test("details");
     }
 
     /**
@@ -446,7 +459,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void dfn() throws Exception {
-        loadPageWithAlerts2(test("dfn"));
+        test("dfn");
     }
 
     /**
@@ -457,7 +470,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void dd() throws Exception {
-        loadPageWithAlerts2(test("dd"));
+        test("dd");
     }
 
     /**
@@ -468,7 +481,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void del() throws Exception {
-        loadPageWithAlerts2(test("del"));
+        test("del");
     }
 
     /**
@@ -479,7 +492,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void dialog() throws Exception {
-        loadPageWithAlerts2(test("dialog"));
+        test("dialog");
     }
 
     /**
@@ -490,7 +503,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void dir() throws Exception {
-        loadPageWithAlerts2(test("dir"));
+        test("dir");
     }
 
     /**
@@ -501,7 +514,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void div() throws Exception {
-        loadPageWithAlerts2(test("div"));
+        test("div");
     }
 
     /**
@@ -512,7 +525,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void dl() throws Exception {
-        loadPageWithAlerts2(test("dl"));
+        test("dl");
     }
 
     /**
@@ -523,7 +536,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void dt() throws Exception {
-        loadPageWithAlerts2(test("dt"));
+        test("dt");
     }
 
     /**
@@ -534,7 +547,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void embed() throws Exception {
-        loadPageWithAlerts2(test("embed"));
+        test("embed");
     }
 
     /**
@@ -545,7 +558,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void em() throws Exception {
-        loadPageWithAlerts2(test("em"));
+        test("em");
     }
 
     /**
@@ -556,7 +569,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void fieldset() throws Exception {
-        loadPageWithAlerts2(test("fieldset"));
+        test("fieldset");
     }
 
     /**
@@ -567,7 +580,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void figcaption() throws Exception {
-        loadPageWithAlerts2(test("figcaption"));
+        test("figcaption");
     }
 
     /**
@@ -578,7 +591,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void figure() throws Exception {
-        loadPageWithAlerts2(test("figure"));
+        test("figure");
     }
 
     /**
@@ -589,7 +602,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void font() throws Exception {
-        loadPageWithAlerts2(test("font"));
+        test("font");
     }
 
     /**
@@ -600,7 +613,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void footer() throws Exception {
-        loadPageWithAlerts2(test("footer"));
+        test("footer");
     }
 
     /**
@@ -609,9 +622,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void form() throws Exception {
-        loadPageWithAlerts2(test("form"));
+        test("form");
     }
 
     /**
@@ -622,7 +635,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void frame() throws Exception {
-        loadPageWithAlerts2(test("frame"));
+        test("frame");
     }
 
     /**
@@ -631,9 +644,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("2")
+    @Alerts("1")
     public void frameset() throws Exception {
-        loadPageWithAlerts2(test("frameset"));
+        test("frameset");
     }
 
     /**
@@ -644,7 +657,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h1() throws Exception {
-        loadPageWithAlerts2(test("h1"));
+        test("h1");
     }
 
     /**
@@ -655,7 +668,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h2() throws Exception {
-        loadPageWithAlerts2(test("h2"));
+        test("h2");
     }
 
     /**
@@ -666,7 +679,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h3() throws Exception {
-        loadPageWithAlerts2(test("h3"));
+        test("h3");
     }
 
     /**
@@ -677,7 +690,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h4() throws Exception {
-        loadPageWithAlerts2(test("h4"));
+        test("h4");
     }
 
     /**
@@ -688,7 +701,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h5() throws Exception {
-        loadPageWithAlerts2(test("h5"));
+        test("h5");
     }
 
     /**
@@ -699,7 +712,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void h6() throws Exception {
-        loadPageWithAlerts2(test("h6"));
+        test("h6");
     }
 
     /**
@@ -710,7 +723,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void head() throws Exception {
-        loadPageWithAlerts2(test("head"));
+        test("head");
     }
 
     /**
@@ -721,7 +734,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void header() throws Exception {
-        loadPageWithAlerts2(test("header"));
+        test("header");
     }
 
     /**
@@ -732,7 +745,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void hr() throws Exception {
-        loadPageWithAlerts2(test("hr"));
+        test("hr");
     }
 
     /**
@@ -743,7 +756,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("2")
     public void html() throws Exception {
-        loadPageWithAlerts2(test("html"));
+        test("html");
     }
 
     /**
@@ -752,9 +765,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void iframe() throws Exception {
-        loadPageWithAlerts2(test("iframe"));
+        test("iframe");
     }
 
     /**
@@ -765,7 +778,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void q() throws Exception {
-        loadPageWithAlerts2(test("q"));
+        test("q");
     }
 
     /**
@@ -776,7 +789,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void image() throws Exception {
-        loadPageWithAlerts2(test("image"));
+        test("image");
     }
 
     /**
@@ -787,7 +800,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void img() throws Exception {
-        loadPageWithAlerts2(test("img"));
+        test("img");
     }
 
     /**
@@ -798,7 +811,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void ins() throws Exception {
-        loadPageWithAlerts2(test("ins"));
+        test("ins");
     }
 
     /**
@@ -810,7 +823,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             IE = "0")
     public void isindex() throws Exception {
-        loadPageWithAlerts2(test("isindex"));
+        test("isindex");
     }
 
     /**
@@ -821,7 +834,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void i() throws Exception {
-        loadPageWithAlerts2(test("i"));
+        test("i");
     }
 
     /**
@@ -832,7 +845,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void kbd() throws Exception {
-        loadPageWithAlerts2(test("kbd"));
+        test("kbd");
     }
 
     /**
@@ -841,7 +854,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void keygen() throws Exception {
-        loadPageWithAlerts2(test("keygen"));
+        test("keygen");
     }
 
     /**
@@ -852,7 +865,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void label() throws Exception {
-        loadPageWithAlerts2(test("label"));
+        test("label");
     }
 
     /**
@@ -863,7 +876,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void layer() throws Exception {
-        loadPageWithAlerts2(test("layer"));
+        test("layer");
     }
 
     /**
@@ -874,7 +887,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void legend() throws Exception {
-        loadPageWithAlerts2(test("legend"));
+        test("legend");
     }
 
     /**
@@ -885,7 +898,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void listing() throws Exception {
-        loadPageWithAlerts2(test("listing"));
+        test("listing");
     }
 
     /**
@@ -896,7 +909,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void li() throws Exception {
-        loadPageWithAlerts2(test("li"));
+        test("li");
     }
 
     /**
@@ -907,7 +920,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void link() throws Exception {
-        loadPageWithAlerts2(test("link"));
+        test("link");
     }
 
     /**
@@ -918,7 +931,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void main() throws Exception {
-        loadPageWithAlerts2(test("main"));
+        test("main");
     }
 
     /**
@@ -929,7 +942,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void map() throws Exception {
-        loadPageWithAlerts2(test("map"));
+        test("map");
     }
 
     /**
@@ -940,7 +953,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void marquee() throws Exception {
-        loadPageWithAlerts2(test("marquee"));
+        test("marquee");
     }
 
     /**
@@ -951,7 +964,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void mark() throws Exception {
-        loadPageWithAlerts2(test("mark"));
+        test("mark");
     }
 
     /**
@@ -962,7 +975,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void menu() throws Exception {
-        loadPageWithAlerts2(test("menu"));
+        test("menu");
     }
 
     /**
@@ -973,7 +986,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void menuitem() throws Exception {
-        loadPageWithAlerts2(test("menuitem"));
+        test("menuitem");
     }
 
     /**
@@ -984,7 +997,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void meta() throws Exception {
-        loadPageWithAlerts2(test("meta"));
+        test("meta");
     }
 
     /**
@@ -995,7 +1008,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void meter() throws Exception {
-        loadPageWithAlerts2(test("meter"));
+        test("meter");
     }
 
     /**
@@ -1006,7 +1019,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void multicol() throws Exception {
-        loadPageWithAlerts2(test("multicol"));
+        test("multicol");
     }
 
     /**
@@ -1017,7 +1030,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void nobr() throws Exception {
-        loadPageWithAlerts2(test("nobr"));
+        test("nobr");
     }
 
     /**
@@ -1028,7 +1041,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void nav() throws Exception {
-        loadPageWithAlerts2(test("nav"));
+        test("nav");
     }
 
     /**
@@ -1039,7 +1052,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void nextid() throws Exception {
-        loadPageWithAlerts2(test("nextid"));
+        test("nextid");
     }
 
     /**
@@ -1048,9 +1061,14 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1",
+            FF = "1",
+            FF_ESR = "1",
+            IE = "1")
     public void noembed() throws Exception {
-        loadPageWithAlerts2(test("noembed"));
+        test("noembed");
     }
 
     /**
@@ -1059,9 +1077,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void noframes() throws Exception {
-        loadPageWithAlerts2(test("noframes"));
+        test("noframes");
     }
 
     /**
@@ -1072,7 +1090,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void nolayer() throws Exception {
-        loadPageWithAlerts2(test("nolayer"));
+        test("nolayer");
     }
 
     /**
@@ -1081,9 +1099,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void noscript() throws Exception {
-        loadPageWithAlerts2(test("noscript"));
+        test("noscript");
     }
 
     /**
@@ -1094,7 +1112,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void object() throws Exception {
-        loadPageWithAlerts2(test("object"));
+        test("object");
     }
 
     /**
@@ -1105,7 +1123,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void ol() throws Exception {
-        loadPageWithAlerts2(test("ol"));
+        test("ol");
     }
 
     /**
@@ -1116,7 +1134,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void optgroup() throws Exception {
-        loadPageWithAlerts2(test("optgroup"));
+        test("optgroup");
     }
 
     /**
@@ -1127,7 +1145,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void option() throws Exception {
-        loadPageWithAlerts2(test("option"));
+        test("option");
     }
 
     /**
@@ -1138,7 +1156,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void output() throws Exception {
-        loadPageWithAlerts2(test("output"));
+        test("output");
     }
 
     /**
@@ -1149,7 +1167,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void p() throws Exception {
-        loadPageWithAlerts2(test("p"));
+        test("p");
     }
 
     /**
@@ -1160,7 +1178,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void param() throws Exception {
-        loadPageWithAlerts2(test("param"));
+        test("param");
     }
 
     /**
@@ -1169,9 +1187,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void plaintext() throws Exception {
-        loadPageWithAlerts2(test("plaintext"));
+        test("plaintext");
     }
 
     /**
@@ -1182,7 +1200,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void pre() throws Exception {
-        loadPageWithAlerts2(test("pre"));
+        test("pre");
     }
 
     /**
@@ -1193,7 +1211,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void progress() throws Exception {
-        loadPageWithAlerts2(test("progress"));
+        test("progress");
     }
 
     /**
@@ -1204,7 +1222,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void ruby() throws Exception {
-        loadPageWithAlerts2(test("ruby"));
+        test("ruby");
     }
 
     /**
@@ -1215,7 +1233,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void rp() throws Exception {
-        loadPageWithAlerts2(test("rp"));
+        test("rp");
     }
 
     /**
@@ -1226,7 +1244,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void rt() throws Exception {
-        loadPageWithAlerts2(test("rt"));
+        test("rt");
     }
 
     /**
@@ -1237,7 +1255,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void s() throws Exception {
-        loadPageWithAlerts2(test("s"));
+        test("s");
     }
 
     /**
@@ -1248,7 +1266,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void samp() throws Exception {
-        loadPageWithAlerts2(test("samp"));
+        test("samp");
     }
 
     /**
@@ -1257,9 +1275,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void script() throws Exception {
-        loadPageWithAlerts2(test("script"));
+        test("script");
     }
 
     /**
@@ -1270,7 +1288,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void section() throws Exception {
-        loadPageWithAlerts2(test("section"));
+        test("section");
     }
 
     /**
@@ -1281,7 +1299,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void select() throws Exception {
-        loadPageWithAlerts2(test("select"));
+        test("select");
     }
 
     /**
@@ -1292,7 +1310,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void small() throws Exception {
-        loadPageWithAlerts2(test("small"));
+        test("small");
     }
 
     /**
@@ -1303,7 +1321,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void source() throws Exception {
-        loadPageWithAlerts2(test("source"));
+        test("source");
     }
 
     /**
@@ -1312,7 +1330,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void spacer() throws Exception {
-        loadPageWithAlerts2(test("spacer"));
+        test("spacer");
     }
 
     /**
@@ -1323,7 +1341,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void span() throws Exception {
-        loadPageWithAlerts2(test("span"));
+        test("span");
     }
 
     /**
@@ -1334,7 +1352,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void strike() throws Exception {
-        loadPageWithAlerts2(test("strike"));
+        test("strike");
     }
 
     /**
@@ -1345,7 +1363,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void strong() throws Exception {
-        loadPageWithAlerts2(test("strong"));
+        test("strong");
     }
 
     /**
@@ -1354,9 +1372,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void style() throws Exception {
-        loadPageWithAlerts2(test("style"));
+        test("style");
     }
 
     /**
@@ -1367,7 +1385,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void sub() throws Exception {
-        loadPageWithAlerts2(test("sub"));
+        test("sub");
     }
 
     /**
@@ -1378,7 +1396,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void summary() throws Exception {
-        loadPageWithAlerts2(test("summary"));
+        test("summary");
     }
 
     /**
@@ -1389,18 +1407,19 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void sup() throws Exception {
-        loadPageWithAlerts2(test("sup"));
+        test("sup");
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSvg}.
      *
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            IE = "exception")
     public void svg() throws Exception {
-        loadPageWithAlerts2(test("svg"));
+        test("svg");
     }
 
     /**
@@ -1411,7 +1430,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void table() throws Exception {
-        loadPageWithAlerts2(test("table"));
+        test("table");
     }
 
     /**
@@ -1422,7 +1441,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void col() throws Exception {
-        loadPageWithAlerts2(test("col"));
+        test("col");
     }
 
     /**
@@ -1433,7 +1452,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void colgroup() throws Exception {
-        loadPageWithAlerts2(test("colgroup"));
+        test("colgroup");
     }
 
     /**
@@ -1444,7 +1463,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tbody() throws Exception {
-        loadPageWithAlerts2(test("tbody"));
+        test("tbody");
     }
 
     /**
@@ -1455,7 +1474,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void td() throws Exception {
-        loadPageWithAlerts2(test("td"));
+        test("td");
     }
 
     /**
@@ -1466,7 +1485,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void th() throws Exception {
-        loadPageWithAlerts2(test("th"));
+        test("th");
     }
 
     /**
@@ -1477,7 +1496,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tr() throws Exception {
-        loadPageWithAlerts2(test("tr"));
+        test("tr");
     }
 
     /**
@@ -1488,7 +1507,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void track() throws Exception {
-        loadPageWithAlerts2(test("track"));
+        test("track");
     }
 
     /**
@@ -1497,9 +1516,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void textarea() throws Exception {
-        loadPageWithAlerts2(test("textarea"));
+        test("textarea");
     }
 
     /**
@@ -1510,7 +1529,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void tfoot() throws Exception {
-        loadPageWithAlerts2(test("tfoot"));
+        test("tfoot");
     }
 
     /**
@@ -1521,7 +1540,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("null")
     public void thead() throws Exception {
-        loadPageWithAlerts2(test("thead"));
+        test("thead");
     }
 
     /**
@@ -1532,7 +1551,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void tt() throws Exception {
-        loadPageWithAlerts2(test("tt"));
+        test("tt");
     }
 
     /**
@@ -1543,7 +1562,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void time() throws Exception {
-        loadPageWithAlerts2(test("time"));
+        test("time");
     }
 
     /**
@@ -1552,9 +1571,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void title() throws Exception {
-        loadPageWithAlerts2(test("title"));
+        test("title");
     }
 
     /**
@@ -1565,7 +1584,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void u() throws Exception {
-        loadPageWithAlerts2(test("u"));
+        test("u");
     }
 
     /**
@@ -1576,7 +1595,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void ul() throws Exception {
-        loadPageWithAlerts2(test("ul"));
+        test("ul");
     }
 
     /**
@@ -1587,7 +1606,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void var() throws Exception {
-        loadPageWithAlerts2(test("var"));
+        test("var");
     }
 
     /**
@@ -1598,7 +1617,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void video() throws Exception {
-        loadPageWithAlerts2(test("video"));
+        test("video");
     }
 
     /**
@@ -1609,7 +1628,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void wbr() throws Exception {
-        loadPageWithAlerts2(test("wbr"));
+        test("wbr");
     }
 
     /**
@@ -1618,9 +1637,9 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("1")
+    @Alerts("0")
     public void xmp() throws Exception {
-        loadPageWithAlerts2(test("xmp"));
+        test("xmp");
     }
 
     /**
@@ -1631,7 +1650,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("0")
     public void input() throws Exception {
-        loadPageWithAlerts2(test("input"));
+        test("input");
     }
 
     /**
@@ -1642,7 +1661,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void data() throws Exception {
-        loadPageWithAlerts2(test("data"));
+        test("data");
     }
 
     /**
@@ -1653,7 +1672,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void content() throws Exception {
-        loadPageWithAlerts2(test("content"));
+        test("content");
     }
 
     /**
@@ -1664,7 +1683,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void picture() throws Exception {
-        loadPageWithAlerts2(test("picture"));
+        test("picture");
     }
 
     /**
@@ -1676,7 +1695,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "0",
             IE = "1")
     public void template() throws Exception {
-        loadPageWithAlerts2(test("template"));
+        test("template");
     }
 
     /**
@@ -1687,7 +1706,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     @Test
     @Alerts("1")
     public void slot() throws Exception {
-        loadPageWithAlerts2(test("slot"));
+        test("slot");
     }
 
 }
