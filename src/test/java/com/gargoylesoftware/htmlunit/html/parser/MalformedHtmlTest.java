@@ -777,7 +777,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"2", "1a", "1b", "2", "BODY", "TR", "TABLE", "2"})
+    @Alerts({"2", "1a", "1b", "2", "BODY", "DIV", "TABLE", "2"})
     public void formInTable8() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"
