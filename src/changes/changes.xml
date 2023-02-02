@@ -8,6 +8,21 @@
 
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
+            <action type="fix" dev="Atsushi Nakagawa">
+                Bunch of fixes to attach input controls to the correct form during dom creation.
+            </action>
+            <action type="fix" dev="rbri">
+                Many corrections for the dom generation for misplaced form or form controls inside tables.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: Close forms directly if they are at the wrong place inside a table.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Augmentations converted into  a tagging interface.
+            </action>
+            <action type="update" dev="rbri">
+                neko: code cleanup and unused features removed.
+            </action>
             <action type="fix" dev="rbri">
                 Enable FEATURE_SECURE_PROCESSING for the XSLT processor.
             </action>
