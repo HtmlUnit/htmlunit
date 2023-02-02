@@ -44,7 +44,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * @author Ronald Brill
  * @author Marc Guillemot
  */
-class XmlSerializer {
+public class XmlSerializer {
 
     private static final String FILE_SEPARATOR = "/";
     private static final Pattern CREATE_FILE_PATTERN = Pattern.compile(".*/");
