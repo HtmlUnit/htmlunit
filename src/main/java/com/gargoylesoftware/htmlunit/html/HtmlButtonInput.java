@@ -55,21 +55,17 @@ public class HtmlButtonInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    public void setDefaultChecked(final boolean defaultChecked) {
-        // Empty.
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+        setDefaultValue(newValue);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if ("value".equals(qualifiedName)) {
-            setDefaultValue(attributeValue, false);
-        }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
+    public void setDefaultChecked(final boolean defaultChecked) {
+        // Empty.
     }
 
     /**

@@ -1087,6 +1087,14 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INNER_TEXT_VALUE_NULL,
 
+    /** The value is ignored when the type of an input is changed. */
+    @BrowserFeature(IE)
+    JS_INPUT_CHANGE_TYPE_DROPS_VALUE,
+
+    /** The value is ignored when the type of an week/month input is changed. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH,
+
     /** Ignore negative selection starts. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_IGNORE_NEGATIVE_SELECTION_START,

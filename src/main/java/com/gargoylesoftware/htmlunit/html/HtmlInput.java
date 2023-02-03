@@ -36,7 +36,6 @@ import com.gargoylesoftware.htmlunit.HttpHeader;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;
 import com.gargoylesoftware.htmlunit.SgmlPage;
-import com.gargoylesoftware.htmlunit.WebAssert;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.javascript.AbstractJavaScriptEngine;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
@@ -68,7 +67,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     private static final String TYPE_ATTRUBUTE = "type";
 
-    private String defaultValue_;
+    private String rawValue_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
     private boolean createdByJavascript_;
@@ -96,21 +95,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public HtmlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
-        defaultValue_ = getValueAttribute();
+        rawValue_ = getValueAttribute();
         originalName_ = getNameAttribute();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setAttribute(final String attributeName, final String attributeValue) {
-        if ("value".equals(attributeName)) {
-            setValueAttribute(attributeValue);
-        }
-        else {
-            super.setAttribute(attributeName, attributeValue);
-        }
     }
 
     /**
@@ -119,7 +105,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param newValue the new value
      */
     public void setValueAttribute(final String newValue) {
-        WebAssert.notNull("newValue", newValue);
         super.setAttribute("value", newValue);
     }
 
@@ -128,7 +113,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public NameValuePair[] getSubmitNameValuePairs() {
-        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValueAttribute())};
+        return new NameValuePair[]{new NameValuePair(getNameAttribute(), getValue())};
     }
 
     /**
@@ -172,7 +157,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value
      */
     public String getValue() {
-        return getValueAttribute();
+        return getRawValue();
     }
 
     /**
@@ -181,7 +166,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param newValue the new value
      */
     public void setValue(final String newValue) {
-        setValueAttribute(newValue);
+        setRawValue(newValue);
     }
 
     /**
@@ -465,7 +450,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public void reset() {
-        setValueAttribute(defaultValue_);
+        setValue(getDefaultValue());
     }
 
     /**
@@ -475,34 +460,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        setDefaultValue(defaultValue, true);
-    }
+        final String oldDefaultValue = getDefaultValue();
+        setValueAttribute(defaultValue);
 
-    /**
-     * Sets the default value, optionally also modifying the current value.
-     * @param defaultValue the new default value
-     * @param modifyValue Whether or not to set the current value to the default value
-     */
-    protected void setDefaultValue(final String defaultValue, final boolean modifyValue) {
-        final String oldAttributeValue = defaultValue_;
-        final HtmlAttributeChangeEvent event;
-        if (ATTRIBUTE_NOT_DEFINED == defaultValue_) {
-            event = new HtmlAttributeChangeEvent(this, "value", defaultValue);
+        if (oldDefaultValue.equals(getValue())) {
+            setRawValue(defaultValue);
         }
-        else {
-            event = new HtmlAttributeChangeEvent(this, "value", oldAttributeValue);
-        }
-
-        defaultValue_ = defaultValue;
-        if (modifyValue) {
-            if (this instanceof HtmlFileInput) {
-                super.setAttribute("value", defaultValue);
-            }
-            else {
-                setValueAttribute(defaultValue);
-            }
-        }
-        notifyAttributeChangeListeners(event, this, oldAttributeValue, true);
     }
 
     /**
@@ -511,7 +474,15 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public String getDefaultValue() {
-        return defaultValue_;
+        return getValueAttribute();
+    }
+
+    protected String getRawValue() {
+        return rawValue_;
+    }
+
+    protected void setRawValue(final String rawValue) {
+        rawValue_ = rawValue;
     }
 
     /**
@@ -716,7 +687,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     }
 
     protected Object getInternalValue() {
-        return getValueAttribute();
+        return getRawValue();
     }
 
     /**
@@ -1008,7 +979,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             return true;
         }
 
-        final String value = getValueAttribute();
+        final String value = getValue();
         if (StringUtils.isEmpty(value)) {
             return true;
         }
@@ -1125,7 +1096,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public boolean isValueMissingValidityState() {
         return isRequiredSupported()
                 && ATTRIBUTE_NOT_DEFINED != getAttributeDirect(ATTRIBUTE_REQUIRED)
-                && getAttributeDirect("value").isEmpty();
+                && getValue().isEmpty();
     }
 
     /**

@@ -49,8 +49,26 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      * {@inheritDoc}
      */
     @Override
+    public void setValue(final String newValue) {
+        super.setValue(newValue);
+
+        final SgmlPage page = getPage();
+        if (page != null && page.isHtmlPage()) {
+            int pos = 0;
+            if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
+                pos = newValue.length();
+            }
+            setSelectionStart(pos);
+            setSelectionEnd(pos);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     protected void doType(final char c, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, c, this, lastType);
+        doTypeProcessor_.doType(getRawValue(), selectionDelegate_, c, this, lastType);
     }
 
     /**
@@ -58,7 +76,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      */
     @Override
     protected void doType(final int keyCode, final boolean lastType) {
-        doTypeProcessor_.doType(getValueAttribute(), selectionDelegate_, keyCode, this, lastType);
+        doTypeProcessor_.doType(getRawValue(), selectionDelegate_, keyCode, this, lastType);
     }
 
     /**
@@ -67,7 +85,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
     @Override
     protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
         if (newValue.length() <= getMaxLength()) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
+            setRawValue(newValue);
         }
     }
 
@@ -76,7 +94,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      */
     @Override
     public void setText(final String text) {
-        setValueAttribute(text);
+        setValue(text);
     }
 
     /**
@@ -84,7 +102,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      */
     @Override
     public String getText() {
-        return getValueAttribute();
+        return getValue();
     }
 
     /**
@@ -143,27 +161,6 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
     public void reset() {
         super.reset();
         setSelectionEnd(0);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-        if ("value".equals(qualifiedName)) {
-            final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
-                int pos = 0;
-                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                    pos = attributeValue.length();
-                }
-                setSelectionStart(pos);
-                setSelectionEnd(pos);
-            }
-        }
     }
 
     /**

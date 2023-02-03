@@ -1136,9 +1136,11 @@ public class HtmlFormTest extends SimpleWebTestCase {
             + "<script>\n"
             + "var i = 0;\n"
             + "while (document.cb_form.Quantity[i]) {\n"
-            + "document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g, '');\n"
-            + "if ((document.cb_form.Quantity[i].value.length == 0)) {document.cb_form.Quantity[i].value = '1';}\n"
-            + "i++;\n"
+            + "  document.cb_form.Quantity[i].value = document.cb_form.Quantity[i].value.replace(/[^0-9]/g, '');\n"
+            + "  if ((document.cb_form.Quantity[i].value.length == 0)) {\n"
+            + "    document.cb_form.Quantity[i].value = '1';\n"
+            + "  }\n"
+            + "  i++;\n"
             + "}\n"
             + "</script>\n"
             + "\n"
@@ -1147,7 +1149,7 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final List<DomElement> quantities = page.getElementsByName("Quantity");
         assertEquals(3, quantities.size());
         for (final DomElement quantity : quantities) {
-            assertEquals("1", quantity.getAttribute("value"));
+            assertEquals("1", ((HtmlInput) quantity).getValue());
         }
     }
 

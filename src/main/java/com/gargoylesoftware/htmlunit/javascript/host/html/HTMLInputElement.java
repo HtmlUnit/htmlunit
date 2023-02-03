@@ -22,6 +22,8 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYP
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
@@ -45,11 +47,15 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
+import com.gargoylesoftware.htmlunit.html.HtmlDateTimeLocalInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
+import com.gargoylesoftware.htmlunit.html.HtmlMonthInput;
 import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
+import com.gargoylesoftware.htmlunit.html.HtmlTimeInput;
+import com.gargoylesoftware.htmlunit.html.HtmlWeekInput;
 import com.gargoylesoftware.htmlunit.html.impl.SelectableTextInput;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
@@ -206,6 +212,27 @@ public class HTMLInputElement extends HTMLElement {
                         .getFactory(HtmlInput.TAG_NAME)
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
+                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
+                    newInput.setValue(input.getValue());
+                }
+                else {
+                    if (newInput instanceof HtmlTimeInput
+                            || newInput instanceof HtmlDateTimeLocalInput
+                            || newInput instanceof HtmlFileInput) {
+                        newInput.setValue("");
+                    }
+                    else if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH)
+                            && (newInput instanceof HtmlWeekInput || newInput instanceof HtmlMonthInput)) {
+                        newInput.setValue("");
+                    }
+                    else {
+                        final String originalValue = input.getValue();
+                        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
+                            newInput.setValue(originalValue);
+                        }
+                    }
+                }
+
                 if (input.wasCreatedByJavascript()) {
                     newInput.markAsCreatedByJavascript();
                 }
@@ -315,10 +342,10 @@ public class HTMLInputElement extends HTMLElement {
         }
         if ("value".equalsIgnoreCase(name)) {
             setDefaultValue(value);
+            return;
         }
-        else {
-            super.setAttribute(name, value);
-        }
+
+        super.setAttribute(name, value);
     }
 
     /**

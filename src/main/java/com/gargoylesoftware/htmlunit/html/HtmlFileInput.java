@@ -62,7 +62,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
         final DomAttr valueAttrib = attributes.get("value");
         if (valueAttrib != null) {
-            setDefaultValue(valueAttrib.getNodeValue(), false);
+            setDefaultValue(valueAttrib.getNodeValue());
         }
     }
 
@@ -164,7 +164,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         if (StringUtils.isEmpty(newValue)) {
             setFiles();
             return;

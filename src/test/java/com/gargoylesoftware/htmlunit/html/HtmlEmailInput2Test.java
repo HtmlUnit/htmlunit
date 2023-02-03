@@ -49,7 +49,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         HtmlEmailInput input = (HtmlEmailInput) page.getElementById("foo");
         input = (HtmlEmailInput) input.cloneNode(true);
         input.type("abc@email.com");
-        assertEquals("abc@email.com", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("abc@email.com", input.getValue());
     }
 
@@ -75,7 +75,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.reset();
         input.type("xyz@email.com");
 
-        assertEquals("xyz@email.com", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("xyz@email.com", input.getValue());
     }
 
@@ -101,8 +101,8 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.setValueAttribute("");
         input.type("xyz@email.com");
 
-        assertEquals("xyz@email.com", input.getValueAttribute());
-        assertEquals("xyz@email.com", input.getValue());
+        assertEquals("", input.getValueAttribute());
+        assertEquals("abc@email.comxyz@email.com", input.getValue());
     }
 
     /**
@@ -127,7 +127,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.setValue("");
         input.type("xyz@email.com");
 
-        assertEquals("xyz@email.com", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("xyz@email.com", input.getValue());
     }
 

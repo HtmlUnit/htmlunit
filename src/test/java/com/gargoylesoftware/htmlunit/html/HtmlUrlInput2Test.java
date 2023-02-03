@@ -69,7 +69,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         HtmlUrlInput input = (HtmlUrlInput) page.getElementById("foo");
         input = (HtmlUrlInput) input.cloneNode(true);
         input.type("4711");
-        assertEquals("4711", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("4711", input.getValue());
     }
 
@@ -95,7 +95,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.reset();
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
     }
 
@@ -121,8 +121,8 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.setValueAttribute("");
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
-        assertEquals("0815", input.getValue());
+        assertEquals("", input.getValueAttribute());
+        assertEquals("47110815", input.getValue());
     }
 
     /**
@@ -147,7 +147,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.setValue("");
         input.type("0815");
 
-        assertEquals("0815", input.getValueAttribute());
+        assertEquals("", input.getValueAttribute());
         assertEquals("0815", input.getValue());
     }
 
@@ -184,7 +184,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts({"true", "true", "true", "https://github.com"})
+    @Alerts({"true", "true", "true", "", "https://github.com"})
     public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
@@ -203,7 +203,7 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("/HtmlUnit/htmlunit");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
-        assertEquals(getExpectedAlerts()[3], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
     }
 
     /**
@@ -211,8 +211,8 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "https://github.com/HtmlUnit/htmlunit"},
-            IE = {"true", "true", "true", "https://github.com/HtmlUnit/htmlunit"})
+    @Alerts(DEFAULT = {"true", "false", "true", "", "https://github.com/HtmlUnit/htmlunit"},
+            IE = {"true", "true", "true", "", "https://github.com/HtmlUnit/htmlunit"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
@@ -231,6 +231,6 @@ public class HtmlUrlInput2Test extends SimpleWebTestCase {
         input.type("/HtmlUnit/htmlunit");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
-        assertEquals(getExpectedAlerts()[3], input.getValue());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
     }
 }

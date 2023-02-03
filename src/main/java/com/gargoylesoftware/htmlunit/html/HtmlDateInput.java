@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_DATE_SUPPORTED;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -62,36 +61,6 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
-            final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
-                notifyMutationObservers);
-        if ("value".equals(qualifiedName)) {
-            final SgmlPage page = getPage();
-            if (page != null && page.isHtmlPage()) {
-                int pos = 0;
-                if (!hasFeature(JS_INPUT_SET_VALUE_MOVE_SELECTION_TO_START)) {
-                    pos = attributeValue.length();
-                }
-                setSelectionStart(pos);
-                setSelectionEnd(pos);
-            }
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setDefaultValue(final String defaultValue) {
-        final boolean modifyValue = getValueAttribute().equals(getDefaultValue());
-        setDefaultValue(defaultValue, modifyValue);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
     }
@@ -100,12 +69,12 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    public void setValueAttribute(final String newValue) {
+    public void setValue(final String newValue) {
         try {
             if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
                 FORMATTER_.parse(newValue);
             }
-            super.setValueAttribute(newValue);
+            super.setValue(newValue);
         }
         catch (final DateTimeParseException e) {
             // ignore
@@ -149,7 +118,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
                 && !getMin().isEmpty()) {
             try {
-                final LocalDate dateValue = LocalDate.parse(getValueAttribute(), FORMATTER_);
+                final LocalDate dateValue = LocalDate.parse(getRawValue(), FORMATTER_);
                 final LocalDate minDate = LocalDate.parse(getMin(), FORMATTER_);
                 return minDate.isEqual(dateValue) || minDate.isBefore(dateValue);
             }
@@ -171,7 +140,7 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED)
                 && !getMax().isEmpty()) {
             try {
-                final LocalDate dateValue = LocalDate.parse(getValueAttribute(), FORMATTER_);
+                final LocalDate dateValue = LocalDate.parse(getRawValue(), FORMATTER_);
                 final LocalDate maxDate = LocalDate.parse(getMax(), FORMATTER_);
                 return maxDate.isEqual(dateValue) || maxDate.isAfter(dateValue);
             }
