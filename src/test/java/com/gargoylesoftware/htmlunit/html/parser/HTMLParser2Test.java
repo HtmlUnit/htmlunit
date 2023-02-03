@@ -561,9 +561,9 @@ public class HTMLParser2Test extends WebDriverTestCase {
     public void unclosedCommentsInScript() throws Exception {
         final String html = "<html><body>\n"
             + "<script><!--\n"
-            + "window.document.title = 'Hi!';\n"
+            + "window.document.title = 'Hi!§';\n"
             + "</script>\n"
-            + "<h1>Ho!</h1>\n"
+            + "<h1>Ho!§</h1>\n"
             + "<!-- some comment -->\n"
             + "<h1>Hu!</h1>\n"
             + "</body></html>";
