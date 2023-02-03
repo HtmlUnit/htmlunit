@@ -136,7 +136,7 @@ public abstract class HtmlElement extends DomElement {
      *
      * @see #getTabIndex()
      */
-    public static final Short TAB_INDEX_OUT_OF_BOUNDS = new Short(Short.MIN_VALUE);
+    public static final Short TAB_INDEX_OUT_OF_BOUNDS = Short.valueOf(Short.MIN_VALUE);
 
     /** Constant 'required'. */
     protected static final String ATTRIBUTE_REQUIRED = "required";

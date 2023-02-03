@@ -52,7 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
 public class CSSGroupingRule extends CSSRule {
 
     /** The collection of rules defined in this rule. */
-    private com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList cssRules_;
+    private CSSRuleList cssRules_;
     private List<Integer> cssRulesIndexFix_;
 
     /**

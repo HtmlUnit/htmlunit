@@ -142,7 +142,7 @@ public class XSLTProcessor extends HtmlUnitScriptable {
                     final org.w3c.dom.Node indentNode = outputNode.getAttributes().getNamedItem("indent");
                     if (indentNode != null && "yes".equalsIgnoreCase(indentNode.getNodeValue())) {
                         try {
-                            transformerFactory.setAttribute("indent-number", new Integer(2));
+                            transformerFactory.setAttribute("indent-number", Integer.valueOf(2));
                         }
                         catch (final IllegalArgumentException e) {
                             // ignore

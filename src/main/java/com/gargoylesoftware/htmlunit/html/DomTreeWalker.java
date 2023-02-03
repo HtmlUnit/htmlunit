@@ -33,7 +33,7 @@ import org.w3c.dom.traversal.TreeWalker;
 @Deprecated
 public class DomTreeWalker implements TreeWalker {
 
-    private final com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker domTreeWalker_;
+    private final HtmlDomTreeWalker domTreeWalker_;
 
     /**
      * Creates an instance.
@@ -53,8 +53,7 @@ public class DomTreeWalker implements TreeWalker {
 
     public DomTreeWalker(final DomNode root, final int whatToShow, final NodeFilter filter,
             final boolean expandEntityReferences) throws DOMException {
-        domTreeWalker_ = new com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker(
-                                        root, whatToShow, filter, expandEntityReferences);
+        domTreeWalker_ = new HtmlDomTreeWalker(root, whatToShow, filter, expandEntityReferences);
     }
 
     /**
