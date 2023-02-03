@@ -59,6 +59,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlHtml;
 import com.gargoylesoftware.htmlunit.html.HtmlImage;
 import com.gargoylesoftware.htmlunit.html.HtmlMeta;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import com.gargoylesoftware.htmlunit.html.HtmlSvg;
 import com.gargoylesoftware.htmlunit.html.HtmlTable;
 import com.gargoylesoftware.htmlunit.html.HtmlTableRow;
 import com.gargoylesoftware.htmlunit.html.HtmlTemplate;
@@ -355,9 +356,13 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // parse can't replace everything as it does not buffer elements while parsing
         addNodeToRightParent(currentNode_, newElement);
 
+        if (newElement instanceof HtmlSvg) {
+            insideSvg_ = true;
+        }
+
         // Forms own elements simply by enclosing source-wise rather than DOM parent-child relationship
         // Forms without a </form> will keep consuming forever
-        if ("form".equals(tagLower)) {
+        if (newElement instanceof HtmlForm) {
             consumingForm_ = (HtmlForm) newElement;
             formEndingIsAdjusting_ = false;
         }
@@ -371,10 +376,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             }
         }
 
-        if ("svg".equals(tagLower)) {
-            insideSvg_ = true;
-        }
-
         // If we had an old synthetic body and we just added a real body element, quietly
         // remove the old body and move its children to the real body element we just added.
         if (oldBody != null) {
@@ -384,7 +385,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (!insideSvg_ && "body".equals(tagLower)) {
             body_ = (HtmlElement) newElement;
         }
-        else if ("meta".equals(tagLower) && page_.hasFeature(META_X_UA_COMPATIBLE)) {
+        else if ((newElement instanceof HtmlMeta) && page_.hasFeature(META_X_UA_COMPATIBLE)) {
             final HtmlMeta meta = (HtmlMeta) newElement;
             if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
                 final String content = meta.getContentAttribute();
@@ -404,7 +405,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                 }
             }
         }
-        else if (createdByJavascript_ && "script".equals(tagLower)) {
+        else if (createdByJavascript_ && newElement instanceof ScriptElement) {
             final ScriptElement script = (ScriptElement) newElement;
             script.markAsCreatedByDomParser();
         }

@@ -115,6 +115,15 @@ public class FuzzerTest extends WebTestCase {
         test("test-54965.html");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void case55628() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54965
+        test("test-55628.html");
+    }
+
     private void test(final String inputFileName) throws Exception {
         final InputStream file = getClass().getClassLoader()
                 .getResourceAsStream("com/gargoylesoftware/htmlunit/fuzzer/" + inputFileName);

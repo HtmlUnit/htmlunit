@@ -9,6 +9,9 @@
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
+                Fix ClassCastExceptions while parsing wrong html tags inside svg elements (e.g. &lt;form&gt;) (oss-fuzz).
+            </action>
+            <action type="fix" dev="rbri">
                 Class com.gargoylesoftware.htmlunit.html.XmlSerializer is now public.
             </action>
             <action type="fix" dev="Atsushi Nakagawa">
