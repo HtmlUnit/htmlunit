@@ -92,6 +92,7 @@ class XPathAdapter {
      * @param caseSensitive whether or not the XPath expression should be case-sensitive
      * @return the processed XPath expression
      */
+    @SuppressWarnings("PMD.UselessParentheses")
     private static String preProcessXPath(final String xpath, final boolean caseSensitive) {
         if (caseSensitive) {
             return xpath;

@@ -525,8 +525,7 @@ public class XMLDOMDocument extends XMLDOMNode {
             return XMLDOMNodeList.emptyCollection(this);
         }
 
-        return new XMLDOMNodeList(XMLDOMDocument.this.getDomNodeOrDie(), false,
-                "XMLDOMDocument.getElementsByTagName") {
+        return new XMLDOMNodeList(getDomNodeOrDie(), false, "XMLDOMDocument.getElementsByTagName") {
             @Override
             protected boolean isMatching(final DomNode node) {
                 return node.getNodeName().equals(tagName);

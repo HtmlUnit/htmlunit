@@ -204,7 +204,7 @@ public class XMLDocument extends Document {
             return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
         }
 
-        final HTMLCollection elements = new HTMLCollection(XMLDocument.this.getDomNodeOrDie(), false);
+        final HTMLCollection elements = new HTMLCollection(getDomNodeOrDie(), false);
 
         elements.setIsMatchingPredicate(
                 (Predicate<DomNode> & Serializable)
