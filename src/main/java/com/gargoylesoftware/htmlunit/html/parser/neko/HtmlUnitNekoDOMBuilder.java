@@ -385,7 +385,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         if (!insideSvg_ && "body".equals(tagLower)) {
             body_ = (HtmlElement) newElement;
         }
-        else if ((newElement instanceof HtmlMeta) && page_.hasFeature(META_X_UA_COMPATIBLE)) {
+        else if (newElement instanceof HtmlMeta && page_.hasFeature(META_X_UA_COMPATIBLE)) {
             final HtmlMeta meta = (HtmlMeta) newElement;
             if ("X-UA-Compatible".equals(meta.getHttpEquivAttribute())) {
                 final String content = meta.getContentAttribute();
