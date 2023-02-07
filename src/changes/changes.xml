@@ -9,6 +9,9 @@
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
+                neko: Content inside the noembed tag is handled as text.
+            </action>
+            <action type="fix" dev="rbri">
                 Fix ClassCastExceptions while parsing wrong html tags inside svg elements (e.g. &lt;form&gt;) (oss-fuzz).
             </action>
             <action type="fix" dev="rbri">

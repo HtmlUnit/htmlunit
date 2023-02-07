@@ -1862,13 +1862,4 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     public void _tr_th() throws Exception {
         test("tr", "th");
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("1")
-    public void _noembed_h1() throws Exception {
-        test("noembed", "h1");
-    }
 }
