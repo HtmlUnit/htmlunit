@@ -20,7 +20,6 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Unit tests for an element to close itself, which is defined in
@@ -1062,11 +1061,6 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(CHROME = "1",
-            EDGE = "1",
-            FF = "1",
-            FF_ESR = "1",
-            IE = "1")
     public void noembed() throws Exception {
         test("noembed");
     }

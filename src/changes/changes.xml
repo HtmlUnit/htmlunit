@@ -9,6 +9,9 @@
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
+                neko: Select tags can only contain option/optgroup/template tags and text.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: Content inside the noembed tag is handled as text.
             </action>
             <action type="fix" dev="rbri">
