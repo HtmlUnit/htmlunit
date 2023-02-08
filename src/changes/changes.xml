@@ -9,6 +9,15 @@
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
             <action type="fix" dev="rbri">
+                neko: source and param are body tags.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: noscript can be part of the header also.
+            </action>
+            <action type="add" dev="rbri">
+                neko: Add audio/bdi/vieo tag support.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: Select tags can only contain option/optgroup/template tags and text.
             </action>
             <action type="fix" dev="rbri">
