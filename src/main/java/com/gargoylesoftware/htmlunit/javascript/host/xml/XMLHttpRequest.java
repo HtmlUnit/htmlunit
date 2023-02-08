@@ -59,6 +59,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.NoHttpResponseException;
@@ -1150,17 +1151,30 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 && !webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN).equals(originHeader)) {
             return false;
         }
-        String headersHeader = preflightResponse.getResponseHeaderValue(HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS);
-        if (headersHeader == null) {
-            headersHeader = "";
+
+        // there is no test case for this because the servlet API has no support
+        // for adding the same header twice
+        final HashSet<String> accessControlValues = new HashSet<>();
+        for (final NameValuePair pair : preflightResponse.getResponseHeaders()) {
+            if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
+                String value = pair.getValue();
+                if (value != null) {
+                    value = value.toLowerCase(Locale.ROOT);
+                    final String[] values = StringUtils.split(value, ',');
+                    for (String part : values) {
+                        part = part.trim();
+                        if (StringUtils.isNotEmpty(part)) {
+                            accessControlValues.add(part);
+                        }
+                    }
+                }
+            }
         }
-        else {
-            headersHeader = headersHeader.toLowerCase(Locale.ROOT);
-        }
+
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
             final String key = header.getKey().toLowerCase(Locale.ROOT);
             if (isPreflightHeader(key, header.getValue())
-                    && !headersHeader.contains(key)) {
+                    && !accessControlValues.contains(key)) {
                 return false;
             }
         }

@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
+            <action type="add" dev="rbri" issue="549">
+                Take all Access-Control-Allow-Headers into account during XMLHttpRequest preflight auth.
+            </action>
             <action type="fix" dev="rbri">
                 neko: source and param are body tags.
             </action>
