@@ -56,8 +56,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             "table", "tbody", "template", "textarea", "tfoot", "thead", "title",
             "tr", "track", "wbr", "xmp");
 
-    private static final List<String> childZero = Arrays.asList("body", "caption", "col", "colgroup", "frame", "frameset",
-            "head", "html", "tbody", "td", "tfoot", "th", "thead", "tr");
+    private static final List<String> childZero = Arrays.asList("body", "caption", "col", "colgroup",
+            "frame", "frameset", "head", "html", "tbody", "td", "tfoot", "th", "thead", "tr");
 
     private static final List<String> svgChildZero = Arrays.asList("b", "big", "blockquote", "body", "br",
             "center", "code", "dd", "div", "dl", "dt", "em", "embed", "h1", "h2", "h3", "h4", "h5", "h6", "head",
@@ -93,7 +93,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         String bodyStart = "<body>\n";
         String bodyEnd = "</body>\n";
 
-        String html;
+        final String html;
         if ("caption".equals(parent)) {
             html = "<table><caption id='outer'><" + child + "></table>\n";
         }
@@ -173,9 +173,11 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         else {
             if (childZero.contains(child)) {
                 expected = "0";
-            } else if (parentZero.contains(parent)) {
+            }
+            else if (parentZero.contains(parent)) {
                 expected = "0";
-            } else if ("html".equals(parent)) {
+            }
+            else if ("html".equals(parent)) {
                 expected = "2";
             }
 
@@ -213,9 +215,9 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             ServerRestartCount_ = 0;
         }
 
-        WebDriver driver = getWebDriver();
+        final WebDriver driver = getWebDriver();
         if (driver instanceof HtmlUnitDriver) {
-            WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();
+            final WebClient webClient = ((HtmlUnitDriver) driver).getWebClient();
             webClient.getOptions().setThrowExceptionOnScriptError(false);
         }
 
