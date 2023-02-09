@@ -198,11 +198,14 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var data = window.btoa('3\u00C3\u00AE\u00C2\u00A6');\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  var dataAtob = atob(data);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyJsVariable(driver, "data", getExpectedAlerts()[0]);
+        verifyJsVariable(driver, "dataAtob", getExpectedAlerts()[1]);
     }
 
     /**
@@ -215,11 +218,14 @@ public class Window2Test extends WebDriverTestCase {
             = "<html><head></head><body>\n"
             + "<script>\n"
             + "  var data = window.btoa('\\t \\u001e');\n"
-            + "  alert(data);\n"
-            + "  alert(atob(data));\n"
+            + "  var dataAtob = atob(data);\n"
             + "</script>\n"
             + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+
+        verifyJsVariable(driver, "data", getExpectedAlerts()[0]);
+        verifyJsVariable(driver, "dataAtob", getExpectedAlerts()[1]);
     }
 
     /**

@@ -74,6 +74,7 @@ import org.junit.ComparisonFailure;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.NoSuchWindowException;
@@ -1122,6 +1123,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
             expected.append(expectedAlerts[i]).append('§');
         }
         assertEquals(expected.toString(), textArea.getAttribute("value"));
+
+        return driver;
+    }
+
+    protected final WebDriver verifyJsVariable(final WebDriver driver, final String varName,
+            final String expected) throws Exception {
+
+        final String script = "return String(" + varName + ")";
+
+        final String result = (String) ((JavascriptExecutor) driver).executeScript(script);
+        assertEquals(expected, result);
 
         return driver;
     }
