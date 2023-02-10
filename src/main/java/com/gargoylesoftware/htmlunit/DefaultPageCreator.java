@@ -119,7 +119,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
             return PageType.UNKNOWN;
         }
 
-        final String contentTypeLC = contentType.toLowerCase(Locale.ROOT);
+        final String contentTypeLC = com.gargoylesoftware.htmlunit.util.StringUtils
+                                            .toRootLowerCaseWithCache(contentType);
         switch (contentTypeLC) {
             case MimeType.TEXT_HTML:
             case "image/svg+xml":

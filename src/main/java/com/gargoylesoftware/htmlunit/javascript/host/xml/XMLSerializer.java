@@ -20,7 +20,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_XML_SERIAL
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Locale;
 import java.util.Set;
 
 import org.w3c.dom.NamedNodeMap;
@@ -221,7 +220,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
             }
         }
         if (!startTagClosed) {
-            final String tagName = nodeName.toLowerCase(Locale.ROOT);
+            final String tagName = StringUtils.toRootLowerCaseWithCache(nodeName);
             if (NON_EMPTY_TAGS.contains(tagName)) {
                 builder.append("></").append(nodeName).append('>');
             }

@@ -20,8 +20,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import java.util.Locale;
-
 import com.gargoylesoftware.htmlunit.html.HtmlBody;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
@@ -31,6 +29,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange;
 import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Function;
 
@@ -61,7 +60,7 @@ public class HTMLBodyElement extends HTMLElement {
     public void createEventHandlerFromAttribute(final String attributeName, final String value) {
         // when many body tags are found while parsing, attributes of
         // different tags are added and should create an event handler when needed
-        if (attributeName.toLowerCase(Locale.ROOT).startsWith("on")) {
+        if (StringUtils.toRootLowerCaseWithCache(attributeName).startsWith("on")) {
             createEventHandler(attributeName.substring(2), value);
         }
     }

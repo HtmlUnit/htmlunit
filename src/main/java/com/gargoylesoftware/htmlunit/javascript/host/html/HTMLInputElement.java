@@ -37,7 +37,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.io.IOException;
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -104,7 +103,7 @@ public class HTMLInputElement extends HTMLElement {
     public String getType() {
         final BrowserVersion browserVersion = getBrowserVersion();
         String type = getDomNodeOrDie().getTypeAttribute();
-        type = type.toLowerCase(Locale.ROOT);
+        type = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(type);
         return isSupported(type, browserVersion) ? type : "text";
     }
 
@@ -183,10 +182,11 @@ public class HTMLInputElement extends HTMLElement {
         final BrowserVersion browser = getBrowserVersion();
         if (!currentType.equalsIgnoreCase(newType)) {
             if (newType != null && browser.hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
-                newType = newType.toLowerCase(Locale.ROOT);
+                newType = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(newType);
             }
 
-            if (!isSupported(newType.toLowerCase(Locale.ROOT), browser)) {
+            if (!isSupported(com.gargoylesoftware.htmlunit.util.StringUtils
+                                    .toRootLowerCaseWithCache(newType), browser)) {
                 if (setThroughAttribute) {
                     newType = "text";
                 }

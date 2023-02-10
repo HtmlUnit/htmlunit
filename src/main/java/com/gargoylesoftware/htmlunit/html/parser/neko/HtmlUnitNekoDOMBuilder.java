@@ -27,7 +27,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -308,7 +307,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         }
         handleCharacters();
 
-        final String tagLower = localName.toLowerCase(Locale.ROOT);
+        final String tagLower = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
         if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
             return;
         }
@@ -518,7 +517,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void endElement(final String namespaceURI, final String localName, final String qName)
         throws SAXException {
 
-        final String tagLower = localName.toLowerCase(Locale.ROOT);
+        final String tagLower = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
 
         if (!"form".equals(tagLower) || !lastTagWasSynthesized_) {
             handleCharacters();
@@ -777,7 +776,8 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     private static void copyAttributes(final DomElement to, final XMLAttributes attrs) {
         final int length = attrs.getLength();
         for (int i = 0; i < length; i++) {
-            final String attrName = attrs.getLocalName(i).toLowerCase(Locale.ROOT);
+            final String attrName = com.gargoylesoftware.htmlunit.util.StringUtils
+                                        .toRootLowerCaseWithCache(attrs.getLocalName(i));
             if (to.getAttributes().getNamedItem(attrName) == null) {
                 to.setAttribute(attrName, attrs.getValue(i));
                 if (attrName.startsWith("on") && to.getPage().getWebClient().isJavaScriptEngineEnabled()

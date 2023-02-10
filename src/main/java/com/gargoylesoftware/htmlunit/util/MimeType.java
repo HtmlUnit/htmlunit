@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.util;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -65,7 +64,7 @@ public final class MimeType {
         if (mimeType == null) {
             return false;
         }
-        final String mimeTypeLC = mimeType.toLowerCase(Locale.ROOT);
+        final String mimeTypeLC = StringUtils.toRootLowerCaseWithCache(mimeType);
 
         return "application/ecmascript".equals(mimeTypeLC)
                 || APPLICATION_JAVASCRIPT.equals(mimeTypeLC)
@@ -114,7 +113,7 @@ public final class MimeType {
      * @return {@code null} if none is known
      */
     public static String getFileExtension(final String contentType) {
-        final String value = type2extension.get(contentType.toLowerCase(Locale.ROOT));
+        final String value = type2extension.get(StringUtils.toRootLowerCaseWithCache(contentType));
         if (value == null) {
             return "unknown";
         }

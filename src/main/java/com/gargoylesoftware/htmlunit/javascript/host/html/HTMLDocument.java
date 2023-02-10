@@ -33,7 +33,6 @@ import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.function.Supplier;
 
@@ -856,7 +855,7 @@ public class HTMLDocument extends Document {
         String name = attributeName;
         if (StringUtils.isNotEmpty(name)
                 && getBrowserVersion().hasFeature(JS_DOCUMENT_CREATE_ATTRUBUTE_LOWER_CASE)) {
-            name = name.toLowerCase(Locale.ROOT);
+            name = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(name);
         }
 
         return super.createAttribute(name);

@@ -962,7 +962,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 final StringBuilder builder = new StringBuilder();
                 for (final Entry<String, String> header
                         : new TreeMap<>(webRequest_.getAdditionalHeaders()).entrySet()) {
-                    final String name = header.getKey().toLowerCase(Locale.ROOT);
+                    final String name = com.gargoylesoftware.htmlunit.util.StringUtils
+                                            .toRootLowerCaseWithCache(header.getKey());
                     if (isPreflightHeader(name, header.getValue())) {
                         if (builder.length() != 0) {
                             builder.append(',');
@@ -1159,7 +1160,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
             if (HttpHeader.ACCESS_CONTROL_ALLOW_HEADERS.equalsIgnoreCase(pair.getName())) {
                 String value = pair.getValue();
                 if (value != null) {
-                    value = value.toLowerCase(Locale.ROOT);
+                    value = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
                     final String[] values = StringUtils.split(value, ',');
                     for (String part : values) {
                         part = part.trim();
@@ -1172,7 +1173,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
 
         for (final Entry<String, String> header : webRequest_.getAdditionalHeaders().entrySet()) {
-            final String key = header.getKey().toLowerCase(Locale.ROOT);
+            final String key = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(header.getKey());
             if (isPreflightHeader(key, header.getValue())
                     && !accessControlValues.contains(key)) {
                 return false;
@@ -1234,7 +1235,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
      * @return {@code true} if the header can be set from JavaScript
      */
     static boolean isAuthorizedHeader(final String name) {
-        final String nameLowerCase = name.toLowerCase(Locale.ROOT);
+        final String nameLowerCase = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(name);
         if (PROHIBITED_HEADERS_.contains(nameLowerCase)) {
             return false;
         }

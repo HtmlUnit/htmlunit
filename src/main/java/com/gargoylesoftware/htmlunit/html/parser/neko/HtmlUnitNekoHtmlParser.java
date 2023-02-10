@@ -24,15 +24,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-import net.sourceforge.htmlunit.xerces.util.DefaultErrorHandler;
-import net.sourceforge.htmlunit.xerces.xni.QName;
-import net.sourceforge.htmlunit.xerces.xni.XNIException;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLErrorHandler;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLParseException;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
@@ -50,9 +43,16 @@ import com.gargoylesoftware.htmlunit.html.UnknownElementFactory;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
 import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
+import net.sourceforge.htmlunit.xerces.util.DefaultErrorHandler;
+import net.sourceforge.htmlunit.xerces.xni.QName;
+import net.sourceforge.htmlunit.xerces.xni.XNIException;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLErrorHandler;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
+import net.sourceforge.htmlunit.xerces.xni.parser.XMLParseException;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link net.sourceforge.htmlunit.cyberneko.HTMLConfiguration}
@@ -286,7 +286,7 @@ public final class HtmlUnitNekoHtmlParser implements HTMLParser {
             String tagName = qualifiedName;
             final int index = tagName.indexOf(':');
             if (index == -1) {
-                tagName = tagName.toLowerCase(Locale.ROOT);
+                tagName = StringUtils.toRootLowerCaseWithCache(tagName);
             }
             else {
                 tagName = tagName.substring(index + 1);

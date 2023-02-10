@@ -32,7 +32,6 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Predicate;
@@ -75,6 +74,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement.ProxyDomNo
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTemplateElement;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
@@ -136,7 +136,7 @@ public class Element extends Node {
         //Should be called only on construction.
         final DomElement htmlElt = (DomElement) domNode;
         for (final DomAttr attr : htmlElt.getAttributesMap().values()) {
-            final String eventName = attr.getName().toLowerCase(Locale.ROOT);
+            final String eventName = StringUtils.toRootLowerCaseWithCache(attr.getName());
             if (eventName.startsWith("on")) {
                 createEventHandler(eventName.substring(2), attr.getValue());
             }
@@ -231,7 +231,7 @@ public class Element extends Node {
         final boolean caseSensitive;
         final DomNode dom = getDomNodeOrNull();
         if (dom == null) {
-            searchTagName = tagName.toLowerCase(Locale.ROOT);
+            searchTagName = StringUtils.toRootLowerCaseWithCache(tagName);
             caseSensitive = false;
         }
         else {
@@ -241,7 +241,7 @@ public class Element extends Node {
                 caseSensitive = true;
             }
             else {
-                searchTagName = tagName.toLowerCase(Locale.ROOT);
+                searchTagName = StringUtils.toRootLowerCaseWithCache(tagName);
                 caseSensitive = false;
             }
         }

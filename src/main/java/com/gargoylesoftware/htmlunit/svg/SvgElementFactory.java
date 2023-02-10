@@ -18,7 +18,6 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.SVG_UNKNOWN_A
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import org.xml.sax.Attributes;
@@ -27,6 +26,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.html.DomAttr;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.ElementFactory;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * Element factory which creates elements by calling the constructor on a
@@ -61,7 +61,8 @@ public class SvgElementFactory implements ElementFactory {
     static {
         try {
             for (final Class<?> klass : CLASSES_) {
-                ELEMENTS_.put(klass.getField("TAG_NAME").get(null).toString().toLowerCase(Locale.ROOT), klass);
+                final String key = klass.getField("TAG_NAME").get(null).toString();
+                ELEMENTS_.put(StringUtils.toRootLowerCaseWithCache(key), klass);
             }
         }
         catch (final Exception e) {
@@ -94,7 +95,7 @@ public class SvgElementFactory implements ElementFactory {
             final Attributes attributes, final boolean checkBrowserCompatibility) {
 
         final Map<String, DomAttr> attributeMap = toMap(page, attributes);
-        qualifiedNameLC = qualifiedNameLC.toLowerCase(Locale.ROOT);
+        qualifiedNameLC = StringUtils.toRootLowerCaseWithCache(qualifiedNameLC);
         String tagNameLC = qualifiedNameLC;
         if (tagNameLC.indexOf(':') != -1) {
             tagNameLC = tagNameLC.substring(tagNameLC.indexOf(':') + 1);
