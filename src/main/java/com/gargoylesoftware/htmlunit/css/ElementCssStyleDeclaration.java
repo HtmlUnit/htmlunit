@@ -14,13 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
-import java.util.Locale;
 import java.util.Map;
 
 import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;
+import com.gargoylesoftware.htmlunit.util.StringUtils;
 
 /**
  * A css StyleDeclaration backed by a {@link DomElement}.
@@ -81,7 +81,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
             if (!value.contains("url")) {
-                return value.toLowerCase(Locale.ROOT);
+                return StringUtils.toRootLowerCaseWithCache(value);
             }
             return value;
         }

@@ -17,6 +17,7 @@ package com.gargoylesoftware.htmlunit.util;
 import java.nio.charset.Charset;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -52,6 +53,7 @@ public final class StringUtils {
     private static final Pattern ILLEGAL_FILE_NAME_CHARS = Pattern.compile("\\\\|/|\\||:|\\?|\\*|\"|<|>|\\p{Cntrl}");
 
     private static final Map<String, String> CamelizeCache_ = new HashMap<>();
+    private static final Map<String, String> RootLowercaseCache_ = new HashMap<>();
 
     /**
      * Disallow instantiation of this class.
@@ -359,6 +361,22 @@ public final class StringUtils {
         }
         result = builder.toString();
         CamelizeCache_.put(string, result);
+
+        return result;
+    }
+
+    public static String toRootLowerCaseWithCache(final String string) {
+        if (string == null) {
+            return null;
+        }
+
+        String result = RootLowercaseCache_.get(string);
+        if (null != result) {
+            return result;
+        }
+
+        result = string.toLowerCase(Locale.ROOT);
+        RootLowercaseCache_.put(string, result);
 
         return result;
     }

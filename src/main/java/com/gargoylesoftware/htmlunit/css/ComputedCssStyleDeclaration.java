@@ -65,7 +65,6 @@ import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WIDTH
 import static com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 
 import java.util.EnumSet;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedMap;
@@ -217,7 +216,7 @@ public class ComputedCssStyleDeclaration extends AbstractCssStyleDeclaration {
         if (element != null && element.getValue() != null) {
             final String value = element.getValue();
             if (!value.contains("url")) {
-                return value.toLowerCase(Locale.ROOT);
+                return com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
             }
             return value;
         }
