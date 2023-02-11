@@ -52,7 +52,6 @@ class XPathAdapter {
      */
     private void initFunctionTable() {
         funcTable_ = new FunctionTable();
-        funcTable_.installFunction("lower-case", LowerCaseFunction.class);
     }
 
     /**

@@ -7,7 +7,14 @@
     </properties>
 
     <body>
-        <release version="2.70.0" date="Febuary xx, 2023" description="Bugfixes">
+        <release version="2.71.0" date="Febuary xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Document.evaluate() and XPathEvaluator.evaluate() now failing with a js exception 
+                if something is wrong with the xpath.
+            </action>
+            <action type="fix" dev="rbri">
+                Remove support for xpath function lower-case as this is not available in real browsers.
+            </action>
             <action type="add" dev="rbri" issue="549">
                 Take all Access-Control-Allow-Headers into account during XMLHttpRequest preflight auth.
             </action>

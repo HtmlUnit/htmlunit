@@ -631,22 +631,28 @@ public class Document extends Node {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
-        XPathResult xPathResult = (XPathResult) result;
-        if (xPathResult == null) {
-            xPathResult = new XPathResult();
-            xPathResult.setParentScope(getParentScope());
-            xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
-        }
+        try {
+            XPathResult xPathResult = (XPathResult) result;
+            if (xPathResult == null) {
+                xPathResult = new XPathResult();
+                xPathResult.setParentScope(getParentScope());
+                xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+            }
 
-        PrefixResolver prefixResolver = null;
-        if (resolver instanceof NativeFunction) {
-            prefixResolver = new NativeFunctionPrefixResolver((NativeFunction) resolver, contextNode.getParentScope());
+            PrefixResolver prefixResolver = null;
+            if (resolver instanceof NativeFunction) {
+                prefixResolver = new NativeFunctionPrefixResolver(
+                                            (NativeFunction) resolver, contextNode.getParentScope());
+            }
+            else if (resolver instanceof PrefixResolver) {
+                prefixResolver = (PrefixResolver) resolver;
+            }
+            xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
+            return xPathResult;
         }
-        else if (resolver instanceof PrefixResolver) {
-            prefixResolver = (PrefixResolver) resolver;
+        catch (final Exception e) {
+            throw Context.reportRuntimeError("Failed to execute 'evaluate': " + e.getMessage());
         }
-        xPathResult.init(contextNode.getDomNodeOrDie().getByXPath(expression, prefixResolver), type);
-        return xPathResult;
     }
 
     /**

@@ -341,6 +341,15 @@ public class HtmlUnitXPath2Test extends WebDriverTestCase {
         compare("//p[@x=1]");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("error")
+    public void lowerCaseNotSupported() throws Exception {
+        compare("//*[lower-case(@id) = \"a\"]");
+    }
+
     private void compare(final String xpath) throws Exception {
         final String content = "<html>\n"
             + "<head>\n"
