@@ -115,11 +115,16 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         Triple<Boolean, Boolean, Boolean> key;
         HTMLElements value;
 
-        final HTMLElements.Element command = new HTMLElements.Element(HTMLElements.COMMAND, "COMMAND",
-                HTMLElements.Element.EMPTY, HTMLElements.BODY, null);
-        final HTMLElements.Element isIndex = new HTMLElements.Element(HTMLElements.ISINDEX, "ISINDEX",
-                HTMLElements.Element.INLINE, HTMLElements.BODY, null);
-        final HTMLElements.Element main = new HTMLElements.Element(HTMLElements.MAIN, "MAIN",
+        final short id = HTMLElements.UNKNOWN;
+        final short commandId = id + 1;
+        final short isindexId = commandId + 1;
+        final short mainId = isindexId + 1;
+
+        final HTMLElements.Element command = new HTMLElements.Element(commandId, "COMMAND",
+                HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
+        final HTMLElements.Element isIndex = new HTMLElements.Element(isindexId, "ISINDEX",
+                HTMLElements.Element.INLINE, HTMLElements.HEAD, null);
+        final HTMLElements.Element main = new HTMLElements.Element(mainId, "MAIN",
                 HTMLElements.Element.INLINE, HTMLElements.BODY, null);
 
         key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
