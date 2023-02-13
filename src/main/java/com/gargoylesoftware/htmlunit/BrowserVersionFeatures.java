@@ -546,7 +546,7 @@ public enum BrowserVersionFeatures {
     HTML_COMMAND_TAG,
 
     /** HTML parser supports the 'isindex' tag. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
+    @BrowserFeature({IE})
     HTML_ISINDEX_TAG,
 
     /** HTML parser supports the 'main' tag. */

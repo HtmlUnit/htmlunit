@@ -35,6 +35,7 @@ import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
 import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for an element to close another element, which is defined in
@@ -200,7 +201,10 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             }
 
             if (getBrowserVersion().isIE()) {
-                if ("isindex".equals(parent)) {
+                if ("isindex".equals(parent) && useRealBrowser()) {
+                    // ie is really strange here - the isindex tag is replaced
+                    // by a form containing an input field - an this has no childs
+                    // simulating this in 2023 is not worth the time
                     expected = "0";
                 }
                 if ("template".equals(parent) && !childZero.contains(child)) {
@@ -851,6 +855,8 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             FF = "0",
             FF_ESR = "0")
+    @HtmlUnitNYI(FF = "1",
+            FF_ESR = "1")
     public void _head_command() throws Exception {
         test("head", "command");
     }

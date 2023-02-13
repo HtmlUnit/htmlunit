@@ -115,59 +115,77 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         Triple<Boolean, Boolean, Boolean> key;
         HTMLElements value;
 
-        final short id = HTMLElements.UNKNOWN;
-        final short commandId = id + 1;
-        final short isindexId = commandId + 1;
-        final short mainId = isindexId + 1;
+        final short unknownId = HTMLElements.UNKNOWN;
+        final short isindexId = unknownId + 1;
+
+        final short commandId = isindexId + 1;
+        final short mainId = commandId + 1;
+
+        // isIndex is special - we have to add it here because all browsers moving this to
+        // the body (even if it is not supported
+        final HTMLElements.Element isIndex = new HTMLElements.Element(isindexId, "ISINDEX",
+                HTMLElements.Element.CONTAINER, HTMLElements.BODY, null);
+        final HTMLElements.Element isIndexSupported = new HTMLElements.Element(isindexId, "ISINDEX",
+                HTMLElements.Element.BLOCK, HTMLElements.BODY, new short[] {isindexId});
 
         final HTMLElements.Element command = new HTMLElements.Element(commandId, "COMMAND",
                 HTMLElements.Element.EMPTY, new short[] {HTMLElements.BODY, HTMLElements.HEAD}, null);
-        final HTMLElements.Element isIndex = new HTMLElements.Element(isindexId, "ISINDEX",
-                HTMLElements.Element.INLINE, HTMLElements.HEAD, null);
         final HTMLElements.Element main = new HTMLElements.Element(mainId, "MAIN",
                 HTMLElements.Element.INLINE, HTMLElements.BODY, null);
 
+        // !COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
+        value.setElement(isIndex);
         ELEMENTS.put(key, value);
 
+        // !COMMAND_TAG !ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.FALSE, Boolean.TRUE);
         value = new HTMLElements();
         value.setElement(main);
+        value.setElement(isIndex);
         ELEMENTS.put(key, value);
 
+        // !COMMAND_TAG ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.FALSE);
         value = new HTMLElements();
-        value.setElement(isIndex);
+        value.setElement(isIndexSupported);
         ELEMENTS.put(key, value);
 
+        // !COMMAND_TAG ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.FALSE, Boolean.TRUE, Boolean.TRUE);
         value = new HTMLElements();
-        value.setElement(isIndex);
+        value.setElement(isIndexSupported);
         value.setElement(main);
         ELEMENTS.put(key, value);
 
+        // COMMAND_TAG !ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(command);
+        value.setElement(isIndex);
         ELEMENTS.put(key, value);
 
+        // COMMAND_TAG !ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.FALSE, Boolean.TRUE);
         value = new HTMLElements();
         value.setElement(command);
+        value.setElement(isIndex);
         value.setElement(main);
         ELEMENTS.put(key, value);
 
+        // COMMAND_TAG ISINDEX_TAG !MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.FALSE);
         value = new HTMLElements();
         value.setElement(command);
-        value.setElement(isIndex);
+        value.setElement(isIndexSupported);
         ELEMENTS.put(key, value);
 
+        // COMMAND_TAG ISINDEX_TAG MAIN_TAG
         key = Triple.of(Boolean.TRUE, Boolean.TRUE, Boolean.TRUE);
         value = new HTMLElements();
         value.setElement(command);
-        value.setElement(isIndex);
+        value.setElement(isIndexSupported);
         value.setElement(main);
         ELEMENTS.put(key, value);
     }

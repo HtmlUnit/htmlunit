@@ -19,13 +19,13 @@
                 Take all Access-Control-Allow-Headers into account during XMLHttpRequest preflight auth.
             </action>
             <action type="fix" dev="rbri">
-                neko: source and param are body tags.
+                neko: source/param/track are body tags.
             </action>
             <action type="fix" dev="rbri">
                 neko: noscript can be part of the header also.
             </action>
             <action type="add" dev="rbri">
-                neko: Add audio/bdi/vieo tag support.
+                neko: Add audio/bdi/canvas/data/datalist/dialog/mark/meter/picture/progress/slot/time/output/video tag support.
             </action>
             <action type="fix" dev="rbri">
                 neko: Select tags can only contain option/optgroup/template tags and text.
