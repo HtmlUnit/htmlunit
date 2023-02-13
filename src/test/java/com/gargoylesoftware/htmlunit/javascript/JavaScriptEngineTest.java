@@ -125,7 +125,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(content, collectedAlerts);
 
         final HtmlTextInput textInput = page.getHtmlElementById("textfield1");
-        assertEquals("blue", textInput.getValueAttribute());
+        assertEquals("foo", textInput.getValueAttribute());
         assertEquals("blue", textInput.getValue());
     }
 

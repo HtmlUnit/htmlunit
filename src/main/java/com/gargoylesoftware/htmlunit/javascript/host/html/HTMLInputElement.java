@@ -212,10 +212,7 @@ public class HTMLInputElement extends HTMLElement {
                         .getFactory(HtmlInput.TAG_NAME)
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
-                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-                    newInput.setValue(input.getValue());
-                }
-                else {
+                if (!browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
                     if (newInput instanceof HtmlTimeInput
                             || newInput instanceof HtmlDateTimeLocalInput
                             || newInput instanceof HtmlFileInput) {
