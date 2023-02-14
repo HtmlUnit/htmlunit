@@ -18,7 +18,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
+import com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Tests for {@link HtmlEmailInput}.
@@ -187,5 +189,143 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         // valid
         input.setValue("abc@email.com");
         assertTrue(input.isValid());
+    }
+    /**
+     * Verifies that asNormalizedText() returns the value string.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("bla")
+    public void asNormalizedText() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' name='tester' id='tester' value='bla'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(html);
+        assertEquals(getExpectedAlerts()[0], page.getBody().asNormalizedText());
+    }
+
+    /**
+     * How could this test be migrated to WebDriver? How to select the field's content?
+     * @throws Exception if an error occurs
+     */
+    @Test
+    public void typeWhileSelected() throws Exception {
+        final String html =
+              "<html><head></head><body>\n"
+            + "<input type='email' id='myInput' value='Hello@world.com'><br>\n"
+            + "</body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlEmailInput input = page.getHtmlElementById("myInput");
+        input.select();
+        input.type("bye@world.com");
+        assertEquals("Hello@world.com", input.getValueAttribute());
+        assertEquals("bye@world.com", input.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeLeftArrow() throws Exception {
+        final String html = "<html><head></head><body><input type='email' id='t'/></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlEmailInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
+        t.type('s');
+        assertEquals("", t.getValueAttribute());
+        assertEquals("test", t.getValue());
+        t.type(KeyboardEvent.DOM_VK_SPACE);
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tes t", t.getValue());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typeDelKey() throws Exception {
+        final String html = "<html><head></head><body><input type='email' id='t'/></body></html>";
+        final HtmlPage page = loadPage(html);
+        final HtmlEmailInput t = page.getHtmlElementById("t");
+        t.type('t');
+        t.type('e');
+        t.type('t');
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        t.type(KeyboardEvent.DOM_VK_LEFT);
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tet", t.getValue());
+        t.type(KeyboardEvent.DOM_VK_DELETE);
+        assertEquals("", t.getValueAttribute());
+        assertEquals("tt", t.getValue());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    @Alerts({"true", "true", "true", "", "a@b.co"})
+    public void maxLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' id='foo' maxLength='6'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
+        input.type("a@b.c");
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
+        input.type("om");
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
+    }
+
+    /**
+     * @throws Exception
+     *         if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "false", "true", "", "a@b.com"},
+            IE = {"true", "true", "true", "", "a@b.com"})
+    public void minLengthValidation() throws Exception {
+        final String htmlContent = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='email' id='foo' minLength='6'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final HtmlPage page = loadPage(htmlContent);
+
+        final HtmlInput input = (HtmlInput) page.getElementById("foo");
+        assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
+        input.type("a@b.c");
+        assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
+        input.type("om");
+        assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
+        assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
+        assertEquals(getExpectedAlerts()[4], input.getValue());
     }
 }

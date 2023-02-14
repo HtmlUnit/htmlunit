@@ -250,7 +250,7 @@ public class HtmlPasswordInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts({"true", "true", "false", "", "foo"})
+    @Alerts({"true", "true", "true", "", "foo"})
     public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
