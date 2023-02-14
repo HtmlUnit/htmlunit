@@ -190,6 +190,7 @@ public class HtmlEmailInput2Test extends SimpleWebTestCase {
         input.setValue("abc@email.com");
         assertTrue(input.isValid());
     }
+
     /**
      * Verifies that asNormalizedText() returns the value string.
      * @throws Exception if the test fails
