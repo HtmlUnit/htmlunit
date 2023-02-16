@@ -14,8 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -28,7 +26,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link HtmlTimeInput}.
@@ -117,10 +115,15 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "20:04"},
-            IE = {"0804", "0804PM"})
-    @BuggyWebDriver(FF = {"", ""},
-            FF_ESR = {"", ""})
-    @NotYetImplemented(IE)
+            FF = {"08:04", "20:04"},
+            FF_ESR = {"08:04", "20:04"},
+            IE = {"08:04", "08:04PM"})
+    @BuggyWebDriver(FF = {"08:04", ""},
+            FF_ESR = {"08:04", ""})
+    @HtmlUnitNYI(CHROME = {"08:04", "08:04PM"},
+            EDGE = {"08:04", "08:04PM"},
+            FF = {"08:04", "08:04PM"},
+            FF_ESR = {"08:04", "08:04PM"})
     public void type() throws Exception {
         final String htmlContent
             = "<html><head></head><body>\n"
@@ -131,7 +134,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
-        input.sendKeys("0804");
+        input.sendKeys("08:04");
         assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
 
         input.sendKeys("PM");
@@ -144,6 +147,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "ex: ",
             FF_ESR = "no ex: ")
+    @HtmlUnitNYI(FF_ESR = "ex: ")
     public void typeWhileDisabled() throws Exception {
         final String html = "<html><body><input type='time' id='p' disabled='disabled'/></body></html>";
         final WebDriver driver = loadPage2(html);

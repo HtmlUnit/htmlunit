@@ -19,6 +19,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYP
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.TemporalAccessor;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -35,7 +36,8 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableElement {
 
-    private static final DateTimeFormatter FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
+    private static final DateTimeFormatter INPUT_FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm[a]");
+    private static final DateTimeFormatter OUTPUT_FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
      * Creates an instance.
@@ -61,17 +63,24 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
      * {@inheritDoc}
      */
     @Override
-    public void setValue(final String newValue) {
-        try {
-            if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
-                    && StringUtils.isNotEmpty(newValue)) {
-                FORMATTER_.parse(newValue);
+    public String getValue() {
+        if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)) {
+            String raw = getRawValue();
+            if (StringUtils.isBlank(raw)) {
+                return "";
             }
-            super.setValue(newValue);
+
+            raw = raw.trim();
+            try {
+                final TemporalAccessor time = INPUT_FORMATTER_.parse(raw);
+                return OUTPUT_FORMATTER_.format(time);
+            }
+            catch (final DateTimeParseException e) {
+                // ignore
+            }
         }
-        catch (final DateTimeParseException e) {
-            // ignore
-        }
+
+        return super.getValue();
     }
 
     /**
@@ -93,8 +102,8 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                 && !getMin().isEmpty()) {
             try {
-                final LocalTime timeValue = LocalTime.parse(getRawValue(), FORMATTER_);
-                final LocalTime minTime = LocalTime.parse(getMin(), FORMATTER_);
+                final LocalTime timeValue = LocalTime.parse(getRawValue(), INPUT_FORMATTER_);
+                final LocalTime minTime = LocalTime.parse(getMin(), INPUT_FORMATTER_);
                 return minTime.equals(timeValue) || minTime.isBefore(timeValue);
             }
             catch (final DateTimeParseException e) {
@@ -115,8 +124,8 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
         if (hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED)
                 && !getMax().isEmpty()) {
             try {
-                final LocalTime timeValue = LocalTime.parse(getRawValue(), FORMATTER_);
-                final LocalTime maxTime = LocalTime.parse(getMax(), FORMATTER_);
+                final LocalTime timeValue = LocalTime.parse(getRawValue(), INPUT_FORMATTER_);
+                final LocalTime maxTime = LocalTime.parse(getMax(), INPUT_FORMATTER_);
                 return maxTime.equals(timeValue) || maxTime.isAfter(timeValue);
             }
             catch (final DateTimeParseException e) {
