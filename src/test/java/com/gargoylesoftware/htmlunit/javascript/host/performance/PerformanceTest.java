@@ -41,10 +41,11 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "<html>\n"
                 + "<head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
-                + "    alert(performance.now());\n"
-                + "    alert(performance.now());\n"
-                + "    alert(typeof performance.now());\n"
+                + "    log(performance.now());\n"
+                + "    log(performance.now());\n"
+                + "    log(typeof performance.now());\n"
                 + "  }\n"
                 + "  test();\n"
                 + "</script>\n"
@@ -53,13 +54,16 @@ public class PerformanceTest extends WebDriverTestCase {
                 + "</html>";
 
         final WebDriver driver = loadPage2(html);
-        final String now1 = getCollectedAlerts(driver, 1).get(0);
+        final String[] title = driver.getTitle().split("§");
+        assertEquals(3, title.length);
+
+        final String now1 = title[0];
         assertTrue(Double.parseDouble(now1) > 0);
 
-        final String now2 = getCollectedAlerts(driver, 1).get(0);
+        final String now2 = title[1];
         assertTrue(Double.parseDouble(now2) > Double.parseDouble(now1));
 
-        assertEquals("number", getCollectedAlerts(driver, 1).get(0));
+        assertEquals("number", title[2]);
     }
 
     /**
