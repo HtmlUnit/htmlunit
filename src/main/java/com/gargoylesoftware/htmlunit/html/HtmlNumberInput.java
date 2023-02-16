@@ -22,7 +22,6 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -42,7 +41,7 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
 public class HtmlNumberInput extends HtmlSelectableTextInput implements LabelableElement {
 
     private static final char[] VALID_INT_CHARS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '-'};
-    private static final Pattern VALID_CHARS = Pattern.compile("^[\\+\\d\\.,eE-]*$");
+    private static final String VALID_CHARS = "0123456789-+.eE";
 
     /**
      * Creates an instance.
@@ -77,6 +76,19 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void doType(final char c, final boolean lastType) {
+        if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            if (VALID_CHARS.indexOf(c) == -1) {
+                return;
+            }
+        }
+        super.doType(c, lastType);
     }
 
     /**
