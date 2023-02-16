@@ -67,41 +67,6 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    protected void typeDone(final String newValue, final boolean notifyAttributeChangeListeners) {
-        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-            return;
-        }
-
-        if (StringUtils.isBlank(newValue)) {
-            setAttributeNS(null, "value", "", notifyAttributeChangeListeners, false);
-            return;
-        }
-
-        if ("-".equals(newValue) || "+".equals(newValue)) {
-            setAttributeNS(null, "value", newValue, notifyAttributeChangeListeners, false);
-            return;
-        }
-
-        String parseValue = newValue;
-        final int lastPos = parseValue.length() - 1;
-        if (parseValue.charAt(lastPos) == '.') {
-            parseValue = parseValue.substring(0, lastPos);
-        }
-
-        try {
-            Double.parseDouble(parseValue);
-            setAttributeNS(null, "value", newValue.trim(), notifyAttributeChangeListeners, false);
-        }
-        catch (final NumberFormatException e) {
-            // ignore
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     protected boolean isSubmittableByEnter() {
         return true;
     }
@@ -118,18 +83,39 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
      * {@inheritDoc}
      */
     @Override
-    public void setValue(final String newValue) {
+    public String getValue() {
+        final String raw = getRawValue();
+
+        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            return raw;
+        }
+
+        if (StringUtils.isBlank(raw)) {
+            return raw;
+        }
+
+        if ("-".equals(raw) || "+".equals(raw)) {
+            return raw;
+        }
+
+        String parseValue = raw;
+        final int lastPos = parseValue.length() - 1;
+        if (parseValue.charAt(lastPos) == '.') {
+            parseValue = parseValue.substring(0, lastPos);
+        }
+
         try {
-            if (!newValue.isEmpty()) {
-                final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
-                final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
-                format.parse(newValue);
-            }
-            super.setValue(newValue);
+            final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
+            final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
+            format.parse(raw);
+
+            return raw.trim();
         }
         catch (final ParseException e) {
             // ignore
         }
+
+        return "";
     }
 
     /**
