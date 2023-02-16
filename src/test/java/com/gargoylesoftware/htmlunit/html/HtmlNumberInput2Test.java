@@ -306,8 +306,8 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         final HtmlNumberInput input = page.getHtmlElementById("myInput");
         input.select();
         input.type("9876543333210");
-        assertEquals("Hello@world.com", input.getValueAttribute());
-        assertEquals("bye@world.com", input.getValue());
+        assertEquals("123456789012345", input.getValueAttribute());
+        assertEquals("9876543333210", input.getValue());
     }
 
     /**
@@ -322,16 +322,16 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         t.type('4');
         t.type('6');
         assertEquals("", t.getValueAttribute());
-        assertEquals("tet", t.getValue());
+        assertEquals("246", t.getValue());
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("", t.getValueAttribute());
-        assertEquals("tet", t.getValue());
-        t.type('s');
+        assertEquals("246", t.getValue());
+        t.type('0');
         assertEquals("", t.getValueAttribute());
-        assertEquals("test", t.getValue());
+        assertEquals("2406", t.getValue());
         t.type(KeyboardEvent.DOM_VK_SPACE);
         assertEquals("", t.getValueAttribute());
-        assertEquals("tes t", t.getValue());
+        assertEquals("240 6", t.getValue());
     }
 
     /**
@@ -346,14 +346,14 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
         t.type('4');
         t.type('7');
         assertEquals("", t.getValueAttribute());
-        assertEquals("tet", t.getValue());
+        assertEquals("247", t.getValue());
         t.type(KeyboardEvent.DOM_VK_LEFT);
         t.type(KeyboardEvent.DOM_VK_LEFT);
         assertEquals("", t.getValueAttribute());
-        assertEquals("tet", t.getValue());
+        assertEquals("247", t.getValue());
         t.type(KeyboardEvent.DOM_VK_DELETE);
         assertEquals("", t.getValueAttribute());
-        assertEquals("tt", t.getValue());
+        assertEquals("27", t.getValue());
     }
 
     /**
@@ -361,23 +361,24 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts({"true", "true", "true", "", "a@b.co"})
+    @Alerts({"true", "true", "true", "", "1234567"})
     public void maxLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
             + "<form id='form1'>\n"
-            + "  <input type='email' id='foo' maxLength='6'>\n"
+            + "  <input type='number' id='foo' maxLength='6'>\n"
             + "</form>\n"
             + "</body></html>";
 
         final HtmlPage page = loadPage(htmlContent);
 
+        // minlength and maxlength ignored by number input
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
         assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
-        input.type("a@b.c");
+        input.type("12345");
         assertEquals(getExpectedAlerts()[1], Boolean.toString(input.isValid()));
-        input.type("om");
+        input.type("67");
         assertEquals(getExpectedAlerts()[2], Boolean.toString(input.isValid()));
         assertEquals(getExpectedAlerts()[3], input.getValueAttribute());
         assertEquals(getExpectedAlerts()[4], input.getValue());
@@ -388,8 +389,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
      *         if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true", "", "a@b.com"},
-            IE = {"true", "true", "true", "", "a@b.com"})
+    @Alerts({"true", "true", "true", "", "12345"})
     public void minLengthValidation() throws Exception {
         final String htmlContent = "<html>\n"
             + "<head></head>\n"
@@ -401,6 +401,7 @@ public class HtmlNumberInput2Test extends SimpleWebTestCase {
 
         final HtmlPage page = loadPage(htmlContent);
 
+        // minlength and maxlength ignored by number input
         final HtmlInput input = (HtmlInput) page.getElementById("foo");
         assertEquals(getExpectedAlerts()[0], Boolean.toString(input.isValid()));
         input.type("12");
