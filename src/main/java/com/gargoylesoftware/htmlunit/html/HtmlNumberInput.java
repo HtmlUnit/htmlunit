@@ -16,6 +16,7 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_REMOVE_WHITESPACE_FROM_VALUE;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -54,10 +55,13 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        final String value = getValueAttribute();
-        if (!value.isEmpty()) {
-            if (!NumberUtils.isCreatable(value)) {
-                setValueAttribute("");
+        if (getPage().getWebClient().getBrowserVersion()
+                .hasFeature(JS_INPUT_NUMBER_REMOVE_WHITESPACE_FROM_VALUE)) {
+            final String value = getValueAttribute();
+            if (!value.isEmpty()) {
+                if (!NumberUtils.isCreatable(value)) {
+                    setValueAttribute("");
+                }
             }
         }
     }
@@ -98,12 +102,8 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
     public String getValue() {
         final String raw = getRawValue();
 
-        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
-            return raw;
-        }
-
         if (StringUtils.isBlank(raw)) {
-            return raw;
+            return "";
         }
 
         if ("-".equals(raw) || "+".equals(raw)) {
@@ -127,6 +127,10 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             // ignore
         }
 
+        if (hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            return raw;
+        }
+
         return "";
     }
 
@@ -139,7 +143,12 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return false;
         }
 
-        final String rawValue = getRawValue();
+        String rawValue = getRawValue();
+        if (StringUtils.isBlank(rawValue)) {
+            return true;
+        }
+
+        rawValue = rawValue.replaceAll("\\s", "");
         if (!rawValue.isEmpty()) {
             if ("-".equals(rawValue) || "+".equals(rawValue)) {
                 return false;

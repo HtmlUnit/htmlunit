@@ -684,6 +684,54 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
     }
 
     @Test
+    @Alerts(DEFAULT = {"8-8-8-true", "-\\s\\s-\\s\\s-true",
+                       "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
+                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"},
+            IE = {"8-8-8-true", "---true", "---true", "\\s3\\s9\\s-\\s3\\s9\\s-\\s3\\s9\\s-true"})
+    public void defaultValuesBlankValue() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "  function test() {\n"
+            + "    var input = document.getElementById('foo');\n"
+            + "    log(input.value + '-' "
+                            + "+ input.defaultValue + '-' "
+                            + "+ input.getAttribute('value')+ '-' "
+                            + "+ input.checkValidity());\n"
+
+            + "    input = document.getElementById('bar');\n"
+            + "    log(input.value + '-' "
+                            + "+ input.defaultValue + '-' "
+                            + "+ input.getAttribute('value')+ '-' "
+                            + "+ input.checkValidity());\n"
+
+            + "    input = document.getElementById('baz');\n"
+            + "    log(input.value + '-' "
+                            + "+ input.defaultValue + '-' "
+                            + "+ input.getAttribute('value')+ '-' "
+                            + "+ input.checkValidity());\n"
+
+            + "    input = document.getElementById('another');\n"
+            + "    log(input.value + '-' "
+                            + "+ input.defaultValue + '-' "
+                            + "+ input.getAttribute('value')+ '-' "
+                            + "+ input.checkValidity());\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <input type='number' id='foo' value='8'>\n"
+            + "  <input type='number' id='bar' value='  '>\n"
+            + "  <input type='number' id='baz' value='  \n  \t '>\n"
+            + "  <input type='number' id='another' value=' 3 9 '>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
     @Alerts({"8-8-8-true", "7-7-7-false", "6-6-6-false"})
     public void defaultValuesIntegerValueOutside() throws Exception {
         final String html = "<html>\n"
