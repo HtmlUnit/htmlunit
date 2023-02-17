@@ -259,7 +259,7 @@ public class HtmlSerializerNormalizedText {
     protected void appendNumberInput(final HtmlSerializerTextBuilder builder, final HtmlNumberInput htmlNumberInput) {
         builder.append(" ", Mode.NORMALIZE);
 
-        String val = htmlNumberInput.getValueAttribute();
+        String val = htmlNumberInput.getRawValue();
         final int lastPos = val.length() - 1;
         if (lastPos >= 0 && val.charAt(lastPos) == '.') {
             val = val.substring(0, lastPos);

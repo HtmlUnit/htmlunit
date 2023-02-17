@@ -110,12 +110,6 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return raw;
         }
 
-        String parseValue = raw;
-        final int lastPos = parseValue.length() - 1;
-        if (parseValue.charAt(lastPos) == '.') {
-            parseValue = parseValue.substring(0, lastPos);
-        }
-
         try {
             final String lang = getPage().getWebClient().getBrowserVersion().getBrowserLanguage();
             final NumberFormat format = NumberFormat.getInstance(Locale.forLanguageTag(lang));
