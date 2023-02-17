@@ -37,6 +37,77 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 public class HtmlUrlInputTest extends WebDriverTestCase {
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"--null", "--null", "--null"})
+    public void defaultValues() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'url';\n"
+            + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { log('exception'); }\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"url\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='url' id='text1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"--null", "--null", "--null"})
+    public void defaultValuesAfterClone() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'url';\n"
+            + "      input = input.cloneNode(false);\n"
+            + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { log('exception'); }\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"url\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='url' id='text1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Verifies getVisibleText().
      * @throws Exception if the test fails
      */
@@ -60,6 +131,29 @@ public class HtmlUrlInputTest extends WebDriverTestCase {
             final HtmlPage page = (HtmlPage) getEnclosedPage();
             assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
         }
+    }
+
+    /**
+     * Verifies clear().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void clearInput() throws Exception {
+        final String htmlContent
+                = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='url' name='tester' id='tester' value='http://htmlunit.sourceforge.net'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final WebElement element = driver.findElement(By.id("tester"));
+
+        element.clear();
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
     }
 
     /**

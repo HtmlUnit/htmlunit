@@ -218,6 +218,9 @@ public class HtmlTelInputTest extends WebDriverTestCase {
                     "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = {"123-456-7890",
                        "true",
@@ -234,6 +237,9 @@ public class HtmlTelInputTest extends WebDriverTestCase {
                 + "id='e1' value='123-456-7890' name='k'>\n", "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = {"",
                        "true",
@@ -249,6 +255,9 @@ public class HtmlTelInputTest extends WebDriverTestCase {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value='' name='k'>\n", "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = {" ",
                        "false",
@@ -264,6 +273,9 @@ public class HtmlTelInputTest extends WebDriverTestCase {
         validation("<input type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' id='e1' value=' ' name='k'>\n", "", null);
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
     @Test
     @Alerts(DEFAULT = {"  \t",
                        "false",
@@ -333,6 +345,24 @@ public class HtmlTelInputTest extends WebDriverTestCase {
                   "§§URL§§?k=1234", "2"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='tel' minlength='5' id='e1' name='k'>\n", "", "1234");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=1234", "2"},
+            IE = {"1234",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=1234", "2"})
+    public void minLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='tel' minlength='20' id='e1' name='k' value='1234'>\n", "", null);
     }
 
     /**
