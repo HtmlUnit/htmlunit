@@ -486,7 +486,13 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         return rawValue_;
     }
 
-    protected void setRawValue(final String rawValue) {
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Update the raw value.
+     * @param rawValue the new raw value
+     */
+    public void setRawValue(final String rawValue) {
         rawValue_ = rawValue;
     }
 

@@ -48,10 +48,13 @@ import com.gargoylesoftware.htmlunit.html.DomNode;
 import com.gargoylesoftware.htmlunit.html.HtmlCheckBoxInput;
 import com.gargoylesoftware.htmlunit.html.HtmlDateTimeLocalInput;
 import com.gargoylesoftware.htmlunit.html.HtmlFileInput;
+import com.gargoylesoftware.htmlunit.html.HtmlImageInput;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlMonthInput;
 import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
+import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
+import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTimeInput;
 import com.gargoylesoftware.htmlunit.html.HtmlWeekInput;
@@ -212,7 +215,11 @@ public class HTMLInputElement extends HTMLElement {
                         .getFactory(HtmlInput.TAG_NAME)
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
-                if (!browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
+                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
+//                    newInput.setValue(input.getValue());
+//                    setDefaultValue(input.getDefaultValue());
+                }
+                else {
                     if (newInput instanceof HtmlTimeInput
                             || newInput instanceof HtmlDateTimeLocalInput
                             || newInput instanceof HtmlFileInput) {
@@ -227,6 +234,15 @@ public class HTMLInputElement extends HTMLElement {
                         if (ATTRIBUTE_NOT_DEFINED != originalValue) {
                             newInput.setValue(originalValue);
                         }
+                    }
+                }
+                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
+                    if (!(newInput instanceof HtmlSubmitInput)
+                            && !(newInput instanceof HtmlResetInput)
+                            && !(newInput instanceof HtmlCheckBoxInput)
+                            && !(newInput instanceof HtmlRadioButtonInput)
+                            && !(newInput instanceof HtmlImageInput)) {
+                        newInput.setRawValue(input.getRawValue());
                     }
                 }
 
