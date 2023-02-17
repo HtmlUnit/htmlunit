@@ -216,8 +216,18 @@ public class HTMLInputElement extends HTMLElement {
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
                 if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-//                    newInput.setValue(input.getValue());
-//                    setDefaultValue(input.getDefaultValue());
+                    // a hack for the moment
+                    if (newInput instanceof HtmlSubmitInput || newInput instanceof HtmlResetInput) {
+                        final String originalValue = input.getValue();
+                        if (ATTRIBUTE_NOT_DEFINED == originalValue) {
+                            newInput.setRawValue(originalValue);
+                        }
+                    }
+                    else if (!(newInput instanceof HtmlCheckBoxInput)
+                            && !(newInput instanceof HtmlRadioButtonInput)
+                            && !(newInput instanceof HtmlImageInput)) {
+                        newInput.setRawValue(input.getRawValue());
+                    }
                 }
                 else {
                     if (newInput instanceof HtmlTimeInput
@@ -234,15 +244,6 @@ public class HTMLInputElement extends HTMLElement {
                         if (ATTRIBUTE_NOT_DEFINED != originalValue) {
                             newInput.setValue(originalValue);
                         }
-                    }
-                }
-                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-                    if (!(newInput instanceof HtmlSubmitInput)
-                            && !(newInput instanceof HtmlResetInput)
-                            && !(newInput instanceof HtmlCheckBoxInput)
-                            && !(newInput instanceof HtmlRadioButtonInput)
-                            && !(newInput instanceof HtmlImageInput)) {
-                        newInput.setRawValue(input.getRawValue());
                     }
                 }
 
