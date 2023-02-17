@@ -94,7 +94,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      */
     @Override
     public void setText(final String text) {
-        setValue(text);
+        setRawValue(text);
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class HtmlSelectableTextInput extends HtmlInput implements Selec
      */
     @Override
     public String getText() {
-        return getValue();
+        return getRawValue();
     }
 
     /**
