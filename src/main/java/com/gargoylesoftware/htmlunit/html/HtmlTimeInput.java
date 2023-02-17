@@ -80,7 +80,7 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
             }
         }
 
-        return super.getValue();
+        return "";
     }
 
     /**

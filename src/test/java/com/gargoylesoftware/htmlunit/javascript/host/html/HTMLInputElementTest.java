@@ -34,6 +34,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
@@ -95,6 +96,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
                   "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc",
                   "abc", "", "50", "abc", "abc", "abc", "abc"})
+    @HtmlUnitNYI(IE = {"abc", "abc", "abc", "", "abc", "", "", "abc", "abc",
+                       "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "abc", "", "abc",
+                       "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueString() throws Exception {
         testValue("'abc'");
@@ -132,6 +136,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = {". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
                   ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ",
                   ". ", "", "50", ". ", ". ", ". ", ". "})
+    @HtmlUnitNYI(IE = {". ", ". ", ". ", "", ". ", "", "", ". ", ". ",
+                       ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", ". ", "", ". ",
+                       ". ", "", "50", ". ", ". ", ". ", ". "})
     @Test
     public void setValueBlankString() throws Exception {
         testValue("'  '");
@@ -152,6 +159,9 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = {"12", "12", "12", "", "12", "", "", "12", "12",
                   "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "12",
                   "12", "12", "12", "12", "12", "12", "12"})
+    @HtmlUnitNYI(IE = {"12", "12", "12", "", "12", "", "", "12", "12",
+                       "12", "12", "12", "12", "12", "12", "12", "12", "12", "12", "", "12",
+                       "12", "12", "12", "12", "12", "12", "12"})
     @Test
     public void setValueNumber() throws Exception {
         testValue("12");
@@ -388,6 +398,21 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
                   "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
                   "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
+    @HtmlUnitNYI(CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                           "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
+                           "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            EDGE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
+                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                  "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
+                  "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            FF_ESR = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                      "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
+                      "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
+            IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
+                  "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
+                  "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
     @Test
     public void setValueAttribute() throws Exception {
         testAttribute("value", "", "abc");
