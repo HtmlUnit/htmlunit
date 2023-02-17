@@ -20,6 +20,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
@@ -54,6 +55,107 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         assertEquals("", input.getAttribute("value"));
         input.sendKeys(Keys.BACK_SPACE);
         assertEquals("", input.getAttribute("value"));
+    }
+
+    @Test
+    @Alerts({"--null", "--null", "--null"})
+    public void defaultValuesAfterClone() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var input = document.getElementById('text1');\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+
+            + "    try {\n"
+            + "      input = document.createElement('input');\n"
+            + "      input.type = 'search';\n"
+            + "      input = input.cloneNode(false);\n"
+            + "      log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "    } catch(e)  { log('exception'); }\n"
+
+            + "    var builder = document.createElement('div');\n"
+            + "    builder.innerHTML = '<input type=\"search\">';\n"
+            + "    input = builder.firstChild;\n"
+            + "    input = input.cloneNode(false);\n"
+            + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head><body onload='test()'>\n"
+            + "<form>\n"
+            + "  <input type='search' id='text1'>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Verifies getVisibleText().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void getVisibleText() throws Exception {
+        final String htmlContent
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='search' name='tester' id='tester' value='1234567' >\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final String text = driver.findElement(By.id("tester")).getText();
+        assertEquals(getExpectedAlerts()[0], text);
+
+        if (driver instanceof HtmlUnitDriver) {
+            final HtmlPage page = (HtmlPage) getEnclosedPage();
+            assertEquals(getExpectedAlerts()[0], page.getBody().getVisibleText());
+        }
+    }
+
+    /**
+     * Verifies clear().
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("")
+    public void clearInput() throws Exception {
+        final String htmlContent
+                = "<html>\n"
+                + "<head></head>\n"
+                + "<body>\n"
+                + "<form id='form1'>\n"
+                + "  <input type='search' name='tester' id='tester' value='1234567'>\n"
+                + "</form>\n"
+                + "</body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+        final WebElement element = driver.findElement(By.id("tester"));
+
+        element.clear();
+        assertEquals(getExpectedAlerts()[0], element.getAttribute("value"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void typing() throws Exception {
+        final String htmlContent
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='search' id='foo'>\n"
+            + "</form></body></html>";
+
+        final WebDriver driver = loadPage2(htmlContent);
+
+        final WebElement input = driver.findElement(By.id("foo"));
+        input.sendKeys("hello");
+        assertEquals("hello", input.getAttribute("value"));
     }
 
     /**
@@ -210,7 +312,6 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
         validation("<input type='search' pattern='[ 012]{3,10}' id='e1' name='k'>\n", "", " 210 ");
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -227,6 +328,24 @@ public class HtmlSearchInputTest extends WebDriverTestCase {
                   "§§URL§§?k=abcd", "2"})
     public void minLengthValidationInvalid() throws Exception {
         validation("<input type='search' minlength='5' id='e1' name='k'>\n", "", "abcd");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"1234",
+                       "true",
+                       "false-false-false-false-false-false-false-false-false-true-false",
+                       "true",
+                       "§§URL§§?k=1234", "2"},
+            IE = {"1234",
+                  "true",
+                  "undefined-false-false-false-false-false-false-undefined-false-true-false",
+                  "true",
+                  "§§URL§§?k=1234", "2"})
+    public void minLengthValidationInvalidInitial() throws Exception {
+        validation("<input type='search' minlength='20' id='e1' name='k' value='1234'>\n", "", null);
     }
 
     /**
