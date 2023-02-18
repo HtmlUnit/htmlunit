@@ -204,10 +204,8 @@ public class HTMLIFrameElement3Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "false", "true", "true", "true", "object", "object"},
-            FF = {"false", "false", "true", "false", "false", "object", "undefined"},
             FF_ESR = {"false", "false", "true", "false", "false", "object", "undefined"})
-    @HtmlUnitNYI(FF = {"false", "false", "true", "true", "true", "object", "object"},
-            FF_ESR = {"false", "false", "true", "true", "true", "object", "object"})
+    @HtmlUnitNYI(FF_ESR = {"false", "false", "true", "true", "true", "object", "object"})
     public void writeToIFrame() throws Exception {
         final String html
             = "<!DOCTYPE html>\n"
