@@ -881,10 +881,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("3px none rgb(0, 0, 0)"), ffLatest("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule}. */
-        COLUMN_RULE_("column-rule", "column-rule", ff("0px none rgb(0, 0, 0)")),
+        COLUMN_RULE_("column-rule", "column-rule", ffEsr("3px none rgb(0, 0, 0)"),
+                ffLatest("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
@@ -919,7 +920,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columns}. */
         COLUMNS("columns", "columns", chromeAndEdge("auto auto"), ie(""),
-                ff("auto auto")),
+                ffEsr("auto auto"), ffLatest("auto")),
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdgeNone(), ffNone()),
@@ -975,6 +976,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code containerType}. */
         CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code container-type}. */
+        CONTAINER_TYPE_("container-type", "container-type", ffLatest("normal")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdgeNormal(), ffNormal()),
