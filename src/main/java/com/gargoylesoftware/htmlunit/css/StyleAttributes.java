@@ -881,10 +881,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("3px none rgb(0, 0, 0)")),
+                ff("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule}. */
-        COLUMN_RULE_("column-rule", "column-rule", ff("3px none rgb(0, 0, 0)")),
+        COLUMN_RULE_("column-rule", "column-rule", ff("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
@@ -965,13 +965,16 @@ public final class StyleAttributes implements Serializable {
                 ffLatest("none")),
 
         /** The style property {@code container}. */
-        CONTAINER("container", "container", chromeAndEdgeNone()),
+        CONTAINER("container", "container", chromeAndEdgeNone(), ffLatest("none")),
 
         /** The style property {@code containerName}. */
-        CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone()),
+        CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code container-name}. */
+        CONTAINER_NAME_("container-name", "container-name", ffLatest("none")),
 
         /** The style property {@code containerType}. */
-        CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal()),
+        CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal(), ffLatest("normal")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdgeNormal(), ffNormal()),
@@ -1433,6 +1436,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code inherits}. */
         INHERITS("inherits", "inherits", chromeAndEdgeEmpty()),
+
+        /** The style property {@code initialLetter}. */
+        INITIAL_LETTER("initialLetter", "initial-letter", chromeAndEdgeNormal()),
 
         /** The style property {@code initialValue}. */
         INITIAL_VALUE("initialValue", "initial-value", chromeAndEdgeEmpty()),
@@ -2743,7 +2749,7 @@ public final class StyleAttributes implements Serializable {
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
         /** The style property {@code page}. */
-        PAGE("page", "page", chromeAndEdgeAuto()),
+        PAGE("page", "page", chromeAndEdgeAuto(), ffLatest("auto")),
 
         /** The style property {@code pageBreakAfter}. */
         PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chromeAndEdgeAuto(), ff("auto"), ie("auto")),
