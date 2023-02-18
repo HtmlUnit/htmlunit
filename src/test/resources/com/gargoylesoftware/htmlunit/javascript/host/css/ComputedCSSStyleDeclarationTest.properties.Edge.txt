@@ -214,6 +214,7 @@ hyphens=:manual
 imageOrientation=:from-image
 imageRendering=:auto
 inherits=:
+initialLetter=:normal
 initialValue=:
 inlineSize=:1193px
 inset=:auto

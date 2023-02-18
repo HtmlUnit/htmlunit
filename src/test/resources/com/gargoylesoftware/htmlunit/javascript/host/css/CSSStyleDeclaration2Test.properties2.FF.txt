@@ -248,6 +248,9 @@ containIntrinsicHeight
 containIntrinsicInlineSize
 containIntrinsicSize
 containIntrinsicWidth
+container
+containerName
+containerType
 content
 counterIncrement
 counterReset
@@ -417,6 +420,7 @@ paddingInlineStart
 paddingLeft
 paddingRight
 paddingTop
+page
 pageBreakAfter
 pageBreakBefore
 pageBreakInside

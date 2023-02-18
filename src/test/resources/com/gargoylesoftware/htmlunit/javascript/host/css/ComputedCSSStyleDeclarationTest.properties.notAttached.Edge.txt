@@ -214,6 +214,7 @@ hyphens=:
 imageOrientation=:
 imageRendering=:
 inherits=:
+initialLetter=:
 initialValue=:
 inlineSize=:
 inset=:
