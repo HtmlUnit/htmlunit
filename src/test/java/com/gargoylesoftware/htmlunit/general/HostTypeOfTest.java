@@ -7686,6 +7686,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void nativeXPathNSResolver() throws Exception {
+        test("NativeXPathNSResolver");
+    }
+
+    /**
      * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult}.
      *
      * @throws Exception if an error occurs
