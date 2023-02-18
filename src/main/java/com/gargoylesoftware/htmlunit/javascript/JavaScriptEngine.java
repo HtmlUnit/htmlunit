@@ -20,14 +20,12 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_GLOBAL_THIS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INTL_NAMED_OBJECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_OBJECT_GET_OWN_PROPERTY_SYMBOLS;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_PROMISE;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_REFLECT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_SYMBOL;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_ACTIVEXOBJECT_HIDDEN;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_WINDOW_INSTALL_TRIGGER_NULL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.STRING_INCLUDES;
@@ -254,18 +252,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             ScriptableObject.deleteProperty(errorObject, "captureStackTrace");
         }
 
-        if (browserVersion.hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
-            URLSearchParams.NativeParamsIterator.init(window, "Iterator");
-        }
-        else {
-            URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
-        }
-        if (browserVersion.hasFeature(JS_FORM_DATA_ITERATOR_SIMPLE_NAME)) {
-            FormData.FormDataIterator.init(window, "Iterator");
-        }
-        else {
-            FormData.FormDataIterator.init(window, "FormData Iterator");
-        }
+        URLSearchParams.NativeParamsIterator.init(window, "URLSearchParams Iterator");
+        FormData.FormDataIterator.init(window, "FormData Iterator");
 
         final Intl intl = new Intl();
         intl.setParentScope(window);
