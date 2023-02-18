@@ -576,12 +576,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function keys() { [native code] }", "[object Iterator]",
+    @Alerts(DEFAULT = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
                        "key1", "key2", "key1", "", "true"},
-            FF = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
-                  "key1", "key2", "key1", "", "true"},
-            FF_ESR = {"function keys() { [native code] }", "[object URLSearchParams Iterator]",
-                      "key1", "key2", "key1", "", "true"},
             IE = {})
     public void keys() throws Exception {
         final String html =
@@ -622,12 +618,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function values() { [native code] }", "[object Iterator]",
+    @Alerts(DEFAULT = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
                        "val1", "", "val3", "val4", "true"},
-            FF = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
-                  "val1", "", "val3", "val4", "true"},
-            FF_ESR = {"function values() { [native code] }", "[object URLSearchParams Iterator]",
-                      "val1", "", "val3", "val4", "true"},
             IE = {})
     public void values() throws Exception {
         final String html =
@@ -698,12 +690,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"function entries() { [native code] }", "[object Iterator]",
+    @Alerts(DEFAULT = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
                        "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
-                  "key1-val1", "key2-", "key1-val3", "-val4", "true"},
-            FF_ESR = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
-                      "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
     public void entries() throws Exception {
         final String html =

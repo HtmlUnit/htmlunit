@@ -14,7 +14,6 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -357,11 +356,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
     public Object entries() {
         final List<NameValuePair> splitted = splitQuery();
 
-        if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
-            return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.BOTH, splitted.iterator());
-        }
-
         return new NativeParamsIterator(getParentScope(),
                 "URLSearchParams Iterator", NativeParamsIterator.Type.BOTH, splitted.iterator());
     }
@@ -376,11 +370,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
     public Object keys() {
         final List<NameValuePair> splitted = splitQuery();
 
-        if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
-            return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.KEYS, splitted.iterator());
-        }
-
         return new NativeParamsIterator(getParentScope(),
                 "URLSearchParams Iterator", NativeParamsIterator.Type.KEYS, splitted.iterator());
     }
@@ -394,11 +383,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
     @JsxFunction
     public Object values() {
         final List<NameValuePair> splitted = splitQuery();
-
-        if (getBrowserVersion().hasFeature(JS_URL_SEARCH_PARMS_ITERATOR_SIMPLE_NAME)) {
-            return new NativeParamsIterator(getParentScope(),
-                    "Iterator", NativeParamsIterator.Type.VALUES, splitted.iterator());
-        }
 
         return new NativeParamsIterator(getParentScope(),
                 "URLSearchParams Iterator", NativeParamsIterator.Type.VALUES, splitted.iterator());
