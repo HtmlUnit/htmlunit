@@ -753,7 +753,7 @@ public enum BrowserVersionFeatures {
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
     /** CSS.toString returns [object Object] instead of [object CSS]. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     JS_CSS_OBJECT,
 
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
