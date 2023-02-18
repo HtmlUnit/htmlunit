@@ -132,7 +132,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("sk", ddDotBlank);
         commonFormats.put("sl", ddDotBlank);
         commonFormats.put("sq", ddDot);
-        commonFormats.put("sr", ddDotDot);
+        commonFormats.put("sr", ddDotBlankDot);
         commonFormats.put("sv", yyyyDash);
         commonFormats.put("th", ddSlash);
         commonFormats.put("tr", ddDot);
@@ -141,7 +141,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("zh", yyyySlash);
         commonFormats.put("zh-HK", ddSlash);
         commonFormats.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
-        commonFormats.put("en-CA", yyyyDash);
+        commonFormats.put("en-CA", mmSlash);
         commonFormats.put("fr-CH", ddDot);
 
         CHROME_FORMATS_.putAll(commonFormats);
@@ -158,6 +158,9 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("sq", mmSlash);
 
+        FF_ESR_FORMATS_.put("en-CA", yyyyDash);
+        FF_ESR_FORMATS_.put("sr", ddDotDot);
+
         IE_FORMATS_.put("ar", rightToLeft);
         IE_FORMATS_.put("ar-AE", rightToLeft);
         IE_FORMATS_.put("ar-BH", rightToLeft);
@@ -168,6 +171,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         IE_FORMATS_.put("ban", ddDot);
         IE_FORMATS_.put("cs", ddDot);
         IE_FORMATS_.put("da", ddDash);
+        IE_FORMATS_.put("en-CA", yyyyDash);
         IE_FORMATS_.put("en-IN", ddDash);
         IE_FORMATS_.put("en-PH", ddSlash);
         IE_FORMATS_.put("es-US", mmSlash);
@@ -182,6 +186,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         IE_FORMATS_.put("lv", ddDot);
         IE_FORMATS_.put("mt", ddSlash);
         IE_FORMATS_.put("no", ddDot);
+        IE_FORMATS_.put("sr", ddDotDot);
         IE_FORMATS_.put("sr-BA", ddDot);
         IE_FORMATS_.put("sr-CS", ddDot);
         IE_FORMATS_.put("sr-ME", ddDot);
