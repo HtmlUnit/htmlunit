@@ -14,9 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.html;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_URL_TRIMMED;
+import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_URL_VALUE_TRIMMED;
 
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
@@ -45,18 +47,32 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
 
     private static Map<String, DomAttr> trimValueAttribute(final SgmlPage page, final Map<String, DomAttr> attributes) {
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
-            for (final String key : attributes.keySet()) {
-                if ("value".equalsIgnoreCase(key)) {
-                    final DomAttr attr = attributes.get(key);
-                    attr.setValue(attr.getValue().trim());
-                    attributes.put(key, attr);
+        if (browserVersion.hasFeature(JS_INPUT_URL_VALUE_TRIMMED)) {
+            for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
+                if ("value".equalsIgnoreCase(entry.getKey())) {
+                    entry.getValue().setValue(entry.getValue().getValue().trim());
                     break;
                 }
             }
         }
 
         return attributes;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getValue() {
+        if (hasFeature(JS_INPUT_URL_VALUE_TRIMMED)) {
+            final String raw = getRawValue();
+            if (StringUtils.isBlank(raw)) {
+                return "";
+            }
+            return raw;
+        }
+
+        return super.getValue();
     }
 
     /**

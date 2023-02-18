@@ -1133,7 +1133,7 @@ public enum BrowserVersionFeatures {
 
     /** Setting the value of an Input URL to blank will result in an empty value. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    JS_INPUT_SET_VALUE_URL_TRIMMED,
+    JS_INPUT_URL_VALUE_TRIMMED,
 
     /** Intl is named Object. */
     @BrowserFeature(IE)
