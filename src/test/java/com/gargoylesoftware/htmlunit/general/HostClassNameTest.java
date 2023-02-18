@@ -1313,7 +1313,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "[object CSS]",
             IE = "exception",
-            FF = "[object Object]",
             FF_ESR = "[object Object]")
     public void css() throws Exception {
         test("CSS");
@@ -11883,6 +11882,17 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("exception")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
+    }
+
+    /**
+     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void nativeXPathNSResolver() throws Exception {
+        test("NativeXPathNSResolver");
     }
 
     /**
