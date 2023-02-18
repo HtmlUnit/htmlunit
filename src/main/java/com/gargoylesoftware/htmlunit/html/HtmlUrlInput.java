@@ -18,8 +18,7 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_
 
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
-
+import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
 /**
@@ -41,7 +40,23 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
      */
     HtmlUrlInput(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
-        super(qualifiedName, page, attributes);
+        super(qualifiedName, page, trimValueAttribute(page, attributes));
+    }
+
+    private static Map<String, DomAttr> trimValueAttribute(final SgmlPage page, final Map<String, DomAttr> attributes) {
+        final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
+        if (browserVersion.hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
+            for (final String key : attributes.keySet()) {
+                if ("value".equalsIgnoreCase(key)) {
+                    final DomAttr attr = attributes.get(key);
+                    attr.setValue(attr.getValue().trim());
+                    attributes.put(key, attr);
+                    break;
+                }
+            }
+        }
+
+        return attributes;
     }
 
     /**
@@ -50,22 +65,6 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String getValue() {
-        if (hasFeature(JS_INPUT_SET_VALUE_URL_TRIMMED)) {
-            final String raw = getRawValue();
-            if (StringUtils.isBlank(raw)) {
-                return "";
-            }
-            return raw.trim();
-        }
-
-        return super.getValue();
     }
 
     /**
