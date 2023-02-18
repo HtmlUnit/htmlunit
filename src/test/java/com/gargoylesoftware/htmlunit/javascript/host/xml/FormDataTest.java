@@ -993,16 +993,12 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object Iterator]", "done", "value",
+    @Alerts(DEFAULT = {"[object FormData Iterator]", "done", "value",
                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF = {"[object FormData Iterator]", "done", "value",
-                  "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF_ESR = {"[object FormData Iterator]", "done", "value",
-                      "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             IE = "no entries")
-    @HtmlUnitNYI(CHROME = {"[object Iterator]", "value", "done",
+    @HtmlUnitNYI(CHROME = {"[object FormData Iterator]", "value", "done",
                            "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            EDGE = {"[object Iterator]", "value", "done",
+            EDGE = {"[object FormData Iterator]", "value", "done",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             FF = {"[object FormData Iterator]", "value", "done",
                   "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},

@@ -15,7 +15,6 @@
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_CONTENT_TYPE_PLAIN_IF_FILE_TYPE_UNKNOWN;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_FORM_DATA_ITERATOR_SIMPLE_NAME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -286,10 +285,6 @@ public class FormData extends HtmlUnitScriptable {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public Scriptable entries() {
-        if (getBrowserVersion().hasFeature(JS_FORM_DATA_ITERATOR_SIMPLE_NAME)) {
-            return new FormDataIterator(this, "Iterator", requestParameters_);
-        }
-
         return new FormDataIterator(this, "FormData Iterator", requestParameters_);
     }
 
