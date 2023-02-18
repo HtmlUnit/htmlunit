@@ -339,7 +339,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                        "false-false-false-false-false-false-false-false-false-true-false",
                        "true",
                        "§§URL§§?k=abc%40email.com", "2"},
-            FF = {" abc@email.com",
+            FF = {"abc@email.com",
                   "false",
                   "false-false-false-false-false-false-false-false-true-false-false",
                   "true",
