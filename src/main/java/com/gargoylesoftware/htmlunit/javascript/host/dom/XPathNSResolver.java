@@ -34,7 +34,7 @@ import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
  * @author Chuck Dumont
  * @author Ronald Brill
  */
-@JsxClass(isJSObject = false, value = {CHROME, EDGE, FF, FF_ESR})
+@JsxClass(className = "NativeXPathNSResolver", isJSObject = false, value = {CHROME, EDGE, FF, FF_ESR})
 public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolver {
 
     private Node element_;

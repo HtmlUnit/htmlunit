@@ -14,16 +14,13 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.dom;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link XPathEvaluator}.
@@ -39,11 +36,12 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object XPathNSResolver]", "first", "second", ""},
+    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""},
             FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
             FF_ESR = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
             IE = {"undefined", "exception", ""})
-    @NotYetImplemented({FF, FF_ESR})
+    @HtmlUnitNYI(FF = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""},
+            FF_ESR = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""})
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"
