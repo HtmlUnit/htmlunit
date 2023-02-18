@@ -290,7 +290,6 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "",
-            FF = "undefined",
             FF_ESR = "undefined")
     public void selectorTextEmpty() throws Exception {
         final String html
