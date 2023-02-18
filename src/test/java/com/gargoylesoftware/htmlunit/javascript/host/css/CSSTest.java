@@ -22,7 +22,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link CSS}.
+ * Tests for {@link CSSPageRule}.
  *
  * @author Ronald Brill
  */
