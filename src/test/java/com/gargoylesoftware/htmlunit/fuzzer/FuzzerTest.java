@@ -120,8 +120,17 @@ public class FuzzerTest extends WebTestCase {
      */
     @Test
     public void case55628() throws Exception {
-        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=54965
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=55628
         test("test-55628.html");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void case55747() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=55747
+        test("test-55747.html");
     }
 
     private void test(final String inputFileName) throws Exception {
