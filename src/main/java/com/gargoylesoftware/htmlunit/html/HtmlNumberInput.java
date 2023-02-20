@@ -16,7 +16,6 @@ package com.gargoylesoftware.htmlunit.html;
 
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_ACCEPT_ALL;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_REMOVE_WHITESPACE_FROM_VALUE;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -25,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.gargoylesoftware.htmlunit.SgmlPage;
 
@@ -55,13 +53,10 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        if (getPage().getWebClient().getBrowserVersion()
-                .hasFeature(JS_INPUT_NUMBER_REMOVE_WHITESPACE_FROM_VALUE)) {
-            final String value = getValueAttribute();
-            if (!value.isEmpty()) {
-                if (!NumberUtils.isCreatable(value)) {
-                    setValueAttribute("");
-                }
+        final String value = getValueAttribute();
+        if (!value.isEmpty()) {
+            if (!StringUtils.containsOnly(value, VALID_CHARS)) {
+                setRawValue("");
             }
         }
     }

@@ -1103,10 +1103,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(FF)
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
-    /** IE trims. */
-    @BrowserFeature(IE)
-    JS_INPUT_NUMBER_REMOVE_WHITESPACE_FROM_VALUE,
-
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_INPUT_NUMBER_SELECTION_START_END_NULL,
