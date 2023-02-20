@@ -23,6 +23,7 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import com.gargoylesoftware.htmlunit.util.MimeType;
 
 /**
  * Tests for general Rhino problems.
@@ -147,6 +148,44 @@ public class RhinoTest extends WebDriverTestCase {
 
             + "</script>\n"
             + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("from script")
+    public void consStringAsSetterFunctionParam() throws Exception {
+        final String html = "<html>\n"
+                + "  <head>\n"
+                + "    <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "      function test() {\n"
+
+                + "        var script = document.createElement('script');\n"
+                + "        script.id = 'b';\n"
+                + "        script.type = 'text/javascript';\n"
+                + "        Object.defineProperty(script, 'source', {\n"
+                + "          get: function() { return this.src },\n"
+                + "          set: function(source) {\n"
+                + "            var srcDesc = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(script), 'src');\n"
+                + "            srcDesc.set.call(this, source);\n"
+                + "          }\n"
+                + "        });\n"
+
+                + "        var part1 = 'sc';\n"
+                + "        script.source = part1 + 'r' + 'ipt.js';\n"
+                + "        document.body.appendChild(script);\n"
+                + "      }\n"
+                + "    </script>\n"
+                + "  </head>\n"
+                + "  <body onload='test()'>\n"
+                + "  </body></html>";
+
+        final String js = "log('from script');";
+        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
 
         loadPageVerifyTitle2(html);
     }
