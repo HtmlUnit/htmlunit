@@ -8,6 +8,15 @@
 
     <body>
         <release version="2.71.0" date="Febuary xx, 2023" description="Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
+            <action type="fix" dev="rbri" issue="550">
+                core-js: Setter function from property descriptor has to convert the args.
+            </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Preserving cause, when a JavaException is rethrown in JavaScript.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: Fix name property for bound functions.
+            </action>
             <action type="fix" dev="rbri">
                 Document.evaluate() and XPathEvaluator.evaluate() now failing with a js exception
                 if something is wrong with the xpath.
