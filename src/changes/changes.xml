@@ -8,6 +8,9 @@
 
     <body>
         <release version="2.71.0" date="Febuary xx, 2023" description="Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix NullPointerException when parsing using html with ignored head tags (oss-fuzz).
+            </action>
             <action type="fix" dev="rbri" issue="550">
                 core-js: Setter function from property descriptor has to convert the args.
             </action>

@@ -332,11 +332,17 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         final String tagLower = com.gargoylesoftware.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
         if (page_.isParsingHtmlSnippet() && ("html".equals(tagLower) || "body".equals(tagLower))) {
+            // we have to push the current node on the stack to make sure
+            // the endElement call is able to remove a node from the stack
+            stack_.push(currentNode_);
             return;
         }
 
         if ("head".equals(tagLower)) {
             if (headParsed_ == HeadParsed.YES || page_.isParsingHtmlSnippet()) {
+                // we have to push the current node on the stack to make sure
+                // the endElement call is able to remove a node from the stack
+                stack_.push(currentNode_);
                 return;
             }
 

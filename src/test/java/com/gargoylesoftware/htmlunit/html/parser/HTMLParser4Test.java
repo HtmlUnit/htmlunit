@@ -123,6 +123,23 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
+    public void badlyFormedHTML_wrongHeadConfusesStack() throws Exception {
+        final String html =
+            "<table\n"
+            + "<t:head>\n"
+            + "<t:head>\n"
+            + "<t:head>\n"
+            + "<t:head>\n"
+            + "<table>\n"
+            + "<table>";
+
+        loadPage2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
     @Alerts({"4", "[object HTMLScriptElement]", "[object Text]",
                 "[object HTMLTitleElement]", "[object Text]"})
     public void badlyFormedHTML_scriptBeforeDoctype() throws Exception {
