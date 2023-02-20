@@ -117,13 +117,11 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "20:04"},
             FF = {"08:04", "20:04"},
             FF_ESR = {"08:04", "20:04"},
-            IE = {"08:04", "08:04PM"})
+            IE = {"0804", "0804PM"})
     @BuggyWebDriver(FF = {"08:04", ""},
             FF_ESR = {"08:04", ""})
-    @HtmlUnitNYI(CHROME = {"08:04", "08:04PM"},
-            EDGE = {"08:04", "08:04PM"},
-            FF = {"08:04", "08:04PM"},
-            FF_ESR = {"08:04", "08:04PM"})
+    @HtmlUnitNYI(CHROME = {"08:04", "20:04"},
+            EDGE = {"08:04", "20:04"})
     public void type() throws Exception {
         final String htmlContent
             = "<html><head></head><body>\n"
@@ -134,7 +132,7 @@ public class HtmlTimeInputTest extends WebDriverTestCase {
         final WebDriver driver = loadPage2(htmlContent);
 
         final WebElement input = driver.findElement(By.id("foo"));
-        input.sendKeys("08:04");
+        input.sendKeys("0804");
         assertEquals(getExpectedAlerts()[0], input.getAttribute("value"));
 
         input.sendKeys("PM");

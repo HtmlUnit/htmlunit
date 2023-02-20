@@ -18,8 +18,11 @@ import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYP
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
+import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,7 +39,13 @@ import com.gargoylesoftware.htmlunit.SgmlPage;
  */
 public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableElement {
 
-    private static final DateTimeFormatter INPUT_FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm[a]");
+    private static final DateTimeFormatter INPUT_FORMATTER_ =
+            new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .appendPattern("hh[:]mm[a]")
+                    .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+                    .parseDefaulting(ChronoField.AMPM_OF_DAY, 0)
+                    .toFormatter(Locale.US);
     private static final DateTimeFormatter OUTPUT_FORMATTER_ = DateTimeFormatter.ofPattern("HH:mm");
 
     /**
@@ -78,9 +87,10 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
             catch (final DateTimeParseException e) {
                 // ignore
             }
+            return "";
         }
 
-        return "";
+        return getRawValue();
     }
 
     /**
