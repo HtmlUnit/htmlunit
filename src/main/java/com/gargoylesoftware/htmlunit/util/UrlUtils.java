@@ -384,6 +384,7 @@ public final class UrlUtils {
      * @return the given input string where every occurrence of <code>%</code> in
      * invalid escape sequences has been replace by <code>%25</code>
      */
+    @SuppressWarnings("PMD.UselessParentheses")
     private static String encodePercentSign(final byte[] input) {
         if (input == null) {
             return null;
@@ -563,7 +564,7 @@ public final class UrlUtils {
      */
     public static URL getUrlWithNewUserPassword(final URL u, final String newUserPassword)
             throws MalformedURLException {
-        String newUserInfo = newUserPassword == null ? "" : (':' + newUserPassword);
+        String newUserInfo = newUserPassword == null ? "" : ':' + newUserPassword;
         final String userInfo = u.getUserInfo();
         if (org.apache.commons.lang3.StringUtils.isNotBlank(userInfo)) {
             final int colonIdx = userInfo.indexOf(':');
@@ -726,6 +727,7 @@ public final class UrlUtils {
      * @param spec The specification to parse.
      * @return the parsed specification.
      */
+    @SuppressWarnings("PMD.UselessParentheses")
     private static Url parseUrl(String spec) {
         final Url url = new Url();
         int startIndex = 0;
@@ -1208,6 +1210,7 @@ public final class UrlUtils {
      * @param u2 a URL object
      * @return true if u1 and u2 refer to the same file
      */
+    @SuppressWarnings("PMD.UselessParentheses")
     public static boolean sameFile(final URL u1, final URL u2) {
         if (u1 == u2) {
             return true;
