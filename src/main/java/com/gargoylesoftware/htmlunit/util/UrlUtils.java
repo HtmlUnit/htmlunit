@@ -934,6 +934,7 @@ public final class UrlUtils {
      * @param scheme the scheme string to check
      * @return true if valid
      */
+    @SuppressWarnings("PMD.UselessParentheses")
     public static boolean isValidScheme(final String scheme) {
         final int length = scheme.length();
         if (length < 1) {
