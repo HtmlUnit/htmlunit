@@ -53,7 +53,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlMonthInput;
 import com.gargoylesoftware.htmlunit.html.HtmlNumberInput;
 import com.gargoylesoftware.htmlunit.html.HtmlRadioButtonInput;
-import com.gargoylesoftware.htmlunit.html.HtmlRangeInput;
 import com.gargoylesoftware.htmlunit.html.HtmlResetInput;
 import com.gargoylesoftware.htmlunit.html.HtmlSubmitInput;
 import com.gargoylesoftware.htmlunit.html.HtmlTextInput;
@@ -222,8 +221,7 @@ public class HTMLInputElement extends HTMLElement {
                             && !(newInput instanceof HtmlResetInput)
                             && !(newInput instanceof HtmlCheckBoxInput)
                             && !(newInput instanceof HtmlRadioButtonInput)
-                            && !(newInput instanceof HtmlImageInput)
-                            && !(newInput instanceof HtmlRangeInput)) {
+                            && !(newInput instanceof HtmlImageInput)) {
                         newInput.setRawValue(input.getRawValue());
                     }
                 }
