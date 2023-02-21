@@ -35,7 +35,7 @@
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.50.v20221201</jetty.version>
-        <log4j.version>2.19.0</log4j.version>
+        <log4j.version>2.20.0</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
