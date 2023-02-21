@@ -994,4 +994,67 @@ public class HtmlFileInputTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"C:\\fakepath\\pom.xml-Hello world-Hello world",
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\">"})
+    public void valueFakepath() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "  function test() {\n"
+              + "    var input = document.getElementById('f');\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.outerHTML);\n"
+              + "  }\n"
+              + "</script></head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f' value='Hello world' multiple>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final File pom = new File("pom.xml");
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("f")).sendKeys(pom.getAbsolutePath());
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"C:\\fakepath\\index.html-Hello world-Hello world",
+             "<input type=\"file\" id=\"f\" value=\"Hello world\" multiple=\"\" webkitdirectory=\"\">"})
+    public void valueWebkitdirectory() throws Exception {
+        final String html =
+              "<html>\n"
+              + "<head>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "  function test() {\n"
+              + "    var input = document.getElementById('f');\n"
+              + "    log(input.value + '-' + input.defaultValue + '-' + input.getAttribute('value'));\n"
+              + "    log(input.outerHTML);\n"
+              + "  }\n"
+              + "</script></head>\n"
+              + "<body>\n"
+              + "  <input type='file' id='f' value='Hello world' multiple webkitdirectory>\n"
+              + "  <button id='clickMe' onclick='test()'>Click Me</button>\n"
+              + "</body></html>";
+
+        final File dir = new File("src/test/resources/pjl-comp-filter");
+        assertTrue(dir.exists());
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("f")).sendKeys(dir.getAbsolutePath());
+        driver.findElement(By.id("clickMe")).click();
+        verifyTitle2(driver, getExpectedAlerts());
+    }
 }

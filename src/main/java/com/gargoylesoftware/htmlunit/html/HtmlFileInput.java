@@ -162,6 +162,40 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc}
+     *
+     * @see SubmittableElement#setDefaultValue(String)
+     */
+    @Override
+    public void setDefaultValue(final String defaultValue) {
+        final String oldDefaultValue = getDefaultValue();
+        // overwritten because we have the overwritten setValueAttribute()
+        super.setValueAttribute(defaultValue);
+
+        if (oldDefaultValue.equals(getValue())) {
+            setRawValue(defaultValue);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     * @deprecated as of version 2.71.0; use {@link #setValue(String)} instead
+     */
+    @Deprecated
+    @Override
+    public void setValueAttribute(final String newValue) {
+        // make sure to remove setDefaultValue() also when removing this
+        super.setValueAttribute(newValue);
+
+        if (StringUtils.isEmpty(newValue)) {
+            files_ = new File[0];
+            return;
+        }
+
+        files_ = new File[] {normalizeFile(new File(newValue))};
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public void setValue(final String newValue) {
