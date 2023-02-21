@@ -688,6 +688,9 @@ public class HtmlNumberInputTest extends WebDriverTestCase {
                        "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
                        "-\\s3\\s9\\s-\\s3\\s9\\s-true"},
             IE = {"8-8-8-true", "---true", "---true", "\\s3\\s9\\s-\\s3\\s9\\s-\\s3\\s9\\s-true"})
+    @HtmlUnitNYI(IE = {"8-8-8-true", "-\\s\\s-\\s\\s-true",
+                       "-\\s\\s\\n\\s\\s\\t\\s-\\s\\s\\n\\s\\s\\t\\s-true",
+                       "-\\s3\\s9\\s-\\s3\\s9\\s-true"})
     public void defaultValuesBlankValue() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"

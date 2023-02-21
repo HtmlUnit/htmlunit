@@ -39,6 +39,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"50----", "50----", "50----"})
+    @HtmlUnitNYI(IE = {"50----", "----", "50----"})
     public void defaultValues() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -77,6 +78,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"50----", "50----", "50----"})
+    @HtmlUnitNYI(IE = {"50----", "----", "50----"})
     public void defaultValuesAfterClone() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

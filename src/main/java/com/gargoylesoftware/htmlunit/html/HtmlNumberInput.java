@@ -137,7 +137,9 @@ public class HtmlNumberInput extends HtmlSelectableTextInput implements Labelabl
             return true;
         }
 
-        rawValue = rawValue.replaceAll("\\s", "");
+        if (!hasFeature(JS_INPUT_NUMBER_ACCEPT_ALL)) {
+            rawValue = rawValue.replaceAll("\\s", "");
+        }
         if (!rawValue.isEmpty()) {
             if ("-".equals(rawValue) || "+".equals(rawValue)) {
                 return false;
