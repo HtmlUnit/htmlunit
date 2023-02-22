@@ -331,8 +331,7 @@ public class HTMLFormElement2Test extends SimpleWebTestCase {
         final List<String> collectedAlerts = new ArrayList<>();
         final HtmlPage page = loadPage(html, collectedAlerts);
         final HtmlFileInput fileInput = page.getHtmlElementById("myFile");
-        fileInput.focus();
-        fileInput.setAttribute("value", "dummy.txt");
+        fileInput.setValue("dummy.txt");
         assertEquals(getExpectedAlerts(), collectedAlerts);
     }
 }
