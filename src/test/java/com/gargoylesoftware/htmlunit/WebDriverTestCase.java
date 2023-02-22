@@ -167,6 +167,13 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * Function used in many tests.
      */
+    public static final String LOG_WINDOW_NAME_FUNCTION =
+            "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n";
+
+
+    /**
+     * Function used in many tests.
+     */
     public static final String LOG_TEXTAREA_FUNCTION = "  function log(msg) { "
             + "document.getElementById('myLog').value += msg + '§';}\n";
 
@@ -1131,11 +1138,21 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final String expected) throws Exception {
 
         final String script = "return String(" + varName + ")";
-
         final String result = (String) ((JavascriptExecutor) driver).executeScript(script);
+
         assertEquals(expected, result);
 
         return driver;
+    }
+
+    protected final WebDriver verifyWindowName2(final WebDriver driver,
+            final String... expectedAlerts) throws Exception {
+        final StringBuilder expected = new StringBuilder();
+        for (int i = 0; i < expectedAlerts.length; i++) {
+            expected.append(expectedAlerts[i]).append('§');
+        }
+
+        return verifyJsVariable(driver, "window.top.name", expected.toString());
     }
 
     /**

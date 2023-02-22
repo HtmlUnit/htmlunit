@@ -1108,6 +1108,7 @@ public class NodeTest extends WebDriverTestCase {
         final String firstHtml = "<html>\n"
             + "<head><title>First Page</title>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function test() {\n"
             + "    var iframe = document.createElement('iframe');\n"
             + "    document.body.appendChild(iframe);\n"
@@ -1124,15 +1125,16 @@ public class NodeTest extends WebDriverTestCase {
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "      var handler = function() {\n"
-            + "        alert(parent.event);\n"
+            + "        log(parent.event);\n"
             + "        parent.document.getElementById('myDiv').style.display = 'none';\n"
-            + "        alert(parent.event);\n"
+            + "        log(parent.event);\n"
             + "      }\n"
             + "      function test() {\n"
             + "        try {\n"
             + "          parent.document.body.attachEvent('onclick', handler);\n"
-            + "        } catch(e) { alert('exception') }\n"
+            + "        } catch(e) { log('exception') }\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -1143,7 +1145,7 @@ public class NodeTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyWindowName2(driver, getExpectedAlerts());
 
         driver.findElement(By.id("myInput")).click();
     }
@@ -1336,11 +1338,12 @@ public class NodeTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function clicking1() {\n"
-            + "    alert(1);\n"
+            + "    log(1);\n"
             + "  }\n"
             + "  function clicking2() {\n"
-            + "    alert(2);\n"
+            + "    log(2);\n"
             + "  }\n"
             + "  function test() {\n"
             + "    var e = document.getElementById('myAnchor');\n"
@@ -1356,7 +1359,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
-        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
         Thread.sleep(200);
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }
@@ -1370,11 +1373,12 @@ public class NodeTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function clicking1() {\n"
-            + "    alert(1);\n"
+            + "    log(1);\n"
             + "  }\n"
             + "  function clicking2() {\n"
-            + "    alert(2);\n"
+            + "    log(2);\n"
             + "    return false;\n"
             + "  }\n"
             + "  function test() {\n"
@@ -1382,7 +1386,8 @@ public class NodeTest extends WebDriverTestCase {
             + "    e.addEventListener('click', clicking1, false);\n"
             + "    e.addEventListener('click', clicking2, false);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <a href='second' id='myAnchor'>Click me</a>\n"
             + "</body></html>";
 
@@ -1391,7 +1396,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
-        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
         Thread.sleep(200);
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }
@@ -1406,11 +1411,12 @@ public class NodeTest extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function clicking1() {\n"
-            + "    alert(1);\n"
+            + "    log(1);\n"
             + "  }\n"
             + "  function clicking2() {\n"
-            + "    alert(2);\n"
+            + "    log(2);\n"
             + "    if (window.event)\n"
             + "      window.event.returnValue = false;\n"
             + "  }\n"
@@ -1419,7 +1425,8 @@ public class NodeTest extends WebDriverTestCase {
             + "    e.addEventListener('click', clicking1, false);\n"
             + "    e.addEventListener('click', clicking2, false);\n"
             + "  }\n"
-            + "</script></head><body onload='test()'>\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
             + "  <a href='second' id='myAnchor'>Click me</a>\n"
             + "</body></html>";
 
@@ -1428,7 +1435,7 @@ public class NodeTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("myAnchor")).click();
-        verifyAlerts(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
+        verifyWindowName2(driver, ArrayUtils.subarray(getExpectedAlerts(), 0, 2));
         Thread.sleep(200);
         assertEquals(getExpectedAlerts()[2], driver.getCurrentUrl());
     }

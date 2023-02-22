@@ -742,6 +742,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "2", "2", "3", "2", "2"},
             IE = {"1", "0", "1", "1", "0", "1"})
+    @HtmlUnitNYI(IE = {"3", "2", "2", "3", "2", "2"})
     public void isindex() throws Exception {
         loadPageVerifyTitle2(test("isindex"));
     }
