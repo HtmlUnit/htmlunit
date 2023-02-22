@@ -123,10 +123,11 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "<head>\n"
             + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function test() {\n"
             + "      if (document.body.parentElement) {\n"
             + "        //.text is defined for Comment in IE\n"
-            + "        alert(typeof document.body.parentElement.previousSibling.text);\n"
+            + "        log(typeof document.body.parentElement.previousSibling.text);\n"
             + "        }\n"
             + "    }\n"
             + "  </script>\n"
@@ -134,7 +135,8 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -147,9 +149,10 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "<head>\n"
             + "  <title>Test</title>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function test() {\n"
             + "      for (var elem = document.firstChild; elem; elem = elem.nextSibling) {\n"
-            + "        alert(elem);\n"
+            + "        log(elem);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -157,6 +160,7 @@ public class DocumentTypeTest extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 }
