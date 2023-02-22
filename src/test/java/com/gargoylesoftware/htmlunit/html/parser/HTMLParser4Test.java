@@ -210,13 +210,14 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  </head>\n"
             + "  <body>\n"
             + "    <p>HtmlUnit</p>\n"
-            + "    <script>alert('from body');</script>\n"
+            + "    <script>window.name += 'from body' + '\\u00a7';</script>\n"
             + "  </body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("alert('from script')", 200, "OK", null);
+        getMockWebConnection().setDefaultResponse("window.name += 'from script' + '\\u00a7'", 200, "OK", null);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -224,7 +225,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("<html><head><title>foo</title></head>"
-            + "<body><script>alert(document.documentElement.outerHTML);</script></body></html>")
+            + "<body><script>window.name += document.documentElement.outerHTML + '\\u00a7';</script></body></html>")
     public void badlyFormedHTML_duplicateHeadStructure() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>"
@@ -234,11 +235,12 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</head>"
             + "</head>"
             + "<body>"
-            + "<script>alert(document.documentElement.outerHTML);</script>"
+            + "<script>window.name += document.documentElement.outerHTML + '\\u00a7';</script>"
             + "</body>"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -278,15 +280,17 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "  <meta http-equiv='Content-Type' content='text/html; charset=ISO-8859-1'>\n"
             + "  <title>first</title>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function test() {\n"
-            + "      alert(document.title);\n"
+            + "      log(document.title);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -694,18 +698,19 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "<html><head>\n"
             + "  <title>Outer Html</title>\n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "    function test() {\n"
-            + "      alert('titles');\n"
+            + "      log('titles');\n"
             + "      var titles = document.getElementsByTagName('title');\n"
             + "      for(var i = 0; i < titles.length; i++) {\n"
-            + "        alert(titles[i].parentNode.nodeName);\n"
-            + "        alert(titles[i].text);\n"
+            + "        log(titles[i].parentNode.nodeName);\n"
+            + "        log(titles[i].text);\n"
             + "      }\n"
-            + "      alert('misc');\n"
-            + "      alert(document.body != null);\n"
+            + "      log('misc');\n"
+            + "      log(document.body != null);\n"
             + "      var innerDiv = document.getElementById('innerDiv');\n"
             + "      if (innerDiv != null) {\n"
-            + "        alert(innerDiv.parentNode.nodeName);\n"
+            + "        log(innerDiv.parentNode.nodeName);\n"
             + "      }\n"
             + "    }\n"
             + "  </script>\n"
@@ -724,7 +729,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
             + "</body>\n"
             + "</html>\n";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -736,10 +742,11 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "<html><head>\n"
                 + "  <title>Outer Html</title>\n"
                 + "  <script>\n"
+                + LOG_WINDOW_NAME_FUNCTION
                 + "    function test() {\n"
                 + "      var body = document.getElementById('tester');\n"
                 + "      var text = body.innerText;"
-                + "      alert(text);\n"
+                + "      log(text);\n"
                 + "    }\n"
                 + "  </script>\n"
                 + "</head>\n"
@@ -760,7 +767,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "</html>\n";
 
         final WebDriver driver = loadPage2(html);
-        final String alerts = getCollectedAlerts(driver, 1).get(0);
+        final String alerts = getJsVariableValue(driver, "window.name");
 
         assertTrue(alerts, alerts.contains("before1after1"));
         assertTrue(alerts, alerts.contains("before2after2"));

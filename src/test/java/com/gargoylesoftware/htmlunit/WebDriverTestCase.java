@@ -1134,12 +1134,17 @@ public abstract class WebDriverTestCase extends WebTestCase {
         return driver;
     }
 
-    protected final WebDriver verifyJsVariable(final WebDriver driver, final String varName,
-            final String expected) throws Exception {
+    protected final String getJsVariableValue(final WebDriver driver, final String varName) throws Exception {
 
         final String script = "return String(" + varName + ")";
         final String result = (String) ((JavascriptExecutor) driver).executeScript(script);
 
+        return result;
+    }
+
+    protected final WebDriver verifyJsVariable(final WebDriver driver, final String varName,
+            final String expected) throws Exception {
+        final String result = getJsVariableValue(driver, varName);
         assertEquals(expected, result);
 
         return driver;
