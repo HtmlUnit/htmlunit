@@ -58,7 +58,7 @@ public class ExternalTest {
     static String CHROME_DRIVER_ = "110.0.5481.77";
     static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
 
-    static String EDGE_DRIVER_ = "110.0.1587.49";
+    static String EDGE_DRIVER_ = "110.0.1587.50";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
 
     /** Gecko driver. */
