@@ -204,7 +204,13 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             return;
         }
 
-        setFiles(new File(newValue));
+        final File file = new File(newValue);
+        if (file.isDirectory()) {
+            setDirectory(file);
+            return;
+        }
+
+        setFiles(file);
     }
 
     /**
