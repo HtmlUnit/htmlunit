@@ -30,6 +30,7 @@ import org.junit.runner.RunWith;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import com.gargoylesoftware.htmlunit.util.Cookie;
 
@@ -274,7 +275,12 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
-    @NotYetImplemented
+    @Alerts("loadExtraContent started at Page 1 loadExtraContent finished at Page 1")
+    @HtmlUnitNYI(CHROME = "loadExtraContent started at Page 1 loadExtraContent finished at Page 2",
+            EDGE = "loadExtraContent started at Page 1 loadExtraContent finished at Page 2",
+            FF = "loadExtraContent started at Page 1 loadExtraContent finished at Page 2",
+            FF_ESR = "loadExtraContent started at Page 1 loadExtraContent finished at Page 2",
+            IE = "loadExtraContent started at Page 1 loadExtraContent finished at Page 2")
     public void makeSureTheCurrentJobHasEndedBeforeReplaceWindowPage() throws Exception {
         final String htmlContent1
             = "<html>\n"
@@ -284,12 +290,14 @@ public class WebClient2Test extends SimpleWebTestCase {
             + "<body>\n"
             + "  <script>\n"
             + "    function loadExtraContent() {\n"
-            + "      for (var i = 0; i < 1000; i++) {\n"
+            + "      window.name += 'loadExtraContent started at ' + window.document.title;"
+            + "      for (var i = 0; i < 4000; i++) {\n"
             + "        var p = document.createElement('p');\n"
             + "        p.innerHTML = 'new content';\n"
             + "        var body = document.querySelector('body');\n"
             + "        if (body) { body.appendChild(p); }\n"
             + "      }\n"
+            + "      window.name += ' loadExtraContent finished at ' + window.document.title;"
             + "    }\n"
 
             + "    setTimeout(loadExtraContent, 1);"
@@ -321,10 +329,14 @@ public class WebClient2Test extends SimpleWebTestCase {
 
         // Immediately load page 2. Timeout function was triggered already
         page = client.getPage(URL_SECOND);
-        client.waitForBackgroundJavaScriptStartingBefore(100);
+        client.waitForBackgroundJavaScriptStartingBefore(1000);
+
+        final String script = "window.name;";
+        final String result = (String) page.executeJavaScript(script).getJavaScriptResult();
+        assertEquals(getExpectedAlerts()[0], result);
 
         // Fails: return 98 (about) instead of 1
-        assertEquals(1, page.querySelectorAll("p").size());
+        // assertEquals(1, page.querySelectorAll("p").size());
     }
 
     /**
