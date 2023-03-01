@@ -175,7 +175,7 @@ public void alerts() throws Exception {
         <section name="Event handlers">
             <p>
                 Most event handlers are already implemented: onload, onclick, ondblclick, onmouseup, onsubmit, onreadystatechange, ... 
-                They will be triggered at the appropriate time just like in a "real browser".  
+                They will be triggered at the appropriate time just like in a "real browser".
             </p>
             <p>
                 If the event that you wish to test is not yet supported then you can 
@@ -185,6 +185,18 @@ public void alerts() throws Exception {
                 other choice.  It is much better to manipulate the page as a user would
                 by clicking on elements and shifting the focus around.
             </p>
+        </section>
+
+        <section name="Run javascript inside the page/window">
+            <p>
+                Sometimes it is helpfull to execute javascript inside the current page e.g. to get the value of window properties
+                or forcing some javascript functions to run. In general you can do everything you can do with a script tag inside
+                the page and additionally get back the result of the invokation.
+            </p>
+            <source><![CDATA[
+String script = "window.name;";
+String result = (String) page.executeJavaScript(script).getJavaScriptResult();
+}]]></source>
         </section>
     </body>
 
