@@ -251,24 +251,6 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     }
 
     /**
-     * Overwritten, because Internet Explorer doesn't follow the spec
-     * when the type isn't specified. It will return
-     * button" rather than the "submit" specified in the spec.
-     *
-     * @param attributeName the name of the attribute
-     * @return the value of the attribute or {@link #ATTRIBUTE_NOT_DEFINED} or {@link #ATTRIBUTE_VALUE_EMPTY}
-     */
-    @Override
-    public String getAttribute(final String attributeName) {
-        String type = super.getAttribute(attributeName);
-
-        if (type == DomElement.ATTRIBUTE_NOT_DEFINED && "type".equalsIgnoreCase(attributeName)) {
-            type = TYPE_SUBMIT;
-        }
-        return type;
-    }
-
-    /**
      * Returns the value of the attribute {@code type}. Refer to the
      * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
      * documentation for details on the use of this attribute.
