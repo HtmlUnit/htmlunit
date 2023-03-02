@@ -46,6 +46,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -104,6 +105,7 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement;
 import com.gargoylesoftware.htmlunit.protocol.data.DataURLConnection;
 import com.gargoylesoftware.htmlunit.util.Cookie;
+import com.gargoylesoftware.htmlunit.util.HeaderUtils;
 import com.gargoylesoftware.htmlunit.util.MimeType;
 import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
@@ -155,6 +157,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
  * @author Joerg Werner
  * @author Anton Demydenko
  * @author Sergio Moreno
+ * @author Lai Quang Duong
  */
 public class WebClient implements Serializable, AutoCloseable {
 
@@ -1583,13 +1586,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // Retrieve the response, either from the cache or from the server.
         final WebResponse fromCache = getCache().getCachedResponse(webRequest);
-        final WebResponse webResponse;
-        if (fromCache == null) {
-            webResponse = getWebConnection().getResponse(webRequest);
-        }
-        else {
-            webResponse = new WebResponseFromCache(fromCache, webRequest);
-        }
+        final WebResponse webResponse = getWebResponseOrUseCached(webRequest, fromCache);
 
         // Continue according to the HTTP status code.
         final int status = webResponse.getStatusCode();
@@ -1679,6 +1676,106 @@ public class WebClient implements Serializable, AutoCloseable {
             getCache().cacheIfPossible(webRequest, webResponse, null);
         }
         return webResponse;
+    }
+
+    /**
+     * Returns the cached response provided for the request if usable otherwise makes the
+     * request and returns the response.
+     * @param webRequest the request
+     * @param cached a previous cached response for the request, or {@code null}
+     */
+    private WebResponse getWebResponseOrUseCached(final WebRequest webRequest, final WebResponse cached) throws IOException {
+        if (cached == null) {
+            return getWebConnection().getResponse(webRequest);
+        }
+
+        if (!HeaderUtils.containsNoCache(cached)) {
+            return new WebResponseFromCache(cached, webRequest);
+        }
+
+        // implementation based on rfc9111 https://www.rfc-editor.org/rfc/rfc9111#name-validation
+        if (HeaderUtils.containsETag(cached)) {
+            webRequest.setAdditionalHeader(HttpHeader.IF_NONE_MATCH, cached.getResponseHeaderValue(HttpHeader.ETAG));
+        }
+        if (HeaderUtils.containsLastModified(cached)) {
+            webRequest.setAdditionalHeader(HttpHeader.IF_MODIFIED_SINCE, cached.getResponseHeaderValue(HttpHeader.LAST_MODIFIED));
+        }
+
+        final WebResponse webResponse = getWebConnection().getResponse(webRequest);
+
+        if (webResponse.getStatusCode() >= HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+            return new WebResponseFromCache(cached, webRequest);
+        }
+
+        if (webResponse.getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
+            final Map<String, NameValuePair> header2NameValuePair = new LinkedHashMap<>();
+            for (NameValuePair pair : cached.getResponseHeaders()) {
+                header2NameValuePair.put(pair.getName(), pair);
+            }
+            for (NameValuePair pair : webResponse.getResponseHeaders()) {
+                if (preferHeaderFrom304Response(pair.getName())) {
+                    header2NameValuePair.put(pair.getName(), pair);
+                }
+            }
+            // WebResponse headers is unmodifiableList so we cannot update it directly
+            // instead, create a new WebResponseFromCache with updated headers then use it to replace the old cached value
+            WebResponse updatedCached = new WebResponseFromCache(cached, new ArrayList<>(header2NameValuePair.values()), webRequest);
+            getCache().cacheIfPossible(webRequest, updatedCached, null);
+            return updatedCached;
+        }
+
+        getCache().cacheIfPossible(webRequest, webResponse, null);
+        return webResponse;
+    }
+
+    /**
+     * These response headers are not copied from a 304 response to the cached
+     * response headers. This list is based on Chromium http_response_headers.cc
+     */
+    private static final String[] DISCARDING_304_RESPONSE_HEADER_NAMES = {
+        "connection",
+        "proxy-connection",
+        "keep-alive",
+        "www-authenticate",
+        "proxy-authenticate",
+        "proxy-authorization",
+        "te",
+        "trailer",
+        "transfer-encoding",
+        "upgrade",
+        "content-location",
+        "content-md5",
+        "etag",
+        "content-encoding",
+        "content-range",
+        "content-type",
+        "content-length",
+        "x-frame-options",
+        "x-xss-protection",
+    };
+
+    private static final String[] DISCARDING_304_HEADER_PREFIXES = {
+        "x-content-",
+        "x-webkit-"
+    };
+
+    /**
+     * Returns true if the value of the specified header in a 304 Not Modified response should be
+     * adopted over any previously cached value.
+     */
+    private static boolean preferHeaderFrom304Response(final String name) {
+        final String lcName = name.toLowerCase(Locale.ROOT);
+        for (String header : DISCARDING_304_RESPONSE_HEADER_NAMES) {
+            if (lcName.equals(header)) {
+                return false;
+            }
+        }
+        for (String prefix : DISCARDING_304_HEADER_PREFIXES) {
+            if (lcName.startsWith(prefix)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

@@ -19,6 +19,7 @@ package com.gargoylesoftware.htmlunit;
  *
  * @author Ronald Brill
  * @author Anton Demydenko
+ * @author Lai Quang Duong
  */
 public final class HttpHeader {
 
@@ -37,6 +38,15 @@ public final class HttpHeader {
 
     /** Last-Modified. */
     public static final String LAST_MODIFIED = "Last-Modified";
+
+    /** Etag. */
+    public static final String ETAG = "Etag";
+
+    /** If-None-Match. */
+    public static final String IF_NONE_MATCH = "If-None-Match";
+
+    /** If-Modified-Since. */
+    public static final String IF_MODIFIED_SINCE = "If-Modified-Since";
 
     /** Expires. */
     public static final String EXPIRES = "Expires";

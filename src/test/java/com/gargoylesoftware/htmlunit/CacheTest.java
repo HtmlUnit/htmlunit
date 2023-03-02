@@ -15,7 +15,10 @@
 package com.gargoylesoftware.htmlunit;
 
 import static com.gargoylesoftware.htmlunit.HttpHeader.CACHE_CONTROL;
+import static com.gargoylesoftware.htmlunit.HttpHeader.ETAG;
 import static com.gargoylesoftware.htmlunit.HttpHeader.EXPIRES;
+import static com.gargoylesoftware.htmlunit.HttpHeader.IF_MODIFIED_SINCE;
+import static com.gargoylesoftware.htmlunit.HttpHeader.IF_NONE_MATCH;
 import static com.gargoylesoftware.htmlunit.HttpHeader.LAST_MODIFIED;
 import static org.apache.http.client.utils.DateUtils.formatDate;
 
@@ -48,6 +51,7 @@ import com.gargoylesoftware.htmlunit.util.mocks.WebResponseMock;
  * @author Anton Demydenko
  * @author Ronald Brill
  * @author Ashley Frieze
+ * @author Lai Quang Duong
 */
 @RunWith(BrowserRunner.class)
 public class CacheTest extends SimpleWebTestCase {
@@ -593,6 +597,73 @@ public class CacheTest extends SimpleWebTestCase {
         client.getPage(pageUrl);
         assertEquals(0, client.getCache().getSize());
         assertEquals(4, connection.getRequestCount());
+    }
+
+    @Test
+    public void testNoCacheCacheControl() throws Exception {
+        final String html = "<html><head><title>page 1</title>\n"
+                + "</head>\n"
+                + "<body>x</body>\n"
+                + "</html>";
+
+        final WebClient client = getWebClient();
+
+        final MockWebConnection connection = new MockWebConnection();
+        client.setWebConnection(connection);
+
+        String date = "Thu, 02 Mar 2023 02:00:00 GMT";
+        String etag = "foo";
+        String lastModified = "Thu, 01 Mar 2023 01:00:00 GMT";
+
+        final List<NameValuePair> headers = new ArrayList<>();
+        headers.add(new NameValuePair("Date", date));
+        headers.add(new NameValuePair(CACHE_CONTROL, "some-other-value, no-cache"));
+        headers.add(new NameValuePair(ETAG, etag));
+        headers.add(new NameValuePair(LAST_MODIFIED, lastModified));
+
+        final URL pageUrl = new URL(URL_FIRST, "page1.html");
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers);
+
+        client.getPage(pageUrl);
+        assertEquals(1, client.getCache().getSize());
+
+        String updatedDate = "Thu, 02 Mar 2023 02:00:10 GMT";
+        final List<NameValuePair> headers2 = new ArrayList<>();
+        headers2.add(new NameValuePair("Date", updatedDate));
+        headers2.add(new NameValuePair("Proxy-Authorization", "Basic YWxhZGRpbjpvcGVuc2VzYW1l"));
+        headers2.add(new NameValuePair("X-Content-Type-Options", "nosniff"));
+        connection.setResponse(pageUrl, html, 304, "Not Modified", "text/html;charset=ISO-8859-1", headers2);
+
+        client.getPage(pageUrl);
+        assertEquals(2, connection.getRequestCount());
+
+        WebRequest lastRequest = connection.getLastWebRequest();
+        assertEquals(etag, lastRequest.getAdditionalHeader(IF_NONE_MATCH));
+        assertEquals(lastModified, lastRequest.getAdditionalHeader(IF_MODIFIED_SINCE));
+        assertEquals(1, client.getCache().getSize());
+
+        WebResponse cached = client.getCache().getCachedResponse(connection.getLastWebRequest());
+        assertEquals(updatedDate, cached.getResponseHeaderValue("Date"));
+        assertEquals(null, cached.getResponseHeaderValue("Proxy-Authorization"));
+        assertEquals(null, cached.getResponseHeaderValue("X-Content-Type-Options"));
+
+        String updatedEtag = "bar";
+        String updatedLastModified = "Thu, 01 Mar 2023 02:00:00 GMT";
+
+        final List<NameValuePair> headers3 = new ArrayList<>();
+        headers3.add(new NameValuePair(CACHE_CONTROL, "some-other-value, no-cache"));
+        headers3.add(new NameValuePair(ETAG, updatedEtag));
+        headers3.add(new NameValuePair(LAST_MODIFIED, updatedLastModified));
+        connection.setResponse(pageUrl, html, 200, "OK", "text/html;charset=ISO-8859-1", headers3);
+
+        client.getPage(pageUrl);
+        assertEquals(3, connection.getRequestCount());
+        assertEquals(1, client.getCache().getSize());
+
+        cached = client.getCache().getCachedResponse(connection.getLastWebRequest());
+        assertEquals(null, cached.getResponseHeaderValue("Date"));
+        assertEquals(updatedEtag, cached.getResponseHeaderValue(ETAG));
+        assertEquals(updatedLastModified, cached.getResponseHeaderValue(LAST_MODIFIED));
     }
 
     /**
