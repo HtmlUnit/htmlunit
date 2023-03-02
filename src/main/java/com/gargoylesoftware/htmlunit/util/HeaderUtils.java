@@ -24,6 +24,7 @@ import com.gargoylesoftware.htmlunit.WebResponse;
 
 /**
  * @author Anton Demydenko
+ * @author Lai Quang Duong
  */
 public final class HeaderUtils {
 
@@ -70,6 +71,22 @@ public final class HeaderUtils {
      */
     public static boolean containsNoCache(final WebResponse response) {
         return containsCacheControlValue(response, CACHE_CONTROL_NO_CACHE);
+    }
+
+    /**
+     * @param response {@code WebResponse}
+     * @return if 'Etag' header is present
+     */
+    public static boolean containsETag(final WebResponse response) {
+        return response.getResponseHeaderValue(HttpHeader.ETAG) != null;
+    }
+
+    /**
+     * @param response {@code WebResponse}
+     * @return if 'Last-Modified' header is present
+     */
+    public static boolean containsLastModified(final WebResponse response) {
+        return response.getResponseHeaderValue(HttpHeader.LAST_MODIFIED) != null;
     }
 
     /**

@@ -14,6 +14,10 @@
  */
 package com.gargoylesoftware.htmlunit;
 
+import java.util.Collections;
+import java.util.List;
+
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 
 /**
@@ -25,15 +29,29 @@ import com.gargoylesoftware.htmlunit.util.WebResponseWrapper;
 class WebResponseFromCache extends WebResponseWrapper {
 
     private final WebRequest request_;
+    private final List<NameValuePair> responseHeaders_;
 
     /**
-     * Wraps the provide response for the given request
+     * Wraps the provided cached response for a new request.
+     * @param cachedResponse the response from cache
+     * @param overwriteHeaders list of headers to overwrite cachedResponse headers
+     * @param currentRequest the new request
+     */
+    WebResponseFromCache(final WebResponse cachedResponse, final List<NameValuePair> overwriteHeaders, final WebRequest currentRequest) {
+        super(cachedResponse);
+        request_ = currentRequest;
+        responseHeaders_ = Collections.unmodifiableList(overwriteHeaders);
+    }
+
+    /**
+     * Wraps the provided response for the given request
      * @param cachedResponse the response from cache
      * @param currentRequest the new request
      */
     WebResponseFromCache(final WebResponse cachedResponse, final WebRequest currentRequest) {
         super(cachedResponse);
         request_ = currentRequest;
+        responseHeaders_ = null;
     }
 
     /**
@@ -42,5 +60,30 @@ class WebResponseFromCache extends WebResponseWrapper {
     @Override
     public WebRequest getWebRequest() {
         return request_;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<NameValuePair> getResponseHeaders() {
+        return responseHeaders_ != null ? responseHeaders_ : super.getResponseHeaders();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String getResponseHeaderValue(final String headerName) {
+        if (responseHeaders_ == null) {
+            return super.getResponseHeaderValue(headerName);
+        }
+
+        for (final NameValuePair pair : responseHeaders_) {
+            if (pair.getName().equalsIgnoreCase(headerName)) {
+                return pair.getValue();
+            }
+        }
+        return null;
     }
 }
