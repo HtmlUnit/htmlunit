@@ -37,7 +37,8 @@ class WebResponseFromCache extends WebResponseWrapper {
      * @param overwriteHeaders list of headers to overwrite cachedResponse headers
      * @param currentRequest the new request
      */
-    WebResponseFromCache(final WebResponse cachedResponse, final List<NameValuePair> overwriteHeaders, final WebRequest currentRequest) {
+    WebResponseFromCache(final WebResponse cachedResponse,
+            final List<NameValuePair> overwriteHeaders, final WebRequest currentRequest) {
         super(cachedResponse);
         request_ = currentRequest;
         responseHeaders_ = Collections.unmodifiableList(overwriteHeaders);

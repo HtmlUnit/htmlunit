@@ -1684,7 +1684,8 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param webRequest the request
      * @param cached a previous cached response for the request, or {@code null}
      */
-    private WebResponse getWebResponseOrUseCached(final WebRequest webRequest, final WebResponse cached) throws IOException {
+    private WebResponse getWebResponseOrUseCached(
+            final WebRequest webRequest, final WebResponse cached) throws IOException {
         if (cached == null) {
             return getWebConnection().getResponse(webRequest);
         }
@@ -1698,7 +1699,8 @@ public class WebClient implements Serializable, AutoCloseable {
             webRequest.setAdditionalHeader(HttpHeader.IF_NONE_MATCH, cached.getResponseHeaderValue(HttpHeader.ETAG));
         }
         if (HeaderUtils.containsLastModified(cached)) {
-            webRequest.setAdditionalHeader(HttpHeader.IF_MODIFIED_SINCE, cached.getResponseHeaderValue(HttpHeader.LAST_MODIFIED));
+            webRequest.setAdditionalHeader(HttpHeader.IF_MODIFIED_SINCE,
+                    cached.getResponseHeaderValue(HttpHeader.LAST_MODIFIED));
         }
 
         final WebResponse webResponse = getWebConnection().getResponse(webRequest);
@@ -1709,17 +1711,19 @@ public class WebClient implements Serializable, AutoCloseable {
 
         if (webResponse.getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
             final Map<String, NameValuePair> header2NameValuePair = new LinkedHashMap<>();
-            for (NameValuePair pair : cached.getResponseHeaders()) {
+            for (final NameValuePair pair : cached.getResponseHeaders()) {
                 header2NameValuePair.put(pair.getName(), pair);
             }
-            for (NameValuePair pair : webResponse.getResponseHeaders()) {
+            for (final NameValuePair pair : webResponse.getResponseHeaders()) {
                 if (preferHeaderFrom304Response(pair.getName())) {
                     header2NameValuePair.put(pair.getName(), pair);
                 }
             }
             // WebResponse headers is unmodifiableList so we cannot update it directly
-            // instead, create a new WebResponseFromCache with updated headers then use it to replace the old cached value
-            WebResponse updatedCached = new WebResponseFromCache(cached, new ArrayList<>(header2NameValuePair.values()), webRequest);
+            // instead, create a new WebResponseFromCache with updated headers
+            // then use it to replace the old cached value
+            final WebResponse updatedCached =
+                    new WebResponseFromCache(cached, new ArrayList<>(header2NameValuePair.values()), webRequest);
             getCache().cacheIfPossible(webRequest, updatedCached, null);
             return updatedCached;
         }
@@ -1765,12 +1769,12 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     private static boolean preferHeaderFrom304Response(final String name) {
         final String lcName = name.toLowerCase(Locale.ROOT);
-        for (String header : DISCARDING_304_RESPONSE_HEADER_NAMES) {
+        for (final String header : DISCARDING_304_RESPONSE_HEADER_NAMES) {
             if (lcName.equals(header)) {
                 return false;
             }
         }
-        for (String prefix : DISCARDING_304_HEADER_PREFIXES) {
+        for (final String prefix : DISCARDING_304_HEADER_PREFIXES) {
             if (lcName.startsWith(prefix)) {
                 return false;
             }

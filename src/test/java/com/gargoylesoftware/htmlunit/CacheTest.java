@@ -611,9 +611,9 @@ public class CacheTest extends SimpleWebTestCase {
         final MockWebConnection connection = new MockWebConnection();
         client.setWebConnection(connection);
 
-        String date = "Thu, 02 Mar 2023 02:00:00 GMT";
-        String etag = "foo";
-        String lastModified = "Thu, 01 Mar 2023 01:00:00 GMT";
+        final String date = "Thu, 02 Mar 2023 02:00:00 GMT";
+        final String etag = "foo";
+        final String lastModified = "Thu, 01 Mar 2023 01:00:00 GMT";
 
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Date", date));
@@ -627,7 +627,7 @@ public class CacheTest extends SimpleWebTestCase {
         client.getPage(pageUrl);
         assertEquals(1, client.getCache().getSize());
 
-        String updatedDate = "Thu, 02 Mar 2023 02:00:10 GMT";
+        final String updatedDate = "Thu, 02 Mar 2023 02:00:10 GMT";
         final List<NameValuePair> headers2 = new ArrayList<>();
         headers2.add(new NameValuePair("Date", updatedDate));
         headers2.add(new NameValuePair("Proxy-Authorization", "Basic YWxhZGRpbjpvcGVuc2VzYW1l"));
@@ -637,7 +637,7 @@ public class CacheTest extends SimpleWebTestCase {
         client.getPage(pageUrl);
         assertEquals(2, connection.getRequestCount());
 
-        WebRequest lastRequest = connection.getLastWebRequest();
+        final WebRequest lastRequest = connection.getLastWebRequest();
         assertEquals(etag, lastRequest.getAdditionalHeader(IF_NONE_MATCH));
         assertEquals(lastModified, lastRequest.getAdditionalHeader(IF_MODIFIED_SINCE));
         assertEquals(1, client.getCache().getSize());
@@ -647,8 +647,8 @@ public class CacheTest extends SimpleWebTestCase {
         assertEquals(null, cached.getResponseHeaderValue("Proxy-Authorization"));
         assertEquals(null, cached.getResponseHeaderValue("X-Content-Type-Options"));
 
-        String updatedEtag = "bar";
-        String updatedLastModified = "Thu, 01 Mar 2023 02:00:00 GMT";
+        final String updatedEtag = "bar";
+        final String updatedLastModified = "Thu, 01 Mar 2023 02:00:00 GMT";
 
         final List<NameValuePair> headers3 = new ArrayList<>();
         headers3.add(new NameValuePair(CACHE_CONTROL, "some-other-value, no-cache"));
