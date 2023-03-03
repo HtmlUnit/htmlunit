@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: HtmlButton.getAttribute() now returns the plain attribute value also for 'type' attribute
                 instead of returning 'submit' in case the attribute is not set.
             </action>
+            <action type="update" dev="rbri">
+                Upgrade Jetty to 9.4.51.v20230217.
+            </action>
             <action type="fix" dev="rbri" issue="555">
                 CSS selectors filtering the type attribute like button[type='submit'] fixed.
             </action>
