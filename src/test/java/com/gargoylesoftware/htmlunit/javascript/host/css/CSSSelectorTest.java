@@ -2600,4 +2600,30 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"1", "I1"})
+    public void buttonTypeInvalid() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('button[type=\"invalid\"]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].innerHTML);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button>None</button>\n"
+            + "  <button type=''>Empty</button>\n"
+            + "  <button type='submit'>S1</button>\n"
+            + "  <button type='invalid'>I1</button>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

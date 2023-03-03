@@ -115,17 +115,51 @@ public class HtmlButtonTest extends SimpleWebTestCase {
     }
 
     /**
-     * According to the HTML spec, the default type for a button is "submit".
-     * IE is different than the HTML spec and has a default type of "button".
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("submit")
-    public void defaultButtonType_StandardsCompliantBrowser() throws Exception {
+    @Alerts("")
+    public void defaultButtonTypeNotSet() throws Exception {
         final String html
             = "<html><head><title>First</title></head><body>\n"
             + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
             + "  <button name='button' id='button' value='pushme'>PushMe</button>\n"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlButton button = page.getHtmlElementById("button");
+        assertEquals(getExpectedAlerts()[0], button.getTypeAttribute());
+        assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("Submit")
+    public void defaultButtonTypeSubmit() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
+            + "  <button name='button' id='button' type='Submit' value='pushme'>PushMe</button>\n"
+            + "</form></body></html>";
+
+        final HtmlPage page = loadPage(html);
+        final HtmlButton button = page.getHtmlElementById("button");
+        assertEquals(getExpectedAlerts()[0], button.getTypeAttribute());
+        assertEquals(getExpectedAlerts()[0], button.getAttribute("type"));
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("invalid")
+    public void defaultButtonTypeInvalid() throws Exception {
+        final String html
+            = "<html><head><title>First</title></head><body>\n"
+            + "<form id='form1' action='" + URL_SECOND + "' method='post'>\n"
+            + "  <button name='button' id='button' type='invalid' value='pushme'>PushMe</button>\n"
             + "</form></body></html>";
 
         final HtmlPage page = loadPage(html);
