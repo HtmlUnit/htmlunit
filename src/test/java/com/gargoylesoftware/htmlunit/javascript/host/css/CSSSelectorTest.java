@@ -2555,4 +2555,49 @@ public class CSSSelectorTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"2", "S1", "S2",
+             "2", "S1", "S2",
+             "2", "S1", "S2",
+             "2", "S1", "S2"})
+    public void typeSubmit() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var list = document.querySelectorAll('button[type=\"submit\"]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].innerHTML);\n"
+            + "  log(list[1].innerHTML );\n"
+
+            + "  var list = document.querySelectorAll('button[type=\"SubMit\"]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].innerHTML);\n"
+            + "  log(list[1].innerHTML );\n"
+
+            + "  var list = document.querySelectorAll('button[type=\"SUBmit\"]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].innerHTML);\n"
+            + "  log(list[1].innerHTML );\n"
+
+            + "  var list = document.querySelectorAll('button[type=\"SUBmit\" i]');\n"
+            + "  log(list.length);\n"
+            + "  log(list[0].innerHTML);\n"
+            + "  log(list[1].innerHTML );\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <button>None</button>\n"
+            + "  <button type=''>Empty</button>\n"
+            + "  <button type='submit'>S1</button>\n"
+            + "  <button type='SubMit'>S2</button>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

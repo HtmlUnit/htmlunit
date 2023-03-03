@@ -575,8 +575,9 @@ public class CssStyleSheet implements Serializable {
                     if (value.indexOf('\\') > -1) {
                         value = UNESCAPE_SELECTOR.matcher(value).replaceAll("$1");
                     }
-                    final String attrValue = element.getAttribute(attributeCondition.getLocalName());
-                    if (attributeCondition.isCaseInSensitive()) {
+                    final String name = attributeCondition.getLocalName();
+                    final String attrValue = element.getAttribute(name);
+                    if (attributeCondition.isCaseInSensitive() || "type".equals(name)) {
                         return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equalsIgnoreCase(value);
                     }
                     return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);
