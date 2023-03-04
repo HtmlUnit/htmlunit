@@ -355,7 +355,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"true", "not defined"})
+    @Alerts({"function onclick(event) { log(\"on click\") }", "not defined"})
     public void onclickToString() throws Exception {
         final String html
             = "<html><head>\n"
@@ -364,7 +364,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    for (var i = 0; i < document.links.length; i++) {\n"
             + "      var onclick = document.links[i].onclick;\n"
-            + "      log(onclick ? (onclick.toString().indexOf('log(') != -1) : 'not defined');\n"
+            + "      log(onclick ? onclick.toString() : 'not defined');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"

@@ -69,11 +69,37 @@ public class EventHandler extends BaseFunction {
             realFunction_ = cx.compileFunction(thisObj, js, eventName_ + " event for " + node_
                 + " in " + node_.getPage().getUrl(), 0, null);
             realFunction_.setParentScope(thisObj);
-
-            // save some memory
-            jsSnippet_ = null;
         }
 
         return realFunction_.call(cx, scope, thisObj, args);
+    }
+
+    /**
+     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * @param typeHint the type hint
+     * @return the js code of the function declaration
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> typeHint) {
+        return "function on" + eventName_ + "(event) { " + jsSnippet_ + " }";
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object get(final String name, final Scriptable start) {
+        // quick and dirty
+        if ("toString".equals(name)) {
+            return new BaseFunction() {
+                @Override
+                public Object call(final Context cx, final Scriptable scope,
+                        final Scriptable thisObj, final Object[] args) {
+                    return "function on" + eventName_ + "(event) { " + jsSnippet_ + " }";
+                }
+            };
+        }
+
+        return super.get(name, start);
     }
 }

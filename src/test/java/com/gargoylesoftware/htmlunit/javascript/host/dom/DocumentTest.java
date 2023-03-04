@@ -2206,13 +2206,12 @@ public class DocumentTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("true")
+    @Alerts("function onload(event) { log(\"hi\") }")
     public void createEvent_overridden() throws Exception {
         final String html =
               "<html>\n"
             + "  <body onload='test()'>\n"
-            + "    <div id='d' onclick='log(onload.toString().indexOf(\"hi\") != -1)'"
-            + " onload='log(\"hi\")'>abc</div>\n"
+            + "    <div id='d' onclick='log(onload)' onload='log(\"hi\")'>abc</div>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
             + "      function test() {\n"
