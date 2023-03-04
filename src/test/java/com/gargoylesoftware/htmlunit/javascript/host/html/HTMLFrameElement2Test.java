@@ -154,8 +154,6 @@ public class HTMLFrameElement2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function handler() {}", "null", "null"})
-    @NotYetImplemented
-    // Currently a \n is put between the {}
     public void onloadNull() throws Exception {
         final String html =
             "<html><head>\n"

@@ -28,7 +28,6 @@ import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link HtmlInput}.
@@ -83,7 +82,6 @@ public final class HtmlInput2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"function handler() {}", "null"})
-    @NotYetImplemented
     public void onchangeNull() throws Exception {
         final String html =
             "<html><head>\n"
