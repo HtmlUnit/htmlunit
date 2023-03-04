@@ -1922,25 +1922,13 @@ public class XMLHttpRequestTest extends WebDriverTestCase {
                   " function onreadystatechange() { [native code] } ",
                   "true", "true"})
     @HtmlUnitNYI(CHROME = {"[object Object]", "undefined", "undefined",
-                           "function () { return !0; }",
+                           "function() { return !0 }",
                            "function onreadystatechange() { [native code] }",
                            "true", "true"},
             EDGE = {"[object Object]", "undefined", "undefined",
-                    "function () { return !0; }",
+                    "function() { return !0 }",
                     "function onreadystatechange() { [native code] }",
-                    "true", "true"},
-            FF = {"[object Object]", "undefined", "undefined",
-                  "function () { return !0; }",
-                  "function onreadystatechange() { [native code] }",
-                  "true", "true"},
-            FF_ESR = {"[object Object]", "undefined", "undefined",
-                      "function () { return !0; }",
-                      "function onreadystatechange() { [native code] }",
-                      "true", "true"},
-            IE = {"[object Object]", "undefined", "undefined",
-                  "function () { return !0; }",
-                  " function onreadystatechange() { [native code] } ",
-                  "true", "true"})
+                    "true", "true"})
     public void defineProperty() throws Exception {
         final String html =
               "<html>\n"
