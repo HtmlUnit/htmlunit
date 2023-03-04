@@ -80,7 +80,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
             final String functionName = ((BaseFunction) thisObj).getFunctionName();
             return "\nfunction " + functionName + "() {\n    [native code]\n}\n";
         }
-        return s;
+        return s.replace("function anonymous() {", "function anonymous() {\n");
     }
 
     static class NativeFunctionToStringFunctionChrome extends FunctionWrapper {
@@ -100,7 +100,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
                 final String functionName = ((BaseFunction) thisObj).getFunctionName();
                 return "function " + functionName + "() { [native code] }";
             }
-            return s.replace("function anonymous() {", "function anonymous(\n) {");
+            return s.replace("function anonymous() {", "function anonymous(\n) {\n");
         }
     }
 
@@ -116,7 +116,7 @@ public class NativeFunctionToStringFunction extends FunctionWrapper {
         @Override
         public Object call(final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
             final String s = (String) super.call(cx, scope, thisObj, args);
-            return s.replace("function anonymous() {", "function anonymous(\n) {");
+            return s.replace("function anonymous() {", "function anonymous(\n) {\n");
         }
     }
 }
