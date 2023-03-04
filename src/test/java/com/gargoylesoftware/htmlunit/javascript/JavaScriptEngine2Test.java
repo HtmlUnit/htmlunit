@@ -151,11 +151,10 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"undefined", "function foo() {}"},
             IE = {"function foo() {}", "function foo() {}"})
-    @HtmlUnitNYI(CHROME = {"function foo() { }", "function foo() { }"},
-            EDGE = {"function foo() { }", "function foo() { }"},
-            FF = {"function foo() { }", "function foo() { }"},
-            FF_ESR = {"function foo() { }", "function foo() { }"},
-            IE = {"function foo() { }", "function foo() { }"})
+    @HtmlUnitNYI(CHROME = {"function foo() {}", "function foo() {}"},
+            EDGE = {"function foo() {}", "function foo() {}"},
+            FF = {"function foo() {}", "function foo() {}"},
+            FF_ESR = {"function foo() {}", "function foo() {}"})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -323,11 +322,6 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("function f() {}")
-    @HtmlUnitNYI(CHROME = "function f() { }",
-            EDGE = "function f() { }",
-            FF = "function f() { }",
-            FF_ESR = "function f() { }",
-            IE = "function f() { }")
     public void function_toStringValue() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

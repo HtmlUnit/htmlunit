@@ -47,11 +47,11 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void openResult() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <title>Test</title>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function test() {\n"
             + "  var res = document.open();\n"
-            + "  alert(res);\n"
+            + "  log(res);\n"
             + "  document.close();\n"
             + "}\n"
             + "</script>\n"
@@ -59,7 +59,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<body onload='test()'>\n"
             + "</body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -72,8 +74,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "<head>\n"
             + "<title>Test</title>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function test() {\n"
-            + "  document.write('<html><body><scr'+'ipt>alert(\"Hello There\")</scr'+'ipt></body></html>');\n"
+            + "  document.write('<html><body><scr'+'ipt>log(\"Hello There\")</scr'+'ipt></body></html>');\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -82,7 +85,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</html>";
 
         try {
-            loadPageWithAlerts2(html);
+            loadPage2(html);
+            verifyWindowName2(getWebDriver(), getExpectedAlerts());
         }
         finally {
             shutDownRealIE();
@@ -98,10 +102,13 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void write_nested() throws Exception {
         final String html =
               "<html><body><script>\n"
-            + "var s = '\"<script>alert(1);<\\/scr\" + \"ipt>\"';\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "var s = '\"<script>log(1);<\\/scr\" + \"ipt>\"';\n"
             + "document.write('<script><!--\\ndocument.write(' + s + ');\\n--><\\/script>');\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -130,9 +137,12 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeScript() throws Exception {
         final String html =
               "<html><body><script>\n"
-            + "  document.write('<scr'+'ipt>alert(1<2)</sc'+'ript>');\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "  document.write('<scr'+'ipt>log(1<2)</sc'+'ript>');\n"
             + "</script></body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -399,14 +409,17 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void write_fromScriptAddedWithAppendChild_inline() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<div id='it'><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "try {\n"
             + "  var s = document.createElement('script');\n"
             + "  var t = document.createTextNode(\"document.write('in inline script'); document.title = 'done';\");\n"
             + "  s.appendChild(t);\n"
             + "  document.body.appendChild(s);\n"
-            + "} catch (e) { alert('exception'); }\n"
+            + "} catch (e) { log('exception'); }\n"
             + "</script></div></body></html>";
-        final WebDriver driver = loadPageWithAlerts2(html);
+
+        final WebDriver driver = loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
 
         assertTitle(driver, "done");
         assertEquals("in inline script", driver.findElement(By.id("it")).getText());
@@ -527,8 +540,9 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Alerts("outer")
     public void writeInManyTimes() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "function doTest() {\n"
-            + "  alert(document.getElementById('inner').parentNode.id);\n"
+            + "  log(document.getElementById('inner').parentNode.id);\n"
             + "}\n"
             + "</script></head>\n"
             + "<body onload='doTest()'>\n"
@@ -539,7 +553,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -552,16 +567,18 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String html = "<html><head><title>foo</title></head>\n"
              + "<body id=\"theBody\">\n"
              + "<script>\n"
+             + LOG_WINDOW_NAME_FUNCTION
              + "document.write('<p id=\"para1\">Paragraph #1</p>');\n"
              + "document.write('<p id=\"para2\">Paragraph #2</p>');\n"
              + "document.write('<p id=\"para3\">Paragraph #3</p>');\n"
-             + "alert(document.getElementById('para1').parentNode.id);\n"
-             + "alert(document.getElementById('para2').parentNode.id);\n"
-             + "alert(document.getElementById('para3').parentNode.id);\n"
+             + "log(document.getElementById('para1').parentNode.id);\n"
+             + "log(document.getElementById('para2').parentNode.id);\n"
+             + "log(document.getElementById('para3').parentNode.id);\n"
              + "</script>\n"
              + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -573,9 +590,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Alerts({"outer", "inner1"})
     public void writeAddNodesToCorrectParent_Bug1678826() throws Exception {
         final String html = "<html><head><title>foo</title><script>\n"
+             + LOG_WINDOW_NAME_FUNCTION
              + "function doTest() {\n"
-             + "  alert(document.getElementById('inner1').parentNode.id);\n"
-             + "  alert(document.getElementById('inner2').parentNode.id);\n"
+             + "  log(document.getElementById('inner1').parentNode.id);\n"
+             + "  log(document.getElementById('inner2').parentNode.id);\n"
              + "}\n"
              + "</script></head>\n"
              + "<body onload='doTest()'>\n"
@@ -589,7 +607,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
              + "</script>\n"
              + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
 
         releaseResources();
         shutDownAll();
@@ -603,17 +622,19 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     public void writeStyle() throws Exception {
         final String html = "<html><head><title>foo</title></head><body>\n"
              + "<script>\n"
+             + LOG_WINDOW_NAME_FUNCTION
              + "  document.write('<style type=\"text/css\" id=\"myStyle\">');\n"
              + "  document.write('  .nwr {white-space: nowrap;}');\n"
              + "  document.write('</style>');\n"
              + "  document.write('<div id=\"myDiv\">');\n"
              + "  document.write('</div>');\n"
-             + "  alert(document.getElementById('myDiv').previousSibling.nodeName);\n"
-             + "  alert(document.getElementById('myStyle').previousSibling.nodeName);\n"
+             + "  log(document.getElementById('myDiv').previousSibling.nodeName);\n"
+             + "  log(document.getElementById('myStyle').previousSibling.nodeName);\n"
              + "</script>\n"
              + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
