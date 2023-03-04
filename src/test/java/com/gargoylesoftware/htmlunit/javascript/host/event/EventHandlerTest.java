@@ -21,7 +21,6 @@ import org.openqa.selenium.WebDriver;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for {@link EventHandler}.
@@ -58,21 +57,6 @@ public class EventHandlerTest extends WebDriverTestCase {
     @Alerts({"function onload(event) { test() }",
              "function onload(event) { test() }",
              "function onload(event) { test() }"})
-    @HtmlUnitNYI(CHROME = {"function onload(event) { test(); }",
-                           "function onload(event) { test(); }",
-                           "function onload(event) { test(); }"},
-            EDGE = {"function onload(event) { test(); }",
-                    "function onload(event) { test(); }",
-                    "function onload(event) { test(); }"},
-            FF = {"function onload(event) { test(); }",
-                  "function onload(event) { test(); }",
-                  "function onload(event) { test(); }"},
-            FF_ESR = {"function onload(event) { test(); }",
-                      "function onload(event) { test(); }",
-                      "function onload(event) { test(); }"},
-            IE = {"function onload(event) { test(); }",
-                  "function onload(event) { test(); }",
-                  "function onload(event) { test(); }"})
     public void testToString() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -85,6 +69,30 @@ public class EventHandlerTest extends WebDriverTestCase {
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function onload(event) { test() }",
+             "function onload(event) { test() }",
+             "function onload(event) { test() }"})
+    public void testToStringWhitespace() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = test.caller;\n"
+            + "    log(e);\n"
+            + "    log('' + e);\n"
+            + "    log(e.toString());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='  test() \t \n'>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);

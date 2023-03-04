@@ -32,7 +32,7 @@ import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 public class EventHandler extends BaseFunction {
     private final DomNode node_;
     private final String eventName_;
-    private final String jsSnippet_;
+    private String jsSnippet_;
     private Function realFunction_;
 
     /**
@@ -44,8 +44,7 @@ public class EventHandler extends BaseFunction {
     public EventHandler(final DomNode node, final String eventName, final String jsSnippet) {
         node_ = node;
         eventName_ = eventName;
-
-        jsSnippet_ = "function on" + eventName + "(event) {" + jsSnippet + "\n}";
+        jsSnippet_ = jsSnippet;
 
         setPrototype(ScriptableObject.getClassPrototype(node.getScriptableObject(), "Function"));
     }
@@ -66,41 +65,15 @@ public class EventHandler extends BaseFunction {
 
         // compile "just in time"
         if (realFunction_ == null) {
-            realFunction_ = cx.compileFunction(thisObj, jsSnippet_, eventName_ + " event for " + node_
+            final String js = "function on" + eventName_ + "(event) { " + jsSnippet_ + " }";
+            realFunction_ = cx.compileFunction(thisObj, js, eventName_ + " event for " + node_
                 + " in " + node_.getPage().getUrl(), 0, null);
             realFunction_.setParentScope(thisObj);
+
+            // save some memory
+            jsSnippet_ = null;
         }
 
         return realFunction_.call(cx, scope, thisObj, args);
     }
-
-    /**
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
-     * @param typeHint the type hint
-     * @return the js code of the function declaration
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> typeHint) {
-        return jsSnippet_;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object get(final String name, final Scriptable start) {
-        // quick and dirty
-        if ("toString".equals(name)) {
-            return new BaseFunction() {
-                @Override
-                public Object call(final Context cx, final Scriptable scope,
-                        final Scriptable thisObj, final Object[] args) {
-                    return jsSnippet_;
-                }
-            };
-        }
-
-        return super.get(name, start);
-    }
-
 }
