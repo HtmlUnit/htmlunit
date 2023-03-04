@@ -149,12 +149,12 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"undefined", "function foo() {}"},
-            IE = {"function foo() {}", "function foo() {}"})
-    @HtmlUnitNYI(CHROME = {"function foo() {}", "function foo() {}"},
-            EDGE = {"function foo() {}", "function foo() {}"},
-            FF = {"function foo() {}", "function foo() {}"},
-            FF_ESR = {"function foo() {}", "function foo() {}"})
+    @Alerts(DEFAULT = {"undefined", "function foo() {}", "function foo() {}", "function foo() {}"},
+            IE = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"})
+    @HtmlUnitNYI(CHROME = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
+            EDGE = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
+            FF = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"},
+            FF_ESR = {"function foo() {}", "function foo() {}", "function foo() {}", "function foo() {}"})
     public void variableNotDefined() throws Exception {
         final String html = "<html><head></head><body>\n"
             + "<script>\n"
@@ -167,6 +167,42 @@ public class JavaScriptEngine2Test extends WebDriverTestCase {
             + "    log('foo error');\n"
             + "  }\n"
             + "  function foo() {}\n"
+            + "  try {\n"
+            + "    log(window.foo);\n"
+            + "    log(foo);\n"
+            + "  } catch (e) {\n"
+            + "    log('foo error');\n"
+            + "  }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"undefined", "foo error", "undefined", "foo error"})
+    public void variableNotDefinedExpression() throws Exception {
+        final String html = "<html><head></head><body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "if (true) {\n"
+            + "  try {\n"
+            + "    log(window.foo);\n"
+            + "    log(foo);\n"
+            + "  } catch (e) {\n"
+            + "    log('foo error');\n"
+            + "  }\n"
+            + "  var fo = function foo() {}\n"
+            + "  try {\n"
+            + "    log(window.foo);\n"
+            + "    log(foo);\n"
+            + "  } catch (e) {\n"
+            + "    log('foo error');\n"
+            + "  }\n"
             + "}\n"
             + "</script>\n"
             + "</body></html>";
