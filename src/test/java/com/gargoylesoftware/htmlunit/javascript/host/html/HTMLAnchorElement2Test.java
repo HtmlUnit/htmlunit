@@ -355,7 +355,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"function onclick(event) { log(\"on click\") }", "not defined"})
+    @Alerts("function onclick(event) { log(\"on click\") }§not defined")
     public void onclickToString() throws Exception {
         final String html
             = "<html><head>\n"
