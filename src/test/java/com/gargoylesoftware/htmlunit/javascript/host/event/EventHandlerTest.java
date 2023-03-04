@@ -97,4 +97,28 @@ public class EventHandlerTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"function onload(event) { test() // comment }",
+             "function onload(event) { test() // comment }",
+             "function onload(event) { test() // comment }"})
+    public void testToStringCommentAtEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = test.caller;\n"
+            + "    log(e);\n"
+            + "    log('' + e);\n"
+            + "    log(e.toString());\n"
+            + "  }\n"
+            + "</script></head>\n"
+            + "<body onload='test() // comment'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
