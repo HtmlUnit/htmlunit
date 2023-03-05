@@ -472,11 +472,15 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         // Next ensure non-table elements don't appear in tables
         if ("table".equals(currentNodeName) || isTableChild(currentNodeName) || "tr".equals(currentNodeName)) {
-            // Scripts, forms, styles, and templates are exempt
-            if ("script".equals(newNodeName)
-                    || "form".equals(newNodeName)
-                    || "style".equals(newNodeName)
-                    || "template".equals(newNodeName)) {
+            if ("template".equals(newNodeName)) {
+                currentNode.appendChild(newElement);
+            }
+
+            // Scripts, forms, and styles are exempt
+            else if (!"colgroup".equals(currentNodeName)
+                    && ("script".equals(newNodeName)
+                        || "form".equals(newNodeName)
+                        || "style".equals(newNodeName))) {
                 currentNode.appendChild(newElement);
             }
 
