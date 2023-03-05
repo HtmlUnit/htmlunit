@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: HtmlButton.getAttribute() now returns the plain attribute value also for 'type' attribute
                 instead of returning 'submit' in case the attribute is not set.
             </action>
+            <action type="fix" dev="rbri">
+                Style and template tags are valid table childs.
+            </action>
             <action type="update" dev="Lai Quang Duong">
                 Implement handling of the Cache-Control: no-cache directive.
             </action>

@@ -998,4 +998,64 @@ public class HTMLParser2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"P", "A para", "STYLE", "graph."})
+    public void styleInsideP() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myP');\n"
+            + "  log(tmp.tagName);\n"
+
+            + "  tmp = tmp.firstChild;\n"
+            + "  log(tmp.textContent);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.tagName);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.textContent);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <p id='myP'>A para<style>h1 {color:red;} p {color:blue;}</style>graph.</p>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"TABLE", "STYLE"})
+    public void styleInsideTable() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "try {\n"
+            + "  var tmp = document.getElementById('myP');\n"
+            + "  log(tmp.tagName);\n"
+
+            + "  tmp = tmp.firstChild;\n"
+            + "  log(tmp.tagName);\n"
+            + "} catch(e) { log('exception'); }\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <table id='myP'><style>h1 {color:red;} p {color:blue;}</style></table>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
