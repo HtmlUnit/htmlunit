@@ -373,9 +373,10 @@ public class HtmlImage2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var img = document.getElementById('myImg');\n"
-            + "    alert(img.src);\n"
+            + "    log(img.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
@@ -385,7 +386,7 @@ public class HtmlImage2Test extends WebDriverTestCase {
             + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -404,21 +405,22 @@ public class HtmlImage2Test extends WebDriverTestCase {
         final String html
             = "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    var img = document.getElementById('myImg');\n"
             + "    img.width;\n" // this forces image loading in htmlunit
-            + "    alert(img.width);\n"
-            + "    alert(img.src);\n"
+            + "    log(img.width);\n"
+            + "    log(img.src);\n"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"
-            + "  <img id='myImg' src='" + URL_SECOND + "a\rb\nc\r\nd/img.gif' onError='alert(\"broken\");'>\n"
+            + "  <img id='myImg' src='" + URL_SECOND + "a\rb\nc\r\nd/img.gif' onError='log(\"broken\");'>\n"
             + "</body>\n"
             + "</html>";
 
         expandExpectedAlertsVariables(URL_SECOND);
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
 
         shutDownRealIE();
     }

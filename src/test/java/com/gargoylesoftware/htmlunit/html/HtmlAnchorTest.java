@@ -456,12 +456,16 @@ public class HtmlAnchorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("<a id=\"a\" href=\"#x\">foo</a>")
+    @Alerts("<a\\sid=\"a\"\\shref=\"#x\">foo</a>")
     public void innerHtmlHrefQuotedEvenInIE() throws Exception {
-        final String html = "<html><body onload='alert(document.getElementById(\"d\").innerHTML)'>\n"
+        final String html = "<html>\n"
+            + "<head><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script></head>\n"
+            + "<body onload='log(document.getElementById(\"d\").innerHTML)'>\n"
             + "<div id='d'><a id='a' href='#x'>foo</a></div></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**

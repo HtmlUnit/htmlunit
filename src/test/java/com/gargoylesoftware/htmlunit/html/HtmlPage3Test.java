@@ -214,11 +214,12 @@ public class HtmlPage3Test extends WebDriverTestCase {
         final String html = "<html>\n"
             + "<head>\n"
             + "<script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function test() {\n"
             + "    document.write(\"<input id='sendemail'>\");\n"
-            + "    alert(document.getElementById('sendemail'));\n"
+            + "    log(document.getElementById('sendemail'));\n"
             + "    document.write(\"<input name='sendemail2'>\");\n"
-            + "    alert(document.getElementsByName('sendemail2').length);\n"
+            + "    log(document.getElementsByName('sendemail2').length);\n"
             + "  }\n"
             + "</script></head>\n"
             + "<body onload='test()'>\n"
@@ -229,7 +230,8 @@ public class HtmlPage3Test extends WebDriverTestCase {
             Assert.fail("Blocks real IE");
         }
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**

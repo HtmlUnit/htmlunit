@@ -377,7 +377,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     public void setHrefWithOnlyHash() throws Exception {
         final String html = "<html><body><script>document.location.href = '#x';</script></body></html>";
-        loadPageWithAlerts2(html);
+        loadPage2(html);
     }
 
     /**
@@ -389,7 +389,7 @@ public class Location2Test extends WebDriverTestCase {
     @Test
     public void setHrefWithOnlyHash2() throws Exception {
         final String html = "<script>document.location.href = '" + URL_FIRST + "#x';</script>";
-        loadPageWithAlerts2(html);
+        loadPage2(html);
     }
 
     /**
@@ -612,12 +612,13 @@ public class Location2Test extends WebDriverTestCase {
         final String html =
               "<html><head>\n"
             + "  <script>\n"
-            + "      document.location.href = 'javascript:alert(\"foo\")';\n"
+            + LOG_TITLE_FUNCTION
+            + "      document.location.href = 'javascript:log(\"foo\")';\n"
             + "  </script>\n"
             + "</head>\n"
             + "<body></body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -751,15 +752,16 @@ public class Location2Test extends WebDriverTestCase {
     public void getNextPageWithOnlyHashChangeShouldTriggerHashChangeEvent() throws Exception {
         final String html =
             "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
             + " window.onhashchange = function(event) {\n"
-            + "    alert('onhashchange ' + window.location.hash);\n"
+            + "    log('onhashchange ' + window.location.hash);\n"
             + " }\n"
             + "</script></body></html>";
 
         final WebDriver driver = loadPage2(html);
         driver.navigate().to(driver.getCurrentUrl() + "#/foo");
 
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -772,12 +774,13 @@ public class Location2Test extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
-            + " if ('onhashchange' in window) { alert('supported') }\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + " if ('onhashchange' in window) { log('supported') }\n"
             + " function locationHashChanged(event) {\n"
             + "   if (event) {\n"
-            + "     alert('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
+            + "     log('onhashchange ' + event.newURL + '  ' + event.oldURL);\n"
             + "   } else {\n"
-            + "     alert('onhashchange -');\n"
+            + "     log('onhashchange -');\n"
             + "   }\n"
             + " }\n"
             + " window.onhashchange = locationHashChanged;\n"
@@ -789,11 +792,11 @@ public class Location2Test extends WebDriverTestCase {
 
         expandExpectedAlertsVariables(URL_FIRST);
         final WebDriver driver = loadPage2(html);
-        verifyAlerts(driver, getExpectedAlerts()[0]);
+        verifyWindowName2(driver, getExpectedAlerts()[0]);
         Thread.sleep(100);
 
         driver.findElement(By.id("click")).click();
-        verifyAlerts(driver, getExpectedAlerts()[1]);
+        verifyWindowName2(driver, getExpectedAlerts());
     }
 
     /**

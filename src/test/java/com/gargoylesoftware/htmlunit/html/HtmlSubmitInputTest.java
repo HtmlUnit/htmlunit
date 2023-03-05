@@ -57,7 +57,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
             + "<input type='submit' name='anotherButton' value='foo'/>\n"
             + "</form></body></html>";
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final WebElement button = driver.findElement(By.name("button"));
         button.click();
@@ -107,7 +107,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "foo.html"), secondHtml);
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
 
         final WebElement button = driver.findElement(By.id("button1"));
         button.click();
@@ -225,7 +225,7 @@ public class HtmlSubmitInputTest extends WebDriverTestCase {
         mockWebConnection.setResponse(new URL(URL_FIRST, "nextPage"),
             "<html><head><title>next page</title></head></html>");
 
-        final WebDriver driver = loadPageWithAlerts2(html);
+        final WebDriver driver = loadPage2(html);
         final WebElement input = driver.findElement(By.name("btn"));
         input.click();
 

@@ -40,13 +40,14 @@ public class NamespaceTest extends WebDriverTestCase {
         final String html
             = "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:me='http://mysite'>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    if (document.namespaces) {\n"
             + "      for (var i = 0; i < document.namespaces.length; i++) {\n"
-            + "        alert(document.namespaces[i].name + ', ' + document.namespaces[i].urn);\n"
+            + "        log(document.namespaces[i].name + ', ' + document.namespaces[i].urn);\n"
             + "      }\n"
             + "    } else {\n"
-            + "      alert('no namespaces');\n"
+            + "      log('no namespaces');\n"
             + "    }\n"
             + "  }\n"
             + "</script>\n"
@@ -55,6 +56,6 @@ public class NamespaceTest extends WebDriverTestCase {
             + "<app:dIv xmlns='http://anotherURL'></app:dIv>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }

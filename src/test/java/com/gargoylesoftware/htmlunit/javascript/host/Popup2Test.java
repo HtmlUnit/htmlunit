@@ -39,19 +39,20 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void popup() throws Exception {
-        final String html = "<html><head><title>First</title><body>\n"
+        final String html = "<html><head></title><body>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    var oPopup = window.createPopup();\n"
             + "    var oPopupBody = oPopup.document.body;\n"
             + "    oPopupBody.innerHTML = 'bla bla';\n"
             + "    oPopup.show(100, 100, 200, 50, document.body);\n"
-            + "    alert('done');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('done');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -62,17 +63,18 @@ public class Popup2Test extends WebDriverTestCase {
     @Test
     @Alerts("exception")
     public void popupBodyStyle() throws Exception {
-        final String html = "<html><head><title>First</title><body>\n"
+        final String html = "<html><head><body>\n"
             + "<script language='javascript'>\n"
+            + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    popup = window.createPopup();\n"
             + "    popupBody = popup.document.body;\n"
             + "    popupBody.style.backgroundColor = '#7f7fff';\n"
-            + "    alert('done');\n"
-            + "  } catch(e) { alert('exception'); }\n"
+            + "    log('done');\n"
+            + "  } catch(e) { log('exception'); }\n"
             + "</script>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 }
