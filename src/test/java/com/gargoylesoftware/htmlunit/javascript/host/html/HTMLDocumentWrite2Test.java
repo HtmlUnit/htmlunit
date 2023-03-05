@@ -458,9 +458,10 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <script>alert(document.body);</script>\n"
+            + "    <script>" + LOG_WINDOW_NAME_FUNCTION + "</script>\n"
+            + "    <script>log(document.body);</script>\n"
             + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
-            + "    <script>alert(document.body);</script>\n"
+            + "    <script>log(document.body);</script>\n"
             + "    <title>test</title>\n"
             + "    <script>document.write('<span id=\"s2\">2</span>');</script>\n"
             + "  </head>\n"
@@ -476,12 +477,13 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
             + "            s += n.id;\n"
             + "        }\n"
             + "      }\n"
-            + "      alert(s);\n"
+            + "      log(s);\n"
             + "    </script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -496,18 +498,20 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
         final String html =
               "<html>\n"
             + "  <head>\n"
-            + "    <script>alert(document.body);</script>\n"
+            + "    <script>" + LOG_WINDOW_NAME_FUNCTION + "</script>\n"
+            + "    <script>log(document.body);</script>\n"
             + "    <script>document.write('<span id=\"s1\">1</span>');</script>\n"
-            + "    <script>alert(document.body);</script>\n"
-            + "    <script>alert(document.body.id);</script>\n"
+            + "    <script>log(document.body);</script>\n"
+            + "    <script>log(document.body.id);</script>\n"
             + "    <title>test</title>\n"
             + "  </head>\n"
             + "  <body id='foo'>\n"
-            + "    <script>alert(document.body.id);</script>\n"
+            + "    <script>log(document.body.id);</script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -522,15 +526,17 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
               "<html>\n"
             + "  <head>\n"
             + "    <title>test</title>\n"
-            + "    <script>alert('1');</script>\n"
-            + "    <script>document.write('<scrip'+'t>alert(\"2\")</s'+'cript>');</script>\n"
+            + "    <script>" + LOG_WINDOW_NAME_FUNCTION + "</script>\n"
+            + "    <script>log('1');</script>\n"
+            + "    <script>document.write('<scrip'+'t>log(\"2\")</s'+'cript>');</script>\n"
             + "  </head>\n"
             + "  <body>\n"
-            + "    <script>document.write('<scrip'+'t>alert(\"3\")</s'+'cript>');</script>\n"
+            + "    <script>document.write('<scrip'+'t>log(\"3\")</s'+'cript>');</script>\n"
             + "  </body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
