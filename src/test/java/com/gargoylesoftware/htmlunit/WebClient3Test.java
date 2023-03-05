@@ -20,6 +20,7 @@ import static org.junit.Assert.assertArrayEquals;
 
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
@@ -375,15 +376,17 @@ public class WebClient3Test extends WebDriverTestCase {
                 + "</head>\n"
                 + "<body>\n"
                 + "<script type='text/javascript'>\n"
-                + "  alert('Executed');\n"
-                + "  setTimeout(\"alert('later')\", 10);\n"
+                + LOG_TITLE_FUNCTION
+                + "  log('Executed');\n"
+                + "  setTimeout(\"log('later')\", 10);\n"
                 + "</script>\n"
                 + "</body></html>\n";
 
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, errorHtml, 404, "Not Found", MimeType.TEXT_HTML, new ArrayList<NameValuePair>());
 
-        loadPageWithAlerts2(URL_FIRST, 42);
+        loadPage2(URL_FIRST, StandardCharsets.UTF_8);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
