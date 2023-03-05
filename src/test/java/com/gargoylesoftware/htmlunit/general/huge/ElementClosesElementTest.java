@@ -111,7 +111,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
         }
         else if ("frameset".equals(parent)) {
             bodyStart = "";
-            html = "<framesetk id='outer'><" + child + "><frameset>\n";
+            html = "<frameset id='outer'><" + child + "><frameset>\n";
             bodyEnd = "";
         }
         else if ("script".equals(parent)) {
