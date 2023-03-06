@@ -13,6 +13,9 @@
                 instead of returning 'submit' in case the attribute is not set.
             </action>
             <action type="fix" dev="rbri">
+                Always throw an UnsupportedEncodingException from all DataUrlDecoder methods to not bypass the general exeption handling.
+            </action>
+            <action type="fix" dev="rbri">
                 StringIndexOutOfBoundsException when parsing invalid data url's (oss-fuzz).
             </action>
             <action type="fix" dev="rbri">

@@ -61,10 +61,8 @@ public class DataUrlDecoder {
      * @param url the URL to decode
      * @return the {@link DataUrlDecoder} holding decoded information
      * @throws UnsupportedEncodingException if the encoding specified by the data URL is invalid or not
-     * available on the JVM
-     * @throws DecoderException if decoding didn't success
      */
-    public static DataUrlDecoder decode(final URL url) throws UnsupportedEncodingException, DecoderException {
+    public static DataUrlDecoder decode(final URL url) throws UnsupportedEncodingException {
         return decodeDataURL(url.toExternalForm());
     }
 
@@ -74,16 +72,14 @@ public class DataUrlDecoder {
      * @return the {@link DataUrlDecoder} holding decoded information
      * @throws UnsupportedEncodingException if the encoding specified by the data URL is invalid or not
      * available on the JVM
-     * @throws DecoderException if decoding didn't success
      */
-    public static DataUrlDecoder decodeDataURL(final String url) throws UnsupportedEncodingException,
-            DecoderException {
+    public static DataUrlDecoder decodeDataURL(final String url) throws UnsupportedEncodingException {
         if (!url.startsWith(DATA_PREFIX)) {
-            throw new IllegalArgumentException("Invalid data url: '" + url + "' (wrong prefix)");
+            throw new UnsupportedEncodingException("Invalid data url: '" + url + "' (wrong prefix)");
         }
         final int comma = url.indexOf(',');
         if (comma < 0) {
-            throw new IllegalArgumentException("Invalid data url: '" + url + "' (no data)");
+            throw new UnsupportedEncodingException("Invalid data url: '" + url + "' (no data)");
         }
 
         String beforeData = url.substring(DATA_PREFIX.length(), comma);
@@ -94,13 +90,20 @@ public class DataUrlDecoder {
         final String mediaType = extractMediaType(beforeData);
         final Charset charset = extractCharset(beforeData);
 
-        byte[] data = url.substring(comma + 1).getBytes(charset);
-        data = decodeUrl(data);
-        if (base64) {
-            data = Base64.decodeBase64(data);
+        try {
+            byte[] data = url.substring(comma + 1).getBytes(charset);
+            data = decodeUrl(data);
+            if (base64) {
+                data = Base64.decodeBase64(data);
+            }
+            return new DataUrlDecoder(data, mediaType, charset);
         }
-
-        return new DataUrlDecoder(data, mediaType, charset);
+        catch (final DecoderException e) {
+            final UnsupportedEncodingException ex =
+                    new UnsupportedEncodingException("Invalid data url: '" + url + "' (data decoding failed)");
+            ex.initCause(e);
+            throw ex;
+        }
     }
 
     private static Charset extractCharset(final String beforeData) {
