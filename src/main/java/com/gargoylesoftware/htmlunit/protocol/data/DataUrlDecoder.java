@@ -78,12 +78,15 @@ public class DataUrlDecoder {
      */
     public static DataUrlDecoder decodeDataURL(final String url) throws UnsupportedEncodingException,
             DecoderException {
-        if (!url.startsWith("data")) {
-            throw new IllegalArgumentException("Not a data url: " + url);
+        if (!url.startsWith(DATA_PREFIX)) {
+            throw new IllegalArgumentException("Invalid data url: '" + url + "' (wrong prefix)");
         }
         final int comma = url.indexOf(',');
-        String beforeData = url.substring(DATA_PREFIX.length(), comma);
+        if (comma < 0) {
+            throw new IllegalArgumentException("Invalid data url: '" + url + "' (no data)");
+        }
 
+        String beforeData = url.substring(DATA_PREFIX.length(), comma);
         final boolean base64 = beforeData.endsWith(";base64");
         if (base64) {
             beforeData = beforeData.substring(0, beforeData.length() - 7);

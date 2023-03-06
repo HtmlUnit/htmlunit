@@ -13,6 +13,9 @@
                 instead of returning 'submit' in case the attribute is not set.
             </action>
             <action type="fix" dev="rbri">
+                StringIndexOutOfBoundsException when parsing invalid data url's (oss-fuzz).
+            </action>
+            <action type="fix" dev="rbri">
                 Style and template tags are valid table childs.
             </action>
             <action type="update" dev="Lai Quang Duong">
