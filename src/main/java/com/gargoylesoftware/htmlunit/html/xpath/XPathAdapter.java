@@ -17,17 +17,17 @@ package com.gargoylesoftware.htmlunit.html.xpath;
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 
-import net.sourceforge.htmlunit.xpath.Expression;
-import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.compiler.Compiler;
-import net.sourceforge.htmlunit.xpath.compiler.FunctionTable;
-import net.sourceforge.htmlunit.xpath.compiler.XPathParser;
-import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.res.XPATHErrorResources;
-import net.sourceforge.htmlunit.xpath.res.XPATHMessages;
-import net.sourceforge.htmlunit.xpath.xml.utils.DefaultErrorHandler;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
-import net.sourceforge.htmlunit.xpath.xml.utils.WrappedRuntimeException;
+import org.htmlunit.xpath.Expression;
+import org.htmlunit.xpath.XPathContext;
+import org.htmlunit.xpath.compiler.Compiler;
+import org.htmlunit.xpath.compiler.FunctionTable;
+import org.htmlunit.xpath.compiler.XPathParser;
+import org.htmlunit.xpath.objects.XObject;
+import org.htmlunit.xpath.res.XPATHErrorResources;
+import org.htmlunit.xpath.res.XPATHMessages;
+import org.htmlunit.xpath.xml.utils.DefaultErrorHandler;
+import org.htmlunit.xpath.xml.utils.PrefixResolver;
+import org.htmlunit.xpath.xml.utils.WrappedRuntimeException;
 
 /**
  * XPath adapter implementation for HtmlUnit.

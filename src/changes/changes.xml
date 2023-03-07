@@ -8,9 +8,15 @@
 
     <body>
         <release version="2.71.0" date="Febuary xx, 2023" description="Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
-            <action type="fix" dev="rbri">
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: HtmlButton.getAttribute() now returns the plain attribute value also for 'type' attribute
                 instead of returning 'submit' in case the attribute is not set.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.xpath to org.htmlunit.xpath.
+            </action>
+            <action type="update" dev="rbri">
+                xpath: again some unused code removed.
             </action>
             <action type="fix" dev="rbri">
                 Always throw an UnsupportedEncodingException from all DataUrlDecoder methods to not bypass the general exeption handling.

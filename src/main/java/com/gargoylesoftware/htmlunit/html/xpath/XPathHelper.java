@@ -19,19 +19,18 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
+import org.htmlunit.xpath.XPathContext;
+import org.htmlunit.xpath.objects.XBoolean;
+import org.htmlunit.xpath.objects.XNodeSet;
+import org.htmlunit.xpath.objects.XNumber;
+import org.htmlunit.xpath.objects.XObject;
+import org.htmlunit.xpath.objects.XString;
+import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.gargoylesoftware.htmlunit.html.DomNode;
-
-import net.sourceforge.htmlunit.xpath.XPathContext;
-import net.sourceforge.htmlunit.xpath.objects.XBoolean;
-import net.sourceforge.htmlunit.xpath.objects.XNodeSet;
-import net.sourceforge.htmlunit.xpath.objects.XNumber;
-import net.sourceforge.htmlunit.xpath.objects.XObject;
-import net.sourceforge.htmlunit.xpath.objects.XString;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * Collection of XPath utility methods.

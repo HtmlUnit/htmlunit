@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -71,7 +72,6 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the

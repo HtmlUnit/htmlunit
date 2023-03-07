@@ -14,10 +14,11 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host;
 
+import org.htmlunit.xpath.xml.utils.PrefixResolver;
+
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A special {@link PrefixResolver} for {@link NativeFunction}s.
