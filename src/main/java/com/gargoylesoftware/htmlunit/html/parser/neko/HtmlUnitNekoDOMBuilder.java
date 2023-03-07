@@ -71,18 +71,18 @@ import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
 
-import net.sourceforge.htmlunit.cyberneko.HTMLConfiguration;
-import net.sourceforge.htmlunit.cyberneko.HTMLElements;
-import net.sourceforge.htmlunit.cyberneko.HTMLEventInfo;
-import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
-import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancingListener;
-import net.sourceforge.htmlunit.xerces.parsers.AbstractSAXParser;
-import net.sourceforge.htmlunit.xerces.xni.Augmentations;
-import net.sourceforge.htmlunit.xerces.xni.QName;
-import net.sourceforge.htmlunit.xerces.xni.XMLAttributes;
-import net.sourceforge.htmlunit.xerces.xni.XNIException;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLParserConfiguration;
+import org.htmlunit.cyberneko.HTMLConfiguration;
+import org.htmlunit.cyberneko.HTMLElements;
+import org.htmlunit.cyberneko.HTMLEventInfo;
+import org.htmlunit.cyberneko.HTMLScanner;
+import org.htmlunit.cyberneko.HTMLTagBalancingListener;
+import org.htmlunit.xerces.parsers.AbstractSAXParser;
+import org.htmlunit.xerces.xni.Augmentations;
+import org.htmlunit.xerces.xni.QName;
+import org.htmlunit.xerces.xni.XMLAttributes;
+import org.htmlunit.xerces.xni.XNIException;
+import org.htmlunit.xerces.xni.parser.XMLInputSource;
+import org.htmlunit.xerces.xni.parser.XMLParserConfiguration;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

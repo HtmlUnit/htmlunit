@@ -45,17 +45,17 @@ import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
 
-import net.sourceforge.htmlunit.cyberneko.HTMLScanner;
-import net.sourceforge.htmlunit.cyberneko.HTMLTagBalancer;
-import net.sourceforge.htmlunit.xerces.util.DefaultErrorHandler;
-import net.sourceforge.htmlunit.xerces.xni.QName;
-import net.sourceforge.htmlunit.xerces.xni.XNIException;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLErrorHandler;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLInputSource;
-import net.sourceforge.htmlunit.xerces.xni.parser.XMLParseException;
+import org.htmlunit.cyberneko.HTMLScanner;
+import org.htmlunit.cyberneko.HTMLTagBalancer;
+import org.htmlunit.xerces.util.DefaultErrorHandler;
+import org.htmlunit.xerces.xni.QName;
+import org.htmlunit.xerces.xni.XNIException;
+import org.htmlunit.xerces.xni.parser.XMLErrorHandler;
+import org.htmlunit.xerces.xni.parser.XMLInputSource;
+import org.htmlunit.xerces.xni.parser.XMLParseException;
 
 /**
- * <p>SAX parser implementation that uses the NekoHTML {@link net.sourceforge.htmlunit.cyberneko.HTMLConfiguration}
+ * <p>SAX parser implementation that uses the NekoHTML {@link org.htmlunit.cyberneko.HTMLConfiguration}
  * to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>
  *
  * @author <a href="mailto:cse@dynabean.de">Christian Sell</a>
