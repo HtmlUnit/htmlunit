@@ -13100,4 +13100,31 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void blob() throws Exception {
         testString("", "new Blob([1, 2], { type: \"text/html\" })");
     }
+
+    /**
+     * Test URLSearchParams.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),sort(),toString(),values()",
+            EDGE = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),sort(),toString(),values()",
+            FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),sort(),toString(),values()",
+            FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),sort(),toString(),values()",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),toString(),values()",
+            EDGE = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),toString(),values()",
+            FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),toString(),values()",
+            FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),toString(),values()")
+    public void urlSearchParams() throws Exception {
+        testString("", "new URLSearchParams('q=URLUtils.searchParams&topic=api')");
+    }
 }

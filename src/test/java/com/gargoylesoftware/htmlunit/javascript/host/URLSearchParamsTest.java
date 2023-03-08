@@ -243,7 +243,8 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"%3Fkey%3D%26=value", "true",
-                       "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3", "http://foo.com/?x=1&y=2&z=3"},
+                       "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3",
+                       "http://foo.com/?x=1&y=2&z=3"},
             IE = {})
     public void appendSpecialChars() throws Exception {
         final String html =

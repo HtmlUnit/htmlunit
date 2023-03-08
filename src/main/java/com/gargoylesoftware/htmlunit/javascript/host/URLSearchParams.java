@@ -158,8 +158,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     }
 
     private List<NameValuePair> splitQuery() {
-        String search = url_.getSearch();
-        return splitQuery(search);
+        return splitQuery(url_.getSearch());
     }
 
     private static List<NameValuePair> splitQuery(String params) {
@@ -201,7 +200,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void append(final String name, final String value) {
-        String search = url_.getSearch();
+        final String search = url_.getSearch();
 
         final List<NameValuePair> pairs;
         if (search == null || search.isEmpty()) {
@@ -348,22 +347,24 @@ public class URLSearchParams extends HtmlUnitScriptable {
     }
 
     /**
-     * The URLSearchParams.forEach() method allows iteration through all key/value pairs contained in this object via a callback function.
+     * The URLSearchParams.forEach() method allows iteration through
+     * all key/value pairs contained in this object via a callback function.
      * @param callback Function to execute on each key/value pairs
      */
     @JsxFunction
     public void forEach(final Object callback) {
         if (!(callback instanceof Function)) {
-            throw ScriptRuntime.typeError("Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
+            throw ScriptRuntime.typeError(
+                    "Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
         }
 
-        final Function fun = (Function)callback;
+        final Function fun = (Function) callback;
 
         String currentSearch = null;
         List<NameValuePair> params = null;
         // This must be indexes instead of iterator() for correct behavior when of list changes while iterating
         for (int i = 0;; i++) {
-            String search = url_.getSearch();
+            final String search = url_.getSearch();
             if (!search.equals(currentSearch)) {
                 params = splitQuery(search);
                 currentSearch = search;
@@ -371,9 +372,10 @@ public class URLSearchParams extends HtmlUnitScriptable {
             if (i >= params.size()) {
                 break;
             }
-            
-            NameValuePair param = params.get(i);
-            fun.call(Context.getCurrentContext(), getParentScope(), this, new Object[] {param.getValue(), param.getName(), this});
+
+            final NameValuePair param = params.get(i);
+            fun.call(Context.getCurrentContext(), getParentScope(), this,
+                        new Object[] {param.getValue(), param.getName(), this});
         }
     }
 

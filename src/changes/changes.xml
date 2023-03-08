@@ -19,6 +19,12 @@
                 INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
             </action>
+            <action type="fix" dev="Lai Quang Duong">
+                Fix incorrect splitting of URLSeachParams when parameters contain url-encoded required characters like "&amp;".
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                Implementation of URLSeachParams.forEach() added.
+            </action>
             <action type="add" dev="Lai Quang Duong">
                 Implementation of Blob.stream() stub added; just throws UnsupportedOperationException.
             </action>
