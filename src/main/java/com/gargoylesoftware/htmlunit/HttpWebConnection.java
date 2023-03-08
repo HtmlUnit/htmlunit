@@ -132,6 +132,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author John J Murdoch
  * @author Carsten Steul
  * @author Hartmut Arlt
+ * @author Lai Quang Duong
  */
 public class HttpWebConnection implements WebConnection {
 
@@ -697,7 +698,10 @@ public class HttpWebConnection implements WebConnection {
                 new RequestExpectContinue());
         b.add(new RequestAcceptEncoding());
         b.add(new RequestAuthCache());
-        b.add(new ResponseProcessCookies());
+
+        if (!webRequest.hasHint(HttpHint.BlockCookies)) {
+            b.add(new ResponseProcessCookies());
+        }
         builder.setHttpProcessor(b.build());
     }
 
@@ -913,7 +917,9 @@ public class HttpWebConnection implements WebConnection {
                 list.add(new RequestClientConnControl());
             }
             else if (HttpHeader.COOKIE.equals(header)) {
-                list.add(new RequestAddCookies());
+                if (!webRequest.hasHint(HttpHint.BlockCookies)) {
+                    list.add(new RequestAddCookies());
+                }
             }
             else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
                 list.add(new DntHeaderHttpRequestInterceptor("1"));

@@ -58,7 +58,10 @@ public class WebRequest implements Serializable {
 
     public enum HttpHint {
         /** Force to include the charset. */
-        IncludeCharsetInContentTypeHeader
+        IncludeCharsetInContentTypeHeader,
+
+        /** Disable sending of stored cookies and receiving of new cookies. */
+        BlockCookies
     }
 
     private static final Pattern DOT_PATTERN = Pattern.compile("/\\./");

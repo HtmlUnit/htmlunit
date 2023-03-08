@@ -14,12 +14,15 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.xml;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.Servlet;
@@ -38,6 +41,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import com.gargoylesoftware.htmlunit.util.MimeType;
+import com.gargoylesoftware.htmlunit.util.NameValuePair;
 
 /**
  * Tests for Cross-Origin Resource Sharing for {@link XMLHttpRequest}.
@@ -329,11 +333,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     public void preflight() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN);
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN, null);
 
         releaseResources();
         shutDownAll();
@@ -343,12 +347,26 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
+    public void preflight_cookie() throws Exception {
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN, "cookie=sweet");
+
+        releaseResources();
+        shutDownAll();
+    }
+
+    /**
+     * @throws Exception if the test fails.
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflight_contentTypeWithCharset() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN + ";charset=utf-8");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", MimeType.TEXT_PLAIN + ";charset=utf-8", null);
 
         releaseResources();
         shutDownAll();
@@ -358,12 +376,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded", null);
 
         releaseResources();
         shutDownAll();
@@ -373,12 +391,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightUrlEncoded_contentTypeWithCharset() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded;charset=utf-8");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "application/x-www-form-urlencoded;charset=utf-8", null);
 
         releaseResources();
         shutDownAll();
@@ -388,12 +406,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data", null);
 
         releaseResources();
         shutDownAll();
@@ -403,12 +421,12 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will work on real Chrome if individually run, but will fail if run with other cases
     public void preflightMultipart_contentTypeWithCharset() throws Exception {
-        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data;charset=utf-8");
+        doPreflightTestAllowedMethods("POST, GET, OPTIONS", "multipart/form-data;charset=utf-8", null);
 
         releaseResources();
         shutDownAll();
@@ -420,19 +438,20 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"},
-            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type"})
-    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother"})
+    @Alerts(DEFAULT = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"},
+            IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother, content-type", "null"})
+    @HtmlUnitNYI(IE = {"4", "200", "§§URL§§", "§§URL§§", "GET", "x-pingother", "null"})
     // unstable test case, this will fail on real Chrome if individually run, but will succeed if run with other cases
     public void preflight_incorrect_methods() throws Exception {
-        doPreflightTestAllowedMethods(null, MimeType.TEXT_PLAIN);
+        doPreflightTestAllowedMethods(null, MimeType.TEXT_PLAIN, null);
 
         releaseResources();
         shutDownAll();
     }
 
-    private void doPreflightTestAllowedMethods(final String allowedMethods, final String contentType)
-        throws Exception {
+    private void doPreflightTestAllowedMethods(final String allowedMethods,
+                    final String contentType, final String cookie)
+                            throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT)); // url without trailing "/"
 
         final String html = "<html><head>\n"
@@ -452,6 +471,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             + "    log(xhr.responseXML.firstChild.childNodes[1].firstChild.nodeValue);\n"
             + "    log(xhr.responseXML.firstChild.childNodes[2].firstChild.nodeValue);\n"
             + "    log(xhr.responseXML.firstChild.childNodes[3].firstChild.nodeValue);\n"
+            + "    log(xhr.responseXML.firstChild.childNodes[4].firstChild.nodeValue);\n"
             + "  } catch(e) { log(e) }\n"
             + "}\n"
             + "</script>\n"
@@ -465,7 +485,18 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/preflight2", PreflightServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/preflight1"));
+        final URL url = new URL(URL_FIRST, "/preflight1");
+        List<NameValuePair> responseHeader = null;
+
+        if (cookie != null) {
+            responseHeader = new ArrayList<>();
+            responseHeader.add(new NameValuePair("Set-Cookie", cookie));
+        }
+
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+        loadPage2(url, null);
+
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -479,6 +510,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         private String options_origin_;
         private String options_method_;
         private String options_headers_;
+        private String options_cookie_;
 
         /**
          * {@inheritDoc}
@@ -497,6 +529,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             options_origin_ = request.getHeader(HttpHeader.ORIGIN);
             options_method_ = request.getHeader("Access-Control-Request-Method");
             options_headers_ = request.getHeader("Access-Control-Request-Headers");
+            options_cookie_ = request.getHeader(HttpHeader.COOKIE);
         }
 
         /**
@@ -517,6 +550,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "<options_origin>" + options_origin_ + "</options_origin>"
                 + "<options_method>" + options_method_ + "</options_method>"
                 + "<options_headers>" + options_headers_ + "</options_headers>"
+                + "<options_cookie>" + options_cookie_ + "</options_cookie>"
                 + "</result>");
         }
     }
