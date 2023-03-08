@@ -81,7 +81,7 @@ public class URL extends HtmlUnitScriptable {
                 final java.net.URL baseUrl = UrlUtils.toUrlUnsafe(baseStr);
                 url_ = new java.net.URL(baseUrl, url);
             }
-            checkRemoveRedundantPort();
+            url_ = UrlUtils.removeRedundantPort(url_);
         }
         catch (final MalformedURLException e) {
             throw ScriptRuntime.typeError(e.toString());
@@ -243,7 +243,7 @@ public class URL extends HtmlUnitScriptable {
         }
 
         url_ = UrlUtils.toUrlUnsafe(href);
-        checkRemoveRedundantPort();
+        url_ = UrlUtils.removeRedundantPort(url_);
     }
 
     /**
@@ -339,7 +339,7 @@ public class URL extends HtmlUnitScriptable {
         }
         final int portInt = port.isEmpty() ? -1 : Integer.parseInt(port);
         url_ = UrlUtils.getUrlWithNewPort(url_, portInt);
-        checkRemoveRedundantPort();
+        url_ = UrlUtils.removeRedundantPort(url_);
     }
 
     /**
@@ -362,7 +362,7 @@ public class URL extends HtmlUnitScriptable {
 
         try {
             url_ = UrlUtils.getUrlWithNewProtocol(url_, protocol);
-            checkRemoveRedundantPort();
+            url_ = UrlUtils.removeRedundantPort(url_);
         }
         catch (final MalformedURLException e) {
             // ignore
