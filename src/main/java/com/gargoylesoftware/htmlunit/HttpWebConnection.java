@@ -697,6 +697,11 @@ public class HttpWebConnection implements WebConnection {
                 new RequestExpectContinue());
         b.add(new RequestAcceptEncoding());
         b.add(new RequestAuthCache());
+
+        if (!webRequest.hasHint(HttpHint.BlockCookies)) {
+            b.add(new ResponseProcessCookies());
+        }
+
         b.add(new ResponseProcessCookies());
         builder.setHttpProcessor(b.build());
     }
@@ -913,7 +918,9 @@ public class HttpWebConnection implements WebConnection {
                 list.add(new RequestClientConnControl());
             }
             else if (HttpHeader.COOKIE.equals(header)) {
-                list.add(new RequestAddCookies());
+                if(!webRequest.hasHint(HttpHint.BlockCookies)) {
+                    list.add(new RequestAddCookies());
+                }
             }
             else if (HttpHeader.DNT.equals(header) && webClient_.getOptions().isDoNotTrackEnabled()) {
                 list.add(new DntHeaderHttpRequestInterceptor("1"));
