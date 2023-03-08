@@ -173,7 +173,13 @@ public class WebRequest implements Serializable {
                 throw new RuntimeException("Cannot change hostname of URL: " + url.toExternalForm(), e);
             }
         }
-        url_ = url.toExternalForm();
+
+        try {
+            url_ = UrlUtils.removeRedundantPort(url).toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            throw new RuntimeException("Cannot strip default port of URL: " + url.toExternalForm(), e);
+        }
 
         // http://john.smith:secret@localhost
         final String userInfo = url.getUserInfo();

@@ -196,15 +196,7 @@ public class URL extends HtmlUnitScriptable {
             url_ = UrlUtils.getUrlWithNewHost(url_, newHost);
         }
 
-        checkRemoveRedundantPort();
-    }
-
-    /** Removes port if it can be deduced from protocol */
-    private void checkRemoveRedundantPort() throws MalformedURLException {
-        if (("https".equals(url_.getProtocol()) && url_.getPort() == 443)
-                || ("http".equals(url_.getProtocol()) && url_.getPort() == 80)) {
-            url_ = UrlUtils.getUrlWithNewPort(url_, -1);
-        }
+        url_ = UrlUtils.removeRedundantPort(url_);
     }
 
     /**
