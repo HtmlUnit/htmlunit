@@ -27,6 +27,7 @@ import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
  *
  * @author Ronald Brill
  * @author cd alexndr
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class URLSearchParamsTest extends WebDriverTestCase {
@@ -241,6 +242,39 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"%3Fkey%3D%26=value", "true",
+                       "%3Fkey%3D%26=value&url=http%3A%2F%2Ffoo.com%2F%3Fx%3D1%26y%3D2%26z%3D3", "http://foo.com/?x=1&y=2&z=3"},
+            IE = {})
+    public void appendSpecialChars() throws Exception {
+        final String html =
+            "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      if (self.URLSearchParams) {\n"
+                + "        var param = new URLSearchParams();\n"
+                + "        param.append('?key=&', 'value');\n"
+                + "        log(param);\n"
+                + "        log(param.has('?key=&'));\n"
+                + "        param.append('url', 'http://foo.com/?x=1&y=2&z=3');\n"
+                + "        log(param);\n"
+                + "        log(param.get('url'));\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"key=value", "key=value&empty-key=undefined",
                        "key=value&empty-key=undefined&key=overwrite",
                        "key=value&empty-key=undefined&key=overwrite&key-null=null",
@@ -359,13 +393,13 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"key+1=val1&key2=val2", "http://test.com/p?key%201=val1&key2=val2",
                        "key2=val2", "http://test.com/p?key2=val2"},
             IE = {})
-    @HtmlUnitNYI(CHROME = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+    @HtmlUnitNYI(CHROME = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                            "key2=val2", "http://test.com/p?key2=val2"},
-                 EDGE = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                 EDGE = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                          "key2=val2", "http://test.com/p?key2=val2"},
-                 FF = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                 FF = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                        "key2=val2", "http://test.com/p?key2=val2"},
-                 FF_ESR = {"key 1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
+                 FF_ESR = {"key+1=val1&key2=val2", "http://test.com/p?key 1=val1&key2=val2",
                            "key2=val2", "http://test.com/p?key2=val2"})
     public void deleteFromUrlSpecialChars() throws Exception {
         final String html =
