@@ -19,6 +19,12 @@
                 INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
             </action>
+            <action type="add" dev="Lai Quang Duong">
+                Implementation of Blob.stream() stub added; just throws UnsupportedOperationException.
+            </action>
+            <action type="add" dev="Lai Quang Duong">
+                Implementation of Blob.arrayBuffer() added.
+            </action>
             <action type="update" dev="rbri">
                 xpath: again some unused code removed.
             </action>

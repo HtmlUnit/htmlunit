@@ -26,10 +26,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code SubtleCrypto}.
@@ -56,11 +52,8 @@ public class SubtleCrypto extends HtmlUnitScriptable {
     }
 
     private Object notImplemented() {
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-        return reject.call(Context.getCurrentContext(), this, ctor,
-                new Object[] {new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR)});
+        return setupRejectedPromise(() ->
+                new DOMException("Operation is not supported", DOMException.NOT_SUPPORTED_ERR));
     }
 
     @JsxFunction

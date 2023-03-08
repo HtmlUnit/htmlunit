@@ -17,8 +17,11 @@ package com.gargoylesoftware.htmlunit.javascript;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLELEMENT;
 import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.HTMLIMAGE_HTMLUNKNOWNELEMENT;
 
+import java.io.IOException;
 import java.util.Deque;
+import java.util.function.Supplier;
 
+import org.apache.commons.lang3.function.FailableSupplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -33,6 +36,8 @@ import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
+import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -406,5 +411,26 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
         catch (final Exception e) {
             throw new IllegalStateException("Clone not supported");
         }
+    }
+
+    protected Object setupPromise(final FailableSupplier<Object, IOException> resolver) {
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+
+        try {
+            final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
+            return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
+        }
+        catch (final IOException e) {
+            final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+            return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
+        }
+    }
+
+    protected Object setupRejectedPromise(final Supplier<Object> resolver) {
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+        final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
+        return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {resolver.get()});
     }
 }

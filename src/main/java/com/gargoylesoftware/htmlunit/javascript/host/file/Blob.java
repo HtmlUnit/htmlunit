@@ -40,8 +40,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
 import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
 import net.sourceforge.htmlunit.corejs.javascript.NativeArray;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
@@ -254,15 +252,13 @@ public class Blob extends HtmlUnitScriptable {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public Object arrayBuffer() {
-        byte[] bytes = getBytes();
-        NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
-        System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
-        ScriptRuntime.setObjectProtoAndParent(buffer, getParentScope());
-
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
-        return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {buffer});
+        return setupPromise(() -> {
+            final byte[] bytes = getBytes();
+            final NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
+            System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
+            ScriptRuntime.setObjectProtoAndParent(buffer, getParentScope());
+            return buffer;
+        });
     }
 
     @JsxFunction
@@ -315,17 +311,7 @@ public class Blob extends HtmlUnitScriptable {
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public Object text() {
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-
-        try {
-            final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
-            return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {getBackend().getText()});
-        }
-        catch (final IOException e) {
-            final LambdaFunction reject = (LambdaFunction) getProperty(ctor, "reject");
-            return reject.call(Context.getCurrentContext(), this, ctor, new Object[] {e.getMessage()});
-        }
+        return setupPromise(() -> getBackend().getText());
     }
 
     public byte[] getBytes() {

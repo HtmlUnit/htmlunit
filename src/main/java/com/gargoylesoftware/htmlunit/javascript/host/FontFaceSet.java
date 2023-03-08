@@ -24,12 +24,6 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.host.event.EventTarget;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
-import net.sourceforge.htmlunit.corejs.javascript.LambdaFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-
 /**
  * A JavaScript object for {@code FontFaceSet}.
  *
@@ -56,9 +50,6 @@ public class FontFaceSet extends EventTarget {
      */
     @JsxFunction
     public Object load(final String font, final String text) {
-        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
-        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
-        final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
-        return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {""});
+        return setupRejectedPromise(() -> "");
     }
 }

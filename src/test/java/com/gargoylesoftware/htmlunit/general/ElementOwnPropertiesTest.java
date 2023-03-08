@@ -13085,4 +13085,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     public void documentType() throws Exception {
         testString("", "document.firstChild");
     }
+
+    /**
+     * Test Blob.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "arrayBuffer(),constructor(),size,slice(),stream(),text(),type",
+            EDGE = "arrayBuffer(),constructor(),size,slice(),stream(),text(),type",
+            FF = "arrayBuffer(),constructor(),size,slice(),stream(),text(),type",
+            FF_ESR = "arrayBuffer(),constructor(),size,slice(),stream(),text(),type",
+            IE = "constructor(),size,slice(),stream(),type")
+    public void blob() throws Exception {
+        testString("", "new Blob([1, 2], { type: \"text/html\" })");
+    }
 }
