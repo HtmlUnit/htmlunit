@@ -37,6 +37,7 @@ import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
+import com.gargoylesoftware.htmlunit.javascript.host.ReadableStream;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.LambdaConstructor;
@@ -301,6 +302,11 @@ public class Blob extends HtmlUnitScriptable {
 
         blob.setBackend(new InMemoryBackend(getBackend().getBytes(usedStart, usedEnd), null, usedContentType, 0L));
         return blob;
+    }
+
+    @JsxFunction
+    public ReadableStream stream() {
+        throw new UnsupportedOperationException("Blob.stream() is not yet implemented.");
     }
 
     /**
