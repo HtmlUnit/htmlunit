@@ -19,6 +19,9 @@
                 INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
             </action>
+            <action type="update" dev="Lai Quang Duong">
+                Remove well known ports from the WebRequest url.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Fix incorrect splitting of URLSeachParams when parameters contain url-encoded required characters like "&amp;".
             </action>

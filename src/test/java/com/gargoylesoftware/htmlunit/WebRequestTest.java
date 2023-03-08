@@ -122,6 +122,36 @@ public class WebRequestTest {
      * @throws Exception if the test fails
      */
     @Test
+    public void setUrl_removePort() throws Exception {
+        final URL url1 = new URL("http://htmlunit.sf.net/foo.html");
+        final URL url2 = new URL("https://htmlunit.sf.net/foo.html");
+
+        WebRequest request = new WebRequest(new URL("http://htmlunit.sf.net:80/foo.html"));
+        assertEquals(url1, request.getUrl());
+
+        request = new WebRequest(new URL("https://htmlunit.sf.net:443/foo.html"));
+        assertEquals(url2, request.getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void setUrl_preservePort() throws Exception {
+        final URL url1 = new URL("http://htmlunit.sf.net:8080/foo.html");
+        final URL url2 = new URL("https://htmlunit.sf.net:8443/foo.html");
+
+        WebRequest request = new WebRequest(new URL("http://htmlunit.sf.net:8080/foo.html"));
+        assertEquals(url1, request.getUrl());
+
+        request = new WebRequest(new URL("https://htmlunit.sf.net:8443/foo.html"));
+        assertEquals(url2, request.getUrl());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     public void credentials() throws Exception {
         final URL url = new URL("http://john.smith:secret@localhost/");
         final WebRequest request = new WebRequest(url);

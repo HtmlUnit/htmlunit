@@ -52,6 +52,7 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
  * @author Adam Afeltowicz
  * @author Joerg Werner
  * @author Michael Lueck
+ * @author Lai Quang Duong
  */
 public class WebRequest implements Serializable {
 
