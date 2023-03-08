@@ -1364,6 +1364,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html =  "<html>\n"
             + "<head>n"
             + "  <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
             + "  function doTest() {\n"
             + "    var nodeTypes = ['body', 'caption', 'col', 'colgroup', 'head', 'html',\n"
             + "                     'tbody', 'td', 'tfoot', 'th', 'thead', 'tr'];\n"
@@ -1372,8 +1373,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "      var myNode = document.getElementsByTagName(nodeType)[0];\n"
             + "      try {\n"
             + "        myNode.outerHTML = 'test';\n"
-            + "        alert('-' + i);\n"
-            + "      } catch(e) {alert(i); }\n"
+            + "        log('-' + i);\n"
+            + "      } catch(e) {log(i); }\n"
             + "    }\n"
             + "  }\n"
             + "  </script>\n"
@@ -1390,7 +1391,8 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "</body>\n"
             + "</html>";
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -2127,6 +2129,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  log(d1.scrollTop);\n"
             + "}\n"
             + "</script></body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
@@ -2139,9 +2142,12 @@ public class HTMLElementTest extends WebDriverTestCase {
     public void scrollIntoView() throws Exception {
         final String html = "<html>\n"
               + "<body>\n"
-              + "<script id='me'>document.getElementById('me').scrollIntoView(); alert('ok');</script>\n"
+              + "<script id='me'>\n"
+              + LOG_TITLE_FUNCTION
+              + "document.getElementById('me').scrollIntoView(); log('ok');</script>\n"
               + "</body></html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -2836,6 +2842,7 @@ public class HTMLElementTest extends WebDriverTestCase {
         final String html =
             "<html><head>\n"
             + "<script>\n"
+            + LOG_TITLE_FUNCTION
             + "function foo() {\n"
             + "  var e = document.createEvent('MouseEvents');\n"
             + "  e.initMouseEvent('click', true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);\n"
@@ -2843,9 +2850,10 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  var canceled = !d.dispatchEvent(e);\n"
             + "}\n"
             + "</script></head>\n"
-            + "<body onload='foo()'><div id='d' onclick='alert(\"clicked\")'>foo</div></body>\n"
+            + "<body onload='foo()'><div id='d' onclick='log(\"clicked\")'>foo</div></body>\n"
             + "</html>";
-        loadPageWithAlerts2(html);
+
+        loadPageVerifyTitle2(html);
     }
 
     /**
