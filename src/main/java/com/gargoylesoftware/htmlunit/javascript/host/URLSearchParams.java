@@ -41,6 +41,8 @@ import com.gargoylesoftware.htmlunit.util.UrlUtils;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ES6Iterator;
+import net.sourceforge.htmlunit.corejs.javascript.Function;
+import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
 import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
 import net.sourceforge.htmlunit.corejs.javascript.Undefined;
@@ -343,6 +345,36 @@ public class URLSearchParams extends HtmlUnitScriptable {
             }
         }
         return false;
+    }
+
+    /**
+     * The URLSearchParams.forEach() method allows iteration through all key/value pairs contained in this object via a callback function.
+     * @param callback Function to execute on each key/value pairs
+     */
+    @JsxFunction
+    public void forEach(final Object callback) {
+        if (!(callback instanceof Function)) {
+            throw ScriptRuntime.typeError("Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
+        }
+
+        final Function fun = (Function)callback;
+
+        String currentSearch = null;
+        List<NameValuePair> params = null;
+        // This must be indexes instead of iterator() for correct behavior when of list changes while iterating
+        for (int i = 0;; i++) {
+            String search = url_.getSearch();
+            if (!search.equals(currentSearch)) {
+                params = splitQuery(search);
+                currentSearch = search;
+            }
+            if (i >= params.size()) {
+                break;
+            }
+            
+            NameValuePair param = params.get(i);
+            fun.call(Context.getCurrentContext(), getParentScope(), this, new Object[] {param.getValue(), param.getName(), this});
+        }
     }
 
     /**

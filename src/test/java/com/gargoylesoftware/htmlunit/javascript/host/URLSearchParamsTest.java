@@ -724,6 +724,46 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"key1-val1", "key2-val2", "key3-val3",
+                       "key1-val1", "key3-val3",
+                       "key2-val2", "key3-val3"},
+            IE = {})
+    public void forEach() throws Exception {
+        final String html =
+            "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      if (self.URLSearchParams) {\n"
+                + "        var param = new URLSearchParams('key1=val1&key2=val2&key3=val3');\n"
+                + "        param.forEach((value, key) => {\n"
+                + "          log(key + '-' + value);\n"
+                + "        });\n"
+                + "        param.forEach((value, key) => {\n"
+                + "          log(key + '-' + value);\n"
+                + "          if (value == 'val1' || value == 'val2') {\n"
+                + "            param.delete(key);\n"
+                + "          }\n"
+                + "        });\n"
+                + "        param.forEach((value, key) => {\n"
+                + "          log(key + '-' + value);\n"
+                + "        });\n"
+                + "      }\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"function entries() { [native code] }", "[object URLSearchParams Iterator]",
                        "key1-val1", "key2-", "key1-val3", "-val4", "true"},
             IE = {})
