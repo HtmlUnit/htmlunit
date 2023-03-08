@@ -50,6 +50,6 @@ public class FontFaceSet extends EventTarget {
      */
     @JsxFunction
     public Object load(final String font, final String text) {
-        return setupRejectedPromise(() -> "");
+        return setupPromise(() -> "");
     }
 }
