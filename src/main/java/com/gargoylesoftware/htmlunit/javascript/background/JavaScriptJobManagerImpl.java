@@ -97,6 +97,16 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         }
         return count;
     }
+    
+    public synchronized int getNonPeriodicJobsCount() {
+    	int count = 0;
+    	for (final JavaScriptJob job : scheduledJobsQ_)
+    		if (!job.isPeriodic())
+    			count++;
+    	if (currentlyRunningJob_ != null && !currentlyRunningJob_.isPeriodic())
+    		count++;
+    	return count;
+    }
 
     /** {@inheritDoc} */
     @Override
@@ -185,29 +195,29 @@ class JavaScriptJobManagerImpl implements JavaScriptJobManager {
         if (debug) {
             LOG.debug("Waiting for all jobs to finish (will wait max " + timeoutMillis + " millis).");
         }
-        if (timeoutMillis > 0) {
-            long now = System.currentTimeMillis();
-            final long end = now + timeoutMillis;
+        synchronized (this) {
+    		if (timeoutMillis > 0) {
+    			long now = System.currentTimeMillis();
+    			final long end = now + timeoutMillis;
 
-            synchronized (this) {
-                while (getJobCount() > 0 && now < end) {
+                while (getNonPeriodicJobsCount() > 0 && now < end) {
                     try {
                         wait(end - now);
-                    }
-                    catch (final InterruptedException e) {
+                    } catch (final InterruptedException e) {
                         LOG.error("InterruptedException while in waitForJobs", e);
                     }
                     // maybe a change triggers the wakup; we have to recalculate the
                     // wait time
                     now = System.currentTimeMillis();
                 }
-            }
-        }
-        final int jobs = getJobCount();
-        if (debug) {
-            LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
-        }
-        return jobs;
+    		}
+    		final int jobs = getNonPeriodicJobsCount();
+    		if (debug && jobs > 0) {
+    			LOG.debug("Finished waiting for all jobs to finish (final job count is " + jobs + ").");
+    			printQueue();
+    		}
+    		return jobs;
+    	}
     }
 
     /** {@inheritDoc} */
