@@ -28,6 +28,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
  * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.file.Blob}.
  *
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class BlobTest extends WebDriverTestCase {
@@ -376,6 +377,38 @@ public class BlobTest extends WebDriverTestCase {
                 + "      blob.text().then(function(text) { log(text); });\n"
                 + "    } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
                 + "  }\n"
+                + "</script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"function", "Hello HtmlUnit"},
+            IE = {"undefined", "TypeError true"})
+    public void arrayBuffer() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+                + "<html>\n"
+                + "<head>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "function test() {\n"
+                + "  var blob = new Blob(['Hello HtmlUnit'], {type : 'text/html'});\n"
+                + "  log(typeof blob.arrayBuffer);\n"
+                + "  try {\n"
+                + "    blob.arrayBuffer().then(function(buf) {\n"
+                + "      var arr = new Uint8Array(buf);\n"
+                + "      log(String.fromCharCode.apply(String, arr));\n"
+                + "    })\n"
+                + "  } catch(e) { log('TypeError ' + (e instanceof TypeError)); }\n"
+                + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='test()'>\n"
