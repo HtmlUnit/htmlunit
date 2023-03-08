@@ -54,6 +54,7 @@ import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferV
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class Blob extends HtmlUnitScriptable {
@@ -244,6 +245,23 @@ public class Blob extends HtmlUnitScriptable {
     @JsxGetter
     public String getType() {
         return getBackend().getType(getBrowserVersion());
+    }
+
+    /**
+     * @return a Promise that resolves with an ArrayBuffer containing the
+     * data in binary form.
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public Object arrayBuffer() {
+        byte[] bytes = getBytes();
+        NativeArrayBuffer buffer = new NativeArrayBuffer(bytes.length);
+        System.arraycopy(bytes, 0, buffer.getBuffer(), 0, bytes.length);
+        ScriptRuntime.setObjectProtoAndParent(buffer, getParentScope());
+
+        final Scriptable scope = ScriptableObject.getTopLevelScope(this);
+        final LambdaConstructor ctor = (LambdaConstructor) getProperty(scope, "Promise");
+        final LambdaFunction resolve = (LambdaFunction) getProperty(ctor, "resolve");
+        return resolve.call(Context.getCurrentContext(), this, ctor, new Object[] {buffer});
     }
 
     @JsxFunction
