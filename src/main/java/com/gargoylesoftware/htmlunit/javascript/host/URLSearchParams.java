@@ -52,6 +52,7 @@ import net.sourceforge.htmlunit.corejs.javascript.Undefined;
  * @author Ronald Brill
  * @author Ween Jiann
  * @author cd alexndr
+ * @author Lai Quang Duong
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
 public class URLSearchParams extends HtmlUnitScriptable {
@@ -156,7 +157,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
     private List<NameValuePair> splitQuery() {
         String search = url_.getSearch();
-        search = UrlUtils.decode(search);
         return splitQuery(search);
     }
 
@@ -170,7 +170,8 @@ public class URLSearchParams extends HtmlUnitScriptable {
 
         final String[] parts = StringUtils.split(params, '&');
         for (final String part : parts) {
-            splitted.add(splitQueryParameter(part));
+            final NameValuePair pair = splitQueryParameter(part);
+            splitted.add(new NameValuePair(UrlUtils.decode(pair.getName()), UrlUtils.decode(pair.getValue())));
         }
         return splitted;
     }
@@ -205,7 +206,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
             pairs = new ArrayList<>(1);
         }
         else {
-            search = UrlUtils.decode(search);
             pairs = splitQuery(search);
         }
 
@@ -400,9 +400,9 @@ public class URLSearchParams extends HtmlUnitScriptable {
                 newSearch.append('&');
             }
             newSearch
-                .append(nameValuePair.getName())
+                .append(UrlUtils.encodeQueryPart(nameValuePair.getName()))
                 .append('=')
-                .append(nameValuePair.getValue());
+                .append(UrlUtils.encodeQueryPart(nameValuePair.getValue()));
         }
 
         return newSearch.toString();
