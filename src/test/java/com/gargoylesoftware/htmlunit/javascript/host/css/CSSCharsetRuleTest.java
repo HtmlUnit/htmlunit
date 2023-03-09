@@ -16,10 +16,10 @@ package com.gargoylesoftware.htmlunit.javascript.host.css;
 
 import java.net.URL;
 
+import org.htmlunit.css.dom.CSSCharsetRuleImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
 import com.gargoylesoftware.htmlunit.WebDriverTestCase;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
 import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;

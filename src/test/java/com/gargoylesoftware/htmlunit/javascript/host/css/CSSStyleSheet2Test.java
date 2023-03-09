@@ -14,18 +14,18 @@
  */
 package com.gargoylesoftware.htmlunit.javascript.host.css;
 
+import org.htmlunit.css.parser.CSSErrorHandler;
+import org.htmlunit.css.parser.CSSException;
+import org.htmlunit.css.parser.CSSOMParser;
+import org.htmlunit.css.parser.CSSParseException;
+import org.htmlunit.css.parser.javacc.CSS3Parser;
+import org.htmlunit.css.parser.selector.Selector;
+import org.htmlunit.css.parser.selector.SelectorList;
+import org.htmlunit.css.parser.selector.SelectorListImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;
 
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.css.parser.CSSException;
-import com.gargoylesoftware.css.parser.CSSOMParser;
-import com.gargoylesoftware.css.parser.CSSParseException;
-import com.gargoylesoftware.css.parser.javacc.CSS3Parser;
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.parser.selector.SelectorListImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;

@@ -71,12 +71,12 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.css.dom.Property;
+import org.htmlunit.css.parser.selector.Selector;
+import org.htmlunit.css.parser.selector.SelectorSpecificity;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.Property;
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;

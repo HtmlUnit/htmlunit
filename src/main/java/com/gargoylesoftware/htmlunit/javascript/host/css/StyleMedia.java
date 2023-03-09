@@ -18,8 +18,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import com.gargoylesoftware.css.dom.MediaListImpl;
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
+import org.htmlunit.css.dom.MediaListImpl;
+import org.htmlunit.css.parser.CSSErrorHandler;
+
 import com.gargoylesoftware.htmlunit.WebWindow;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;

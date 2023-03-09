@@ -19,7 +19,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
+import org.htmlunit.css.dom.CSSStyleSheetImpl;
+
 import com.gargoylesoftware.htmlunit.Cache;
 import com.gargoylesoftware.htmlunit.css.CssStyleSheet;
 import com.gargoylesoftware.htmlunit.html.HtmlStyle;

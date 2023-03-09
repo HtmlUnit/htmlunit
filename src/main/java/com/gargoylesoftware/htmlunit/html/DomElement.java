@@ -38,6 +38,12 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.css.dom.Property;
+import org.htmlunit.css.parser.CSSException;
+import org.htmlunit.css.parser.selector.Selector;
+import org.htmlunit.css.parser.selector.SelectorList;
+import org.htmlunit.css.parser.selector.SelectorSpecificity;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
@@ -46,12 +52,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.TypeInfo;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.dom.Property;
-import com.gargoylesoftware.css.parser.CSSException;
-import com.gargoylesoftware.css.parser.selector.Selector;
-import com.gargoylesoftware.css.parser.selector.SelectorList;
-import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.ScriptResult;

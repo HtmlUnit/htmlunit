@@ -21,9 +21,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.dom.CSSMediaRuleImpl;
+import org.htmlunit.css.dom.MediaListImpl;
 
-import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
-import com.gargoylesoftware.css.dom.MediaListImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.CssMediaList;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;

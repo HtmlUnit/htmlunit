@@ -18,9 +18,8 @@ import java.io.Serializable;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.css.parser.CSSParseException;
+import org.htmlunit.css.parser.CSSErrorHandler;
+import org.htmlunit.css.parser.CSSParseException;
 
 /**
  * HtmlUnit's default implementation of {@link CSSErrorHandler}, which logs all CSS problems.

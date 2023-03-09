@@ -73,8 +73,8 @@ import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
+import org.htmlunit.css.parser.CSSErrorHandler;
 
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
 import com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import com.gargoylesoftware.htmlunit.attachment.AttachmentHandler;
 import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;

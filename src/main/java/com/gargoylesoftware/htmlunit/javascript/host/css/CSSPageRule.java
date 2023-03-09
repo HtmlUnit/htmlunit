@@ -25,9 +25,9 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.dom.CSSPageRuleImpl;
 import org.w3c.dom.DOMException;
 
-import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;

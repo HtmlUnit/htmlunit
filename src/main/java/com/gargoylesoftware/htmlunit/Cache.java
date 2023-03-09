@@ -24,8 +24,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.http.client.utils.DateUtils;
+import org.htmlunit.css.dom.CSSStyleSheetImpl;
 
-import com.gargoylesoftware.css.dom.CSSStyleSheetImpl;
 import com.gargoylesoftware.htmlunit.util.HeaderUtils;
 import com.gargoylesoftware.htmlunit.util.UrlUtils;
 

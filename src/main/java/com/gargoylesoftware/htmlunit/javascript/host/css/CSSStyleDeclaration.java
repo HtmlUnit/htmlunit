@@ -119,8 +119,8 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.dom.AbstractCSSRuleImpl;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.AbstractCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.css.ComputedCssStyleDeclaration;

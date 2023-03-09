@@ -21,7 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import com.gargoylesoftware.css.parser.media.MediaQuery;
+import org.htmlunit.css.parser.media.MediaQuery;
+
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.css.CssMediaList;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;

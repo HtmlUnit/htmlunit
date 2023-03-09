@@ -24,12 +24,12 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.css.dom.CSSCharsetRuleImpl;
+import org.htmlunit.css.dom.CSSMediaRuleImpl;
+import org.htmlunit.css.dom.CSSRuleListImpl;
 import org.w3c.dom.DOMException;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
-import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
-import com.gargoylesoftware.css.dom.CSSRuleListImpl;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;

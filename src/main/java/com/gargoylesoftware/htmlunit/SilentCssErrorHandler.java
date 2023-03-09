@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit;
 
 import java.io.Serializable;
 
-import com.gargoylesoftware.css.parser.CSSErrorHandler;
-import com.gargoylesoftware.css.parser.CSSParseException;
+import org.htmlunit.css.parser.CSSErrorHandler;
+import org.htmlunit.css.parser.CSSParseException;
 
 /**
  * Implementation of {@link CSSErrorHandler} which ignores all CSS problems.

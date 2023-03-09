@@ -21,8 +21,8 @@ import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBr
 import static com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.css.dom.CSSFontFaceRuleImpl;
 
-import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;

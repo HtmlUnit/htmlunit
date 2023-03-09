@@ -17,9 +17,10 @@ package com.gargoylesoftware.htmlunit.css;
 import java.util.Collections;
 import java.util.Map;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleDeclarationImpl;
-import com.gargoylesoftware.css.parser.selector.SelectorSpecificity;
+import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.css.parser.selector.SelectorSpecificity;
+
 import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.javascript.host.Element;

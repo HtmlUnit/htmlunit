@@ -24,15 +24,15 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.css.dom.CSSCharsetRuleImpl;
+import org.htmlunit.css.dom.CSSFontFaceRuleImpl;
+import org.htmlunit.css.dom.CSSImportRuleImpl;
+import org.htmlunit.css.dom.CSSMediaRuleImpl;
+import org.htmlunit.css.dom.CSSPageRuleImpl;
+import org.htmlunit.css.dom.CSSStyleRuleImpl;
+import org.htmlunit.css.dom.CSSUnknownRuleImpl;
 
-import com.gargoylesoftware.css.dom.AbstractCSSRuleImpl;
-import com.gargoylesoftware.css.dom.CSSCharsetRuleImpl;
-import com.gargoylesoftware.css.dom.CSSFontFaceRuleImpl;
-import com.gargoylesoftware.css.dom.CSSImportRuleImpl;
-import com.gargoylesoftware.css.dom.CSSMediaRuleImpl;
-import com.gargoylesoftware.css.dom.CSSPageRuleImpl;
-import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
-import com.gargoylesoftware.css.dom.CSSUnknownRuleImpl;
 import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;

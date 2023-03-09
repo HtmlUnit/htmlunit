@@ -38,9 +38,9 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.css.parser.CSSException;
 import org.xml.sax.SAXException;
 
-import com.gargoylesoftware.css.parser.CSSException;
 import com.gargoylesoftware.htmlunit.SgmlPage;
 import com.gargoylesoftware.htmlunit.css.ElementCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.html.DomAttr;

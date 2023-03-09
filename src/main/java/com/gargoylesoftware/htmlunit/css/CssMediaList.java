@@ -16,8 +16,8 @@ package com.gargoylesoftware.htmlunit.css;
 
 import java.io.Serializable;
 
-import com.gargoylesoftware.css.dom.MediaListImpl;
-import com.gargoylesoftware.css.parser.media.MediaQuery;
+import org.htmlunit.css.dom.MediaListImpl;
+import org.htmlunit.css.parser.media.MediaQuery;
 
 /**
  * A MediaList.

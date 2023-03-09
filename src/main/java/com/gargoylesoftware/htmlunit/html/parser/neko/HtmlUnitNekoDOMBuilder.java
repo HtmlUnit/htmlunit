@@ -32,6 +32,18 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.htmlunit.cyberneko.HTMLConfiguration;
+import org.htmlunit.cyberneko.HTMLElements;
+import org.htmlunit.cyberneko.HTMLEventInfo;
+import org.htmlunit.cyberneko.HTMLScanner;
+import org.htmlunit.cyberneko.HTMLTagBalancingListener;
+import org.htmlunit.xerces.parsers.AbstractSAXParser;
+import org.htmlunit.xerces.xni.Augmentations;
+import org.htmlunit.xerces.xni.QName;
+import org.htmlunit.xerces.xni.XMLAttributes;
+import org.htmlunit.xerces.xni.XNIException;
+import org.htmlunit.xerces.xni.parser.XMLInputSource;
+import org.htmlunit.xerces.xni.parser.XMLParserConfiguration;
 import org.w3c.dom.Node;
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
@@ -70,19 +82,6 @@ import com.gargoylesoftware.htmlunit.html.parser.HTMLParserDOMBuilder;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBodyElement;
 import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument;
-
-import org.htmlunit.cyberneko.HTMLConfiguration;
-import org.htmlunit.cyberneko.HTMLElements;
-import org.htmlunit.cyberneko.HTMLEventInfo;
-import org.htmlunit.cyberneko.HTMLScanner;
-import org.htmlunit.cyberneko.HTMLTagBalancingListener;
-import org.htmlunit.xerces.parsers.AbstractSAXParser;
-import org.htmlunit.xerces.xni.Augmentations;
-import org.htmlunit.xerces.xni.QName;
-import org.htmlunit.xerces.xni.XMLAttributes;
-import org.htmlunit.xerces.xni.XNIException;
-import org.htmlunit.xerces.xni.parser.XMLInputSource;
-import org.htmlunit.xerces.xni.parser.XMLParserConfiguration;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

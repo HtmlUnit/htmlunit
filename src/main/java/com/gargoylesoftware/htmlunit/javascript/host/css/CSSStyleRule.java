@@ -25,7 +25,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.gargoylesoftware.css.dom.CSSStyleRuleImpl;
+import org.htmlunit.css.dom.CSSStyleRuleImpl;
+
 import com.gargoylesoftware.htmlunit.css.WrappedCssStyleDeclaration;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
 import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstructor;

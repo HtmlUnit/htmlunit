@@ -26,6 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.htmlunit.cyberneko.HTMLScanner;
+import org.htmlunit.cyberneko.HTMLTagBalancer;
+import org.htmlunit.xerces.util.DefaultErrorHandler;
+import org.htmlunit.xerces.xni.QName;
+import org.htmlunit.xerces.xni.XNIException;
+import org.htmlunit.xerces.xni.parser.XMLErrorHandler;
+import org.htmlunit.xerces.xni.parser.XMLInputSource;
+import org.htmlunit.xerces.xni.parser.XMLParseException;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
@@ -44,15 +52,6 @@ import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
 import com.gargoylesoftware.htmlunit.html.parser.HTMLParserListener;
 import com.gargoylesoftware.htmlunit.svg.SvgElementFactory;
 import com.gargoylesoftware.htmlunit.util.StringUtils;
-
-import org.htmlunit.cyberneko.HTMLScanner;
-import org.htmlunit.cyberneko.HTMLTagBalancer;
-import org.htmlunit.xerces.util.DefaultErrorHandler;
-import org.htmlunit.xerces.xni.QName;
-import org.htmlunit.xerces.xni.XNIException;
-import org.htmlunit.xerces.xni.parser.XMLErrorHandler;
-import org.htmlunit.xerces.xni.parser.XMLInputSource;
-import org.htmlunit.xerces.xni.parser.XMLParseException;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link org.htmlunit.cyberneko.HTMLConfiguration}
