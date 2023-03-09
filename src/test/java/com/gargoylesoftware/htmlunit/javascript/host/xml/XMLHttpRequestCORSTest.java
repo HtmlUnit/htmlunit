@@ -101,7 +101,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"4", "200", "§§URL§§"})
+    @Alerts({"4", "200", "<root><origin>§§URL§§</origin><cookie>null</cookie></root>"})
     public void simple() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -116,7 +116,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.send();\n"
                 + "    log(xhr.readyState);\n"
                 + "    log(xhr.status);\n"
-                + "    log(xhr.responseXML.firstChild.firstChild.nodeValue);\n"
+                + "    log(xhr.responseText);\n"
                 + "  } catch(e) { log(e) }\n"
                 + "}\n"
                 + "</script>\n"
@@ -128,7 +128,14 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/simple2", SimpleServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        loadPage2(html, new URL(URL_FIRST, "/simple1"));
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        final URL url = new URL(URL_FIRST, "/simple1");
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+
+        loadPage2(url, null);
         verifyTitle2(getWebDriver(), getExpectedAlerts());
     }
 
@@ -176,7 +183,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"4", "200", "§§URL§§"})
+    @Alerts({"4", "200", "<root><origin>§§URL§§</origin><cookie>null</cookie></root>"})
     public void simplePost() throws Exception {
         expandExpectedAlertsVariables(new URL("http://localhost:" + PORT));
 
@@ -191,7 +198,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.send('');\n"
                 + "    log(xhr.readyState);\n"
                 + "    log(xhr.status);\n"
-                + "    log(xhr.responseXML.firstChild.firstChild.nodeValue);\n"
+                + "    log(xhr.responseText);\n"
                 + "  } catch(e) { log(e) }\n"
                 + "}\n"
                 + "</script>\n"
@@ -258,11 +265,13 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             }
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_XML);
+
             String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";
             }
-            response.getWriter().write("<origin>" + origin + "</origin>");
+            final String cookie = request.getHeader(HttpHeader.COOKIE);
+            response.getWriter().write("<root><origin>" + origin + "</origin><cookie>" + cookie + "</cookie></root>");
         }
 
         /**
@@ -286,7 +295,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0"})
+    @Alerts({"exception", "4", "0", ""})
     public void noAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin(null);
     }
@@ -306,6 +315,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "  } catch(e) { log('exception') }\n"
                 + "  log(xhr.readyState);\n"
                 + "  log(xhr.status);\n"
+                + "  log(xhr.responseText);\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
@@ -324,7 +334,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts({"exception", "4", "0"})
+    @Alerts({"exception", "4", "0", ""})
     public void nonMatchingAccessControlAllowOrigin() throws Exception {
         incorrectAccessControlAllowOrigin("http://www.sourceforge.net");
     }
@@ -486,8 +496,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         startWebServer2(".", null, servlets2);
 
         final URL url = new URL(URL_FIRST, "/preflight1");
-        List<NameValuePair> responseHeader = null;
 
+        List<NameValuePair> responseHeader = null;
         if (cookie != null) {
             responseHeader = new ArrayList<>();
             responseHeader.add(new NameValuePair("Set-Cookie", cookie));
@@ -817,7 +827,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 0")
+    @Alerts({"1", "0", "4", "0", ""})
     public void withCredentials() throws Exception {
         testWithCredentials("*", "true");
     }
@@ -826,7 +836,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 200")
+    @Alerts({"1", "0", "4", "200", "<root><origin>§§URL§§</origin><cookie>cookie=sweet</cookie></root>"})
     public void withCredentialsServer() throws Exception {
         testWithCredentials("http://localhost:" + PORT, "true");
     }
@@ -835,7 +845,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 0")
+    @Alerts({"1", "0", "4", "0", ""})
     public void withCredentialsServerSlashAtEnd() throws Exception {
         testWithCredentials(URL_FIRST.toExternalForm(), "true");
     }
@@ -844,7 +854,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 0")
+    @Alerts({"1", "0", "4", "0", ""})
     public void withCredentials_no_header() throws Exception {
         testWithCredentials("*", null);
     }
@@ -853,7 +863,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 0")
+    @Alerts({"1", "0", "4", "0", ""})
     public void withCredentials_no_header_Server() throws Exception {
         testWithCredentials("http://localhost:" + PORT, null);
     }
@@ -862,7 +872,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
      * @throws Exception if the test fails.
      */
     @Test
-    @Alerts("1 0 4 0")
+    @Alerts({"1", "0", "4", "0", ""})
     public void withCredentials_no_header_ServerSlashAtEnd() throws Exception {
         testWithCredentials(URL_FIRST.toExternalForm(), null);
     }
@@ -873,6 +883,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         final String html = "<html><head>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "function test() {\n"
                 + "  try {\n"
@@ -881,16 +892,17 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.withCredentials = true;\n"
                 + "    xhr.onreadystatechange = onReadyStateChange;\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { document.title += ' ' + e }\n"
-                + "  document.title += ' ' + xhr.readyState;\n"
+                + "  } catch(e) { log('exception') }\n"
+                + "  log(xhr.readyState);\n"
                 + "  try {\n"
-                + "    document.title += ' ' + xhr.status;\n"
-                + "  } catch(e) { document.title += ' ' + 'ex: status not available' }\n"
+                + "    log(xhr.status);\n"
+                + "  } catch(e) { log('ex: status not available') }\n"
 
                 + "  function onReadyStateChange() {\n"
                 + "    if (xhr.readyState == 4) {\n"
-                + "      document.title += ' ' + xhr.readyState;\n"
-                + "      document.title += ' ' + xhr.status;\n"
+                + "      log(xhr.readyState);\n"
+                + "      log(xhr.status);\n"
+                + "      log(xhr.responseText);\n"
                 + "    }\n"
                 + "  }\n"
                 + "}\n"
@@ -905,8 +917,15 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
         servlets2.put("/withCredentials2", WithCredentialsServerServlet.class);
         startWebServer2(".", null, servlets2);
 
-        final WebDriver driver = loadPage2(html, new URL(URL_FIRST, "/withCredentials1"));
-        assertTitle(driver, getExpectedAlerts()[0]);
+        final List<NameValuePair> responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        final URL url = new URL(URL_FIRST, "/withCredentials1");
+        getMockWebConnection().setResponse(url, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+
+        final WebDriver driver = loadPage2(url, null);
+        verifyTitle2(DEFAULT_WAIT_TIME, driver, getExpectedAlerts());
     }
 
     /**
@@ -917,7 +936,7 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
     public void testWithCredentialsIFrame() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"
-                + LOG_TITLE_FUNCTION
+                + LOG_WINDOW_NAME_FUNCTION
 
                 + "function load() {\n"
                 + "  try {\n"
@@ -931,14 +950,15 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    asyncLoadIFrame.contentWindow.document.open('text/html', 'replace');\n"
                 + "    asyncLoadIFrame.contentWindow.document.write(myContent);\n"
                 + "    asyncLoadIFrame.contentWindow.document.close();\n"
-                + "  } catch(e) { alert(e) }\n"
+                + "  } catch(e) { log(e) }\n"
                 + "}\n"
                 + "</script>\n"
                 + "</head>\n"
                 + "<body onload='load()'>\n"
                 + "</body></html>";
 
-        final String js = ""
+        final String js =
+                LOG_WINDOW_NAME_FUNCTION
                 + "var xhr = new XMLHttpRequest();\n"
                 + "  try {\n"
                 + "    var url = '/data';\n"
@@ -946,11 +966,11 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
                 + "    xhr.withCredentials = true;\n"
                 + "    xhr.onreadystatechange = onReadyStateChange;\n"
                 + "    xhr.send();\n"
-                + "  } catch(e) { alert(e) }\n"
+                + "  } catch(e) { log(e) }\n"
 
                 + "  function onReadyStateChange() {\n"
                 + "    if (xhr.readyState == 4) {\n"
-                + "      alert('done ' + xhr.status);\n"
+                + "      log('done ' + xhr.status);\n"
                 + "    }\n"
                 + "  }\n";
 
@@ -959,7 +979,8 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
 
         getMockWebConnection().setResponse(new URL(URL_FIRST, "/data"), xml, MimeType.TEXT_XML);
 
-        loadPageWithAlerts2(html);
+        loadPage2(html);
+        verifyWindowName2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -982,11 +1003,13 @@ public class XMLHttpRequestCORSTest extends WebDriverTestCase {
             }
             response.setCharacterEncoding(UTF_8.name());
             response.setContentType(MimeType.TEXT_XML);
+
             String origin = request.getHeader(HttpHeader.ORIGIN);
             if (origin == null) {
                 origin = "No Origin!";
             }
-            response.getWriter().write("<origin>" + origin + "</origin>");
+            final String cookie = request.getHeader(HttpHeader.COOKIE);
+            response.getWriter().write("<root><origin>" + origin + "</origin><cookie>" + cookie + "</cookie></root>");
         }
     }
 

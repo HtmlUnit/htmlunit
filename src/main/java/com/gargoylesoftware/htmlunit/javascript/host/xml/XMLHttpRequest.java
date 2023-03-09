@@ -474,6 +474,11 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 LOG.debug("XMLHttpRequest.responseXML returns of a network error ("
                         + ((NetworkErrorWebResponse) webResponse_).getError() + ")");
             }
+
+            final NetworkErrorWebResponse resp = (NetworkErrorWebResponse) webResponse_;
+            if (resp.getError() != null && resp.getError() instanceof NoPermittedHeaderException) {
+                return "";
+            }
             return null;
         }
 
@@ -1058,7 +1063,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("No permitted \"Access-Control-Allow-Origin\" header for URL " + webRequest_.getUrl());
                 }
-                throw new IOException("No permitted \"Access-Control-Allow-Origin\" header.");
+                throw new NoPermittedHeaderException("No permitted \"Access-Control-Allow-Origin\" header.");
             }
 
             setState(HEADERS_RECEIVED);
@@ -1570,6 +1575,12 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
          */
         public IOException getError() {
             return error_;
+        }
+    }
+
+    private static final class NoPermittedHeaderException extends IOException {
+        private NoPermittedHeaderException(final String msg) {
+            super(msg);
         }
     }
 }
