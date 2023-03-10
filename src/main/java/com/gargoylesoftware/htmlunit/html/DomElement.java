@@ -97,7 +97,7 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /** Cache for the styles. */
     private String styleString_;
-    private Map<String, StyleElement> styleMap_;
+    private LinkedHashMap<String, StyleElement> styleMap_;
 
     /**
      * Whether the Mouse is currently over this element or not.
@@ -269,13 +269,13 @@ public class DomElement extends DomNamespaceNode implements Element {
      *
      * @return a sorted map containing style elements, keyed on style element name
      */
-    public Map<String, StyleElement> getStyleMap() {
+    public LinkedHashMap<String, StyleElement> getStyleMap() {
         final String styleAttribute = getAttributeDirect("style");
         if (styleString_ == styleAttribute) {
             return styleMap_;
         }
 
-        final Map<String, StyleElement> styleMap = new LinkedHashMap<>();
+        final LinkedHashMap<String, StyleElement> styleMap = new LinkedHashMap<>();
         if (ATTRIBUTE_NOT_DEFINED == styleAttribute || DomElement.ATTRIBUTE_VALUE_EMPTY == styleAttribute) {
             styleMap_ = styleMap;
             styleString_ = styleAttribute;

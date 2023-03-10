@@ -14,6 +14,7 @@
  */
 package com.gargoylesoftware.htmlunit.css;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import org.htmlunit.css.dom.AbstractCSSRuleImpl;
@@ -133,8 +134,21 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
      * {@inheritDoc}
      */
     @Override
-    public Object item(final int index) {
-        return domElement_.getStyleMap().get(index);
+    public String item(final int index) {
+        if (index < 0) {
+            return "";
+        }
+
+        int i = 0;
+        final Iterator<StyleElement> values = domElement_.getStyleMap().values().iterator();
+        while (values.hasNext()) {
+            if (index == i) {
+                return values.next().getName();
+            }
+            values.next();
+            i++;
+        }
+        return "";
     }
 
     /**

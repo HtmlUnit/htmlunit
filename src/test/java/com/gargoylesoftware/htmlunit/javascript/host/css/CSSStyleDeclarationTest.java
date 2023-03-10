@@ -3677,4 +3677,42 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"background-color", "string", "font-weight", "", "string", "", "string"})
+    public void item() throws Exception {
+        final String html
+            = "<html><body>\n"
+
+            + "<style>\n"
+            + "  p { background-color: #FFFFFF; }\n"
+            + "</style>\n"
+
+            + "<div id='myDiv' style='background-color: #FFFFFF; font-weight: bold;'></div>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  decl = document.getElementById('myDiv').style;\n"
+            + "  log(decl.item(0));\n"
+            + "  log(typeof decl.item(0));\n"
+
+            + "  log(decl.item(1));\n"
+            + "  log(decl.item(2));\n"
+            + "  log(typeof decl.item(2));\n"
+            + "  try {\n"
+            + "    log(decl.item(-1));\n"
+            + "    log(typeof decl.item(-1));\n"
+            + "  } catch(e) {\n"
+            + "    log('exception ');\n"
+            + "  }\n"
+            + "</script>\n"
+
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
