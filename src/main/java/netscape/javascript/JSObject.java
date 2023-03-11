@@ -20,11 +20,11 @@ import java.util.Arrays;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.ScriptResult;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.Element;
-import com.gargoylesoftware.htmlunit.javascript.host.Window;
+import org.htmlunit.Page;
+import org.htmlunit.ScriptResult;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.host.Element;
+import org.htmlunit.javascript.host.Window;
 
 import net.sourceforge.htmlunit.corejs.javascript.Context;
 import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
