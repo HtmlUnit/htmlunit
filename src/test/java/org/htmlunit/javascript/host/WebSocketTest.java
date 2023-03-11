@@ -12,11 +12,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package org.htmlunit.javascript.host;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.UTF_16LE;
 
 import java.io.IOException;
@@ -39,13 +39,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebClientInternals;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.HttpHeader;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebClientInternals;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for {@link WebSocket}.
@@ -190,7 +190,7 @@ public class WebSocketTest extends WebDriverTestCase {
         final String firstResponse = "Browser: has joined!";
         final String secondResponse = "Browser: Hope you are fine!";
 
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
             null, null, new ChatWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
@@ -323,7 +323,7 @@ public class WebSocketTest extends WebDriverTestCase {
     public void cookies() throws Exception {
         final String[] expected = getExpectedAlerts();
 
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
             null, null, new CookiesWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
@@ -444,7 +444,7 @@ public class WebSocketTest extends WebDriverTestCase {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
         final String expected = String.join("\n", getExpectedAlerts());
 
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
             null, null, new EventsWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
@@ -529,7 +529,7 @@ public class WebSocketTest extends WebDriverTestCase {
         expandExpectedAlertsVariables("ws://localhost:" + PORT);
         final String expected = String.join("\n", getExpectedAlerts());
 
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
             null, null, new EventsWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
@@ -561,7 +561,7 @@ public class WebSocketTest extends WebDriverTestCase {
              "onCloseListener code: 1006  wasClean: false",
              "onClose code: 1006  wasClean: false"})
     public void eventsNoSocketServer() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host", null, null, null);
+        startWebServer("src/test/resources/org/htmlunit/javascript/host", null, null, null);
         try {
             final WebDriver driver = getWebDriver();
             driver.get(URL_FIRST + "WebSocketTest_wasClean.html");
@@ -658,7 +658,7 @@ public class WebSocketTest extends WebDriverTestCase {
      */
     @Test
     public void listener() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
                 null, null, new EventsWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();
@@ -716,7 +716,7 @@ public class WebSocketTest extends WebDriverTestCase {
      */
     @Test
     public void socketsGetClosedOnPageReplace() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host",
+        startWebServer("src/test/resources/org/htmlunit/javascript/host",
                 null, null, new ChatWebSocketHandler());
         try {
             final WebDriver driver = getWebDriver();

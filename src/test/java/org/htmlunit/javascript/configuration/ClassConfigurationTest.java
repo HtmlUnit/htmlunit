@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.configuration;
+package org.htmlunit.javascript.configuration;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * Tests for {@link ClassConfiguration}.

@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package org.htmlunit.html;
 
 import java.net.URL;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.RefreshHandler;
+import org.htmlunit.Page;
+import org.htmlunit.RefreshHandler;
 
 /**
  * A handler for page refreshes that logs the refreshes but doesn't actually

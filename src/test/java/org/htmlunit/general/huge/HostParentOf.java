@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.general.huge;
+package org.htmlunit.general.huge;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,11 +25,11 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameter;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.TestCaseTest;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.TestCaseTest;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Tests two Host classes, if one prototype is parent of another.

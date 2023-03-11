@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript;
+package org.htmlunit.javascript;
 
 import static org.junit.Assert.fail;
 
@@ -24,15 +24,15 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.ScriptException;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.util.MimeType;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import org.htmlunit.FailingHttpStatusCodeException;
+import org.htmlunit.MockWebConnection;
+import org.htmlunit.ScriptException;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.
@@ -115,7 +115,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
         loadPage(html);
 
         assertEquals("", javaScriptErrorListener.getWarnings());
-        assertEquals("com.gargoylesoftware.htmlunit.ScriptException: "
+        assertEquals("org.htmlunit.ScriptException: "
                 + "ReferenceError: \"unknown\" is not defined. "
                 + "(script in http://localhost:" + PORT + "/ from (1, 58) to (1, 81)#1)",
                 javaScriptErrorListener.getScriptExceptions());
@@ -151,7 +151,7 @@ public class JavascriptErrorListenerTest extends WebServerTestCase {
 
         assertEquals("", javaScriptErrorListener.getScriptExceptions());
         assertEquals(URL_FIRST + "notExisting.js, "
-                + "com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException: "
+                + "org.htmlunit.FailingHttpStatusCodeException: "
                 + "500 Server Error for " + URL_FIRST + "notExisting.js",
                 javaScriptErrorListener.getLoadScriptErrors());
         assertEquals("", javaScriptErrorListener.getMalformedScriptURLErrors());

@@ -12,10 +12,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.canvas;
+package org.htmlunit.javascript.host.canvas;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 
 import java.io.InputStream;
 import java.util.Collections;
@@ -26,13 +26,13 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.util.MimeType;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
 
 /**
  * Unit tests for {@link CanvasRenderingContext2D}.

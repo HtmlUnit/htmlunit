@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -26,8 +26,8 @@ import org.apache.http.impl.cookie.BasicClientCookie;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.httpclient.HtmlUnitCookieStore;
-import com.gargoylesoftware.htmlunit.util.Cookie;
+import org.htmlunit.httpclient.HtmlUnitCookieStore;
+import org.htmlunit.util.Cookie;
 
 /**
  * Tests the HtmlUnitCookieStore, which is a wrapper around the CookieManager.

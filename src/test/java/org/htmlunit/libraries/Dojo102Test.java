@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
+package org.htmlunit.libraries;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for compatibility with version 1.0.2 of the <a href="http://dojotoolkit.org/">Dojo

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -22,7 +22,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.util.Cookie;
+import org.htmlunit.util.Cookie;
 
 /**
  * Unit tests for {@link CookieManager}.

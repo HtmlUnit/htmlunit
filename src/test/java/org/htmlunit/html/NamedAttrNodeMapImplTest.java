@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package org.htmlunit.html;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

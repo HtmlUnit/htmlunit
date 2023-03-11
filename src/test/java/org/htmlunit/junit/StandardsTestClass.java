@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -27,7 +27,7 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 
 /**
- * Test class annotated with {@link com.gargoylesoftware.htmlunit.annotations.StandardsMode}.
+ * Test class annotated with {@link org.htmlunit.annotations.StandardsMode}.
  *
  * @author Ahmed Ashour
  */

@@ -12,18 +12,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host;
+package org.htmlunit.javascript.host;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.History;
-import com.gargoylesoftware.htmlunit.TopLevelWindow;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import org.htmlunit.History;
+import org.htmlunit.TopLevelWindow;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for {@link History}.

@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.WebTestCase.URL_FIRST;
+import static org.htmlunit.WebTestCase.URL_FIRST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -29,10 +29,10 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.httpclient.HttpClientConverter;
-import com.gargoylesoftware.htmlunit.util.KeyDataPair;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.util.KeyDataPair;
+import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * Tests for {@link WebRequest}.

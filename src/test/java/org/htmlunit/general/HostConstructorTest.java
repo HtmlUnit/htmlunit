@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.general;
+package org.htmlunit.general;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,11 +27,11 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
-import com.gargoylesoftware.htmlunit.TestCaseTest;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.TestCaseTest;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserParameterizedRunner;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Test the host class constructors.

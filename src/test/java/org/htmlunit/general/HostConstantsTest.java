@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.general;
+package org.htmlunit.general;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
+import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_STACK_TRACE_LIMIT;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,13 +30,13 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-import com.gargoylesoftware.htmlunit.TestCaseTest;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.TestCaseTest;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.javascript.configuration.ClassConfiguration;
+import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
+import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import org.htmlunit.junit.BrowserParameterizedRunner;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 
 /**
  * Test all {@code constant}s defined in host classes.

@@ -12,13 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
-import static com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.CHROME;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -37,11 +37,11 @@ import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
 import org.junit.runners.model.Statement;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.annotations.StandardsMode;
 
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized

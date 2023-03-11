@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
+package org.htmlunit.libraries;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.junit.Assert.fail;
@@ -32,7 +32,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebDriverTestCase;
 
 /**
  * Base class for tests for compatibility with <a href="http://prototype.conio.net/">Prototype</a>.

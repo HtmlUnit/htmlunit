@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
-import static com.gargoylesoftware.htmlunit.HttpHeader.CACHE_CONTROL;
-import static com.gargoylesoftware.htmlunit.HttpHeader.ETAG;
-import static com.gargoylesoftware.htmlunit.HttpHeader.EXPIRES;
-import static com.gargoylesoftware.htmlunit.HttpHeader.IF_MODIFIED_SINCE;
-import static com.gargoylesoftware.htmlunit.HttpHeader.IF_NONE_MATCH;
-import static com.gargoylesoftware.htmlunit.HttpHeader.LAST_MODIFIED;
+import static org.htmlunit.HttpHeader.CACHE_CONTROL;
+import static org.htmlunit.HttpHeader.ETAG;
+import static org.htmlunit.HttpHeader.EXPIRES;
+import static org.htmlunit.HttpHeader.IF_MODIFIED_SINCE;
+import static org.htmlunit.HttpHeader.IF_NONE_MATCH;
+import static org.htmlunit.HttpHeader.LAST_MODIFIED;
 import static org.apache.http.client.utils.DateUtils.formatDate;
 
 import java.net.URL;
@@ -35,12 +35,12 @@ import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.util.MimeType;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
-import com.gargoylesoftware.htmlunit.util.mocks.WebResponseMock;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.util.MimeType;
+import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.mocks.WebResponseMock;
 
 /**
  * Tests for {@link Cache}.

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import static org.junit.Assert.assertFalse;
 
@@ -21,11 +21,11 @@ import java.util.Arrays;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.AlertsStandards;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * The Browser Statement.

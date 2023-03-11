@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.general;
+package org.htmlunit.general;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests the result of {@code element.childNodes.length}.
@@ -57,7 +57,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAbbreviated}.
+     * Test {@link org.htmlunit.html.HtmlAbbreviated}.
      *
      * @throws Exception if the test fails
      */
@@ -68,7 +68,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAcronym}.
+     * Test {@link org.htmlunit.html.HtmlAcronym}.
      *
      * @throws Exception if the test fails
      */
@@ -79,7 +79,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAnchor}.
+     * Test {@link org.htmlunit.html.HtmlAnchor}.
      *
      * @throws Exception if the test fails
      */
@@ -90,7 +90,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAddress}.
+     * Test {@link org.htmlunit.html.HtmlAddress}.
      *
      * @throws Exception if the test fails
      */
@@ -101,7 +101,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlApplet}.
+     * Test {@link org.htmlunit.html.HtmlApplet}.
      *
      * @throws Exception if the test fails
      */
@@ -112,7 +112,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlArea}.
+     * Test {@link org.htmlunit.html.HtmlArea}.
      *
      * @throws Exception if the test fails
      */
@@ -123,7 +123,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlArticle}.
+     * Test {@link org.htmlunit.html.HtmlArticle}.
      *
      * @throws Exception if the test fails
      */
@@ -134,7 +134,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAside}.
+     * Test {@link org.htmlunit.html.HtmlAside}.
      *
      * @throws Exception if the test fails
      */
@@ -145,7 +145,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlAudio}.
+     * Test {@link org.htmlunit.html.HtmlAudio}.
      *
      * @throws Exception if the test fails
      */
@@ -156,7 +156,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBackgroundSound}.
+     * Test {@link org.htmlunit.html.HtmlBackgroundSound}.
      *
      * @throws Exception if the test fails
      */
@@ -167,7 +167,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBase}.
+     * Test {@link org.htmlunit.html.HtmlBase}.
      *
      * @throws Exception if the test fails
      */
@@ -178,7 +178,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBaseFont}.
+     * Test {@link org.htmlunit.html.HtmlBaseFont}.
      *
      * @throws Exception if the test fails
      */
@@ -189,7 +189,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalIsolation}.
+     * Test {@link org.htmlunit.html.HtmlBidirectionalIsolation}.
      *
      * @throws Exception if the test fails
      */
@@ -200,7 +200,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBidirectionalOverride}.
+     * Test {@link org.htmlunit.html.HtmlBidirectionalOverride}.
      *
      * @throws Exception if the test fails
      */
@@ -211,7 +211,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBig}.
+     * Test {@link org.htmlunit.html.HtmlBig}.
      *
      * @throws Exception if the test fails
      */
@@ -222,7 +222,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBlink}.
+     * Test {@link org.htmlunit.html.HtmlBlink}.
      *
      * @throws Exception if the test fails
      */
@@ -233,7 +233,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBlockQuote}.
+     * Test {@link org.htmlunit.html.HtmlBlockQuote}.
      *
      * @throws Exception if the test fails
      */
@@ -244,7 +244,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBody}.
+     * Test {@link org.htmlunit.html.HtmlBody}.
      *
      * @throws Exception if the test fails
      */
@@ -255,7 +255,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBold}.
+     * Test {@link org.htmlunit.html.HtmlBold}.
      *
      * @throws Exception if the test fails
      */
@@ -266,7 +266,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlBreak}.
+     * Test {@link org.htmlunit.html.HtmlBreak}.
      *
      * @throws Exception if the test fails
      */
@@ -277,7 +277,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlButton}.
+     * Test {@link org.htmlunit.html.HtmlButton}.
      *
      * @throws Exception if the test fails
      */
@@ -288,7 +288,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCanvas}.
+     * Test {@link org.htmlunit.html.HtmlCanvas}.
      *
      * @throws Exception if the test fails
      */
@@ -299,7 +299,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCaption}.
+     * Test {@link org.htmlunit.html.HtmlCaption}.
      *
      * @throws Exception if the test fails
      */
@@ -310,7 +310,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCenter}.
+     * Test {@link org.htmlunit.html.HtmlCenter}.
      *
      * @throws Exception if the test fails
      */
@@ -321,7 +321,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCitation}.
+     * Test {@link org.htmlunit.html.HtmlCitation}.
      *
      * @throws Exception if the test fails
      */
@@ -332,7 +332,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCode}.
+     * Test {@link org.htmlunit.html.HtmlCode}.
      *
      * @throws Exception if the test fails
      */
@@ -343,7 +343,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlCommand}.
+     * Test {@link org.htmlunit.html.HtmlCommand}.
      *
      * @throws Exception if the test fails
      */
@@ -356,7 +356,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDataList}.
+     * Test {@link org.htmlunit.html.HtmlDataList}.
      *
      * @throws Exception if the test fails
      */
@@ -367,7 +367,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinition}.
+     * Test {@link org.htmlunit.html.HtmlDefinition}.
      *
      * @throws Exception if the test fails
      */
@@ -378,7 +378,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionDescription}.
+     * Test {@link org.htmlunit.html.HtmlDefinitionDescription}.
      *
      * @throws Exception if the test fails
      */
@@ -389,7 +389,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDeletedText}.
+     * Test {@link org.htmlunit.html.HtmlDeletedText}.
      *
      * @throws Exception if the test fails
      */
@@ -400,7 +400,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDetails}.
+     * Test {@link org.htmlunit.html.HtmlDetails}.
      *
      * @throws Exception if the test fails
      */
@@ -411,7 +411,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDialog}.
+     * Test {@link org.htmlunit.html.HtmlDialog}.
      *
      * @throws Exception if the test fails
      */
@@ -427,7 +427,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDirectory}.
+     * Test {@link org.htmlunit.html.HtmlDirectory}.
      *
      * @throws Exception if the test fails
      */
@@ -438,7 +438,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDivision}.
+     * Test {@link org.htmlunit.html.HtmlDivision}.
      *
      * @throws Exception if the test fails
      */
@@ -449,7 +449,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionList}.
+     * Test {@link org.htmlunit.html.HtmlDefinitionList}.
      *
      * @throws Exception if the test fails
      */
@@ -460,7 +460,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlDefinitionTerm}.
+     * Test {@link org.htmlunit.html.HtmlDefinitionTerm}.
      *
      * @throws Exception if the test fails
      */
@@ -471,7 +471,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlEmbed}.
+     * Test {@link org.htmlunit.html.HtmlEmbed}.
      *
      * @throws Exception if the test fails
      */
@@ -482,7 +482,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlEmphasis}.
+     * Test {@link org.htmlunit.html.HtmlEmphasis}.
      *
      * @throws Exception if the test fails
      */
@@ -493,7 +493,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFieldSet}.
+     * Test {@link org.htmlunit.html.HtmlFieldSet}.
      *
      * @throws Exception if the test fails
      */
@@ -504,7 +504,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFigureCaption}.
+     * Test {@link org.htmlunit.html.HtmlFigureCaption}.
      *
      * @throws Exception if the test fails
      */
@@ -515,7 +515,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFigure}.
+     * Test {@link org.htmlunit.html.HtmlFigure}.
      *
      * @throws Exception if the test fails
      */
@@ -526,7 +526,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFont}.
+     * Test {@link org.htmlunit.html.HtmlFont}.
      *
      * @throws Exception if the test fails
      */
@@ -537,7 +537,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlForm}.
+     * Test {@link org.htmlunit.html.HtmlForm}.
      *
      * @throws Exception if the test fails
      */
@@ -548,7 +548,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFooter}.
+     * Test {@link org.htmlunit.html.HtmlFooter}.
      *
      * @throws Exception if the test fails
      */
@@ -559,7 +559,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFrame}.
+     * Test {@link org.htmlunit.html.HtmlFrame}.
      *
      * @throws Exception if the test fails
      */
@@ -570,7 +570,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlFrameSet}.
+     * Test {@link org.htmlunit.html.HtmlFrameSet}.
      *
      * @throws Exception if the test fails
      */
@@ -581,7 +581,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading1}.
+     * Test {@link org.htmlunit.html.HtmlHeading1}.
      *
      * @throws Exception if the test fails
      */
@@ -592,7 +592,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading2}.
+     * Test {@link org.htmlunit.html.HtmlHeading2}.
      *
      * @throws Exception if the test fails
      */
@@ -603,7 +603,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading3}.
+     * Test {@link org.htmlunit.html.HtmlHeading3}.
      *
      * @throws Exception if the test fails
      */
@@ -614,7 +614,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading4}.
+     * Test {@link org.htmlunit.html.HtmlHeading4}.
      *
      * @throws Exception if the test fails
      */
@@ -625,7 +625,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading5}.
+     * Test {@link org.htmlunit.html.HtmlHeading5}.
      *
      * @throws Exception if the test fails
      */
@@ -636,7 +636,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeading6}.
+     * Test {@link org.htmlunit.html.HtmlHeading6}.
      *
      * @throws Exception if the test fails
      */
@@ -647,7 +647,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHead}.
+     * Test {@link org.htmlunit.html.HtmlHead}.
      *
      * @throws Exception if the test fails
      */
@@ -658,7 +658,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHeader}.
+     * Test {@link org.htmlunit.html.HtmlHeader}.
      *
      * @throws Exception if the test fails
      */
@@ -669,7 +669,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHorizontalRule}.
+     * Test {@link org.htmlunit.html.HtmlHorizontalRule}.
      *
      * @throws Exception if the test fails
      */
@@ -680,7 +680,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlHtml}.
+     * Test {@link org.htmlunit.html.HtmlHtml}.
      *
      * @throws Exception if the test fails
      */
@@ -691,7 +691,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInlineFrame}.
+     * Test {@link org.htmlunit.html.HtmlInlineFrame}.
      *
      * @throws Exception if the test fails
      */
@@ -702,7 +702,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlImage}.
+     * Test {@link org.htmlunit.html.HtmlImage}.
      *
      * @throws Exception if the test fails
      */
@@ -713,7 +713,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlImage}.
+     * Test {@link org.htmlunit.html.HtmlImage}.
      *
      * @throws Exception if the test fails
      */
@@ -724,7 +724,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInsertedText}.
+     * Test {@link org.htmlunit.html.HtmlInsertedText}.
      *
      * @throws Exception if the test fails
      */
@@ -735,7 +735,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlIsIndex}.
+     * Test {@link org.htmlunit.html.HtmlIsIndex}.
      *
      * @throws Exception if the test fails
      */
@@ -748,7 +748,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlItalic}.
+     * Test {@link org.htmlunit.html.HtmlItalic}.
      *
      * @throws Exception if the test fails
      */
@@ -759,7 +759,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlKeyboard}.
+     * Test {@link org.htmlunit.html.HtmlKeyboard}.
      *
      * @throws Exception if the test fails
      */
@@ -779,7 +779,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLabel}.
+     * Test {@link org.htmlunit.html.HtmlLabel}.
      *
      * @throws Exception if the test fails
      */
@@ -790,7 +790,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLayer}.
+     * Test {@link org.htmlunit.html.HtmlLayer}.
      *
      * @throws Exception if the test fails
      */
@@ -801,7 +801,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLegend}.
+     * Test {@link org.htmlunit.html.HtmlLegend}.
      *
      * @throws Exception if the test fails
      */
@@ -812,7 +812,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlListing}.
+     * Test {@link org.htmlunit.html.HtmlListing}.
      *
      * @throws Exception if the test fails
      */
@@ -823,7 +823,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlListItem}.
+     * Test {@link org.htmlunit.html.HtmlListItem}.
      *
      * @throws Exception if the test fails
      */
@@ -834,7 +834,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlLink}.
+     * Test {@link org.htmlunit.html.HtmlLink}.
      *
      * @throws Exception if the test fails
      */
@@ -845,7 +845,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMain}.
+     * Test {@link org.htmlunit.html.HtmlMain}.
      *
      * @throws Exception if the test fails
      */
@@ -857,7 +857,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMap}.
+     * Test {@link org.htmlunit.html.HtmlMap}.
      *
      * @throws Exception if the test fails
      */
@@ -868,7 +868,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMarquee}.
+     * Test {@link org.htmlunit.html.HtmlMarquee}.
      *
      * @throws Exception if the test fails
      */
@@ -879,7 +879,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMark}.
+     * Test {@link org.htmlunit.html.HtmlMark}.
      *
      * @throws Exception if the test fails
      */
@@ -890,7 +890,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMenu}.
+     * Test {@link org.htmlunit.html.HtmlMenu}.
      *
      * @throws Exception if the test fails
      */
@@ -901,7 +901,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMenuItem}.
+     * Test {@link org.htmlunit.html.HtmlMenuItem}.
      *
      * @throws Exception if the test fails
      */
@@ -912,7 +912,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMeta}.
+     * Test {@link org.htmlunit.html.HtmlMeta}.
      *
      * @throws Exception if the test fails
      */
@@ -923,7 +923,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMeter}.
+     * Test {@link org.htmlunit.html.HtmlMeter}.
      *
      * @throws Exception if the test fails
      */
@@ -934,7 +934,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlMultiColumn}.
+     * Test {@link org.htmlunit.html.HtmlMultiColumn}.
      *
      * @throws Exception if the test fails
      */
@@ -945,7 +945,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNav}.
+     * Test {@link org.htmlunit.html.HtmlNav}.
      *
      * @throws Exception if the test fails
      */
@@ -956,7 +956,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNextId}.
+     * Test {@link org.htmlunit.html.HtmlNextId}.
      *
      * @throws Exception if the test fails
      */
@@ -967,7 +967,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoBreak}.
+     * Test {@link org.htmlunit.html.HtmlNoBreak}.
      *
      * @throws Exception if the test fails
      */
@@ -978,7 +978,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoEmbed}.
+     * Test {@link org.htmlunit.html.HtmlNoEmbed}.
      *
      * @throws Exception if the test fails
      */
@@ -989,7 +989,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoFrames}.
+     * Test {@link org.htmlunit.html.HtmlNoFrames}.
      *
      * @throws Exception if the test fails
      */
@@ -1000,7 +1000,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoLayer}.
+     * Test {@link org.htmlunit.html.HtmlNoLayer}.
      *
      * @throws Exception if the test fails
      */
@@ -1011,7 +1011,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlNoScript}.
+     * Test {@link org.htmlunit.html.HtmlNoScript}.
      *
      * @throws Exception if the test fails
      */
@@ -1022,7 +1022,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlObject}.
+     * Test {@link org.htmlunit.html.HtmlObject}.
      *
      * @throws Exception if the test fails
      */
@@ -1033,7 +1033,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOrderedList}.
+     * Test {@link org.htmlunit.html.HtmlOrderedList}.
      *
      * @throws Exception if the test fails
      */
@@ -1044,7 +1044,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOptionGroup}.
+     * Test {@link org.htmlunit.html.HtmlOptionGroup}.
      *
      * @throws Exception if the test fails
      */
@@ -1055,7 +1055,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOption}.
+     * Test {@link org.htmlunit.html.HtmlOption}.
      *
      * @throws Exception if the test fails
      */
@@ -1066,7 +1066,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlOutput}.
+     * Test {@link org.htmlunit.html.HtmlOutput}.
      *
      * @throws Exception if the test fails
      */
@@ -1077,7 +1077,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlParagraph}.
+     * Test {@link org.htmlunit.html.HtmlParagraph}.
      *
      * @throws Exception if the test fails
      */
@@ -1088,7 +1088,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlParameter}.
+     * Test {@link org.htmlunit.html.HtmlParameter}.
      *
      * @throws Exception if the test fails
      */
@@ -1099,7 +1099,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPlainText}.
+     * Test {@link org.htmlunit.html.HtmlPlainText}.
      *
      * @throws Exception if the test fails
      */
@@ -1110,7 +1110,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPreformattedText}.
+     * Test {@link org.htmlunit.html.HtmlPreformattedText}.
      *
      * @throws Exception if the test fails
      */
@@ -1121,7 +1121,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlProgress}.
+     * Test {@link org.htmlunit.html.HtmlProgress}.
      *
      * @throws Exception if the test fails
      */
@@ -1132,7 +1132,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInlineQuotation}.
+     * Test {@link org.htmlunit.html.HtmlInlineQuotation}.
      *
      * @throws Exception if the test fails
      */
@@ -1143,7 +1143,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRuby}.
+     * Test {@link org.htmlunit.html.HtmlRuby}.
      *
      * @throws Exception if the test fails
      */
@@ -1154,7 +1154,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRt}.
+     * Test {@link org.htmlunit.html.HtmlRt}.
      *
      * @throws Exception if the test fails
      */
@@ -1165,7 +1165,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlRp}.
+     * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
      */
@@ -1176,7 +1176,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlS}.
+     * Test {@link org.htmlunit.html.HtmlS}.
      *
      * @throws Exception if the test fails
      */
@@ -1187,7 +1187,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSample}.
+     * Test {@link org.htmlunit.html.HtmlSample}.
      *
      * @throws Exception if the test fails
      */
@@ -1198,7 +1198,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlScript}.
+     * Test {@link org.htmlunit.html.HtmlScript}.
      *
      * @throws Exception if the test fails
      */
@@ -1209,7 +1209,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSection}.
+     * Test {@link org.htmlunit.html.HtmlSection}.
      *
      * @throws Exception if the test fails
      */
@@ -1220,7 +1220,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSelect}.
+     * Test {@link org.htmlunit.html.HtmlSelect}.
      *
      * @throws Exception if the test fails
      */
@@ -1231,7 +1231,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSmall}.
+     * Test {@link org.htmlunit.html.HtmlSmall}.
      *
      * @throws Exception if the test fails
      */
@@ -1242,7 +1242,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSource}.
+     * Test {@link org.htmlunit.html.HtmlSource}.
      *
      * @throws Exception if the test fails
      */
@@ -1262,7 +1262,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSpan}.
+     * Test {@link org.htmlunit.html.HtmlSpan}.
      *
      * @throws Exception if the test fails
      */
@@ -1273,7 +1273,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStrike}.
+     * Test {@link org.htmlunit.html.HtmlStrike}.
      *
      * @throws Exception if the test fails
      */
@@ -1284,7 +1284,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStrong}.
+     * Test {@link org.htmlunit.html.HtmlStrong}.
      *
      * @throws Exception if the test fails
      */
@@ -1295,7 +1295,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlStyle}.
+     * Test {@link org.htmlunit.html.HtmlStyle}.
      *
      * @throws Exception if the test fails
      */
@@ -1306,7 +1306,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSubscript}.
+     * Test {@link org.htmlunit.html.HtmlSubscript}.
      *
      * @throws Exception if the test fails
      */
@@ -1317,7 +1317,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSummary}.
+     * Test {@link org.htmlunit.html.HtmlSummary}.
      *
      * @throws Exception if the test fails
      */
@@ -1328,7 +1328,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     * Test {@link org.htmlunit.html.HtmlSuperscript}.
      *
      * @throws Exception if the test fails
      */
@@ -1339,7 +1339,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSuperscript}.
+     * Test {@link org.htmlunit.html.HtmlSuperscript}.
      *
      * @throws Exception if the test fails
      */
@@ -1350,7 +1350,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTable}.
+     * Test {@link org.htmlunit.html.HtmlTable}.
      *
      * @throws Exception if the test fails
      */
@@ -1361,7 +1361,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableColumn}.
+     * Test {@link org.htmlunit.html.HtmlTableColumn}.
      *
      * @throws Exception if the test fails
      */
@@ -1372,7 +1372,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableColumnGroup}.
+     * Test {@link org.htmlunit.html.HtmlTableColumnGroup}.
      *
      * @throws Exception if the test fails
      */
@@ -1383,7 +1383,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableBody}.
+     * Test {@link org.htmlunit.html.HtmlTableBody}.
      *
      * @throws Exception if the test fails
      */
@@ -1394,7 +1394,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableDataCell}.
+     * Test {@link org.htmlunit.html.HtmlTableDataCell}.
      *
      * @throws Exception if the test fails
      */
@@ -1405,7 +1405,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeaderCell}.
+     * Test {@link org.htmlunit.html.HtmlTableHeaderCell}.
      *
      * @throws Exception if the test fails
      */
@@ -1416,7 +1416,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableRow}.
+     * Test {@link org.htmlunit.html.HtmlTableRow}.
      *
      * @throws Exception if the test fails
      */
@@ -1427,7 +1427,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTrack}.
+     * Test {@link org.htmlunit.html.HtmlTrack}.
      *
      * @throws Exception if the test fails
      */
@@ -1438,7 +1438,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTextArea}.
+     * Test {@link org.htmlunit.html.HtmlTextArea}.
      *
      * @throws Exception if the test fails
      */
@@ -1449,7 +1449,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableFooter}.
+     * Test {@link org.htmlunit.html.HtmlTableFooter}.
      *
      * @throws Exception if the test fails
      */
@@ -1460,7 +1460,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTableHeader}.
+     * Test {@link org.htmlunit.html.HtmlTableHeader}.
      *
      * @throws Exception if the test fails
      */
@@ -1471,7 +1471,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTeletype}.
+     * Test {@link org.htmlunit.html.HtmlTeletype}.
      *
      * @throws Exception if the test fails
      */
@@ -1482,7 +1482,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTime}.
+     * Test {@link org.htmlunit.html.HtmlTime}.
      *
      * @throws Exception if the test fails
      */
@@ -1493,7 +1493,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTitle}.
+     * Test {@link org.htmlunit.html.HtmlTitle}.
      *
      * @throws Exception if the test fails
      */
@@ -1504,7 +1504,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlUnderlined}.
+     * Test {@link org.htmlunit.html.HtmlUnderlined}.
      *
      * @throws Exception if the test fails
      */
@@ -1515,7 +1515,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlUnorderedList}.
+     * Test {@link org.htmlunit.html.HtmlUnorderedList}.
      *
      * @throws Exception if the test fails
      */
@@ -1526,7 +1526,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlVariable}.
+     * Test {@link org.htmlunit.html.HtmlVariable}.
      *
      * @throws Exception if the test fails
      */
@@ -1537,7 +1537,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlVideo}.
+     * Test {@link org.htmlunit.html.HtmlVideo}.
      *
      * @throws Exception if the test fails
      */
@@ -1548,7 +1548,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlWordBreak}.
+     * Test {@link org.htmlunit.html.HtmlWordBreak}.
      *
      * @throws Exception if the test fails
      */
@@ -1559,7 +1559,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlExample}.
+     * Test {@link org.htmlunit.html.HtmlExample}.
      *
      * @throws Exception if the test fails
      */
@@ -1570,7 +1570,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlInput}.
+     * Test {@link org.htmlunit.html.HtmlInput}.
      *
      * @throws Exception if the test fails
      */
@@ -1581,7 +1581,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlData}.
+     * Test {@link org.htmlunit.html.HtmlData}.
      *
      * @throws Exception if the test fails
      */
@@ -1603,7 +1603,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlPicture}.
+     * Test {@link org.htmlunit.html.HtmlPicture}.
      *
      * @throws Exception if the test fails
      */
@@ -1614,7 +1614,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlTemplate}.
+     * Test {@link org.htmlunit.html.HtmlTemplate}.
      *
      * @throws Exception if the test fails
      */
@@ -1625,7 +1625,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.html.HtmlSlot}.
+     * Test {@link org.htmlunit.html.HtmlSlot}.
      *
      * @throws Exception if the test fails
      */

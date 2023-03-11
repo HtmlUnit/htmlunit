@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.css;
+package org.htmlunit.css;
 
 import static org.junit.Assert.fail;
 
@@ -28,7 +28,7 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.css.StyleAttributes.Definition;
+import org.htmlunit.css.StyleAttributes.Definition;
 
 /**
  * Tests for {@link StyleAttributes}.

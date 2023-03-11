@@ -12,12 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.util;
+package org.htmlunit.util;
 
-import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
-import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
-import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
-import static com.gargoylesoftware.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
+import static org.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
+import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
+import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
+import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertSame;
@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
+import org.htmlunit.HttpHeader;
 
 /**
  * Unit tests for {@link EncodingSniffer}.

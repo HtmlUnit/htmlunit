@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertTrue;
@@ -33,18 +33,18 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.annotations.StandardsMode;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.AlertsStandards;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.BuggyWebDriver;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.OS;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Tries;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.annotations.StandardsMode;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.AlertsStandards;
+import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.BrowserRunner.OS;
+import org.htmlunit.junit.BrowserRunner.TestedBrowser;
+import org.htmlunit.junit.BrowserRunner.Tries;
 
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.TestedBrowser}).

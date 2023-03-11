@@ -12,27 +12,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
+package org.htmlunit.activex.javascript.msxml;
 
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.ACTIVEX_CHECK;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLDOMDOCUMENT_FUNCTION;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLDOMDocument;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromString;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callSerializeXMLDOMDocumentToString;
-import static com.gargoylesoftware.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.ACTIVEX_CHECK;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLDOMDOCUMENT_FUNCTION;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.LOAD_XMLDOMDOCUMENT_FROM_STRING_FUNCTION;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.SERIALIZE_XMLDOMDOCUMENT_TO_STRING_FUNCTION;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLDOMDocument;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLDOMDocumentFromString;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callSerializeXMLDOMDocumentToString;
+import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Tests for {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument}.
- * @see com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument2Test
+ * Tests for {@link org.htmlunit.javascript.host.xml.XMLDocument}.
+ * @see org.htmlunit.javascript.host.xml.XMLDocument2Test
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

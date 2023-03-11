@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.assertTrue;
@@ -29,9 +29,9 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.configuration.BrowserFeature;
-import com.gargoylesoftware.htmlunit.javascript.configuration.SupportedBrowser;
+import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
+import org.htmlunit.javascript.configuration.BrowserFeature;
+import org.htmlunit.javascript.configuration.SupportedBrowser;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.

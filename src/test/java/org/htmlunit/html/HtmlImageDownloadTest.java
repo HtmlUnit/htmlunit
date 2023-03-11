@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package org.htmlunit.html;
 
 import static org.junit.Assert.fail;
 
@@ -29,13 +29,13 @@ import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.HttpHeader;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.platform.image.ImageData;
-import com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData;
+import org.htmlunit.HttpHeader;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebResponse;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.platform.image.ImageData;
+import org.htmlunit.platform.image.ImageIOImageData;
 
 /**
  * Tests for {@link HtmlImage}.
@@ -47,7 +47,7 @@ import com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData;
  */
 @RunWith(BrowserRunner.class)
 public class HtmlImageDownloadTest extends WebServerTestCase {
-    private static final String base_file_path_ = "src/test/resources/com/gargoylesoftware/htmlunit/html";
+    private static final String base_file_path_ = "src/test/resources/org/htmlunit/html";
 
     /**
      * Constructor.

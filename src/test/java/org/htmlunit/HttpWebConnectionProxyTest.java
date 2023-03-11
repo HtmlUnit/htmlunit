@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import java.net.URL;
 
@@ -22,8 +22,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.util.UrlUtils;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * Tests methods in {@link HttpWebConnection}.

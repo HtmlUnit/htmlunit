@@ -12,17 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.general;
+package org.htmlunit.general;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleRule;
-import com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleSheet;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.javascript.host.css.CSSStyleRule;
+import org.htmlunit.javascript.host.css.CSSStyleSheet;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests that {@code typeof} host class is correct.
@@ -57,7 +57,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ActiveXObject}.
+     * Test {@link org.htmlunit.javascript.host.ActiveXObject}.
      *
      * @throws Exception if an error occurs
      */
@@ -68,7 +68,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AnalyserNode}.
+     * Test {@link org.htmlunit.javascript.host.media.AnalyserNode}.
      *
      * @throws Exception if the test fails
      */
@@ -119,7 +119,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     * Test {@link org.htmlunit.javascript.host.ApplicationCache}.
      *
      * @throws Exception if an error occurs
      */
@@ -194,7 +194,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Attr}.
+     * Test {@link org.htmlunit.javascript.host.dom.Attr}.
      *
      * @throws Exception if an error occurs
      */
@@ -275,7 +275,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.AudioParam}.
+     * Test {@link org.htmlunit.javascript.host.media.AudioParam}.
      *
      * @throws Exception if the test fails
      */
@@ -359,7 +359,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.BeforeUnloadEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.BeforeUnloadEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -529,7 +529,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
+     * Test {@link org.htmlunit.javascript.host.canvas.CanvasRenderingContext2D}.
      *
      * @throws Exception if an error occurs
      */
@@ -552,7 +552,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CDATASection}.
+     * Test {@link org.htmlunit.javascript.host.dom.CDATASection}.
      *
      * @throws Exception if an error occurs
      */
@@ -564,7 +564,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.media.ChannelMergerNode}.
+     * Test {@link org.htmlunit.javascript.host.media.ChannelMergerNode}.
      *
      * @throws Exception if the test fails
      */
@@ -596,7 +596,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.CharacterData}.
+     * Test {@link org.htmlunit.javascript.host.dom.CharacterData}.
      *
      * @throws Exception if an error occurs
      */
@@ -607,7 +607,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     * Test {@link org.htmlunit.javascript.host.ClientRect}.
      *
      * @throws Exception if an error occurs
      */
@@ -658,7 +658,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
+     * Test {@link org.htmlunit.javascript.host.dom.Comment}.
      *
      * @throws Exception if an error occurs
      */
@@ -680,7 +680,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     * Test {@link org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -723,7 +723,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.geo.Coordinates}.
+     * Test {@link org.htmlunit.javascript.host.geo.Coordinates}.
      *
      * @throws Exception if an error occurs
      */
@@ -785,7 +785,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -827,7 +827,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSFontFaceRule}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSFontFaceRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -849,7 +849,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSImportRule}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSImportRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -881,7 +881,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSMediaRule}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSMediaRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -924,7 +924,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSRule}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSRule}.
      *
      * @throws Exception if an error occurs
      */
@@ -936,7 +936,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSRuleList}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSRuleList}.
      *
      * @throws Exception if an error occurs
      */
@@ -948,7 +948,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -1172,7 +1172,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Document}.
+     * Test {@link org.htmlunit.javascript.host.dom.Document}.
      *
      * @throws Exception if an error occurs
      */
@@ -1184,7 +1184,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentFragment}.
+     * Test {@link org.htmlunit.javascript.host.dom.DocumentFragment}.
      *
      * @throws Exception if an error occurs
      */
@@ -1196,7 +1196,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DocumentType}.
+     * Test {@link org.htmlunit.javascript.host.dom.DocumentType}.
      *
      * @throws Exception if an error occurs
      */
@@ -1231,7 +1231,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMException}.
+     * Test {@link org.htmlunit.javascript.host.dom.DOMException}.
      *
      * @throws Exception if an error occurs
      */
@@ -1243,7 +1243,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMImplementation}.
+     * Test {@link org.htmlunit.javascript.host.dom.DOMImplementation}.
      *
      * @throws Exception if an error occurs
      */
@@ -1275,7 +1275,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMParser}.
+     * Test {@link org.htmlunit.javascript.host.dom.DOMParser}.
      *
      * @throws Exception if an error occurs
      */
@@ -1306,7 +1306,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ClientRect}.
+     * Test {@link org.htmlunit.javascript.host.ClientRect}.
      *
      * @throws Exception if an error occurs
      */
@@ -1369,7 +1369,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMStringMap}.
+     * Test {@link org.htmlunit.javascript.host.dom.DOMStringMap}.
      *
      * @throws Exception if an error occurs
      */
@@ -1381,7 +1381,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.DOMTokenList}.
+     * Test {@link org.htmlunit.javascript.host.dom.DOMTokenList}.
      *
      * @throws Exception if an error occurs
      */
@@ -1413,7 +1413,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Element}.
+     * Test {@link org.htmlunit.javascript.host.Element}.
      *
      * @throws Exception if an error occurs
      */
@@ -1425,7 +1425,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.Enumerator}.
+     * Test {@link org.htmlunit.javascript.host.html.Enumerator}.
      *
      * @throws Exception if an error occurs
      */
@@ -1456,7 +1456,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.Event}.
+     * Test {@link org.htmlunit.javascript.host.event.Event}.
      *
      * @throws Exception if an error occurs
      */
@@ -1525,7 +1525,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.External}.
+     * Test {@link org.htmlunit.javascript.host.External}.
      *
      * @throws Exception if an error occurs
      */
@@ -1722,7 +1722,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.FormData}.
+     * Test {@link org.htmlunit.javascript.host.xml.FormData}.
      *
      * @throws Exception if an error occurs
      */
@@ -1782,7 +1782,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.geo.Geolocation}.
+     * Test {@link org.htmlunit.javascript.host.geo.Geolocation}.
      *
      * @throws Exception if an error occurs
      */
@@ -1803,7 +1803,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.HashChangeEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.HashChangeEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -1825,7 +1825,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.History}.
+     * Test {@link org.htmlunit.javascript.host.History}.
      *
      * @throws Exception if an error occurs
      */
@@ -1837,7 +1837,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAllCollection}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLAllCollection}.
      *
      * @throws Exception if an error occurs
      */
@@ -1849,7 +1849,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAnchorElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLAnchorElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1861,7 +1861,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAppletElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLAppletElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1873,7 +1873,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAreaElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLAreaElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1885,7 +1885,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLAudioElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLAudioElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1897,7 +1897,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLBaseElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1909,7 +1909,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBaseFontElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLBaseFontElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1921,7 +1921,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBGSoundElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLBGSoundElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1933,7 +1933,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBlockElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLBlockElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1945,7 +1945,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1956,7 +1956,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1968,7 +1968,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLBRElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLBRElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1980,7 +1980,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLButtonElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLButtonElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -1992,7 +1992,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCanvasElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLCanvasElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2004,7 +2004,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLCollection}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLCollection}.
      *
      * @throws Exception if an error occurs
      */
@@ -2016,7 +2016,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Comment}.
+     * Test {@link org.htmlunit.javascript.host.dom.Comment}.
      *
      * @throws Exception if an error occurs
      */
@@ -2046,7 +2046,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDataListElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDataListElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2058,7 +2058,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDDElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2070,7 +2070,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDDElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDDElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2081,7 +2081,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDTElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2092,7 +2092,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDetailsElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDetailsElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2104,7 +2104,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDialogElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDialogElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2116,7 +2116,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDirectoryElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDirectoryElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2128,7 +2128,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDivElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2140,7 +2140,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDListElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDListElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2152,7 +2152,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDocument}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDocument}.
      *
      * @throws Exception if an error occurs
      */
@@ -2164,7 +2164,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDTElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLDTElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2176,7 +2176,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2188,7 +2188,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLEmbedElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLEmbedElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2200,7 +2200,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFieldSetElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLFieldSetElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2212,7 +2212,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFontElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLFontElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2234,7 +2234,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFormElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLFormElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2246,7 +2246,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLFrameElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2258,7 +2258,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLFrameSetElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLFrameSetElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2270,7 +2270,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLUnknownElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2281,7 +2281,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLHeadElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2293,7 +2293,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHeadingElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLHeadingElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2305,7 +2305,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHRElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLHRElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2317,7 +2317,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLHtmlElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLHtmlElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2338,7 +2338,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIFrameElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLIFrameElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2350,7 +2350,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLImageElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2362,7 +2362,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInlineQuotationElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLInlineQuotationElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2373,7 +2373,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLInputElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLInputElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2385,7 +2385,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLIsIndexElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLIsIndexElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2406,7 +2406,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLabelElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLLabelElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2418,7 +2418,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLegendElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLLegendElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2430,7 +2430,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLIElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLLIElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2442,7 +2442,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLLinkElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLLinkElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2454,7 +2454,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLListElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLListElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2465,7 +2465,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMapElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMapElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2477,7 +2477,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMarqueeElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMarqueeElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2489,7 +2489,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMediaElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMediaElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2501,7 +2501,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMenuElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMenuElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2522,7 +2522,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMetaElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMetaElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2534,7 +2534,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLMeterElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLMeterElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2546,7 +2546,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLModElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLModElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2558,7 +2558,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLNextIdElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLNextIdElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2579,7 +2579,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLObjectElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLObjectElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2591,7 +2591,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOListElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOListElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2603,7 +2603,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptGroupElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOptGroupElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2615,7 +2615,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOptionElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2627,7 +2627,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionsCollection}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOptionsCollection}.
      *
      * @throws Exception if an error occurs
      */
@@ -2639,7 +2639,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOutputElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOutputElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2651,7 +2651,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParagraphElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLParagraphElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2663,7 +2663,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLParamElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLParamElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2675,7 +2675,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPhraseElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLPhraseElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2697,7 +2697,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLPreElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLPreElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2709,7 +2709,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLProgressElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLProgressElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2721,7 +2721,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLQuoteElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLQuoteElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2733,7 +2733,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLScriptElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLScriptElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2745,7 +2745,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLSelectElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2778,7 +2778,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSourceElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLSourceElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2790,7 +2790,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSpanElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLSpanElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2802,7 +2802,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLStyleElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLStyleElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2814,7 +2814,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCaptionElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableCaptionElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2826,7 +2826,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableCellElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableCellElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2838,7 +2838,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableColElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableColElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2850,7 +2850,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableComponent}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableComponent}.
      *
      * @throws Exception if an error occurs
      */
@@ -2861,7 +2861,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableDataCellElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableDataCellElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2873,7 +2873,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2885,7 +2885,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableHeaderCellElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableHeaderCellElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2897,7 +2897,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableRowElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableRowElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2909,7 +2909,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTableSectionElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTableSectionElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2931,7 +2931,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTextAreaElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTextAreaElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2952,7 +2952,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTimeElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTimeElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2964,7 +2964,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTitleElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTitleElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2976,7 +2976,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLTrackElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLTrackElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -2988,7 +2988,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUListElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLUListElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -3000,7 +3000,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLUnknownElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLUnknownElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -3012,7 +3012,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLVideoElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLVideoElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -3173,7 +3173,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLImageElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLImageElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -3308,7 +3308,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.intl.Intl}.
+     * Test {@link org.htmlunit.javascript.host.intl.Intl}.
      *
      * @throws Exception if the test fails
      */
@@ -3328,7 +3328,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.KeyboardEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.KeyboardEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -3361,7 +3361,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Location}.
+     * Test {@link org.htmlunit.javascript.host.Location}.
      *
      * @throws Exception if an error occurs
      */
@@ -3520,7 +3520,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.MediaList}.
+     * Test {@link org.htmlunit.javascript.host.css.MediaList}.
      *
      * @throws Exception if an error occurs
      */
@@ -3631,7 +3631,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessageChannel}.
+     * Test {@link org.htmlunit.javascript.host.MessageChannel}.
      *
      * @throws Exception if an error occurs
      */
@@ -3642,7 +3642,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MessageEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.MessageEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -3654,7 +3654,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MessagePort}.
+     * Test {@link org.htmlunit.javascript.host.MessagePort}.
      *
      * @throws Exception if an error occurs
      */
@@ -3762,7 +3762,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MimeType}.
+     * Test {@link org.htmlunit.javascript.host.MimeType}.
      *
      * @throws Exception if an error occurs
      */
@@ -3774,7 +3774,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.MimeTypeArray}.
+     * Test {@link org.htmlunit.javascript.host.MimeTypeArray}.
      *
      * @throws Exception if an error occurs
      */
@@ -3786,7 +3786,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MouseEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.MouseEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -3960,7 +3960,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
+     * Test {@link org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -3983,7 +3983,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.CSSStyleDeclaration}.
+     * Test {@link org.htmlunit.javascript.host.css.CSSStyleDeclaration}.
      *
      * @throws Exception if an error occurs
      */
@@ -3996,7 +3996,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.MutationEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.MutationEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -4027,7 +4027,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.NamedNodeMap}.
+     * Test {@link org.htmlunit.javascript.host.NamedNodeMap}.
      *
      * @throws Exception if an error occurs
      */
@@ -4039,7 +4039,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Namespace}.
+     * Test {@link org.htmlunit.javascript.host.Namespace}.
      *
      * @throws Exception if an error occurs
      */
@@ -4050,7 +4050,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.NamespaceCollection}.
+     * Test {@link org.htmlunit.javascript.host.NamespaceCollection}.
      *
      * @throws Exception if an error occurs
      */
@@ -4061,7 +4061,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Navigator}.
+     * Test {@link org.htmlunit.javascript.host.Navigator}.
      *
      * @throws Exception if an error occurs
      */
@@ -4073,7 +4073,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.network.NetworkInformation}.
+     * Test {@link org.htmlunit.javascript.host.network.NetworkInformation}.
      *
      * @throws Exception if an error occurs
      */
@@ -4086,7 +4086,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Node}.
+     * Test {@link org.htmlunit.javascript.host.dom.Node}.
      *
      * @throws Exception if an error occurs
      */
@@ -4098,7 +4098,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.NodeFilter}.
+     * Test {@link org.htmlunit.javascript.host.dom.NodeFilter}.
      *
      * @throws Exception if an error occurs
      */
@@ -4120,7 +4120,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.NodeList}.
+     * Test {@link org.htmlunit.javascript.host.dom.NodeList}.
      *
      * @throws Exception if an error occurs
      */
@@ -4132,7 +4132,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Notification}.
+     * Test {@link org.htmlunit.javascript.host.Notification}.
      *
      * @throws Exception if an error occurs
      */
@@ -4231,7 +4231,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.ApplicationCache}.
+     * Test {@link org.htmlunit.javascript.host.ApplicationCache}.
      *
      * @throws Exception if an error occurs
      */
@@ -4259,7 +4259,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.HTMLOptionElement}.
+     * Test {@link org.htmlunit.javascript.host.html.HTMLOptionElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -4311,7 +4311,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.canvas.Path2D}.
+     * Test {@link org.htmlunit.javascript.host.canvas.Path2D}.
      *
      * @throws Exception if the test fails
      */
@@ -4506,7 +4506,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Plugin}.
+     * Test {@link org.htmlunit.javascript.host.Plugin}.
      *
      * @throws Exception if an error occurs
      */
@@ -4518,7 +4518,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.PluginArray}.
+     * Test {@link org.htmlunit.javascript.host.PluginArray}.
      *
      * @throws Exception if an error occurs
      */
@@ -4530,7 +4530,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.PointerEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.PointerEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -4561,7 +4561,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.geo.Position}.
+     * Test {@link org.htmlunit.javascript.host.geo.Position}.
      *
      * @throws Exception if an error occurs
      */
@@ -4649,7 +4649,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ProcessingInstruction}.
+     * Test {@link org.htmlunit.javascript.host.dom.ProcessingInstruction}.
      *
      * @throws Exception if an error occurs
      */
@@ -4745,7 +4745,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Range}.
+     * Test {@link org.htmlunit.javascript.host.dom.Range}.
      *
      * @throws Exception if an error occurs
      */
@@ -4817,7 +4817,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.html.RowContainer}.
+     * Test {@link org.htmlunit.javascript.host.html.RowContainer}.
      *
      * @throws Exception if an error occurs
      */
@@ -4907,7 +4907,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Screen}.
+     * Test {@link org.htmlunit.javascript.host.Screen}.
      *
      * @throws Exception if an error occurs
      */
@@ -4949,7 +4949,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Selection}.
+     * Test {@link org.htmlunit.javascript.host.dom.Selection}.
      *
      * @throws Exception if an error occurs
      */
@@ -5018,7 +5018,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.ShadowRoot}.
+     * Test {@link org.htmlunit.javascript.host.dom.ShadowRoot}.
      *
      * @throws Exception if the test fails
      */
@@ -5039,7 +5039,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SharedWorker}.
+     * Test {@link org.htmlunit.javascript.host.SharedWorker}.
      *
      * @throws Exception if an error occurs
      */
@@ -5051,7 +5051,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.SimpleArray}.
+     * Test {@link org.htmlunit.javascript.host.SimpleArray}.
      *
      * @throws Exception if an error occurs
      */
@@ -5243,7 +5243,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Storage}.
+     * Test {@link org.htmlunit.javascript.host.Storage}.
      *
      * @throws Exception if an error occurs
      */
@@ -5295,7 +5295,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.css.StyleSheetList}.
+     * Test {@link org.htmlunit.javascript.host.css.StyleSheetList}.
      *
      * @throws Exception if an error occurs
      */
@@ -5317,7 +5317,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGAElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5338,7 +5338,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAngle}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGAngle}.
      *
      * @throws Exception if an error occurs
      */
@@ -5470,7 +5470,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGAnimateElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5482,7 +5482,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateMotionElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGAnimateMotionElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5494,7 +5494,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGAnimateTransformElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGAnimateTransformElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5516,7 +5516,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGCircleElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGCircleElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5528,7 +5528,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGClipPathElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGClipPathElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5559,7 +5559,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDefsElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGDefsElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5571,7 +5571,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGDescElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGDescElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5601,7 +5601,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5613,7 +5613,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGEllipseElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGEllipseElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5625,7 +5625,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEBlendElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEBlendElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5637,7 +5637,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEColorMatrixElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEColorMatrixElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5649,7 +5649,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEComponentTransferElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEComponentTransferElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5661,7 +5661,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFECompositeElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFECompositeElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5673,7 +5673,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEConvolveMatrixElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEConvolveMatrixElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5685,7 +5685,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDiffuseLightingElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEDiffuseLightingElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5697,7 +5697,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDisplacementMapElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEDisplacementMapElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5709,7 +5709,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEDistantLightElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEDistantLightElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5731,7 +5731,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFloodElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEFloodElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5743,7 +5743,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncAElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEFuncAElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5755,7 +5755,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncBElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEFuncBElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5767,7 +5767,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncGElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEFuncGElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5779,7 +5779,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEFuncRElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEFuncRElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5791,7 +5791,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEGaussianBlurElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEGaussianBlurElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5803,7 +5803,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEImageElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEImageElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5815,7 +5815,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMergeElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEMergeElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5827,7 +5827,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMergeNodeElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEMergeNodeElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5839,7 +5839,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEMorphologyElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEMorphologyElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5851,7 +5851,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEOffsetElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEOffsetElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5863,7 +5863,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFEPointLightElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFEPointLightElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5875,7 +5875,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFESpecularLightingElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFESpecularLightingElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5887,7 +5887,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFESpotLightElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFESpotLightElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5899,7 +5899,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFETileElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFETileElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5911,7 +5911,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFETurbulenceElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFETurbulenceElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5923,7 +5923,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGFilterElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGFilterElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5935,7 +5935,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGForeignObjectElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGForeignObjectElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5947,7 +5947,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGGElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGGElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -5989,7 +5989,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGImageElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGImageElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6021,7 +6021,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLinearGradientElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGLinearGradientElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6033,7 +6033,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGLineElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGLineElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6045,7 +6045,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMarkerElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGMarkerElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6057,7 +6057,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMaskElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGMaskElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6069,7 +6069,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMatrix}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGMatrix}.
      *
      * @throws Exception if an error occurs
      */
@@ -6081,7 +6081,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMetadataElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGMetadataElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6093,7 +6093,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGMPathElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGMPathElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6125,7 +6125,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPathElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGPathElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6347,7 +6347,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPatternElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGPatternElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6379,7 +6379,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolygonElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGPolygonElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6391,7 +6391,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGPolylineElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGPolylineElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6413,7 +6413,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRadialGradientElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGRadialGradientElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6425,7 +6425,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRect}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGRect}.
      *
      * @throws Exception if an error occurs
      */
@@ -6437,7 +6437,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGRectElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGRectElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6449,7 +6449,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGScriptElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGScriptElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6461,7 +6461,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSetElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGSetElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6473,7 +6473,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStopElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGStopElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6495,7 +6495,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGStyleElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGStyleElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6507,7 +6507,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSVGElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGSVGElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6519,7 +6519,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSwitchElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGSwitchElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6531,7 +6531,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGSymbolElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGSymbolElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6553,7 +6553,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGTextElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6565,7 +6565,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTextPathElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGTextPathElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6587,7 +6587,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTitleElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGTitleElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6619,7 +6619,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGTSpanElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGTSpanElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6641,7 +6641,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGUseElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGUseElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6653,7 +6653,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.svg.SVGViewElement}.
+     * Test {@link org.htmlunit.javascript.host.svg.SVGViewElement}.
      *
      * @throws Exception if an error occurs
      */
@@ -6705,7 +6705,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.Text}.
+     * Test {@link org.htmlunit.javascript.host.dom.Text}.
      *
      * @throws Exception if an error occurs
      */
@@ -6759,7 +6759,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TextRange}.
+     * Test {@link org.htmlunit.javascript.host.dom.TextRange}.
      *
      * @throws Exception if an error occurs
      */
@@ -6902,7 +6902,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.TreeWalker}.
+     * Test {@link org.htmlunit.javascript.host.dom.TreeWalker}.
      *
      * @throws Exception if an error occurs
      */
@@ -6914,7 +6914,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.event.UIEvent}.
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
      *
      * @throws Exception if an error occurs
      */
@@ -6989,7 +6989,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.URLSearchParams}.
+     * Test {@link org.htmlunit.javascript.host.URLSearchParams}.
      *
      * @throws Exception if an error occurs
      */
@@ -7537,7 +7537,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.WebSocket}.
+     * Test {@link org.htmlunit.javascript.host.WebSocket}.
      *
      * @throws Exception if an error occurs
      */
@@ -7558,7 +7558,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.Window}.
+     * Test {@link org.htmlunit.javascript.host.Window}.
      *
      * @throws Exception if an error occurs
      */
@@ -7579,7 +7579,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.worker.Worker}.
+     * Test {@link org.htmlunit.javascript.host.worker.Worker}.
      *
      * @throws Exception if an error occurs
      */
@@ -7599,7 +7599,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLDocument}.
+     * Test {@link org.htmlunit.javascript.host.xml.XMLDocument}.
      *
      * @throws Exception if an error occurs
      */
@@ -7611,7 +7611,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLHttpRequest}.
+     * Test {@link org.htmlunit.javascript.host.xml.XMLHttpRequest}.
      *
      * @throws Exception if an error occurs
      */
@@ -7642,7 +7642,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XMLSerializer}.
+     * Test {@link org.htmlunit.javascript.host.xml.XMLSerializer}.
      *
      * @throws Exception if an error occurs
      */
@@ -7653,7 +7653,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathEvaluator}.
+     * Test {@link org.htmlunit.javascript.host.dom.XPathEvaluator}.
      *
      * @throws Exception if an error occurs
      */
@@ -7675,7 +7675,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */
@@ -7686,7 +7686,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathNSResolver}.
+     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
      *
      * @throws Exception if an error occurs
      */
@@ -7697,7 +7697,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.dom.XPathResult}.
+     * Test {@link org.htmlunit.javascript.host.dom.XPathResult}.
      *
      * @throws Exception if an error occurs
      */
@@ -7718,7 +7718,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link com.gargoylesoftware.htmlunit.javascript.host.xml.XSLTProcessor}.
+     * Test {@link org.htmlunit.javascript.host.xml.XSLTProcessor}.
      *
      * @throws Exception if an error occurs
      */

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package org.htmlunit.html;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.html.parser.HTMLParser;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.MockWebConnection;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.html.parser.HTMLParser;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -126,7 +126,7 @@ public class AttributesTest extends TestCase {
         final HashSet<String> supportedTags = new HashSet<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
 
         for (final String testClass : classesToTest) {
-            final Class<?> clazz = Class.forName("com.gargoylesoftware.htmlunit.html." + testClass);
+            final Class<?> clazz = Class.forName("org.htmlunit.html." + testClass);
             addTestsForClass(clazz, suite);
 
             String tag;

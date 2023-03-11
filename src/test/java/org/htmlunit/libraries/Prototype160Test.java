@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.libraries;
+package org.htmlunit.libraries;
 
 import java.util.List;
 
@@ -23,9 +23,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import com.gargoylesoftware.htmlunit.WebServerTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with version 1.6.0 of
@@ -115,7 +115,7 @@ public class Prototype160Test extends PrototypeTestBase {
     }
 
     /**
-     * Depends on {@link com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable2Test#parentProtoFeature()}.
+     * Depends on {@link org.htmlunit.javascript.HtmlUnitScriptable2Test#parentProtoFeature()}.
      *
      * @throws Exception if test fails
      */

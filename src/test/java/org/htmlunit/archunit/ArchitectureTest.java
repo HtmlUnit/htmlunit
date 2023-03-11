@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.archunit;
+package org.htmlunit.archunit;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.classes;
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.fields;
@@ -25,12 +25,12 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClass;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxClasses;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxConstant;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxFunction;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxGetter;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxClasses;
+import org.htmlunit.javascript.configuration.JsxConstant;
+import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 import com.tngtech.archunit.base.DescribedPredicate;
 import com.tngtech.archunit.core.domain.JavaMethod;
 import com.tngtech.archunit.core.domain.JavaModifier;
@@ -49,16 +49,16 @@ import com.tngtech.archunit.lang.SimpleConditionEvent;
  * @author Ronald Brill
  */
 @RunWith(ArchUnitRunner.class)
-@AnalyzeClasses(packages = "com.gargoylesoftware.htmlunit", importOptions = ImportOption.DoNotIncludeTests.class)
+@AnalyzeClasses(packages = "org.htmlunit", importOptions = ImportOption.DoNotIncludeTests.class)
 public class ArchitectureTest {
 
     /**
-     * Utility classes should be placed in 'com.gargoylesoftware.htmlunit.util'.
+     * Utility classes should be placed in 'org.htmlunit.util'.
      */
     @ArchTest
     public static final ArchRule utilsPackageRule = classes()
         .that().haveNameMatching(".*Util.?")
-        .should().resideInAPackage("com.gargoylesoftware.htmlunit.util");
+        .should().resideInAPackage("org.htmlunit.util");
 
     /**
      * Do not use awt if not really needed (because not available on android).
@@ -67,17 +67,17 @@ public class ArchitectureTest {
     public static final ArchRule awtPackageRule = noClasses()
         .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend")
+                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$SaveState")
+                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$SaveState")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$1")
+                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$1")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.html.DoTypeProcessor")
+                    "org.htmlunit.html.DoTypeProcessor")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
-            .and().doNotHaveFullyQualifiedName("com.gargoylesoftware.htmlunit.html.applets.AppletContextImpl")
-            .and().resideOutsideOfPackage("com.gargoylesoftware.htmlunit.platform..")
+                    "org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
+            .and().resideOutsideOfPackage("org.htmlunit.platform..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
@@ -230,13 +230,13 @@ public class ArchitectureTest {
     public static final ArchRule androidTreeWalker = noClasses()
             .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.html.HtmlDomTreeWalker")
+                    "org.htmlunit.html.HtmlDomTreeWalker")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.platform.dom.traversal.DomTreeWalker")
+                    "org.htmlunit.platform.dom.traversal.DomTreeWalker")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
+                    "org.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.SgmlPage")
+                    "org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.TreeWalker");
 
     /**
@@ -246,7 +246,7 @@ public class ArchitectureTest {
     public static final ArchRule androidDocumentTraversal = noClasses()
             .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.SgmlPage")
+                    "org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.DocumentTraversal");
 
     /**
@@ -256,12 +256,12 @@ public class ArchitectureTest {
     public static final ArchRule androidImageio = noClasses()
          .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.platform.image.ImageIOImageData")
+                    "org.htmlunit.platform.image.ImageIOImageData")
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
+                    "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
             // ToDo
             .and().doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.html.HtmlImage")
+                    "org.htmlunit.html.HtmlImage")
         .should().dependOnClassesThat().resideInAnyPackage("javax.imageio..");
 
     /**
@@ -271,7 +271,7 @@ public class ArchitectureTest {
     public static final ArchRule xerces = noClasses()
         .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.platform.util.XmlUtilsXercesHelper")
+                    "org.htmlunit.platform.util.XmlUtilsXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.xerces..");
 
 
@@ -282,6 +282,6 @@ public class ArchitectureTest {
     public static final ArchRule jdkXerces = noClasses()
         .that()
             .doNotHaveFullyQualifiedName(
-                    "com.gargoylesoftware.htmlunit.platform.util.XmlUtilsSunXercesHelper")
+                    "org.htmlunit.platform.util.XmlUtilsSunXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("com.sun.org.apache.xerces..");
 }

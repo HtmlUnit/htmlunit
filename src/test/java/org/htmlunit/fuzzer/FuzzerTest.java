@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.fuzzer;
+package org.htmlunit.fuzzer;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -21,9 +21,9 @@ import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for issues reported by Google OSS-Fuzz
@@ -144,7 +144,7 @@ public class FuzzerTest extends WebTestCase {
 
     private void test(final String inputFileName) throws Exception {
         final InputStream file = getClass().getClassLoader()
-                .getResourceAsStream("com/gargoylesoftware/htmlunit/fuzzer/" + inputFileName);
+                .getResourceAsStream("org/htmlunit/fuzzer/" + inputFileName);
         final String input = IOUtils.toString(file, StandardCharsets.UTF_8);
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {

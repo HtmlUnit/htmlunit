@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -32,9 +32,9 @@ import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.parameterized.TestWithParameters;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.WebTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
 
 /**
  * A {@link BrowserVersionClassRunner} which is also parameterized.

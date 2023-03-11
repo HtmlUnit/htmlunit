@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.

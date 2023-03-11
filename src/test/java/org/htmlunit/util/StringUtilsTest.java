@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.util;
+package org.htmlunit.util;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.html.impl.Color;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.html.impl.Color;
 
 /**
  * Tests for {@link StringUtils}.

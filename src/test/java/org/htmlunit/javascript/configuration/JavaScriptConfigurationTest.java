@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.configuration;
+package org.htmlunit.javascript.configuration;
 
-import static com.gargoylesoftware.htmlunit.BrowserVersion.FIREFOX;
+import static org.htmlunit.BrowserVersion.FIREFOX;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -36,12 +36,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.text.RandomStringGenerator;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.javascript.HtmlUnitScriptable;
-import com.gargoylesoftware.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.MockWebConnection;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
+import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Tests for {@link JavaScriptConfiguration}.
@@ -139,7 +139,7 @@ public class JavaScriptConfigurationTest extends SimpleWebTestCase {
                 catch (final Throwable t) {
                     continue;
                 }
-                if ("com.gargoylesoftware.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
+                if ("org.htmlunit.javascript.host.intl".equals(klass.getPackage().getName())
                         || "Reflect".equals(klass.getSimpleName())
                         || "DedicatedWorkerGlobalScope".equals(klass.getSimpleName())) {
                     continue;

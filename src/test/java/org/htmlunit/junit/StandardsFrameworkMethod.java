@@ -12,16 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import java.lang.reflect.Method;
 
 import org.junit.runners.model.FrameworkMethod;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebDriverTestCase;
 
 /**
- * A method of a class annotated with {@link com.gargoylesoftware.htmlunit.annotations.StandardsMode}.
+ * A method of a class annotated with {@link org.htmlunit.annotations.StandardsMode}.
  *
  * @author Ahmed Ashour
  */

@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.protocol.data;
+package org.htmlunit.protocol.data;
 
-import static com.gargoylesoftware.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
+import static org.htmlunit.protocol.data.DataUrlDecoder.decodeDataURL;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 

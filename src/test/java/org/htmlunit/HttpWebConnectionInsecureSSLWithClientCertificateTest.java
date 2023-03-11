@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static org.eclipse.jetty.http.HttpVersion.HTTP_1_1;
 import static org.junit.Assert.fail;
@@ -29,7 +29,7 @@ import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for insecure SSL, with client certificate.

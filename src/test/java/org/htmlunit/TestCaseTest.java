@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -27,10 +27,10 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
-import com.gargoylesoftware.htmlunit.html.HtmlTitle;
-import com.gargoylesoftware.htmlunit.javascript.configuration.ClassConfiguration;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import org.htmlunit.html.DefaultElementFactory;
+import org.htmlunit.html.HtmlTitle;
+import org.htmlunit.javascript.configuration.ClassConfiguration;
+import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
 
 /**
  * Tests for various test cases.
@@ -44,7 +44,7 @@ public final class TestCaseTest {
 
     /**
      * Tests that all test cases with the pattern used by
-     * {@link com.gargoylesoftware.htmlunit.source.ElementTestSource#generateTestForHtmlElements}
+     * {@link org.htmlunit.source.ElementTestSource#generateTestForHtmlElements}
      * are up to date.
      *
      * @throws Exception if the test fails

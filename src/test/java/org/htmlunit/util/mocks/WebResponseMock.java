@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-package com.gargoylesoftware.htmlunit.util.mocks;
+package org.htmlunit.util.mocks;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
@@ -21,9 +21,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.util.NameValuePair;
+import org.htmlunit.WebRequest;
+import org.htmlunit.WebResponse;
+import org.htmlunit.util.NameValuePair;
 
 /**
  * Simple mock for {@link WebResponse}.

@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.html;
+package org.htmlunit.html;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.MockWebConnection;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.WebResponse;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.util.MimeType;
+import org.htmlunit.CollectingAlertHandler;
+import org.htmlunit.MockWebConnection;
+import org.htmlunit.Page;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebResponse;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link XHtmlPage}.
@@ -38,7 +38,7 @@ import com.gargoylesoftware.htmlunit.util.MimeType;
 public class XHtmlPageTest extends SimpleWebTestCase {
 
     /**
-     * Regression test for Bug #764. Originally located in {@link com.gargoylesoftware.htmlunit.xml.XmlPageTest}.
+     * Regression test for Bug #764. Originally located in {@link org.htmlunit.xml.XmlPageTest}.
      * @throws Exception if an error occurs
      */
     @Test
@@ -74,7 +74,7 @@ public class XHtmlPageTest extends SimpleWebTestCase {
 
     /**
      * Tests a simplified real-life response from Ajax4jsf. Originally located in
-     * {@link com.gargoylesoftware.htmlunit.xml.XmlPageTest}.
+     * {@link org.htmlunit.xml.XmlPageTest}.
      * @throws Exception if an error occurs
      */
     @Test

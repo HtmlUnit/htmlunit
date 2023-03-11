@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -47,9 +47,9 @@ import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.junit.After;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.util.MimeType;
+import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.util.MimeType;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.

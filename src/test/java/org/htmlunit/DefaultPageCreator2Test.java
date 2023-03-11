@@ -12,14 +12,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.DefaultPageCreator.PageType;
-import com.gargoylesoftware.htmlunit.util.MimeType;
+import org.htmlunit.DefaultPageCreator.PageType;
+import org.htmlunit.util.MimeType;
 
 /**
  * Tests for {@link DefaultPageCreator}.

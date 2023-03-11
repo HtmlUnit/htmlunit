@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.source;
+package org.htmlunit.source;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -39,10 +39,10 @@ import java.util.regex.Pattern;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
-import com.gargoylesoftware.htmlunit.WebDriverTestCase;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.TestedBrowser;
-import com.gargoylesoftware.htmlunit.libraries.JQuery1x8x2Test;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.BrowserRunner.TestedBrowser;
+import org.htmlunit.libraries.JQuery1x8x2Test;
 
 /**
  * Extracts the needed expectation from the real browsers output, this is done by waiting the browser to finish

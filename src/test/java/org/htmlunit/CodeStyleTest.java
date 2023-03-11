@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static org.junit.Assert.fail;
@@ -353,7 +353,7 @@ public class CodeStyleTest {
      */
     private void versionYear() throws IOException {
         final List<String> lines =
-                FileUtils.readLines(new File("src/main/java/com/gargoylesoftware/htmlunit/Version.java"),
+                FileUtils.readLines(new File("src/main/java/org/htmlunit/Version.java"),
                         ISO_8859_1);
         for (final String line : lines) {
             if (line.contains("return \"Copyright (c) 2002-" + Calendar.getInstance(Locale.ROOT).get(Calendar.YEAR))) {

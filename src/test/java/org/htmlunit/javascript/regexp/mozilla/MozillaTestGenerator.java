@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.regexp.mozilla;
+package org.htmlunit.javascript.regexp.mozilla;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -47,15 +47,15 @@ public final class MozillaTestGenerator {
             System.out.println(o);
         }
         final String[] jsPathTokens = jsPath.split("/");
-        System.out.println("package com.gargoylesoftware.htmlunit.javascript.regexp.mozilla."
+        System.out.println("package org.htmlunit.javascript.regexp.mozilla."
                 + jsPathTokens[4] + ";");
         System.out.println();
         System.out.println("import org.junit.Test;");
         System.out.println("import org.junit.runner.RunWith;");
         System.out.println();
-        System.out.println("import com.gargoylesoftware.htmlunit.BrowserRunner;");
-        System.out.println("import com.gargoylesoftware.htmlunit.WebDriverTestCase;");
-        System.out.println("import com.gargoylesoftware.htmlunit.BrowserRunner.Alerts;");
+        System.out.println("import org.htmlunit.BrowserRunner;");
+        System.out.println("import org.htmlunit.WebDriverTestCase;");
+        System.out.println("import org.htmlunit.BrowserRunner.Alerts;");
         System.out.println();
         System.out.println("/**");
         System.out.println(" * Tests originally in '" + jsPath + "'.");

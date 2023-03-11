@@ -12,15 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.source;
+package org.htmlunit.source;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.gargoylesoftware.htmlunit.html.DefaultElementFactory;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.configuration.JavaScriptConfigurationTest;
+import org.htmlunit.html.DefaultElementFactory;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.configuration.JavaScriptConfigurationTest;
 
 /**
  * Use to generate test cases similar to the ones in the 'general' package.

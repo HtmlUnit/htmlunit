@@ -12,9 +12,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.activex.javascript.msxml;
+package org.htmlunit.activex.javascript.msxml;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
+import org.htmlunit.html.HtmlPageTest;
 
 /**
  * Test utility stuff for MSXML tests.

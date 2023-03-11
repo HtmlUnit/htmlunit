@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit;
+package org.htmlunit;
 
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 
@@ -25,7 +25,7 @@ import java.util.TreeSet;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import com.gargoylesoftware.htmlunit.general.ElementPropertiesTest;
+import org.htmlunit.general.ElementPropertiesTest;
 
 /**
  * Generates HTML file with all <tt>NotYetImplemented</tt> methods.

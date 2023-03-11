@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.junit;
+package org.htmlunit.junit;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -32,13 +32,13 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.junit.ComparisonFailure;
 import org.junit.runners.model.FrameworkMethod;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
-import com.gargoylesoftware.htmlunit.CodeStyleTest;
-import com.gargoylesoftware.htmlunit.general.HostExtractor;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.CodeStyleTest;
+import org.htmlunit.general.HostExtractor;
 
 /**
  * This is meant to automatically correct the test case to put either the real browser expectations,
- * or the {@link com.gargoylesoftware.htmlunit.junit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
+ * or the {@link org.htmlunit.junit.BrowserRunner.NotYetImplemented} annotation for HtmlUnit.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

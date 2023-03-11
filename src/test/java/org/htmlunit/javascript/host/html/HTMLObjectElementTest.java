@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gargoylesoftware.htmlunit.javascript.host.html;
+package org.htmlunit.javascript.host.html;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,15 +22,15 @@ import java.util.Map;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import com.gargoylesoftware.htmlunit.CollectingAlertHandler;
-import com.gargoylesoftware.htmlunit.SimpleWebTestCase;
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.html.HtmlPageTest;
-import com.gargoylesoftware.htmlunit.javascript.MockActiveXObject;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner;
-import com.gargoylesoftware.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.CollectingAlertHandler;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.javascript.MockActiveXObject;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for {@link HTMLObjectElement}.
@@ -69,7 +69,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClientWithMockWebConnection();
         final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
         loadPageWithAlerts(html);
@@ -103,7 +103,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClientWithMockWebConnection();
         final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
         final List<String> collectedAlerts = new ArrayList<>();
@@ -149,7 +149,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClientWithMockWebConnection();
         final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
         loadPageWithAlerts(html);
@@ -180,7 +180,7 @@ public class HTMLObjectElementTest extends SimpleWebTestCase {
 
         final WebClient client = getWebClientWithMockWebConnection();
         final Map<String, String> activeXObjectMap = new HashMap<>();
-        activeXObjectMap.put(clsid, "com.gargoylesoftware.htmlunit.javascript.MockActiveXObject");
+        activeXObjectMap.put(clsid, "org.htmlunit.javascript.MockActiveXObject");
         client.setActiveXObjectMap(activeXObjectMap);
 
         loadPageWithAlerts(html);
