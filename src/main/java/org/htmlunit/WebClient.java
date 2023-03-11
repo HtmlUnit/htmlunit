@@ -73,7 +73,7 @@ import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
-import org.htmlunit.css.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
 
 import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.attachment.AttachmentHandler;

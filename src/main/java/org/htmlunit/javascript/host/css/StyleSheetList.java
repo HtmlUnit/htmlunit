@@ -24,7 +24,7 @@ import java.io.Serializable;
 import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.dom.MediaListImpl;
+import org.htmlunit.cssparser.dom.MediaListImpl;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;

@@ -39,7 +39,7 @@ public class HistoryTest extends WebServerTestCase {
      */
     @Before
     public void setUp() throws Exception {
-        startWebServer("src/test/resources/com/gargoylesoftware/htmlunit/javascript/host");
+        startWebServer("src/test/resources/org/htmlunit/javascript/host");
     }
 
     /**

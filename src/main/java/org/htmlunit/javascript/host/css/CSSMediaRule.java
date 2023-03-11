@@ -21,8 +21,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.dom.CSSMediaRuleImpl;
-import org.htmlunit.css.dom.MediaListImpl;
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
+import org.htmlunit.cssparser.dom.MediaListImpl;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.CssMediaList;

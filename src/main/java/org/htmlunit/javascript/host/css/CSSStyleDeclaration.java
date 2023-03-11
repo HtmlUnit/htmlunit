@@ -119,7 +119,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.AbstractCssStyleDeclaration;

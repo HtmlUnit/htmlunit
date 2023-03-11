@@ -19,7 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.css.parser.CSSException;
+import org.htmlunit.cssparser.parser.CSSException;
 
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;

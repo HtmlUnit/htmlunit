@@ -24,10 +24,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
-import org.htmlunit.css.dom.CSSCharsetRuleImpl;
-import org.htmlunit.css.dom.CSSMediaRuleImpl;
-import org.htmlunit.css.dom.CSSRuleListImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
+import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.w3c.dom.DOMException;
 
 import org.htmlunit.javascript.configuration.JsxClass;

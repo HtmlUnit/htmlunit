@@ -24,14 +24,14 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
-import org.htmlunit.css.dom.CSSCharsetRuleImpl;
-import org.htmlunit.css.dom.CSSFontFaceRuleImpl;
-import org.htmlunit.css.dom.CSSImportRuleImpl;
-import org.htmlunit.css.dom.CSSMediaRuleImpl;
-import org.htmlunit.css.dom.CSSPageRuleImpl;
-import org.htmlunit.css.dom.CSSStyleRuleImpl;
-import org.htmlunit.css.dom.CSSUnknownRuleImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
+import org.htmlunit.cssparser.dom.CSSFontFaceRuleImpl;
+import org.htmlunit.cssparser.dom.CSSImportRuleImpl;
+import org.htmlunit.cssparser.dom.CSSMediaRuleImpl;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
+import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
+import org.htmlunit.cssparser.dom.CSSUnknownRuleImpl;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;

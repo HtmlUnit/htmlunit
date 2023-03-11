@@ -17,7 +17,7 @@ package org.htmlunit.css;
 import java.io.Serializable;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.htmlunit.css.parser.selector.SelectorSpecificity;
+import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

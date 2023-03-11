@@ -16,7 +16,7 @@ package org.htmlunit.javascript.host.css;
 
 import java.net.URL;
 
-import org.htmlunit.css.dom.CSSCharsetRuleImpl;
+import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

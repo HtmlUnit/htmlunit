@@ -18,8 +18,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.htmlunit.css.dom.MediaListImpl;
-import org.htmlunit.css.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.dom.MediaListImpl;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
 
 import org.htmlunit.WebWindow;
 import org.htmlunit.css.CssStyleSheet;

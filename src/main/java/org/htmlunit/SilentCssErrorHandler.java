@@ -16,8 +16,8 @@ package org.htmlunit;
 
 import java.io.Serializable;
 
-import org.htmlunit.css.parser.CSSErrorHandler;
-import org.htmlunit.css.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.CSSParseException;
 
 /**
  * Implementation of {@link CSSErrorHandler} which ignores all CSS problems.

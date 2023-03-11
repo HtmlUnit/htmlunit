@@ -14,14 +14,14 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import org.htmlunit.css.parser.CSSErrorHandler;
-import org.htmlunit.css.parser.CSSException;
-import org.htmlunit.css.parser.CSSOMParser;
-import org.htmlunit.css.parser.CSSParseException;
-import org.htmlunit.css.parser.javacc.CSS3Parser;
-import org.htmlunit.css.parser.selector.Selector;
-import org.htmlunit.css.parser.selector.SelectorList;
-import org.htmlunit.css.parser.selector.SelectorListImpl;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.CSSException;
+import org.htmlunit.cssparser.parser.CSSOMParser;
+import org.htmlunit.cssparser.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.javacc.CSS3Parser;
+import org.htmlunit.cssparser.parser.selector.Selector;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
+import org.htmlunit.cssparser.parser.selector.SelectorListImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.NodeList;

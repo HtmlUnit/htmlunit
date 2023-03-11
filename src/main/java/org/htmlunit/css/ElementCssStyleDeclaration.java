@@ -17,7 +17,7 @@ package org.htmlunit.css;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.html.DomElement;

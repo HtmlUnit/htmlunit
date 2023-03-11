@@ -16,8 +16,8 @@ package org.htmlunit.css;
 
 import java.io.Serializable;
 
-import org.htmlunit.css.dom.MediaListImpl;
-import org.htmlunit.css.parser.media.MediaQuery;
+import org.htmlunit.cssparser.dom.MediaListImpl;
+import org.htmlunit.cssparser.parser.media.MediaQuery;
 
 /**
  * A MediaList.

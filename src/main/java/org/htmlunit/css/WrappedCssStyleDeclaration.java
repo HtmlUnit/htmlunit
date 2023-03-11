@@ -17,9 +17,9 @@ package org.htmlunit.css;
 import java.util.Collections;
 import java.util.Map;
 
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
-import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
-import org.htmlunit.css.parser.selector.SelectorSpecificity;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.html.DomElement;

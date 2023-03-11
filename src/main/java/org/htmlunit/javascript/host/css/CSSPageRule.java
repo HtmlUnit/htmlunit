@@ -25,7 +25,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.dom.CSSPageRuleImpl;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.w3c.dom.DOMException;
 
 import org.htmlunit.BrowserVersion;

@@ -71,11 +71,11 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.css.dom.AbstractCSSRuleImpl;
-import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
-import org.htmlunit.css.dom.Property;
-import org.htmlunit.css.parser.selector.Selector;
-import org.htmlunit.css.parser.selector.SelectorSpecificity;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.dom.Property;
+import org.htmlunit.cssparser.parser.selector.Selector;
+import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebWindow;

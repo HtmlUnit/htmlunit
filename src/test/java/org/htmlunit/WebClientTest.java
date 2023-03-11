@@ -37,9 +37,9 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.mutable.MutableInt;
-import org.htmlunit.css.parser.CSSErrorHandler;
-import org.htmlunit.css.parser.CSSException;
-import org.htmlunit.css.parser.CSSParseException;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
+import org.htmlunit.cssparser.parser.CSSException;
+import org.htmlunit.cssparser.parser.CSSParseException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 

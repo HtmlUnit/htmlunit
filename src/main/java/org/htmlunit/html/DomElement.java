@@ -38,12 +38,12 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.css.dom.CSSStyleDeclarationImpl;
-import org.htmlunit.css.dom.Property;
-import org.htmlunit.css.parser.CSSException;
-import org.htmlunit.css.parser.selector.Selector;
-import org.htmlunit.css.parser.selector.SelectorList;
-import org.htmlunit.css.parser.selector.SelectorSpecificity;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.dom.Property;
+import org.htmlunit.cssparser.parser.CSSException;
+import org.htmlunit.cssparser.parser.selector.Selector;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
+import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Element;
