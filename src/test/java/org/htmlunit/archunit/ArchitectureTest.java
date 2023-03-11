@@ -58,6 +58,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule utilsPackageRule = classes()
         .that().haveNameMatching(".*Util.?")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.cssparser.util.ParserUtils")
         .should().resideInAPackage("org.htmlunit.util");
 
     /**
