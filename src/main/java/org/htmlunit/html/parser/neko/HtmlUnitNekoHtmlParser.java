@@ -28,12 +28,12 @@ import java.util.Map;
 
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancer;
-import org.htmlunit.xerces.util.DefaultErrorHandler;
-import org.htmlunit.xerces.xni.QName;
-import org.htmlunit.xerces.xni.XNIException;
-import org.htmlunit.xerces.xni.parser.XMLErrorHandler;
-import org.htmlunit.xerces.xni.parser.XMLInputSource;
-import org.htmlunit.xerces.xni.parser.XMLParseException;
+import org.htmlunit.cyberneko.xerces.util.DefaultErrorHandler;
+import org.htmlunit.cyberneko.xerces.xni.QName;
+import org.htmlunit.cyberneko.xerces.xni.XNIException;
+import org.htmlunit.cyberneko.xerces.xni.parser.XMLErrorHandler;
+import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
+import org.htmlunit.cyberneko.xerces.xni.parser.XMLParseException;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
