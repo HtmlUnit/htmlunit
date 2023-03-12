@@ -1366,6 +1366,7 @@ public final class UrlUtils {
      * Removes the well known ports if it can be deduced from protocol.
      * @param url the url to clean up
      * @return a new URL without the port or the given one
+     * @throws MalformedURLException if the URL string cannot be converted to a URL instance
      */
     public static URL removeRedundantPort(final URL url) throws MalformedURLException {
         if (("https".equals(url.getProtocol()) && url.getPort() == 443)
