@@ -51,7 +51,7 @@ import org.htmlunit.xml.XmlPage;
  */
 public class ExternalTest {
 
-    static String SONATYPE_SNAPSHOT_REPO_URL_ = "https://oss.sonatype.org/content/repositories/snapshots/";
+    static String SONATYPE_SNAPSHOT_REPO_URL_ = "https://s01.oss.sonatype.org/content/repositories/snapshots/";
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
@@ -227,7 +227,7 @@ public class ExternalTest {
         if (version.contains("SNAPSHOT")) {
             try (WebClient webClient = buildWebClient()) {
                 final XmlPage page = webClient.getPage(SONATYPE_SNAPSHOT_REPO_URL_
-                                        + "net/sourceforge/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
+                                        + "org/htmlunit/htmlunit/" + version + "/maven-metadata.xml");
                 final String timestamp = page.getElementsByTagName("timestamp").get(0).getTextContent();
                 final DateFormat format = new SimpleDateFormat("yyyyMMdd.HHmmss", Locale.ROOT);
                 final long snapshotMillis = format.parse(timestamp).getTime();
