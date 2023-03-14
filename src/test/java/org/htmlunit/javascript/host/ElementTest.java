@@ -906,7 +906,7 @@ public class ElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"first", "third", "3", "second", "second"})
+    @Alerts({"3", "first", "third", "second", "second"})
     public void firstElementChild() throws Exception {
         final String html
             = "<html><head>\n"
@@ -915,9 +915,9 @@ public class ElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var e = document.getElementById('myDiv');\n"
             + "    if (e.firstElementChild) {\n"
+            + "      log(e.childElementCount);\n"
             + "      log(e.firstElementChild.id);\n"
             + "      log(e.lastElementChild.id);\n"
-            + "      log(e.childElementCount);\n"
             + "      log(e.firstElementChild.nextElementSibling.id);\n"
             + "      log(e.lastElementChild.previousElementSibling.id);\n"
             + "    }\n"
@@ -930,6 +930,33 @@ public class ElementTest extends WebDriverTestCase {
             + "    <br id='second'/>\n"
             + "    <input id='third' type=button' value='something'>\n"
             + "  </div>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"0", "null", "null"})
+    public void firstElementChildTextNode() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var e = document.getElementById('myDiv');\n"
+            + "    if (e.childElementCount !== undefined) {\n"
+            + "      log(e.childElementCount);\n"
+            + "      log(e.firstElementChild);\n"
+            + "      log(e.lastElementChild);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'>HtmlUnit</div>\n"
             + "</body></html>";
 
         loadPageVerifyTitle2(html);
