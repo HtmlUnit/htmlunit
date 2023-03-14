@@ -40,11 +40,7 @@ public class PolymerWebComponentsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("Hello Unicorn :)")
-    @HtmlUnitNYI(CHROME = "",
-            EDGE = "",
-            FF = "",
-            FF_ESR = "",
-            IE = "")
+    @HtmlUnitNYI(CHROME = "")
     public void hello() throws Exception {
         final String url = URL_FIRST + "index.html";
 
