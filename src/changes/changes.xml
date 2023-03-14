@@ -19,6 +19,10 @@
                 INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
             </action>
+            <action type="fix" dev="rbri">
+                DocumentFragment methods childElementCount(), firstElementChild(), and lastElementChild() 
+                are ignoring non element nodes.
+            </action>
             <action type="fix" dev="rbri" issue="561">
                 Document readystatechange event was not triggered on page loading.
             </action>

@@ -109,11 +109,7 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public int getChildElementCount() {
-        int counter = 0;
-        for (final DomNode domNode : getDomNodeOrDie().getChildren()) {
-            counter++;
-        }
-        return counter;
+        return super.getChildElementCount();
     }
 
     /**
@@ -122,11 +118,7 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Element getFirstElementChild() {
-        final DomNode firstChild = getDomNodeOrDie().getFirstChild();
-        if (firstChild != null) {
-            return firstChild.getScriptableObject();
-        }
-        return null;
+        return super.getFirstElementChild();
     }
 
     /**
@@ -135,11 +127,7 @@ public class DocumentFragment extends Node {
     @Override
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public Element getLastElementChild() {
-        final DomNode lastChild  = getDomNodeOrDie().getLastChild();
-        if (lastChild != null) {
-            return lastChild .getScriptableObject();
-        }
-        return null;
+        return super.getLastElementChild();
     }
 
     /**

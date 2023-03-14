@@ -200,6 +200,49 @@ public class DocumentFragmentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"0", "null", "null", "0", "null", "null", "1", "myDiv", "myDiv"},
+            IE = {"undefined", "undefined", "undefined"})
+    public void firstElementChildTextNode() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var fragment = document.createDocumentFragment();\n"
+
+            + "    log(fragment.childElementCount);\n"
+            + "    log(fragment.firstElementChild);\n"
+            + "    log(fragment.lastElementChild);\n"
+
+            + "    if (fragment.childElementCount === undefined) { return; };\n"
+
+            + "    var txt = document.createTextNode('HtmlUnit');\n"
+            + "    fragment.appendChild(txt);\n"
+
+            + "    log(fragment.childElementCount);\n"
+            + "    log(fragment.firstElementChild);\n"
+            + "    log(fragment.lastElementChild);\n"
+
+            + "    var d = document.createElement('div');\n"
+            + "    d.id = 'myDiv';\n"
+            + "    fragment.appendChild(d);\n"
+
+            + "    log(fragment.childElementCount);\n"
+            + "    log(fragment.firstElementChild.id);\n"
+            + "    log(fragment.lastElementChild.id);\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"null", "null", "null", "null", "[object HTMLDivElement]", "null", "null"})
     public void getElementById() throws Exception {
         final String html = "<html>\n"

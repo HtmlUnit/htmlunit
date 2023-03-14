@@ -767,7 +767,21 @@ public class Node extends EventTarget {
      * @return the child element count
      */
     protected int getChildElementCount() {
-        return ((DomElement) getDomNodeOrDie()).getChildElementCount();
+        final DomNode domNode = getDomNodeOrDie();
+        if (domNode instanceof DomElement) {
+            return ((DomElement) domNode).getChildElementCount();
+        }
+
+        int counter = 0;
+        for (final DomNode child : getDomNodeOrDie().getChildren()) {
+            if (child != null) {
+                final Scriptable scriptable = child.getScriptableObject();
+                if (scriptable instanceof Element) {
+                    counter++;
+                }
+            }
+        }
+        return counter;
     }
 
     /**
