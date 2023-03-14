@@ -277,6 +277,7 @@ public class HtmlPage extends SgmlPage {
         if (!isAboutBlank) {
             setReadyState(READY_STATE_INTERACTIVE);
             getDocumentElement().setReadyState(READY_STATE_INTERACTIVE);
+            executeEventHandlersIfNeeded(Event.TYPE_READY_STATE_CHANGE);
         }
 
         executeDeferredScriptsIfNeeded();
@@ -293,6 +294,7 @@ public class HtmlPage extends SgmlPage {
             }
             setReadyState(READY_STATE_COMPLETE);
             getDocumentElement().setReadyState(READY_STATE_COMPLETE);
+            executeEventHandlersIfNeeded(Event.TYPE_READY_STATE_CHANGE);
         }
 
         // frame initialization has a different order
@@ -1287,7 +1289,10 @@ public class HtmlPage extends SgmlPage {
 
             final EventTarget jsNode;
             if (Event.TYPE_DOM_DOCUMENT_LOADED.equals(eventType)) {
-                jsNode = this.getScriptableObject();
+                jsNode = getScriptableObject();
+            }
+            else if (Event.TYPE_READY_STATE_CHANGE.equals(eventType)) {
+                jsNode = getDocumentElement().getScriptableObject();
             }
             else {
                 // The load/beforeunload/unload events target Document but paths Window only (tested in Chrome/FF)

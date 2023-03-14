@@ -697,4 +697,27 @@ public class Document2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"Initial State:loading", "Changed:interactive", "Changed:complete"})
+    public void readyStateEventListener() throws Exception {
+        final String html
+            = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "    log('Initial State:' + document.readyState);\n"
+            + "    document.addEventListener('readystatechange', function() {\n"
+            + "        log('Changed:' + document.readyState);\n"
+            + "    });\r\n"
+            + "</script>"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
