@@ -20,7 +20,7 @@
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
             </action>
             <action type="fix" dev="rbri">
-                DocumentFragment methods childElementCount(), firstElementChild(), and lastElementChild() 
+                DocumentFragment methods childElementCount(), firstElementChild(), and lastElementChild()
                 are ignoring non element nodes.
             </action>
             <action type="fix" dev="rbri" issue="561">

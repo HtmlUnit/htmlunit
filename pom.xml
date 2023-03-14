@@ -3,7 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>net.sourceforge.htmlunit</groupId>
+    <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
     <version>3.0.0-SNAPSHOT</version>
     <name>HtmlUnit</name>
@@ -274,7 +274,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -303,7 +303,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -334,7 +334,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -362,7 +362,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -390,7 +390,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -420,7 +420,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -449,7 +449,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -478,7 +478,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -507,7 +507,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -535,7 +535,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -563,7 +563,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -591,7 +591,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.22.2</version>
+                        <version>3.0.0</version>
                         <configuration>
                             <!-- see https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
                             <useSystemClassLoader>false</useSystemClassLoader>
@@ -1124,7 +1124,7 @@
             <version>${htmlunitcorejs.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
+            <groupId>org.htmlunit</groupId>
             <artifactId>neko-htmlunit</artifactId>
             <version>${htmlunitneko.version}</version>
         </dependency>
@@ -1135,12 +1135,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
+            <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-cssparser</artifactId>
             <version>${htmlunitcssparser.version}</version>
         </dependency>
         <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
+            <groupId>org.htmlunit</groupId>
             <artifactId>htmlunit-xpath</artifactId>
             <version>${htmlunitxpath.version}</version>
         </dependency>
@@ -1429,18 +1429,13 @@
         </dependency>
     </dependencies>
     <distributionManagement>
-        <site>
-            <id>htmlunit-website</id>
-            <name>HtmlUnit WebSite - Sourceforge</name>
-            <url>scp://shell.sourceforge.net/home/project-web/htmlunit/htdocs/</url>
-        </site>
         <snapshotRepository>
             <id>sonatype-nexus-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>sonatype-nexus-staging</id>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
     <repositories>
@@ -1454,6 +1449,17 @@
             </releases>
             <id>OSS Sonatype snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+        </repository>
+        <repository>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <id>S01 OSS Sonatype snapshots</id>
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
         </repository>
     </repositories>
 </project>
