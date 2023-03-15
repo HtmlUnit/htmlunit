@@ -14,9 +14,9 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersion.INTERNET_EXPLORER;
 import static org.junit.Assert.fail;
 
 import java.io.File;
@@ -39,7 +39,6 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
-import java.util.function.Supplier;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
@@ -66,6 +65,11 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.HandlerWrapper;
 import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.htmlunit.MockWebConnection.RawResponseData;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPageTest;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.util.NameValuePair;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -98,12 +102,6 @@ import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.UnreachableBrowserException;
-
-import org.htmlunit.MockWebConnection.RawResponseData;
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPageTest;
-import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.util.NameValuePair;
 
 /**
  * Base class for tests using WebDriver.
@@ -1212,43 +1210,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
             throws Exception {
         final WebDriver driver = loadPage2(html, url);
 
-        verify(maxWaitTime, driver, getExpectedAlerts());
+        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
         return driver;
-    }
-
-    /**
-     * Verifies the captured alerts.
-     * @param func actual string producer
-     * @param expected the expected string
-     * @throws Exception in case of failure
-     */
-    protected void verify(final Supplier<String> func, final String expected) throws Exception {
-        verify(func, expected, DEFAULT_WAIT_TIME);
-    }
-
-    /**
-     * Verifies the captured alerts.
-     * @param func actual string producer
-     * @param expected the expected string
-     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
-     * @throws Exception in case of failure
-     */
-    protected void verify(final Supplier<String> func, final String expected,
-            final long maxWaitTime) throws Exception {
-        final long maxWait = System.currentTimeMillis() + maxWaitTime;
-
-        String actual = null;
-        while (System.currentTimeMillis() < maxWait) {
-            actual = func.get();
-
-            if (StringUtils.equals(expected, actual)) {
-                break;
-            }
-
-            Thread.sleep(50);
-        }
-
-        assertEquals(expected, actual);
     }
 
     /**
@@ -1258,7 +1221,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verifyAlerts(final WebDriver driver, final String... expectedAlerts) throws Exception {
-        verify(DEFAULT_WAIT_TIME, driver, expectedAlerts);
+        verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
     }
 
     /**
@@ -1266,26 +1229,26 @@ public abstract class WebDriverTestCase extends WebTestCase {
      *
      * @param maxWaitTime the maximum time to wait for the expected alert to be found
      * @param driver the driver instance
-     * @param expectedAlerts the expected alerts
+     * @param expected the expected alerts
      * @throws Exception in case of failure
      */
-    protected void verify(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
+    protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expected)
             throws Exception {
-        final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
+        final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expected.length);
 
-        assertEquals(expectedAlerts.length, actualAlerts.size());
+        assertEquals(expected.length, actualAlerts.size());
 
         if (!useRealBrowser()) {
             // check if we have data-image Url
-            for (int i = 0; i < expectedAlerts.length; i++) {
-                if (expectedAlerts[i].startsWith("data:image/png;base64,")) {
+            for (int i = 0; i < expected.length; i++) {
+                if (expected[i].startsWith("data:image/png;base64,")) {
                     // we have to compare element by element
-                    for (int j = 0; j < expectedAlerts.length; j++) {
-                        if (expectedAlerts[j].startsWith("data:image/png;base64,")) {
-                            compareImages(expectedAlerts[j], actualAlerts.get(j));
+                    for (int j = 0; j < expected.length; j++) {
+                        if (expected[j].startsWith("data:image/png;base64,")) {
+                            compareImages(expected[j], actualAlerts.get(j));
                         }
                         else {
-                            assertEquals(expectedAlerts[j], actualAlerts.get(j));
+                            assertEquals(expected[j], actualAlerts.get(j));
                         }
                     }
                     return;
@@ -1293,7 +1256,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             }
         }
 
-        assertEquals(expectedAlerts, actualAlerts);
+        assertEquals(expected, actualAlerts);
     }
 
     /**
@@ -1323,7 +1286,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         expandExpectedAlertsVariables(URL_FIRST);
 
         final WebDriver driver = loadPage2(html, url, servlets);
-        verify(maxWaitTime, driver, getExpectedAlerts());
+        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
 
         return driver;
     }
@@ -1352,7 +1315,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
 
-        verify(maxWaitTime, driver, getExpectedAlerts());
+        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
         return driver;
     }
 

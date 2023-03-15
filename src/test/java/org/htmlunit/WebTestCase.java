@@ -32,11 +32,13 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -459,6 +461,41 @@ public abstract class WebTestCase {
     @AfterClass
     public static void afterClass() {
         Locale.setDefault(SAVE_LOCALE);
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @throws Exception in case of failure
+     */
+    protected void verify(final Supplier<String> func, final String expected) throws Exception {
+        verify(func, expected, DEFAULT_WAIT_TIME);
+    }
+
+    /**
+     * Verifies the captured alerts.
+     * @param func actual string producer
+     * @param expected the expected string
+     * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
+     * @throws Exception in case of failure
+     */
+    protected void verify(final Supplier<String> func, final String expected,
+            final long maxWaitTime) throws Exception {
+        final long maxWait = System.currentTimeMillis() + maxWaitTime;
+
+        String actual = null;
+        while (System.currentTimeMillis() < maxWait) {
+            actual = func.get();
+
+            if (StringUtils.equals(expected, actual)) {
+                break;
+            }
+
+            Thread.sleep(50);
+        }
+
+        assertEquals(expected, actual);
     }
 
     /**
