@@ -1212,7 +1212,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
             throws Exception {
         final WebDriver driver = loadPage2(html, url);
 
-        verifyAlerts(maxWaitTime, driver, getExpectedAlerts());
+        verify(maxWaitTime, driver, getExpectedAlerts());
         return driver;
     }
 
@@ -1222,8 +1222,8 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param expected the expected string
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final Supplier<String> func, final String expected) throws Exception {
-        verifyAlerts(func, expected, DEFAULT_WAIT_TIME);
+    protected void verify(final Supplier<String> func, final String expected) throws Exception {
+        verify(func, expected, DEFAULT_WAIT_TIME);
     }
 
     /**
@@ -1233,7 +1233,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param maxWaitTime the maximum time to wait to get the alerts (in millis)
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final Supplier<String> func, final String expected,
+    protected void verify(final Supplier<String> func, final String expected,
             final long maxWaitTime) throws Exception {
         final long maxWait = System.currentTimeMillis() + maxWaitTime;
 
@@ -1258,7 +1258,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception in case of failure
      */
     protected void verifyAlerts(final WebDriver driver, final String... expectedAlerts) throws Exception {
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, expectedAlerts);
+        verify(DEFAULT_WAIT_TIME, driver, expectedAlerts);
     }
 
     /**
@@ -1269,7 +1269,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @param expectedAlerts the expected alerts
      * @throws Exception in case of failure
      */
-    protected void verifyAlerts(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
+    protected void verify(final long maxWaitTime, final WebDriver driver, final String... expectedAlerts)
             throws Exception {
         final List<String> actualAlerts = getCollectedAlerts(maxWaitTime, driver, expectedAlerts.length);
 
@@ -1321,10 +1321,9 @@ public abstract class WebDriverTestCase extends WebTestCase {
             final Map<String, Class<? extends Servlet>> servlets) throws Exception {
 
         expandExpectedAlertsVariables(URL_FIRST);
-        final String[] expectedAlerts = getExpectedAlerts();
 
         final WebDriver driver = loadPage2(html, url, servlets);
-        verifyAlerts(maxWaitTime, driver, expectedAlerts);
+        verify(maxWaitTime, driver, getExpectedAlerts());
 
         return driver;
     }
@@ -1348,14 +1347,12 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * @throws Exception if something goes wrong
      */
     protected final WebDriver loadPageWithAlerts2(final URL url, final long maxWaitTime) throws Exception {
-        final String[] expectedAlerts = getExpectedAlerts();
-
         startWebServer(getMockWebConnection(), null);
 
         final WebDriver driver = getWebDriver();
         driver.get(url.toExternalForm());
 
-        verifyAlerts(maxWaitTime, driver, expectedAlerts);
+        verify(maxWaitTime, driver, getExpectedAlerts());
         return driver;
     }
 

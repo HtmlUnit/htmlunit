@@ -2290,7 +2290,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
             return;
         }
 
@@ -2333,7 +2333,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
             return;
         }
 
@@ -2378,7 +2378,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
             return;
         }
 
@@ -2426,11 +2426,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
             return;
         }
 
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 
@@ -2469,11 +2469,11 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         if (getExpectedAlerts().length == 1) {
-            verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
+            verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[0]});
             return;
         }
 
-        verifyAlerts(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
+        verify(DEFAULT_WAIT_TIME, driver, new String[] {getExpectedAlerts()[1]});
         assertTitle(driver, getExpectedAlerts()[0]);
     }
 

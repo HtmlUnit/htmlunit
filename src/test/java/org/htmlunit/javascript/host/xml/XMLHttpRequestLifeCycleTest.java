@@ -299,7 +299,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -312,7 +312,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -330,7 +330,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_preflight_forbidden() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -347,7 +347,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.WITHOUT_ORIGIN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -364,7 +364,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_preflight_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.WITHOUT_ORIGIN_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -376,7 +376,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.SEND_ABORT), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -397,7 +397,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -420,7 +420,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 }
             }
             finally {
-                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
             }
         }
 
@@ -444,7 +444,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 }
             }
             finally {
-                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
             }
         }
 
@@ -457,7 +457,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -469,7 +469,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error403_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -486,7 +486,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error403_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -498,7 +498,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -510,7 +510,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -527,7 +527,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_sync_Error500_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC, Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -548,7 +548,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 }
             }
             finally {
-                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
             }
         }
 
@@ -568,7 +568,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -586,7 +586,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -602,7 +602,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_preflight_forbidden() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -618,7 +618,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.WITHOUT_ORIGIN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -634,7 +634,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_preflight_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.WITHOUT_ORIGIN_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -650,7 +650,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.SEND_ABORT), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -681,7 +681,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.DONE_ABORT), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -697,7 +697,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_networkErrorTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -713,7 +713,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_networkErrorTriggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.NETWORK_ERROR_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -733,7 +733,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error500Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -753,7 +753,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error500Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -770,7 +770,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error500Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -787,7 +787,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_timeout() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.TIMEOUT), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         // same tests as above, but this time we're triggering with the onkeyword.
@@ -802,7 +802,7 @@ public final class XMLHttpRequestLifeCycleTest {
             // most of them won't fire anyway.
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -815,7 +815,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -833,7 +833,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_preflight_forbidden() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT_FORBIDDEN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -850,7 +850,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.WITHOUT_ORIGIN),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -867,7 +867,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_preflight_without_origin() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.WITHOUT_ORIGIN_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
 
@@ -880,7 +880,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.SEND_ABORT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -901,7 +901,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -927,7 +927,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 }
             }
             finally {
-                verifyAlerts(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(getWebDriver()), String.join("\n", getExpectedAlerts()));
             }
         }
 
@@ -940,7 +940,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error403() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -953,7 +953,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -971,7 +971,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -983,7 +983,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_Error500() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.ERROR_500), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()), DEFAULT_WAIT_TIME * 10);
         }
 
         /**
@@ -996,7 +996,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1014,7 +1014,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD,
                     Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1025,7 +1025,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_sync_timeout() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.SYNC_ON_KEYWORD, Execution.TIMEOUT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1044,7 +1044,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1062,7 +1062,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ONLY_SEND_PREFLIGHT),
                     URL_FIRST, servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1078,7 +1078,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_abortTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.SEND_ABORT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1108,7 +1108,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_abortAfterDoneTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.DONE_ABORT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1124,7 +1124,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_networkErrorTriggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.NETWORK_ERROR),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
 
@@ -1145,7 +1145,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_Error403Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1166,7 +1166,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1184,7 +1184,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1204,7 +1204,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_Error500Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.ERROR_500),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1224,7 +1224,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error403Triggered() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403), URL_FIRST,
                     servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1244,7 +1244,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error403Triggered_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1261,7 +1261,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void addEventListener_async_Error403Triggered_during_preflight() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC, Execution.ERROR_403_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1282,7 +1282,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_500_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1300,7 +1300,7 @@ public final class XMLHttpRequestLifeCycleTest {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD,
                     Execution.ERROR_500_DURING_PREFLIGHT), URL_FIRST,
                     servlets_, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
 
         /**
@@ -1317,7 +1317,7 @@ public final class XMLHttpRequestLifeCycleTest {
         public void onKeyWord_async_timeout() throws Exception {
             final WebDriver driver = loadPage2(buildHtml(Mode.ASYNC_ON_KEYWORD, Execution.TIMEOUT),
                     URL_FIRST, servlets_);
-            verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+            verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
         }
     }
 
@@ -1360,7 +1360,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                 // no chance to to check the request count because of retries
                 assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
@@ -1405,7 +1405,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1447,7 +1447,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1493,7 +1493,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                 // no chance to to check the request count because of retries
                 assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
@@ -1540,7 +1540,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1584,7 +1584,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1622,7 +1622,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                 // no chance to to check the request count because of retries
                 assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
@@ -1667,7 +1667,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1709,7 +1709,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1755,7 +1755,7 @@ public final class XMLHttpRequestLifeCycleTest {
                 final WebDriver driver = getWebDriver();
                 driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                 // no chance to to check the request count because of retries
                 assertEquals(new URL(WebTestCase.URL_FIRST, SUCCESS_URL),
@@ -1802,7 +1802,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),
@@ -1846,7 +1846,7 @@ public final class XMLHttpRequestLifeCycleTest {
                     final WebDriver driver = getWebDriver();
                     driver.get(WebTestCase.URL_FIRST.toExternalForm());
 
-                    verifyAlerts(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
+                    verify(() -> extractLog(driver), String.join("\n", getExpectedAlerts()));
 
                     // no chance to to check the request count because of retries
                     assertEquals(new URL("http://localhost:" + PORT2 + SUCCESS_URL),

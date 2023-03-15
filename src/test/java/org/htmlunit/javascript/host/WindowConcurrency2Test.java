@@ -59,6 +59,6 @@ public class WindowConcurrency2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
 
-        verifyAlerts(() -> driver.findElement(By.id("d")).getText(), getExpectedAlerts()[0]);
+        verify(() -> driver.findElement(By.id("d")).getText(), getExpectedAlerts()[0]);
     }
 }
