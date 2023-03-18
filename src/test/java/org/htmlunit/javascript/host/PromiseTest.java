@@ -23,7 +23,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 
-import net.sourceforge.htmlunit.corejs.javascript.NativePromise;
+import org.htmlunit.corejs.javascript.NativePromise;
 
 /**
  * Tests for {@link NativePromise}.

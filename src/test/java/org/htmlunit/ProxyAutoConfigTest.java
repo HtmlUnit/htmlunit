@@ -21,7 +21,7 @@ import java.util.Locale;
 
 import org.junit.Test;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * Tests for the {@link ProxyAutoConfig}.

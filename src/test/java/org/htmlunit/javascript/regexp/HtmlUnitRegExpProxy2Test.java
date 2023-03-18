@@ -23,10 +23,10 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.junit.BrowserRunner;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.
