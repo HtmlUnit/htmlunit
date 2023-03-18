@@ -22,7 +22,7 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
- * Tests for setup done in {@link net.sourceforge.htmlunit.corejs.javascript.NativeGlobal}.
+ * Tests for setup done in {@link org.htmlunit.corejs.javascript.NativeGlobal}.
  *
  * @author Marc Guillemot
  * @author Frank Danek

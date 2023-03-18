@@ -39,7 +39,7 @@ import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for an element to close another element, which is defined in
- * {@link net.sourceforge.htmlunit.cyberneko.HTMLElements}.
+ * {@link org.htmlunit.cyberneko.HTMLElements}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill

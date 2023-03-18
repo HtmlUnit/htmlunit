@@ -23,7 +23,7 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 
 /**
  * Unit tests for an element to close itself, which is defined in
- * {@link net.sourceforge.htmlunit.cyberneko.HTMLElements}.
+ * {@link org.htmlunit.cyberneko.HTMLElements}.
  *
  * @author Ahmed Ashour
  * @author Frank Danek

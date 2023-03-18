@@ -277,7 +277,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     * Test {@code org.htmlunit.corejs.javascript.Arguments}.
      *
      * @throws Exception if an error occurs
      */
@@ -8410,7 +8410,7 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
+     * Test {@code org.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
      *
      * @throws Exception if an error occurs
      */

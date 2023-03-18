@@ -140,7 +140,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.Arguments}.
+     * Test {@code org.htmlunit.corejs.javascript.Arguments}.
      *
      * @throws Exception if an error occurs
      */
@@ -5232,7 +5232,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@code net.sourceforge.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
+     * Test {@code org.htmlunit.corejs.javascript.NativeIterator#StopIteration}.
      *
      * @throws Exception if an error occurs
      */
