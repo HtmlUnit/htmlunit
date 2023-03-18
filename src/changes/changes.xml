@@ -9,15 +9,28 @@
     <body>
         <release version="3.0.0" date="Febuary xx, 2023" description="Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
             <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: Value processing for input controls changed; typing now ONLY changes the value 
+                but not the value attribute. As consequence all calls to setValueAttribute(..) hve to be replaced by setValue() or type().
+            </action>
+            <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: HtmlButton.getAttribute() now returns the plain attribute value also for 'type' attribute
                 instead of returning 'submit' in case the attribute is not set.
             </action>
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.xpath to org.htmlunit.xpath.
+                INCOMPATIBLE CHANGE: xpath: All packages renamed from net.sourceforge.htmlunit.xpath to org.htmlunit.xpath.
             </action>
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
+                INCOMPATIBLE CHANGE: neko: All packages renamed from net.sourceforge.htmlunit.cyberneko to org.htmlunit.cyberneko
                 and net.sourceforge.htmlunit.xerces to org.htmlunit.xerces.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: cssparser: All packages renamed from net.sourceforge.htmlunit.cssparser to org.htmlunit.cssparser.
+            </action>
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: core-js: All packages renamed from net.sourceforge.htmlunit.corejs to org.htmlunit.corejs.
+            </action>
+            <action type="fix" dev="rbri" issue="552">
+                core-js: Function.toString() now returns the source of the function without any reformating.
             </action>
             <action type="fix" dev="rbri">
                 DocumentFragment methods childElementCount(), firstElementChild(), and lastElementChild()
