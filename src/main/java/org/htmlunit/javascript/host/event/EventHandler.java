@@ -75,7 +75,7 @@ public class EventHandler extends BaseFunction {
     }
 
     /**
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
+     * @see org.htmlunit.corejs.javascript.ScriptableObject#getDefaultValue(java.lang.Class)
      * @param typeHint the type hint
      * @return the js code of the function declaration
      */

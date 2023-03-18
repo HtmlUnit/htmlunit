@@ -112,7 +112,7 @@ public abstract class HtmlUnitScriptableProxy<T extends HtmlUnitScriptable> exte
      * @param hint the type hint
      * @return the default value
      *
-     * @see net.sourceforge.htmlunit.corejs.javascript.Scriptable#getDefaultValue
+     * @see org.htmlunit.corejs.javascript.Scriptable#getDefaultValue
      */
     @Override
     public Object getDefaultValue(final Class<?> hint) {

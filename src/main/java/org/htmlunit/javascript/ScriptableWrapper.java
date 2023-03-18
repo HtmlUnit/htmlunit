@@ -101,7 +101,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see ScriptableObject#get(java.lang.String,net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#get(java.lang.String,org.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final String name, final Scriptable start) {
@@ -132,7 +132,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see ScriptableObject#has(java.lang.String, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#has(java.lang.String, org.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public boolean has(final String name, final Scriptable start) {
@@ -166,7 +166,7 @@ public class ScriptableWrapper extends ScriptableObject {
 
     /**
      * {@inheritDoc}
-     * @see ScriptableObject#get(int, net.sourceforge.htmlunit.corejs.javascript.Scriptable)
+     * @see ScriptableObject#get(int, org.htmlunit.corejs.javascript.Scriptable)
      */
     @Override
     public Object get(final int index, final Scriptable start) {

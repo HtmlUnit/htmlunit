@@ -249,7 +249,7 @@ public class HTMLOptionsCollection extends HtmlUnitScriptable {
      * a distinction between a caller of the form add(someObject) and add (someObject, 0).
      * Since the behavior of these two call forms is different, the newIndex parameter is
      * specified as an Object. If the newIndex parameter is not specified by the actual
-     * JavaScript code being run, then newIndex is of type net.sourceforge.htmlunit.corejs.javascript.Undefined.
+     * JavaScript code being run, then newIndex is of type org.htmlunit.corejs.javascript.Undefined.
      * If the newIndex parameter is specified, then it should be of type java.lang.Number and
      * can be converted into an integer value.</p>
      *

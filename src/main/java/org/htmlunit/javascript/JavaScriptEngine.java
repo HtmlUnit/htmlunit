@@ -169,8 +169,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
-     * Returns this JavaScript engine's Rhino {@link net.sourceforge.htmlunit.corejs.javascript.ContextFactory}.
-     * @return this JavaScript engine's Rhino {@link net.sourceforge.htmlunit.corejs.javascript.ContextFactory}
+     * Returns this JavaScript engine's Rhino {@link org.htmlunit.corejs.javascript.ContextFactory}.
+     * @return this JavaScript engine's Rhino {@link org.htmlunit.corejs.javascript.ContextFactory}
      */
     public HtmlUnitContextFactory getContextFactory() {
         return contextFactory_;

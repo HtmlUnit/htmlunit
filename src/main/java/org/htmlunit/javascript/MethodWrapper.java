@@ -66,7 +66,7 @@ public class MethodWrapper extends ScriptableObject implements Function {
     }
 
     /**
-     * @see net.sourceforge.htmlunit.corejs.javascript.ScriptableObject#getClassName()
+     * @see org.htmlunit.corejs.javascript.ScriptableObject#getClassName()
      * @return a name based on the method name
      */
     @Override

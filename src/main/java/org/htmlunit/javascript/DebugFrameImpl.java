@@ -32,13 +32,13 @@ import org.htmlunit.corejs.javascript.debug.DebuggableScript;
 
 /**
  * <p>
- * HtmlUnit's implementation of the {@link net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame} interface,
+ * HtmlUnit's implementation of the {@link org.htmlunit.corejs.javascript.debug.DebugFrame} interface,
  * which logs stack entries as well as exceptions. All logging is done at the <code>TRACE</code> level. This class does
  * a fairly good job of guessing names for anonymous functions when they are referenced by name from an existing
  * object. See <a href="http://www.mozilla.org/rhino/rhino15R4-debugger.html">the Rhino documentation</a> or
  * <a href="http://lxr.mozilla.org/mozilla/source/js/rhino/src/org/mozilla/javascript/debug/DebugFrame.java">the
  * interface source code</a> for more information on the
- * {@link net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame} interface and its uses.
+ * {@link org.htmlunit.corejs.javascript.debug.DebugFrame} interface and its uses.
  * </p>
  *
  * <p>

@@ -299,7 +299,7 @@ public class HtmlUnitRegExpProxy extends RegExpImpl {
             final Object[] args, final int actionType) {
 
         // take care to set the context's RegExp proxy to the original one as this is checked
-        // (cf net.sourceforge.htmlunit.corejs.javascript.regexp.RegExpImp:334)
+        // (cf org.htmlunit.corejs.javascript.regexp.RegExpImp:334)
         try {
             ScriptRuntime.setRegExpProxy(cx, wrapped_);
             return wrapped_.action(cx, scope, thisObj, args, actionType);
