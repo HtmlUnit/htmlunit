@@ -16,8 +16,8 @@ package org.htmlunit.javascript;
 
 import java.io.Serializable;
 
-import net.sourceforge.htmlunit.corejs.javascript.Delegator;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Delegator;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Proxy for a {@link HtmlUnitScriptable}.

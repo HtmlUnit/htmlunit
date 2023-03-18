@@ -26,7 +26,7 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.configuration.JsxStaticGetter;
 import org.htmlunit.javascript.host.event.EventTarget;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A Notification.

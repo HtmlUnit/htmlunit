@@ -34,7 +34,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.javascript.host.dom.DOMTokenList;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLLinkElement}.

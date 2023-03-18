@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * This object contains the result of executing a chunk of script code.

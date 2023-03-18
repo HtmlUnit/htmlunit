@@ -31,8 +31,8 @@ import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.xml.XMLDocument;
 import org.htmlunit.util.MimeType;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DOMParser}.

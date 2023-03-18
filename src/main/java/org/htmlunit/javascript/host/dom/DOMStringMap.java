@@ -27,9 +27,9 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.util.StringUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code DOMStringMap}.

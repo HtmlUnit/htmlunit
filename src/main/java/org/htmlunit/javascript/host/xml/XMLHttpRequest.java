@@ -99,18 +99,18 @@ import org.htmlunit.util.UrlUtils;
 import org.htmlunit.util.WebResponseWrapper;
 import org.htmlunit.xml.XmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
-import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser;
-import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser.ParseException;
-import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
-import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.json.JsonParser;
+import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 
 /**
  * A JavaScript object for an {@code XMLHttpRequest}.

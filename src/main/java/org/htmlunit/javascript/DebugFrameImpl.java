@@ -20,15 +20,15 @@ import org.apache.commons.logging.LogFactory;
 
 import org.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.EcmaError;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.IdFunctionObject;
+import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.NativeFunction;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.debug.DebuggableScript;
 
 /**
  * <p>

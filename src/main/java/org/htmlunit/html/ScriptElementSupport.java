@@ -44,7 +44,7 @@ import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
+import org.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

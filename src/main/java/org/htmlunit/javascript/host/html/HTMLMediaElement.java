@@ -32,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.DOMException;
 import org.htmlunit.javascript.host.dom.Node;
 
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object {@code HTMLMediaElement}.

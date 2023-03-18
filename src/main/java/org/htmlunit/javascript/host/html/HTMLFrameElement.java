@@ -32,7 +32,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowProxy;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLFrameElement}.

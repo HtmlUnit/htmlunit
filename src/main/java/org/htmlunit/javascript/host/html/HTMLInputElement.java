@@ -69,8 +69,8 @@ import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.FileList;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object for {@link HtmlInput}.

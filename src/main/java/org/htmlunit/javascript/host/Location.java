@@ -53,8 +53,8 @@ import org.htmlunit.javascript.host.event.HashChangeEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.UrlUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A JavaScript object for {@code Location}.

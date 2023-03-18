@@ -34,7 +34,7 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.WindowProxy;
 import org.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@link HtmlInlineFrame}.

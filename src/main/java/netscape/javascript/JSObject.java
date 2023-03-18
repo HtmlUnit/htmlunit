@@ -26,8 +26,8 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.Window;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Stub for the JSException. This is part of the Applet

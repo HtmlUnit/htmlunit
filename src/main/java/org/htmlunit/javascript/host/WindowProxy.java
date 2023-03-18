@@ -17,7 +17,7 @@ package org.htmlunit.javascript.host;
 import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.HtmlUnitScriptableProxy;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Proxy for a {@link Window} script object.

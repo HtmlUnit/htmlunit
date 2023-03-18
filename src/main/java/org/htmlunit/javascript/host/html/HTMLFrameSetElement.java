@@ -27,7 +27,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.event.Event;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Function;
 
 /**
  * The JavaScript object {@code HTMLFrameSetElement}.

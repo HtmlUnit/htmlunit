@@ -31,7 +31,7 @@ import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.StringUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Function;
 
 /**
  * The JavaScript object {@code HTMLBodyElement}.

@@ -59,8 +59,8 @@ import org.htmlunit.javascript.host.xml.XMLDocument;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.xml.XmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code DOMImplementation}.

@@ -20,7 +20,7 @@ import org.htmlunit.html.DomText;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMText.<br>

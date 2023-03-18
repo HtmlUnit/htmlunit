@@ -16,8 +16,8 @@ package org.htmlunit.javascript;
 
 import java.lang.reflect.Member;
 
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Extended FunctionObject that overrides avoidObjectDetection().

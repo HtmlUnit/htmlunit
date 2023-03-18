@@ -17,9 +17,9 @@ package org.htmlunit.javascript.background;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
 
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.Function;
 
 /**
  * A factory for all the things we have to construct from outside the

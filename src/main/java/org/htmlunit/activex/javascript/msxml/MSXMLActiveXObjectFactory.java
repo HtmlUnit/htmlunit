@@ -23,7 +23,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebWindow;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * ActiveXObjectFactory for the MSXML ActiveX library.

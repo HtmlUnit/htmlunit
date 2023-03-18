@@ -43,7 +43,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.util.XmlUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XSLProcessor.<br>

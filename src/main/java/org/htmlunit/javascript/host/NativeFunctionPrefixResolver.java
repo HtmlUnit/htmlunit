@@ -16,9 +16,9 @@ package org.htmlunit.javascript.host;
 
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.NativeFunction;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A special {@link PrefixResolver} for {@link NativeFunction}s.

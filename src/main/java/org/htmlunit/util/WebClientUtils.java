@@ -24,9 +24,9 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.Main;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
-import net.sourceforge.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
+import org.htmlunit.corejs.javascript.tools.debugger.Main;
+import org.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
+import org.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
 
 /**
  * Utility class containing miscellaneous {@link WebClient}-related methods.

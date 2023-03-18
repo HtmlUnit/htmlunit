@@ -18,8 +18,8 @@ import org.htmlunit.WebWindow;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A {@link JavaScriptJob} created from a {@link Function} object.

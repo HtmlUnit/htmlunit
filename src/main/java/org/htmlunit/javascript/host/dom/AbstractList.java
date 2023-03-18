@@ -34,9 +34,9 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 
-import net.sourceforge.htmlunit.corejs.javascript.ExternalArrayData;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.ExternalArrayData;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The parent class of {@link NodeList} and {@link org.htmlunit.javascript.host.html.HTMLCollection}.

@@ -21,9 +21,9 @@ import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Support to use polyfills for js features not implemented so far

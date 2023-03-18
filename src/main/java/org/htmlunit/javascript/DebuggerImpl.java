@@ -14,9 +14,9 @@
  */
 package org.htmlunit.javascript;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebugFrame;
-import net.sourceforge.htmlunit.corejs.javascript.debug.DebuggableScript;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.debug.DebugFrame;
+import org.htmlunit.corejs.javascript.debug.DebuggableScript;
 
 /**
  * <p>

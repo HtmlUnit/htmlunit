@@ -36,7 +36,7 @@ import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.TextRange;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object {@code HTMLTextAreaElement}.

@@ -46,8 +46,8 @@ import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
 
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * <p>An ordered list of stylesheets, accessible via <code>document.styleSheets</code>, as specified by the

@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * A window opened in JavaScript via either <code>window.showModalDialog</code>

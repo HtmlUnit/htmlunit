@@ -29,9 +29,9 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser;
-import net.sourceforge.htmlunit.corejs.javascript.json.JsonParser.ParseException;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.json.JsonParser;
+import org.htmlunit.corejs.javascript.json.JsonParser.ParseException;
 
 /**
  * A JavaScript object for {@code PerformanceNavigation}.

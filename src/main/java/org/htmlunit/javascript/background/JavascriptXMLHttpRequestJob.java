@@ -14,8 +14,8 @@
  */
 package org.htmlunit.javascript.background;
 
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.ContextFactory;
 
 /**
  * A helper class for XMLHttpRequest.

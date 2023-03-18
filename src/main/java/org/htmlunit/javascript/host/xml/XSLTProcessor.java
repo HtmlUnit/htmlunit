@@ -55,7 +55,7 @@ import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.util.XmlUtils;
 import org.htmlunit.xml.XmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for {@code XSLTProcessor}.

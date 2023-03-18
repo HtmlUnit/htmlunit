@@ -20,11 +20,11 @@ import static org.htmlunit.BrowserVersionFeatures.JS_NATIVE_FUNCTION_TOSTRING_NL
 
 import org.htmlunit.BrowserVersion;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.BaseFunction;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Replacement (in fact a wrapper) for Rhino's native toString function on Function prototype

@@ -27,8 +27,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.host.NativeFunctionPrefixResolver;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.NativeFunction;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.NativeFunction;
 
 /**
  * A JavaScript object for {@code XPathEvaluator}.

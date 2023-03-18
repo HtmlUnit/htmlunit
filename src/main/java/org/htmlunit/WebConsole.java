@@ -19,12 +19,12 @@ import java.io.Serializable;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.NativeConsole;
-import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.ConsolePrinter;
-import net.sourceforge.htmlunit.corejs.javascript.NativeConsole.Level;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptStackElement;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.NativeConsole;
+import org.htmlunit.corejs.javascript.NativeConsole.ConsolePrinter;
+import org.htmlunit.corejs.javascript.NativeConsole.Level;
+import org.htmlunit.corejs.javascript.ScriptStackElement;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * This class can be used to print messages to the logger. The first parameter

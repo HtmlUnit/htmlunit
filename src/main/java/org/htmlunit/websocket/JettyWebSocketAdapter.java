@@ -27,7 +27,7 @@ import org.eclipse.jetty.websocket.client.WebSocketClient;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClientOptions;
 
-import net.sourceforge.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
+import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**
  * Jetty based impl of the WebSocketAdapter.

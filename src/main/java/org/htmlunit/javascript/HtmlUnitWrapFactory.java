@@ -19,9 +19,9 @@ import java.io.Serializable;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.WrapFactory;
 
 /**
  * Called by Rhino to Wrap Object as {@link Scriptable}.

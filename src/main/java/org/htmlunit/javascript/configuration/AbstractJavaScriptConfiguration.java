@@ -36,8 +36,8 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.SymbolKey;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.SymbolKey;
 
 /**
  * An abstract container for all the JavaScript configuration information.

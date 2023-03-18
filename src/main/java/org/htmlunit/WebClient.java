@@ -113,7 +113,7 @@ import org.htmlunit.webstart.WebStartHandler;
 import com.shapesecurity.salvation2.Policy;
 import com.shapesecurity.salvation2.URLs.URI;
 
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.

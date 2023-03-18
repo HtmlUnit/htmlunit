@@ -70,8 +70,8 @@ import org.htmlunit.util.SerializableLock;
 import org.htmlunit.xml.XmlPage;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * Base class for nodes in the HTML DOM tree. This class is modeled after the

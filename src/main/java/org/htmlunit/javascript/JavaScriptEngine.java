@@ -74,22 +74,22 @@ import org.htmlunit.javascript.host.intl.Intl;
 import org.htmlunit.javascript.host.xml.FormData;
 import org.htmlunit.javascript.polyfill.Polyfill;
 
-import net.sourceforge.htmlunit.corejs.javascript.BaseFunction;
-import net.sourceforge.htmlunit.corejs.javascript.Callable;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.FunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.IdFunctionObject;
-import net.sourceforge.htmlunit.corejs.javascript.NativeConsole;
-import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptableObject;
-import net.sourceforge.htmlunit.corejs.javascript.StackStyle;
-import net.sourceforge.htmlunit.corejs.javascript.Symbol;
-import net.sourceforge.htmlunit.corejs.javascript.UniqueTag;
+import org.htmlunit.corejs.javascript.BaseFunction;
+import org.htmlunit.corejs.javascript.Callable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.IdFunctionObject;
+import org.htmlunit.corejs.javascript.NativeConsole;
+import org.htmlunit.corejs.javascript.RhinoException;
+import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.StackStyle;
+import org.htmlunit.corejs.javascript.Symbol;
+import org.htmlunit.corejs.javascript.UniqueTag;
 
 /**
  * A wrapper for the <a href="http://www.mozilla.org/rhino">Rhino JavaScript engine</a>

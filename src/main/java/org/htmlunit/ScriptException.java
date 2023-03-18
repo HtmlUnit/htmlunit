@@ -27,10 +27,10 @@ import org.apache.commons.logging.LogFactory;
 
 import org.htmlunit.html.HtmlPage;
 
-import net.sourceforge.htmlunit.corejs.javascript.EcmaError;
-import net.sourceforge.htmlunit.corejs.javascript.JavaScriptException;
-import net.sourceforge.htmlunit.corejs.javascript.RhinoException;
-import net.sourceforge.htmlunit.corejs.javascript.WrappedException;
+import org.htmlunit.corejs.javascript.EcmaError;
+import org.htmlunit.corejs.javascript.JavaScriptException;
+import org.htmlunit.corejs.javascript.RhinoException;
+import org.htmlunit.corejs.javascript.WrappedException;
 
 /**
  * An exception that will be thrown if an error occurs during the processing of

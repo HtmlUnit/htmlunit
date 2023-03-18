@@ -20,8 +20,8 @@ import org.apache.commons.logging.LogFactory;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Base class for MSXML's (ActiveX) JavaScript host objects in HtmlUnit.

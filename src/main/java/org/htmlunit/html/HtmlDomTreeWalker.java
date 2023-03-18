@@ -18,7 +18,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * In general this is an implementation of org.w3c.dom.traversal.TreeWalker.

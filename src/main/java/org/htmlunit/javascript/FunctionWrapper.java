@@ -16,9 +16,9 @@ package org.htmlunit.javascript;
 
 import java.io.Serializable;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.

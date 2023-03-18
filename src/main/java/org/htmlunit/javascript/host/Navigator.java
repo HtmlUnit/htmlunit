@@ -36,8 +36,8 @@ import org.htmlunit.javascript.host.geo.Geolocation;
 import org.htmlunit.javascript.host.media.MediaDevices;
 import org.htmlunit.javascript.host.network.NetworkInformation;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code Navigator}.

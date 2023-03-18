@@ -30,19 +30,19 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.regexp.HtmlUnitRegExpProxy;
 
-import net.sourceforge.htmlunit.corejs.javascript.Callable;
-import net.sourceforge.htmlunit.corejs.javascript.Context;
-import net.sourceforge.htmlunit.corejs.javascript.ContextAction;
-import net.sourceforge.htmlunit.corejs.javascript.ContextFactory;
-import net.sourceforge.htmlunit.corejs.javascript.ErrorReporter;
-import net.sourceforge.htmlunit.corejs.javascript.Evaluator;
-import net.sourceforge.htmlunit.corejs.javascript.EvaluatorException;
-import net.sourceforge.htmlunit.corejs.javascript.Function;
-import net.sourceforge.htmlunit.corejs.javascript.Script;
-import net.sourceforge.htmlunit.corejs.javascript.ScriptRuntime;
-import net.sourceforge.htmlunit.corejs.javascript.Scriptable;
-import net.sourceforge.htmlunit.corejs.javascript.WrapFactory;
-import net.sourceforge.htmlunit.corejs.javascript.debug.Debugger;
+import org.htmlunit.corejs.javascript.Callable;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextAction;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.ErrorReporter;
+import org.htmlunit.corejs.javascript.Evaluator;
+import org.htmlunit.corejs.javascript.EvaluatorException;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.WrapFactory;
+import org.htmlunit.corejs.javascript.debug.Debugger;
 
 /**
  * ContextFactory that supports termination of scripts if they exceed a timeout. Based on example from

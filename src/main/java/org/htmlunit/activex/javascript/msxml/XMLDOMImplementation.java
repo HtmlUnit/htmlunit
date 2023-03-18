@@ -19,7 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 
-import net.sourceforge.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Context;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMImplementation.<br>
