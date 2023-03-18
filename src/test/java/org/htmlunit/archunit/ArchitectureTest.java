@@ -79,6 +79,7 @@ public class ArchitectureTest {
                     "org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
             .and().resideOutsideOfPackage("org.htmlunit.platform..")
+            .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
 
     /**
