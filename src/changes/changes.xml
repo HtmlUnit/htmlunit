@@ -7,9 +7,9 @@
     </properties>
 
     <body>
-        <release version="3.0.0" date="Febuary xx, 2023" description="Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
+        <release version="3.0.0" date="March 19, 2023" description="htmlunit.org, Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
             <action type="update" dev="rbri">
-                INCOMPATIBLE CHANGE: Value processing for input controls changed; typing now ONLY changes the value 
+                INCOMPATIBLE CHANGE: Value processing for input controls changed; typing now ONLY changes the value
                 but not the value attribute. As consequence all calls to setValueAttribute(..) hve to be replaced by setValue() or type().
             </action>
             <action type="update" dev="rbri">

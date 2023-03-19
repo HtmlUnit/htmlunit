@@ -1,18 +1,18 @@
 # HtmlUnit
 
-Version 2.70.0 / January 22, 2023
+Version 3.0.0 / March 19, 2023
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/net.sourceforge.htmlunit/htmlunit)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.htmlunit/htmlunit)
 
 **Homepage**
 
-[htmlunit.sourceforge.io][4]
+[htmlunit.org][4]
 
 **News**
 
- * HtmlUnit suffers from a remote code execution via XSLT vulnerability on versions 2.70.0 and below. Please update to at least version 2.71.0.
+ * HtmlUnit suffers from a remote code execution via XSLT vulnerability on versions 2.70.0 and below. Please update to at least version 3.0.0.
 
 [HtmlUnit@Twitter][3]
 
@@ -29,6 +29,7 @@ such as:
 
 ## Get it!
 
+[Download from GitHub][12]
 [Download from Sourceforge][1]
 
 ### Maven
@@ -37,9 +38,9 @@ Add to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>net.sourceforge.htmlunit</groupId>
+    <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.70.0</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
@@ -48,7 +49,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.70.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.0.0'
 ```
 
 ## Overview
@@ -102,7 +103,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
     <!-- ... --> 
     <repository>
       <id>OSS Sonatype snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
       <snapshots>
         <enabled>true</enabled>
         <updatePolicy>always</updatePolicy>
@@ -115,9 +116,9 @@ Add the snapshot repository and dependency to your `pom.xml`:
     <!-- ... -->
     <dependencies>
       <dependency>
-          <groupId>net.sourceforge.htmlunit</groupId>
+          <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>2.71.0-SNAPSHOT</version>
+          <version>3.1.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -131,12 +132,12 @@ Add the snapshot repository and dependency to your `build.gradle`:
 
 ```groovy
 repositories {
-  maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+  maven { url "https://s01.oss.sonatype.org/content/repositories/snapshots" }
   // ...
 }
 // ...
 dependencies {
-    implementation group: 'net.sourceforge.htmlunit', name: 'htmlunit', version: '2.71.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.1.0-SNAPSHOT'
   // ...
 }
 ```
@@ -152,11 +153,12 @@ This project is licensed under the Apache 2.0 License
 [1]: https://sourceforge.net/projects/htmlunit/files/htmlunit/2.70.0/ "HtmlUnit on sourceforge"
 [2]: https://jenkins.wetator.org/view/HtmlUnit/ "HtmlUnit CI"
 [3]: https://twitter.com/HtmlUnit "https://twitter.com/HtmlUnit"
-[4]: https://htmlunit.sourceforge.io/ "https://htmlunit.sourceforge.io/"
+[4]: https://www.htmlunit.org "https://www.htmlunit.org"
 [5]: https://www.openhub.net/p/HtmlUnit "https://www.openhub.net/p/HtmlUnit"
 [6]: https://github.com/HtmlUnit/htmlunit/projects/1 "https://github.com/HtmlUnit/htmlunit/projects/1"
-[7]: https://htmlunit.sourceforge.io/gettingStarted.html
+[7]: https://www.htmlunit.org/gettingStarted.html
 [8]: https://www.scrapingbee.com/java-webscraping-book/
 [9]: https://www.innoq.com/en/blog/webscraping/
 [10]: https://www.webscrapingapi.com/java-web-scraping/
 [11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
+[12]: https://github.com/HtmlUnit/htmlunit/releases

@@ -56,9 +56,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>January 22, 2023</date></dt>
+                    <dt>Latest release <date>March 19, 2023</date></dt>
                     <dd>
-                        <p><a href="https://sourceforge.net/projects/htmlunit/files/htmlunit/2.70.0/">version 2.70.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.0.0">version 3.0.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -177,9 +177,9 @@
                 For maven, you would add:
             <source><![CDATA[
 <dependency>
-    <groupId>net.sourceforge.htmlunit</groupId>
+    <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>2.69.0</version>
+    <version>3.0.0</version>
 </dependency>]]></source>
             </p>
 

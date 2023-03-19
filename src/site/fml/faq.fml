@@ -9,8 +9,8 @@
             <answer>
                 <p>
                     The best way is to open a bug report in the
-                    <a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-                    tracking database</a>.  Sending a bug report to the mailing list runs the risk that the
+                    <a href="https://github.com/HtmlUnit/htmlunit/issues">GitHub issue
+                    tracker</a>.  Sending a bug report to the mailing list runs the risk that the
                     bug may get lost. Putting it in the bug database guarantees that it won't. Please
                     search the bug database to see if your bug hasn't already been reported before opening
                     a new one.
@@ -28,8 +28,8 @@
             <answer>
                 <p>
                     The best way is to open a bug report in the
-                    <a href="https://sourceforge.net/tracker/?group_id=47038&amp;atid=448266">sourceforge bug
-                    tracking database</a>. See the answer on bug reporting for why the database is preferred.
+                    <a href="https://github.com/HtmlUnit/htmlunit/issues">GitHub issue
+                    tracker</a>. See the answer on bug reporting for why the database is preferred.
                 </p>
                 <p>
                     If you're willing to write the feature yourself, you can always send us a pull requests.
