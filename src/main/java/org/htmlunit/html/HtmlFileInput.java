@@ -178,7 +178,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
 
     /**
      * {@inheritDoc}
-     * @deprecated as of version 2.71.0; use {@link #setValue(String)} instead
+     * @deprecated as of version 3.0.0; use {@link #setValue(String)} instead
      */
     @Deprecated
     @Override
