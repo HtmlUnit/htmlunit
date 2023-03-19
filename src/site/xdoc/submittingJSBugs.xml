@@ -52,7 +52,7 @@ function someFunction() {
                 You can encounter an error similar to: 
             </p>
             <source><![CDATA[
-net.sourceforge.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
+org.htmlunit.corejs.javascript.EcmaError: TypeError: Cannot call method "getAttribute" of undefined
 (http://download.dojotoolkit.org/release-1.4.0/dojo-release-1.4.0/dojo/dojo.js#16(eval)#16)]]></source>
             <p>
                 which means that in <code>some_variable.getAttribute()</code>, <code>some_variable</code>

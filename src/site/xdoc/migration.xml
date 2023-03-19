@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Migrating</title>
+        <author email="rbri@rbri.de">Ronald Brill</author>
+    </properties>
+
+    <body>
+        <section name="Migrating from HtmlUnit 2.x.x to HtmlUnit 3.x.x">
+            <p>
+                HtmlUnit 3 is essentially the conversion to the new domain htmlunit.org.
+                For this purpose, the maven group id's of HtmlUnit as well as the subprojects
+                core-js, neko, cssparser and xpath were adapted. Furthermore the package names were unified.
+            </p>
+
+            <subsection name="1. adjust maven group id to org.htmlunit">
+                <source><![CDATA[<dependency>
+    <groupId>org.htmlunit</groupId>
+    <artifactId>htmlunit</artifactId>
+    <version>3.0.0</version>
+</dependency>]]></source>
+            </subsection>
+
+            <subsection name="2. Change all package names in your source code - replace 'net.sourceforge.htmlunit'' by 'org.htmlunit'">
+                <source><![CDATA[import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebClient;
+import org.htmlunit.html.HtmlInput;
+import org.htmlunit.html.HtmlPage;]]></source>
+            </subsection>
+
+            <subsection name="3. Update input control value access">
+                <p>Replace all usages of org.htmlunit.html.HtmlInput.getValueAttribute() by 
+                    <strong>org.htmlunit.html.HtmlInput.getValue()</strong>.
+                </p>
+                <p>Replace all usages of org.htmlunit.html.HtmlInput.setValueAttribute(String) by 
+                    <strong>org.htmlunit.html.HtmlInput.setValue(String)</strong>.
+                </p>
+            </subsection>
+        </section>
+    </body>
+</document>
