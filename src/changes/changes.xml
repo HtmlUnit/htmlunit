@@ -29,6 +29,9 @@
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: core-js: All packages renamed from net.sourceforge.htmlunit.corejs to org.htmlunit.corejs.
             </action>
+            <action type="update" dev="rbri">
+                INTERNET_EXPLORER is deprecated.
+            </action>
             <action type="fix" dev="rbri" issue="552">
                 core-js: Function.toString() now returns the source of the function without any reformating.
             </action>

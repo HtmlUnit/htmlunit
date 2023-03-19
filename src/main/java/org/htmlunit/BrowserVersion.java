@@ -97,7 +97,11 @@ public final class BrowserVersion implements Serializable {
     /** Firefox ESR. */
     public static final BrowserVersion FIREFOX_ESR = new BrowserVersion(FIREFOX_ESR_NUMERIC, "FF-ESR");
 
-    /** Internet Explorer 11. */
+    /**
+     * Internet Explorer 11.
+     * @deprecated as of version 3.0.0
+     */
+    @Deprecated
     public static final BrowserVersion INTERNET_EXPLORER = new BrowserVersion(11, "IE");
 
     /** Latest Edge. */
