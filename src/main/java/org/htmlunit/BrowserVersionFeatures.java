@@ -51,6 +51,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE})
     ANCHOR_SEND_PING_REQUEST,
 
+    /** Use Keep-Alive instead of keep-alive. */
+    @BrowserFeature(IE)
+    CONNECTION_KEEP_ALIVE_IE,
+
     /** Browser does not check the CSP. */
     @BrowserFeature(IE)
     CONTENT_SECURITY_POLICY_IGNORED,

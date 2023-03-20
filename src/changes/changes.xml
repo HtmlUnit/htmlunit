@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="3.1.0" date="March xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                Use 'keep-alive' instead of 'Keep-Alive' for the connection header.
+            </action>
+        </release>
+
+
         <release version="3.0.0" date="March 19, 2023" description="htmlunit.org, Chrome/Edge 110, Firefox 110, HTML parser improved, Bugfixes">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: Value processing for input controls changed; typing now ONLY changes the value

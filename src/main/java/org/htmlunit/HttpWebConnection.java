@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import static org.htmlunit.BrowserVersionFeatures.CONNECTION_KEEP_ALIVE_IE;
 import static org.htmlunit.BrowserVersionFeatures.URL_AUTH_CREDENTIALS;
 
 import java.io.ByteArrayInputStream;
@@ -75,7 +76,6 @@ import org.apache.http.client.protocol.HttpClientContext;
 import org.apache.http.client.protocol.RequestAcceptEncoding;
 import org.apache.http.client.protocol.RequestAddCookies;
 import org.apache.http.client.protocol.RequestAuthCache;
-import org.apache.http.client.protocol.RequestClientConnControl;
 import org.apache.http.client.protocol.RequestDefaultHeaders;
 import org.apache.http.client.protocol.RequestExpectContinue;
 import org.apache.http.client.protocol.ResponseProcessCookies;
@@ -84,6 +84,7 @@ import org.apache.http.config.ConnectionConfig;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.config.SocketConfig;
 import org.apache.http.conn.DnsResolver;
+import org.apache.http.conn.routing.RouteInfo;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.socket.LayeredConnectionSocketFactory;
 import org.apache.http.conn.ssl.DefaultHostnameVerifier;
@@ -105,7 +106,6 @@ import org.apache.http.protocol.RequestContent;
 import org.apache.http.protocol.RequestTargetHost;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.TextUtils;
-
 import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.httpclient.HtmlUnitCookieSpecProvider;
 import org.htmlunit.httpclient.HtmlUnitCookieStore;
@@ -914,7 +914,8 @@ public class HttpWebConnection implements WebConnection {
                 }
             }
             else if (HttpHeader.CONNECTION.equals(header)) {
-                list.add(new RequestClientConnControl());
+                list.add(new RequestClientConnControl(
+                                webClient_.getBrowserVersion().hasFeature(CONNECTION_KEEP_ALIVE_IE)));
             }
             else if (HttpHeader.COOKIE.equals(header)) {
                 if (!webRequest.hasHint(HttpHint.BlockCookies)) {
@@ -1148,6 +1149,49 @@ public class HttpWebConnection implements WebConnection {
             throws HttpException, IOException {
             for (final Map.Entry<String, String> entry : map_.entrySet()) {
                 request.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
+    }
+
+    private static class RequestClientConnControl implements HttpRequestInterceptor {
+
+        private static final String PROXY_CONN_DIRECTIVE = "Proxy-Connection";
+        private static final String CONN_DIRECTIVE = "Connection";
+        private static final String CONN_KEEP_ALIVE = "keep-alive";
+        private static final String CONN_KEEP_ALIVE_IE = "Keep-Alive";
+
+        private final boolean ie_;
+
+        RequestClientConnControl(final boolean ie) {
+            ie_ = ie;
+        }
+
+        @Override
+        public void process(final HttpRequest request, final HttpContext context)
+            throws HttpException, IOException {
+            final String method = request.getRequestLine().getMethod();
+            if ("CONNECT".equalsIgnoreCase(method)) {
+                request.setHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                return;
+            }
+
+            final HttpClientContext clientContext = HttpClientContext.adapt(context);
+
+            // Obtain the client connection (required)
+            final RouteInfo route = clientContext.getHttpRoute();
+            if (route == null) {
+                return;
+            }
+
+            if (route.getHopCount() == 1 || route.isTunnelled()) {
+                if (!request.containsHeader(CONN_DIRECTIVE)) {
+                    request.addHeader(CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                }
+            }
+            if (route.getHopCount() == 2 && !route.isTunnelled()) {
+                if (!request.containsHeader(PROXY_CONN_DIRECTIVE)) {
+                    request.addHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
+                }
             }
         }
     }
