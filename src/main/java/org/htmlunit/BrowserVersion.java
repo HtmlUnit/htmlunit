@@ -160,8 +160,7 @@ public final class BrowserVersion implements Serializable {
             140, 141, 143, 143, 144, 145, 146, 148};
 
         FIREFOX.applicationVersion_ = "5.0 (Windows)";
-        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:"
-                                            + (FIREFOX.getBrowserVersionNumeric() - 1) + ".0) Gecko/20100101 Firefox/"
+        FIREFOX.userAgent_ = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/"
                                             + FIREFOX.getBrowserVersionNumeric() + ".0";
         FIREFOX.buildId_ = "20181001000000";
         FIREFOX.productSub_ = "20100101";
