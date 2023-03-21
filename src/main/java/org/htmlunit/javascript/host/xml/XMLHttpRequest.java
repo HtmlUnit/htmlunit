@@ -62,8 +62,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.NoHttpResponseException;
-import org.apache.http.auth.UsernamePasswordCredentials;
 
 import org.htmlunit.AjaxController;
 import org.htmlunit.BrowserVersion;
@@ -76,6 +74,8 @@ import org.htmlunit.WebRequest.HttpHint;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -740,7 +740,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                     passwordCred = password.toString();
                 }
 
-                request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
+                request.setCredentials(new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred));
             }
             webRequest_ = request;
         }
@@ -1114,7 +1114,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
 
                 if (!preflighted
-                        && e instanceof NoHttpResponseException
+                        && HttpClientConverter.isNoHttpResponseException(e)
                         && browserVersion.hasFeature(XHR_PROGRESS_ON_NETWORK_ERROR_ASYNC)) {
                     fireJavascriptEvent(Event.TYPE_PROGRESS);
                 }

@@ -28,6 +28,7 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.auth.NTCredentials;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.CredentialsProvider;
+import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 
 /**
  * Default HtmlUnit implementation of the <code>CredentialsProvider</code> interface. Provides
@@ -110,7 +111,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
         final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
-        final Credentials credentials = new UsernamePasswordCredentials(username, password);
+        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
     }
 
@@ -142,7 +143,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addSocksCredentials(final String username, final String password, final String host,
             final int port) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final Credentials credentials = new UsernamePasswordCredentials(username, password);
+        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
 
         initSocksAuthenticatorIfNeeded(this);
@@ -166,7 +167,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
 
-        if ((credentials instanceof UsernamePasswordCredentials) || (credentials instanceof NTCredentials)) {
+        if ((credentials instanceof UsernamePasswordCredentials)
+                || (credentials instanceof HtmlUnitUsernamePasswordCredentials)
+                || (credentials instanceof NTCredentials)) {
             credentialsMap_.put(new AuthScopeProxy(authscope), credentials);
             return;
         }

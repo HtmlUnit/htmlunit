@@ -15,14 +15,11 @@
 package org.htmlunit.util;
 
 import java.nio.charset.Charset;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.http.client.utils.DateUtils;
 
 import org.htmlunit.html.impl.Color;
 
@@ -131,20 +128,6 @@ public final class StringUtils {
             }
         }
         return -1;
-    }
-
-    /**
-     * Parses the specified date string, assuming that it is formatted according to RFC 1123, RFC 1036 or as an ANSI
-     * C HTTP date header. This method returns {@code null} if the specified string is {@code null} or unparseable.
-     *
-     * @param s the string to parse as a date
-     * @return the date version of the specified string, or {@code null}
-     */
-    public static Date parseHttpDate(final String s) {
-        if (s == null) {
-            return null;
-        }
-        return DateUtils.parseDate(s);
     }
 
     /**

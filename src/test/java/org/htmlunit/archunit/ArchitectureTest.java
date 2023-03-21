@@ -59,6 +59,7 @@ public class ArchitectureTest {
     public static final ArchRule utilsPackageRule = classes()
         .that().haveNameMatching(".*Util.?")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.cssparser.util.ParserUtils")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.httpclient.util.HttpDateUtils")
         .should().resideInAPackage("org.htmlunit.util");
 
     /**
@@ -231,14 +232,10 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule androidTreeWalker = noClasses()
             .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.html.HtmlDomTreeWalker")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.dom.traversal.DomTreeWalker")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.SgmlPage")
+                .doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDomTreeWalker")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.dom.traversal.DomTreeWalker")
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
+                .and().doNotHaveFullyQualifiedName("org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.TreeWalker");
 
     /**
@@ -247,8 +244,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule androidDocumentTraversal = noClasses()
             .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.SgmlPage")
+                .doNotHaveFullyQualifiedName("org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.DocumentTraversal");
 
     /**
@@ -276,7 +272,6 @@ public class ArchitectureTest {
                     "org.htmlunit.platform.util.XmlUtilsXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.xerces..");
 
-
     /**
      * Make sure to not use jdk - Xerces.
      */
@@ -286,4 +281,22 @@ public class ArchitectureTest {
             .doNotHaveFullyQualifiedName(
                     "org.htmlunit.platform.util.XmlUtilsSunXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("com.sun.org.apache.xerces..");
+
+    /**
+     * Make sure the httpclient is only accessed from the adapter classes.
+     */
+    @ArchTest
+    public static final ArchRule httpClient = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName("org.htmlunit.HttpWebConnection")
+            .and().areNotInnerClasses()
+            .and().areNotMemberClasses()
+
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebClient")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebRequest")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.Cookie")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.CookieManager")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.DefaultCredentialsProvider")
+            .and().resideOutsideOfPackage("org.htmlunit.httpclient..")
+        .should().dependOnClassesThat().resideInAnyPackage("org.apache.http..");
 }

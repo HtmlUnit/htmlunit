@@ -42,7 +42,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.client.utils.URLEncodedUtils;
 
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ElementNotFoundException;
@@ -298,7 +297,7 @@ public class HtmlForm extends HtmlElement {
             if (actionUrl.contains("#")) {
                 anchor = StringUtils.substringAfter(actionUrl, "#");
             }
-            queryFormFields = URLEncodedUtils.format(HttpClientConverter.nameValuePairsToHttpClient(parameters), enc);
+            queryFormFields = HttpClientConverter.toQueryFormFields(parameters, enc);
 
             // action may already contain some query parameters: they have to be removed
             actionUrl = StringUtils.substringBefore(actionUrl, "#");

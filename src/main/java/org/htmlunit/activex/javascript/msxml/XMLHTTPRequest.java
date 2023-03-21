@@ -35,7 +35,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.auth.UsernamePasswordCredentials;
 
 import org.htmlunit.AjaxController;
 import org.htmlunit.FormEncodingType;
@@ -45,6 +44,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -423,7 +423,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
                     passwordCred = password.toString();
                 }
 
-                request.setCredentials(new UsernamePasswordCredentials(userCred, passwordCred));
+                request.setCredentials(new HtmlUnitUsernamePasswordCredentials(userCred, passwordCred));
             }
             webRequest_ = request;
         }

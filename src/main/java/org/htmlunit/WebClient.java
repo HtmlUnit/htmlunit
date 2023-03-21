@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.BrowserVersionFeatures.CONTENT_SECURITY_POLICY_IGNORED;
 import static org.htmlunit.BrowserVersionFeatures.DIALOGWINDOW_REFERER;
 import static org.htmlunit.BrowserVersionFeatures.HTTP_HEADER_CH_UA;
@@ -23,8 +25,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTTP_REDIRECT_WITHOUT_HASH;
 import static org.htmlunit.BrowserVersionFeatures.JS_XML_SUPPORT_VIA_ACTIVEXOBJECT;
 import static org.htmlunit.BrowserVersionFeatures.URL_MINIMAL_QUERY_ENCODING;
 import static org.htmlunit.BrowserVersionFeatures.WINDOW_EXECUTE_EVENTS;
-import static java.nio.charset.StandardCharsets.ISO_8859_1;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -66,18 +66,17 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.ClientCookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.message.BufferedHeader;
 import org.apache.http.util.CharArrayBuffer;
-import org.htmlunit.cssparser.parser.CSSErrorHandler;
-
 import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.attachment.AttachmentHandler;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.cssparser.parser.CSSErrorHandler;
 import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -89,6 +88,7 @@ import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.DefaultJavaScriptErrorListener;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -110,10 +110,9 @@ import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.htmlunit.webstart.WebStartHandler;
+
 import com.shapesecurity.salvation2.Policy;
 import com.shapesecurity.salvation2.URLs.URI;
-
-import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The main starting point in HtmlUnit: this class simulates a web browser.
@@ -1411,7 +1410,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, contentType));
         compiledHeaders.add(new NameValuePair(HttpHeader.LAST_MODIFIED,
-                DateUtils.formatDate(new Date(file.lastModified()))));
+                HttpClientConverter.formatDate(new Date(file.lastModified()))));
         final WebResponseData responseData = new WebResponseData(content, 200, "OK", compiledHeaders);
         final WebResponse webResponse = new WebResponse(responseData, webRequest, 0);
         getCache().cacheIfPossible(webRequest, webResponse, null);

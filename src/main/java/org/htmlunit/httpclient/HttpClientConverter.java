@@ -16,8 +16,11 @@ package org.htmlunit.httpclient;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.apache.http.NoHttpResponseException;
+import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -62,4 +65,44 @@ public final class HttpClientConverter {
         return resultingPairs;
     }
 
+    /**
+     * @param parameters the paramters
+     * @param enc the charset
+     * @return the query string from the given parameters
+     */
+    public static String toQueryFormFields(final List<NameValuePair> parameters, final Charset enc) {
+        return URLEncodedUtils.format(nameValuePairsToHttpClient(parameters), enc);
+    }
+
+    /**
+     * Parses the specified date string, assuming that it is formatted according to RFC 1123, RFC 1036 or as an ANSI
+     * C HTTP date header. This method returns {@code null} if the specified string is {@code null} or unparseable.
+     *
+     * @param s the string to parse as a date
+     * @return the date version of the specified string, or {@code null}
+     */
+    public static Date parseHttpDate(final String s) {
+        if (s == null) {
+            return null;
+        }
+        return DateUtils.parseDate(s);
+    }
+
+    /**
+     * Formats the given date according to the RFC 1123 pattern.
+     *
+     * @param date The date to format.
+     * @return An RFC 1123 formatted date string.
+     */
+    public static String formatDate(final Date date) {
+        return DateUtils.formatDate(date);
+    }
+
+    /**
+     * @param e the exception to check
+     * @return true if the provided Exception is na {@link NoHttpResponseException}
+     */
+    public static boolean isNoHttpResponseException(final Exception e) {
+        return e instanceof NoHttpResponseException;
+    }
 }
