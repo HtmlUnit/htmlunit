@@ -15,13 +15,12 @@
 package org.htmlunit;
 
 import org.apache.http.auth.AuthScope;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.auth.Credentials;
 import org.apache.http.impl.auth.BasicScheme;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link DefaultCredentialsProvider}.
@@ -44,21 +43,18 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials("username", "password");
 
-        UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
-        assertEquals("username", credentials.getUserName());
+        Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        assertEquals("username", credentials.getUserPrincipal().getName());
         assertEquals("password", credentials.getPassword());
 
         provider.addCredentials("username", "new password");
-        credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
-        assertEquals("username", credentials.getUserName());
+        credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        assertEquals("username", credentials.getUserPrincipal().getName());
         assertEquals("new password", credentials.getPassword());
 
         provider.addCredentials("new username", "other password");
-        credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
-        assertEquals("new username", credentials.getUserName());
+        credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        assertEquals("new username", credentials.getUserPrincipal().getName());
         assertEquals("other password", credentials.getPassword());
     }
 
@@ -87,15 +83,13 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
         provider.addCredentials("username", "password", HttpHeader.HOST_LC, 80, realm);
 
-        UsernamePasswordCredentials credentials =
-            (UsernamePasswordCredentials) provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
-        assertEquals("username", credentials.getUserName());
+        Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        assertEquals("username", credentials.getUserPrincipal().getName());
         assertEquals("password", credentials.getPassword());
 
         provider.removeCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
 
-        credentials = (UsernamePasswordCredentials) provider
-                        .getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
+        credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertNull(credentials);
     }
 
