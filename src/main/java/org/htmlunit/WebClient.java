@@ -720,11 +720,9 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     public void printContentIfNecessary(final WebResponse webResponse) {
         if (getOptions().isPrintContentOnFailingStatusCode()) {
-            final int statusCode = webResponse.getStatusCode();
-            final boolean successful = statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
-            if (!successful && LOG.isInfoEnabled()) {
+            if (!webResponse.isSuccess() && LOG.isInfoEnabled()) {
                 final String contentType = webResponse.getContentType();
-                LOG.info("statusCode=[" + statusCode + "] contentType=[" + contentType + "]");
+                LOG.info("statusCode=[" + webResponse.getStatusCode() + "] contentType=[" + contentType + "]");
                 LOG.info(webResponse.getContentAsString());
             }
         }
@@ -739,11 +737,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param webResponse the response which may trigger a {@link FailingHttpStatusCodeException}
      */
     public void throwFailingHttpStatusCodeExceptionIfNecessary(final WebResponse webResponse) {
-        final int statusCode = webResponse.getStatusCode();
-        final boolean successful = (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
-            || statusCode == HttpStatus.SC_USE_PROXY
-            || statusCode == HttpStatus.SC_NOT_MODIFIED;
-        if (getOptions().isThrowExceptionOnFailingStatusCode() && !successful) {
+        if (getOptions().isThrowExceptionOnFailingStatusCode() && !webResponse.isSuccessOrUseProxyOrNotModified()) {
             throw new FailingHttpStatusCodeException(webResponse);
         }
     }

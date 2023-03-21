@@ -1102,8 +1102,7 @@ public class HtmlPage extends SgmlPage {
             throw new FailingHttpStatusCodeException(response);
         }
 
-        if (statusCode < HttpStatus.SC_OK
-                || statusCode >= HttpStatus.SC_MULTIPLE_CHOICES) {
+        if (!response.isSuccess()) {
             throw new IOException("Unable to download JavaScript from '" + url + "' (status " + statusCode + ").");
         }
 
