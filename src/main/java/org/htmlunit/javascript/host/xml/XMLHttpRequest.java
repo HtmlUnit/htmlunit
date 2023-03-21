@@ -951,9 +951,6 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         final WebClient wc = getWindow().getWebWindow().getWebClient();
         boolean preflighted = false;
         try {
-            // header origin
-            final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
-
             if (!isSameOrigin_ && isPreflight()) {
                 preflighted = true;
                 final WebRequest preflightRequest = new WebRequest(webRequest_.getUrl(), HttpMethod.OPTIONS);
@@ -961,6 +958,8 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 // preflight request shouldn't have cookies
                 preflightRequest.addHint(HttpHint.BlockCookies);
 
+                // header origin
+                final String originHeaderValue = webRequest_.getAdditionalHeaders().get(HttpHeader.ORIGIN);
                 preflightRequest.setAdditionalHeader(HttpHeader.ORIGIN, originHeaderValue);
 
                 // header request-method
@@ -1006,7 +1005,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 }
             }
 
-            if (originHeaderValue != null) {
+            if (!isSameOrigin_) {
                 // Cookies should not be sent for cross-origin requests when withCredentials is false
                 if (!isWithCredentials()) {
                     webRequest_.addHint(HttpHint.BlockCookies);
