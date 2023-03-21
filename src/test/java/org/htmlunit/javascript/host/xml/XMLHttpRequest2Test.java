@@ -551,7 +551,7 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("a=b,0")
+    @Alerts("a=b,0; cookie: null")
     public void post() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
@@ -572,6 +572,38 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("a=b,0; cookie: cookie=sweet")
+    public void post_cookies() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var xhr = new XMLHttpRequest();\n"
+            + "  xhr.open('POST', '/test2?a=b', false);\n"
+            + "  xhr.send('');\n"
+            + "  log(xhr.responseText);\n"
+            + "}\n"
+            + "</script></head><body onload='test()'></body></html>";
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/test2", PostServlet2.class);
+
+        List<NameValuePair> responseHeader = null;
+        responseHeader = new ArrayList<>();
+        responseHeader.add(new NameValuePair("Set-Cookie", "cookie=sweet"));
+
+        getMockWebConnection().setResponse(URL_FIRST, html,
+                200, "OK", "text/html;charset=ISO-8859-1", ISO_8859_1, responseHeader);
+        loadPage2(URL_FIRST, null);
+
+        loadPage2(html, servlets);
+        verifyTitle2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
      * Servlet for {@link #post()}.
      */
     public static class PostServlet2 extends HttpServlet {
@@ -580,7 +612,11 @@ public class XMLHttpRequest2Test extends WebDriverTestCase {
         protected void doPost(final HttpServletRequest req, final HttpServletResponse resp)
             throws ServletException, IOException {
             final Writer writer = resp.getWriter();
+
             writer.write(req.getQueryString() + ',' + req.getContentLength());
+
+            final String cookie = req.getHeader(HttpHeader.COOKIE);
+            writer.write("; cookie: " + cookie);
         }
     }
 
