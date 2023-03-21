@@ -14,6 +14,7 @@
  */
 package org.htmlunit.httpclient;
 
+import java.io.Serializable;
 import java.security.Principal;
 
 import org.apache.http.auth.Credentials;
@@ -25,7 +26,7 @@ import org.apache.http.util.LangUtils;
  *
  * @author Ronald Brill
  */
-public class HtmlUnitUsernamePasswordCredentials implements Credentials {
+public class HtmlUnitUsernamePasswordCredentials implements Credentials, Serializable {
 
     private final UsernamePasswordCredentials httpClientUsernamePasswordCredentials_;
 
