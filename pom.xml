@@ -1326,7 +1326,7 @@
         <!-- WebDriver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>htmlunit-driver</artifactId>
+            <artifactId>htmlunit3-driver</artifactId>
             <version>${htmlunitdriver.version}</version>
             <scope>test</scope>
             <exclusions>
