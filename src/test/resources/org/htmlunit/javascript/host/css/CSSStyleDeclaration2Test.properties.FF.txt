@@ -293,6 +293,9 @@ fontSizeAdjust
 fontStretch
 fontStyle
 fontSynthesis
+fontSynthesisSmallCaps
+fontSynthesisStyle
+fontSynthesisWeight
 fontVariant
 fontVariantAlternates
 fontVariantCaps

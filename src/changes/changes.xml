@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.1.0" date="March xx, 2023" description="Bugfixes">
+        <release version="3.1.0" date="March xx, 2023" description="Firefox 111, Bugfixes">
             <action type="fix" dev="rbri">
                 Use 'keep-alive' instead of 'Keep-Alive' for the connection header.
             </action>

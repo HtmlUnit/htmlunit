@@ -1592,9 +1592,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "NoReferrer",
-            EDGE = "NoReferrer")
+    @Alerts(DEFAULT = "NoReferrer",
+            FF_ESR = "undefined",
+            IE = "undefined")
     public void relAttribute() throws Exception {
         final String html
             = "<html><head></head>\n"

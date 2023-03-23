@@ -1139,7 +1139,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code font}. */
         FONT("font", "font", chromeAndEdge("16px \"Times New Roman\""), ie(""),
-                ff("400 16px serif")),
+                ff("16px serif")),
 
         /** The style property {@code fontDisplay}. */
         FONT_DISPLAY("fontDisplay", "font-display", chromeAndEdgeEmpty()),
@@ -1215,13 +1215,23 @@ public final class StyleAttributes implements Serializable {
         FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff("weight style small-caps")),
 
         /** The style property {@code fontSynthesisSmallCaps}. */
-        FONT_SYNTHESIS_SMALL_CAPS("fontSynthesisSmallCaps", "fontSynthesisSmallCaps", chromeAndEdgeAuto()),
+        FONT_SYNTHESIS_SMALL_CAPS("fontSynthesisSmallCaps", "fontSynthesisSmallCaps",
+                chromeAndEdgeAuto(), ffLatest("auto")),
+
+        /** The style property {@code font-synthesis-small-caps}. */
+        FONT_SYNTHESIS_SMALL_CAPS_("font-synthesis-small-caps", "fontSynthesisSmallCaps", ffLatest("auto")),
 
         /** The style property {@code fontSynthesisStyle}. */
-        FONT_SYNTHESIS_STYLE("fontSynthesisStyle", "fontSynthesisStyle", chromeAndEdgeAuto()),
+        FONT_SYNTHESIS_STYLE("fontSynthesisStyle", "fontSynthesisStyle", chromeAndEdgeAuto(), ffLatest("auto")),
+
+        /** The style property {@code font-synthesis-style}. */
+        FONT_SYNTHESIS_STYLE_("font-synthesis-style", "fontSynthesisStyle", ffLatest("auto")),
 
         /** The style property {@code fontSynthesisWeight}. */
-        FONT_SYNTHESIS_WEIGHT("fontSynthesisWeight", "fontSynthesisWeight", chromeAndEdgeAuto()),
+        FONT_SYNTHESIS_WEIGHT("fontSynthesisWeight", "fontSynthesisWeight", chromeAndEdgeAuto(), ffLatest("auto")),
+
+        /** The style property {@code font-synthesis-weight}. */
+        FONT_SYNTHESIS_WEIGHT_("font-synthesis-weight", "fontSynthesisWeight", ffLatest("auto")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdgeNormal(), ffNormal(), ie("normal")),
