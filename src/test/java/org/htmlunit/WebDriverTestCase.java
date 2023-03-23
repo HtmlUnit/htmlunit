@@ -521,6 +521,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
                 }
                 final ChromeOptions options = new ChromeOptions();
                 options.addArguments("--lang=en-US");
+                options.addArguments("--remote-allow-origins=*");
 
                 return new ChromeDriver(options);
             }
