@@ -166,7 +166,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
      * Function used in many tests.
      */
     public static final String LOG_WINDOW_NAME_FUNCTION =
-            "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n";
+            "  function log(msg) { window.top.name += msg + '\\u00a7'; }\n  window.top.name = '';";
 
 
     /**
