@@ -210,6 +210,8 @@ public class HTMLDocumentWrite2Test extends WebDriverTestCase {
     @Test
     @Alerts("HelloHello")
     public void writeExternalScriptAfterClick() throws Exception {
+        shutDownAll();
+
         final String html = "<html><head>\n"
             + "<script>\n"
             + "document.write('<scr'+'ipt src=\"script.js\"></scr'+'ipt>');\n"
