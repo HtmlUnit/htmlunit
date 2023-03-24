@@ -25,6 +25,7 @@ import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
@@ -70,6 +71,8 @@ public class HtmlFrame2Test extends WebDriverTestCase {
     @Alerts(DEFAULT = "1",
             CHROME = {"1", "1"},
             EDGE = {"1", "1"})
+    @HtmlUnitNYI(CHROME = "1",
+            EDGE = "1")
     public void iframeOnloadCalledOnlyOnce() throws Exception {
         final String firstHtml = "<html><body>\n"
             + "<iframe src='" + URL_SECOND + "' onload='window.top.name += \"1\\u00a7\"'></iframe>\n"

@@ -3631,6 +3631,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "content",
             FF_ESR = "content",
             IE = "-")
+    @HtmlUnitNYI(CHROME = "content",
+            EDGE = "content")
     public void template() throws Exception {
         test("template");
     }
@@ -6729,7 +6731,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "aspectRatio,backdropFilter,backfaceVisibility,background,backgroundAttachment,"
                 + "backgroundBlendMode,backgroundClip,backgroundColor,backgroundImage,backgroundOrigin,"
                 + "backgroundPosition,backgroundPositionX,backgroundPositionY,backgroundRepeat,backgroundRepeatX,"
-                + "backgroundRepeatY,backgroundSize,baselineShift,basePalette,blockSize,border,borderBlock,"
+                + "backgroundRepeatY,backgroundSize,baselineShift,baselineSource,"
+                + "basePalette,blockSize,border,borderBlock,"
                 + "borderBlockColor,borderBlockEnd,borderBlockEndColor,borderBlockEndStyle,borderBlockEndWidth,"
                 + "borderBlockStart,borderBlockStartColor,borderBlockStartStyle,borderBlockStartWidth,"
                 + "borderBlockStyle,borderBlockWidth,borderBottom,borderBottomColor,borderBottomLeftRadius,"
@@ -6754,7 +6757,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "fillRule,filter,flex,flexBasis,flexDirection,flexFlow,flexGrow,flexShrink,flexWrap,float,"
                 + "floodColor,floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,"
                 + "fontOpticalSizing,fontPalette,fontSize,fontStretch,fontStyle,fontSynthesis,"
-                + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantCaps,"
+                + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,"
+                + "fontVariant,fontVariantAlternates,fontVariantCaps,"
                 + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariationSettings,fontWeight,"
                 + "forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),grid,gridArea,gridAutoColumns,"
                 + "gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,"
@@ -6794,7 +6798,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "textUnderlineOffset,textUnderlinePosition,top,touchAction,transform,transformBox,transformOrigin,"
                 + "transformStyle,transition,transitionDelay,transitionDuration,transitionProperty,"
                 + "transitionTimingFunction,translate,"
-                + "unicodeBidi,unicodeRange,userSelect,vectorEffect,verticalAlign,"
+                + "unicodeBidi,unicodeRange,userSelect,vectorEffect,verticalAlign,viewTransitionName,"
                 + "visibility,webkitAlignContent,webkitAlignItems,webkitAlignSelf,webkitAnimation,"
                 + "webkitAnimationDelay,webkitAnimationDirection,webkitAnimationDuration,webkitAnimationFillMode,"
                 + "webkitAnimationIterationCount,webkitAnimationName,webkitAnimationPlayState,"
@@ -6840,7 +6844,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "aspectRatio,backdropFilter,backfaceVisibility,background,backgroundAttachment,"
                 + "backgroundBlendMode,backgroundClip,backgroundColor,backgroundImage,backgroundOrigin,"
                 + "backgroundPosition,backgroundPositionX,backgroundPositionY,backgroundRepeat,backgroundRepeatX,"
-                + "backgroundRepeatY,backgroundSize,baselineShift,basePalette,blockSize,border,borderBlock,"
+                + "backgroundRepeatY,backgroundSize,baselineShift,baselineSource,"
+                + "basePalette,blockSize,border,borderBlock,"
                 + "borderBlockColor,borderBlockEnd,borderBlockEndColor,borderBlockEndStyle,borderBlockEndWidth,"
                 + "borderBlockStart,borderBlockStartColor,borderBlockStartStyle,borderBlockStartWidth,"
                 + "borderBlockStyle,borderBlockWidth,borderBottom,borderBottomColor,borderBottomLeftRadius,"
@@ -6864,7 +6869,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "fillRule,filter,flex,flexBasis,flexDirection,flexFlow,flexGrow,flexShrink,flexWrap,float,"
                 + "floodColor,floodOpacity,font,fontDisplay,fontFamily,fontFeatureSettings,fontKerning,"
                 + "fontOpticalSizing,fontPalette,fontSize,fontStretch,fontStyle,fontSynthesis,"
-                + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,fontVariant,fontVariantCaps,"
+                + "fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,"
+                + "fontVariant,fontVariantAlternates,fontVariantCaps,"
                 + "fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariationSettings,fontWeight,"
                 + "forcedColorAdjust,gap,getPropertyPriority(),getPropertyValue(),grid,gridArea,gridAutoColumns,"
                 + "gridAutoFlow,gridAutoRows,gridColumn,gridColumnEnd,gridColumnGap,gridColumnStart,gridGap,gridRow,"
@@ -6904,7 +6910,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "textUnderlineOffset,textUnderlinePosition,top,touchAction,transform,transformBox,transformOrigin,"
                 + "transformStyle,transition,transitionDelay,transitionDuration,transitionProperty,"
                 + "transitionTimingFunction,translate,"
-                + "unicodeBidi,unicodeRange,userSelect,vectorEffect,verticalAlign,"
+                + "unicodeBidi,unicodeRange,userSelect,vectorEffect,verticalAlign,viewTransitionName,"
                 + "visibility,webkitAlignContent,webkitAlignItems,webkitAlignSelf,webkitAnimation,"
                 + "webkitAnimationDelay,webkitAnimationDirection,webkitAnimationDuration,webkitAnimationFillMode,"
                 + "webkitAnimationIterationCount,webkitAnimationName,webkitAnimationPlayState,"

@@ -1921,7 +1921,7 @@ public class Window2Test extends WebDriverTestCase {
             + "</form>\n"
             + "<script>\n"
             + "  window.onsubmit = function() {\n"
-            + "    window.name = window.name + '-onsubmit-';\n" // hack
+            + "    window.name = window.name + '-onsubmit-' + '\\u00a7';\n" // hack
             + "  }\n"
             + "</script>\n"
             + "</body></html>";
