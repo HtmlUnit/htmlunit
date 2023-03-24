@@ -14,10 +14,6 @@
  */
 package org.htmlunit.html.parser;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -25,6 +21,8 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Test class for {@link HTMLParser}.
@@ -227,6 +225,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
     @Alerts("<html><head><title>foo</title></head>"
             + "<body><script>window.name += document.documentElement.outerHTML + '\\u00a7';</script></body></html>")
     public void badlyFormedHTML_duplicateHeadStructure() throws Exception {
+        shutDownAll();
+
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html>"
             + "<head>"
@@ -737,12 +737,18 @@ public class HTMLParser4Test extends WebDriverTestCase {
      * @throws Exception failure
      */
     @Test
+    @Alerts("before1after1\\nbefore2after2\\nbefore3after3\\nbefore4after4\\nbefore5after5\\nbefore6<>after6")
+    @HtmlUnitNYI(
+            CHROME = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
+            EDGE = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
+            FF = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
+            FF_ESR = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6",
+            IE = "before1after1\\sbefore2after2\\sbefore3after3\\sbefore4after4\\sbefore5after5\\sbefore6<>after6")
     public void specialComments() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
                 + "<html><head>\n"
-                + "  <title>Outer Html</title>\n"
                 + "  <script>\n"
-                + LOG_WINDOW_NAME_FUNCTION
+                + LOG_TITLE_FUNCTION_NORMALIZE
                 + "    function test() {\n"
                 + "      var body = document.getElementById('tester');\n"
                 + "      var text = body.innerText;"
@@ -766,15 +772,7 @@ public class HTMLParser4Test extends WebDriverTestCase {
                 + "</body>\n"
                 + "</html>\n";
 
-        final WebDriver driver = loadPage2(html);
-        final String alerts = getJsVariableValue(driver, "window.name");
-
-        assertTrue(alerts, alerts.contains("before1after1"));
-        assertTrue(alerts, alerts.contains("before2after2"));
-        assertTrue(alerts, alerts.contains("before3after3"));
-        assertTrue(alerts, alerts.contains("before4after4"));
-        assertTrue(alerts, alerts.contains("before5after5"));
-        assertTrue(alerts, alerts.contains("before6<>after6"));
+        loadPageVerifyTitle2(html, getExpectedAlerts());
     }
 
     /**
