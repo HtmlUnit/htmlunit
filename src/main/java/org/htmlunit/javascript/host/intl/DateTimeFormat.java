@@ -153,6 +153,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         CHROME_FORMATS_.put("be", mmSlash);
+        CHROME_FORMATS_.put("en-CA", yyyyDash);
         CHROME_FORMATS_.put("ga", mmSlash);
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("mk", mmSlash);

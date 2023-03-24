@@ -67,7 +67,9 @@ public class HtmlFrame2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1")
+    @Alerts(DEFAULT = "1",
+            CHROME = {"1", "1"},
+            EDGE = {"1", "1"})
     public void iframeOnloadCalledOnlyOnce() throws Exception {
         final String firstHtml = "<html><body>\n"
             + "<iframe src='" + URL_SECOND + "' onload='window.top.name += \"1\\u00a7\"'></iframe>\n"

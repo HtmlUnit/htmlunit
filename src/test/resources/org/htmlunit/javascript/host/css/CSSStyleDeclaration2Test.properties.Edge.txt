@@ -36,6 +36,7 @@ backgroundRepeatY
 backgroundSize
 basePalette
 baselineShift
+baselineSource
 blockSize
 border
 borderBlock
@@ -181,6 +182,7 @@ fontSynthesisSmallCaps
 fontSynthesisStyle
 fontSynthesisWeight
 fontVariant
+fontVariantAlternates
 fontVariantCaps
 fontVariantEastAsian
 fontVariantLigatures
@@ -425,6 +427,7 @@ unicodeRange
 userSelect
 vectorEffect
 verticalAlign
+viewTransitionName
 visibility
 webkitAlignContent
 webkitAlignItems

@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.1.0" date="March xx, 2023" description="Firefox 111, Bugfixes">
+        <release version="3.1.0" date="March xx, 2023" description="Chrome/Edge 111, Firefox 111, Bugfixes">
+            <action type="fix" dev="rbri" issue="565">
+                XMLHttpRequest post request for the same origin must include the cookies (regression in 3.0.0).
+            </action>
             <action type="fix" dev="rbri">
                 Use 'keep-alive' instead of 'Keep-Alive' for the connection header.
             </action>

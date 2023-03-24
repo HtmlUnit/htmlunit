@@ -133,7 +133,7 @@ public class CSSRule extends HtmlUnitScriptable {
     /**
      * The rule is a {@code CSSCounterStyleRule}.
      */
-    @JsxConstant({FF, FF_ESR})
+    @JsxConstant({CHROME, EDGE, FF, FF_ESR})
     public static final short FONT_FEATURE_VALUES_RULE  = 14;
 
     /**

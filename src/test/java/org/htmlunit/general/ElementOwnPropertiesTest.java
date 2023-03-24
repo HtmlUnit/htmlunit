@@ -10718,8 +10718,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "constructor(),content",
-            CHROME = "constructor(),content,shadowRoot",
-            EDGE = "constructor(),content,shadowRoot",
+            CHROME = "constructor(),content,shadowRoot,shadowRootMode",
+            EDGE = "constructor(),content,shadowRoot,shadowRootMode",
             IE = "constructor,namedRecordset(),recordset")
     @HtmlUnitNYI(CHROME = "constructor(),content",
             EDGE = "constructor(),content",
