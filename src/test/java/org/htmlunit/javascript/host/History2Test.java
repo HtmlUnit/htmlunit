@@ -139,7 +139,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
-                + "    window.name = window.name + 'a';\n"
+                + "    window.name = window.name + 'a\\u00a7';\n"
                 + "  }\n"
 
                 + "  window.addEventListener('popstate', popMe);\n"
@@ -155,45 +155,45 @@ public class History2Test extends WebDriverTestCase {
         int i = 0;
 
         final WebDriver driver = loadPage2(html);
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
 
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
         driver.findElement(By.id("myId")).click();
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
         driver.findElement(By.id("myId2")).click();
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
         driver.navigate().back();
         i = i + 4;
         verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
         driver.navigate().back();
         i = i + 4;
         verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
         driver.navigate().forward();
         i = i + 4;
         verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
         driver.navigate().forward();
         i = i + 4;
         verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
         assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
@@ -244,7 +244,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
-                + "    window.name = window.name + 'a';\n"
+                + "    window.name = window.name + 'a\\u00a7';\n"
                 + "  }\n"
 
                 + "  window.addEventListener('popstate', popMe);\n"
@@ -259,47 +259,47 @@ public class History2Test extends WebDriverTestCase {
         final String[] expectedAlerts = getExpectedAlerts();
         int i = 0;
         final WebDriver driver = loadPage2(html);
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
 
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
         final long waitTime = 4 * DEFAULT_WAIT_TIME;
         if (expectedAlerts.length != 0) {
             driver.findElement(By.id("myId")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.findElement(By.id("myId2")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
             i = 6;
             verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.navigate().back();
             i = i + 6;
             verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
             i = i + 6;
             verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.navigate().forward();
             i = i + 6;
             verifyTitle2(waitTime, driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 2, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
         }
@@ -402,7 +402,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
-                + "    window.name = window.name + 'a';\n"
+                + "    window.name = window.name + 'a\\u00a7';\n"
                 + "  }\n"
 
                 + "  window.addEventListener('popstate', popMe);\n"
@@ -418,31 +418,31 @@ public class History2Test extends WebDriverTestCase {
         int i = 0;
         final WebDriver driver = loadPage2(html);
 
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
         if (expectedAlerts.length != 0) {
             driver.findElement(By.id("myId")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.findElement(By.id("myId2")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
             i = i + 4;
             verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
             i = i + 4;
             verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
         }
@@ -490,7 +490,7 @@ public class History2Test extends WebDriverTestCase {
                 + "  }\n"
 
                 + "  function setWindowName() {\n"
-                + "    window.name = window.name + 'a';\n"
+                + "    window.name = window.name + 'a\\u00a7';\n"
                 + "  }\n"
 
                 + "  window.addEventListener('popstate', popMe);\n"
@@ -506,31 +506,31 @@ public class History2Test extends WebDriverTestCase {
         int i = 0;
         final WebDriver driver = loadPage2(html);
 
-        assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+        verifyWindowName2(driver, "a");
         final long start = (Long) ((JavascriptExecutor) driver).executeScript("return window.history.length");
 
         if (expectedAlerts.length != 0) {
             driver.findElement(By.id("myId")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar.html", driver.getCurrentUrl());
 
             driver.findElement(By.id("myId2")).click();
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
 
             driver.navigate().back();
             i = i + 6;
             verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST.toString(), driver.getCurrentUrl());
 
             driver.navigate().forward();
             i = i + 6;
             verifyTitle2(driver, Arrays.copyOfRange(expectedAlerts, 0, i));
-            assertEquals("a", ((JavascriptExecutor) driver).executeScript("return window.name"));
+            verifyWindowName2(driver, "a");
             assertEquals(start + 1, ((JavascriptExecutor) driver).executeScript("return window.history.length"));
             assertEquals(URL_FIRST + "bar2.html", driver.getCurrentUrl());
         }
