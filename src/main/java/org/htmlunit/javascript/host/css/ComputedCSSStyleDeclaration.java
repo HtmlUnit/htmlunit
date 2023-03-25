@@ -104,6 +104,8 @@ import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlSlot;
 import org.htmlunit.html.HtmlSpan;
 import org.htmlunit.html.HtmlSubmitInput;
+import org.htmlunit.html.HtmlTableCell;
+import org.htmlunit.html.HtmlTableRow;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.html.HtmlTime;
@@ -1122,25 +1124,38 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
 
         ComputedCSSStyleDeclaration lastFlowing = null;
         final Set<ComputedCSSStyleDeclaration> styles = new HashSet<>();
-        for (final DomNode child : node.getChildren()) {
-            if (child.mayBeDisplayed()) {
-                final Object scriptObj = child.getScriptableObject();
-                if (scriptObj instanceof HTMLElement) {
-                    final HTMLElement e = (HTMLElement) scriptObj;
+
+        if (node instanceof HtmlTableRow) {
+            final HtmlTableRow row = (HtmlTableRow) node;
+            for (final HtmlTableCell cell : row.getCellIterator()) {
+                if (cell.mayBeDisplayed()) {
+                    final HTMLElement e = (HTMLElement) cell.getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
-                    final String position = style.getPositionWithInheritance();
-                    if (STATIC.equals(position) || RELATIVE.equals(position)) {
-                        lastFlowing = style;
-                    }
-                    else if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
-                        styles.add(style);
-                    }
+                    styles.add(style);
                 }
             }
         }
+        else {
+            for (final DomNode child : node.getChildren()) {
+                if (child.mayBeDisplayed()) {
+                    final Object scriptObj = child.getScriptableObject();
+                    if (scriptObj instanceof HTMLElement) {
+                        final HTMLElement e = (HTMLElement) scriptObj;
+                        final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
+                        final String position = style.getPositionWithInheritance();
+                        if (STATIC.equals(position) || RELATIVE.equals(position)) {
+                            lastFlowing = style;
+                        }
+                        else if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
+                            styles.add(style);
+                        }
+                    }
+                }
+            }
 
-        if (lastFlowing != null) {
-            styles.add(lastFlowing);
+            if (lastFlowing != null) {
+                styles.add(lastFlowing);
+            }
         }
 
         int max = 0;
@@ -1198,6 +1213,9 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final String position = getPositionWithInheritance();
             if (ABSOLUTE.equals(position) || FIXED.equals(position)) {
                 top = getTopForAbsolutePositionWithInheritance();
+            }
+            else if (getDomElement() instanceof HtmlTableCell) {
+                top = 0;
             }
             else {
                 // Calculate the vertical displacement caused by *previous* siblings.

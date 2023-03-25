@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
@@ -611,6 +612,34 @@ public class HTMLTableRowElementTest extends WebDriverTestCase {
             + "  log(node.borderColorLight);\n"
 
             + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts({"true", "true"})
+    public void heightIsMaxOfCells() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><body>\n"
+            + "<table>\n"
+            + "  <tr id='tr1'>\n"
+            + "    <td style='height: 30px'>a</td>\n"
+            + "    <td style='height: 10px'>b</td>\n"
+            + "    <td style='height: 40px'>d</td>\n"
+            + "  </tr>\n"
+            + "</table>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var tr1 = document.getElementById('tr1');\n"
+            + "  log(tr1.offsetHeight > 35);\n"
+            + "  log(tr1.offsetHeight < 45);\n"
+            + "</script>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
