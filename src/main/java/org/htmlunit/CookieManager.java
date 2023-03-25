@@ -15,8 +15,6 @@
 package org.htmlunit;
 
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -24,11 +22,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.cookie.CookieOrigin;
-
-import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.util.Cookie;
-import org.htmlunit.util.UrlUtils;
 
 /**
  * Manages cookies for a {@link WebClient}. This class is thread-safe.
@@ -87,21 +81,6 @@ public class CookieManager implements Serializable {
     }
 
     /**
-     * Helper that builds a CookieOrigin.
-     * @param url the url to be used
-     * @return the new CookieOrigin
-     */
-    public CookieOrigin buildCookieOrigin(final URL url) {
-        final URL normalizedUrl = replaceForCookieIfNecessary(url);
-
-        return new CookieOrigin(
-                normalizedUrl.getHost(),
-                getPort(normalizedUrl),
-                normalizedUrl.getPath(),
-                "https".equals(normalizedUrl.getProtocol()));
-    }
-
-    /**
      * Clears all cookies that have expired before supplied date.
      * If disabled, this returns false.
      * @param date the date to use for comparison when clearing expired cookies
@@ -125,44 +104,6 @@ public class CookieManager implements Serializable {
             }
         }
         return foundExpired;
-    }
-
-    /**
-     * Gets the port of the URL.
-     * This functionality is implemented here as protected method to allow subclass to change it
-     * as workaround to <a href="http://code.google.com/p/googleappengine/issues/detail?id=4784">
-     * Google App Engine bug 4784</a>.
-     * @param url the URL
-     * @return the port use to connect the server
-     */
-    protected int getPort(final URL url) {
-        if (url.getPort() != -1) {
-            return url.getPort();
-        }
-        return url.getDefaultPort();
-    }
-
-    /**
-     * {@link CookieOrigin} doesn't like empty hosts and negative ports,
-     * but these things happen if we're dealing with a local file.
-     * This method allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
-     *
-     * @param url the URL to replace if necessary
-     * @return the replacement URL, or the original URL if no replacement was necessary
-     */
-    public URL replaceForCookieIfNecessary(URL url) {
-        final String protocol = url.getProtocol();
-        final boolean file = "file".equals(protocol);
-        if (file) {
-            try {
-                url = UrlUtils.getUrlWithNewHostAndPort(url,
-                        HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
-            }
-            catch (final MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return url;
     }
 
     /**

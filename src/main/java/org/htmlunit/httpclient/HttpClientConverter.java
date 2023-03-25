@@ -14,6 +14,8 @@
  */
 package org.htmlunit.httpclient;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,9 +24,10 @@ import java.util.List;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.message.BasicNameValuePair;
-
 import org.htmlunit.util.NameValuePair;
+import org.htmlunit.util.UrlUtils;
 
 /**
  * Helper methods to convert from/to HttpClient.
@@ -104,5 +107,48 @@ public final class HttpClientConverter {
      */
     public static boolean isNoHttpResponseException(final Exception e) {
         return e instanceof NoHttpResponseException;
+    }
+
+    /**
+     * Helper that builds a CookieOrigin.
+     * @param url the url to be used
+     * @return the new CookieOrigin
+     */
+    public static org.apache.http.cookie.CookieOrigin buildCookieOrigin(final URL url) {
+        final URL normalizedUrl = replaceForCookieIfNecessary(url);
+
+        int port = normalizedUrl.getPort();
+        if (port == -1) {
+            port = normalizedUrl.getDefaultPort();
+        }
+
+        return new org.apache.http.cookie.CookieOrigin(
+                normalizedUrl.getHost(),
+                port,
+                normalizedUrl.getPath(),
+                "https".equals(normalizedUrl.getProtocol()));
+    }
+
+    /**
+     * {@link CookieOrigin} doesn't like empty hosts and negative ports,
+     * but these things happen if we're dealing with a local file.
+     * This method allows us to work around this limitation in HttpClient by feeding it a bogus host and port.
+     *
+     * @param url the URL to replace if necessary
+     * @return the replacement URL, or the original URL if no replacement was necessary
+     */
+    public static URL replaceForCookieIfNecessary(URL url) {
+        final String protocol = url.getProtocol();
+        final boolean file = "file".equals(protocol);
+        if (file) {
+            try {
+                url = UrlUtils.getUrlWithNewHostAndPort(url,
+                        HtmlUnitBrowserCompatCookieSpec.LOCAL_FILESYSTEM_DOMAIN, 0);
+            }
+            catch (final MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return url;
     }
 }

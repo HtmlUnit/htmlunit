@@ -2726,7 +2726,7 @@ public class WebClient implements Serializable, AutoCloseable {
             return Collections.emptySet();
         }
 
-        final URL normalizedUrl = cookieManager.replaceForCookieIfNecessary(url);
+        final URL normalizedUrl = HttpClientConverter.replaceForCookieIfNecessary(url);
 
         final String host = normalizedUrl.getHost();
         // URLs like "about:blank" don't have cookies and we need to catch these
@@ -2735,12 +2735,6 @@ public class WebClient implements Serializable, AutoCloseable {
             return Collections.emptySet();
         }
 
-        final String path = normalizedUrl.getPath();
-        final String protocol = normalizedUrl.getProtocol();
-        final boolean secure = "https".equals(protocol);
-
-        final int port = cookieManager.getPort(normalizedUrl);
-
         // discard expired cookies
         cookieManager.clearExpired(new Date());
 
@@ -2748,7 +2742,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
 
         if (all.size() > 0) {
-            final CookieOrigin cookieOrigin = new CookieOrigin(host, port, path, secure);
+            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
             for (final org.apache.http.cookie.Cookie cookie : all) {
                 if (cookieSpec.match(cookie, cookieOrigin)) {
@@ -2785,7 +2779,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         try {
             final List<org.apache.http.cookie.Cookie> cookies =
-                    cookieSpec.parse(new BufferedHeader(buffer), cookieManager.buildCookieOrigin(pageUrl));
+                    cookieSpec.parse(new BufferedHeader(buffer), HttpClientConverter.buildCookieOrigin(pageUrl));
 
             for (final org.apache.http.cookie.Cookie cookie : cookies) {
                 final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
