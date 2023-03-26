@@ -123,7 +123,7 @@ public final class HttpClientConverter {
      * @param url the url to be used
      * @return the new CookieOrigin
      */
-    public static org.apache.http.cookie.CookieOrigin buildCookieOrigin(final URL url) {
+    public static CookieOrigin buildCookieOrigin(final URL url) {
         final URL normalizedUrl = replaceForCookieIfNecessary(url);
 
         int port = normalizedUrl.getPort();
@@ -131,7 +131,7 @@ public final class HttpClientConverter {
             port = normalizedUrl.getDefaultPort();
         }
 
-        return new org.apache.http.cookie.CookieOrigin(
+        return new CookieOrigin(
                 normalizedUrl.getHost(),
                 port,
                 normalizedUrl.getPath(),
@@ -172,7 +172,7 @@ public final class HttpClientConverter {
         final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), buildCookieOrigin(pageUrl));
 
         final List<org.htmlunit.util.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
-        for (final org.apache.http.cookie.Cookie cookie : cookies) {
+        for (final Cookie cookie : cookies) {
             final org.htmlunit.util.Cookie htmlUnitCookie = new org.htmlunit.util.Cookie((ClientCookie) cookie);
             htmlUnitCookies.add(htmlUnitCookie);
         }
@@ -184,8 +184,8 @@ public final class HttpClientConverter {
      * @param cookies the cookies to be converted
      * @return the specified cookies, as HttpClient cookies
      */
-    public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<org.htmlunit.util.Cookie> cookies) {
-        final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
+    public static List<Cookie> toHttpClient(final Collection<org.htmlunit.util.Cookie> cookies) {
+        final ArrayList<Cookie> array = new ArrayList<>(cookies.size());
         for (final org.htmlunit.util.Cookie cookie : cookies) {
             array.add(cookie.toHttpClient());
         }
@@ -197,9 +197,9 @@ public final class HttpClientConverter {
      * @param cookies the cookies to be converted
      * @return the specified HttpClient cookies, as cookies
      */
-    public static List<org.htmlunit.util.Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
+    public static List<org.htmlunit.util.Cookie> fromHttpClient(final List<Cookie> cookies) {
         final List<org.htmlunit.util.Cookie> list = new ArrayList<>(cookies.size());
-        for (final org.apache.http.cookie.Cookie c : cookies) {
+        for (final Cookie c : cookies) {
             list.add(new org.htmlunit.util.Cookie((ClientCookie) c));
         }
         return list;
@@ -207,12 +207,12 @@ public final class HttpClientConverter {
 
     public static void addMatching(final Set<org.htmlunit.util.Cookie> cookies,
             final URL normalizedUrl, final BrowserVersion browserVersion,
-            final List<org.apache.http.cookie.Cookie> matches) {
-        final List<org.apache.http.cookie.Cookie> all = HttpClientConverter.toHttpClient(cookies);
+            final List<Cookie> matches) {
+        final List<Cookie> all = HttpClientConverter.toHttpClient(cookies);
         if (all.size() > 0) {
             final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
             final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
-            for (final org.apache.http.cookie.Cookie cookie : all) {
+            for (final Cookie cookie : all) {
                 if (cookieSpec.match(cookie, cookieOrigin)) {
                     matches.add(cookie);
                 }

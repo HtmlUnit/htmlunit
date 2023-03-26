@@ -167,9 +167,9 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
             throw new IllegalArgumentException("Authentication scope may not be null");
         }
 
-        if ((credentials instanceof UsernamePasswordCredentials)
-                || (credentials instanceof HtmlUnitUsernamePasswordCredentials)
-                || (credentials instanceof NTCredentials)) {
+        if (credentials instanceof UsernamePasswordCredentials
+                || credentials instanceof HtmlUnitUsernamePasswordCredentials
+                || credentials instanceof NTCredentials) {
             credentialsMap_.put(new AuthScopeProxy(authscope), credentials);
             return;
         }

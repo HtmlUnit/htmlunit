@@ -9,7 +9,7 @@
     <body>
         <release version="3.1.0" date="March xx, 2023" description="Chrome/Edge 111, Firefox 111, Bugfixes">
             <action type="remove" dev="rbri">
-                INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like 
+                INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
             <action type="fix" dev="rbri" issue="565">

@@ -712,12 +712,11 @@ public class WebClient implements Serializable, AutoCloseable {
      * @param webResponse the response whose content may be logged
      */
     public void printContentIfNecessary(final WebResponse webResponse) {
-        if (getOptions().isPrintContentOnFailingStatusCode()) {
-            if (!webResponse.isSuccess() && LOG.isInfoEnabled()) {
-                final String contentType = webResponse.getContentType();
-                LOG.info("statusCode=[" + webResponse.getStatusCode() + "] contentType=[" + contentType + "]");
-                LOG.info(webResponse.getContentAsString());
-            }
+        if (getOptions().isPrintContentOnFailingStatusCode()
+                && !webResponse.isSuccess() && LOG.isInfoEnabled()) {
+            final String contentType = webResponse.getContentType();
+            LOG.info("statusCode=[" + webResponse.getStatusCode() + "] contentType=[" + contentType + "]");
+            LOG.info(webResponse.getContentAsString());
         }
     }
 

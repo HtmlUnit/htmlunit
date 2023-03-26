@@ -1183,15 +1183,13 @@ public class HttpWebConnection implements WebConnection {
                 return;
             }
 
-            if (route.getHopCount() == 1 || route.isTunnelled()) {
-                if (!request.containsHeader(CONN_DIRECTIVE)) {
-                    request.addHeader(CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
-                }
+            if ((route.getHopCount() == 1 || route.isTunnelled())
+                    && !request.containsHeader(CONN_DIRECTIVE)) {
+                request.addHeader(CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
             }
-            if (route.getHopCount() == 2 && !route.isTunnelled()) {
-                if (!request.containsHeader(PROXY_CONN_DIRECTIVE)) {
-                    request.addHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
-                }
+            if ((route.getHopCount() == 2 && !route.isTunnelled())
+                    && !request.containsHeader(PROXY_CONN_DIRECTIVE)) {
+                request.addHeader(PROXY_CONN_DIRECTIVE, ie_ ? CONN_KEEP_ALIVE_IE : CONN_KEEP_ALIVE);
             }
         }
     }
