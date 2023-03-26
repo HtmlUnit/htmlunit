@@ -66,12 +66,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
-import org.apache.http.cookie.ClientCookie;
-import org.apache.http.cookie.CookieOrigin;
-import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.MalformedCookieException;
-import org.apache.http.message.BufferedHeader;
-import org.apache.http.util.CharArrayBuffer;
 import org.htmlunit.activex.javascript.msxml.MSXMLActiveXObjectFactory;
 import org.htmlunit.attachment.AttachmentHandler;
 import org.htmlunit.corejs.javascript.ScriptableObject;
@@ -87,7 +82,6 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
-import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.DefaultJavaScriptErrorListener;
@@ -2738,20 +2732,11 @@ public class WebClient implements Serializable, AutoCloseable {
         // discard expired cookies
         cookieManager.clearExpired(new Date());
 
-        final List<org.apache.http.cookie.Cookie> all = Cookie.toHttpClient(cookieManager.getCookies());
         final List<org.apache.http.cookie.Cookie> matches = new ArrayList<>();
 
-        if (all.size() > 0) {
-            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
-            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
-            for (final org.apache.http.cookie.Cookie cookie : all) {
-                if (cookieSpec.match(cookie, cookieOrigin)) {
-                    matches.add(cookie);
-                }
-            }
-        }
+        HttpClientConverter.addMatching(cookieManager.getCookies(), normalizedUrl, getBrowserVersion(), matches);
 
-        final Set<Cookie> cookies = new LinkedHashSet<>(Cookie.fromHttpClient(matches));
+        final Set<Cookie> cookies = new LinkedHashSet<>(HttpClientConverter.fromHttpClient(matches));
         return Collections.unmodifiableSet(cookies);
     }
 
@@ -2771,19 +2756,11 @@ public class WebClient implements Serializable, AutoCloseable {
             return;
         }
 
-        final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
-        buffer.append("Set-Cookie: ");
-        buffer.append(cookieString);
-
-        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(getBrowserVersion());
-
         try {
-            final List<org.apache.http.cookie.Cookie> cookies =
-                    cookieSpec.parse(new BufferedHeader(buffer), HttpClientConverter.buildCookieOrigin(pageUrl));
+            final List<Cookie> cookies = HttpClientConverter.parseCookie(cookieString, pageUrl, getBrowserVersion());
 
-            for (final org.apache.http.cookie.Cookie cookie : cookies) {
-                final Cookie htmlUnitCookie = new Cookie((ClientCookie) cookie);
-                cookieManager.addCookie(htmlUnitCookie);
+            for (final Cookie cookie : cookies) {
+                cookieManager.addCookie(cookie);
 
                 if (LOG.isDebugEnabled()) {
                     LOG.debug("Added cookie: '" + cookieString + "'");

@@ -56,7 +56,7 @@ public final class HtmlUnitCookieStore implements CookieStore, Serializable {
      */
     @Override
     public synchronized List<Cookie> getCookies() {
-        return org.htmlunit.util.Cookie.toHttpClient(manager_.getCookies());
+        return HttpClientConverter.toHttpClient(manager_.getCookies());
     }
 
     /**

@@ -18,14 +18,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.cookie.ClientCookie;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
+import org.apache.http.cookie.CookieSpec;
+import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.message.BufferedHeader;
+import org.apache.http.util.CharArrayBuffer;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -150,5 +159,64 @@ public final class HttpClientConverter {
             }
         }
         return url;
+    }
+
+    public static List<org.htmlunit.util.Cookie> parseCookie(final String cookieString, final URL pageUrl,
+            final BrowserVersion browserVersion)
+            throws MalformedCookieException {
+        final CharArrayBuffer buffer = new CharArrayBuffer(cookieString.length() + 22);
+        buffer.append("Set-Cookie: ");
+        buffer.append(cookieString);
+
+        final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+        final List<Cookie> cookies = cookieSpec.parse(new BufferedHeader(buffer), buildCookieOrigin(pageUrl));
+
+        final List<org.htmlunit.util.Cookie> htmlUnitCookies = new ArrayList<>(cookies.size());
+        for (final org.apache.http.cookie.Cookie cookie : cookies) {
+            final org.htmlunit.util.Cookie htmlUnitCookie = new org.htmlunit.util.Cookie((ClientCookie) cookie);
+            htmlUnitCookies.add(htmlUnitCookie);
+        }
+        return htmlUnitCookies;
+    }
+
+    /**
+     * Converts the specified collection of cookies into a collection of HttpClient cookies.
+     * @param cookies the cookies to be converted
+     * @return the specified cookies, as HttpClient cookies
+     */
+    public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<org.htmlunit.util.Cookie> cookies) {
+        final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
+        for (final org.htmlunit.util.Cookie cookie : cookies) {
+            array.add(cookie.toHttpClient());
+        }
+        return array;
+    }
+
+    /**
+     * Converts the specified array of HttpClient cookies into a list of cookies.
+     * @param cookies the cookies to be converted
+     * @return the specified HttpClient cookies, as cookies
+     */
+    public static List<org.htmlunit.util.Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
+        final List<org.htmlunit.util.Cookie> list = new ArrayList<>(cookies.size());
+        for (final org.apache.http.cookie.Cookie c : cookies) {
+            list.add(new org.htmlunit.util.Cookie((ClientCookie) c));
+        }
+        return list;
+    }
+
+    public static void addMatching(final Set<org.htmlunit.util.Cookie> cookies,
+            final URL normalizedUrl, final BrowserVersion browserVersion,
+            final List<org.apache.http.cookie.Cookie> matches) {
+        final List<org.apache.http.cookie.Cookie> all = HttpClientConverter.toHttpClient(cookies);
+        if (all.size() > 0) {
+            final CookieOrigin cookieOrigin = HttpClientConverter.buildCookieOrigin(normalizedUrl);
+            final CookieSpec cookieSpec = new HtmlUnitBrowserCompatCookieSpec(browserVersion);
+            for (final org.apache.http.cookie.Cookie cookie : all) {
+                if (cookieSpec.match(cookie, cookieOrigin)) {
+                    matches.add(cookie);
+                }
+            }
+        }
     }
 }

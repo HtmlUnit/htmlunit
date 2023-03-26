@@ -15,10 +15,7 @@
 package org.htmlunit.util;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -270,31 +267,5 @@ public class Cookie implements Serializable {
      */
     public org.apache.http.cookie.Cookie toHttpClient() {
         return httpClientCookie_;
-    }
-
-    /**
-     * Converts the specified collection of cookies into a collection of HttpClient cookies.
-     * @param cookies the cookies to be converted
-     * @return the specified cookies, as HttpClient cookies
-     */
-    public static List<org.apache.http.cookie.Cookie> toHttpClient(final Collection<Cookie> cookies) {
-        final ArrayList<org.apache.http.cookie.Cookie> array = new ArrayList<>(cookies.size());
-        for (final Cookie cookie : cookies) {
-            array.add(cookie.toHttpClient());
-        }
-        return array;
-    }
-
-    /**
-     * Converts the specified array of HttpClient cookies into a list of cookies.
-     * @param cookies the cookies to be converted
-     * @return the specified HttpClient cookies, as cookies
-     */
-    public static List<Cookie> fromHttpClient(final List<org.apache.http.cookie.Cookie> cookies) {
-        final List<Cookie> list = new ArrayList<>(cookies.size());
-        for (final org.apache.http.cookie.Cookie c : cookies) {
-            list.add(new Cookie((ClientCookie) c));
-        }
-        return list;
     }
 }
