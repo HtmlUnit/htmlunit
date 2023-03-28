@@ -557,9 +557,9 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         final String tagLower = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(localName);
 
-        if (!"form".equals(tagLower) || !lastTagWasSynthesized_) {
+        // if (!"form".equals(tagLower) || !lastTagWasSynthesized_) {
             handleCharacters();
-        }
+        //}
 
         if (page_.isParsingHtmlSnippet()) {
             if ("html".equals(tagLower) || "body".equals(tagLower)) {

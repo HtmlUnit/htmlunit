@@ -16,7 +16,7 @@ package org.htmlunit.html.parser;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -243,4 +243,18 @@ public class HTMLParser5Test extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+    @Test
+    @Alerts("x<form name=\"f1\">y</form>")
+    public void unclosedForm() throws Exception {
+        final String html =
+            "<html><body>"
+            + "x<form name=\"f1\">y"
+            + "</body></html>";
+
+        loadPage2(html);
+
+        final String script = "return document.body.innerHTML";
+        final String result = (String) ((JavascriptExecutor) getWebDriver()).executeScript(script);
+        assertEquals(getExpectedAlerts()[0], result);
+    }
 }
