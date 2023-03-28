@@ -60,7 +60,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     @Override
     public String getStylePriority(final String name) {
         final StyleElement element = domElement_.getStyleElement(name);
-        if (element.getValue() != null) {
+        if (element != null && element.getValue() != null) {
             return element.getPriority();
         }
         return "";
