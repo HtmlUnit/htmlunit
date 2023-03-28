@@ -34,6 +34,7 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
  * @author Carsten Steurl
  * @author Leszek Hoppe
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {

@@ -32,6 +32,7 @@ import java.util.List;
  * @author Ronald Brill
  * @author Leszek Hoppe
  * @author Atsushi Nakagawa
+ * @author Lai Quang Duong
  */
 public class RegExpJsToJavaConverter {
 

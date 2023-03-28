@@ -22,6 +22,7 @@ import org.junit.Test;
  * Tests for {@link RegExpJsToJavaConverter}.
  *
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 public class RegExpJsToJavaConverterTest {
 
