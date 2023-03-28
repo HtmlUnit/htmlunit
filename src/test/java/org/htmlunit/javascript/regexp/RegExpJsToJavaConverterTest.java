@@ -471,8 +471,8 @@ public class RegExpJsToJavaConverterTest {
         assertEquals("(?!)", regExpJsToJavaConverter.convert("[]"));
         assertEquals("x(?!)y", regExpJsToJavaConverter.convert("x[]y"));
 
-        assertEquals(".", regExpJsToJavaConverter.convert("[^]"));
-        assertEquals("x.y", regExpJsToJavaConverter.convert("x[^]y"));
+        assertEquals("[\\s\\S]", regExpJsToJavaConverter.convert("[^]"));
+        assertEquals("x[\\s\\S]y", regExpJsToJavaConverter.convert("x[^]y"));
     }
 
     /**

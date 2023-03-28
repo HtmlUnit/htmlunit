@@ -240,7 +240,7 @@ public class RegExpJsToJavaConverter {
                 else if (']' == next) {
                     // [^]
                     tape_.move(-3);
-                    tape_.replace(3, ".");
+                    tape_.replace(3, "[\\s\\S]");
                 }
                 else {
                     tape_.move(-1);
