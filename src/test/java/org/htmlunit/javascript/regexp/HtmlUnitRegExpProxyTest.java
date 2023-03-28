@@ -1135,10 +1135,10 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("abc")
+    @Alerts("ab\nc")
     public void specialBrackets6() throws Exception {
         // [^] matches any character in JS
-        testEvaluate("'abc'.match(/[^]*/)[0]");
+        testEvaluate("'ab\\nc'.match(/[^]*/)[0]");
     }
 
     /**
