@@ -417,10 +417,7 @@ public class ElementChildNodesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"1", "0", "1", "1", "0", "1"},
             IE = {"3", "2", "2", "3", "2", "2"})
-    @HtmlUnitNYI(CHROME = {"3", "2", "2", "3", "2", "2"},
-            EDGE = {"3", "2", "2", "3", "2", "2"},
-            FF = {"3", "2", "2", "3", "2", "2"},
-            FF_ESR = {"3", "2", "2", "3", "2", "2"})
+    @HtmlUnitNYI(IE = {"1", "0", "1", "1", "0", "1"})
     public void dialog() throws Exception {
         loadPageVerifyTitle2(test("dialog"));
     }
