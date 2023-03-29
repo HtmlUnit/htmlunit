@@ -16,9 +16,6 @@ package org.htmlunit.html.parser;
 
 import java.net.URL;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.StringWebResponse;
 import org.htmlunit.WebClient;
@@ -31,6 +28,8 @@ import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.html.HtmlTableColumnGroup;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Test class for {@link HTMLParser}.

@@ -21,10 +21,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.cssparser.parser.media.MediaQuery;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.CssMediaList;
+import org.htmlunit.cssparser.parser.media.MediaQuery;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;

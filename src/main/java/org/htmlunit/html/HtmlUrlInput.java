@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_URL_VALUE_TRIMMED;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 

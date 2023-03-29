@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_INITIAL;
 import static org.htmlunit.BrowserVersionFeatures.CSS_BACKGROUND_RGBA;
 import static org.htmlunit.BrowserVersionFeatures.CSS_LENGTH_INITIAL;
@@ -102,7 +103,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
-import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -119,9 +119,12 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-
 import org.htmlunit.BrowserVersion;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.AbstractCssStyleDeclaration;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssPixelValueConverter;
@@ -130,6 +133,7 @@ import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.css.StyleElement;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.impl.Color;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -139,12 +143,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.Element;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * A JavaScript object for {@code CSSStyleDeclaration}.

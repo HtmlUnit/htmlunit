@@ -22,13 +22,12 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Tries;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link WebClient#waitForBackgroundJavaScriptStartingBefore(long)} and

@@ -14,9 +14,9 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -36,10 +36,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.w3c.dom.NodeList;
-
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.HttpMethod;
@@ -62,6 +58,9 @@ import org.htmlunit.util.Cookie;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.w3c.dom.NodeList;
 
 /**
  * Tests for {@link HtmlPage}.

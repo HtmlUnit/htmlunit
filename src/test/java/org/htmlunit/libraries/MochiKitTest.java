@@ -17,15 +17,14 @@ package org.htmlunit.libraries;
 import java.time.Duration;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for compatibility with <a href="http://mochikit.com">MochiKit</a>.

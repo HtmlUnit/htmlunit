@@ -14,13 +14,12 @@
  */
 package org.htmlunit.activex.javascript.msxml;
 
-import org.w3c.dom.NamedNodeMap;
-
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.util.StringUtils;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for XMLSerializer.

@@ -27,11 +27,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-
 import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
 import org.htmlunit.javascript.configuration.BrowserFeature;
 import org.htmlunit.javascript.configuration.SupportedBrowser;
+import org.junit.Test;
 
 /**
  * Tests for {@link BrowserVersionFeatures}.

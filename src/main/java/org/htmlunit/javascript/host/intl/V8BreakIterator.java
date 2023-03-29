@@ -20,19 +20,18 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import java.text.BreakIterator;
 import java.util.Locale;
 
-import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.RecursiveFunctionObject;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
-import org.htmlunit.javascript.configuration.JsxFunction;
-import org.htmlunit.javascript.host.Window;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeArray;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.htmlunit.javascript.RecursiveFunctionObject;
+import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.host.Window;
 
 /**
  * A JavaScript object for {@code V8BreakIterator}.

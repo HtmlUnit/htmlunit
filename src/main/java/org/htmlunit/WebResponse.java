@@ -32,7 +32,6 @@ import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpStatus;
-
 import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;

@@ -19,6 +19,7 @@ import java.util.List;
 
 import javax.xml.transform.TransformerException;
 
+import org.htmlunit.html.DomNode;
 import org.htmlunit.xpath.XPathContext;
 import org.htmlunit.xpath.objects.XBoolean;
 import org.htmlunit.xpath.objects.XNodeSet;
@@ -29,8 +30,6 @@ import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
-import org.htmlunit.html.DomNode;
 
 /**
  * Collection of XPath utility methods.

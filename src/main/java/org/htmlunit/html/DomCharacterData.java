@@ -14,9 +14,8 @@
  */
 package org.htmlunit.html;
 
-import org.w3c.dom.CharacterData;
-
 import org.htmlunit.SgmlPage;
+import org.w3c.dom.CharacterData;
 
 /**
  * Wrapper for the DOM node CharacterData.

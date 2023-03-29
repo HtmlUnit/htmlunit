@@ -16,11 +16,10 @@ package org.htmlunit;
 
 import java.net.URL;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link NiceRefreshHandler}.

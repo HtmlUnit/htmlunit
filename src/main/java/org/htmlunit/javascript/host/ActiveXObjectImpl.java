@@ -16,11 +16,10 @@ package org.htmlunit.javascript.host;
 
 import java.lang.reflect.Method;
 
-import org.htmlunit.javascript.HtmlUnitScriptable;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * An implementation of native ActiveX components using <a href="http://jacob-project.wiki.sourceforge.net/">Jacob</a>.

@@ -16,12 +16,11 @@ package org.htmlunit.html;
 
 import java.util.Iterator;
 
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xml.sax.helpers.AttributesImpl;
-
-import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for {@link DefaultElementFactory}.

@@ -24,7 +24,6 @@ import org.apache.http.client.utils.DateUtils;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.cookie.SetCookie;
 import org.apache.http.impl.cookie.BasicExpiresHandler;
-
 import org.htmlunit.BrowserVersion;
 
 /**

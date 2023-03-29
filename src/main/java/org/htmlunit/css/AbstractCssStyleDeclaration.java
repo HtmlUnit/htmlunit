@@ -19,9 +19,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
-
 import org.htmlunit.css.StyleAttributes.Definition;
+import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.host.Element;
 

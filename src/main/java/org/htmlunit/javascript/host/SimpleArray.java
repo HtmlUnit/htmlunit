@@ -17,12 +17,11 @@ package org.htmlunit.javascript.host;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-
-import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A JavaScript object for {@code SimpleArray} allowing access per key and index (like {@link MimeTypeArray}).

@@ -19,9 +19,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
-
 import org.htmlunit.BrowserVersion;
+import org.junit.Test;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.

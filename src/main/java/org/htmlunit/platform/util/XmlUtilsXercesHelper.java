@@ -22,11 +22,10 @@ import java.util.Objects;
 
 import org.apache.xerces.dom.DeferredDocumentImpl;
 import org.apache.xerces.dom.DeferredNode;
+import org.htmlunit.platform.XmlUtilsHelperAPI;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
-
-import org.htmlunit.platform.XmlUtilsHelperAPI;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 

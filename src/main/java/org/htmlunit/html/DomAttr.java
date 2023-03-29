@@ -14,10 +14,9 @@
  */
 package org.htmlunit.html;
 
+import org.htmlunit.SgmlPage;
 import org.w3c.dom.Attr;
 import org.w3c.dom.TypeInfo;
-
-import org.htmlunit.SgmlPage;
 
 /**
  * An attribute of an element. Attributes are stored in {@link HtmlElement},

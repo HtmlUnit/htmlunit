@@ -19,26 +19,24 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.html.DomAttr;
-import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlDivision;
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlPage;
-
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.DomAttr;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlDivision;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlPage;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Tests for {@link Window} that use background jobs.

@@ -20,11 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.JavaScriptEngine;
+import org.junit.After;
+import org.junit.Before;
 
 /**
  * A simple WebTestCase which doesn't require server to run, and doens't use WebDriver.

@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.Filterable;
@@ -34,10 +37,6 @@ import org.junit.runners.Suite;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.TestClass;
 import org.junit.runners.parameterized.TestWithParameters;
-
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebTestCase;
 
 /**
  * The custom runner <code>BrowserParameterizedRunner</code> combines the behavior of both

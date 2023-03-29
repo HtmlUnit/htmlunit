@@ -14,10 +14,6 @@
  */
 package org.htmlunit.general;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.w3c.dom.css.CSS2Properties;
-
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.annotations.StandardsMode;
@@ -37,6 +33,9 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.AlertsStandards;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.w3c.dom.css.CSS2Properties;
 
 /**
  * Test the host class names.

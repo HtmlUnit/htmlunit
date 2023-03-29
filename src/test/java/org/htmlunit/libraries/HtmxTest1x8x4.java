@@ -14,12 +14,11 @@
  */
 package org.htmlunit.libraries;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for <a href="https://htmx.org/">htmx</a>.

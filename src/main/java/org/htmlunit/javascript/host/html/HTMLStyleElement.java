@@ -19,10 +19,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
-
 import org.htmlunit.Cache;
 import org.htmlunit.css.CssStyleSheet;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;

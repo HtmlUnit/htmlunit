@@ -19,17 +19,16 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 
 /**
  * Tests for compatibility with <a href="https://www.chartjs.org/">Chart.js</a>.

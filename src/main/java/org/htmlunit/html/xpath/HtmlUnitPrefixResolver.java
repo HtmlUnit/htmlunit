@@ -16,13 +16,12 @@ package org.htmlunit.html.xpath;
 
 import java.util.Map;
 
-import org.htmlunit.xpath.xml.utils.PrefixResolverDefault;
-import org.w3c.dom.Node;
-
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.xml.XmlPage;
+import org.htmlunit.xpath.xml.utils.PrefixResolverDefault;
+import org.w3c.dom.Node;
 
 /**
  * Custom {@link PrefixResolverDefault} extension.

@@ -14,9 +14,8 @@
  */
 package org.htmlunit.html;
 
-import org.w3c.dom.DocumentFragment;
-
 import org.htmlunit.SgmlPage;
+import org.w3c.dom.DocumentFragment;
 
 /**
  * A DOM object for DocumentFragment.

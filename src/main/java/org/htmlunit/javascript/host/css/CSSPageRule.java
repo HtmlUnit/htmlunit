@@ -25,15 +25,14 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
-import org.w3c.dom.DOMException;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.css.WrappedCssStyleDeclaration;
+import org.htmlunit.cssparser.dom.CSSPageRuleImpl;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.w3c.dom.DOMException;
 
 /**
  * A JavaScript object for {@code CSSPageRule}.

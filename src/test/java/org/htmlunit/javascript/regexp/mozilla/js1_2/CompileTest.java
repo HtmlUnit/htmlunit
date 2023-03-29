@@ -14,12 +14,11 @@
  */
 package org.htmlunit.javascript.regexp.mozilla.js1_2;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests originally in '/js/src/tests/js1_2/regexp/compile.js'.

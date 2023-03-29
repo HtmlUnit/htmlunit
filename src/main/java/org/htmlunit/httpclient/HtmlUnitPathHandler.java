@@ -20,7 +20,6 @@ import org.apache.http.cookie.Cookie;
 import org.apache.http.cookie.CookieOrigin;
 import org.apache.http.cookie.MalformedCookieException;
 import org.apache.http.impl.cookie.BasicPathHandler;
-
 import org.htmlunit.BrowserVersion;
 
 /**

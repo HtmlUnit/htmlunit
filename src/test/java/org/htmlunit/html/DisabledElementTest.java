@@ -20,13 +20,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.SimpleWebTestCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
-
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.SimpleWebTestCase;
 
 /**
  * Tests the <code>isDisabled()</code> method on all of the elements that must implement the <code>disabled</code>

@@ -14,9 +14,8 @@
  */
 package org.htmlunit.javascript.host;
 
-import org.htmlunit.javascript.HtmlUnitScriptable;
-
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * A JavaScript object for {@code Netscape}.

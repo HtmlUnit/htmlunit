@@ -23,9 +23,8 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-
 import org.htmlunit.general.ElementPropertiesTest;
+import org.junit.Test;
 
 /**
  * Generates HTML file with all <tt>NotYetImplemented</tt> methods.

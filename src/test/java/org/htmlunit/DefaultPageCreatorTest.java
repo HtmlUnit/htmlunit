@@ -24,13 +24,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.xml.XmlPage;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link DefaultPageCreator}.

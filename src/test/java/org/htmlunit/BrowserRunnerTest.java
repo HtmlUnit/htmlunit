@@ -14,12 +14,11 @@
  */
 package org.htmlunit;
 
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for {@link BrowserRunner}.

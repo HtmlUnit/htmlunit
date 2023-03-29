@@ -20,13 +20,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.xml.sax.Attributes;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.util.StringUtils;
+import org.xml.sax.Attributes;
 
 /**
  * Element factory which creates elements by calling the constructor on a

@@ -22,8 +22,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.HashSet;
 
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.SgmlPage;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
@@ -37,10 +39,6 @@ import org.htmlunit.javascript.host.ClientRect;
 import org.htmlunit.javascript.host.ClientRectList;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.html.HTMLElement;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * The JavaScript object that represents a Range.

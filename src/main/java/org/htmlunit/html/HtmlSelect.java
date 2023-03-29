@@ -27,8 +27,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.Node;
-
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.Page;
 import org.htmlunit.SgmlPage;
@@ -36,6 +34,7 @@ import org.htmlunit.WebAssert;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.util.NameValuePair;
+import org.w3c.dom.Node;
 
 /**
  * Wrapper for the HTML element "select".

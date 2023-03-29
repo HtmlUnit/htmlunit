@@ -19,7 +19,6 @@ import static org.htmlunit.css.CssStyleSheet.AUTO;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.math.NumberUtils;
-
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCanvas;

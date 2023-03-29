@@ -21,9 +21,6 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.ScriptException;
@@ -33,6 +30,8 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.

@@ -17,11 +17,10 @@ package org.htmlunit.html;
 import java.util.Iterator;
 import java.util.ListIterator;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link DomNodeList}.

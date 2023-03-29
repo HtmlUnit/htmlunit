@@ -17,9 +17,6 @@ package org.htmlunit.javascript;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.htmlunit.javascript.host.event.Event;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
@@ -29,6 +26,7 @@ import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.debug.DebuggableScript;
+import org.htmlunit.javascript.host.event.Event;
 
 /**
  * <p>

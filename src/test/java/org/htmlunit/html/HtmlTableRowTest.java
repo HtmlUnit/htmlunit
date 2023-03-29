@@ -19,16 +19,14 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-
-import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HtmlTableRow}.

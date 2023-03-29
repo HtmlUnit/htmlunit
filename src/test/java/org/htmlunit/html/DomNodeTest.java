@@ -19,10 +19,6 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.xml.sax.helpers.AttributesImpl;
-
 import org.htmlunit.ElementNotFoundException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
@@ -31,6 +27,9 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * Tests for {@link DomNode}.

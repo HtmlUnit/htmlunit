@@ -17,10 +17,9 @@ package org.htmlunit.javascript.host.dom;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 
+import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
-
-import org.htmlunit.corejs.javascript.Function;
 
 /**
  * A JavaScript object for {@code WebKitMutationObserver}.

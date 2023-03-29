@@ -25,12 +25,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
-
 import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.html.HtmlTitle;
 import org.htmlunit.javascript.configuration.ClassConfiguration;
 import org.htmlunit.javascript.configuration.JavaScriptConfiguration;
+import org.junit.Test;
 
 /**
  * Tests for various test cases.

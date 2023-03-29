@@ -14,13 +14,13 @@
  */
 package org.htmlunit;
 
+import static org.apache.http.client.utils.DateUtils.formatDate;
 import static org.htmlunit.HttpHeader.CACHE_CONTROL;
 import static org.htmlunit.HttpHeader.ETAG;
 import static org.htmlunit.HttpHeader.EXPIRES;
 import static org.htmlunit.HttpHeader.IF_MODIFIED_SINCE;
 import static org.htmlunit.HttpHeader.IF_NONE_MATCH;
 import static org.htmlunit.HttpHeader.LAST_MODIFIED;
-import static org.apache.http.client.utils.DateUtils.formatDate;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -32,15 +32,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.mocks.WebResponseMock;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link Cache}.

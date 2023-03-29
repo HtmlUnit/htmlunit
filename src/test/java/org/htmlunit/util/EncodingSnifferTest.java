@@ -14,19 +14,18 @@
  */
 package org.htmlunit.util;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static java.util.Collections.singletonList;
 import static org.htmlunit.util.EncodingSniffer.extractEncodingFromContentType;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromHttpHeaders;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromMetaTag;
 import static org.htmlunit.util.EncodingSniffer.sniffEncodingFromXmlDeclaration;
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertSame;
 
 import java.nio.charset.Charset;
 
-import org.junit.Test;
-
 import org.htmlunit.HttpHeader;
+import org.junit.Test;
 
 /**
  * Unit tests for {@link EncodingSniffer}.

@@ -26,6 +26,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.htmlunit.ObjectInstantiationException;
+import org.htmlunit.Page;
+import org.htmlunit.SgmlPage;
+import org.htmlunit.WebAssert;
+import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLScanner;
 import org.htmlunit.cyberneko.HTMLTagBalancer;
 import org.htmlunit.cyberneko.xerces.util.DefaultErrorHandler;
@@ -34,14 +39,6 @@ import org.htmlunit.cyberneko.xerces.xni.XNIException;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLErrorHandler;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLParseException;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
-import org.htmlunit.ObjectInstantiationException;
-import org.htmlunit.Page;
-import org.htmlunit.SgmlPage;
-import org.htmlunit.WebAssert;
-import org.htmlunit.WebResponse;
 import org.htmlunit.html.DefaultElementFactory;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
@@ -52,6 +49,8 @@ import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.svg.SvgElementFactory;
 import org.htmlunit.util.StringUtils;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
 
 /**
  * <p>SAX parser implementation that uses the NekoHTML {@link org.htmlunit.cyberneko.HTMLConfiguration}

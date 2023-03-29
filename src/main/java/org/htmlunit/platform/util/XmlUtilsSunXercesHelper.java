@@ -20,11 +20,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import org.htmlunit.platform.XmlUtilsHelperAPI;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
-import org.htmlunit.platform.XmlUtilsHelperAPI;
 import com.sun.org.apache.xerces.internal.dom.DeferredDocumentImpl;
 import com.sun.org.apache.xerces.internal.dom.DeferredNode;
 

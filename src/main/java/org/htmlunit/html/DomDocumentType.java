@@ -14,10 +14,9 @@
  */
 package org.htmlunit.html;
 
+import org.htmlunit.SgmlPage;
 import org.w3c.dom.DocumentType;
 import org.w3c.dom.NamedNodeMap;
-
-import org.htmlunit.SgmlPage;
 
 /**
  * A DOM object for DocumentType.

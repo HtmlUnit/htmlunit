@@ -18,11 +18,9 @@ import java.util.Locale;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebWindow;
-
 import org.htmlunit.corejs.javascript.Scriptable;
 
 /**

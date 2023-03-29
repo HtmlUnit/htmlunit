@@ -16,10 +16,9 @@ package org.htmlunit.html;
 
 import java.io.PrintWriter;
 
+import org.htmlunit.SgmlPage;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.ProcessingInstruction;
-
-import org.htmlunit.SgmlPage;
 
 /**
  * Wrapper for the DOM node ProcessingInstruction.

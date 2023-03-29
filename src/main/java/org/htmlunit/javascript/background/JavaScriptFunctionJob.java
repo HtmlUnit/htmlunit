@@ -15,11 +15,10 @@
 package org.htmlunit.javascript.background;
 
 import org.htmlunit.WebWindow;
-import org.htmlunit.html.DomElement;
-import org.htmlunit.html.HtmlPage;
-
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.html.DomElement;
+import org.htmlunit.html.HtmlPage;
 
 /**
  * A {@link JavaScriptJob} created from a {@link Function} object.

@@ -23,6 +23,9 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
+import org.htmlunit.corejs.javascript.ExternalArrayData;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.html.DomChangeEvent;
 import org.htmlunit.html.DomChangeListener;
 import org.htmlunit.html.DomElement;
@@ -33,10 +36,6 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-
-import org.htmlunit.corejs.javascript.ExternalArrayData;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 
 /**
  * The parent class of {@link NodeList} and {@link org.htmlunit.javascript.host.html.HTMLCollection}.

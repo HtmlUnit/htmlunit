@@ -21,12 +21,11 @@ import java.io.IOException;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
-import org.junit.Test;
-
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder;
 import org.htmlunit.html.serializer.HtmlSerializerNormalizedText.HtmlSerializerTextBuilder.Mode;
+import org.junit.Test;
 
 /**
  * Tests for {@link HtmlSerializerNormalizedText}.

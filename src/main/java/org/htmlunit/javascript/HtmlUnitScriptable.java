@@ -24,23 +24,21 @@ import java.util.function.Supplier;
 import org.apache.commons.lang3.function.FailableSupplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebAssert;
 import org.htmlunit.WebWindow;
-import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlImage;
-import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.html.HTMLElement;
-import org.htmlunit.javascript.host.html.HTMLUnknownElement;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.LambdaConstructor;
 import org.htmlunit.corejs.javascript.LambdaFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlImage;
+import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.html.HTMLElement;
+import org.htmlunit.javascript.host.html.HTMLUnknownElement;
 
 /**
  * Base class for Rhino host objects in HtmlUnit (not bound to a DOM node).

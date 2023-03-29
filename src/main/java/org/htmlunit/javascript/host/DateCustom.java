@@ -20,9 +20,7 @@ import static org.htmlunit.BrowserVersionFeatures.JS_DATE_WITH_LEFT_TO_RIGHT_MAR
 import java.util.Date;
 
 import org.apache.commons.lang3.time.FastDateFormat;
-
 import org.htmlunit.BrowserVersion;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;

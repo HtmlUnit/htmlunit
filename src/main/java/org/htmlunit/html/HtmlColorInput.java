@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_VALUE_MOVE_SELECT
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.impl.Color;
 

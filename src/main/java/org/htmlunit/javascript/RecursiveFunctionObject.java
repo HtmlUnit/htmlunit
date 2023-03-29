@@ -23,13 +23,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
-import org.htmlunit.javascript.configuration.ClassConfiguration;
-import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
-
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.configuration.AbstractJavaScriptConfiguration;
+import org.htmlunit.javascript.configuration.ClassConfiguration;
+import org.htmlunit.javascript.configuration.ClassConfiguration.ConstantInfo;
 
 /**
  * A FunctionObject that returns IDs of this object and all its parent classes.

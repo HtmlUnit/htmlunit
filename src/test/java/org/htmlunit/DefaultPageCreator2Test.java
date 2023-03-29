@@ -16,10 +16,9 @@ package org.htmlunit;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import org.htmlunit.DefaultPageCreator.PageType;
 import org.htmlunit.util.MimeType;
+import org.junit.Test;
 
 /**
  * Tests for {@link DefaultPageCreator}.

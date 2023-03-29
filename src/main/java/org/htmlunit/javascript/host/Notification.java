@@ -19,14 +19,13 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxStaticFunction;
 import org.htmlunit.javascript.configuration.JsxStaticGetter;
 import org.htmlunit.javascript.host.event.EventTarget;
-
-import org.htmlunit.corejs.javascript.Scriptable;
 
 /**
  * A Notification.

@@ -14,9 +14,6 @@
  */
 package org.htmlunit.html.serializer;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlElement;
@@ -26,6 +23,8 @@ import org.htmlunit.html.HtmlTable;
 import org.htmlunit.html.HtmlTableCell;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HtmlSerializerNormalizedText}.

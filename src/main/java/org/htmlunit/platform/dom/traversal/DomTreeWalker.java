@@ -14,12 +14,11 @@
  */
 package org.htmlunit.platform.dom.traversal;
 
+import org.htmlunit.html.DomNode;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.TreeWalker;
-
-import org.htmlunit.html.DomNode;
 
 /**
  * An implementation of {@link TreeWalker} backed by {@link org.htmlunit.html.HtmlDomTreeWalker}.

@@ -17,16 +17,14 @@ package org.htmlunit.util;
 import java.awt.Frame;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
-import org.htmlunit.javascript.HtmlUnitContextFactory;
-import org.htmlunit.javascript.JavaScriptEngine;
-
 import org.htmlunit.corejs.javascript.tools.debugger.Main;
 import org.htmlunit.corejs.javascript.tools.debugger.ScopeProvider;
 import org.htmlunit.corejs.javascript.tools.debugger.SourceProvider;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
+import org.htmlunit.javascript.JavaScriptEngine;
 
 /**
  * Utility class containing miscellaneous {@link WebClient}-related methods.

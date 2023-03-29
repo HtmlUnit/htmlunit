@@ -17,13 +17,12 @@ package org.htmlunit;
 import java.net.URL;
 
 import org.eclipse.jetty.server.Server;
+import org.htmlunit.junit.BrowserRunner;
+import org.htmlunit.util.UrlUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.htmlunit.junit.BrowserRunner;
-import org.htmlunit.util.UrlUtils;
 
 /**
  * Tests methods in {@link HttpWebConnection}.

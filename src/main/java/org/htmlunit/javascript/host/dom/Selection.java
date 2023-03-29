@@ -22,8 +22,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.w3c.dom.ranges.Range;
-
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -31,8 +30,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-
-import org.htmlunit.corejs.javascript.Context;
+import org.w3c.dom.ranges.Range;
 
 /**
  * A JavaScript object for {@code Selection}.

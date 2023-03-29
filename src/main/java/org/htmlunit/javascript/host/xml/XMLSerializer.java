@@ -22,8 +22,6 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.w3c.dom.NamedNodeMap;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.*;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -37,6 +35,7 @@ import org.htmlunit.javascript.host.dom.DocumentFragment;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.StringUtils;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for {@code XMLSerializer}.

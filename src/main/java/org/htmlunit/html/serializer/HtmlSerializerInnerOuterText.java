@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_NL;
 import static org.htmlunit.BrowserVersionFeatures.JS_INNER_TEXT_SVG_TITLE;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;

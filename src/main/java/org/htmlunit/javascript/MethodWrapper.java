@@ -17,7 +17,6 @@ package org.htmlunit.javascript;
 import java.lang.reflect.Method;
 
 import org.apache.commons.lang3.ArrayUtils;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.FunctionObject;

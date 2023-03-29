@@ -16,10 +16,9 @@ package org.htmlunit;
 
 import java.io.IOException;
 
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for {@link ImmediateRefreshHandler}.

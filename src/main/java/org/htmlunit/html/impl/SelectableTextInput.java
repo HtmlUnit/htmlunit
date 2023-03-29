@@ -14,9 +14,8 @@
  */
 package org.htmlunit.html.impl;
 
-import org.w3c.dom.Node;
-
 import org.htmlunit.Page;
+import org.w3c.dom.Node;
 
 /**
  * Internal interface which defines an input element which contains selectable text. This interface just keeps

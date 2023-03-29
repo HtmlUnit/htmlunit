@@ -24,13 +24,11 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.htmlunit.html.HtmlPage;
-
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.RhinoException;
 import org.htmlunit.corejs.javascript.WrappedException;
+import org.htmlunit.html.HtmlPage;
 
 /**
  * An exception that will be thrown if an error occurs during the processing of

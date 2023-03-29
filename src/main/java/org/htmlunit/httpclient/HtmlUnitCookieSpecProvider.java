@@ -17,7 +17,6 @@ package org.htmlunit.httpclient;
 import org.apache.http.cookie.CookieSpec;
 import org.apache.http.cookie.CookieSpecProvider;
 import org.apache.http.protocol.HttpContext;
-
 import org.htmlunit.BrowserVersion;
 
 /**

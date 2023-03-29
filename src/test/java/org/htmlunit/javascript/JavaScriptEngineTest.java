@@ -28,9 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.FailingHttpStatusCodeException;
@@ -42,6 +39,11 @@ import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.Script;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlButtonInput;
 import org.htmlunit.html.HtmlElement;
@@ -54,12 +56,8 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.ContextFactory;
-import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.Script;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for the {@link JavaScriptEngine}.

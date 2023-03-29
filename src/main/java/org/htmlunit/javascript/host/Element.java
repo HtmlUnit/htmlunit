@@ -38,11 +38,16 @@ import java.util.function.Predicate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.cssparser.parser.CSSException;
-import org.xml.sax.SAXException;
-
 import org.htmlunit.SgmlPage;
+import org.htmlunit.corejs.javascript.BaseFunction;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.FunctionObject;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ElementCssStyleDeclaration;
+import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomCharacterData;
 import org.htmlunit.html.DomComment;
@@ -75,14 +80,7 @@ import org.htmlunit.javascript.host.html.HTMLScriptElement;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
 import org.htmlunit.javascript.host.html.HTMLTemplateElement;
 import org.htmlunit.util.StringUtils;
-
-import org.htmlunit.corejs.javascript.BaseFunction;
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.FunctionObject;
-import org.htmlunit.corejs.javascript.ScriptRuntime;
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
+import org.xml.sax.SAXException;
 
 /**
  * A JavaScript object for {@code Element}.

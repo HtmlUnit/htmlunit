@@ -17,7 +17,6 @@ package org.htmlunit.html;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-
 import org.htmlunit.SgmlPage;
 
 /**

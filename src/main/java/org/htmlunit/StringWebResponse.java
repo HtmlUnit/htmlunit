@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpStatus;
-
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
 

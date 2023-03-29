@@ -14,10 +14,9 @@
  */
 package org.htmlunit.javascript.configuration;
 
-import org.junit.Test;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.javascript.HtmlUnitScriptable;
+import org.junit.Test;
 
 /**
  * Tests for {@link ClassConfiguration}.

@@ -19,17 +19,16 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.applet.Applet;
 import java.lang.reflect.Method;
 
-import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlApplet;
-import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxGetter;
-import org.htmlunit.javascript.configuration.JsxSetter;
-
 import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlApplet;
+import org.htmlunit.javascript.configuration.JsxClass;
+import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 
 /**
  * The JavaScript object {@code HTMLAppletElement}.

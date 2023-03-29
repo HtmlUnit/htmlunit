@@ -14,13 +14,12 @@
  */
 package org.htmlunit.html.impl;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.w3c.dom.Node;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.w3c.dom.Node;
 
 /**
  * Tests for SimpleRange.

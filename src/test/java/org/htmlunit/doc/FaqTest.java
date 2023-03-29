@@ -23,12 +23,11 @@ import java.nio.charset.StandardCharsets;
 
 import javax.imageio.ImageIO;
 
-import org.junit.Test;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.XHtmlPage;
+import org.junit.Test;
 
 /**
  * Tests for the sample code from the documentation to make sure

@@ -25,16 +25,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Map;
 
-import org.w3c.dom.DOMException;
-
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Scriptable;
+import org.w3c.dom.DOMException;
 
 /**
  * The JavaScript object that represents a Storage.

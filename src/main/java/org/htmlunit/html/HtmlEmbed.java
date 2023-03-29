@@ -23,7 +23,6 @@ import java.nio.file.Files;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;

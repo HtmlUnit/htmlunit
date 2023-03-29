@@ -23,12 +23,11 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callLoadXMLD
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callSerializeXMLDOMDocumentToString;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link org.htmlunit.javascript.host.xml.XMLDocument}.

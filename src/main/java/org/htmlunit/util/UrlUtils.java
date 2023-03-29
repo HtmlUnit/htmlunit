@@ -31,7 +31,6 @@ import java.util.Objects;
 
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
-
 import org.htmlunit.WebAssert;
 import org.htmlunit.protocol.AnyHandler;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;

@@ -14,14 +14,13 @@
  */
 package org.htmlunit.general;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.annotations.StandardsMode;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.AlertsStandards;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests the result of the default 'display' style of an element.

@@ -19,7 +19,6 @@ import java.util.IllformedLocaleException;
 import java.util.Locale;
 
 import org.htmlunit.BrowserVersion;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptRuntime;

@@ -16,9 +16,8 @@ package org.htmlunit.html;
 
 import java.util.Map;
 
-import org.xml.sax.Attributes;
-
 import org.htmlunit.SgmlPage;
+import org.xml.sax.Attributes;
 
 /**
  * A factory for elements encountered in parsing the input which are not represented

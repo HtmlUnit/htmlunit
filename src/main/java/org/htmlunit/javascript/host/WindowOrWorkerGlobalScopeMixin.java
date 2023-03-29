@@ -18,12 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.apache.commons.codec.binary.Base64;
-
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
-import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
-import org.htmlunit.javascript.background.JavaScriptJob;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.EvaluatorException;
 import org.htmlunit.corejs.javascript.Function;
@@ -31,6 +27,8 @@ import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
+import org.htmlunit.javascript.background.JavaScriptJob;
 
 /**
  * The implementation of {@code WindowOrWorkerGlobalScope}

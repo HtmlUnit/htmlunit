@@ -25,12 +25,11 @@ import java.util.zip.GZIPOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
-
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.junit.Test;
 
 /**
  * Tests for {@link DebuggingWebConnection}.

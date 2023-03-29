@@ -25,10 +25,6 @@ import java.net.URL;
 import javax.imageio.ImageReader;
 
 import org.apache.commons.io.IOUtils;
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebResponse;
@@ -36,6 +32,9 @@ import org.htmlunit.WebServerTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HtmlImage}.

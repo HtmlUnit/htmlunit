@@ -46,7 +46,6 @@ import javax.imageio.ImageReader;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.javascript.host.canvas.ImageData;
 import org.htmlunit.platform.image.ImageIOImageData;
 import org.htmlunit.util.StringUtils;

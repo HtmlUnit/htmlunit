@@ -20,9 +20,6 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.EDGE;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.AlertHandler;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
@@ -35,6 +32,8 @@ import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Unit tests for {@link Selection}.

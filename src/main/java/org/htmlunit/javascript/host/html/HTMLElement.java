@@ -47,9 +47,11 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.xml.sax.helpers.AttributesImpl;
-
 import org.htmlunit.SgmlPage;
+import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
@@ -129,11 +131,7 @@ import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.MouseEvent;
-
-import org.htmlunit.corejs.javascript.Context;
-import org.htmlunit.corejs.javascript.Function;
-import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.Undefined;
+import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * The JavaScript object {@code HTMLElement} which is the base class for all HTML

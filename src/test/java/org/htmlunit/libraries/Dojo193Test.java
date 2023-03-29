@@ -14,10 +14,9 @@
  */
 package org.htmlunit.libraries;
 
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for compatibility with version 1.9.3 of the <a href="http://dojotoolkit.org/">Dojo

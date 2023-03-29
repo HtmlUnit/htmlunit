@@ -14,14 +14,13 @@
  */
 package org.htmlunit.html;
 
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.w3c.dom.traversal.NodeFilter;
 import org.w3c.dom.traversal.NodeIterator;
-
-import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for {@link DomNodeIterator}.

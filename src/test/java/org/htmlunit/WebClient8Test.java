@@ -16,9 +16,6 @@ package org.htmlunit;
 
 import java.net.URL;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.HtmlCheckBoxInput;
@@ -27,6 +24,8 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link WebClient} running with js disabled.

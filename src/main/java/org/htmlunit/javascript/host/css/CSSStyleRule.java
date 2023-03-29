@@ -25,9 +25,8 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
-
 import org.htmlunit.css.WrappedCssStyleDeclaration;
+import org.htmlunit.cssparser.dom.CSSStyleRuleImpl;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;

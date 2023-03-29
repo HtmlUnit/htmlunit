@@ -24,19 +24,17 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.ScriptResult;
-import org.htmlunit.html.DomNode;
-import org.htmlunit.html.HtmlPage;
-import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.html.HTMLDocument;
-import org.htmlunit.javascript.host.html.HTMLElement;
-
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.host.Window;
+import org.htmlunit.javascript.host.html.HTMLDocument;
+import org.htmlunit.javascript.host.html.HTMLElement;
 
 /**
  * Container for event listener.

@@ -16,13 +16,11 @@ package org.htmlunit.activex.javascript.msxml;
 
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.w3c.dom.NamedNodeMap;
-
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxGetter;
-
-import org.htmlunit.corejs.javascript.Context;
+import org.w3c.dom.NamedNodeMap;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XMLDOMDocumentType.<br>

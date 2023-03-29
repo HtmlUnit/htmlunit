@@ -32,12 +32,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.javascript.HtmlUnitScriptable;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.SymbolKey;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * An abstract container for all the JavaScript configuration information.

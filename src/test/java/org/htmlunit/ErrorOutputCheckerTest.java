@@ -14,11 +14,10 @@
  */
 package org.htmlunit;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Unit tests for the unit test utility {@link ErrorOutputChecker}.

@@ -16,7 +16,6 @@ package org.htmlunit;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.UrlUtils;
 

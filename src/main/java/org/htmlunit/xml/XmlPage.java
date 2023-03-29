@@ -14,8 +14,8 @@
  */
 package org.htmlunit.xml;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_XML;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.JS_XML;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,6 +27,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.htmlunit.SgmlPage;
+import org.htmlunit.WebResponse;
+import org.htmlunit.WebWindow;
+import org.htmlunit.html.DomElement;
+import org.htmlunit.html.DomProcessingInstruction;
+import org.htmlunit.util.XmlUtils;
 import org.w3c.dom.Attr;
 import org.w3c.dom.DOMConfiguration;
 import org.w3c.dom.DOMImplementation;
@@ -36,13 +42,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
-
-import org.htmlunit.SgmlPage;
-import org.htmlunit.WebResponse;
-import org.htmlunit.WebWindow;
-import org.htmlunit.html.DomElement;
-import org.htmlunit.html.DomProcessingInstruction;
-import org.htmlunit.util.XmlUtils;
 
 /**
  * A page that will be returned for response with content type "text/xml".

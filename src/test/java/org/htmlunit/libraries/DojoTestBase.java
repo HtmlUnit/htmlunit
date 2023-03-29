@@ -20,6 +20,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.jetty.server.Server;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebServerTestCase;
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -28,10 +31,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebServerTestCase;
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Base class for the <a href="http://dojotoolkit.org/">Dojo

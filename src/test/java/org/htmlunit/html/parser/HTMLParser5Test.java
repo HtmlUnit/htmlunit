@@ -14,12 +14,12 @@
  */
 package org.htmlunit.html.parser;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.JavascriptExecutor;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  * Test class for {@link HTMLParser}.

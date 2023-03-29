@@ -23,11 +23,10 @@ import javax.net.ssl.SSLHandshakeException;
 import org.eclipse.jetty.server.SslConnectionFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.util.ssl.SslContextFactory.Server;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.WebConnectionWrapper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for insecure SSL.

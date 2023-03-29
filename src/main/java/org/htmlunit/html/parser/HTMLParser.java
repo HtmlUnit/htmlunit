@@ -16,13 +16,12 @@ package org.htmlunit.html.parser;
 
 import java.io.IOException;
 
-import org.xml.sax.SAXException;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebResponse;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.ElementFactory;
 import org.htmlunit.html.HtmlPage;
+import org.xml.sax.SAXException;
 
 /**
  * <p>Interface for the parser used to parse HTML into a HtmlUnit-specific DOM (HU-DOM) tree.</p>

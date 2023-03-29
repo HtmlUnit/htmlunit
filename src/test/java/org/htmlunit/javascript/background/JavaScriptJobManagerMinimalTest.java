@@ -18,13 +18,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.apache.commons.lang3.mutable.MutableInt;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 import org.htmlunit.Page;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
  * Minimal tests for {@link JavaScriptJobManagerImpl}. Tests which use the full HtmlUnit stack

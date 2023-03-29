@@ -19,10 +19,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Assume;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.AppletConfirmHandler;
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.MockWebConnection;
@@ -33,6 +29,9 @@ import org.htmlunit.WebClient;
 import org.htmlunit.javascript.host.ActiveXObjectTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Assume;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HtmlObject}.

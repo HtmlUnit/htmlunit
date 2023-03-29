@@ -16,9 +16,8 @@ package org.htmlunit.html;
 
 import java.io.PrintWriter;
 
-import org.w3c.dom.Comment;
-
 import org.htmlunit.SgmlPage;
+import org.w3c.dom.Comment;
 
 /**
  * Wrapper for the DOM node Comment.

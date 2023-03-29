@@ -20,8 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
-import org.w3c.dom.DOMException;
-
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlDomTreeWalker;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -30,8 +29,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-
-import org.htmlunit.corejs.javascript.Context;
+import org.w3c.dom.DOMException;
 
 /**
  * The JavaScript object that represents a {@code TreeWalker}.

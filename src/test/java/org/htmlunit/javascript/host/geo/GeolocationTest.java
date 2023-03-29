@@ -32,9 +32,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.CollectingAlertHandler;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebServerTestCase;
@@ -43,6 +40,8 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.junit.BrowserRunner.OS;
 import org.htmlunit.util.ServletContentWrapper;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link Geolocation}.

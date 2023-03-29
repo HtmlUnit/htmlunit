@@ -14,9 +14,8 @@
  */
 package org.htmlunit.html;
 
-import org.xml.sax.Attributes;
-
 import org.htmlunit.SgmlPage;
+import org.xml.sax.Attributes;
 
 /**
  * Specification of a factory capable of creating {@link DomElement} objects.

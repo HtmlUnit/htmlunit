@@ -16,9 +16,8 @@ package org.htmlunit.html;
 
 import java.io.PrintWriter;
 
-import org.w3c.dom.CDATASection;
-
 import org.htmlunit.SgmlPage;
+import org.w3c.dom.CDATASection;
 
 /**
  * Representation of a CDATA node in the HTML DOM.

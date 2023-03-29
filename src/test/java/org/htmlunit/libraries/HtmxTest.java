@@ -16,6 +16,8 @@ package org.htmlunit.libraries;
 
 import java.util.List;
 
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.junit.BrowserRunner;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -23,9 +25,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.junit.BrowserRunner;
 
 /**
  * Tests for <a href="https://htmx.org/">htmx</a>.

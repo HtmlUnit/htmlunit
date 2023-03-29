@@ -38,20 +38,6 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
-import org.htmlunit.cssparser.dom.Property;
-import org.htmlunit.cssparser.parser.CSSException;
-import org.htmlunit.cssparser.parser.selector.Selector;
-import org.htmlunit.cssparser.parser.selector.SelectorList;
-import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
-import org.w3c.dom.Attr;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.TypeInfo;
-import org.xml.sax.SAXException;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Page;
 import org.htmlunit.ScriptResult;
@@ -60,6 +46,12 @@ import org.htmlunit.WebClient;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.StyleElement;
+import org.htmlunit.cssparser.dom.CSSStyleDeclarationImpl;
+import org.htmlunit.cssparser.dom.Property;
+import org.htmlunit.cssparser.parser.CSSException;
+import org.htmlunit.cssparser.parser.selector.Selector;
+import org.htmlunit.cssparser.parser.selector.SelectorList;
+import org.htmlunit.cssparser.parser.selector.SelectorSpecificity;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
@@ -68,6 +60,13 @@ import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.event.MouseEvent;
 import org.htmlunit.javascript.host.event.PointerEvent;
 import org.htmlunit.util.StringUtils;
+import org.w3c.dom.Attr;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.TypeInfo;
+import org.xml.sax.SAXException;
 
 /**
  * @author Ahmed Ashour

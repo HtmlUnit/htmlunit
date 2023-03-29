@@ -19,9 +19,8 @@ import static java.nio.charset.StandardCharsets.ISO_8859_1;
 import java.net.InetAddress;
 import java.net.URL;
 
-import org.junit.Test;
-
 import org.htmlunit.SimpleWebTestCase;
+import org.junit.Test;
 
 /**
  * Tests for {@link UrlUtils}.

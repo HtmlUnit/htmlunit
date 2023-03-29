@@ -32,6 +32,10 @@ import java.util.Map;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Triple;
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.ObjectInstantiationException;
+import org.htmlunit.WebClient;
+import org.htmlunit.WebResponse;
 import org.htmlunit.cyberneko.HTMLConfiguration;
 import org.htmlunit.cyberneko.HTMLElements;
 import org.htmlunit.cyberneko.HTMLEventInfo;
@@ -44,17 +48,6 @@ import org.htmlunit.cyberneko.xerces.xni.XMLAttributes;
 import org.htmlunit.cyberneko.xerces.xni.XNIException;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLInputSource;
 import org.htmlunit.cyberneko.xerces.xni.parser.XMLParserConfiguration;
-import org.w3c.dom.Node;
-import org.xml.sax.Attributes;
-import org.xml.sax.ContentHandler;
-import org.xml.sax.Locator;
-import org.xml.sax.SAXException;
-import org.xml.sax.ext.LexicalHandler;
-
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.ObjectInstantiationException;
-import org.htmlunit.WebClient;
-import org.htmlunit.WebResponse;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentType;
 import org.htmlunit.html.DomElement;
@@ -82,6 +75,12 @@ import org.htmlunit.html.parser.HTMLParserDOMBuilder;
 import org.htmlunit.html.parser.HTMLParserListener;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLDocument;
+import org.w3c.dom.Node;
+import org.xml.sax.Attributes;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.ext.LexicalHandler;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

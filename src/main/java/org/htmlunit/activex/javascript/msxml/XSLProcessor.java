@@ -30,9 +30,8 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.commons.lang3.StringUtils;
-import org.w3c.dom.NodeList;
-
 import org.htmlunit.SgmlPage;
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
@@ -42,8 +41,7 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.util.XmlUtils;
-
-import org.htmlunit.corejs.javascript.Context;
+import org.w3c.dom.NodeList;
 
 /**
  * A JavaScript object for MSXML's (ActiveX) XSLProcessor.<br>

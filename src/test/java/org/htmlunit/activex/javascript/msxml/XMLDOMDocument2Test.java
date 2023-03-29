@@ -25,13 +25,12 @@ import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHT
 
 import java.net.URL;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.util.MimeType;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link XMLDOMDocument}.

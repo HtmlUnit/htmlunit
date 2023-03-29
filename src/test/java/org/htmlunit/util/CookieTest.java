@@ -14,9 +14,8 @@
  */
 package org.htmlunit.util;
 
-import org.junit.Test;
-
 import org.htmlunit.SimpleWebTestCase;
+import org.junit.Test;
 
 /**
  * Tests for {@link Cookie}.

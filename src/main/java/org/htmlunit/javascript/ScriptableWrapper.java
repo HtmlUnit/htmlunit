@@ -19,13 +19,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.NodeList;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.NodeList;
 
 /**
  * Simple wrapper to make "normal" object scriptable according to specific configuration

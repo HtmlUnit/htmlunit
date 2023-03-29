@@ -16,13 +16,12 @@ package org.htmlunit.html;
 
 import java.io.PrintWriter;
 
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Text;
-
 import org.htmlunit.SgmlPage;
 import org.htmlunit.html.impl.SelectionDelegate;
 import org.htmlunit.html.impl.SimpleSelectionDelegate;
 import org.htmlunit.util.StringUtils;
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Text;
 
 /**
  * Representation of a text node in the HTML DOM.

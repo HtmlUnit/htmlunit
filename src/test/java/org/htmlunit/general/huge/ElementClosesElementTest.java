@@ -20,6 +20,13 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.htmlunit.WebClient;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.DefaultElementFactory;
+import org.htmlunit.junit.BrowserParameterizedRunner;
+import org.htmlunit.junit.BrowserParameterizedRunner.Default;
+import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,14 +35,6 @@ import org.junit.runners.Parameterized.Parameters;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-
-import org.htmlunit.WebClient;
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.DefaultElementFactory;
-import org.htmlunit.junit.BrowserParameterizedRunner;
-import org.htmlunit.junit.BrowserParameterizedRunner.Default;
-import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 
 /**
  * Tests for an element to close another element, which is defined in

@@ -20,9 +20,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.junit.Test;
-
 import org.htmlunit.util.Cookie;
+import org.junit.Test;
 
 /**
  * Unit tests for {@link CookieManager}.

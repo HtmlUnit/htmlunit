@@ -14,19 +14,17 @@
  */
 package org.htmlunit.javascript.regexp;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
-import org.htmlunit.html.HtmlPage;
-import org.htmlunit.javascript.JavaScriptEngine;
-import org.htmlunit.junit.BrowserRunner;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.JavaScriptException;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HtmlUnitRegExpProxy}.

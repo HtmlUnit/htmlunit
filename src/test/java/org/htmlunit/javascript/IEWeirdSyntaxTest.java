@@ -14,12 +14,11 @@
  */
 package org.htmlunit.javascript;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.ScriptException;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Test for IE weird JavaScript syntax.

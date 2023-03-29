@@ -17,13 +17,12 @@ package org.htmlunit.javascript.host.html;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectOutputStream;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link HTMLFrameElement} when used for {@link org.htmlunit.html.HtmlFrame}.

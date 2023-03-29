@@ -26,7 +26,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.ProxyConfig;
 import org.htmlunit.WebClient;

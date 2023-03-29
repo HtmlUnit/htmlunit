@@ -14,11 +14,10 @@
  */
 package org.htmlunit.javascript.host;
 
-import org.htmlunit.xpath.xml.utils.PrefixResolver;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.xpath.xml.utils.PrefixResolver;
 
 /**
  * A special {@link PrefixResolver} for {@link NativeFunction}s.

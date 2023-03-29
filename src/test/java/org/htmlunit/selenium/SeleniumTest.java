@@ -14,10 +14,9 @@
  */
 package org.htmlunit.selenium;
 
+import org.htmlunit.WebDriverTestCase;
 import org.junit.Before;
 import org.openqa.selenium.WebDriver;
-
-import org.htmlunit.WebDriverTestCase;
 
 /**
  * The parent class of Selenium tests.

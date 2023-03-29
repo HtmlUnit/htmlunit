@@ -27,6 +27,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.List;
 
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.css.StyleAttributes;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlElement;
@@ -38,8 +39,6 @@ import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.event.MouseEvent;
-
-import org.htmlunit.corejs.javascript.Context;
 
 /**
  * The JavaScript object representing a TD or TH.

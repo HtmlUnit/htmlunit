@@ -22,15 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.reflect.ConstructorUtils;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import org.htmlunit.platform.canvas.rendering.AwtRenderingBackend;
 import org.htmlunit.platform.canvas.rendering.NoOpRenderingBackend;
 import org.htmlunit.platform.canvas.rendering.RenderingBackend;
 import org.htmlunit.platform.image.ImageData;
 import org.htmlunit.platform.image.NoOpImageData;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
 
 /**
  * Singleton to handle JDK specific stuff.

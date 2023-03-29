@@ -27,12 +27,11 @@ import java.util.List;
 import org.apache.http.auth.BasicUserPrincipal;
 import org.apache.http.auth.Credentials;
 import org.apache.http.client.utils.URLEncodedUtils;
-import org.junit.Test;
-
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
+import org.junit.Test;
 
 /**
  * Tests for {@link WebRequest}.

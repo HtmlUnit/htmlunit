@@ -23,7 +23,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import org.apache.commons.net.util.SubnetUtils;
-
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.FunctionObject;
 import org.htmlunit.corejs.javascript.NativeFunction;

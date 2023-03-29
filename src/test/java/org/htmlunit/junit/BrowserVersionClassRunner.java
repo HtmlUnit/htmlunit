@@ -22,17 +22,6 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import org.apache.commons.lang3.SystemUtils;
-import org.junit.Test;
-import org.junit.internal.runners.model.ReflectiveCallable;
-import org.junit.internal.runners.statements.Fail;
-import org.junit.rules.RunRules;
-import org.junit.rules.TestRule;
-import org.junit.runners.BlockJUnit4ClassRunner;
-import org.junit.runners.model.FrameworkMethod;
-import org.junit.runners.model.InitializationError;
-import org.junit.runners.model.Statement;
-import org.junit.runners.model.TestClass;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebTestCase;
@@ -45,6 +34,16 @@ import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.junit.BrowserRunner.OS;
 import org.htmlunit.junit.BrowserRunner.TestedBrowser;
 import org.htmlunit.junit.BrowserRunner.Tries;
+import org.junit.Test;
+import org.junit.internal.runners.model.ReflectiveCallable;
+import org.junit.internal.runners.statements.Fail;
+import org.junit.rules.RunRules;
+import org.junit.rules.TestRule;
+import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.model.FrameworkMethod;
+import org.junit.runners.model.InitializationError;
+import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
 
 /**
  * The runner for test methods that run with a specific browser ({@link BrowserRunner.TestedBrowser}).

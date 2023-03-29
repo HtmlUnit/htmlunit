@@ -16,9 +16,8 @@ package org.htmlunit.junit;
 
 import java.lang.reflect.Method;
 
-import org.junit.runners.model.FrameworkMethod;
-
 import org.htmlunit.WebDriverTestCase;
+import org.junit.runners.model.FrameworkMethod;
 
 /**
  * A method of a class annotated with {@link org.htmlunit.annotations.StandardsMode}.

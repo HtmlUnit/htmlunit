@@ -23,10 +23,8 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.WebSocketPolicy;
 import org.eclipse.jetty.websocket.client.WebSocketClient;
-
 import org.htmlunit.WebClient;
 import org.htmlunit.WebClientOptions;
-
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 
 /**

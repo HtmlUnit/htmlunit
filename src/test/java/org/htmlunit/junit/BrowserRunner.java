@@ -29,6 +29,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.htmlunit.BrowserVersion;
+import org.htmlunit.SimpleWebTestCase;
+import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.WebTestCase;
+import org.htmlunit.annotations.StandardsMode;
 import org.junit.runner.Runner;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.Filterable;
@@ -36,12 +41,6 @@ import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
 import org.junit.runners.model.Statement;
-
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.SimpleWebTestCase;
-import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.WebTestCase;
-import org.htmlunit.annotations.StandardsMode;
 
 /**
  * The custom runner <code>BrowserRunner</code> implements browser parameterized

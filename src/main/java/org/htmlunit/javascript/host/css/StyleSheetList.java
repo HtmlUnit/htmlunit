@@ -24,11 +24,12 @@ import java.io.Serializable;
 import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
-import org.htmlunit.cssparser.dom.MediaListImpl;
-
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.CssStyleSheet;
+import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
@@ -45,9 +46,6 @@ import org.htmlunit.javascript.host.html.HTMLCollection;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
-
-import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Undefined;
 
 /**
  * <p>An ordered list of stylesheets, accessible via <code>document.styleSheets</code>, as specified by the

@@ -14,14 +14,13 @@
  */
 package org.htmlunit.javascript;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.ScriptException;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link JavaScriptErrorListener}.

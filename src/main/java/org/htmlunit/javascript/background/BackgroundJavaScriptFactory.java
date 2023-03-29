@@ -16,7 +16,6 @@ package org.htmlunit.javascript.background;
 
 import org.htmlunit.WebClient;
 import org.htmlunit.WebWindow;
-
 import org.htmlunit.corejs.javascript.ContextAction;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;

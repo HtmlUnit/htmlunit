@@ -26,8 +26,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.w3c.dom.Attr;
-
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.FrameContentHandler;
 import org.htmlunit.Page;
@@ -40,6 +38,7 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.UrlUtils;
+import org.w3c.dom.Attr;
 
 /**
  * Base class for frame and iframe.

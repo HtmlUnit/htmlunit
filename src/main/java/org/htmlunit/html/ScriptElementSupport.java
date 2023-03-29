@@ -25,11 +25,11 @@ import java.nio.charset.Charset;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.FailingHttpStatusCodeException;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebWindow;
+import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.html.HtmlPage.JavaScriptLoadResult;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -43,8 +43,6 @@ import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.xml.XmlPage;
-
-import org.htmlunit.corejs.javascript.BaseFunction;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

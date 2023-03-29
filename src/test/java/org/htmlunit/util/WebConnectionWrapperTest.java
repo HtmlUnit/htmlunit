@@ -17,14 +17,13 @@ package org.htmlunit.util;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-
 import org.htmlunit.HttpMethod;
 import org.htmlunit.SimpleWebTestCase;
 import org.htmlunit.WebConnection;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.WebResponseData;
+import org.junit.Test;
 
 /**
  * Tests for {@link WebConnectionWrapper}.

@@ -45,11 +45,10 @@ import org.eclipse.jetty.util.security.Constraint;
 import org.eclipse.jetty.util.thread.QueuedThreadPool;
 import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
-import org.junit.After;
-
 import org.htmlunit.WebDriverTestCase.MockWebConnectionServlet;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.util.MimeType;
+import org.junit.After;
 
 /**
  * A WebTestCase which starts a local server, and doens't use WebDriver.

@@ -14,13 +14,13 @@
  */
 package org.htmlunit.activex.javascript.msxml;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.ACTIVEX_CHECK;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLHTTPREQUEST_FUNCTION;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.CREATE_XMLHTTPREQUEST_FUNCTION_NAME;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.callCreateXMLHTTPRequest;
 import static org.htmlunit.activex.javascript.msxml.MSXMLTestHelper.createTestHTML;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -35,10 +35,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.junit.After;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import org.htmlunit.HttpHeader;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.WebRequest;
@@ -48,6 +44,9 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * Tests for {@link XMLHTTPRequest}.
