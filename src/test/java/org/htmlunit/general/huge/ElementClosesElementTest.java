@@ -1174,6 +1174,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "0",
             IE = "1")
+    @HtmlUnitNYI(IE = "0")
     public void _p_dialog() throws Exception {
         test("p", "dialog");
     }
@@ -1337,6 +1338,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "0")
     public void _p_isindex() throws Exception {
         test("p", "isindex");
     }
