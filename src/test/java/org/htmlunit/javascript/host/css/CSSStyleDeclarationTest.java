@@ -3020,20 +3020,38 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
               + LOG_TITLE_FUNCTION
               + "  function test() {\n"
               + "    var node = document.getElementById('a1');\n"
-              + "    if (node.style.getPropertyPriority) {\n"
-              + "      log(node.style.getPropertyPriority('color'));\n"
+              + "    log(node.style.getPropertyPriority('color'));\n"
 
-              + "      node = document.getElementById('a2');\n"
-              + "      log(node.style.getPropertyPriority('color'));\n"
+              + "    node = document.getElementById('a2');\n"
+              + "    log(node.style.getPropertyPriority('color'));\n"
 
-              + "      node = document.getElementById('a3');\n"
-              + "      log(node.style.getPropertyPriority('background-color'));\n"
+              + "    node = document.getElementById('a3');\n"
+              + "    log(node.style.getPropertyPriority('background-color'));\n"
 
-              + "      node = document.getElementById('a4');\n"
-              + "      log(node.style.getPropertyPriority('background-color'));\n"
-              + "    } else {\n"
-              + "      log('not supported');\n"
-              + "    }\n"
+              + "    node = document.getElementById('a4');\n"
+              + "    log(node.style.getPropertyPriority('background-color'));\n"
+              + "  }\n"
+              + "</script>\n"
+              + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("")
+    public void getPropertyPriorityNoStyle() throws Exception {
+        final String html =
+                "<html><body onload='test()'>\n"
+              + "<a id='a1' href='#'>go</a>\n"
+
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "  function test() {\n"
+              + "    var node = document.getElementById('a1');\n"
+              + "    log(node.style.getPropertyPriority('color'));\n"
               + "  }\n"
               + "</script>\n"
               + "</body></html>";

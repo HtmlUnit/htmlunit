@@ -38,6 +38,7 @@ import org.htmlunit.util.StringUtils;
  * @author Frank Danek
  * @author Dennis Duysak
  * @author cd alexndr
+ * @author Lai Quang Duong
  */
 public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
 
