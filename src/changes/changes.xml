@@ -13,6 +13,9 @@
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
             <action type="fix" dev="rbri">
+                neko: Template tags are valid inside the head.
+            </action>
+            <action type="fix" dev="rbri">
                 neko: Script tags are valid inside select's.
             </action>
             <action type="fix" dev="rbri">
