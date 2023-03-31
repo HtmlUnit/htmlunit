@@ -18,6 +18,14 @@ import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.FF_ESR;
 import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
+
+import org.apache.commons.io.FileUtils;
+import org.htmlunit.CookieManager4Test;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
@@ -28,6 +36,7 @@ import org.htmlunit.util.MimeType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
@@ -2662,5 +2671,98 @@ public class Window2Test extends WebDriverTestCase {
                 + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "not available")
+    public void isSecureContextLocalhost() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.hasOwnProperty('isSecureContext') ? isSecureContext : 'not available');\n"
+            + "</script></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "not available")
+    public void isSecureContextHttp() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.hasOwnProperty('isSecureContext') ? isSecureContext : 'not available');\n"
+            + "</script></body></html>";
+
+        final WebDriver driver = loadPage2(html, new URL(CookieManager4Test.URL_HOST1));
+        verifyTitle2(driver, getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "null")
+    public void isSecureContextHttpS() throws Exception {
+        final WebDriver driver = loadPage2(new URL("https://www.wetator.org/HtmlUnit"), StandardCharsets.UTF_8);
+
+        final String script = "return window.isSecureContext";
+        final Object result = ((JavascriptExecutor) driver).executeScript(script);
+        assertEquals(getExpectedAlerts()[0], "" + result);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            IE = "null")
+    public void isSecureContextFile() throws Exception {
+        final String html
+            = "<html><body><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log(window.hasOwnProperty('isSecureContext') ? isSecureContext : 'not available');\n"
+            + "</script></body></html>";
+
+        final File currentDirectory = new File((new File("")).getAbsolutePath());
+        final File tmpFile = File.createTempFile("isSecureContext", ".html", currentDirectory);
+        tmpFile.deleteOnExit();
+        final String encoding = (new OutputStreamWriter(new ByteArrayOutputStream())).getEncoding();
+        FileUtils.writeStringToFile(tmpFile, html, encoding);
+
+        final WebDriver driver = getWebDriver();
+        driver.get("file://" + tmpFile.getCanonicalPath());
+
+        final String script = "return window.isSecureContext";
+        final Object result = ((JavascriptExecutor) driver).executeScript(script);
+        assertEquals(getExpectedAlerts()[0], "" + result);
+
+        shutDownAll();
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "false",
+            IE = "null")
+    public void isSecureContextAboutBlank() throws Exception {
+        final WebDriver driver = getWebDriver();
+        driver.get("about:blank");
+
+        final String script = "return window.isSecureContext";
+        final Object result = ((JavascriptExecutor) driver).executeScript(script);
+        assertEquals(getExpectedAlerts()[0], "" + result);
+
+        shutDownAll();
     }
 }

@@ -4197,6 +4197,32 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         }
         super.put(name, start, value);
     }
+
+    /**
+     * @return a boolean indicating whether the current context is secure (true) or not (false).
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public Object getIsSecureContext() {
+        final Page page = getWebWindow().getEnclosedPage();
+        if (page != null) {
+            final String protocol = page.getUrl().getProtocol();
+            if ("https".equals(protocol)
+                    || "wss".equals(protocol)
+                    || "file".equals(protocol)) {
+                return true;
+            }
+
+            final String host = page.getUrl().getHost();
+            if ("localhost".equals(host)
+                    || "localhost.".equals(host)
+                    || host.endsWith(".localhost")
+                    || host.endsWith(".localhost.")) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
 
 class HTMLCollectionFrames extends HTMLCollection {

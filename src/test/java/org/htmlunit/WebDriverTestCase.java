@@ -1538,7 +1538,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
         //    https://github.com/HtmlUnit/htmlunit/issues/462
         //    https://github.com/eclipse/jetty.project/issues/2503
         //    the value for the QueuedThreadPool are validated,
-        //    let's amke another try with the defaults
+        //    let's make another try with the defaults
         //
         //    final QueuedThreadPool threadPool = new QueuedThreadPool(5, 2);
         //
