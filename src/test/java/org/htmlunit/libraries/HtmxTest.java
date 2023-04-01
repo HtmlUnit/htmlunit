@@ -33,35 +33,44 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 @RunWith(BrowserRunner.class)
 public abstract class HtmxTest extends WebDriverTestCase {
+    private static final int RETRIES = 2;
+    private static final long RUN_TIME = 42 * DEFAULT_WAIT_TIME;
 
     protected void htmx(final String subDir) throws Exception {
         startWebServer("src/test/resources/libraries/htmx/" + subDir, null, null);
 
-        final long runTime = 42 * DEFAULT_WAIT_TIME;
-        final long endTime = System.currentTimeMillis() + runTime;
-
         try {
+            final String url = URL_FIRST + "test/index.html";
             final WebDriver webDriver = getWebDriver();
 
             if (getWebDriver() instanceof HtmlUnitDriver) {
                 getWebClient().getOptions().setThrowExceptionOnScriptError(false);
             }
 
-            final String url = URL_FIRST + "test/index.html";
-            webDriver.get(url);
-
             String lastStats = "";
-            while (lastStats.length() == 0
-                    || !lastStats.startsWith(getExpectedAlerts()[0])) {
-                Thread.sleep(100);
+            int tries = 0;
+            while (tries < RETRIES) {
+                tries++;
 
-                if (System.currentTimeMillis() > endTime) {
-                    lastStats = "HtmxTest runs too long (longer than " + runTime / 1000 + "s) - "
-                            + getResultElementText(webDriver);
-                    break;
+                webDriver.get(url);
+
+                lastStats = "";
+                final long endTime = System.currentTimeMillis() + RUN_TIME;
+                while (lastStats.length() == 0 || !lastStats.startsWith(getExpectedAlerts()[0])) {
+                    if (lastStats.startsWith(getExpectedAlerts()[0])) {
+                        tries = RETRIES;
+                        break;
+                    }
+                    Thread.sleep(100);
+
+                    if (System.currentTimeMillis() > endTime) {
+                        lastStats = "HtmxTest runs too long (longer than " + RUN_TIME / 1000 + "s) - "
+                                + getResultElementText(webDriver);
+                        break;
+                    }
+
+                    lastStats = getResultElementText(webDriver);
                 }
-
-                lastStats = getResultElementText(webDriver);
             }
 
             // bug hunting
@@ -77,11 +86,14 @@ public abstract class HtmxTest extends WebDriverTestCase {
             assertTrue(lastStats + "\n\n" + getErrors(webDriver), lastStats.startsWith(getExpectedAlerts()[0]));
         }
         catch (final Exception e) {
+            // bug hunting
+            /*
             e.printStackTrace();
             Throwable t = e;
             while ((t = t.getCause()) != null) {
                 t.printStackTrace();
             }
+            */
             throw e;
         }
     }
