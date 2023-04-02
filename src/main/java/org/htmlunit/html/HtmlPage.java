@@ -55,7 +55,6 @@ import java.util.WeakHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.htmlunit.BrowserVersion;
 import org.htmlunit.Cache;
 import org.htmlunit.ElementNotFoundException;
@@ -84,6 +83,7 @@ import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.html.parser.HTMLParserDOMBuilder;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -1028,7 +1028,7 @@ public class HtmlPage extends SgmlPage {
             return JavaScriptLoadResult.DOWNLOAD_ERROR;
         }
         catch (final FailingHttpStatusCodeException e) {
-            if (e.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+            if (e.getStatusCode() == HttpClientConverter.NO_CONTENT) {
                 return JavaScriptLoadResult.NO_CONTENT;
             }
             client.getJavaScriptErrorListener().loadScriptError(this, scriptURL, e);
@@ -1096,7 +1096,7 @@ public class HtmlPage extends SgmlPage {
         client.throwFailingHttpStatusCodeExceptionIfNecessary(response);
 
         final int statusCode = response.getStatusCode();
-        if (statusCode == HttpStatus.SC_NO_CONTENT) {
+        if (statusCode == HttpClientConverter.NO_CONTENT) {
             throw new FailingHttpStatusCodeException(response);
         }
 

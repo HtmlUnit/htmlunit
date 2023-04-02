@@ -31,8 +31,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.htmlunit.DefaultPageCreator.PageType;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;
 
@@ -47,17 +47,6 @@ import org.htmlunit.util.NameValuePair;
  * @author Ronald Brill
  */
 public class WebResponse implements Serializable {
-
-    /** Forwarder to HttpStatus.SC_OK. */
-    public static final int OK = HttpStatus.SC_OK;
-    /** Forwarder to HttpStatus.SC_FORBIDDEN. */
-    public static final int FORBIDDEN = HttpStatus.SC_FORBIDDEN;
-    /** Forwarder to HttpStatus.SC_NOT_FOUND. */
-    public static final int NOT_FOUND = HttpStatus.SC_NOT_FOUND;
-    /** Forwarder to HttpStatus.SC_NO_CONTENT. */
-    public static final int NO_CONTENT = HttpStatus.SC_NO_CONTENT;
-    /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR. */
-    public static final int INTERNAL_SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
     private static final Log LOG = LogFactory.getLog(WebResponse.class);
     private static final ByteOrderMark[] BOM_HEADERS = {
@@ -327,7 +316,7 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccess() {
         final int statusCode = getStatusCode();
-        return statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES;
+        return statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES;
     }
 
     /**
@@ -335,8 +324,8 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxy() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
-                || statusCode == HttpStatus.SC_USE_PROXY;
+        return (statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES)
+                || statusCode == HttpClientConverter.USE_PROXY;
     }
 
     /**
@@ -344,8 +333,8 @@ public class WebResponse implements Serializable {
      */
     public boolean isSuccessOrUseProxyOrNotModified() {
         final int statusCode = getStatusCode();
-        return (statusCode >= HttpStatus.SC_OK && statusCode < HttpStatus.SC_MULTIPLE_CHOICES)
-                || statusCode == HttpStatus.SC_USE_PROXY
-                || statusCode == HttpStatus.SC_NOT_MODIFIED;
+        return (statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES)
+                || statusCode == HttpClientConverter.USE_PROXY
+                || statusCode == HttpClientConverter.NOT_MODIFIED;
     }
 }

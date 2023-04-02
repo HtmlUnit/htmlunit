@@ -63,7 +63,6 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.cookie.MalformedCookieException;
@@ -594,7 +593,7 @@ public class WebClient implements Serializable, AutoCloseable {
         WebAssert.notNull("webResponse", webResponse);
         WebAssert.notNull("webWindow", webWindow);
 
-        if (webResponse.getStatusCode() == HttpStatus.SC_NO_CONTENT) {
+        if (webResponse.getStatusCode() == HttpClientConverter.NO_CONTENT) {
             return webWindow.getEnclosedPage();
         }
 
@@ -1576,12 +1575,12 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // Continue according to the HTTP status code.
         final int status = webResponse.getStatusCode();
-        if (status == HttpStatus.SC_USE_PROXY) {
+        if (status == HttpClientConverter.USE_PROXY) {
             getIncorrectnessListener().notify("Ignoring HTTP status code [305] 'Use Proxy'", this);
         }
-        else if (status >= HttpStatus.SC_MOVED_PERMANENTLY
+        else if (status >= HttpClientConverter.MOVED_PERMANENTLY
             && status <= 308
-            && status != HttpStatus.SC_NOT_MODIFIED
+            && status != HttpClientConverter.NOT_MODIFIED
             && getOptions().isRedirectEnabled()) {
 
             URL newUrl;
@@ -1617,9 +1616,9 @@ public class WebClient implements Serializable, AutoCloseable {
                     + webResponse.getWebRequest().getUrl(), webResponse);
             }
 
-            if (status == HttpStatus.SC_MOVED_PERMANENTLY
-                    || status == HttpStatus.SC_MOVED_TEMPORARILY
-                    || status == HttpStatus.SC_SEE_OTHER) {
+            if (status == HttpClientConverter.MOVED_PERMANENTLY
+                    || status == HttpClientConverter.MOVED_TEMPORARILY
+                    || status == HttpClientConverter.SEE_OTHER) {
                 final WebRequest wrs = new WebRequest(newUrl, HttpMethod.GET);
                 wrs.setCharset(webRequest.getCharset());
 
@@ -1631,8 +1630,8 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
                 return loadWebResponseFromWebConnection(wrs, allowedRedirects - 1);
             }
-            else if (status == HttpStatus.SC_TEMPORARY_REDIRECT
-                        || status == 308) {
+            else if (status == HttpClientConverter.TEMPORARY_REDIRECT
+                        || status == HttpClientConverter.PERMANENT_REDIRECT) {
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/307
                 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/308
                 // reuse method and body
@@ -1691,11 +1690,11 @@ public class WebClient implements Serializable, AutoCloseable {
 
         final WebResponse webResponse = getWebConnection().getResponse(webRequest);
 
-        if (webResponse.getStatusCode() >= HttpStatus.SC_INTERNAL_SERVER_ERROR) {
+        if (webResponse.getStatusCode() >= HttpClientConverter.INTERNAL_SERVER_ERROR) {
             return new WebResponseFromCache(cached, webRequest);
         }
 
-        if (webResponse.getStatusCode() == HttpStatus.SC_NOT_MODIFIED) {
+        if (webResponse.getStatusCode() == HttpClientConverter.NOT_MODIFIED) {
             final Map<String, NameValuePair> header2NameValuePair = new LinkedHashMap<>();
             for (final NameValuePair pair : cached.getResponseHeaders()) {
                 header2NameValuePair.put(pair.getName(), pair);

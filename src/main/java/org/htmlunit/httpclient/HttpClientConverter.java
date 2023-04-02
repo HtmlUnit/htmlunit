@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.http.HttpStatus;
 import org.apache.http.NoHttpResponseException;
 import org.apache.http.client.utils.DateUtils;
 import org.apache.http.client.utils.URLEncodedUtils;
@@ -44,6 +45,45 @@ import org.htmlunit.util.UrlUtils;
  * @author Ronald Brill
  */
 public final class HttpClientConverter {
+
+    /** Forwarder to HttpStatus.SC_OK. */
+    public static final int OK = HttpStatus.SC_OK;
+
+    /** Forwarder to HttpStatus.SC_NO_CONTENT. */
+    public static final int NO_CONTENT = HttpStatus.SC_NO_CONTENT;
+
+    /** Forwarder to HttpStatus.MULTIPLE_CHOICES. */
+    public static final int MULTIPLE_CHOICES = HttpStatus.SC_MULTIPLE_CHOICES;
+
+    /** Forwarder to HttpStatus.MOVED_PERMANENTLY. */
+    public static final int MOVED_PERMANENTLY = HttpStatus.SC_MOVED_PERMANENTLY;
+
+    /** Forwarder to HttpStatus.MOVED_TEMPORARILY. */
+    public static final int MOVED_TEMPORARILY = HttpStatus.SC_MOVED_TEMPORARILY;
+
+    /** Forwarder to HttpStatus.SEE_OTHER. */
+    public static final int SEE_OTHER = HttpStatus.SC_SEE_OTHER;
+
+    /** Forwarder to HttpStatus.TEMPORARY_REDIRECT. */
+    public static final int TEMPORARY_REDIRECT = HttpStatus.SC_TEMPORARY_REDIRECT;
+
+    /** 308. */
+    public static final int PERMANENT_REDIRECT = 308;
+
+    /** Forwarder to HttpStatus.NOT_MODIFIED. */
+    public static final int NOT_MODIFIED = HttpStatus.SC_NOT_MODIFIED;
+
+    /** Forwarder to HttpStatus.SC_USE_PROXY. */
+    public static final int USE_PROXY = HttpStatus.SC_USE_PROXY;
+
+    /** Forwarder to HttpStatus.SC_FORBIDDEN. */
+    public static final int FORBIDDEN = HttpStatus.SC_FORBIDDEN;
+
+    /** Forwarder to HttpStatus.SC_NOT_FOUND. */
+    public static final int NOT_FOUND = HttpStatus.SC_NOT_FOUND;
+
+    /** Forwarder to HttpStatus.SC_INTERNAL_SERVER_ERROR. */
+    public static final int INTERNAL_SERVER_ERROR = HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
     private HttpClientConverter() {
     }

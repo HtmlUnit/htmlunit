@@ -21,7 +21,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.StringUtils;
 
@@ -70,7 +70,7 @@ public class StringWebResponse extends WebResponse {
         final byte[] content = StringUtils.toByteArray(contentString, charset);
         final List<NameValuePair> compiledHeaders = new ArrayList<>();
         compiledHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE, "text/html; charset=" + charset));
-        return new WebResponseData(content, HttpStatus.SC_OK, "OK", compiledHeaders);
+        return new WebResponseData(content, HttpClientConverter.OK, "OK", compiledHeaders);
     }
 
     private static WebRequest buildWebRequest(final URL originatingURL, final Charset charset) {
