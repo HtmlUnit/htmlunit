@@ -31,7 +31,7 @@ import org.htmlunit.WebAssert;
  */
 public class CollectingAttachmentHandler implements AttachmentHandler {
 
-    private final ArrayList<Attachment> collectedAttachments_;
+    private final List<Attachment> collectedAttachments_;
 
     /**
      * Creates a new instance.
@@ -46,7 +46,7 @@ public class CollectingAttachmentHandler implements AttachmentHandler {
      */
     public CollectingAttachmentHandler(final List<Attachment> list) {
         WebAssert.notNull("list", list);
-        collectedAttachments_ = new ArrayList<>(list);
+        collectedAttachments_ = list;
     }
 
     /**
@@ -65,5 +65,4 @@ public class CollectingAttachmentHandler implements AttachmentHandler {
     public List<Attachment> getCollectedAttachments() {
         return collectedAttachments_;
     }
-
 }
