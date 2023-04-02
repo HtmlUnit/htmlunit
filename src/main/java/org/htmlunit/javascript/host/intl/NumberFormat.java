@@ -224,7 +224,7 @@ public class NumberFormat extends HtmlUnitScriptable {
      * Helper.
      */
     static final class NumberFormatHelper {
-        private DecimalFormat formatter_;
+        private final DecimalFormat formatter_;
 
         NumberFormatHelper(final String localeName, final BrowserVersion browserVersion, final String pattern) {
             Locale locale = browserVersion.getBrowserLocale();

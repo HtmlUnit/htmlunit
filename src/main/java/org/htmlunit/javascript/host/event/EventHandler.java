@@ -31,7 +31,7 @@ import org.htmlunit.html.DomNode;
 public class EventHandler extends BaseFunction {
     private final DomNode node_;
     private final String eventName_;
-    private String jsSnippet_;
+    private final String jsSnippet_;
     private Function realFunction_;
 
     /**

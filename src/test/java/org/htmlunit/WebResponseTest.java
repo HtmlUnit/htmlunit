@@ -34,6 +34,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -95,7 +96,7 @@ public class WebResponseTest extends WebServerTestCase {
         final WebClient client = getWebClient();
         client.setAlertHandler(new CollectingAlertHandler(collectedAlerts));
         final MockWebConnection conn = new MockWebConnection();
-        conn.setResponse(URL_FIRST, xml, WebResponse.OK, "OK", "text/xml; charset=\"ISO-8859-1\"", null);
+        conn.setResponse(URL_FIRST, xml, HttpClientConverter.OK, "OK", "text/xml; charset=\"ISO-8859-1\"", null);
         client.setWebConnection(conn);
         client.getPage(URL_FIRST);
     }

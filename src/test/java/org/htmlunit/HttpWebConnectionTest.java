@@ -49,6 +49,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicHttpResponse;
 import org.apache.http.message.BasicStatusLine;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
@@ -177,7 +178,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final long loadTime = 500L;
 
         final ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 0);
-        final StatusLine statusLine = new BasicStatusLine(protocolVersion, WebResponse.OK, null);
+        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpClientConverter.OK, null);
         final HttpResponse httpResponse = new BasicHttpResponse(statusLine);
 
         final HttpEntity responseEntity = new StringEntity(content);
@@ -190,7 +191,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final WebResponse response = (WebResponse) method.invoke(connection,
                 httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
 
-        assertEquals(WebResponse.OK, response.getStatusCode());
+        assertEquals(HttpClientConverter.OK, response.getStatusCode());
         assertEquals(url, response.getWebRequest().getUrl());
         assertEquals(loadTime, response.getLoadTime());
         assertEquals(content, response.getContentAsString());

@@ -1127,7 +1127,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
             final HtmlTableRow row = (HtmlTableRow) node;
             for (final HtmlTableCell cell : row.getCellIterator()) {
                 if (cell.mayBeDisplayed()) {
-                    final HTMLElement e = (HTMLElement) cell.getScriptableObject();
+                    final HTMLElement e = cell.getScriptableObject();
                     final ComputedCSSStyleDeclaration style = e.getWindow().getComputedStyle(e, null);
                     styles.add(style);
                 }

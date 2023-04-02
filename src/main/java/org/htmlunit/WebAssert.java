@@ -416,7 +416,7 @@ public final class WebAssert {
         for (final String tag : tags) {
             for (final HtmlElement element : page.getDocumentElement().getElementsByTagName(tag)) {
                 final Short tabIndex = element.getTabIndex();
-                if (tabIndex == null || tabIndex == HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
+                if (tabIndex == null || HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(tabIndex)) {
                     final String s = element.getAttributeDirect("tabindex");
                     throw new AssertionError("Illegal value for tab index: '" + s + "'.");
                 }

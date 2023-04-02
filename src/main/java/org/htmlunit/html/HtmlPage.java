@@ -811,7 +811,7 @@ public class HtmlPage extends SgmlPage {
             final String tagName = element.getTagName();
             if (TABBABLE_TAGS.contains(tagName)) {
                 final boolean disabled = element.hasAttribute(ATTRIBUTE_DISABLED);
-                if (!disabled && element.getTabIndex() != HtmlElement.TAB_INDEX_OUT_OF_BOUNDS) {
+                if (!disabled && !HtmlElement.TAB_INDEX_OUT_OF_BOUNDS.equals(element.getTabIndex())) {
                     tabbableElements.add(element);
                 }
             }

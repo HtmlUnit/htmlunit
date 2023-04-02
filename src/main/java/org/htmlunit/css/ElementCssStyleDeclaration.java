@@ -44,7 +44,7 @@ public class ElementCssStyleDeclaration extends AbstractCssStyleDeclaration {
     // private static final Log LOG = LogFactory.getLog(ElementCssStyleDeclaration.class);
 
     /** The DomElement. */
-    private DomElement domElement_;
+    private final DomElement domElement_;
 
     /**
      * Creates an instance which backed by the given dom element.

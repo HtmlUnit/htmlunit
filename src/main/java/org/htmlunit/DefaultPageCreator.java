@@ -85,7 +85,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     private static final byte[] markerUTF16LE_ = {(byte) 0xff, (byte) 0xfe};
 
     /**
-     * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05
+     * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05">
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05</a>
      */
     private static final String[] htmlPatterns = {"!DOCTYPE HTML", "HTML", "HEAD", "SCRIPT",
         "IFRAME", "H1", "DIV", "FONT", "TABLE", "A", "STYLE", "TITLE", "B", "BODY", "BR", "P", "!--" };
@@ -246,7 +247,8 @@ public class DefaultPageCreator implements PageCreator, Serializable {
     }
 
     /**
-     * See http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4
+     * See <a href="http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4">
+     * http://tools.ietf.org/html/draft-abarth-mime-sniff-05#section-4</a>
      * @param bytes the bytes to check
      */
     private static boolean isBinary(final byte[] bytes) {

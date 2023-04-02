@@ -115,36 +115,36 @@ public class Location extends HtmlUnitScriptable {
 
     static {
         try {
-            methodAssign = Location.class.getDeclaredMethod("assign", new Class[] {String.class});
-            methodReload = Location.class.getDeclaredMethod("reload", new Class[] {boolean.class});
-            methodReplace = Location.class.getDeclaredMethod("replace", new Class[] {String.class});
-            methodToString = Location.class.getDeclaredMethod("jsToString", new Class[] {});
+            methodAssign = Location.class.getDeclaredMethod("assign", String.class);
+            methodReload = Location.class.getDeclaredMethod("reload", boolean.class);
+            methodReplace = Location.class.getDeclaredMethod("replace", String.class);
+            methodToString = Location.class.getDeclaredMethod("jsToString");
 
-            getterHash = Location.class.getDeclaredMethod("getHash", new Class[] {});
-            setterHash = Location.class.getDeclaredMethod("setHash", new Class[] {String.class});
+            getterHash = Location.class.getDeclaredMethod("getHash");
+            setterHash = Location.class.getDeclaredMethod("setHash", String.class);
 
-            getterHost = Location.class.getDeclaredMethod("getHost", new Class[] {});
-            setterHost = Location.class.getDeclaredMethod("setHost", new Class[] {String.class});
+            getterHost = Location.class.getDeclaredMethod("getHost");
+            setterHost = Location.class.getDeclaredMethod("setHost", String.class);
 
-            getterHostname = Location.class.getDeclaredMethod("getHostname", new Class[] {});
-            setterHostname = Location.class.getDeclaredMethod("setHostname", new Class[] {String.class});
+            getterHostname = Location.class.getDeclaredMethod("getHostname");
+            setterHostname = Location.class.getDeclaredMethod("setHostname", String.class);
 
-            getterHref = Location.class.getDeclaredMethod("getHref", new Class[] {});
-            setterHref = Location.class.getDeclaredMethod("setHref", new Class[] {String.class});
+            getterHref = Location.class.getDeclaredMethod("getHref");
+            setterHref = Location.class.getDeclaredMethod("setHref", String.class);
 
-            getterOrigin = Location.class.getDeclaredMethod("getOrigin", new Class[] {});
+            getterOrigin = Location.class.getDeclaredMethod("getOrigin");
 
-            getterPathname = Location.class.getDeclaredMethod("getPathname", new Class[] {});
-            setterPathname = Location.class.getDeclaredMethod("setPathname", new Class[] {String.class});
+            getterPathname = Location.class.getDeclaredMethod("getPathname");
+            setterPathname = Location.class.getDeclaredMethod("setPathname", String.class);
 
-            getterPort = Location.class.getDeclaredMethod("getPort", new Class[] {});
-            setterPort = Location.class.getDeclaredMethod("setPort", new Class[] {String.class});
+            getterPort = Location.class.getDeclaredMethod("getPort");
+            setterPort = Location.class.getDeclaredMethod("setPort", String.class);
 
-            getterProtocol = Location.class.getDeclaredMethod("getProtocol", new Class[] {});
-            setterProtocol = Location.class.getDeclaredMethod("setProtocol", new Class[] {String.class});
+            getterProtocol = Location.class.getDeclaredMethod("getProtocol");
+            setterProtocol = Location.class.getDeclaredMethod("setProtocol", String.class);
 
-            getterSearch = Location.class.getDeclaredMethod("getSearch", new Class[] {});
-            setterSearch = Location.class.getDeclaredMethod("setSearch", new Class[] {String.class});
+            getterSearch = Location.class.getDeclaredMethod("getSearch");
+            setterSearch = Location.class.getDeclaredMethod("setSearch", String.class);
         }
         catch (NoSuchMethodException | SecurityException e) {
             throw new RuntimeException(e);

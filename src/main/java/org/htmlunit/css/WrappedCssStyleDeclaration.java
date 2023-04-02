@@ -44,7 +44,7 @@ public class WrappedCssStyleDeclaration extends AbstractCssStyleDeclaration {
     // private static final Log LOG = LogFactory.getLog(WrappedCssStyleDeclaration.class);
 
     /** The wrapped CSSStyleDeclaration. */
-    private CSSStyleDeclarationImpl cssStyleDeclarationImpl_;
+    private final CSSStyleDeclarationImpl cssStyleDeclarationImpl_;
 
     /**
      * Creates an instance which wraps the specified style declaration implementation.

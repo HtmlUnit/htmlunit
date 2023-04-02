@@ -156,7 +156,7 @@ public class MutationRecord extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code previousSibling} property.
-     * @param removedNodes the {@code previousSibling} property
+     * @param previousSibling the {@code previousSibling} property
      */
     void setPreviousSibling(final Node previousSibling) {
         previousSibling_ = previousSibling;
@@ -173,7 +173,7 @@ public class MutationRecord extends HtmlUnitScriptable {
 
     /**
      * Sets the {@code nextSibling} property.
-     * @param removedNodes the {@code nextSibling} property
+     * @param nextSibling the {@code nextSibling} property
      */
     void setNextSibling(final Node nextSibling) {
         nextSibling_ = nextSibling;

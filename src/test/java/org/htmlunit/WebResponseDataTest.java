@@ -33,6 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
@@ -64,7 +65,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
-        final WebResponseData data = new WebResponseData(zippedContent, WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpClientConverter.OK, "OK", headers);
         final String body = new String(data.getBody(), UTF_8);
         assertTrue(StringUtils.contains(body, "Test"));
 
@@ -78,7 +79,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void emptyGZippedContent() throws Exception {
-        testEmptyGZippedContent(WebResponse.OK, 0, null);
+        testEmptyGZippedContent(HttpClientConverter.OK, 0, null);
     }
 
     /**
@@ -87,7 +88,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthIsZero() throws Exception {
-        testEmptyGZippedContent(WebResponse.OK, 0, MimeType.TEXT_HTML);
+        testEmptyGZippedContent(HttpClientConverter.OK, 0, MimeType.TEXT_HTML);
     }
 
     /**
@@ -96,7 +97,7 @@ public class WebResponseDataTest extends WebServerTestCase {
      */
     @Test
     public void contentLengthIsMissing() throws Exception {
-        testEmptyGZippedContent(WebResponse.NO_CONTENT, -1, null);
+        testEmptyGZippedContent(HttpClientConverter.NO_CONTENT, -1, null);
     }
 
     /**
@@ -112,7 +113,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip-only-text/html"));
         headers.add(new NameValuePair("content-type", MimeType.TEXT_HTML));
 
-        final WebResponseData data = new WebResponseData(zippedContent, WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpClientConverter.OK, "OK", headers);
         final String body = new String(data.getBody(), UTF_8);
         assertTrue(StringUtils.contains(body, "Test"));
 
@@ -133,7 +134,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         headers.add(new NameValuePair("Content-Encoding", "gzip-only-text/html"));
         headers.add(new NameValuePair("content-type", MimeType.IMAGE_PNG));
 
-        final WebResponseData data = new WebResponseData(zippedContent, WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpClientConverter.OK, "OK", headers);
         final byte[] bytes = IOUtils.toByteArray(data.getInputStream());
         assertEquals(128, bytes.length);
         assertEquals(137 - 256, bytes[0]);
@@ -157,7 +158,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         headers.add(new NameValuePair("Content-Encoding", "no-gzip"));
         headers.add(new NameValuePair("content-type", MimeType.TEXT_HTML));
 
-        final WebResponseData data = new WebResponseData(zippedContent, WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpClientConverter.OK, "OK", headers);
         final String body = new String(data.getBody(), UTF_8);
         assertTrue(StringUtils.contains(body, "Test"));
 
@@ -194,7 +195,8 @@ public class WebResponseDataTest extends WebServerTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "gzip"));
 
-        final WebResponseData data = new WebResponseData("Plain Content".getBytes(), WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData("Plain Content".getBytes(),
+                HttpClientConverter.OK, "OK", headers);
         try {
             data.getBody();
         }
@@ -215,7 +217,7 @@ public class WebResponseDataTest extends WebServerTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "br"));
 
-        final WebResponseData data = new WebResponseData(zippedContent, WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData(zippedContent, HttpClientConverter.OK, "OK", headers);
         final String body = new String(data.getBody(), UTF_8);
         assertTrue(StringUtils.contains(body, "Test"));
 
@@ -232,7 +234,8 @@ public class WebResponseDataTest extends WebServerTestCase {
         final List<NameValuePair> headers = new ArrayList<>();
         headers.add(new NameValuePair("Content-Encoding", "br"));
 
-        final WebResponseData data = new WebResponseData("Plain Content".getBytes(), WebResponse.OK, "OK", headers);
+        final WebResponseData data = new WebResponseData("Plain Content".getBytes(),
+                HttpClientConverter.OK, "OK", headers);
         try {
             data.getBody();
         }

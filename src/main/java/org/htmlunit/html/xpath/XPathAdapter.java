@@ -57,7 +57,6 @@ class XPathAdapter {
     /**
      * Constructor.
      * @param exprString the XPath expression
-     * @param locator the location of the expression, may be {@code null}
      * @param prefixResolver a prefix resolver to use to resolve prefixes to namespace URIs
      * @param errorListener the error listener, or {@code null} if default should be used
      * @param caseSensitive whether the attributes should be case-sensitive

@@ -328,7 +328,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     HTMLALLCOLLECTION_NULL_IF_NAMED_ITEM_NOT_FOUND,
 
-    /** Should {@link org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden}. */
+    /** Should org.htmlunit.javascript.host.html.HTMLBaseFontElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR})
     HTMLBASEFONT_END_TAG_FORBIDDEN,
 
@@ -525,7 +525,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     HTMLTEXTAREA_WILL_VALIDATE_IGNORES_READONLY,
 
-    /** Should {@link org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden}. */
+    /** Should org.htmlunit.javascript.host.html.HTMLTrackElement#isEndTagForbidden(). */
     @BrowserFeature({FF, FF_ESR, IE})
     HTMLTRACK_END_TAG_FORBIDDEN,
 

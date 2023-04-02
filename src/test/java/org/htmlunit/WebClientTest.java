@@ -49,6 +49,7 @@ import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.parser.HTMLParser;
 import org.htmlunit.html.parser.neko.HtmlUnitNekoHtmlParser;
+import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.host.html.HTMLStyleElement;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
@@ -636,7 +637,7 @@ public class WebClientTest extends SimpleWebTestCase {
         }
         else {
             // A redirect should have happened
-            assertEquals(WebResponse.OK, webResponse.getStatusCode());
+            assertEquals(HttpClientConverter.OK, webResponse.getStatusCode());
             assertEquals(newLocation, webResponse.getWebRequest().getUrl());
             assertEquals("Second", page.getTitleText());
             assertEquals(expectedRedirectedRequestMethod, webConnection.getLastMethod());

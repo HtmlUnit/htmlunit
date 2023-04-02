@@ -113,7 +113,7 @@ public class Cache implements Serializable {
          * Is this cached entry still fresh?
          * @param now the current time
          * @return <code>true</code> if can keep in the cache
-         * @see {@link #isWithinCacheWindow(WebResponse, long, long)}
+         * @see #isWithinCacheWindow(WebResponse, long, long)
          */
         boolean isStillFresh(final long now) {
             return Cache.isWithinCacheWindow(response_, now, createdAt_);

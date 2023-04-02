@@ -759,7 +759,7 @@ public final class UrlUtils {
                     }
                 }
                 else {
-                    before &= false;
+                    before = false;
                     trailing = 0;
                 }
 
