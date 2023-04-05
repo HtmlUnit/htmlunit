@@ -191,9 +191,10 @@ public class RegExpJsToJavaConverterTest {
     public void charClassOpenInside() {
         final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
 
-        final String in = "[af[g]";
-        final String out = regExpJsToJavaConverter.convert(in);
-        assertEquals("[af\\[g]", out);
+        assertEquals("[af\\[g]", regExpJsToJavaConverter.convert("[af[g]"));
+        assertEquals("(?!)[a][b]", regExpJsToJavaConverter.convert("[][a][b]"));
+        assertEquals("[a](?s:.)[b]", regExpJsToJavaConverter.convert("[a][^][b]"));
+        assertEquals("[a\\[b]c]", regExpJsToJavaConverter.convert("[a[b]c]"));
     }
 
     /**
