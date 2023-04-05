@@ -1155,6 +1155,26 @@ public class HtmlUnitRegExpProxyTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("xcd")
+    public void specialBrackets8() throws Exception {
+        // [^] matches any character in JS
+        testEvaluate("'abdcd'.replace(/a[^]d/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("x abdu")
+    public void specialBrackets9() throws Exception {
+        // [^] matches any character in JS
+        testEvaluate("'abdo abdu'.replace(/a[^]d[o]/g, 'x')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("axbxc d efg 1 23")
     public void regExMinusInRangeBorderCase1() throws Exception {
         testEvaluate("'a-b_c d efg 1 23'.replace(/[_-]+/g, 'x')");
