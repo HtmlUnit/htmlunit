@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
+            <action type="add" dev="rbri" issue="576">
+                HTMLCollection are iterable now - you can use them in for..of loops.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 Regexp "[^]" and "[^]" break translation of later char rangen in the regex.
             </action>

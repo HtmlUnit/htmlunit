@@ -363,6 +363,102 @@ public class HTMLCollectionTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts({"myForm", "mySecondForm"})
+    public void forOf() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    for (f of document.forms) {\n"
+            + "      log(f.name);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "<form name='mySecondForm'></form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myForm", "mySecondForm", "dynamicForm", "-", "myForm", "mySecondForm", "dynamicForm"})
+    public void forOfDynamicAtEnd() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = 0;"
+            + "    for (f of document.forms) {\n"
+            + "      i++;\n"
+            + "      if (i == 1) {\n"
+            + "        var frm = document.createElement('FORM');\n"
+            + "        frm.name = 'dynamicForm';\n"
+            + "        document.body.appendChild(frm);\n"
+            + "      }\n"
+            + "      log(f.name);\n"
+            + "    }\n"
+
+            + "    log('-');\n"
+            + "    for (f of document.forms) {\n"
+            + "      log(f.name);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "<form name='mySecondForm'></form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"myForm", "myForm", "mySecondForm", "-", "dynamicForm", "myForm", "mySecondForm"})
+    public void forOfDynamicAtStart() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var i = 0;"
+            + "    for (f of document.forms) {\n"
+            + "      i++;\n"
+            + "      if (i == 1) {\n"
+            + "        var frm = document.createElement('FORM');\n"
+            + "        frm.name = 'dynamicForm';\n"
+            + "        document.body.insertBefore(frm, document.getElementsByName('myForm')[0]);\n"
+            + "      }\n"
+            + "      log(f.name);\n"
+            + "    }\n"
+
+            + "    log('-');\n"
+            + "    for (f of document.forms) {\n"
+            + "      log(f.name);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='myForm'></form>\n"
+            + "<form name='mySecondForm'></form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "b1-button1",
             IE = "null")
     public void item_Unknown() throws Exception {
