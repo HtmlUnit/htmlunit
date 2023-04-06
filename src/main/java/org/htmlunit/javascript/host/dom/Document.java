@@ -1955,8 +1955,8 @@ public class Document extends Node {
      * @param elementName - value of the {@code name} attribute to look for
      * @return all HTML elements that have a {@code name} attribute with the specified value
      */
-    @JsxFunction({CHROME, EDGE, IE})
-    public HTMLCollection getElementsByName(final String elementName) {
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR, IE})
+    public NodeList getElementsByName(final String elementName) {
         return null;
     }
 
@@ -2009,7 +2009,7 @@ public class Document extends Node {
      * Returns the current selection.
      * @return the current selection
      */
-    @JsxFunction({CHROME, EDGE})
+    @JsxFunction
     public Selection getSelection() {
         return null;
     }

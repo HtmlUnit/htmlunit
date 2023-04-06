@@ -73,6 +73,7 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.Document;
+import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.Selection;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.Cookie;
@@ -613,17 +614,17 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction({FF, FF_ESR})
-    public HTMLCollection getElementsByName(final String elementName) {
+    public NodeList getElementsByName(final String elementName) {
         implicitCloseIfNecessary();
+
         if ("null".equals(elementName)
                 || (elementName.isEmpty()
                     && getBrowserVersion().hasFeature(HTMLDOCUMENT_ELEMENTS_BY_NAME_EMPTY))) {
-            return HTMLCollection.emptyCollection(getWindow().getDomNodeOrDie());
+            return NodeList.staticNodeList(getWindow(), new ArrayList<DomNode>());
         }
 
         final HtmlPage page = getPage();
-        final HTMLCollection elements = new HTMLCollection(page, true);
+        final NodeList elements = new NodeList(page, true);
         elements.setElementsSupplier(
                 (Supplier<List<DomNode>> & Serializable)
                 () -> new ArrayList<>(page.getElementsByName(elementName)));
@@ -837,7 +838,6 @@ public class HTMLDocument extends Document {
      * {@inheritDoc}
      */
     @Override
-    @JsxFunction
     public Selection getSelection() {
         return getWindow().getSelectionImpl();
     }

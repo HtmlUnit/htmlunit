@@ -12,6 +12,15 @@
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
+            <action type="fix" dev="rbri">
+                Document.getSelection() is defined for Firefox and IE also.
+            </action>
+            <action type="fix" dev="rbri">
+                Document.getElementsByName() is defined for Firefox also.
+            </action>
+            <action type="fix" dev="rbri">
+                Document.getElementsByName() returns a NodeList instead of a HTMLCollection.
+            </action>
             <action type="add" dev="rbri" issue="576">
                 HTMLCollection are iterable now - you can use them in for..of loops.
             </action>

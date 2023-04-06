@@ -32,15 +32,12 @@ import java.util.List;
 import java.util.function.Supplier;
 
 import org.htmlunit.BrowserVersion;
-import org.htmlunit.corejs.javascript.BaseFunction;
 import org.htmlunit.corejs.javascript.Callable;
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ES6Iterator;
 import org.htmlunit.corejs.javascript.NativeArrayIterator;
-import org.htmlunit.corejs.javascript.NativeArrayIterator.ARRAY_ITERATOR_TYPE;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.ScriptableObject;
-import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
@@ -50,6 +47,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.dom.AbstractList;
 
 /**
@@ -76,17 +74,7 @@ public class HTMLCollection extends AbstractList implements Callable {
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
     public HTMLCollection() {
-        defineProperty(SymbolKey.ITERATOR, IteratorMethod_, ScriptableObject.DONTENUM);
     }
-
-    private static org.htmlunit.corejs.javascript.BaseFunction IteratorMethod_ =
-            new BaseFunction() {
-                @Override
-                public Object call(
-                        final Context cx, final Scriptable scope, final Scriptable thisObj, final Object[] args) {
-                    return new NativeArrayIterator(scope, thisObj, ARRAY_ITERATOR_TYPE.VALUES);
-                }
-            };
 
     /**
      * Creates an instance.
@@ -127,6 +115,11 @@ public class HTMLCollection extends AbstractList implements Callable {
     @Override
     protected HTMLCollection create(final DomNode parentScope, final List<DomNode> initialElements) {
         return new HTMLCollection(parentScope, initialElements);
+    }
+
+    @JsxSymbol({CHROME, EDGE, FF, FF_ESR})
+    public ES6Iterator iterator() {
+        return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }
 
     /**

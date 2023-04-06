@@ -11263,14 +11263,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor()",
             IE = "constructor")
     @HtmlUnitNYI(CHROME = "constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
-                + "getSelection(),head,open(),write(),writeln()",
+                + "head,open(),write(),writeln()",
             EDGE = "constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
-                + "getSelection(),head,open(),write(),writeln()",
+                + "head,open(),write(),writeln()",
             FF_ESR = "close(),constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
-                + "getElementsByName(),getSelection(),head,open(),write(),writeln()",
+                + "head,open(),write(),writeln()",
             FF = "close(),constructor(),cookie,dispatchEvent(),documentElement,getElementById(),"
-                + "getElementsByName(),getSelection(),head,open(),write(),writeln()",
-            IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),getSelection(),"
+                + "head,open(),write(),writeln()",
+            IE = "constructor,cookie,dispatchEvent(),documentElement,getElementById(),"
                 + "head,open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("", "document");
@@ -11806,18 +11806,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length,values()",
-            EDGE = "constructor(),entries(),forEach(),item(),keys(),length,values()",
-            FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
-            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
-            IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(CHROME = "constructor(),item(),length,namedItem()",
+    @Alerts(CHROME = "constructor(),item(),length,namedItem()",
             EDGE = "constructor(),item(),length,namedItem()",
             FF = "constructor(),item(),length,namedItem()",
             FF_ESR = "constructor(),item(),length,namedItem()",
-            IE = "constructor,item(),length,namedItem(),tags()")
+            IE = "constructor,item(),length,namedItem(),tags(),urns()")
+    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
     public void htmlCollection() throws Exception {
-        testString("", "document.getElementsByName('myLog')");
+        testString("", "document.getElementsByTagName('div')");
     }
 
     /**
@@ -11943,8 +11939,23 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
             IE = "constructor,item(),length")
-    public void nodeList() throws Exception {
+    public void nodeListElementById() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
+    }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length,values()",
+            IE = "constructor,item(),length")
+    public void nodeListElementsByName() throws Exception {
+        testString("", "document.getElementsByName('myLog')");
     }
 
     /**

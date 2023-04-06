@@ -4553,11 +4553,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("-")
     @HtmlUnitNYI(CHROME = "open(),write(),writeln()",
             EDGE = "open(),write(),writeln()",
-            FF_ESR = "close(),cookie,getElementsByName(),getSelection(),head,"
+            FF_ESR = "close(),cookie,head,"
                 + "open(),write(),writeln()",
-            FF = "close(),cookie,getElementsByName(),getSelection(),head,"
+            FF = "close(),cookie,head,"
                 + "open(),write(),writeln()",
-            IE = "getSelection(),open(),write(),writeln()")
+            IE = "open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("", "document, xmlDocument");
     }
@@ -4802,8 +4802,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,elementFromPoint(),"
                 + "embeds,evaluate(),execCommand(),fgColor,firstElementChild,fonts,forms,"
-                + "getElementById(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,images,implementation,"
+                + "getElementById(),getElementsByClassName(),getElementsByName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),"
+                + "hasFocus(),hidden,images,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,linkColor,links,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
@@ -4824,8 +4825,9 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),"
                 + "currentScript,defaultView,designMode,doctype,documentElement,documentURI,domain,elementFromPoint(),"
                 + "embeds,evaluate(),execCommand(),fgColor,firstElementChild,fonts,forms,"
-                + "getElementById(),getElementsByClassName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),hidden,images,implementation,"
+                + "getElementById(),getElementsByClassName(),getElementsByName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),"
+                + "hasFocus(),hidden,images,implementation,"
                 + "importNode(),inputEncoding,lastElementChild,lastModified,linkColor,links,location,onabort,"
                 + "onafterscriptexecute,onbeforescriptexecute,onblur,oncanplay,oncanplaythrough,onchange,"
                 + "onclick,oncontextmenu,oncopy,oncut,ondblclick,ondrag,ondragend,ondragenter,ondragleave,"
@@ -4845,7 +4847,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "createProcessingInstruction(),createRange(),createTextNode(),createTreeWalker(),defaultCharset,"
                 + "defaultView,designMode,doctype,documentElement,documentMode,domain,elementFromPoint(),embeds,"
                 + "execCommand(),fgColor,forms,frames,getElementById(),getElementsByClassName(),getElementsByName(),"
-                + "getElementsByTagName(),getElementsByTagNameNS(),hasFocus(),head,hidden,images,implementation,"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getSelection(),"
+                + "hasFocus(),head,hidden,images,implementation,"
                 + "importNode(),inputEncoding,lastModified,linkColor,links,location,onabort,onactivate,"
                 + "onbeforeactivate,onbeforedeactivate,onblur,oncanplay,oncanplaythrough,onchange,onclick,"
                 + "oncontextmenu,ondblclick,ondeactivate,ondrag,ondragend,ondragenter,ondragleave,ondragover,"
