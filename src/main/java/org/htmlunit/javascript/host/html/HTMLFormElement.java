@@ -475,12 +475,17 @@ public class HTMLFormElement extends HTMLElement implements Function {
 
     List<HtmlElement> findElements(final String name) {
         final List<HtmlElement> elements = new ArrayList<>();
-        addElements(name, getHtmlForm().getHtmlElementDescendants(), elements);
-        addElements(name, getHtmlForm().getLostChildren(), elements);
+        final HtmlForm form = (HtmlForm) getDomNodeOrNull();
+        if (form == null) {
+            return elements;
+        }
+
+        addElements(name, form.getHtmlElementDescendants(), elements);
+        addElements(name, form.getLostChildren(), elements);
 
         // If no form fields are found, browsers are able to find img elements by ID or name.
         if (elements.isEmpty()) {
-            for (final DomNode node : getHtmlForm().getHtmlElementDescendants()) {
+            for (final DomNode node : form.getHtmlElementDescendants()) {
                 if (node instanceof HtmlImage) {
                     final HtmlImage img = (HtmlImage) node;
                     if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
@@ -503,20 +508,25 @@ public class HTMLFormElement extends HTMLElement implements Function {
     }
 
     private HtmlElement findFirstElement(final String name) {
-        for (final HtmlElement node : getHtmlForm().getHtmlElementDescendants()) {
+        final HtmlForm form = (HtmlForm) getDomNodeOrNull();
+        if (form == null) {
+            return null;
+        }
+
+        for (final HtmlElement node : form.getHtmlElementDescendants()) {
             if (isAccessibleByIdOrName(node, name)) {
                 return node;
             }
         }
 
-        for (final HtmlElement node : getHtmlForm().getLostChildren()) {
+        for (final HtmlElement node : form.getLostChildren()) {
             if (isAccessibleByIdOrName(node, name)) {
                 return node;
             }
         }
 
         // If no form fields are found, browsers are able to find img elements by ID or name.
-        for (final DomNode node : getHtmlForm().getHtmlElementDescendants()) {
+        for (final DomNode node : form.getHtmlElementDescendants()) {
             if (node instanceof HtmlImage) {
                 final HtmlImage img = (HtmlImage) node;
                 if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
