@@ -30,8 +30,8 @@
         <htmlunitcorejs.version>3.0.0</htmlunitcorejs.version>
         <htmlunitxpath.version>3.0.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.8.1</htmlunitdriver.version>
-        <selenium.version>4.8.1</selenium.version>
+        <htmlunitdriver.version>4.8.3-SNAPSHOT</htmlunitdriver.version>
+        <selenium.version>4.8.3</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.51.v20230217</jetty.version>
@@ -77,7 +77,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.7.3.3</version>
+                <version>4.7.3.4</version>
                 <dependencies>
                     <dependency>
                         <groupId>com.github.spotbugs</groupId>
