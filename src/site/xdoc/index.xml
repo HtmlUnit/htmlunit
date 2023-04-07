@@ -35,6 +35,7 @@
                 HtmlUnit is used as the underlying "browser" by different Open Source tools like
                 <a href="https://github.com/SeleniumHQ/selenium">WebDriver</a>,
                 <a href="https://arquillian.org/arquillian-extension-drone">Arquillian Drone</a>,
+                <a href="https://serenity-bdd.info">Serenity BDD</a>,
                 <a href="https://www.wetator.org/">WETATOR</a>,
                 <a href="https://github.com/jenkinsci/jenkins-test-harness">jenkins-test-harness</a>,
                 <a href="https://github.com/sbabcoc/Selenium-Foundation">Selenium Foundation</a>,
