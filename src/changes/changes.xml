@@ -22,7 +22,7 @@
                 Document.getElementsByName() returns a NodeList instead of a HTMLCollection.
             </action>
             <action type="add" dev="rbri" issue="576">
-                HTMLCollection are iterable now - you can use them in for..of loops.
+                HTMLCollections are iterable now - you can use them in for..of loops.
             </action>
             <action type="fix" dev="Lai Quang Duong">
                 Regexp "[^]" and "[^]" break translation of later char rangen in the regex.
