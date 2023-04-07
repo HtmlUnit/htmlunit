@@ -414,6 +414,7 @@ public class HTMLCollectionTest extends WebDriverTestCase {
             + "        log(f.name);\n"
             + "      }\n"
             + "    } catch(e) { log('exception') }\n"
+            + "  }\n"
             + "</script>\n"
             + "</head>\n"
             + "<body onload='test()'>\n"

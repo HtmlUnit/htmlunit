@@ -5845,18 +5845,14 @@ public class ElementPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
-            EDGE = "entries(),forEach(),item(),keys(),length,values()",
-            FF = "entries(),forEach(),item(),keys(),length,values()",
-            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
-            IE = "item(),length,namedItem()")
-    @HtmlUnitNYI(CHROME = "item(),length,namedItem()",
+    @Alerts(CHROME = "item(),length,namedItem()",
             EDGE = "item(),length,namedItem()",
             FF = "item(),length,namedItem()",
             FF_ESR = "item(),length,namedItem()",
-            IE = "item(),length,namedItem(),tags()")
+            IE = "item(),length,namedItem()")
+    @HtmlUnitNYI(IE = "item(),length,namedItem(),tags()")
     public void htmlCollection() throws Exception {
-        testString("", "document.getElementsByName('myLog')");
+        testString("", "document.getElementsByTagName('div')");
     }
 
     /**
@@ -5982,8 +5978,23 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "entries(),forEach(),item(),keys(),length,values()",
             FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
             IE = "item(),length")
-    public void nodeList() throws Exception {
+    public void nodeListElementById() throws Exception {
         testString("", "document.getElementById('myLog').childNodes");
+    }
+
+    /**
+     * Test {@link NodeList}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "entries(),forEach(),item(),keys(),length,values()",
+            EDGE = "entries(),forEach(),item(),keys(),length,values()",
+            FF = "entries(),forEach(),item(),keys(),length,values()",
+            FF_ESR = "entries(),forEach(),item(),keys(),length,values()",
+            IE = "item(),length")
+    public void nodeListElementsByName() throws Exception {
+        testString("", "document.getElementsByName('myLog')");
     }
 
     /**
