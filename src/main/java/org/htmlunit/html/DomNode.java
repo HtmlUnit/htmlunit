@@ -1864,7 +1864,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         final SelectorList selectorList = parser.parseSelectors(selectors);
         // in case of error parseSelectors returns null
         if (errorHandler.errorDetected()) {
-            throw new CSSException("Invalid selectors: " + selectors);
+            throw new CSSException("Invalid selectors: '" + selectors + "'");
         }
 
         if (selectorList != null) {
