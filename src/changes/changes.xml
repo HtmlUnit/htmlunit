@@ -12,6 +12,10 @@
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
+            <action type="fix" dev="rbri" issue="578">
+                Calls to hasOwnProperty() and getOwnPropertyDescriptor now takes care of form elements accessable from
+                the form object.
+            </action>
             <action type="fix" dev="rbri">
                 Document.getSelection() is defined for Firefox and IE also.
             </action>
