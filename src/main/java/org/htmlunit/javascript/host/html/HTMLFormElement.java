@@ -432,6 +432,47 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return coll;
     }
 
+    /**
+     * Overridden to allow the retrieval of certain form elements by ID or name.
+     *
+     * @param name {@inheritDoc}
+     * @param start {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    public boolean has(final String name, final Scriptable start) {
+        if (super.has(name, start)) {
+            return true;
+        }
+
+        return findFirstElement(name) != null;
+    }
+
+    /**
+     * Overridden to allow the retrieval of certain form elements by ID or name.
+     *
+     * @param cx {@inheritDoc}
+     * @param id {@inheritDoc}
+     * @return {@inheritDoc}
+     */
+    @Override
+    protected ScriptableObject getOwnPropertyDescriptor(final Context cx, final Object id) {
+        final ScriptableObject desc = super.getOwnPropertyDescriptor(cx, id);
+        if (desc != null) {
+            return desc;
+        }
+
+        if (id instanceof CharSequence) {
+            final HtmlElement element = findFirstElement(id.toString());
+            if (element != null) {
+                return ScriptableObject.buildDataDescriptor(this, element.getScriptableObject(),
+                                            ScriptableObject.READONLY | ScriptableObject.DONTENUM);
+            }
+        }
+
+        return null;
+    }
+
     List<HtmlElement> findElements(final String name) {
         final List<HtmlElement> elements = new ArrayList<>();
         addElements(name, getHtmlForm().getHtmlElementDescendants(), elements);
@@ -459,6 +500,32 @@ public class HTMLFormElement extends HTMLElement implements Function {
                 addTo.add(node);
             }
         }
+    }
+
+    private HtmlElement findFirstElement(final String name) {
+        for (final HtmlElement node : getHtmlForm().getHtmlElementDescendants()) {
+            if (isAccessibleByIdOrName(node, name)) {
+                return node;
+            }
+        }
+
+        for (final HtmlElement node : getHtmlForm().getLostChildren()) {
+            if (isAccessibleByIdOrName(node, name)) {
+                return node;
+            }
+        }
+
+        // If no form fields are found, browsers are able to find img elements by ID or name.
+        for (final DomNode node : getHtmlForm().getHtmlElementDescendants()) {
+            if (node instanceof HtmlImage) {
+                final HtmlImage img = (HtmlImage) node;
+                if (name.equals(img.getId()) || name.equals(img.getNameAttribute())) {
+                    return img;
+                }
+            }
+        }
+
+        return null;
     }
 
     /**
