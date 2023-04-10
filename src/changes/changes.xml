@@ -13,7 +13,7 @@
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
             <action type="fix" dev="rbri" issue="578">
-                Calls to hasOwnProperty() and getOwnPropertyDescriptor now takes care of form elements accessable from
+                Calls to hasOwnProperty() and getOwnPropertyDescriptor now taking care of form elements accessible from
                 the form object.
             </action>
             <action type="fix" dev="rbri">

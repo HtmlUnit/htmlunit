@@ -120,4 +120,25 @@ public class FunctionsTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("foo = undefined")
+    public void conditionallyCreatedFunction() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  log('foo = ' + foo);\n"
+            + "  if (false) {\n"
+            + "    function foo() { return 1; }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
