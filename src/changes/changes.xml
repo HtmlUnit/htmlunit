@@ -12,6 +12,15 @@
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
+            <action type="fix" dev="rbri">
+                neko: mention CVE-2023-26119 on the github page.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: HtmlTagBalancer.reset() now resets the whole state.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: fix search for message bundles (regression in 3.0.0).
+            </action>
             <action type="fix" dev="rbri" issue="578">
                 Calls to hasOwnProperty() and getOwnPropertyDescriptor now taking care of form elements accessible from
                 the form object.
@@ -29,7 +38,7 @@
                 HTMLCollections are iterable now - you can use them in for..of loops.
             </action>
             <action type="fix" dev="Lai Quang Duong">
-                Regexp "[^]" and "[^]" break translation of later char rangen in the regex.
+                Regexp "[^]" and "[^]" break translation of later char ranges in the regex.
             </action>
             <action type="add" dev="rbri" issue="573">
                 window.isSecureContext added.
