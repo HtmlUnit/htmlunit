@@ -125,7 +125,7 @@ public class FunctionsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("foo = undefined")
+    @Alerts({"foo = undefined", "1"})
     public void conditionallyCreatedFunction() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -133,7 +133,33 @@ public class FunctionsTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  log('foo = ' + foo);\n"
-            + "  if (false) {\n"
+            + "  if (true) {\n"
+            + "    log(foo());\n"
+            + "    function foo() { return 1; }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts({"error", "1"})
+    public void conditionallyCreatedFunctionStrict() throws Exception {
+        final String html
+            = "<html><head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + "  'use strict';\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    log('foo = ' + foo);\n"
+            + "  } catch(e) { log('error ' + e); }\n"
+            + "  if (true) {\n"
+            + "    log(foo());\n"
             + "    function foo() { return 1; }\n"
             + "  }\n"
             + "</script>\n"
