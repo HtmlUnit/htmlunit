@@ -12,6 +12,9 @@
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
                 &lt;a href="http://code.google.com/p/googleappengine/issues/detail?id=4784"&gt; is solved.
             </action>
+            <action type="fix" dev="RhinoTeam">
+                core-js: Handling of java primitive types in EqualObjectGraphs are fixed.
+            </action>
             <action type="fix" dev="rbri">
                 neko: mention CVE-2023-26119 on the github page.
             </action>
