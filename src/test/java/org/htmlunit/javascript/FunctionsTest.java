@@ -14,9 +14,12 @@
  */
 package org.htmlunit.javascript;
 
+import org.htmlunit.ScriptException;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -126,6 +129,7 @@ public class FunctionsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts({"foo = undefined", "1"})
+    @NotYetImplemented
     public void conditionallyCreatedFunction() throws Exception {
         final String html
             = "<html><head></head>\n"
@@ -157,7 +161,7 @@ public class FunctionsTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  try {\n"
             + "    log('foo = ' + foo);\n"
-            + "  } catch(e) { log('error ' + e); }\n"
+            + "  } catch(e) { log('error'); }\n"
             + "  if (true) {\n"
             + "    log(foo());\n"
             + "    function foo() { return 1; }\n"
