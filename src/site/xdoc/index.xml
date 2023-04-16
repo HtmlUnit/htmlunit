@@ -57,9 +57,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>March 19, 2023</date></dt>
+                    <dt>Latest release <date>April 16, 2023</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.0.0">version 3.0.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.1.0">version 3.1.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -180,7 +180,7 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
 </dependency>]]></source>
             </p>
 

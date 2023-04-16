@@ -1,6 +1,6 @@
 # HtmlUnit
 
-Version 3.0.0 / March 19, 2023
+Version 3.1.0 / April 16, 2023
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
@@ -40,7 +40,7 @@ Add to your `pom.xml`:
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
 </dependency>
 ```
 
@@ -49,7 +49,7 @@ Add to your `pom.xml`:
 Add to your `build.gradle`:
 
 ```groovy
-implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.0.0'
+implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.1.0'
 ```
 
 ## Overview
@@ -118,7 +118,7 @@ Add the snapshot repository and dependency to your `pom.xml`:
       <dependency>
           <groupId>org.htmlunit</groupId>
           <artifactId>htmlunit</artifactId>
-          <version>3.1.0-SNAPSHOT</version>
+          <version>3.2.0-SNAPSHOT</version>
       </dependency>
       <!-- ... -->
     </dependencies>
@@ -137,7 +137,7 @@ repositories {
 }
 // ...
 dependencies {
-    implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.1.0-SNAPSHOT'
+    implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.2.0-SNAPSHOT'
   // ...
 }
 ```
