@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="3.2.0" date="Mai xx, 2023" description="Bugfixes">
+            <action type="update" dev="rbri">
+                cssparser: Custom properties without values are valid.
+            </action>
+        </release>
+
+
         <release version="3.1.0" date="April 16, 2023" description="Chrome/Edge 111, Firefox 111, Html parser improved, for..of loops for HTMLCollections, Bugfixes">
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: CookieManager.getPort(URL) removed. Looks like
