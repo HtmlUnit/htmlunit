@@ -111,7 +111,6 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
         validation("\\p{uppercaseletter}*", "&#x041C&#x0419&#x0420");
     }
 
-
     /**
      * @throws Exception if an error occurs
      */
@@ -120,6 +119,16 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
     public void validationPatternUnicodePropertyEscapeLowercaseLetter() throws Exception {
         validation("\\p{Ll}*", "html");
         validation("\\p{Ll}*", "&#x043C&#x0439&#x0440");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("false")
+    public void validationPatternUnicodePropertyEscapePrivateUse() throws Exception {
+        validation("[^\\p{gc=Co}\\p{gc=Cn}]+", "&#xE111");
+        validation("[^\\p{gc=Co}\\p{gc=Cn}]+", "&#x05FD");
     }
 
     private void validation(final String pattern, final String value) throws Exception {
