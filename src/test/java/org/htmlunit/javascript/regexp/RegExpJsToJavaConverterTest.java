@@ -392,7 +392,10 @@ public class RegExpJsToJavaConverterTest {
         final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
 
         assertEquals("\\p{L}0-9", regExpJsToJavaConverter.convert("\\p{L}0-9"));
-        assertEquals("\\p{L}0-9", regExpJsToJavaConverter.convert("\\p{Letter}0-9"));
+        assertEquals("\\p{Letter}0-9", regExpJsToJavaConverter.convert("\\p{Letter}0-9"));
+
+        assertEquals("\\p{Lu}0-9", regExpJsToJavaConverter.convert("\\p{Lu}0-9"));
+        assertEquals("\\p{Ll}0-9", regExpJsToJavaConverter.convert("\\p{Ll}0-9"));
 
         assertEquals("p\\{html\\}0-9", regExpJsToJavaConverter.convert("\\p{html}0-9"));
     }

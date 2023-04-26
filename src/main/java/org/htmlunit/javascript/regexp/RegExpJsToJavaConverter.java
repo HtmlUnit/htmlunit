@@ -49,7 +49,11 @@ public class RegExpJsToJavaConverter {
     static {
         UNICODE_ESCAPES = new HashMap<>();
         UNICODE_ESCAPES.put("L", "L");
-        UNICODE_ESCAPES.put("Letter", "L");
+        UNICODE_ESCAPES.put("LETTER", "L");
+        UNICODE_ESCAPES.put("LU", "Lu");
+        UNICODE_ESCAPES.put("UPPERCASELETTER", "Lu");
+        UNICODE_ESCAPES.put("LL", "Ll");
+        UNICODE_ESCAPES.put("LOWERCASELETTER", "Ll");
     }
 
     /**
@@ -392,12 +396,7 @@ public class RegExpJsToJavaConverter {
                     }
                     while (next > -1 && next != '}');
                     if (next == '}') {
-                        final String escape = tape_.tape_.substring(uPos, tape_.currentPos_ - 1);
-                        final String replace = UNICODE_ESCAPES.get(escape);
-                        if (replace != null) {
-                            tape_.tape_.replace(uPos, uPos + escape.length(), replace);
-                            return;
-                        }
+                        return;
                     }
 
                     // back to the old behavior
