@@ -383,4 +383,17 @@ public class RegExpJsToJavaConverterTest {
         assertEquals("\\u{FFFFD", regExpJsToJavaConverter.convert("\\u{FFFFD"));
         assertEquals("\\x{FFFFD}\\}", regExpJsToJavaConverter.convert("\\u{FFFFD}}"));
     }
+
+    /**
+     * Unicode property escapes.
+     */
+    @Test
+    public void unicodePropertyEscapes() {
+        final RegExpJsToJavaConverter regExpJsToJavaConverter = new RegExpJsToJavaConverter();
+
+        assertEquals("\\p{L}0-9", regExpJsToJavaConverter.convert("\\p{L}0-9"));
+        assertEquals("\\p{L}0-9", regExpJsToJavaConverter.convert("\\p{Letter}0-9"));
+
+        assertEquals("p\\{html\\}0-9", regExpJsToJavaConverter.convert("\\p{html}0-9"));
+    }
 }

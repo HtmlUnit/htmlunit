@@ -17,6 +17,7 @@ package org.htmlunit.javascript.regexp;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,12 +38,19 @@ import java.util.List;
 public class RegExpJsToJavaConverter {
 
     private static final String DIGITS = "0123456789";
+    private static final HashMap<String, String> UNICODE_ESCAPES;
 
     private Tape tape_;
     private boolean insideCharClass_;
     private boolean insideRepetition_;
     private Deque<Subexpresion> parsingSubexpressions_;
     private List<Subexpresion> subexpressions_;
+
+    static {
+        UNICODE_ESCAPES = new HashMap<>();
+        UNICODE_ESCAPES.put("L", "L");
+        UNICODE_ESCAPES.put("Letter", "L");
+    }
 
     /**
      * Helper to encapsulate the transformations.
@@ -368,6 +376,34 @@ public class RegExpJsToJavaConverter {
 
                 // Unicode (e.g. \u0009)
                 // we have nothing to convert here
+            }
+
+            return;
+        }
+
+        // Unicode property escape
+        if ('p' == escapeSequence) {
+            int next = tape_.read();
+            if (next > -1) {
+                if (next == '{') {
+                    final int uPos = tape_.currentPos_;
+                    do {
+                        next = tape_.read();
+                    }
+                    while (next > -1 && next != '}');
+                    if (next == '}') {
+                        final String escape = tape_.tape_.substring(uPos, tape_.currentPos_ - 1);
+                        final String replace = UNICODE_ESCAPES.get(escape);
+                        if (replace != null) {
+                            tape_.tape_.replace(uPos, uPos + escape.length(), replace);
+                            return;
+                        }
+                    }
+
+                    // back to the old behavior
+                    tape_.move(uPos - tape_.currentPos_ - 3);
+                    tape_.remove(1);
+                }
             }
 
             return;

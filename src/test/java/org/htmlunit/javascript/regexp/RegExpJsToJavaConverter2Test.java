@@ -86,6 +86,16 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
         validation("123\\u{1D306}", "123&#x1D307;");
     }
 
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void validationPatternUnicodePropertyEscapeL() throws Exception {
+        validation("\\p{L}*", "Html");
+        validation("\\p{L}*", "&#x043C&#x0439&#x0440");
+    }
+
     private void validation(final String pattern, final String value) throws Exception {
         final String html =
                 "<html><head>\n"
