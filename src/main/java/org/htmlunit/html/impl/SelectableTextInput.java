@@ -15,7 +15,6 @@
 package org.htmlunit.html.impl;
 
 import org.htmlunit.Page;
-import org.w3c.dom.Node;
 
 /**
  * Internal interface which defines an input element which contains selectable text. This interface just keeps
@@ -24,8 +23,9 @@ import org.w3c.dom.Node;
  * This interface is not public because it is an internal contract.
  *
  * @author Daniel Gredler
+ * @author Ronald Brill
  */
-public interface SelectableTextInput extends Node {
+public interface SelectableTextInput {
 
     /**
      * Returns the page which contains this element.
