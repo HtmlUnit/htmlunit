@@ -9,6 +9,12 @@
     <body>
         <release version="3.2.0" date="Mai xx, 2023" description="Bugfixes">
             <action type="update" dev="rbri">
+                Avoid usage of org.w3c.dom.ranges.Range - this is not available on android.
+            </action>
+            <action type="add" dev="rbri" issue="583">
+                Support unicode property escapes in regular expressions.
+            </action>
+            <action type="update" dev="rbri">
                 cssparser: Custom properties without values are valid.
             </action>
         </release>

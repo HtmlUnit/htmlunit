@@ -93,7 +93,7 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
     @Alerts("true")
     public void validationPatternUnicodePropertyEscapeLetter() throws Exception {
         validation("\\p{L}*", "Html");
-        validation("\\p{L}*", "&#x043C&#x0439&#x0440");
+        validation("\\p{L}*", "&#x043C;&#x0439;&#x0440;");
     }
 
     /**
@@ -103,12 +103,12 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
     @Alerts("true")
     public void validationPatternUnicodePropertyEscapeUppercaseLetter() throws Exception {
         validation("\\p{Lu}*", "HTML");
-        validation("\\p{Lu}*", "&#x041C&#x0419&#x0420");
-        validation("\\p{uppercase letter}*", "&#x041C&#x0419&#x0420");
-        validation("\\p{Uppercase Letter}*", "&#x041C&#x0419&#x0420");
-        validation("\\p{Uppercase_Letter}*", "&#x041C&#x0419&#x0420");
-        validation("\\p{Uppercase-Letter}*", "&#x041C&#x0419&#x0420");
-        validation("\\p{uppercaseletter}*", "&#x041C&#x0419&#x0420");
+        validation("\\p{Lu}*", "&#x041C;&#x0419;&#x0420;");
+        validation("\\p{uppercase letter}*", "&#x041C;&#x0419;&#x0420");
+        validation("\\p{Uppercase Letter}*", "&#x041C;&#x0419;&#x0420");
+        validation("\\p{Uppercase_Letter}*", "&#x041C;&#x0419;&#x0420");
+        validation("\\p{Uppercase-Letter}*", "&#x041C;&#x0419;&#x0420");
+        validation("\\p{uppercaseletter}*", "&#x041C;&#x0419;&#x0420");
     }
 
     /**
@@ -118,7 +118,16 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
     @Alerts("true")
     public void validationPatternUnicodePropertyEscapeLowercaseLetter() throws Exception {
         validation("\\p{Ll}*", "html");
-        validation("\\p{Ll}*", "&#x043C&#x0439&#x0440");
+        validation("\\p{Ll}*", "&#x043C;&#x0439;&#x0440;");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("true")
+    public void validationPatternUnicodePropertyEscapePrivateUse() throws Exception {
+        validation("[\\p{gc=Co}]+", "&#xE000;&#xF8FF;");
     }
 
     /**
@@ -126,9 +135,8 @@ public class RegExpJsToJavaConverter2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts("false")
-    public void validationPatternUnicodePropertyEscapePrivateUse() throws Exception {
-        validation("[^\\p{gc=Co}\\p{gc=Cn}]+", "&#xE111");
-        validation("[^\\p{gc=Co}\\p{gc=Cn}]+", "&#x05FD");
+    public void validationPatternUnicodePropertyEscapeOther() throws Exception {
+        validation("^\\p{gc=Cn}", "a");
     }
 
     private void validation(final String pattern, final String value) throws Exception {
