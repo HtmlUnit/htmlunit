@@ -351,8 +351,7 @@ public class Range extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns a W3C {@link org.w3c.dom.ranges.Range} version of this object.
-     * @return a W3C {@link org.w3c.dom.ranges.Range} version of this object
+     * @return a {@link SimpleRange} version of this object
      */
     public SimpleRange getSimpleRange() {
         return new SimpleRange(startContainer_.getDomNodeOrNull(), startOffset_,

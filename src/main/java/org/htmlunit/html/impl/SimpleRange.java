@@ -210,14 +210,6 @@ public class SimpleRange implements Serializable {
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public short compareBoundaryPoints(final short how, final Range sourceRange) throws DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
-
     /**
      * Removes the contents of this range from the containing document or
      * document fragment without returning a reference to the removed
@@ -280,14 +272,6 @@ public class SimpleRange implements Serializable {
             }
         }
     }
-
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void detach() throws DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
 
     /**
      * Moves the contents of a Range from the containing document or document
@@ -438,22 +422,6 @@ public class SimpleRange implements Serializable {
         endContainer_ = refNode;
         endOffset_ = offset;
     }
-//
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void setEndAfter(final Node refNode) throws RangeException, DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void setEndBefore(final Node refNode) throws RangeException, DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
 
     /**
      * Sets the attributes describing the start.
@@ -464,22 +432,6 @@ public class SimpleRange implements Serializable {
         startContainer_ = refNode;
         startOffset_ = offset;
     }
-
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void setStartAfter(final Node refNode) throws RangeException, DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
-//
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public void setStartBefore(final Node refNode) throws RangeException, DOMException {
-//        throw new RuntimeException("Not implemented!");
-//    }
 
     /**
      * Reparents the contents of the Range to the given node and inserts the

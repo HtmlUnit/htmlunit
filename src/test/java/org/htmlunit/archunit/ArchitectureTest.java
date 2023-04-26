@@ -251,6 +251,14 @@ public class ArchitectureTest {
      * Make sure to not use javax.imageio.
      */
     @ArchTest
+    public static final ArchRule androidRanges = noClasses()
+        .should().dependOnClassesThat().resideInAnyPackage("org.w3c.dom.ranges..");
+
+
+    /**
+     * Make sure to not use javax.imageio.
+     */
+    @ArchTest
     public static final ArchRule androidImageio = noClasses()
          .that()
             .doNotHaveFullyQualifiedName(
