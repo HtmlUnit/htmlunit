@@ -16,7 +16,7 @@ package org.htmlunit.html.impl;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_IGNORE_NEGATIVE_SELECTION_START;
 
-import org.w3c.dom.ranges.Range;
+import org.htmlunit.html.DomNode;
 
 /**
  * Contains standard selection-related functionality used by various input elements.
@@ -36,7 +36,7 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
     private final SelectableTextInput element_;
 
     /** The field selection, which is independent of the browsing context's selection. */
-    private final Range selection_;
+    private final SimpleRange selection_;
 
     /**
      * Creates a new instance for the specified element.
@@ -44,7 +44,7 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
      */
     public SelectableTextSelectionDelegate(final SelectableTextInput element) {
         element_ = element;
-        selection_ = new SimpleRange(element, 0);
+        selection_ = new SimpleRange((DomNode) element, 0);
     }
 
     /**
@@ -85,9 +85,9 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
 
         final int length = element_.getText().length();
         selectionStart = Math.max(0, Math.min(selectionStart, length));
-        selection_.setStart(element_, selectionStart);
+        selection_.setStart((DomNode) element_, selectionStart);
         if (selection_.getEndOffset() < selectionStart) {
-            selection_.setEnd(element_, selectionStart);
+            selection_.setEnd((DomNode) element_, selectionStart);
         }
     }
 
@@ -106,9 +106,9 @@ public class SelectableTextSelectionDelegate implements SelectionDelegate {
     public void setSelectionEnd(int selectionEnd) {
         final int length = element_.getText().length();
         selectionEnd = Math.min(length, Math.max(selectionEnd, 0));
-        selection_.setEnd(element_, selectionEnd);
+        selection_.setEnd((DomNode) element_, selectionEnd);
         if (selection_.getStartOffset() > selectionEnd) {
-            selection_.setStart(element_, selectionEnd);
+            selection_.setStart((DomNode) element_, selectionEnd);
         }
     }
 }

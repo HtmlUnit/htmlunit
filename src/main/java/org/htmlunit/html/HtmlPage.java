@@ -110,7 +110,6 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.EntityReference;
 import org.w3c.dom.ProcessingInstruction;
-import org.w3c.dom.ranges.Range;
 
 /**
  * A representation of an HTML page returned from a server.
@@ -182,7 +181,7 @@ public class HtmlPage extends SgmlPage {
     private List<AutoCloseable> autoCloseableList_;
     private ElementFromPointHandler elementFromPointHandler_;
     private DomElement elementWithFocus_;
-    private List<Range> selectionRanges_ = new ArrayList<>(3);
+    private List<SimpleRange> selectionRanges_ = new ArrayList<>(3);
 
     private transient ComputedStylesCache computedStylesCache_;
 
@@ -2520,7 +2519,7 @@ public class HtmlPage extends SgmlPage {
         if (newElement instanceof SelectableTextInput
                 && hasFeature(PAGE_SELECTION_RANGE_FROM_SELECTABLE_TEXT_INPUT)) {
             final SelectableTextInput sti = (SelectableTextInput) newElement;
-            setSelectionRange(new SimpleRange(sti, sti.getSelectionStart(), sti, sti.getSelectionEnd()));
+            setSelectionRange(new SimpleRange(newElement, sti.getSelectionStart(), newElement, sti.getSelectionEnd()));
         }
 
         if (newElement != null) {
@@ -2574,7 +2573,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @return the page's current selection ranges
      */
-    public List<Range> getSelectionRanges() {
+    public List<SimpleRange> getSelectionRanges() {
         return selectionRanges_;
     }
 
@@ -2585,7 +2584,7 @@ public class HtmlPage extends SgmlPage {
      *
      * @param selectionRange the selection range
      */
-    public void setSelectionRange(final Range selectionRange) {
+    public void setSelectionRange(final SimpleRange selectionRange) {
         selectionRanges_.clear();
         selectionRanges_.add(selectionRange);
     }

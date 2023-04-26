@@ -91,14 +91,14 @@ public class Range extends HtmlUnitScriptable {
         endContainer_ = document;
     }
 
-    Range(final org.w3c.dom.ranges.Range w3cRange) {
-        final DomNode domNodeStartContainer = (DomNode) w3cRange.getStartContainer();
+    Range(final SimpleRange simpleRange) {
+        final DomNode domNodeStartContainer = simpleRange.getStartContainer();
         startContainer_ = domNodeStartContainer.getScriptableObject();
-        startOffset_ = w3cRange.getStartOffset();
+        startOffset_ = simpleRange.getStartOffset();
 
-        final DomNode domNodeEndContainer = (DomNode) w3cRange.getEndContainer();
+        final DomNode domNodeEndContainer = simpleRange.getEndContainer();
         endContainer_ = domNodeEndContainer.getScriptableObject();
-        endOffset_ = w3cRange.getEndOffset();
+        endOffset_ = simpleRange.getEndOffset();
     }
 
     /**
@@ -111,7 +111,7 @@ public class Range extends HtmlUnitScriptable {
                 || endContainer_ == null) {
             return super.getDefaultValue(hint);
         }
-        return toW3C().toString();
+        return getSimpleRange().toString();
     }
 
     /**
@@ -347,14 +347,14 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object extractContents() {
-        return toW3C().extractContents().getScriptableObject();
+        return getSimpleRange().extractContents().getScriptableObject();
     }
 
     /**
      * Returns a W3C {@link org.w3c.dom.ranges.Range} version of this object.
      * @return a W3C {@link org.w3c.dom.ranges.Range} version of this object
      */
-    public SimpleRange toW3C() {
+    public SimpleRange getSimpleRange() {
         return new SimpleRange(startContainer_.getDomNodeOrNull(), startOffset_,
             endContainer_.getDomNodeOrDie(), endOffset_);
     }
@@ -420,7 +420,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object cloneContents() {
-        return toW3C().cloneContents().getScriptableObject();
+        return getSimpleRange().cloneContents().getScriptableObject();
     }
 
     /**
@@ -428,7 +428,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void deleteContents() {
-        toW3C().deleteContents();
+        getSimpleRange().deleteContents();
     }
 
     /**
@@ -438,7 +438,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void insertNode(final Node newNode) {
-        toW3C().insertNode(newNode.getDomNodeOrDie());
+        getSimpleRange().insertNode(newNode.getDomNodeOrDie());
     }
 
     /**
@@ -447,7 +447,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void surroundContents(final Node newNode) {
-        toW3C().surroundContents(newNode.getDomNodeOrDie());
+        getSimpleRange().surroundContents(newNode.getDomNodeOrDie());
     }
 
     /**
@@ -456,7 +456,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object cloneRange() {
-        return new Range(toW3C().cloneRange());
+        return new Range(getSimpleRange().cloneRange());
     }
 
     /**
@@ -473,7 +473,7 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
-        return toW3C().toString();
+        return getSimpleRange().toString();
     }
 
     @Override
@@ -501,7 +501,7 @@ public class Range extends HtmlUnitScriptable {
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
         // simple impl for now
-        for (final DomNode node : toW3C().containedNodes()) {
+        for (final DomNode node : getSimpleRange().containedNodes()) {
             final ScriptableObject scriptable = node.getScriptableObject();
             if (scriptable instanceof HTMLElement) {
                 final ClientRect rect = new ClientRect(0, 0, 1, 1);
@@ -526,7 +526,7 @@ public class Range extends HtmlUnitScriptable {
         rect.setPrototype(getPrototype(rect.getClass()));
 
         // simple impl for now
-        for (final DomNode node : toW3C().containedNodes()) {
+        for (final DomNode node : getSimpleRange().containedNodes()) {
             final ScriptableObject scriptable = node.getScriptableObject();
             if (scriptable instanceof HTMLElement) {
                 final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();

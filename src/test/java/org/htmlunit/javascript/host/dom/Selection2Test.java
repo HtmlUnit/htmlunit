@@ -289,7 +289,7 @@ public class Selection2Test extends SimpleWebTestCase {
         final DomNode s2Text = page.getHtmlElementById("s2").getFirstChild();
         final HtmlInput input = page.getHtmlElementById("b");
 
-        final org.w3c.dom.ranges.Range range = new SimpleRange();
+        final SimpleRange range = new SimpleRange();
         range.setStart(s1Text, 2);
         range.setEnd(s2Text, 1);
         page.setSelectionRange(range);
