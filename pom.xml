@@ -30,8 +30,8 @@
         <htmlunitcorejs.version>3.1.0</htmlunitcorejs.version>
         <htmlunitxpath.version>3.1.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.8.3</htmlunitdriver.version>
-        <selenium.version>4.8.3</selenium.version>
+        <htmlunitdriver.version>4.9.0</htmlunitdriver.version>
+        <selenium.version>4.9.0</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.51.v20230217</jetty.version>
@@ -60,7 +60,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>3.2.1</version>
+                <version>3.2.2</version>
                 <configuration>
                     <configLocation>checkstyle.xml</configLocation>
                     <suppressionsLocation>checkstyle_suppressions.xml</suppressionsLocation>
