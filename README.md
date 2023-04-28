@@ -12,7 +12,12 @@ Version 3.1.0 / April 16, 2023
 
 **News**
 
- * HtmlUnit suffers from a remote code execution via XSLT vulnerability on versions 2.70.0 and below. Please update to at least version 3.0.0.
+#### [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119)
+#### HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0.
+
+#### [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)
+#### HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0.
+
 
 [HtmlUnit@Twitter][3]
 
