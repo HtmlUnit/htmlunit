@@ -143,6 +143,9 @@ public final class StyleAttributes implements Serializable {
         ANIMATION("animation", "animation", ie(""), chromeAndEdge("none 0s ease 0s 1 normal none running"),
                 ff("0s ease 0s 1 normal none running none")),
 
+        /** The style property {@code animationComposition}. */
+        ANIMATION_COMPOSITION("animationComposition", "animation-composition", chromeAndEdge("replace")),
+
         /** The style property {@code animationDelay}. */
         ANIMATION_DELAY("animationDelay", "animation-delay", ie("0s"), chromeAndEdgeAndFirefox("0s")),
 
@@ -2091,10 +2094,10 @@ public final class StyleAttributes implements Serializable {
         MOZ_HYPHENS__("-moz-hyphens", "-moz-hyphens", ff("manual")),
 
         /** The style property {@code MozImageRegion}. */
-        MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ff("auto")),
+        MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ffEsr("auto")),
 
         /** The style property {@code -moz-image-region}. */
-        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ff("auto")),
+        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ffEsr("auto")),
 
         /** The style property {@code MozMarginEnd}. */
         MOZ_MARGIN_END("MozMarginEnd", "-moz-margin-end", ff("0px")),

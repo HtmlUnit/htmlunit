@@ -30,7 +30,6 @@ MozFontFeatureSettings
 MozFontLanguageOverride
 MozForceBrokenImageIcon
 MozHyphens
-MozImageRegion
 MozMarginEnd
 MozMarginStart
 MozOrient

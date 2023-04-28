@@ -85,6 +85,7 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("da", ddDot);
         commonFormats.put("de", ddDot);
         commonFormats.put("el", ddSlash);
+        commonFormats.put("en-CA", yyyyDash);
         commonFormats.put("en-NZ", ddSlash);
         commonFormats.put("en-PA", ddSlash);
         commonFormats.put("en-PR", ddSlash);
@@ -140,7 +141,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         commonFormats.put("zh", yyyySlash);
         commonFormats.put("zh-HK", ddSlash);
         commonFormats.put("zh-SG", "\u200EYYYY\u200E\u5E74\u200EMM\u200E\u6708\u200Edd\u200E\u65E5");
-        commonFormats.put("en-CA", mmSlash);
         commonFormats.put("fr-CH", ddDot);
 
         CHROME_FORMATS_.putAll(commonFormats);
@@ -152,13 +152,11 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         FF_ESR_FORMATS_.putAll(commonFormats);
 
         CHROME_FORMATS_.put("be", mmSlash);
-        CHROME_FORMATS_.put("en-CA", yyyyDash);
         CHROME_FORMATS_.put("ga", mmSlash);
         CHROME_FORMATS_.put("is", mmSlash);
         CHROME_FORMATS_.put("mk", mmSlash);
         CHROME_FORMATS_.put("sq", mmSlash);
 
-        FF_ESR_FORMATS_.put("en-CA", yyyyDash);
         FF_ESR_FORMATS_.put("sr", ddDotDot);
 
         IE_FORMATS_.put("ar", rightToLeft);

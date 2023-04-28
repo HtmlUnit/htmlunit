@@ -30,7 +30,6 @@
 -moz-font-language-override=:
 -moz-force-broken-image-icon=:
 -moz-hyphens=:
--moz-image-region=:
 -moz-margin-end=:
 -moz-margin-start=:
 -moz-orient=:
@@ -154,7 +153,6 @@ MozFontFeatureSettings=:
 MozFontLanguageOverride=:
 MozForceBrokenImageIcon=:
 MozHyphens=:
-MozImageRegion=:
 MozMarginEnd=:
 MozMarginStart=:
 MozOrient=:

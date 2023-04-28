@@ -6,6 +6,7 @@ alignSelf
 alignmentBaseline
 all
 animation
+animationComposition
 animationDelay
 animationDirection
 animationDuration

@@ -625,15 +625,20 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
 
     /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature({CHROME, EDGE, IE})
+    @BrowserFeature(FF)
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
+
+    /** The anchor pathname detects url's starting with one letter as file url's
+     * and replaces them with the file protocol. */
+    @BrowserFeature({CHROME, EDGE, IE})
+    JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE,
 
     /** The anchor pathname property returns nothing for broken http(s) url's. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
 
     /** The anchor pathname property returns nothing for none http(s) url's. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature(FF_ESR)
     JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL,
 
     /** The anchor pathname prefixes file url's with '/'. */

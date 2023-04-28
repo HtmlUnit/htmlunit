@@ -6,6 +6,7 @@ alignSelf=:auto
 alignmentBaseline=:auto
 all=:
 animation=:none 0s ease 0s 1 normal none running
+animationComposition=:replace
 animationDelay=:0s
 animationDirection=:normal
 animationDuration=:0s

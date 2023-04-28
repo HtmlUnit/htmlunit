@@ -699,8 +699,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "2013-12-20",
-            EDGE = "12/20/2013",
-            FF = "12/20/2013",
             IE = "\u200e2013\u200e-\u200e12\u200e-\u200e20")
     public void format_en_ca() throws Exception {
         test("new Intl.DateTimeFormat('en-CA').format(date)");
