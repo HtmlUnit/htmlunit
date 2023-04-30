@@ -56,6 +56,7 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.WebWindow;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.event.SubmitEvent;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.NameValuePair;
@@ -152,8 +153,8 @@ public class HtmlForm extends HtmlElement {
                 if (validate && !areChildrenValid()) {
                     return;
                 }
-
-                final ScriptResult scriptResult = fireEvent(Event.TYPE_SUBMIT);
+                final ScriptResult scriptResult = fireEvent(new SubmitEvent(this,
+                        ((HtmlElement) submitElement).getScriptableObject()));
                 if (isPreventDefault_) {
                     // null means 'nothing executed'
                     if (scriptResult == null) {

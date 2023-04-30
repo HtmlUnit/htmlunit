@@ -2138,7 +2138,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"srcElement null: false", "srcElement==form: true",
+    @Alerts({"type: submit", "submitter: [object HTMLInputElement]",
+             "srcElement null: false", "srcElement==form: true",
              "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head>\n"
@@ -2146,6 +2147,8 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "function test(_event) {\n"
             + "  var oEvent = _event ? _event : window.event;\n"
+            + "  log('type: ' + oEvent.type);\n"
+            + "  log('submitter: ' + oEvent.submitter);\n"
             + "  log('srcElement null: ' + (oEvent.srcElement == null));\n"
             + "  log('srcElement==form: ' + (oEvent.srcElement == document.forms[0]));\n"
             + "  log('target null: ' + (oEvent.target == null));\n"

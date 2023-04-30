@@ -35,11 +35,11 @@ public class HtmxTest1x9x1 extends HtmxTest {
     @Alerts(DEFAULT = "passes:528failures:0",
             IE = "not testable")
     @HtmlUnitNYI(
-            CHROME = "passes:512failures:16",
-            EDGE = "passes:512failures:16",
-            FF = "passes:512failures:16",
-            FF_ESR = "passes:512failures:16",
-            IE = "passes:411failures:109")
+            CHROME = "passes:513failures:15",
+            EDGE = "passes:513failures:15",
+            FF = "passes:513failures:15",
+            FF_ESR = "passes:513failures:15",
+            IE = "passes:412failures:108")
     public void htmx() throws Exception {
         htmx("htmx-1.9.1");
     }

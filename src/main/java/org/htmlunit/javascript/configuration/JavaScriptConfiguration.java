@@ -231,6 +231,7 @@ import org.htmlunit.javascript.host.event.SVGZoomEvent;
 import org.htmlunit.javascript.host.event.SecurityPolicyViolationEvent;
 import org.htmlunit.javascript.host.event.SpeechSynthesisEvent;
 import org.htmlunit.javascript.host.event.StorageEvent;
+import org.htmlunit.javascript.host.event.SubmitEvent;
 import org.htmlunit.javascript.host.event.TextEvent;
 import org.htmlunit.javascript.host.event.TimeEvent;
 import org.htmlunit.javascript.host.event.TouchEvent;
@@ -610,7 +611,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         SpeechSynthesis.class, SpeechSynthesisErrorEvent.class, SpeechSynthesisEvent.class,
         SpeechSynthesisUtterance.class, SpeechSynthesisVoice.class,
         StereoPannerNode.class, Storage.class, StorageEvent.class, StorageManager.class,
-        StyleMedia.class, StyleSheet.class, StyleSheetList.class, SubtleCrypto.class,
+        StyleMedia.class, StyleSheet.class, StyleSheetList.class, SubmitEvent.class, SubtleCrypto.class,
         SVGAElement.class, SVGAngle.class, SVGAnimatedAngle.class,
         SVGAnimatedBoolean.class, SVGAnimatedEnumeration.class, SVGAnimatedInteger.class,
         SVGAnimatedLength.class, SVGAnimatedLengthList.class, SVGAnimatedNumber.class, SVGAnimatedNumberList.class,

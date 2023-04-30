@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.2.0" date="Mai xx, 2023" description="Chrome/Edge 112, Firefox 112, Bugfixes">
+            <action type="add" dev="rbri">
+                SubmitEvent support added.
+            </action>
             <action type="update" dev="rbri">
                 Avoid usage of org.w3c.dom.ranges.Range - this is not available on android.
             </action>
