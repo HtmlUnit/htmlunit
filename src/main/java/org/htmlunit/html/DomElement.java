@@ -1463,10 +1463,7 @@ public class DomElement extends DomNamespaceNode implements Element {
      * @return the execution result, or {@code null} if nothing is executed
      */
     public ScriptResult fireEvent(final String eventType) {
-        if (getPage().getWebClient().isJavaScriptEnabled()) {
-            return fireEvent(new Event(this, eventType));
-        }
-        return null;
+        return fireEvent(new Event(this, eventType));
     }
 
     /**
