@@ -8528,6 +8528,18 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "function SubmitEvent() { [native code] }",
+            FF = "function SubmitEvent() {\n    [native code]\n}",
+            FF_ESR = "function SubmitEvent() {\n    [native code]\n}",
+            IE = "exception")
+    public void submitEvent() throws Exception {
+        test("SubmitEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "function SubtleCrypto() { [native code] }",
             FF = "function SubtleCrypto() {\n    [native code]\n}",
             IE = "[object SubtleCrypto]",

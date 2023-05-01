@@ -5310,6 +5310,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void submitEvent() throws Exception {
+        test("SubmitEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
             IE = "object")
     public void subtleCrypto() throws Exception {
         test("SubtleCrypto");

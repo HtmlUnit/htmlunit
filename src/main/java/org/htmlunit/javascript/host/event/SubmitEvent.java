@@ -32,7 +32,7 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  *
  * @author Ronald Brill
  */
-@JsxClass
+@JsxClass({CHROME, EDGE, FF, FF_ESR})
 public class SubmitEvent extends Event {
 
     private HTMLElement submitter_;
