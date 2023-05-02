@@ -265,7 +265,8 @@ public class SubmitEventTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("true")
+    @Alerts(DEFAULT = "true",
+            IE = "false")
     public void inWindow() throws Exception {
         final String html
             = "<html>\n"

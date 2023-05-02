@@ -2138,9 +2138,12 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"type: submit", "submitter: [object HTMLInputElement]",
-             "srcElement null: false", "srcElement==form: true",
-             "target null: false", "target==form: true"})
+    @Alerts(DEFAULT = {"type: submit", "submitter: [object HTMLInputElement]",
+                       "srcElement null: false", "srcElement==form: true",
+                       "target null: false", "target==form: true"},
+            IE = {"type: submit", "submitter: undefined",
+                  "srcElement null: false", "srcElement==form: true",
+                  "target null: false", "target==form: true"})
     public void onSubmitEvent() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
