@@ -331,6 +331,16 @@ public class HostParentOfSTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "true",
+            IE = "false")
+    public void _SubmitEvent_SubmitEvent() throws Exception {
+        test("SubmitEvent", "SubmitEvent");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("true")
     public void _SubtleCrypto_SubtleCrypto() throws Exception {
         test("SubtleCrypto", "SubtleCrypto");
