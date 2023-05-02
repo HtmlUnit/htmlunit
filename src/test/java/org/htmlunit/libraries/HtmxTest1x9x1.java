@@ -39,7 +39,7 @@ public class HtmxTest1x9x1 extends HtmxTest {
             EDGE = "passes:513failures:15",
             FF = "passes:513failures:15",
             FF_ESR = "passes:513failures:15",
-            IE = "passes:412failures:108")
+            IE = "passes:411failures:109")
     public void htmx() throws Exception {
         htmx("htmx-1.9.1");
     }
