@@ -26,21 +26,21 @@ import org.junit.runner.RunWith;
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmxTest1x9x1 extends HtmxTest {
+public class HtmxTest1x9x2 extends HtmxTest {
 
     /**
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "passes:528failures:0",
+    @Alerts(DEFAULT = "passes:529failures:0",
             IE = "not testable")
     @HtmlUnitNYI(
-            CHROME = "passes:513failures:15",
-            EDGE = "passes:513failures:15",
-            FF = "passes:513failures:15",
-            FF_ESR = "passes:513failures:15",
-            IE = "passes:411failures:109")
+            CHROME = "passes:514failures:15",
+            EDGE = "passes:514failures:15",
+            FF = "passes:514failures:15",
+            FF_ESR = "passes:514failures:15",
+            IE = "passes:412failures:109")
     public void htmx() throws Exception {
-        htmx("htmx-1.9.1");
+        htmx("htmx-1.9.2");
     }
 }

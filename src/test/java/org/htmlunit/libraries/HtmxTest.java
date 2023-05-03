@@ -47,29 +47,30 @@ public abstract class HtmxTest extends WebDriverTestCase {
                 getWebClient().getOptions().setThrowExceptionOnScriptError(false);
             }
 
-            String lastStats = "";
             int tries = 0;
-            while (tries < RETRIES) {
-                tries++;
+            String lastStats = "";
+            webDriver.get(url);
+            long endTime = System.currentTimeMillis() + RUN_TIME;
 
-                webDriver.get(url);
+            while (true) {
+                lastStats = getResultElementText(webDriver);
+                if (lastStats.startsWith(getExpectedAlerts()[0])) {
+                    break;
+                }
+                Thread.sleep(100);
 
-                lastStats = "";
-                final long endTime = System.currentTimeMillis() + RUN_TIME;
-                while (lastStats.length() == 0 || !lastStats.startsWith(getExpectedAlerts()[0])) {
-                    if (lastStats.startsWith(getExpectedAlerts()[0])) {
-                        tries = RETRIES;
-                        break;
+                if (System.currentTimeMillis() > endTime) {
+                    tries++;
+
+                    if (tries < RETRIES) {
+                        lastStats = "";
+                        webDriver.get(url);
+                        endTime = System.currentTimeMillis() + RUN_TIME;
                     }
-                    Thread.sleep(100);
-
-                    if (System.currentTimeMillis() > endTime) {
+                    else {
                         lastStats = "HtmxTest runs too long (longer than " + RUN_TIME / 1000 + "s) - "
                                 + getResultElementText(webDriver);
-                        break;
                     }
-
-                    lastStats = getResultElementText(webDriver);
                 }
             }
 
