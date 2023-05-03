@@ -46,7 +46,7 @@ public class SubmitEvent extends Event {
     /**
      * Ctor.
      * @param domNode the DOM node that triggered the event
-     * @param submitElement
+     * @param submitElement the element that has triggerd this event
      *
      */
     public SubmitEvent(final DomNode domNode, final HTMLElement submitElement) {
