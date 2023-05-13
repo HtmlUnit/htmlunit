@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.media.rtc;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -27,7 +26,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = {FF, FF_ESR}, className = "mozRTCPeerConnection")
+@JsxClass(value = FF_ESR, className = "mozRTCPeerConnection")
 public class MozRTCPeerConnection extends EventTarget {
 
     /**

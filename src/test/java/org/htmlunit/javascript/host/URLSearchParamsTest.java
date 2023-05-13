@@ -833,6 +833,40 @@ public class URLSearchParamsTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"4", "0", "1"},
+            FF_ESR = {"undefined", "undefined", "undefined"},
+            IE = {})
+    public void size() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (self.URLSearchParams) {\n"
+            + "        var param = new URLSearchParams('key1=val1&key2=&key1=val3&=val4');\n"
+            + "        log(param.size);\n"
+
+            + "        param = new URLSearchParams('');\n"
+            + "        log(param.size);\n"
+
+            + "        param = new URLSearchParams('key1=val1');\n"
+            + "        log(param.size);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test

@@ -6105,7 +6105,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function mozRTCIceCandidate() {\n    [native code]\n}",
             FF_ESR = "function mozRTCIceCandidate() {\n    [native code]\n}")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
@@ -6116,7 +6115,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function mozRTCPeerConnection() {\n    [native code]\n}",
             FF_ESR = "function mozRTCPeerConnection() {\n    [native code]\n}")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
@@ -6127,7 +6125,6 @@ public class HostClassNameTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "exception",
-            FF = "function mozRTCSessionDescription() {\n    [native code]\n}",
             FF_ESR = "function mozRTCSessionDescription() {\n    [native code]\n}")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
@@ -7774,7 +7771,8 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "exception",
             CHROME = "function RTCSctpTransport() { [native code] }",
-            EDGE = "function RTCSctpTransport() { [native code] }")
+            EDGE = "function RTCSctpTransport() { [native code] }",
+            FF = "function RTCSctpTransport() {\n    [native code]\n}")
     @HtmlUnitNYI(CHROME = "exception",
             EDGE = "exception")
     public void rtcSctpTransport() throws Exception {

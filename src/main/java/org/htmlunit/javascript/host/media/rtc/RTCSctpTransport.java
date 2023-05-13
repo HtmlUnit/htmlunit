@@ -14,25 +14,27 @@
  */
 package org.htmlunit.javascript.host.media.rtc;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
+import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 
 /**
- * A JavaScript object for {@code mozRTCIceCandidate}.
+ * A JavaScript object for {@code RTCSctpTransport}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-@JsxClass(value = FF_ESR, className = "mozRTCIceCandidate")
-public class MozRTCIceCandidate extends HtmlUnitScriptable {
+@JsxClass({CHROME, EDGE, FF})
+public class RTCSctpTransport extends HtmlUnitScriptable {
 
     /**
-     * Creates a new instance.
+     * Default constructor.
      */
     @JsxConstructor
-    public MozRTCIceCandidate() {
+    public RTCSctpTransport() {
     }
 }

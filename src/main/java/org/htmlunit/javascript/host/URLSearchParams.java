@@ -42,6 +42,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -421,8 +422,16 @@ public class URLSearchParams extends HtmlUnitScriptable {
     }
 
     /**
-     * Returns the text of the Range.
-     * @return the text
+     * @return the total number of search parameter entries
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public int getSize() {
+        final List<NameValuePair> splitted = splitQuery();
+        return splitted.size();
+    }
+
+    /**
+     * @return the text of the URLSearchParams
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {

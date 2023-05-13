@@ -304,6 +304,7 @@ fontVariantNumeric
 fontVariantPosition
 fontVariationSettings
 fontWeight
+forcedColorAdjust
 gap
 grid
 gridArea

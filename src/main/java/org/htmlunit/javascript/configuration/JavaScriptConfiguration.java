@@ -437,6 +437,7 @@ import org.htmlunit.javascript.host.media.rtc.MozRTCSessionDescription;
 import org.htmlunit.javascript.host.media.rtc.RTCCertificate;
 import org.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
 import org.htmlunit.javascript.host.media.rtc.RTCPeerConnection;
+import org.htmlunit.javascript.host.media.rtc.RTCSctpTransport;
 import org.htmlunit.javascript.host.media.rtc.RTCSessionDescription;
 import org.htmlunit.javascript.host.media.rtc.RTCStatsReport;
 import org.htmlunit.javascript.host.media.rtc.WebkitRTCPeerConnection;
@@ -603,8 +604,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PushSubscription.class, PushSubscriptionOptions.class, RadioNodeList.class, Range.class, ReadableStream.class,
         RemotePlayback.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnection.class, RTCPeerConnectionIceEvent.class,
-        RTCSessionDescription.class, RTCStatsReport.class, Screen.class, ScreenOrientation.class,
-        ScriptProcessorNode.class,
+        RTCSessionDescription.class, RTCStatsReport.class, RTCSctpTransport.class,
+        Screen.class, ScreenOrientation.class, ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class,
         ShadowRoot.class, SharedWorker.class, SimpleArray.class, SourceBuffer.class, SourceBufferList.class,

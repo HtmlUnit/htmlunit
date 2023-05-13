@@ -1662,10 +1662,10 @@ public class CanvasRenderingContext2DTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "data:image/png;base64,"
-                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALBJREFUOE/t0rEJAkEQheH/crEGEUwv"
-                + "swkDS7AJDUTjM7cJ0RpsQixBLMBMBAMZeCMbnMvuamBwE8/7GB5TATVw5kdTAXvgBmyAy7eugT1gBSyBRvC9FDbQZwCsganQ"
-                + "bQkagp4f6+KR4F0O3AZ6fiL4qSqOKXAM9PxMVdgnWMenGJwCen6uiw+q4toG54CW7wtdBB/xCOFc0LNDwdarXfyeUvBjjR2Y"
-                + "8rrxna7DP+zwBU1tGRWRQb0vAAAAAElFTkSuQmCC",
+                + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALBJREFUOE/t0rEJAkEUhOH/cjGwAhEs"
+                + "wSYMLMEmNBCNNbcJ0RosQrAEMRYzOTCQB/Nkg3PZXQ0M7sU7H8OwFdADbvzoKmAP3IENcPnWNbADLIGF0DXwKIUN9OsDK2Ai"
+                + "eFuChqDnR2o8FLzLgZtAz48FPwGb4ZgCx0DPTzXFWY1PMTgF9PxMjQ+Cr01wDmj5rtB58CPqEM4FPTsQbLta4/eVgh9nbMGU"
+                + "rxt/0274hxu+AE0JGRUWB25NAAAAAElFTkSuQmCC",
             FF = "data:image/png;base64,"
                 + "iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAo0lEQVQ4T2NkoDJgBJo3FYiZgbgNiB9Raj7IQB4grgLiCqih"
                 + "rUD6O7kGgwyEAUWowX5QgyeSYyiygTD9ZlCDVaAGLyPFYGwGwvR7QQ3+AzV4FzEG4zMQpj8eavAlqMHn8RlMjIEw/cVARjUQ"

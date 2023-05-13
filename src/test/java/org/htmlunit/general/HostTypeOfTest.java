@@ -3885,7 +3885,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF_ESR = "function")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
@@ -3896,7 +3895,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF_ESR = "function")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
@@ -3907,7 +3905,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF_ESR = "function")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
@@ -4903,6 +4900,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "undefined")
     public void rtcStatsReport() throws Exception {
         test("RTCStatsReport");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            FF_ESR = "undefined",
+            IE = "undefined")
+    public void rtcSctpTransport() throws Exception {
+        test("RTCSctpTransport");
     }
 
     /**
