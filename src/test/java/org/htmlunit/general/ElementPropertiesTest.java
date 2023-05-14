@@ -7069,7 +7069,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "fontSynthesis,fontSynthesisSmallCaps,fontSynthesisStyle,fontSynthesisWeight,"
                 + "fontVariant,fontVariantAlternates,"
                 + "fontVariantCaps,fontVariantEastAsian,fontVariantLigatures,fontVariantNumeric,fontVariantPosition,"
-                + "fontVariationSettings,fontWeight,forcedColorAdjust,"
+                + "fontVariationSettings,fontWeight,forced-color-adjust,forcedColorAdjust,"
                 + "gap,getPropertyPriority(),getPropertyValue(),grid,grid-area,"
                 + "grid-auto-columns,grid-auto-flow,grid-auto-rows,grid-column,grid-column-end,grid-column-gap,"
                 + "grid-column-start,grid-gap,grid-row,grid-row-end,grid-row-gap,grid-row-start,grid-template,"
