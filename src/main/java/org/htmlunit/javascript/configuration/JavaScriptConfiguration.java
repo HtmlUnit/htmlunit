@@ -604,7 +604,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         PushSubscription.class, PushSubscriptionOptions.class, RadioNodeList.class, Range.class, ReadableStream.class,
         RemotePlayback.class, Request.class, Response.class, RowContainer.class, RTCCertificate.class,
         RTCDataChannelEvent.class, RTCIceCandidate.class, RTCPeerConnection.class, RTCPeerConnectionIceEvent.class,
-        RTCSessionDescription.class, RTCStatsReport.class, RTCSctpTransport.class,
+        RTCSctpTransport.class, RTCSessionDescription.class, RTCStatsReport.class,
         Screen.class, ScreenOrientation.class, ScriptProcessorNode.class,
         SecurityPolicyViolationEvent.class, Selection.class, ServiceWorker.class, ServiceWorkerContainer.class,
         ServiceWorkerRegistration.class,

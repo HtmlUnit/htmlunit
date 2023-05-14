@@ -7773,8 +7773,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             CHROME = "function RTCSctpTransport() { [native code] }",
             EDGE = "function RTCSctpTransport() { [native code] }",
             FF = "function RTCSctpTransport() {\n    [native code]\n}")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception")
     public void rtcSctpTransport() throws Exception {
         test("RTCSctpTransport");
     }

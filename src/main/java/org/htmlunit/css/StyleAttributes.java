@@ -1297,7 +1297,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
-                chromeAndEdgeAuto()),
+                chromeAndEdgeAuto(), ffLatest("auto")),
+
+        /** The style property {@code forced-color-adjust}. */
+        FORCED_COLOR_ADJUST_("forced-color-adjust", "forced-color-adjust",
+                ffLatest("auto")),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdgeNormal(), ff("normal")),
