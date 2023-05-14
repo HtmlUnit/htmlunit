@@ -21,6 +21,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.host.event.EventTarget;
 
 /**
  * A JavaScript object for {@code RTCSctpTransport}.
@@ -29,7 +30,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
  * @author Ronald Brill
  */
 @JsxClass({CHROME, EDGE, FF})
-public class RTCSctpTransport extends HtmlUnitScriptable {
+public class RTCSctpTransport extends EventTarget {
 
     /**
      * Default constructor.

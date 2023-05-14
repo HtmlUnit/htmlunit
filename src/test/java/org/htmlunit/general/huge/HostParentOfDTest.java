@@ -3895,7 +3895,6 @@ public class HostParentOfDTest extends HostParentOf {
      */
     @Test
     @Alerts(DEFAULT = "false",
-            FF = "true",
             FF_ESR = "true")
     public void _EventTarget_mozRTCPeerConnection() throws Exception {
         test("EventTarget", "mozRTCPeerConnection");
@@ -4088,6 +4087,17 @@ public class HostParentOfDTest extends HostParentOf {
             IE = "false")
     public void _EventTarget_RTCPeerConnection() throws Exception {
         test("EventTarget", "RTCPeerConnection");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "true",
+            FF_ESR = "false",
+            IE = "false")
+    public void _EventTarget_RTCSctpTransport() throws Exception {
+        test("EventTarget", "RTCSctpTransport");
     }
 
     /**
