@@ -634,7 +634,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                         if (enclosingTable != null) { // may be null when called from Range.createContextualFragment
                             if (enclosingTable.getPreviousSibling() instanceof DomText) {
                                 final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                                domText.setTextContent(domText + textValue);
+                                domText.setTextContent(domText.getWholeText() + textValue);
                             }
                             else {
                                 enclosingTable.insertBefore(text);
@@ -645,7 +645,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                         final HtmlTable enclosingTable = (HtmlTable) currentNode_;
                         if (enclosingTable.getPreviousSibling() instanceof DomText) {
                             final DomText domText = (DomText) enclosingTable.getPreviousSibling();
-                            domText.setTextContent(domText + textValue);
+                            domText.setTextContent(domText.getWholeText() + textValue);
                         }
                         else {
                             enclosingTable.insertBefore(text);
