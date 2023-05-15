@@ -14,6 +14,7 @@
  */
 package org.htmlunit.fuzzer;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
@@ -141,13 +142,31 @@ public class FuzzerTest extends WebTestCase {
         test("test-56702.html");
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void case58943() throws Exception {
+        // https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=58943
+        test("test-58943.html");
+    }
+
     private void test(final String inputFileName) throws Exception {
         final InputStream file = getClass().getClassLoader()
                 .getResourceAsStream("org/htmlunit/fuzzer/" + inputFileName);
         final String input = IOUtils.toString(file, StandardCharsets.UTF_8);
 
         try (WebClient webClient = new WebClient(getBrowserVersion())) {
+            // org.htmlunit.corejs.javascript.EvaluatorException seems to be fatal
+            webClient.getOptions().setThrowExceptionOnScriptError(false);
+            // no exception if linked resources are not available
+            webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
+
             webClient.loadHtmlCodeIntoCurrentWindow(input);
+        }
+        catch (final IllegalArgumentException e) {
+        }
+        catch (final IOException e) {
         }
     }
 }
