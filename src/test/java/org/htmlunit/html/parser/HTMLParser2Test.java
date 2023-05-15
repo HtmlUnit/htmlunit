@@ -53,11 +53,6 @@ public class HTMLParser2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts({"\\nbeforeafter", "undefined", "undefined"})
-    @HtmlUnitNYI(CHROME = {"beforeafter", "undefined", "undefined"},
-            EDGE = {"beforeafter", "undefined", "undefined"},
-            FF = {"beforeafter", "undefined", "undefined"},
-            FF_ESR = {"beforeafter", "undefined", "undefined"},
-            IE = {"beforeafter", "undefined", "undefined"})
     public void htmlTableTextAroundTD() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
