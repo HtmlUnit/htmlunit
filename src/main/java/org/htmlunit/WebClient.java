@@ -2808,7 +2808,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebWindow webWindow = getCurrentWindow();
 
         final StringWebResponse webResponse =
-                new StringWebResponse(htmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+                new StringWebResponse(htmlCode, new URL("https://www.htmlunit.org/dummy.html"));
         final HtmlPage page = new HtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
@@ -2829,7 +2829,7 @@ public class WebClient implements Serializable, AutoCloseable {
         final WebWindow webWindow = getCurrentWindow();
 
         final StringWebResponse webResponse =
-                new StringWebResponse(xhtmlCode, new URL("http://htmlunit.sourceforge.net/dummy.html"));
+                new StringWebResponse(xhtmlCode, new URL("https://www.htmlunit.org/dummy.html"));
         final XHtmlPage page = new XHtmlPage(webResponse, webWindow);
         webWindow.setEnclosedPage(page);
 
