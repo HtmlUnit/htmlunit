@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.2.0" date="Mai xx, 2023" description="Chrome/Edge 113, Firefox 113, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fix for the dom construction in some edge cases (oss-fuzz).
+            </action>
             <action type="add" dev="rbri">
                 RTCSctpTransport stub added.
             </action>
