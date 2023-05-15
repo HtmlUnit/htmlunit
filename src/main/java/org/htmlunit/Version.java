@@ -22,6 +22,7 @@ import org.htmlunit.html.HtmlPage;
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public final class Version {
 
@@ -51,7 +52,7 @@ public final class Version {
      */
     private static void runSanityCheck() throws Exception {
         try (WebClient webClient = new WebClient()) {
-            final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net/index.html");
+            final HtmlPage page = webClient.getPage("https://www.htmlunit.org/index.html");
             page.executeJavaScript("document.location");
             System.out.println("Sanity check complete.");
         }
