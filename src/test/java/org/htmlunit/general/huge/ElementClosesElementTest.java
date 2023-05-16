@@ -198,7 +198,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
             if (getBrowserVersion().isIE()) {
                 if ("isindex".equals(parent) && useRealBrowser()) {
                     // ie is really strange here - the isindex tag is replaced
-                    // by a form containing an input field - an this has no childs
+                    // by a form containing an input field - and this has no childs
                     // simulating this in 2023 is not worth the time
                     expected = "0";
                 }
@@ -298,6 +298,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _colgroup_template() throws Exception {
         test("colgroup", "template");
     }
@@ -470,6 +471,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _form_isindex() throws Exception {
         test("form", "isindex");
     }
@@ -925,6 +927,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _head_template() throws Exception {
         test("head", "template");
     }
@@ -1070,6 +1073,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "null",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _isindex_frameset() throws Exception {
         test("isindex", "frameset");
     }
@@ -1343,6 +1347,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _p_isindex() throws Exception {
         test("p", "isindex");
     }
@@ -1507,6 +1512,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _select_template() throws Exception {
         test("select", "template");
     }
@@ -1589,6 +1595,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _table_template() throws Exception {
         test("table", "template");
     }
@@ -1671,6 +1678,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _tbody_template() throws Exception {
         test("tbody", "template");
     }
@@ -1735,6 +1743,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _tfoot_template() throws Exception {
         test("tfoot", "template");
     }
@@ -1799,6 +1808,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _thead_template() throws Exception {
         test("thead", "template");
     }
@@ -1863,6 +1873,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "1",
             IE = "0")
+    @HtmlUnitNYI(IE = "1")
     public void _tr_template() throws Exception {
         test("tr", "template");
     }
@@ -1874,5 +1885,105 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Alerts("1")
     public void _tr_th() throws Exception {
         test("tr", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_caption() throws Exception {
+        test("template", "tr");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_col() throws Exception {
+        test("template", "col");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_colgroup() throws Exception {
+        test("template", "colgroup");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_frame() throws Exception {
+        test("template", "frame");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_tbody() throws Exception {
+        test("template", "tbody");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_td() throws Exception {
+        test("template", "td");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_tfoot() throws Exception {
+        test("template", "tfoot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_th() throws Exception {
+        test("template", "th");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_thead() throws Exception {
+        test("template", "thead");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE  = "1")
+    public void _template_tr() throws Exception {
+        test("template", "tr");
     }
 }
