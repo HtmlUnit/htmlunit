@@ -174,8 +174,8 @@ public final class HtmlUnitSSLConnectionSocketFactory extends SSLConnectionSocke
                 throw new ConnectTimeoutException("Connect to " + socksProxyAddress + " timed out");
             }
 
-            final Socket sslSocket = getSSLSocketFactory().createSocket(underlying, socksProxy.getHostName(),
-                    socksProxy.getPort(), true);
+            final Socket sslSocket = getSSLSocketFactory().createSocket(underlying, remoteAddress.getHostName(),
+                    remoteAddress.getPort(), true);
             configureSocket((SSLSocket) sslSocket, context);
             return sslSocket;
         }
