@@ -8,6 +8,13 @@
 
     <body>
         <release version="3.2.0" date="May 15, 2023" description="Chrome/Edge 113, Firefox 113, SubmitEvent, Bugfixes">
+            <action type="fix" dev="Vadzim Miliantsei">
+                SOCKS proxy setup fixed.
+            </action>
+        </release>
+
+
+        <release version="3.2.0" date="May 15, 2023" description="Chrome/Edge 113, Firefox 113, SubmitEvent, Bugfixes">
             <action type="fix" dev="rbri">
                 Fix for the dom construction in some edge cases (oss-fuzz).
             </action>

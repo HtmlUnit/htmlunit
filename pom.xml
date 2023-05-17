@@ -1094,6 +1094,9 @@
         <contributor>
             <name>Lai Quang Duong</name>
         </contributor>
+        <contributor>
+            <name>Vadzim Miliantsei</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->
