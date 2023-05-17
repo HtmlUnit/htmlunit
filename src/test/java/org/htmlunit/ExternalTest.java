@@ -328,12 +328,6 @@ public class ExternalTest {
             return true;
         }
 
-        // there is a serious bug
-        // https://issues.apache.org/jira/browse/IO-744
-        if ("commons-io".equals(artifactId) && (version.startsWith("2.11.0"))) {
-            return true;
-        }
-
         // version 10 requires JDK 11
         if ("checkstyle".equals(artifactId) && (version.startsWith("10."))) {
             return true;
