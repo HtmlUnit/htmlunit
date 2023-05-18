@@ -27,6 +27,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -800,11 +801,17 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
     public void ignoredStartElement(final QName elem, final XMLAttributes attrs, final Augmentations augs) {
         // when multiple body elements are encountered, the attributes of the discarded
         // elements are used when not previously defined
-        if (body_ != null && "body".equalsIgnoreCase(elem.localpart) && attrs != null) {
-            copyAttributes(body_, attrs);
-        }
-        if (body_ != null && "html".equalsIgnoreCase(elem.localpart) && attrs != null) {
-            copyAttributes((DomElement) body_.getParentNode(), attrs);
+        if (attrs != null && body_ != null) {
+            String lp = elem.localpart;
+            if (lp != null && lp.length() == 4) {
+                lp = lp.toLowerCase(Locale.ROOT);
+                if ("body".equals(lp)) {
+                    copyAttributes(body_, attrs);
+                }
+                else if ("html".equals(lp)) {
+                    copyAttributes((DomElement) body_.getParentNode(), attrs);
+                }
+            }
         }
     }
 

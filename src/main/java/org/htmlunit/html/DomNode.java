@@ -946,9 +946,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
             basicAppend(domNode);
 
-            if (fire) {
-                fireAddition(domNode);
-            }
+            fireAddition(domNode, fire);
         }
 
         return domNode;
@@ -1040,9 +1038,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         basicInsertBefore(newNode);
 
-        if (fire) {
-            fireAddition(newNode);
-        }
+        fireAddition(newNode, fire);
     }
 
     /**
@@ -1068,7 +1064,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         previousSibling_ = node;
     }
 
-    private void fireAddition(final DomNode domNode) {
+    private void fireAddition(final DomNode domNode, final boolean fire) {
         final boolean wasAlreadyAttached = domNode.isAttachedToPage();
         domNode.attachedToPage_ = isAttachedToPage();
 
@@ -1093,7 +1089,9 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        fireNodeAdded(new DomChangeEvent(this, domNode));
+        if (fire) {
+            fireNodeAdded(new DomChangeEvent(this, domNode));
+        }
     }
 
     /**
@@ -1173,9 +1171,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         basicRemove();
 
-        if (fireRemoval) {
-            fireRemoval(exParent);
-        }
+        fireRemoval(exParent, fireRemoval);
     }
 
     /**
@@ -1204,7 +1200,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
     }
 
-    private void fireRemoval(final DomNode exParent) {
+    private void fireRemoval(final DomNode exParent, final boolean fire) {
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
             // some actions executed on removal need an intact parent relationship (e.g. for the
@@ -1214,7 +1210,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             parent_ = null;
         }
 
-        if (exParent != null) {
+        if (fire && exParent != null) {
             final DomChangeEvent event = new DomChangeEvent(exParent, this);
             fireNodeDeleted(event);
             // ask ex-parent to fire event (because we don't have parent now)
