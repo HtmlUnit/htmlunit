@@ -911,30 +911,31 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     @Override
     public DomNode appendChild(final Node node) {
-        return appendChild(node, true);
+        return appendChild(node, true, true);
     }
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
      * @param node the node to add
+     * @param checkAnchestor if true check anchestor
      * @param fire if true fire addition/removal event
      * @return The node added
      */
-    public DomNode appendChild(final Node node, final boolean fire) {
+    public DomNode appendChild(final Node node, final boolean checkAnchestor, final boolean fire) {
         if (node == this) {
             Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
             return this;
         }
         final DomNode domNode = (DomNode) node;
-        if (domNode.isAncestorOf(this)) {
+        if (checkAnchestor && domNode.isAncestorOf(this)) {
             Context.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
         }
 
         if (domNode instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
             for (final DomNode child : fragment.getChildren()) {
-                appendChild(child, fire);
+                appendChild(child, checkAnchestor, fire);
             }
         }
         else {
