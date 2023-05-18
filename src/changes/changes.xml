@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.2.0" date="May 15, 2023" description="Bugfixes">
+        <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
+            <action type="update" dev="rbri">
+                neko: minor optimization of avoid object creation and some not required method calls.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.12.0.
             </action>
