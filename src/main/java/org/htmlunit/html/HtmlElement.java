@@ -1263,10 +1263,10 @@ public abstract class HtmlElement extends DomElement {
      * This is the first step of a move.
      */
     @Override
-    protected void detach() {
+    protected void detach(final boolean fireRemoval) {
         final SgmlPage page = getPage();
         if (!page.getWebClient().isJavaScriptEngineEnabled()) {
-            super.detach();
+            super.detach(fireRemoval);
             return;
         }
 
@@ -1301,7 +1301,7 @@ public abstract class HtmlElement extends DomElement {
                 }
             }
         }
-        super.detach();
+        super.detach(fireRemoval);
     }
 
     /**

@@ -471,7 +471,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
         // Next ensure non-table elements don't appear in tables
         if ("table".equals(currentNodeName) || isTableChild(currentNodeName) || "tr".equals(currentNodeName)) {
             if ("template".equals(newNodeName)) {
-                currentNode.appendChild(newElement);
+                currentNode.appendChild(newElement, false);
             }
 
             // Scripts, forms, and styles are exempt
@@ -479,23 +479,23 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                     && ("script".equals(newNodeName)
                         || "form".equals(newNodeName)
                         || "style".equals(newNodeName))) {
-                currentNode.appendChild(newElement);
+                currentNode.appendChild(newElement, false);
             }
 
             // These are good
             else if ("col".equals(newNodeName) && "colgroup".equals(currentNodeName)) {
-                currentNode.appendChild(newElement);
+                currentNode.appendChild(newElement, false);
             }
             else if ("caption".equals(currentNodeName)) {
-                currentNode.appendChild(newElement);
+                currentNode.appendChild(newElement, false);
             }
             else if (newElement instanceof HtmlHiddenInput) {
-                currentNode.appendChild(newElement);
+                currentNode.appendChild(newElement, false);
             }
             else {
                 // Move before the table
                 final DomNode parent = findElementOnStack("table");
-                parent.insertBefore(newElement);
+                parent.insertBefore(newElement, false);
             }
             return;
         }
@@ -637,7 +637,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                                 domText.setTextContent(domText.getWholeText() + textValue);
                             }
                             else {
-                                enclosingTable.insertBefore(text);
+                                enclosingTable.insertBefore(text, false);
                             }
                         }
                     }
@@ -648,11 +648,11 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
                             domText.setTextContent(domText.getWholeText() + textValue);
                         }
                         else {
-                            enclosingTable.insertBefore(text);
+                            enclosingTable.insertBefore(text, false);
                         }
                     }
                     else if (currentNode_ instanceof HtmlImage) {
-                        currentNode_.getParentNode().appendChild(text);
+                        currentNode_.getParentNode().appendChild(text, false);
                     }
                     else {
                         appendChild(currentNode_, text);
@@ -739,7 +739,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
 
         final Node child;
         child = type;
-        page_.appendChild(child);
+        page_.appendChild(child, false);
     }
 
     /** {@inheritDoc} */
@@ -853,6 +853,6 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             return;
         }
 
-        parent.appendChild(child);
+        parent.appendChild(child, false);
     }
 }

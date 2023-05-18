@@ -911,6 +911,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     @Override
     public DomNode appendChild(final Node node) {
+        return appendChild(node, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @param node the node to add
+     * @param fire if true fire addition/removal event
+     * @return The node added
+     */
+    public DomNode appendChild(final Node node, final boolean fire) {
         if (node == this) {
             Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
             return this;
@@ -923,18 +934,20 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         if (domNode instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
             for (final DomNode child : fragment.getChildren()) {
-                appendChild(child);
+                appendChild(child, fire);
             }
         }
         else {
             // clean up the new node, in case it is being moved
             if (domNode.getParentNode() != null) {
-                domNode.detach();
+                domNode.detach(fire);
             }
 
             basicAppend(domNode);
 
-            fireAddition(domNode);
+            if (fire) {
+                fireAddition(domNode);
+            }
         }
 
         return domNode;
@@ -998,6 +1011,19 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param newNode the new node to insert
      */
     public void insertBefore(final DomNode newNode) {
+        insertBefore(newNode, true);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Inserts the specified node as a new child node before this node into the child relationship this node is a
+     * part of. If the specified node is this node, this method is a no-op.
+     *
+     * @param newNode the new node to insert
+     * @param fire if true fire addition/removal event
+     */
+    public void insertBefore(final DomNode newNode, final boolean fire) {
         if (previousSibling_ == null) {
             throw new IllegalStateException("Previous sibling for " + this + " is null.");
         }
@@ -1008,12 +1034,14 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         // clean up the new node, in case it is being moved
         if (newNode.getParentNode() != null) {
-            newNode.detach();
+            newNode.detach(fire);
         }
 
         basicInsertBefore(newNode);
 
-        fireAddition(newNode);
+        if (fire) {
+            fireAddition(newNode);
+        }
     }
 
     /**
@@ -1128,7 +1156,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void remove() {
         // same as detach for the moment
-        detach();
+        detach(true);
     }
 
     /**
@@ -1136,13 +1164,17 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Detach this node from all relationships with other nodes.
      * This is the first step of a move.
+     *
+     * @param fireRemoval if true fire removal event
      */
-    protected void detach() {
+    protected void detach(final boolean fireRemoval) {
         final DomNode exParent = parent_;
 
         basicRemove();
 
-        fireRemoval(exParent);
+        if (fireRemoval) {
+            fireRemoval(exParent);
+        }
     }
 
     /**
