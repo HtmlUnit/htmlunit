@@ -911,42 +911,30 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     @Override
     public DomNode appendChild(final Node node) {
-        return appendChild(node, true, true);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * @param node the node to add
-     * @param checkAnchestor if true check anchestor
-     * @param fire if true fire addition/removal event
-     * @return The node added
-     */
-    public DomNode appendChild(final Node node, final boolean checkAnchestor, final boolean fire) {
         if (node == this) {
             Context.throwAsScriptRuntimeEx(new Exception("Can not add not to itself " + this));
             return this;
         }
         final DomNode domNode = (DomNode) node;
-        if (checkAnchestor && domNode.isAncestorOf(this)) {
+        if (domNode.isAncestorOf(this)) {
             Context.throwAsScriptRuntimeEx(new Exception("Can not add (grand)parent to itself " + this));
         }
 
         if (domNode instanceof DomDocumentFragment) {
             final DomDocumentFragment fragment = (DomDocumentFragment) domNode;
             for (final DomNode child : fragment.getChildren()) {
-                appendChild(child, checkAnchestor, fire);
+                appendChild(child);
             }
         }
         else {
             // clean up the new node, in case it is being moved
             if (domNode.getParentNode() != null) {
-                domNode.detach(fire);
+                domNode.detach();
             }
 
             basicAppend(domNode);
 
-            fireAddition(domNode, fire);
+            fireAddition(domNode);
         }
 
         return domNode;
@@ -1010,19 +998,6 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      * @param newNode the new node to insert
      */
     public void insertBefore(final DomNode newNode) {
-        insertBefore(newNode, true);
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Inserts the specified node as a new child node before this node into the child relationship this node is a
-     * part of. If the specified node is this node, this method is a no-op.
-     *
-     * @param newNode the new node to insert
-     * @param fire if true fire addition/removal event
-     */
-    public void insertBefore(final DomNode newNode, final boolean fire) {
         if (previousSibling_ == null) {
             throw new IllegalStateException("Previous sibling for " + this + " is null.");
         }
@@ -1033,12 +1008,12 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
 
         // clean up the new node, in case it is being moved
         if (newNode.getParentNode() != null) {
-            newNode.detach(fire);
+            newNode.detach();
         }
 
         basicInsertBefore(newNode);
 
-        fireAddition(newNode, fire);
+        fireAddition(newNode);
     }
 
     /**
@@ -1064,7 +1039,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         previousSibling_ = node;
     }
 
-    private void fireAddition(final DomNode domNode, final boolean fire) {
+    private void fireAddition(final DomNode domNode) {
         final boolean wasAlreadyAttached = domNode.isAttachedToPage();
         domNode.attachedToPage_ = isAttachedToPage();
 
@@ -1089,9 +1064,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             onAddedToDocumentFragment();
         }
 
-        if (fire) {
-            fireNodeAdded(new DomChangeEvent(this, domNode));
-        }
+        fireNodeAdded(new DomChangeEvent(this, domNode));
     }
 
     /**
@@ -1155,7 +1128,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     public void remove() {
         // same as detach for the moment
-        detach(true);
+        detach();
     }
 
     /**
@@ -1163,15 +1136,13 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      *
      * Detach this node from all relationships with other nodes.
      * This is the first step of a move.
-     *
-     * @param fireRemoval if true fire removal event
      */
-    protected void detach(final boolean fireRemoval) {
+    protected void detach() {
         final DomNode exParent = parent_;
 
         basicRemove();
 
-        fireRemoval(exParent, fireRemoval);
+        fireRemoval(exParent);
     }
 
     /**
@@ -1200,7 +1171,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
         }
     }
 
-    private void fireRemoval(final DomNode exParent, final boolean fire) {
+    private void fireRemoval(final DomNode exParent) {
         final HtmlPage htmlPage = getHtmlPageOrNull();
         if (htmlPage != null) {
             // some actions executed on removal need an intact parent relationship (e.g. for the
@@ -1210,7 +1181,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             parent_ = null;
         }
 
-        if (fire && exParent != null) {
+        if (exParent != null) {
             final DomChangeEvent event = new DomChangeEvent(exParent, this);
             fireNodeDeleted(event);
             // ask ex-parent to fire event (because we don't have parent now)
