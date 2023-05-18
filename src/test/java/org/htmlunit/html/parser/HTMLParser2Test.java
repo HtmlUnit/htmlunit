@@ -76,6 +76,76 @@ public class HTMLParser2Test extends WebDriverTestCase {
     }
 
     /**
+     * Malformed HTML:
+     * &lt;/td&gt;some text&lt;/tr&gt; =&gt; text comes before the table.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"\\nabcbeforeafter", "undefined", "undefined"})
+    public void htmlTableTextAroundTD2() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "function test() {\n"
+            + "  var tmp = document.getElementById('testDiv');\n"
+            + "  tmp = tmp.firstChild;\n"
+            + "  log(tmp.data);\n"
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.data);\n"
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.tagName);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div id='testDiv'>\n"
+            + "abc<table><tr>before<td></td>after</tr></table>\n"
+            + "</div></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Malformed HTML:
+     * &lt;/td&gt;some text&lt;/tr&gt; =&gt; text comes before the table.
+     *
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts({"\\nbe", "B-for", "e", "STRONG-aft", "er", "[object\\sHTMLTableElement]"})
+    public void htmlTableTagsAroundTD() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "function test() {\n"
+            + "  var tmp = document.getElementById('testDiv');\n"
+            + "  tmp = tmp.firstChild;\n"
+            + "  log(tmp.data);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.nodeName + '-' + tmp.firstChild.data);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.data);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.nodeName + '-' + tmp.firstChild.data);\n"
+
+            + "  tmp = tmp.nextSibling;\n"
+            + "  log(tmp.data);\n"
+
+            + "  log(tmp.nextSibling);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'><div id='testDiv'>\n"
+            + "<table><tr>be<b>for</b>e<td></td><strong>aft</strong>er</tr></table>\n"
+            + "</div></body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * @throws Exception on test failure
      */
     @Test
