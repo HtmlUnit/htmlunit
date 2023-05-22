@@ -24,6 +24,9 @@ import java.net.MalformedURLException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlPage;
@@ -185,6 +188,19 @@ public class HTMLLinkElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
+    }
+
+    /**
+     * Sets the relList property.
+     * @param rel attribute value
+     */
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    public void setRelList(final ScriptableObject rel) {
+        if (Undefined.isUndefined(rel)) {
+            setRel("undefined");
+            return;
+        }
+        setRel(ScriptRuntime.toString(rel));
     }
 
     /**

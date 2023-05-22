@@ -80,16 +80,6 @@ public class HTMLLabelElement extends HTMLElement {
     }
 
     /**
-     * The control attribute is read-only.
-     *
-     * @param control ignored
-     */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
-    public void setControl(final HTMLElement control) {
-        // the control attribute is read-only
-    }
-
-    /**
      * Returns the value of the JavaScript {@code form} attribute.
      *
      * @return the value of the JavaScript {@code form} attribute
@@ -118,15 +108,5 @@ public class HTMLLabelElement extends HTMLElement {
         }
 
         return (HTMLFormElement) getScriptableFor(form);
-    }
-
-    /**
-     * The form attribute is read-only.
-     *
-     * @param form ignored
-     */
-    @JsxSetter
-    public void setForm(final HTMLFormElement form) {
-        // the form attribute is read-only
     }
 }
