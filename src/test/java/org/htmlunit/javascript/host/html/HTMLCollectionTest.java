@@ -998,4 +998,59 @@ public class HTMLCollectionTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "1"},
+            IE = "Type error")
+    public void setLength() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  var x = document.children;\n"
+            + "  try {\n"
+            + "    log(x.length);\n"
+            + "    x.length = 100;\n"
+            + "    log(x.length);\n"
+            + "  } catch(e) { log('Type error'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"1", "Type error"},
+            IE = "Type error")
+    public void setLengthStrictMode() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  'use strict';\n"
+            + "  var x = document.children;\n"
+            + "  try {\n"
+            + "    log(x.length);\n"
+            + "    x.length = 100;\n"
+            + "    log(x.length);\n"
+            + "  } catch(e) { log('Type error'); }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='test()'>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
