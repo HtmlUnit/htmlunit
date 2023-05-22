@@ -22,8 +22,8 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
         <additionalparam>-Xdoclint:none</additionalparam>
 
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
 
         <htmlunitcssparser.version>3.6.0</htmlunitcssparser.version>
         <htmlunitneko.version>3.6.0</htmlunitneko.version>
@@ -34,7 +34,7 @@
         <selenium.version>4.14.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
-        <jetty.version>9.4.53.v20231009</jetty.version>
+        <jetty.version>11.0.17</jetty.version>
         <log4j.version>2.21.0</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
@@ -1209,7 +1209,7 @@
         <!-- Jetty -->
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-client</artifactId>
+            <artifactId>websocket-jetty-client</artifactId>
             <version>${jetty.version}</version>
         </dependency>
 
@@ -1330,7 +1330,7 @@
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-server</artifactId>
+            <artifactId>websocket-jetty-server</artifactId>
             <version>${jetty.version}</version>
             <scope>test</scope>
         </dependency>
