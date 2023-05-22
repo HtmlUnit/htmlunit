@@ -826,15 +826,6 @@ public class HTMLDocument extends Document {
     }
 
     /**
-     * Sets the head.
-     * @param head the head
-     */
-    @JsxSetter({FF, FF_ESR, IE})
-    public void setHead(final ScriptableObject head) {
-        //ignore
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
