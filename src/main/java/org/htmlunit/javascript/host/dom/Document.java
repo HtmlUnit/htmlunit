@@ -2024,7 +2024,7 @@ public class Document extends Node {
      * Returns this document's {@code head} element.
      * @return this document's {@code head} element
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public Object getHead() {
         return null;
     }
