@@ -1109,6 +1109,150 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
+            IE = "exception")
+    public void setRelListString() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = 'alternate help';\n"
+            + "  a2.relList = 'abc';\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
+            IE = "exception")
+    public void setRelListStringBlank() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = '';\n"
+            + "  a2.relList = '  \t';\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
+            IE = "exception")
+    public void setRelListNull() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = null;\n"
+            + "  a2.relList = null;\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
+            IE = "exception")
+    public void setRelListUndefined() throws Exception {
+        final String html
+            = "<html><body><a id='a1'>a1</a><a id='a2' rel='alternate help'>a2</a><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('a1'), a2 = document.getElementById('a2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = undefined;\n"
+            + "  a2.relList = undefined;\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts(DEFAULT = {"", "user", "user", "",
                        "", "",
                        "Tester", "https://Tester:password@developer.mozilla.org/",

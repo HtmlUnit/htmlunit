@@ -1413,19 +1413,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "urn")
     @HtmlUnitNYI(CHROME = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
                 + "hostname[GSCE],href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],"
                 + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
             EDGE = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
                 + "hostname[GSCE],href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],"
                 + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
             FF = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
                 + "href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],"
                 + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
             FF_ESR = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
                 + "href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
-                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GSCE],"
                 + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
             IE = "exception")
     public void a() throws Exception {

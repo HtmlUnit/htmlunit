@@ -43,6 +43,8 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlElement;
@@ -815,6 +817,19 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
+    }
+
+    /**
+     * Sets the relList property.
+     * @param rel attribute value
+     */
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
+    public void setRelList(final ScriptableObject rel) {
+        if (Undefined.isUndefined(rel)) {
+            setRel("null");
+            return;
+        }
+        setRel(ScriptRuntime.toString(rel));
     }
 
     /**
