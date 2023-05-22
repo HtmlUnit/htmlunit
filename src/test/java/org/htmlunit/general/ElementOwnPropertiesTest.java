@@ -11341,21 +11341,27 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "deleteCaption(),deleteRow(),deleteTFoot(),deleteTHead(),frame,height,insertRow(),moveRow(),rows,"
                 + "rules,summary,tBodies,tFoot,tHead,"
                 + "width")
-    @HtmlUnitNYI(CHROME = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,tBodies,"
-                + "tFoot,tHead,width",
-            EDGE = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,tBodies,"
-                + "tFoot,tHead,width",
-            FF_ESR = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,"
-                + "tBodies,tFoot,tHead,width",
-            FF = "bgColor,border,caption,cellPadding,cellSpacing,constructor(),createCaption(),createTBody(),"
-                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),rules,summary,"
-                + "tBodies,tFoot,tHead,width",
-            IE = "bgColor,border,borderColor,borderColorDark,borderColorLight,caption,cellPadding,cellSpacing,"
-                + "constructor,createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
-                + "deleteTFoot(),deleteTHead(),rules,summary,tBodies,tFoot,tHead,width")
+    @HtmlUnitNYI(CHROME = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
+                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
+            EDGE = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
+                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
+            FF_ESR = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
+                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
+            FF = "bgColor[GSCE],border[GSCE],caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor(),createCaption(),createTBody(),"
+                + "createTFoot(),createTHead(),deleteCaption(),deleteTFoot(),deleteTHead(),"
+                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]",
+            IE = "bgColor[GSCE],border[GSCE],borderColor[GSCE],borderColorDark[GSCE],borderColorLight[GSCE],"
+                + "caption[GSCE],cellPadding[GSCE],cellSpacing[GSCE],"
+                + "constructor[],createCaption(),createTBody(),createTFoot(),createTHead(),deleteCaption(),"
+                + "deleteTFoot(),deleteTHead(),"
+                + "rules[GSCE],summary[GSCE],tBodies[GCE],tFoot[GSCE],tHead[GSCE],width[GSCE]")
     public void table() throws Exception {
         test("table");
     }
@@ -11411,11 +11417,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
-    @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
-            EDGE = "ch,chOff,constructor(),vAlign",
-            FF_ESR = "ch,chOff,constructor(),vAlign",
-            FF = "ch,chOff,constructor(),vAlign",
-            IE = "bgColor,ch,chOff,constructor,vAlign")
+    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            IE = "bgColor[GSCE],ch[GSCE],chOff[GSCE],constructor[],vAlign[GSCE]")
     public void tbody() throws Exception {
         test("tbody");
     }
@@ -11476,10 +11482,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "vAlign[GSCE],"
                 + "width[GSCE]",
             IE = "constructor,scope")
-    @HtmlUnitNYI(CHROME = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
-            EDGE = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
-            FF_ESR = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
-            FF = "abbr,axis,bgColor,cellIndex,colSpan,constructor(),headers,height,noWrap,rowSpan,scope,width",
+    @HtmlUnitNYI(CHROME = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
+                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
+            EDGE = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
+                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
+            FF_ESR = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
+                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
+            FF = "abbr[GSCE],axis[GSCE],bgColor[GSCE],cellIndex[GCE],colSpan[GSCE],"
+                + "constructor(),headers[GSCE],height[GSCE],noWrap[GSCE],rowSpan[GSCE],scope[GSCE],width[GSCE]",
             IE = "constructor[]")
     public void th() throws Exception {
         test("th");
@@ -11506,12 +11516,17 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "align,bgColor,borderColor,borderColorDark,borderColorLight,cells,ch,chOff,constructor,"
                 + "deleteCell(),height,insertCell(),rowIndex,sectionRowIndex,"
                 + "vAlign")
-    @HtmlUnitNYI(CHROME = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
-            EDGE = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
-            FF_ESR = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
-            FF = "bgColor,cells,constructor(),deleteCell(),insertCell(),rowIndex,sectionRowIndex",
-            IE = "bgColor,borderColor,borderColorDark,borderColorLight,cells,constructor,"
-                + "deleteCell(),insertCell(),rowIndex,sectionRowIndex")
+    @HtmlUnitNYI(CHROME = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
+                + "rowIndex[GCE],sectionRowIndex[GCE]",
+            EDGE = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
+                + "rowIndex[GCE],sectionRowIndex[GCE]",
+            FF_ESR = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
+                + "rowIndex[GCE],sectionRowIndex[GCE]",
+            FF = "bgColor[GSCE],cells[GCE],constructor(),deleteCell(),insertCell(),"
+                + "rowIndex[GCE],sectionRowIndex[GCE]",
+            IE = "bgColor[GSCE],borderColor[GSCE],borderColorDark[GSCE],borderColorLight[GSCE],cells[GCE],"
+                + "constructor[],"
+                + "deleteCell(),insertCell(),rowIndex[GCE],sectionRowIndex[GCE]")
     public void tr() throws Exception {
         test("tr");
     }
@@ -11553,21 +11568,33 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "placeholder,readOnly,required,rows,select(),selectionEnd,selectionStart,setCustomValidity(),"
                 + "setSelectionRange(),status,type,validationMessage,validity,value,willValidate,"
                 + "wrap")
-    @HtmlUnitNYI(CHROME = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,"
-                + "maxLength,minLength,name,placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
-            EDGE = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,"
-                + "maxLength,minLength,name,placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
-            FF_ESR = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
-            FF = "checkValidity(),cols,constructor(),defaultValue,disabled,form,labels,maxLength,minLength,name,"
-                + "placeholder,readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),textLength,type,validity,value,willValidate",
-            IE = "checkValidity(),cols,constructor,createTextRange(),defaultValue,form,maxLength,name,placeholder,"
-                + "readOnly,required,rows,select(),selectionEnd,"
-                + "selectionStart,setCustomValidity(),setSelectionRange(),type,validity,value,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
+                + "form[GCE],labels[GCE],"
+                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "rows[GSCE],select(),selectionEnd[GSCE],"
+                + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
+                + "validity[GCE],value[GSCE],willValidate[GCE]",
+            EDGE = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
+                + "form[GCE],labels[GCE],"
+                + "maxLength[GSCE],minLength[GSCE],name[GSCE],placeholder[GSCE],readOnly[GSCE],required[GSCE],"
+                + "rows[GSCE],select(),selectionEnd[GSCE],"
+                + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
+                + "validity[GCE],value[GSCE],willValidate[GCE]",
+            FF_ESR = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
+                + "form[GCE],labels[GCE],maxLength[GSCE],minLength[GSCE],name[GSCE],"
+                + "placeholder[GSCE],readOnly[GSCE],required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
+                + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
+                + "validity[GCE],value[GSCE],willValidate[GCE]",
+            FF = "checkValidity(),cols[GSCE],constructor(),defaultValue[GSCE],disabled[GSCE],"
+                + "form[GCE],labels[GCE],maxLength[GSCE],minLength[GSCE],name[GSCE],"
+                + "placeholder[GSCE],readOnly[GSCE],required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
+                + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),textLength[GCE],type[GCE],"
+                + "validity[GCE],value[GSCE],willValidate[GCE]",
+            IE = "checkValidity(),cols[GSCE],constructor[],createTextRange(),defaultValue[GSCE],"
+                + "form[GCE],maxLength[GSCE],name[GSCE],placeholder[GSCE],"
+                + "readOnly[GSCE],required[GSCE],rows[GSCE],select(),selectionEnd[GSCE],"
+                + "selectionStart[GSCE],setCustomValidity(),setSelectionRange(),type[GCE],"
+                + "validity[GCE],value[GSCE],willValidate[GCE]")
     public void textarea() throws Exception {
         test("textarea");
     }
@@ -11583,11 +11610,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
-    @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
-            EDGE = "ch,chOff,constructor(),vAlign",
-            FF_ESR = "ch,chOff,constructor(),vAlign",
-            FF = "ch,chOff,constructor(),vAlign",
-            IE = "bgColor,ch,chOff,constructor,vAlign")
+    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            IE = "bgColor[GSCE],ch[GSCE],chOff[GSCE],constructor[],vAlign[GSCE]")
     public void tfoot() throws Exception {
         test("tfoot");
     }
@@ -11604,10 +11631,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
     @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
-            EDGE = "ch,chOff,constructor(),vAlign",
-            FF_ESR = "ch,chOff,constructor(),vAlign",
-            FF = "ch,chOff,constructor(),vAlign",
-            IE = "bgColor,ch,chOff,constructor,vAlign")
+            EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
+            IE = "bgColor[GSCE],ch[GSCE],chOff[GSCE],constructor[],vAlign[GSCE]")
     public void thead() throws Exception {
         test("thead");
     }
@@ -12792,7 +12819,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                     + "DOM_KEY_LOCATION_STANDARD[E],"
                     + "initKeyboardEvent(),isComposing[GCE],key[GCE],keyCode[GCE],location[GCE],metaKey[GCE],"
                     + "repeat[GCE],shiftKey[GCE],which[GCE]",
-                FF_ESR = "altKey,charCode,code,constructor(),ctrlKey,DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
+                FF_ESR = "altKey[GCE],charCode[GCE],code[GCE],constructor(),ctrlKey[GCE],"
+                    + "DOM_KEY_LOCATION_LEFT,DOM_KEY_LOCATION_NUMPAD,"
                     + "DOM_KEY_LOCATION_RIGHT,DOM_KEY_LOCATION_STANDARD,DOM_VK_0,DOM_VK_1,DOM_VK_2,DOM_VK_3,DOM_VK_4,"
                     + "DOM_VK_5,DOM_VK_6,DOM_VK_7,DOM_VK_8,DOM_VK_9,DOM_VK_A,DOM_VK_ACCEPT,DOM_VK_ADD,DOM_VK_ALT,"
                     + "DOM_VK_ALTGR,DOM_VK_AMPERSAND,DOM_VK_ASTERISK,DOM_VK_AT,DOM_VK_ATTN,DOM_VK_B,DOM_VK_BACK_QUOTE,"
@@ -12887,10 +12915,12 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "rangeParent[GCE],SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE],"
                 + "which[GCE]",
             IE = "constructor,detail,deviceSessionId,initUIEvent(),view")
-    @HtmlUnitNYI(CHROME = "constructor(),detail[GCE],initUIEvent(),view[GCE]",
-            EDGE = "constructor(),detail[GCE],initUIEvent(),view[GCE]",
-            FF_ESR = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE]",
-            FF = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],view[GCE]",
+    @HtmlUnitNYI(CHROME = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
+            EDGE = "constructor(),detail[GCE],initUIEvent(),view[GCE],which[GCE]",
+            FF_ESR = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
+                + "view[GCE],which[GCE]",
+            FF = "constructor(),detail[GCE],initUIEvent(),SCROLL_PAGE_DOWN[E],SCROLL_PAGE_UP[E],"
+                + "view[GCE],which[GCE]",
             IE = "constructor[],detail[GCE],initUIEvent(),view[GCE]")
     public void uiEvent() throws Exception {
         testString("", "document.createEvent('UIEvent')");
