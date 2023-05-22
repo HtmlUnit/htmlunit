@@ -164,4 +164,13 @@ public class UIEvent extends Event {
         // Ignore the view parameter; we always use the window.
         setDetail(detail);
     }
+
+    /**
+     * @return a number that indicates which button was pressed on the mouse,
+     * or the numeric keyCode or the character code (charCode) of the key pressed on the keyboard
+     */
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
+    public int getWhich() {
+        return 0;
+    }
 }

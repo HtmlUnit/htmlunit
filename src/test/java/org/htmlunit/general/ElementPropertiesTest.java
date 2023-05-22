@@ -3939,21 +3939,23 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
             FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
@@ -4254,21 +4256,23 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
             FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,data,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
@@ -4311,21 +4315,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view",
+                + "target,timeStamp,type,view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
                 + "composed,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view",
+                + "target,timeStamp,type,view,which",
             FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),preventDefault(),srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
@@ -4371,27 +4375,27 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
                 + "inputType,isComposing,NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view",
+                + "target,timeStamp,type,view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),"
                 + "inputType,isComposing,NONE,"
                 + "preventDefault(),returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
-                + "target,timeStamp,type,view",
+                + "target,timeStamp,type,view,which",
             FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),"
                 + "initUIEvent(),inputType,isComposing,"
                 + "META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view",
+                + "stopPropagation(),target,timeStamp,type,view,which",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,currentTarget,"
                 + "data,defaultPrevented,detail,eventPhase,initEvent(),"
                 + "initUIEvent(),inputType,isComposing,"
                 + "META_MASK,NONE,preventDefault(),returnValue,SCROLL_PAGE_DOWN,"
                 + "SCROLL_PAGE_UP,SHIFT_MASK,srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type,view")
+                + "stopPropagation(),target,timeStamp,type,view,which")
     public void inputEvent() throws Exception {
         testString("", "new InputEvent('input')");
     }
@@ -4468,21 +4472,21 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,CONTROL_MASK,"
                 + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),META_MASK,NONE,"
                 + "preventDefault(),returnValue,SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,SHIFT_MASK,srcElement,"
-                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view,which",
             IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,currentTarget,"
                 + "defaultPrevented,"
                 + "detail,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
@@ -4518,11 +4522,13 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view",
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which",
             EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,"
                 + "CAPTURING_PHASE,composed,currentTarget,"
                 + "defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
-                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,view")
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type,"
+                + "view,which")
     public void touchEvent() throws Exception {
         testString("", "new TouchEvent('touch')");
     }
@@ -4555,10 +4561,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Alerts("-")
     @HtmlUnitNYI(CHROME = "open(),write(),writeln()",
             EDGE = "open(),write(),writeln()",
-            FF_ESR = "close(),cookie,head,"
-                + "open(),write(),writeln()",
-            FF = "close(),cookie,head,"
-                + "open(),write(),writeln()",
+            FF_ESR = "close(),cookie,open(),write(),writeln()",
+            FF = "close(),cookie,open(),write(),writeln()",
             IE = "open(),write(),writeln()")
     public void htmlDocument() throws Exception {
         testString("", "document, xmlDocument");

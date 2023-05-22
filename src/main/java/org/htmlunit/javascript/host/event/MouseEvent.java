@@ -341,6 +341,7 @@ public class MouseEvent extends UIEvent {
      * @return the button code
      */
     @JsxGetter(IE)
+    @Override
     public int getWhich() {
         return button_ + 1;
     }
