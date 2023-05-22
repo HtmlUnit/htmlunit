@@ -9,6 +9,9 @@
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
             <action type="update" dev="rbri">
+                The MouseEvent which property is only available in IE.
+            </action>
+            <action type="update" dev="rbri">
                 The head property is defined on Document and not on HtmlDocuent.
             </action>
             <action type="update" dev="rbri">
