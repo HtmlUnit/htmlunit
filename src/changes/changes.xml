@@ -9,6 +9,9 @@
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
             <action type="update" dev="rbri">
+                Remove the superfluous origin setter for anchors.
+            </action>
+            <action type="update" dev="rbri">
                 The which property is moved up to the UIEvent for Chrome/Edge and FF.
             </action>
             <action type="update" dev="rbri">

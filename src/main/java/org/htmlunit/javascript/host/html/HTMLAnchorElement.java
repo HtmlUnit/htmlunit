@@ -659,15 +659,6 @@ public class HTMLAnchorElement extends HTMLElement {
     }
 
     /**
-     * Sets the {@code origin} attribute.
-     * @param origin {@code origin} attribute
-     */
-    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
-    public void setOrigin(final String origin) {
-        // ignore
-    }
-
-    /**
      * Returns the {@code username} attribute.
      * @return the {@code username} attribute
      */

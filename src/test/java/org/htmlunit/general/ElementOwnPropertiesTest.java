@@ -1411,18 +1411,22 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "charset,constructor,coords,hash,host,hostname,href,hreflang,Methods,mimeType,name,nameProp,"
                 + "pathname,port,protocol,protocolLong,rel,rev,search,shape,target,text,toString(),type,"
                 + "urn")
-    @HtmlUnitNYI(CHROME = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
-                + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
-                + "type,username",
-            EDGE = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
-                + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
-                + "type,username",
-            FF = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
-                + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
-                + "type,username",
-            FF_ESR = "charset,constructor(),coords,download,hash,host,hostname,href,hreflang,name,origin,password,"
-                + "pathname,ping,port,protocol,referrerPolicy,rel,relList,rev,search,shape,target,text,"
-                + "type,username",
+    @HtmlUnitNYI(CHROME = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
+                + "hostname[GSCE],href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
+            EDGE = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],"
+                + "hostname[GSCE],href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
+            FF = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
+                + "href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
+            FF_ESR = "charset[GSCE],constructor(),coords[GSCE],download[GSCE],hash[GSCE],host[GSCE],hostname[GSCE],"
+                + "href[GSCE],hreflang[GSCE],name[GSCE],origin[GCE],password[GSCE],"
+                + "pathname[GSCE],ping[GSCE],port[GSCE],protocol[GSCE],referrerPolicy[GSCE],rel[GSCE],relList[GCE],"
+                + "rev[GSCE],search[GSCE],shape[GSCE],target[GSCE],text[GSCE],type[GSCE],username[GSCE]",
             IE = "exception")
     public void a() throws Exception {
         test("a");
@@ -1667,11 +1671,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "alt,constructor,coords,hash,host,hostname,href,noHref,pathname,port,protocol,rel,search,shape,"
                 + "target,"
                 + "toString()")
-    @HtmlUnitNYI(CHROME = "alt,constructor(),coords,rel,relList",
-            EDGE = "alt,constructor(),coords,rel,relList",
-            FF_ESR = "alt,constructor(),coords,rel,relList",
-            FF = "alt,constructor(),coords,rel,relList",
-            IE = "alt,constructor,coords,rel")
+    @HtmlUnitNYI(CHROME = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
+            EDGE = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
+            FF_ESR = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
+            FF = "alt[GSCE],constructor(),coords[GSCE],rel[GSCE],relList[GCE]",
+            IE = "alt[GSCE],constructor[],coords[GSCE],rel[GSCE]")
     public void area() throws Exception {
         test("area");
     }
