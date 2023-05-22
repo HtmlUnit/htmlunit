@@ -8,7 +8,6 @@
 
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
-          onmessageerror
             <action type="update" dev="rbri">
                 Frameset onmessageerror property is setable in FF also.
             </action>
