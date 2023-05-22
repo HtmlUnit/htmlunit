@@ -241,7 +241,7 @@ public class HTMLFrameSetElement extends HTMLElement {
      * Sets the {@code onmessageerror} event handler for this element.
      * @param onmessageerror the {@code onmessageerror} event handler for this element
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnmessageerror(final Object onmessageerror) {
         setEventHandler(Event.TYPE_ONMESSAGEERROR, onmessageerror);
     }
