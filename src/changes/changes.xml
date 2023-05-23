@@ -12,6 +12,9 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
+                Marquee properties height, width, and bgColor are avilable in FF also.
+            </action>
+            <action type="update" dev="rbri">
                 Event type property is read-only.
             </action>
             <action type="update" dev="rbri">

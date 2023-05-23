@@ -2507,8 +2507,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "start(),stop(),trueSpeed,vspace,width")
     @HtmlUnitNYI(CHROME = "bgColor,height,width",
             EDGE = "bgColor,height,width",
-            FF_ESR = "-",
-            FF = "-",
+            FF_ESR = "bgColor,height,width",
+            FF = "bgColor,height,width",
             IE = "bgColor,height,width")
     public void marquee() throws Exception {
         test("marquee");

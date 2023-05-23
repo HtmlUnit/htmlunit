@@ -1727,7 +1727,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "contentDocument,data,declare,form,height,hspace,name,namedRecordset(),object,recordset,standby,"
                 + "type,useMap,vspace,"
                 + "width")
-    @HtmlUnitNYI(IE = "align,alt,border,classid,constructor,height,width")
+    @HtmlUnitNYI(IE = "align[GSCE],alt[GSCE],border[GSCE],classid[GSCE],constructor[],height[GSCE],width[GSCE]")
     public void applet() throws Exception {
         test("applet");
     }
@@ -3616,7 +3616,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "align[GSCE],constructor()",
             FF = "align[GSCE],constructor()",
             FF_ESR = "align[GSCE],constructor()",
-            IE = "align,constructor,vAlign")
+            IE = "align[GSCE],constructor[],vAlign[GSCE]")
     public void caption() throws Exception {
         test("caption");
     }
@@ -8034,11 +8034,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "behavior,bgColor,constructor,direction,height,hspace,loop,onbounce,onfinish,onstart,scrollAmount,"
                 + "scrollDelay,start(),stop(),trueSpeed,vspace,"
                 + "width")
-    @HtmlUnitNYI(CHROME = "bgColor,constructor(),height,width",
-            EDGE = "bgColor,constructor(),height,width",
-            FF = "constructor()",
-            FF_ESR = "constructor()",
-            IE = "bgColor,constructor,height,width")
+    @HtmlUnitNYI(CHROME = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
+            EDGE = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
+            FF = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
+            FF_ESR = "bgColor[GSCE],constructor(),height[GSCE],width[GSCE]",
+            IE = "bgColor[GSCE],constructor[],height[GSCE],width[GSCE]")
     public void marquee() throws Exception {
         test("marquee");
     }
@@ -9572,7 +9572,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),disabled[GSCE],label[GSCE]",
             FF_ESR = "constructor(),disabled[GSCE],label[GSCE]",
             IE = "constructor,defaultSelected,form,index,label,selected,text,value")
-    @HtmlUnitNYI(IE = "constructor,disabled,label")
+    @HtmlUnitNYI(IE = "constructor[],disabled[GSCE],label[GSCE]")
     public void optgroup() throws Exception {
         test("optgroup");
     }
@@ -9593,7 +9593,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "selected[GSCE],text[GSCE],value[GSCE]",
             IE = "constructor,defaultSelected[GSCE],form[GCE],index[GCE],label[GSCE],selected[GSCE],"
                 + "text[GSCE],value[GSCE]")
-    @HtmlUnitNYI(IE = "constructor,defaultSelected,disabled,form,index,label,selected,text,value")
+    @HtmlUnitNYI(IE = "constructor[WC],defaultSelected[GCE],disabled[GSCE],form[GCE],index[GCE],"
+                + "label[GSCE],selected[GSCE],text[GSCE],value[GSCE]")
     public void option() throws Exception {
         test("option");
     }
@@ -9655,7 +9656,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
             FF = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
             FF_ESR = "constructor(),name[GSCE],type[GSCE],value[GSCE],valueType[GSCE]",
-            IE = "constructor,name,type,value,valueType")
+            IE = "constructor[],name[GCE],type[GCE],value[GCE],valueType[GCE]")
     public void param() throws Exception {
         test("param");
     }
@@ -11114,9 +11115,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "add(),checkValidity(),constructor(),disabled,form,item(),labels,length,multiple,"
                 + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
                 + "validity,value,willValidate",
-            IE = "add(),checkValidity(),constructor,form,item(),length,multiple,"
-                + "name,options,remove(),required,selectedIndex,setCustomValidity(),size,type,"
-                + "validity,value,willValidate")
+            IE = "add(),checkValidity(),constructor[],form[GCE],item(),length[GSCE],multiple[GSCE],"
+                + "name[GSCE],options[GCE],remove(),required[GSCE],selectedIndex[GSCE],setCustomValidity(),"
+                + "size[GSCE],type[GCE],validity[GCE],value[GSCE],willValidate[GCE]")
     public void select() throws Exception {
         test("select");
     }
@@ -13067,7 +13068,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),text[GSCE]",
             FF = "constructor(),text[GSCE]",
             FF_ESR = "constructor(),text[GSCE]",
-            IE = "constructor,text")
+            IE = "constructor[],text[GSCE]")
     public void title() throws Exception {
         test("title");
     }
@@ -14343,8 +14344,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "constructor,height,hwTimestamp,initPointerEvent(),isPrimary,pointerId,pointerType,pressure,"
                 + "rotation,tiltX,tiltY,"
                 + "width")
-    @HtmlUnitNYI(IE = "constructor,height,initPointerEvent(),isPrimary,pointerId,pointerType,pressure,"
-                + "tiltX,tiltY,width")
+    @HtmlUnitNYI(IE = "constructor[],height[GCE],initPointerEvent(),isPrimary[GCE],pointerId[GCE],"
+                + "pointerType[GCE],pressure[GCE],tiltX[GCE],tiltY[GCE],width[GCE]")
     public void pointerEvent2() throws Exception {
         testString("", " document.createEvent('PointerEvent')");
     }
@@ -14533,9 +14534,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor()",
             FF_ESR = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
             FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            IE = "constructor,DOM_INPUT_METHOD_DROP,DOM_INPUT_METHOD_HANDWRITING,DOM_INPUT_METHOD_IME,"
-                + "DOM_INPUT_METHOD_KEYBOARD,DOM_INPUT_METHOD_MULTIMODAL,DOM_INPUT_METHOD_OPTION,"
-                + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE")
+            IE = "constructor[],DOM_INPUT_METHOD_DROP[E],DOM_INPUT_METHOD_HANDWRITING[E],DOM_INPUT_METHOD_IME[E],"
+                + "DOM_INPUT_METHOD_KEYBOARD[E],DOM_INPUT_METHOD_MULTIMODAL[E],DOM_INPUT_METHOD_OPTION[E],"
+                + "DOM_INPUT_METHOD_PASTE[E],DOM_INPUT_METHOD_SCRIPT[E],DOM_INPUT_METHOD_UNKNOWN[E],"
+                + "DOM_INPUT_METHOD_VOICE[E]")
     public void textEvent() throws Exception {
         testString("", "document.createEvent('TextEvent')");
     }
@@ -14834,7 +14836,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),getElementsByTagName()",
             FF_ESR = "constructor(),getElementsByTagName()",
             FF = "constructor(),getElementsByTagName()",
-            IE = "constructor,getElementsByTagName()")
+            IE = "constructor[],getElementsByTagName()")
     public void xmlDocument() throws Exception {
         testString("", "xmlDocument");
     }
@@ -15458,7 +15460,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length[GCE],namedItem()",
             FF_ESR = "constructor(),item(),length[GCE],namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
+    @HtmlUnitNYI(IE = "constructor[],item(),length[GCE],namedItem(),tags()")
     public void htmlCollectionDocumentEmbeds() throws Exception {
         testString("", "document.embeds");
     }
@@ -15490,7 +15492,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor(),item(),length[GCE],namedItem()",
             FF_ESR = "constructor(),item(),length[GCE],namedItem()",
             IE = "constructor,item(),length,namedItem(),tags(),urns()")
-    @HtmlUnitNYI(IE = "constructor,item(),length,namedItem(),tags()")
+    @HtmlUnitNYI(IE = "constructor[],item(),length[GCE],namedItem(),tags()")
     public void htmlCollectionDocumentImages() throws Exception {
         testString("", "document.images");
     }
@@ -15552,7 +15554,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             EDGE = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             FF = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
             FF_ESR = "constructor(),entries(),forEach(),item(),keys(),length[GCE],values()",
-            IE = "constructor,item(),length")
+            IE = "constructor[],item(),length[GCE]")
     public void nodeListElementsByName() throws Exception {
         testString("", "document.getElementsByName('myLog')");
     }
