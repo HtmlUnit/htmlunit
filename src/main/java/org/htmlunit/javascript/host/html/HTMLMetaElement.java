@@ -145,7 +145,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * @param media the media attribute
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF})
     public void setMedia(final String media) {
         getDomNodeOrDie().setAttribute("media", media);
     }
