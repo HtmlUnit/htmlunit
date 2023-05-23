@@ -15177,14 +15177,14 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "getElementById(),lastElementChild[GCE],prepend(),querySelector(),querySelectorAll(),"
                 + "replaceChildren()",
             IE = "constructor,querySelector(),querySelectorAll(),removeNode(),replaceNode(),swapNode()")
-    @HtmlUnitNYI(CHROME = "childElementCount,children,constructor(),firstElementChild,getElementById(),"
-                + "lastElementChild,querySelector(),querySelectorAll()",
-            EDGE = "childElementCount,children,constructor(),firstElementChild,getElementById(),"
-                + "lastElementChild,querySelector(),querySelectorAll()",
-            FF_ESR = "childElementCount,children,constructor(),firstElementChild,getElementById()"
-                + ",lastElementChild,querySelector(),querySelectorAll()",
-            FF = "childElementCount,children,constructor(),firstElementChild,getElementById()"
-                + ",lastElementChild,querySelector(),querySelectorAll()",
+    @HtmlUnitNYI(CHROME = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
+                + "getElementById(),lastElementChild[GCE],querySelector(),querySelectorAll()",
+            EDGE = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
+                + "getElementById(),lastElementChild[GCE],querySelector(),querySelectorAll()",
+            FF_ESR = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
+                + "getElementById(),lastElementChild[GCE],querySelector(),querySelectorAll()",
+            FF = "childElementCount[GCE],children[GCE],constructor(),firstElementChild[GCE],"
+                + "getElementById(),lastElementChild[GCE],querySelector(),querySelectorAll()",
             IE = "constructor[],querySelector(),querySelectorAll()")
     public void documentFragment() throws Exception {
         testString("", "document.createDocumentFragment()");
