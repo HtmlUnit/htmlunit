@@ -2813,6 +2813,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
+
     /**
      * @throws Exception if an error occurs
      */

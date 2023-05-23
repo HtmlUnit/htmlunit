@@ -2016,15 +2016,15 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "name,namedItem(),noValidate,reset(),submit(),"
                 + "target")
     @HtmlUnitNYI(CHROME = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,rel,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
             EDGE = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,rel,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
             FF_ESR = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,requestSubmit(),reset(),submit(),target",
+                + "noValidate,requestSubmit(),reset(),submit(),target",
             FF = "action,checkValidity(),elements,encoding,enctype,length,method,name,"
-                    + "noValidate,rel,requestSubmit(),reset(),submit(),target",
+                + "noValidate,rel,relList,requestSubmit(),reset(),submit(),target",
             IE = "action,checkValidity(),elements,encoding,enctype,item(),length,method,name,noValidate,"
-                    + "reset(),submit(),target")
+                + "reset(),submit(),target")
     public void form() throws Exception {
         test("form");
     }
@@ -8201,11 +8201,11 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "msOrientation,msUnlockOrientation(),onmsorientationchange,pixelDepth,removeEventListener(),"
                 + "systemXDPI,systemYDPI,width")
     @HtmlUnitNYI(FF = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
-                + "height,left,mozOrientation,onchange,orientation,pixelDepth,removeEventListener(),top,width",
+                + "height,left,mozOrientation,orientation,pixelDepth,removeEventListener(),top,width",
             FF_ESR = "addEventListener(),availHeight,availLeft,availTop,availWidth,colorDepth,dispatchEvent(),"
-                + "height,left,mozOrientation,onchange,orientation,pixelDepth,removeEventListener(),top,width",
+                + "height,left,mozOrientation,orientation,pixelDepth,removeEventListener(),top,width",
             IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,deviceXDPI,deviceYDPI,"
-                + "dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,onchange,pixelDepth,"
+                + "dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,pixelDepth,"
                 + "removeEventListener(),systemXDPI,systemYDPI,width")
     public void screen() throws Exception {
         testString("", "window.screen");
