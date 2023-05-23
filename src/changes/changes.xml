@@ -9,6 +9,15 @@
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
             <action type="update" dev="rbri">
+                Support of form property relList added.
+            </action>
+            <action type="update" dev="rbri">
+                Setter for form property rel added.
+            </action>
+            <action type="update" dev="rbri">
+                Nearly all screen properties are read-only.
+            </action>
+            <action type="update" dev="rbri">
                 Link relList property is setable.
             </action>
             <action type="update" dev="rbri">

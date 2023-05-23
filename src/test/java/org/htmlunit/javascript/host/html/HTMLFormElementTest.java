@@ -2813,4 +2813,207 @@ public class HTMLFormElementTest extends WebDriverTestCase {
 
         assertEquals(getExpectedAlerts()[0], driver.getTitle());
     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"},
+            FF_ESR = {"undefined", "undefined", "prefetch", "prefetch", "not supported", "notsupported"},
+            IE = {"undefined", "undefined", "prefetch", "prefetch", "not supported", "notsupported"})
+    public void readWriteRel() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
+
+            + "a1.rel = 'prefetch';\n"
+            + "a2.rel = 'prefetch';\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
+
+            + "a1.rel = 'not supported';\n"
+            + "a2.rel = 'notsupported';\n"
+            + "log(a1.rel);\n"
+            + "log(a2.rel);\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
+            FF_ESR = "exception",
+            IE = "exception")
+    public void relList() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
+            FF_ESR = "exception",
+            IE = "exception")
+    public void setRelListString() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = 'alternate help';\n"
+            + "  a2.relList = 'abc';\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
+            FF_ESR = "exception",
+            IE = "exception")
+    public void setRelListStringBlank() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = '';\n"
+            + "  a2.relList = '  \t';\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
+            FF_ESR = "exception",
+            IE = "exception")
+    public void setRelListNull() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = null;\n"
+            + "  a2.relList = null;\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
+            FF_ESR = "exception",
+            IE = "exception")
+    public void setRelListUndefined() throws Exception {
+        final String html
+            = "<html><body><form id='f1'>a1</form><form id='f2' rel='alternate help'>a2</form><script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "var a1 = document.getElementById('f1'), a2 = document.getElementById('f2');\n"
+
+            + "try {\n"
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  a1.relList = undefined;\n"
+            + "  a2.relList = undefined;\n"
+
+            + "  log(a1.relList.length);\n"
+            + "  log(a2.relList.length);\n"
+
+            + "  for (var i = 0; i < a1.relList.length; i++) {\n"
+            + "    log(a1.relList[i]);\n"
+            + "  }\n"
+
+            + "  for (var i = 0; i < a2.relList.length; i++) {\n"
+            + "    log(a2.relList[i]);\n"
+            + "  }\n"
+
+            + "  log(a1.rel);\n"
+            + "  log(a2.rel);\n"
+            + "} catch(e) { log('exception'); }\n"
+
+            + "</script></body></html>";
+        loadPageVerifyTitle2(html);
+    }
 }

@@ -5317,11 +5317,16 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "willValidate[GCE]",
             IE = "align,checkValidity(),constructor,form,setCustomValidity(),validationMessage,validity,"
                 + "willValidate")
-    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            EDGE = "checkValidity(),constructor(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            FF_ESR = "checkValidity(),constructor(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            FF = "checkValidity(),constructor(),disabled,form,name,setCustomValidity(),validity,willValidate",
-            IE = "align,checkValidity(),constructor,disabled,form,setCustomValidity(),validity,willValidate")
+    @HtmlUnitNYI(CHROME = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
+                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+            EDGE = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
+                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+            FF_ESR = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
+                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+            FF = "checkValidity(),constructor(),disabled[GSCE],form[GCE],name[GSCE],"
+                + "setCustomValidity(),validity[GCE],willValidate[GCE]",
+            IE = "align[GSCE],checkValidity(),constructor[],disabled[GSCE],form[GCE],"
+                + "setCustomValidity(),validity[GCE],willValidate[GCE]")
     public void fieldset() throws Exception {
         test("fieldset");
     }
@@ -5866,16 +5871,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "acceptCharset,action,autocomplete,checkValidity(),constructor,elements,encoding,enctype,item(),"
                 + "length,method,name,namedItem(),noValidate,reset(),submit(),tags(),target,"
                 + "urns()")
-    @HtmlUnitNYI(CHROME = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,"
-                + "name,noValidate,rel,requestSubmit(),reset(),submit(),target",
-            EDGE = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,"
-                + "name,noValidate,rel,requestSubmit(),reset(),submit(),target",
-            FF_ESR = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,requestSubmit(),reset(),submit(),target",
-            FF = "action,checkValidity(),constructor(),elements,encoding,enctype,length,method,name,"
-                + "noValidate,rel,requestSubmit(),reset(),submit(),target",
-            IE = "action,checkValidity(),constructor,elements,encoding,enctype,item(),length,method,name,"
-                + "noValidate,reset(),submit(),target")
+    @HtmlUnitNYI(CHROME = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
+                + "requestSubmit(),reset(),submit(),target[GSCE]",
+            EDGE = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
+                + "requestSubmit(),reset(),submit(),target[GSCE]",
+            FF_ESR = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],"
+                + "requestSubmit(),reset(),submit(),target[GSCE]",
+            FF = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
+                + "requestSubmit(),reset(),submit(),target[GSCE]",
+            IE = "action[GSCE],checkValidity(),constructor[],elements[GCE],encoding[GSCE],enctype[GSCE],item(),"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],reset(),submit(),target[GSCE]")
     public void form() throws Exception {
         test("form");
     }
@@ -9539,11 +9548,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             FF_ESR = "compact[GSCE],constructor(),reversed[GSCE],start[GSCE],type[GSCE]",
             IE = "compact,constructor,start,type")
-    @HtmlUnitNYI(CHROME = "constructor(),type",
-            EDGE = "constructor(),type",
-            FF_ESR = "constructor(),type",
-            FF = "constructor(),type",
-            IE = "constructor,type")
+    @HtmlUnitNYI(CHROME = "constructor(),type[GSCE]",
+            EDGE = "constructor(),type[GSCE]",
+            FF_ESR = "constructor(),type[GSCE]",
+            FF = "constructor(),type[GSCE]",
+            IE = "constructor[],type[GSCE]")
     public void ol() throws Exception {
         test("ol");
     }
@@ -10800,11 +10809,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "integrity[GSCE],noModule[GSCE],referrerPolicy[GSCE],src[GSCE],text[GSCE],"
                 + "type[GSCE]",
             IE = "async,charset,constructor,crossOrigin,defer,event,htmlFor,src,text,type")
-    @HtmlUnitNYI(CHROME = "async,constructor(),src,text,type",
-            EDGE = "async,constructor(),src,text,type",
-            FF_ESR = "async,constructor(),src,text,type",
-            FF = "async,constructor(),src,text,type",
-            IE = "async,constructor,src,text,type")
+    @HtmlUnitNYI(CHROME = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
+            EDGE = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
+            FF_ESR = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
+            FF = "async[GSCE],constructor(),src[GSCE],text[GSCE],type[GSCE]",
+            IE = "async[GSCE],constructor[],src[GSCE],text[GSCE],type[GSCE]")
     public void script() throws Exception {
         test("script");
     }
@@ -13571,11 +13580,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "videoHeight[GCE],videoWidth[GCE],"
                 + "width[GSCE]",
             IE = "constructor,getVideoPlaybackQuality(),height,msZoom,poster,videoHeight,videoWidth,width")
-    @HtmlUnitNYI(CHROME = "constructor(),height,width",
-            EDGE = "constructor(),height,width",
-            FF_ESR = "constructor(),height,width",
-            FF = "constructor(),height,width",
-            IE = "constructor,height,width")
+    @HtmlUnitNYI(CHROME = "constructor(),height[GSCE],width[GSCE]",
+            EDGE = "constructor(),height[GSCE],width[GSCE]",
+            FF_ESR = "constructor(),height[GSCE],width[GSCE]",
+            FF = "constructor(),height[GSCE],width[GSCE]",
+            IE = "constructor[],height[GSCE],width[GSCE]")
     public void video() throws Exception {
         test("video");
     }
@@ -16909,17 +16918,19 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "height[GCE],left[GCE],mozLockOrientation(),mozOrientation[GCE],mozUnlockOrientation(),"
                 + "onmozorientationchange[GSCE],orientation[GCE],pixelDepth[GCE],top[GCE],"
                 + "width[GCE]",
-            IE = "addEventListener(),availHeight,availWidth,bufferDepth,colorDepth,constructor,"
-                + "deviceXDPI,deviceYDPI,dispatchEvent(),fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,"
-                + "msLockOrientation(),msOrientation,msUnlockOrientation(),onmsorientationchange,"
-                + "pixelDepth,removeEventListener(),systemXDPI,systemYDPI,width")
-    @HtmlUnitNYI(FF = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
-                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
-            FF_ESR = "availHeight,availLeft,availTop,availWidth,colorDepth,constructor(),height,left,"
-                + "mozOrientation,onchange,orientation,pixelDepth,top,width",
-            IE = "availHeight,availWidth,bufferDepth,colorDepth,constructor,deviceXDPI,deviceYDPI,"
-                + "fontSmoothingEnabled,height,logicalXDPI,logicalYDPI,onchange,pixelDepth,"
-                + "systemXDPI,systemYDPI,width")
+            IE = "addEventListener(),availHeight[GCE],availWidth[GCE],bufferDepth[GSCE],colorDepth[GCE],"
+                + "constructor[],deviceXDPI[GCE],deviceYDPI[GCE],dispatchEvent(),fontSmoothingEnabled[GCE],"
+                + "height[GCE],logicalXDPI[GCE],logicalYDPI[GCE],msLockOrientation(),msOrientation[GCE],"
+                + "msUnlockOrientation(),onmsorientationchange[GSCE],pixelDepth[GCE],removeEventListener(),"
+                + "systemXDPI[GCE],systemYDPI[GCE],width[GCE]")
+    @HtmlUnitNYI(FF = "availHeight[GCE],availLeft[GCE],availTop[GCE],availWidth[GCE],colorDepth[GCE],constructor(),"
+                + "height[GCE],left[GCE],mozOrientation[GCE],orientation[GCE],pixelDepth[GCE],top[GCE],width[GCE]",
+            FF_ESR = "availHeight[GCE],availLeft[GCE],availTop[GCE],availWidth[GCE],colorDepth[GCE],constructor(),"
+                 + "height[GCE],left[GCE],mozOrientation[GCE],orientation[GCE],pixelDepth[GCE],top[GCE],width[GCE]",
+            IE = "availHeight[GCE],availWidth[GCE],bufferDepth[GSCE],colorDepth[GCE],constructor[],"
+                + "deviceXDPI[GCE],deviceYDPI[GCE],fontSmoothingEnabled[GCE],height[GCE],"
+                + "logicalXDPI[GCE],logicalYDPI[GCE],pixelDepth[GCE],"
+                + "systemXDPI[GCE],systemYDPI[GCE],width[GCE]")
     public void screen() throws Exception {
         testString("", "window.screen");
     }

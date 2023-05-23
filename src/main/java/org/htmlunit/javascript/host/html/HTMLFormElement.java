@@ -61,6 +61,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.MimeType;
@@ -263,6 +264,37 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter({CHROME, EDGE, FF})
     public String getRel() {
         return getHtmlForm().getRelAttribute();
+    }
+
+    /**
+     * Sets the rel property.
+     * @param rel rel attribute value
+     */
+    @JsxSetter({CHROME, EDGE, FF})
+    public void setRel(final String rel) {
+        getHtmlForm().setAttribute("rel", rel);
+    }
+
+    /**
+     * Returns the {@code relList} attribute.
+     * @return the {@code relList} attribute
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public DOMTokenList getRelList() {
+        return new DOMTokenList(this, "rel");
+    }
+
+    /**
+     * Sets the relList property.
+     * @param rel attribute value
+     */
+    @JsxSetter({CHROME, EDGE, FF})
+    public void setRelList(final Object rel) {
+        if (Undefined.isUndefined(rel)) {
+            setRel("undefined");
+            return;
+        }
+        setRel(ScriptRuntime.toString(rel));
     }
 
     /**
