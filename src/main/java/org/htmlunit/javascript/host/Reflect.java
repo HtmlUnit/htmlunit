@@ -25,13 +25,13 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxStaticFunction;
 
 /**
  * A JavaScript object for {@code Reflect}.
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass({CHROME, EDGE, FF, FF_ESR})
 public class Reflect extends HtmlUnitScriptable {
@@ -57,7 +57,6 @@ public class Reflect extends HtmlUnitScriptable {
      * @param propertyKey The name of the property to check.
      * @return true or false
      */
-    @JsxStaticFunction
     public boolean has(final Scriptable target, final String propertyKey) {
         return ScriptableObject.hasProperty(target, propertyKey);
     }
