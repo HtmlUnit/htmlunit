@@ -25,7 +25,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
-import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.HtmlLink;
@@ -195,7 +194,7 @@ public class HTMLLinkElement extends HTMLElement {
      * @param rel attribute value
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
-    public void setRelList(final ScriptableObject rel) {
+    public void setRelList(final Object rel) {
         if (Undefined.isUndefined(rel)) {
             setRel("undefined");
             return;
