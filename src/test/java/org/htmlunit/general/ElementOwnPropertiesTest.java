@@ -15125,37 +15125,37 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END[E],START_TO_START[E],"
                 + "surroundContents(),"
                 + "toString()",
-            IE = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
-                + "compareBoundaryPoints(),constructor,createContextualFragment(),deleteContents(),detach(),"
-                + "END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),getBoundingClientRect(),"
-                + "getClientRects(),insertNode(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
-                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
-                + "startContainer,startOffset,surroundContents(),"
+            IE = "cloneContents(),cloneRange(),collapse(),collapsed[GCE],commonAncestorContainer[GCE],"
+                + "compareBoundaryPoints(),constructor[],createContextualFragment(),deleteContents(),detach(),"
+                + "END_TO_END[E],END_TO_START[E],endContainer[GCE],endOffset[GCE],extractContents(),"
+                + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
+                + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
+                + "START_TO_END[E],START_TO_START[E],startContainer[GCE],startOffset[GCE],surroundContents(),"
                 + "toString()")
-    @HtmlUnitNYI(CHROME = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+    @HtmlUnitNYI(CHROME = "cloneContents(),cloneRange(),collapse(),commonAncestorContainer[GCE],"
                 + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),detach(),"
-                + "END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),getBoundingClientRect(),"
+                + "END_TO_END[E],END_TO_START[E],extractContents(),getBoundingClientRect(),"
                 + "getClientRects(),insertNode(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
-                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
-                + "startContainer,startOffset,surroundContents(),toString()",
-            EDGE = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END[E],START_TO_START[E],"
+                + "surroundContents(),toString()",
+            EDGE = "cloneContents(),cloneRange(),collapse(),commonAncestorContainer[GCE],"
                 + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),detach(),"
-                + "END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),getBoundingClientRect(),"
+                + "END_TO_END[E],END_TO_START[E],extractContents(),getBoundingClientRect(),"
                 + "getClientRects(),insertNode(),selectNode(),selectNodeContents(),setEnd(),setEndAfter(),"
-                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END,START_TO_START,"
-                + "startContainer,startOffset,surroundContents(),toString()",
-            FF_ESR = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "setEndBefore(),setStart(),setStartAfter(),setStartBefore(),START_TO_END[E],START_TO_START[E],"
+                + "surroundContents(),toString()",
+            FF_ESR = "cloneContents(),cloneRange(),collapse(),commonAncestorContainer[GCE],"
                 + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),"
-                + "detach(),END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),"
+                + "detach(),END_TO_END[E],END_TO_START[E],extractContents(),"
                 + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
                 + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
-                + "START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),toString()",
-            FF = "cloneContents(),cloneRange(),collapse(),collapsed,commonAncestorContainer,"
+                + "START_TO_END[E],START_TO_START[E],surroundContents(),toString()",
+            FF = "cloneContents(),cloneRange(),collapse(),commonAncestorContainer[GCE],"
                 + "compareBoundaryPoints(),constructor(),createContextualFragment(),deleteContents(),"
-                + "detach(),END_TO_END,END_TO_START,endContainer,endOffset,extractContents(),"
+                + "detach(),END_TO_END[E],END_TO_START[E],extractContents(),"
                 + "getBoundingClientRect(),getClientRects(),insertNode(),selectNode(),selectNodeContents(),"
                 + "setEnd(),setEndAfter(),setEndBefore(),setStart(),setStartAfter(),setStartBefore(),"
-                + "START_TO_END,START_TO_START,startContainer,startOffset,surroundContents(),toString()")
+                + "START_TO_END[E],START_TO_START[E],surroundContents(),toString()")
     public void range() throws Exception {
         testString("", "document.createRange()");
     }

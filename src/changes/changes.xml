@@ -12,6 +12,9 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
+                Range collapsed, startContainer, endContainer, startOffset, and endOffset properties are IE only.
+            </action>
+            <action type="update" dev="rbri">
                 Meta media property has to be writeable in FF.
             </action>
             <action type="update" dev="rbri">
