@@ -32,7 +32,7 @@ public class ReflectTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"true", "false", "true"},
+    @Alerts(DEFAULT = {"true", "true", "false", "true"},
             IE = "no Reflect")
     public void has() throws Exception {
         final String html = "<html><head>\n"
@@ -40,6 +40,7 @@ public class ReflectTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  if (typeof Reflect != 'undefined') {\n"
+            + "    log((Reflect ? Reflect.has : log)({x: 0}, 'x'));\n"
             + "    log(Reflect.has({x: 0}, 'x'));\n"
             + "    log(Reflect.has({x: 0}, 'y'));\n"
             + "    log(Reflect.has({x: 0}, 'toString'));\n"

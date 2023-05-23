@@ -37,14 +37,12 @@ import org.htmlunit.javascript.configuration.JsxStaticFunction;
 public class Reflect extends HtmlUnitScriptable {
 
     /**
-     * {@inheritDoc}
+     * Creates an instance.
      */
-    @Override
-    public void setParentScope(final Scriptable scope) {
-        super.setParentScope(scope);
+    public Reflect() {
         try {
             final FunctionObject functionObject = new FunctionObject("has",
-                    getClass().getDeclaredMethod("has", Scriptable.class, String.class), scope);
+                    getClass().getDeclaredMethod("has", Scriptable.class, String.class), this);
             defineProperty("has", functionObject, ScriptableObject.DONTENUM);
         }
         catch (final Exception e) {
