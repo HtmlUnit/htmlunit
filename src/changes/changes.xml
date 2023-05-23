@@ -12,6 +12,9 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
+                ScreenOrientation onchange property has to be writeable.
+            </action>
+            <action type="update" dev="rbri">
                 Support of form property relList added.
             </action>
             <action type="update" dev="rbri">

@@ -23,6 +23,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSetter;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 
@@ -67,5 +68,14 @@ public class ScreenOrientation extends EventTarget {
     @JsxGetter
     public Function getOnchange() {
         return getEventHandler(Event.TYPE_CHANGE);
+    }
+
+    /**
+     * Setter for the {@code onchange} event handler.
+     * @param change the handler
+     */
+    @JsxSetter
+    public void setOnchange(final Object change) {
+        setEventHandler(Event.TYPE_CHANGE, change);
     }
 }

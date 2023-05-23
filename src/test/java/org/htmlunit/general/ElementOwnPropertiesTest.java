@@ -11815,9 +11815,9 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF_ESR = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
             IE = "constructor,media,sheet,type")
     @HtmlUnitNYI(
-            CHROME = "constructor(),disabled,media,sheet,type",
-            EDGE = "constructor(),disabled,media,sheet,type",
-            IE = "constructor,disabled,media,sheet,type")
+            CHROME = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
+            EDGE = "constructor(),disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]",
+            IE = "constructor[],disabled[GSCE],media[GSCE],sheet[GCE],type[GSCE]")
     public void style() throws Exception {
         test("style");
     }
@@ -13087,11 +13087,11 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "readyState[GCE],src[GSCE],srclang[GSCE],"
                 + "track[GCE]",
             IE = "constructor,default,ERROR,kind,label,LOADED,LOADING,NONE,readyState,src,srclang,track")
-    @HtmlUnitNYI(CHROME = "constructor(),ERROR,LOADED,LOADING,NONE",
-            EDGE = "constructor(),ERROR,LOADED,LOADING,NONE",
-            FF_ESR = "constructor(),ERROR,LOADED,LOADING,NONE",
-            FF = "constructor(),ERROR,LOADED,LOADING,NONE",
-            IE = "constructor,ERROR,LOADED,LOADING,NONE")
+    @HtmlUnitNYI(CHROME = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
+            EDGE = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
+            FF_ESR = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
+            FF = "constructor(),ERROR[E],LOADED[E],LOADING[E],NONE[E]",
+            IE = "constructor[],ERROR[E],LOADED[E],LOADING[E],NONE[E]")
     public void track() throws Exception {
         test("track");
     }
@@ -16946,10 +16946,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
             FF_ESR = "angle[GCE],constructor(),lock(),onchange[GSCE],type[GCE],unlock()",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "angle,constructor(),onchange,type",
-            EDGE = "angle,constructor(),onchange,type",
-            FF = "angle,constructor(),onchange,type",
-            FF_ESR = "angle,constructor(),onchange,type")
+    @HtmlUnitNYI(CHROME = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
+            EDGE = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
+            FF = "angle[GCE],constructor(),onchange[GSCE],type[GCE]",
+            FF_ESR = "angle[GCE],constructor(),onchange[GSCE],type[GCE]")
     public void screenOrientation() throws Exception {
         testString("", "window.screen.orientation");
     }
