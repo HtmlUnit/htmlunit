@@ -791,7 +791,6 @@ public class Event extends HtmlUnitScriptable {
      * Sets the event type.
      * @param type the event type
      */
-    @JsxSetter
     public void setType(final String type) {
         type_ = type;
     }

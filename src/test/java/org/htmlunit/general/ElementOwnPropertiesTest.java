@@ -746,26 +746,30 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "currentTarget,defaultPrevented,eventPhase,initEvent(),isTrusted,preventDefault(),srcElement,"
                 + "stopImmediatePropagation(),stopPropagation(),target,timeStamp,"
                 + "type")
-    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
-                + "constructor(),"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,constructor(),"
-                + "currentTarget,defaultPrevented,eventPhase,initEvent(),NONE,preventDefault(),returnValue,"
-                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,timeStamp,type",
-            FF = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "composed,constructor(),"
-                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
-                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
-                + "timeStamp,type",
-            FF_ESR = "ALT_MASK,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,"
-                + "composed,constructor(),"
-                + "CONTROL_MASK,currentTarget,defaultPrevented,eventPhase,initEvent(),META_MASK,NONE,preventDefault(),"
-                + "returnValue,SHIFT_MASK,srcElement,stopImmediatePropagation(),stopPropagation(),target,"
-                + "timeStamp,type",
-            IE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,constructor,currentTarget,"
-                + "defaultPrevented,eventPhase,initEvent(),preventDefault(),srcElement,stopImmediatePropagation(),"
-                + "stopPropagation(),target,timeStamp,type")
+    @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),"
+                + "returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),"
+                + "returnValue[GSCE],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],preventDefault(),"
+                + "returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),META_MASK[E],NONE[E],preventDefault(),"
+                + "returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]",
+            IE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "constructor[],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "preventDefault(),srcElement[GSCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]")
     public void event() throws Exception {
         testString("", "event");
     }
