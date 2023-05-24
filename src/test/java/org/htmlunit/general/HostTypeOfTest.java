@@ -56,6 +56,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    @HtmlUnitNYI(IE = "function")
+    public void abstractRange() throws Exception {
+        test("AbstractRange");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.ActiveXObject}.
      *
      * @throws Exception if an error occurs

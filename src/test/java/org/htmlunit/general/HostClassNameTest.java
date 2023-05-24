@@ -79,6 +79,19 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = "function AbstractRange() { [native code] }",
+            FF = "function AbstractRange() {\n    [native code]\n}",
+            FF_ESR = "function AbstractRange() {\n    [native code]\n}",
+            IE = "exception")
+    @HtmlUnitNYI(IE = "function AbstractRange() {\n    [native code]\n}\n")
+    public void abstractRange() throws Exception {
+        test("AbstractRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts("exception")
     public void abstractWorker() throws Exception {
         test("AbstractWorker");
