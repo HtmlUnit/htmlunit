@@ -659,8 +659,8 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final ScriptableObject scriptable) {
         configureConstants(config, scriptable);
         configureProperties(config, scriptable);
-        configureSymbols(config, scriptable);
         configureFunctions(config, scriptable);
+        configureSymbols(config, scriptable);
     }
 
     private static void configureFunctions(final ClassConfiguration config, final ScriptableObject scriptable) {
@@ -731,9 +731,14 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         final Map<Symbol, Method> symbolMap = config.getSymbolMap();
         if (symbolMap != null) {
             for (final Entry<Symbol, Method> symbolInfo : symbolMap.entrySet()) {
-                final Callable symbolFunction = new FunctionObject(
-                                    symbolInfo.getKey().toString(), symbolInfo.getValue(), scriptable);
-                scriptable.defineProperty(symbolInfo.getKey(), symbolFunction, ScriptableObject.DONTENUM);
+                final Symbol symbol = symbolInfo.getKey();
+                final Method method = symbolInfo.getValue();
+                final String methodName = method.getName();
+
+                final Callable symbolFunction = scriptable.has(methodName, scriptable)
+                        ? (Callable)scriptable.get(methodName, scriptable)
+                        : new FunctionObject(symbol.toString(), method, scriptable);
+                scriptable.defineProperty(symbol, symbolFunction, ScriptableObject.DONTENUM);
             }
         }
     }
