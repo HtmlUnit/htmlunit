@@ -52,4 +52,35 @@ public class ReflectTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"-1,0,6,8,55,773,str,str2,Symbol(foo),Symbol(bar)"},
+            IE = "no Reflect")
+    public void ownKeys() throws Exception {
+        final String html = "<html><head>\n"
+                + "<body>\n"
+                + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "  if (typeof Reflect != 'undefined') {\n"
+                + "    var obj = {};\n"
+                + "    obj[Symbol.for('foo')] = 0;\n"
+                + "    obj['str'] = 0;\n"
+                + "    obj[773] = 0;\n"
+                + "    obj['55'] = 0;\n"
+                + "    obj[0] = 0;\n"
+                + "    obj['-1'] = 0;\n"
+                + "    obj[8] = 0;\n"
+                + "    obj['6'] = 0;\n"
+                + "    obj[Symbol.for('bar')] = 0;\n"
+                + "    obj['str2'] = 0;\n"
+                + "    log(Reflect.ownKeys(obj));\n"
+                + "  } else { log('no Reflect'); }\n"
+                + "</script>\n"
+                + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
