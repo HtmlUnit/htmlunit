@@ -27,6 +27,7 @@ import org.junit.runner.RunWith;
  *
  * @author Ahmed Ashour
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class NodeListTest extends WebDriverTestCase {

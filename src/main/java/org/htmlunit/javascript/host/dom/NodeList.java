@@ -55,6 +55,7 @@ import org.htmlunit.javascript.configuration.JsxSymbol;
  * @author Ahmed Ashour
  * @author Frank Danek
  * @author Ronald Brill
+ * @author Lai Quang Duong
  */
 @JsxClass
 public class NodeList extends AbstractList implements Callable {

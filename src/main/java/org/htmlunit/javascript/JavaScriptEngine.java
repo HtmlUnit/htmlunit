@@ -108,6 +108,7 @@ import org.htmlunit.javascript.polyfill.Polyfill;
  * @author Amit Manjhi
  * @author Ronald Brill
  * @author Frank Danek
+ * @author Lai Quang Duong
  * @see <a href="http://groups-beta.google.com/group/netscape.public.mozilla.jseng/browse_thread/thread/b4edac57329cf49f/069e9307ec89111f">
  * Rhino and Java Browser</a>
  */
@@ -736,7 +737,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final String methodName = method.getName();
 
                 final Callable symbolFunction = scriptable.has(methodName, scriptable)
-                        ? (Callable)scriptable.get(methodName, scriptable)
+                        ? (Callable) scriptable.get(methodName, scriptable)
                         : new FunctionObject(symbol.toString(), method, scriptable);
                 scriptable.defineProperty(symbol, symbolFunction, ScriptableObject.DONTENUM);
             }

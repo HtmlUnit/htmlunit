@@ -9,6 +9,15 @@
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
             <action type="fix" dev="Lai Quang Duong">
+                nodeList[Symbol.iterator] === nodeList.values has to be true.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Symbol.iterator property is now available on URLSearchParams.
+            </action>
+            <action type="update" dev="Lai Quang Duong">
+                Putting both the @JsxSymbol and @JsxFunction annotations on the same method works properly.
+            </action>
+            <action type="fix" dev="Lai Quang Duong">
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
