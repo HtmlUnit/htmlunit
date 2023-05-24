@@ -175,7 +175,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private String status_ = "";
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
-    private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
@@ -821,10 +820,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
         applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
-
-        // like a JS new Object()
-        final Context ctx = Context.getCurrentContext();
-        controllers_ = ctx.newObject(this);
 
         if (webWindow_ instanceof TopLevelWindow) {
             final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
@@ -1758,26 +1753,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Gets the {@code controllers}. The result doesn't currently matter but it is important to return an
-     * object as some JavaScript libraries check it.
-     * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
-     * @return some object
-     */
-    @JsxGetter({FF, FF_ESR})
-    public Object getControllers() {
-        return controllers_;
-    }
-
-    /**
-     * Sets the {@code controllers}.
-     * @param value the new value
-     */
-    @JsxSetter({FF, FF_ESR})
-    public void setControllers(final Object value) {
-        controllers_ = value;
-    }
-
-    /**
      * Returns the value of {@code mozInnerScreenX} property.
      * @return the value of {@code mozInnerScreenX} property
      */
@@ -2508,24 +2483,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     }
 
     /**
-     * Returns the {@code ondeviceproximity} event handler.
-     * @return the {@code ondeviceproximity} event handler
-     */
-    @JsxGetter({FF, FF_ESR})
-    public Function getOndeviceproximity() {
-        return getEventHandler(Event.TYPE_DEVICEPROXIMITY);
-    }
-
-    /**
-     * Sets the {@code ondeviceproximity} event handler.
-     * @param ondeviceproximity the {@code ondeviceproximity} event handler
-     */
-    @JsxSetter({FF, FF_ESR})
-    public void setOndeviceproximity(final Object ondeviceproximity) {
-        setHandlerForJavaScript(Event.TYPE_DEVICEPROXIMITY, ondeviceproximity);
-    }
-
-    /**
      * Returns the {@code onreset} event handler.
      * @return the {@code onreset} event handler
      */
@@ -2811,24 +2768,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnmouseover(final Object onmouseover) {
         setHandlerForJavaScript(MouseEvent.TYPE_MOUSE_OVER, onmouseover);
-    }
-
-    /**
-     * Returns the {@code onuserproximity} event handler.
-     * @return the {@code onuserproximity} event handler
-     */
-    @JsxGetter({FF, FF_ESR})
-    public Function getOnuserproximity() {
-        return getEventHandler(Event.TYPE_USERPROXIMITY);
-    }
-
-    /**
-     * Sets the {@code onuserproximity} event handler.
-     * @param onuserproximity the {@code onuserproximity} event handler
-     */
-    @JsxSetter({FF, FF_ESR})
-    public void setOnuserproximity(final Object onuserproximity) {
-        setHandlerForJavaScript(Event.TYPE_USERPROXIMITY, onuserproximity);
     }
 
     /**
@@ -3531,24 +3470,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     @JsxSetter
     public void setOnstorage(final Object onstorage) {
         setHandlerForJavaScript(Event.TYPE_STORAGE, onstorage);
-    }
-
-    /**
-     * Returns the {@code ondevicelight} event handler.
-     * @return the {@code ondevicelight} event handler
-     */
-    @JsxGetter({FF, FF_ESR})
-    public Function getOndevicelight() {
-        return getEventHandler(Event.TYPE_DEVICELIGHT);
-    }
-
-    /**
-     * Sets the {@code ondevicelight} event handler.
-     * @param ondevicelight the {@code ondevicelight} event handler
-     */
-    @JsxSetter({FF, FF_ESR})
-    public void setOndevicelight(final Object ondevicelight) {
-        setHandlerForJavaScript(Event.TYPE_DEVICELIGHT, ondevicelight);
     }
 
     /**

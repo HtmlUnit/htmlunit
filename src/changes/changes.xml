@@ -21,6 +21,10 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
+                Remove the no longer available properties controllers, ondevicelight, 
+                ondeviceproximity, and onuserproximity from window (FF).
+            </action>
+            <action type="update" dev="rbri">
                 KeyboardEvent which property is IE only.
             </action>
             <action type="update" dev="rbri">

@@ -199,9 +199,6 @@ public class Event extends HtmlUnitScriptable {
     /** The msgesturestart event type, triggered by {@code msgesturestart} event handlers. */
     public static final String TYPE_MSGESTURESTART = "msgesturestart";
 
-    /** The deviceproximity event type, triggered by {@code deviceproximity} event handlers. */
-    public static final String TYPE_DEVICEPROXIMITY = "deviceproximity";
-
     /** The drag event type, triggered by {@code drag} event handlers. */
     public static final String TYPE_DRAG = "drag";
 
@@ -237,9 +234,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The mspointermove event type, triggered by {@code mspointermove} event handlers. */
     public static final String TYPE_MSPOINTERMOVE = "mspointermove";
-
-    /** The userproximity event type, triggered by {@code userproximity} event handlers. */
-    public static final String TYPE_USERPROXIMITY = "userproximity";
 
     /** The lostpointercapture event type, triggered by {@code lostpointercapture} event handlers. */
     public static final String TYPE_LOSTPOINTERCAPTURE = "lostpointercapture";
@@ -345,9 +339,6 @@ public class Event extends HtmlUnitScriptable {
 
     /** The storage event type, triggered by {@code storage} event handlers. */
     public static final String TYPE_STORAGE = "storage";
-
-    /** The devicelight event type, triggered by {@code devicelight} event handlers. */
-    public static final String TYPE_DEVICELIGHT = "devicelight";
 
     /** The animationstart event type, triggered by {@code animationstart} event handlers. */
     public static final String TYPE_ANIMATIONSTART = "animationstart";
