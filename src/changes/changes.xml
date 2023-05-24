@@ -21,6 +21,9 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
+                KeyboardEvent which property is IE only.
+            </action>
+            <action type="update" dev="rbri">
                 Body onmessageerror property has to be writeable in FF too.
             </action>
             <action type="update" dev="rbri">

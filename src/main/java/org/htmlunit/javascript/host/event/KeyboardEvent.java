@@ -1185,7 +1185,7 @@ public class KeyboardEvent extends UIEvent {
      * Returns the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed.
      * @return the numeric keyCode of the key pressed, or the charCode for an alphanumeric key pressed
      */
-    @JsxGetter
+    @JsxGetter(IE)
     @Override
     public int getWhich() {
         return which_;

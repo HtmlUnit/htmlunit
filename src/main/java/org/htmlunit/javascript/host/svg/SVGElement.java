@@ -1321,7 +1321,7 @@ public class SVGElement extends Element {
      * Sets the {@code onpaste} event handler.
      * @param paste the {@code onpaste} event handler
      */
-    @JsxSetter({FF, FF_ESR})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setOnpaste(final Object paste) {
         setEventHandler(Event.TYPE_PASTE, paste);
     }
