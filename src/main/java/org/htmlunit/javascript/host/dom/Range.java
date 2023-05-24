@@ -30,7 +30,6 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.impl.SimpleRange;
-import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -53,7 +52,7 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  * @author Ronald Brill
  */
 @JsxClass
-public class Range extends HtmlUnitScriptable {
+public class Range extends AbstractRange {
 
     /** Comparison mode for compareBoundaryPoints. */
     @JsxConstant
@@ -71,11 +70,6 @@ public class Range extends HtmlUnitScriptable {
     @JsxConstant
     public static final short END_TO_START = 3;
 
-    private Node startContainer_;
-    private Node endContainer_;
-    private int startOffset_;
-    private int endOffset_;
-
     /**
      * Creates an instance.
      */
@@ -88,31 +82,14 @@ public class Range extends HtmlUnitScriptable {
      * @param document the HTML document creating the range
      */
     public Range(final Document document) {
-        startContainer_ = document;
-        endContainer_ = document;
+        super(document, document, 0, 0);
     }
 
     Range(final SimpleRange simpleRange) {
-        final DomNode domNodeStartContainer = simpleRange.getStartContainer();
-        startContainer_ = domNodeStartContainer.getScriptableObject();
-        startOffset_ = simpleRange.getStartOffset();
-
-        final DomNode domNodeEndContainer = simpleRange.getEndContainer();
-        endContainer_ = domNodeEndContainer.getScriptableObject();
-        endOffset_ = simpleRange.getEndOffset();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (getPrototype() == null
-                || startContainer_ == null
-                || endContainer_ == null) {
-            return super.getDefaultValue(hint);
-        }
-        return getSimpleRange().toString();
+        super(simpleRange.getStartContainer().getScriptableObject(),
+                simpleRange.getEndContainer().getScriptableObject(),
+                simpleRange.getStartOffset(),
+                simpleRange.getEndOffset());
     }
 
     /**
@@ -120,11 +97,9 @@ public class Range extends HtmlUnitScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter(IE)
+    @Override
     public Object getStartContainer() {
-        if (startContainer_ == null) {
-            return Undefined.instance;
-        }
-        return startContainer_;
+        return super.getStartContainer();
     }
 
     /**
@@ -132,11 +107,9 @@ public class Range extends HtmlUnitScriptable {
      * @return <code>undefined</code> if not initialized
      */
     @JsxGetter(IE)
+    @Override
     public Object getEndContainer() {
-        if (endContainer_ == null) {
-            return Undefined.instance;
-        }
-        return endContainer_;
+        return super.getEndContainer();
     }
 
     /**
@@ -144,8 +117,9 @@ public class Range extends HtmlUnitScriptable {
      * @return <code>0</code> if not initialized
      */
     @JsxGetter(IE)
+    @Override
     public int getStartOffset() {
-        return startOffset_;
+        return super.getStartOffset();
     }
 
     /**
@@ -153,8 +127,9 @@ public class Range extends HtmlUnitScriptable {
      * @return <code>0</code> if not initialized
      */
     @JsxGetter(IE)
+    @Override
     public int getEndOffset() {
-        return endOffset_;
+        return super.getEndOffset();
     }
 
     /**
@@ -167,8 +142,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStart() with a null node.");
         }
-        startContainer_ = refNode;
-        startOffset_ = offset;
+        internSetStartContainer(refNode);
+        internSetStartOffset(offset);
     }
 
     /**
@@ -180,8 +155,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartAfter() with a null node.");
         }
-        startContainer_ = refNode.getParent();
-        startOffset_ = getPositionInContainer(refNode) + 1;
+        internSetStartContainer(refNode.getParent());
+        internSetStartOffset(getPositionInContainer(refNode) + 1);
     }
 
     /**
@@ -193,8 +168,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setStartBefore() with a null node.");
         }
-        startContainer_ = refNode.getParent();
-        startOffset_ = getPositionInContainer(refNode);
+        internSetStartContainer(refNode.getParent());
+        internSetStartOffset(getPositionInContainer(refNode));
     }
 
     private static int getPositionInContainer(final Node refNode) {
@@ -212,8 +187,9 @@ public class Range extends HtmlUnitScriptable {
      * @return {@code true} if the range is collapsed
      */
     @JsxGetter(IE)
+    @Override
     public boolean isCollapsed() {
-        return startContainer_ == endContainer_ && startOffset_ == endOffset_;
+        return super.isCollapsed();
     }
 
     /**
@@ -226,8 +202,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEnd() with a null node.");
         }
-        endContainer_ = refNode;
-        endOffset_ = offset;
+        internSetEndContainer(refNode);
+        internSetEndOffset(offset);
     }
 
     /**
@@ -239,8 +215,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndAfter() with a null node.");
         }
-        endContainer_ = refNode.getParent();
-        endOffset_ = getPositionInContainer(refNode) + 1;
+        internSetEndContainer(refNode.getParent());
+        internSetEndOffset(getPositionInContainer(refNode) + 1);
     }
 
     /**
@@ -252,8 +228,8 @@ public class Range extends HtmlUnitScriptable {
         if (refNode == null) {
             throw Context.reportRuntimeError("It is illegal to call Range.setEndBefore() with a null node.");
         }
-        startContainer_ = refNode.getParent();
-        startOffset_ = getPositionInContainer(refNode);
+        internSetStartContainer(refNode.getParent());
+        internSetStartOffset(getPositionInContainer(refNode));
     }
 
     /**
@@ -262,10 +238,10 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public void selectNodeContents(final Node refNode) {
-        startContainer_ = refNode;
-        startOffset_ = 0;
-        endContainer_ = refNode;
-        endOffset_ = refNode.getChildNodes().getLength();
+        internSetStartContainer(refNode);
+        internSetStartOffset(0);
+        internSetEndContainer(refNode);
+        internSetEndOffset(refNode.getChildNodes().getLength());
     }
 
     /**
@@ -285,12 +261,12 @@ public class Range extends HtmlUnitScriptable {
     @JsxFunction
     public void collapse(final boolean toStart) {
         if (toStart) {
-            endContainer_ = startContainer_;
-            endOffset_ = startOffset_;
+            internSetEndContainer(internGetStartContainer());
+            internSetEndOffset(internGetStartOffset());
         }
         else {
-            startContainer_ = endContainer_;
-            startOffset_ = endOffset_;
+            internSetStartContainer(internGetEndContainer());
+            internSetStartOffset(internGetEndOffset());
         }
     }
 
@@ -301,13 +277,13 @@ public class Range extends HtmlUnitScriptable {
     @JsxGetter
     public Object getCommonAncestorContainer() {
         final HashSet<Node> startAncestors = new HashSet<>();
-        Node ancestor = startContainer_;
+        Node ancestor = internGetStartContainer();
         while (ancestor != null) {
             startAncestors.add(ancestor);
             ancestor = ancestor.getParent();
         }
 
-        ancestor = endContainer_;
+        ancestor = internGetEndContainer();
         while (ancestor != null) {
             if (startAncestors.contains(ancestor)) {
                 return ancestor;
@@ -327,11 +303,11 @@ public class Range extends HtmlUnitScriptable {
      */
     @JsxFunction
     public Object createContextualFragment(final String valueAsString) {
-        final SgmlPage page = startContainer_.getDomNodeOrDie().getPage();
+        final SgmlPage page = internGetStartContainer().getDomNodeOrDie().getPage();
         final DomDocumentFragment fragment = new DomDocumentFragment(page);
         try {
             page.getWebClient().getPageCreator().getHtmlParser()
-                    .parseFragment(fragment, startContainer_.getDomNodeOrDie(), valueAsString, false);
+                    .parseFragment(fragment, internGetStartContainer().getDomNodeOrDie(), valueAsString, false);
         }
         catch (final Exception e) {
             LogFactory.getLog(Range.class).error("Unexpected exception occurred in createContextualFragment", e);
@@ -352,14 +328,6 @@ public class Range extends HtmlUnitScriptable {
     }
 
     /**
-     * @return a {@link SimpleRange} version of this object
-     */
-    public SimpleRange getSimpleRange() {
-        return new SimpleRange(startContainer_.getDomNodeOrNull(), startOffset_,
-            endContainer_.getDomNodeOrDie(), endOffset_);
-    }
-
-    /**
      * Compares the boundary points of two Ranges.
      * @param how a constant describing the comparison method
      * @param sourceRange the Range to compare boundary points with this range
@@ -372,25 +340,25 @@ public class Range extends HtmlUnitScriptable {
         final int offsetForThis;
         final int containingMoficator;
         if (START_TO_START == how || END_TO_START == how) {
-            nodeForThis = startContainer_;
-            offsetForThis = startOffset_;
+            nodeForThis = internGetStartContainer();
+            offsetForThis = internGetStartOffset();
             containingMoficator = 1;
         }
         else {
-            nodeForThis = endContainer_;
-            offsetForThis = endOffset_;
+            nodeForThis = internGetEndContainer();
+            offsetForThis = internGetEndOffset();
             containingMoficator = -1;
         }
 
         final Node nodeForOther;
         final int offsetForOther;
         if (START_TO_END == how || START_TO_START == how) {
-            nodeForOther = sourceRange.startContainer_;
-            offsetForOther = sourceRange.startOffset_;
+            nodeForOther = sourceRange.internGetStartContainer();
+            offsetForOther = sourceRange.internGetStartOffset();
         }
         else {
-            nodeForOther = sourceRange.endContainer_;
-            offsetForOther = sourceRange.endOffset_;
+            nodeForOther = sourceRange.internGetEndContainer();
+            offsetForOther = sourceRange.internGetEndOffset();
         }
 
         if (nodeForThis == nodeForOther) {
@@ -474,18 +442,6 @@ public class Range extends HtmlUnitScriptable {
     @JsxFunction(functionName = "toString")
     public String jsToString() {
         return getSimpleRange().toString();
-    }
-
-    @Override
-    protected Object equivalentValues(final Object value) {
-        if (!(value instanceof Range)) {
-            return false;
-        }
-        final Range other = (Range) value;
-        return startContainer_ == other.startContainer_
-                && endContainer_ == other.endContainer_
-                && startOffset_ == other.startOffset_
-                && endOffset_ == other.endOffset_;
     }
 
     /**

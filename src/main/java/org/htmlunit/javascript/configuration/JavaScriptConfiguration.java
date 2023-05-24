@@ -142,6 +142,7 @@ import org.htmlunit.javascript.host.css.StyleSheet;
 import org.htmlunit.javascript.host.css.StyleSheetList;
 import org.htmlunit.javascript.host.css.WebKitCSSMatrix;
 import org.htmlunit.javascript.host.dom.AbstractList;
+import org.htmlunit.javascript.host.dom.AbstractRange;
 import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.CDATASection;
 import org.htmlunit.javascript.host.dom.CharacterData;
@@ -491,7 +492,8 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
 
     @SuppressWarnings("unchecked")
     static final Class<? extends HtmlUnitScriptable>[] CLASSES_ = new Class[] {
-        AbstractList.class, ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
+        AbstractList.class, AbstractRange.class,
+        ActiveXObject.class, AnalyserNode.class, ANGLE_instanced_arrays.class,
         Animation.class, AnimationEvent.class,
         ApplicationCache.class,
         Atomics.class,
