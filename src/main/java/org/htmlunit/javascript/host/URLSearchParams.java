@@ -43,6 +43,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 
@@ -386,6 +387,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
      * @return an iterator.
      */
     @JsxFunction
+    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
     public Object entries() {
         final List<NameValuePair> splitted = splitQuery();
 
