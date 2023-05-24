@@ -214,7 +214,7 @@ public class NodeListTest extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts(DEFAULT = {"[object HTMLHtmlElement]", "[object HTMLHeadElement]",
+    @Alerts(DEFAULT = {"true", "[object HTMLHtmlElement]", "[object HTMLHeadElement]",
                        "[object HTMLScriptElement]", "[object HTMLBodyElement]",
                        "[object HTMLDivElement]"},
             IE = "no for..of")
@@ -224,6 +224,11 @@ public class NodeListTest extends WebDriverTestCase {
                 + LOG_TITLE_FUNCTION
                 + "  function test() {\n"
                 + "    var nodeList = document.querySelectorAll('*');\n"
+
+                + "    if (typeof Symbol != 'undefined') {\n"
+                + "      log(nodeList[Symbol.iterator] === nodeList.values);\n"
+                + "    }\n"
+
                 + "    if (!nodeList.forEach) {\n"
                 + "      log('no for..of');\n"
                 + "      return;\n"

@@ -126,6 +126,7 @@ public class NodeList extends AbstractList implements Callable {
      * @return an {@link NativeArrayIterator}
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
     public ES6Iterator values() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.VALUES);
     }
@@ -137,11 +138,6 @@ public class NodeList extends AbstractList implements Callable {
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
     public ES6Iterator entries() {
         return new NativeArrayIterator(getParentScope(), this, NativeArrayIterator.ARRAY_ITERATOR_TYPE.ENTRIES);
-    }
-
-    @JsxSymbol({CHROME, EDGE, FF, FF_ESR})
-    public ES6Iterator iterator() {
-        return values();
     }
 
     /**
