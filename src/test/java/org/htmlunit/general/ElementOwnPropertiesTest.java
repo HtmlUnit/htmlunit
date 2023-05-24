@@ -12864,7 +12864,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             FF_ESR = "align[GSCE],ch[GSCE],chOff[GSCE],constructor(),deleteRow(),insertRow(),rows[GCE],vAlign[GSCE]",
             IE = "align,bgColor,ch,chOff,constructor,deleteRow(),insertRow(),moveRow(),rows,vAlign")
-    @HtmlUnitNYI(CHROME = "ch,chOff,constructor(),vAlign",
+    @HtmlUnitNYI(CHROME = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             EDGE = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             FF_ESR = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
             FF = "ch[GSCE],chOff[GSCE],constructor(),vAlign[GSCE]",
