@@ -51,6 +51,24 @@ public class HostParentOfATest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts("true")
+    public void _AbstractRange_AbstractRange() throws Exception {
+        test("AbstractRange", "AbstractRange");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("true")
+    public void _AbstractRange_Range() throws Exception {
+        test("AbstractRange", "Range");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(DEFAULT = "false",
             IE = "true")
     public void _ActiveXObject_ActiveXObject() throws Exception {
