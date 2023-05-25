@@ -18,9 +18,13 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxGetter;
 
 /**
  * A JavaScript object for {@code TextEvent}.
@@ -61,10 +65,33 @@ public class TextEvent extends UIEvent {
     @JsxConstant(IE)
     public static final int DOM_INPUT_METHOD_SCRIPT = 9;
 
+    private Object data_;
+
     /**
      * Default constructor.
      */
-    @JsxConstructor({CHROME, EDGE})
     public TextEvent() {
+        data_ = Undefined.instance;
+    }
+
+    /**
+     * JavaScript constructor.
+     *
+     * @param type the event type
+     * @param details the event details (optional)
+     */
+    @JsxConstructor({CHROME, EDGE})
+    @Override
+    public void jsConstructor(final String type, final ScriptableObject details) {
+        throw ScriptRuntime.typeError("TextEvent ctor is not available");
+    }
+
+    /**
+     * Retrieves the data contained.
+     * @return the data contained
+     */
+    @JsxGetter({CHROME, EDGE})
+    public Object getData() {
+        return data_;
     }
 }

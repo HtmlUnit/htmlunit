@@ -255,6 +255,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     EVENT_TYPE_PROGRESSEVENT,
 
+    /** Supports event type 'TextEvent'. */
+    @BrowserFeature({CHROME, EDGE, IE})
+    EVENT_TYPE_TEXTEVENT,
+
     /** Supports event type 'WheelEvent'. */
     @BrowserFeature({CHROME, EDGE, IE})
     EVENT_TYPE_WHEELEVENT,
@@ -877,7 +881,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMIMPLEMENTATION_FEATURE_SVG_BASICSTRUCTURE_1_2,
 
-    /** If document.implementation.hasFeature() supports 'MutationNameEvents'. */
+    /** If document.implementation.hasFeature() supports 'TextEvents'. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DOMIMPLEMENTATION_FEATURE_TEXTEVENTS,
 

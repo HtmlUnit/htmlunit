@@ -22,6 +22,7 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_HASHCHANGEEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_MOUSEWHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_POINTEREVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_PROGRESSEVENT;
+import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_TEXTEVENT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
@@ -1205,6 +1206,10 @@ public class Document extends Node {
             if (CloseEvent.class == clazz
                     && getBrowserVersion().hasFeature(EVENT_ONCLOSE_DOCUMENT_CREATE_NOT_SUPPORTED)) {
                 clazz = null;
+            }
+            else if (TextEvent.class == clazz
+                    && !getBrowserVersion().hasFeature(EVENT_TYPE_TEXTEVENT)) {
+                clazz = CompositionEvent.class;
             }
         }
         if (clazz == null

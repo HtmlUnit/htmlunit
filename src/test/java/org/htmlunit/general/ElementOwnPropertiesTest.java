@@ -14748,10 +14748,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "DOM_INPUT_METHOD_PASTE,DOM_INPUT_METHOD_SCRIPT,DOM_INPUT_METHOD_UNKNOWN,DOM_INPUT_METHOD_VOICE,"
                 + "initTextEvent(),inputMethod,"
                 + "locale")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF_ESR = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
-            FF = "constructor(),detail,initUIEvent(),SCROLL_PAGE_DOWN,SCROLL_PAGE_UP,view",
+    @HtmlUnitNYI(CHROME = "constructor(),data[GCE]",
+            EDGE = "constructor(),data[GCE]",
+            FF_ESR = "constructor(),data[GCE]",
+            FF = "constructor(),data[GCE]",
             IE = "constructor[],DOM_INPUT_METHOD_DROP[E],DOM_INPUT_METHOD_HANDWRITING[E],DOM_INPUT_METHOD_IME[E],"
                 + "DOM_INPUT_METHOD_KEYBOARD[E],DOM_INPUT_METHOD_MULTIMODAL[E],DOM_INPUT_METHOD_OPTION[E],"
                 + "DOM_INPUT_METHOD_PASTE[E],DOM_INPUT_METHOD_SCRIPT[E],DOM_INPUT_METHOD_UNKNOWN[E],"
