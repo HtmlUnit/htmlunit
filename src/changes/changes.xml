@@ -21,7 +21,7 @@
                 Reflect's properties having an incorrect scope.
             </action>
             <action type="update" dev="rbri">
-                Remove the no longer available properties controllers, ondevicelight, 
+                Remove the no longer available properties ondevicelight,
                 ondeviceproximity, and onuserproximity from window (FF).
             </action>
             <action type="update" dev="rbri">

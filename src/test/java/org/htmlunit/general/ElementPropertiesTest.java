@@ -1268,7 +1268,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "TEMPORARY,test(),top,window",
             FF_ESR = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),"
+                + "close(),closed,confirm(),controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,"
                 + "innerHeight,innerWidth,isSecureContext,"
@@ -1291,7 +1291,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "setInterval(),setTimeout(),sortFunction(),status,stop(),test(),top,window",
             FF = "addEventListener(),alert(),applicationCache,atob(),blur(),btoa(),cancelAnimationFrame(),"
                 + "captureEvents(),clearInterval(),clearTimeout(),clientInformation,"
-                + "close(),closed,confirm(),"
+                + "close(),closed,confirm(),controllers,"
                 + "crypto,devicePixelRatio,dispatchEvent(),document,dump(),event,external,find(),focus(),"
                 + "frameElement,frames,getComputedStyle(),getSelection(),history,"
                 + "innerHeight,innerWidth,InstallTrigger,isSecureContext,"

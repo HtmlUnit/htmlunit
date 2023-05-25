@@ -175,6 +175,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
     private String status_ = "";
     private Map<Class<? extends Scriptable>, Scriptable> prototypes_ = new HashMap<>();
     private Map<String, Scriptable> prototypesPerJSName_ = new HashMap<>();
+    private Object controllers_;
     private Object opener_;
     private Object top_ = NOT_FOUND; // top can be set from JS to any value!
     private Crypto crypto_;
@@ -820,6 +821,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         applicationCache_ = new ApplicationCache();
         applicationCache_.setParentScope(this);
         applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
+
+        // like a JS new Object()
+        final Context ctx = Context.getCurrentContext();
+        controllers_ = ctx.newObject(this);
 
         if (webWindow_ instanceof TopLevelWindow) {
             final WebWindow opener = ((TopLevelWindow) webWindow_).getOpener();
@@ -1750,6 +1755,26 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         catch (final IOException e) {
             throw Context.throwAsScriptRuntimeEx(e);
         }
+    }
+
+    /**
+     * Gets the {@code controllers}. The result doesn't currently matter but it is important to return an
+     * object as some JavaScript libraries check it.
+     * @see <a href="https://developer.mozilla.org/En/DOM/Window.controllers">Mozilla documentation</a>
+     * @return some object
+     */
+    @JsxGetter({FF, FF_ESR})
+    public Object getControllers() {
+        return controllers_;
+    }
+
+    /**
+     * Sets the {@code controllers}.
+     * @param value the new value
+     */
+    @JsxSetter({FF, FF_ESR})
+    public void setControllers(final Object value) {
+        controllers_ = value;
     }
 
     /**
