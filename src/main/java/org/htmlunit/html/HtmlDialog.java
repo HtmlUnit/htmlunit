@@ -74,4 +74,22 @@ public class HtmlDialog extends HtmlElement {
             removeAttribute("open");
         }
     }
+
+    /**
+     *  Displays the dialog modelessly.
+     */
+    public void show() {
+        if (!isOpen()) {
+            setOpen(true);
+        }
+    }
+
+    /**
+     *  Displays the dialog modal.
+     */
+    public void showModal() {
+        if (!isOpen()) {
+            setOpen(true);
+        }
+    }
 }

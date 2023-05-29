@@ -19,10 +19,12 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 
@@ -60,5 +62,27 @@ public class HTMLDialogElement extends HTMLElement {
         final boolean bool = ScriptRuntime.toBoolean(newValue);
 
         ((HtmlDialog) getDomNodeOrDie()).setOpen(bool);
+    }
+
+    /**
+     *  Displays the dialog modelessly.
+     */
+    @JsxFunction
+    public void show() {
+        ((HtmlDialog) getDomNodeOrDie()).show();
+    }
+
+    /**
+     *  Displays the dialog modal.
+     */
+    @JsxFunction
+    public void showModal() {
+        final HtmlDialog dialog = (HtmlDialog) getDomNodeOrDie();
+
+        if (dialog.isOpen()) {
+            throw Context.reportRuntimeError("InvalidStateError: Dialog is already open.");
+        }
+
+        dialog.showModal();
     }
 }
