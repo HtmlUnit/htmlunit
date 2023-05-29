@@ -52,4 +52,26 @@ public class HtmlDialog extends HtmlElement {
         }
         return DisplayStyle.INLINE;
     }
+
+    /**
+     * Returns the {@code open} property.
+     * @return the {@code open} property
+     */
+    public boolean isOpen() {
+        return hasAttribute("open");
+    }
+
+    /**
+     * Sets the open state.
+     *
+     * @param newValue the new value
+     */
+    public void setOpen(final boolean newValue) {
+        if (newValue) {
+            setAttribute("open", "");
+        }
+        else {
+            removeAttribute("open");
+        }
+    }
 }

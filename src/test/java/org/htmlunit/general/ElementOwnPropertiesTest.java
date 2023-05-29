@@ -4827,10 +4827,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             FF_ESR = "close(),constructor(),open[GSCE],returnValue[GSCE],show(),showModal()",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "constructor()",
-            EDGE = "constructor()",
-            FF = "constructor()",
-            FF_ESR = "constructor()",
+    @HtmlUnitNYI(CHROME = "constructor(),open[GSCE]",
+            EDGE = "constructor(),open[GSCE]",
+            FF = "constructor(),open[GSCE]",
+            FF_ESR = "constructor(),open[GSCE]",
             IE = "constructor[]")
     public void dialog() throws Exception {
         test("dialog");

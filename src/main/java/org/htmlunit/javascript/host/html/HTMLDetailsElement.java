@@ -58,11 +58,7 @@ public class HTMLDetailsElement extends HTMLElement {
     @JsxSetter
     public void setOpen(final Object newValue) {
         final boolean bool = ScriptRuntime.toBoolean(newValue);
-        if (bool) {
-            getDomNodeOrDie().setAttribute("open", "");
-        }
-        else {
-            getDomNodeOrDie().removeAttribute("open");
-        }
+
+        ((HtmlDetails) getDomNodeOrDie()).setOpen(bool);
     }
 }
