@@ -29,8 +29,6 @@ import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
 
-import net.bytebuddy.asm.Advice.Return;
-
 /**
  * The JavaScript object {@code HTMLDialogElement}.
  *
@@ -76,7 +74,7 @@ public class HTMLDialogElement extends HTMLElement {
 
     /**
      *  Closes the dialog.
-     *  @param returnValue the {@link Return} value
+     *  @param returnValue the return value
      */
     @JsxFunction
     public void close(final Object returnValue) {
