@@ -21,12 +21,15 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlDialog;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
+
+import net.bytebuddy.asm.Advice.Return;
 
 /**
  * The JavaScript object {@code HTMLDialogElement}.
@@ -45,7 +48,6 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
-     * Returns the {@code open} property.
      * @return the {@code open} property
      */
     @JsxGetter
@@ -73,6 +75,19 @@ public class HTMLDialogElement extends HTMLElement {
     }
 
     /**
+     *  Closes the dialog.
+     *  @param returnValue the {@link Return} value
+     */
+    @JsxFunction
+    public void close(final Object returnValue) {
+        if (returnValue == null || Undefined.isUndefined(returnValue)) {
+            ((HtmlDialog) getDomNodeOrDie()).close("");
+        }
+
+        ((HtmlDialog) getDomNodeOrDie()).close(ScriptRuntime.toString(returnValue));
+    }
+
+    /**
      *  Displays the dialog modal.
      */
     @JsxFunction
@@ -84,5 +99,26 @@ public class HTMLDialogElement extends HTMLElement {
         }
 
         dialog.showModal();
+    }
+
+    /**
+     * @return the {@code returnValue} property
+     */
+    @JsxGetter
+    public String getReturnValue() {
+        return ((HtmlDialog) getDomNodeOrDie()).getReturnValue();
+    }
+
+    /**
+     * Sets the returnValue attribute.
+     * @param newValue the new value to set
+     */
+    @JsxSetter
+    public void setReturnValue(final Object newValue) {
+        if (newValue == null || Undefined.isUndefined(newValue)) {
+            ((HtmlDialog) getDomNodeOrDie()).setReturnValue("");
+        }
+
+        ((HtmlDialog) getDomNodeOrDie()).setReturnValue(ScriptRuntime.toString(newValue));
     }
 }

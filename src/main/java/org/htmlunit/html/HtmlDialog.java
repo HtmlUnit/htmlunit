@@ -24,11 +24,14 @@ import org.htmlunit.SgmlPage;
  * Wrapper for the HTML element "dialog".
  *
  * @author Ahmed Ashour
+ * @author Ronald Brill
  */
 public class HtmlDialog extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dialog";
+
+    private String returnValue_;
 
     /**
      * Creates a new instance.
@@ -40,6 +43,8 @@ public class HtmlDialog extends HtmlElement {
     HtmlDialog(final String qualifiedName, final SgmlPage page,
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
+
+        returnValue_ = "";
     }
 
     /**
@@ -54,7 +59,6 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
-     * Returns the {@code open} property.
      * @return the {@code open} property
      */
     public boolean isOpen() {
@@ -91,5 +95,36 @@ public class HtmlDialog extends HtmlElement {
         if (!isOpen()) {
             setOpen(true);
         }
+    }
+
+    /**
+     *  Displays the dialog modal.
+     *  @param returnValue the return value
+     */
+    public void close(final String returnValue) {
+        if (isOpen()) {
+            setReturnValue(returnValue);
+            setOpen(false);
+        }
+    }
+
+    /**
+     * @return the {@code returnValue} property
+     */
+    public String getReturnValue() {
+        return returnValue_;
+    }
+
+    /**
+     * Sets the open state.
+     *
+     * @param newValue the new value
+     */
+    public void setReturnValue(final String newValue) {
+        if (newValue == null) {
+            returnValue_ = "";
+            return;
+        }
+        returnValue_ = newValue;
     }
 }

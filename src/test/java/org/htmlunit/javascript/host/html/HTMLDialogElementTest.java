@@ -323,4 +323,190 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
+                       "false", "null", "", "false", "null", ""},
+            IE = "No")
+    public void close() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
+                       "false", "null", "Html", "false", "null", "Html"},
+            IE = "No")
+    public void closeReturnValue() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close('Html');\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close('unit');\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "", "1", "true", "1", "2", "false", "3", "4"},
+            IE = "No")
+    public void returnValue() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.returnValue = '1';\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.returnValue = '2';\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close('3');\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.returnValue = '4';\n"
+            + "        log(dia.returnValue);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "string ", "string null", "string undefined", "string 4", "string [object Object]"},
+            IE = "No")
+    public void returnValueSpecial() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+            + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
+
+            + "        dia.returnValue = null;\n"
+            + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
+
+            + "        dia.returnValue = undefined;\n"
+            + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
+
+            + "        dia.returnValue = 4;\n"
+            + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
+
+            + "        dia.returnValue = { a: '#' };\n"
+            + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
