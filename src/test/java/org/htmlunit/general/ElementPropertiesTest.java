@@ -1859,10 +1859,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "close(),open,returnValue,show(),showModal()",
             IE = "-")
-    @HtmlUnitNYI(CHROME = "open",
-            EDGE = "open",
-            FF = "open",
-            FF_ESR = "open")
+    @HtmlUnitNYI(CHROME = "open,show(),showModal()",
+            EDGE = "open,show(),showModal()",
+            FF = "open,show(),showModal()",
+            FF_ESR = "open,show(),showModal()")
     public void dialog() throws Exception {
         test("dialog");
     }
