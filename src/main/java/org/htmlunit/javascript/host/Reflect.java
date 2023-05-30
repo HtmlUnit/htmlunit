@@ -37,9 +37,12 @@ import org.htmlunit.javascript.configuration.JsxClass;
 public class Reflect extends HtmlUnitScriptable {
 
     /**
-     * Creates an instance.
+     * {@inheritedDoc}
      */
-    public Reflect() {
+    @Override
+    public void setParentScope(final Scriptable scope) {
+        super.setParentScope(scope);
+
         try {
             final FunctionObject functionObject = new FunctionObject("has",
                     getClass().getDeclaredMethod("has", Scriptable.class, String.class), this);
