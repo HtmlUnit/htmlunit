@@ -37,7 +37,7 @@ import org.htmlunit.javascript.configuration.JsxClass;
 public class Reflect extends HtmlUnitScriptable {
 
     /**
-     * {@inheritedDoc}
+     * {@inheritDoc}
      */
     @Override
     public void setParentScope(final Scriptable scope) {
