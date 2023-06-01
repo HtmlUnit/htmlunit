@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for Array.at added.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for Array.flat added.
+            </action>
             <action type="fix" dev="Lai Quang Duong">
                 nodeList[Symbol.iterator] === nodeList.values has to be true.
             </action>
