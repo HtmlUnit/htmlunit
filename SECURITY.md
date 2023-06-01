@@ -2,18 +2,16 @@
 
 ## Reporting Potential Security Issues
 
-If you have encountered a potential security vulnerability in this project, 
-please report it to us at rbri@rbri.de(mailto:rbri@rbri.de).
+If you have discovered a potential  security vulnerability in this project, please report it privately.
+**Do not disclose it as a public issue.**
+This gives us time to work with you to fix the issue before public exposure, reducing the chance that the exploit will be used before a patch is released.
+
+Please disclose it at our [security advisory](https://github.com/HtmlUnit/htmlunit/security/advisories/new).
+
+This project is maintained by a team of volunteers on a reasonable-effort basis. As such, vulnerabilities will be disclosed in a best effort base.
+
 We will work with you to verify the vulnerability and fix it.
 
-When reporting issues, please provide the following information:
-
- * A description indicating how to reproduce the issue
- * A summary of the security vulnerability and impact
-
-We request that you contact us via the email address above and give the project contributors a chance to resolve 
-the vulnerability and issue a new release prior to any public exposure; this helps protect the project's users, 
-and provides them with a chance to upgrade and/or update in order to protect their applications.
 
 ## Policy
 
