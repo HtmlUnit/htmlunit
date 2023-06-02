@@ -8,6 +8,15 @@
 
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: optimization - replace some language version checks with constant values
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: the PropertyDescriptor has an setter slot even if no setter function is available
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: the order of slots in the PropertyDescriptor is no in sync with the spec/browsers
+            </action>
             <action type="update" dev="rbri">
                 Use Objects.equals() instead of StringUtils.equals().
             </action>
