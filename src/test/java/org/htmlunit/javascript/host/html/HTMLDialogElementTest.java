@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.html;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -27,6 +28,15 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class HTMLDialogElementTest extends WebDriverTestCase {
+
+    private static final String DUMP_EVENT_FUNCTION = "  function dump(event) {\n"
+            + "    log(event);\n"
+            + "    log(event.type);\n"
+            + "    log(event.bubbles);\n"
+            + "    log(event.cancelable);\n"
+            + "    log(event.composed);\n"
+            + "    log(event.target);\n"
+            + "  }\n";
 
     /**
      * @throws Exception if an error occurs
@@ -41,9 +51,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -96,9 +111,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -143,9 +163,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -182,9 +207,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -217,9 +247,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -258,9 +293,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -295,9 +335,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -329,7 +374,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
-                       "false", "null", "", "false", "null", ""},
+                       "false", "null", "", "false", "null", "",
+                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
             IE = "No")
     public void close() throws Exception {
         final String html =
@@ -337,9 +383,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -377,7 +428,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
-                       "false", "null", "Html", "false", "null", "Html"},
+                       "false", "null", "Html", "false", "null", "Html",
+                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
             IE = "No")
     public void closeReturnValue() throws Exception {
         final String html =
@@ -385,9 +437,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.getAttribute('open'));\n"
@@ -424,7 +481,8 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "", "1", "true", "1", "2", "false", "3", "4"},
+    @Alerts(DEFAULT = {"false", "", "1", "true", "1", "2", "false", "3", "4",
+                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
             IE = "No")
     public void returnValue() throws Exception {
         final String html =
@@ -432,9 +490,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(dia.returnValue);\n"
@@ -480,9 +543,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
             + "        log(typeof dia.returnValue + ' ' + dia.returnValue);\n"
@@ -515,17 +583,35 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "true", "false"},
+    @Alerts(DEFAULT = {"false", "true", "false",
+                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
             IE = "No")
+    @HtmlUnitNYI(CHROME = {"false", "true",
+                           "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                           "false"},
+            EDGE = {"false", "true",
+                    "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                    "false"},
+            FF = {"false", "true",
+                  "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                  "false"},
+            FF_ESR = {"false", "true",
+                      "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                      "false"})
     public void formClosesDialog() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
 
@@ -565,6 +651,10 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
 
@@ -609,9 +699,14 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
             + "      function test() {\n"
             + "        var dia = document.getElementById('tester');\n"
             + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
 
             + "        log(dia.open);\n"
 

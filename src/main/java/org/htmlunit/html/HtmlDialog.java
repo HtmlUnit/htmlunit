@@ -19,6 +19,11 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.javascript.JavaScriptEngine;
+import org.htmlunit.javascript.PostponedAction;
+import org.htmlunit.javascript.host.event.Event;
+import org.htmlunit.javascript.host.html.HTMLDialogElement;
 
 /**
  * Wrapper for the HTML element "dialog".
@@ -105,6 +110,19 @@ public class HtmlDialog extends HtmlElement {
         if (isOpen()) {
             setReturnValue(returnValue);
             setOpen(false);
+
+            final HTMLDialogElement dialogElement = getScriptableObject();
+            final Event event = new Event(dialogElement, Event.TYPE_CLOSE);
+
+            final JavaScriptEngine jsEngine = (JavaScriptEngine) getPage().getWebClient().getJavaScriptEngine();
+            final PostponedAction action = new PostponedAction(getPage(), "Dialog.CloseEvent") {
+                @Override
+                public void execute() throws Exception {
+                    final ContextFactory cf = jsEngine.getContextFactory();
+                    cf.call(cx -> dialogElement.dispatchEvent(event));
+                }
+            };
+            jsEngine.addPostponedAction(action);
         }
     }
 

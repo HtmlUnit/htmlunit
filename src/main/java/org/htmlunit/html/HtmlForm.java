@@ -189,7 +189,7 @@ public class HtmlForm extends HtmlElement {
             // find parent dialog
             final HtmlElement dialog = getEnclosingElement("dialog");
             if (dialog != null) {
-                ((HtmlDialog) dialog).setOpen(false);
+                ((HtmlDialog) dialog).close("");
             }
             return;
         }

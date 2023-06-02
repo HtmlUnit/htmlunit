@@ -627,7 +627,8 @@ public class Event extends HtmlUnitScriptable {
         if (TYPE_CHANGE.equals(type)) {
             cancelable_ = false;
         }
-        else if (TYPE_LOAD.equals(type)) {
+        else if (TYPE_LOAD.equals(type)
+                    || TYPE_CLOSE.equals(type)) {
             bubbles_ = false;
             cancelable_ = false;
         }
