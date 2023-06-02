@@ -1930,10 +1930,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             IE = "[object Document]",
             FF = "function Document() {\n    [native code]\n}",
             FF_ESR = "function Document() {\n    [native code]\n}")
-    @HtmlUnitNYI(CHROME = "[object Document]",
-            EDGE = "[object Document]",
-            FF = "[object Document]",
-            FF_ESR = "[object Document]")
     public void document() throws Exception {
         test("Document");
     }
