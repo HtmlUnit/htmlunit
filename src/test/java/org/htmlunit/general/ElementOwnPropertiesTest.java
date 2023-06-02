@@ -14997,14 +14997,10 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "timeline[GCE],title[GSCE],URL[GCE],visibilityState[GCE],vlinkColor[GSCE],write(),"
                 + "writeln()",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "head[GCE],open(),write(),writeln()",
-            EDGE = "constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "head[GCE],open(),write(),writeln()",
-            FF_ESR = "close(),constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "head[GCE],open(),write(),writeln()",
-            FF = "close(),constructor(),cookie[GSCE],dispatchEvent(),documentElement[GCE],getElementById(),"
-                + "head[GCE],open(),write(),writeln()")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF_ESR = "exception",
+            FF = "exception")
     public void document() throws Exception {
         testString("", "new Document()");
     }

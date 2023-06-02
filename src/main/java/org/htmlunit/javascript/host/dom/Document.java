@@ -105,7 +105,6 @@ import org.htmlunit.html.impl.SimpleRange;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -324,13 +323,6 @@ public class Document extends Node {
      * Creates an instance.
      */
     public Document() {
-    }
-
-    /**
-     * JavaScript constructor.
-     */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public void jsConstructor() {
     }
 
     /**

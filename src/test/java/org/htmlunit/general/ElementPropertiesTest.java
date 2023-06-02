@@ -4741,6 +4741,10 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "styleSheetSets,TEXT_NODE,textContent,timeline,title,URL,visibilityState,vlinkColor,write(),"
                 + "writeln()",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF_ESR = "exception",
+            FF = "exception")
     public void document() throws Exception {
         testString("", "new Document()");
     }

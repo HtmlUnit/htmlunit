@@ -24,6 +24,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.htmlunit.util.MimeType;
 import org.junit.Test;
@@ -3218,6 +3219,38 @@ public class DocumentTest extends WebDriverTestCase {
             + "      } else {\n"
             + "        log('no WeakSet');\n"
             + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'></body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"about:blank", "about:blank", "undefined", "null", "null"},
+            IE = "no")
+    @HtmlUnitNYI(CHROME = "no",
+            EDGE = "no",
+            FF = "no",
+            FF_ESR = "no")
+    public void newDoc() throws Exception {
+        final String html = "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      if (typeof Document === 'object') { log('no'); return ; }"
+            + "      var doc = new Document();"
+            + "      log(doc.documentURI);\n"
+            + "      log(doc.URL);\n"
+            + "      log(doc.origin);\n"
+            + "      log(doc.firstElementChild);\n"
+            + "      log(doc.defaultView);\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
