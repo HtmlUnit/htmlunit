@@ -510,4 +510,131 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "false"},
+            IE = "No")
+    public void formClosesDialog() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+
+            + "        document.getElementById('close').click();\n"
+            + "        log(dia.open);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "      <form method='dialog'>\n"
+            + "        <button id='close'>OK</button>\n"
+            + "      </form>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "true"},
+            IE = "No")
+    public void formGet() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_WINDOW_NAME_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+
+            + "        document.getElementById('close').click();\n"
+            + "        log(dia.open);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "      <form method='get' action='" + URL_SECOND + "'>\n"
+            + "        <button id='close'>OK</button>\n"
+            + "      </form>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final String secondContent
+            = "<html><head><title>second</title></head><body>\n"
+            + "<p>hello world</p>\n"
+            + "</body></html>";
+        getMockWebConnection().setDefaultResponse(secondContent);
+
+        loadPage2(html);
+        Thread.sleep(DEFAULT_WAIT_TIME / 20); // FF
+        verifyWindowName2(getWebDriver(), getExpectedAlerts());
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "true"},
+            IE = "No")
+    public void formOutsideDialog() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+
+            + "        document.getElementById('close').click();\n"
+            + "        log(dia.open);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+
+            + "    <form method='dialog'>\n"
+            + "      <button id='close'>OK</button>\n"
+            + "    </form>\n"
+
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

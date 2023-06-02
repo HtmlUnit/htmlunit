@@ -183,6 +183,17 @@ public class HtmlForm extends HtmlElement {
             updateHtml5Attributes(submitElement);
         }
 
+        // dialog support
+        final String methodAttribute = getMethodAttribute();
+        if ("dialog".equalsIgnoreCase(methodAttribute)) {
+            // find parent dialog
+            final HtmlElement dialog = getEnclosingElement("dialog");
+            if (dialog != null) {
+                ((HtmlDialog) dialog).setOpen(false);
+            }
+            return;
+        }
+
         final WebRequest request = getWebRequest(submitElement);
         final String target = htmlPage.getResolvedTarget(getTargetAttribute());
 
