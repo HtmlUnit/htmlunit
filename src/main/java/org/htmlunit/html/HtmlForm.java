@@ -37,6 +37,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -976,14 +977,14 @@ public class HtmlForm extends HtmlElement {
 
         for (final HtmlElement next : getFormHtmlElementDescendants()) {
             if (next instanceof HtmlInput
-                    && StringUtils.equals(((HtmlInput) next).getValue(), value)) {
+                    && Objects.equals(((HtmlInput) next).getValue(), value)) {
                 results.add((HtmlInput) next);
             }
         }
 
         for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput
-                    && StringUtils.equals(((HtmlInput) element).getValue(), value)) {
+                    && Objects.equals(((HtmlInput) element).getValue(), value)) {
                 results.add((HtmlInput) element);
             }
         }

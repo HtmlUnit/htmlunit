@@ -51,6 +51,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -427,7 +428,7 @@ public class WebClient implements Serializable, AutoCloseable {
             final URL current = webRequest.getUrl();
             if (UrlUtils.sameFile(current, prev)
                         && current.getRef() != null
-                        && !StringUtils.equals(current.getRef(), prev.getRef())) {
+                        && !Objects.equals(current.getRef(), prev.getRef())) {
                 // We're just navigating to an anchor within the current page.
                 page.getWebResponse().getWebRequest().setUrl(current);
                 if (addToHistory) {
@@ -2575,7 +2576,7 @@ public class WebClient implements Serializable, AutoCloseable {
                     && url.getPath().equals(otherUrl.getPath()) // fail fast
                     && url.toString().equals(otherUrl.toString())
                     && request.getRequestParameters().equals(otherRequest.getRequestParameters())
-                    && StringUtils.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
+                    && Objects.equals(request.getRequestBody(), otherRequest.getRequestBody())) {
                     return; // skip it;
                 }
             }

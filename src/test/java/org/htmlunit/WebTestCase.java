@@ -32,13 +32,13 @@ import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.function.Supplier;
 
 import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -488,7 +488,7 @@ public abstract class WebTestCase {
         while (System.currentTimeMillis() < maxWait) {
             actual = func.get();
 
-            if (StringUtils.equals(expected, actual)) {
+            if (Objects.equals(expected, actual)) {
                 break;
             }
 

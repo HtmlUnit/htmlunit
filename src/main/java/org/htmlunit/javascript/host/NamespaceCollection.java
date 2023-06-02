@@ -19,8 +19,8 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -123,7 +123,7 @@ public class NamespaceCollection extends HtmlUnitScriptable implements Function 
     @Override
     public Object get(final String name, final Scriptable start) {
         for (final Namespace n : namespaces_) {
-            if (StringUtils.equals(n.getName(), name)) {
+            if (Objects.equals(n.getName(), name)) {
                 return n;
             }
         }

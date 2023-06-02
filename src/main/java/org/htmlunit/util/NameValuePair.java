@@ -15,8 +15,8 @@
 package org.htmlunit.util;
 
 import java.io.Serializable;
+import java.util.Objects;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 /**
@@ -70,7 +70,7 @@ public class NameValuePair implements Serializable {
             return false;
         }
         final NameValuePair other = (NameValuePair) object;
-        return StringUtils.equals(name_, other.name_) && StringUtils.equals(value_, other.value_);
+        return Objects.equals(name_, other.name_) && Objects.equals(value_, other.value_);
     }
 
     /**
