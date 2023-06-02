@@ -3234,23 +3234,26 @@ public class DocumentTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"about:blank", "about:blank", "undefined", "null", "null"},
             IE = "no")
-    @HtmlUnitNYI(CHROME = "no",
-            EDGE = "no",
-            FF = "no",
-            FF_ESR = "no")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void newDoc() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
             + "  <script>\n"
             + LOG_TITLE_FUNCTION
             + "    function test() {\n"
-            + "      if (typeof Document === 'object') { log('no'); return ; }"
-            + "      var doc = new Document();"
-            + "      log(doc.documentURI);\n"
-            + "      log(doc.URL);\n"
-            + "      log(doc.origin);\n"
-            + "      log(doc.firstElementChild);\n"
-            + "      log(doc.defaultView);\n"
+            + "      if (typeof Document === 'object') { log('no'); return ; }\n"
+
+            + "      try {\n"
+            + "        var doc = new Document();"
+            + "        log(doc.documentURI);\n"
+            + "        log(doc.URL);\n"
+            + "        log(doc.origin);\n"
+            + "        log(doc.firstElementChild);\n"
+            + "        log(doc.defaultView);\n"
+            + "      } catch(e) { log('exception'); }\n"
             + "    }\n"
             + "  </script>\n"
             + "</head>\n"
