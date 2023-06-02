@@ -628,6 +628,63 @@ public class HtmlFormTest extends SimpleWebTestCase {
         }
     }
 
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void getInputByValueValueChanged() throws Exception {
+        final String html
+            = "<html><head><title>foo</title></head><body>\n"
+            + "<form id='form1'>\n"
+            + "  <input type='submit' name='button' value='xxx'/>\n"
+            + "  <input type='text' name='textfield' value='foo'/>\n"
+            + "  <input type='submit' name='button1' value='foo'/>\n"
+            + "  <input type='reset' name='button2' value='foo'/>\n"
+            + "  <input type='button' name='button3' value='foo'/>\n"
+            + "  <input type='image' name='img' value='foo'/>\n"
+            + "  <input type='submit' name='button' value='bar'/>\n"
+            + "</form></body></html>";
+        final HtmlPage page = loadPage(html);
+
+        final HtmlForm form = page.getHtmlElementById("form1");
+
+        HtmlInput input = form.getInputByValue("xxx");
+        input.setValue("yyy");
+        HtmlElement elem = form.getInputByValue("yyy");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("foo");
+        input.setValue("text");
+        elem = form.getInputByValue("text");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("foo");
+        input.setValue("suBmit");
+        elem = form.getInputByValue("suBmit");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("foo");
+        input.setValue("RESET");
+        elem = form.getInputByValue("RESET");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("foo");
+        input.setValue("button");
+        elem = form.getInputByValue("button");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("foo");
+        input.setValue("Image");
+        elem = form.getInputByValue("Image");
+        assertEquals(input, elem);
+
+        input = form.getInputByValue("bar");
+        input.setValue("1234");
+        elem = form.getInputByValue("1234");
+        assertEquals(input, elem);
+    }
+
     /**
      * Test that {@link HtmlForm#getTextAreaByName(String)} returns
      * the first textarea with the given name.

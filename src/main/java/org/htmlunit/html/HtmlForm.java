@@ -972,10 +972,18 @@ public class HtmlForm extends HtmlElement {
      * @return all the inputs in this form with the specified value
      */
     public List<HtmlInput> getInputsByValue(final String value) {
-        final List<HtmlInput> results = getFormElementsByAttribute(HtmlInput.TAG_NAME, "value", value);
+        final List<HtmlInput> results = new ArrayList<>();
+
+        for (final HtmlElement next : getFormHtmlElementDescendants()) {
+            if (next instanceof HtmlInput
+                    && StringUtils.equals(((HtmlInput) next).getValue(), value)) {
+                results.add((HtmlInput) next);
+            }
+        }
 
         for (final HtmlElement element : getLostChildren()) {
-            if (element instanceof HtmlInput && value.equals(element.getAttributeDirect("value"))) {
+            if (element instanceof HtmlInput
+                    && StringUtils.equals(((HtmlInput) element).getValue(), value)) {
                 results.add((HtmlInput) element);
             }
         }

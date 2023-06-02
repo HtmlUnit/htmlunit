@@ -8,6 +8,10 @@
 
     <body>
         <release version="3.2.0" date="May xx, 2023" description="Bugfixes">
+            <action type="fix" dev="rbri" issue="602">
+                HtmlForm.getInputByValue and HtmlForm.getInputsByValue have to use
+                the value instead of the value attribute (regression in 3.0.0).
+            </action>
             <action type="add" dev="RhinoTeam">
                 core-js: Support for Array.at added.
             </action>
