@@ -20,6 +20,8 @@ import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 /**
  * Unit tests for {@link HTMLDialogElement}.
@@ -837,5 +839,59 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
             + "</html>";
 
         loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"Show dialog", "false",
+                       "Show dialog\nHello World\nDismiss", "true",
+                       "Show dialog", "false"},
+            IE = {"Show dialog\nHello World\nDismiss", "true",
+                  "Show dialog\nHello World\nDismiss", "true",
+                  "Show dialog\nHello World\nDismiss", "true"})
+    public void useCaseIssue598() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <body>\n"
+            + "    <button id='showMyDialog'>Show dialog</button><br/>\n"
+            + "    <dialog id='mydialog'>\n"
+            + "      Hello World<br/>\n"
+            + "      <button id='dismiss'>Dismiss</button>\n"
+            + "    </dialog>\n"
+
+            + "    <script>\n"
+            + "      showButton = document.getElementById('showMyDialog');\n"
+            + "      showButton.addEventListener('click', showMyDialog);\n"
+
+            + "      dismissButton = document.getElementById('dismiss');\n"
+            + "      dismissButton.addEventListener('click', closeMyDialog);\r\n"
+
+            + "      function showMyDialog() {\n"
+            + "        mydialog = document.getElementById('mydialog');\n"
+            + "        mydialog.showModal();\n"
+            + "      }\n"
+
+            + "      function closeMyDialog() {\n"
+            + "        mydialog = document.getElementById('mydialog');\n"
+            + "        mydialog.close();\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        final WebDriver driver = loadPage2(html);
+
+        assertEquals(getExpectedAlerts()[0], driver.findElement(By.tagName("body")).getText().trim());
+        assertEquals(Boolean.parseBoolean(getExpectedAlerts()[1]), driver.findElement(By.id("mydialog")).isDisplayed());
+
+        driver.findElement(By.id("showMyDialog")).click();
+        assertEquals(getExpectedAlerts()[2], driver.findElement(By.tagName("body")).getText().trim());
+        assertEquals(Boolean.parseBoolean(getExpectedAlerts()[3]), driver.findElement(By.id("mydialog")).isDisplayed());
+
+        driver.findElement(By.id("dismiss")).click();
+        assertEquals(getExpectedAlerts()[4], driver.findElement(By.tagName("body")).getText().trim());
+        assertEquals(Boolean.parseBoolean(getExpectedAlerts()[5]), driver.findElement(By.id("mydialog")).isDisplayed());
     }
 }
