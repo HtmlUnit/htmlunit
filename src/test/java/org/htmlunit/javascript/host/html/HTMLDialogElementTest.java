@@ -428,6 +428,55 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
+                       "false", "null", "", "false", "null", "", "closed"},
+            IE = "No")
+    public void closeOnclose() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+
+            + "        dia.close();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "        log(dia.returnValue);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester' onclose='log(\"closed\")'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "", "true", "", "",
                        "false", "null", "Html", "false", "null", "Html",
                        "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
             IE = "No")
@@ -599,6 +648,63 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
                       "false"})
     public void formClosesDialog() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
+
+            + "        log(dia.open);\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+
+            + "        document.getElementById('close').click();\n"
+            + "        log(dia.open);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "      <form method='dialog'>\n"
+            + "        <button id='close'>OK</button>\n"
+            + "      </form>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "true", "false",
+                       "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]"},
+            IE = "No")
+    @HtmlUnitNYI(CHROME = {"false", "true",
+                           "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                           "false"},
+            EDGE = {"false", "true",
+                    "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                    "false"},
+            FF = {"false", "true",
+                  "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                  "false"},
+            FF_ESR = {"false", "true",
+                      "[object Event]", "close", "false", "false", "false", "[object HTMLDialogElement]",
+                      "false"})
+    public void formClosesDialogWithoutJs() throws Exception {
         final String html =
             "<html>\n"
             + "  <head>\n"

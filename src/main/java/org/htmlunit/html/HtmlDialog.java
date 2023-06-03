@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_DIALOG_NONE;
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.WebClient;
 import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -111,18 +112,22 @@ public class HtmlDialog extends HtmlElement {
             setReturnValue(returnValue);
             setOpen(false);
 
-            final HTMLDialogElement dialogElement = getScriptableObject();
-            final Event event = new Event(dialogElement, Event.TYPE_CLOSE);
+            final SgmlPage page = getPage();
+            final WebClient client = page.getWebClient();
+            if (client.isJavaScriptEnabled()) {
+                final HTMLDialogElement dialogElement = getScriptableObject();
+                final Event event = new Event(dialogElement, Event.TYPE_CLOSE);
 
-            final JavaScriptEngine jsEngine = (JavaScriptEngine) getPage().getWebClient().getJavaScriptEngine();
-            final PostponedAction action = new PostponedAction(getPage(), "Dialog.CloseEvent") {
-                @Override
-                public void execute() throws Exception {
-                    final ContextFactory cf = jsEngine.getContextFactory();
-                    cf.call(cx -> dialogElement.dispatchEvent(event));
-                }
-            };
-            jsEngine.addPostponedAction(action);
+                final JavaScriptEngine jsEngine = (JavaScriptEngine) client.getJavaScriptEngine();
+                final PostponedAction action = new PostponedAction(page, "Dialog.CloseEvent") {
+                    @Override
+                    public void execute() throws Exception {
+                        final ContextFactory cf = jsEngine.getContextFactory();
+                        cf.call(cx -> dialogElement.dispatchEvent(event));
+                    }
+                };
+                jsEngine.addPostponedAction(action);
+            }
         }
     }
 

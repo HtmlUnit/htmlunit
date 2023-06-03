@@ -708,16 +708,24 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
             final ArrayList<ComputedCssStyleDeclaration> styles = new ArrayList<>(ancestors.size());
 
             for (final Node node : ancestors) {
-                if (node instanceof HtmlElement && ((HtmlElement) node).isHidden()) {
-                    return false;
-                }
-
                 if (node instanceof HtmlElement) {
-                    final ComputedCssStyleDeclaration style = window.getComputedStyle((HtmlElement) node, null);
-                    if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
+                    final HtmlElement elem = (HtmlElement) node;
+                    if (elem.isHidden()) {
                         return false;
                     }
-                    styles.add(style);
+
+                    if (elem instanceof HtmlDialog) {
+                        if (!((HtmlDialog) elem).isOpen()) {
+                            return false;
+                        }
+                    }
+                    else {
+                        final ComputedCssStyleDeclaration style = window.getComputedStyle(elem, null);
+                        if (DisplayStyle.NONE.value().equals(style.getDisplay())) {
+                            return false;
+                        }
+                        styles.add(style);
+                    }
                 }
             }
 
