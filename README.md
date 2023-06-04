@@ -25,9 +25,9 @@ such as:
 
 ## Get it!
 
-[Download from GitHub][12]
-[Download from Sourceforge][1]
-[Release History](https://www.htmlunit.org/changes-report.html)
+* [Download from GitHub][12]
+* [Download from Sourceforge][1]
+* [Release History](https://www.htmlunit.org/changes-report.html)
 
 ### Maven
 
