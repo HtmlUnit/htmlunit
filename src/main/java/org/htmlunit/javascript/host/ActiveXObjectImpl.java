@@ -19,6 +19,7 @@ import java.lang.reflect.Method;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
+import org.htmlunit.corejs.javascript.Symbol;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
@@ -111,6 +112,11 @@ public class ActiveXObjectImpl extends HtmlUnitScriptable {
                 }
 
                 @Override
+                public void delete(final Symbol arg0) {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
                 public Object get(final String arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
@@ -152,6 +158,11 @@ public class ActiveXObjectImpl extends HtmlUnitScriptable {
 
                 @Override
                 public boolean has(final int arg0, final Scriptable arg1) {
+                    throw new UnsupportedOperationException();
+                }
+
+                @Override
+                public boolean has(final Symbol arg0, final Scriptable arg1) {
                     throw new UnsupportedOperationException();
                 }
 

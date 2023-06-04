@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.3.0" date="May xx, 2023" description="Bugfixes">
+        <release version="3.3.0" date="May xx, 2023" description="Reflect, Dialog, Bugfixes">
+            <action type="update" dev="rbri">
+                core-js: Reflect implementation added (only construct() support is missing).
+            </action>
             <action type="fix" dev="rbri" issue="598">"
                 Dialog tag method and properties added.
             </action>

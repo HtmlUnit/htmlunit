@@ -82,7 +82,6 @@ import org.htmlunit.javascript.host.ActiveXObject;
 import org.htmlunit.javascript.host.ConsoleCustom;
 import org.htmlunit.javascript.host.DateCustom;
 import org.htmlunit.javascript.host.NumberCustom;
-import org.htmlunit.javascript.host.Reflect;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.intl.Intl;
@@ -240,6 +239,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             deleteProperties(window, "Symbol");
         }
 
+        if (!browserVersion.hasFeature(JS_REFLECT)) {
+            deleteProperties(window, "Reflect");
+        }
+
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
         if (browserVersion.hasFeature(JS_ERROR_STACK_TRACE_LIMIT)) {
             errorObject.defineProperty("stackTraceLimit", 10, ScriptableObject.EMPTY);
@@ -261,12 +264,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             intl.setClassName("Object");
         }
         intl.defineProperties(browserVersion);
-
-        if (browserVersion.hasFeature(JS_REFLECT)) {
-            final Reflect reflect = new Reflect();
-            reflect.setParentScope(window);
-            window.defineProperty(reflect.getClassName(), reflect, ScriptableObject.DONTENUM);
-        }
 
         // strange but this is the reality for browsers
         // because there will be still some sites using this for browser detection the property is
