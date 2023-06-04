@@ -12,12 +12,20 @@ Version 3.2.0 / May 15, 2023
 
 **News**
 
+#### [CVE-2023-2798](https://nvd.nist.gov/vuln/detail/CVE-2023-2798)
+HtmlUnit suffers from a Denial of service attack on versions 2.69.0 and below. Please update to at least version 2.70.0.
+
 #### [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119)
-#### HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0.
+HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0.
 
 #### [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)
-#### HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0.
+HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0.
 
+| CVE                                                               | Descrition |
+|-------------------------------------------------------------------|-----------------|
+| [CVE-2023-2798](https://nvd.nist.gov/vuln/detail/CVE-2023-2798)   | HtmlUnit suffers from a Denial of service attack on versions 2.69.0 and below. Please update to at least version 2.70.0. |
+| [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119) | HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0. |
+| [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)   | HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0. |
 
 [HtmlUnit@Twitter][3]
 
