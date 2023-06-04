@@ -10,23 +10,6 @@ Version 3.2.0 / May 15, 2023
 
 [htmlunit.org][4]
 
-**News**
-
-#### [CVE-2023-2798](https://nvd.nist.gov/vuln/detail/CVE-2023-2798)
-HtmlUnit suffers from a Denial of service attack on versions 2.69.0 and below. Please update to at least version 2.70.0.
-
-#### [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119)
-HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0.
-
-#### [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)
-HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0.
-
-| CVE                                                               | Descrition |
-|-------------------------------------------------------------------|-----------------|
-| [CVE-2023-2798](https://nvd.nist.gov/vuln/detail/CVE-2023-2798)   | HtmlUnit suffers from a Denial of service attack on versions 2.69.0 and below. Please update to at least version 2.70.0. |
-| [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119) | HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0. |
-| [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)   | HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0. |
-
 [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
@@ -44,6 +27,7 @@ such as:
 
 [Download from GitHub][12]
 [Download from Sourceforge][1]
+[Release History](https://www.htmlunit.org/changes-report.html)
 
 ### Maven
 
@@ -64,6 +48,14 @@ Add to your `build.gradle`:
 ```groovy
 implementation group: 'org.htmlunit', name: 'htmlunit', version: '3.2.0'
 ```
+
+### Vulnerabilities
+
+| CVE                                                               | Description |
+|-------------------------------------------------------------------|-----------------|
+| [CVE-2023-2798](https://nvd.nist.gov/vuln/detail/CVE-2023-2798)   | HtmlUnit suffers from a Denial of service attack on versions 2.69.0 and below. Please update to at least version 2.70.0. |
+| [CVE-2023-26119](https://nvd.nist.gov/vuln/detail/CVE-2023-26119) | HtmlUnit suffers from a remote code execution via XSTL vulnerability on versions 2.70.0 and below. Please update to at least version 3.1.0. |
+| [CVE-2020-5529](https://nvd.nist.gov/vuln/detail/CVE-2020-5529)   | HtmlUnit suffers from a remote code execution vulnerability (improper initialization of the Rhino engine) on versions 2.36.0 and below. Please update to at least version 3.1.0. |
 
 ## Overview
 HtmlUnit is a "GUI-less browser for Java programs". It models HTML documents and provides an API that allows you to invoke pages, fill out forms, click links, etc... just like you do in your "normal" browser.
