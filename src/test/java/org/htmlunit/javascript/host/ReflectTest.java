@@ -22,7 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for {@link Reflect}.
+ * Tests for Reflect.
  *
  * @author Ronald Brill
  * @author Lai Quang Duong
