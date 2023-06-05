@@ -3479,6 +3479,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code text-underline-position}. */
         TEXT_UNDERLINE_POSITION_("text-underline-position", "text-underline-position", ff("auto")),
 
+        /** The style property {@code textWrap}. */
+        TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap")),
+
         /** The style property {@code top}. */
         TOP("top", "top", ff("auto"), ie("auto"), chromeAndEdgeAuto()),
 
@@ -4537,6 +4540,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code white-space}. */
         WHITE_SPACE_("white-space", "white-space", ffNormal()),
+
+        /** The style property {@code whiteSpaceCollapse}. */
+        WHITE_SPACE_COLLAPSE("whiteSpaceCollapse", "white-space-collapse", chromeAndEdge("collapse")),
 
         /** The style property {@code widows}. */
         WIDOWS("widows", "widows", ie("2"), chromeAndEdge("2")),
