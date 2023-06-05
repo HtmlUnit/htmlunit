@@ -27,7 +27,7 @@ import static org.htmlunit.BrowserVersionFeatures.EVENT_TYPE_WHEELEVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_CHARSET_LOWERCASE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHORS_REQUIRES_NAME_OR_ID;
+import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_REQUIRES_NAME_OR_ID;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
@@ -860,7 +860,7 @@ public class Document extends Node {
                         return false;
                     }
                     final HtmlAnchor anchor = (HtmlAnchor) node;
-                    if (getBrowserVersion().hasFeature(JS_ANCHORS_REQUIRES_NAME_OR_ID)) {
+                    if (getBrowserVersion().hasFeature(JS_ANCHOR_REQUIRES_NAME_OR_ID)) {
                         return anchor.hasAttribute("name") || anchor.hasAttribute("id");
                     }
                     return anchor.hasAttribute("name");

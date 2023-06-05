@@ -617,13 +617,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ALIGN_FOR_INPUT_IGNORES_VALUES,
 
-    /**
-     * Javascript property anchors includes all anchors with a name or an id property.
-     * If not set name property is required.
-     */
-    @BrowserFeature(IE)
-    JS_ANCHORS_REQUIRES_NAME_OR_ID,
-
     /** The anchor hostname setter ignores blank url's. */
     @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
@@ -664,6 +657,17 @@ public enum BrowserVersionFeatures {
     /** The anchor protocol property setter throws an error if the protocol is not valid. */
     @BrowserFeature(IE)
     JS_ANCHOR_PROTOCOL_INVALID_THROWS,
+
+    /** The anchor rellist setter converts undefined to null. */
+    @BrowserFeature({FF, FF_ESR})
+    JS_ANCHOR_RELLIST_NULL,
+
+    /**
+     * Javascript property anchors includes all anchors with a name or an id property.
+     * If not set name property is required.
+     */
+    @BrowserFeature(IE)
+    JS_ANCHOR_REQUIRES_NAME_OR_ID,
 
     /**
      * Javascript fetch api is supported.
