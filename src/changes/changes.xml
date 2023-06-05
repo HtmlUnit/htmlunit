@@ -7,6 +7,10 @@
     </properties>
 
     <body>
+        <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Bugfixes">
+        </release>
+
+
         <release version="3.3.0" date="June 04, 2023" description="Reflect, Dialog, Bugfixes">
             <action type="update" dev="rbri">
                 core-js: Reflect implementation added (only construct() support is missing).
