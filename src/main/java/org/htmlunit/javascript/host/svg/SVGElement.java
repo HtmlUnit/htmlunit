@@ -445,6 +445,24 @@ public class SVGElement extends Element {
     }
 
     /**
+     * Returns the {@code onscrollend} event handler.
+     * @return the {@code onscrollend} event handler
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public Function getOnscrollend() {
+        return getEventHandler(Event.TYPE_SCROLLEND);
+    }
+
+    /**
+     * Sets the {@code onscrollend} event handler.
+     * @param scrollend the {@code onscrollend} event handler
+     */
+    @JsxSetter({CHROME, EDGE, FF})
+    public void setOnscrollend(final Object scrollend) {
+        setEventHandler(Event.TYPE_SCROLLEND, scrollend);
+    }
+
+    /**
      * Returns the {@code onkeydown} event handler.
      * @return the {@code onkeydown} event handler
      */

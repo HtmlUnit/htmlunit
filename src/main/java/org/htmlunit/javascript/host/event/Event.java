@@ -154,6 +154,9 @@ public class Event extends HtmlUnitScriptable {
     /** The scroll event type, triggered by {@code onscroll} event handlers. */
     public static final String TYPE_SCROLL = "scroll";
 
+    /** The scroll event type, triggered by {@code onscrollend} event handlers. */
+    public static final String TYPE_SCROLLEND = "scrollend";
+
     /** The search event type, triggered by {@code onsearch} event handlers. */
     public static final String TYPE_SEARCH = "search";
 
