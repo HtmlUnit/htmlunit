@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <script src="./html2canvas.js"></script>
+</head>
+<body>
+
+<div id="printId">
+  HelloWorld
+</div>
+
+<button id="printButtonId" type="button" onclick="printOut()">Print</button> 
+
+<textarea id='myLog' cols='80' rows='42'></textarea>
+
+<script>
+  function printOut() {
+    html2canvas(document.querySelector('#printId'), {
+        allowTaint: true,
+        scale: 2 
+    }).then(function (canvas) {
+        document.getElementById('myLog').value = canvas.toDataURL();
+    })
+  }
+</script>
+
+</body>
+</html>
+
