@@ -19,7 +19,6 @@ import java.io.Serializable;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.Scriptable;
-import org.htmlunit.corejs.javascript.Symbol;
 
 /**
  * Wrapper for a {@link Function} delegating all calls to the wrapped instance.
@@ -99,14 +98,6 @@ public class FunctionWrapper implements Function, Serializable {
      * {@inheritDoc}
      */
     @Override
-    public boolean has(final Symbol symbol, final Scriptable start) {
-        return wrapped_.has(symbol, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void put(final String name, final Scriptable start, final Object value) {
         wrapped_.put(name, wrapped_, value);
     }
@@ -133,14 +124,6 @@ public class FunctionWrapper implements Function, Serializable {
     @Override
     public void delete(final int index) {
         wrapped_.delete(index);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void delete(final Symbol symbol) {
-        wrapped_.delete(symbol);
     }
 
     /**

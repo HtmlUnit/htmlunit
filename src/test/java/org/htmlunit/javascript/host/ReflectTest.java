@@ -114,6 +114,17 @@ public class ReflectTest extends WebDriverTestCase {
     }
 
     @Test
+    @Alerts(DEFAULT = {"true", "1776"},
+            IE = "no Reflect")
+    public void construct() throws Exception {
+        final String js =
+                "var d = Reflect.construct(Date, [1776, 6, 4]);\n"
+                + "log(d instanceof Date);\n"
+                + "log(d.getFullYear());";
+        test(js);
+    }
+
+    @Test
     @Alerts(DEFAULT = {"true", "42"},
             IE = "no Reflect")
     public void defineProperty() throws Exception {
@@ -259,7 +270,7 @@ public class ReflectTest extends WebDriverTestCase {
         final String js =
                 "var o = { d: 42 };\n"
                 + "delete o.d;\n"
-                + "log(Reflect.ownKeys({}).length);";
+                + "log(Reflect.ownKeys(o).length);";
         test(js);
     }
 
