@@ -68,7 +68,7 @@ public final class TestCaseTest {
                             final String relativePath = file.getAbsolutePath().substring(
                                     new File(".").getAbsolutePath().length() - 1);
                             final HashSet<String> tags =
-                                    new HashSet<String>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
+                                    new HashSet<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
                             // title tag is special
                             tags.remove(HtmlTitle.TAG_NAME);
                             checkLines(relativePath, line, lines, "xmp", tags);

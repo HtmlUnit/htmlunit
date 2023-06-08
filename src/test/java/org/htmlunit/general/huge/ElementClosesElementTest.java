@@ -79,7 +79,7 @@ public class ElementClosesElementTest extends WebDriverTestCase {
     @Parameters
     public static Collection<Object[]> data() throws Exception {
         final List<Object[]> list = new ArrayList<>();
-        final List<String> strings = new LinkedList<String>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
+        final List<String> strings = new LinkedList<>(Arrays.asList(DefaultElementFactory.SUPPORTED_TAGS_));
 
         for (final String parent : strings) {
             for (final String child : strings) {

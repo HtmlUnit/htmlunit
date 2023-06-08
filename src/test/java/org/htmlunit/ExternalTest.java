@@ -88,7 +88,7 @@ public class ExternalTest {
         final Map<String, String> properties = new HashMap<>();
         final List<String> lines = FileUtils.readLines(new File("pom.xml"), ISO_8859_1);
 
-        final List<String> wrongVersions = new LinkedList<String>();
+        final List<String> wrongVersions = new LinkedList<>();
         for (int i = 0; i < lines.size(); i++) {
             final String line = lines.get(i);
             if (line.trim().equals("<properties>")) {
