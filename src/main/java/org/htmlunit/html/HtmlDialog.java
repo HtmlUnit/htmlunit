@@ -121,7 +121,7 @@ public class HtmlDialog extends HtmlElement {
                 final JavaScriptEngine jsEngine = (JavaScriptEngine) client.getJavaScriptEngine();
                 final PostponedAction action = new PostponedAction(page, "Dialog.CloseEvent") {
                     @Override
-                    public void execute() throws Exception {
+                    public void execute() {
                         final ContextFactory cf = jsEngine.getContextFactory();
                         cf.call(cx -> dialogElement.dispatchEvent(event));
                     }

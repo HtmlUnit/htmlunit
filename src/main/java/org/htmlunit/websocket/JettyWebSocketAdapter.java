@@ -116,14 +116,14 @@ public abstract class JettyWebSocketAdapter implements WebSocketAdapter {
     }
 
     @Override
-    public void closeIncommingSession() throws Exception {
+    public void closeIncommingSession() {
         if (incomingSession_ != null) {
             incomingSession_.close();
         }
     }
 
     @Override
-    public void closeOutgoingSession() throws Exception {
+    public void closeOutgoingSession() {
         if (outgoingSession_ != null) {
             outgoingSession_.close();
         }

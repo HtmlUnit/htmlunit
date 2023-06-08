@@ -109,7 +109,7 @@ public class MessagePort extends EventTarget {
             final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
             final PostponedAction action = new PostponedAction(page, "MessagePort.postMessage") {
                 @Override
-                public void execute() throws Exception {
+                public void execute() {
                     final ContextFactory cf = jsEngine.getContextFactory();
                     cf.call(cx -> port1_.dispatchEvent(event));
                 }

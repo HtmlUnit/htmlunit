@@ -161,10 +161,9 @@ public class FileReader extends EventTarget {
     /**
      * Reads the contents of the specified {@link Blob} or {@link File}.
      * @param object the {@link Blob} or {@link File} from which to read
-     * @throws IOException if an error occurs
      */
     @JsxFunction
-    public void readAsArrayBuffer(final Object object) throws IOException {
+    public void readAsArrayBuffer(final Object object) {
         readyState_ = LOADING;
 
         if (object instanceof Blob) {
@@ -191,10 +190,9 @@ public class FileReader extends EventTarget {
      * contents of the file as a text string.
      * @param object the {@link Blob} or {@link File} from which to read
      * @param encoding the encoding
-     * @throws IOException if an error occurs
      */
     @JsxFunction
-    public void readAsText(final Object object, final Object encoding) throws IOException {
+    public void readAsText(final Object object, final Object encoding) {
         readyState_ = LOADING;
 
         Charset charset = StandardCharsets.UTF_8;

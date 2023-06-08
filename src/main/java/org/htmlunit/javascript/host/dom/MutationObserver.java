@@ -154,7 +154,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
                     (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
             jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.characterDataChanged") {
                 @Override
-                public void execute() throws Exception {
+                public void execute() {
                     final NativeArray array = new NativeArray(new Object[] {mutationRecord});
                     ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
                     jsEngine.callFunction(owningPage, function_, scope, MutationObserver.this, new Object[] {array});
@@ -204,7 +204,7 @@ public class MutationObserver extends HtmlUnitScriptable implements HtmlAttribut
                         (JavaScriptEngine) window.getWebWindow().getWebClient().getJavaScriptEngine();
                 jsEngine.addPostponedAction(new PostponedAction(owningPage, "MutationObserver.attributeReplaced") {
                     @Override
-                    public void execute() throws Exception {
+                    public void execute() {
                         final NativeArray array = new NativeArray(new Object[] {mutationRecord});
                         ScriptRuntime.setBuiltinProtoAndParent(array, scope, TopLevel.Builtins.Array);
                         jsEngine.callFunction(owningPage, function_, scope,

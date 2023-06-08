@@ -163,7 +163,7 @@ public class HtmlImage extends HtmlElement {
                 if (READY_STATE_LOADING.equals(readyState)) {
                     final PostponedAction action = new PostponedAction(getPage(), "HtmlImage.setAttributeNS") {
                         @Override
-                        public void execute() throws Exception {
+                        public void execute() {
                             doOnLoad();
                         }
                     };
@@ -311,7 +311,7 @@ public class HtmlImage extends HtmlElement {
             if (READY_STATE_LOADING.equals(htmlPage.getReadyState())) {
                 final PostponedAction action = new PostponedAction(getPage(), "HtmlImage.doOnLoad") {
                     @Override
-                    public void execute() throws Exception {
+                    public void execute() {
                         HtmlImage.this.fireEvent(event);
                     }
                 };

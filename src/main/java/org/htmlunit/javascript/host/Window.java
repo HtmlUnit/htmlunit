@@ -2019,7 +2019,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
-            public void execute() throws Exception {
+            public void execute() {
                 final ContextAction<Object> contextAction = cx -> dispatchEvent(event);
 
                 final ContextFactory cf = jsEngine.getContextFactory();

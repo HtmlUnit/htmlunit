@@ -116,7 +116,7 @@ public class BaseAudioContext extends EventTarget {
         if (error != null) {
             jsEngine.addPostponedAction(new PostponedAction(owningPage, "BaseAudioContext.decodeAudioData") {
                 @Override
-                public void execute() throws Exception {
+                public void execute() {
                     jsEngine.callFunction(owningPage, error, getParentScope(), BaseAudioContext.this, new Object[] {});
                 }
             });

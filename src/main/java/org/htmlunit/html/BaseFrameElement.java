@@ -134,7 +134,7 @@ public abstract class BaseFrameElement extends HtmlElement {
             if (jsEngine != null && jsEngine.isScriptRunning()) {
                 final PostponedAction action = new PostponedAction(getPage(), "BaseFrame.loadInnerPage") {
                     @Override
-                    public void execute() throws Exception {
+                    public void execute() {
                         htmlPage.setReadyState(READY_STATE_COMPLETE);
                     }
                 };
