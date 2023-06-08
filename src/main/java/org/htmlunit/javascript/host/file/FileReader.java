@@ -111,7 +111,7 @@ public class FileReader extends EventTarget {
         result_ = DataURLConnection.DATA_PREFIX;
 
         final byte[] bytes = ((Blob) object).getBytes();
-        final String value = new String(new Base64().encode(bytes), StandardCharsets.US_ASCII);
+        final String value = new String(Base64.encodeBase64(bytes), StandardCharsets.US_ASCII);
         final BrowserVersion browserVersion = getBrowserVersion();
 
         String contentType = ((Blob) object).getType();

@@ -535,7 +535,7 @@ public class AwtRenderingBackend implements RenderingBackend {
             ImageIO.write(image_, imageType, bos);
 
             final byte[] imageBytes = bos.toByteArray();
-            return new String(new Base64().encode(imageBytes), StandardCharsets.US_ASCII);
+            return new String(Base64.encodeBase64(imageBytes), StandardCharsets.US_ASCII);
         }
     }
 

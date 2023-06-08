@@ -60,7 +60,6 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 
-import org.apache.commons.codec.DecoderException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -1325,12 +1324,7 @@ public class WebClient implements Serializable, AutoCloseable {
     private WebResponse makeWebResponseForDataUrl(final WebRequest webRequest) throws IOException {
         final URL url = webRequest.getUrl();
         final DataURLConnection connection;
-        try {
-            connection = new DataURLConnection(url);
-        }
-        catch (final DecoderException e) {
-            throw new IOException(e.getMessage());
-        }
+        connection = new DataURLConnection(url);
 
         final List<NameValuePair> responseHeaders = new ArrayList<>();
         responseHeaders.add(new NameValuePair(HttpHeader.CONTENT_TYPE_LC,
