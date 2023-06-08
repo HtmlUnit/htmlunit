@@ -2089,19 +2089,15 @@ public class Element extends Node {
                 removeAttribute(name);
                 return false;
             }
-            else {
-                setAttribute(name, "");
-                return true;
-            }
+            setAttribute(name, "");
+            return true;
         }
         if (ScriptRuntime.toBoolean(force)) {
             setAttribute(name, "");
             return true;
         }
-        else {
-            removeAttribute(name);
-            return false;
-        }
+        removeAttribute(name);
+        return false;
     }
 
     /**
