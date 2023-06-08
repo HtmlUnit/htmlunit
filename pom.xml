@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>3.3.0</htmlunitcorejs.version>
         <htmlunitxpath.version>3.3.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.10.0-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.10.0</htmlunitdriver.version>
         <selenium.version>4.10.0</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
