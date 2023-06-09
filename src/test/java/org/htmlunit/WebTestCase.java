@@ -514,7 +514,9 @@ public abstract class WebTestCase {
      */
     @After
     public void releaseResources() {
-        mockWebConnection_ = null;
+        if (mockWebConnection_ != null) {
+            mockWebConnection_.clear();
+        }
     }
 
     /**

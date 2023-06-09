@@ -526,5 +526,18 @@ public class MockWebConnection implements WebConnection {
      */
     @Override
     public void close() {
+        clear();
+    }
+
+    /**
+     * Resets this.
+     */
+    public void clear() {
+        throwableMap_.clear();
+        responseMap_.clear();
+        defaultResponse_ = null;
+        lastRequest_ = null;
+        requestCount_ = 0;
+        requestedUrls_.clear();
     }
 }
