@@ -165,7 +165,7 @@ public class Selection extends HtmlUnitScriptable {
      * @param range the range to add
      */
     @JsxFunction
-    public void addRange(final org.htmlunit.javascript.host.dom.Range range) {
+    public void addRange(final Range range) {
         final SimpleRange rg = range.getSimpleRange();
         getRanges().add(rg);
 
@@ -180,7 +180,7 @@ public class Selection extends HtmlUnitScriptable {
      * @param range the range to remove
      */
     @JsxFunction
-    public void removeRange(final org.htmlunit.javascript.host.dom.Range range) {
+    public void removeRange(final Range range) {
         getRanges().remove(range.getSimpleRange());
 
         if (getRangeCount() < 1) {
@@ -205,16 +205,15 @@ public class Selection extends HtmlUnitScriptable {
      * @return the range at the specified index
      */
     @JsxFunction
-    public org.htmlunit.javascript.host.dom.Range getRangeAt(final int index) {
+    public Range getRangeAt(final int index) {
         final List<SimpleRange> ranges = getRanges();
         if (index < 0 || index >= ranges.size()) {
             throw Context.reportRuntimeError("Invalid range index: " + index);
         }
         final SimpleRange range = ranges.get(index);
-        final org.htmlunit.javascript.host.dom.Range jsRange =
-            new org.htmlunit.javascript.host.dom.Range(range);
+        final Range jsRange = new Range(range);
         jsRange.setParentScope(getWindow());
-        jsRange.setPrototype(getPrototype(org.htmlunit.javascript.host.dom.Range.class));
+        jsRange.setPrototype(getPrototype(Range.class));
 
         return jsRange;
     }
