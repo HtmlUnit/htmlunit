@@ -9,6 +9,9 @@
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Bugfixes">
             <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.13.0.
+            </action>
+            <action type="update" dev="rbri">
                 core-js: Reflect.construct() support added.
             </action>
         </release>
