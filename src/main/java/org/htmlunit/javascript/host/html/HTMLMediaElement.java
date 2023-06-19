@@ -20,7 +20,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.eclipse.jetty.util.Promise;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlMedia;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -114,7 +113,7 @@ public class HTMLMediaElement extends HTMLElement {
     /**
      * Begins playback of the media.
      *
-     * @return a {@link Promise} which is fulfilled when playback has been started,
+     * @return a Promise which is fulfilled when playback has been started,
      *         or is rejected if for any reason playback cannot be started
      */
     @JsxFunction
