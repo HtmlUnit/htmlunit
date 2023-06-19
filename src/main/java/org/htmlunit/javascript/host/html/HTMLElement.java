@@ -53,7 +53,6 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.StyleAttributes;
-import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlAbbreviated;
@@ -131,7 +130,6 @@ import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventHandler;
 import org.htmlunit.javascript.host.event.MouseEvent;
-import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * The JavaScript object {@code HTMLElement} which is the base class for all HTML
@@ -569,22 +567,6 @@ public class HTMLElement extends Element {
                 }
             }
         }
-    }
-
-    /**
-     * Gets the attributes of the element in the form of a {@link org.xml.sax.Attributes}.
-     * @param element the element to read the attributes from
-     * @return the attributes
-     */
-    protected AttributesImpl readAttributes(final HtmlElement element) {
-        final AttributesImpl attributes = new AttributesImpl();
-        for (final DomAttr entry : element.getAttributesMap().values()) {
-            final String name = entry.getName();
-            final String value = entry.getValue();
-            attributes.addAttribute(null, name, name, null, value);
-        }
-
-        return attributes;
     }
 
     /**

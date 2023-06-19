@@ -44,6 +44,7 @@ import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlDateTimeLocalInput;
@@ -197,12 +198,22 @@ public class HTMLInputElement extends HTMLElement {
                 }
             }
 
-            final AttributesImpl attributes = readAttributes(input);
-            final int index = attributes.getIndex("type");
-            if (index > -1) {
-                attributes.setValue(index, newType);
+            final AttributesImpl attributes = new AttributesImpl();
+            boolean typeFound = false;
+            for (final DomAttr entry : input.getAttributesMap().values()) {
+                final String name = entry.getName();
+                final String value = entry.getValue();
+
+                if ("type".equals(name)) {
+                    attributes.addAttribute(null, name, name, null, newType);
+                    typeFound = true;
+                }
+                else {
+                    attributes.addAttribute(null, name, name, null, value);
+                }
             }
-            else {
+
+            if (!typeFound) {
                 attributes.addAttribute(null, "type", "type", null, newType);
             }
 
