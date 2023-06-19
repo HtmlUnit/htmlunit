@@ -1247,4 +1247,39 @@ public class HtmlFormTest extends SimpleWebTestCase {
         final HtmlPage page = loadPage(html);
         assertEquals(xml, page.asXml());
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second/?hiddenName=hiddenValue")
+    public void inputHiddenAdded() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' method='GET' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myButton' type='submit' />\n"
+            + "  </form>\n"
+            + "</body></html>";
+
+        final String secondContent = "second content";
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final HtmlPage page = loadPage(html);
+        final HtmlForm form = (HtmlForm) page.getElementById("myForm");
+
+        final DomElement input = page.createElement("input");
+        input.setAttribute("type", "hidden");
+        input.setAttribute("id", "hiddenId");
+        input.setAttribute("name", "hiddenName");
+        input.setAttribute("value", "hiddenValue");
+
+        form.appendChild(input);
+
+        page.getElementById("myButton").click();
+
+        final String url = getMockWebConnection().getLastWebRequest().getUrl().toExternalForm();
+        assertTrue(url.endsWith(getExpectedAlerts()[0]));
+    }
 }

@@ -92,17 +92,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxSetter
     public void setType(final String newType) {
-        setType(newType, false);
-    }
-
-    /**
-     * Sets the value of the attribute {@code type}.
-     * Note: this replace the DOM node with a new one.
-     * @param newType the new type to set
-     * @param setThroughAttribute set type value through setAttribute()
-     */
-    private void setType(final String newType, final boolean setThroughAttribute) {
-        if (getDomNodeOrDie().setType(newType, setThroughAttribute)) {
+        if (getDomNodeOrDie().setType(newType, false)) {
             super.setAttribute("type", newType);
         }
     }
@@ -178,25 +168,6 @@ public class HTMLInputElement extends HTMLElement {
             ((HtmlTextInput) input).select();
         }
         // currently nothing for other input types
-    }
-
-    /**
-     * Uses {@link #setType(String)} if attribute's name is type to
-     * replace DOM node as well as long as we have subclasses of {@link HtmlInput}.
-     * {@inheritDoc}
-     */
-    @Override
-    public void setAttribute(final String name, final String value) {
-        if ("type".equalsIgnoreCase(name)) {
-            setType(value, true);
-            return;
-        }
-        if ("value".equalsIgnoreCase(name)) {
-            setDefaultValue(value);
-            return;
-        }
-
-        super.setAttribute(name, value);
     }
 
     /**

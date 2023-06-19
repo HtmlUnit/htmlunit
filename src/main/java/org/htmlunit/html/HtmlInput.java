@@ -631,6 +631,23 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             }
             newNames_.add(attributeValue);
         }
+
+        if ("type".equals(qualifiedName)) {
+            setType(attributeValue, true);
+            return;
+        }
+
+        if ("value".equals(qualifiedName)) {
+            final String oldDefaultValue = getDefaultValue();
+            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+                    notifyMutationObservers);
+
+            if (oldDefaultValue.equals(getValue())) {
+                setRawValue(attributeValue);
+            }
+            return;
+        }
+
         super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
     }

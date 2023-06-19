@@ -1709,4 +1709,39 @@ public class HtmlForm2Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("second/?hiddenName=hiddenValue")
+    public void inputHiddenAdded() throws Exception {
+        final String html = "<!DOCTYPE html>\n"
+            + "<html><head></head>\n"
+            + "<body>\n"
+            + "  <p>hello world</p>\n"
+            + "  <form id='myForm' method='GET' action='" + URL_SECOND + "'>\n"
+            + "    <input id='myButton' type='submit' />\n"
+            + "  </form>\n"
+            + "  <script>\n"
+            + "    var i = document.createElement('input');\n"
+            + "    i.setAttribute('type', 'hidden');\n"
+            + "    i.setAttribute('id', 'hiddenId');\n"
+            + "    i.setAttribute('name', 'hiddenName');\n"
+            + "    i.setAttribute('value', 'hiddenValue');\n"
+
+            + "    var f = document.getElementById('myForm');\n"
+            + "    f.appendChild(i);\n"
+            + "  </script>\n"
+            + "</body></html>";
+
+        final String secondContent = "second content";
+        getMockWebConnection().setResponse(URL_SECOND, secondContent);
+
+        final WebDriver driver = loadPage2(html);
+        driver.findElement(By.id("myButton")).click();
+
+        final String url = getMockWebConnection().getLastWebRequest().getUrl().toExternalForm();
+        assertTrue(url.endsWith(getExpectedAlerts()[0]));
+    }
 }
