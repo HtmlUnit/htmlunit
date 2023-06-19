@@ -753,7 +753,8 @@ public class HttpWebConnection implements WebConnection {
         }
 
         try (InputStream is = httpEntity.getContent()) {
-            return downloadContent(is, webClient_.getOptions().getMaxInMemory());
+            return downloadContent(is, webClient_.getOptions().getMaxInMemory(),
+                        webClient_.getOptions().getTempFileDirectory());
         }
     }
 
@@ -761,10 +762,12 @@ public class HttpWebConnection implements WebConnection {
      * Reads the content of the stream and saves it in memory or on the file system.
      * @param is the stream to read
      * @param maxInMemory the maximumBytes to store in memory, after which save to a local file
+     * @param tempFileDirectory the directory to be used or null for the system default
      * @return a wrapper around the downloaded content
      * @throws IOException in case of read issues
      */
-    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory) throws IOException {
+    public static DownloadedContent downloadContent(final InputStream is, final int maxInMemory,
+            final File tempFileDirectory) throws IOException {
         if (is == null) {
             return new DownloadedContent.InMemory(null);
         }
@@ -777,7 +780,7 @@ public class HttpWebConnection implements WebConnection {
                     bos.write(buffer, 0, nbRead);
                     if (bos.size() > maxInMemory) {
                         // we have exceeded the max for memory, let's write everything to a temporary file
-                        final File file = File.createTempFile("htmlunit", ".tmp");
+                        final File file = File.createTempFile("htmlunit", ".tmp", tempFileDirectory);
                         file.deleteOnExit();
                         try (OutputStream fos = Files.newOutputStream(file.toPath())) {
                             bos.writeTo(fos); // what we have already read

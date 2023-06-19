@@ -1332,7 +1332,9 @@ public class WebClient implements Serializable, AutoCloseable {
 
         try (InputStream is = connection.getInputStream()) {
             final DownloadedContent downloadedContent =
-                    HttpWebConnection.downloadContent(is, getOptions().getMaxInMemory());
+                    HttpWebConnection.downloadContent(is,
+                            getOptions().getMaxInMemory(),
+                            getOptions().getTempFileDirectory());
             final WebResponseData data = new WebResponseData(downloadedContent, 200, "OK", responseHeaders);
             return new WebResponse(data, url, webRequest.getHttpMethod(), 0);
         }

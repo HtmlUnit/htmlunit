@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
@@ -23,6 +24,8 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
+
+import org.apache.commons.io.FileUtils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -49,11 +52,14 @@ public class WebClientOptions implements Serializable {
     private boolean appletEnabled_;
     private boolean popupBlockerEnabled_;
     private boolean isRedirectEnabled_ = true;
+    private File tempFileDirectory_;
+
     private KeyStore sslClientCertificateStore_;
     private char[] sslClientCertificatePassword_;
     private KeyStore sslTrustStore_;
     private String[] sslClientProtocols_;
     private String[] sslClientCipherSuites_;
+
     private boolean geolocationEnabled_;
     private boolean doNotTrackEnabled_;
     private boolean activeXNative_;
@@ -106,6 +112,36 @@ public class WebClientOptions implements Serializable {
      */
     public void setRedirectEnabled(final boolean enabled) {
         isRedirectEnabled_ = enabled;
+    }
+
+    /**
+     * Returns whether or not redirections will be followed automatically on receipt of
+     * a redirect status code from the server.
+     * @return true if automatic redirection is enabled
+     */
+    public File getTempFileDirectory() {
+        return tempFileDirectory_;
+    }
+
+    /**
+     * Sets the directory to be uses for storing temporary files.
+     * If the given directory does not exist, this call creates it.
+     *
+     * @param tempFileDirectory the directory to be used or null to use the system defaut
+     * @throws IOException in case of error
+     */
+    public void setTempFileDirectory(final File tempFileDirectory) throws IOException {
+        if (tempFileDirectory != null) {
+            if (tempFileDirectory.exists() && !tempFileDirectory.isDirectory()) {
+                throw new IllegalArgumentException("The provided file '" + tempFileDirectory
+                        + "' points to an already existing file");
+            }
+
+            if (!tempFileDirectory.exists()) {
+                FileUtils.forceMkdir(tempFileDirectory);
+            }
+        }
+        tempFileDirectory_ = tempFileDirectory;
     }
 
     /**
