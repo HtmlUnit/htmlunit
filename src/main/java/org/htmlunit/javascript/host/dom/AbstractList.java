@@ -202,7 +202,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
     }
 
     @Override
-    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
+    public void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
         final DomNode oldDomNode = getDomNodeOrNull();
 
         super.setDomNode(domNode, assignScriptObject);

@@ -191,11 +191,13 @@ public class HtmlUnitScriptable extends ScriptableObject implements Cloneable {
     }
 
     /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
      * Sets the DOM node that corresponds to this JavaScript object.
      * @param domNode the DOM node
      * @param assignScriptObject If true, call <code>setScriptObject</code> on domNode
      */
-    protected void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
+    public void setDomNode(final DomNode domNode, final boolean assignScriptObject) {
         WebAssert.notNull("domNode", domNode);
         domNode_ = domNode;
         if (assignScriptObject) {

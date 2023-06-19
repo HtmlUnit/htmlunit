@@ -16,20 +16,10 @@ package org.htmlunit.javascript.host.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILES_UNDEFINED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_FILE_SELECTION_START_END_NULL;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_DATETIME_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
-import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_ALIGN_FOR_INPUT_IGNORES_VALUES;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_NUMBER_SELECTION_START_END_NULL;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION;
 import static org.htmlunit.BrowserVersionFeatures.JS_SELECT_FILE_THROWS;
-import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -40,25 +30,15 @@ import java.io.IOException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
-import org.htmlunit.BrowserVersion;
-import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
-import org.htmlunit.html.DomAttr;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCheckBoxInput;
-import org.htmlunit.html.HtmlDateTimeLocalInput;
 import org.htmlunit.html.HtmlFileInput;
-import org.htmlunit.html.HtmlImageInput;
 import org.htmlunit.html.HtmlInput;
-import org.htmlunit.html.HtmlMonthInput;
 import org.htmlunit.html.HtmlNumberInput;
 import org.htmlunit.html.HtmlRadioButtonInput;
-import org.htmlunit.html.HtmlResetInput;
-import org.htmlunit.html.HtmlSubmitInput;
 import org.htmlunit.html.HtmlTextInput;
-import org.htmlunit.html.HtmlTimeInput;
-import org.htmlunit.html.HtmlWeekInput;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -69,7 +49,6 @@ import org.htmlunit.javascript.host.dom.NodeList;
 import org.htmlunit.javascript.host.dom.TextRange;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.file.FileList;
-import org.xml.sax.helpers.AttributesImpl;
 
 /**
  * The JavaScript object for {@link HtmlInput}.
@@ -103,61 +82,7 @@ public class HTMLInputElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        final BrowserVersion browserVersion = getBrowserVersion();
-        String type = getDomNodeOrDie().getTypeAttribute();
-        type = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(type);
-        return isSupported(type, browserVersion) ? type : "text";
-    }
-
-    /**
-     * Returns whether the specified type is supported or not.
-     * @param type the input type
-     * @param browserVersion the browser version
-     * @return whether the specified type is supported or not
-     */
-    private static boolean isSupported(final String type, final BrowserVersion browserVersion) {
-        boolean supported = false;
-        switch (type) {
-            case "date":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED);
-                break;
-            case "datetime-local":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_LOCAL_SUPPORTED);
-                break;
-            case "month":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_MONTH_SUPPORTED);
-                break;
-            case "time":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_DATETIME_SUPPORTED);
-                break;
-            case "week":
-                supported = browserVersion.hasFeature(HTMLINPUT_TYPE_WEEK_SUPPORTED);
-                break;
-            case "color":
-                supported = !browserVersion.hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED);
-                break;
-            case "email":
-            case "text":
-            case "submit":
-            case "checkbox":
-            case "radio":
-            case "hidden":
-            case "password":
-            case "image":
-            case "reset":
-            case "button":
-            case "file":
-            case "number":
-            case "range":
-            case "search":
-            case "tel":
-            case "url":
-                supported = true;
-                break;
-
-            default:
-        }
-        return supported;
+        return getDomNodeOrDie().getType();
     }
 
     /**
@@ -176,102 +101,9 @@ public class HTMLInputElement extends HTMLElement {
      * @param newType the new type to set
      * @param setThroughAttribute set type value through setAttribute()
      */
-    private void setType(String newType, final boolean setThroughAttribute) {
-        HtmlInput input = getDomNodeOrDie();
-
-        final String currentType = input.getAttributeDirect("type");
-
-        final BrowserVersion browser = getBrowserVersion();
-        if (!currentType.equalsIgnoreCase(newType)) {
-            if (newType != null && browser.hasFeature(JS_INPUT_SET_TYPE_LOWERCASE)) {
-                newType = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(newType);
-            }
-
-            if (!isSupported(org.htmlunit.util.StringUtils
-                                    .toRootLowerCaseWithCache(newType), browser)) {
-                if (setThroughAttribute) {
-                    newType = "text";
-                }
-                else if (browser.hasFeature(JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION)) {
-                    throw Context.reportRuntimeError("Invalid argument '" + newType
-                            + "' for setting property type.");
-                }
-            }
-
-            final AttributesImpl attributes = new AttributesImpl();
-            boolean typeFound = false;
-            for (final DomAttr entry : input.getAttributesMap().values()) {
-                final String name = entry.getName();
-                final String value = entry.getValue();
-
-                if ("type".equals(name)) {
-                    attributes.addAttribute(null, name, name, null, newType);
-                    typeFound = true;
-                }
-                else {
-                    attributes.addAttribute(null, name, name, null, value);
-                }
-            }
-
-            if (!typeFound) {
-                attributes.addAttribute(null, "type", "type", null, newType);
-            }
-
-            // create a new one only if we have a new type
-            if (ATTRIBUTE_NOT_DEFINED != currentType || !"text".equalsIgnoreCase(newType)) {
-                final SgmlPage page = input.getPage();
-                final HtmlInput newInput = (HtmlInput) page.getWebClient().getPageCreator().getHtmlParser()
-                        .getFactory(HtmlInput.TAG_NAME)
-                        .createElement(page, HtmlInput.TAG_NAME, attributes);
-
-                if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-                    // a hack for the moment
-                    if (!(newInput instanceof HtmlSubmitInput)
-                            && !(newInput instanceof HtmlResetInput)
-                            && !(newInput instanceof HtmlCheckBoxInput)
-                            && !(newInput instanceof HtmlRadioButtonInput)
-                            && !(newInput instanceof HtmlImageInput)) {
-                        newInput.setRawValue(input.getRawValue());
-                    }
-                }
-                else {
-                    if (newInput instanceof HtmlTimeInput
-                            || newInput instanceof HtmlDateTimeLocalInput
-                            || newInput instanceof HtmlFileInput) {
-                        newInput.setValue("");
-                    }
-                    else if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH)
-                            && (newInput instanceof HtmlWeekInput || newInput instanceof HtmlMonthInput)) {
-                        newInput.setValue("");
-                    }
-                    else {
-                        final String originalValue = input.getValue();
-                        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
-                            newInput.setValue(originalValue);
-                        }
-                    }
-                }
-
-                if (input.wasCreatedByJavascript()) {
-                    newInput.markAsCreatedByJavascript();
-                }
-
-                if (input.getParentNode() == null) {
-                    // the input hasn't yet been inserted into the DOM tree (likely has been
-                    // created via document.createElement()), so simply replace it with the
-                    // new Input instance created in the code above
-                    input = newInput;
-                }
-                else {
-                    input.getParentNode().replaceChild(newInput, input);
-                }
-
-                input.setScriptableObject(null);
-                setDomNode(newInput, true);
-            }
-            else {
-                super.setAttribute("type", newType);
-            }
+    private void setType(final String newType, final boolean setThroughAttribute) {
+        if (getDomNodeOrDie().setType(newType, setThroughAttribute)) {
+            super.setAttribute("type", newType);
         }
     }
 
