@@ -142,12 +142,11 @@ public class ExternalTest {
             final HtmlPage page = webClient.getPage(CHROME_DRIVER_URL_);
             String content = page.asNormalizedText();
             content = content.substring(content.indexOf("Current Releases"));
-            content = content.replace("\r\n", "");
+            content = content.replace("\n", " ");
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("If you are using Chrome version "
-                            + BrowserVersion.CHROME.getBrowserVersionNumeric()
-                            + ", please download ChromeDriver (\\d*\\.\\d*\\.\\d*\\.\\d*)");
+                    Pattern.compile("ChromeDriver (\\d*\\.\\d*\\.\\d*\\.\\d*) Supports Chrome version "
+                            + BrowserVersion.CHROME.getBrowserVersionNumeric());
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
