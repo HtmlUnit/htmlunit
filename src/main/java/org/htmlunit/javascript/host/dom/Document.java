@@ -857,15 +857,15 @@ public class Document extends Node {
                     }
                     final HtmlAnchor anchor = (HtmlAnchor) node;
                     if (getBrowserVersion().hasFeature(JS_ANCHOR_REQUIRES_NAME_OR_ID)) {
-                        return anchor.hasAttribute("name") || anchor.hasAttribute("id");
+                        return anchor.hasAttribute(DomElement.NAME_ATTRIBUTE) || anchor.hasAttribute("id");
                     }
-                    return anchor.hasAttribute("name");
+                    return anchor.hasAttribute(DomElement.NAME_ATTRIBUTE);
                 });
 
         anchors.setEffectOnCacheFunction(
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                     event -> {
-                        if ("name".equals(event.getName()) || "id".equals(event.getName())) {
+                        if (DomElement.NAME_ATTRIBUTE.equals(event.getName()) || "id".equals(event.getName())) {
                             return EffectOnCache.RESET;
                         }
                         return EffectOnCache.NONE;

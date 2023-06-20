@@ -136,7 +136,7 @@ public class HtmlApplet extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -218,7 +218,7 @@ public class HtmlApplet extends HtmlElement {
         }
 
         final HashMap<String, String> params = new HashMap<>();
-        params.put("name", getNameAttribute());
+        params.put(NAME_ATTRIBUTE, getNameAttribute());
 
         params.put("object", getObjectAttribute());
         params.put("align", getAlignAttribute());

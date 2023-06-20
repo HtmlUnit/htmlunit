@@ -218,7 +218,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -337,7 +337,7 @@ public class HtmlObject extends HtmlElement implements ValidatableElement {
         }
 
         final HashMap<String, String> params = new HashMap<>();
-        params.put("name", getNameAttribute());
+        params.put(NAME_ATTRIBUTE, getNameAttribute());
 
         params.put("height", getHeightAttribute());
         params.put("width", getWidthAttribute());

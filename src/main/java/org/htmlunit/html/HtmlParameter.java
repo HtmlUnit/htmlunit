@@ -67,7 +67,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**

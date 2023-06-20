@@ -20,6 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlMeta;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -103,7 +104,7 @@ public class HTMLMetaElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -113,7 +114,7 @@ public class HTMLMetaElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**

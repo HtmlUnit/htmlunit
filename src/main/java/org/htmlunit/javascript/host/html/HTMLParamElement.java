@@ -48,7 +48,7 @@ public class HTMLParamElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**

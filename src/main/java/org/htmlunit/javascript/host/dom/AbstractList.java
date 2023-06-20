@@ -318,7 +318,7 @@ public class AbstractList extends HtmlUnitScriptable implements ExternalArrayDat
         final List<DomNode> matchingElements = new ArrayList<>();
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
-                final String nodeName = ((DomElement) next).getAttributeDirect("name");
+                final String nodeName = ((DomElement) next).getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }

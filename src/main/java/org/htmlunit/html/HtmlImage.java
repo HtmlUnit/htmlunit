@@ -372,7 +372,7 @@ public class HtmlImage extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -771,7 +771,7 @@ public class HtmlImage extends HtmlElement {
             // remove initial '#'
             final String mapName = getUseMapAttribute().substring(1);
             final HtmlElement doc = ((HtmlPage) getPage()).getDocumentElement();
-            final HtmlMap map = doc.getOneHtmlElementByAttribute("map", "name", mapName);
+            final HtmlMap map = doc.getOneHtmlElementByAttribute("map", NAME_ATTRIBUTE, mapName);
             for (final DomElement element : map.getChildElements()) {
                 if (element instanceof HtmlArea) {
                     final HtmlArea area = (HtmlArea) element;

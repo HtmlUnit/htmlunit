@@ -259,7 +259,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -268,7 +268,7 @@ public abstract class BaseFrameElement extends HtmlElement {
      * @param name the new window name
      */
     public final void setNameAttribute(final String name) {
-        setAttribute("name", name);
+        setAttribute(NAME_ATTRIBUTE, name);
     }
 
     /**

@@ -79,6 +79,9 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     private static final Log LOG = LogFactory.getLog(DomElement.class);
 
+    /** name. */
+    public static final String NAME_ATTRIBUTE = "name";
+
     /** src. */
     public static final String SRC_ATTRIBUTE = "src";
 

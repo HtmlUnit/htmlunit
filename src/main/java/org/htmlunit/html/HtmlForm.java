@@ -505,11 +505,11 @@ public class HtmlForm extends HtmlElement {
             return true;
         }
 
-        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && !element.hasAttribute("name")) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && !element.hasAttribute(NAME_ATTRIBUTE)) {
             return false;
         }
 
-        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttributeDirect("name"))) {
+        if (!HtmlIsIndex.TAG_NAME.equals(tagName) && "".equals(element.getAttributeDirect(NAME_ATTRIBUTE))) {
             return false;
         }
 
@@ -560,11 +560,11 @@ public class HtmlForm extends HtmlElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getFormElementsByAttribute(HtmlInput.TAG_NAME, "name", name);
+        final List<HtmlInput> list = getFormElementsByAttribute(HtmlInput.TAG_NAME, NAME_ATTRIBUTE, name);
 
         // collect inputs from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlInput && name.equals(elt.getAttributeDirect("name"))) {
+            if (elt instanceof HtmlInput && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
                 list.add((HtmlInput) elt);
             }
         }
@@ -633,7 +633,7 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlInput> inputs = getInputsByName(name);
 
         if (inputs.isEmpty()) {
-            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "name", name);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, NAME_ATTRIBUTE, name);
         }
         return (I) inputs.get(0);
     }
@@ -645,11 +645,11 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getFormElementsByAttribute(HtmlSelect.TAG_NAME, "name", name);
+        final List<HtmlSelect> list = getFormElementsByAttribute(HtmlSelect.TAG_NAME, NAME_ATTRIBUTE, name);
 
         // collect selects from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlSelect && name.equals(elt.getAttributeDirect("name"))) {
+            if (elt instanceof HtmlSelect && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
                 list.add((HtmlSelect) elt);
             }
         }
@@ -667,7 +667,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlSelect getSelectByName(final String name) throws ElementNotFoundException {
         final List<HtmlSelect> list = getSelectsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException(HtmlSelect.TAG_NAME, "name", name);
+            throw new ElementNotFoundException(HtmlSelect.TAG_NAME, NAME_ATTRIBUTE, name);
         }
         return list.get(0);
     }
@@ -679,11 +679,11 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getFormElementsByAttribute(HtmlButton.TAG_NAME, "name", name);
+        final List<HtmlButton> list = getFormElementsByAttribute(HtmlButton.TAG_NAME, NAME_ATTRIBUTE, name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlButton && name.equals(elt.getAttributeDirect("name"))) {
+            if (elt instanceof HtmlButton && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
                 list.add((HtmlButton) elt);
             }
         }
@@ -701,7 +701,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlButton getButtonByName(final String name) throws ElementNotFoundException {
         final List<HtmlButton> list = getButtonsByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException(HtmlButton.TAG_NAME, "name", name);
+            throw new ElementNotFoundException(HtmlButton.TAG_NAME, NAME_ATTRIBUTE, name);
         }
         return list.get(0);
     }
@@ -713,11 +713,11 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getFormElementsByAttribute(HtmlTextArea.TAG_NAME, "name", name);
+        final List<HtmlTextArea> list = getFormElementsByAttribute(HtmlTextArea.TAG_NAME, NAME_ATTRIBUTE, name);
 
         // collect buttons from lost children
         for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlTextArea && name.equals(elt.getAttributeDirect("name"))) {
+            if (elt instanceof HtmlTextArea && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
                 list.add((HtmlTextArea) elt);
             }
         }
@@ -735,7 +735,7 @@ public class HtmlForm extends HtmlElement {
     public HtmlTextArea getTextAreaByName(final String name) throws ElementNotFoundException {
         final List<HtmlTextArea> list = getTextAreasByName(name);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException(HtmlTextArea.TAG_NAME, "name", name);
+            throw new ElementNotFoundException(HtmlTextArea.TAG_NAME, NAME_ATTRIBUTE, name);
         }
         return list.get(0);
     }
@@ -847,7 +847,7 @@ public class HtmlForm extends HtmlElement {
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -858,7 +858,7 @@ public class HtmlForm extends HtmlElement {
      * @param name the value of the attribute {@code name}
      */
     public final void setNameAttribute(final String name) {
-        setAttribute("name", name);
+        setAttribute(NAME_ATTRIBUTE, name);
     }
 
     /**

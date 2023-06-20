@@ -132,7 +132,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -142,7 +142,7 @@ public class HTMLAnchorElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**

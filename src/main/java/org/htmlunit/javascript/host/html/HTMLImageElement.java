@@ -286,7 +286,7 @@ public class HTMLImageElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -296,7 +296,7 @@ public class HTMLImageElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
 }

@@ -123,7 +123,7 @@ public class HTMLAllCollection extends HTMLCollection {
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
                 final DomElement elem = (DomElement) next;
-                if (name.equals(elem.getAttributeDirect("name"))
+                if (name.equals(elem.getAttributeDirect(DomElement.NAME_ATTRIBUTE))
                         || name.equals(elem.getId())) {
                     matching.add(elem);
                 }

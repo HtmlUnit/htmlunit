@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -110,7 +111,7 @@ public class HTMLEmbedElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -120,7 +121,7 @@ public class HTMLEmbedElement extends HTMLElement {
     @JsxSetter
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
 }

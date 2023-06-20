@@ -535,7 +535,7 @@ public class HTMLElement extends Element {
         // Merge ID and name if we aren't preserving identity.
         if (preserveIdentity instanceof Boolean && !((Boolean) preserveIdentity).booleanValue()) {
             target.setId(src.getId());
-            target.setAttribute("name", src.getAttributeDirect("name"));
+            target.setAttribute(DomElement.NAME_ATTRIBUTE, src.getAttributeDirect(DomElement.NAME_ATTRIBUTE));
         }
     }
 
@@ -3455,7 +3455,7 @@ public class HTMLElement extends Element {
      * @return the value of this attribute
      */
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -3464,7 +3464,7 @@ public class HTMLElement extends Element {
      * @param newName the new name
      */
     public void setName(final String newName) {
-        getDomNodeOrDie().setAttribute("name", newName);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, newName);
     }
 
     /**

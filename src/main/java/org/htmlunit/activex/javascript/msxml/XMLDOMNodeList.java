@@ -339,7 +339,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         // no element found by id, let's search by name
         for (final DomNode next : elements) {
             if (next instanceof DomElement) {
-                final String nodeName = ((DomElement) next).getAttributeDirect("name");
+                final String nodeName = ((DomElement) next).getAttributeDirect(DomElement.NAME_ATTRIBUTE);
                 if (name.equals(nodeName)) {
                     matchingElements.add(next);
                 }
@@ -468,7 +468,7 @@ public class XMLDOMNodeList extends MSXMLScriptable implements Function, org.w3c
         int index = 0;
         for (final DomNode next : elements) {
             final HtmlElement element = (HtmlElement) next;
-            final String name = element.getAttributeDirect("name");
+            final String name = element.getAttributeDirect(DomElement.NAME_ATTRIBUTE);
             if (ATTRIBUTE_NOT_DEFINED  == name) {
                 final String id = element.getId();
                 if (ATTRIBUTE_NOT_DEFINED == id) {

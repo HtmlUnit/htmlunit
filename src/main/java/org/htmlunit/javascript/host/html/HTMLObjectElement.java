@@ -33,6 +33,7 @@ import org.htmlunit.corejs.javascript.NativeJavaObject;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Wrapper;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlObject;
@@ -327,7 +328,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     @JsxGetter
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -337,7 +338,7 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
     @JsxSetter
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**

@@ -656,7 +656,7 @@ public class HtmlPage extends SgmlPage {
      * @throws ElementNotFoundException if the anchor could not be found
      */
     public HtmlAnchor getAnchorByName(final String name) throws ElementNotFoundException {
-        return getDocumentElement().getOneHtmlElementByAttribute("a", "name", name);
+        return getDocumentElement().getOneHtmlElementByAttribute("a", DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -702,9 +702,10 @@ public class HtmlPage extends SgmlPage {
      * @exception ElementNotFoundException If no forms match the specified result.
      */
     public HtmlForm getFormByName(final String name) throws ElementNotFoundException {
-        final List<HtmlForm> forms = getDocumentElement().getElementsByAttribute("form", "name", name);
+        final List<HtmlForm> forms = getDocumentElement()
+                .getElementsByAttribute("form", DomElement.NAME_ATTRIBUTE, name);
         if (forms.isEmpty()) {
-            throw new ElementNotFoundException("form", "name", name);
+            throw new ElementNotFoundException("form", DomElement.NAME_ATTRIBUTE, name);
         }
         return forms.get(0);
     }
@@ -1549,7 +1550,7 @@ public class HtmlPage extends SgmlPage {
             }
         }
 
-        throw new ElementNotFoundException("frame or iframe", "name", name);
+        throw new ElementNotFoundException("frame or iframe", DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -1711,7 +1712,7 @@ public class HtmlPage extends SgmlPage {
         if (elements != null) {
             return (E) elements.first();
         }
-        throw new ElementNotFoundException("*", "name", name);
+        throw new ElementNotFoundException("*", DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -1819,7 +1820,7 @@ public class HtmlPage extends SgmlPage {
     void addMappedElement(final DomElement element, final boolean recurse) {
         if (isAncestorOf(element)) {
             addElement(idMap_, element, "id", recurse);
-            addElement(nameMap_, element, "name", recurse);
+            addElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
         }
     }
 
@@ -1888,7 +1889,7 @@ public class HtmlPage extends SgmlPage {
     void removeMappedElement(final DomElement element, final boolean recurse, final boolean descendant) {
         if (descendant || isAncestorOf(element)) {
             removeElement(idMap_, element, "id", recurse);
-            removeElement(nameMap_, element, "name", recurse);
+            removeElement(nameMap_, element, DomElement.NAME_ATTRIBUTE, recurse);
         }
     }
 
@@ -1918,7 +1919,7 @@ public class HtmlPage extends SgmlPage {
      */
     static boolean isMappedElement(final Document document, final String attributeName) {
         return document instanceof HtmlPage
-            && ("name".equals(attributeName) || "id".equals(attributeName));
+            && (DomElement.NAME_ATTRIBUTE.equals(attributeName) || "id".equals(attributeName));
     }
 
     private void calculateBase() {

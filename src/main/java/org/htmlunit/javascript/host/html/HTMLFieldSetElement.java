@@ -20,6 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlFieldSet;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -69,7 +70,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     @Override
     public String getName() {
-        return getDomNodeOrDie().getAttributeDirect("name");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.NAME_ATTRIBUTE);
     }
 
     /**
@@ -79,7 +80,7 @@ public class HTMLFieldSetElement extends HTMLElement {
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     @Override
     public void setName(final String name) {
-        getDomNodeOrDie().setAttribute("name", name);
+        getDomNodeOrDie().setAttribute(DomElement.NAME_ATTRIBUTE, name);
     }
 
     /**

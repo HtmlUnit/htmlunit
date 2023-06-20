@@ -591,7 +591,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     return true;
                 }
             }
-            else if (name.equals(element.getAttributeDirect("name"))) {
+            else if (name.equals(element.getAttributeDirect(DomElement.NAME_ATTRIBUTE))) {
                 return true;
             }
 

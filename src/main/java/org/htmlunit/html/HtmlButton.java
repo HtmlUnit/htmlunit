@@ -235,7 +235,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code name} or an empty string if that attribute isn't defined
      */
     public final String getNameAttribute() {
-        return getAttributeDirect("name");
+        return getAttributeDirect(NAME_ATTRIBUTE);
     }
 
     /**
@@ -336,7 +336,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if ("name".equals(qualifiedName)) {
+        if (NAME_ATTRIBUTE.equals(qualifiedName)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }

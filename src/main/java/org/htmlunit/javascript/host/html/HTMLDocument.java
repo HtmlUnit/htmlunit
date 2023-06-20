@@ -701,7 +701,8 @@ public class HTMLDocument extends Document {
                 (java.util.function.Function<HtmlAttributeChangeEvent, EffectOnCache> & Serializable)
                 event -> {
                     final String attributeName = event.getName();
-                    if ("name".equals(attributeName) || (forIDAndOrName && "id".equals(attributeName))) {
+                    if (DomElement.NAME_ATTRIBUTE.equals(attributeName)
+                            || (forIDAndOrName && "id".equals(attributeName))) {
                         return EffectOnCache.RESET;
                     }
 
