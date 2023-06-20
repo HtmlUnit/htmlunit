@@ -93,7 +93,6 @@ import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
-import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRp;
 import org.htmlunit.html.HtmlRt;
@@ -692,10 +691,7 @@ public class Document extends Node {
             final SgmlPage page = getPage();
             org.w3c.dom.Node element = page.createElement(tagName);
 
-            if (element instanceof HtmlInput) {
-                ((HtmlInput) element).markAsCreatedByJavascript();
-            }
-            else if (element instanceof HtmlImage) {
+            if (element instanceof HtmlImage) {
                 ((HtmlImage) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlRp) {

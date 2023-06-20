@@ -82,7 +82,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     private String rawValue_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
-    private boolean createdByJavascript_;
     private boolean valueModifiedByJavascript_;
     private Object valueAtFocus_;
     private String customValidity_;
@@ -671,27 +670,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Marks this frame as created by javascript. This is needed to handle
-     * some special IE behavior.
-     */
-    public void markAsCreatedByJavascript() {
-        createdByJavascript_ = true;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Returns true if this frame was created by javascript. This is needed to handle
-     * some special IE behavior.
-     * @return true or false
-     */
-    public boolean wasCreatedByJavascript() {
-        return createdByJavascript_;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
      * Marks this element as modified (value) by javascript. This is needed
      * to support maxlength/minlength validation.
      */
@@ -1253,10 +1231,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                             newInput.setValue(originalValue);
                         }
                     }
-                }
-
-                if (wasCreatedByJavascript()) {
-                    newInput.markAsCreatedByJavascript();
                 }
 
                 if (getParentNode() == null) {
