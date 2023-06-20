@@ -248,7 +248,7 @@ public class HtmlAnchor extends HtmlElement {
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttributeDirect("type");
+        return getAttributeDirect(TYPE_ATTRIBUTE);
     }
 
     /**

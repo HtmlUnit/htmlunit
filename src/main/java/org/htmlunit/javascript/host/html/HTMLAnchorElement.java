@@ -45,6 +45,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
 import org.htmlunit.html.HtmlElement;
@@ -798,7 +799,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getAttributeDirect("type");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
     }
 
     /**
@@ -807,7 +808,7 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter
     public void setType(final String type) {
-        getDomNodeOrDie().setAttribute("type", type);
+        getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, type);
     }
 
     /**

@@ -183,7 +183,8 @@ public class HTMLFormElement extends HTMLElement implements Function {
     @JsxGetter
     public int getLength() {
         final int all = getElements().getLength();
-        final int images = getHtmlForm().getElementsByAttribute(HtmlInput.TAG_NAME, "type", "image").size();
+        final int images = getHtmlForm().getElementsByAttribute(
+                            HtmlInput.TAG_NAME, DomElement.TYPE_ATTRIBUTE, "image").size();
         return all - images;
     }
 

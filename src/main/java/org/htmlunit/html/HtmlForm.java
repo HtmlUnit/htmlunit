@@ -215,7 +215,7 @@ public class HtmlForm extends HtmlElement {
         if (submitElement instanceof HtmlElement) {
             final HtmlElement element = (HtmlElement) submitElement;
 
-            final String type = element.getAttributeDirect("type");
+            final String type = element.getAttributeDirect(TYPE_ATTRIBUTE);
             boolean typeImage = false;
             final boolean isInput = HtmlInput.TAG_NAME.equals(element.getTagName());
             if (isInput) {

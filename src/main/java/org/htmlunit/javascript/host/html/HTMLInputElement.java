@@ -94,7 +94,7 @@ public class HTMLInputElement extends HTMLElement {
     @JsxSetter
     public void setType(final String newType) {
         if (getDomNodeOrDie().setType(newType, false)) {
-            super.setAttribute("type", newType);
+            super.setAttribute(DomElement.TYPE_ATTRIBUTE, newType);
         }
     }
 

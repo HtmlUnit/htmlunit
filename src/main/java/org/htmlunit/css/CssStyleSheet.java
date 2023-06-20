@@ -576,7 +576,7 @@ public class CssStyleSheet implements Serializable {
                     }
                     final String name = attributeCondition.getLocalName();
                     final String attrValue = element.getAttribute(name);
-                    if (attributeCondition.isCaseInSensitive() || "type".equals(name)) {
+                    if (attributeCondition.isCaseInSensitive() || DomElement.TYPE_ATTRIBUTE.equals(name)) {
                         return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equalsIgnoreCase(value);
                     }
                     return ATTRIBUTE_NOT_DEFINED != attrValue && attrValue.equals(value);

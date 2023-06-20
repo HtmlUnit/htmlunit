@@ -81,8 +81,12 @@ public class DomElement extends DomNamespaceNode implements Element {
 
     /** src. */
     public static final String SRC_ATTRIBUTE = "src";
-    /** src. */
+
+    /** value. */
     public static final String VALUE_ATTRIBUTE = "value";
+
+    /** type. */
+    public static final String TYPE_ATTRIBUTE = "type";
 
     /** Constant meaning that the specified attribute was not defined. */
     public static final String ATTRIBUTE_NOT_DEFINED = new String("");

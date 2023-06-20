@@ -77,8 +77,6 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "input";
 
-    private static final String TYPE_ATTRUBUTE = "type";
-
     private String rawValue_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
@@ -135,7 +133,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        final String type = getAttributeDirect(TYPE_ATTRUBUTE);
+        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == type) {
             return "text";
         }
@@ -631,7 +629,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             newNames_.add(attributeValue);
         }
 
-        if ("type".equals(qualifiedName)) {
+        if (TYPE_ATTRIBUTE.equals(qualifiedName)) {
             setType(attributeValue, true);
             return;
         }
@@ -888,7 +886,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     protected boolean isCustomValidityValid() {
         if (isCustomErrorValidityState()) {
-            final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+            final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
             if (!"button".equals(type)
                     && !"hidden".equals(type)
                     && !"reset".equals(type)
@@ -1036,7 +1034,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return whether this is a checkbox or a radio button
      */
     public boolean isCheckable() {
-        final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
         return "radio".equals(type) || "checkbox".equals(type);
     }
 
@@ -1044,7 +1042,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return false for type submit/resest/image/button otherwise true
      */
     public boolean isSubmitable() {
-        final String type = getAttributeDirect(TYPE_ATTRUBUTE).toLowerCase(Locale.ROOT);
+        final String type = getAttributeDirect(DomElement.TYPE_ATTRIBUTE).toLowerCase(Locale.ROOT);
         return !"submit".equals(type) && !"image".equals(type) && !"reset".equals(type) && !"button".equals(type);
     }
 
@@ -1159,7 +1157,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return true if the attribute setter has to be called
      */
     public boolean setType(String newType, final boolean setThroughAttribute) {
-        final String currentType = getAttributeDirect("type");
+        final String currentType = getAttributeDirect(TYPE_ATTRIBUTE);
 
         final SgmlPage page = getPage();
         final WebClient webClient = page.getWebClient();
@@ -1186,7 +1184,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 final String name = entry.getName();
                 final String value = entry.getValue();
 
-                if ("type".equals(name)) {
+                if (TYPE_ATTRIBUTE.equals(name)) {
                     attributes.addAttribute(null, name, name, null, newType);
                     typeFound = true;
                 }
@@ -1196,7 +1194,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             }
 
             if (!typeFound) {
-                attributes.addAttribute(null, "type", "type", null, newType);
+                attributes.addAttribute(null, TYPE_ATTRIBUTE, TYPE_ATTRIBUTE, null, newType);
             }
 
             // create a new one only if we have a new type

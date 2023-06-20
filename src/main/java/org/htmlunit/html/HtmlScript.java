@@ -83,7 +83,7 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getTypeAttribute() {
-        return getAttributeDirect("type");
+        return getAttributeDirect(TYPE_ATTRIBUTE);
     }
 
     /**

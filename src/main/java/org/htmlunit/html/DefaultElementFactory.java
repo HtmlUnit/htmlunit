@@ -793,7 +793,7 @@ public class DefaultElementFactory implements ElementFactory {
         String type = "";
         if (attributeMap != null) {
             for (final Map.Entry<String, DomAttr> entry : attributeMap.entrySet()) {
-                if ("type".equalsIgnoreCase(entry.getKey())) {
+                if (DomElement.TYPE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
                     type = entry.getValue().getValue();
                 }
             }

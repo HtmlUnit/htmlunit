@@ -20,6 +20,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlButton;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -59,7 +60,7 @@ public class HTMLButtonElement extends HTMLElement {
      */
     @JsxSetter
     public void setType(final String newType) {
-        getDomNodeOrDie().setAttribute("type", newType);
+        getDomNodeOrDie().setAttribute(DomElement.TYPE_ATTRIBUTE, newType);
     }
 
     /**

@@ -52,7 +52,7 @@ public class HtmlStyle extends HtmlElement {
      * @return the value of the attribute {@code type} or an empty string if that attribute isn't defined
      */
     public final String getTypeAttribute() {
-        return getAttributeDirect("type");
+        return getAttributeDirect(TYPE_ATTRIBUTE);
     }
 
     /**
@@ -61,7 +61,7 @@ public class HtmlStyle extends HtmlElement {
      * @param type the new type
      */
     public final void setTypeAttribute(final String type) {
-        setAttribute("type", type);
+        setAttribute(TYPE_ATTRIBUTE, type);
     }
 
     /**

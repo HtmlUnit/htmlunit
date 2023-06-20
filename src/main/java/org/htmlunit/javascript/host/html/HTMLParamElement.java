@@ -67,7 +67,7 @@ public class HTMLParamElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return getDomNodeOrDie().getAttributeDirect("type");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.TYPE_ATTRIBUTE);
     }
 
     /**
