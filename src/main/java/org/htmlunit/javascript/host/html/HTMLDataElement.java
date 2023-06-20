@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlData;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -47,7 +48,7 @@ public class HTMLDataElement extends HTMLElement {
      */
     @JsxSetter
     public void setValue(final String newValue) {
-        getDomNodeOrDie().setAttribute("value", newValue);
+        getDomNodeOrDie().setAttribute(DomElement.VALUE_ATTRIBUTE, newValue);
     }
 
     /**
@@ -57,6 +58,6 @@ public class HTMLDataElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getValue() {
-        return getDomNodeOrDie().getAttributeDirect("value");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.VALUE_ATTRIBUTE);
     }
 }

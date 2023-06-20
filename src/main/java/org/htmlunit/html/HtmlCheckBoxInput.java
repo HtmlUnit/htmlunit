@@ -63,7 +63,7 @@ public class HtmlCheckBoxInput extends HtmlInput implements LabelableElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
+        if (getAttributeDirect(VALUE_ATTRIBUTE) == ATTRIBUTE_NOT_DEFINED) {
             setRawValue(DEFAULT_VALUE);
         }
 

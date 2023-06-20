@@ -59,7 +59,7 @@ public class HtmlFileInput extends HtmlInput implements LabelableElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        final DomAttr valueAttrib = attributes.get("value");
+        final DomAttr valueAttrib = attributes.get(VALUE_ATTRIBUTE);
         if (valueAttrib != null) {
             setDefaultValue(valueAttrib.getNodeValue());
         }

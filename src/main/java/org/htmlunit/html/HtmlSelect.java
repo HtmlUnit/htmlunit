@@ -512,23 +512,23 @@ public class HtmlSelect extends HtmlElement implements DisabledElement, Submitta
      * @exception ElementNotFoundException If a particular element could not be found in the DOM model
      */
     public HtmlOption getOptionByValue(final String value) throws ElementNotFoundException {
-        WebAssert.notNull("value", value);
+        WebAssert.notNull(VALUE_ATTRIBUTE, value);
         for (final HtmlOption option : getOptions()) {
             if (option.getValueAttribute().equals(value)) {
                 return option;
             }
         }
-        throw new ElementNotFoundException("option", "value", value);
+        throw new ElementNotFoundException("option", VALUE_ATTRIBUTE, value);
     }
 
     private HtmlOption getOptionByValueStrict(final String value) throws ElementNotFoundException {
-        WebAssert.notNull("value", value);
+        WebAssert.notNull(VALUE_ATTRIBUTE, value);
         for (final HtmlOption option : getOptions()) {
-            if (option.getAttributeDirect("value").equals(value)) {
+            if (option.getAttributeDirect(VALUE_ATTRIBUTE).equals(value)) {
                 return option;
             }
         }
-        throw new ElementNotFoundException("option", "value", value);
+        throw new ElementNotFoundException("option", VALUE_ATTRIBUTE, value);
     }
 
     /**

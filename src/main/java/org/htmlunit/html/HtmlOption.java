@@ -232,7 +232,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @return the value of the attribute {@code value}
      */
     public final String getValueAttribute() {
-        String value = getAttributeDirect("value");
+        String value = getAttributeDirect(VALUE_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == value) {
             value = getText();
         }
@@ -247,7 +247,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
      * @param newValue the value of the attribute {@code value}
      */
     public final void setValueAttribute(final String newValue) {
-        setAttribute("value", newValue);
+        setAttribute(VALUE_ATTRIBUTE, newValue);
     }
 
     /**

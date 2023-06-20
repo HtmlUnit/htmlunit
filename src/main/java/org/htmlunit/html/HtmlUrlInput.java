@@ -48,7 +48,7 @@ public class HtmlUrlInput extends HtmlSelectableTextInput implements LabelableEl
         final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
         if (browserVersion.hasFeature(JS_INPUT_URL_VALUE_TRIMMED)) {
             for (final Map.Entry<String, DomAttr> entry : attributes.entrySet()) {
-                if ("value".equalsIgnoreCase(entry.getKey())) {
+                if (VALUE_ATTRIBUTE.equalsIgnoreCase(entry.getKey())) {
                     entry.getValue().setValue(entry.getValue().getValue().trim());
                     break;
                 }

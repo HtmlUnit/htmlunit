@@ -83,7 +83,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @param newValue the new content
      */
     public void setValueAttribute(final String newValue) {
-        setAttribute("value", newValue);
+        setAttribute(VALUE_ATTRIBUTE, newValue);
     }
 
     /**
@@ -246,7 +246,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
-        return getAttributeDirect("value");
+        return getAttributeDirect(VALUE_ATTRIBUTE);
     }
 
     /**

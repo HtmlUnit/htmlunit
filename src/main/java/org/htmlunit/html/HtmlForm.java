@@ -973,7 +973,7 @@ public class HtmlForm extends HtmlElement {
     public <I extends HtmlInput> I getInputByValue(final String value) throws ElementNotFoundException {
         final List<HtmlInput> list = getInputsByValue(value);
         if (list.isEmpty()) {
-            throw new ElementNotFoundException(HtmlInput.TAG_NAME, "value", value);
+            throw new ElementNotFoundException(HtmlInput.TAG_NAME, VALUE_ATTRIBUTE, value);
         }
         return (I) list.get(0);
     }

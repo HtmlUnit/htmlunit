@@ -51,7 +51,7 @@ public class HtmlResetInput extends HtmlInput implements LabelableElement {
             final Map<String, DomAttr> attributes) {
         super(qualifiedName, page, attributes);
 
-        if (getAttributeDirect("value") == ATTRIBUTE_NOT_DEFINED) {
+        if (getAttributeDirect(VALUE_ATTRIBUTE) == ATTRIBUTE_NOT_DEFINED) {
             final BrowserVersion browserVersion = page.getWebClient().getBrowserVersion();
             if (browserVersion.hasFeature(RESETINPUT_DEFAULT_VALUE_IF_VALUE_NOT_DEFINED)) {
                 setValue(DEFAULT_VALUE);

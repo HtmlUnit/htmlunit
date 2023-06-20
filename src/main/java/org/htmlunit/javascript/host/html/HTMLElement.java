@@ -53,6 +53,7 @@ import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.StyleAttributes;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlAbbreviated;
@@ -3472,7 +3473,7 @@ public class HTMLElement extends Element {
      * @return the value of this attribute
      */
     public Object getValue() {
-        return getDomNodeOrDie().getAttributeDirect("value");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.VALUE_ATTRIBUTE);
     }
 
     /**
@@ -3481,7 +3482,7 @@ public class HTMLElement extends Element {
      * @param newValue the new value
      */
     public void setValue(final Object newValue) {
-        getDomNodeOrDie().setAttribute("value", Context.toString(newValue));
+        getDomNodeOrDie().setAttribute(DomElement.VALUE_ATTRIBUTE, Context.toString(newValue));
     }
 
     /**

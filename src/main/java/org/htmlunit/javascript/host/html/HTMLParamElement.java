@@ -19,6 +19,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlParameter;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -57,7 +58,7 @@ public class HTMLParamElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getValue() {
-        return getDomNodeOrDie().getAttributeDirect("value");
+        return getDomNodeOrDie().getAttributeDirect(DomElement.VALUE_ATTRIBUTE);
     }
 
     /**

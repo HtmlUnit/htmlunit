@@ -79,7 +79,7 @@ public class HtmlParameter extends HtmlElement {
      * or an empty string if that attribute isn't defined.
      */
     public final String getValueAttribute() {
-        return getAttributeDirect("value");
+        return getAttributeDirect(VALUE_ATTRIBUTE);
     }
 
     /**

@@ -24,6 +24,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlForm;
@@ -90,7 +91,7 @@ public class HTMLOptionElement extends HTMLElement {
     @JsxGetter
     @Override
     public String getValue() {
-        String value = getDomNodeOrNull().getAttributeDirect("value");
+        String value = getDomNodeOrNull().getAttributeDirect(DomElement.VALUE_ATTRIBUTE);
         if (ATTRIBUTE_NOT_DEFINED == value) {
             value = ((HtmlOption) getDomNodeOrNull()).getText();
         }

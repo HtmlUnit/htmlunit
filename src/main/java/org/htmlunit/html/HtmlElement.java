@@ -1350,7 +1350,7 @@ public abstract class HtmlElement extends DomElement {
     public boolean isValid() {
         return !isRequiredSupported()
                 || ATTRIBUTE_NOT_DEFINED == getAttributeDirect(ATTRIBUTE_REQUIRED)
-                || !getAttributeDirect("value").isEmpty();
+                || !getAttributeDirect(VALUE_ATTRIBUTE).isEmpty();
     }
 
     /**

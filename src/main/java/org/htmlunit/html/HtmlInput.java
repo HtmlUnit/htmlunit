@@ -116,7 +116,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @param newValue the new value
      */
     public void setValueAttribute(final String newValue) {
-        super.setAttribute("value", newValue);
+        super.setAttribute(VALUE_ATTRIBUTE, newValue);
     }
 
     /**
@@ -161,7 +161,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * @return the value of the attribute {@code value} or an empty string if that attribute isn't defined
      */
     public final String getValueAttribute() {
-        return getAttributeDirect("value");
+        return getAttributeDirect(VALUE_ATTRIBUTE);
     }
 
     /**
@@ -636,7 +636,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             return;
         }
 
-        if ("value".equals(qualifiedName)) {
+        if (VALUE_ATTRIBUTE.equals(qualifiedName)) {
             final String oldDefaultValue = getDefaultValue();
             super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);

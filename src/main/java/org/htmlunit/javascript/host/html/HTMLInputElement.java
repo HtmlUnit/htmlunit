@@ -32,6 +32,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Undefined;
+import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlFileInput;
@@ -549,7 +550,7 @@ public class HTMLInputElement extends HTMLElement {
     @Override
     public String getAttribute(final String attributeName, final Integer flags) {
         final String superAttribute = super.getAttribute(attributeName, flags);
-        if ("value".equalsIgnoreCase(attributeName)) {
+        if (DomElement.VALUE_ATTRIBUTE.equalsIgnoreCase(attributeName)) {
             if ((superAttribute == null || !superAttribute.isEmpty())
                     && getDefaultValue().isEmpty()) {
                 return null;
