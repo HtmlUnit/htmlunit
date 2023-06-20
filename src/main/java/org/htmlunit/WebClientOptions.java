@@ -115,19 +115,20 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns whether or not redirections will be followed automatically on receipt of
-     * a redirect status code from the server.
-     * @return true if automatic redirection is enabled
+     * Returns the directory to be used for storing the response content in
+     * a temporary file see {@link #getMaxInMemory()}.
+     * @return the directory to be used for storing temp files or null to use the system default
      */
     public File getTempFileDirectory() {
         return tempFileDirectory_;
     }
 
     /**
-     * Sets the directory to be uses for storing temporary files.
-     * If the given directory does not exist, this call creates it.
+     * sets the directory to be used for storing the response content in
+     * a temporary file see {@link #setMaxInMemory(int)}.
+     * If the given directory does not exist, this creates it.
      *
-     * @param tempFileDirectory the directory to be used or null to use the system defaut
+     * @param tempFileDirectory the directory to be used or null to use the system default
      * @throws IOException in case of error
      */
     public void setTempFileDirectory(final File tempFileDirectory) throws IOException {
@@ -601,7 +602,7 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Returns the maximum bytes to have in memory, after which the content is saved to a file.
+     * Returns the maximum bytes to have in memory, after which the content is saved to a temporary file.
      * @return the maximum bytes in memory
      */
     public int getMaxInMemory() {
@@ -609,8 +610,8 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * Sets the maximum bytes to have in memory, after which the content is saved to a file.
-     * Set this to zero or -1 to deactivate the history at all.
+     * Sets the maximum bytes to have in memory, after which the content is saved to a temporary file.
+     * Set this to zero or -1 to deactivate the saving at all.
      * @param maxInMemory maximum bytes in memory
      */
     public void setMaxInMemory(final int maxInMemory) {
