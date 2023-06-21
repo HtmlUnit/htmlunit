@@ -373,38 +373,6 @@ public class HTMLInputElementTest extends WebDriverTestCase {
         testAttribute("checked", "", "");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
-    @Alerts(DEFAULT = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                       "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                       "", "", "", "", "", "50", "abc", "abc", "abc", "abc"},
-            FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                  "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                  "", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF_ESR = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                      "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "", "abc",
-                      "", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            IE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                  "abc", "abc", "abc", "abc", "abc", "foo", "abc", "abc", "abc",
-                  "abc", "abc", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
-    @HtmlUnitNYI(CHROME = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                           "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
-                           "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            EDGE = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                    "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
-                    "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                  "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
-                  "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"},
-            FF_ESR = {"abc", "abc", "abc", "", "abc", "foo", "", "abc", "abc",
-                      "abc", "abc", "abc", "abc", "abc", "foo", "#000000", "abc", "abc",
-                      "abc", "", "abc", "abc", "", "50", "abc", "abc", "abc", "abc"})
-    @Test
-    public void setValueAttribute() throws Exception {
-        testAttribute("value", "", "abc");
-    }
-
     private void testAttribute(final String property, final String attrib, final String value) throws Exception {
         String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -473,6 +441,337 @@ public class HTMLInputElementTest extends WebDriverTestCase {
             + "  log(document.form1.email1." + property + ");\n"
             + "  log(document.form1.tel1." + property + ");\n"
             + "  log(document.form1.url1." + property + ");\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "  <input type='button' name='button1' " + attrib + "></button>\n"
+            + "  <button type='button' name='button2' " + attrib + "></button>\n"
+            + "  <input type='checkbox' name='checkbox1' " + attrib + "/>\n"
+            + "  <input type='file' name='fileupload1' " + attrib + "/>\n"
+            + "  <input type='hidden' name='hidden1' " + attrib + "/>\n"
+            + "  <select name='select1' " + attrib + ">\n"
+            + "    <option>foo</option>\n"
+            + "  </select>\n"
+            + "  <select multiple='multiple' name='select2' " + attrib + ">\n"
+            + "    <option>foo</option>\n"
+            + "  </select>\n"
+            + "  <input type='password' name='password1' " + attrib + "/>\n"
+            + "  <input type='radio' name='radio1' " + attrib + "/>\n"
+            + "  <input type='reset' name='reset1' " + attrib + "/>\n"
+            + "  <button type='reset' name='reset2' " + attrib + "></button>\n"
+            + "  <input type='submit' name='submit1' " + attrib + "/>\n"
+            + "  <button type='submit' name='submit2' " + attrib + "></button>\n"
+            + "  <input type='text' name='textInput1' " + attrib + "/>\n"
+            + "  <textarea name='textarea1' " + attrib + ">foo</textarea>\n"
+            + "  <input type='color' name='color1' " + attrib + "/>\n"
+            + "  <input type='date' name='date1' " + attrib + "/>\n"
+            + "  <input type='datetime' name='datetime1' " + attrib + "/>\n"
+            + "  <input type='datetime-local' name='datetimeLocal1' " + attrib + "/>\n"
+            + "  <input type='time' name='time1' " + attrib + "/>\n"
+            + "  <input type='week' name='week1' " + attrib + "/>\n"
+            + "  <input type='month' name='month1' " + attrib + "/>\n"
+            + "  <input type='number' name='number1' " + attrib + "/>\n"
+            + "  <input type='range' name='range1' " + attrib + "/>\n"
+            + "  <input type='search' name='search1' " + attrib + "/>\n"
+            + "  <input type='email' name='email1' " + attrib + "/>\n"
+            + "  <input type='tel' name='tel1' " + attrib + "/>\n"
+            + "  <input type='url' name='url1' " + attrib + "/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeInputButton() throws Exception {
+        testAttribute("button1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeButton() throws Exception {
+        testAttribute("button2", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeCheckbox() throws Exception {
+        testAttribute("checkbox1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("")
+    @Test
+    public void setValueAttributeFile() throws Exception {
+        testAttribute("fileupload1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeHidden() throws Exception {
+        testAttribute("hidden1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("foo")
+    @Test
+    public void setValueAttributeSelect() throws Exception {
+        testAttribute("select1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("")
+    @Test
+    public void setValueAttributeSelectMultiple() throws Exception {
+        testAttribute("select2", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributePassword() throws Exception {
+        testAttribute("password1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeRadio() throws Exception {
+        testAttribute("radio1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeReset() throws Exception {
+        testAttribute("reset1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeResetButton() throws Exception {
+        testAttribute("reset2", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeSubmit() throws Exception {
+        testAttribute("submit1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeSubmitButton() throws Exception {
+        testAttribute("submit2", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeText() throws Exception {
+        testAttribute("textInput1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("foo")
+    @Test
+    public void setValueAttributeTextArea() throws Exception {
+        testAttribute("textarea1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "#000000",
+            IE = "abc")
+    @Test
+    public void setValueAttributeColor() throws Exception {
+        testAttribute("color1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "",
+            IE = "abc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
+    @Test
+    public void setValueAttributeDate() throws Exception {
+        testAttribute("date1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeDateTime() throws Exception {
+        testAttribute("datetime1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "",
+            IE = "abc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc",
+            FF = "abc",
+            FF_ESR = "abc")
+    @Test
+    public void setValueAttributeDateTimeLocal() throws Exception {
+        testAttribute("datetimeLocal1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "",
+            IE = "abc")
+    @Test
+    public void setValueAttributeTime() throws Exception {
+        testAttribute("time1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "",
+            FF = "abc",
+            FF_ESR = "abc",
+            IE = "abc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc")
+    @Test
+    public void setValueAttributeWeek() throws Exception {
+        testAttribute("week1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts(DEFAULT = "",
+            FF = "abc",
+            FF_ESR = "abc",
+            IE = "abc")
+    @HtmlUnitNYI(CHROME = "abc",
+            EDGE = "abc")
+    @Test
+    public void setValueAttributeMonth() throws Exception {
+        testAttribute("month1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("")
+    @Test
+    public void setValueAttributeNumber() throws Exception {
+        testAttribute("number1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("50")
+    @Test
+    public void setValueAttributeRange() throws Exception {
+        testAttribute("range1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeSearch() throws Exception {
+        testAttribute("search1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeEmail() throws Exception {
+        testAttribute("email1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeTel() throws Exception {
+        testAttribute("tel1", "value", "", "abc");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts("abc")
+    @Test
+    public void setValueAttributeUrl() throws Exception {
+        testAttribute("url1", "value", "", "abc");
+    }
+
+    private void testAttribute(final String itemId, final String property,
+                    final String attrib, final String value) throws Exception {
+        String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n";
+
+        if (value != null) {
+            html = html
+                + "  document.form1." + itemId + ".setAttribute('" + property + "', '" + value + "');\n";
+        }
+
+        html = html
+            + "  log(document.form1." + itemId + "." + property + ");\n"
             + "}\n"
             + "</script></head><body onload='doTest()'>\n"
             + "<p>hello world</p>\n"
