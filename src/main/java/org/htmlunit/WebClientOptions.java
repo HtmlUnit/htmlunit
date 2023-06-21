@@ -124,7 +124,7 @@ public class WebClientOptions implements Serializable {
     }
 
     /**
-     * sets the directory to be used for storing the response content in
+     * Sets the directory to be used for storing the response content in
      * a temporary file see {@link #setMaxInMemory(int)}.
      * If the given directory does not exist, this creates it.
      *
