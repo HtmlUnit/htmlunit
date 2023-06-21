@@ -622,30 +622,32 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if (NAME_ATTRIBUTE.equals(qualifiedName)) {
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        if (NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
 
-        if (TYPE_ATTRIBUTE.equals(qualifiedName)) {
+        if (TYPE_ATTRIBUTE.equals(qualifiedNameLC)) {
             setType(attributeValue, true);
             return;
         }
 
-        if (VALUE_ATTRIBUTE.equals(qualifiedName)) {
+        if (VALUE_ATTRIBUTE.equals(qualifiedNameLC)) {
             final String oldDefaultValue = getDefaultValue();
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+            super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
 
-            if (oldDefaultValue.equals(getValue())) {
+            if (this instanceof HtmlCheckBoxInput || this instanceof HtmlRadioButtonInput
+                    || oldDefaultValue.equals(getValue())) {
                 setRawValue(attributeValue);
             }
             return;
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
     }
 
@@ -1153,10 +1155,8 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      * Note: this replace the DOM node with a new one.
      * @param newType the new type to set
      * @param setThroughAttribute set type value through setAttribute()
-     *
-     * @return true if the attribute setter has to be called
      */
-    public boolean setType(String newType, final boolean setThroughAttribute) {
+    public void setType(String newType, final boolean setThroughAttribute) {
         final String currentType = getAttributeDirect(TYPE_ATTRIBUTE);
 
         final SgmlPage page = getPage();
@@ -1244,11 +1244,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 setScriptableObject(null);
                 scriptable.setDomNode(newInput, true);
 
-                return false;
+                return;
             }
-            return true;
+            super.setAttributeNS(null, TYPE_ATTRIBUTE, newType, true, true);
         }
-        return false;
     }
 
     /**

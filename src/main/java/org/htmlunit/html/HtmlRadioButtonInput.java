@@ -273,10 +273,11 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if (ATTRIBUTE_CHECKED.equals(qualifiedName)) {
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        if (ATTRIBUTE_CHECKED.equals(qualifiedNameLC)) {
             checkedState_ = true;
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
     }
 

@@ -140,10 +140,11 @@ public class HtmlImage extends HtmlElement {
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
 
         final HtmlPage htmlPage = getHtmlPageOrNull();
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
-            final String oldValue = getAttributeNS(namespaceURI, qualifiedName);
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && value != ATTRIBUTE_NOT_DEFINED && htmlPage != null) {
+            final String oldValue = getAttributeNS(namespaceURI, qualifiedNameLC);
             if (!oldValue.equals(value)) {
-                super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
+                super.setAttributeNS(namespaceURI, qualifiedNameLC, value, notifyAttributeChangeListeners,
                         notifyMutationObservers);
 
                 // onload handlers may need to be invoked again, and a new image may need to be downloaded
@@ -175,7 +176,7 @@ public class HtmlImage extends HtmlElement {
             }
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, value, notifyAttributeChangeListeners,
+        super.setAttributeNS(namespaceURI, qualifiedNameLC, value, notifyAttributeChangeListeners,
                 notifyMutationObservers);
     }
 

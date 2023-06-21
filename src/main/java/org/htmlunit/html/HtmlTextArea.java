@@ -541,13 +541,14 @@ public class HtmlTextArea extends HtmlElement implements DisabledElement, Submit
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
-        if (DomElement.NAME_ATTRIBUTE.equals(qualifiedName)) {
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        if (DomElement.NAME_ATTRIBUTE.equals(qualifiedNameLC)) {
             if (newNames_.isEmpty()) {
                 newNames_ = new HashSet<>();
             }
             newNames_.add(attributeValue);
         }
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
     }
 

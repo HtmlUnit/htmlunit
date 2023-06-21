@@ -157,16 +157,17 @@ public class HtmlScript extends HtmlElement implements ScriptElement {
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, final String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObservers) {
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
         // special additional processing for the 'src'
-        if (namespaceURI != null || !SRC_ATTRIBUTE.equals(qualifiedName)) {
-            super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        if (namespaceURI != null || !SRC_ATTRIBUTE.equals(qualifiedNameLC)) {
+            super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
             return;
         }
 
         // namespaceURI is always null here - we can call getAttribute directly
-        final String oldValue = getAttribute(qualifiedName);
-        super.setAttributeNS(null, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        final String oldValue = getAttribute(qualifiedNameLC);
+        super.setAttributeNS(null, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObservers);
 
         if (isAttachedToPage() && oldValue.isEmpty() && getFirstChild() == null) {

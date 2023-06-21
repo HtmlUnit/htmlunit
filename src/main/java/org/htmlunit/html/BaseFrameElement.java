@@ -380,16 +380,17 @@ public abstract class BaseFrameElement extends HtmlElement {
     @Override
     protected void setAttributeNS(final String namespaceURI, final String qualifiedName, String attributeValue,
             final boolean notifyAttributeChangeListeners, final boolean notifyMutationObserver) {
-        if (null != attributeValue && SRC_ATTRIBUTE.equals(qualifiedName)) {
+        final String qualifiedNameLC = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(qualifiedName);
+        if (null != attributeValue && SRC_ATTRIBUTE.equals(qualifiedNameLC)) {
             attributeValue = attributeValue.trim();
         }
 
-        super.setAttributeNS(namespaceURI, qualifiedName, attributeValue, notifyAttributeChangeListeners,
+        super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                 notifyMutationObserver);
 
         // do not use equals() here
         // see HTMLIFrameElement2Test.documentCreateElement_onLoad_srcAboutBlank()
-        if (SRC_ATTRIBUTE.equals(qualifiedName) && UrlUtils.ABOUT_BLANK != attributeValue) {
+        if (SRC_ATTRIBUTE.equals(qualifiedNameLC) && UrlUtils.ABOUT_BLANK != attributeValue) {
             if (isAttachedToPage()) {
                 loadSrc();
             }
