@@ -46,14 +46,17 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
             final double max = getMaxNumeric();
             if (max < min) {
                 setValue(min);
+                unmarkValueDirty();
                 return;
             }
 
             final double val = min + ((max - min) / 2);
             setValue(val);
+            unmarkValueDirty();
         }
         else {
             setValue(value);
+            unmarkValueDirty();
         }
     }
 

@@ -171,7 +171,7 @@ public class HtmlImageInput extends HtmlInput implements LabelableElement {
      */
     @Override
     public void setValue(final String newValue) {
-        super.setValue(newValue);
+        unmarkValueDirty();
         setDefaultValue(newValue);
     }
 

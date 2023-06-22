@@ -239,6 +239,7 @@ public class HtmlRangeInputTest extends WebDriverTestCase {
             + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"
                     + " + '-' + input.step);\n"
+
             + "    input.defaultValue = '8';\n"
             + "    log(input.value + '-' + input.defaultValue"
                     + " + '-' + input.max + '-' + input.min"

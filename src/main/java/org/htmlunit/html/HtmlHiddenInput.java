@@ -49,7 +49,7 @@ public class HtmlHiddenInput extends HtmlInput {
      */
     @Override
     public void setValue(final String newValue) {
-        super.setValue(newValue);
+        unmarkValueDirty();
         setDefaultValue(newValue);
     }
 

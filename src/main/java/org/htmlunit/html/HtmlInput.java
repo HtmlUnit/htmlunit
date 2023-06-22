@@ -78,6 +78,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     public static final String TAG_NAME = "input";
 
     private String rawValue_;
+    private boolean isValueDirty_;
     private final String originalName_;
     private Collection<String> newNames_ = Collections.emptySet();
     private boolean valueModifiedByJavascript_;
@@ -176,6 +177,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     public void setValue(final String newValue) {
         setRawValue(newValue);
+        isValueDirty_ = true;
     }
 
     /**
@@ -460,6 +462,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
     @Override
     public void reset() {
         setValue(getDefaultValue());
+        isValueDirty_ = true;
     }
 
     /**
@@ -469,12 +472,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
      */
     @Override
     public void setDefaultValue(final String defaultValue) {
-        final String oldDefaultValue = getDefaultValue();
         setValueAttribute(defaultValue);
-
-        if (oldDefaultValue.equals(getValue())) {
-            setRawValue(defaultValue);
-        }
     }
 
     /**
@@ -636,12 +634,11 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         }
 
         if (VALUE_ATTRIBUTE.equals(qualifiedNameLC)) {
-            final String oldDefaultValue = getDefaultValue();
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
 
             if (this instanceof HtmlCheckBoxInput || this instanceof HtmlRadioButtonInput
-                    || oldDefaultValue.equals(getValue())) {
+                    || !isValueDirty_) {
                 setRawValue(attributeValue);
             }
             return;
@@ -1299,5 +1296,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             default:
         }
         return supported;
+    }
+
+    protected void unmarkValueDirty() {
+        isValueDirty_ = false;
     }
 }
