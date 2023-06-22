@@ -637,8 +637,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
 
-            if (this instanceof HtmlCheckBoxInput || this instanceof HtmlRadioButtonInput
-                    || !isValueDirty_) {
+            if (!isValueDirty_) {
                 setRawValue(attributeValue);
             }
             return;
