@@ -26,6 +26,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -142,5 +143,10 @@ public class HtmlTimeInput extends HtmlSelectableTextInput implements LabelableE
             }
         }
         return true;
+    }
+
+    @Override
+    protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
+        setRawValue("");
     }
 }

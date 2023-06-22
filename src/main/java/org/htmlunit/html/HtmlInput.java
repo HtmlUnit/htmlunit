@@ -24,7 +24,6 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_IMAGE_IGNORES_C
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_WEEK_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE;
-import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_TYPE_LOWERCASE;
 import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_SET_UNSUPORTED_TYPE_EXCEPTION;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
@@ -1200,7 +1199,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                         .createElement(page, HtmlInput.TAG_NAME, attributes);
 
                 if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE)) {
-                    // a hack for the moment
+                    // a hack for the moment (IE)
                     if (!(newInput instanceof HtmlSubmitInput)
                             && !(newInput instanceof HtmlResetInput)
                             && !(newInput instanceof HtmlCheckBoxInput)
@@ -1210,22 +1209,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                     }
                 }
                 else {
-                    if (newInput instanceof HtmlTimeInput
-                            || newInput instanceof HtmlDateTimeLocalInput
-                            || newInput instanceof HtmlFileInput) {
-                        newInput.setValue("");
-                    }
-                    else if (browser.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH)
-                            && (newInput instanceof HtmlWeekInput || newInput instanceof HtmlMonthInput)) {
-                        newInput.setValue("");
-                    }
-                    else {
-                        final String originalValue = getValue();
-                        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
-                            newInput.setValue(originalValue);
-                        }
-                    }
+                    newInput.adjustValueAfterTypeChange(this, browser);
                 }
+
+                // newInput.isValueDirty_ = isValueDirty_;
 
                 if (getParentNode() == null) {
                     // the input hasn't yet been inserted into the DOM tree (likely has been
@@ -1243,6 +1230,13 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                 return;
             }
             super.setAttributeNS(null, TYPE_ATTRIBUTE, newType, true, true);
+        }
+    }
+
+    protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
+        final String originalValue = oldInput.getValue();
+        if (ATTRIBUTE_NOT_DEFINED != originalValue) {
+            setValue(originalValue);
         }
     }
 

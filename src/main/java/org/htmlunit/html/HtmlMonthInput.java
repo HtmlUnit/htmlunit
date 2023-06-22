@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.HTMLINPUT_TYPE_MONTH_SUPPORTED;
+import static org.htmlunit.BrowserVersionFeatures.JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH;
 
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -22,6 +23,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -119,5 +121,14 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
             }
         }
         return true;
+    }
+
+    @Override
+    protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
+        if (browserVersion.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH)) {
+            setRawValue("");
+            return;
+        }
+        super.adjustValueAfterTypeChange(oldInput, browserVersion);
     }
 }

@@ -817,6 +817,72 @@ public class HTMLInputElementTest extends WebDriverTestCase {
     /**
      * @throws Exception if the test fails
      */
+    @Alerts({"abc-abc", "abc-abc", "jkl-abc"})
+    @Test
+    public void typeChangeNotDirty() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var inpt = document.form1.textInput1;\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.type = 'password';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.value = 'jkl';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "  <input type='text' name='textInput1' value='abc'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Alerts({"abc-abc", "def-abc", "ghi-abc", "ghi-abc", "jkl-abc"})
+    @Test
+    public void typeChangeDirty() throws Exception {
+        final String html
+            = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  var inpt = document.form1.textInput1;\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.value = 'def';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.value = 'ghi';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.type = 'password';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+
+            + "  inpt.value = 'jkl';\n"
+            + "  log(inpt.value + '-' + inpt.defaultValue);\n"
+            + "}\n"
+            + "</script></head><body onload='doTest()'>\n"
+            + "<p>hello world</p>\n"
+            + "<form name='form1'>\n"
+            + "  <input type='text' name='textInput1' value='abc'/>\n"
+            + "</form>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
     @Test
     @Alerts({"false", "true"})
     public void checkedAttribute_Checkbox() throws Exception {

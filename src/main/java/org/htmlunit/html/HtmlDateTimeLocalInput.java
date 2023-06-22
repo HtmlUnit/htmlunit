@@ -22,6 +22,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.htmlunit.BrowserVersion;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -122,5 +123,10 @@ public class HtmlDateTimeLocalInput extends HtmlInput implements LabelableElemen
             }
         }
         return true;
+    }
+
+    @Override
+    protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
+        setValue("");
     }
 }
