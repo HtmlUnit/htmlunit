@@ -21,7 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.SgmlPage;
 
 /**
@@ -62,22 +61,6 @@ public class HtmlDateInput extends HtmlSelectableTextInput implements LabelableE
     @Override
     public void setDefaultChecked(final boolean defaultChecked) {
         // Empty.
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setValue(final String newValue) {
-        try {
-            if (hasFeature(JS_INPUT_SET_VALUE_DATE_SUPPORTED) && StringUtils.isNotEmpty(newValue)) {
-                FORMATTER_.parse(newValue);
-            }
-            super.setValue(newValue);
-        }
-        catch (final DateTimeParseException e) {
-            // ignore
-        }
     }
 
     /**
