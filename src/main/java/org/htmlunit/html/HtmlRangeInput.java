@@ -217,7 +217,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         }
         value = min + step * fact;
 
-        if (!Double.isInfinite(value) && (value == Math.floor(value))) {
+        if (!Double.isInfinite(value) && value == Math.floor(value)) {
             setRawValue(Integer.toString((int) value));
         }
         else {

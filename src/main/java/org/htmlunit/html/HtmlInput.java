@@ -1216,14 +1216,10 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
                     newInput.adjustValueAfterTypeChange(this, browser);
                 }
 
-                // newInput.isValueDirty_ = isValueDirty_;
-
-                if (getParentNode() == null) {
-                    // the input hasn't yet been inserted into the DOM tree (likely has been
-                    // created via document.createElement()), so simply replace it with the
-                    // new Input instance created in the code above
-                }
-                else {
+                // the input hasn't yet been inserted into the DOM tree (likely has been
+                // created via document.createElement()), so simply replace it with the
+                // new Input instance created in the code above
+                if (getParentNode() != null) {
                     getParentNode().replaceChild(newInput, this);
                 }
 

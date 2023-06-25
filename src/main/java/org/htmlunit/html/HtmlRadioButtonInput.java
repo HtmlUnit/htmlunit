@@ -119,10 +119,8 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
 
         if (changed) {
             final ScriptResult scriptResult = fireEvent(Event.TYPE_CHANGE);
-            if (scriptResult != null) {
-                if (page != null) {
-                    page = page.getEnclosingWindow().getWebClient().getCurrentWindow().getEnclosedPage();
-                }
+            if (scriptResult != null && page != null) {
+                page = page.getEnclosingWindow().getWebClient().getCurrentWindow().getEnclosedPage();
             }
         }
         return page;
@@ -313,10 +311,9 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         for (final DomNode domNode : getPage().getDescendants()) {
             if (domNode instanceof HtmlRadioButtonInput) {
                 final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) domNode;
-                if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))) {
-                    if (radioInput.isChecked()) {
-                        return false;
-                    }
+                if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))
+                        && radioInput.isChecked()) {
+                    return false;
                 }
             }
         }
