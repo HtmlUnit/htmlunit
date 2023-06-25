@@ -23,7 +23,7 @@
             </p>
             <p>
                 The most important part for this approach is the class
-                <a href="https://htmlunit.sourceforge.io/testapidocs/com/gargoylesoftware/htmlunit/WebDriverTestCase.html">WebDriverTestCase</a>.
+                <a href="https://www.htmlunit.org/testapidocs/org/htmlunit/WebDriverTestCase.html">WebDriverTestCase</a>.
                 Please have a look at the javadoc to learn how you can switch between real browsers and HtmlUnit when running your tests.
             </p>
         </section>

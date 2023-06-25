@@ -21,7 +21,7 @@ public void homePage_proxy() throws Exception {
         final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
         credentialsProvider.addCredentials("username", "password");
 
-        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org");
         Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
@@ -39,7 +39,7 @@ public void homePage_proxy() throws Exception {
         final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
         credentialsProvider.addCredentials("username", "password", PROXY_HOST, PROXY_PORT);
 
-        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org");
         Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
@@ -60,7 +60,7 @@ public void homePage_proxy() throws Exception {
         final DefaultCredentialsProvider credentialsProvider = (DefaultCredentialsProvider) webClient.getCredentialsProvider();
         credentialsProvider.addSocksCredentials("username", "password", SOCKS_PROXY_HOST, SOCKS_PROXY_PORT);
 
-        final HtmlPage page = webClient.getPage("http://htmlunit.sourceforge.net");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org");
         Assert.assertEquals("HtmlUnit - Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>

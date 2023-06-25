@@ -138,8 +138,8 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             </p>
             <p>
                 HtmlUnit complies with the semantics described above when an <tt>AttachmentHandler</tt> has
-                been registered with the com.gargoylesoftware.htmlunit.WebClient via
-                com.gargoylesoftware.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler). When
+                been registered with the org.htmlunit.WebClient via
+                org.htmlunit.WebClient#setAttachmentHandler(AttachmentHandler). When
                 no attachment handler has been registered with the <tt>WebClient</tt>, the semantics described
                 above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
                 are not registered with new <tt>WebClient</tt> instances.

@@ -23,7 +23,9 @@
 </dependency>]]></source>
             </subsection>
 
-            <subsection name="2. Change all package names in your source code - replace 'net.sourceforge.htmlunit'' by 'org.htmlunit'">
+            <subsection name="2. Adjust package names in your source code">
+                <p>Replace all usages of <strong>com.gargoylesoftware.htmlunit</strong> by <strong>org.htmlunit</strong>.</p>
+                <p>Replace all usages of <strong>net.sourceforge.htmlunit</strong> by <strong>org.htmlunit</strong>.</p>
                 <source><![CDATA[import org.htmlunit.BrowserVersion;
 import org.htmlunit.WebClient;
 import org.htmlunit.html.HtmlInput;
@@ -31,10 +33,10 @@ import org.htmlunit.html.HtmlPage;]]></source>
             </subsection>
 
             <subsection name="3. Update input control value access">
-                <p>Replace all usages of org.htmlunit.html.HtmlInput.getValueAttribute() by 
+                <p>Replace all usages of <strong>org.htmlunit.html.HtmlInput.getValueAttribute()</strong> by 
                     <strong>org.htmlunit.html.HtmlInput.getValue()</strong>.
                 </p>
-                <p>Replace all usages of org.htmlunit.html.HtmlInput.setValueAttribute(String) by 
+                <p>Replace all usages of <strong>org.htmlunit.html.HtmlInput.setValueAttribute(String)</strong> by 
                     <strong>org.htmlunit.html.HtmlInput.setValue(String)</strong>.
                 </p>
             </subsection>

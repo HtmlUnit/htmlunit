@@ -50,7 +50,7 @@
                     All JavaScript related problems are forwarded to the JavaScriptErrorListener configured for
                     the WebClient. 
                     The WebClient uses by default an instance of
-                    class 'com.gargoylesoftware.htmlunit.javascript.DefaultJavaScriptErrorListener'.
+                    class 'org.htmlunit.javascript.DefaultJavaScriptErrorListener'.
                     The DefaultJavaScriptErrorListener simply logs all information using commons logging.
                     <source><![CDATA[
 final WebClient webClient = new WebClient();
@@ -67,7 +67,7 @@ webClient.setJavaScriptErrorListener(new SilentJavaScriptErrorListener());]]></s
                     The package used to parse the HTML (htmlunit-neko ) has the ability to report
                     the problems it encounters while parsing source.
                     These messages may be programmatically catched or easily logged to the 
-                    "com.gargoylesoftware.htmlunit.html.HTMLParserListener" log for instance by calling:
+                    'org.htmlunit.html.HTMLParserListener' log for instance by calling:
                     <source><![CDATA[
 final WebClient webClient = new WebClient();
 webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
@@ -78,7 +78,7 @@ webClient.setHTMLParserListener(HTMLParserListener.LOG_REPORTER);]]></source>
                 <p>
                     HtmlUnit uses a separate CSS parser package (htmlunit-cssparser).
                     Parsing problems are reported using the CSSErrorHandler configured for the WebClient.
-                    The WebClient by default uses an instance of class 'com.gargoylesoftware.htmlunit.DefaultCssErrorHandler'.
+                    The WebClient by default uses an instance of class 'org.htmlunit.DefaultCssErrorHandler'.
                     The DefaultCssErrorHandler simply logs all information using commons logging.
                     <source><![CDATA[
 final WebClient webClient = new WebClient();

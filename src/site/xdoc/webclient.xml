@@ -16,7 +16,7 @@
     try (final WebClient webClient = new WebClient()) {
         // no you have a running browser and you can start doing real things
         // like going to a web page
-        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
     }
 }]]></source>
         </section>
@@ -24,7 +24,7 @@
         <section name="Imitating a specific browser">
             <p>
                 Often you will want to simulate a specific browser. This is done by passing a
-                com.gargoylesoftware.htmlunit.BrowserVersion into the WebClient constructor.
+                org.htmlunit.BrowserVersion into the WebClient constructor.
                 Constants have been provided for some common browsers but you can create your own specific
                 version by instantiating a BrowserVersion.
             </p>
@@ -32,7 +32,7 @@
 @Test
 public void homePage_Firefox() throws Exception {
     try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
-        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
         Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
@@ -55,7 +55,7 @@ public void homePage_Firefox() throws Exception {
          // disable css support
          webClient.getOptions().setCssEnabled(false);
 
-        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
         Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
@@ -73,13 +73,13 @@ public void homePage_Firefox() throws Exception {
          // procced with the js execution on unhandled js errors
          webClient.getOptions().setThrowExceptionOnScriptError(false);
 
-        final HtmlPage page = webClient.getPage("https://htmlunit.sourceforge.io/");
+        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
         Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
     }
 }]]></source>
             <p>
                 For a complete list and more details please have a look at the 
-                <a href="apidocs//com/gargoylesoftware/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
+                <a href="apidocs/org/htmlunit/WebClientOptions.html">WebClientOptions API</a>.
             </p>
         </section>
 
