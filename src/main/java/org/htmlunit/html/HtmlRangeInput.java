@@ -171,7 +171,11 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
     }
 
     @Override
-    protected void valueAttributeChanged(final String attributeValue) {
+    protected void valueAttributeChanged(final String attributeValue, final boolean isValueDirty) {
+        if (isValueDirty) {
+            return;
+        }
+
         try {
             if (StringUtils.isNotEmpty(attributeValue)) {
                 setRawValue(Double.parseDouble(attributeValue));
@@ -181,7 +185,7 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
                 final double max = getMaxNumeric();
 
                 // place in the middle
-                setValue(min + ((max - min) / 2));
+                setRawValue(min + ((max - min) / 2));
             }
         }
         catch (final NumberFormatException e) {

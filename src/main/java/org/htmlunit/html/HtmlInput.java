@@ -179,7 +179,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         isValueDirty_ = true;
     }
 
-    protected void valueAttributeChanged(final String attributeValue) {
+    protected void valueAttributeChanged(final String attributeValue, final boolean isValueDirty) {
         if (!isValueDirty_) {
             setRawValue(attributeValue);
         }
@@ -642,7 +642,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
 
-            valueAttributeChanged(attributeValue);
+            valueAttributeChanged(attributeValue, isValueDirty_);
             return;
         }
 

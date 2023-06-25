@@ -54,7 +54,7 @@ public class HtmlHiddenInput extends HtmlInput {
     }
 
     @Override
-    protected void valueAttributeChanged(final String attributeValue) {
+    protected void valueAttributeChanged(final String attributeValue, final boolean isValueDirty) {
         setRawValue(attributeValue);
     }
 

@@ -77,7 +77,11 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
     }
 
     @Override
-    protected void valueAttributeChanged(final String attributeValue) {
+    protected void valueAttributeChanged(final String attributeValue, final boolean isValueDirty) {
+        if (isValueDirty) {
+            return;
+        }
+
         if (hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED)) {
             setRawValue(attributeValue);
             return;
