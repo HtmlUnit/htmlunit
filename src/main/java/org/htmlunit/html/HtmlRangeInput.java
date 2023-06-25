@@ -170,6 +170,57 @@ public class HtmlRangeInput extends HtmlInput implements LabelableElement {
         }
     }
 
+    @Override
+    protected void valueAttributeChanged(final String attributeValue) {
+        try {
+            if (StringUtils.isNotEmpty(attributeValue)) {
+                setRawValue(Double.parseDouble(attributeValue));
+            }
+            else {
+                final double min = getMinNumeric();
+                final double max = getMaxNumeric();
+
+                // place in the middle
+                setValue(min + ((max - min) / 2));
+            }
+        }
+        catch (final NumberFormatException e) {
+            // ignore
+        }
+    }
+
+    private void setRawValue(final double newValue) {
+        double value = newValue;
+
+        final double min = getMinNumeric();
+        final double max = getMaxNumeric();
+
+        if (value > max) {
+            value = max;
+        }
+        else {
+            if (value < min) {
+                value = min;
+            }
+        }
+
+        final double step = getStepNumeric();
+        value = value - min;
+        int fact = (int) (value / step);
+        final double rest = value % step;
+        if (rest >= step / 2) {
+            fact++;
+        }
+        value = min + step * fact;
+
+        if (!Double.isInfinite(value) && (value == Math.floor(value))) {
+            setRawValue(Integer.toString((int) value));
+        }
+        else {
+            setRawValue(Double.toString(value));
+        }
+    }
+
     /**
      * {@inheritDoc}
      */

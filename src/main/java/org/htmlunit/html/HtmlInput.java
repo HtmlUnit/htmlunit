@@ -179,6 +179,12 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
         isValueDirty_ = true;
     }
 
+    protected void valueAttributeChanged(final String attributeValue) {
+        if (!isValueDirty_) {
+            setRawValue(attributeValue);
+        }
+    }
+
     /**
      * Returns the value of the attribute {@code checked}. Refer to the
      * <a href="http://www.w3.org/TR/html401/">HTML 4.01</a>
@@ -636,9 +642,7 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
             super.setAttributeNS(namespaceURI, qualifiedNameLC, attributeValue, notifyAttributeChangeListeners,
                     notifyMutationObservers);
 
-            if (!isValueDirty_) {
-                setRawValue(attributeValue);
-            }
+            valueAttributeChanged(attributeValue);
             return;
         }
 
@@ -1293,5 +1297,9 @@ public abstract class HtmlInput extends HtmlElement implements DisabledElement, 
 
     protected void unmarkValueDirty() {
         isValueDirty_ = false;
+    }
+
+    protected void markValueDirty() {
+        isValueDirty_ = true;
     }
 }

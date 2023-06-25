@@ -53,6 +53,11 @@ public class HtmlHiddenInput extends HtmlInput {
         setDefaultValue(newValue);
     }
 
+    @Override
+    protected void valueAttributeChanged(final String attributeValue) {
+        setRawValue(attributeValue);
+    }
+
     /**
      * {@inheritDoc}
      */

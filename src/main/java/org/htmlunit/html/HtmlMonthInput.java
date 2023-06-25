@@ -126,7 +126,7 @@ public class HtmlMonthInput extends HtmlInput implements LabelableElement {
     @Override
     protected void adjustValueAfterTypeChange(final HtmlInput oldInput, final BrowserVersion browserVersion) {
         if (browserVersion.hasFeature(JS_INPUT_CHANGE_TYPE_DROPS_VALUE_WEEK_MONTH)) {
-            setRawValue("");
+            setValue("");
             return;
         }
         super.adjustValueAfterTypeChange(oldInput, browserVersion);

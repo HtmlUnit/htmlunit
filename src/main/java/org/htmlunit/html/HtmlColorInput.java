@@ -76,6 +76,23 @@ public class HtmlColorInput extends HtmlInput implements LabelableElement {
         }
     }
 
+    @Override
+    protected void valueAttributeChanged(final String attributeValue) {
+        if (hasFeature(HTMLINPUT_TYPE_COLOR_NOT_SUPPORTED)) {
+            setRawValue(attributeValue);
+            return;
+        }
+
+        if (StringUtils.isEmpty(attributeValue)) {
+            setRawValue("#000000");
+            return;
+        }
+
+        if (isValid(attributeValue)) {
+            setRawValue(attributeValue);
+        }
+    }
+
     private static boolean isValid(final String value) {
         boolean valid = false;
         if (value.length() == 7 && value.charAt(0) == '#') {

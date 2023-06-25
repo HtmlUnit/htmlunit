@@ -61,8 +61,8 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
-import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.dom.AbstractList.EffectOnCache;
+import org.htmlunit.javascript.host.dom.DOMTokenList;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.util.MimeType;
 
