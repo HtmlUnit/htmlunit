@@ -108,6 +108,7 @@ WebkitOrder
 WebkitPerspective
 WebkitPerspectiveOrigin
 WebkitTextFillColor
+WebkitTextSecurity
 WebkitTextSizeAdjust
 WebkitTextStroke
 WebkitTextStrokeColor
@@ -588,6 +589,7 @@ webkitOrder
 webkitPerspective
 webkitPerspectiveOrigin
 webkitTextFillColor
+webkitTextSecurity
 webkitTextSizeAdjust
 webkitTextStroke
 webkitTextStrokeColor

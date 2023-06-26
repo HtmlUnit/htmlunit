@@ -24,7 +24,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_B
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_HTTP_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_INVALID_THROWS;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_RELLIST_NULL;
 import static org.htmlunit.html.DomElement.ATTRIBUTE_NOT_DEFINED;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
@@ -44,7 +43,6 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.SgmlPage;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
-import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAnchor;
@@ -826,10 +824,6 @@ public class HTMLAnchorElement extends HTMLElement {
      */
     @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRelList(final Object rel) {
-        if (Undefined.isUndefined(rel) && getBrowserVersion().hasFeature(JS_ANCHOR_RELLIST_NULL)) {
-            setRel("null");
-            return;
-        }
         setRel(ScriptRuntime.toString(rel));
     }
 

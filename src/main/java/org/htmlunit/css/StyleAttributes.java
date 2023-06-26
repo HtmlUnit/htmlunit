@@ -4386,7 +4386,10 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_TEXT_ORIENTATION("webkitTextOrientation", "webkit-text-orientation", chromeAndEdge("vertical-right")),
 
         /** The style property {@code webkitTextSecurity}. */
-        WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chromeAndEdgeNone()),
+        WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chromeAndEdgeNone(), ffLatest("none")),
+
+        /** The style property {@code webkitTextSecurity}. */
+        WEBKIT_TEXT_SECURITY_("WebkitTextSecurity", "webkit-text-security", ffLatest("none")),
 
         /** The style property {@code webkitTextSizeAdjust}. */
         WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", chromeAndEdgeAuto(), ff("auto")),

@@ -1215,9 +1215,7 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
-            CHROME = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
-            EDGE = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
+    @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
             IE = "exception")
     public void setRelListUndefined() throws Exception {
         final String html

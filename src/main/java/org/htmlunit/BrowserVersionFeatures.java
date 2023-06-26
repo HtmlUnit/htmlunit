@@ -658,10 +658,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_ANCHOR_PROTOCOL_INVALID_THROWS,
 
-    /** The anchor rellist setter converts undefined to null. */
-    @BrowserFeature({FF, FF_ESR})
-    JS_ANCHOR_RELLIST_NULL,
-
     /**
      * Javascript property anchors includes all anchors with a name or an id property.
      * If not set name property is required.
