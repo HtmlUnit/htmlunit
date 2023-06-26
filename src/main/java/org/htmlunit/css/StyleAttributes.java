@@ -4388,8 +4388,11 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code webkitTextSecurity}. */
         WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chromeAndEdgeNone(), ffLatest("none")),
 
-        /** The style property {@code webkitTextSecurity}. */
+        /** The style property {@code WebkitTextSecurity}. */
         WEBKIT_TEXT_SECURITY_("WebkitTextSecurity", "webkit-text-security", ffLatest("none")),
+
+        /** The style property {@code -webkit-text-security}. */
+        WEBKIT_TEXT_SECURITY__("-webkit-text-security", "webkit-text-security", ffLatest("none")),
 
         /** The style property {@code webkitTextSizeAdjust}. */
         WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", chromeAndEdgeAuto(), ff("auto")),
