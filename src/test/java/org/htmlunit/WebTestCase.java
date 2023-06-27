@@ -39,6 +39,7 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SerializationUtils;
+import org.htmlunit.junit.RetryRule;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -71,6 +72,14 @@ public abstract class WebTestCase {
      */
     @Rule
     public TestName testMethodName_ = new TestName();
+
+    /**
+     * Define retry.
+     */
+    @Rule
+    public final RetryRule retryRule_ = new RetryRule(4);
+
+
 
     /** Logging support. */
     // private static final Log LOG = LogFactory.getLog(WebTestCase.class);

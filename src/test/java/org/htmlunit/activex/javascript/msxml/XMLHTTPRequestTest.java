@@ -42,11 +42,10 @@ import org.htmlunit.javascript.host.xml.XMLHttpRequestTest.BasicAuthenticationSe
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
-import org.htmlunit.junit.RetryRule;
+import org.htmlunit.junit.Retry;
 import org.htmlunit.util.MimeType;
 import org.htmlunit.util.NameValuePair;
 import org.junit.After;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -58,12 +57,6 @@ import org.junit.runner.RunWith;
  */
 @RunWith(BrowserRunner.class)
 public class XMLHTTPRequestTest extends WebDriverTestCase {
-
-    /**
-     * Define retry.
-     */
-    @Rule
-    public final RetryRule retryRule_ = new RetryRule(3);
 
     /**
      * Closes the real IE; otherwise tests are failing because of cached responses.
@@ -627,6 +620,7 @@ public class XMLHTTPRequestTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Retry
     @Alerts(DEFAULT = "no\\sActiveX",
             IE = {"1:ex\\sstatus\\sex\\stext\\s",
                   "1:ex\\sstatus\\sex\\stext\\s",

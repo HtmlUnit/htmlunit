@@ -14,6 +14,8 @@
  */
 package org.htmlunit.junit;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -25,10 +27,10 @@ import org.junit.runners.model.Statement;
  * @author Ronald Brill
  */
 public class RetryRule implements TestRule {
-    private int retryCount_;
+    private AtomicInteger retryCount_;
 
     public RetryRule(final int retryCount) {
-        retryCount_ = retryCount;
+        retryCount_ = new AtomicInteger(retryCount);
     }
 
     @Override
@@ -40,17 +42,18 @@ public class RetryRule implements TestRule {
         return new Statement() {
             @Override
             public void evaluate() throws Throwable {
-                Throwable caughtThrowable = null;
-                for (int i = 0; i < retryCount_; i++) {
+                while (retryCount_.getAndDecrement() > 0) {
                     try {
+                        System.out.println("ret " + retryCount_.get());
                         stmt.evaluate();
                         return;
                     }
                     catch (final Throwable t) {
-                        caughtThrowable = t;
+                        if (retryCount_.get() == 0 || desc.getAnnotation(Retry.class) == null) {
+                            throw t;
+                        }
                     }
                 }
-                throw caughtThrowable;
             }
         };
     }
