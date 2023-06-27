@@ -7,7 +7,16 @@
     </properties>
 
     <body>
-        <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Bugfixes">
+        <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="fix" dev="rbri" issue="606">
+                Input elements value attribute handling fixed.
+            </action>
+            <action type="update" dev="rbri">
+                Input elements are now using a separate isValueDirty flag.
+            </action>
+            <action type="update" dev="rbri" issue="608">
+                Various documentation fixes and migration guide updates.
+            </action>
             <action type="add" dev="rbri" issue="605">
                 New WebClientOption setTempFileDirectory() to specify a separate directory for
                 the temp file.
