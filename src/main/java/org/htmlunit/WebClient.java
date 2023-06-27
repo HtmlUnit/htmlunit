@@ -93,8 +93,6 @@ import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration;
 import org.htmlunit.javascript.host.dom.Node;
 import org.htmlunit.javascript.host.event.Event;
-import org.htmlunit.javascript.host.html.HTMLDocument;
-import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.javascript.host.html.HTMLIFrameElement;
 import org.htmlunit.protocol.data.DataURLConnection;
 import org.htmlunit.util.Cookie;
@@ -981,14 +979,7 @@ public class WebClient implements Serializable, AutoCloseable {
             //2. onFocus event is triggered for focusedElement of new current window
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                final Window jsWindow = currentWindow_.getScriptableObject();
-                if (jsWindow != null) {
-                    final HTMLElement activeElement =
-                            ((HTMLDocument) jsWindow.getDocument()).getActiveElement();
-                    if (activeElement != null) {
-                        ((HtmlPage) enclosedPage).setFocusedElement(activeElement.getDomNodeOrDie(), true);
-                    }
-                }
+                ((HtmlPage) enclosedPage).setInitialFocus();
             }
         }
     }

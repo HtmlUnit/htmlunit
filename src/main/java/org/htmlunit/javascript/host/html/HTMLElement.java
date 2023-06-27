@@ -978,8 +978,6 @@ public class HTMLElement extends Element {
     @JsxFunction(IE)
     public void setActive() {
         final Window window = getWindow();
-        final HTMLDocument document = (HTMLDocument) window.getDocument();
-        document.setActiveElement(this);
         if (window.getWebWindow() == window.getWebWindow().getWebClient().getCurrentWindow()) {
             final HtmlElement element = getDomNodeOrDie();
             ((HtmlPage) element.getPage()).setFocusedElement(element);

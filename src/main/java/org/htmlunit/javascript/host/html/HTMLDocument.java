@@ -56,7 +56,6 @@ import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
-import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.httpclient.HtmlUnitBrowserCompatCookieSpec;
@@ -106,8 +105,6 @@ public class HTMLDocument extends Document {
     private static final Log LOG = LogFactory.getLog(HTMLDocument.class);
 
     private enum ParsingStatus { OUTSIDE, START, IN_NAME, INSIDE, IN_STRING }
-
-    private HTMLElement activeElement_;
 
     /** The buffer that will be used for calls to document.write(). */
     private final StringBuilder writeBuilder_ = new StringBuilder();
@@ -764,14 +761,16 @@ public class HTMLDocument extends Document {
      */
     @Override
     public HTMLElement getActiveElement() {
-        if (activeElement_ == null) {
-            final HtmlElement body = getPage().getBody();
-            if (body != null) {
-                activeElement_ = (HTMLElement) getScriptableFor(body);
-            }
+        final DomElement activeElement = getPage().getFocusedElement();
+        if (activeElement instanceof HtmlElement) {
+            return (HTMLElement) activeElement.getScriptableObject();
         }
 
-        return activeElement_;
+        final HtmlElement body = getPage().getBody();
+        if (body != null) {
+            return (HTMLElement) getScriptableFor(body);
+        }
+        return null;
     }
 
     /**
@@ -779,32 +778,7 @@ public class HTMLDocument extends Document {
      */
     @Override
     public boolean hasFocus() {
-        return activeElement_ != null && getPage().getFocusedElement() == activeElement_.getDomNodeOrDie();
-    }
-
-    /**
-     * Sets the specified element as the document's active element.
-     * @see HTMLElement#setActive()
-     * @param element the new active element for this document
-     */
-    public void setActiveElement(final HTMLElement element) {
-        // TODO update page focus element also
-
-        activeElement_ = element;
-
-        if (element != null) {
-            // if this is part of an iFrame, make the iFrame tag the
-            // active element of his doc
-            final WebWindow window = element.getDomNodeOrDie().getPage().getEnclosingWindow();
-            if (window instanceof FrameWindow) {
-                final BaseFrameElement frame = ((FrameWindow) window).getFrameElement();
-                if (frame instanceof HtmlInlineFrame) {
-                    final Window winWithFrame = frame.getPage().getEnclosingWindow().getScriptableObject();
-                    ((HTMLDocument) winWithFrame.getDocument()).setActiveElement(
-                            frame.getScriptableObject());
-                }
-            }
-        }
+        return getPage().getFocusedElement() != null;
     }
 
     /**

@@ -1277,7 +1277,6 @@ public abstract class HtmlElement extends DomElement {
             final Object activeElement = doc.getActiveElement();
 
             if (activeElement == getScriptableObject()) {
-                doc.setActiveElement(null);
                 if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                     ((HtmlPage) page).setFocusedElement(null);
                 }
@@ -1288,7 +1287,6 @@ public abstract class HtmlElement extends DomElement {
             else {
                 for (final DomNode child : getChildNodes()) {
                     if (activeElement == child.getScriptableObject()) {
-                        doc.setActiveElement(null);
                         if (hasFeature(HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT)) {
                             ((HtmlPage) page).setFocusedElement(null);
                         }

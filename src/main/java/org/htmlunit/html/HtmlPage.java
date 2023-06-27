@@ -94,7 +94,6 @@ import org.htmlunit.javascript.host.event.BeforeUnloadEvent;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.event.EventTarget;
 import org.htmlunit.javascript.host.html.HTMLDocument;
-import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.protocol.javascript.JavaScriptURLConnection;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
@@ -2485,13 +2484,6 @@ public class HtmlPage extends SgmlPage {
         final DomElement oldFocusedElement = elementWithFocus_;
         elementWithFocus_ = null;
 
-        if (getWebClient().isJavaScriptEnabled()) {
-            final Object o = getScriptableObject();
-            if (o instanceof HTMLDocument) {
-                ((HTMLDocument) o).setActiveElement(null);
-            }
-        }
-
         if (!windowActivated) {
             if (hasFeature(EVENT_FOCUS_IN_FOCUS_OUT_BLUR)) {
                 if (oldFocusedElement != null) {
@@ -2524,16 +2516,6 @@ public class HtmlPage extends SgmlPage {
         }
 
         if (newElement != null) {
-            if (getWebClient().isJavaScriptEnabled()) {
-                final Object o = getScriptableObject();
-                if (o instanceof HTMLDocument) {
-                    final Object e = newElement.getScriptableObject();
-                    if (e instanceof HTMLElement) {
-                        ((HTMLDocument) o).setActiveElement((HTMLElement) e);
-                    }
-                }
-            }
-
             newElement.focus();
             newElement.fireEvent(Event.TYPE_FOCUS);
 
@@ -2564,6 +2546,18 @@ public class HtmlPage extends SgmlPage {
      */
     public void setElementWithFocus(final DomElement elementWithFocus) {
         elementWithFocus_ = elementWithFocus;
+    }
+
+    /**
+     * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
+     *
+     * Focuses an element after page load.
+     */
+    public void setInitialFocus() {
+        final HtmlElement body = getPage().getBody();
+        if (body != null) {
+            setElementWithFocus(body);
+        }
     }
 
     /**
