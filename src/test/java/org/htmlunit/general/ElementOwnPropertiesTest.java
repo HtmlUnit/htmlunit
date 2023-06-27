@@ -1172,7 +1172,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1198,7 +1199,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1224,7 +1226,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1392,7 +1395,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1418,7 +1422,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1444,7 +1449,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1662,7 +1668,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,clear,constructor,width")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1688,7 +1695,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1714,7 +1722,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1957,7 +1966,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1983,7 +1993,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2009,7 +2020,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2217,7 +2229,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2243,7 +2256,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2269,7 +2283,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2367,7 +2382,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF_ESR = "constructor()",
             IE = "balance,constructor,loop,src,volume")
-    @HtmlUnitNYI(FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+    @HtmlUnitNYI(FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],"
                 + "onabort[GSCE],onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],"
@@ -2546,7 +2562,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "color[GSCE],constructor[],face[GSCE],size[GSCE]")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2572,7 +2589,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2598,7 +2616,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2765,7 +2784,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2791,7 +2811,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2817,7 +2838,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2985,7 +3007,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3011,7 +3034,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3037,7 +3061,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3205,7 +3230,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3231,7 +3257,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3257,7 +3284,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3502,7 +3530,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3528,7 +3557,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3554,7 +3584,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3821,7 +3852,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,clear,constructor,width")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3847,7 +3879,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3873,7 +3906,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4041,7 +4075,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4067,7 +4102,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4093,7 +4129,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4261,7 +4298,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4287,7 +4325,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4313,7 +4352,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4512,7 +4552,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4538,7 +4579,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4564,7 +4606,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4732,7 +4775,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "constructor[],noWrap[GSCE]")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4758,7 +4802,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4784,7 +4829,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5053,7 +5099,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "constructor[],noWrap[GSCE]")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5079,7 +5126,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5105,7 +5153,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5298,7 +5347,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5324,7 +5374,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5350,7 +5401,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5570,7 +5622,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5596,7 +5649,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5622,7 +5676,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5829,7 +5884,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5855,7 +5911,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5881,7 +5938,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6147,7 +6205,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "removeNode(),replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),"
                 + "setActive(),setCapture(),sourceIndex,spellcheck,style,swapNode(),tabIndex,title,"
                 + "uniqueID,uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6173,7 +6232,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6199,7 +6259,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6502,7 +6563,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6528,7 +6590,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6554,7 +6617,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6941,7 +7005,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -7117,7 +7182,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7143,7 +7209,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7169,7 +7236,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7337,7 +7405,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7363,7 +7432,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7389,7 +7459,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7535,7 +7606,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF_ESR = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7561,7 +7633,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7795,7 +7868,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7821,7 +7895,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7847,7 +7922,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8048,7 +8124,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8074,7 +8151,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8100,7 +8178,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8426,7 +8505,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8452,7 +8532,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8478,7 +8559,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8683,7 +8765,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8709,7 +8792,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8735,7 +8819,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8921,7 +9006,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8947,7 +9033,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8973,7 +9060,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9180,7 +9268,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9206,7 +9295,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9232,7 +9322,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9370,7 +9461,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "constructor()",
             FF_ESR = "constructor()",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9396,7 +9488,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9545,7 +9638,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,clear,constructor,width")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9571,7 +9665,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9597,7 +9692,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10006,7 +10102,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,clear,constructor,width")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10032,7 +10129,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10058,7 +10156,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10261,7 +10360,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10287,7 +10387,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10438,7 +10539,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10464,7 +10566,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10615,7 +10718,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10641,7 +10745,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10792,7 +10897,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
                 + "lang[GSCE],offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],"
                 + "offsetWidth[GCE],onabort[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],"
@@ -10814,7 +10920,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
                 + "lang[GSCE],offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],"
                 + "offsetWidth[GCE],onabort[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],"
@@ -10857,7 +10964,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -11001,7 +11109,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
                 + "lang[GSCE],offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],"
                 + "onabort[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -11023,7 +11132,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GCE],"
                 + "style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],"
                 + "lang[GSCE],offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],"
                 + "onabort[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -11065,7 +11175,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -11257,7 +11368,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11283,7 +11395,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11309,7 +11422,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11550,7 +11664,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11576,7 +11691,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11602,7 +11718,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11805,7 +11922,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11831,7 +11949,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11857,7 +11976,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12025,7 +12145,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12051,7 +12172,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12077,7 +12199,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12264,7 +12387,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12290,7 +12414,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12316,7 +12441,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12484,7 +12610,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "constructor,namedRecordset(),recordset")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12510,7 +12637,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12536,7 +12664,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12704,7 +12833,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12730,7 +12860,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12756,7 +12887,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13271,7 +13403,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13297,7 +13430,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13323,7 +13457,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13550,7 +13685,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13576,7 +13712,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13602,7 +13739,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13790,7 +13928,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],"
                 + "title[GSCE]",
             IE = "cite,constructor,dateTime")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13816,7 +13955,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13842,7 +13982,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14067,7 +14208,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "replaceAdjacentText(),replaceNode(),runtimeStyle,scrollIntoView(),setActive(),setCapture(),"
                 + "sourceIndex,spellcheck,style,swapNode(),tabIndex,title,uniqueID,"
                 + "uniqueNumber")
-    @HtmlUnitNYI(CHROME = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+    @HtmlUnitNYI(CHROME = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14093,7 +14235,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            EDGE = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            EDGE = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14119,7 +14262,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"

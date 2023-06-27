@@ -5305,4 +5305,124 @@ public class HTMLElementTest extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "", "true", "7", "true", "seven", "false", "null"},
+            FF_ESR = {"undefined", "", "undefined", "7", "undefined", "seven", "undefined", "null"},
+            IE = {"undefined", "", "undefined", "7", "undefined", "seven", "undefined", "null"})
+    public void autofocus() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>test</title>\n"
+                + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
+                + "  function doTest() {\n"
+                + "    var myNode1 = document.getElementById('myNode1');\n"
+                + "    log(myNode1.autofocus);\n"
+                + "    log(myNode1.getAttribute('autofocus'));\n"
+
+                + "    var myNode2 = document.getElementById('myNode2');\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    var myNode3 = document.getElementById('myNode3');\n"
+                + "    log(myNode3.autofocus);\n"
+                + "    log(myNode3.getAttribute('autofoCuS'));\n"
+
+                + "    var myNode4 = document.getElementById('myNode4');\n"
+                + "    log(myNode4.autofocus);\n"
+                + "    log(myNode4.getAttribute('autofocus'));\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<p id='myNode1' autofocus></p>\n"
+                + "<p id='myNode2' autofocus=7></p>\n"
+                + "<p id='myNode3' autOFocus='seven'></p>\n"
+                + "<p id='myNode4'></p>\n"
+                + LOG_TEXTAREA
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
+
+    /**
+     * @throws Exception on test failure
+     */
+    @Test
+    @Alerts(DEFAULT = {"true", "", "true", "", "false", "null", "true", "7",
+                       "true", "", "false", "null", "true", "", "false", "null",
+                       "true", "", "false", "null", "false", "null"},
+            FF_ESR = {"undefined", "", "undefined", "", "undefined", "null", "undefined", "7",
+                      "true", "7", "false", "7", "true", "7", "false", "7",
+                      "no", "7", "null", "7", "undefined", "7"},
+            IE = {"undefined", "", "undefined", "", "undefined", "null", "undefined", "7",
+                  "true", "7", "false", "7", "true", "7", "false", "7",
+                  "no", "7", "null", "7", "undefined", "7"})
+    public void editAutofocus() throws Exception {
+        final String html = "<html>\n"
+                + "<head>\n"
+                + "  <title>test</title>\n"
+                + "  <script>\n"
+                + LOG_TEXTAREA_FUNCTION
+                + "  function doTest() {\n"
+                + "    var myNode1 = document.getElementById('myNode1');\n"
+                + "    log(myNode1.autofocus);\n"
+                + "    log(myNode1.getAttribute('autofocus'));\n"
+
+                + "    myNode1.setAttribute('autofocus', '');\n"
+                + "    log(myNode1.autofocus);\n"
+                + "    log(myNode1.getAttribute('autofocus'));\n"
+
+                + "    myNode1.removeAttribute('autofocus');\n"
+                + "    log(myNode1.autofocus);\n"
+                + "    log(myNode1.getAttribute('autofocus'));\n"
+
+                + "    var myNode2 = document.getElementById('myNode2');\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = true;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = false;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = true;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = false;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = 'no';\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = null;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+
+                + "    myNode2.autofocus = undefined;\n"
+                + "    log(myNode2.autofocus);\n"
+                + "    log(myNode2.getAttribute('autofocus'));\n"
+                + "  }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='doTest()'>\n"
+                + "<p id='myNode1' autofocus></p>\n"
+                + "<p id='myNode2' autofocus=7></p>\n"
+                + LOG_TEXTAREA
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTextArea2(html);
+    }
 }

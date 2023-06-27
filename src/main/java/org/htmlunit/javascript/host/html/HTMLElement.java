@@ -427,7 +427,7 @@ public class HTMLElement extends Element {
 
     /**
      * Returns the element title.
-     * @return the ID of this element
+     * @return the title of this element
      */
     @JsxGetter
     public String getTitle() {
@@ -436,11 +436,34 @@ public class HTMLElement extends Element {
 
     /**
      * Sets the title of this element.
-     * @param newTitle the new identifier of this element
+     * @param newTitle the new title of this element
      */
     @JsxSetter
     public void setTitle(final String newTitle) {
         getDomNodeOrDie().setAttribute("title", newTitle);
+    }
+
+    /**
+     * Returns the element autofocus property.
+     * @return the autofocus of this element
+     */
+    @JsxGetter({CHROME, EDGE, FF})
+    public boolean getAutofocus() {
+        return getDomNodeOrDie().hasAttribute("autofocus");
+    }
+
+    /**
+     * Sets the autofocus of this element.
+     * @param newAutofocus the new autofocus of this element
+     */
+    @JsxSetter({CHROME, EDGE, FF})
+    public void setAutofocus(final boolean newAutofocus) {
+        if (newAutofocus) {
+            getDomNodeOrDie().setAttribute("autofocus", "");
+        }
+        else {
+            getDomNodeOrDie().removeAttribute("autofocus");
+        }
     }
 
     /**

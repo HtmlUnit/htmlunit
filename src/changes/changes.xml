@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="add" dev="rbri">
+                HtmlElement autofocus property added.
+            </action>
             <action type="fix" dev="rbri" issue="606">
                 Input elements value attribute handling fixed.
             </action>
