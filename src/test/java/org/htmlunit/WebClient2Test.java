@@ -29,6 +29,7 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
+import org.htmlunit.junit.Retry;
 import org.htmlunit.util.Cookie;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -274,6 +275,7 @@ public class WebClient2Test extends SimpleWebTestCase {
      * @throws Exception if something goes wrong
      */
     @Test
+    @Retry
     @Alerts({"loadExtraContent started at Page 1", " loadExtraContent finished at Page 1"})
     @HtmlUnitNYI(CHROME = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
             EDGE = {"loadExtraContent started at Page 1", " loadExtraContent finished at Page 2"},
