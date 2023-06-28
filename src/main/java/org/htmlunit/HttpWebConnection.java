@@ -62,6 +62,7 @@ import org.apache.http.auth.Credentials;
 import org.apache.http.client.AuthCache;
 import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpHead;
@@ -188,10 +189,14 @@ public class HttpWebConnection implements WebConnection {
             final long startTime = System.currentTimeMillis();
 
             final HttpContext httpContext = getHttpContext();
-            HttpResponse httpResponse;
             try {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                    httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
+                    try (CloseableHttpResponse httpResponse =
+                            closeableHttpClient.execute(httpHost, httpMethod, httpContext)) {
+                        final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
+                        final long endTime = System.currentTimeMillis();
+                        return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
+                    }
                 }
             }
             catch (final SSLPeerUnverifiedException s) {
@@ -199,12 +204,15 @@ public class HttpWebConnection implements WebConnection {
                 if (webClient_.getOptions().isUseInsecureSSL()) {
                     HtmlUnitSSLConnectionSocketFactory.setUseSSL3Only(httpContext, true);
                     try (CloseableHttpClient closeableHttpClient = builder.build()) {
-                        httpResponse = closeableHttpClient.execute(httpHost, httpMethod, httpContext);
+                        try (CloseableHttpResponse httpResponse =
+                                closeableHttpClient.execute(httpHost, httpMethod, httpContext)) {
+                            final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
+                            final long endTime = System.currentTimeMillis();
+                            return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
+                        }
                     }
                 }
-                else {
-                    throw s;
-                }
+                throw s;
             }
             catch (final Error e) {
                 // in case a StackOverflowError occurs while the connection is leased, it won't get released.
@@ -214,10 +222,6 @@ public class HttpWebConnection implements WebConnection {
                 httpClientBuilder_.remove(Thread.currentThread());
                 throw e;
             }
-
-            final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
-            final long endTime = System.currentTimeMillis();
-            return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
         }
         finally {
             if (httpMethod != null) {
