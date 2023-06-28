@@ -83,9 +83,10 @@ public class WebClient5Test extends WebTestCase {
 
         @SuppressWarnings("resource")
         final WebClient webClient = new WebClient();
-        webClient.setWebConnection(connection);
         webClient.close();
 
+        // webClient.close() also removes the webConnection
+        webClient.setWebConnection(connection);
         webClient.getPage(URL_FIRST);
         assertTrue(getJavaScriptThreads().isEmpty());
     }

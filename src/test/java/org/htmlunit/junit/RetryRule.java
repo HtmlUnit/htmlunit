@@ -44,7 +44,6 @@ public class RetryRule implements TestRule {
             public void evaluate() throws Throwable {
                 while (retryCount_.getAndDecrement() > 0) {
                     try {
-                        System.out.println("ret " + retryCount_.get());
                         stmt.evaluate();
                         return;
                     }
