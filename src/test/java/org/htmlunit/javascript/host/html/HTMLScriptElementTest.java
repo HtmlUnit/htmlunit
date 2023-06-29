@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
@@ -47,42 +46,37 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("1 2 3 4 onload ")
+    @Alerts({"1", "2", "3", "4", "onload"})
     public void onReadyStateChangeHandler() throws Exception {
         final String html = "<html>\n"
             + "  <head>\n"
-            + "    <title>test</title>\n"
             + "    <script>\n"
+            + LOG_TITLE_FUNCTION
             + "      function test() {\n"
             + "        var script = document.createElement('script');\n"
             + "        script.id = 'b';\n"
             + "        script.type = 'text/javascript';\n"
             + "        script.onreadystatechange = null;\n"
             + "        script.onreadystatechange = function() {\n"
-            + "          document.getElementById('myTextarea').value += 'onreadystatechange ' + script.readyState + ' ';\n"
+            + "          log('onreadystatechange ' + script.readyState);\n"
             + "        }\n"
             + "        script.onload = function() {\n"
-            + "          document.getElementById('myTextarea').value += 'onload ';\n"
+            + "          log('onload');\n"
             + "        }\n"
-            + "        document.getElementById('myTextarea').value += '1 ';\n"
+            + "        log('1');\n"
             + "        script.src = 'script.js';\n"
-            + "        document.getElementById('myTextarea').value += '2 ';\n"
+            + "        log('2');\n"
             + "        document.getElementsByTagName('head')[0].appendChild(script);\n"
-            + "        document.getElementById('myTextarea').value += '3 ';\n"
+            + "        log('3');\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
             + "  <body onload='test()'>\n"
-            + "    <textarea id='myTextarea' cols='40'></textarea>\n"
             + "  </body></html>";
 
-        final String js = "document.getElementById('myTextarea').value += '4 ';";
+        getMockWebConnection().setDefaultResponse("log('4');", MimeType.APPLICATION_JAVASCRIPT);
 
-        getMockWebConnection().setDefaultResponse(js, MimeType.APPLICATION_JAVASCRIPT);
-
-        final WebDriver driver = loadPage2(html);
-        final WebElement textArea = driver.findElement(By.id("myTextarea"));
-        assertEquals(getExpectedAlerts()[0], textArea.getAttribute("value"));
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -216,27 +210,31 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
             + "<head></head>\n"
             + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
-            + "    alert('hello');\n"
+            + "    log('hello');\n"
             + "    //]]>\n"
             + "  </script>\n"
             + "  <script>\n"
-            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "    /*<![CDATA[*/log('hello');/*]]>*/\n"
             + "  </script>\n"
             + "  <script>\n"
             + "    <![CDATA[\n"
-            + "    alert('world');\n"
+            + "    log('world');\n"
             + "    ]]>\n"
             + "  </script>\n"
-            + "  <script>alert('-');</script>\n"
+            + "  <script>log('-');</script>\n"
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
             getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
+
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.APPLICATION_XHTML, StandardCharsets.UTF_8);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -253,27 +251,30 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<html xmlns='http://www.w3.org/1999/xhtml' xmlns:xhtml='http://www.w3.org/1999/xhtml'>\n"
             + "<head></head>\n"
             + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
-            + "    alert('hello');\n"
+            + "    log('hello');\n"
             + "    //]]>\n"
             + "  </script>\n"
             + "  <script>\n"
-            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "    /*<![CDATA[*/log('hello');/*]]>*/\n"
             + "  </script>\n"
             + "  <script>\n"
             + "    <![CDATA[\n"
-            + "    alert('world');\n"
+            + "    log('world');\n"
             + "    ]]>\n"
             + "  </script>\n"
-            + "  <script>alert('-');</script>\n"
+            + "  <script>log('-');</script>\n"
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
             getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
         final WebDriver driver = loadPage2(html, URL_FIRST, MimeType.TEXT_XML, StandardCharsets.UTF_8);
-        verifyAlerts(driver, getExpectedAlerts());
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -286,26 +287,29 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             "<html>\n"
             + "<head></head>\n"
             + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "  <script>\n"
             + "    //<![CDATA[\n"
-            + "    alert('hello');\n"
+            + "    log('hello');\n"
             + "    //]]>\n"
             + "  </script>\n"
             + "  <script>\n"
-            + "    /*<![CDATA[*/alert('hello');/*]]>*/\n"
+            + "    /*<![CDATA[*/log('hello');/*]]>*/\n"
             + "  </script>\n"
             + "  <script>\n"
             + "    <![CDATA[\n"
-            + "    alert('world');\n"
+            + "    log('world');\n"
             + "    ]]>\n"
             + "  </script>\n"
-            + "  <script>alert('-');</script>\n"
+            + "  <script>log('-');</script>\n"
             + "</body></html>";
 
         if (getWebDriver() instanceof HtmlUnitDriver) {
             getWebClient().getOptions().setThrowExceptionOnScriptError(false);
         }
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -434,25 +438,26 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("start middle end executed")
+    @Alerts({"start", "middle", "end", "executed"})
     public void createElementWithSetSrcAndAppend() throws Exception {
         final String html =
                 "<html><head></head><body>\n"
               + "<script>\n"
-              + "  document.title += ' start';\n"
+              + LOG_TITLE_FUNCTION
+              + "  log('start');\n"
               + "  var script = document.createElement('script');\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  document.title += ' middle';\n"
+              + "  log('middle');\n"
               + "  document.body.appendChild(script);\n"
-              + "  document.title += ' end';\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "document.title += '  executed';";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
         final WebDriver driver = loadPage2(html);
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -677,24 +682,26 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("start end executed")
+    @Alerts({"start", "end", "executed"})
     public void replaceWithSetSrcEmpty() throws Exception {
         final String html =
                 "<html><head></head><body>\n"
+              + "<script>\n"
+              + LOG_TITLE_FUNCTION
+              + "</script>\n"
               + "<script id='js1'></script>\n"
               + "<script>\n"
-              + "  document.title += ' start';\n"
+              + "  log('start');\n"
               + "  var script = document.getElementById('js1');\n"
               + "  script.src = \"" + URL_SECOND + "\";\n"
-              + "  document.title += ' end';\n"
+              + "  log('end');\n"
               + "</script>\n"
               + "</body></html>";
 
-        final String js = "document.title += ' executed';";
+        final String js = "log('executed');";
         getMockWebConnection().setResponse(URL_SECOND, js);
 
-        final WebDriver driver = loadPage2(html);
-        assertTitle(driver, getExpectedAlerts()[0]);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -988,11 +995,14 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("\n  <ul>{{for people}}\n    <li>Name: {{:name}}</li>\n  {{/for}}</ul>\n")
+    @Alerts("\\n\\s\\s<ul>{{for\\speople}}\\n\\s\\s\\s\\s<li>Name:\\s{{:name}}</li>\\n\\s\\s{{/for}}</ul>\\n")
     public void specialScriptType() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION_NORMALIZE
+            + "</script>\n"
             + "<script id='template' type='text/x-jsrender'>\n"
             + "  <ul>{{for people}}\n"
             + "    <li>Name: {{:name}}</li>\n"
@@ -1002,7 +1012,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<script>\n"
             + "function doTest() {\n"
             + "  script = document.getElementById('template');\n"
-            + "  alert(script.innerHTML);\n"
+            + "  log(script.innerHTML);\n"
             + "}\n"
             + "</script>\n"
 
@@ -1010,7 +1020,7 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
             + "<body onload='doTest()'>\n"
             + "</body></html>";
 
-        loadPageWithAlerts2(html);
+        loadPageVerifyTitle2(html);
     }
 
     /**
@@ -1065,18 +1075,14 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("onload for window,")
+    @Alerts("onload for window")
     public void scriptEventFor() throws Exception {
         final String html = "<html>\n"
             + "<head>\n"
-            + "  <script>\n"
-            + "    function log(text) {\n"
-            + "      var textarea = document.getElementById('myTextarea');\n"
-            + "      textarea.value += text + ',';\n"
-            + "    }\n"
-            + "  </script>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "</script>\n"
             + "</head><body>\n"
-            + "  <textarea id='myTextarea' cols='80' rows='10'></textarea>\n"
             + "  <script event='onload' for='window'>\n"
             + "    log('onload for window');\n"
             + "  </script>\n"
@@ -1093,7 +1099,8 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
         final WebDriver webDriver = loadPage2(html);
         webDriver.findElement(By.id("div1")).click();
         webDriver.findElement(By.id("div2")).click();
-        assertEquals(getExpectedAlerts()[0], webDriver.findElement(By.id("myTextarea")).getAttribute("value"));
+
+        verifyTitle2(webDriver, getExpectedAlerts());
     }
 
     /**
@@ -1252,27 +1259,30 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined append append done from script undefined")
+    @Alerts({"undefined", "append", "append done", "from script", "undefined"})
     public void asyncOnLoad() throws Exception {
         final String html = "<html><body>\n"
                 + "<script>\n"
+                + LOG_TITLE_FUNCTION
+                + "</script>\n"
+                + "<script>\n"
                 + "  var script = document.createElement('script');\n"
-                + "  document.title += ' ' + script.readyState;\n"
+                + "  log(script.readyState);\n"
                 + "  script.src = 'js.js';\n"
                 + "  script.async = true;\n"
                 + "  script.onload = function () {\n"
-                + "    document.title += ' ' + this.readyState;\n"
+                + "    log(this.readyState);\n"
                 + "  };\n"
-                + "  document.title += ' append';\n"
+                + "  log('append');\n"
                 + "  document.body.appendChild(script);\n"
-                + "  document.title += ' append done';\n"
+                + "  log('append done');\n"
                 + "</script>\n"
                 + "</body></html>\n";
 
-        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "document.title += ' from script';");
+        getMockWebConnection().setResponse(new URL(URL_FIRST, "js.js"), "log('from script');");
 
         final WebDriver driver = loadPage2(html);
-        assertTitle(driver, getExpectedAlerts()[0]);
+        verifyTitle2(driver, getExpectedAlerts());
     }
 
     /**
@@ -1545,6 +1555,25 @@ public class HTMLScriptElementTest extends WebDriverTestCase {
 
             + "</body>\n"
             + "</html>\n";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("onerror")
+    public void onErrorHandler() throws Exception {
+        final String html = "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    </script>\n"
+            + "    <script src='http://www.unknown-host.xyz' onload='log(\"onload\")' onerror='log(\"onerror\")'></script>\n"
+            + "  </head>\n"
+            + "  <body>\n"
+            + "  </body></html>";
 
         loadPageVerifyTitle2(html);
     }
