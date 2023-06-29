@@ -804,7 +804,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             LOG.trace("Javascript compile " + sourceName + newline + sourceCode + newline);
         }
 
-        final ContextAction<Object> action = new HtmlUnitContextAction(scope, owningPage) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, owningPage) {
             @Override
             public Object doRun(final Context cx) {
                 return cx.compileString(sourceCode, sourceName, startLine, null);
@@ -853,7 +853,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @return the result of executing the specified code
      */
     public Object execute(final HtmlPage page, final Scriptable scope, final Script script) {
-        final ContextAction<Object> action = new HtmlUnitContextAction(scope, page) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 return script.exec(cx, scope);
@@ -901,7 +901,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     public Object callFunction(final HtmlPage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
 
-        final ContextAction<Object> action = new HtmlUnitContextAction(scope, page) {
+        final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
                 if (ScriptRuntime.hasTopCall(cx)) {
@@ -1065,9 +1065,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      * @param triggerOnError if true, this triggers the onerror handler
      */
     protected void handleJavaScriptException(final ScriptException scriptException, final boolean triggerOnError) {
-        // shutdown was already called
         final WebClient webClient = getWebClient();
         if (webClient == null) {
+            // shutdown was already called
             if (LOG.isInfoEnabled()) {
                 LOG.info("handleJavaScriptException('" + scriptException.getMessage()
                     + "') called after the shutdown of the Javascript engine - exception ignored.");
