@@ -41,7 +41,7 @@
         <checkstyle.version>9.3</checkstyle.version>
         <spotbugs.version>4.7.3</spotbugs.version>
         <pmd.version>6.50.0</pmd.version>
-        <junit.version>5.9.3</junit.version>
+        <junit.version>4.13.2</junit.version>
         <archunit.version>1.0.1</archunit.version>
         <dependencycheck.version>8.3.1</dependencycheck.version>
     </properties>
@@ -1200,14 +1200,8 @@
 
         <!-- Test dependencies. -->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.vintage</groupId>
-            <artifactId>junit-vintage-engine</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
