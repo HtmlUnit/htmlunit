@@ -293,7 +293,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         cx.setInstructionObserverThreshold(INSTRUCTION_COUNT_THRESHOLD);
 
         cx.setErrorReporter(new HtmlUnitErrorReporter(webClient_.getJavaScriptErrorListener()));
-        // cx.setWrapFactory(wrapFactory_);
+        cx.setWrapFactory(wrapFactory_);
 
         if (debugger_ != null) {
             cx.setDebugger(debugger_, null);
