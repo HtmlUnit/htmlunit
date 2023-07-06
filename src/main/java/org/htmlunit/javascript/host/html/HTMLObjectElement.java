@@ -214,20 +214,20 @@ public class HTMLObjectElement extends HTMLElement implements Wrapper {
      */
     @Override
     public Object get(final String name, final Scriptable start) {
-        // for java mocks do a bit more, we have handle unknown properties
-        // ourself
-        if (wrappedActiveX_ instanceof NativeJavaObject) {
-            final NativeJavaObject obj = (NativeJavaObject) wrappedActiveX_;
-            final Object result = obj.get(name, start);
-            if (Scriptable.NOT_FOUND != result) {
-                return result;
-            }
-            return super.get(name, start);
-        }
-
-        if (wrappedActiveX_ != null) {
-            return wrappedActiveX_.get(name, start);
-        }
+//        // for java mocks do a bit more, we have handle unknown properties
+//        // ourself
+//        if (wrappedActiveX_ instanceof NativeJavaObject) {
+//            final NativeJavaObject obj = (NativeJavaObject) wrappedActiveX_;
+//            final Object result = obj.get(name, start);
+//            if (Scriptable.NOT_FOUND != result) {
+//                return result;
+//            }
+//            return super.get(name, start);
+//        }
+//
+//        if (wrappedActiveX_ != null) {
+//            return wrappedActiveX_.get(name, start);
+//        }
         return super.get(name, start);
     }
 
