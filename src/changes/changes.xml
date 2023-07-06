@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="update" dev="rbri">
+                WebClientOptions.getHomePage() now point to https://www.htmlunit.org/.
+            </action>
+            <action type="update" dev="rbri">
+                WebClientOptions.setActiveXNative() is deprecated (like the whole IE).
+            </action>
             <action type="add" dev="rbri">
                 HtmlElement autofocus property added.
             </action>
