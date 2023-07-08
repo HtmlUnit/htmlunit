@@ -193,9 +193,7 @@ public class HttpWebConnection implements WebConnection {
                 try (CloseableHttpClient closeableHttpClient = builder.build()) {
                     try (CloseableHttpResponse httpResponse =
                             closeableHttpClient.execute(httpHost, httpMethod, httpContext)) {
-                        final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
-                        final long endTime = System.currentTimeMillis();
-                        return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
+                        return downloadResponse(httpMethod, webRequest, httpResponse, startTime);
                     }
                 }
             }
@@ -206,9 +204,7 @@ public class HttpWebConnection implements WebConnection {
                     try (CloseableHttpClient closeableHttpClient = builder.build()) {
                         try (CloseableHttpResponse httpResponse =
                                 closeableHttpClient.execute(httpHost, httpMethod, httpContext)) {
-                            final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
-                            final long endTime = System.currentTimeMillis();
-                            return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
+                            return downloadResponse(httpMethod, webRequest, httpResponse, startTime);
                         }
                     }
                 }
@@ -726,11 +722,21 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Converts an HttpMethod into a WebResponse.
+     * Downloads the response.
+     * This calls {@link #downloadResponseBody(HttpResponse)} and constructs the {@link WebResponse}.
+     * @param httpMethod the HttpUriRequest
+     * @param webRequest the {@link WebRequest}
+     * @param httpResponse the web server's response
+     * @param startTime the download start time
+     * @return a wrapper for the downloaded body.
+     * @throws IOException in case of problem reading/saving the body
      */
-    private WebResponse makeWebResponse(final HttpResponse httpResponse,
-            final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
+    protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
+            final WebRequest webRequest, final HttpResponse httpResponse,
+            final long startTime) throws IOException {
 
+        final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
+        final long endTime = System.currentTimeMillis();
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
         if (statusMessage == null) {
             statusMessage = "Unknown status message";
@@ -740,8 +746,8 @@ public class HttpWebConnection implements WebConnection {
         for (final Header header : httpResponse.getAllHeaders()) {
             headers.add(new NameValuePair(header.getName(), header.getValue()));
         }
-        final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
-        return newWebResponseInstance(responseData, loadTime, webRequest);
+        final WebResponseData responseData = new WebResponseData(downloadedBody, statusCode, statusMessage, headers);
+        return newWebResponseInstance(responseData, endTime - startTime, webRequest);
     }
 
     /**

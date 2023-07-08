@@ -93,6 +93,8 @@ public class WebResponse implements Serializable {
     private final WebResponseData responseData_;
     private final WebRequest request_;
     private boolean defaultCharsetUtf8_;
+    private boolean wasBlocked_;
+    private String blockReason_;
 
     /**
      * Constructs with all data.
@@ -371,5 +373,29 @@ public class WebResponse implements Serializable {
         return (statusCode >= HttpClientConverter.OK && statusCode < HttpClientConverter.MULTIPLE_CHOICES)
                 || statusCode == HttpClientConverter.USE_PROXY
                 || statusCode == HttpClientConverter.NOT_MODIFIED;
+    }
+
+    /**
+     * @return true if the request was blocked
+     */
+    public boolean wasBlocked() {
+        return wasBlocked_;
+    }
+
+    /**
+     * @return the reason for blocking or null
+     */
+    public String getBlockReason() {
+        return blockReason_;
+    }
+
+    /**
+     * Sets the wasBlocked state to true.
+     *
+     * @param blockReason the reason
+     */
+    public void markAsBlocked(final String blockReason) {
+        wasBlocked_ = true;
+        blockReason_ = blockReason;
     }
 }
