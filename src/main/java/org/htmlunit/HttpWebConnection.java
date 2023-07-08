@@ -722,6 +722,25 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
+     * Converts an HttpMethod into a WebResponse.
+     */
+    protected WebResponse makeWebResponse(final HttpResponse httpResponse,
+            final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
+
+        String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
+        if (statusMessage == null) {
+            statusMessage = "Unknown status message";
+        }
+        final int statusCode = httpResponse.getStatusLine().getStatusCode();
+        final List<NameValuePair> headers = new ArrayList<>();
+        for (final Header header : httpResponse.getAllHeaders()) {
+            headers.add(new NameValuePair(header.getName(), header.getValue()));
+        }
+        final WebResponseData responseData = new WebResponseData(responseBody, statusCode, statusMessage, headers);
+        return newWebResponseInstance(responseData, loadTime, webRequest);
+    }
+
+    /**
      * Downloads the response.
      * This calls {@link #downloadResponseBody(HttpResponse)} and constructs the {@link WebResponse}.
      * @param httpMethod the HttpUriRequest
@@ -737,17 +756,8 @@ public class HttpWebConnection implements WebConnection {
 
         final DownloadedContent downloadedBody = downloadResponseBody(httpResponse);
         final long endTime = System.currentTimeMillis();
-        String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
-        if (statusMessage == null) {
-            statusMessage = "Unknown status message";
-        }
-        final int statusCode = httpResponse.getStatusLine().getStatusCode();
-        final List<NameValuePair> headers = new ArrayList<>();
-        for (final Header header : httpResponse.getAllHeaders()) {
-            headers.add(new NameValuePair(header.getName(), header.getValue()));
-        }
-        final WebResponseData responseData = new WebResponseData(downloadedBody, statusCode, statusMessage, headers);
-        return newWebResponseInstance(responseData, endTime - startTime, webRequest);
+
+        return makeWebResponse(httpResponse, webRequest, downloadedBody, endTime - startTime);
     }
 
     /**

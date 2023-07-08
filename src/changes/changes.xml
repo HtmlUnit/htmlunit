@@ -8,6 +8,14 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="update" dev="rbri" issue="611">
+                HttpWebConnection.downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long) and
+                WebResponse.markAsBlocked(String) introduced to make some content blocking iml possible.
+            </action>
+            <action type="update" dev="rbri" issue="611">
+                HttpWebConnection.downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long) introduced
+                to make some content blocking iml possible.
+            </action>
             <action type="update" dev="rbri">
                 WebClientOptions.getHomePage() now point to https://www.htmlunit.org/.
             </action>
