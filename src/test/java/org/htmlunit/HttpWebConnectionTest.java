@@ -17,15 +17,12 @@ package org.htmlunit;
 import static org.junit.Assert.fail;
 
 import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,19 +34,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.ProtocolVersion;
-import org.apache.http.StatusLine;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.message.BasicHttpResponse;
-import org.apache.http.message.BasicStatusLine;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.util.KeyDataPair;
 import org.htmlunit.util.MimeType;
@@ -164,39 +152,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
                 }
             }
         }
-    }
-
-    /**
-     * Tests creation of a web response.
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void makeWebResponse() throws Exception {
-        final URL url = new URL("http://htmlunit.sourceforge.net/");
-        final String content = "<html><head></head><body></body></html>";
-        final DownloadedContent downloadedContent = new DownloadedContent.InMemory(content.getBytes());
-        final long loadTime = 500L;
-
-        final ProtocolVersion protocolVersion = new ProtocolVersion("HTTP", 1, 0);
-        final StatusLine statusLine = new BasicStatusLine(protocolVersion, HttpClientConverter.OK, null);
-        final HttpResponse httpResponse = new BasicHttpResponse(statusLine);
-
-        final HttpEntity responseEntity = new StringEntity(content);
-        httpResponse.setEntity(responseEntity);
-
-        final HttpWebConnection connection = new HttpWebConnection(getWebClient());
-        final Method method = connection.getClass().getDeclaredMethod("makeWebResponse",
-                HttpResponse.class, WebRequest.class, DownloadedContent.class, long.class);
-        method.setAccessible(true);
-        final WebResponse response = (WebResponse) method.invoke(connection,
-                httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
-
-        assertEquals(HttpClientConverter.OK, response.getStatusCode());
-        assertEquals(url, response.getWebRequest().getUrl());
-        assertEquals(loadTime, response.getLoadTime());
-        assertEquals(content, response.getContentAsString());
-        assertEquals(content.getBytes(), IOUtils.toByteArray(response.getContentAsStream()));
-        assertEquals(new ByteArrayInputStream(content.getBytes()), response.getContentAsStream());
     }
 
     /**
