@@ -8,7 +8,12 @@
     </properties>
 
     <body>
-        <section name="Request headers">
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
+        <section name="Request headers" id="request_headers">
             <p>
                 HtmlUnit mimics the browser as close as possible, of course this includes the sent request headers also.
                 But you can change this if needed at three levels; the request level, the client level and the BrowserVersion level.<br/>
@@ -91,7 +96,7 @@ client .getPage(wr);
              </subsection>
         </section>
 
-        <section name="Animations based on Window.requestAnimationFrame()">
+        <section name="Animations based on Window.requestAnimationFrame()"  id="animations">
             <p>
                 All browsers supporded by HtmlUnit are able to do animations based on the
                 <a href='https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame'>Window.requestAnimationFrame() API</a>.
@@ -128,7 +133,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             </p>
         </section>
 
-        <section name="Attachments">
+        <section name="Attachments" id="attachments">
             <p>
                 Normally pages are loaded inline: clicking on
                 a link, for example, loads the linked page in the current window. Attached pages are different
@@ -146,7 +151,117 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             </p>
         </section>
 
-        <section name="Multithreading/Threads Pooling">
+        <section name="Content blocking" id="content_blocking">
+            <p>
+                Out of the box HtmlUnit does not include any content blocking mechanism. But there are several
+                options to include your own.<br/>
+            </p>
+            <subsection name="Blocking based on the request (URL)">
+                <p>
+                    This simple form of content blocking works based on the requested url. Usually you have
+                    to use a list of bolked url's or some url patterns to detect the blocked url. In case
+                    the url is blocked the request is not sent to the server; instead a simple page is returned.
+                </p>
+                <p>
+                    With HtmlUnit you can implement this using a WebConnectionWrapper.
+            <source><![CDATA[
+    try (WebClient webClient = new WebClient()) {
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        // set more options
+
+        // create a WebConnectionWrapper with an (subclassed) getResponse() impl
+        new WebConnectionWrapper(webClient) {
+
+            @Override
+            public WebResponse getResponse(final WebRequest request) throws IOException {
+                final URL url = request.getUrl();
+                // check the request url
+                // if is allowed simple call super.
+
+                if (!isBlocked(url)) {
+                    return super.getResponse(request);
+                }
+
+                // construct alternative response
+                final String content = "<html><html>";
+                final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                        200, "blocked", Collections.emptyList());
+                final WebResponse blocked = new WebResponse(data, request, 0L);
+                // if you like to check later on for blocked responses
+                blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm() + "'");
+                return blocked;
+            }
+
+            private boolean isBlocked(final URL url) {
+                return true;
+            }
+        };
+
+        // use the client as usual
+        final HtmlPage page = webClient.getPage(url);
+    }
+            ]]></source>
+                </p>
+            </subsection>
+
+            <subsection name="Blocking based on the response (headers)">
+                <p>requires HtmlUnit 3.4.0 or later</p>
+                <p>
+                    For blocking based on the response a more sophisticated approche is needed.
+                    The following sample code shows blocking base on the content length header. Using
+                    this you are able to check the header of the respons and stop downloading the whole
+                    response directly. This might be helpfull to improve the speed of some test cases.
+                </p>
+                <p>
+                    For the implementation we have to deal with the real web connection to be able to
+                    access the headers before the whole content is downloaded and also to abort the
+                    download of the body itself. Therefore we have to replace the WebConnection with
+                    our own subclass of HttpWebConnection.
+            <source><![CDATA[
+    try (WebClient webClient = new WebClient()) {
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        // set more options
+  
+        // use our own sublcass of HttpWebConnection
+        webClient.setWebConnection(new HttpWebConnection(webClient) {
+            @Override
+            protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
+                    final WebRequest webRequest, final HttpResponse httpResponse,
+                    final long startTime) throws IOException {
+  
+                // check content length header
+                final int contentLenght = Integer.parseInt(
+                        httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH).getValue());
+  
+                // if not too big - done
+                if (contentLenght < 1_000) {
+                    return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
+                }
+  
+                // abort downloading of the content
+                httpMethod.abort();
+  
+                // construct alternative response
+                final String content = "<html><html>";
+                final WebResponseData data = new WebResponseData(content.getBytes(Charsets.UTF_8),
+                        200, "blocked", Collections.emptyList());
+                final WebResponse blocked = new WebResponse(data, webRequest, 0L);
+                // if you like to check later on for blocked responses
+                blocked.markAsBlocked("Blocked URL: '" + url.toExternalForm()
+                            + "' content length: " + contentLenght);
+                return blocked;
+            }
+        });
+  
+        // use the client as usual
+        final HtmlPage page = webClient.getPage(url);
+    }
+            ]]></source>
+                </p>
+            </subsection>
+        </section>
+
+        <section name="Multithreading/Threads Pooling" id="multithreading">
             <p>
                 HtmlUnit uses an Executor backed by a CachedThreadPool for thread handling. This should work
                 fine for common cases. The CachedThreadPool is in use since 2.54.0 to be able to support scenarios using

@@ -729,7 +729,7 @@ public class HttpWebConnection implements WebConnection {
      * @param loadTime the download time
      * @return a wrapper for the downloaded body.
      */
-    public WebResponse makeWebResponse(final HttpResponse httpResponse,
+    protected WebResponse makeWebResponse(final HttpResponse httpResponse,
             final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
