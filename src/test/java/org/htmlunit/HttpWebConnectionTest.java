@@ -22,6 +22,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Writer;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -552,7 +553,6 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final HttpWebConnection connection = new HttpWebConnection(getWebClient());
         final Method method = connection.getClass().getDeclaredMethod("makeWebResponse",
                 HttpResponse.class, WebRequest.class, DownloadedContent.class, long.class);
-        method.setAccessible(true);
         final WebResponse response = (WebResponse) method.invoke(connection,
                 httpResponse, new WebRequest(url), downloadedContent, new Long(loadTime));
 
@@ -565,7 +565,10 @@ public class HttpWebConnectionTest extends WebServerTestCase {
     }
 
     /**
-     * Test for broken gzip content.
+     * Test for overwriting the
+     * {@link HttpWebConnection#downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long)}
+     * method.
+     *
      * @throws Exception if the test fails
      */
     @Test
@@ -578,7 +581,7 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(URL_FIRST, content, 200, "OK", MimeType.APPLICATION_JSON, headers);
 
-        startWebServer(getMockWebConnection());
+        startWebServer(conn);
 
         final WebClient client = getWebClient();
         client.setWebConnection(new HttpWebConnection(client) {
@@ -586,6 +589,8 @@ public class HttpWebConnectionTest extends WebServerTestCase {
             protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
                     final WebRequest webRequest, final HttpResponse httpResponse,
                     final long startTime) {
+
+                httpMethod.abort();
 
                 final DownloadedContent downloaded = new DownloadedContent.InMemory(null);
                 final long endTime = System.currentTimeMillis();
@@ -598,5 +603,82 @@ public class HttpWebConnectionTest extends WebServerTestCase {
         final UnexpectedPage page = client.getPage(URL_FIRST);
         assertTrue(page.getWebResponse().wasBlocked());
         assertEquals("test blocking", page.getWebResponse().getBlockReason());
+    }
+
+    /**
+     * Test for overwriting the
+     * {@link HttpWebConnection#downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long)}
+     * method.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void contentSizeBlocking() throws Exception {
+        stopWebServer();
+
+        final Map<String, Class<? extends Servlet>> servlets = new HashMap<>();
+        servlets.put("/big", BigContentServlet.class);
+        startWebServer("./", null, servlets);
+
+        final WebClient client = getWebClient();
+        client.setWebConnection(new HttpWebConnection(client) {
+            @Override
+            protected WebResponse downloadResponse(final HttpUriRequest httpMethod,
+                    final WebRequest webRequest, final HttpResponse httpResponse,
+                    final long startTime) throws IOException {
+
+                final int contentLenght = Integer.parseInt(
+                        httpResponse.getFirstHeader(HttpHeader.CONTENT_LENGTH).getValue());
+
+                if (contentLenght < 1_000) {
+                    return super.downloadResponse(httpMethod, webRequest, httpResponse, startTime);
+                }
+
+                httpMethod.abort();
+
+                final DownloadedContent downloaded = new DownloadedContent.InMemory(null);
+                final long endTime = System.currentTimeMillis();
+                final WebResponse response = makeWebResponse(httpResponse, webRequest, downloaded, endTime - startTime);
+                response.markAsBlocked("blocking " + contentLenght);
+                return response;
+            }
+        });
+
+        final TextPage page = client.getPage(URL_FIRST + "big");
+        assertTrue(page.getWebResponse().wasBlocked());
+        assertEquals("blocking 10240000", page.getWebResponse().getBlockReason());
+        assertTrue("blocks sent " + BigContentServlet.SENT_, BigContentServlet.SENT_ < 5000);
+
+        BigContentServlet.CANCEL_ = true;
+    }
+
+    /**
+     * Servlet for bigContent().
+     */
+    public static class BigContentServlet extends HttpServlet {
+
+        /** Helper. */
+        public static int SENT_;
+        /** Helper. */
+        public static boolean CANCEL_;
+
+        /**
+         * {@inheritDoc}
+         */
+        @Override
+        protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+            final int blockSize = 1024;
+            final int blockCount = 10_000;
+
+            response.setHeader(HttpHeader.CONTENT_LENGTH, String.valueOf(blockSize * blockCount));
+
+            final byte[] buffer = new byte[blockSize];
+            try (OutputStream out = response.getOutputStream()) {
+                for (int i = 0; i < blockCount && !CANCEL_; i++) {
+                    SENT_++;
+                    out.write(buffer);
+                }
+            }
+        }
     }
 }

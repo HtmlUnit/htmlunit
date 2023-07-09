@@ -722,9 +722,14 @@ public class HttpWebConnection implements WebConnection {
     }
 
     /**
-     * Converts an HttpMethod into a WebResponse.
+     * Converts an HttpMethod into a {@link WebResponse}.
+     * @param httpResponse the web server's response
+     * @param webRequest the {@link WebRequest}
+     * @param responseBody the {@link DownloadedContent}
+     * @param loadTime the download time
+     * @return a wrapper for the downloaded body.
      */
-    protected WebResponse makeWebResponse(final HttpResponse httpResponse,
+    public WebResponse makeWebResponse(final HttpResponse httpResponse,
             final WebRequest webRequest, final DownloadedContent responseBody, final long loadTime) {
 
         String statusMessage = httpResponse.getStatusLine().getReasonPhrase();
