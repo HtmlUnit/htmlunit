@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<document>
+<document xmlns="http://maven.apache.org/XDOC/2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://maven.apache.org/XDOC/2.0 https://maven.apache.org/xsd/xdoc-2.0.xsd">
 
     <properties>
         <title>Windows and Frames</title>
@@ -9,6 +10,11 @@
     </properties>
 
     <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
         <section name="WebWindow">
             <p>
                 All pages are contained within WebWindow objects.  This could be a

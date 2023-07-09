@@ -8,6 +8,11 @@
     </properties>
 
     <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
         <section name="File downloads in real browsers">
             <p>
                 Because file download is a tricky story (at least with HtmlUnit), i like to start from the beginning with some info about

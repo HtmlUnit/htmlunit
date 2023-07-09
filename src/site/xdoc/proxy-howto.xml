@@ -7,6 +7,11 @@
     </properties>
 
     <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
         <section name="Using a http proxy server">
             <p>
                 There is a special WebClient constructor that allows you to specify proxy server information in those cases

@@ -8,6 +8,11 @@
     </properties>
 
     <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
         <section name="Introduction">
             <p>
                 The <a href="dependencies.html">dependencies page</a> lists all the jars that you will need

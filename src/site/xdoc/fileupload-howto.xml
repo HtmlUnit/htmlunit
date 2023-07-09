@@ -8,6 +8,11 @@
     </properties>
 
     <body>
+        <section name="Content" id="content">
+            <macro name="toc">
+            </macro>
+        </section>
+
         <section name="File uploads">
             <p>
                 From the browsers point of view the file upload is supported using a special input control.
