@@ -153,7 +153,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 many treads e.g. because of many WebSockets.
             </p>
             <p>
-                Starting with 2,45.0 you can change this by using WebClient.setExecutor(ExecutorService). It might be
+                Starting with 2.45.0 you can change this by using WebClient.setExecutor(ExecutorService). It might be
                 a good idea to also implement some thread naming to distinguish Threads used by HtmlUnit from the rest.
             </p>
         </section>
