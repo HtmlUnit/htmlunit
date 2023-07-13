@@ -34,15 +34,11 @@ public class StorageHolder implements Serializable {
      * Type for Storage.
      */
     public enum Type {
-        /** Old Firefox's global storage. */
-        GLOBAL_STORAGE,
         /** The type for window.localStorage. */
         LOCAL_STORAGE,
         /** The type for window.sessionStorage. */
         SESSION_STORAGE
     }
-
-    private final Map<String, Map<String, String>> globalStorage_ = new HashMap<>();
 
     private final Map<String, Map<String, String>> localStorage_ = new HashMap<>();
 
@@ -55,50 +51,40 @@ public class StorageHolder implements Serializable {
      * @return the store
      */
     public Map<String, String> getStore(final Type storageType, final Page page) {
-        final Map<String, Map<String, String>> storage = getStorage(storageType);
-        if (storage == null) {
-            return null;
-        }
-
-        synchronized (storage) {
-            final String key = getKey(storageType, page);
-            return storage.computeIfAbsent(key, k -> new LinkedHashMap<>());
-        }
-    }
-
-    private static String getKey(final Type type, final Page page) {
-        switch (type) {
-            case GLOBAL_STORAGE:
-                return page.getUrl().getHost();
-
+        switch (storageType) {
             case LOCAL_STORAGE:
-                final URL url = page.getUrl();
-                return url.getProtocol() + "://" + url.getHost() + ':'
-                        + url.getProtocol();
+                return getLocalStorage(page.getUrl());
 
             case SESSION_STORAGE:
-                final WebWindow topWindow = page.getEnclosingWindow()
-                        .getTopWindow();
-                return Integer.toHexString(topWindow.hashCode());
+                return getSessionStorage(page.getEnclosingWindow());
 
             default:
                 return null;
         }
     }
 
-    private Map<String, Map<String, String>> getStorage(final Type type) {
-        switch (type) {
-            case GLOBAL_STORAGE:
-                return globalStorage_;
+    /**
+     * Gets the local storage (map).
+     * @param url the page origin
+     * @return the store
+     */
+    public Map<String, String> getLocalStorage(final URL url) {
+        synchronized (localStorage_) {
+            final String key = url.getProtocol() + "://" + url.getHost();
+            return localStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
+        }
+    }
 
-            case LOCAL_STORAGE:
-                return localStorage_;
-
-            case SESSION_STORAGE:
-                return sessionStorage_;
-
-            default:
-                return null;
+    /**
+     * Gets the local storage (map).
+     * @param webWindow the window
+     * @return the store
+     */
+    public Map<String, String> getSessionStorage(final WebWindow webWindow) {
+        synchronized (sessionStorage_) {
+            final WebWindow topWindow = webWindow.getTopWindow();
+            final String key = Integer.toHexString(topWindow.hashCode());
+            return sessionStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
         }
     }
 }
