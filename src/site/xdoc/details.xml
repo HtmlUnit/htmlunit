@@ -272,5 +272,56 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 a good idea to also implement some thread naming to distinguish Threads used by HtmlUnit from the rest.
             </p>
         </section>
+
+        <section name="Local/Session Storage" id="sessionstorage">
+            <p>
+                HtmlUnit supports the Web Storage API.
+            </p>
+            <p>
+                But for testing purposes it might be usefull to add some entries to the storage before running a test 
+                and also accessing the stored content. Therefor the storage is accessible from the web client using the
+                StorageHolder implementation.
+            </p>
+
+            <subsection name ="SessionStorage example">
+                <source><![CDATA[
+    try (WebClient webClient = new WebClient()) {
+
+        // get the session storage for the current window
+        final Map<String, String> sessionStorage =
+                webClient.getStorageHolder().getSessionStorage(webClient.getCurrentWindow());
+
+        // place some data in the session storage
+        sessionStorage.put("myKey", "myData");
+
+        // load the page that consumes the session storage data
+        webClient.getPage(url);
+
+        // make sure the new data are in
+        assertEquals("myNewData", sessionStorage.get("myNewKey"));
+    }
+                ]]></source>
+            </subsection>
+
+            <subsection name="LocalStorage example">
+                <source><![CDATA[
+    try (WebClient webClient = new WebClient()) {
+
+        // get the local storage for the url
+        // the url has to match the page url you will load later
+        final Map<String, String> localStorage = webClient.getStorageHolder().getLocalStorage(url);
+
+        // place some data in the session storage
+        localStorage.put("myKey", "myData");
+
+        // load the page that consumes the session storage data
+        webClient.getPage(url);
+
+        // make sure the new data are in
+        assertEquals("myNewData", localStorage.get("myNewKey"));
+    }
+                ]]></source>
+            </subsection>
+        </section>
     </body>
 </document>

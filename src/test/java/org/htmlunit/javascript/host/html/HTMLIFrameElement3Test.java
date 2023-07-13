@@ -23,7 +23,6 @@ import org.htmlunit.HttpHeader;
 import org.htmlunit.MockWebConnection;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
-import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;

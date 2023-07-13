@@ -8,6 +8,13 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="add" dev="rbri">
+                New methods StorageHolder.getLocalStorage(URL) and StorageHolder.getSessionStorage(WebWindow) to better
+                support testing the Web Storage API.
+            </action>
+            <action type="remove" dev="rbri">
+                Some code for the no longer available global storage removed from the StorageHolder implentation.
+            </action>
             <action type="update" dev="rbri" issue="611">
                 HttpWebConnection.downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long) and
                 WebResponse.markAsBlocked(String) introduced to make some content blocking iml possible.
