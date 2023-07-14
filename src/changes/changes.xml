@@ -12,6 +12,9 @@
                 New methods StorageHolder.getLocalStorage(URL) and StorageHolder.getSessionStorage(WebWindow) to better
                 support testing the Web Storage API.
             </action>
+            <action type="add" dev="rbri">
+                Documentation for working with the StorageHolder added (https://www.htmlunit.org/details.html#Local.2FSession_Storage).
+            </action>
             <action type="remove" dev="rbri">
                 Some code for the no longer available global storage removed from the StorageHolder implentation.
             </action>
@@ -23,8 +26,11 @@
                 HttpWebConnection.downloadResponse(HttpUriRequest, WebRequest, HttpResponse, long) introduced
                 to make some content blocking iml possible.
             </action>
+            <action type="add" dev="rbri" issue="611">
+                Documentation for content blocking added (https://www.htmlunit.org/details.html#Content_blocking).
+            </action>
             <action type="update" dev="rbri">
-                WebClientOptions.getHomePage() now point to https://www.htmlunit.org/.
+                WebClientOptions.getHomePage() now points to https://www.htmlunit.org/.
             </action>
             <action type="update" dev="rbri">
                 WebClientOptions.setActiveXNative() is deprecated (like the whole IE).
