@@ -1,4 +1,4 @@
-# HtmlUnit(https://www.htmlunit.org) - CVE Overview
+# [HtmlUnit](https://www.htmlunit.org) - CVE Overview
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
 
