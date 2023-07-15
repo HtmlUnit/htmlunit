@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -226,10 +225,6 @@ public class ReflectTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"0", "6", "8", "55", "773", "str", "-1", "str2", "Symbol(foo)", "Symbol(bar)"},
             IE = "no Reflect")
-    @HtmlUnitNYI(CHROME = {"-1", "0", "6", "8", "55", "773", "str", "str2", "Symbol(foo)", "Symbol(bar)"},
-            EDGE = {"-1", "0", "6", "8", "55", "773", "str", "str2", "Symbol(foo)", "Symbol(bar)"},
-            FF = {"-1", "0", "6", "8", "55", "773", "str", "str2", "Symbol(foo)", "Symbol(bar)"},
-            FF_ESR = {"-1", "0", "6", "8", "55", "773", "str", "str2", "Symbol(foo)", "Symbol(bar)"})
     public void ownKeys2() throws Exception {
         final String js =
                 "    var obj = {};\n"

@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="fix" dev="rbri">
+                core-js: Negative integer index values must be handles as strings and not as integer.
+            </action>
             <action type="update" dev="rbri">
                 Ctor HtmlUnitUsernamePasswordCredentials(String, String) is deprecated, please use
                 HtmlUnitUsernamePasswordCredentials(String, char[]) instead.
