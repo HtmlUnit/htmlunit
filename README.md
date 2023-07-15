@@ -154,7 +154,7 @@ This project is licensed under the Apache 2.0 License
 ## Some insights
 [HtmlUnit at openhub][5]
 
-###Stargazers
+### Stargazers
 [![Stargazers](https://starchart.cc/HtmlUnit/htmlunit.svg)](https://starchart.cc/HtmlUnit/htmlunit)
 
 
