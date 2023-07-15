@@ -41,18 +41,18 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final String scheme = new BasicScheme().getSchemeName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", "password");
+        provider.addCredentials("username", "password".toCharArray());
 
         Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserPrincipal().getName());
         assertEquals("password", credentials.getPassword());
 
-        provider.addCredentials("username", "new password");
+        provider.addCredentials("username", "new password".toCharArray());
         credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserPrincipal().getName());
         assertEquals("new password", credentials.getPassword());
 
-        provider.addCredentials("new username", "other password");
+        provider.addCredentials("new username", "other password".toCharArray());
         credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("new username", credentials.getUserPrincipal().getName());
         assertEquals("other password", credentials.getPassword());
@@ -63,7 +63,8 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
      */
     @Test
     public void basicAuthenticationTwice() throws Exception {
-        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider()).addCredentials("jetty", "jetty");
+        ((DefaultCredentialsProvider) getWebClient().getCredentialsProvider())
+                                        .addCredentials("jetty", "jetty".toCharArray());
 
         getMockWebConnection().setResponse(URL_SECOND, "Hello World");
         HtmlPage page = loadPage("Hi There");
@@ -81,7 +82,7 @@ public class DefaultCredentialsProviderTest extends SimpleWebTestCase {
         final String scheme = new BasicScheme().getSchemeName();
 
         final DefaultCredentialsProvider provider = new DefaultCredentialsProvider();
-        provider.addCredentials("username", "password", HttpHeader.HOST_LC, 80, realm);
+        provider.addCredentials("username", "password".toCharArray(), HttpHeader.HOST_LC, 80, realm);
 
         Credentials credentials = provider.getCredentials(new AuthScope(HttpHeader.HOST_LC, 80, realm, scheme));
         assertEquals("username", credentials.getUserPrincipal().getName());

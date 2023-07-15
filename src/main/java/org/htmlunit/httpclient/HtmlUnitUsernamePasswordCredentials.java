@@ -35,9 +35,22 @@ public class HtmlUnitUsernamePasswordCredentials implements Credentials, Seriali
      *
      * @param userName the user name
      * @param password the password
+     *
+     * @deprecated as of version 3.4.0; use HtmlUnitUsernamePasswordCredentials(String, char[]) instead
      */
+    @Deprecated
     public HtmlUnitUsernamePasswordCredentials(final String userName, final String password) {
         httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(userName, password);
+    }
+
+    /**
+     * The constructor with the username and password arguments.
+     *
+     * @param userName the user name
+     * @param password the password
+     */
+    public HtmlUnitUsernamePasswordCredentials(final String userName, final char[] password) {
+        httpClientUsernamePasswordCredentials_ = new UsernamePasswordCredentials(userName, String.valueOf(password));
     }
 
     @Override

@@ -8,6 +8,14 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+            <action type="update" dev="rbri">
+                Ctor HtmlUnitUsernamePasswordCredentials(String, String) is deprecated, please use
+                HtmlUnitUsernamePasswordCredentials(String, char[]) instead.
+            </action>
+            <action type="update" dev="rbri">
+                Several methods of DefaultCredentialsProvider are deprecated, please use
+                there counterparts expecting the password as char[] instead.
+            </action>
             <action type="add" dev="rbri">
                 New methods StorageHolder.getLocalStorage(URL) and StorageHolder.getSessionStorage(WebWindow) to better
                 support testing the Web Storage API.
