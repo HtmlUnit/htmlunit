@@ -17,6 +17,7 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -186,6 +187,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"a b", "2", "null", "undefined"},
             IE = {"a b", "2", "null", "null"})
+    @HtmlUnitNYI(IE = {"a b", "2", "null", "undefined"})
     public void itemNegative() throws Exception {
         item("a b", -1);
     }
@@ -196,6 +198,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"a b", "2", "null", "undefined"},
             IE = {"a b", "2", "null", "null"})
+    @HtmlUnitNYI(IE = {"a b", "2", "null", "undefined"})
     public void itemNegative2() throws Exception {
         item("a b", -123);
     }
@@ -930,6 +933,7 @@ public class DOMTokenListTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"2", "false", "true", "false", "false"},
             IE = {"2", "true", "true", "true", "true"})
+    @HtmlUnitNYI(IE = {"2", "false", "true", "true", "true"})
     public void in() throws Exception {
         final String html
             = "<html><head><script>\n"
