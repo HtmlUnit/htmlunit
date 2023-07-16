@@ -12,7 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.htmlunit;
+package org.htmlunit.httpclient;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.http.impl.cookie.BasicClientCookie;
-import org.htmlunit.httpclient.HtmlUnitCookieStore;
+import org.htmlunit.CookieManager;
 import org.htmlunit.util.Cookie;
 import org.junit.Before;
 import org.junit.Test;
