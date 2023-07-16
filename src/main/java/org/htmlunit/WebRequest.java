@@ -34,7 +34,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.http.auth.Credentials;
-import org.apache.http.auth.UsernamePasswordCredentials;
+import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.httpclient.HttpClientConverter;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
@@ -189,12 +189,12 @@ public class WebRequest implements Serializable {
         if (userInfo != null) {
             final int splitPos = userInfo.indexOf(':');
             if (splitPos == -1) {
-                urlCredentials_ = new UsernamePasswordCredentials(userInfo, "");
+                urlCredentials_ = new HtmlUnitUsernamePasswordCredentials(userInfo, new char[0]);
             }
             else {
                 final String username = userInfo.substring(0, splitPos);
                 final String password = userInfo.substring(splitPos + 1);
-                urlCredentials_ = new UsernamePasswordCredentials(username, password);
+                urlCredentials_ = new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
             }
         }
     }
