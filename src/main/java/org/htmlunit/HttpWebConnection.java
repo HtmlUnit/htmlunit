@@ -147,7 +147,7 @@ public class HttpWebConnection implements WebConnection {
     private final WebClient webClient_;
 
     private String virtualHost_;
-    private final CookieSpecProvider htmlUnitCookieSpecProvider_;
+    private final HtmlUnitCookieSpecProvider htmlUnitCookieSpecProvider_;
     private final WebClientOptions usedOptions_;
     private PoolingHttpClientConnectionManager connectionManager_;
 
