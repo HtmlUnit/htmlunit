@@ -131,7 +131,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addCredentials(final String username, final String password, final String host,
             final int port, final String realm) {
         final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
-        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
+        final HtmlUnitUsernamePasswordCredentials credentials =
+                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
         setCredentials(authscope, credentials);
     }
 
@@ -148,7 +149,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addCredentials(final String username, final char[] password, final String host,
             final int port, final String realm) {
         final AuthScope authscope = new AuthScope(host, port, realm, ANY_SCHEME);
-        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password);
+        final HtmlUnitUsernamePasswordCredentials credentials =
+                    new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
     }
 
@@ -170,7 +172,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addNTLMCredentials(final String username, final String password, final String host,
             final int port, final String workstation, final String domain) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final Credentials credentials = new NTCredentials(username, password, workstation, domain);
+        final NTCredentials credentials = new NTCredentials(username, password, workstation, domain);
         setCredentials(authscope, credentials);
     }
 
@@ -188,7 +190,7 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addNTLMCredentials(final String username, final char[] password, final String host,
             final int port, final String workstation, final String domain) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final Credentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
+        final NTCredentials credentials = new NTCredentials(username, String.valueOf(password), workstation, domain);
         setCredentials(authscope, credentials);
     }
 
@@ -206,7 +208,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addSocksCredentials(final String username, final String password, final String host,
             final int port) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password);
+        final HtmlUnitUsernamePasswordCredentials credentials =
+                    new HtmlUnitUsernamePasswordCredentials(username, password.toCharArray());
         setCredentials(authscope, credentials);
 
         initSocksAuthenticatorIfNeeded(this);
@@ -222,7 +225,8 @@ public class DefaultCredentialsProvider implements CredentialsProvider, Serializ
     public void addSocksCredentials(final String username, final char[] password, final String host,
             final int port) {
         final AuthScope authscope = new AuthScope(host, port, ANY_REALM, ANY_SCHEME);
-        final Credentials credentials = new HtmlUnitUsernamePasswordCredentials(username, password);
+        final HtmlUnitUsernamePasswordCredentials credentials =
+                    new HtmlUnitUsernamePasswordCredentials(username, password);
         setCredentials(authscope, credentials);
 
         initSocksAuthenticatorIfNeeded(this);
