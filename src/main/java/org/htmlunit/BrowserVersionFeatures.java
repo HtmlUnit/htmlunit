@@ -793,6 +793,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_DOCUMENT_DESIGN_MODE_INHERIT,
 
+    /** Javascript document.evaluate creates a new result object even if provided as param. */
+    @BrowserFeature({CHROME, EDGE})
+    JS_DOCUMENT_EVALUATE_RECREATES_RESULT,
+
     /** Javascript document.forms(...) supported. */
     @BrowserFeature(IE)
     JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED,

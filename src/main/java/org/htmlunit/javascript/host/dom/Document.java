@@ -29,6 +29,7 @@ import static org.htmlunit.BrowserVersionFeatures.HTMLDOCUMENT_COLOR;
 import static org.htmlunit.BrowserVersionFeatures.HTML_COLOR_EXPAND_ZERO;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_REQUIRES_NAME_OR_ID;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_DESIGN_MODE_INHERIT;
+import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_EVALUATE_RECREATES_RESULT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_FORMS_FUNCTION_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SELECTION_RANGE_COUNT;
 import static org.htmlunit.BrowserVersionFeatures.JS_DOCUMENT_SETTING_DOMAIN_THROWS_FOR_ABOUT_BLANK;
@@ -77,6 +78,7 @@ import org.htmlunit.corejs.javascript.NativeFunction;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.html.DomComment;
 import org.htmlunit.html.DomDocumentFragment;
@@ -637,11 +639,25 @@ public class Document extends Node {
     public XPathResult evaluate(final String expression, final Node contextNode,
             final Object resolver, final int type, final Object result) {
         try {
-            XPathResult xPathResult = (XPathResult) result;
-            if (xPathResult == null) {
+            XPathResult xPathResult = null;
+            if (result instanceof XPathResult) {
+                xPathResult = (XPathResult) result;
+
+                if (getBrowserVersion().hasFeature(JS_DOCUMENT_EVALUATE_RECREATES_RESULT)) {
+                    xPathResult = new XPathResult();
+                    xPathResult.setParentScope(getParentScope());
+                    xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+                }
+            }
+            else if (result == null
+                    || Undefined.isUndefined(result)
+                    || result instanceof ScriptableObject) {
                 xPathResult = new XPathResult();
                 xPathResult.setParentScope(getParentScope());
                 xPathResult.setPrototype(getPrototype(xPathResult.getClass()));
+            }
+            else {
+                throw ScriptRuntime.typeError("Argument 5 of Document.evaluate has to be an XPathResult or null.");
             }
 
             PrefixResolver prefixResolver = null;
