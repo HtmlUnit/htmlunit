@@ -9197,4 +9197,24 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void urlSearchParams() throws Exception {
         testString("", "new URLSearchParams('q=URLUtils.searchParams&topic=api')");
     }
+
+    /**
+     * Test NamedNodeMap.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
+                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
+            EDGE = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
+                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
+            FF = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
+                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
+            FF_ESR = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
+                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
+            IE = "getNamedItem(),getNamedItemNS(),item(),length,removeNamedItem(),"
+                + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()")
+    public void namedNodeMap() throws Exception {
+        testString("", "element.attributes");
+    }
 }
