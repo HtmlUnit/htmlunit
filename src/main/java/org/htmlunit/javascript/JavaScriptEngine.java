@@ -658,6 +658,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         configureConstants(config, scriptable);
         configureProperties(config, scriptable);
         configureFunctions(config, scriptable);
+        configureSymbolConstants(config, scriptable);
         configureSymbols(config, scriptable);
     }
 
@@ -720,6 +721,15 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                 final FunctionObject staticFunctionObject = new FunctionObject(functionName, method,
                         scriptable);
                 scriptable.defineProperty(functionName, staticFunctionObject, ScriptableObject.EMPTY);
+            }
+        }
+    }
+
+    private static void configureSymbolConstants(final ClassConfiguration config, final ScriptableObject scriptable) {
+        final Map<Symbol, String> symbolConstantMap = config.getSymbolConstantMap();
+        if (symbolConstantMap != null) {
+            for (final Entry<Symbol, String> symbolInfo : symbolConstantMap.entrySet()) {
+                scriptable.defineProperty(symbolInfo.getKey(), symbolInfo.getValue(), ScriptableObject.DONTENUM);
             }
         }
     }

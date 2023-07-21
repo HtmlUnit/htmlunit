@@ -208,6 +208,10 @@ public abstract class AbstractJavaScriptConfiguration {
                     }
                 }
             }
+
+            // do this as first step to be able to overwrite the symbol later if needed
+            classConfiguration.addSymbolConstant(SymbolKey.TO_STRING_TAG, classConfiguration.getHostClassSimpleName());
+
             for (final Method method : classConfiguration.getHostClass().getDeclaredMethods()) {
                 for (final Annotation annotation : method.getAnnotations()) {
                     if (annotation instanceof JsxGetter) {
