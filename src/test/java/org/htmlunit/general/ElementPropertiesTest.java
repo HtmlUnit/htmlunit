@@ -2999,6 +2999,24 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void select() throws Exception {
         test("select");
     }
+    /**
+     * Test {@link org.htmlunit.html.HtmlSelect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "add(),item(),length,namedItem(),remove(),selectedIndex",
+            EDGE = "add(),item(),length,namedItem(),remove(),selectedIndex",
+            FF = "add(),item(),length,namedItem(),remove(),selectedIndex",
+            FF_ESR = "add(),item(),length,namedItem(),remove(),selectedIndex",
+            IE = "add(),childNodes,item(),length,remove(),selectedIndex")
+    @HtmlUnitNYI(CHROME = "add(),item(),length,remove(),selectedIndex",
+            EDGE = "add(),item(),length,remove(),selectedIndex",
+            FF_ESR = "add(),item(),length,remove(),selectedIndex",
+            FF = "add(),item(),length,remove(),selectedIndex")
+    public void optionsCollection() throws Exception {
+        testString("var sel = document.createElement('select')", "sel.options");
+    }
 
     /**
      * Test {@link org.htmlunit.html.HtmlSmall}.

@@ -14,6 +14,8 @@
  */
 package org.htmlunit.javascript.host.html;
 
+import static org.htmlunit.junit.BrowserRunner.TestedBrowser.IE;
+
 import java.util.List;
 
 import org.htmlunit.HttpMethod;
@@ -23,6 +25,7 @@ import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
 import org.htmlunit.junit.BrowserRunner.BuggyWebDriver;
 import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
+import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -2762,5 +2765,37 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertTrue(options.get(0).isSelected());
         assertFalse(options.get(1).isSelected());
         assertFalse(options.get(2).isSelected());
+    }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLOptionElement]", "[object HTMLOptionElement]", "[object HTMLOptionElement]"},
+            IE = "exception")
+    @NotYetImplemented(IE)
+    public void optionsForOf() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var s = document.getElementById('s');\n"
+            + "    for (var opt of s) {\n"
+            + "      log(opt);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<select id='s' multiple>\n"
+            + "  <option selected value='one'>One</option>\n"
+            + "  <option value='two'>Two</option>\n"
+            + "  <option selected value='three'>Three</option>\n"
+            + "</select>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
     }
 }

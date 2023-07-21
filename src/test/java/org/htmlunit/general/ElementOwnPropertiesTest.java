@@ -11547,6 +11547,27 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlSelect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
+            EDGE = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
+            FF = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
+            FF_ESR = "add(),constructor(),length[GSCE],remove(),selectedIndex[GSCE]",
+            IE = "__defineGetter__(),__defineSetter__(),__lookupGetter__(),__lookupSetter__(),"
+                    + "constructor(),hasOwnProperty(),isPrototypeOf(),propertyIsEnumerable(),"
+                    + "toLocaleString(),toString(),valueOf()")
+    @HtmlUnitNYI(CHROME = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
+            EDGE = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
+            FF_ESR = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]",
+            FF = "add(),constructor(),item(),length[GSCE],remove(),selectedIndex[GSCE]")
+    public void optionsCollection() throws Exception {
+        testString("var sel = document.createElement('select')", "sel.options");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlSmall}.
      *
      * @throws Exception if the test fails
@@ -17665,7 +17686,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
             FF_ESR = "constructor(),getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()",
-            IE = "constructor,getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
+            IE = "constructor[],getNamedItem(),getNamedItemNS(),item(),length[GCE],removeNamedItem(),"
                 + "removeNamedItemNS(),setNamedItem(),setNamedItemNS()")
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");

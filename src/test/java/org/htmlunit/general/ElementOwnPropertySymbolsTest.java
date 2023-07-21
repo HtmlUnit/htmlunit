@@ -2128,6 +2128,21 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlSelect}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
+            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
+            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
+            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [HTMLOptionsCollection]",
+            IE = "exception")
+    public void optionsCollection() throws Exception {
+        testString("var sel = document.createElement('select')", "sel.options");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlSmall}.
      *
      * @throws Exception if the test fails
