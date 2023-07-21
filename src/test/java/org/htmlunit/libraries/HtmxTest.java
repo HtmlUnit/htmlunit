@@ -16,7 +16,10 @@ package org.htmlunit.libraries;
 
 import java.util.List;
 
+import org.htmlunit.Page;
+import org.htmlunit.WebClient;
 import org.htmlunit.WebDriverTestCase;
+import org.htmlunit.html.HtmlPage;
 import org.htmlunit.junit.BrowserRunner;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
@@ -33,6 +36,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 @RunWith(BrowserRunner.class)
 public abstract class HtmxTest extends WebDriverTestCase {
+
+    private static final boolean BUG_HUNTING = false;
+
     private static final int RETRIES = 2;
     private static final long RUN_TIME = 42 * DEFAULT_WAIT_TIME;
 
@@ -70,31 +76,28 @@ public abstract class HtmxTest extends WebDriverTestCase {
                     else {
                         lastStats = "HtmxTest runs too long (longer than " + RUN_TIME / 1000 + "s) - "
                                 + getResultElementText(webDriver);
+                        break;
                     }
                 }
             }
 
-            // bug hunting
-            /*
-            if (getWebDriver() instanceof HtmlUnitDriver) {
-                final WebClient webClient = getWebWindowOf((HtmlUnitDriver) getWebDriver()).getWebClient();
+            if (BUG_HUNTING && getWebDriver() instanceof HtmlUnitDriver) {
+                final WebClient webClient = ((HtmlUnitDriver) getWebDriver()).getWebClient();
 
                 final Page page = webClient.getCurrentWindow().getEnclosedPage();
                 System.out.println(((HtmlPage) page).asNormalizedText());
             }
-            */
 
             assertTrue(lastStats + "\n\n" + getErrors(webDriver), lastStats.startsWith(getExpectedAlerts()[0]));
         }
         catch (final Exception e) {
-            // bug hunting
-            /*
-            e.printStackTrace();
-            Throwable t = e;
-            while ((t = t.getCause()) != null) {
-                t.printStackTrace();
+            if (BUG_HUNTING && getWebDriver() instanceof HtmlUnitDriver) {
+                e.printStackTrace();
+                Throwable t = e;
+                while ((t = t.getCause()) != null) {
+                    t.printStackTrace();
+                }
             }
-            */
             throw e;
         }
     }

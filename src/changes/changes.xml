@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
+        <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, htmx 1.9.3, Bugfixes">
+            <action type="add" dev="rbri">
+                htmx version 1.9.3 testsuite added.
+            </action>
             <action type="add" dev="rbri">
                 NamedNodeMap methods getNamedItemNS(), setNamedItemNS(), and removeNamedItemNS() added.
             </action>
