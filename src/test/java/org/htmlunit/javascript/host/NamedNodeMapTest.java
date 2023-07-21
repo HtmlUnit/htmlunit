@@ -75,6 +75,39 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"},
+            IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
+    @NotYetImplemented(IE)
+    public void attributesForOf() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var f = document.getElementById('f');\n"
+            + "    for (var attr of f.attributes) {\n"
+            + "      if (attr) {\n"
+            + "        log(attr.name + '=' + attr.value);\n"
+            + "      } else {\n"
+            + "        log(i);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "<form name='f' id='f' foo='bar' baz='blah'></form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"name", "f", "name", "f", "name", "f", "name", "f", "null"})
     public void getNamedItem_HTML() throws Exception {
         final String html =
