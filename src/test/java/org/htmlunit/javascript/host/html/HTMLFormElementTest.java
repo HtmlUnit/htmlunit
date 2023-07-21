@@ -3024,7 +3024,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
             IE = "exception")
     @NotYetImplemented(IE)
-    public void attributesForOf() throws Exception {
+    public void elementsForOf() throws Exception {
         final String html =
               "<html>\n"
             + "<head>\n"
