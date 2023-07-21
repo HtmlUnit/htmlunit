@@ -30,6 +30,7 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSymbol;
+import org.htmlunit.javascript.host.dom.Attr;
 import org.htmlunit.javascript.host.dom.Node;
 
 /**
@@ -135,6 +136,24 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
+     * Gets the specified attribute.
+     * @param namespaceURI the namespace URI of the node to retrieve.
+     * @param localName the local name of the node to retrieve.
+     * @return the attribute node, {@code null} if the attribute is not defined
+     */
+    @JsxFunction
+    public Node getNamedItemNS(final String namespaceURI, final String localName) {
+        if (attributes_ != null) {
+            final DomNode attr = (DomNode) attributes_.getNamedItemNS(namespaceURI, localName);
+            if (attr != null) {
+                return attr.getScriptableObject();
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Sets the specified attribute.
      * @param node the attribute
      */
@@ -144,12 +163,32 @@ public class NamedNodeMap extends HtmlUnitScriptable {
     }
 
     /**
+     * Sets the specified attribute.
+     * @param node the attribute
+     */
+    @JsxFunction
+    public void setNamedItemNS(final Node node) {
+        attributes_.setNamedItemNS(node.getDomNodeOrDie());
+    }
+
+    /**
      * Removes the specified attribute.
      * @param name the name of the item to remove
      */
     @JsxFunction
     public void removeNamedItem(final String name) {
         attributes_.removeNamedItem(name);
+    }
+
+    /**
+     * Removes the specified attribute.
+     * @param namespaceURI the namespace URI of the node to retrieve.
+     * @param localName the local name of the node to retrieve.
+     * @return the attribute node, {@code null} if the attribute is not defined
+     */
+    @JsxFunction
+    public Attr removeNamedItemNS(final String namespaceURI, final String localName) {
+        return (Attr) attributes_.removeNamedItemNS(namespaceURI, localName);
     }
 
     /**
