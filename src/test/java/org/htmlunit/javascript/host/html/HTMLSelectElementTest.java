@@ -2766,6 +2766,7 @@ public class HTMLSelectElementTest extends WebDriverTestCase {
         assertFalse(options.get(1).isSelected());
         assertFalse(options.get(2).isSelected());
     }
+
     /**
      * @throws Exception if an error occurs
      */

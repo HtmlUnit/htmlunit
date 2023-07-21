@@ -2999,6 +2999,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void select() throws Exception {
         test("select");
     }
+
     /**
      * Test {@link org.htmlunit.html.HtmlSelect}.
      *

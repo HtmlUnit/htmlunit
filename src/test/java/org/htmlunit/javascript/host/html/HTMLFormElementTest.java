@@ -3017,6 +3017,7 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+
     /**
      * @throws Exception if an error occurs
      */
