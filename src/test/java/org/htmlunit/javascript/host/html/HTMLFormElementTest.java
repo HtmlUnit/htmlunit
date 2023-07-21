@@ -3017,4 +3017,35 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "</script></body></html>";
         loadPageVerifyTitle2(html);
     }
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
+            IE = "exception")
+    @NotYetImplemented(IE)
+    public void attributesForOf() throws Exception {
+        final String html =
+              "<html>\n"
+            + "<head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    var f = document.getElementById('testForm');\n"
+            + "    for (var attr of f) {\n"
+            + "      log(attr);\n"
+            + "    }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form name='testForm' id='testForm'>\n"
+            + "    <input type='submit' id='submit'>\n"
+            + "    <input type='text' name='test' value=''>"
+            + "  </form>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }

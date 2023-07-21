@@ -9,7 +9,7 @@
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, Bugfixes">
             <action type="add" dev="rbri">
-                NamedNodeMap is now iterable (for..of support).
+                NamedNodeMap, and HTMLFormElement are now iterable (for..of support).
             </action>
             <action type="add" dev="rbri">
                 Support for the toStringTag symbol added to all dom classes.
