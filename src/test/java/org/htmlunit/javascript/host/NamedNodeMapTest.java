@@ -76,7 +76,7 @@ public class NamedNodeMapTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"name=f", "id=f", "foo=bar", "baz=blah"},
-            IE = {"name=f", "id=f", "baz=blah", "foo=bar"})
+            IE = "exception")
     @NotYetImplemented(IE)
     public void attributesForOf() throws Exception {
         final String html =
