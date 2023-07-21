@@ -3207,6 +3207,10 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
             FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [SourceBufferList]",
             IE = "exception")
+    @HtmlUnitNYI(CHROME = "exception",
+            EDGE = "exception",
+            FF = "exception",
+            FF_ESR = "exception")
     public void sourceBufferList() throws Exception {
         testString("var mediaSource = new MediaSource;", "mediaSource.sourceBuffers");
     }
