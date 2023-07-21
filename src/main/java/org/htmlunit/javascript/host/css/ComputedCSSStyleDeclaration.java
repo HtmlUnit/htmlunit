@@ -113,6 +113,7 @@ import org.htmlunit.html.HtmlTime;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
+import org.htmlunit.javascript.configuration.JsxSymbolConstant;
 import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
@@ -131,6 +132,10 @@ import org.htmlunit.javascript.host.html.HTMLElement;
  */
 @JsxClass(value = {FF, FF_ESR}, className = "CSS2Properties")
 public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
+
+    /** Symbol.toStringTag support. */
+    @JsxSymbolConstant({FF, FF_ESR})
+    public static final String TO_STRING_TAG = "CSS2Properties";
 
     /**
      * Creates an instance.

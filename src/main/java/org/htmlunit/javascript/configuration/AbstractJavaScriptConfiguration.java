@@ -312,18 +312,36 @@ public abstract class AbstractJavaScriptConfiguration {
                 classConfiguration.addProperty(property, getterEntry.getValue(), allSetters.get(property));
             }
 
-            // JsxConstant
+            // JsxConstant/JsxSymbolConstant
             for (final Field field : classConfiguration.getHostClass().getDeclaredFields()) {
-                final JsxConstant jsxConstant = field.getAnnotation(JsxConstant.class);
-                if (jsxConstant != null && isSupported(jsxConstant.value(), expectedBrowser)) {
-                    try {
-                        classConfiguration.addConstant(field.getName(), field.get(null));
+                for (final Annotation annotation : field.getAnnotations()) {
+                    if (annotation instanceof JsxConstant) {
+                        final JsxConstant jsxConstant = (JsxConstant) annotation;
+                        if (isSupported(jsxConstant.value(), expectedBrowser)) {
+                            try {
+                                classConfiguration.addConstant(field.getName(), field.get(null));
+                            }
+                            catch (final IllegalAccessException e) {
+                                throw Context.reportRuntimeError(
+                                        "Cannot get field '" + field.getName()
+                                        + "' for type: " + classConfiguration.getHostClass().getName()
+                                        + "reason: " + e.getMessage());
+                            }
+                        }
                     }
-                    catch (final IllegalAccessException e) {
-                        throw Context.reportRuntimeError(
-                                "Cannot get field '" + field.getName()
-                                + "' for type: " + classConfiguration.getHostClass().getName()
-                                + "reason: " + e.getMessage());
+                    if (annotation instanceof JsxSymbolConstant) {
+                        final JsxSymbolConstant jsxSymbolConstant = (JsxSymbolConstant) annotation;
+                        if (isSupported(jsxSymbolConstant.value(), expectedBrowser)) {
+                            final SymbolKey symbolKey;
+                            if ("TO_STRING_TAG".equalsIgnoreCase(field.getName())) {
+                                symbolKey = SymbolKey.TO_STRING_TAG;
+                            }
+                            else {
+                                throw new RuntimeException("Invalid JsxSymbol annotation; unsupported '"
+                                        + field.getName() + "' symbol name.");
+                            }
+                            classConfiguration.addSymbolConstant(symbolKey, field.get(null).toString());
+                        }
                     }
                 }
             }
