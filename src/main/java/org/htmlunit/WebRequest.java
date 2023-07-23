@@ -435,7 +435,7 @@ public class WebRequest implements Serializable {
 
     /**
      * Sets the body content to be submitted if this is a {@code POST}, {@code PUT} or {@code PATCH} request.
-     * Ignored for all other request types.
+     * Other request types result in {@link RuntimeException}.
      * Should not be used in combination with {@link #setRequestParameters(List) request parameters}.
      * @param requestBody the body content to be submitted if this is a {@code POST}, {@code PUT}
      * or {@code PATCH} request
