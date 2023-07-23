@@ -4554,7 +4554,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "setCapture available",
+    @Alerts(DEFAULT = {"undefined", "undefined", "undefined", "setCapture available"},
             CHROME = "exception",
             EDGE = "exception")
     public void setCapture() throws Exception {
@@ -4565,9 +4565,9 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    try {\n"
-            + "      div.setCapture();\n"
-            + "      div.setCapture(true);\n"
-            + "      div.setCapture(false);\n"
+            + "      log(div.setCapture());\n"
+            + "      log(div.setCapture(true));\n"
+            + "      log(div.setCapture(false));\n"
             + "      log('setCapture available');\n"
             + "    } catch(e) { log('exception'); }\n"
             + "  }\n"

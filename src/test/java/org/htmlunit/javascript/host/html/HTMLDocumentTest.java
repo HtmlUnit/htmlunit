@@ -2457,8 +2457,33 @@ public class HTMLDocumentTest extends WebDriverTestCase {
         loadPageVerifyTitle2(html);
     }
 
+
     /**
      * Simple test that calls setCapture.
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void setCapture() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      log(document.setCapture);\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <div id='myDiv'></div>\n"
+            + "</body></html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * Simple test that calls releaseCapture.
      * @throws Exception if the test fails
      */
     @Test
