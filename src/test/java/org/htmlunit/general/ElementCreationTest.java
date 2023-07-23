@@ -1605,7 +1605,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLUnknownElement]")
+            IE = "[object HTMLPhraseElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -1624,7 +1624,7 @@ public class ElementCreationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "[object HTMLElement]",
-            IE = "[object HTMLUnknownElement]")
+            IE = "[object HTMLPhraseElement]")
     public void rtc() throws Exception {
         test("rtc");
     }
