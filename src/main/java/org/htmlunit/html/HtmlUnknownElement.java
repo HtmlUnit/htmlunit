@@ -110,7 +110,7 @@ public class HtmlUnknownElement extends HtmlElement {
                         && wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;
                 }
-                return DisplayStyle.RUBY_TEXT;
+                return DisplayStyle.RUBY_TEXT_CONTAINER;
             case HtmlMultiColumn.TAG_NAME:
                 if (hasFeature(MULTICOL_BLOCK)) {
                     return DisplayStyle.BLOCK;

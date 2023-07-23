@@ -32,7 +32,7 @@ public class HtmlRbTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"", "none", "none"},
+    @Alerts(DEFAULT = {"", "inline", "inline"},
             IE = {"inline", "inline", "inline"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"

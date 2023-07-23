@@ -70,13 +70,13 @@ public class HtmlRtc extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-            return DisplayStyle.INLINE;
+            return DisplayStyle.RUBY_TEXT_CONTAINER;
         }
         if (wasCreatedByJavascript()) {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
             }
         }
-        return DisplayStyle.NONE;
+        return DisplayStyle.INLINE;
     }
 }

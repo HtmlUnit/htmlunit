@@ -113,7 +113,9 @@ public abstract class HtmlElement extends DomElement {
         /** ruby. */
         RUBY("ruby"),
         /** ruby-text. */
-        RUBY_TEXT("ruby-text");
+        RUBY_TEXT("ruby-text"),
+        /** ruby-text-container. */
+        RUBY_TEXT_CONTAINER("ruby-text-container");
 
         private final String value_;
         DisplayStyle(final String value) {
