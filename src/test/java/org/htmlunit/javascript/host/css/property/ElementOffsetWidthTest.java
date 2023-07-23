@@ -1350,8 +1350,6 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(CHROME = "-16",
-            EDGE = "-16")
     public void rtc() throws Exception {
         test("rtc");
     }
