@@ -1309,6 +1309,17 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlRb}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    public void rb() throws Exception {
+        test("rb");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
@@ -1330,6 +1341,19 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
             EDGE = "-16")
     public void rt() throws Exception {
         test("rt");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRtc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(CHROME = "-16",
+            EDGE = "-16")
+    public void rtc() throws Exception {
+        test("rtc");
     }
 
     /**

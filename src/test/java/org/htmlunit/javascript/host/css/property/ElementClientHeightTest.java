@@ -1415,6 +1415,18 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlRb}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE = "18")
+    public void rb() throws Exception {
+        loadPageVerifyTitle2(test("rb"));
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
@@ -1436,6 +1448,18 @@ public class ElementClientHeightTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "18")
     public void rt() throws Exception {
         loadPageVerifyTitle2(test("rt"));
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRtc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("0")
+    @HtmlUnitNYI(IE = "18")
+    public void rtc() throws Exception {
+        loadPageVerifyTitle2(test("rtc"));
     }
 
     /**

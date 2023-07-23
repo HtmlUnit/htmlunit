@@ -21,13 +21,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
- * Tests for {@link HtmlRp}.
+ * Tests for {@link HtmlRb}.
  *
- * @author Ahmed Ashour
  * @author Ronald Brill
  */
 @RunWith(BrowserRunner.class)
-public class HtmlRpTest extends WebDriverTestCase {
+public class HtmlRbTest extends WebDriverTestCase {
 
     /**
      * @throws Exception if the test fails
@@ -40,7 +39,7 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    var e = document.createElement('rp');\n"
+            + "    var e = document.createElement('rb');\n"
             + "    check(e);\n"
             + "    document.body.appendChild(e);\n"
             + "    check(e);\n"
@@ -55,7 +54,7 @@ public class HtmlRpTest extends WebDriverTestCase {
             + "</script>\n"
             + "</head><body onload='test()'>\n"
             + "<ruby>\n"
-            + "  <rp id='myId'></rp>\n"
+            + "  <rb id='myId'></rb>\n"
             + "</ruby>\n"
             + "</body></html>";
 

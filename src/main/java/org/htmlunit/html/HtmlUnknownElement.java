@@ -83,6 +83,14 @@ public class HtmlUnknownElement extends HtmlElement {
                     return DisplayStyle.INLINE;
                 }
                 return DisplayStyle.RUBY;
+            case HtmlRb.TAG_NAME:
+                if (hasFeature(CSS_RP_DISPLAY_NONE)) {
+                    return DisplayStyle.NONE;
+                }
+                if (wasCreatedByJavascript() && getParentNode() == null) {
+                    return DisplayStyle.BLOCK;
+                }
+                break;
             case HtmlRp.TAG_NAME:
                 if (hasFeature(CSS_RP_DISPLAY_NONE)) {
                     return DisplayStyle.NONE;
@@ -92,6 +100,12 @@ public class HtmlUnknownElement extends HtmlElement {
                 }
                 break;
             case HtmlRt.TAG_NAME:
+                if (!hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)
+                        && wasCreatedByJavascript() && getParentNode() == null) {
+                    return DisplayStyle.BLOCK;
+                }
+                return DisplayStyle.RUBY_TEXT;
+            case HtmlRtc.TAG_NAME:
                 if (!hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)
                         && wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;

@@ -23,8 +23,10 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
 import org.htmlunit.Page;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlRb;
 import org.htmlunit.html.HtmlRp;
 import org.htmlunit.html.HtmlRt;
+import org.htmlunit.html.HtmlRtc;
 import org.htmlunit.html.HtmlRuby;
 import org.htmlunit.html.HtmlUnknownElement;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -71,11 +73,11 @@ public class HTMLUnknownElement extends HTMLElement {
             if (element != null) {
                 final String name = element.getNodeName();
                 if (getBrowserVersion().hasFeature(JS_HTML_RUBY_ELEMENT_CLASS_NAME)
-                        && (HtmlRp.TAG_NAME.equals(name)
+                        && (HtmlRb.TAG_NAME.equals(name)
+                                || HtmlRp.TAG_NAME.equals(name)
                                 || HtmlRt.TAG_NAME.equals(name)
-                                || HtmlRuby.TAG_NAME.equals(name)
-                                || "rb".equals(name)
-                                || "rtc".equals(name))) {
+                                || HtmlRtc.TAG_NAME.equals(name)
+                                || HtmlRuby.TAG_NAME.equals(name))) {
                     return "HTMLElement";
                 }
 

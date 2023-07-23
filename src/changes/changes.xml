@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.4.0" date="June xx, 2023" description="Chrome/Edge 114, Firefox 114, htmx 1.9.3, Bugfixes">
+            <action type="update" dev="rbri">
+                Testsuite cleanup and consistency checks.
+            </action>
+            <action type="add" dev="rbri">
+                Support for rb and rtc tag added.
+            </action>
             <action type="fix" dev="rbri">
                 Document.releaseCapture() and Element.releaseCapture() having no return value.
             </action>

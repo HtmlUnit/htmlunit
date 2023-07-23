@@ -96,8 +96,10 @@ import org.htmlunit.html.HtmlEmbed;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlRb;
 import org.htmlunit.html.HtmlRp;
 import org.htmlunit.html.HtmlRt;
+import org.htmlunit.html.HtmlRtc;
 import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlSvg;
 import org.htmlunit.html.HtmlUnknownElement;
@@ -710,11 +712,17 @@ public class Document extends Node {
             if (element instanceof HtmlImage) {
                 ((HtmlImage) element).markAsCreatedByJavascript();
             }
+            else if (element instanceof HtmlRb) {
+                ((HtmlRb) element).markAsCreatedByJavascript();
+            }
             else if (element instanceof HtmlRp) {
                 ((HtmlRp) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlRt) {
                 ((HtmlRt) element).markAsCreatedByJavascript();
+            }
+            else if (element instanceof HtmlRtc) {
+                ((HtmlRtc) element).markAsCreatedByJavascript();
             }
             else if (element instanceof HtmlUnknownElement) {
                 ((HtmlUnknownElement) element).markAsCreatedByJavascript();

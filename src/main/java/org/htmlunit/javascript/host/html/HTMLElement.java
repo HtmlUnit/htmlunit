@@ -95,8 +95,10 @@ import org.htmlunit.html.HtmlNoLayer;
 import org.htmlunit.html.HtmlNoScript;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlPlainText;
+import org.htmlunit.html.HtmlRb;
 import org.htmlunit.html.HtmlRp;
 import org.htmlunit.html.HtmlRt;
+import org.htmlunit.html.HtmlRtc;
 import org.htmlunit.html.HtmlRuby;
 import org.htmlunit.html.HtmlS;
 import org.htmlunit.html.HtmlSample;
@@ -185,8 +187,10 @@ import org.htmlunit.javascript.host.event.MouseEvent;
 @JsxClass(domClass = HtmlNoScript.class)
 @JsxClass(domClass = HtmlPlainText.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlRuby.class, value = {CHROME, EDGE})
+@JsxClass(domClass = HtmlRb.class, value = {CHROME, EDGE})
 @JsxClass(domClass = HtmlRp.class, value = {CHROME, EDGE})
 @JsxClass(domClass = HtmlRt.class, value = {CHROME, EDGE})
+@JsxClass(domClass = HtmlRtc.class, value = {CHROME, EDGE})
 @JsxClass(domClass = HtmlS.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlSample.class, value = {CHROME, EDGE, FF, FF_ESR})
 @JsxClass(domClass = HtmlSection.class)
