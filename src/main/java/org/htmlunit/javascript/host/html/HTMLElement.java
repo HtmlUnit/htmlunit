@@ -1742,12 +1742,11 @@ public class HTMLElement extends Element {
 
     /**
      * Mock for the moment.
-     * @return true for success
      */
     @JsxFunction(IE)
     @Override
-    public boolean releaseCapture() {
-        return super.releaseCapture();
+    public void releaseCapture() {
+        super.releaseCapture();
     }
 
     /**

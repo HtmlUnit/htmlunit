@@ -4584,7 +4584,7 @@ public class HTMLElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "releaseCapture available",
+    @Alerts(DEFAULT = {"undefined", "releaseCapture available"},
             CHROME = "exception",
             EDGE = "exception")
     public void releaseCapture() throws Exception {
@@ -4595,7 +4595,7 @@ public class HTMLElementTest extends WebDriverTestCase {
             + "  function test() {\n"
             + "    var div = document.getElementById('myDiv');\n"
             + "    try {\n"
-            + "      div.releaseCapture();\n"
+            + "      log(div.releaseCapture());\n"
             + "      log('releaseCapture available');\n"
             + "    } catch(e) { log('exception'); }\n"
             + "  }\n"

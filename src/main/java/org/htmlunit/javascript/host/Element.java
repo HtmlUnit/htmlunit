@@ -1924,11 +1924,9 @@ public class Element extends Node {
 
     /**
      * Mock for the moment.
-     * @return true for success
      */
     @JsxFunction({FF, FF_ESR})
-    public boolean releaseCapture() {
-        return true;
+    public void releaseCapture() {
     }
 
     /**

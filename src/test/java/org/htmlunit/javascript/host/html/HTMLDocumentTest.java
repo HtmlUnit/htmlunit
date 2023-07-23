@@ -2462,7 +2462,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "releaseCapture available",
+    @Alerts(DEFAULT = {"undefined", "releaseCapture available"},
             CHROME = "exception",
             EDGE = "exception")
     public void releaseCapture() throws Exception {
@@ -2472,7 +2472,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
             + "    try {\n"
-            + "      document.releaseCapture();\n"
+            + "      log(document.releaseCapture());\n"
             + "      log('releaseCapture available');\n"
             + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
