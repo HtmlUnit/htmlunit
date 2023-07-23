@@ -2860,6 +2860,32 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlRb}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
+    @HtmlUnitNYI(IE = "-")
+    public void rb() throws Exception {
+        test("rb");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRbc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
+    @HtmlUnitNYI(IE = "-")
+    public void rbc() throws Exception {
+        test("rbc");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
@@ -2883,6 +2909,19 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     @HtmlUnitNYI(IE = "-")
     public void rt() throws Exception {
         test("rt");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRtc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "-",
+            IE = "cite,dateTime")
+    @HtmlUnitNYI(IE = "-")
+    public void rtc() throws Exception {
+        test("rtc");
     }
 
     /**

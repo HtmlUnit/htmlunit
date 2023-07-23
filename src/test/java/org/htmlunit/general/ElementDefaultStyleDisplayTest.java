@@ -1235,6 +1235,32 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlRb}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            FF = {"", "ruby-base"},
+            FF_ESR = {"", "ruby-base"},
+            IE = {"inline", "inline"})
+    public void rb() throws Exception {
+        test("rb");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRbc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            IE = {"inline", "inline"})
+    public void rbc() throws Exception {
+        test("rbc");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
@@ -1258,6 +1284,20 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             IE = {"ruby-text", "ruby-text"})
     public void rt() throws Exception {
         test("rt");
+    }
+
+    /**
+     * Test HtmlRtc.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            FF = {"", "ruby-text-container"},
+            FF_ESR = {"", "ruby-text-container"},
+            IE = {"ruby-text", "ruby-text"})
+    public void rtc() throws Exception {
+        test("rtc");
     }
 
     /**
@@ -1356,6 +1396,18 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             IE = {"inline", "inline"})
     public void source() throws Exception {
         test("source");
+    }
+
+    /**
+     * Test Spacer.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            IE = {"inline", "inline"})
+    public void spacer() throws Exception {
+        test("spacer");
     }
 
     /**
@@ -1764,5 +1816,15 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
             IE = {"inline", "inline"})
     public void slot() throws Exception {
         test("slot");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"", "inline"},
+            IE = {"inline", "inline"})
+    public void arbitrary() throws Exception {
+        test("abcdefg");
     }
 }

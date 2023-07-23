@@ -2053,6 +2053,36 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.html.HtmlRb}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            IE = "exception")
+    public void rb() throws Exception {
+        test("rb");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRbc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            EDGE = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            IE = "exception")
+    public void rbc() throws Exception {
+        test("rbc");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlRp}.
      *
      * @throws Exception if the test fails
@@ -2084,6 +2114,21 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
     public void rt() throws Exception {
         test("rt");
+    }
+
+    /**
+     * Test {@link org.htmlunit.html.HtmlRtc}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            EDGE = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
+            IE = "exception")
+    public void rtc() throws Exception {
+        test("rtc");
     }
 
     /**

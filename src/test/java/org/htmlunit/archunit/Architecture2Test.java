@@ -36,10 +36,17 @@ import com.tngtech.archunit.junit.ArchUnitRunner;
 public class Architecture2Test {
 
     @ArchTest
-    public static void rule3(final JavaClasses classes) {
+    public static void allPropertyTestShoulsTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertiesTest");
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertySymbolsTest");
-        compare(classes, "ElementOwnPropertiesTest", "ElementOwnPropertySymbolsTest");
+    }
+
+    @ArchTest
+    public static void allElementTestShoulsTestTheSameObjects(final JavaClasses classes) {
+        compare(classes, "ElementChildNodesTest", "ElementClosesItselfTest");
+        compare(classes, "ElementChildNodesTest", "ElementCreationTest");
+        compare(classes, "ElementChildNodesTest", "ElementDefaultStyleDisplayTest");
+        compare(classes, "ElementChildNodesTest", "ElementOuterHtmlTest");
     }
 
     private static void compare(final JavaClasses classes, final String oneName, final String anotherName) {
