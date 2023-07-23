@@ -686,6 +686,186 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.Element}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "after(),animate(),append(),ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColSpan[GSCE],ariaCurrent[GSCE],ariaDescription[GSCE],ariaDisabled[GSCE],"
+                + "ariaExpanded[GSCE],ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],"
+                + "ariaLabel[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
+                + "ariaMultiSelectable[GSCE],ariaOrientation[GSCE],ariaPlaceholder[GSCE],ariaPosInSet[GSCE],"
+                + "ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
+                + "ariaRoleDescription[GSCE],ariaRowCount[GSCE],ariaRowIndex[GSCE],ariaRowSpan[GSCE],"
+                + "ariaSelected[GSCE],ariaSetSize[GSCE],ariaSort[GSCE],ariaValueMax[GSCE],ariaValueMin[GSCE],"
+                + "ariaValueNow[GSCE],ariaValueText[GSCE],assignedSlot[GCE],attachShadow(),attributes[GCE],before(),"
+                + "checkVisibility(),childElementCount[GCE],children[GCE],classList[GSCE],className[GSCE],"
+                + "clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),computedStyleMap(),"
+                + "constructor(),elementTiming[GSCE],firstElementChild[GCE],getAnimations(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
+                + "getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
+                + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
+                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
+                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
+                + "setHTML(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],tagName[GCE],toggleAttribute(),"
+                + "webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "webkitRequestFullscreen()",
+            EDGE = "after(),animate(),append(),ariaAtomic[GSCE],ariaAutoComplete[GSCE],ariaBrailleLabel[GSCE],"
+                + "ariaBrailleRoleDescription[GSCE],ariaBusy[GSCE],ariaChecked[GSCE],ariaColCount[GSCE],"
+                + "ariaColIndex[GSCE],ariaColSpan[GSCE],ariaCurrent[GSCE],ariaDescription[GSCE],ariaDisabled[GSCE],"
+                + "ariaExpanded[GSCE],ariaHasPopup[GSCE],ariaHidden[GSCE],ariaInvalid[GSCE],ariaKeyShortcuts[GSCE],"
+                + "ariaLabel[GSCE],ariaLevel[GSCE],ariaLive[GSCE],ariaModal[GSCE],ariaMultiLine[GSCE],"
+                + "ariaMultiSelectable[GSCE],ariaOrientation[GSCE],ariaPlaceholder[GSCE],ariaPosInSet[GSCE],"
+                + "ariaPressed[GSCE],ariaReadOnly[GSCE],ariaRelevant[GSCE],ariaRequired[GSCE],"
+                + "ariaRoleDescription[GSCE],ariaRowCount[GSCE],ariaRowIndex[GSCE],ariaRowSpan[GSCE],"
+                + "ariaSelected[GSCE],ariaSetSize[GSCE],ariaSort[GSCE],ariaValueMax[GSCE],ariaValueMin[GSCE],"
+                + "ariaValueNow[GSCE],ariaValueText[GSCE],assignedSlot[GCE],attachShadow(),attributes[GCE],before(),"
+                + "checkVisibility(),childElementCount[GCE],children[GCE],classList[GSCE],className[GSCE],"
+                + "clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),computedStyleMap(),"
+                + "constructor(),elementTiming[GSCE],firstElementChild[GCE],getAnimations(),getAttribute(),"
+                + "getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),getAttributeNS(),"
+                + "getBoundingClientRect(),getClientRects(),getElementsByClassName(),getElementsByTagName(),"
+                + "getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],"
+                + "onfullscreenchange[GSCE],onfullscreenerror[GSCE],onsearch[GSCE],onwebkitfullscreenchange[GSCE],"
+                + "onwebkitfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releasePointerCapture(),remove(),"
+                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),"
+                + "requestFullscreen(),requestPointerLock(),role[GSCE],scroll(),scrollBy(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTo(),scrollTop[GSCE],"
+                + "scrollWidth[GCE],setAttribute(),setAttributeNode(),setAttributeNodeNS(),setAttributeNS(),"
+                + "setHTML(),setPointerCapture(),shadowRoot[GCE],slot[GSCE],tagName[GCE],toggleAttribute(),"
+                + "webkitMatchesSelector(),webkitRequestFullScreen(),"
+                + "webkitRequestFullscreen()",
+            FF = "after(),animate(),append(),assignedSlot[GCE],attachShadow(),attributes[GCE],before(),"
+                + "checkVisibility(),childElementCount[GCE],children[GCE],classList[GSCE],className[GSCE],"
+                + "clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),constructor(),"
+                + "firstElementChild[GCE],getAnimations(),getAttribute(),getAttributeNames(),getAttributeNode(),"
+                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "getElementsByClassName(),getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),"
+                + "hasAttributeNS(),hasAttributes(),hasPointerCapture(),id[GSCE],innerHTML[GSCE],"
+                + "insertAdjacentElement(),insertAdjacentHTML(),insertAdjacentText(),lastElementChild[GCE],"
+                + "localName[GCE],matches(),mozMatchesSelector(),mozRequestFullScreen(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onfullscreenchange[GSCE],onfullscreenerror[GSCE],outerHTML[GSCE],"
+                + "part[GSCE],prefix[GCE],prepend(),previousElementSibling[GCE],querySelector(),querySelectorAll(),"
+                + "releaseCapture(),releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),"
+                + "removeAttributeNS(),replaceChildren(),replaceWith(),requestFullscreen(),requestPointerLock(),"
+                + "scroll(),scrollBy(),scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollLeftMax[GCE],"
+                + "scrollTo(),scrollTop[GSCE],scrollTopMax[GCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
+                + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot[GCE],"
+                + "slot[GSCE],tagName[GCE],toggleAttribute(),"
+                + "webkitMatchesSelector()",
+            FF_ESR = "after(),animate(),append(),assignedSlot[GCE],attachShadow(),attributes[GCE],before(),"
+                + "childElementCount[GCE],children[GCE],classList[GSCE],className[GSCE],clientHeight[GCE],"
+                + "clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),constructor(),firstElementChild[GCE],"
+                + "getAnimations(),getAttribute(),getAttributeNames(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),hasAttributes(),"
+                + "hasPointerCapture(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),mozMatchesSelector(),"
+                + "mozRequestFullScreen(),namespaceURI[GCE],nextElementSibling[GCE],onfullscreenchange[GSCE],"
+                + "onfullscreenerror[GSCE],outerHTML[GSCE],part[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),releaseCapture(),"
+                + "releasePointerCapture(),remove(),removeAttribute(),removeAttributeNode(),removeAttributeNS(),"
+                + "replaceChildren(),replaceWith(),requestFullscreen(),requestPointerLock(),scroll(),scrollBy(),"
+                + "scrollHeight[GCE],scrollIntoView(),scrollLeft[GSCE],scrollLeftMax[GCE],scrollTo(),"
+                + "scrollTop[GSCE],scrollTopMax[GCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
+                + "setAttributeNodeNS(),setAttributeNS(),setCapture(),setPointerCapture(),shadowRoot[GCE],"
+                + "slot[GSCE],tagName[GCE],toggleAttribute(),"
+                + "webkitMatchesSelector()",
+            IE = "attributes[GCE],childElementCount[GCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],"
+                + "clientWidth[GCE],constructor[],firstElementChild[GCE],getAttribute(),getAttributeNode(),"
+                + "getAttributeNodeNS(),getAttributeNS(),getBoundingClientRect(),getClientRects(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),hasAttribute(),hasAttributeNS(),"
+                + "lastElementChild[GCE],msMatchesSelector(),nextElementSibling[GCE],ongotpointercapture[GSCE],"
+                + "onlostpointercapture[GSCE],onmsgesturechange[GSCE],onmsgesturedoubletap[GSCE],"
+                + "onmsgestureend[GSCE],onmsgesturehold[GSCE],onmsgesturestart[GSCE],onmsgesturetap[GSCE],"
+                + "onmsgotpointercapture[GSCE],onmsinertiastart[GSCE],onmslostpointercapture[GSCE],"
+                + "onmspointercancel[GSCE],onmspointerdown[GSCE],onmspointerenter[GSCE],"
+                + "onmspointerleave[GSCE],onmspointermove[GSCE],onmspointerout[GSCE],onmspointerover[GSCE],"
+                + "onmspointerup[GSCE],onpointercancel[GSCE],onpointerdown[GSCE],onpointerenter[GSCE],"
+                + "onpointerleave[GSCE],onpointermove[GSCE],onpointerout[GSCE],onpointerover[GSCE],"
+                + "onpointerup[GSCE],previousElementSibling[GCE],querySelector(),querySelectorAll(),"
+                + "removeAttribute(),removeAttributeNode(),removeAttributeNS(),scrollHeight[GCE],"
+                + "scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],setAttribute(),setAttributeNode(),"
+                + "setAttributeNS(),tagName[GCE]")
+    @HtmlUnitNYI(CHROME = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
+                + "children[GCE],classList[GCE],"
+                + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
+                + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
+                + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
+            EDGE = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
+                + "children[GCE],classList[GCE],"
+                + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
+                + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
+                + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
+            FF_ESR = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
+                + "children[GCE],classList[GCE],"
+                + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
+                + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
+                + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()",
+            FF = "after(),append(),attributes[GCE],before(),childElementCount[GCE],"
+                + "children[GCE],classList[GCE],"
+                + "className[GSCE],clientHeight[GCE],clientLeft[GCE],clientTop[GCE],clientWidth[GCE],closest(),"
+                + "constructor(),firstElementChild[GCE],getAttribute(),getAttributeNode(),getAttributeNodeNS(),"
+                + "getAttributeNS(),getBoundingClientRect(),getClientRects(),getElementsByClassName(),"
+                + "getElementsByTagName(),getElementsByTagNameNS(),getInnerHTML(),hasAttribute(),hasAttributeNS(),"
+                + "hasAttributes(),id[GSCE],innerHTML[GSCE],insertAdjacentElement(),insertAdjacentHTML(),"
+                + "insertAdjacentText(),lastElementChild[GCE],localName[GCE],matches(),namespaceURI[GCE],"
+                + "nextElementSibling[GCE],onbeforecopy[GSCE],onbeforecut[GSCE],onbeforepaste[GSCE],onsearch[GSCE],"
+                + "onwebkitfullscreenchange[GSCE],onwebkitfullscreenerror[GSCE],outerHTML[GSCE],prefix[GCE],prepend(),"
+                + "previousElementSibling[GCE],querySelector(),querySelectorAll(),remove(),removeAttribute(),"
+                + "removeAttributeNode(),removeAttributeNS(),replaceChildren(),replaceWith(),scrollHeight[GCE],"
+                + "scrollIntoView(),scrollIntoViewIfNeeded(),scrollLeft[GSCE],scrollTop[GSCE],scrollWidth[GCE],"
+                + "setAttribute(),setAttributeNode(),setAttributeNS(),"
+                + "tagName[GCE],toggleAttribute(),webkitMatchesSelector()")
+    public void element2() throws Exception {
+        testString("", "element, document.createDocumentFragment()");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -14740,6 +14920,58 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],"
+                + "srcElement[GCE],stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            FF_ESR = "ALT_MASK[E],AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],composedPath(),constructor(),CONTROL_MASK[E],currentTarget[GCE],"
+                + "defaultPrevented[GCE],eventPhase[GCE],explicitOriginalTarget[GCE],initEvent(),META_MASK[E],"
+                + "NONE[E],originalTarget[GCE],preventDefault(),returnValue[GSCE],SHIFT_MASK[E],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],"
+                + "type[GCE]",
+            IE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],CAPTURING_PHASE[E],"
+                + "constructor[],currentTarget[GCE],defaultPrevented[GCE],eventPhase[GCE],initEvent(),"
+                + "preventDefault(),srcElement[GSCE],stopImmediatePropagation(),stopPropagation(),"
+                + "target[GCE],timeStamp[GCE],type[GCE]")
+    @HtmlUnitNYI(CHROME = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            EDGE = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            FF_ESR = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]",
+            FF = "AT_TARGET[E],bubbles[GCE],BUBBLING_PHASE[E],cancelable[GCE],cancelBubble[GSCE],"
+                + "CAPTURING_PHASE[E],composed[GCE],constructor(),currentTarget[GCE],defaultPrevented[GCE],"
+                + "eventPhase[GCE],initEvent(),NONE[E],preventDefault(),returnValue[GSCE],srcElement[GCE],"
+                + "stopImmediatePropagation(),stopPropagation(),target[GCE],timeStamp[GCE],type[GCE]")
+    public void event2() throws Exception {
+        testString("", "document.createEvent('Event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
             EDGE = "constructor(),detail[GCE],initUIEvent(),sourceCapabilities[GCE],view[GCE],which[GCE]",
             FF = "constructor(),detail[GCE],initUIEvent(),layerX[GCE],layerY[GCE],rangeOffset[GCE],"
@@ -15928,6 +16160,23 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     @Alerts("exception")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "constructor(),persisted[GCE]",
+            EDGE = "constructor(),persisted[GCE]",
+            FF = "constructor(),persisted[GCE]",
+            FF_ESR = "constructor(),persisted[GCE]",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void pageTransitionEvent() throws Exception {
+        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**

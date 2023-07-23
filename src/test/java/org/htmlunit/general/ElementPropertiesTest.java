@@ -4557,6 +4557,39 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.TouchEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
+                + "type,view,"
+                + "which",
+            EDGE = "altKey,AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,changedTouches,"
+                + "composed,composedPath(),ctrlKey,currentTarget,defaultPrevented,detail,eventPhase,initEvent(),"
+                + "initUIEvent(),isTrusted,metaKey,NONE,preventDefault(),returnValue,shiftKey,sourceCapabilities,"
+                + "srcElement,stopImmediatePropagation(),stopPropagation(),target,targetTouches,timeStamp,touches,"
+                + "type,view,"
+                + "which",
+            FF = "exception",
+            FF_ESR = "exception",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which",
+            EDGE = "AT_TARGET,bubbles,BUBBLING_PHASE,cancelable,cancelBubble,CAPTURING_PHASE,composed,"
+                + "currentTarget,defaultPrevented,detail,eventPhase,initEvent(),initUIEvent(),NONE,preventDefault(),"
+                + "returnValue,srcElement,stopImmediatePropagation(),stopPropagation(),"
+                + "target,timeStamp,type,view,which")
+    public void touchEvent2() throws Exception {
+        testString("", "new TouchEvent('touch')");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlSlot}.
      *
      * @throws Exception if the test fails

@@ -504,6 +504,33 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.Element}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,"
+                + "\"before\":true,\"prepend\":true,\"remove\":true,\"replaceChildren\":true,\"replaceWith\":true,"
+                + "\"slot\":true}]",
+            EDGE = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"after\":true,\"append\":true,"
+                + "\"before\":true,\"prepend\":true,\"remove\":true,\"replaceChildren\":true,\"replaceWith\":true,"
+                + "\"slot\":true}]",
+            FF = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,"
+                + "\"after\":true,\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
+                + "\"replaceChildren\":true}]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [Element],Symbol(Symbol.unscopables) [{\"slot\":true,\"before\":true,"
+                + "\"after\":true,\"replaceWith\":true,\"remove\":true,\"prepend\":true,\"append\":true,"
+                + "\"replaceChildren\":true}]",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [Element]",
+            EDGE = "Symbol(Symbol.toStringTag) [Element]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [Element]",
+            FF = "Symbol(Symbol.toStringTag) [Element]")
+    public void element2() throws Exception {
+        testString("", "element, document.createDocumentFragment()");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -2712,6 +2739,21 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [Event]",
+            EDGE = "Symbol(Symbol.toStringTag) [Event]",
+            FF = "Symbol(Symbol.toStringTag) [Event]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [Event]",
+            IE = "exception")
+    public void event2() throws Exception {
+        testString("", "document.createEvent('Event')");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts(CHROME = "Symbol(Symbol.toStringTag) [UIEvent]",
             EDGE = "Symbol(Symbol.toStringTag) [UIEvent]",
             FF = "Symbol(Symbol.toStringTag) [UIEvent]",
@@ -3238,6 +3280,19 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     @Alerts("exception")
     public void offlineAudioCompletionEvent() throws Exception {
         testString("", "document.createEvent('OfflineAudioCompletionEvent')");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
+            EDGE = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
+            FF = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [PageTransitionEvent]",
+            IE = "exception")
+    public void pageTransitionEvent() throws Exception {
+        testString("", "new PageTransitionEvent('transition')");
     }
 
     /**
