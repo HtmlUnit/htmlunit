@@ -1243,7 +1243,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby-base"},
             FF_ESR = {"", "ruby-base"},
-            IE = {"inline", "inline"})
+            IE = {"ruby-base", "ruby-base"})
     public void rb() throws Exception {
         test("rb");
     }
@@ -1295,7 +1295,7 @@ public class ElementDefaultStyleDisplayTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"", "inline"},
             FF = {"", "ruby-text-container"},
             FF_ESR = {"", "ruby-text-container"},
-            IE = {"ruby-text", "ruby-text"})
+            IE = {"ruby-text-container", "ruby-text-container"})
     public void rtc() throws Exception {
         test("rtc");
     }

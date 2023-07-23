@@ -84,13 +84,11 @@ public class HtmlUnknownElement extends HtmlElement {
                 }
                 return DisplayStyle.RUBY;
             case HtmlRb.TAG_NAME:
-                if (hasFeature(CSS_RP_DISPLAY_NONE)) {
-                    return DisplayStyle.NONE;
-                }
-                if (wasCreatedByJavascript() && getParentNode() == null) {
+                if (!hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)
+                        && wasCreatedByJavascript() && getParentNode() == null) {
                     return DisplayStyle.BLOCK;
                 }
-                break;
+                return DisplayStyle.RUBY_BASE;
             case HtmlRp.TAG_NAME:
                 if (hasFeature(CSS_RP_DISPLAY_NONE)) {
                     return DisplayStyle.NONE;

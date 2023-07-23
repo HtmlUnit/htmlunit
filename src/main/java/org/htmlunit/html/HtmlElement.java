@@ -112,7 +112,9 @@ public abstract class HtmlElement extends DomElement {
         TABLE_CAPTION("table-caption"),
         /** ruby. */
         RUBY("ruby"),
-        /** ruby-text. */
+        /** ruby-base. */
+        RUBY_BASE("ruby-base"),
+        /** ruby-text-container. */
         RUBY_TEXT("ruby-text"),
         /** ruby-text-container. */
         RUBY_TEXT_CONTAINER("ruby-text-container");

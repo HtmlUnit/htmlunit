@@ -19,6 +19,7 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAY
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
+import org.htmlunit.html.HtmlElement.DisplayStyle;
 
 /**
  * Wrapper for the HTML element "rb".
@@ -70,13 +71,16 @@ public class HtmlRb extends HtmlElement {
     @Override
     public DisplayStyle getDefaultStyleDisplay() {
         if (hasFeature(CSS_RT_DISPLAY_RUBY_TEXT_ALWAYS)) {
-            return DisplayStyle.INLINE;
+            return DisplayStyle.RUBY_BASE;
         }
         if (wasCreatedByJavascript()) {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
             }
         }
-        return DisplayStyle.NONE;
+        else {
+            return DisplayStyle.BLOCK;
+        }
+        return DisplayStyle.INLINE;
     }
 }
