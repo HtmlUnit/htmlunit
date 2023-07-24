@@ -10633,6 +10633,20 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function UIEvent() { [native code] }",
+            IE = "[object UIEvent]",
+            FF = "function UIEvent() {\n    [native code]\n}",
+            FF_ESR = "function UIEvent() {\n    [native code]\n}")
+    public void uIEvent() throws Exception {
+        test("UIEvent");
+    }
+
+    /**
      * @throws Exception if the test fails
      */
     @Test
