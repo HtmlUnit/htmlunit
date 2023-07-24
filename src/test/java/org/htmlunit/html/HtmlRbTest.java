@@ -33,7 +33,9 @@ public class HtmlRbTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "inline", "inline"},
-            IE = {"inline", "inline", "inline"})
+            FF = {"", "ruby-base", "ruby-base"},
+            FF_ESR = {"", "ruby-base", "ruby-base"},
+            IE = {"ruby-base", "ruby-base", "ruby-base"})
     public void defaultStyle() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"

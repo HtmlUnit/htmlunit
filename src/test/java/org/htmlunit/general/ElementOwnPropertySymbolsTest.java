@@ -2063,6 +2063,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
             FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
             IE = "exception")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
     public void rb() throws Exception {
         test("rb");
     }
@@ -2127,6 +2129,8 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.toStringTag) [HTMLElement]",
             FF_ESR = "Symbol(Symbol.toStringTag) [HTMLElement]",
             IE = "exception")
+    @HtmlUnitNYI(FF = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [HTMLUnknownElement]")
     public void rtc() throws Exception {
         test("rtc");
     }

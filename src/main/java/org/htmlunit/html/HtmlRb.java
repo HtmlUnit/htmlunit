@@ -19,7 +19,6 @@ import static org.htmlunit.BrowserVersionFeatures.CSS_RT_DISPLAY_RUBY_TEXT_ALWAY
 import java.util.Map;
 
 import org.htmlunit.SgmlPage;
-import org.htmlunit.html.HtmlElement.DisplayStyle;
 
 /**
  * Wrapper for the HTML element "rb".
@@ -77,9 +76,6 @@ public class HtmlRb extends HtmlElement {
             if (getParentNode() == null) {
                 return DisplayStyle.EMPTY;
             }
-        }
-        else {
-            return DisplayStyle.BLOCK;
         }
         return DisplayStyle.INLINE;
     }
