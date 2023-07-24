@@ -6403,6 +6403,17 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("exception")
+    public void nativeXPathNSResolver() throws Exception {
+        test("NativeXPathNSResolver");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Navigator}.
      *
      * @throws Exception if an error occurs
@@ -10633,20 +10644,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function UIEvent() { [native code] }",
-            IE = "[object UIEvent]",
-            FF = "function UIEvent() {\n    [native code]\n}",
-            FF_ESR = "function UIEvent() {\n    [native code]\n}")
-    public void uIEvent() throws Exception {
-        test("UIEvent");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -11916,17 +11913,6 @@ public class HostClassNameTest extends WebDriverTestCase {
     @Alerts("exception")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("exception")
-    public void nativeXPathNSResolver() throws Exception {
-        test("NativeXPathNSResolver");
     }
 
     /**

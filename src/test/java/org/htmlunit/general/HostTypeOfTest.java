@@ -5753,6 +5753,17 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts("undefined")
+    public void nativeXPathNSResolver() throws Exception {
+        test("NativeXPathNSResolver");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.Navigator}.
      *
      * @throws Exception if an error occurs
@@ -6706,16 +6717,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "function",
-            IE = "undefined")
-    public void pushSubscription() throws Exception {
-        test("PushSubscription");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
     @Alerts("undefined")
     public void pushMessageData() throws Exception {
         test("PushMessageData");
@@ -6728,6 +6729,16 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void pushRegistrationManager() throws Exception {
         test("PushRegistrationManager");
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
+    public void pushSubscription() throws Exception {
+        test("PushSubscription");
     }
 
     /**
@@ -9138,6 +9149,15 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("undefined")
+    public void svgTRefElement() throws Exception {
+        test("SVGTRefElement");
+    }
+
+    /**
      * Test {@link org.htmlunit.javascript.host.svg.SVGTSpanElement}.
      *
      * @throws Exception if an error occurs
@@ -9147,15 +9167,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "object")
     public void svgTSpanElement() throws Exception {
         test("SVGTSpanElement");
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("undefined")
-    public void svgTRefElement() throws Exception {
-        test("SVGTRefElement");
     }
 
     /**
@@ -9532,18 +9543,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts(DEFAULT = "function",
-            IE = "object")
-    public void uIEvent() throws Exception {
-        test("UIEvent");
-    }
-
-    /**
      * @throws Exception if the test fails
      */
     @Test
@@ -9577,6 +9576,18 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void uDPSocket() throws Exception {
         test("UDPSocket");
+    }
+
+    /**
+     * Test {@link org.htmlunit.javascript.host.event.UIEvent}.
+     *
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = "function",
+            IE = "object")
+    public void uiEvent() throws Exception {
+        test("UIEvent");
     }
 
     /**
@@ -10679,17 +10690,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Alerts("undefined")
     public void xPathNSResolver() throws Exception {
         test("XPathNSResolver");
-    }
-
-    /**
-     * Test {@link org.htmlunit.javascript.host.dom.XPathNSResolver}.
-     *
-     * @throws Exception if an error occurs
-     */
-    @Test
-    @Alerts("undefined")
-    public void nativeXPathNSResolver() throws Exception {
-        test("NativeXPathNSResolver");
     }
 
     /**
