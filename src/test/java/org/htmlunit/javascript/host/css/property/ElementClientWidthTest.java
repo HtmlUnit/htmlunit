@@ -1296,8 +1296,6 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts("0")
-    @HtmlUnitNYI(CHROME = "-16",
-            EDGE = "-16")
     public void rb() throws Exception {
         loadPageVerifyTitle2(test("rb"));
     }
