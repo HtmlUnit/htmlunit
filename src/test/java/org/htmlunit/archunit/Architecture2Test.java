@@ -36,17 +36,22 @@ import com.tngtech.archunit.junit.ArchUnitRunner;
 public class Architecture2Test {
 
     @ArchTest
-    public static void allPropertyTestShoulsTestTheSameObjects(final JavaClasses classes) {
+    public static void allPropertyTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertiesTest");
         compare(classes, "ElementPropertiesTest", "ElementOwnPropertySymbolsTest");
     }
 
     @ArchTest
-    public static void allElementTestShoulsTestTheSameObjects(final JavaClasses classes) {
+    public static void allElementTestShouldTestTheSameObjects(final JavaClasses classes) {
         compare(classes, "ElementChildNodesTest", "ElementClosesItselfTest");
         compare(classes, "ElementChildNodesTest", "ElementCreationTest");
         compare(classes, "ElementChildNodesTest", "ElementDefaultStyleDisplayTest");
         compare(classes, "ElementChildNodesTest", "ElementOuterHtmlTest");
+    }
+
+    @ArchTest
+    public static void allHostTestShouldTestTheSameObjects(final JavaClasses classes) {
+        compare(classes, "HostClassNameTest", "HostTypeOfTest");
     }
 
     private static void compare(final JavaClasses classes, final String oneName, final String anotherName) {
@@ -68,19 +73,22 @@ public class Architecture2Test {
 
         if (tmp.size() + oneTests.size() > 0) {
             if (tmp.size() == 0) {
-                oneTests.removeAll(anotherTests);
-                Assert.fail("The method(s) " + oneTests
+                Assert.fail("The " + oneTests.size() + " method(s) "
+                    + oneTests.stream().sorted().collect(Collectors.toList())
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
             }
             else if (oneTests.size() == 0) {
                 anotherTests.removeAll(oneTests);
-                Assert.fail("The method(s) " + tmp
+                Assert.fail("The " + tmp.size() + " method(s) "
+                    + tmp.stream().sorted().collect(Collectors.toList())
                     + " are available in " + anotherName + " but missing in " + oneName + ".");
             }
 
-            Assert.fail("The method(s) " + tmp
+            Assert.fail("The " + tmp.size() + " method(s) "
+                    + tmp.stream().sorted().collect(Collectors.toList())
                     + " are available in " + anotherName + " but missing in " + oneName
-                    + " and the method(s) " + oneTests
+                    + " and the " + oneTests.size() + " method(s) "
+                    + oneTests.stream().sorted().collect(Collectors.toList())
                     + " are available in " + oneName + " but missing in " + anotherName + ".");
         }
     }
