@@ -263,6 +263,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, IE})
     EVENT_TYPE_WHEELEVENT,
 
+    /** For new pages the focus points to the body node. */
+    @BrowserFeature(IE)
+    FOCUS_BODY_ELEMENT_AT_START,
+
     /** Indicates if a form field is directly reachable by its new name once this has been changed. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     FORMFIELD_REACHABLE_BY_NEW_NAMES,
