@@ -124,6 +124,7 @@ public class HTMLElement3Test extends SimpleWebTestCase {
         final HtmlButton buttonA = firstPage.getHtmlElementById("clickme");
         final HtmlPage secondPage = buttonA.click();
         assertEquals("Second", secondPage.getTitleText());
+
         webClient.setCurrentWindow(firstPage.getEnclosingWindow());
         webClient.setCurrentWindow(secondPage.getEnclosingWindow());
         assertEquals(getExpectedAlerts(), collectedAlerts);

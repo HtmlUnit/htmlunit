@@ -761,14 +761,9 @@ public class HTMLDocument extends Document {
      */
     @Override
     public HTMLElement getActiveElement() {
-        final DomElement activeElement = getPage().getFocusedElement();
+        final DomElement activeElement = getPage().getActiveElement();
         if (activeElement instanceof HtmlElement) {
             return (HTMLElement) activeElement.getScriptableObject();
-        }
-
-        final HtmlElement body = getPage().getBody();
-        if (body != null) {
-            return (HTMLElement) getScriptableFor(body);
         }
         return null;
     }

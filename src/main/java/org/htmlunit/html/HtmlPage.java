@@ -2551,13 +2551,19 @@ public class HtmlPage extends SgmlPage {
     /**
      * <p><span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span></p>
      *
-     * Focuses an element after page load.
+     * @return the element with focus or the body
      */
-    public void setInitialFocus() {
-        final HtmlElement body = getPage().getBody();
-        if (body != null) {
-            setElementWithFocus(body);
+    public HtmlElement getActiveElement() {
+        final DomElement activeElement = getFocusedElement();
+        if (activeElement instanceof HtmlElement) {
+            return (HtmlElement) activeElement;
         }
+
+        final HtmlElement body = getBody();
+        if (body != null) {
+            return body;
+        }
+        return null;
     }
 
     /**

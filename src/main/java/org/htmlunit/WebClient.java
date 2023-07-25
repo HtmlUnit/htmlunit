@@ -75,6 +75,7 @@ import org.htmlunit.html.BaseFrameElement;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FrameWindow;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.html.HtmlPage;
@@ -979,7 +980,11 @@ public class WebClient implements Serializable, AutoCloseable {
             //2. onFocus event is triggered for focusedElement of new current window
             final Page enclosedPage = currentWindow_.getEnclosedPage();
             if (enclosedPage != null && enclosedPage.isHtmlPage()) {
-                ((HtmlPage) enclosedPage).setInitialFocus();
+                final HtmlPage enclosedHtmlPage = (HtmlPage) enclosedPage;
+                final HtmlElement activeElement = enclosedHtmlPage.getActiveElement();
+                if (activeElement != null) {
+                    enclosedHtmlPage.setFocusedElement(activeElement, true);
+                }
             }
         }
     }
