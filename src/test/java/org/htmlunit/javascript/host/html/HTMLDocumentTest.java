@@ -2799,8 +2799,7 @@ public class HTMLDocumentTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "false",
             EDGE = "false",
             FF = "false",
-            FF_ESR = "false",
-            IE = "false")
+            FF_ESR = "false")
     public void hasFocus() throws Exception {
         final String html = ""
             + "<html><head>\n"
