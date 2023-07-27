@@ -1230,7 +1230,7 @@ public class ElementClosesItselfTest extends WebDriverTestCase {
     }
 
     /**
-     * Test {@link org.htmlunit.html.HtmlRbc}.
+     * Test HtmlRbc.
      *
      * @throws Exception if the test fails
      */
