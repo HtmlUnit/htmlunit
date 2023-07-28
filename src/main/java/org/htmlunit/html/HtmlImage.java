@@ -34,8 +34,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
 
-import javax.imageio.ImageReader;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -55,7 +53,6 @@ import org.htmlunit.javascript.host.html.HTMLElement;
 import org.htmlunit.platform.Platform;
 import org.htmlunit.platform.geom.IntDimension2D;
 import org.htmlunit.platform.image.ImageData;
-import org.htmlunit.platform.image.ImageIOImageData;
 import org.htmlunit.util.UrlUtils;
 
 /**
@@ -608,21 +605,6 @@ public class HtmlImage extends HtmlElement {
             }
             return 24;
         }
-    }
-
-    /**
-     * <p>Returns the <code>ImageReader</code> which can be used to read the image contained by this image element.</p>
-     * <p><span style="color:red">POTENTIAL PERFORMANCE KILLER - DOWNLOADS THE IMAGE - USE AT YOUR OWN RISK</span></p>
-     * <p>If the image has not already been downloaded, this method triggers a download and caches the image.</p>
-     *
-     * @return the <code>ImageReader</code> which can be used to read the image contained by this image element
-     * @throws IOException if an error occurs while downloading or reading the image
-     *
-     * @deprecated as of version 2.70.0; use {@link #getImageData()} instead
-     */
-    @Deprecated
-    public ImageReader getImageReader() throws IOException {
-        return ((ImageIOImageData) getImageData()).getImageReader();
     }
 
     public ImageData getImageData() throws IOException {

@@ -19,7 +19,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import org.htmlunit.SgmlPage;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeIterator;
 import org.htmlunit.javascript.HtmlUnitScriptable;
@@ -49,15 +48,14 @@ public class NodeIterator extends HtmlUnitScriptable {
     /**
      * Creates a new instance.
      *
-     * @param page the page
      * @param root The root node at which to begin the {@link NodeIterator}'s traversal
      * @param whatToShow an optional long representing a bitmask created by combining
      * the constant properties of {@link NodeFilter}
      * @param filter an object implementing the {@link NodeFilter} interface
      */
-    public NodeIterator(final SgmlPage page, final Node root, final int whatToShow,
+    public NodeIterator(final Node root, final int whatToShow,
             final org.w3c.dom.traversal.NodeFilter filter) {
-        iterator_ = page.createNodeIterator(root.getDomNodeOrDie(), whatToShow, filter, true);
+        iterator_ = new DomNodeIterator(root.getDomNodeOrDie(), whatToShow, filter, true);
     }
 
     /**

@@ -7,7 +7,28 @@
     </properties>
 
     <body>
-        <release version="3.4.0" date="June 27, 2023" description="Chrome/Edge 114, Firefox 114, htmx 1.9.3, Bugfixes">
+        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Bugfixes">
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Class org.htmlunit.html.DomTreeWalker removed;
+                use org.htmlunit.platform.dom.traversal.DomTreeWalker instead.
+            </action>
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Method org.htmlunit.SgmlPage.createTreeWalker(Node, int, NodeFilter, boolean) removed;
+                use use org.htmlunit.platform.dom.traversal.DomTreeWalker.DomTreeWalker(DomNode, int, NodeFilter, boolean) instead.
+            </action>
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Class org.htmlunit.SgmlPage no longer implements the
+                org.w3c.dom.traversal.DocumentTraversal interface; the method org.htmlunit.SgmlPage.createNodeIterator(Node, int, NodeFilter, boolean)
+                is therefore also removed.
+            </action>
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Method org.htmlunit.html.HtmlImage.getImageReader() removed;
+                use org.htmlunit.html.HtmlImage.getImageData() instead.
+            </action>
+        </release>
+
+
+        <release version="3.4.0" date="July 27, 2023" description="Chrome/Edge 114, Firefox 114, htmx 1.9.3, Bugfixes">
             <action type="update" dev="rbri">
                 Testsuite cleanup and consistency checks.
             </action>

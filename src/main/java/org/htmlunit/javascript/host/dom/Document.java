@@ -1291,7 +1291,7 @@ public class Document extends Node {
     @JsxFunction
     public NodeIterator createNodeIterator(final Node root, final int whatToShow, final Scriptable filter) {
         final org.w3c.dom.traversal.NodeFilter filterWrapper = createFilterWrapper(filter, false);
-        final NodeIterator iterator = new NodeIterator(getPage(), root, whatToShow, filterWrapper);
+        final NodeIterator iterator = new NodeIterator(root, whatToShow, filterWrapper);
         iterator.setParentScope(getParentScope());
         iterator.setPrototype(getPrototype(iterator.getClass()));
         return iterator;

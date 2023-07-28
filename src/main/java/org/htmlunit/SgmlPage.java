@@ -30,7 +30,6 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeIterator;
 import org.htmlunit.html.DomNodeList;
 import org.htmlunit.html.DomText;
-import org.htmlunit.html.DomTreeWalker;
 import org.htmlunit.util.UrlUtils;
 import org.w3c.dom.CDATASection;
 import org.w3c.dom.Comment;
@@ -40,7 +39,6 @@ import org.w3c.dom.DocumentType;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.Text;
-import org.w3c.dom.traversal.DocumentTraversal;
 import org.w3c.dom.traversal.NodeFilter;
 
 /**
@@ -49,7 +47,7 @@ import org.w3c.dom.traversal.NodeFilter;
  * @author Ahmed Ashour
  * @author Ronald Brill
  */
-public abstract class SgmlPage extends DomNode implements Page, Document, DocumentTraversal {
+public abstract class SgmlPage extends DomNode implements Page, Document {
 
     private DocumentType documentType_;
     private final WebResponse webResponse_;
@@ -341,23 +339,28 @@ public abstract class SgmlPage extends DomNode implements Page, Document, Docume
     }
 
     /**
-     * {@inheritDoc}
-     * @deprecated as of version 2.70.0; use
-     * {@link org.htmlunit.platform.dom.traversal.DomTreeWalker
-     *      #DomTreeWalker(DomNode, int, NodeFilter, boolean)}
-     * instead
+     * Create a new <code>NodeIterator</code> over the subtree rooted at the
+     * specified node.
+     * @param root The node which will be iterated together with its
+     *   children. The <code>NodeIterator</code> is initially positioned
+     *   just before this node. The <code>whatToShow</code> flags and the
+     *   filter, if any, are not considered when setting this position. The
+     *   root must not be <code>null</code>.
+     * @param whatToShow This flag specifies which node types may appear in
+     *   the logical view of the tree presented by the
+     *   <code>NodeIterator</code>. See the description of
+     *   <code>NodeFilter</code> for the set of possible <code>SHOW_</code>
+     *   values.These flags can be combined using <code>OR</code>.
+     * @param filter The <code>NodeFilter</code> to be used with this
+     *   <code>NodeIterator</code>, or <code>null</code> to indicate no
+     *   filter.
+     * @param entityReferenceExpansion The value of this flag determines
+     *   whether entity reference nodes are expanded.
+     * @return The newly created <code>NodeIterator</code>.
+     * @exception DOMException
+     *   NOT_SUPPORTED_ERR: Raised if the specified <code>root</code> is
+     *   <code>null</code>.
      */
-    @Deprecated
-    @Override
-    public DomTreeWalker createTreeWalker(final Node root, final int whatToShow, final NodeFilter filter,
-            final boolean entityReferenceExpansion) throws DOMException {
-        return new DomTreeWalker((DomNode) root, whatToShow, filter, entityReferenceExpansion);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public DomNodeIterator createNodeIterator(final Node root, final int whatToShow, final NodeFilter filter,
             final boolean entityReferenceExpansion) throws DOMException {
         return new DomNodeIterator((DomNode) root, whatToShow, filter, entityReferenceExpansion);
