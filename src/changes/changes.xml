@@ -25,6 +25,10 @@
                 INCOMPATIBLE CHANGE: Method org.htmlunit.html.HtmlImage.getImageReader() removed;
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
+
+            <action type="fix" dev="rbri">
+                Fix batik version in images-howto.
+            </action>
         </release>
 
 
