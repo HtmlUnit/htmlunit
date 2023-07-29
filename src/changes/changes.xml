@@ -26,6 +26,9 @@
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
 
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-lang3 to 3.13.0.
+            </action>
             <action type="fix" dev="rbri">
                 Fix batik version in images-howto.
             </action>
