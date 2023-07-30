@@ -17,7 +17,6 @@ package org.htmlunit.javascript.host.dom;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
-import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,12 +34,8 @@ public class XPathEvaluatorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""},
-            FF = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
-            FF_ESR = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
+    @Alerts(DEFAULT = {"function", "[object XPathEvaluator]", "[object HTMLHtmlElement]", "first", "second", ""},
             IE = {"undefined", "exception", ""})
-    @HtmlUnitNYI(FF = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""},
-            FF_ESR = {"function", "[object XPathEvaluator]", "[object NativeXPathNSResolver]", "first", "second", ""})
     public void simple() throws Exception {
         final String html = "<html><body>\n"
             + "<span id='first'>hello</span>\n"

@@ -86,4 +86,12 @@ public class XPathNSResolver extends HtmlUnitScriptable implements PrefixResolve
     public boolean handlesNullPrefixes() {
         return false;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Object getDefaultValue(final Class<?> hint) {
+        return element_.getDefaultValue(hint);
+    }
 }
