@@ -363,7 +363,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Returns the application cache.
      * @return the application cache
      */
-    @JsxGetter({FF, FF_ESR, IE})
+    @JsxGetter({FF_ESR, IE})
     @SuppressFBWarnings("EI_EXPOSE_REP")
     public ApplicationCache getApplicationCache() {
         return applicationCache_;

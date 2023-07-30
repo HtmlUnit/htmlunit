@@ -38,7 +38,7 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Alerts(DEFAULT = "[object ApplicationCache]",
             CHROME = "undefined",
             EDGE = "undefined",
-            FF = "[object OfflineResourceList]",
+            FF = "undefined",
             FF_ESR = "[object OfflineResourceList]")
     public void scriptableToString() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -61,7 +61,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void onchecking() throws Exception {
         eventHandler("onchecking");
     }
@@ -72,7 +73,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void onerror() throws Exception {
         eventHandler("onerror");
     }
@@ -83,7 +85,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void onnoupdate() throws Exception {
         eventHandler("onnoupdate");
     }
@@ -94,7 +97,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void ondownloading() throws Exception {
         eventHandler("ondownloading");
     }
@@ -105,7 +109,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void onprogress() throws Exception {
         eventHandler("onprogress");
     }
@@ -116,7 +121,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void onupdateready() throws Exception {
         eventHandler("onupdateready");
     }
@@ -127,7 +133,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function(e){}",
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void oncached() throws Exception {
         eventHandler("oncached");
     }
@@ -161,7 +168,8 @@ public class ApplicationCacheTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "false", "false", "true", "true"},
             CHROME = "no applicationCache",
-            EDGE = "no applicationCache")
+            EDGE = "no applicationCache",
+            FF = "no applicationCache")
     public void eventListener() throws Exception {
         final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
             + "<html><head>\n"

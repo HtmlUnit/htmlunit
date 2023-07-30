@@ -6057,7 +6057,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "undefined",
-            FF = "function",
             FF_ESR = "function")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");

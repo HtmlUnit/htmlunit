@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
@@ -44,7 +41,7 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClass(IE)
-@JsxClass(className = "OfflineResourceList", value = {FF, FF_ESR})
+@JsxClass(className = "OfflineResourceList", value = FF_ESR)
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
@@ -69,7 +66,7 @@ public class ApplicationCache extends EventTarget {
     /**
      * The constructor.
      */
-    @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
+    @JsxConstructor(FF_ESR)
     public ApplicationCache() {
     }
 
