@@ -749,6 +749,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     JS_CLIENTWIDTH_INPUT_TEXT_143,
 
+    /** ClientWidth for text/password input is 145. */
+    @BrowserFeature(FF_ESR)
+    JS_CLIENTWIDTH_INPUT_TEXT_145,
+
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})
     JS_CLIENTWIDTH_INPUT_TEXT_173,
