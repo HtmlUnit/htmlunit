@@ -1145,7 +1145,7 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "4.05px",
-            CHROME = "3.81px",
+            CHROME = "3.774px",
             EDGE = "3.822px",
             IE = "0px")
     @HtmlUnitNYI(CHROME = "1px",
@@ -2473,7 +2473,8 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts("0 17")
+    @Alerts(DEFAULT = "0 17",
+            EDGE = "0 15")
     @HtmlUnitNYI(CHROME = "0 0",
             EDGE = "0 0",
             FF = "0 0",

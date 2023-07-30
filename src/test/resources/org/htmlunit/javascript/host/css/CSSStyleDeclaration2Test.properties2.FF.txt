@@ -128,6 +128,7 @@ alignItems
 alignSelf
 all
 animation
+animationComposition
 animationDelay
 animationDirection
 animationDuration
@@ -152,6 +153,7 @@ backgroundPositionX
 backgroundPositionY
 backgroundRepeat
 backgroundSize
+baselineSource
 blockSize
 border
 borderBlock

@@ -144,7 +144,11 @@ public final class StyleAttributes implements Serializable {
                 ff("0s ease 0s 1 normal none running none")),
 
         /** The style property {@code animationComposition}. */
-        ANIMATION_COMPOSITION("animationComposition", "animation-composition", chromeAndEdge("replace")),
+        ANIMATION_COMPOSITION("animationComposition", "animation-composition", chromeAndEdge("replace"),
+                ffLatest("replace")),
+
+        /** The style property {@code animation-composition}. */
+        ANIMATION_COMPOSITION_("animation-composition", "animation-composition", ffLatest("replace")),
 
         /** The style property {@code animationDelay}. */
         ANIMATION_DELAY("animationDelay", "animation-delay", ie("0s"), chromeAndEdgeAndFirefox("0s")),
@@ -191,12 +195,25 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code animation-play-state}. */
         ANIMATION_PLAY_STATE_("animation-play-state", "animation-play-state", ff("running")),
 
+        /** The style property {@code animationRange}. */
+        ANIMATION_RANGE("animationRange", "animation-range", chromeAndEdgeNormal()),
+
+        /** The style property {@code animationRangeEnd}. */
+        ANIMATION_RANGE_END("animationRangeEnd", "animation-range-end", chromeAndEdgeNormal()),
+
+        /** The style property {@code animationRangeStart}. */
+        ANIMATION_RANGE_START("animationRangeStart", "animation-range-start", chromeAndEdgeNormal()),
+//        animationTimeline
+
         /** The style property {@code animationTimingFunction}. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction", "animation-timing-function",
                 ie("cubic-bezier(0.25, 0.1, 0.25, 1)"), chromeAndEdgeAndFirefox("ease")),
 
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
+
+        /** The style property {@code animationTimeline}. */
+        ANIMATION_TIMELINE("animationTimeline", "animation-timeline", chromeAndEdgeAuto()),
 
         /** The style property {@code appRegion}. */
         APP_REGION("appRegion", "app-region", chromeAndEdgeNone()),
@@ -323,7 +340,11 @@ public final class StyleAttributes implements Serializable {
                 chromeAndEdge("0px")),
 
         /** The style property {@code baselineSource}. */
-        BASELINE_SOURCE("baselineSource", "baseline-source", chromeAndEdgeAuto()),
+        BASELINE_SOURCE("baselineSource", "baseline-source", chromeAndEdgeAuto(),
+                ffLatest("auto")),
+
+        /** The style property {@code baseline-source}. */
+        BASELINE_SOURCE_("baseline-source", "baseline-source", ffLatest("auto")),
 
         /** The style property {@code behavior}. */
         BEHAVIOR("behavior", "behavior"),
@@ -3119,6 +3140,15 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code scroll-snap-type}. */
         SCROLL_SNAP_TYPE_("scroll-snap-type", "scroll-snap-type", ffNone()),
 
+        /** The style property {@code scrollTimeline}. */
+        SCROLL_TIMELINE("scrollTimeline", "scroll-timeline", chromeAndEdgeNone()),
+
+        /** The style property {@code scrollTimelineAxis}. */
+        SCROLL_TIMELINE_AXIS("scrollTimelineAxis", "scroll-timeline-axis", chromeAndEdge("block")),
+
+        /** The style property {@code scrollTimelineName}. */
+        SCROLL_TIMELINE_NAME("scrollTimelineName", "scroll-timeline-name", chromeAndEdgeNone()),
+
         /** The style property {@code scrollbar3dLightColor}. */
         SCROLLBAR_3DLIGHT_COLOR("scrollbar3dLightColor", "scrollbar-3dlight-color", ie("undefined")),
 
@@ -3576,6 +3606,18 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code vertical-align}. */
         VERTICAL_ALIGN_("vertical-align", "vertical-align", ff("baseline")),
+
+        /** The style property {@code viewTimeline}. */
+        VIEW_TIMELINE("viewTimeline", "view-timeline", chromeAndEdgeNone()),
+
+        /** The style property {@code viewTimelineAxis}. */
+        VIEW_TIMELINE_AXIS("viewTimelineAxis", "view-timeline-axis", chromeAndEdge("block")),
+
+        /** The style property {@code viewTimelineInset}. */
+        VIEW_TIMELINE_INSET("viewTimelineInset", "view-timeline-inset", chromeAndEdge("0px")),
+
+        /** The style property {@code viewTimelineName}. */
+        VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
 
         /** The style property {@code viewTransitionName}. */
         VIEW_TRANSITION_NAME("viewTransitionName", "view-transition-name", chromeAndEdgeNone()),
