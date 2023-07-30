@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Bugfixes">
+        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Chrome/Edge 115, Firefox 115, Bugfixes">
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: Class org.htmlunit.html.DomTreeWalker removed;
                 use org.htmlunit.platform.dom.traversal.DomTreeWalker instead.
