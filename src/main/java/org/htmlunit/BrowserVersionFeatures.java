@@ -975,7 +975,7 @@ public enum BrowserVersionFeatures {
     JS_EVENT_LOAD_SUPPRESSED_BY_CONTENT_SECURIRY_POLICY,
 
     /** Whether {@code FileReader} includes content type or not. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_FILEREADER_CONTENT_TYPE,
 
     /** Whether {@code FileReader} includes {@code base64} for empty content or not. */

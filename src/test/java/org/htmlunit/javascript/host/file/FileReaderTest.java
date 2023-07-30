@@ -258,9 +258,7 @@ public class FileReaderTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "#data:",
-            FF = "#data:image/png;base64,",
-            FF_ESR = "#data:image/png;base64,",
+    @Alerts(DEFAULT = "#data:image/png;base64,",
             IE = "#null")
     public void readAsDataURLEmptyImage() throws Exception {
         final String html
