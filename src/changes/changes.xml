@@ -27,6 +27,9 @@
             </action>
 
             <action type="update" dev="rbri">
+                Adjust HtmlDialog handling for the changes done in Chrome/Edge/FF 115.
+            </action>
+            <action type="update" dev="rbri">
                 Upgrade Apache commons-lang3 to 3.13.0.
             </action>
             <action type="fix" dev="rbri">

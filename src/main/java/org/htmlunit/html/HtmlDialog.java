@@ -37,6 +37,7 @@ public class HtmlDialog extends HtmlElement {
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "dialog";
 
+    private boolean modal_;
     private String returnValue_;
 
     /**
@@ -72,6 +73,13 @@ public class HtmlDialog extends HtmlElement {
     }
 
     /**
+     * @return true if the dialog is open and modal.
+     */
+    public boolean isModal() {
+        return modal_;
+    }
+
+    /**
      * Sets the open state.
      *
      * @param newValue the new value
@@ -82,6 +90,7 @@ public class HtmlDialog extends HtmlElement {
         }
         else {
             removeAttribute("open");
+            modal_ = false;
         }
     }
 
@@ -100,6 +109,7 @@ public class HtmlDialog extends HtmlElement {
     public void showModal() {
         if (!isOpen()) {
             setOpen(true);
+            modal_ = true;
         }
     }
 
@@ -129,6 +139,7 @@ public class HtmlDialog extends HtmlElement {
                 jsEngine.addPostponedAction(action);
             }
         }
+        modal_ = false;
     }
 
     /**

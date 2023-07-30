@@ -241,8 +241,10 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError"},
+    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""},
+            FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""},
             IE = "No")
+    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "true", ""})
     public void showModal() throws Exception {
         final String html =
             "<html>\n"
@@ -267,9 +269,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
 
             + "        try {\n"
             + "          dia.showModal();\n"
-            + "          log(dia.open);\n"
-            + "          log(dia.getAttribute('open'));\n"
             + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -287,7 +289,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"true", "", "InvalidStateError"},
+    @Alerts(DEFAULT = {"true", "", "InvalidStateError", "true", ""},
             IE = "No")
     public void showModalAlreadyOpend() throws Exception {
         final String html =
@@ -309,9 +311,9 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
 
             + "        try {\n"
             + "          dia.showModal();\n"
-            + "          log(dia.open);\n"
-            + "          log(dia.getAttribute('open'));\n"
             + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"
@@ -331,6 +333,54 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""},
             IE = "No")
+    public void showAfterShow() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        try {\n"
+            + "          dia.show();\n"
+            + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError", "true", ""},
+            FF_ESR = {"false", "null", "true", "", "true", ""},
+            IE = "No")
+    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showAfterShowModal() throws Exception {
         final String html =
             "<html>\n"
@@ -355,9 +405,103 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
 
             + "        try {\n"
             + "          dia.show();\n"
-            + "          log(dia.open);\n"
-            + "          log(dia.getAttribute('open'));\n"
             + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError", "true", ""},
+            IE = "No")
+    public void showModalAfterShow() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        dia.show();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        try {\n"
+            + "          dia.showModal();\n"
+            + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>\n"
+            + "    <dialog id='tester'>\n"
+            + "      <p>HtmlUNit dialog</p>\n"
+            + "    </dialog>\n"
+            + "  </body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""},
+            FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""},
+            IE = "No")
+    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "true", ""})
+    public void showModalAfterShowModal() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + DUMP_EVENT_FUNCTION
+            + "      function test() {\n"
+            + "        var dia = document.getElementById('tester');\n"
+            + "        if (typeof HTMLDialogElement !== 'function') { log('No'); return; }\n"
+
+            + "        dia.addEventListener('close', (event) => {\n"
+            + "          dump(event);\n"
+            + "        });\n"
+
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        dia.showModal();\n"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
+
+            + "        try {\n"
+            + "          dia.showModal();\n"
+            + "        } catch(e) { log('InvalidStateError'); }"
+            + "        log(dia.open);\n"
+            + "        log(dia.getAttribute('open'));\n"
             + "      }\n"
             + "    </script>\n"
             + "  </head>\n"

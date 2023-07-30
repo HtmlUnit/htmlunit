@@ -69,7 +69,15 @@ public class HTMLDialogElement extends HTMLElement {
      */
     @JsxFunction
     public void show() {
-        ((HtmlDialog) getDomNodeOrDie()).show();
+        final HtmlDialog dialog = (HtmlDialog) getDomNodeOrDie();
+
+        if (dialog.isOpen()) {
+            if (dialog.isModal()) {
+                throw Context.reportRuntimeError("InvalidStateError: Dialog is already open.");
+            }
+        }
+
+        dialog.show();
     }
 
     /**
@@ -93,7 +101,9 @@ public class HTMLDialogElement extends HTMLElement {
         final HtmlDialog dialog = (HtmlDialog) getDomNodeOrDie();
 
         if (dialog.isOpen()) {
-            throw Context.reportRuntimeError("InvalidStateError: Dialog is already open.");
+            if (!dialog.isModal()) {
+                throw Context.reportRuntimeError("InvalidStateError: Dialog is already open.");
+            }
         }
 
         dialog.showModal();
