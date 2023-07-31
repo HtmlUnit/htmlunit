@@ -54,8 +54,9 @@ public class ExternalTest {
     static String MAVEN_REPO_URL_ = "https://repo1.maven.org/maven2/";
 
     /** Chrome driver. */
-    static String CHROME_DRIVER_ = "115.0.5735.90";
-    static String CHROME_DRIVER_URL_ = "https://chromedriver.chromium.org/downloads";
+    static String CHROME_DRIVER_ = "115.0.5790.102";
+    static String CHROME_DRIVER_URL_ =
+            "https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json";
 
     static String EDGE_DRIVER_ = "115.0.1901.188";
     static String EDGE_DRIVER_URL_ = "https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/";
@@ -139,14 +140,12 @@ public class ExternalTest {
     @Test
     public void assertChromeDriver() throws Exception {
         try (WebClient webClient = buildWebClient()) {
-            final HtmlPage page = webClient.getPage(CHROME_DRIVER_URL_);
-            String content = page.asNormalizedText();
-            content = content.substring(content.indexOf("Current Releases"));
-            content = content.replace("\n", " ");
+            final Page page = webClient.getPage(CHROME_DRIVER_URL_);
+            final String content = page.getWebResponse().getContentAsString();
+
             String version = "0.0.0.0";
             final Pattern regex =
-                    Pattern.compile("ChromeDriver (\\d*\\.\\d*\\.\\d*\\.\\d*) Supports Chrome version "
-                            + BrowserVersion.CHROME.getBrowserVersionNumeric());
+                    Pattern.compile("\"channels\":\\{\"Stable\":\\{.*?\"version\":\"(\\d*\\.\\d*\\.\\d*\\.\\d*)\"");
             final Matcher matcher = regex.matcher(content);
             while (matcher.find()) {
                 if (version.compareTo(matcher.group(1)) < 0) {
