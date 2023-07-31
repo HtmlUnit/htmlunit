@@ -327,7 +327,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "635",
+    @Alerts(CHROME = "629",
             EDGE = "637",
             FF = "677",
             FF_ESR = "677",
@@ -693,7 +693,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "680",
+    @Alerts(CHROME = "674",
             EDGE = "637",
             FF = "677",
             FF_ESR = "677",
@@ -713,7 +713,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "635",
+    @Alerts(CHROME = "629",
             EDGE = "637",
             FF = "677",
             FF_ESR = "677",
@@ -832,7 +832,7 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(CHROME = "635",
+    @Alerts(CHROME = "629",
             EDGE = "637",
             FF = "8",
             FF_ESR = "8",
@@ -1456,8 +1456,9 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("0")
-    @HtmlUnitNYI(IE = "18")
+    @Alerts(DEFAULT = "0",
+            FF = "9")
+    @HtmlUnitNYI(FF = "0", IE = "18")
     public void rtc() throws Exception {
         loadPageVerifyTitle2(test("rtc"));
     }
