@@ -507,6 +507,9 @@ public class AwtRenderingBackend implements RenderingBackend {
                                 catch (final InterruptedException e) {
                                     LOG.error("[" + id_ + "] AwtRenderingBackend interrupted "
                                             + "while waiting for drawImage to finish.", e);
+
+                                    // restore interrupted status
+                                    Thread.currentThread().interrupt();
                                 }
                             }
                         }

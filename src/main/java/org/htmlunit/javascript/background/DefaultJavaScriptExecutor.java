@@ -80,14 +80,20 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
         if (eventLoopThread_ == null) {
             return;
         }
+
         try {
             eventLoopThread_.interrupt();
             eventLoopThread_.join(10_000);
         }
         catch (final InterruptedException e) {
-            LOG.warn("InterruptedException while waiting for the eventLoop thread to join ", e);
-            // ignore, this doesn't matter, we want to stop it
+            if (LOG.isWarnEnabled()) {
+                LOG.warn("InterruptedException while waiting for the eventLoop thread to join", e);
+            }
+
+            // restore interrupted status
+            Thread.currentThread().interrupt();
         }
+
         if (eventLoopThread_.isAlive()) {
             if (LOG.isWarnEnabled()) {
                 LOG.warn("Event loop thread "
@@ -168,6 +174,7 @@ public class DefaultJavaScriptExecutor implements JavaScriptExecutor {
                 Thread.sleep(sleepInterval);
             }
             catch (final InterruptedException e) {
+                // restore interrupted status
                 Thread.currentThread().interrupt();
             }
         }
