@@ -26,7 +26,7 @@
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
 
-            <action type="fix" dev="rbri">
+            <action type="fix" dev="rbri" due-to="Guang-Hou" issue="609">
                 Always restore interrupted status when catching and ignoring InterruptedExceptions.
             </action>
             <action type="update" dev="rbri">

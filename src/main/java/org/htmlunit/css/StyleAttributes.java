@@ -203,7 +203,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code animationRangeStart}. */
         ANIMATION_RANGE_START("animationRangeStart", "animation-range-start", chromeAndEdgeNormal()),
-//        animationTimeline
+
+        /** The style property {@code animationTimeline}. */
+        ANIMATION_TIMELINE("animationTimeline", "animation-timeline", chromeAndEdgeAuto()),
 
         /** The style property {@code animationTimingFunction}. */
         ANIMATION_TIMING_FUNCTION("animationTimingFunction", "animation-timing-function",
@@ -211,9 +213,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code animation-timing-function}. */
         ANIMATION_TIMING_FUNCTION_("animation-timing-function", "animation-timing-function", ff("ease")),
-
-        /** The style property {@code animationTimeline}. */
-        ANIMATION_TIMELINE("animationTimeline", "animation-timeline", chromeAndEdgeAuto()),
 
         /** The style property {@code appRegion}. */
         APP_REGION("appRegion", "app-region", chromeAndEdgeNone()),
