@@ -3945,10 +3945,8 @@ public class HostParentOfDTest extends HostParentOf {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "true",
-            CHROME = "false",
-            EDGE = "false",
-            IE = "false")
+    @Alerts(DEFAULT = "false",
+            FF_ESR = "true")
     public void _EventTarget_OfflineResourceList() throws Exception {
         test("EventTarget", "OfflineResourceList");
     }
