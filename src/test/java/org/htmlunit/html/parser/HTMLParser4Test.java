@@ -880,4 +880,40 @@ public class HTMLParser4Test extends WebDriverTestCase {
 
         loadPageVerifyTitle2(html);
     }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"1", "[object HTMLElement]", "1", "[object Text]",
+             "<!-- anchor linking to external file -->"
+                     + "<a href='https://www.htmlunit.org/'>External Link</a>"})
+    public void noscript() throws Exception {
+        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
+            + "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var bodyChildren = document.getElementsByTagName('body')[0].childNodes;\n"
+            + "        log(bodyChildren.length);\n"
+            + "        log(bodyChildren[0]);\n"
+
+            + "        var noscript = bodyChildren[0];\n"
+            + "        log(noscript.childNodes.length);\n"
+            + "        log(noscript.childNodes[0]);\n"
+            + "        log(noscript.childNodes[0].textContent);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>"
+                    + "<noscript>"
+                    + "<!-- anchor linking to external file -->"
+                    + "<a href='https://www.htmlunit.org/'>External Link</a>"
+                    + "</noscript>"
+            + "</body>"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
 }
