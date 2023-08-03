@@ -889,8 +889,8 @@ public class HTMLParser4Test extends WebDriverTestCase {
              "<!-- anchor linking to external file -->"
                      + "<a href='https://www.htmlunit.org/'>External Link</a>"})
     public void noscript() throws Exception {
-        final String html = HtmlPageTest.STANDARDS_MODE_PREFIX_
-            + "<html>\n"
+        final String html =
+            "<html>\n"
             + "  <head>\n"
             + "    <script>\n"
             + LOG_TITLE_FUNCTION
@@ -910,6 +910,52 @@ public class HTMLParser4Test extends WebDriverTestCase {
                     + "<noscript>"
                     + "<!-- anchor linking to external file -->"
                     + "<a href='https://www.htmlunit.org/'>External Link</a>"
+                    + "</noscript>"
+            + "</body>"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception failure
+     */
+    @Test
+    @Alerts({"3", "[object HTMLElement]", "[object HTMLDivElement]", "[object Text]",
+             "1", "[object Text]", "<!-- ",
+             "1", "<div>abc</div>",
+             "0", "-->"})
+    public void noscriptBrokenComment() throws Exception {
+        final String html =
+            "<html>\n"
+            + "  <head>\n"
+            + "    <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "      function test() {\n"
+            + "        var bodyChildren = document.getElementsByTagName('body')[0].childNodes;\n"
+            + "        log(bodyChildren.length);\n"
+            + "        log(bodyChildren[0]);\n"
+            + "        log(bodyChildren[1]);\n"
+            + "        log(bodyChildren[2]);\n"
+
+            + "        var noscript = bodyChildren[0];\n"
+            + "        log(noscript.childNodes.length);\n"
+            + "        log(noscript.childNodes[0]);\n"
+            + "        log(noscript.childNodes[0].textContent);\n"
+
+            + "        var div = bodyChildren[1];\n"
+            + "        log(div.childNodes.length);\n"
+            + "        log(div.outerHTML);\n"
+
+            + "        var txt = bodyChildren[2];\n"
+            + "        log(txt.childNodes.length);\n"
+            + "        log(txt.textContent);\n"
+            + "      }\n"
+            + "    </script>\n"
+            + "  </head>\n"
+            + "  <body onload='test()'>"
+                    + "<noscript>"
+                    + "<!-- </noscript><div>abc</div>-->"
                     + "</noscript>"
             + "</body>"
             + "</html>";
