@@ -4,3 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    ignore:
+      # ignore because it does not work with java 8
+      - dependency-name: "org.apache.maven.plugins:maven-site-plugin"
