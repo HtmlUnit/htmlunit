@@ -26,7 +26,7 @@
         <maven.compiler.target>8</maven.compiler.target>
 
         <htmlunitcssparser.version>3.4.0</htmlunitcssparser.version>
-        <htmlunitneko.version>3.5.0-SNAPSHOT</htmlunitneko.version>
+        <htmlunitneko.version>3.4.0</htmlunitneko.version>
         <htmlunitcorejs.version>3.4.0</htmlunitcorejs.version>
         <htmlunitxpath.version>3.4.0</htmlunitxpath.version>
 
