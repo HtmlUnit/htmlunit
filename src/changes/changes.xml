@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Chrome/Edge 115, Firefox 115, Bugfixes">
+        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Chrome/Edge 115, Firefox 115, htmx 1.9.4, Bugfixes">
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: Class org.htmlunit.html.DomTreeWalker removed;
                 use org.htmlunit.platform.dom.traversal.DomTreeWalker instead.
@@ -26,6 +26,24 @@
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
 
+            <action type="add" dev="rbri">
+                htmx version 1.9.4 testsuite added.
+            </action>
+            <action type="fix" dev="rbri">
+                neko: self closing textarea tag are now handled correctly.
+            </action>
+            <action type="update" dev="rbri">
+                neko: bunch of test cases added.
+            </action>
+            <action type="update" dev="rbri">
+                neko: XMLString now internally uses a StringBuilder instead of maintaining an char[] buffer.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Code cleanup and more unused code removed.
+            </action>
+            <action type="update" dev="rbri">
+                neko: Use the same code style rules as HtmlUnit.
+            </action>
             <action type="fix" dev="rbri" due-to="Guang-Hou" issue="609">
                 Always restore interrupted status when catching and ignoring InterruptedExceptions.
             </action>
