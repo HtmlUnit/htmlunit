@@ -26,6 +26,11 @@
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
 
+            <action type="fix" dev="rbri">
+                core-js: Improved handling for NativeError instances when generating the console output.
+                Before this, when outputing NativeError instances the json serializer was used ending up in something like this '{"fileName":"source.js","lineNumber":426}';
+                means the whole message was missing. This fix brings the output closer to the output of real browsers by writing the message and the stack trace.
+            </action>
             <action type="add" dev="rbri">
                 htmx version 1.9.4 testsuite added.
             </action>
