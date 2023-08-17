@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.5.0" date="August xx, 2023" description="Android compatibility, Chrome/Edge 115, Firefox 115, htmx 1.9.4, Bugfixes">
+        <release version="3.5.0" date="August xx, 2023" description="Proxy, Android compatibility, Chrome/Edge 115, Firefox 115, htmx 1.9.4, Bugfixes">
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: Class org.htmlunit.html.DomTreeWalker removed;
                 use org.htmlunit.platform.dom.traversal.DomTreeWalker instead.
@@ -25,7 +25,22 @@
                 INCOMPATIBLE CHANGE: Method org.htmlunit.html.HtmlImage.getImageReader() removed;
                 use org.htmlunit.html.HtmlImage.getImageData() instead.
             </action>
+            <action type="remove" dev="rbri">
+                INCOMPATIBLE CHANGE: Support for proxy polyfill removed.
+            </action>
 
+            <action type="update" dev="rbri">
+                core-js: Proxy implementation added.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: format issues in Messages.properties fixed.
+            </action>
+            <action type="fix" dev="rbri">
+                core-js: missing array limit check added
+            </action>
+            <action type="fix" dev="rbri">
+                cssparser: inherit is a valid class selector name.
+            </action>
             <action type="fix" dev="rbri">
                 core-js: Improved handling for NativeError instances when generating the console output.
                 Before this, when outputing NativeError instances the json serializer was used ending up in something like this '{"fileName":"source.js","lineNumber":426}';
