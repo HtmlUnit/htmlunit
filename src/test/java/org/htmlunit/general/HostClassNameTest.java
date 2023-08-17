@@ -7426,10 +7426,6 @@ public class HostClassNameTest extends WebDriverTestCase {
             FF = "function Proxy() {\n    [native code]\n}",
             IE = "exception",
             FF_ESR = "function Proxy() {\n    [native code]\n}")
-    @HtmlUnitNYI(CHROME = "exception",
-            EDGE = "exception",
-            FF = "exception",
-            FF_ESR = "exception")
     public void proxy() throws Exception {
         test("Proxy");
     }

@@ -85,7 +85,6 @@ public class WebClientOptions implements Serializable {
     private int webSocketMaxBinaryMessageBufferSize_ = -1;
 
     private boolean isFetchPolyfillEnabled_;
-    private boolean isProxyPolyfillEnabled_;
 
     /**
      * If set to {@code true}, the client will accept connections to any host, regardless of
@@ -837,20 +836,5 @@ public class WebClientOptions implements Serializable {
      */
     public boolean isFetchPolyfillEnabled() {
         return isFetchPolyfillEnabled_;
-    }
-
-    /**
-     * Sets whether or not proxy polyfill should be used.
-     * @param enabled true to enable proxy polyfill
-     */
-    public void setProxyPolyfillEnabled(final boolean enabled) {
-        isProxyPolyfillEnabled_ = enabled;
-    }
-
-    /**
-     * @return true if the proxy api polyfill is enabled
-     */
-    public boolean isProxyPolyfillEnabled() {
-        return isProxyPolyfillEnabled_;
     }
 }

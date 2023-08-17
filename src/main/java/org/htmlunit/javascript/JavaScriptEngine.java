@@ -15,7 +15,6 @@
 package org.htmlunit.javascript;
 
 import static org.htmlunit.BrowserVersionFeatures.JS_API_FETCH;
-import static org.htmlunit.BrowserVersionFeatures.JS_API_PROXY;
 import static org.htmlunit.BrowserVersionFeatures.JS_ARRAY_FROM;
 import static org.htmlunit.BrowserVersionFeatures.JS_CONSOLE_TIMESTAMP;
 import static org.htmlunit.BrowserVersionFeatures.JS_ERROR_CAPTURE_STACK_TRACE;
@@ -241,6 +240,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (!browserVersion.hasFeature(JS_REFLECT)) {
             deleteProperties(window, "Reflect");
+            deleteProperties(window, "Proxy");
         }
 
         final ScriptableObject errorObject = (ScriptableObject) ScriptableObject.getProperty(window, "Error");
@@ -548,10 +548,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
 
         if (webClient.getOptions().isFetchPolyfillEnabled() && browserVersion.hasFeature(JS_API_FETCH)) {
             Polyfill.getFetchPolyfill().apply(context, scriptable);
-        }
-
-        if (webClient.getOptions().isProxyPolyfillEnabled() && browserVersion.hasFeature(JS_API_PROXY)) {
-            Polyfill.getProxyPolyfill().apply(context, scriptable);
         }
     }
 

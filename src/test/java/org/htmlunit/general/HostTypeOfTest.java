@@ -6685,10 +6685,6 @@ public class HostTypeOfTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "function",
             IE = "undefined")
-    @HtmlUnitNYI(CHROME = "undefined",
-            EDGE = "undefined",
-            FF = "undefined",
-            FF_ESR = "undefined")
     public void proxy() throws Exception {
         test("Proxy");
     }
