@@ -20,7 +20,8 @@
     </custom>
 
     <bannerLeft>
-        <name>${project.name}</name>
+        <name>HtmlUnit</name>
+        <src>/images/htmlunit.png</src>
         <href>https://www.htmlunit.org</href>
     </bannerLeft>
     <bannerRight>
