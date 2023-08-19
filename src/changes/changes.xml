@@ -29,6 +29,9 @@
                 INCOMPATIBLE CHANGE: Support for proxy polyfill removed.
             </action>
 
+            <action type="add" dev="RhinoTeam">
+                core-js: Support for Array.prototype.flatMap added.
+            </action>
             <action type="update" dev="rbri">
                 core-js: Proxy implementation added.
             </action>
