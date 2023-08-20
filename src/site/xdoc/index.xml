@@ -57,9 +57,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>July 27, 2023</date></dt>
+                    <dt>Latest release <date>August 20, 2023</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.4.0">version 3.4.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.5.0">version 3.5.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>
@@ -180,7 +180,7 @@
 <dependency>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.4.0</version>
+    <version>3.5.0</version>
 </dependency>]]></source>
             </p>
 
@@ -219,6 +219,7 @@
                     <li>htmx 1.8.4: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/HtmxTest1x8x4.java">here</a>)</li>
                     <li>htmx 1.9.2: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/HtmxTest1x9x2.java">here</a>)</li>
                     <li>htmx 1.9.3: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/HtmxTest1x9x3.java">here</a>)</li>
+                    <li>htmx 1.9.4: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/HtmxTest1x9x4.java">here</a>)</li>
                     <li>jQuery 1.11.3: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/JQuery1x11x3Test.java">here</a>)</li>
                     <li>jQuery 1.8.2: Full support (see unit test <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/JQuery182Test.java">here</a>)</li>
                     <li>MochiKit 1.4.1: Full support (see unit tests <a href="https://github.com/HtmlUnit/htmlunit/blob/master/src/test/java/org/htmlunit/libraries/MochiKitTest.java">here</a>)</li>
