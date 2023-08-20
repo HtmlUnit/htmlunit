@@ -169,12 +169,28 @@ public class WebClientOptions implements Serializable {
     public void setSSLClientCertificate(final InputStream certificateInputStream, final String certificatePassword,
             final String certificateType) {
         try {
-            sslClientCertificateStore_ = getKeyStore(certificateInputStream, certificatePassword, certificateType);
-            sslClientCertificatePassword_ = certificatePassword == null ? null : certificatePassword.toCharArray();
+            setSSLClientCertificateKeyStore(
+                    getKeyStore(certificateInputStream, certificatePassword, certificateType),
+                    certificatePassword.toCharArray());
         }
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
+    }
+    /**
+     * Sets the SSL client certificate keystore to use.
+     * <p>
+     * If the web server requires Renegotiation, you have to set system property
+     * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
+     * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
+     * TLS Renegotiation Issue</a>.
+     *
+     * @param keyStore {@link KeyStore} to use
+     * @param keyStorePassword the keystore password
+     */
+    public void setSSLClientCertificateKeyStore(final KeyStore keyStore, final char[] keyStorePassword) {
+        sslClientCertificateStore_ = keyStore;
+        sslClientCertificatePassword_ = keyStorePassword == null ? null : keyStorePassword;
     }
 
     /**
@@ -199,10 +215,6 @@ public class WebClientOptions implements Serializable {
         catch (final Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    void setSSLClientCertificateStore(final KeyStore keyStore) {
-        sslClientCertificateStore_ = keyStore;
     }
 
     /**

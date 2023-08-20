@@ -7,6 +7,13 @@
     </properties>
 
     <body>
+        <release version="3.6.0" date="September xx, 2023" description="Bugfixes">
+            <action type="add" dev="rbri" issue="623">
+                Method WebClientOptions.setSSLClientCertificateKeyStore(KeyStore, char[]) added.
+            </action>
+        </release>
+
+
         <release version="3.5.0" date="August 20, 2023" description="Proxy support, Android compatibility, Chrome/Edge 115, Firefox 115, htmx 1.9.4, Bugfixes">
             <action type="remove" dev="rbri">
                 INCOMPATIBLE CHANGE: Class org.htmlunit.html.DomTreeWalker removed;

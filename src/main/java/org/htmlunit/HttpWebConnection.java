@@ -677,7 +677,8 @@ public class HttpWebConnection implements WebConnection {
         builder.setSSLSocketFactory(socketFactory);
 
         usedOptions_.setUseInsecureSSL(options.isUseInsecureSSL());
-        usedOptions_.setSSLClientCertificateStore(options.getSSLClientCertificateStore());
+        usedOptions_.setSSLClientCertificateKeyStore(options.getSSLClientCertificateStore(),
+                        options.getSSLClientCertificatePassword());
         usedOptions_.setSSLTrustStore(options.getSSLTrustStore());
         usedOptions_.setSSLClientCipherSuites(options.getSSLClientCipherSuites());
         usedOptions_.setSSLClientProtocols(options.getSSLClientProtocols());
