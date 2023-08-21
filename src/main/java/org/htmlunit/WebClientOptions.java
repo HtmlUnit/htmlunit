@@ -161,6 +161,10 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * <p>
+     * In some cases the impl seems to pick old certificats from the KeyStore. To avoid
+     * that, wrap your keystore inside your own KeyStore impl and filter out outdated
+     * certificates. Provide the Keystore to the options instead of the input stream.
      *
      * @param certificateInputStream the input stream which represents the certificate
      * @param certificatePassword the certificate password
@@ -185,6 +189,10 @@ public class WebClientOptions implements Serializable {
      * "sun.security.ssl.allowUnsafeRenegotiation" to true, as hinted in
      * <a href="http://www.oracle.com/technetwork/java/javase/documentation/tlsreadme2-176330.html">
      * TLS Renegotiation Issue</a>.
+     * <p>
+     * In some cases the impl seems to pick old certificats from the KeyStore. To avoid
+     * that, wrap your keystore inside your own KeyStore impl and filter out outdated
+     * certificates.
      *
      * @param keyStore {@link KeyStore} to use
      * @param keyStorePassword the keystore password
