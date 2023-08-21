@@ -2271,7 +2271,23 @@ public class WebClient implements Serializable, AutoCloseable {
     public void close() {
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
-        final List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
+        List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
+        for (final TopLevelWindow topWindow : topWindows) {
+            if (topLevelWindows_.contains(topWindow)) {
+                try {
+                    topWindow.close(true);
+                }
+                catch (final Exception e) {
+                    LOG.error("Exception while closing a topLevelWindow", e);
+                }
+            }
+        }
+
+        if (scriptEngine_ != null) {
+            scriptEngine_.prepareShutdown();
+        }
+
+        topWindows = new ArrayList<>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
                 try {

@@ -763,6 +763,14 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void prepareShutdown() {
+        webClient_ = null;
+    }
+
+    /**
      * Shutdown the JavaScriptEngine.
      */
     @Override

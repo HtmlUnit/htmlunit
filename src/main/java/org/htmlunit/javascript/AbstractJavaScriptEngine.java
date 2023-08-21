@@ -101,6 +101,11 @@ public interface AbstractJavaScriptEngine<SCRIPT> {
     long getJavaScriptTimeout();
 
     /**
+     * Disable starting of new js threads.
+     */
+    void prepareShutdown();
+
+    /**
      * Shutdown the JavaScriptEngine.
      */
     void shutdown();
