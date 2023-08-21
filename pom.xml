@@ -43,7 +43,7 @@
         <pmd.version>6.50.0</pmd.version>
         <junit.version>4.13.2</junit.version>
         <archunit.version>1.1.0</archunit.version>
-        <dependencycheck.version>8.3.1</dependencycheck.version>
+        <dependencycheck.version>8.4.0</dependencycheck.version>
     </properties>
 
     <build>
