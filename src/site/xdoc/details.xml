@@ -133,7 +133,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             </p>
         </section>
 
-        <section name="Attachments" id="attachments">
+        <section name="File download and Attachments" id="attachments">
             <p>
                 Normally pages are loaded inline: clicking on
                 a link, for example, loads the linked page in the current window. Attached pages are different
@@ -149,6 +149,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 above to not apply, and attachments are loaded inline. By default, <tt>AttachmentHandler</tt>s
                 are not registered with new <tt>WebClient</tt> instances.
             </p>
+            Please find more details and samples in the <a href="filedownload-howto.html">File download</a> section.
         </section>
 
         <section name="Content blocking" id="content_blocking">
@@ -323,5 +324,22 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 ]]></source>
             </subsection>
         </section>
+
+        <section name="Client side certificates" id="client-certificates">
+            <p>
+                HtmlUnit optionally provides support for using client side certificates. You can use different way to provide
+                the certificates
+                <ul>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificate-java.io.InputStream-java.lang.String-java.lang.String-'>WebClientOptions.setSSLClientCertificate(InputStream, String, String)</a></li>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCertificate-java.net.URL-java.lang.String-java.lang.String-'>WebClientOptions.setSSLClientCertificate(URL certificateUrl, String certificatePassword, String certificateType)</a></li>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientCipherSuites-java.lang.String...-'>WebClientOptions.setSSLClientCipherSuites(String... sslClientCipherSuites)</a></li>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLClientProtocols-java.lang.String...-'>WebClientOptions.setSSLClientProtocols(String... sslClientProtocols)</a></li>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLInsecureProtocol-java.lang.String-'>WebClientOptions.setSSLInsecureProtocol(String sslInsecureProtocol)</a></li>
+                  <li><a href='/apidocs/org/htmlunit/WebClientOptions.html#setSSLTrustStore-java.net.URL-java.lang.String-java.lang.String-'>WebClientOptions.setSSLTrustStore(URL sslTrustStoreUrl, String sslTrustStorePassword, String sslTrustStoreType)</a></li>
+                </ul>
+                Please have a look at the javadoc for more details.
+            </p>
+        </section>
+
     </body>
 </document>
