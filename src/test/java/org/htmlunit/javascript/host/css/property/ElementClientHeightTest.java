@@ -1292,12 +1292,11 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20",
-            FF = "0",
+            FF = "18",
             FF_ESR = "0",
             IE = "0")
     @HtmlUnitNYI(CHROME = "18",
             EDGE = "18",
-            FF = "18",
             FF_ESR = "18",
             IE = "18")
     public void optgroup() throws Exception {
@@ -1457,8 +1456,11 @@ public class ElementClientHeightTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "0",
-            FF = "9")
-    @HtmlUnitNYI(FF = "0", IE = "18")
+            FF = "9",
+            FF_ESR = "9")
+    @HtmlUnitNYI(FF = "0",
+            FF_ESR = "0",
+            IE = "18")
     public void rtc() throws Exception {
         loadPageVerifyTitle2(test("rtc"));
     }

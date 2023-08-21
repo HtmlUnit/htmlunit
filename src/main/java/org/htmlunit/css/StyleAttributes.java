@@ -358,14 +358,14 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code border}. */
         BORDER("border", "border", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderBlock}. */
         BORDER_BLOCK("borderBlock", "border-block", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-block}. */
-        BORDER_BLOCK_("border-block", "border-block", ff("0px none rgb(0, 0, 0)")),
+        BORDER_BLOCK_("border-block", "border-block", ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderBlockColor}. */
         BORDER_BLOCK_COLOR("borderBlockColor", "border-block-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -377,11 +377,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderBlockEnd}. */
         BORDER_BLOCK_END("borderBlockEnd", "border-block-end", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-block-end}. */
         BORDER_BLOCK_END_("border-block-end", "border-block-end",
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderBlockEndColor}. */
         BORDER_BLOCK_END_COLOR("borderBlockEndColor", "border-block-end-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -407,11 +407,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderBlockStart}. */
         BORDER_BLOCK_START("borderBlockStart", "border-block-start", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-block-start}. */
         BORDER_BLOCK_START_("border-block-start", "border-block-start",
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderBlockStartColor}. */
         BORDER_BLOCK_START_COLOR("borderBlockStartColor", "border-block-start-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -455,10 +455,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderBottom}. */
         BORDER_BOTTOM("borderBottom", "border-bottom", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-bottom}. */
-        BORDER_BOTTOM_("border-bottom", "border-bottom", ff("0px none rgb(0, 0, 0)")),
+        BORDER_BOTTOM_("border-bottom", "border-bottom", ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderBottomColor}. */
         BORDER_BOTTOM_COLOR("borderBottomColor", "border-bottom-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -520,10 +520,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderImage}. */
         BORDER_IMAGE("borderImage", "border-image", ie(""), chromeAndEdgeNone(),
-                ff("none 100% / 1 / 0 stretch")),
+                ffEsr("none 100% / 1 / 0 stretch"), ffLatest("none")),
 
         /** The style property {@code border-image}. */
-        BORDER_IMAGE_("border-image", "border-image", ff("none 100% / 1 / 0 stretch")),
+        BORDER_IMAGE_("border-image", "border-image", ffEsr("none 100% / 1 / 0 stretch"), ffLatest("none")),
 
         /** The style property {@code borderImageOutset}. */
         BORDER_IMAGE_OUTSET("borderImageOutset", "border-image-outset", ie("0"), chromeAndEdge("0"),
@@ -563,10 +563,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderInline}. */
         BORDER_INLINE("borderInline", "border-inline", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-inline}. */
-        BORDER_INLINE_("border-inline", "border-inline", ff("0px none rgb(0, 0, 0)")),
+        BORDER_INLINE_("border-inline", "border-inline", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderInlineColor}. */
         BORDER_INLINE_COLOR("borderInlineColor", "border-inline-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -578,10 +579,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderInlineEnd}. */
         BORDER_INLINE_END("borderInlineEnd", "border-inline-end", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-inline-end}. */
-        BORDER_INLINE_END_("border-inline-end", "border-inline-end", ff("0px none rgb(0, 0, 0)")),
+        BORDER_INLINE_END_("border-inline-end", "border-inline-end", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderInlineEndColor}. */
         BORDER_INLINE_END_COLOR("borderInlineEndColor", "border-inline-end-color", chromeAndEdge("rgb(0, 0, 0)"),
@@ -609,11 +611,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderInlineStart}. */
         BORDER_INLINE_START("borderInlineStart", "border-inline-start", chromeAndEdge("0px none rgb(0, 0, 0)"),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-inline-start}. */
         BORDER_INLINE_START_("border-inline-start", "border-inline-start",
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderInlineStartColor}. */
         BORDER_INLINE_START_COLOR("borderInlineStartColor", "border-inline-start-color",
@@ -656,10 +658,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderLeft}. */
         BORDER_LEFT("borderLeft", "border-left", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-left}. */
-        BORDER_LEFT_("border-left", "border-left", ff("0px none rgb(0, 0, 0)")),
+        BORDER_LEFT_("border-left", "border-left", ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderLeftColor}. */
         BORDER_LEFT_COLOR("borderLeftColor", "border-left-color", chromeAndEdge("rgb(0, 0, 0)"), ff("rgb(0, 0, 0)"),
@@ -689,10 +691,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderRight}. */
         BORDER_RIGHT("borderRight", "border-right", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-right}. */
-        BORDER_RIGHT_("border-right", "border-right", ff("0px none rgb(0, 0, 0)")),
+        BORDER_RIGHT_("border-right", "border-right", ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderRightColor}. */
         BORDER_RIGHT_COLOR("borderRightColor", "border-right-color", chromeAndEdge("rgb(0, 0, 0)"), ff(""), ie("")),
@@ -740,10 +742,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code borderTop}. */
         BORDER_TOP("borderTop", "border-top", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ff("0px none rgb(0, 0, 0)")),
+                ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code border-top}. */
-        BORDER_TOP_("border-top", "border-top", ff("0px none rgb(0, 0, 0)")),
+        BORDER_TOP_("border-top", "border-top", ffEsr("0px none rgb(0, 0, 0)"), ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code borderTopColor}. */
         BORDER_TOP_COLOR("borderTopColor", "border-top-color", chromeAndEdge("rgb(0, 0, 0)"), ff(""), ie("")),
@@ -1125,10 +1127,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code flexFlow}. */
         FLEX_FLOW("flexFlow", "flex-flow", ie("row nowrap"), chromeAndEdge("row nowrap"),
-                ff("row nowrap")),
+                ffEsr("row nowrap"), ffLatest("row")),
 
         /** The style property {@code flex-flow}. */
-        FLEX_FLOW_("flex-flow", "flex-flow", ff("row nowrap")),
+        FLEX_FLOW_("flex-flow", "flex-flow", ffEsr("row nowrap"), ffLatest("row")),
 
         /** The style property {@code flexGrow}. */
         FLEX_GROW("flexGrow", "flex-grow", ff("0"), ie("0"), chromeAndEdge("0")),
@@ -1943,10 +1945,12 @@ public final class StyleAttributes implements Serializable {
                 ffNotIterable("none")),
 
         /** The style property {@code MozBorderEnd}. */
-        MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ff("0px none rgb(0, 0, 0)")),
+        MOZ_BORDER_END("MozBorderEnd", "-moz-border-end", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code -moz-border-end}. */
-        MOZ_BORDER_END__("-moz-border-end", "-moz-border-end", ff("0px none rgb(0, 0, 0)")),
+        MOZ_BORDER_END__("-moz-border-end", "-moz-border-end", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code MozBorderEndColor}. */
         MOZ_BORDER_END_COLOR("MozBorderEndColor", "-moz-border-end-color", ff("rgb(0, 0, 0)")),
@@ -1967,10 +1971,12 @@ public final class StyleAttributes implements Serializable {
         MOZ_BORDER_END_WIDTH__("-moz-border-end-width", "-moz-border-end-width", ff("0px")),
 
         /** The style property {@code MozBorderImage}. */
-        MOZ_BORDER_IMAGE("MozBorderImage", "-moz-border-image", ff("none 100% / 1 / 0 stretch")),
+        MOZ_BORDER_IMAGE("MozBorderImage", "-moz-border-image", ffEsr("none 100% / 1 / 0 stretch"),
+                ffLatest("none")),
 
         /** The style property {@code -moz-border-image}. */
-        MOZ_BORDER_IMAGE__("-moz-border-image", "-moz-border-image", ff("none 100% / 1 / 0 stretch")),
+        MOZ_BORDER_IMAGE__("-moz-border-image", "-moz-border-image", ffEsr("none 100% / 1 / 0 stretch"),
+                ffLatest("none")),
 
         /** The style property {@code MozBorderLeftColors}. */
         MOZ_BORDER_LEFT_COLORS("MozBorderLeftColors", "-moz-border-left-colors",
@@ -2004,10 +2010,12 @@ public final class StyleAttributes implements Serializable {
                 ffNotIterable("none")),
 
         /** The style property {@code MozBorderStart}. */
-        MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ff("0px none rgb(0, 0, 0)")),
+        MOZ_BORDER_START("MozBorderStart", "-moz-border-start", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code -moz-border-start}. */
-        MOZ_BORDER_START__("-moz-border-start", "-moz-border-start", ff("0px none rgb(0, 0, 0)")),
+        MOZ_BORDER_START__("-moz-border-start", "-moz-border-start", ffEsr("0px none rgb(0, 0, 0)"),
+                ffLatest("0px rgb(0, 0, 0)")),
 
         /** The style property {@code MozBorderStartColor}. */
         MOZ_BORDER_START_COLOR("MozBorderStartColor", "-moz-border-start-color", ff("rgb(0, 0, 0)")),
@@ -3875,15 +3883,15 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitBorderImage}. */
         WEBKIT_BORDER_IMAGE("webkitBorderImage", "webkit-border-image", chromeAndEdgeNone(),
-                ff("none 100% / 1 / 0 stretch")),
+                ffEsr("none 100% / 1 / 0 stretch"), ffLatest("none")),
 
         /** The style property {@code WebkitBorderImage}. */
         WEBKIT_BORDER_IMAGE_("WebkitBorderImage", "webkit-border-image",
-                ff("none 100% / 1 / 0 stretch")),
+                ffEsr("none 100% / 1 / 0 stretch"), ffLatest("none")),
 
         /** The style property {@code -webkit-border-image}. */
         WEBKIT_BORDER_IMAGE__("-webkit-border-image", "webkit-border-image",
-                ff("none 100% / 1 / 0 stretch")),
+                ffEsr("none 100% / 1 / 0 stretch"), ffLatest("none")),
 
         /** The style property {@code webkitBorderRadius}. */
         WEBKIT_BORDER_RADIUS("webkitBorderRadius", "webkit-border-radius", chromeAndEdge("0px"), ff("0px")),
@@ -4099,13 +4107,15 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code webkitFlexFlow}. */
         WEBKIT_FLEX_FLOW("webkitFlexFlow", "webkit-flex-flow", chromeAndEdge("row nowrap"),
-                ff("row nowrap")),
+                ffEsr("row nowrap"), ffLatest("row")),
 
         /** The style property {@code WebkitFlexFlow}. */
-        WEBKIT_FLEX_FLOW_("WebkitFlexFlow", "webkit-flex-flow", ff("row nowrap")),
+        WEBKIT_FLEX_FLOW_("WebkitFlexFlow", "webkit-flex-flow", ffEsr("row nowrap"),
+                ffLatest("row")),
 
         /** The style property {@code -webkit-flex-flow}. */
-        WEBKIT_FLEX_FLOW__("-webkit-flex-flow", "webkit-flex-flow", ff("row nowrap")),
+        WEBKIT_FLEX_FLOW__("-webkit-flex-flow", "webkit-flex-flow", ffEsr("row nowrap"),
+                ffLatest("row")),
 
         /** The style property {@code webkitFlexGrow}. */
         WEBKIT_FLEX_GROW("webkitFlexGrow", "webkit-flex-grow", chromeAndEdge("0"), ff("0")),

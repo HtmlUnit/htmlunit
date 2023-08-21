@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.6.0" date="September xx, 2023" description="Bugfixes">
+        <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Bugfixes">
+            <action type="update" dev="rbri">
+                FF 116 now supports css page rules.
+            </action>
             <action type="add" dev="rbri" issue="623">
                 Method WebClientOptions.setSSLClientCertificateKeyStore(KeyStore, char[]) added.
             </action>

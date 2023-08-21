@@ -67,6 +67,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     CSS_BACKGROUND_RGBA,
 
+    /** {@code CSSFontFaceRule.cssText} uses one more blank. */
+    @BrowserFeature(FF)
+    CSS_CSSTEXT_FF_STYLE,
+
     /** {@code CSSFontFaceRule.cssText} uses {@code \n\t} to break lines. */
     @BrowserFeature(IE)
     CSS_CSSTEXT_IE_STYLE,

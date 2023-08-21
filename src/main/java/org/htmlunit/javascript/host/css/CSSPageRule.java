@@ -14,6 +14,7 @@
  */
 package org.htmlunit.javascript.host.css;
 
+import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_FF_STYLE;
 import static org.htmlunit.BrowserVersionFeatures.CSS_CSSTEXT_IE_STYLE;
 import static org.htmlunit.BrowserVersionFeatures.JS_PAGERULE_SELECTORTEXT_EMPTY;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -73,7 +74,7 @@ public class CSSPageRule extends CSSRule {
      * Returns the textual representation of the selector for the rule set.
      * @return the textual representation of the selector for the rule set
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter({CHROME, EDGE, FF, IE})
     public String getSelectorText() {
         if (getBrowserVersion().hasFeature(JS_PAGERULE_SELECTORTEXT_EMPTY)) {
             return "";
@@ -90,7 +91,7 @@ public class CSSPageRule extends CSSRule {
      * Sets the textual representation of the selector for the rule set.
      * @param selectorText the textual representation of the selector for the rule set
      */
-    @JsxSetter({CHROME, EDGE})
+    @JsxSetter({CHROME, EDGE, FF})
     public void setSelectorText(final String selectorText) {
         try {
             getPageRule().setSelectorText(selectorText);
@@ -130,6 +131,10 @@ public class CSSPageRule extends CSSRule {
             cssText = StringUtils.replace(cssText, " { ", "  {\n\t");
             cssText = StringUtils.replace(cssText, "; }", ";\n}");
         }
+        else if (browserVersion.hasFeature(CSS_CSSTEXT_FF_STYLE)) {
+            cssText = StringUtils.replace(cssText, "@page {", "@page  {");
+        }
+
         return cssText;
     }
 }
