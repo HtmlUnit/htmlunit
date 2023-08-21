@@ -181,7 +181,7 @@ public abstract class WebDriverTestCase extends WebTestCase {
     /**
      * HtmlSniped to insert text area used for logging.
      */
-    public static final String LOG_TEXTAREA = "  <textarea id='myLog' cols='80' rows='42'></textarea>\n";
+    public static final String LOG_TEXTAREA = "  <textarea id='myLog' cols='80' rows='22'></textarea>\n";
 
     /**
      * The system property for automatically fixing the test case expectations.
