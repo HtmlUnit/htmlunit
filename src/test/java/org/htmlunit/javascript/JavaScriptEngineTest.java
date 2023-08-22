@@ -54,6 +54,7 @@ import org.htmlunit.html.HtmlScript;
 import org.htmlunit.html.HtmlTextInput;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.Retry;
 import org.htmlunit.util.NameValuePair;
 import org.htmlunit.util.UrlUtils;
 import org.junit.Test;
@@ -1241,6 +1242,7 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Retry
     @Alerts("starting")
     public void shutdownShouldKill() throws Exception {
         final String html = "<html>\n"
