@@ -2260,9 +2260,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverButtonDisabled() throws Exception {
         mouseOver("<input id='tester' type='button' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -2280,9 +2279,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverSubmitDisabled() throws Exception {
         mouseOver("<input id='tester' type='submit' onmouseover='dumpEvent(event);' disabled >");
     }
@@ -2300,9 +2298,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverResetDisabled() throws Exception {
         mouseOver("<input id='tester' type='reset' onmouseover='dumpEvent(event);' disabled >");
     }
@@ -2320,9 +2317,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverTextDisabled() throws Exception {
         mouseOver("<input id='tester' type='text' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -2340,9 +2336,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverPasswordDisabled() throws Exception {
         mouseOver("<input id='tester' type='password' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -2360,9 +2355,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverFileDisabled() throws Exception {
         mouseOver("<input id='tester' type='file' onmouseover='dumpEvent(event);' disabled >");
     }
@@ -2380,9 +2374,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverCheckboxDisabled() throws Exception {
         mouseOver("<input id='tester' type='checkbox' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }
@@ -2400,9 +2393,8 @@ public class HTMLInputElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF = "mouse over [tester]",
-            FF_ESR = "mouse over [tester]")
+    @Alerts(DEFAULT = "mouse over [tester]",
+            IE = "")
     public void mouseOverRadioDisabled() throws Exception {
         mouseOver("<input id='tester' type='radio' onmouseover='dumpEvent(event);' value='HtmlUnit' disabled >");
     }

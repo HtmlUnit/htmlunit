@@ -366,9 +366,8 @@ public class HTMLButtonElementTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "Test:",
-            FF = "Test:mouse over [disabledBtn]",
-            FF_ESR = "Test:mouse over [disabledBtn]")
+    @Alerts(DEFAULT = "Test:mouse over [disabledBtn]",
+            IE = "Test:")
     public void mouseOverDiabled() throws Exception {
         final String html =
             HtmlPageTest.STANDARDS_MODE_PREFIX_

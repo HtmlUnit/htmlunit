@@ -1204,9 +1204,9 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "Outer = <p id=\"myNode\">New  cell value\n"
-                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"42\"></textarea>\n\n</p>",
+                    + "  <textarea id=\"myLog\" cols=\"80\" rows=\"22\"></textarea>\n\n</p>",
             IE = "Outer = <p id=\"myNode\">New  cell value\n"
-                    + "  <textarea id=\"myLog\" rows=\"42\" cols=\"80\"></textarea>\n\n")
+                    + "  <textarea id=\"myLog\" rows=\"22\" cols=\"80\"></textarea>\n\n")
     @NotYetImplemented
     public void getOuterHTMLFromUnclosedParagraph() throws Exception {
         final String html = createPageForGetOuterHTML("p", "New  cell value", true);
