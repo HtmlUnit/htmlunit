@@ -168,7 +168,7 @@ public class DomNodeIterator implements NodeIterator {
                 }
             }
         }
-        while (node != null && (!(isNodeVisible(node)) || !isAccepted(node)));
+        while (node != null && (!isNodeVisible(node) || !isAccepted(node)));
 
         //apply filter here and loop
 
