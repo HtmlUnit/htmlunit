@@ -279,8 +279,10 @@ objectFit
 objectPosition
 objectViewBox
 offset
+offsetAnchor
 offsetDistance
 offsetPath
+offsetPosition
 offsetRotate
 opacity
 order
@@ -418,6 +420,7 @@ textTransform
 textUnderlineOffset
 textUnderlinePosition
 textWrap
+timelineScope
 top
 touchAction
 transform
