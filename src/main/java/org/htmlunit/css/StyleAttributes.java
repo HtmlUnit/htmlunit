@@ -2591,7 +2591,7 @@ public final class StyleAttributes implements Serializable {
         OFFSET("offset", "offset", chromeAndEdge("none 0px auto 0deg"), ff("none")),
 
         /** The style property {@code offsetAnchor}. */
-        OFFSET_ANCHOR("offsetAnchor", "offset-anchor", ff("auto")),
+        OFFSET_ANCHOR("offsetAnchor", "offset-anchor", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code offset-anchor}. */
         OFFSET_ANCHOR_("offset-anchor", "offset-anchor", ff("auto")),
@@ -2607,6 +2607,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code offset-path}. */
         OFFSET_PATH_("offset-path", "offset-path", ffNone()),
+
+        /** The style property {@code offset-position}. */
+        OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeAuto()),
 
         /** The style property {@code offsetRotate}. */
         OFFSET_ROTATE("offsetRotate", "offset-rotate", chromeAndEdge("auto 0deg"), ff("auto")),
@@ -3518,6 +3521,9 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textWrap}. */
         TEXT_WRAP("textWrap", "text-wrap", chromeAndEdge("wrap")),
+
+        /** The style property {@code timelineScope}. */
+        TIMELINE_SCOPE("timelineScope", "timeline-scope", chromeAndEdgeNone()),
 
         /** The style property {@code top}. */
         TOP("top", "top", ff("auto"), ie("auto"), chromeAndEdgeAuto()),
