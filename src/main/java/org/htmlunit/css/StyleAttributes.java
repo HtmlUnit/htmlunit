@@ -2608,7 +2608,7 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code offset-path}. */
         OFFSET_PATH_("offset-path", "offset-path", ffNone()),
 
-        /** The style property {@code offset-position}. */
+        /** The style property {@code offsetPosition}. */
         OFFSET_POSITION("offsetPosition", "offset-position", chromeAndEdgeAuto()),
 
         /** The style property {@code offsetRotate}. */

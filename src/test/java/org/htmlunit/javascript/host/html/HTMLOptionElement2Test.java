@@ -1525,9 +1525,7 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "o-mouse over [option1]",
-            FF = "o-mouse over [option1] s-mouse over [option1]",
-            FF_ESR = "o-mouse over [option1] s-mouse over [option1]",
+    @Alerts(DEFAULT = "o-mouse over [option1] s-mouse over [option1]",
             IE = "")
     public void mouseOverDisabledSelect() throws Exception {
         shutDownAll();
@@ -1581,9 +1579,10 @@ public class HTMLOptionElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
+    @Alerts(DEFAULT = "o-mouse over [option1] s-mouse over [option1]",
             FF = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
-            FF_ESR = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]")
+            FF_ESR = "s-mouse over [select1] o-mouse over [option1] s-mouse over [option1]",
+            IE = "")
     public void mouseOverDisabledOption() throws Exception {
         shutDownAll();
 

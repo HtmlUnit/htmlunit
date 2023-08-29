@@ -15,6 +15,7 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.CSS_DISPLAY_BLOCK2;
+import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONCLICK_FOR_SELECT_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_FOR_SELECT_OPTION_TRIGGERS_ADDITIONAL_DOWN_FOR_SELECT;
 import static org.htmlunit.BrowserVersionFeatures.EVENT_ONMOUSEDOWN_NOT_FOR_SELECT_OPTION;
@@ -434,7 +435,7 @@ public class HtmlOption extends HtmlElement implements DisabledElement {
     @Override
     public boolean handles(final Event event) {
         if (MouseEvent.TYPE_MOUSE_OVER.equals(event.getType())
-                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_ONMOUSEOVER_FOR_DISABLED_OPTION)) {
+                && getPage().getWebClient().getBrowserVersion().hasFeature(EVENT_MOUSE_ON_DISABLED)) {
             return true;
         }
         return super.handles(event);
