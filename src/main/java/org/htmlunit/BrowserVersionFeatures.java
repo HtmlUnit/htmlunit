@@ -172,7 +172,7 @@ public enum BrowserVersionFeatures {
     EVENT_HANDLER_NULL_RETURN_IS_MEANINGFUL,
 
     /** Mouse events are triggered on disabled elements also. */
-    @BrowserFeature({FF, FF_ESR})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     EVENT_MOUSE_ON_DISABLED,
 
     /** <code>AnimationEvent</code> can not be created by calling document.createEvent('AnimationEvent'). */
