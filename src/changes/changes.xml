@@ -8,6 +8,15 @@
 
     <body>
         <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, Bugfixes">
+            <action type="add" dev="rbri">
+                core-js: bunch of improvements for the Proxy support.
+            </action>
+            <action type="add" dev="rbri">
+                core-js: Array.of has to use defineOwnProperty instead of set.
+            </action>
+            <action type="add" dev="RhinoTeam">
+                core-js: Improved unicode support for the js source parser.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.52.v20230823.
             </action>
