@@ -2269,6 +2269,11 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     @Override
     public void close() {
+        // avoid attaching new windows to the js engine
+        if (scriptEngine_ != null) {
+            scriptEngine_.prepareShutdown();
+        }
+
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
         List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
@@ -2283,10 +2288,8 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
-        if (scriptEngine_ != null) {
-            scriptEngine_.prepareShutdown();
-        }
-
+        // second round, none of the remaining windows should be registered to
+        // the js engine because of prepareShutdown()
         topWindows = new ArrayList<>(topLevelWindows_);
         for (final TopLevelWindow topWindow : topWindows) {
             if (topLevelWindows_.contains(topWindow)) {
@@ -2299,8 +2302,11 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
-        // do this after closing the windows, otherwise some unload event might
-        // start a new window that will start the thread again
+        if (topLevelWindows_.size() > 0) {
+            LOG.error("Sill " + topLevelWindows_.size() + " windows are open. Please repot this error");
+            topLevelWindows_.clear();
+        }
+
         ThreadDeath toThrow = null;
         if (scriptEngine_ != null) {
             try {
@@ -2314,6 +2320,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 LOG.error("Exception while shutdown the scriptEngine", e);
             }
         }
+        scriptEngine_ = null;
 
         try {
             webConnection_.close();
@@ -2321,6 +2328,7 @@ public class WebClient implements Serializable, AutoCloseable {
         catch (final Exception e) {
             LOG.error("Exception while closing the connection", e);
         }
+        webConnection_ = null;
 
         synchronized (this) {
             if (executor_ != null) {
@@ -2332,6 +2340,7 @@ public class WebClient implements Serializable, AutoCloseable {
                 }
             }
         }
+        executor_ = null;
 
         cache_.clear();
         if (toThrow != null) {

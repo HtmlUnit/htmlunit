@@ -115,12 +115,13 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     private static final Log LOG = LogFactory.getLog(JavaScriptEngine.class);
 
     private WebClient webClient_;
-    private final HtmlUnitContextFactory contextFactory_;
-    private final JavaScriptConfiguration jsConfig_;
+    private HtmlUnitContextFactory contextFactory_;
+    private JavaScriptConfiguration jsConfig_;
 
     private transient ThreadLocal<Boolean> javaScriptRunning_;
     private transient ThreadLocal<List<PostponedAction>> postponedActions_;
     private transient boolean holdPostponedActions_;
+    private transient boolean shutdownPending_;
 
     /** The JavaScriptExecutor corresponding to all windows of this Web client */
     private transient JavaScriptExecutor javaScriptExecutor_;
@@ -180,6 +181,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     @Override
     public void initialize(final WebWindow webWindow, final Page page) {
         WebAssert.notNull("webWindow", webWindow);
+
+        if (shutdownPending_) {
+            return;
+        }
 
         getContextFactory().call(cx -> {
             try {
@@ -753,6 +758,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public synchronized void registerWindowAndMaybeStartEventLoop(final WebWindow webWindow) {
+        if (shutdownPending_) {
+            return;
+        }
+
         final WebClient webClient = getWebClient();
         if (webClient != null) {
             if (javaScriptExecutor_ == null) {
@@ -767,7 +776,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public void prepareShutdown() {
-        webClient_ = null;
+        shutdownPending_ = true;
     }
 
     /**
@@ -776,6 +785,9 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
     @Override
     public void shutdown() {
         webClient_ = null;
+        contextFactory_ = null;
+        jsConfig_ = null;
+
         if (javaScriptExecutor_ != null) {
             javaScriptExecutor_.shutdown();
             javaScriptExecutor_ = null;
@@ -914,7 +926,6 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     public Object callFunction(final HtmlPage page, final Function function,
             final Scriptable scope, final Scriptable thisObject, final Object[] args) {
-
         final HtmlUnitContextAction action = new HtmlUnitContextAction(scope, page) {
             @Override
             public Object doRun(final Context cx) {
@@ -1065,6 +1076,10 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
      */
     @Override
     public void addPostponedAction(final PostponedAction action) {
+        if (shutdownPending_) {
+            return;
+        }
+
         List<PostponedAction> actions = postponedActions_.get();
         if (actions == null) {
             actions = new ArrayList<>();
@@ -1166,6 +1181,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
         javaScriptRunning_ = new ThreadLocal<>();
         postponedActions_ = new ThreadLocal<>();
         holdPostponedActions_ = false;
+        shutdownPending_ = false;
     }
 
     /**
