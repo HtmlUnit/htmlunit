@@ -2396,8 +2396,9 @@ public class WebClientTest extends SimpleWebTestCase {
 
         client.close();
 
-        assertEquals(1, client.getWebWindows().size());
-        assertEquals(1, client.getTopLevelWindows().size());
+        assertEquals(0, client.getWebWindows().size());
+        assertEquals(0, client.getTopLevelWindows().size());
+        assertNull(client.getCurrentWindow());
     }
 
     /**
@@ -2488,9 +2489,12 @@ public class WebClientTest extends SimpleWebTestCase {
 
         // close and verify that the WebClient is clean
         webClient.close();
-        assertEquals(1, webClient.getWebWindows().size());
-        nbJSThreads = getJavaScriptThreads().size();
 
+        assertEquals(0, webClient.getWebWindows().size());
+        assertEquals(0, webClient.getTopLevelWindows().size());
+        assertNull(webClient.getCurrentWindow());
+
+        nbJSThreads = getJavaScriptThreads().size();
         assertEquals(initialJSThreads, nbJSThreads);
     }
 
