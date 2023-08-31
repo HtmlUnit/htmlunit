@@ -2279,8 +2279,8 @@ public class WebClient implements Serializable, AutoCloseable {
         // window available
         webWindowListeners_.removeIf(listener -> listener instanceof CurrentWindowTracker);
 
-        // NB: this implementation is too simple as a new TopLevelWindow may be opened by
-        // some JS script while we are closing the others
+        // Hint: a new TopLevelWindow may be opened by some JS script while we are closing the others
+        // but the prepareShutdown() call will prevent the new window form getting js support
         List<WebWindow> windows = new ArrayList<>(windows_);
         for (final WebWindow window : windows) {
             if (window instanceof TopLevelWindow) {
@@ -2333,6 +2333,7 @@ public class WebClient implements Serializable, AutoCloseable {
             }
         }
 
+        // now both lists have to be empty
         if (topLevelWindows_.size() > 0) {
             LOG.error("Sill " + topLevelWindows_.size() + " top level windows are open. Please repot this error");
             topLevelWindows_.clear();
@@ -2342,6 +2343,7 @@ public class WebClient implements Serializable, AutoCloseable {
             LOG.error("Sill " + windows_.size() + " windows are open. Please repot this error");
             windows_.clear();
         }
+        currentWindow_ = null;
 
         ThreadDeath toThrow = null;
         if (scriptEngine_ != null) {
