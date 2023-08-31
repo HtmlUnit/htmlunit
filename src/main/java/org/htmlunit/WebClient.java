@@ -2274,37 +2274,73 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_.prepareShutdown();
         }
 
+        // remove the CurrentWindowTracker from the list of windowListener
+        // because the CurrentWindowTracker makes sure there is still one
+        // window available
+        webWindowListeners_.removeIf(listener -> listener instanceof CurrentWindowTracker);
+
         // NB: this implementation is too simple as a new TopLevelWindow may be opened by
         // some JS script while we are closing the others
-        List<TopLevelWindow> topWindows = new ArrayList<>(topLevelWindows_);
-        for (final TopLevelWindow topWindow : topWindows) {
-            if (topLevelWindows_.contains(topWindow)) {
+        List<WebWindow> windows = new ArrayList<>(windows_);
+        for (final WebWindow window : windows) {
+            if (window instanceof TopLevelWindow) {
+                final TopLevelWindow topLevelWindow = (TopLevelWindow) window;
+
                 try {
-                    topWindow.close(true);
+                    topLevelWindow.close(true);
+                    topLevelWindows_.remove(topLevelWindow);
                 }
                 catch (final Exception e) {
-                    LOG.error("Exception while closing a topLevelWindow", e);
+                    LOG.error("Exception while closing a TopLevelWindow", e);
+                }
+            }
+            else if (window instanceof DialogWindow) {
+                final DialogWindow dialogWindow = (DialogWindow) window;
+
+                try {
+                    dialogWindow.close();
+                }
+                catch (final Exception e) {
+                    LOG.error("Exception while closing a DialogWindow", e);
                 }
             }
         }
 
         // second round, none of the remaining windows should be registered to
         // the js engine because of prepareShutdown()
-        topWindows = new ArrayList<>(topLevelWindows_);
-        for (final TopLevelWindow topWindow : topWindows) {
-            if (topLevelWindows_.contains(topWindow)) {
+        windows = new ArrayList<>(windows_);
+        for (final WebWindow window : windows) {
+            if (window instanceof TopLevelWindow) {
+                final TopLevelWindow topLevelWindow = (TopLevelWindow) window;
+
                 try {
-                    topWindow.close(true);
+                    topLevelWindow.close(true);
+                    topLevelWindows_.remove(topLevelWindow);
                 }
                 catch (final Exception e) {
-                    LOG.error("Exception while closing a topLevelWindow", e);
+                    LOG.error("Exception while closing a TopLevelWindow", e);
+                }
+            }
+            else if (window instanceof DialogWindow) {
+                final DialogWindow dialogWindow = (DialogWindow) window;
+
+                try {
+                    dialogWindow.close();
+                }
+                catch (final Exception e) {
+                    LOG.error("Exception while closing a DialogWindow", e);
                 }
             }
         }
 
         if (topLevelWindows_.size() > 0) {
-            LOG.error("Sill " + topLevelWindows_.size() + " windows are open. Please repot this error");
+            LOG.error("Sill " + topLevelWindows_.size() + " top level windows are open. Please repot this error");
             topLevelWindows_.clear();
+        }
+
+        if (windows_.size() > 0) {
+            LOG.error("Sill " + windows_.size() + " windows are open. Please repot this error");
+            windows_.clear();
         }
 
         ThreadDeath toThrow = null;
@@ -2322,11 +2358,13 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         scriptEngine_ = null;
 
-        try {
-            webConnection_.close();
-        }
-        catch (final Exception e) {
-            LOG.error("Exception while closing the connection", e);
+        if (webConnection_ != null) {
+            try {
+                webConnection_.close();
+            }
+            catch (final Exception e) {
+                LOG.error("Exception while closing the connection", e);
+            }
         }
         webConnection_ = null;
 

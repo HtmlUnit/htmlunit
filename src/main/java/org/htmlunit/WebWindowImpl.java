@@ -32,7 +32,6 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.html.FrameWindow;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
@@ -217,7 +216,7 @@ public abstract class WebWindowImpl implements WebWindow {
      *
      * @param child the child window to associate with this window
      */
-    public void addChildWindow(final FrameWindow child) {
+    public void addChildWindow(final WebWindowImpl child) {
         synchronized (childWindows_) {
             childWindows_.add(child);
         }
