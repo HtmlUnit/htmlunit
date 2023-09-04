@@ -145,14 +145,15 @@ public class HTMLDocument extends Document {
     /**
      * JavaScript function "write" may accept a variable number of arguments.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536782.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public static void write(final Context context, final Scriptable thisObj, final Object[] args,
-        final Function function) {
+    public static void write(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         final HTMLDocument thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args));
     }
@@ -173,14 +174,15 @@ public class HTMLDocument extends Document {
     /**
      * JavaScript function "writeln" may accept a variable number of arguments.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536783.aspx">MSDN documentation</a>
      */
     @JsxFunction
-    public static void writeln(
-        final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static void writeln(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         final HTMLDocument thisAsDocument = getDocument(thisObj);
         thisAsDocument.write(concatArgsAsString(args) + "\n");
     }

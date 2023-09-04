@@ -55,14 +55,15 @@ public class V8BreakIterator extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the WebSocket constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         Locale locale = new Locale("en", "US");
         if (args.length != 0) {
             final Object locales = args[0];

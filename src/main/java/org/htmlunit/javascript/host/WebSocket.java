@@ -208,15 +208,15 @@ public class WebSocket extends EventTarget implements AutoCloseable {
     /**
      * JavaScript constructor.
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the WebSocket constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(
-            final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 1 || args.length > 2) {
             throw Context.reportRuntimeError(
                     "WebSocket Error: constructor must have one or two String parameters.");

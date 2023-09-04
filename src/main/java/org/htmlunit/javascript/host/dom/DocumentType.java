@@ -156,13 +156,14 @@ public class DocumentType extends Node {
      * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
      * just before this ChildNode.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void before(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void before(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.before(context, thisObj, args, function);
     }
 
@@ -170,26 +171,28 @@ public class DocumentType extends Node {
      * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
      * just after this ChildNode.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void after(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void after(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.after(context, thisObj, args, function);
     }
 
     /**
      * Replaces the node wit a set of Node or DOMString objects.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void replaceWith(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.replaceWith(context, thisObj, args, function);
     }
 }

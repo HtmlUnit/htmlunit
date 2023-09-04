@@ -60,6 +60,7 @@ public class Worker extends EventTarget {
     /**
      * For instantiation in JavaScript.
      * @param cx the current context
+     * @param scope the scope
      * @param args the URIs
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
@@ -67,9 +68,8 @@ public class Worker extends EventTarget {
      * @throws Exception in case of problem
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(
-            final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) throws Exception {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) throws Exception {
         if (args.length < 1 || args.length > 2) {
             throw Context.reportRuntimeError(
                     "Worker Error: constructor must have one or two String parameters.");

@@ -413,14 +413,15 @@ public class XMLDOMNode extends MSXMLScriptable {
     /**
      * Inserts a child node to the left of the specified node, or at the end of the list.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return on success, returns the child node that was inserted
      */
     @JsxFunction
-    public static Object insertBefore(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static Object insertBefore(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return ((XMLDOMNode) thisObj).insertBeforeImpl(args);
     }
 

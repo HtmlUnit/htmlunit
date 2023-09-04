@@ -251,14 +251,15 @@ public class DateTimeFormat extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the WebSocket constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor
-    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final String[] locales;
         if (args.length != 0) {
             if (args[0] instanceof NativeArray) {

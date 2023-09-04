@@ -22,6 +22,7 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
+import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBuffer;
 import org.htmlunit.corejs.javascript.typedarrays.NativeUint8ClampedArray;
@@ -55,16 +56,15 @@ public class ImageData extends HtmlUnitScriptable {
     /**
      * JavaScript constructor.
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the WebSocket constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public static ImageData jsConstructor(
-            final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
-
+    public static ImageData jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         if (args.length < 2) {
             throw Context.reportRuntimeError("ImageData ctor - too less arguments");
         }

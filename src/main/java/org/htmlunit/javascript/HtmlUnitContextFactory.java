@@ -302,7 +302,7 @@ public class HtmlUnitContextFactory extends ContextFactory {
         // register custom RegExp processing
         ScriptRuntime.setRegExpProxy(cx, new HtmlUnitRegExpProxy(ScriptRuntime.getRegExpProxy(cx), browserVersion_));
 
-        cx.setMaximumInterpreterStackDepth(10_000);
+        cx.setMaximumInterpreterStackDepth(5_000);
 
         return cx;
     }

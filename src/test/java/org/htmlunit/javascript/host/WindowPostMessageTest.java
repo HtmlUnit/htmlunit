@@ -73,6 +73,50 @@ public class WindowPostMessageTest extends WebDriverTestCase {
             + "</script></body></html>";
 
         getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), expectedAlerts);
+    }
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
+                       "origin: ", "source: false true", "lastEventId: "},
+            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
+                  "origin: ", "source: false true", "lastEventId: undefined"})
+    public void postMessageFromIframe() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[4] += "http://localhost:" + PORT;
+        setExpectedAlerts(expectedAlerts);
+
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <iframe id='myFrame' src='" + URL_SECOND + "'></iframe>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var win = document.getElementById('myFrame').contentWindow;\n"
+
+            + "  function receiveMessage(event) {\n"
+            + "    log('type: ' + event.type);\n"
+            + "    log('bubbles: ' + event.bubbles);\n"
+            + "    log('cancelable: ' + event.cancelable);\n"
+            + "    log('data: ' + event.data);\n"
+            + "    log('origin: ' + event.origin);\n"
+            + "    log('source: ' + (event.source === win) + ' ' + (event.source === window));\n"
+            + "    log('lastEventId: ' + event.lastEventId);\n"
+            + "  }\n"
+
+            + "  win.addEventListener('message', receiveMessage, false);\n"
+            + "  win.postMessage('hello', '*');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body><p>inside frame</p></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
         loadPageVerifyTitle2(html);
     }
 

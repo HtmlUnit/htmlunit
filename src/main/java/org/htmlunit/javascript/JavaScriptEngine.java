@@ -432,7 +432,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             final Scriptable prototype = prototypesPerJSName.get("ActiveXObject");
             if (null != prototype) {
                 final Method jsConstructor = ActiveXObject.class.getDeclaredMethod("jsConstructor",
-                        Context.class, Object[].class, Function.class, boolean.class);
+                        Context.class, Scriptable.class, Object[].class, Function.class, boolean.class);
                 final FunctionObject functionObject = new HiddenFunctionObject("ActiveXObject", jsConstructor, window);
                 try {
                     functionObject.addAsConstructor(window, prototype, ScriptableObject.DONTENUM);

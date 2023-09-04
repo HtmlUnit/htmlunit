@@ -1933,13 +1933,14 @@ public class Element extends Node {
      * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
      * just before this ChildNode.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void before(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void before(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.before(context, thisObj, args, function);
     }
 
@@ -1947,40 +1948,43 @@ public class Element extends Node {
      * Inserts a set of Node or DOMString objects in the children list of this ChildNode's parent,
      * just after this ChildNode.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void after(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void after(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.after(context, thisObj, args, function);
     }
 
     /**
      * Replaces the node with a set of Node or DOMString objects.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void replaceWith(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void replaceWith(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         Node.replaceWith(context, thisObj, args, function);
     }
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the value
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static boolean matches(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static boolean matches(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
@@ -2000,48 +2004,51 @@ public class Element extends Node {
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the value
      */
     @JsxFunction({FF, FF_ESR})
-    public static boolean mozMatchesSelector(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return matches(context, thisObj, args, function);
+    public static boolean mozMatchesSelector(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, scope, thisObj, args, function);
     }
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the value
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static boolean webkitMatchesSelector(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return matches(context, thisObj, args, function);
+    public static boolean webkitMatchesSelector(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, scope, thisObj, args, function);
     }
 
     /**
      * Returns true if the element would be selected by the specified selector string; otherwise, returns false.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the value
      */
     @JsxFunction(IE)
-    public static boolean msMatchesSelector(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
-        return matches(context, thisObj, args, function);
+    public static boolean msMatchesSelector(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+        return matches(context, scope, thisObj, args, function);
     }
 
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static Element closest(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static Element closest(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
@@ -2102,13 +2109,14 @@ public class Element extends Node {
      * Inserts a set of Node objects or string objects after the last child of the Element.
      * String objects are inserted as equivalent Text nodes.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void append(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void append(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
@@ -2120,13 +2128,14 @@ public class Element extends Node {
      * Inserts a set of Node objects or string objects before the first child of the Element.
      * String objects are inserted as equivalent Text nodes.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void prepend(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void prepend(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }
@@ -2138,13 +2147,14 @@ public class Element extends Node {
      * Replaces the existing children of a Node with a specified new set of children.
      * These can be string or Node objects.
      * @param context the context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the arguments
      * @param function the function
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
-    public static void replaceChildren(final Context context, final Scriptable thisObj, final Object[] args,
-            final Function function) {
+    public static void replaceChildren(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof Element)) {
             throw ScriptRuntime.typeError("Illegal invocation");
         }

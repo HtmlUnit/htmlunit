@@ -61,15 +61,15 @@ public class PointerEvent extends MouseEvent {
     /**
      * JavaScript constructor.
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the WebSocket constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public static Scriptable jsConstructor(
-            final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         final PointerEvent event = new PointerEvent();
         if (args.length != 0) {
             event.setType(Context.toString(args[0]));

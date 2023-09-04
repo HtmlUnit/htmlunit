@@ -35,12 +35,13 @@ public final class ConsoleCustom {
      * recorded in the timeline, such as layout and paint events.
      * <p>Currently a noop because timeline is not supported so far</p>
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      */
-    public static void timeStamp(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static void timeStamp(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         // noop
     }
 }

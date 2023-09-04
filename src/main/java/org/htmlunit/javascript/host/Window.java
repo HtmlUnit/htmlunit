@@ -204,14 +204,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * Creates an instance.
      *
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the ActiveXObject constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not
      * @return the java object to allow JavaScript to access
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
-    public static Scriptable jsConstructor(final Context cx, final Object[] args, final Function ctorObj,
-            final boolean inNewExpr) {
+    public static Scriptable jsConstructor(final Context cx, final Scriptable scope,
+            final Object[] args, final Function ctorObj, final boolean inNewExpr) {
         throw ScriptRuntime.typeError("Illegal constructor");
     }
 
@@ -493,14 +494,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * MDN web docs</a>
      *
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the id of the created timer
      */
     @JsxFunction
-    public static Object setTimeout(final Context context, final Scriptable thisObj,
-            final Object[] args, final Function function) {
+    public static Object setTimeout(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context, thisObj, args, function);
     }
 
@@ -510,14 +512,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
      * MDN web docs</a>
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the id of the created interval
      */
     @JsxFunction
-    public static Object setInterval(final Context context, final Scriptable thisObj,
-            final Object[] args, final Function function) {
+    public static Object setInterval(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context, thisObj, args, function);
     }
 
@@ -1982,10 +1985,24 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public void postMessage(final Object message, final String targetOrigin, final Object transfer) {
-        final WebWindow webWindow = getWebWindow();
+    public static void postMessage(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
+            // final Object message, final String targetOrigin, final Object transfer) {
+        if (args.length < 2) {
+            throw ScriptRuntime.typeError("todo");
+        }
+
+        final Object message = args[0];
+        final String targetOrigin = ScriptRuntime.toString(args[1]);
+        final Object transfer = Undefined.instance; // = args[2];
+
+        final Window sender = (Window) scope;
+        final Window receiver = (Window) thisObj;
+
+        final WebWindow webWindow = sender.getWebWindow();
         final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
+
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
             final URL targetURL;
@@ -2012,15 +2029,15 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         final MessageEvent event = new MessageEvent();
         final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
-        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", this, transfer);
-        event.setParentScope(this);
-        event.setPrototype(getPrototype(event.getClass()));
+        event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", sender, transfer);
+        event.setParentScope(scope);
+        event.setPrototype(receiver.getPrototype(event.getClass()));
 
         final JavaScriptEngine jsEngine = (JavaScriptEngine) webWindow.getWebClient().getJavaScriptEngine();
         final PostponedAction action = new PostponedAction(page, "Window.postMessage") {
             @Override
             public void execute() {
-                final ContextAction<Object> contextAction = cx -> dispatchEvent(event);
+                final ContextAction<Object> contextAction = cx -> receiver.dispatchEvent(event);
 
                 final ContextFactory cf = jsEngine.getContextFactory();
                 cf.call(contextAction);

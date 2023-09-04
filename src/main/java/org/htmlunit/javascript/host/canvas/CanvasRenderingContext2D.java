@@ -235,13 +235,14 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
     /**
      * Creates a new clipping region.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      */
     @JsxFunction
-    public static void clip(final Context context, final Scriptable thisObj, final Object[] args,
-        final Function function) {
+    public static void clip(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D)) {
             throw Context.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");
@@ -287,14 +288,15 @@ public class CanvasRenderingContext2D extends HtmlUnitScriptable {
      * Returns the {@code ImageData} object.
      * this may accept a variable number of arguments.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the {@code ImageData} object
      */
     @JsxFunction
-    public static ImageData createImageData(final Context context, final Scriptable thisObj, final Object[] args,
-        final Function function) {
+    public static ImageData createImageData(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         if (!(thisObj instanceof CanvasRenderingContext2D)) {
             throw Context.reportRuntimeError(
                     "CanvasRenderingContext2D.getImageData() failed - this is not a CanvasRenderingContext2D");

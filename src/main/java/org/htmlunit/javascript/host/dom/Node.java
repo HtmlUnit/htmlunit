@@ -276,14 +276,15 @@ public class Node extends EventTarget {
      * Add a DOM node as a child to this node before the referenced node.
      * If the referenced node is null, append to the end.
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the newly added child node
      */
     @JsxFunction
-    public static Object insertBefore(
-            final Context context, final Scriptable thisObj, final Object[] args, final Function function) {
+    public static Object insertBefore(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return ((Node) thisObj).insertBeforeImpl(args);
     }
 
