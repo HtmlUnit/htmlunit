@@ -240,23 +240,24 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
     /**
      * Import external script(s).
      * @param cx the current context
+     * @param scope the scope
      * @param thisObj this object
      * @param args the script(s) to import
      * @param funObj the JS function called
      * @throws IOException in case of problem loading/executing the scripts
      */
     @JsxFunction
-    public static void importScripts(final Context cx, final Scriptable thisObj,
-        final Object[] args, final Function funObj) throws IOException {
-        final DedicatedWorkerGlobalScope scope = (DedicatedWorkerGlobalScope) thisObj;
+    public static void importScripts(final Context cx, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) throws IOException {
+        final DedicatedWorkerGlobalScope workerScope = (DedicatedWorkerGlobalScope) thisObj;
 
-        final WebClient webClient = scope.owningWindow_.getWebWindow().getWebClient();
+        final WebClient webClient = workerScope.owningWindow_.getWebWindow().getWebClient();
         final boolean checkContentType = !webClient.getBrowserVersion()
                 .hasFeature(JS_WORKER_IMPORT_SCRIPTS_ACCEPTS_ALL);
 
         for (final Object arg : args) {
             final String url = Context.toString(arg);
-            scope.loadAndExecute(webClient, url, cx, checkContentType);
+            workerScope.loadAndExecute(webClient, url, cx, checkContentType);
         }
     }
 
@@ -307,14 +308,15 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * MDN web docs</a>
      *
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function
      * @return the id of the created timer
      */
     @JsxFunction
-    public static Object setTimeout(final Context context, final Scriptable thisObj,
-            final Object[] args, final Function function) {
+    public static Object setTimeout(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setTimeout(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
     }
@@ -331,8 +333,8 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * @return the id of the created interval
      */
     @JsxFunction
-    public static Object setInterval(final Context context, final Scriptable thisObj,
-            final Object[] args, final Function function) {
+    public static Object setInterval(final Context context, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function function) {
         return WindowOrWorkerGlobalScopeMixin.setInterval(context,
                 ((DedicatedWorkerGlobalScope) thisObj).owningWindow_, args, function);
     }
