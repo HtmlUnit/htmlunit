@@ -70,6 +70,7 @@ public class ActiveXObject extends HtmlUnitScriptable {
      * </ol>
      *
      * @param cx the current context
+     * @param scope the scope
      * @param args the arguments to the ActiveXObject constructor
      * @param ctorObj the function object
      * @param inNewExpr Is new or not

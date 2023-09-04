@@ -327,6 +327,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">
      * MDN web docs</a>
      * @param context the JavaScript context
+     * @param scope the scope
      * @param thisObj the scriptable
      * @param args the arguments passed into the method
      * @param function the function

@@ -1979,22 +1979,32 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Posts a message.
-     * @param message the object passed to the window
-     * @param targetOrigin the origin this window must be for the event to be dispatched
-     * @param transfer an optional sequence of Transferable objects
+     * @param cx the current context
+     * @param scope the scope
+     * @param thisObj this object
+     * @param args the script(s) to import
+     * @param funObj the JS function called
      * @see <a href="https://developer.mozilla.org/en-US/docs/Web/API/window.postMessage">MDN documentation</a>
      */
     @JsxFunction
-    public static void postMessage(final Context context, final Scriptable scope,
-            final Scriptable thisObj, final Object[] args, final Function function) {
-            // final Object message, final String targetOrigin, final Object transfer) {
-        if (args.length < 2) {
-            throw ScriptRuntime.typeError("todo");
+    public static void postMessage(final Context cx, final Scriptable scope,
+            final Scriptable thisObj, final Object[] args, final Function funObj) {
+
+        // support the structured clone algorithm
+        Object message = null;
+        if (args.length > 0) {
+            message = args[0];
         }
 
-        final Object message = args[0];
-        final String targetOrigin = ScriptRuntime.toString(args[1]);
-        final Object transfer = Undefined.instance; // = args[2];
+        String targetOrigin = null;
+        if (args.length > 1) {
+            targetOrigin = ScriptRuntime.toString(args[1]);
+        }
+
+        Object transfer = Undefined.instance;
+        if (args.length > 2) {
+            transfer = args[2];
+        }
 
         final Window sender = (Window) scope;
         final Window receiver = (Window) thisObj;
@@ -2002,7 +2012,6 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         final WebWindow webWindow = sender.getWebWindow();
         final Page page = webWindow.getEnclosedPage();
         final URL currentURL = page.getUrl();
-
 
         if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
             final URL targetURL;
