@@ -9,6 +9,9 @@
     <body>
         <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, Bugfixes">
             <action type="add" dev="rbri">
+                core-js: some minor improvements for the Reflect support.
+            </action>
+            <action type="add" dev="rbri">
                 core-js: bunch of improvements for the Proxy support.
             </action>
             <action type="add" dev="rbri">
