@@ -1991,12 +1991,12 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             final Scriptable thisObj, final Object[] args, final Function funObj) {
 
         // support the structured clone algorithm
-        Object message = null;
-        if (args.length > 0) {
-            message = args[0];
+        if (args.length < 1) {
+            throw ScriptRuntime.typeError("message not provided");
         }
+        final Object message = args[0];
 
-        String targetOrigin = null;
+        String targetOrigin = "*";
         if (args.length > 1) {
             targetOrigin = ScriptRuntime.toString(args[1]);
         }

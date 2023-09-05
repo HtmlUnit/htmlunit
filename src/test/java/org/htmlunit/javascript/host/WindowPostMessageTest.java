@@ -123,6 +123,73 @@ public class WindowPostMessageTest extends WebDriverTestCase {
     }
 
     /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void postMessageMissingParameters() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    window.postMessage();\n"
+            + "  } catch (e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
+                       "origin: ", "source: false true", "lastEventId: "},
+            IE = {"type: message", "bubbles: false", "cancelable: false", "data: hello",
+                  "origin: ", "source: false true", "lastEventId: undefined"})
+    public void postMessageWithoutTargetOrigin() throws Exception {
+        final String[] expectedAlerts = getExpectedAlerts();
+        expectedAlerts[4] += "http://localhost:" + PORT;
+        setExpectedAlerts(expectedAlerts);
+
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "  <iframe id='myFrame' src='" + URL_SECOND + "'></iframe>\n"
+
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  var win = document.getElementById('myFrame').contentWindow;\n"
+
+            + "  function receiveMessage(event) {\n"
+            + "    log('type: ' + event.type);\n"
+            + "    log('bubbles: ' + event.bubbles);\n"
+            + "    log('cancelable: ' + event.cancelable);\n"
+            + "    log('data: ' + event.data);\n"
+            + "    log('origin: ' + event.origin);\n"
+            + "    log('source: ' + (event.source === win) + ' ' + (event.source === window));\n"
+            + "    log('lastEventId: ' + event.lastEventId);\n"
+            + "  }\n"
+
+            + "  win.addEventListener('message', receiveMessage, false);\n"
+            + "  win.postMessage('hello');\n"
+            + "</script>\n"
+            + "</body></html>";
+
+        final String iframe = "<html><body><p>inside frame</p></body></html>";
+
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
      * Test for #1589 NullPointerException because of missing context.
      *
      * @throws Exception if the test fails
