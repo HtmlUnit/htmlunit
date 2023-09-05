@@ -526,10 +526,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Cancels a time-out previously set with the
-     * {@link #setTimeout(Context, Scriptable, Object[], Function)} method.
+     * {@link #setTimeout(Context, Scriptable, Scriptable, Object[], Function)} method.
      *
      * @param timeoutId identifier for the timeout to clear
-     *        as returned by {@link #setTimeout(Context, Scriptable, Object[], Function)}
+     *        as returned by {@link #setTimeout(Context, Scriptable, Scriptable, Object[], Function)}
      */
     @JsxFunction
     public void clearTimeout(final int timeoutId) {
@@ -541,10 +541,10 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
     /**
      * Cancels the interval previously started using the
-     * {@link #setInterval(Context, Scriptable, Object[], Function)} method.
+     * {@link #setInterval(Context, Scriptable, Scriptable, Object[], Function)} method.
      * Current implementation does nothing.
      * @param intervalID specifies the interval to cancel as returned by the
-     *        {@link #setInterval(Context, Scriptable, Object[], Function)} method
+     *        {@link #setInterval(Context, Scriptable, Scriptable, Object[], Function)} method
      * @see <a href="http://msdn.microsoft.com/en-us/library/ms536353.aspx">MSDN documentation</a>
      */
     @JsxFunction
