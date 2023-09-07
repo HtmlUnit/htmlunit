@@ -2008,36 +2008,42 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
 
         final Window sender = (Window) scope;
         final Window receiver = (Window) thisObj;
+        final URL receiverURL = receiver.getWebWindow().getEnclosedPage().getUrl();
 
         final WebWindow webWindow = sender.getWebWindow();
         final Page page = webWindow.getEnclosedPage();
-        final URL currentURL = page.getUrl();
+        final URL senderURL = page.getUrl();
 
-        if (!"*".equals(targetOrigin) && !"/".equals(targetOrigin)) {
+        if (!"*".equals(targetOrigin)) {
             final URL targetURL;
-            try {
-                targetURL = new URL(targetOrigin);
+            if ("/".equals(targetOrigin)) {
+                targetURL = senderURL;
             }
-            catch (final Exception e) {
-                throw Context.throwAsScriptRuntimeEx(
-                        new Exception(
-                                "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
-                                + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
+            else {
+                try {
+                    targetURL = new URL(targetOrigin);
+                }
+                catch (final Exception e) {
+                    throw Context.throwAsScriptRuntimeEx(
+                            new Exception(
+                                    "SyntaxError: Failed to execute 'postMessage' on 'Window': Invalid target origin '"
+                                            + targetOrigin + "' was specified (reason: " + e.getMessage() + "."));
+                }
             }
 
-            if (getPort(targetURL) != getPort(currentURL)) {
+            if (getPort(targetURL) != getPort(receiverURL)) {
                 return;
             }
-            if (!targetURL.getHost().equals(currentURL.getHost())) {
+            if (!targetURL.getHost().equals(receiverURL.getHost())) {
                 return;
             }
-            if (!targetURL.getProtocol().equals(currentURL.getProtocol())) {
+            if (!targetURL.getProtocol().equals(receiverURL.getProtocol())) {
                 return;
             }
         }
 
         final MessageEvent event = new MessageEvent();
-        final String origin = currentURL.getProtocol() + "://" + currentURL.getHost() + ':' + currentURL.getPort();
+        final String origin = senderURL.getProtocol() + "://" + senderURL.getHost() + ':' + senderURL.getPort();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", sender, transfer);
         event.setParentScope(scope);
         event.setPrototype(receiver.getPrototype(event.getClass()));
