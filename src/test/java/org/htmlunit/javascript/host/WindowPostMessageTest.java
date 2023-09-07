@@ -118,7 +118,30 @@ public class WindowPostMessageTest extends WebDriverTestCase {
 
         final String iframe = "<html><body><p>inside frame</p></body></html>";
 
-        getMockWebConnection().setResponse(URL_THIRD, iframe);
+        getMockWebConnection().setResponse(URL_SECOND, iframe);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts("exception")
+    public void postMessageMissingParameters() throws Exception {
+        final String html
+            = "<html>\n"
+            + "<head></head>\n"
+            + "<body>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "  try {\n"
+            + "    window.postMessage();\n"
+            + "  } catch (e) {\n"
+            + "    log('exception');\n"
+            + "  }\n"
+            + "</script>\n"
+            + "</body></html>";
+
         loadPageVerifyTitle2(html);
     }
 
