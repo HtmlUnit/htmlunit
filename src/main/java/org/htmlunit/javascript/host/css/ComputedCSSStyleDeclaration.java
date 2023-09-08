@@ -63,10 +63,6 @@ import static org.htmlunit.css.StyleAttributes.Definition.WORD_SPACING;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineBreakMeasurer;
-import java.awt.font.TextAttribute;
-import java.text.AttributedString;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -119,6 +115,7 @@ import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.dom.Text;
 import org.htmlunit.javascript.host.html.HTMLBodyElement;
 import org.htmlunit.javascript.host.html.HTMLElement;
+import org.htmlunit.platform.Platform;
 
 /**
  * An object for a CSSStyleDeclaration, which is computed.
@@ -1056,28 +1053,7 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 if (pixelWidth > 0
                         && !width.isEmpty()
                         && StringUtils.isNotBlank(content)) {
-                    final String[] lines = StringUtils.split(content, '\n');
-                    int lineCount = 0;
-                    final int fontSizeInt = Integer.parseInt(fontSize.substring(0, fontSize.length() - 2));
-                    final FontRenderContext fontRenderCtx = new FontRenderContext(null, false, true);
-                    for (final String line : lines) {
-                        if (StringUtils.isBlank(line)) {
-                            lineCount++;
-                        }
-                        else {
-                            // width is specified, we have to to some line breaking
-                            final AttributedString attributedString = new AttributedString(line);
-                            attributedString.addAttribute(TextAttribute.SIZE, fontSizeInt / 1.1);
-                            final LineBreakMeasurer lineBreakMeasurer =
-                                    new LineBreakMeasurer(attributedString.getIterator(), fontRenderCtx);
-                            lineBreakMeasurer.nextLayout(pixelWidth);
-                            lineCount++;
-                            while (lineBreakMeasurer.getPosition() < line.length() && lineCount < 1000) {
-                                lineBreakMeasurer.nextLayout(pixelWidth);
-                                lineCount++;
-                            }
-                        }
-                    }
+                    final int lineCount = Platform.getFontUtil().countLines(content, pixelWidth, fontSize);
                     defaultHeight *= lineCount;
                 }
                 else {
