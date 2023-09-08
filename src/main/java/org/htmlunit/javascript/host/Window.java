@@ -2042,8 +2042,16 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             }
         }
 
+        String origin = "";
+        try {
+            final URL originUrl = UrlUtils.getUrlWithoutPathRefQuery(senderURL);
+            origin = UrlUtils.removeRedundantPort(originUrl).toExternalForm();
+        }
+        catch (final MalformedURLException e) {
+            throw Context.throwAsScriptRuntimeEx(e);
+        }
+
         final MessageEvent event = new MessageEvent();
-        final String origin = senderURL.getProtocol() + "://" + senderURL.getHost() + ':' + senderURL.getPort();
         event.initMessageEvent(Event.TYPE_MESSAGE, false, false, message, origin, "", sender, transfer);
         event.setParentScope(scope);
         event.setPrototype(receiver.getPrototype(event.getClass()));
