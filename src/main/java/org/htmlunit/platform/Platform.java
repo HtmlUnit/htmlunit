@@ -126,7 +126,7 @@ public final class Platform {
                         "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend");
             return (RenderingBackend) ConstructorUtils.invokeConstructor(backendClass, imageWidth, imageHeight);
         }
-        catch (final Exception e) {
+        catch (final Throwable e) {
             return new NoOpRenderingBackend(imageWidth, imageHeight);
         }
     }
@@ -148,7 +148,7 @@ public final class Platform {
         catch (final RuntimeException re) {
             throw re;
         }
-        catch (final Exception ex) {
+        catch (final Throwable ex) {
             return new NoOpImageData();
         }
     }
