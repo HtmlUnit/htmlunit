@@ -60,6 +60,9 @@ public class ArchitectureTest {
         .that().haveNameMatching(".*Util.?")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.cssparser.util.ParserUtils")
         .and().doNotHaveFullyQualifiedName("org.htmlunit.httpclient.util.HttpDateUtils")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.AwtFontUtil")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.FontUtil")
+        .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.font.NoOpFontUtil")
         .should().resideInAPackage("org.htmlunit.util");
 
     /**
