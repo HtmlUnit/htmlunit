@@ -14,6 +14,8 @@
  */
 package org.htmlunit;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.net.URL;
 import java.util.HashMap;
@@ -40,9 +42,8 @@ public class StorageHolder implements Serializable {
         SESSION_STORAGE
     }
 
-    private final Map<String, Map<String, String>> localStorage_ = new HashMap<>();
-
-    private final transient Map<String, Map<String, String>> sessionStorage_ = new HashMap<>();
+    private Map<String, Map<String, String>> localStorage_ = new HashMap<>();
+    private transient Map<String, Map<String, String>> sessionStorage_ = new HashMap<>();
 
     /**
      * Gets the store of the give type for the page.
@@ -86,5 +87,11 @@ public class StorageHolder implements Serializable {
             final String key = Integer.toHexString(topWindow.hashCode());
             return sessionStorage_.computeIfAbsent(key, k -> new LinkedHashMap<>());
         }
+    }
+
+    private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
+        ois.defaultReadObject();
+
+        sessionStorage_ = new HashMap<>();
     }
 }
