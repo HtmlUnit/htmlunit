@@ -324,7 +324,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
             else if ("WebKitMutationObserver".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("MutationObserver");
             }
-            else if ("webkitURL".equals(hostClassSimpleName)) {
+            else if ("WebkitURL".equals(hostClassSimpleName)) {
                 prototype = prototypesPerJSName.get("URL");
             }
 
@@ -351,7 +351,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                     }
 
                     if ("WebKitMutationObserver".equals(hostClassSimpleName)
-                            || "webkitURL".equals(hostClassSimpleName)
+                            || "WebkitURL".equals(hostClassSimpleName)
                             || "Image".equals(hostClassSimpleName)
                             || "Option".equals(hostClassSimpleName)) {
                         final Object prototypeProperty = ScriptableObject.getProperty(window, prototype.getClassName());
