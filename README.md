@@ -1,5 +1,7 @@
 # HtmlUnit
 
+** +++ I'm on vacation until 24.9. - please have a little patience +++ **
+
 Version 3.5.0 / August 20, 2023
 
 :heart: [Sponsor](https://github.com/sponsors/rbri)
