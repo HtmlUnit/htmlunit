@@ -37,6 +37,7 @@ import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.javascript.host.html.HTMLFormElement;
 import org.htmlunit.util.KeyDataPair;
@@ -282,6 +283,7 @@ public class FormData extends HtmlUnitScriptable {
      * @return An Iterator that contains all the requestParameters name[0] and value[1]
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
     public Scriptable entries() {
         return new FormDataIterator(this, "FormData Iterator", requestParameters_);
     }
