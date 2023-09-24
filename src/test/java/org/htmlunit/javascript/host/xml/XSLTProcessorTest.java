@@ -56,14 +56,10 @@ public class XSLTProcessorTest extends WebDriverTestCase {
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>",
             FF_ESR = "<html><body><h2>My CD Collection</h2>"
                 + "<ul><li>Empire Burlesque (Bob Dylan)</li></ul></body></html>")
-    public void test() throws Exception {
+    public void transformToDocument() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-
-            + "  function createXmlDocument() {\n"
-            + "    return document.implementation.createDocument('', '', null);\n"
-            + "  }\n"
 
             + "  function  loadXMLDocument(url) {\n"
             + "    var xhttp = new XMLHttpRequest();\n"
@@ -84,9 +80,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
             + "    } catch(e) { log('exception'); }\n"
             + "  }\n"
 
-            + "  function createXmlDocument() {\n"
-            + "    return document.implementation.createDocument('', '', null);\n"
-            + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "</body></html>";
 
@@ -123,6 +116,40 @@ public class XSLTProcessorTest extends WebDriverTestCase {
         final MockWebConnection conn = getMockWebConnection();
         conn.setResponse(new URL(URL_SECOND, "1"), xml, MimeType.TEXT_XML);
         conn.setResponse(new URL(URL_SECOND, "2"), xsl, MimeType.TEXT_XML);
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "*bar*",
+            IE = "exception")
+    public void transformToFragment() throws Exception {
+        final String xsl
+            = "<xsl:stylesheet version=\"1.0\" xmlns:xsl=\"http://www.w3.org/1999/XSL/Transform\">"
+            + "<xsl:template match=\"/\">*<xsl:value-of select=\"foo\" />*</xsl:template>"
+            + "</xsl:stylesheet>";
+
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+
+            + "  function test() {\n"
+            + "    try {\n"
+            + "      var xmlDoc = new DOMParser().parseFromString('<foo>bar</foo>', 'application/xml');\n"
+            + "      var xslDoc = new DOMParser().parseFromString('" + xsl + "', 'application/xml');\n"
+
+            + "      var processor = new XSLTProcessor();\n"
+            + "      processor.importStylesheet(xslDoc);\n"
+            + "      var newFragment = processor.transformToFragment(xmlDoc, document);\n"
+            + "      log(new XMLSerializer().serializeToString(newFragment));\n"
+            + "    } catch(e) { log('exception'); }\n"
+            + "  }\n"
+
+            + "</script></head><body onload='test()'>\n"
+            + "</body></html>";
 
         loadPageVerifyTitle2(html);
     }
@@ -235,10 +262,6 @@ public class XSLTProcessorTest extends WebDriverTestCase {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
-
-            + "  function createXmlDocument() {\n"
-            + "    return document.implementation.createDocument('', '', null);\n"
-            + "  }\n"
 
             + "  function  loadXMLDocument(url) {\n"
             + "    var xhttp = new XMLHttpRequest();\n"

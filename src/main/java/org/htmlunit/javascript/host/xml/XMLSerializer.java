@@ -127,7 +127,7 @@ public class XMLSerializer extends HtmlUnitScriptable {
                 builder.append(serializeToString(node));
                 node = node.getNextSibling();
             }
-            return builder.toString();
+            return builder.toString().trim();
         }
 
         if (root instanceof Document) {

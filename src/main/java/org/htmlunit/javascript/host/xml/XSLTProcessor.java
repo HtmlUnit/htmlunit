@@ -173,6 +173,8 @@ public class XSLTProcessor extends HtmlUnitScriptable {
             }
 
             final Transformer transformer = transformerFactory.newTransformer(xsltSource);
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+
             for (final Map.Entry<String, Object> entry : parameters_.entrySet()) {
                 transformer.setParameter(entry.getKey(), entry.getValue());
             }
@@ -223,23 +225,20 @@ public class XSLTProcessor extends HtmlUnitScriptable {
         rv.setParentScope(getParentScope());
         rv.setDomNode(fragment);
 
-        transform(source, fragment);
-        return rv;
-    }
-
-    private void transform(final Node source, final DomNode parent) {
         final Object result = transform(source);
         if (result instanceof org.w3c.dom.Node) {
-            final SgmlPage parentPage = parent.getPage();
+            final SgmlPage parentPage = fragment.getPage();
             final NodeList children = ((org.w3c.dom.Node) result).getChildNodes();
             for (int i = 0; i < children.getLength(); i++) {
-                XmlUtils.appendChild(parentPage, parent, children.item(i), true);
+                XmlUtils.appendChild(parentPage, fragment, children.item(i), true);
             }
         }
         else {
-            final DomText text = new DomText(parent.getPage(), (String) result);
-            parent.appendChild(text);
+            final DomText text = new DomText(fragment.getPage(), (String) result);
+            fragment.appendChild(text);
         }
+
+        return rv;
     }
 
     /**
