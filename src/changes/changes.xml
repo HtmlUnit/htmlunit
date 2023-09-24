@@ -7,7 +7,10 @@
     </properties>
 
     <body>
-        <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, Bugfixes">
+        <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, htmx 1.9.6, Bugfixes">
+            <action type="fix" dev="rbri" due-to="Lai Quang Duong">
+                core-js: Reflect.apply() now works also with primitive thisArgument (String, Number, Boolean).
+            </action>
             <action type="update" dev="rbri">
                 Introduce Platform-FontUtil to encapsulate awt.font stuff for android support.
             </action>
