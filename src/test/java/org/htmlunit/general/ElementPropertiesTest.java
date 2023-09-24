@@ -9335,4 +9335,34 @@ public class ElementPropertiesTest extends WebDriverTestCase {
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");
     }
+
+    /**
+     * Test MutationObserver.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "disconnect(),observe(),takeRecords()",
+            EDGE = "disconnect(),observe(),takeRecords()",
+            FF = "disconnect(),observe(),takeRecords()",
+            FF_ESR = "disconnect(),observe(),takeRecords()",
+            IE = "disconnect(),observe(),takeRecords()")
+    public void mutationObserver() throws Exception {
+        testString("", "new MutationObserver(function(m) {})");
+    }
+
+    /**
+     * Test WebKitMutationObserver.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "disconnect(),observe(),takeRecords()",
+            EDGE = "disconnect(),observe(),takeRecords()",
+            FF = "exception",
+            FF_ESR = "exception",
+            IE = "exception")
+    public void webKitMutationObserver() throws Exception {
+        testString("", "new WebKitMutationObserver(function(m) {})");
+    }
 }

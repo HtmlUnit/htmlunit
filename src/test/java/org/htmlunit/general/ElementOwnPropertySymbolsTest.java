@@ -3743,4 +3743,34 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     public void namedNodeMap() throws Exception {
         testString("", "element.attributes");
     }
+
+    /**
+     * Test MutationObserver.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            EDGE = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            FF = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            IE = "exception")
+    public void mutationObserver() throws Exception {
+        testString("", "new MutationObserver(function(m) {})");
+    }
+
+    /**
+     * Test WebKitMutationObserver.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            EDGE = "Symbol(Symbol.toStringTag) [MutationObserver]",
+            FF = "exception",
+            FF_ESR = "exception",
+            IE = "exception")
+    public void webKitMutationObserver() throws Exception {
+        testString("", "new WebKitMutationObserver(function(m) {})");
+    }
 }
