@@ -118,7 +118,7 @@ public class RecursiveFunctionObject extends FunctionObject {
             case "webkitSpeechRecognitionEvent":
                 return "SpeechRecognitionEvent";
 
-            case "WebkitURL":
+            case "webkitURL":
                 return "URL";
 
             default:

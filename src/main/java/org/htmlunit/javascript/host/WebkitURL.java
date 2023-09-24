@@ -34,7 +34,19 @@ public class WebkitURL extends URL {
     /**
      * Creates an instance.
      */
-    @JsxConstructor
     public WebkitURL() {
+    }
+
+    /**
+     * Creates an instance.
+     * @param url a string representing an absolute or relative URL.
+     * If url is a relative URL, base is required, and will be used
+     * as the base URL. If url is an absolute URL, a given base will be ignored.
+     * @param base a string representing the base URL to use in case url
+     * is a relative URL. If not specified, it defaults to ''.
+     */
+    @JsxConstructor
+    public WebkitURL(final String url, final Object base) {
+        super(url, base);
     }
 }

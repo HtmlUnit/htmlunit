@@ -371,8 +371,7 @@ public class JavaScriptEngine implements AbstractJavaScriptEngine<Script> {
                             }
                         }
 
-                        ScriptableObject.defineProperty(window, hostClassSimpleName, function,
-                                ScriptableObject.DONTENUM);
+                        ScriptableObject.defineProperty(window, jsClassName, function, ScriptableObject.DONTENUM);
 
                         // the prototype class name is set as a side effect of functionObject.addAsConstructor
                         // so we restore its value
