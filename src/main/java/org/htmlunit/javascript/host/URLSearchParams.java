@@ -25,6 +25,9 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -33,10 +36,13 @@ import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
+import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -137,12 +143,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public URLSearchParams(final Object params) {
-        // TODO: Pass in a sequence
-        // new URLSearchParams([["foo", 1],["bar", 2]]);
-
-        // TODO: Pass in a record
-        // new URLSearchParams({"foo" : 1 , "bar" : 2});
-
         url_ = new URL("http://www.htmlunit.org", "");
 
         if (params == null || Undefined.isUndefined(params)) {
@@ -150,10 +150,137 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         try {
-            url_.setSearch(splitQuery(Context.toString(params)));
+            url_.setSearch(resolveParams(params));
+        }
+        catch (final EcmaError e) {
+            throw ScriptRuntime.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage());
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);
+        }
+    }
+
+    /*
+     * Implementation follows https://url.spec.whatwg.org/#urlsearchparams-initialize
+     */
+    private static List<NameValuePair> resolveParams(final Object params) {
+        // if params is a sequence
+        if (params instanceof Scriptable && ScriptableObject.hasProperty((Scriptable)params, SymbolKey.ITERATOR)) {
+            final List<NameValuePair> nameValuePairs = new ArrayList<>();
+
+            final Iterator<Object> paramsIterator = new IterationProtocolIterator((Scriptable)params,
+                    Context.getCurrentContext(), ((Scriptable)params).getParentScope());
+            while (paramsIterator.hasNext()) {
+                final Object nameValue = paramsIterator.next();
+
+                if (!(nameValue instanceof Scriptable)) {
+                    throw ScriptRuntime.typeError("The provided value cannot be converted to a sequence.");
+                }
+                if (!ScriptableObject.hasProperty((Scriptable)nameValue, SymbolKey.ITERATOR)) {
+                    throw ScriptRuntime.typeError("The object must have a callable @@iterator property.");
+                }
+
+                final Iterator<Object> nameValueIterator = new IterationProtocolIterator((Scriptable)nameValue,
+                        Context.getCurrentContext(), ((Scriptable)nameValue).getParentScope());
+
+                final Object name = nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+                final Object value = nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+
+                if (name == Scriptable.NOT_FOUND || value == Scriptable.NOT_FOUND || nameValueIterator.hasNext()) {
+                    throw ScriptRuntime.typeError("Sequence initializer must only contain pair elements.");
+                }
+
+                nameValuePairs.add(new NameValuePair(Context.toString(name), Context.toString(value)));
+            }
+
+            return nameValuePairs;
+        }
+
+        // if params is a record
+        if (params instanceof NativeObject) {
+            final List<NameValuePair> nameValuePairs = new ArrayList<>();
+            for (Map.Entry<Object, Object> keyValuePair : ((NativeObject)params).entrySet()) {
+                nameValuePairs.add(new NameValuePair(Context.toString(keyValuePair.getKey()), Context.toString(keyValuePair.getValue())));
+            }
+            return nameValuePairs;
+        }
+
+        // otherwise handle it as string
+        return splitQuery(Context.toString(params));
+    }
+
+    /*
+     * Java iterator for JavaScript objects implementing the iterator protocol:
+     * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
+     */
+    private static class IterationProtocolIterator implements java.util.Iterator<Object> {
+        private static final Object UNSET = new Object();
+        private static final Object NO_MORE = new Object();
+
+        private final Context cx;
+        private final Scriptable scope;
+
+        private final Scriptable iterator;
+        private final Function nextFunc;
+
+        private Object nextValue = UNSET;
+
+        public IterationProtocolIterator(final Scriptable iterable, final Context cx, final Scriptable scope) {
+            this.cx = Objects.requireNonNull(cx);
+            this.scope = Objects.requireNonNull(scope);
+
+            // get iterator function
+            Object iteratorFunc = ScriptableObject.getProperty(iterable, SymbolKey.ITERATOR);
+            if (!(iteratorFunc instanceof Function)) {
+                throw ScriptRuntime.typeError("@@iterator must be a callable");
+            }
+
+            // get iterator object by calling iterator function
+            Object iterator = ((Function)iteratorFunc).call(cx, scope, iterable, new Object[0]);
+            if (!(iterator instanceof Scriptable)) {
+                throw ScriptRuntime.typeError("Iterator object must be an object.");
+            }
+            this.iterator = (Scriptable)iterator;
+
+            // iterator object must always implement next()
+            Object nextFunc = ScriptRuntime.getObjectProp(iterator, "next", cx, scope);
+            if (!(nextFunc instanceof Function)) {
+                throw ScriptRuntime.typeError("Expected next() function on iterator.");
+            }
+            this.nextFunc = (Function)nextFunc;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (nextValue == NO_MORE) {
+                return false;
+            }
+            if (nextValue == UNSET) {
+                // get next element from iterator.next()
+                Object elem = nextFunc.call(cx, scope, iterator, new Object[0]);
+                if (!(elem instanceof Scriptable)) {
+                    throw ScriptRuntime.typeError("Expected iterator.next() to return an Object.");
+                }
+
+                Object done = ScriptRuntime.getObjectProp(elem, "done", cx, scope);
+                if (done == Boolean.TRUE) {
+                    nextValue = NO_MORE;
+                    return false;
+                }
+
+                nextValue = ScriptRuntime.getObjectProp(elem, "value", cx, scope);
+            }
+            return true;
+        }
+
+        @Override
+        public Object next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            Object value = nextValue;
+            nextValue = UNSET;
+            return value;
         }
     }
 
