@@ -53,6 +53,7 @@ import org.openqa.selenium.WebDriver;
  * @author Ronald Brill
  * @author Frank Danek
  * @author Thorsten Wendelmuth
+ * @author Lai Quang Duong
  */
 @RunWith(BrowserRunner.class)
 public class FormDataTest extends WebDriverTestCase {
@@ -61,8 +62,10 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function"},
-            IE = {"function", "undefined", "undefined", "undefined", "undefined", "undefined"})
+    @Alerts(DEFAULT = {"function", "function", "function", "function", "function", "function",
+                       "function", "function", "function", "function"},
+            IE = {"function", "undefined", "undefined", "undefined", "undefined", "undefined",
+                  "undefined", "undefined", "undefined", "undefined"})
     public void functions() throws Exception {
         final String html
             = HtmlPageTest.STANDARDS_MODE_PREFIX_
@@ -73,10 +76,14 @@ public class FormDataTest extends WebDriverTestCase {
             + "      var formData = new FormData();\n"
             + "      log(typeof formData.append);\n"
             + "      log(typeof formData.delete);\n"
+            + "      log(typeof formData.entries);\n"
+            + "      log(typeof formData.forEach);\n"
             + "      log(typeof formData.get);\n"
             + "      log(typeof formData.getAll);\n"
             + "      log(typeof formData.has);\n"
+            + "      log(typeof formData.keys);\n"
             + "      log(typeof formData.set);\n"
+            + "      log(typeof formData.values);\n"
             + "    }\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
@@ -950,6 +957,196 @@ public class FormDataTest extends WebDriverTestCase {
         assertEquals(getExpectedAlerts()[0], headerValue);
     }
 
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function keys() { [native code] }", "[object FormData Iterator]",
+                       "key1", "key2", "key1", "undefined", "true"},
+            IE = "no keys")
+    public void keys() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var formData = new FormData();\n"
+
+            + "      if (!formData.forEach) {\n"
+            + "        log('no keys');\n"
+            + "        return;"
+            + "      }\n"
+
+            + "      formData.append('key1', 'val1');\n"
+            + "      formData.append('key2', undefined);\n"
+            + "      formData.append('key1', 'val3');\n"
+            + "      formData.append(undefined, 'val3');\n"
+
+
+            + "      log(formData.keys);\n"
+            + "      var iter = formData.keys();\n"
+            + "      log(iter);\n"
+
+            + "      var entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+
+            + "      log(iter.next().done);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"function values() { [native code] }", "[object FormData Iterator]",
+                       "val1", "undefined", "val3", "val4", "true"},
+            IE = "no values")
+    public void values() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var formData = new FormData();\n"
+
+            + "      if (!formData.forEach) {\n"
+            + "        log('no values');\n"
+            + "        return;"
+            + "      }\n"
+
+            + "      formData.append('key1', 'val1');\n"
+            + "      formData.append('key2', undefined);\n"
+            + "      formData.append('key1', 'val3');\n"
+            + "      formData.append(undefined, 'val4');\n"
+
+            + "      log(formData.values);\n"
+            + "      var iter = formData.values();\n"
+            + "      log(iter);\n"
+
+            + "      var entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+            + "      entry = iter.next().value;\n"
+            + "      log(entry);\n"
+
+            + "      log(iter.next().done);\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"val1", "undefined", "val3", "val4"},
+            IE = "no values")
+    public void valuesForOf() throws Exception {
+        final String html =
+            "<html>\n"
+            + "<head>\n"
+            + "  <script>\n"
+            + LOG_TITLE_FUNCTION
+            + "    function test() {\n"
+            + "      var formData = new FormData();\n"
+
+            + "      if (!formData.forEach) {\n"
+            + "        log('no values');\n"
+            + "        return;"
+            + "      }\n"
+
+            + "      formData.append('key1', 'val1');\n"
+            + "      formData.append('key2', undefined);\n"
+            + "      formData.append('key1', 'val3');\n"
+            + "      formData.append(undefined, 'val4');\n"
+
+            + "      for (var i of formData.values()) {\n"
+            + "        log(i);\n"
+            + "      }\n"
+            + "    }\n"
+            + "  </script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "</body>\n"
+            + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
+    @Alerts(DEFAULT = {"key1-val1", "key2-val2", "key3-val3",
+                       "key1-val1", "key3-val3",
+                       "key2-val2", "key3-val3"},
+            IE = "no forEach")
+    public void forEach() throws Exception {
+        final String html =
+            "<html>\n"
+                + "<head>\n"
+                + "  <script>\n"
+                + LOG_TITLE_FUNCTION
+                + "    function test() {\n"
+                + "      var formData = new FormData();\n"
+
+                + "      if (!formData.forEach) {\n"
+                + "        log('no forEach');\n"
+                + "        return;"
+                + "      }\n"
+
+                + "      formData.append('key1', 'val1');\n"
+                + "      formData.append('key2', 'val2');\n"
+                + "      formData.append('key3', 'val3');\n"
+
+                + "      formData.forEach((value, key) => {\n"
+                + "        log(key + '-' + value);\n"
+                + "      });\n"
+
+                + "      formData.forEach((value, key) => {\n"
+                + "        log(key + '-' + value);\n"
+                + "        if (value == 'val1' || value == 'val2') {\n"
+                + "          formData.delete(key);\n"
+                + "        }\n"
+                + "      });\n"
+
+                + "      formData.forEach((value, key) => {\n"
+                + "        log(key + '-' + value);\n"
+                + "      });\n"
+                + "    }\n"
+                + "  </script>\n"
+                + "</head>\n"
+                + "<body onload='test()'>\n"
+                + "</body>\n"
+                + "</html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
     /**
      * Going through entries() via suggested for ... of method
      * @throws Exception if an error occurs
@@ -992,16 +1189,16 @@ public class FormDataTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"[object FormData Iterator]", "done", "value",
+    @Alerts(DEFAULT = {"true", "[object FormData Iterator]", "done", "value",
                        "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
             IE = "no entries")
-    @HtmlUnitNYI(CHROME = {"[object FormData Iterator]", "value", "done",
+    @HtmlUnitNYI(CHROME = {"true", "[object FormData Iterator]", "value", "done",
                            "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            EDGE = {"[object FormData Iterator]", "value", "done",
+            EDGE = {"true", "[object FormData Iterator]", "value", "done",
                     "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF = {"[object FormData Iterator]", "value", "done",
+            FF = {"true", "[object FormData Iterator]", "value", "done",
                   "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"},
-            FF_ESR = {"[object FormData Iterator]", "value", "done",
+            FF_ESR = {"true", "[object FormData Iterator]", "value", "done",
                       "myKey", "myValue", "myKey2", "", "myKey", "myvalue2"})
     public void entriesIterator() throws Exception {
         final String html
@@ -1018,6 +1215,10 @@ public class FormDataTest extends WebDriverTestCase {
             + "  formData.append('myKey', 'myValue');\n"
             + "  formData.append('myKey2', '');\n"
             + "  formData.append('myKey', 'myvalue2');\n"
+
+            + "  if (typeof Symbol != 'undefined') {\n"
+            + "    log(formData[Symbol.iterator] === formData.entries);\n"
+            + "  }\n"
 
             + "  var iterator = formData.entries();\n"
             + "  log(iterator);\n"

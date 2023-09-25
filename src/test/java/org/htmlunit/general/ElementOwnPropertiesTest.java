@@ -6261,10 +6261,6 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             IE = "append(),constructor()")
-    @HtmlUnitNYI(CHROME = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
-            EDGE = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
-            FF_ESR = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
-            FF = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()")
     public void formData() throws Exception {
         testString("", "new FormData()");
     }

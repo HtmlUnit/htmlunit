@@ -2046,10 +2046,6 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
             IE = "append()")
-    @HtmlUnitNYI(CHROME = "append(),delete(),entries(),get(),getAll(),has(),set()",
-            EDGE = "append(),delete(),entries(),get(),getAll(),has(),set()",
-            FF_ESR = "append(),delete(),entries(),get(),getAll(),has(),set()",
-            FF = "append(),delete(),entries(),get(),getAll(),has(),set()")
     public void formData() throws Exception {
         testString("", "new FormData()");
     }

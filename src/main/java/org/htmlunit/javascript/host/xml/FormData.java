@@ -31,12 +31,15 @@ import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
+import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
+import org.htmlunit.javascript.configuration.JsxSymbol;
 import org.htmlunit.javascript.host.file.File;
 import org.htmlunit.javascript.host.html.HTMLFormElement;
 import org.htmlunit.util.KeyDataPair;
@@ -59,7 +62,9 @@ public class FormData extends HtmlUnitScriptable {
     private final List<NameValuePair> requestParameters_ = new ArrayList<>();
 
     public static final class FormDataIterator extends ES6Iterator {
+        enum Type { KEYS, VALUES, BOTH }
 
+        private final Type type_;
         private final String className_;
         private final List<NameValuePair> nameValuePairList_;
         private int index_;
@@ -69,14 +74,16 @@ public class FormData extends HtmlUnitScriptable {
         }
 
         public FormDataIterator(final String className) {
+            type_ = Type.BOTH;
             index_ = 0;
             nameValuePairList_ = Collections.emptyList();
             className_ = className;
         }
 
-        public FormDataIterator(final Scriptable scope, final String className,
+        public FormDataIterator(final Scriptable scope, final String className, final Type type,
                 final List<NameValuePair> nameValuePairList) {
             super(scope, FORM_DATA_TAG);
+            type_ = type;
             index_ = 0;
             nameValuePairList_ = nameValuePairList;
             className_ = className;
@@ -108,7 +115,16 @@ public class FormData extends HtmlUnitScriptable {
             }
 
             final NameValuePair nextNameValuePair = nameValuePairList_.get(index_++);
-            return cx.newArray(scope, new Object[] {nextNameValuePair.getName(), nextNameValuePair.getValue()});
+            switch (type_) {
+                case KEYS:
+                    return nextNameValuePair.getName();
+                case VALUES:
+                    return nextNameValuePair.getValue();
+                case BOTH:
+                    return cx.newArray(scope, new Object[] {nextNameValuePair.getName(), nextNameValuePair.getValue()});
+                default:
+                    throw new AssertionError();
+            }
         }
     }
 
@@ -282,8 +298,9 @@ public class FormData extends HtmlUnitScriptable {
      * @return An Iterator that contains all the requestParameters name[0] and value[1]
      */
     @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    @JsxSymbol(value = {CHROME, EDGE, FF, FF_ESR}, symbolName = "iterator")
     public Scriptable entries() {
-        return new FormDataIterator(this, "FormData Iterator", requestParameters_);
+        return new FormDataIterator(this, "FormData Iterator", FormDataIterator.Type.BOTH, requestParameters_);
     }
 
     /**
@@ -293,5 +310,55 @@ public class FormData extends HtmlUnitScriptable {
     public void fillRequest(final WebRequest webRequest) {
         webRequest.setEncodingType(FormEncodingType.MULTIPART);
         webRequest.setRequestParameters(requestParameters_);
+    }
+
+    /**
+     * The FormData.forEach() method allows iteration through
+     * all key/value pairs contained in this object via a callback function.
+     * @param callback Function to execute on each key/value pairs
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public void forEach(final Object callback) {
+        if (!(callback instanceof Function)) {
+            throw ScriptRuntime.typeError(
+                    "Foreach callback '" + ScriptRuntime.toString(callback) + "' is not a function");
+        }
+
+        final Function fun = (Function) callback;
+
+        // This must be indexes instead of iterator() for correct behavior when of list changes while iterating
+        for (int i = 0;; i++) {
+            if (i >= requestParameters_.size()) {
+                break;
+            }
+
+            final NameValuePair param = requestParameters_.get(i);
+            fun.call(Context.getCurrentContext(), getParentScope(), this,
+                        new Object[] {param.getValue(), param.getName(), this});
+        }
+    }
+
+    /**
+     * The FormData.keys() method returns an iterator allowing to go through
+     * all keys contained in this object. The keys are USVString objects.
+     *
+     * @return an iterator.
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public Object keys() {
+        return new FormDataIterator(getParentScope(),
+                "FormData Iterator", FormDataIterator.Type.KEYS, requestParameters_);
+    }
+
+    /**
+     * The URLSearchParams.values() method returns an iterator allowing to go through
+     * all values contained in this object. The values are USVString objects.
+     *
+     * @return an iterator.
+     */
+    @JsxFunction({CHROME, EDGE, FF, FF_ESR})
+    public Object values() {
+        return new FormDataIterator(getParentScope(),
+                "FormData Iterator", FormDataIterator.Type.VALUES, requestParameters_);
     }
 }

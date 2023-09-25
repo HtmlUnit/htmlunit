@@ -1240,10 +1240,6 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
             FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
             IE = "exception")
-    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [FormData]",
-            EDGE = "Symbol(Symbol.toStringTag) [FormData]",
-            FF_ESR = "Symbol(Symbol.toStringTag) [FormData]",
-            FF = "Symbol(Symbol.toStringTag) [FormData]")
     public void formData() throws Exception {
         testString("", "new FormData()");
     }
