@@ -8,6 +8,11 @@
 
     <body>
         <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, htmx 1.9.6, Bugfixes">
+            <action type="add" dev="Lai Quang Duong">
+                The URLSearchParams ctor now supports also a sequence of name-value string pairs, 
+                or any object with an iterator that produces a sequence of string pairs,
+                or a record of string keys and string values.
+            </action>
             <action type="add" dev="rbri">
                 Implementation of FormData.forEach(), FormData.keys(), and FormData.values() added.
             </action>

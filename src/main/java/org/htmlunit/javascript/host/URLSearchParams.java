@@ -25,6 +25,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
@@ -33,10 +34,14 @@ import org.htmlunit.FormEncodingType;
 import org.htmlunit.WebRequest;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ES6Iterator;
+import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
+import org.htmlunit.corejs.javascript.IteratorLikeIterable;
+import org.htmlunit.corejs.javascript.NativeObject;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.corejs.javascript.SymbolKey;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -138,12 +143,6 @@ public class URLSearchParams extends HtmlUnitScriptable {
      */
     @JsxConstructor
     public URLSearchParams(final Object params) {
-        // TODO: Pass in a sequence
-        // new URLSearchParams([["foo", 1],["bar", 2]]);
-
-        // TODO: Pass in a record
-        // new URLSearchParams({"foo" : 1 , "bar" : 2});
-
         url_ = new URL("http://www.htmlunit.org", "");
 
         if (params == null || Undefined.isUndefined(params)) {
@@ -151,11 +150,73 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
 
         try {
-            url_.setSearch(splitQuery(Context.toString(params)));
+            url_.setSearch(resolveParams(params));
+        }
+        catch (final EcmaError e) {
+            throw ScriptRuntime.typeError("Failed to construct 'URLSearchParams': " + e.getErrorMessage());
         }
         catch (final MalformedURLException e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    /*
+     * Implementation follows https://url.spec.whatwg.org/#urlsearchparams-initialize
+     */
+    private static List<NameValuePair> resolveParams(final Object params) {
+        // if params is a sequence
+        if (params instanceof Scriptable && ScriptableObject.hasProperty((Scriptable) params, SymbolKey.ITERATOR)) {
+
+            final Context cx = Context.getCurrentContext();
+            final Scriptable paramsScriptable = (Scriptable) params;
+
+            final List<NameValuePair> nameValuePairs = new ArrayList<>();
+
+            try (IteratorLikeIterable itr = buildIteratorLikeIterable(cx, paramsScriptable)) {
+                for (final Object nameValue : itr) {
+                    if (!(nameValue instanceof Scriptable)) {
+                        throw ScriptRuntime.typeError("The provided value cannot be converted to a sequence.");
+                    }
+                    if (!ScriptableObject.hasProperty((Scriptable) nameValue, SymbolKey.ITERATOR)) {
+                        throw ScriptRuntime.typeError("The object must have a callable @@iterator property.");
+                    }
+
+                    try (IteratorLikeIterable nameValueItr = buildIteratorLikeIterable(cx, (Scriptable) nameValue)) {
+
+                        final Iterator<Object> nameValueIterator = nameValueItr.iterator();
+                        final Object name =
+                                nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+                        final Object value =
+                                nameValueIterator.hasNext() ? nameValueIterator.next() : Scriptable.NOT_FOUND;
+
+                        if (name == Scriptable.NOT_FOUND
+                                || value == Scriptable.NOT_FOUND
+                                || nameValueIterator.hasNext()) {
+                            throw ScriptRuntime.typeError("Sequence initializer must only contain pair elements.");
+                        }
+
+                        nameValuePairs.add(new NameValuePair(Context.toString(name), Context.toString(value)));
+                    }
+                }
+            }
+
+            return nameValuePairs;
+        }
+
+        // if params is a record
+        if (params instanceof NativeObject) {
+            final List<NameValuePair> nameValuePairs = new ArrayList<>();
+            for (final Map.Entry<Object, Object> keyValuePair : ((NativeObject) params).entrySet()) {
+                nameValuePairs.add(
+                        new NameValuePair(
+                                Context.toString(keyValuePair.getKey()),
+                                Context.toString(keyValuePair.getValue())));
+            }
+            return nameValuePairs;
+        }
+
+        // otherwise handle it as string
+        return splitQuery(Context.toString(params));
     }
 
     private List<NameValuePair> splitQuery() {
@@ -190,6 +251,11 @@ public class URLSearchParams extends HtmlUnitScriptable {
         }
         final String value = "";
         return new NameValuePair(singleParam, value);
+    }
+
+    private static IteratorLikeIterable buildIteratorLikeIterable(final Context cx, final Scriptable iterable) {
+        final Object iterator = ScriptRuntime.callIterator(iterable, cx, iterable.getParentScope());
+        return new IteratorLikeIterable(cx, iterable.getParentScope(), iterator);
     }
 
     /**
