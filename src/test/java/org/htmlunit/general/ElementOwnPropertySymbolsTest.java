@@ -1230,6 +1230,25 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.xml.FormData}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
+            EDGE = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
+            FF = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
+            FF_ESR = "Symbol(Symbol.iterator) [function],Symbol(Symbol.toStringTag) [FormData]",
+            IE = "exception")
+    @HtmlUnitNYI(CHROME = "Symbol(Symbol.toStringTag) [FormData]",
+            EDGE = "Symbol(Symbol.toStringTag) [FormData]",
+            FF_ESR = "Symbol(Symbol.toStringTag) [FormData]",
+            FF = "Symbol(Symbol.toStringTag) [FormData]")
+    public void formData() throws Exception {
+        testString("", "new FormData()");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlFooter}.
      *
      * @throws Exception if the test fails

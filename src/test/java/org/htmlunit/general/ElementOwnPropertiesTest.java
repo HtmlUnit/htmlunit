@@ -6251,6 +6251,25 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
     }
 
     /**
+     * Test {@link org.htmlunit.javascript.host.xml.FormData}.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(CHROME = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
+            EDGE = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
+            FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
+            FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),values()",
+            IE = "append(),constructor()")
+    @HtmlUnitNYI(CHROME = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
+            EDGE = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
+            FF_ESR = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()",
+            FF = "append(),constructor(),delete(),entries(),get(),getAll(),has(),set()")
+    public void formData() throws Exception {
+        testString("", "new FormData()");
+    }
+
+    /**
      * Test {@link org.htmlunit.html.HtmlFooter}.
      *
      * @throws Exception if the test fails
