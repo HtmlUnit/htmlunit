@@ -2062,6 +2062,7 @@ return (function () {
         }
 
         function processNode(elt) {
+console.log('########## processNode(elt) ' + elt);
             elt = resolveTarget(elt);
             if (closest(elt, htmx.config.disableSelector)) {
                 cleanUpElement(elt)
@@ -2403,6 +2404,7 @@ return (function () {
         }
 
         function addValueToValues(name, value, values) {
+console.log('addValueToValues(name, value, values)' + name + ' '  + value);
             // This is a little ugly because both the current value of the named value in the form
             // and the new value could be arrays, so we have to handle all four cases :/
             if (name != null && value != null) {
