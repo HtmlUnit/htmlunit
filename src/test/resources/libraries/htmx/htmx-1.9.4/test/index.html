@@ -36,7 +36,7 @@
 <script src="../node_modules/mock-socket/dist/mock-socket.js"></script>
 <script src="../src/htmx.js"></script>
 <script class="mocha-init">
-    mocha.setup('bdd');
+    mocha.setup({ui: 'bdd', timeout: 4000 });
     mocha.checkLeaks();
     should = chai.should();
 </script>
