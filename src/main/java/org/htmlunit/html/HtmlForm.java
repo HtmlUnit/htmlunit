@@ -596,10 +596,13 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
-     * Same as {@link #getHtmlElementDescendants} but
-     * ignoring elements that are contained in a nested form.
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Same as {@link #getHtmlElementDescendants} but ignoring elements that are contained in a nested form.
+     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
+     *         descendants but ignoring elements that are contained in a nested form
      */
-    private Iterable<HtmlElement> getFormHtmlElementDescendants() {
+    public Iterable<HtmlElement> getFormHtmlElementDescendants() {
         final Iterator<HtmlElement> iter = new DescendantElementsIterator<HtmlElement>(HtmlElement.class) {
             private boolean filterChildrenOfNestedForms_;
 

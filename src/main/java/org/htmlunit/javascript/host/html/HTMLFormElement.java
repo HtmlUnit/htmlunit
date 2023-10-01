@@ -30,7 +30,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -131,40 +130,18 @@ public class HTMLFormElement extends HTMLElement implements Function {
         elements.setElementsSupplier(
                 (Supplier<List<DomNode>> & Serializable)
                 () -> {
-                    boolean filterChildrenOfNestedForms = false;
-
                     final List<DomNode> response = new ArrayList<>();
                     final DomNode domNode = getDomNodeOrNull();
                     if (domNode == null) {
                         return response;
                     }
-                    for (final DomNode desc : domNode.getDescendants()) {
-                        if (desc instanceof DomElement) {
-                            if (desc instanceof HtmlForm) {
-                                filterChildrenOfNestedForms = true;
-                            }
-                            else {
-                                if (desc instanceof HtmlInput || desc instanceof HtmlButton
-                                    || desc instanceof HtmlTextArea || desc instanceof HtmlSelect) {
-                                    response.add(desc);
-                                }
-                            }
+                    for (final HtmlElement desc : ((HtmlForm) domNode).getFormHtmlElementDescendants()) {
+                        if (desc instanceof HtmlInput || desc instanceof HtmlButton
+                            || desc instanceof HtmlTextArea || desc instanceof HtmlSelect) {
+                            response.add(desc);
                         }
                     }
 
-                    // it would be more performant to avoid iterating through
-                    // nested forms but as it is a corner case of ill formed HTML
-                    // the needed refactoring would take too much time
-                    // => filter here and not in isMatching as it won't be needed in most
-                    // of the cases
-                    if (filterChildrenOfNestedForms) {
-                        for (final Iterator<DomNode> iter = response.iterator(); iter.hasNext();) {
-                            final HtmlElement field = (HtmlElement) iter.next();
-                            if (field.getEnclosingForm() != htmlForm) {
-                                iter.remove();
-                            }
-                        }
-                    }
                     response.addAll(htmlForm.getLostChildren());
                     return response;
                 });
