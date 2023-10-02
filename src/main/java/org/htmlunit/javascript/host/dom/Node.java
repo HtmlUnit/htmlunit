@@ -39,6 +39,7 @@ import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
+import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlInlineFrame;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
@@ -220,8 +221,8 @@ public class Node extends EventTarget {
             appendedChild = childObject;
 
             initInlineFrameIfNeeded(childDomNode);
-            for (final DomNode domNode : childDomNode.getDescendants()) {
-                initInlineFrameIfNeeded(domNode);
+            for (final HtmlElement htmlElement : childDomNode.getHtmlElementDescendants()) {
+                initInlineFrameIfNeeded(htmlElement);
             }
         }
         return appendedChild;

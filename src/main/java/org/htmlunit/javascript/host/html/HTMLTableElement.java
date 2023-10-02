@@ -274,10 +274,10 @@ public class HTMLTableElement extends RowContainer {
     public Object insertRow(final int index) {
         // check if a tbody should be created
         if (index != 0) {
-            for (final DomNode domNode : getDomNodeOrDie().getDescendants()) {
-                if (domNode instanceof HtmlTableBody
-                        || domNode instanceof HtmlTableHeader
-                        || domNode instanceof HtmlTableFooter) {
+            for (final HtmlElement htmlElement : getDomNodeOrDie().getHtmlElementDescendants()) {
+                if (htmlElement instanceof HtmlTableBody
+                        || htmlElement instanceof HtmlTableHeader
+                        || htmlElement instanceof HtmlTableFooter) {
                     return super.insertRow(index);
                 }
             }

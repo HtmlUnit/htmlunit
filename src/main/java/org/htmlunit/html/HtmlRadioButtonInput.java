@@ -154,9 +154,9 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
      */
     private void setCheckedForPage(final HtmlPage htmlPage) {
         final String name = getNameAttribute();
-        for (final DomNode domNode : htmlPage.getDescendants()) {
-            if (domNode instanceof HtmlRadioButtonInput) {
-                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) domNode;
+        for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
+            if (htmlElement instanceof HtmlRadioButtonInput) {
+                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
                 if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))
                         && radioInput.getEnclosingForm() == null) {
                     if (radioInput == this) {
@@ -308,9 +308,9 @@ public class HtmlRadioButtonInput extends HtmlInput implements LabelableElement 
         }
 
         final String name = getNameAttribute();
-        for (final DomNode domNode : getPage().getDescendants()) {
-            if (domNode instanceof HtmlRadioButtonInput) {
-                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) domNode;
+        for (final HtmlElement htmlElement : getPage().getHtmlElementDescendants()) {
+            if (htmlElement instanceof HtmlRadioButtonInput) {
+                final HtmlRadioButtonInput radioInput = (HtmlRadioButtonInput) htmlElement;
                 if (name.equals(radioInput.getAttribute(DomElement.NAME_ATTRIBUTE))
                         && radioInput.isChecked()) {
                     return false;
