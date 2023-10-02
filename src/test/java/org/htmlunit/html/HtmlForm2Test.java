@@ -270,7 +270,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception if the test page can't be loaded
      */
     @Test
-    @Alerts({"1", "val2"})
+    @Alerts({"1", "val2", "3", "3"})
     public void malformedHtml_nestedForms() throws Exception {
         final String html
             = "<html><head>\n"
@@ -279,6 +279,9 @@ public class HtmlForm2Test extends WebDriverTestCase {
             + "  function test() {\n"
             + "    log(document.forms.length);\n"
             + "    log(document.forms[0].field2.value);\n"
+
+            + "    log(document.forms[0].length);\n"
+            + "    log(document.forms[0].elements.length);\n"
             + "  }\n"
             + "</script></head><body onload='test()'>\n"
             + "<form id='form1' method='get' action='foo'>\n"

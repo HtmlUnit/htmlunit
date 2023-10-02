@@ -46,15 +46,12 @@ import org.htmlunit.html.DomElement;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.FormFieldWithNameHistory;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
-import org.htmlunit.html.HtmlButton;
 import org.htmlunit.html.HtmlElement;
 import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlImage;
 import org.htmlunit.html.HtmlImageInput;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlSelect;
-import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.html.SubmittableElement;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstructor;
@@ -133,15 +130,9 @@ public class HTMLFormElement extends HTMLElement implements Function {
                     final List<DomNode> response = new ArrayList<>();
                     final DomNode domNode = getDomNodeOrNull();
                     if (domNode == null) {
-                        return response;
+                        return new ArrayList<>();
                     }
-                    for (final HtmlElement desc : ((HtmlForm) domNode).getFormHtmlElementDescendants()) {
-                        if (desc instanceof HtmlInput || desc instanceof HtmlButton
-                            || desc instanceof HtmlTextArea || desc instanceof HtmlSelect) {
-                            response.add(desc);
-                        }
-                    }
-
+                    response.addAll(((HtmlForm) domNode).getElements());
                     response.addAll(htmlForm.getLostChildren());
                     return response;
                 });

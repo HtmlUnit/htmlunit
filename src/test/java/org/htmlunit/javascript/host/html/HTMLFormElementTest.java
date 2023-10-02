@@ -132,6 +132,40 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
+    @Alerts(DEFAULT = {"3", "textInput1", "button1", "textInput3"},
+            IE = {"1", "button1"})
+    public void elementsAccessorFormAttribute() throws Exception {
+        final String html
+            = "<html><head><script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function doTest() {\n"
+            + "  log(document.form1.length);\n"
+            + "  for (var i = 0; i < document.form1.length; i++) {\n"
+            + "    var element = document.form1.elements[i];\n"
+            + "    log(element.name);\n"
+            + "  }\n"
+            + "}\n"
+            + "</script></head>\n"
+            + "<body onload='doTest()'>\n"
+
+            + "<input type='text' name='textInput1' form='myForm'/>\n"
+            + "<input type='text' name='textInput2' form='form1'/>\n"
+
+            + "<form id='myForm' name='form1'>\n"
+            + "  <input type='button' name='button1' />\n"
+            + "</form>\n"
+
+            + "<input type='text' name='textInput3' form='myForm'/>\n"
+            + "<input type='text' name='textInput4' form='form1'/>\n"
+            + "</body></html>";
+
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
     @Alerts({"3", "1", "2", "3"})
     public void radioButtonArray() throws Exception {
         final String html

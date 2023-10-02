@@ -33,7 +33,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -262,7 +261,7 @@ public class HtmlForm extends HtmlElement {
 
     private boolean areChildrenValid() {
         boolean valid = true;
-        for (final HtmlElement element : getFormHtmlElementDescendants()) {
+        for (final HtmlElement element : getElements()) {
             if (element instanceof HtmlInput && !element.isValid()) {
                 if (LOG.isInfoEnabled()) {
                     LOG.info("Form validation failed; element '" + element + "' was not valid. Submit cancelled.");
@@ -459,7 +458,7 @@ public class HtmlForm extends HtmlElement {
     Collection<SubmittableElement> getSubmittableElements(final SubmittableElement submitElement) {
         final List<SubmittableElement> submittableElements = new ArrayList<>();
 
-        for (final HtmlElement element : getFormHtmlElementDescendants()) {
+        for (final HtmlElement element : getElements()) {
             if (isSubmittable(element, submitElement)) {
                 submittableElements.add((SubmittableElement) element);
             }
@@ -581,11 +580,11 @@ public class HtmlForm extends HtmlElement {
         final List<E> list = new ArrayList<>();
         final String lowerCaseTagName = elementName.toLowerCase(Locale.ROOT);
 
-        for (final HtmlElement next : getFormHtmlElementDescendants()) {
-            if (next.getTagName().equals(lowerCaseTagName)) {
-                final String attValue = next.getAttribute(attributeName);
+        for (final HtmlElement element : getElements()) {
+            if (element.getTagName().equals(lowerCaseTagName)) {
+                final String attValue = element.getAttribute(attributeName);
                 if (attValue.equals(attributeValue)) {
-                    list.add((E) next);
+                    list.add((E) element);
                 }
             }
         }
@@ -595,29 +594,47 @@ public class HtmlForm extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * Same as {@link #getHtmlElementDescendants} but ignoring elements that are contained in a nested form.
-     * @return an {@link Iterable} that will recursively iterate over all of this node's {@link HtmlElement}
-     *         descendants but ignoring elements that are contained in a nested form
+     * @return returns a list of all form controls contained in the <form> element or referenced by formId
+     *         but ignoring elements that are contained in a nested form
      */
-    public Iterable<HtmlElement> getFormHtmlElementDescendants() {
-        final Iterator<HtmlElement> iter = new DescendantElementsIterator<HtmlElement>(HtmlElement.class) {
-            private boolean filterChildrenOfNestedForms_;
+    public List<HtmlElement> getElements() {
+        final List<HtmlElement> elements = new ArrayList<>();
 
-            @Override
-            protected boolean isAccepted(final DomNode node) {
-                if (node instanceof HtmlForm) {
-                    filterChildrenOfNestedForms_ = true;
-                    return false;
-                }
+        final String formId = getId();
+        final boolean formAttribSupported = formId != ATTRIBUTE_NOT_DEFINED
+                && getPage().getWebClient().getBrowserVersion().hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE);
 
-                final boolean accepted = super.isAccepted(node);
-                if (accepted && filterChildrenOfNestedForms_) {
-                    return ((HtmlElement) node).getEnclosingForm() == HtmlForm.this;
-                }
-                return accepted;
+        final HashSet<HtmlElement> nestedForms = new HashSet<>();
+
+        for (final HtmlElement element : ((HtmlPage) getPage()).getBody().getHtmlElementDescendants()) {
+            if (element != this && element instanceof HtmlForm && this.isAncestorOf(element)) {
+                nestedForms.add(element);
+                continue;
             }
-        };
-        return () -> iter;
+
+            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
+                if (isAncestorOf(element)) {
+                    elements.add(element);
+                    continue;
+                }
+
+                if (formAttribSupported) {
+                    final String formIdRef = element.getAttribute("form");
+                    if (formId.equals(formIdRef)) {
+                        elements.add(element);
+                        continue;
+                    }
+                }
+            }
+        }
+
+        for (final HtmlElement element : lostChildren_) {
+            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
+                elements.add(element);
+            }
+        }
+
+        return elements;
     }
 
     /**
@@ -986,10 +1003,10 @@ public class HtmlForm extends HtmlElement {
     public List<HtmlInput> getInputsByValue(final String value) {
         final List<HtmlInput> results = new ArrayList<>();
 
-        for (final HtmlElement next : getFormHtmlElementDescendants()) {
-            if (next instanceof HtmlInput
-                    && Objects.equals(((HtmlInput) next).getValue(), value)) {
-                results.add((HtmlInput) next);
+        for (final HtmlElement element : getElements()) {
+            if (element instanceof HtmlInput
+                    && Objects.equals(((HtmlInput) element).getValue(), value)) {
+                results.add((HtmlInput) element);
             }
         }
 
