@@ -8,6 +8,15 @@
 
     <body>
         <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, htmx 1.9.6, Bugfixes">
+            <action type="fix" dev="rbri" issue="627">
+                INCOMPATIBLE CHANGE: WebClient.close() now really closes all windows and also
+                stops the js engine. This means you can't use the the webClient afterwards for browsing.
+                If you only like to cleanup all the window resources use WebClient.reset().
+            </action>
+            <action type="add" dev="rbri">
+                New method WebClient.reset() added, this is like close() but restarting the js engine
+                and open a new empty window afterwards.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.14.0.
             </action>

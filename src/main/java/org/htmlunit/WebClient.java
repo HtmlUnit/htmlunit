@@ -2266,6 +2266,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
     /**
      * Closes all opened windows, stopping all background JavaScript processing.
+     * The WebClient is not really usable after this - you have to create a new one or
+     * use WebClient.reset() instead.
      * <p>
      * {@inheritDoc}
      */
@@ -2384,9 +2386,37 @@ public class WebClient implements Serializable, AutoCloseable {
         }
         executor_ = null;
 
+        msxmlActiveXObjectFactory_ = null;
         cache_.clear();
         if (toThrow != null) {
             throw toThrow;
+        }
+    }
+
+    /**
+     * <p><span style="color:red">Experimental API: May be changed in next release
+     * and may not yet work perfectly!</span></p>
+     *
+     * <p>This shuts down the whole client and restarts with a new empty window.
+     * Cookies and other states are preserved.
+     */
+    public void reset() {
+        close();
+
+        // this has to be done after the browser version was set
+        webConnection_ = new HttpWebConnection(this);
+        if (javaScriptEngineEnabled_) {
+            scriptEngine_ = new JavaScriptEngine(this);
+        }
+
+        // The window must be constructed AFTER the script engine.
+        addWebWindowListener(new CurrentWindowTracker(this));
+        currentWindow_ = new TopLevelWindow("", this);
+
+        initMSXMLActiveX();
+
+        if (isJavaScriptEnabled()) {
+            fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
         }
     }
 

@@ -2645,4 +2645,69 @@ public class WebClientTest extends SimpleWebTestCase {
         final HtmlPage page = client.loadXHtmlCodeIntoCurrentWindow(htmlCode);
         assertEquals("content...", page.getBody().asNormalizedText());
     }
+
+    /**
+     * @throws Exception if test fails
+     */
+    @Test
+    public void reset() throws Exception {
+        final String html = "<html><head><title>testpage</title></head>\n"
+                + "<body>\n"
+                + "</body></html>";
+
+        final String html2 = "<html><head><title>testpage</title></head>\n"
+                + "<body>\n"
+                + "<script>document.title = 'js'</script>\n"
+                + "</body></html>";
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+
+        @SuppressWarnings("resource")
+        final WebClient webClient = getWebClientWithMockWebConnection();
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertNull(webClient.getCurrentWindow().getEnclosedPage());
+
+        webClient.getPage(URL_FIRST);
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertEquals("testpage", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+
+        webClient.reset();
+
+        getMockWebConnection().setResponse(URL_FIRST, html);
+        webClient.setWebConnection(getMockWebConnection());
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertNull(webClient.getCurrentWindow().getEnclosedPage());
+
+        webClient.getPage(URL_FIRST);
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertEquals("testpage", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+
+        webClient.reset();
+        getMockWebConnection().setResponse(URL_FIRST, html2);
+        webClient.setWebConnection(getMockWebConnection());
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertNull(webClient.getCurrentWindow().getEnclosedPage());
+
+        webClient.getPage(URL_FIRST);
+
+        assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertNotNull(webClient.getCurrentWindow());
+        assertEquals("js", ((HtmlPage) webClient.getCurrentWindow().getEnclosedPage()).getTitleText());
+    }
 }
