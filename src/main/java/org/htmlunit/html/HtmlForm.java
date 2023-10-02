@@ -16,7 +16,6 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
@@ -464,27 +463,6 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
-            final String formId = getId();
-            if (formId != ATTRIBUTE_NOT_DEFINED) {
-                for (final HtmlElement element : ((HtmlPage) getPage()).getBody().getHtmlElementDescendants()) {
-                    final String formIdRef = element.getAttribute("form");
-                    if (formId.equals(formIdRef) && isSubmittable(element, submitElement)) {
-                        final SubmittableElement submittable = (SubmittableElement) element;
-                        if (!submittableElements.contains(submittable)) {
-                            submittableElements.add(submittable);
-                        }
-                    }
-                }
-            }
-        }
-
-        for (final HtmlElement element : lostChildren_) {
-            if (isSubmittable(element, submitElement)) {
-                submittableElements.add((SubmittableElement) element);
-            }
-        }
-
         return submittableElements;
     }
 
@@ -556,15 +534,7 @@ public class HtmlForm extends HtmlElement {
      * @return all input elements which are members of this form and have the specified name
      */
     public List<HtmlInput> getInputsByName(final String name) {
-        final List<HtmlInput> list = getFormElementsByAttribute(HtmlInput.TAG_NAME, NAME_ATTRIBUTE, name);
-
-        // collect inputs from lost children
-        for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlInput && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
-                list.add((HtmlInput) elt);
-            }
-        }
-        return list;
+        return getFormElementsByAttribute(HtmlInput.TAG_NAME, NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -643,15 +613,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlSelect} elements in this form that have the specified name
      */
     public List<HtmlSelect> getSelectsByName(final String name) {
-        final List<HtmlSelect> list = getFormElementsByAttribute(HtmlSelect.TAG_NAME, NAME_ATTRIBUTE, name);
-
-        // collect selects from lost children
-        for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlSelect && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
-                list.add((HtmlSelect) elt);
-            }
-        }
-        return list;
+        return getFormElementsByAttribute(HtmlSelect.TAG_NAME, NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -677,15 +639,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlButton} elements in this form that have the specified name
      */
     public List<HtmlButton> getButtonsByName(final String name) {
-        final List<HtmlButton> list = getFormElementsByAttribute(HtmlButton.TAG_NAME, NAME_ATTRIBUTE, name);
-
-        // collect buttons from lost children
-        for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlButton && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
-                list.add((HtmlButton) elt);
-            }
-        }
-        return list;
+        return getFormElementsByAttribute(HtmlButton.TAG_NAME, NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -711,15 +665,7 @@ public class HtmlForm extends HtmlElement {
      * @return all the {@link HtmlTextArea} elements in this form that have the specified name
      */
     public List<HtmlTextArea> getTextAreasByName(final String name) {
-        final List<HtmlTextArea> list = getFormElementsByAttribute(HtmlTextArea.TAG_NAME, NAME_ATTRIBUTE, name);
-
-        // collect buttons from lost children
-        for (final HtmlElement elt : getLostChildren()) {
-            if (elt instanceof HtmlTextArea && name.equals(elt.getAttributeDirect(NAME_ATTRIBUTE))) {
-                list.add((HtmlTextArea) elt);
-            }
-        }
-        return list;
+        return getFormElementsByAttribute(HtmlTextArea.TAG_NAME, NAME_ATTRIBUTE, name);
     }
 
     /**
@@ -985,13 +931,6 @@ public class HtmlForm extends HtmlElement {
         final List<HtmlInput> results = new ArrayList<>();
 
         for (final HtmlElement element : getElements()) {
-            if (element instanceof HtmlInput
-                    && Objects.equals(((HtmlInput) element).getValue(), value)) {
-                results.add((HtmlInput) element);
-            }
-        }
-
-        for (final HtmlElement element : getLostChildren()) {
             if (element instanceof HtmlInput
                     && Objects.equals(((HtmlInput) element).getValue(), value)) {
                 results.add((HtmlInput) element);
