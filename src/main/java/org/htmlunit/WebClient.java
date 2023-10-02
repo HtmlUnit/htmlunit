@@ -304,12 +304,10 @@ public class WebClient implements Serializable, AutoCloseable {
         addWebWindowListener(new CurrentWindowTracker(this));
         currentWindow_ = new TopLevelWindow("", this);
 
+        initMSXMLActiveX();
+
         if (isJavaScriptEnabled()) {
             fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
-
-            if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-                initMSXMLActiveX();
-            }
         }
     }
 
@@ -334,6 +332,10 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     private void initMSXMLActiveX() {
+        if (!isJavaScriptEnabled() || !getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
+            return;
+        }
+
         msxmlActiveXObjectFactory_ = new MSXMLActiveXObjectFactory();
         // TODO [IE] initialize in #init or in #initialize?
         try {
@@ -2533,9 +2535,7 @@ public class WebClient implements Serializable, AutoCloseable {
         jobManagers_ = Collections.synchronizedList(new ArrayList<>());
         loadQueue_ = new ArrayList<>();
 
-        if (getBrowserVersion().hasFeature(JS_XML_SUPPORT_VIA_ACTIVEXOBJECT)) {
-            initMSXMLActiveX();
-        }
+        initMSXMLActiveX();
     }
 
     private static class LoadJob {
