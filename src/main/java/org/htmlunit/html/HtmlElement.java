@@ -14,7 +14,7 @@
  */
 package org.htmlunit.html;
 
-import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_FORM_ATTRIBUTE;
+import static org.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_DETACH_ACTIVE_TRIGGERS_NO_KEYUP_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.HTMLELEMENT_REMOVE_ACTIVE_TRIGGERS_BLUR_EVENT;
 import static org.htmlunit.BrowserVersionFeatures.KEYBOARD_EVENT_SPECIAL_KEYPRESS;
@@ -464,7 +464,7 @@ public abstract class HtmlElement extends DomElement {
      */
     public HtmlForm getEnclosingForm() {
         final BrowserVersion browserVersion = getPage().getWebClient().getBrowserVersion();
-        if (browserVersion.hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
+        if (browserVersion.hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
             final String formId = getAttribute("form");
             if (ATTRIBUTE_NOT_DEFINED != formId) {
                 final Element formById = getPage().getElementById(formId);

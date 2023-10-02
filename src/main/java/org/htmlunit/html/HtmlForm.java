@@ -16,9 +16,9 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
-import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_FORM_ATTRIBUTE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_ORIGIN;
@@ -464,7 +464,7 @@ public class HtmlForm extends HtmlElement {
             }
         }
 
-        if (getPage().getWebClient().getBrowserVersion().hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE)) {
+        if (getPage().getWebClient().getBrowserVersion().hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
             final String formId = getId();
             if (formId != ATTRIBUTE_NOT_DEFINED) {
                 for (final HtmlElement element : ((HtmlPage) getPage()).getBody().getHtmlElementDescendants()) {
@@ -602,7 +602,7 @@ public class HtmlForm extends HtmlElement {
 
         final String formId = getId();
         final boolean formAttribSupported = formId != ATTRIBUTE_NOT_DEFINED
-                && getPage().getWebClient().getBrowserVersion().hasFeature(FORM_SUBMISSION_FORM_ATTRIBUTE);
+                && getPage().getWebClient().getBrowserVersion().hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED);
 
         final HashSet<HtmlElement> nestedForms = new HashSet<>();
 

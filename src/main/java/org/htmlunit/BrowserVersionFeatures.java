@@ -291,11 +291,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED,
 
-    /** Form submit takes care of fields outside the form linked to the form
-     * using the form attribute. */
-    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
-    FORM_SUBMISSION_FORM_ATTRIBUTE,
-
     /** Form submit includes the Cache-Control: max-age=0 header. */
     @BrowserFeature({CHROME, EDGE})
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE,
