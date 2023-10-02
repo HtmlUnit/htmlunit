@@ -15,7 +15,6 @@
 package org.htmlunit.html;
 
 import static org.htmlunit.BrowserVersionFeatures.EVENT_MOUSE_ON_DISABLED;
-import static org.htmlunit.BrowserVersionFeatures.FORM_FORM_ATTRIBUTE_SUPPORTED;
 import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE;
 import static org.htmlunit.BrowserVersionFeatures.HTMLBUTTON_WILL_VALIDATE_IGNORES_READONLY;
 import static org.htmlunit.html.HtmlForm.ATTRIBUTE_FORMNOVALIDATE;
@@ -92,18 +91,7 @@ public class HtmlButton extends HtmlElement implements DisabledElement, Submitta
     @Override
     protected boolean doClickStateUpdate(final boolean shiftKey, final boolean ctrlKey) throws IOException {
         if (hasFeature(HTMLBUTTON_SUBMIT_IGNORES_DISABLED_STATE) || !isDisabled()) {
-            HtmlForm form = null;
-            final String formId = getAttributeDirect("form");
-            if (DomElement.ATTRIBUTE_NOT_DEFINED == formId || !hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED)) {
-                form = getEnclosingForm();
-            }
-            else {
-                final DomElement elem = getHtmlPageOrNull().getElementById(formId);
-                if (elem instanceof HtmlForm) {
-                    form = (HtmlForm) elem;
-                }
-            }
-
+            final HtmlForm form = getEnclosingForm();
             if (form != null) {
                 final String type = getType();
                 if (TYPE_BUTTON.equals(type)) {

@@ -23,6 +23,7 @@ import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.html.HtmlPageTest;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.htmlunit.junit.BrowserRunner.NotYetImplemented;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -965,7 +966,7 @@ public class MalformedHtmlTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = {"3", "1b", "1a", "1c", "0", "TABLE"},
             IE = {"3", "1a", "1b", "1c", "0", "TABLE"})
-    @NotYetImplemented({CHROME, EDGE, FF, FF_ESR})
+    @HtmlUnitNYI(IE = {"3", "1b", "1a", "1c", "0", "TABLE"})
     public void formInTable9() throws Exception {
         final String html = "<html>\n"
                 + "<body>\n"

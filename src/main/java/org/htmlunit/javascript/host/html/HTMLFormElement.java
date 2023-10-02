@@ -133,7 +133,6 @@ public class HTMLFormElement extends HTMLElement implements Function {
                         return new ArrayList<>();
                     }
                     response.addAll(((HtmlForm) domNode).getElements());
-                    response.addAll(htmlForm.getLostChildren());
                     return response;
                 });
 

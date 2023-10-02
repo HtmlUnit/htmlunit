@@ -600,36 +600,17 @@ public class HtmlForm extends HtmlElement {
     public List<HtmlElement> getElements() {
         final List<HtmlElement> elements = new ArrayList<>();
 
-        final String formId = getId();
-        final boolean formAttribSupported = formId != ATTRIBUTE_NOT_DEFINED
-                && getPage().getWebClient().getBrowserVersion().hasFeature(FORM_FORM_ATTRIBUTE_SUPPORTED);
-
-        final HashSet<HtmlElement> nestedForms = new HashSet<>();
-
         for (final HtmlElement element : ((HtmlPage) getPage()).getBody().getHtmlElementDescendants()) {
-            if (element != this && element instanceof HtmlForm && this.isAncestorOf(element)) {
-                nestedForms.add(element);
-                continue;
-            }
-
-            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
-                if (isAncestorOf(element)) {
-                    elements.add(element);
-                    continue;
-                }
-
-                if (formAttribSupported) {
-                    final String formIdRef = element.getAttribute("form");
-                    if (formId.equals(formIdRef)) {
-                        elements.add(element);
-                        continue;
-                    }
-                }
+            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
+                    && element.getEnclosingForm() == this) {
+                elements.add(element);
             }
         }
 
         for (final HtmlElement element : lostChildren_) {
-            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())) {
+            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
+                    && element.getEnclosingForm() == this
+                    && !elements.contains(element)) {
                 elements.add(element);
             }
         }
