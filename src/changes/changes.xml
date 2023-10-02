@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.6.0" date="September xx, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, htmx 1.9.6, Bugfixes">
+            <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.14.0.
+            </action>
             <action type="fix" dev="rbri">
                 Form elements are all elements that belong to a form; not only the child elements. We now 
                 take care of elements that use the form attribute to specify the associated form in many more places.
