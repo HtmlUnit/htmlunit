@@ -86,14 +86,14 @@ public abstract class MochiKitTest extends WebDriverTestCase {
         doTest("DOM-Safari");
     }
 
-    /**
-     * @throws Exception if the test fails
-     */
+    // /**
+    //  * @throws Exception if the test fails
+    //  */
     // have to investigate why this fails in HtmlUnit
     // @Test
-    public void dragAndDrop() throws Exception {
-        doTest("DragAndDrop");
-    }
+    // public void dragAndDrop() throws Exception {
+    //     doTest("DragAndDrop");
+    // }
 
     /**
      * @throws Exception if the test fails
