@@ -7,3 +7,5 @@ updates:
     ignore:
       # ignore because it does not work with java 8
       - dependency-name: "org.apache.maven.plugins:maven-site-plugin"
+      - dependency-name: "com.puppycrawl.tools:checkstyle"
+        versions: ["10.x"]
