@@ -487,8 +487,11 @@ public class HTMLFormElement extends HTMLElement implements Function {
             return elements;
         }
 
-        addElements(name, form.getHtmlElementDescendants(), elements);
-        addElements(name, form.getLostChildren(), elements);
+        for (final HtmlElement element : form.getElements()) {
+            if (isAccessibleByIdOrName(element, name)) {
+                elements.add(element);
+            }
+        }
 
         // If no form fields are found, browsers are able to find img elements by ID or name.
         if (elements.isEmpty()) {
@@ -505,28 +508,13 @@ public class HTMLFormElement extends HTMLElement implements Function {
         return elements;
     }
 
-    private void addElements(final String name, final Iterable<HtmlElement> nodes,
-        final List<HtmlElement> addTo) {
-        for (final HtmlElement node : nodes) {
-            if (isAccessibleByIdOrName(node, name)) {
-                addTo.add(node);
-            }
-        }
-    }
-
     private HtmlElement findFirstElement(final String name) {
         final HtmlForm form = (HtmlForm) getDomNodeOrNull();
         if (form == null) {
             return null;
         }
 
-        for (final HtmlElement node : form.getHtmlElementDescendants()) {
-            if (isAccessibleByIdOrName(node, name)) {
-                return node;
-            }
-        }
-
-        for (final HtmlElement node : form.getLostChildren()) {
+        for (final HtmlElement node : form.getElements()) {
             if (isAccessibleByIdOrName(node, name)) {
                 return node;
             }

@@ -943,14 +943,15 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts({"before", "2"})
-    public void fieldFoundWithID() throws Exception {
+    @Alerts({"before", "2", "undefined"})
+    public void fieldFoundWithId() throws Exception {
         final String html = "<html><head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "function test() {\n"
             + "  log(IRForm.IRText.value);\n"
             + "  log(IRForm.myField.length);\n"
+            + "  log(IRForm.myDiv);\n"
             + "}\n"
             + "</script>\n"
             + "</head>\n"
@@ -961,11 +962,37 @@ public class HTMLFormElementTest extends WebDriverTestCase {
             + "    <input type='image' id='myField' src='foo.gif'/>\n"
             + "    <input type='text' name='myField'/>\n"
             + "    <input type='text' id='myField'/>\n"
+            + "    <div id='myDiv'>oooo</div>\n"
             + "  </form>\n"
             + "</body>\n"
             + "</html>";
 
-        getMockWebConnection().setDefaultResponse("Error: not found", 404, "Not Found", MimeType.TEXT_HTML);
+        loadPageVerifyTitle2(html);
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = {"[object HTMLInputElement]", "[object HTMLInputElement]"},
+            IE = {"undefined", "undefined"})
+    public void fieldFoundWithIdByReference() throws Exception {
+        final String html = "<html><head>\n"
+            + "<script>\n"
+            + LOG_TITLE_FUNCTION
+            + "function test() {\n"
+            + "  log(IRForm.IRText);\n"
+            + "  log(IRForm.myField);\n"
+            + "}\n"
+            + "</script>\n"
+            + "</head>\n"
+            + "<body onload='test()'>\n"
+            + "  <form name='IRForm' id='testForm' action='#'>\n"
+            + "  </form>\n"
+            + "  <input type='text' id='IRText' value='abc' form='testForm' />\n"
+            + "  <input type='text' id='myField' value='xy' form='testForm'/>\n"
+            + "</body>\n"
+            + "</html>";
 
         loadPageVerifyTitle2(html);
     }

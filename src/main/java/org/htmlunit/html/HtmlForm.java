@@ -564,7 +564,7 @@ public class HtmlForm extends HtmlElement {
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
      *
-     * @return returns a list of all form controls contained in the <form> element or referenced by formId
+     * @return returns a list of all form controls contained in the &lt;form&gt; element or referenced by formId
      *         but ignoring elements that are contained in a nested form
      */
     public List<HtmlElement> getElements() {
@@ -573,14 +573,6 @@ public class HtmlForm extends HtmlElement {
         for (final HtmlElement element : ((HtmlPage) getPage()).getBody().getHtmlElementDescendants()) {
             if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
                     && element.getEnclosingForm() == this) {
-                elements.add(element);
-            }
-        }
-
-        for (final HtmlElement element : lostChildren_) {
-            if (SUBMITTABLE_ELEMENT_NAMES.contains(element.getTagName())
-                    && element.getEnclosingForm() == this
-                    && !elements.contains(element)) {
                 elements.add(element);
             }
         }
@@ -711,7 +703,7 @@ public class HtmlForm extends HtmlElement {
      * @param radioButtonInput the radio button to select
      */
     void setCheckedRadioButton(final HtmlRadioButtonInput radioButtonInput) {
-        if (radioButtonInput.getEnclosingForm() == null && !lostChildren_.contains(radioButtonInput)) {
+        if (radioButtonInput.getEnclosingForm() == null) {
             throw new IllegalArgumentException("HtmlRadioButtonInput is not child of this HtmlForm");
         }
         final List<HtmlRadioButtonInput> radios = getRadioButtonsByName(radioButtonInput.getNameAttribute());
