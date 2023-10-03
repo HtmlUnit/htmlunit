@@ -94,8 +94,6 @@ public class HtmlForm extends HtmlElement {
 
     private static final Pattern SUBMIT_CHARSET_PATTERN = Pattern.compile("[ ,].*");
 
-    private final List<HtmlElement> lostChildren_ = new ArrayList<>();
-
     private boolean isPreventDefault_;
 
     /**
@@ -930,27 +928,6 @@ public class HtmlForm extends HtmlElement {
         }
 
         return results;
-    }
-
-    /**
-     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
-     *
-     * Allows the parser to notify the form of a field that doesn't belong to its DOM children
-     * due to malformed HTML code
-     * @param field the form field
-     */
-    public void addLostChild(final HtmlElement field) {
-        lostChildren_.add(field);
-        field.setOwningForm(this);
-    }
-
-    /**
-     * Gets the form elements that may be submitted but that don't belong to the form's children
-     * in the DOM due to incorrect HTML code.
-     * @return the elements
-     */
-    public List<HtmlElement> getLostChildren() {
-        return lostChildren_;
     }
 
     /**

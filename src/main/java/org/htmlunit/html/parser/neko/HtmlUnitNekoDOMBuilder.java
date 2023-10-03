@@ -398,7 +398,7 @@ final class HtmlUnitNekoDOMBuilder extends AbstractSAXParser
             if (newElement instanceof SubmittableElement) {
                 // Let these be owned by the form
                 if (((HtmlElement) newElement).getEnclosingForm() != consumingForm_) {
-                    consumingForm_.addLostChild((HtmlElement) newElement);
+                    ((HtmlElement) newElement).setOwningForm(consumingForm_);
                 }
             }
         }

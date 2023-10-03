@@ -1022,7 +1022,13 @@ public abstract class HtmlElement extends DomElement {
         super.checkChildHierarchy(childNode);
     }
 
-    void setOwningForm(final HtmlForm form) {
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * Allows the parser to connect to a form that is not a parent of this due to malformed HTML code
+     * @param form the owning form
+     */
+    public void setOwningForm(final HtmlForm form) {
         owningForm_ = form;
     }
 
