@@ -1,0 +1,86 @@
+Passed: 84
+Failed: 0
+ok - aFunction should have 'this' as submit
+ok - HTML onclick event can be connected to a function
+ok - HTML onclick can be disconnected from a function
+ok - aFunction should have 'this' as submit
+ok - Checking that a DOM element can be connected to a function
+ok - ...and then disconnected
+ok - checking that event() is an object
+ok - checking that type() is a string
+ok - checking that target is "submit"
+ok - checking that modifier() is an object
+ok - checking that modifier().alt is defined, but false
+ok - checking that modifier().ctrl is defined, but false
+ok - checking that modifier().meta is defined, but false
+ok - checking that modifier().shift is defined, but false
+ok - checking that mouse() is an object
+ok - checking that mouse().button is an object
+ok - checking that mouse().button.left is true
+ok - checking that mouse().button.middle is false
+ok - checking that mouse().button.right is false
+ok - checking that mouse().page is an object
+ok - checking that mouse().page.x is a number
+ok - checking that mouse().page.y is a number
+ok - checking that mouse().client is an object
+ok - checking that mouse().client.x is a number
+ok - checking that mouse().client.y is a number
+ok - checking that relatedTarget() is undefined
+ok - checking that key() is undefined
+ok - checking that mouse().wheel is undefined
+ok - Connecting an event to an HTML object and firing a synthetic event
+ok - Disconnecting an event to an HTML object and firing a synthetic event
+ok - checking that mouse() is an object
+ok - checking that mouse().wheel is an object
+ok - checking that mouse().wheel.x is a number
+ok - checking that mouse().wheel.y is a number
+ok - Connecting a mousewheel event to an HTML object and firing a synthetic event
+ok - Disconnecting a mousewheel event to an HTML object and firing a synthetic event
+ok - Connecting function
+ok - New style disconnecting function
+ok - Connecting function
+ok - New style disconnecting function
+ok - Connecting function
+ok - Old style disconnecting function
+ok - Connecting obj-function
+ok - New style disconnecting obj-function
+ok - Connecting obj-function
+ok - Disconnecting obj-function
+ok - Connecting obj-string
+ok - New style disconnecting obj-string
+ok - Connecting obj-string
+ok - Old style disconnecting obj-string
+ok - An exception was raised
+ok - Exception raised, signal should not have fired
+ok - Connecting one signal to two slots in one object
+ok - Disconnecting one signal from two slots in one object
+ok - Connecting one signal to two slots in two objects
+ok - Disconnecting one signal from two slots in two objects
+ok - An exception was raised when connecting undefined
+ok - An exception was raised when disconnecting undefined
+ok - An exception was raised when connecting an undefined function
+ok - An exception was raised when disconnecting an undefined function
+ok - An exception was raised when connecting an undefined method
+ok - An exception was raised when connecting an undefined method (as string)
+ok - Signals should not have fired
+ok - disconnectAll works with single explicit signal
+ok - disconnectAll works with single explicit signal
+ok - disconnectAll does not disconnect unrelated signals
+ok - disconnectAll works with two explicit signals
+ok - disconnectAll works with two explicit signals as a list
+ok - disconnectAll works with implicit signals
+ok - disconnectAll fired in a signal loop works
+ok - disconnectAllTo func precondition
+ok - disconnectAllTo func
+ok - disconnectAllTo obj precondition
+ok - disconnectAllTo obj precondition
+ok - disconnectAllTo obj
+ok - disconnectAllTo obj
+ok - disconnectAllTo obj+str
+ok - disconnectAllTo obj+str
+ok - __connect__ is called when it exists
+ok - __disconnect__ is called when it exists
+ok - disconnected slots do not fire
+ok - custom signal does not re-bind methods
+ok - connect uses late function binding
+ok - test suite finished!

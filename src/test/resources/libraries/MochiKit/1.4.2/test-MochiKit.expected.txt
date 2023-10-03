@@ -1,0 +1,6 @@
+Passed: 4
+Failed: 0
+ok - null is not undefined
+ok - empty string is not undefined
+ok - undefined is undefined
+ok - missing property is undefined

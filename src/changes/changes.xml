@@ -17,6 +17,9 @@
                 New method WebClient.reset() added, this is like close() but restarting the js engine
                 and open a new empty window afterwards.
             </action>
+            <action type="add" dev="rbri">
+                MochiKit 1.4.2 test suite added.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-io to 2.14.0.
             </action>

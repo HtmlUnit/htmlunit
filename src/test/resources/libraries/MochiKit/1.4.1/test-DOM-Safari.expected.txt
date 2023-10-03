@@ -1,0 +1,4 @@
+Passed: 2
+Failed: 0
+ok - Safari didn't crash! #213
+ok - test suite finished!

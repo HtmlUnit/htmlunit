@@ -1,0 +1,220 @@
+Passed: 218
+Failed: 0
+ok - boundFunc bound to self properly
+ok - boundFunc bound to self on another obj
+ok - boundFunc successfully rebound!
+ok - boundFunc partial no self change
+ok - boundFunc partial self change
+ok - boundMethod bound to self properly
+ok - boundMethod bound to self on another obj
+ok - boundMethod successfully rebound!
+ok - boundMethod partial no self change
+ok - boundMethod partial self change
+ok - bindLate binds properly
+ok - bindLate late function lookup
+ok - bindLate fallback to standard bind
+ok - bindMethods doesn't break shit
+ok - bindMethods works on other objects
+ok - bindMethods works on functions
+ok - cloned correct inheritance
+ok - clone-cloned correct inheritance
+ok - clone-clone is copy-on-write
+ok - clone is copy-on-write
+ok - clone-clone has proper delegation
+ok - clone function calls correct
+ok - clone really does work
+ok - isNull matches null
+ok - isNull doesn't match undefined
+ok - isNull doesn't match objects
+ok - isCallable returns true on itself
+ok - isCallable returns false on numbers
+ok - null is not undefined
+ok - empty string is not undefined
+ok - undefined is undefined
+ok - missing property is undefined
+ok - null is undefined or null
+ok - empty string is not undefined or null
+ok - undefined is undefined or null
+ok - missing property is undefined or null
+ok - isEmpty null
+ok - isEmpty true
+ok - isEmpty true
+ok - isEmpty false
+ok - isEmpty false
+ok - isNotEmpty null
+ok - isNotEmpty false
+ok - isNotEmpty false
+ok - isNotEmpty true
+ok - isNotEmpty true
+ok - isArrayLike(undefined)
+ok - isArrayLike(null)
+ok - isArrayLike([])
+ok - extend to an empty array
+ok - extend to a non-empty array
+ok - extend of an empty array
+ok - extend null
+ok - extend undefined
+ok - numbers compare lt
+ok - numbers compare gt
+ok - numbers compare eq
+ok - arrays compare eq
+ok - arrays compare lt (length)
+ok - arrays compare lt (contents)
+ok - arrays compare gt (length)
+ok - arrays compare gt (contents)
+ok - setup for test is correct
+ok - partial application works
+ok - partial application works still
+ok - rebinding partial works
+ok - re-unbinding partial application works
+ok - nodeWalk looks like it works
+ok - map works
+ok - xmap works
+ok - map(fn, p, q) works
+ok - map(fn, p, q) works (q long)
+ok - map(fn, p, q) works (p long)
+ok - map(null, p, q) works
+ok - zip(p, q) works
+ok - map(null, lst) works
+ok - 3 char string is not empty
+ok - 0 char string is empty
+ok - 3 element list is not empty
+ok - 0 element list is empty
+ok - filter works
+ok - filter self works
+ok - xfilter works
+ok - objMax works (with numbers)
+ok - objMin works (with numbers)
+ok - registry found callable
+ok - registry found ArrayLike
+ok - non-matching raised correctly
+ok - priorities are as documented
+ok - removed adapter
+ok - adapter was removed
+ok - override works
+ok - keyComparator 1 lt
+ok - keyComparator 1 eq
+ok - keyComparator 2 eq gt
+ok - keyComparator 2 eq lt
+ok - reverseKeyComparator
+ok - concat
+ok - string repr
+ok - number repr
+ok - listMin
+ok - objMin
+ok - listMax
+ok - objMax
+ok - keys
+ok - items
+ok - bad comparison raised TypeError
+ok - default repr for StringMap
+ok - repr worked
+ok - default repr for StringMap
+ok - registerComparator
+ok - update worked (first obj)
+ok - update worked (second obj)
+ok - update worked (skipped undefined and null)
+ok - update worked (comparison)
+ok - setdefault worked (skipped existing)
+ok - setdefault worked (set non-existing)
+ok - setdefault worked (self is null)
+ok - setdefault worked (self is undefined)
+ok - update worked (self is null, first obj)
+ok - update worked (self is null, second obj)
+ok - update worked (self is null, skipped undefined and null)
+ok - update worked (self is undefined, first obj)
+ok - update worked (self is undefined, second obj)
+ok - update worked (self is undefined, skipped undefined and null)
+ok - merge worked
+ok - bad comparison raised TypeError
+ok - __repr__ protocol
+ok - __repr__ protocol when repr is defined
+ok - NAME protocol (obj)
+ok - NAME protocol (func)
+ok - test nameFunctions
+ok - urlEncode
+ok - queryString
+ok - one item alternate form queryString
+ok - two item alternate form queryString, function skip
+ok - parseQueryString pathological name
+ok - parseQueryString second name:value pair
+ok - parseQueryString useArrays
+ok - parseQueryString strip leading question mark
+ok - extra cruft in parseQueryString output
+ok - string JSON
+ok - null JSON
+ok - undefined not serializable
+ok - 1 JSON
+ok - 1.23 JSON
+ok - function JSON (null, not string)
+ok - array JSON
+ok - evalJSON on an object (1)
+ok - evalJSON on an object (2)
+ok - evalJSON on an object that jsons self (1)
+ok - evalJSON on an object that jsons self (2)
+ok - json serialization calling
+ok - json serialization calling in a structure
+ok - json comment stripping
+ok - json comment stripping
+ok - json registry
+ok - updatetree merge
+ok - updatetree insert
+ok - updatetree merge (self is null)
+ok - updatetree insert (self is null)
+ok - updatetree merge (self is undefined)
+ok - updatetree insert (self is undefined)
+ok - counter starts at 1
+ok - counter increases
+ok - counter starts at 2
+ok - counter increases
+ok - findValue returns -1 on not found
+ok - findValue returns correct index
+ok - findValue honors start
+ok - findValue honors end
+ok - findIdentical returns -1
+ok - findIdentical returns correct index
+ok - findIdentical honors start
+ok - findIdentical honors end
+ok - flattenArguments
+ok - methodcaller with a method name
+ok - methodcaller with a function
+ok - test the compose test
+ok - three fn composition works
+ok - associative left
+ok - associative right
+ok - wrong compose argument raised correctly
+ok - one word
+ok - two words
+ok - three words
+ok - letter and word
+ok - trailing hyphen
+ok - starting hyphen
+ok - one character and word
+ok - flattenArray
+ok - no arguments raised correctly
+ok - single argument (arg list)
+ok - single argument (array)
+ok - three arguments (arg list)
+ok - three arguments (array)
+ok - test the average alias
+ok - no arguments raised correctly
+ok - single argument (arg list)
+ok - single argument (array)
+ok - three arguments (arg list)
+ok - three arguments (array)
+ok - four arguments (arg list)
+ok - four arguments (array)
+ok - parseQueryString('')
+ok - parseQueryString('', true)
+ok - queryString array value
+ok - queryString string value
+ok - values()
+ok - undefined
+ok - parseQueryString multiple = first
+ok - parseQueryString multiple = second
+ok - parseQueryString multiple = third
+ok - parseQueryString multiple = fourth
+ok - queryString with null value
+ok - queryString with null value
+ok - repr of function
+ok - test suite finished!

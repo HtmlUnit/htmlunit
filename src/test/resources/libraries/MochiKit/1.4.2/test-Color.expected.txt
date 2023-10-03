@@ -1,0 +1,88 @@
+Passed: 86
+Failed: 0
+ok - whiteColor has right hex
+ok - blackColor has right hex
+ok - blueColor has right hex
+ok - redColor has right hex
+ok - greenColor has right hex
+ok - default colors compare right
+ok - default colors are interned
+ok - rgb(255,255,255)
+ok - rgb(0,0,255)
+ok - fromRGB works
+ok - fromRGB < 16 works
+ok - alt fromRGB works
+ok - round-trip hex
+ok - round-trip string(hex)
+ok - round-trip rgb
+ok - round-trip rgb
+ok - red hsl.h
+ok - red hsl.s
+ok - red hsl.l
+ok - darkblue hsl.h
+ok - darkblue hsl.s
+ok - darkblue hsl.l
+ok - 4169e1 h
+ok - 4169e1 s
+ok - 4169e1 l
+ok - 555544 h
+ok - 555544 s
+ok - 555544 l
+ok - aqua hsl.h
+ok - aqua hsl.s
+ok - aqua hsl.l
+ok - fromHSL works with components
+ok - fromHSL alt form
+ok - fromHSLString
+ok - toHSLString
+ok - fromHSL to black
+ok - black hsl.h
+ok - black hsl.s
+ok - black hsl.l
+ok - asHSL returns copy
+ok - brown rgb.r
+ok - brown rgb.g
+ok - brown rgb.b
+ok - asRGB returns copy
+ok - aqua fromName
+ok - aqua fromString
+ok - transparent fromName
+ok - transparent fromString
+ok - transparent toRGBString
+ok - rgba parsing alpha correctly
+ok - rgba output correctly
+ok - fromRGBString with spaces and alpha
+ok - fromRGBString with spaces
+ok - fromRGBString with percents
+ok - red hsv.h
+ok - red hsv.s
+ok - red hsv.v
+ok - red hexstring
+ok - darkblue hsv.h
+ok - darkblue hsv.s
+ok - darkblue hsv.v
+ok - darkblue hexstring
+ok - 4169e1 h
+ok - 4169e1 s
+ok - 4169e1 l
+ok - 4169e1 hexstring
+ok - 555544 h
+ok - 555544 s
+ok - 555544 l
+ok - 555544 hexstring
+ok - aqua hsv.h
+ok - aqua hsv.s
+ok - aqua hsv.v
+ok - fromHSV works with components
+ok - fromHSV alt form
+ok - white hsv.h
+ok - white hsv.s
+ok - white hsv.v
+ok - HSV saturation
+ok - fromText no style
+ok - fromText direct style
+ok - fromText indirect style
+ok - fromComputedStyle direct style
+ok - fromComputedStyle indirect style
+ok - fromBackground with DOM
+ok - test suite finished!
