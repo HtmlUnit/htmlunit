@@ -23,6 +23,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -171,7 +172,7 @@ public class HtmlAnchor extends HtmlElement {
         // use the page encoding even if this is a GET requests
         webRequest.setCharset(page.getCharset());
 
-        if (!"noreferrer".equals(getRelAttribute().toLowerCase(Locale.ROOT))) {
+        if (!relContainsNoreferrer()) {
             webRequest.setRefererlHeader(page.getUrl());
         }
 
@@ -194,6 +195,15 @@ public class HtmlAnchor extends HtmlElement {
         }
         page.getWebClient().download(page.getEnclosingWindow(), target, webRequest,
                 true, false, ATTRIBUTE_NOT_DEFINED != getDownloadAttribute(), "Link click");
+    }
+
+    private boolean relContainsNoreferrer() {
+        String rel = getRelAttribute();
+        if (rel != null) {
+            rel = rel.toLowerCase(Locale.ROOT);
+            return ArrayUtils.contains(org.htmlunit.util.StringUtils.splitAtBlank(rel), "noreferrer");
+        }
+        return false;
     }
 
     /**

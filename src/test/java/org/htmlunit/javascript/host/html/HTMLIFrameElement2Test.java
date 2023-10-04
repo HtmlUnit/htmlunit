@@ -218,7 +218,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html2 = "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -340,7 +341,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html2 = "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -702,7 +704,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html2 = "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -771,7 +774,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
         final String html2 = "<html><body>foo</body></html>";
         getMockWebConnection().setResponse(URL_SECOND, html2);
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -804,7 +808,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
             + "  </body>\n"
             + "</html>";
 
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**
@@ -908,9 +913,7 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = {"about:blank", "§§URL§§", "§§URL§§"},
-            FF = {"about:blank", "about:blank", "about:blank"},
-            FF_ESR = {"about:blank", "about:blank", "about:blank"})
+    @Alerts({"about:blank", "§§URL§§", "§§URL§§"})
     public void location() throws Exception {
         final String html =
                 "<html>\n"
@@ -934,7 +937,8 @@ public class HTMLIFrameElement2Test extends WebDriverTestCase {
               + "</html>";
 
         expandExpectedAlertsVariables(URL_FIRST);
-        loadPageVerifyTitle2(html);
+        loadPage2(html);
+        verifyTitle2(DEFAULT_WAIT_TIME, getWebDriver(), getExpectedAlerts());
     }
 
     /**

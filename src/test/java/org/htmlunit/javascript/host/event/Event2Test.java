@@ -1003,8 +1003,9 @@ public class Event2Test extends WebDriverTestCase {
 
         final WebDriver driver = loadPage2(html);
         driver.findElement(By.id("tester")).click();
+        Thread.sleep(200);
         driver.switchTo().alert().accept();
-        Thread.sleep(200); // avoid stale element exception in FF60
+        Thread.sleep(200);
 
         driver.findElement(By.id("getResult")).click();
         final String text = driver.getTitle().trim().replaceAll(";", "\n").trim();

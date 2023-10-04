@@ -1511,7 +1511,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("§§URL§§index.html?test")
+    @Alerts(DEFAULT = "§§URL§§index.html?test",
+            FF = "null")
     public void submit_refererHeaderNoreferrer() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1531,7 +1532,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(By.id("button")).click();
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1539,7 +1540,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("§§URL§§index.html?test")
+    @Alerts(DEFAULT = "§§URL§§index.html?test",
+            FF = "null")
     public void submit_refererHeaderNoreferrerCaseSensitive() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1559,7 +1561,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(By.id("button")).click();
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**
@@ -1567,7 +1569,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      * @throws Exception on test failure
      */
     @Test
-    @Alerts("§§URL§§index.html?test")
+    @Alerts(DEFAULT = "§§URL§§index.html?test",
+            FF = "null")
     public void submit_refererHeaderNoreferrerGet() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1587,7 +1590,7 @@ public class HtmlForm2Test extends WebDriverTestCase {
         driver.findElement(By.id("button")).click();
 
         final Map<String, String> lastAdditionalHeaders = getMockWebConnection().getLastAdditionalHeaders();
-        assertEquals(getExpectedAlerts()[0], lastAdditionalHeaders.get(HttpHeader.REFERER));
+        assertEquals(getExpectedAlerts()[0], "" + lastAdditionalHeaders.get(HttpHeader.REFERER));
     }
 
     /**

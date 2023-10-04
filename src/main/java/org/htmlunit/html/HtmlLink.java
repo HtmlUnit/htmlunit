@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.BrowserVersion;
@@ -33,6 +34,7 @@ import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLLinkElement;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 
 /**
@@ -328,8 +330,9 @@ public class HtmlLink extends HtmlElement {
     public boolean isStyleSheetLink() {
         String rel = getRelAttribute();
         if (rel != null) {
-            rel = rel.trim().toLowerCase(Locale.ROOT);
+            rel = rel.toLowerCase(Locale.ROOT);
+            return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "stylesheet");
         }
-        return "stylesheet".equals(rel);
+        return false;
     }
 }

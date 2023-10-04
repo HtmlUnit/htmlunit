@@ -283,6 +283,10 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
+    /** Form elements are able to refer to the for by using the from attribute. */
+    @BrowserFeature({CHROME, EDGE, FF_ESR, IE})
+    FORM_IGNORE_REL_NOREFERRER,
+
     /** Form formxxx parameters not supported for input type image. */
     @BrowserFeature(IE)
     FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE,
@@ -299,7 +303,7 @@ public enum BrowserVersionFeatures {
     @BrowserFeature(IE)
     FORM_SUBMISSION_HEADER_CACHE_CONTROL_NO_CACHE,
 
-    /** Form submit includes the origin header. */
+    /** Forms are ignoring the rel='noreferrer' attribute. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     FORM_SUBMISSION_HEADER_ORIGIN,
 

@@ -7,6 +7,12 @@
     </properties>
 
     <body>
+        <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes">
+            <action type="fix" dev="rbri">
+                'rel' attribute may contain multiple values, we have to split before checking the value.
+            </action>
+        </release>
+
         <release version="3.6.0" date="October 03, 2023" description="Firefox 116, Chrome/Edge 116, htmx 1.9.5, htmx 1.9.6, Bugfixes">
             <action type="fix" dev="rbri" issue="627">
                 INCOMPATIBLE CHANGE: WebClient.close() now really closes all windows and also

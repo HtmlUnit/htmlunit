@@ -1144,6 +1144,7 @@ public class NodeTest extends WebDriverTestCase {
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
         final WebDriver driver = loadPage2(firstHtml);
+        Thread.sleep(200);
         verifyWindowName2(driver, getExpectedAlerts());
 
         driver.findElement(By.id("myInput")).click();

@@ -16,6 +16,7 @@ package org.htmlunit.html;
 
 import static java.nio.charset.StandardCharsets.UTF_16;
 import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.htmlunit.BrowserVersionFeatures.FORM_IGNORE_REL_NOREFERRER;
 import static org.htmlunit.BrowserVersionFeatures.FORM_PARAMETRS_NOT_SUPPORTED_FOR_IMAGE;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_DOWNLOWDS_ALSO_IF_ONLY_HASH_CHANGED;
 import static org.htmlunit.BrowserVersionFeatures.FORM_SUBMISSION_HEADER_CACHE_CONTROL_MAX_AGE;
@@ -38,6 +39,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -355,7 +357,10 @@ public class HtmlForm extends HtmlElement {
         request.setCharset(enc);
 
         // forms are ignoring the rel='noreferrer'
-        request.setRefererlHeader(htmlPage.getUrl());
+        if (browser.hasFeature(FORM_IGNORE_REL_NOREFERRER)
+                || !relContainsNoreferrer()) {
+            request.setRefererlHeader(htmlPage.getUrl());
+        }
 
         if (HttpMethod.POST == method
                 && browser.hasFeature(FORM_SUBMISSION_HEADER_ORIGIN)) {
@@ -380,6 +385,15 @@ public class HtmlForm extends HtmlElement {
         }
 
         return request;
+    }
+
+    private boolean relContainsNoreferrer() {
+        String rel = getRelAttribute();
+        if (rel != null) {
+            rel = rel.toLowerCase(Locale.ROOT);
+            return ArrayUtils.contains(org.htmlunit.util.StringUtils.splitAtBlank(rel), "noreferrer");
+        }
+        return false;
     }
 
     /**
