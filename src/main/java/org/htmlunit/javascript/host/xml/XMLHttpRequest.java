@@ -1175,7 +1175,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
                 String value = pair.getValue();
                 if (value != null) {
                     value = org.htmlunit.util.StringUtils.toRootLowerCaseWithCache(value);
-                    final String[] values = StringUtils.split(value, ',');
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtComma(value);
                     for (String part : values) {
                         part = part.trim();
                         if (StringUtils.isNotEmpty(part)) {

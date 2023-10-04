@@ -61,6 +61,7 @@ import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.SerializableLock;
+import org.htmlunit.util.StringUtils;
 import org.htmlunit.xml.XmlPage;
 import org.htmlunit.xpath.xml.utils.PrefixResolver;
 import org.w3c.dom.DOMException;
@@ -1527,7 +1528,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
      */
     private static Map<String, String> parseSelectionNamespaces(final String selectionNS) {
         final Map<String, String> result = new HashMap<>();
-        final String[] toks = selectionNS.split("\\s");
+        final String[] toks = StringUtils.splitAtJavaWhitespace(selectionNS);
         for (final String tok : toks) {
             if (tok.startsWith("xmlns=")) {
                 result.put("", tok.substring(7, tok.length() - 7));

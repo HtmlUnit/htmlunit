@@ -559,7 +559,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                     return "0% 0%";
                 }
                 if (getBrowserVersion().hasFeature(CSS_ZINDEX_TYPE_INTEGER)) {
-                    final String[] values = value.split(" ");
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
                     if ("center".equals(values[0])) {
                         values[0] = "";
                     }
@@ -571,7 +571,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
                     }
                 }
                 if (isComputed) {
-                    final String[] values = value.split(" ");
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtBlank(value);
                     switch (values[0]) {
                         case "left":
                             values[0] = "0%";
@@ -809,7 +809,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             if (value == null) {
                 final String borderWidth = getStyleAttribute(BORDER_WIDTH, false);
                 if (!StringUtils.isEmpty(borderWidth)) {
-                    final String[] values = StringUtils.split(borderWidth);
+                    final String[] values = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(borderWidth);
                     int index = values.length;
                     if (borderSideWidth.name().contains("TOP")) {
                         index = 0;
@@ -2577,7 +2577,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
             return org.htmlunit.util.StringUtils.formatColor(tmpColor);
         }
 
-        final String[] tokens = StringUtils.split(text, ' ');
+        final String[] tokens = org.htmlunit.util.StringUtils.splitAtBlank(text);
         for (final String token : tokens) {
             if (isColorKeyword(token)) {
                 return token;
@@ -2667,7 +2667,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the border style if found, null otherwise
      */
     private static String findBorderStyle(final String text) {
-        for (final String token : StringUtils.split(text, ' ')) {
+        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
             if (isBorderStyle(token)) {
                 return token;
             }
@@ -2681,7 +2681,7 @@ public class CSSStyleDeclaration extends HtmlUnitScriptable {
      * @return the border width if found, null otherwise
      */
     private static String findBorderWidth(final String text) {
-        for (final String token : StringUtils.split(text, ' ')) {
+        for (final String token : org.htmlunit.util.StringUtils.splitAtBlank(text)) {
             if (isBorderWidth(token)) {
                 return token;
             }

@@ -403,4 +403,65 @@ public final class StringUtils {
 
         return content.getBytes(charset);
     }
+
+    /**
+     * Splits the provided text into an array, using whitespace as the
+     * separator.
+     * Whitespace is defined by {@link Character#isWhitespace(char)}.
+     *
+     * @param str  the String to parse, may be null
+     * @return an array of parsed Strings, an empty array if null String input
+     */
+    public static String[] splitAtJavaWhitespace(final String str) {
+        final String[] parts = org.apache.commons.lang3.StringUtils.split(str);
+        if (parts == null) {
+            return new String[0];
+        }
+        return parts;
+    }
+
+    /**
+     * Splits the provided text into an array, using blank as the
+     * separator.
+     *
+     * @param str  the String to parse, may be null
+     * @return an array of parsed Strings, an empty array if null String input
+     */
+    public static String[] splitAtBlank(final String str) {
+        final String[] parts = org.apache.commons.lang3.StringUtils.split(str, ' ');
+        if (parts == null) {
+            return new String[0];
+        }
+        return parts;
+    }
+
+    /**
+     * Splits the provided text into an array, using blank as the
+     * separator.
+     *
+     * @param str  the String to parse, may be null
+     * @return an array of parsed Strings, an empty array if null String input
+     */
+    public static String[] splitAtComma(final String str) {
+        final String[] parts = org.apache.commons.lang3.StringUtils.split(str, ',');
+        if (parts == null) {
+            return new String[0];
+        }
+        return parts;
+    }
+
+    /**
+     * Splits the provided text into an array, using comma or blank as the
+     * separator.
+     *
+     * @param str  the String to parse, may be null
+     * @return an array of parsed Strings, an empty array if null String input
+     */
+    public static String[] splitAtCommaOrBlank(final String str) {
+        final String[] parts = org.apache.commons.lang3.StringUtils.split(str, ", ");
+        if (parts == null) {
+            return new String[0];
+        }
+        return parts;
+    }
 }

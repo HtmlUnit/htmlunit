@@ -130,7 +130,7 @@ public class Navigator extends HtmlUnitScriptable {
         }
 
         final ArrayList<String> res = new ArrayList<>();
-        final String[] parts = StringUtils.split(acceptLang, ",");
+        final String[] parts = org.htmlunit.util.StringUtils.splitAtComma(acceptLang);
         for (final String part : parts) {
             if (!StringUtils.isEmpty(part)) {
                 final String lang = StringUtils.substringBefore(part, ";").trim();

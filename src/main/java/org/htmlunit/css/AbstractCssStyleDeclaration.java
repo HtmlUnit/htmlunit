@@ -18,11 +18,11 @@ import java.io.Serializable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.css.StyleAttributes.Definition;
 import org.htmlunit.cssparser.dom.AbstractCSSRuleImpl;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.javascript.host.Element;
+import org.htmlunit.util.StringUtils;
 
 /**
  * A css StyleDeclaration.
@@ -109,7 +109,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
         }
         value = element2.getValue();
 
-        final String[] values = StringUtils.split(value);
+        final String[] values = StringUtils.splitAtJavaWhitespace(value);
         if (definition1.name().contains("TOP")) {
             if (values.length > 0) {
                 return values[0];
@@ -231,7 +231,7 @@ public abstract class AbstractCssStyleDeclaration implements Serializable {
     public abstract DomElement getDomElementOrNull();
 
     protected String getStyleAttribute(final Definition name, final String value) {
-        final String[] values = StringUtils.split(value);
+        final String[] values = StringUtils.splitAtJavaWhitespace(value);
         if (name.name().contains("TOP")) {
             if (values.length > 0) {
                 return values[0];

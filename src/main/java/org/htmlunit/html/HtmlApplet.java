@@ -272,7 +272,7 @@ public class HtmlApplet extends HtmlElement {
 
             // check archive
             final List<URL> archiveUrls = new ArrayList<>();
-            String[] archives = StringUtils.split(params.get(ARCHIVE), ',');
+            String[] archives = org.htmlunit.util.StringUtils.splitAtComma(params.get(ARCHIVE));
             if (null != archives) {
                 for (final String tmpArchive : archives) {
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
@@ -282,7 +282,7 @@ public class HtmlApplet extends HtmlElement {
                     archiveUrls.add(archiveUrl);
                 }
             }
-            archives = StringUtils.split(params.get(CACHE_ARCHIVE), ',');
+            archives = org.htmlunit.util.StringUtils.splitAtComma(params.get(CACHE_ARCHIVE));
             if (null != archives) {
                 for (final String tmpArchive : archives) {
                     final String tempUrl = UrlUtils.resolveUrl(baseUrl, tmpArchive.trim());
