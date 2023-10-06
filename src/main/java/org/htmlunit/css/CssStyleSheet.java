@@ -1593,7 +1593,8 @@ public class CssStyleSheet implements Serializable {
 
         if (isActive(index.getMediaList(), element.getPage().getEnclosingWindow())) {
             final String elementName = element.getLowercaseName();
-            final String[] classes = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(element.getAttributeDirect("class"));
+            final String[] classes = org.htmlunit.util.StringUtils.splitAtJavaWhitespace(
+                                                            element.getAttributeDirect("class"));
             final Iterator<CSSStyleSheetImpl.SelectorEntry> iter =
                     index.getSelectorEntriesIteratorFor(elementName, classes);
 
