@@ -319,6 +319,7 @@ public final class BrowserVersion implements Serializable {
         CHROME.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
         CHROME.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
         CHROME.registerUploadMimeType("png", MimeType.IMAGE_PNG);
+        CHROME.registerUploadMimeType("pdf", "application/pdf");
         CHROME.registerUploadMimeType("webp", "image/webp");
         CHROME.registerUploadMimeType("mp4", "video/mp4");
         CHROME.registerUploadMimeType("m4v", "video/mp4");
@@ -346,6 +347,7 @@ public final class BrowserVersion implements Serializable {
         EDGE.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
         EDGE.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
         EDGE.registerUploadMimeType("png", MimeType.IMAGE_PNG);
+        EDGE.registerUploadMimeType("pdf", "application/pdf");
         EDGE.registerUploadMimeType("webp", "image/webp");
         EDGE.registerUploadMimeType("mp4", "video/mp4");
         EDGE.registerUploadMimeType("m4v", "video/mp4");
@@ -372,6 +374,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX_ESR.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
         FIREFOX_ESR.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
         FIREFOX_ESR.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        FIREFOX_ESR.registerUploadMimeType("pdf", "application/pdf");
         FIREFOX_ESR.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX_ESR.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX_ESR.registerUploadMimeType("m4a", "audio/mp4");
@@ -398,6 +401,7 @@ public final class BrowserVersion implements Serializable {
         FIREFOX.registerUploadMimeType("gif", MimeType.IMAGE_GIF);
         FIREFOX.registerUploadMimeType("jpeg", MimeType.IMAGE_JPEG);
         FIREFOX.registerUploadMimeType("jpg", MimeType.IMAGE_JPEG);
+        FIREFOX.registerUploadMimeType("pdf", "application/pdf");
         FIREFOX.registerUploadMimeType("mp4", "video/mp4");
         FIREFOX.registerUploadMimeType("m4v", "video/mp4");
         FIREFOX.registerUploadMimeType("m4a", "audio/mp4");

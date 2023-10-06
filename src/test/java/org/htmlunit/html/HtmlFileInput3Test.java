@@ -243,6 +243,16 @@ public class HtmlFileInput3Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
+    @Alerts(DEFAULT = {"CONTENT_TYPE:application/pdf", "charset"},
+            IE = {"CONTENT_TYPE:application/octet-stream", "charset"})
+    public void contentTypePdf() throws Exception {
+        contentType("pdf");
+    }
+
+    /**
+     * @throws Exception if an error occurs
+     */
+    @Test
     @Alerts({"CONTENT_TYPE:audio/wav", "charset"})
     public void contentTypeWav() throws Exception {
         contentType("wav");
