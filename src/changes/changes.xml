@@ -8,6 +8,10 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes">
+            <action type="fix" dev="rbri">
+                Fixed a major leak - frame windows (incl. iframes) are still referenced by the web client
+                windows list after the parent was closed. In the end they are not garbage collected.
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.10.0.
             </action>

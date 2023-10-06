@@ -259,6 +259,7 @@ public abstract class WebWindowImpl implements WebWindow {
         synchronized (childWindows_) {
             childWindows_.remove(window);
         }
+        webClient_.deregisterWebWindow(window);
     }
 
     /**
