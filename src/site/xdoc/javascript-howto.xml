@@ -30,25 +30,30 @@
 
         <section name="Enable/Disable JavaScript support">
             <p>
-                JavaScript support is enabled per default like in real browsers.
+                The JavaScript support is enabled per default like in real browsers.
             </p>
+
+            <subsection name="Handling of JavaScript errors">
             <p>
-                <s>But:</s> There is one major difference - in the default configuration HtmlUnit will
+                <strong>But:</strong> There is one major difference compared to real browsers - in 
+                the default configuration HtmlUnit will
                 stop JavaScript execution if an unhandled JavaScript error occurs. This is done
                 because HtmlUnit was initially designed for testing where fail early is
                 a good practice.<br></br>
                 You can change this to silently (HtmlUnit will still log the exceptions)
-                ignore them (like in real browsers) by setting
+                ignore the JavaScript exceptions (like in real browsers) by setting
                 the option throwExceptionOnScriptError to false.
             </p>
             <source><![CDATA[
  final WebClient webClient = new WebClient();
  webClient.getOptions.setThrowExceptionOnScriptError(false);
 ]]></source>
+            </subsection>
 
+            <subsection name="Completely disable the JavaScript support">
             <p>
                 For some use cases it might be helpful to completely disable the JavaScript support
-                (e.g. for better performance).
+                (e.g. for better performance and less memory usage).
                 HtmlUnit offers two way to do this; you can completely disable JavaScript or only
                 temporary.<br></br>
                 To disable the JavaScript support (without the possibility to enable it for the WebClient
@@ -58,10 +63,14 @@
             <source><![CDATA[
  WebClient webClient = new WebClient(BrowserVersion.FIREFOX, false, null, -1);
 ]]></source>
+            </subsection>
+
+            <subsection name="Temporary disable the JavaScript support">
             <p>
-                By using the WebClientOptions it is possible to disable and re-enable the JavaScript support
-                at any time for a given client. Doing this will only stop executing the script tags 
-                and triggering any event listeners.
+                By using the WebClientOptions it is possible to disable JavaScript support for a specific client
+                at any time and enable it again later.
+                However, this only disables the execution of the script tags and the triggering of event listeners.
+                However, the JavaScript objects will still be created.
             </p>
             <source><![CDATA[
  final WebClient webClient = new WebClient(BrowserVersion.FIREFOX);
@@ -69,6 +78,7 @@
  ....
  webClient.getOptions.setJavaScriptEnabled(true);
 ]]></source>
+            </subsection>
         </section>
 
         <section name="Example: using Document.write()">
