@@ -71,16 +71,8 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule awtPackageRule = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$SaveState")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.javascript.host.canvas.rendering.AwtRenderingBackend$1")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.html.DoTypeProcessor")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
+            .doNotHaveFullyQualifiedName("org.htmlunit.html.DoTypeProcessor")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
             .and().resideOutsideOfPackage("org.htmlunit.platform..")
             .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")
@@ -237,7 +229,6 @@ public class ArchitectureTest {
             .that()
                 .doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDomTreeWalker")
                 .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.dom.traversal.DomTreeWalker")
-                .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomTreeWalker") // deprecated as of 2.70.0
                 .and().doNotHaveFullyQualifiedName("org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.TreeWalker");
 
@@ -309,4 +300,35 @@ public class ArchitectureTest {
             .and().doNotHaveFullyQualifiedName("org.htmlunit.DefaultCredentialsProvider")
             .and().resideOutsideOfPackage("org.htmlunit.httpclient..")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.http..");
+
+    /**
+     * Do not use core-js dependencies outside of the adapter.
+     */
+    @ArchTest
+    public static final ArchRule corejsPackageRule = noClasses()
+        .that()
+            .doNotHaveFullyQualifiedName("org.htmlunit.ProxyAutoConfig")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptException")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptResult")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.DialogWindow")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomNode")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomElement")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlDialog$1")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlInput")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.HtmlPage")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebWindowImpl")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.impl.SimpleRange")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.DebuggingWebConnection")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.util.WebClientUtils")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.websocket.JettyWebSocketAdapter")
+            .and().doNotHaveFullyQualifiedName(
+                    "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
+
+            .and().resideOutsideOfPackage("org.htmlunit.javascript..")
+            .and().resideOutsideOfPackage("org.htmlunit.activex.javascript..")
+
+            .and().resideOutsideOfPackage("org.htmlunit.corejs..")
+        .should().dependOnClassesThat().resideInAnyPackage("org.htmlunit.corejs..");
 }
