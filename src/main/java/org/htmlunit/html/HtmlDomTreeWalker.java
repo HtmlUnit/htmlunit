@@ -14,7 +14,6 @@
  */
 package org.htmlunit.html;
 
-import org.htmlunit.corejs.javascript.Context;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Node;
 import org.w3c.dom.traversal.NodeFilter;
@@ -57,8 +56,7 @@ public class HtmlDomTreeWalker {
     public HtmlDomTreeWalker(final DomNode root, final int whatToShow, final NodeFilter filter,
             final boolean expandEntityReferences) throws DOMException {
         if (root == null) {
-            Context.throwAsScriptRuntimeEx(new DOMException(DOMException.NOT_SUPPORTED_ERR,
-                    "root must not be null"));
+            throw new IllegalArgumentException("root must not be null");
         }
         root_ = root;
         whatToShow_ = whatToShow;
