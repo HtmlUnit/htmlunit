@@ -324,7 +324,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public Object extractContents() {
-        return getSimpleRange().extractContents().getScriptableObject();
+        try {
+            return getSimpleRange().extractContents().getScriptableObject();
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -388,7 +393,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public Object cloneContents() {
-        return getSimpleRange().cloneContents().getScriptableObject();
+        try {
+            return getSimpleRange().cloneContents().getScriptableObject();
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -396,7 +406,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public void deleteContents() {
-        getSimpleRange().deleteContents();
+        try {
+            getSimpleRange().deleteContents();
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -406,7 +421,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public void insertNode(final Node newNode) {
-        getSimpleRange().insertNode(newNode.getDomNodeOrDie());
+        try {
+            getSimpleRange().insertNode(newNode.getDomNodeOrDie());
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -415,7 +435,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public void surroundContents(final Node newNode) {
-        getSimpleRange().surroundContents(newNode.getDomNodeOrDie());
+        try {
+            getSimpleRange().surroundContents(newNode.getDomNodeOrDie());
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -424,7 +449,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction
     public Object cloneRange() {
-        return new Range(getSimpleRange().cloneRange());
+        try {
+            return new Range(getSimpleRange().cloneRange());
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -441,7 +471,12 @@ public class Range extends AbstractRange {
      */
     @JsxFunction(functionName = "toString")
     public String jsToString() {
-        return getSimpleRange().toString();
+        try {
+            return getSimpleRange().toString();
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -456,18 +491,23 @@ public class Range extends AbstractRange {
         rectList.setParentScope(w);
         rectList.setPrototype(getPrototype(rectList.getClass()));
 
-        // simple impl for now
-        for (final DomNode node : getSimpleRange().containedNodes()) {
-            final ScriptableObject scriptable = node.getScriptableObject();
-            if (scriptable instanceof HTMLElement) {
-                final ClientRect rect = new ClientRect(0, 0, 1, 1);
-                rect.setParentScope(w);
-                rect.setPrototype(getPrototype(rect.getClass()));
-                rectList.add(rect);
+        try {
+            // simple impl for now
+            for (final DomNode node : getSimpleRange().containedNodes()) {
+                final ScriptableObject scriptable = node.getScriptableObject();
+                if (scriptable instanceof HTMLElement) {
+                    final ClientRect rect = new ClientRect(0, 0, 1, 1);
+                    rect.setParentScope(w);
+                    rect.setPrototype(getPrototype(rect.getClass()));
+                    rectList.add(rect);
+                }
             }
-        }
 
-        return rectList;
+            return rectList;
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 
     /**
@@ -481,18 +521,23 @@ public class Range extends AbstractRange {
         rect.setParentScope(getWindow());
         rect.setPrototype(getPrototype(rect.getClass()));
 
-        // simple impl for now
-        for (final DomNode node : getSimpleRange().containedNodes()) {
-            final ScriptableObject scriptable = node.getScriptableObject();
-            if (scriptable instanceof HTMLElement) {
-                final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
-                rect.setTop(Math.min(rect.getTop(), childRect.getTop()));
-                rect.setLeft(Math.min(rect.getLeft(), childRect.getLeft()));
-                rect.setRight(Math.max(rect.getRight(), childRect.getRight()));
-                rect.setBottom(Math.max(rect.getBottom(), childRect.getBottom()));
+        try {
+            // simple impl for now
+            for (final DomNode node : getSimpleRange().containedNodes()) {
+                final ScriptableObject scriptable = node.getScriptableObject();
+                if (scriptable instanceof HTMLElement) {
+                    final ClientRect childRect = ((HTMLElement) scriptable).getBoundingClientRect();
+                    rect.setTop(Math.min(rect.getTop(), childRect.getTop()));
+                    rect.setLeft(Math.min(rect.getLeft(), childRect.getLeft()));
+                    rect.setRight(Math.max(rect.getRight(), childRect.getRight()));
+                    rect.setBottom(Math.max(rect.getBottom(), childRect.getBottom()));
+                }
             }
-        }
 
-        return rect;
+            return rect;
+        }
+        catch (final IllegalStateException e) {
+            throw Context.reportRuntimeError(e.getMessage());
+        }
     }
 }

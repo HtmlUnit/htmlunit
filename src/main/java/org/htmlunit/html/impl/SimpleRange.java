@@ -22,7 +22,6 @@ import java.util.List;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.htmlunit.SgmlPage;
-import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.html.DomDocumentFragment;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomNodeList;
@@ -153,7 +152,7 @@ public class SimpleRange implements Serializable {
 
         // Remove everything following the selection end from the clones.
         if (endClone == null) {
-            throw Context.reportRuntimeError("Unable to find end node clone.");
+            throw new IllegalStateException("Unable to find end node clone.");
         }
         deleteAfter(endClone, endOffset_);
         for (DomNode n = endClone; n != null; n = n.getParentNode()) {
@@ -164,7 +163,7 @@ public class SimpleRange implements Serializable {
 
         // Remove everything prior to the selection start from the clones.
         if (startClone == null) {
-            throw Context.reportRuntimeError("Unable to find start node clone.");
+            throw new IllegalStateException("Unable to find start node clone.");
         }
         deleteBefore(startClone, startOffset_);
         for (DomNode n = startClone; n != null; n = n.getParentNode()) {
