@@ -23,7 +23,7 @@ import java.net.URL;
 
 import org.htmlunit.Page;
 import org.htmlunit.WebWindow;
-import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.configuration.JsxClass;
@@ -110,7 +110,7 @@ public class MessagePort extends EventTarget {
             final PostponedAction action = new PostponedAction(page, "MessagePort.postMessage") {
                 @Override
                 public void execute() {
-                    final ContextFactory cf = jsEngine.getContextFactory();
+                    final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
                     cf.call(cx -> port1_.dispatchEvent(event));
                 }
             };

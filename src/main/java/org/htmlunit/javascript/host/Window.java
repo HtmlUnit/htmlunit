@@ -64,7 +64,6 @@ import org.htmlunit.WebWindowNotFoundException;
 import org.htmlunit.corejs.javascript.AccessorSlot;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.EcmaError;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.JavaScriptException;
@@ -93,6 +92,7 @@ import org.htmlunit.html.HtmlObject;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlSelect;
 import org.htmlunit.html.HtmlTextArea;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
@@ -2062,7 +2062,7 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
             public void execute() {
                 final ContextAction<Object> contextAction = cx -> receiver.dispatchEvent(event);
 
-                final ContextFactory cf = jsEngine.getContextFactory();
+                final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
                 cf.call(contextAction);
             }
         };

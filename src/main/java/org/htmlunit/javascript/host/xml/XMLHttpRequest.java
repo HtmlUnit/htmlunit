@@ -74,7 +74,6 @@ import org.htmlunit.WebResponse;
 import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
@@ -87,6 +86,7 @@ import org.htmlunit.corejs.javascript.typedarrays.NativeArrayBufferView;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
 import org.htmlunit.httpclient.HttpClientConverter;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -808,7 +808,7 @@ public class XMLHttpRequest extends XMLHttpRequestEventTarget {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+            final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction<Object> action = new ContextAction<Object>() {
                 @Override
                 public Object run(final Context cx) {

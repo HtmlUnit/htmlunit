@@ -39,6 +39,7 @@ import org.htmlunit.corejs.javascript.Script;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BasicJavaScriptJob;
@@ -188,7 +189,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             return null;
         };
 
-        final ContextFactory cf = jsEngine.getContextFactory();
+        final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
 
         final JavaScriptJob job = new WorkerJob(cf, action, "postMessage: " + Context.toString(message));
 
@@ -210,7 +211,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             return null;
         };
 
-        final ContextFactory cf = jsEngine.getContextFactory();
+        final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
 
         final JavaScriptJob job = new WorkerJob(cf, action, "messagePosted: " + Context.toString(message));
 
@@ -288,7 +289,7 @@ public class DedicatedWorkerGlobalScope extends EventTarget implements WindowOrW
             return null;
         };
 
-        final ContextFactory cf = javaScriptEngine.getContextFactory();
+        final HtmlUnitContextFactory cf = javaScriptEngine.getContextFactory();
 
         if (context != null) {
             action.run(context);

@@ -44,13 +44,13 @@ import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.corejs.javascript.Context;
 import org.htmlunit.corejs.javascript.ContextAction;
-import org.htmlunit.corejs.javascript.ContextFactory;
 import org.htmlunit.corejs.javascript.Function;
 import org.htmlunit.corejs.javascript.ScriptRuntime;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.html.HtmlPage;
 import org.htmlunit.httpclient.HtmlUnitUsernamePasswordCredentials;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJob;
@@ -473,7 +473,7 @@ public class XMLHTTPRequest extends MSXMLScriptable {
         }
         else {
             // Create and start a thread in which to execute the request.
-            final ContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
+            final HtmlUnitContextFactory cf = ((JavaScriptEngine) client.getJavaScriptEngine()).getContextFactory();
             final ContextAction<Object> action = cx -> {
                 // KEY_STARTING_SCOPE maintains a stack of scopes
                 @SuppressWarnings("unchecked")

@@ -1126,8 +1126,8 @@ public class JavaScriptEngineTest extends SimpleWebTestCase {
         final WebClient client1 = getWebClient();
         final WebClient client2 = createNewWebClient();
 
-        final ContextFactory cf1 = ((JavaScriptEngine) client1.getJavaScriptEngine()).getContextFactory();
-        final ContextFactory cf2 = ((JavaScriptEngine) client2.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf1 = ((JavaScriptEngine) client1.getJavaScriptEngine()).getContextFactory();
+        final HtmlUnitContextFactory cf2 = ((JavaScriptEngine) client2.getJavaScriptEngine()).getContextFactory();
 
         assertFalse(cf1 == cf2);
         assertFalse(cf1 == ContextFactory.getGlobal());

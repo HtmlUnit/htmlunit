@@ -20,7 +20,7 @@ import java.util.Map;
 
 import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
-import org.htmlunit.corejs.javascript.ContextFactory;
+import org.htmlunit.javascript.HtmlUnitContextFactory;
 import org.htmlunit.javascript.JavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
@@ -132,7 +132,7 @@ public class HtmlDialog extends HtmlElement {
                 final PostponedAction action = new PostponedAction(page, "Dialog.CloseEvent") {
                     @Override
                     public void execute() {
-                        final ContextFactory cf = jsEngine.getContextFactory();
+                        final HtmlUnitContextFactory cf = jsEngine.getContextFactory();
                         cf.call(cx -> dialogElement.dispatchEvent(event));
                     }
                 };
