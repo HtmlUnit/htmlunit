@@ -18,6 +18,7 @@ import java.io.Serializable;
 
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
 
 /**
@@ -97,7 +98,7 @@ public interface WebWindow extends Serializable {
      * @param <T> the object type
      * @param scriptObject the JavaScript object
      */
-    <T> void setScriptableObject(T scriptObject);
+    <T extends HtmlUnitScriptable> void setScriptableObject(T scriptObject);
 
     /**
      * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>

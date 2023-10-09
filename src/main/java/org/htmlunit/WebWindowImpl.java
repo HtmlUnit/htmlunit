@@ -28,11 +28,11 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
 import org.htmlunit.javascript.host.Element;
@@ -60,7 +60,7 @@ public abstract class WebWindowImpl implements WebWindow {
     private final WebClient webClient_;
     private final Screen screen_;
     private Page enclosedPage_;
-    private transient Object scriptObject_;
+    private transient HtmlUnitScriptable scriptObject_;
     private JavaScriptJobManager jobManager_;
     private final List<WebWindowImpl> childWindows_ = new ArrayList<>();
     private String name_ = "";
@@ -177,7 +177,7 @@ public abstract class WebWindowImpl implements WebWindow {
      * {@inheritDoc}
      */
     @Override
-    public <T> void setScriptableObject(final T scriptObject) {
+    public <T extends HtmlUnitScriptable> void setScriptableObject(final T scriptObject) {
         scriptObject_ = scriptObject;
     }
 
@@ -368,12 +368,12 @@ public abstract class WebWindowImpl implements WebWindow {
 
     private void writeObject(final ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
-        oos.writeObject(scriptObject_ instanceof Scriptable ? scriptObject_ : null);
+        oos.writeObject(scriptObject_);
     }
 
     private void readObject(final ObjectInputStream ois) throws ClassNotFoundException, IOException {
         ois.defaultReadObject();
-        scriptObject_ = ois.readObject();
+        scriptObject_ = (HtmlUnitScriptable) ois.readObject();
     }
 
     /**

@@ -14,7 +14,7 @@
  */
 package org.htmlunit;
 
-import org.htmlunit.corejs.javascript.ScriptableObject;
+import org.htmlunit.javascript.HtmlUnitScriptable;
 
 /**
  * A window opened in JavaScript via either <code>window.showModalDialog</code>
@@ -66,9 +66,9 @@ public class DialogWindow extends WebWindowImpl {
      * {@inheritDoc}
      */
     @Override
-    public <T> void setScriptableObject(final T scriptObject) {
-        if (scriptObject instanceof ScriptableObject) {
-            ((ScriptableObject) scriptObject).put("dialogArguments", (ScriptableObject) scriptObject, arguments_);
+    public <T extends HtmlUnitScriptable> void setScriptableObject(final T scriptObject) {
+        if (scriptObject != null) {
+            scriptObject.put("dialogArguments", scriptObject, arguments_);
         }
         super.setScriptableObject(scriptObject);
     }
