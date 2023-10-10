@@ -56,6 +56,11 @@
             <action type="fix" dev="rbri">
                 Form elements are all elements that belong to a form; not only the child elements. We now
                 take care of elements that use the form attribute to specify the associated form in many more places.
+                This means that the method HtmlForm.getLostChildren() is removed. You should always use the mehtod
+                HtmlForm.getElements() to get an list of all form-elements associated to that form (descendants or
+                using the 'form' attribute). This implies also that all the HtmlForm methods for searching elements
+                now working based on the getElements() method (also searching for elements associated to the form
+                based on the 'form' attribute.
             </action>
             <action type="add" dev="Lai Quang Duong">
                 The URLSearchParams ctor now supports also a sequence of name-value string pairs,
