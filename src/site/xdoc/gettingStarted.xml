@@ -81,6 +81,51 @@ public void submittingForm() throws Exception {
         final HtmlPage page2 = button.click();
     }
 }]]></source>
+
+            <subsection name="Finding form elements">
+                <p>
+                    For filling out a form you first have to find the form elements you like to interact with.
+                </p>
+            <source><![CDATA[
+final HtmlTextInput textField = form.getInputByName("userid");]]></source>
+                <p>
+                    In addition to all the general ways of finding dom elements (see <a href="#Finding_a_specific_element">below</a>) the HtmlForm object
+                    offers some convenient methods to find form elements:
+                </p>
+                <ul>
+                    <li>HtmlForm.getButtonByName(String)</li>
+                    <li>HtmlForm.getButtonsByName(String)</li>
+                    <li>HtmlForm.getCheckedRadioButton(String)</li>
+                    <li>HtmlForm.getInputByName(String)</li>
+                    <li>HtmlForm.getInputByValue(String)</li>
+                    <li>HtmlForm.getInputsByName(String)</li>
+                    <li>HtmlForm.getInputsByValue(String)</li>
+                    <li>HtmlForm.getRadioButtonsByName(String)</li>
+                    <li>HtmlForm.getSelectByName(String)</li>
+                    <li>HtmlForm.getSelectsByName(String)</li>
+                    <li>HtmlForm.getTextAreaByName(String)</li>
+                    <li>HtmlForm.getTextAreasByName(String)</li>
+                    <li>HtmlForm.getElements()</li>
+                </ul>
+                <p>
+                    All these methods are working based on a list of all dom elements associated with this form -
+                    this list includes all descendants of the form element AND all other elements associated to
+                    this form using the 'form' attribute. In general the method HtmlForm.getElements() builds this
+                    list and all other methods using this list as base for more filtering.
+                </p>
+            </subsection>
+
+            <subsection name="Text input">
+                <p>
+                    Todo
+                </p>
+            </subsection>
+
+            <subsection name="Radio buttons and checkboxes">
+                <p>
+                    Todo
+                </p>
+            </subsection>
         </section>
 
         <section name="Imitating a specific browser">
