@@ -232,14 +232,13 @@
                 </ul>
             </p>
             <p>
-                Disabling JavaScript support: to disable JavaScript processing for one WebClient,
-                call <tt>webClient.getOptions().setJavaScriptEnabled(false)</tt>.
-            </p>
-            <p>
                 JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
                 Additionally HtmlUnit provides the ability to inject code into an existing page via
-                HtmlPage.executeJavascript(String yourJsCode).
+                HtmlPage.executeJavascript(String yourJsCode).<br></br>
+                Refer to the <a href="javascript-howto.html">Use JavaScript</a> for more details.
             </p>
+            
+            
             <p>
                 Refer to the <a href="changes-report.html">changes document</a> for details on what is being added.
             </p>

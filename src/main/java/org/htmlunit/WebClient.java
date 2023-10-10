@@ -2867,6 +2867,7 @@ public class WebClient implements Serializable, AutoCloseable {
      * To disable the javascript support (eg. temporary)
      * you have to use the {@link WebClientOptions#setJavaScriptEnabled(boolean)} setter.
      * @see #isJavaScriptEngineEnabled()
+     * @see WebClientOptions#isJavaScriptEnabled()
      * @return true if the javaScript engine and the javaScript support is enabled.
      */
     public boolean isJavaScriptEnabled() {

@@ -79,6 +79,12 @@
  webClient.getOptions.setJavaScriptEnabled(true);
 ]]></source>
             </subsection>
+
+            <p>
+                If you like to check the state of the JavaScript support from your code it is recommended to use
+                <a href="apidocs/org/htmlunit/WebClient.html#isJavaScriptEnabled--">WebClient#isJavaScriptEnabled()</a>
+                because this checks both ways of disabling Javascript.
+            </p>
         </section>
 
         <section name="Example: using Document.write()">

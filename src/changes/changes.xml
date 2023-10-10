@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes">
+            <action type="update" dev="rbri">
+                A bit more documentation about the two ways to disable the JavaScript engine added.
+            </action>
             <action type="fix" dev="rbri">
                 Remove proxy polyfill from the documentation because it is no longer available
                 (Proxy/Reflect support was added to core-js).
