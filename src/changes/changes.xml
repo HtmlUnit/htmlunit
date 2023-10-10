@@ -8,6 +8,10 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes">
+            <action type="fix" dev="rbri">
+                Remove proxy polyfill from the documentation because it is no longer available
+                (Proxy/Reflect support was added to core-js).
+            </action>
             <action type="update" dev="rbri">
                 Upgrade Jetty to 9.4.53.v20231009.
             </action>

@@ -203,13 +203,6 @@ public void fetchSupport() throws Exception {
                 <source><![CDATA[webClient.getOptions().setFetchPolyfillEnabled(true);]]></source>
             </subsection>
 
-            <subsection name="Proxy Polyfill">
-                <p>
-                    <a href="https://github.com/ambit-tsai/es6-proxy-polyfill">ambit-tsai/es6-proxy-polyfill</a>
-                </p>
-                <source><![CDATA[webClient.getOptions().setProxyPolyfillEnabled(true);]]></source>
-            </subsection>
-
         </section>
     </body>
 </document>
