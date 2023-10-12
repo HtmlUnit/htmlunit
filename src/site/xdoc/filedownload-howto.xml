@@ -15,11 +15,11 @@
 
         <section name="File downloads in real browsers">
             <p>
-                Because file download is a tricky story (at least with HtmlUnit), i like to start from the beginning with some info about
+                Because file download is a tricky story (at least with HtmlUnit), lets start from the beginning with some info about
                 file download in real browsers.<br/>
                 When surfing the internet, you usually opening url's pointing to content (files) containing (X)Html. And your favorite browser
                 'eats' this stuff and renders the content on your screen. There are also some more file types your browser is able to handle like
-                CSS or JavaScript stuff. And for course all kind of images, sound and video files. This is all done behind the scenes
+                CSS or JavaScript stuff. And for course all kind of images, sound and video files. This is all done behind the scenes,
                 and you can see all the fancy stuff the internet has to offer.<br/>
                 Only in three cases, your browser hands over the control about the content handling to you
             </p>
@@ -50,7 +50,7 @@
 
             <subsection name="UnexpectedPage (default)">
                 <p>
-                    HtmlUnit handles all unknown content similar to known content - the content is wrapped in an page object and the page is placed inside the window.
+                    HtmlUnit handles all unknown content similar to known content - the content is wrapped in a page object and the page is placed inside the window.
                     For all unknown content HtmlUnit uses the UnexpectedPage. In most cases the UnexpectedPage replaces the current (Html)page in the current window,
                     but in some cases a new additional window gets opened (e.g. clicking an anchor with a download attribute defined).
                 </p>
@@ -64,7 +64,6 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 
     .... // click some anchor/button that forces a file download
 
-    // we now processing the animation
     UnexpectedPage downloadPage = (UnexpectedPage) window.getEnclosedPage();
 
     try (InputStream downloadedContent = downloadPage.getInputStream()) {

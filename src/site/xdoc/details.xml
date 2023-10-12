@@ -98,7 +98,7 @@ client .getPage(wr);
 
         <section name="Animations based on Window.requestAnimationFrame()"  id="animations">
             <p>
-                All browsers supporded by HtmlUnit are able to do animations based on the
+                All browsers supported by HtmlUnit are able to do animations based on the
                 <a href='https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame'>Window.requestAnimationFrame() API</a>.
                 A typical example for this is <a href='https://www.chartjs.org/'>Chart.js</a>.
                 This kind of animation support is not triggered automatically because HtmlUnit is headless.
@@ -114,7 +114,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
 
     // page is loaded and async js done
 
-    // we now processing the animation
+    // we are now processing the animation
     Window window = page.getEnclosingWindow().getScriptableObject();
     int i = 0; // to be able to limit the animation cycles
     do {
@@ -138,7 +138,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 Normally pages are loaded inline: clicking on
                 a link, for example, loads the linked page in the current window. Attached pages are different
                 in that they are intended to be loaded outside of this flow: clicking on a link prompts the
-                user to either save the linked page, or open it outside of the current window, but does not
+                user to either save the linked page, or open it outside the current window, but does not
                 load the page in the current window.
             </p>
             <p>
@@ -160,7 +160,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             <subsection name="Blocking based on the request (URL)">
                 <p>
                     This simple form of content blocking works based on the requested url. Usually you have
-                    to use a list of bolked url's or some url patterns to detect the blocked url. In case
+                    to use a list of blocked urls or some url patterns to detect the blocked url. In case
                     the url is blocked the request is not sent to the server; instead a simple page is returned.
                 </p>
                 <p>
@@ -208,10 +208,10 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
             <subsection name="Blocking based on the response (headers)">
                 <p>requires HtmlUnit 3.4.0 or later</p>
                 <p>
-                    For blocking based on the response a more sophisticated approche is needed.
+                    For blocking based on the response a more sophisticated approach is needed.
                     The following sample code shows blocking base on the content length header. Using
-                    this you are able to check the header of the respons and stop downloading the whole
-                    response directly. This might be helpfull to improve the speed of some test cases.
+                    this you are able to check the header of the response and stop downloading the whole
+                    response directly. This might be helpful to improve the speed of some test cases.
                 </p>
                 <p>
                     For the implementation we have to deal with the real web connection to be able to
@@ -279,7 +279,7 @@ try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
                 HtmlUnit supports the Web Storage API.
             </p>
             <p>
-                But for testing purposes it might be usefull to add some entries to the storage before running a test 
+                But for testing purposes it might be useful to add some entries to the storage before running a test
                 and also accessing the stored content. Therefor the storage is accessible from the web client using the
                 StorageHolder implementation.
             </p>

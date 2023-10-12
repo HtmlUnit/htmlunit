@@ -109,7 +109,7 @@
 </body></html>]]></source>
             
             <p>
-                We would likely want to test that the five text fields were created so
+                We would likely want to test that the five text fields were created, so
                 we could start with this.
             </p>
             <source><![CDATA[
@@ -129,7 +129,7 @@ public void documentWrite() throws Exception {
             <p>
                 We might also want to check off-by-one errors by ensuring that 
                 it didn't create "textfield0" or "textfield6".  Trying to get an 
-                element that doesn't exist will cause an exception to be thrown
+                element that doesn't exist will cause an exception to be thrown,
                 so we could add this to the end of the previous test.
             </p>
             <source><![CDATA[
@@ -188,7 +188,7 @@ public void alerts() throws Exception {
             <p>
                 Handling prompt dialogs, confirm dialogs and status line messages
                 work in the same way as alerts.  You register a handler of the 
-                appropriate type and it will get notified when that method is called.
+                appropriate type, and it will get notified when that method is called.
                 See WebClient.setPromptHandler(), WebClient.setConfirmHandler() and
                 WebClient.setStatusHandler() for details on these.
             </p>
@@ -211,9 +211,9 @@ public void alerts() throws Exception {
 
         <section name="Run javascript inside the page/window">
             <p>
-                Sometimes it is helpfull to execute javascript inside the current page e.g. to get the value of window properties
-                or forcing some javascript functions to run. In general you can do everything you can do with a script tag inside
-                the page and additionally get back the result of the invokation.
+                Sometimes it is helpful to execute javascript inside the current page e.g. to get the value of window properties
+                or forcing some javascript functions to run. In general, you can do everything you can do with a script tag inside
+                the page and additionally get back the result of the invocation.
             </p>
             <source><![CDATA[
 String script = "window.name;";

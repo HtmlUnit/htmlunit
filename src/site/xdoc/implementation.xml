@@ -15,10 +15,10 @@
             <p>
                 To be able to stay in sync with the development of real browsers, we try to write
                 tests in a way that enables us to compare the results of executing the tests with real
-                browsers to our own results. This also directy leads to a test firsts approach - write
+                browsers to our own results. This also directly leads to a test firsts approach - write
                 the test; run the test with all real browsers and adjust the expectations, run the test
-                with HtmlUnit and finally fix the implementation if needed. Additionally we try to make the
-                test as small as possible to make the connetion between a failing test and the related
+                with HtmlUnit and finally fix the implementation if needed. Additionally, we try to make the
+                test as small as possible to make the connection between a failing test and the related
                 implementation as direct as possible.
             </p>
             <p>

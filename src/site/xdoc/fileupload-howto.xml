@@ -51,7 +51,7 @@ firstPage.getHtmlElementById("mySubmit").click();
 ]]></source>
             </subsection>
 
-            <subsection name="Upload multiple files (if the 'multiple' attribut is set for the file input control)">
+            <subsection name="Upload multiple files (if the 'multiple' attribute is set for the file input control)">
 <source><![CDATA[
 String filename1 = "HtmlFileInputTest_one.txt";
 String path1 = getClass().getResource(filename1).toExternalForm();

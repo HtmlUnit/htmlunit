@@ -11,7 +11,7 @@
                 Because HtmlUnit is a headless browsers you might think HtmlUnit can be agnostic to image formats.
                 This is in general true but not if you look at the details. Even if HtmlUnit is headless there is
                 still support for layout related methods like Element.getBoundingClientRect(). A second case is
-                Canvas.drawImage(). To support this HtmlUnit has to be able to determine the dimensions of an given
+                Canvas.drawImage(). To support this HtmlUnit has to be able to determine the dimensions of a given
                 image (for the first case) and produce a raster version (for the second case).
             </p>
             <p>

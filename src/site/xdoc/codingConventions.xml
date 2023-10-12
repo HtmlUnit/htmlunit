@@ -31,7 +31,7 @@
         <section name="Unit tests">
             <p>
                 All code must have 100% automated test coverage using the <a href="http://www.junit.org">JUnit</a>
-                testing framework.  It is strongly suggested that you write the code test-first but it is fine
+                testing framework.  It is strongly suggested that you write the code test-first, but it is fine
                 as long as there are full tests for everything.  Run the tests with the following target:
                 <source>mvn test</source>
             </p>
@@ -39,7 +39,7 @@
 
         <section name="Abbreviations">
             <p>
-                Abbreviations obscure meaning and therefore they are not to be used in variable/method names.
+                Abbreviations obscure meaning, and therefore they are not to be used in variable/method names.
                 If you saw the following code, would you have any idea what it was doing?
             </p>
             <source>cob.getTrh()</source>
@@ -152,7 +152,7 @@ import java.util.ArrayList;
                 deprecate the existing API (using the javadoc @deprecated tag). Code deprecated in
                 this way should be left in the source for at least 6 months and at least 2 releases,
                 meaning the time could be longer than 6 months if there are not 2 releases in a
-                6 month period but never less than 6 months.
+                6 month' period but never less than 6 months.
                 
                 When deprecation is not possible a <a href="changes-report.html">change log</a> message
                 containing "INCOMPATIBLE CHANGE" should be added to make these changes easy to find.

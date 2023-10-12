@@ -24,19 +24,19 @@
                 all of the tests. (see <a href="webclient.html">WebClient - the browser</a>)
             </p>
             <p><strong>Android</strong><br/>
-                Using HtmlUnit on Android has some challanges because of the subtle technical distinction
-                of java on android. Because of this we offer a customized distribution to work around these problem.
+                Using HtmlUnit on Android has some challenges because of the subtle technical distinction
+                of java on android. Because of this, we offer a customized distribution to work around these problem.
                 Please check out <a href="https://github.com/HtmlUnit/htmlunit-android" target="_blank">htmlunit-android</a> on github.
             </p>
             <p>
-                Most unit testing will be done within a framework like <a href="http://www.junit.org">JUnit</a>
+                Most unit testing will be done within a framework like <a href="https://junit.org">JUnit</a>
                 so all the examples here will assume that we are using that.
             </p>
             <p>
                 In the first sample, we create the web client and have it load the homepage from the HtmlUnit website.
                 We then verify that this page has the correct title.  Note that getPage() can return different types
-                of pages based on the content type of the returned data.  In this case we are expecting a content
-                type of text/html so we cast the result to an org.htmlunit.html.HtmlPage.
+                of pages based on the content type of the returned data.  In this case, we are expecting a content
+                type of text/html, so we cast the result to an org.htmlunit.html.HtmlPage.
             </p>
             <source><![CDATA[
 @Test
@@ -84,7 +84,7 @@ public void submittingForm() throws Exception {
 
             <subsection name="Finding form elements">
                 <p>
-                    For filling out a form you first have to find the form elements you like to interact with.
+                    For filling out a form, you first have to find the form elements you like to interact with.
                 </p>
             <source><![CDATA[
 final HtmlTextInput textField = form.getInputByName("userid");]]></source>
@@ -115,38 +115,86 @@ final HtmlTextInput textField = form.getInputByName("userid");]]></source>
                 </p>
             </subsection>
 
-            <subsection name="Text input">
+            <subsection name="Text input &lt;input type='test'&gt;">
                 <p>
-                    Todo
+                    These form elements represented as instances of class HtmlTextInput.
+                </p>
+                <source><![CDATA[
+final HtmlTextInput textField = form.getInputByName("userid");]]></source>
+                <p>
+                    To replace the value with some new text you should use the method 
+                    <a href='apidocs/org/htmlunit/html/HtmlElement.html#type-java.lang.String-'>HtmlElement#type(String)</a>.
+                    This call takes care of setting the focus (if required; including triggering all the focus related events) and
+                    then simulating the typing of the provided string (char by char, including the keyboard events).
+                </p>
+                <source><![CDATA[
+textField.type("RBRi");]]></source>
+                <p>
+                    If all the events not really needed, you can also use the method
+                    <a href='apidocs/org/htmlunit/html/HtmlSelectableTextInput.html#setValue-java.lang.String-'>HtmlSelectableTextInput#setValue(String)</a>.
                 </p>
             </subsection>
 
-            <subsection name="Radio buttons and checkboxes">
+            <subsection name="Text area &lt;textarea&gt;">
                 <p>
-                    Todo
+                    These form elements represented as instances of class HtmlTextArea.
+                </p>
+                <source><![CDATA[
+final HtmlTextArea textArea = form.getInputByName("comment");]]></source>
+                <p>
+                    The usage of HtmlTextArea is similar to HtmlTextInput (because both derived from HtmlSelectableTextInput).
+                    This means you can also use type(String) or even setValue(String) for updating these elements.
+                </p>
+                <source><![CDATA[
+textArea.type("HtmlUnit is a great library...");]]></source>
+            </subsection>
+
+            <subsection name="Radio buttons &lt;input type='radio'&gt; and Checkboxes &lt;input type='checkbox'&gt;">
+                <p>
+                    These form elements represented as instances of class HtmlRadioButtonInput/HtmlCheckBoxInput.
+                </p>
+                <source><![CDATA[
+final HtmlRadioButtonInput countryGermany = form.getInputByName("radio_country_germany");
+final HtmlCheckBoxInput programmingLanguage = form.getInputByName("check_language_java");]]></source>
+                <p>
+                    Usually your form contains many of these elements organized in groups. To check a radio button
+                    of a checkbox you have to use 
+                    <a href='apidocs/org/htmlunit/html/HtmlRadioButtonInput.html#setChecked-boolean-'>HtmlRadioButtonInput#setChecked(boolean)</a>
+                    or
+                    <a href='apidocs/org/htmlunit/html/HtmlCheckBoxInput.html#setChecked-boolean-'>HtmlCheckBoxInput#setChecked(boolean)</a>.
+                </p>
+                <source><![CDATA[
+countryGermany.setChecked(true);
+programmingLanguage.setChecked(true);]]></source>
+                <p>
+                    Checking a single radio button will automatically uncheck all other radio buttons in the same group.
                 </p>
             </subsection>
-        </section>
 
-        <section name="Imitating a specific browser">
-            <p>
-                Often you will want to simulate a specific browser. This is done by passing a
-                org.htmlunit.BrowserVersion into the WebClient constructor.
-                Constants have been provided for some common browsers but you can create your own specific
-                version by instantiating a BrowserVersion.
-            </p>
-            <source><![CDATA[
-@Test
-public void homePage_Firefox() throws Exception {
-    try (final WebClient webClient = new WebClient(BrowserVersion.FIREFOX)) {
-        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-        Assert.assertEquals("HtmlUnit – Welcome to HtmlUnit", page.getTitleText());
-    }
-}]]></source>
-            <p>
-                Specifying this BrowserVersion will change the user agent header that is sent up to the
-                server and will change the behavior of some of the JavaScript.
-            </p>
+            <subsection name="Select &lt;select&gt;">
+                <p>
+                    These form elements represented as instances of class HtmlSelect. The individual options are represented by
+                    instances of class HtmlOption.
+                </p>
+                <source><![CDATA[
+final HtmlSelect currency = form.getInputByName("currency");
+                <p>
+                    The simplest way to select one of the options is the method
+                    <a href='apidocs/org/htmlunit/html/HtmlSelect.html#setSelectedIndex-int-'>HtmlSelect.html#setSelectedIndex(int)</a>.
+                </p>
+                <source><![CDATA[
+currency.setSelectedIndex(true);]]></source>
+                <p>
+                    To make your code more readable and robust, you have to search for the HtmlOption to select and then use
+                    <a href='apidocs/org/htmlunit/html/HtmlSelect.html#setSelectedAttribute-org.htmlunit.html.HtmlOption-boolean-'>HtmlSelect.html#setSelectedAttribute(HtmlOption, boolean)</a>.
+                </p>
+                <source><![CDATA[
+HtmlOption euro = currency.getOptionByValue("Euro");
+currency.setSelectedAttribute(euro, true);]]></source>
+                <p>
+                    For single selection select elements, this call also deselects all other options.
+                </p>
+            </subsection>
         </section>
 
         <section name="Finding a specific element">

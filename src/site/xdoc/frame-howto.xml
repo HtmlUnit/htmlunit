@@ -47,8 +47,8 @@ packageListPage.getAnchors().get(5).click();]]></source>
                 To get the page of the frame named 'packageFrame' (at lower left) and click the second link:
             </p>
             <source><![CDATA[
-final HtmlPage pakcagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
-pakcagePage.getAnchors().get(1).click();]]></source>
+final HtmlPage packagePage = (HtmlPage) mainPage.getFrameByName("packageFrame").getEnclosedPage();
+packagePage.getAnchors().get(1).click();]]></source>
         
             <p>
                 To get the page of the frame named 'classFrame' (at right):

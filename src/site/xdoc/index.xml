@@ -22,7 +22,7 @@
                 simulating Chrome, Firefox or Internet Explorer depending on the configuration used.
             </p> 
             <p>
-                It is typically used for testing purposes or to retrieve information from web sites.
+                It is typically used for testing purposes or to retrieve information from websites.
             </p>
             <p>
                 HtmlUnit is not a generic unit testing framework. It is specifically a way to simulate
@@ -185,7 +185,7 @@
             </p>
 
             <p>
-                If you like to use the lastest available snapshot build you have to add the sonatype
+                If you like to use the latest available snapshot build you have to add the sonatype
                 snapshot repository to your pom repositories section; also (check
                 <a href="https://twitter.com/HtmlUnit">Twitter</a> for regular information about new
                 snapshot builds).
@@ -232,8 +232,8 @@
                 </ul>
             </p>
             <p>
-                JavaScript code is executed just like in normal browsers when the page loads or when an handler is triggered.
-                Additionally HtmlUnit provides the ability to inject code into an existing page via
+                JavaScript code is executed just like in normal browsers when the page loads or when a handler is triggered.
+                Additionally, HtmlUnit provides the ability to inject code into an existing page via
                 HtmlPage.executeJavascript(String yourJsCode).<br></br>
                 Refer to the <a href="javascript-howto.html">Use JavaScript</a> for more details.
             </p>

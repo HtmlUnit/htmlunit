@@ -12,7 +12,7 @@
             <p>
                 HtmlUnit 3 is essentially the conversion to the new domain htmlunit.org.
                 For this purpose, the maven group id's of HtmlUnit as well as the subprojects
-                core-js, neko, cssparser and xpath were adapted. Furthermore the package names were unified.
+                core-js, neko, cssparser and xpath were adapted. Furthermore, the package names were unified.
             </p>
 
             <subsection name="1. adjust maven group id to org.htmlunit">
