@@ -31,7 +31,7 @@
         <htmlunitxpath.version>3.6.0</htmlunitxpath.version>
 
         <htmlunitdriver.version>4.13.0</htmlunitdriver.version>
-        <selenium.version>4.13.0</selenium.version>
+        <selenium.version>4.14.0</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.53.v20231009</jetty.version>
@@ -614,6 +614,13 @@
                     <detectJavaApiLink>true</detectJavaApiLink>
                     <excludePackageNames>netscape:netscape.*:org.htmlunit.platform.util</excludePackageNames>
                 </configuration>
+                <reportSets>
+                    <reportSet>
+                      <reports>
+                        <report>javadoc</report>
+                      </reports>
+                    </reportSet>
+                </reportSets>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
