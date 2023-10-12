@@ -8,7 +8,7 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes">
-            <action type="add" dev="rbri" issue"#647">
+            <action type="add" dev="rbri" issue="#647">
                 HtmlForm.getElements() is now part of the public api.
             </action>
             <action type="update" dev="rbri">
