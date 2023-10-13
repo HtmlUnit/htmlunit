@@ -3563,7 +3563,7 @@ public final class StyleAttributes implements Serializable {
         TRANSITION("transition", "transition", ie(""), chromeAndEdge("all 0s ease 0s"),
                 ff("all 0s ease 0s")),
 
-        /** The style property {@code transitionDelay}. */
+        /** The style property {@code transitionBehavior}. */
         TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chrome("normal")),
 
         /** The style property {@code transitionDelay}. */

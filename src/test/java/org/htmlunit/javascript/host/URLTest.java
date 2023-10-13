@@ -660,6 +660,88 @@ public class URLTest extends WebDriverTestCase {
     }
 
     @Test
+    @Alerts(DEFAULT = {"https:",
+                       "http:", "http://mydomain.com/svn/Repos/",
+                       "https:", "https://mydomain.com/svn/Repos/",
+                       "ftp:", "ftp://mydomain.com/svn/Repos/",
+                       "ftp:", "ftp://mydomain.com/svn/Repos/",
+                       "ws:", "ws://mydomain.com/svn/Repos/",
+                       "wss:", "wss://mydomain.com/svn/Repos/",
+                       "file:", "file://mydomain.com/svn/Repos/"},
+            EDGE = {"https:",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "https:", "https://mydomain.com/svn/Repos/",
+                    "ftp:", "ftp://mydomain.com/svn/Repos/",
+                    "ftps:", "ftps://mydomain.com/svn/Repos/",
+                    "ws:", "ws://mydomain.com/svn/Repos/",
+                    "wss:", "wss://mydomain.com/svn/Repos/",
+                    "file:", "file://mydomain.com/svn/Repos/"},
+            FF = {"https:",
+                  "http:", "http://mydomain.com/svn/Repos/",
+                  "https:", "https://mydomain.com/svn/Repos/",
+                  "ftp:", "ftp://mydomain.com/svn/Repos/",
+                  "ftps:", "ftps://mydomain.com/svn/Repos/",
+                  "ws:", "ws://mydomain.com/svn/Repos/",
+                  "wss:", "wss://mydomain.com/svn/Repos/",
+                  "file:", "file:///svn/Repos/"},
+            FF_ESR = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "https:", "https://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
+                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ws:", "ws://mydomain.com/svn/Repos/",
+                      "wss:", "wss://mydomain.com/svn/Repos/",
+                      "file:", "file:///svn/Repos/"},
+            IE = {})
+    public void specialScheme() throws Exception {
+        final String html =
+                "<html>\n"
+                        + "<head>\n"
+                        + "  <script>\n"
+                        + LOG_TITLE_FUNCTION
+                        + "    function test() {\n"
+                        + "      if (typeof window.URL === 'function') {\n"
+                        + "        var u = new URL('https://mydomain.com:80/svn/Repos/');\n"
+                        + "        log(u.protocol);\n"
+
+                        + "        u.protocol = 'http';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'https';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'ftp';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'ftps';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'ws';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'wss';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+
+                        + "        u.protocol = 'file';\n"
+                        + "        log(u.protocol);\n"
+                        + "        log(u.toString());\n"
+                        + "      }\n"
+                        + "    }\n"
+                        + "  </script>\n"
+                        + "</head>\n"
+                        + "<body onload='test()'>\n"
+                        + "</body>\n"
+                        + "</html>";
+        loadPageVerifyTitle2(html);
+    }
+
+    @Test
     @Alerts(DEFAULT = {"?q=123",
                        "?a=b&c=d", "https://developer.mozilla.org/search?a=b&c=d",
                        "?a=7", "https://developer.mozilla.org/search?a=7",

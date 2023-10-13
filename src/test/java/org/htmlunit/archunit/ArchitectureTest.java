@@ -309,6 +309,7 @@ public class ArchitectureTest {
         .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.ProxyAutoConfig")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.WebConsole$1")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptException")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.ScriptResult")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.DomNode")
