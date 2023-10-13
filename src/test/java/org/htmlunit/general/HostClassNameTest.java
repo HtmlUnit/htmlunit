@@ -5103,7 +5103,9 @@ public class HostClassNameTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("exception")
+    @Alerts(DEFAULT = "exception",
+            CHROME = "function Iterator() { [native code] }",
+            EDGE = "function Iterator() { [native code] }")
     public void iterator() throws Exception {
         test("Iterator");
     }

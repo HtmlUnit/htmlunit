@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Bugfixes, Documentation updates">
+        <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Chrome 118, Bugfixes, Documentation updates">
             <action type="remove" dev="rbri">
                 test-javadoc removed from the website.
             </action>

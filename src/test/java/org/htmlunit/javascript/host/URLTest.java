@@ -593,6 +593,15 @@ public class URLTest extends WebDriverTestCase {
                        "http:", "http://mydomain.com/svn/Repos/",
                        "null:", "null://mydomain.com/svn/Repos/",
                        "ex-unknown"},
+            CHROME = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "ex-unknown"},
             IE = {})
     public void protocol() throws Exception {
         final String html =

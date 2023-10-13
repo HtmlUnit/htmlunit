@@ -17,6 +17,7 @@ package org.htmlunit.javascript;
 import org.htmlunit.WebDriverTestCase;
 import org.htmlunit.junit.BrowserRunner;
 import org.htmlunit.junit.BrowserRunner.Alerts;
+import org.htmlunit.junit.BrowserRunner.HtmlUnitNYI;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -32,55 +33,20 @@ public class IteratorTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("Iterator not available")
-    public void simple() throws Exception {
+    @Alerts(DEFAULT =  {"undefined", "undefined"},
+            CHROME = {"function", "function"},
+            EDGE = {"function", "function"})
+    @HtmlUnitNYI(CHROME =  {"undefined", "undefined"},
+            EDGE =  {"undefined", "undefined"})
+    public void windowIterator() throws Exception {
         final String html
             = "<html>\n"
             + "<head>\n"
             + "<script>\n"
             + LOG_TITLE_FUNCTION
             + "  function test() {\n"
-            + "    if (!window.Iterator) { log('Iterator not available'); return; }\n"
-
-            + "    var data = { first: 1, second: 2 };\n"
-            + "    var it = Iterator(data);\n"
-            + "    log(it.next());\n"
-            + "    log(it.next());\n"
-            + "  }\n"
-            + "</script>\n"
-            + "</head>\n"
-            + "<body onload='test()'>\n"
-            + "</body></html>";
-
-        loadPageVerifyTitle2(html);
-    }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    @Alerts("Iterator not available")
-    public void stopIteration() throws Exception {
-        final String html
-            = "<html>\n"
-            + "<head>\n"
-            + "<script>\n"
-            + LOG_TITLE_FUNCTION
-            + "  function test() {\n"
-            + "    if (!window.Iterator) { log('Iterator not available'); return; }\n"
-
-            + "    var data = { };\n"
-            + "    var it = Iterator(data);\n"
-            + "    \n"
-            + "    try {\n"
-            + "      log(it.next());\n"
-            + "    } catch (e) {\n"
-            + "      if (e == StopIteration) {\n"
-            + "        log(e);\n"
-            + "      } else {\n"
-            + "        log('ex');\n"
-            + "      }\n"
-            + "    }\n"
+            + "    log(typeof window.Iterator);"
+            + "    log(typeof Iterator);"
             + "  }\n"
             + "</script>\n"
             + "</head>\n"

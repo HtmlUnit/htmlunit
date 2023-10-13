@@ -1423,7 +1423,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts({"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"})
+    @Alerts(DEFAULT = {"http:", "axdeg:", "axdeg://§§URL§§/foo.html#O"},
+            CHROME = {"http:", "http:", "http://§§URL§§/foo.html#O"})
     public void readWriteProtocolUnknown() throws Exception {
         final String html =
               "<html>\n"
