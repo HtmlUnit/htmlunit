@@ -1299,7 +1299,7 @@ public final class StyleAttributes implements Serializable {
         FONT_VARIANT_NUMERIC_("font-variant-numeric", "font-variant-numeric", ffNormal()),
 
         /** The style property {@code fontVariantPosition}. */
-        FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ffNormal()),
+        FONT_VARIANT_POSITION("fontVariantPosition", "font-variant-position", ffNormal(), chrome("normal")),
 
         /** The style property {@code font-variant-position}. */
         FONT_VARIANT_POSITION_("font-variant-position", "font-variant-position", ffNormal()),
@@ -2700,6 +2700,9 @@ public final class StyleAttributes implements Serializable {
         /** The style property {@code overflow-y}. */
         OVERFLOW_Y_("overflow-y", "overflow-y", ff("visible")),
 
+        /** The style property {@code overlay}. */
+        OVERLAY("overlay", "overlay", chrome("none")),
+
         /** The style property {@code overrideColors}. */
         OVERRIDE_COLOR("overrideColors", "override-colors", chromeAndEdgeEmpty()),
 
@@ -3561,6 +3564,9 @@ public final class StyleAttributes implements Serializable {
                 ff("all 0s ease 0s")),
 
         /** The style property {@code transitionDelay}. */
+        TRANSITION_BEHAVIOR("transitionBehavior", "transition-behavior", chrome("normal")),
+
+        /** The style property {@code transitionDelay}. */
         TRANSITION_DELAY("transitionDelay", "transition-delay", ff("0s"), ie("0s"), chromeAndEdge("0s")),
 
         /** The style property {@code transition-delay}. */
@@ -3627,7 +3633,7 @@ public final class StyleAttributes implements Serializable {
         VIEW_TIMELINE_AXIS("viewTimelineAxis", "view-timeline-axis", chromeAndEdge("block")),
 
         /** The style property {@code viewTimelineInset}. */
-        VIEW_TIMELINE_INSET("viewTimelineInset", "view-timeline-inset", chromeAndEdge("0px")),
+        VIEW_TIMELINE_INSET("viewTimelineInset", "view-timeline-inset", chrome("auto"), edge("0px")),
 
         /** The style property {@code viewTimelineName}. */
         VIEW_TIMELINE_NAME("viewTimelineName", "view-timeline-name", chromeAndEdgeNone()),
@@ -4158,7 +4164,7 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_FONT_SMOOTHING("webkitFontSmoothing", "webkit-font-smoothing", chromeAndEdgeAuto()),
 
         /** The style property {@code webkitHighlight}. */
-        WEBKIT_HIGHLIGHT("webkitHighlight", "webkit-highlight", chromeAndEdgeNone()),
+        WEBKIT_HIGHLIGHT("webkitHighlight", "webkit-highlight", edge("none")),
 
         /** The style property {@code webkitHyphenateCharacter}. */
         WEBKIT_HYPHENATE_CHARACTER("webkitHyphenateCharacter", "webkit-hyphenate-character", chromeAndEdgeAuto()),
