@@ -14,9 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER;
-import static org.htmlunit.BrowserVersionFeatures.CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN;
-import static org.htmlunit.BrowserVersionFeatures.QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE;
 import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_ADD_RULE_RETURNS_POS;
 import static org.htmlunit.BrowserVersionFeatures.STYLESHEET_HREF_EMPTY_IS_NULL;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
@@ -33,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.corejs.javascript.Context;
@@ -44,14 +40,6 @@ import org.htmlunit.cssparser.dom.CSSCharsetRuleImpl;
 import org.htmlunit.cssparser.dom.CSSRuleListImpl;
 import org.htmlunit.cssparser.parser.CSSException;
 import org.htmlunit.cssparser.parser.InputSource;
-import org.htmlunit.cssparser.parser.condition.Condition;
-import org.htmlunit.cssparser.parser.condition.NotPseudoClassCondition;
-import org.htmlunit.cssparser.parser.selector.ChildSelector;
-import org.htmlunit.cssparser.parser.selector.DescendantSelector;
-import org.htmlunit.cssparser.parser.selector.DirectAdjacentSelector;
-import org.htmlunit.cssparser.parser.selector.ElementSelector;
-import org.htmlunit.cssparser.parser.selector.GeneralAdjacentSelector;
-import org.htmlunit.cssparser.parser.selector.Selector;
 import org.htmlunit.cssparser.parser.selector.SelectorList;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlLink;
@@ -62,7 +50,6 @@ import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.javascript.host.html.HTMLElement;
 import org.w3c.dom.DOMException;
 
@@ -393,122 +380,15 @@ public class CSSStyleSheet extends StyleSheet {
      * @param documentMode see {@link HTMLDocument#getDocumentMode()}
      * @param domNode the dom node the query should work on
      * @throws CSSException if a selector is invalid
+     *
+     * @deprecated as of version 3.7.0; use
+     *   {@link CssStyleSheet#validateSelectors(org.htmlunit.cssparser.parser.selector.SelectorList, int, DomNode)}
+     *   instead
      */
+    @Deprecated
     public static void validateSelectors(final SelectorList selectorList, final int documentMode,
                 final DomNode domNode) throws CSSException {
-        for (final Selector selector : selectorList) {
-            if (!isValidSelector(selector, documentMode, domNode)) {
-                throw new CSSException("Invalid selector: " + selector);
-            }
-        }
-    }
-
-    /**
-     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
-     */
-    private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
-        switch (selector.getSelectorType()) {
-            case ELEMENT_NODE_SELECTOR:
-                final List<Condition> conditions = ((ElementSelector) selector).getConditions();
-                if (conditions != null) {
-                    for (final Condition condition : conditions) {
-                        if (!isValidCondition(condition, documentMode, domNode)) {
-                            return false;
-                        }
-                    }
-                }
-                return true;
-            case DESCENDANT_SELECTOR:
-                final DescendantSelector ds = (DescendantSelector) selector;
-                return isValidSelector(ds.getAncestorSelector(), documentMode, domNode)
-                        && isValidSelector(ds.getSimpleSelector(), documentMode, domNode);
-            case CHILD_SELECTOR:
-                final ChildSelector cs = (ChildSelector) selector;
-                return isValidSelector(cs.getAncestorSelector(), documentMode, domNode)
-                        && isValidSelector(cs.getSimpleSelector(), documentMode, domNode);
-            case DIRECT_ADJACENT_SELECTOR:
-                final DirectAdjacentSelector das = (DirectAdjacentSelector) selector;
-                return isValidSelector(das.getSelector(), documentMode, domNode)
-                        && isValidSelector(das.getSimpleSelector(), documentMode, domNode);
-            case GENERAL_ADJACENT_SELECTOR:
-                final GeneralAdjacentSelector gas = (GeneralAdjacentSelector) selector;
-                return isValidSelector(gas.getSelector(), documentMode, domNode)
-                        && isValidSelector(gas.getSimpleSelector(), documentMode, domNode);
-            default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unhandled CSS selector type '"
-                                + selector.getSelectorType() + "'. Accepting it silently.");
-                }
-                return true; // at least in a first time to break less stuff
-        }
-    }
-
-    /**
-     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
-     */
-    private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
-        switch (condition.getConditionType()) {
-            case ATTRIBUTE_CONDITION:
-            case ID_CONDITION:
-            case LANG_CONDITION:
-            case ONE_OF_ATTRIBUTE_CONDITION:
-            case BEGIN_HYPHEN_ATTRIBUTE_CONDITION:
-            case CLASS_CONDITION:
-            case PREFIX_ATTRIBUTE_CONDITION:
-            case SUBSTRING_ATTRIBUTE_CONDITION:
-            case SUFFIX_ATTRIBUTE_CONDITION:
-                return true;
-            case NOT_PSEUDO_CLASS_CONDITION:
-                final NotPseudoClassCondition notPseudoCondition = (NotPseudoClassCondition) condition;
-                final SelectorList selectorList = notPseudoCondition.getSelectors();
-                for (final Selector selector : selectorList) {
-                    if (!isValidSelector(selector, documentMode, domNode)) {
-                        return false;
-                    }
-                }
-                return true;
-            case PSEUDO_CLASS_CONDITION:
-                String value = condition.getValue();
-                if (value.endsWith(")")) {
-                    if (value.endsWith("()")) {
-                        return false;
-                    }
-                    value = value.substring(0, value.indexOf('(') + 1) + ')';
-                }
-                if (documentMode < 9) {
-                    return CssStyleSheet.CSS2_PSEUDO_CLASSES.contains(value);
-                }
-
-                if (!CssStyleSheet.CSS2_PSEUDO_CLASSES.contains(value)
-                        && domNode.hasFeature(QUERYSELECTOR_CSS3_PSEUDO_REQUIRE_ATTACHED_NODE)
-                        && !domNode.isAttachedToPage()
-                        && !domNode.hasChildNodes()) {
-                    throw new CSSException("Syntax Error");
-                }
-
-                if ("nth-child()".equals(value)) {
-                    final String arg = StringUtils.substringBetween(condition.getValue(), "(", ")").trim();
-                    return "even".equalsIgnoreCase(arg) || "odd".equalsIgnoreCase(arg)
-                            || NTH_NUMERIC.matcher(arg).matches()
-                            || NTH_COMPLEX.matcher(arg).matches();
-                }
-
-                if ("placeholder-shown".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_PLACEHOLDER_SHOWN);
-                }
-
-                if ("-ms-input-placeholder".equals(value)) {
-                    return domNode.hasFeature(CSS_PSEUDO_SELECTOR_MS_PLACEHHOLDER);
-                }
-
-                return CssStyleSheet.CSS4_PSEUDO_CLASSES.contains(value);
-            default:
-                if (LOG.isWarnEnabled()) {
-                    LOG.warn("Unhandled CSS condition type '"
-                                + condition.getConditionType() + "'. Accepting it silently.");
-                }
-                return true;
-        }
+        CssStyleSheet.validateSelectors(null, documentMode, domNode);
     }
 
     private void initCssRules() {

@@ -57,7 +57,6 @@ import org.htmlunit.html.serializer.HtmlSerializerNormalizedText;
 import org.htmlunit.html.serializer.HtmlSerializerVisibleText;
 import org.htmlunit.html.xpath.XPathHelper;
 import org.htmlunit.javascript.HtmlUnitScriptable;
-import org.htmlunit.javascript.host.css.CSSStyleSheet;
 import org.htmlunit.javascript.host.event.Event;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.SerializableLock;
@@ -1884,7 +1883,7 @@ public abstract class DomNode implements Cloneable, Serializable, Node {
                     documentMode = ((HTMLDocument) sobj).getDocumentMode();
                 }
             }
-            CSSStyleSheet.validateSelectors(selectorList, documentMode, this);
+            CssStyleSheet.validateSelectors(selectorList, documentMode, this);
 
         }
         return selectorList;
