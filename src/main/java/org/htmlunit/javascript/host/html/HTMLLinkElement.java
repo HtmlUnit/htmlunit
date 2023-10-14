@@ -61,6 +61,14 @@ public class HTMLLinkElement extends HTMLElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public HtmlLink getDomNodeOrDie() {
+        return (HtmlLink) super.getDomNodeOrDie();
+    }
+
+    /**
      * Sets the href property.
      * @param href href attribute value
      */
@@ -75,7 +83,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxGetter
     public String getHref() {
-        final HtmlLink link = (HtmlLink) getDomNodeOrDie();
+        final HtmlLink link = getDomNodeOrDie();
         final String href = link.getHrefAttribute();
         if (href.isEmpty()) {
             return href;
@@ -103,7 +111,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxGetter
     public String getRel() {
-        return ((HtmlLink) getDomNodeOrDie()).getRelAttribute();
+        return getDomNodeOrDie().getRelAttribute();
     }
 
     /**
@@ -121,7 +129,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxGetter
     public String getRev() {
-        return ((HtmlLink) getDomNodeOrDie()).getRevAttribute();
+        return getDomNodeOrDie().getRevAttribute();
     }
 
     /**
@@ -139,7 +147,7 @@ public class HTMLLinkElement extends HTMLElement {
      */
     @JsxGetter
     public String getType() {
-        return ((HtmlLink) getDomNodeOrDie()).getTypeAttribute();
+        return getDomNodeOrDie().getTypeAttribute();
     }
 
     /**
@@ -150,9 +158,8 @@ public class HTMLLinkElement extends HTMLElement {
     public CSSStyleSheet getSheet() {
         if (sheet_ == null) {
             try {
-                final CssStyleSheet sheet =
-                        CssStyleSheet.loadStylesheet(getDomNodeOrDie(), (HtmlLink) getDomNodeOrDie(), null);
-                sheet_ = new CSSStyleSheet(this, this.getWindow(), sheet);
+                final CssStyleSheet sheet = getDomNodeOrDie().getSheet();
+                sheet_ = new CSSStyleSheet(this, getWindow(), sheet);
             }
             catch (final RuntimeException e) {
                 // Got something unexpected; we can throw an exception in this case.
@@ -219,5 +226,4 @@ public class HTMLLinkElement extends HTMLElement {
     public void setDisabled(final boolean disabled) {
         super.setDisabled(disabled);
     }
-
 }

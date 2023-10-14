@@ -30,6 +30,7 @@ import org.htmlunit.SgmlPage;
 import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
+import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
@@ -54,6 +55,12 @@ public class HtmlLink extends HtmlElement {
 
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "link";
+
+    /**
+     * The associated style sheet (only valid for links of type
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
+     */
+    private CssStyleSheet sheet_;
 
     /**
      * Creates an instance of HtmlLink
@@ -322,6 +329,18 @@ public class HtmlLink extends HtmlElement {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    /**
+     * Returns the associated style sheet (only valid for links of type
+     * <code>&lt;link rel="stylesheet" type="text/css" href="..." /&gt;</code>).
+     * @return the associated style sheet
+     */
+    public CssStyleSheet getSheet() {
+        if (sheet_ == null) {
+            sheet_ = CssStyleSheet.loadStylesheet(this, this, null);
+        }
+        return sheet_;
     }
 
     /**

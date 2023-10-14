@@ -14,9 +14,17 @@
  */
 package org.htmlunit.html;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.htmlunit.Cache;
 import org.htmlunit.SgmlPage;
+import org.htmlunit.css.CssStyleSheet;
+import org.htmlunit.cssparser.dom.CSSStyleSheetImpl;
+import org.htmlunit.cssparser.parser.InputSource;
 
 /**
  * Wrapper for the HTML element "style".
@@ -29,8 +37,12 @@ import org.htmlunit.SgmlPage;
  */
 public class HtmlStyle extends HtmlElement {
 
+    private static final Log LOG = LogFactory.getLog(HtmlStyle.class);
+
     /** The HTML tag represented by this element. */
     public static final String TAG_NAME = "style";
+
+    private CssStyleSheet sheet_;
 
     /**
      * Creates an instance of HtmlStyle
@@ -109,5 +121,34 @@ public class HtmlStyle extends HtmlElement {
     @Override
     public boolean mayBeDisplayed() {
         return false;
+    }
+
+    /**
+     * @return the referenced style sheet
+     */
+    public CssStyleSheet getSheet() {
+        if (sheet_ != null) {
+            return sheet_;
+        }
+
+        final Cache cache = getPage().getWebClient().getCache();
+        final CSSStyleSheetImpl cached = cache.getCachedStyleSheet(getTextContent());
+        final String uri = getPage().getWebResponse().getWebRequest().getUrl().toExternalForm();
+
+        if (cached != null) {
+            sheet_ = new CssStyleSheet(this, cached, uri);
+        }
+        else {
+            final String css = getTextContent();
+            try (InputSource source = new InputSource(new StringReader(css))) {
+                sheet_ = new CssStyleSheet(this, source, uri);
+                cache.cache(css, sheet_.getWrappedSheet());
+            }
+            catch (final IOException e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
+
+        return sheet_;
     }
 }
