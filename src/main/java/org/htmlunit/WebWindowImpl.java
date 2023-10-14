@@ -14,6 +14,7 @@
  */
 package org.htmlunit;
 
+import static org.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_139;
@@ -29,17 +30,18 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
+import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlPage;
+import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
-import org.htmlunit.javascript.host.Element;
 import org.htmlunit.javascript.host.Window;
-import org.htmlunit.javascript.host.css.CSSStyleSheet;
-import org.htmlunit.javascript.host.css.StyleSheetList;
-import org.htmlunit.javascript.host.html.HTMLDocument;
+import org.w3c.dom.Document;
 
 /**
  * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
@@ -401,21 +403,36 @@ public abstract class WebWindowImpl implements WebWindow {
             }
         }
 
-        final Element e = element.getScriptableObject();
         final ComputedCssStyleDeclaration computedsStyleDeclaration =
                 new ComputedCssStyleDeclaration(new ElementCssStyleDeclaration(element));
 
-        final Object ownerDocument = e.getOwnerDocument();
-        if (ownerDocument instanceof HTMLDocument) {
-            final StyleSheetList sheets = ((HTMLDocument) ownerDocument).getStyleSheets();
-            final boolean trace = LOG.isTraceEnabled();
-            for (int i = 0; i < sheets.getLength(); i++) {
-                final CSSStyleSheet sheet = (CSSStyleSheet) sheets.item(i);
-                if (sheet.getCssStyleSheet().isActive() && sheet.getCssStyleSheet().isEnabled()) {
-                    if (trace) {
-                        LOG.trace("modifyIfNecessary: " + sheet + ", " + computedsStyleDeclaration + ", " + e);
+        final Document ownerDocument = element.getOwnerDocument();
+        if (ownerDocument instanceof HtmlPage) {
+            final HtmlPage htmlPage = (HtmlPage) ownerDocument;
+
+            final WebClient webClient = getWebClient();
+
+            if (webClient.getOptions().isCssEnabled()) {
+                final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
+
+                final boolean trace = LOG.isTraceEnabled();
+                for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
+                    CssStyleSheet cssStyleSheet = null;
+                    if (htmlElement instanceof HtmlStyle) {
+                        cssStyleSheet = ((HtmlStyle) htmlElement).getSheet();
                     }
-                    sheet.getCssStyleSheet().modifyIfNecessary(computedsStyleDeclaration, element, normalizedPseudo);
+                    else if (htmlElement instanceof HtmlLink) {
+                        cssStyleSheet = ((HtmlLink) htmlElement).getSheet();
+                    }
+
+                    if (cssStyleSheet != null && cssStyleSheet.isEnabled()
+                            && (!onlyActive || cssStyleSheet.isActive())) {
+                        if (trace) {
+                            LOG.trace("modifyIfNecessary: " + cssStyleSheet
+                                        + ", " + computedsStyleDeclaration + ", " + element);
+                        }
+                        cssStyleSheet.modifyIfNecessary(computedsStyleDeclaration, element, normalizedPseudo);
+                    }
                 }
             }
 

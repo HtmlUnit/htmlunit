@@ -23,13 +23,9 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import java.io.Serializable;
 import java.util.function.Predicate;
 
-import org.apache.commons.lang3.StringUtils;
 import org.htmlunit.WebClient;
-import org.htmlunit.WebWindow;
 import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.Undefined;
-import org.htmlunit.css.CssStyleSheet;
-import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.htmlunit.html.DomNode;
 import org.htmlunit.html.HtmlAttributeChangeEvent;
 import org.htmlunit.html.HtmlElement;
@@ -72,29 +68,6 @@ public class StyleSheetList extends HtmlUnitScriptable {
     private HTMLCollection nodes_;
 
     /**
-     * Verifies if the provided node is a link node pointing to an active stylesheet.
-     *
-     * @param domNode the mode to check
-     * @return true if the provided node is a stylesheet link
-     */
-    boolean isActiveStyleSheetLink(final DomNode domNode) {
-        if (domNode instanceof HtmlLink) {
-            final HtmlLink link = (HtmlLink) domNode;
-            if (link.isStyleSheetLink()) {
-                final String media = link.getMediaAttribute();
-                if (StringUtils.isBlank(media)) {
-                    return true;
-                }
-                final WebWindow webWindow = getWindow().getWebWindow();
-                final MediaListImpl mediaList =
-                        CssStyleSheet.parseMedia(webWindow.getWebClient().getCssErrorHandler(), media);
-                return CssStyleSheet.isActive(mediaList, webWindow);
-            }
-        }
-        return false;
-    }
-
-    /**
      * Creates an instance.
      */
     @JsxConstructor({CHROME, EDGE, FF, FF_ESR})
@@ -132,10 +105,13 @@ public class StyleSheetList extends HtmlUnitScriptable {
                         if (node instanceof HtmlStyle) {
                             return true;
                         }
-                        if (onlyActive) {
-                            return isActiveStyleSheetLink(node);
+                        if (node instanceof HtmlLink) {
+                            if (onlyActive) {
+                                return ((HtmlLink) node).isActiveStyleSheetLink();
+                            }
+                            return ((HtmlLink) node).isStyleSheetLink();
                         }
-                        return node instanceof HtmlLink && ((HtmlLink) node).isStyleSheetLink();
+                        return false;
                     });
         }
         else {

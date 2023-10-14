@@ -31,6 +31,7 @@ import org.htmlunit.WebClient;
 import org.htmlunit.WebRequest;
 import org.htmlunit.WebResponse;
 import org.htmlunit.css.CssStyleSheet;
+import org.htmlunit.cssparser.dom.MediaListImpl;
 import org.htmlunit.javascript.AbstractJavaScriptEngine;
 import org.htmlunit.javascript.PostponedAction;
 import org.htmlunit.javascript.host.event.Event;
@@ -351,6 +352,28 @@ public class HtmlLink extends HtmlElement {
         if (rel != null) {
             rel = rel.toLowerCase(Locale.ROOT);
             return ArrayUtils.contains(StringUtils.splitAtBlank(rel), "stylesheet");
+        }
+        return false;
+    }
+
+    /**
+     * <p><span style="color:red">Experimental API: May be changed in next release
+     * and may not yet work perfectly!</span></p>
+     *
+     * Verifies if the provided node is a link node pointing to an active stylesheet.
+     *
+     * @return true if the provided node is a stylesheet link
+     */
+    public boolean isActiveStyleSheetLink() {
+        if (isStyleSheetLink()) {
+            final String media = getMediaAttribute();
+            if (org.apache.commons.lang3.StringUtils.isBlank(media)) {
+                return true;
+            }
+
+            final MediaListImpl mediaList =
+                    CssStyleSheet.parseMedia(getPage().getWebClient().getCssErrorHandler(), media);
+            return CssStyleSheet.isActive(mediaList, getPage().getEnclosingWindow());
         }
         return false;
     }
