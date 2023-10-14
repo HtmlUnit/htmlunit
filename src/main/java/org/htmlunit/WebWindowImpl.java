@@ -14,7 +14,6 @@
  */
 package org.htmlunit;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_STYLESHEETLIST_ACTIVE_ONLY;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_COMPUTED_STYLE_PSEUDO_ACCEPT_WITHOUT_COLON;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_131;
 import static org.htmlunit.BrowserVersionFeatures.JS_WINDOW_OUTER_INNER_HEIGHT_DIFF_139;
@@ -413,8 +412,6 @@ public abstract class WebWindowImpl implements WebWindow {
             final WebClient webClient = getWebClient();
 
             if (webClient.getOptions().isCssEnabled()) {
-                final boolean onlyActive = webClient.getBrowserVersion().hasFeature(JS_STYLESHEETLIST_ACTIVE_ONLY);
-
                 final boolean trace = LOG.isTraceEnabled();
                 for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
                     CssStyleSheet cssStyleSheet = null;
@@ -425,8 +422,9 @@ public abstract class WebWindowImpl implements WebWindow {
                         cssStyleSheet = ((HtmlLink) htmlElement).getSheet();
                     }
 
-                    if (cssStyleSheet != null && cssStyleSheet.isEnabled()
-                            && (!onlyActive || cssStyleSheet.isActive())) {
+                    if (cssStyleSheet != null
+                            && cssStyleSheet.isEnabled()
+                            && cssStyleSheet.isActive()) {
                         if (trace) {
                             LOG.trace("modifyIfNecessary: " + cssStyleSheet
                                         + ", " + computedsStyleDeclaration + ", " + element);
