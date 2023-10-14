@@ -72,7 +72,6 @@ public class ArchitectureTest {
     public static final ArchRule awtPackageRule = noClasses()
         .that()
             .doNotHaveFullyQualifiedName("org.htmlunit.html.DoTypeProcessor")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.javascript.host.css.ComputedCSSStyleDeclaration")
             .and().doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
             .and().resideOutsideOfPackage("org.htmlunit.platform..")
             .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")

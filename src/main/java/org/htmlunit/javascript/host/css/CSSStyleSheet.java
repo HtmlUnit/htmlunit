@@ -273,7 +273,7 @@ public class CSSStyleSheet extends StyleSheet {
                 continue;
             }
 
-            final CSSRule cssRule = org.htmlunit.javascript.host.css.CSSRule.create(this, rule);
+            final CSSRule cssRule = CSSRule.create(this, rule);
             if (null == cssRule) {
                 cssRulesIndexFix_.add(pos);
             }

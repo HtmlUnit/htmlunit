@@ -158,10 +158,6 @@ public class CssStyleSheet implements Serializable {
     /** The HTML element which owns this stylesheet. */
     private final HtmlElement owner_;
 
-    /** The collection of rules defined in this style sheet. */
-    private org.htmlunit.javascript.host.css.CSSRuleList cssRules_;
-    private List<Integer> cssRulesIndexFix_;
-
     /** The CSS import rules and their corresponding stylesheets. */
     private final Map<CSSImportRuleImpl, CssStyleSheet> imports_ = new HashMap<>();
 
