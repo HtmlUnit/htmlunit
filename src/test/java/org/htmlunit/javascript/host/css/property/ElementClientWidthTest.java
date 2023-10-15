@@ -1386,7 +1386,7 @@ public class ElementClientWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "22",
-            EDGE = "18",
+            EDGE = "20",
             FF = "26",
             FF_ESR = "26",
             IE = "23")

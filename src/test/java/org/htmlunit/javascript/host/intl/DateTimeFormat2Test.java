@@ -498,6 +498,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_be() throws Exception {
         test("new Intl.DateTimeFormat('be').format(date)");
@@ -509,6 +510,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_be_by() throws Exception {
         test("new Intl.DateTimeFormat('be-BY').format(date)");
@@ -1110,6 +1112,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2013")
     public void format_ga() throws Exception {
         test("new Intl.DateTimeFormat('ga').format(date)");
@@ -1121,6 +1124,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20/12/2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E/\u200E12\u200E/\u200E2013")
     public void format_ga_ie() throws Exception {
         test("new Intl.DateTimeFormat('ga-IE').format(date)");
@@ -1202,6 +1206,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_is() throws Exception {
         test("new Intl.DateTimeFormat('is').format(date)");
@@ -1213,6 +1218,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_is_is() throws Exception {
         test("new Intl.DateTimeFormat('is-IS').format(date)");
@@ -1354,6 +1360,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk').format(date)");
@@ -1365,6 +1372,7 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "20.12.2013",
             CHROME = "12/20/2013",
+            EDGE = "12/20/2013",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_mk_mk() throws Exception {
         test("new Intl.DateTimeFormat('mk-MK').format(date)");

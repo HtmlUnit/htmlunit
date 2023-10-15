@@ -1405,7 +1405,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = "24",
-            EDGE = "20",
+            EDGE = "22",
             FF = "30",
             FF_ESR = "30",
             IE = "25")

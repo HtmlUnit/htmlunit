@@ -200,7 +200,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"8", "16", "1227", "0"},
-            EDGE = {"8", "16", "1172", "0"},
+            EDGE = {"8", "16", "1179", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"},
             IE = {"687", "16", "0", "0"})
@@ -241,7 +241,7 @@ public class HTMLHtmlElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(CHROME = {"8", "16", "1227", "0"},
-            EDGE = {"8", "16", "1172", "0"},
+            EDGE = {"8", "16", "1179", "0"},
             FF = {"8", "16", "0", "0"},
             FF_ESR = {"8", "16", "0", "0"},
             IE = {"687", "16", "0", "0"})

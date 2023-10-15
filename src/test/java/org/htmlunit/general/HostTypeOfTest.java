@@ -4540,7 +4540,9 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts("undefined")
+    @Alerts(DEFAULT = "undefined",
+            CHROME = "function",
+            EDGE = "function")
     public void iterator() throws Exception {
         test("Iterator");
     }
