@@ -7,7 +7,7 @@ pipeline {
     timeout(time: 35, unit: 'MINUTES')
   }
   tools {
-    jdk 'openjdk-1.8'
+    jdk 'openjdk-11+28'
   }
   stages {
     stage('Build') {
