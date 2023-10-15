@@ -105,6 +105,7 @@ import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTextArea;
 import org.htmlunit.javascript.host.css.MediaList;
+import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLDocument;
 import org.htmlunit.util.EncodingSniffer;
 import org.htmlunit.util.MimeType;
@@ -1077,7 +1078,7 @@ public class CssStyleSheet implements Serializable {
     /**
      * Validates the list of selectors.
      * @param selectorList the selectors
-     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     * @param documentMode see {@link Document#getDocumentMode()}
      * @param domNode the dom node the query should work on
      * @throws CSSException if a selector is invalid
      */
@@ -1091,7 +1092,7 @@ public class CssStyleSheet implements Serializable {
     }
 
     /**
-     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     * @param documentMode see {@link Document#getDocumentMode()}
      */
     private static boolean isValidSelector(final Selector selector, final int documentMode, final DomNode domNode) {
         switch (selector.getSelectorType()) {
@@ -1131,7 +1132,7 @@ public class CssStyleSheet implements Serializable {
     }
 
     /**
-     * @param documentMode see {@link HTMLDocument#getDocumentMode()}
+     * @param documentMode see {@link Document#getDocumentMode()}
      */
     private static boolean isValidCondition(final Condition condition, final int documentMode, final DomNode domNode) {
         switch (condition.getConditionType()) {
