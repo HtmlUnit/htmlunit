@@ -71,8 +71,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule awtPackageRule = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName("org.htmlunit.html.DoTypeProcessor")
-            .and().doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
+            .doNotHaveFullyQualifiedName("org.htmlunit.html.applets.AppletContextImpl")
             .and().resideOutsideOfPackage("org.htmlunit.platform..")
             .and().resideOutsideOfPackage("org.htmlunit.corejs.javascript.tools..")
         .should().dependOnClassesThat().resideInAnyPackage("java.awt..");
@@ -236,8 +235,6 @@ public class ArchitectureTest {
      */
     @ArchTest
     public static final ArchRule androidDocumentTraversal = noClasses()
-            .that()
-                .doNotHaveFullyQualifiedName("org.htmlunit.SgmlPage")
             .should().dependOnClassesThat().haveFullyQualifiedName("org.w3c.dom.traversal.DocumentTraversal");
 
     /**
@@ -254,13 +251,8 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule androidImageio = noClasses()
          .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.image.ImageIOImageData")
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
-            // ToDo
-            .and().doNotHaveFullyQualifiedName(
-                    "org.htmlunit.html.HtmlImage")
+            .doNotHaveFullyQualifiedName("org.htmlunit.platform.image.ImageIOImageData")
+            .and().doNotHaveFullyQualifiedName("org.htmlunit.platform.canvas.rendering.AwtRenderingBackend")
         .should().dependOnClassesThat().resideInAnyPackage("javax.imageio..");
 
     /**
@@ -269,8 +261,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule xerces = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.util.XmlUtilsXercesHelper")
+            .doNotHaveFullyQualifiedName("org.htmlunit.platform.util.XmlUtilsXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("org.apache.xerces..");
 
     /**
@@ -279,8 +270,7 @@ public class ArchitectureTest {
     @ArchTest
     public static final ArchRule jdkXerces = noClasses()
         .that()
-            .doNotHaveFullyQualifiedName(
-                    "org.htmlunit.platform.util.XmlUtilsSunXercesHelper")
+            .doNotHaveFullyQualifiedName("org.htmlunit.platform.util.XmlUtilsSunXercesHelper")
         .should().dependOnClassesThat().resideInAnyPackage("com.sun.org.apache.xerces..");
 
     /**
