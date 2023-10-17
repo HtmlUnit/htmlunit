@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Chrome/Edge 118, Bugfixes, Documentation updates">
+            <action type="fix" dev="rbri">
+                Trigger WebWindowEvent for the initial WebClient window also if js is disabled.
+            </action>
             <action type="update" dev="rbri" issue="#338">
                 Implementation of CSS pseudo classes :invalid and :valid improved.
             </action>

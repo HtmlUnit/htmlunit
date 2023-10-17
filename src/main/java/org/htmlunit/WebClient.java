@@ -306,9 +306,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         initMSXMLActiveX();
 
-        if (isJavaScriptEnabled()) {
-            fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
-        }
+        fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
     }
 
     /**
@@ -2415,9 +2413,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         initMSXMLActiveX();
 
-        if (isJavaScriptEnabled()) {
-            fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
-        }
+        fireWindowOpened(new WebWindowEvent(currentWindow_, WebWindowEvent.OPEN, null, null));
     }
 
     /**
