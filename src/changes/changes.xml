@@ -34,8 +34,8 @@
                 Sending the correct content type of "application/pdf" for PDF files for form-multipart posts.
             </action>
             <action type="fix" dev="rbri">
-                Fixed a major leak - frame windows (incl. iframes) are still referenced by the web client
-                windows list after the parent was closed. In the end they are not garbage collected.
+                Fixed a major memory leak - frame windows (incl. iframes) are still referenced by the web client
+                window list after the parent was closed. In the end they are not garbage collected.
             </action>
             <action type="update" dev="rbri">
                 Upgrade Apache commons-net to 3.10.0.

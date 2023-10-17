@@ -31,11 +31,11 @@
         <htmlunitxpath.version>3.6.0</htmlunitxpath.version>
 
         <htmlunitdriver.version>4.13.0</htmlunitdriver.version>
-        <selenium.version>4.14.0</selenium.version>
+        <selenium.version>4.14.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
         <jetty.version>9.4.53.v20231009</jetty.version>
-        <log4j.version>2.20.0</log4j.version>
+        <log4j.version>2.21.0</log4j.version>
 
         <!-- As a property, as it is included in Checkstyle build -->
         <checkstyle.version>9.3</checkstyle.version>
