@@ -459,6 +459,19 @@ public class HtmlForm extends HtmlElement {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isValid() {
+        for (final HtmlElement element : getElements()) {
+            if (!element.isValid()) {
+                return false;
+            }
+        }
+        return super.isValid();
+    }
+
+    /**
      * Returns a collection of elements that represent all the "submittable" elements in this form,
      * assuming that the specified element is used to submit the form.
      *

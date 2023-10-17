@@ -97,6 +97,7 @@ import org.htmlunit.html.DomNode;
 import org.htmlunit.html.DomText;
 import org.htmlunit.html.HtmlCheckBoxInput;
 import org.htmlunit.html.HtmlElement;
+import org.htmlunit.html.HtmlForm;
 import org.htmlunit.html.HtmlInput;
 import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlOption;
@@ -104,6 +105,7 @@ import org.htmlunit.html.HtmlPage;
 import org.htmlunit.html.HtmlRadioButtonInput;
 import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.html.HtmlTextArea;
+import org.htmlunit.html.ValidatableElement;
 import org.htmlunit.javascript.host.css.MediaList;
 import org.htmlunit.javascript.host.dom.Document;
 import org.htmlunit.javascript.host.html.HTMLDocument;
@@ -870,10 +872,16 @@ public class CssStyleSheet implements Serializable {
                 return true;
 
             case "valid":
-                return element instanceof HtmlElement && ((HtmlElement) element).isValid();
+                if (element instanceof HtmlForm || element instanceof ValidatableElement) {
+                    return ((HtmlElement) element).isValid();
+                }
+                return false;
 
             case "invalid":
-                return element instanceof HtmlElement && !((HtmlElement) element).isValid();
+                if (element instanceof HtmlForm || element instanceof ValidatableElement) {
+                    return !((HtmlElement) element).isValid();
+                }
+                return false;
 
             case "empty":
                 return isEmpty(element);

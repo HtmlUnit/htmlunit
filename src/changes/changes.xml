@@ -8,6 +8,12 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Chrome/Edge 118, Bugfixes, Documentation updates">
+            <action type="update" dev="rbri" issue="#338">
+                Implementation of CSS pseudo classes :invalid and :valid improved.
+            </action>
+            <action type="update" dev="rbri">
+                Form.isValid() checks all form elements.
+            </action>
             <action type="update" dev="rbri">
                 WebClient documentation enhanced.
             </action>
