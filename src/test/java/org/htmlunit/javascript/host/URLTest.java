@@ -612,6 +612,25 @@ public class URLTest extends WebDriverTestCase {
                     "http:", "http://mydomain.com/svn/Repos/",
                     "ex-unknown"},
             IE = {})
+    @HtmlUnitNYI(
+            CHROME = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "null:", "null://mydomain.com/svn/Repos/",
+                      "ex-unknown"},
+            EDGE = {"https:",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "axdeg:", "axdeg://mydomain.com/svn/Repos/",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "null:", "null://mydomain.com/svn/Repos/",
+                    "ex-unknown"})
     public void protocol() throws Exception {
         final String html =
                 "<html>\n"
@@ -694,6 +713,39 @@ public class URLTest extends WebDriverTestCase {
                       "wss:", "wss://mydomain.com/svn/Repos/",
                       "file:", "file:///svn/Repos/"},
             IE = {})
+    @HtmlUnitNYI(
+            CHROME = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "https:", "https://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
+                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ws:", "ws://mydomain.com/svn/Repos/",
+                      "wss:", "wss://mydomain.com/svn/Repos/",
+                      "file:", "file://mydomain.com/svn/Repos/"},
+            EDGE = {"https:",
+                    "http:", "http://mydomain.com/svn/Repos/",
+                    "https:", "https://mydomain.com/svn/Repos/",
+                    "ftp:", "ftp://mydomain.com/svn/Repos/",
+                    "ftps:", "ftps://mydomain.com/svn/Repos/",
+                    "ws:", "ws://mydomain.com/svn/Repos/",
+                    "wss:", "wss://mydomain.com/svn/Repos/",
+                    "file:", "file://mydomain.com/svn/Repos/"},
+            FF = {"https:",
+                  "http:", "http://mydomain.com/svn/Repos/",
+                  "https:", "https://mydomain.com/svn/Repos/",
+                  "ftp:", "ftp://mydomain.com/svn/Repos/",
+                  "ftps:", "ftps://mydomain.com/svn/Repos/",
+                  "ws:", "ws://mydomain.com/svn/Repos/",
+                  "wss:", "wss://mydomain.com/svn/Repos/",
+                  "file:", "file://mydomain.com/svn/Repos/"},
+            FF_ESR = {"https:",
+                      "http:", "http://mydomain.com/svn/Repos/",
+                      "https:", "https://mydomain.com/svn/Repos/",
+                      "ftp:", "ftp://mydomain.com/svn/Repos/",
+                      "ftps:", "ftps://mydomain.com/svn/Repos/",
+                      "ws:", "ws://mydomain.com/svn/Repos/",
+                      "wss:", "wss://mydomain.com/svn/Repos/",
+                      "file:", "file://mydomain.com/svn/Repos/"})
     public void specialScheme() throws Exception {
         final String html =
                 "<html>\n"
