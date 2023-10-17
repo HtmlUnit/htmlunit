@@ -18,12 +18,16 @@
                 The WebClient represent the browser if you work with HtmlUnit. To start using HtmlUnit
                 you have to in instantiate a new WebClient - like starting the browser in the real world. 
             </p>
+            <p>
+                WebClient implements AutoCloseable; you should always use it with try-with-resources constructions.
+                After a WebClient is closed (see <a href="apidocs/org/htmlunit/WebClient.html#close--">WebClient.close()</a>),
+                any further use is not supported and might lead to exceptions or incorrect behaviour.
+            </p>
             <source><![CDATA[
-    try (final WebClient webClient = new WebClient()) {
-        // now you have a running browser, and you can start doing real things
-        // like going to a web page
-        final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
-    }
+try (final WebClient webClient = new WebClient()) {
+    // now you have a running browser, and you can start doing real things
+    // like going to a web page
+    final HtmlPage page = webClient.getPage("https://www.htmlunit.org/");
 }]]></source>
         </section>
 

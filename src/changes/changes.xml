@@ -8,6 +8,9 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Chrome/Edge 118, Bugfixes, Documentation updates">
+            <action type="update" dev="rbri">
+                WebClient documentation enhanced.
+            </action>
             <action type="update" dev="rbri" issue="#131">
                 Documentation about proxy setup integrated into the WebClient documentation.
             </action>
