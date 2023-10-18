@@ -1110,6 +1110,9 @@
         <contributor>
             <name>Vadzim Miliantsei</name>
         </contributor>
+        <contributor>
+            <name>Piotr P. Karwasz</name>
+        </contributor>
     </contributors>
     <dependencies>
         <!-- this includes httpclient as depencency -->
