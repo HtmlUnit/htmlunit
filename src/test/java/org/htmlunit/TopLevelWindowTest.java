@@ -80,6 +80,8 @@ public class TopLevelWindowTest extends SimpleWebTestCase {
         assertNotSame(webClient.getCurrentWindow(), windowToClose);
 
         assertEquals(1, webClient.getWebWindows().size());
+        assertEquals(1, webClient.getTopLevelWindows().size());
+        assertEquals(webClient.getWebWindows().get(0), webClient.getTopLevelWindows().get(0));
     }
 
     /**
