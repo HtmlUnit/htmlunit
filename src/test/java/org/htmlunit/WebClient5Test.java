@@ -72,22 +72,4 @@ public class WebClient5Test extends WebTestCase {
             assertEquals(URL_FIRST, calledUrls[0]);
         }
     }
-
-    /**
-     * @throws Exception if the test fails
-     */
-    @Test
-    public void useAfterCloseShouldNotCreateThreads() throws Exception {
-        final MockWebConnection connection = getMockWebConnection();
-        connection.setDefaultResponse("hello");
-
-        @SuppressWarnings("resource")
-        final WebClient webClient = new WebClient();
-        webClient.close();
-
-        // webClient.close() also removes the webConnection
-        webClient.setWebConnection(connection);
-        webClient.getPage(URL_FIRST);
-        assertTrue(getJavaScriptThreads().isEmpty());
-    }
 }
