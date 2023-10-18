@@ -186,7 +186,12 @@ public class WebClient implements Serializable, AutoCloseable {
     private final BrowserVersion browserVersion_;
     private PageCreator pageCreator_ = new DefaultPageCreator();
 
+    // we need a separate one to be sure the one is always informed as first
+    // one. Only then we can make sure our state is consistent when the others
+    // are informed.
+    private WebWindowListener webWindowListener_;
     private final Set<WebWindowListener> webWindowListeners_ = new HashSet<>(5);
+
     private final List<TopLevelWindow> topLevelWindows_ =
             Collections.synchronizedList(new ArrayList<>()); // top-level windows
     private final List<WebWindow> windows_ = Collections.synchronizedList(new ArrayList<>()); // all windows
@@ -301,7 +306,7 @@ public class WebClient implements Serializable, AutoCloseable {
         loadQueue_ = new ArrayList<>();
 
         // The window must be constructed AFTER the script engine.
-        addWebWindowListener(new CurrentWindowTracker(this));
+        webWindowListener_ = new CurrentWindowTracker(this);
         currentWindow_ = new TopLevelWindow("", this);
 
         initMSXMLActiveX();
@@ -1009,18 +1014,27 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     private void fireWindowContentChanged(final WebWindowEvent event) {
+        if (webWindowListener_ != null) {
+            webWindowListener_.webWindowContentChanged(event);
+        }
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowContentChanged(event);
         }
     }
 
     private void fireWindowOpened(final WebWindowEvent event) {
+        if (webWindowListener_ != null) {
+            webWindowListener_.webWindowOpened(event);
+        }
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowOpened(event);
         }
     }
 
     private void fireWindowClosed(final WebWindowEvent event) {
+        if (webWindowListener_ != null) {
+            webWindowListener_.webWindowClosed(event);
+        }
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowClosed(event);
         }
@@ -2276,10 +2290,9 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_.prepareShutdown();
         }
 
-        // remove the CurrentWindowTracker from the list of windowListener
-        // because the CurrentWindowTracker makes sure there is still one
-        // window available
-        webWindowListeners_.removeIf(listener -> listener instanceof CurrentWindowTracker);
+        // stop the CurrentWindowTracker
+        // the CurrentWindowTracker makes sure there is still one window available
+        webWindowListener_ = null;
 
         // Hint: a new TopLevelWindow may be opened by some JS script while we are closing the others
         // but the prepareShutdown() call will prevent the new window form getting js support
@@ -2408,7 +2421,7 @@ public class WebClient implements Serializable, AutoCloseable {
         }
 
         // The window must be constructed AFTER the script engine.
-        addWebWindowListener(new CurrentWindowTracker(this));
+        webWindowListener_ = new CurrentWindowTracker(this);
         currentWindow_ = new TopLevelWindow("", this);
 
         initMSXMLActiveX();

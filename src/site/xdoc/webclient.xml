@@ -154,6 +154,26 @@ public void homePage_proxy() throws Exception {
             </subsection>
         </section>
 
+        <section name="WebWindowListener / WebWindowEvents">
+            <p>
+                If you wish to be notified when windows are created or pages are loaded, you need to register a
+                <a href="apidocs/org/htmlunit/WebWindowListener.html">WebWindowListener</a> 
+                with the WebClient using
+                <a href="apidocs/org/htmlunit/WebClient.html#addWebWindowListener-org.htmlunit.WebWindowListener-">WebClient.addWebWindowListener(WebWindowListener)</a>
+            </p>
+            <p>
+                When a window is opened either by JavaScript or through the WebClient, a WebWindowEvent will be
+                fired and passed into the WebWindowListener.webWindowOpened(WebWindowEvent)
+                method.  Note that both the new and old pages in the event will be null as the window does not
+                have any content loaded at this point.  If a URL was specified during creation of the window then the page
+                will be loaded and another event will be fired as described below.
+            </p>
+            <p>
+                When a new page is loaded into a specific window, a WebWindowEvent will be fired and passed into the
+                WebWindowListener.webWindowContentChanged(WebWindowEvent) method.
+            </p>
+        </section>
+
         <section name="Using handlers">
             <p>
                 There are many handlers used by the WebClient for special purposes. These Handlers are implementing
