@@ -79,6 +79,7 @@ import org.htmlunit.corejs.javascript.Scriptable;
 import org.htmlunit.corejs.javascript.ScriptableObject;
 import org.htmlunit.corejs.javascript.Undefined;
 import org.htmlunit.css.ComputedCssStyleDeclaration;
+import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.html.FrameWindow.PageDenied;
 import org.htmlunit.html.impl.SelectableTextInput;
 import org.htmlunit.html.impl.SimpleRange;
@@ -2711,6 +2712,29 @@ public class HtmlPage extends SgmlPage {
     public void putStyleIntoCache(final DomElement element, final String normalizedPseudo,
             final ComputedCssStyleDeclaration style) {
         getCssPropertiesCache().put(element, normalizedPseudo, style);
+    }
+
+    /**
+     * <span style="color:red">INTERNAL API - SUBJECT TO CHANGE AT ANY TIME - USE AT YOUR OWN RISK.</span><br>
+     *
+     * @return a list of all styles from this page (&lt;style&gt; and &lt;link rel=stylesheet&gt;).
+     * This returns an empty list if css support is disabled in the web client options.
+     */
+    public List<CssStyleSheet> getStyleSheets() {
+        final List<CssStyleSheet> styles = new ArrayList<>();
+        if (getWebClient().getOptions().isCssEnabled()) {
+            for (final HtmlElement htmlElement : getHtmlElementDescendants()) {
+                if (htmlElement instanceof HtmlStyle) {
+                    styles.add(((HtmlStyle) htmlElement).getSheet());
+                    continue;
+                }
+
+                if (htmlElement instanceof HtmlLink) {
+                    styles.add(((HtmlLink) htmlElement).getSheet());
+                }
+            }
+        }
+        return styles;
     }
 
     /**

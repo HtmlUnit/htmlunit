@@ -32,10 +32,7 @@ import org.htmlunit.css.ComputedCssStyleDeclaration;
 import org.htmlunit.css.CssStyleSheet;
 import org.htmlunit.css.ElementCssStyleDeclaration;
 import org.htmlunit.html.DomElement;
-import org.htmlunit.html.HtmlElement;
-import org.htmlunit.html.HtmlLink;
 import org.htmlunit.html.HtmlPage;
-import org.htmlunit.html.HtmlStyle;
 import org.htmlunit.javascript.HtmlUnitScriptable;
 import org.htmlunit.javascript.background.BackgroundJavaScriptFactory;
 import org.htmlunit.javascript.background.JavaScriptJobManager;
@@ -413,15 +410,7 @@ public abstract class WebWindowImpl implements WebWindow {
 
             if (webClient.getOptions().isCssEnabled()) {
                 final boolean trace = LOG.isTraceEnabled();
-                for (final HtmlElement htmlElement : htmlPage.getHtmlElementDescendants()) {
-                    CssStyleSheet cssStyleSheet = null;
-                    if (htmlElement instanceof HtmlStyle) {
-                        cssStyleSheet = ((HtmlStyle) htmlElement).getSheet();
-                    }
-                    else if (htmlElement instanceof HtmlLink) {
-                        cssStyleSheet = ((HtmlLink) htmlElement).getSheet();
-                    }
-
+                for (final CssStyleSheet cssStyleSheet : htmlPage.getStyleSheets()) {
                     if (cssStyleSheet != null
                             && cssStyleSheet.isEnabled()
                             && cssStyleSheet.isActive()) {
