@@ -43,7 +43,7 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
             + "<script type='text/javascript'>\n"
             + "  document.location.href = '" + URL_SECOND + "';\n"
             + "</script>\n"
-            + "<p>Second Page<p>\n"
+            + "<p>First Page<p>\n"
             + "</body></html>";
 
         final String secondHtml
@@ -54,23 +54,86 @@ public class WebWindowListenerTest extends SimpleWebTestCase {
 
         getMockWebConnection().setResponse(URL_SECOND, secondHtml);
 
-        final StringBuilder msg = new StringBuilder();
-        getWebClient().addWebWindowListener(new WebWindowListener() {
-            @Override
-            public void webWindowOpened(final WebWindowEvent event) {
-            }
-
-            @Override
-            public void webWindowContentChanged(final WebWindowEvent event) {
-                msg.append("changed '" + ((HtmlPage) event.getNewPage()).getTitleText() + "'; ");
-            }
-            @Override
-            public void webWindowClosed(final WebWindowEvent event) {
-            }
-        });
+        final LoggingWebWindowListener logger = new LoggingWebWindowListener();
+        getWebClient().addWebWindowListener(logger);
 
         loadPage(firstHtml);
-        assertEquals("changed 'Test 1'; changed 'Test 2'; ", msg.toString());
+        assertEquals("changed '' - 'Test 1'; changed 'Test 1' - 'Test 2'; ", logger.getMsg());
     }
 
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void eventOrderCloseLast() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<head><title>Test 1</title></head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final LoggingWebWindowListener logger = new LoggingWebWindowListener();
+        getWebClient().addWebWindowListener(logger);
+
+        loadPage(firstHtml);
+        ((TopLevelWindow) getWebClient().getCurrentWindow()).close();
+
+        assertEquals("changed '' - 'Test 1'; closed 'Test 1' - ''; opened '' - ''; ", logger.getMsg());
+    }
+
+    /**
+     * @throws Exception if the test fails
+     */
+    @Test
+    public void eventOrderReset() throws Exception {
+        final String firstHtml
+            = "<html>\n"
+            + "<head><title>Test 1</title></head>\n"
+            + "<body>\n"
+            + "</body></html>";
+
+        final LoggingWebWindowListener logger = new LoggingWebWindowListener();
+        getWebClient().addWebWindowListener(logger);
+
+        loadPage(firstHtml);
+        getWebClient().reset();
+
+        assertEquals("changed '' - 'Test 1'; closed 'Test 1' - ''; opened '' - ''; ", logger.getMsg());
+    }
+
+    private final class LoggingWebWindowListener implements WebWindowListener {
+        private final StringBuilder msg_ = new StringBuilder();
+
+        @Override
+        public void webWindowOpened(final WebWindowEvent event) {
+            log("opened", event);
+        }
+
+        @Override
+        public void webWindowContentChanged(final WebWindowEvent event) {
+            log("changed", event);
+        }
+        @Override
+        public void webWindowClosed(final WebWindowEvent event) {
+            log("closed", event);
+        }
+
+        private void log(final String prefix, final WebWindowEvent event) {
+            msg_.append(prefix).append(" '");
+            Page page = event.getOldPage();
+            if (page instanceof HtmlPage) {
+                msg_.append(((HtmlPage) page).getTitleText());
+            }
+            msg_.append("' - '");
+            page = event.getNewPage();
+            if (page instanceof HtmlPage) {
+                msg_.append(((HtmlPage) page).getTitleText());
+            }
+            msg_.append("'; ");
+        }
+
+        public String getMsg() {
+            return msg_.toString();
+        }
+    }
 }
