@@ -1030,12 +1030,17 @@ public class WebClient implements Serializable, AutoCloseable {
     }
 
     private void fireWindowClosed(final WebWindowEvent event) {
+        if (currentWindowTracker_ != null) {
+            currentWindowTracker_.webWindowClosed(event);
+        }
+
         for (final WebWindowListener listener : new ArrayList<>(webWindowListeners_)) {
             listener.webWindowClosed(event);
         }
 
+        // to open a new top level window if all others are gone
         if (currentWindowTracker_ != null) {
-            currentWindowTracker_.webWindowClosed(event);
+            currentWindowTracker_.afterWebWindowClosedListenersProcessed(event);
         }
     }
 
@@ -2197,12 +2202,7 @@ public class WebClient implements Serializable, AutoCloseable {
             if (window instanceof TopLevelWindow) {
                 webClient_.topLevelWindows_.remove(window);
                 if (window == webClient_.getCurrentWindow()) {
-                    if (webClient_.topLevelWindows_.isEmpty()) {
-                        // Must always have at least window, and there are no top-level windows left; must create one.
-                        final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
-                        webClient_.setCurrentWindow(newWindow);
-                    }
-                    else {
+                    if (!webClient_.topLevelWindows_.isEmpty()) {
                         // The current window is now the previous top-level window.
                         webClient_.setCurrentWindow(
                                 webClient_.topLevelWindows_.get(webClient_.topLevelWindows_.size() - 1));
@@ -2218,6 +2218,17 @@ public class WebClient implements Serializable, AutoCloseable {
                     webClient_.setCurrentWindow(
                             webClient_.topLevelWindows_.get(webClient_.topLevelWindows_.size() - 1));
                 }
+            }
+        }
+
+        /**
+         * Postprocessing to make sure we have always one top level window open.
+         */
+        public void afterWebWindowClosedListenersProcessed(final WebWindowEvent event) {
+            if (webClient_.topLevelWindows_.isEmpty()) {
+                // Must always have at least window, and there are no top-level windows left; must create one.
+                final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
+                webClient_.setCurrentWindow(newWindow);
             }
         }
 
