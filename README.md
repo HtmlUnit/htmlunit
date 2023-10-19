@@ -11,7 +11,7 @@ Version 3.6.0 / October 03, 2023
 
 [htmlunit.org][4]
 
-[HtmlUnit@Twitter][3]
+[HtmlUnit@mastodon] [13] | [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
 
@@ -171,3 +171,4 @@ This project is licensed under the Apache 2.0 License
 [10]: https://www.webscrapingapi.com/java-web-scraping/
 [11]: http://www.mastertheboss.com/java-ee/jsf/how-to-test-jakarta-faces-with-htmlunit-and-arquillian
 [12]: https://github.com/HtmlUnit/htmlunit/releases
+[13]: https://fosstodon.org/@HtmlUnit

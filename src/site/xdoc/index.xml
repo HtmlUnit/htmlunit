@@ -69,7 +69,10 @@
 
                     <dt>News</dt>
                     <dd>
-                        <p><a href="https://twitter.com/HtmlUnit"><img src="./images/logos/twitter.png" alt="Twitter" height="73" width="60"></img></a></p>
+                        <p>
+                          <a href="https://fosstodon.org/@HtmlUnit"><img src="./images/logos/mastodon.png" alt="Twitter" height="40" width="37"></img></a>
+                          <a href="https://twitter.com/HtmlUnit"><img src="./images/logos/twitter.png" alt="Twitter" height="50" width="68"></img></a>
+                        </p>
                     </dd>
 
                     <dt>Latest build / CI server</dt>
