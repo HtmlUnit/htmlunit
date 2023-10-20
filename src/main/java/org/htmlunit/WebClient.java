@@ -307,7 +307,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // The window must be constructed AFTER the script engine.
         currentWindowTracker_ = new CurrentWindowTracker(this, true);
-        new TopLevelWindow("", this);
+        currentWindow_ = new TopLevelWindow("", this);
 
         initMSXMLActiveX();
     }
@@ -2233,7 +2233,8 @@ public class WebClient implements Serializable, AutoCloseable {
 
             if (webClient_.topLevelWindows_.isEmpty()) {
                 // Must always have at least window, and there are no top-level windows left; must create one.
-                new TopLevelWindow("", webClient_);
+                final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
+                webClient_.setCurrentWindow(newWindow);
             }
         }
 
@@ -2285,7 +2286,6 @@ public class WebClient implements Serializable, AutoCloseable {
             if (window instanceof TopLevelWindow) {
                 final TopLevelWindow tlw = (TopLevelWindow) window;
                 webClient_.topLevelWindows_.add(tlw);
-                webClient_.setCurrentWindow(tlw);
             }
             // Page is not loaded yet, don't set it now as current window.
         }
@@ -2436,7 +2436,7 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // The window must be constructed AFTER the script engine.
         currentWindowTracker_ = new CurrentWindowTracker(this, true);
-        new TopLevelWindow("", this);
+        currentWindow_ = new TopLevelWindow("", this);
     }
 
     /**
