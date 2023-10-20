@@ -306,7 +306,7 @@ public class WebClient implements Serializable, AutoCloseable {
         loadQueue_ = new ArrayList<>();
 
         // The window must be constructed AFTER the script engine.
-        currentWindowTracker_ = new CurrentWindowTracker(this);
+        currentWindowTracker_ = new CurrentWindowTracker(this, true);
         currentWindow_ = new TopLevelWindow("", this);
 
         initMSXMLActiveX();
@@ -2188,9 +2188,11 @@ public class WebClient implements Serializable, AutoCloseable {
      */
     private static final class CurrentWindowTracker implements WebWindowListener, Serializable {
         private final WebClient webClient_;
+        private final boolean ensureOneTopLevelWindow_;
 
-        CurrentWindowTracker(final WebClient webClient) {
+        CurrentWindowTracker(final WebClient webClient, final boolean ensureOneTopLevelWindow) {
             webClient_ = webClient;
+            ensureOneTopLevelWindow_ = ensureOneTopLevelWindow;
         }
 
         /**
@@ -2225,6 +2227,10 @@ public class WebClient implements Serializable, AutoCloseable {
          * Postprocessing to make sure we have always one top level window open.
          */
         public void afterWebWindowClosedListenersProcessed(final WebWindowEvent event) {
+            if (!ensureOneTopLevelWindow_) {
+                return;
+            }
+
             if (webClient_.topLevelWindows_.isEmpty()) {
                 // Must always have at least window, and there are no top-level windows left; must create one.
                 final TopLevelWindow newWindow = new TopLevelWindow("", webClient_);
@@ -2299,9 +2305,8 @@ public class WebClient implements Serializable, AutoCloseable {
             scriptEngine_.prepareShutdown();
         }
 
-        // stop the CurrentWindowTracker
-        // the CurrentWindowTracker makes sure there is still one window available
-        currentWindowTracker_ = null;
+        // stop the CurrentWindowTracker from making sure there is still one window available
+        currentWindowTracker_ = new CurrentWindowTracker(this, false);
 
         // Hint: a new TopLevelWindow may be opened by some JS script while we are closing the others
         // but the prepareShutdown() call will prevent the new window form getting js support
@@ -2312,7 +2317,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 try {
                     topLevelWindow.close(true);
-                    topLevelWindows_.remove(topLevelWindow);
                 }
                 catch (final Exception e) {
                     LOG.error("Exception while closing a TopLevelWindow", e);
@@ -2339,7 +2343,6 @@ public class WebClient implements Serializable, AutoCloseable {
 
                 try {
                     topLevelWindow.close(true);
-                    topLevelWindows_.remove(topLevelWindow);
                 }
                 catch (final Exception e) {
                     LOG.error("Exception while closing a TopLevelWindow", e);
@@ -2432,7 +2435,7 @@ public class WebClient implements Serializable, AutoCloseable {
         initMSXMLActiveX();
 
         // The window must be constructed AFTER the script engine.
-        currentWindowTracker_ = new CurrentWindowTracker(this);
+        currentWindowTracker_ = new CurrentWindowTracker(this, true);
         currentWindow_ = new TopLevelWindow("", this);
     }
 
