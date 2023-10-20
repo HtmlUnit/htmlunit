@@ -8,6 +8,15 @@
 
     <body>
         <release version="3.7.0" date="October xx, 2023" description="Firefox 118, Chrome/Edge 118, Bugfixes, Documentation updates">
+            <action type="update" dev="rbri">
+                INCOMPATIBLE CHANGE: For this version, the processing of WebWindowListener events got many changes/fixes/improvements.
+                The main point was to let this work as stable as possible even if many WebWindowListener are registred. Also the state
+                of the various WebClient properties should be clear in every case. This results in some minor changes the might have
+                some impact for the backward compatibility.
+            </action>
+            <action type="update" dev="rbri">
+                WebWindowListener javadoc updated to reflect the latest changes and include some words about common pitfalls.
+            </action>
             <action type="fix" dev="rbri">
                 Make sure the webClient is in a consistent state when the WebWindowListener events are fired.
             </action>
