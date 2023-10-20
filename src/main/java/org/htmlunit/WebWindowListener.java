@@ -16,8 +16,18 @@ package org.htmlunit;
 
 /**
  * A listener for WebWindowEvent's.
+ * <p>
+ * This listener informs when a new window is opened, when the content of a window changes
+ * or when a window is closed.
+ * </p>
+ * <p>
+ * Caution: The WebClient creates (and opens) the initial window as part of the construction
+ * process. This implies, the initial window is already open at the time you attach this listener.
+ * Therefore you will receive no open event for this.
+ * </p>
  *
  * @author <a href="mailto:mbowler@GargoyleSoftware.com">Mike Bowler</a>
+ * @author Ronald Brill
  */
 public interface WebWindowListener {
 
@@ -25,7 +35,7 @@ public interface WebWindowListener {
      * A web window has been opened.
      *
      * @param event the event (the oldPage and newPage properties will be {@code null}
-     * because the event is generated when the window is opened before the content is loaded)
+     * because the event is generated after the window is opened but before the content is loaded)
      */
     void webWindowOpened(WebWindowEvent event);
 
@@ -37,7 +47,8 @@ public interface WebWindowListener {
     void webWindowContentChanged(WebWindowEvent event);
 
     /**
-     * A web window has been closed.
+     * A web window has been closed. Closing the last window of the WebClient will automatically open
+     * a new one. You will receive an additional open event in this case.
      *
      * @param event the event
      */
