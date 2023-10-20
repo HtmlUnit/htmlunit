@@ -11,7 +11,7 @@ Version 3.6.0 / October 03, 2023
 
 [htmlunit.org][4]
 
-[HtmlUnit@mastodon] [13] | [HtmlUnit@Twitter][3]
+[HtmlUnit@mastodon][13] | [HtmlUnit@Twitter][3]
 
 [HtmlUnit Kanban Board][6]
 
