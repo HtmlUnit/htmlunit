@@ -15,6 +15,15 @@
                 some impact for the backward compatibility.
             </action>
             <action type="update" dev="rbri">
+                Upgrade Apache commons-io to 2.15.0.
+            </action>
+            <action type="remove" dev="rbri">
+                core-js: a no longer used switch removed
+            </action>
+            <action type="update" dev="rbri">
+                core-js: build system switched to maven
+            </action>
+            <action type="update" dev="rbri">
                 WebWindowListener javadoc updated to reflect the latest changes and include some words about common pitfalls.
             </action>
             <action type="fix" dev="rbri">
