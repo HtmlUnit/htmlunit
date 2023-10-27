@@ -2362,12 +2362,12 @@ public class WebClient implements Serializable, AutoCloseable {
 
         // now both lists have to be empty
         if (topLevelWindows_.size() > 0) {
-            LOG.error("Sill " + topLevelWindows_.size() + " top level windows are open. Please repot this error!");
+            LOG.error("Sill " + topLevelWindows_.size() + " top level windows are open. Please report this error!");
             topLevelWindows_.clear();
         }
 
         if (windows_.size() > 0) {
-            LOG.error("Sill " + windows_.size() + " windows are open. Please repot this error!");
+            LOG.error("Sill " + windows_.size() + " windows are open. Please report this error!");
             windows_.clear();
         }
         currentWindow_ = null;
