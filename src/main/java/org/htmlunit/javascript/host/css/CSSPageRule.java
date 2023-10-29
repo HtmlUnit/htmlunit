@@ -21,7 +21,6 @@ import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
-import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import java.util.Locale;
 
@@ -74,7 +73,7 @@ public class CSSPageRule extends CSSRule {
      * Returns the textual representation of the selector for the rule set.
      * @return the textual representation of the selector for the rule set
      */
-    @JsxGetter({CHROME, EDGE, FF, IE})
+    @JsxGetter
     public String getSelectorText() {
         if (getBrowserVersion().hasFeature(JS_PAGERULE_SELECTORTEXT_EMPTY)) {
             return "";
@@ -91,7 +90,7 @@ public class CSSPageRule extends CSSRule {
      * Sets the textual representation of the selector for the rule set.
      * @param selectorText the textual representation of the selector for the rule set
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setSelectorText(final String selectorText) {
         try {
             getPageRule().setSelectorText(selectorText);

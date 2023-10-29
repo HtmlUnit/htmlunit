@@ -157,7 +157,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the owner node.
      * @return the owner node
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public HTMLElement getOwnerNode() {
         return ownerNode_;
     }
@@ -175,7 +175,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Retrieves the collection of rules defined in this style sheet.
      * @return the collection of rules defined in this style sheet
      */
-    @JsxGetter({CHROME, EDGE, IE})
+    @JsxGetter
     public CSSRuleList getRules() {
         return getCssRules();
     }
@@ -194,7 +194,7 @@ public class CSSStyleSheet extends StyleSheet {
      * Returns the URL of the stylesheet.
      * @return the URL of the stylesheet
      */
-    @JsxGetter
+    @JsxGetter(IE)
     public String getHref() {
         if (ownerNode_ != null) {
             final DomNode node = ownerNode_.getDomNodeOrDie();

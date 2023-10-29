@@ -137,6 +137,20 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
                 + "    <invalid id='mySvg'/>\n"
                 + "  </svg>\n"
+
+                + "  <style>\n"
+                + "    @page { margin: 1cm; }\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); };\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    h3 { color: blue;  }\n"
+                + "  </style>\n"
+
                 + LOG_TEXTAREA
                 + "</body></html>";
 
@@ -18486,5 +18500,94 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             IE = "exception")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
+    }
+
+    /**
+     * Test StyleSheet.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "addRule(),constructor(),cssRules[GCE],deleteRule(),insertRule(),"
+                + "ownerRule[GCE],removeRule(),replace(),replaceSync(),rules[GCE]",
+            IE = "addRule(),constructor[],cssRules[GCE],deleteRule(),href[GCE],insertRule(),"
+                + "ownerNode[GCE],owningElement[GCE],removeRule(),rules[GCE]")
+    @HtmlUnitNYI(CHROME = "addRule(),constructor(),cssRules[GCE],deleteRule(),"
+                + "insertRule(),removeRule(),rules[GCE]",
+            EDGE = "addRule(),constructor(),cssRules[GCE],deleteRule(),"
+                    + "insertRule(),removeRule(),rules[GCE]",
+            FF = "addRule(),constructor(),cssRules[GCE],deleteRule(),"
+                    + "insertRule(),removeRule(),rules[GCE]",
+            FF_ESR = "addRule(),constructor(),cssRules[GCE],deleteRule(),"
+                    + "insertRule(),removeRule(),rules[GCE]")
+    public void cssStyleSheet() throws Exception {
+        testString("", "document.styleSheets[0]");
+    }
+
+    /**
+     * Test CSSPageRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),selectorText[GSCE],style[GSCE]",
+            IE = "constructor[],selectorText[GCE],style[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),selectorText[GSCE],style[GCE]",
+            EDGE = "constructor(),selectorText[GSCE],style[GCE]",
+            FF = "constructor(),selectorText[GSCE],style[GCE]",
+            FF_ESR = "constructor(),selectorText[GSCE],style[GCE]")
+    public void cssPageRule() throws Exception {
+        testString("", "document.styleSheets[0].cssRules[0]");
+    }
+
+    /**
+     * Test CSSMediaRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),media[GSCE]",
+            IE = "constructor[],media[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),media[GCE]",
+            EDGE = "constructor(),media[GCE]",
+            FF = "constructor(),media[GCE]",
+            FF_ESR = "constructor(),media[GCE]")
+    public void cssMediaRule() throws Exception {
+        testString("", "document.styleSheets[1].cssRules[0]");
+    }
+
+    /**
+     * Test CSSFontFaceRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),style[GCE]",
+            IE = "constructor[]")
+    @HtmlUnitNYI(CHROME = "constructor()",
+            EDGE = "constructor()",
+            FF = "constructor()",
+            FF_ESR = "constructor()")
+    public void cssFontFaceRule() throws Exception {
+        testString("", "document.styleSheets[2].cssRules[0]");
+    }
+
+    /**
+     * Test CSSRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "constructor(),cssRules[GCE],deleteRule(),insertRule(),"
+                + "selectorText[GSCE],style[GSCE],styleMap[GCE]",
+            FF = "constructor(),selectorText[GSCE],style[GSCE]",
+            FF_ESR = "constructor(),selectorText[GSCE],style[GSCE]",
+            IE = "constructor[],readOnly[GCE],selectorText[GSCE],style[GCE]")
+    @HtmlUnitNYI(CHROME = "constructor(),selectorText[GSCE],style[GCE]",
+            EDGE = "constructor(),selectorText[GSCE],style[GCE]",
+            FF = "constructor(),selectorText[GSCE],style[GCE]",
+            FF_ESR = "constructor(),selectorText[GSCE],style[GCE]")
+    public void cssStyleRule() throws Exception {
+        testString("", "document.styleSheets[3].cssRules[0]");
     }
 }

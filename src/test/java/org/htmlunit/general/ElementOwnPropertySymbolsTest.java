@@ -130,6 +130,20 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
                 + "  <svg xmlns='http://www.w3.org/2000/svg' version='1.1'>\n"
                 + "    <invalid id='mySvg'/>\n"
                 + "  </svg>\n"
+
+                + "  <style>\n"
+                + "    @page { margin: 1cm; }\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    @media screen { p { background-color:#FFFFFF; }};\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    @font-face { font-family: Delicious; src: url('Delicious-Bold.otf'); };\n"
+                + "  </style>\n"
+                + "  <style>\n"
+                + "    h3 { color: blue;  }\n"
+                + "  </style>\n"
+
                 + LOG_TEXTAREA
                 + "</body></html>";
 
@@ -3787,5 +3801,65 @@ public class ElementOwnPropertySymbolsTest extends WebDriverTestCase {
             IE = "exception")
     public void webKitMutationObserver() throws Exception {
         testString("", "new WebKitMutationObserver(function(m) {})");
+    }
+
+    /**
+     * Test StyleSheet.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSStyleSheet]",
+            IE = "exception")
+    public void cssStyleSheet() throws Exception {
+        testString("", "document.styleSheets[0]");
+    }
+
+    /**
+     * Test CSSPageRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSPageRule]",
+            IE = "exception")
+    public void cssPageRule() throws Exception {
+        testString("", "document.styleSheets[0].cssRules[0]");
+    }
+
+    /**
+     * Test CSSMediaRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSMediaRule]",
+            IE = "exception")
+    public void cssMediaRule() throws Exception {
+        testString("", "document.styleSheets[1].cssRules[0]");
+    }
+
+    /**
+     * Test CSSFontFaceRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSFontFaceRule]",
+            IE = "exception")
+    public void cssFontFaceRule() throws Exception {
+        testString("", "document.styleSheets[2].cssRules[0]");
+    }
+
+    /**
+     * Test CSSRule.
+     *
+     * @throws Exception if the test fails
+     */
+    @Test
+    @Alerts(DEFAULT = "Symbol(Symbol.toStringTag) [CSSStyleRule]",
+            IE = "exception")
+    public void cssStyleRule() throws Exception {
+        testString("", "document.styleSheets[3].cssRules[0]");
     }
 }
