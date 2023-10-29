@@ -295,6 +295,7 @@ fontSizeAdjust
 fontStretch
 fontStyle
 fontSynthesis
+fontSynthesisPosition
 fontSynthesisSmallCaps
 fontSynthesisStyle
 fontSynthesisWeight
@@ -382,6 +383,8 @@ maskPositionY
 maskRepeat
 maskSize
 maskType
+mathDepth
+mathStyle
 maxBlockSize
 maxHeight
 maxInlineSize
