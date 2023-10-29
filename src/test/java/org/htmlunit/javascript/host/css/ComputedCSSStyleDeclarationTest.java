@@ -908,7 +908,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             IE = {"inline", "inline", "none", "block", "inline-block", "inline",
                   "inline", "inline", "inline", "inline", "inline", "inline", "inline"})
     @HtmlUnitNYI(FF = {"inline", "inline", "none", "block", "inline-block", "inline",
-                       "inline", "inline", "inline", "inline", "inline", "block", "inline"})
+                       "inline", "inline", "inline", "inline", "inline", "block", "inline"},
+            FF_ESR = {"inline", "inline", "none", "block", "inline-block", "inline",
+                      "inline", "inline", "inline", "inline", "inline", "block", "inline"})
     public void defaultDisplayValues_S() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <p>\n"
@@ -974,7 +976,9 @@ public class ComputedCSSStyleDeclarationTest extends WebDriverTestCase {
             FF_ESR = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
                       "table-cell", "table-header-group", "inline", "table-row", "", "inline"})
     @HtmlUnitNYI(FF = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
-                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
+                       "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"},
+            FF_ESR = {"table", "table-row-group", "table-cell", "inline-block", "table-footer-group",
+                      "table-cell", "table-header-group", "inline", "table-row", "inline", "inline"})
     public void defaultDisplayValues_T() throws Exception {
         final String html = "<!DOCTYPE HTML>\n<html><body>\n"
             + "  <table id='table'>\n"

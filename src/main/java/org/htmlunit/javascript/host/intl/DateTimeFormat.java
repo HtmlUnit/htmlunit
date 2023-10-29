@@ -158,8 +158,6 @@ public class DateTimeFormat extends HtmlUnitScriptable {
         CHROME_FORMATS_.putAll(commonFormats);
         CHROME_FORMATS_.put("sq", mmSlash);
 
-        FF_ESR_FORMATS_.put("sr", ddDotDot);
-
         IE_FORMATS_.put("ar", rightToLeft);
         IE_FORMATS_.put("ar-AE", rightToLeft);
         IE_FORMATS_.put("ar-BH", rightToLeft);
