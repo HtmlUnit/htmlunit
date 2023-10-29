@@ -30,7 +30,7 @@
         <htmlunitcorejs.version>3.7.0-SNAPSHOT</htmlunitcorejs.version>
         <htmlunitxpath.version>3.6.0</htmlunitxpath.version>
 
-        <htmlunitdriver.version>4.13.0</htmlunitdriver.version>
+        <htmlunitdriver.version>4.14.1-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.14.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
@@ -1162,7 +1162,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-text</artifactId>
-            <version>1.10.0</version>
+            <version>1.11.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.apache.commons</groupId>
