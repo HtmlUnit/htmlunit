@@ -6053,7 +6053,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
             IE = "undefined")
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
-            FF = "undefined")
+            FF = "undefined",
+            FF_ESR = "undefined")
     public void offscreenCanvas() throws Exception {
         test("OffscreenCanvas");
     }

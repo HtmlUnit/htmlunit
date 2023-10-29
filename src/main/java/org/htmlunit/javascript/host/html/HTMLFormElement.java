@@ -236,7 +236,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the value of the rel property.
      * @return the rel property
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getRel() {
         return getHtmlForm().getRelAttribute();
     }
@@ -245,7 +245,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the rel property.
      * @param rel rel attribute value
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRel(final String rel) {
         getHtmlForm().setAttribute("rel", rel);
     }

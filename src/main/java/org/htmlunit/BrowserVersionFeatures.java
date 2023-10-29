@@ -284,7 +284,7 @@ public enum BrowserVersionFeatures {
     FORM_FORM_ATTRIBUTE_SUPPORTED,
 
     /** Form elements are able to refer to the for by using the from attribute. */
-    @BrowserFeature({CHROME, EDGE, FF_ESR, IE})
+    @BrowserFeature({CHROME, EDGE, IE})
     FORM_IGNORE_REL_NOREFERRER,
 
     /** Form formxxx parameters not supported for input type image. */
