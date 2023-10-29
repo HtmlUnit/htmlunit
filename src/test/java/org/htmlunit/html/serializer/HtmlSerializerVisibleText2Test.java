@@ -55,6 +55,7 @@ public class HtmlSerializerVisibleText2Test extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "baz",
             EDGE = "baz",
             FF = "baz",
+            FF_ESR = "baz",
             IE = "baz")
     public void xmlPage() throws Exception {
         final String xml = "<xml>\n"

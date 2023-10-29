@@ -493,7 +493,7 @@ public class URLSearchParams extends HtmlUnitScriptable {
     /**
      * @return the total number of search parameter entries
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public int getSize() {
         final List<NameValuePair> splitted = splitQuery();
         return splitted.size();

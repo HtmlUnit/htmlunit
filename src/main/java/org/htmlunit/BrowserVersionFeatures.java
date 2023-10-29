@@ -1102,7 +1102,7 @@ public enum BrowserVersionFeatures {
     JS_INPUT_NUMBER_ACCEPT_ALL,
 
     /** FF comma at end is not an integer. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_INPUT_NUMBER_DOT_AT_END_IS_DOUBLE,
 
     /** Chrome/FF returns null for selectionStart/selectionEnd. */
@@ -1307,7 +1307,7 @@ public enum BrowserVersionFeatures {
     JS_SELECT_OPTIONS_HAS_SELECT_CLASS_NAME,
 
     /** Ignore negative value when setting the length. */
-    @BrowserFeature({CHROME, EDGE, FF})
+    @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_SELECT_OPTIONS_IGNORE_NEGATIVE_LENGTH,
 
     /** The 'in' operator returns always true for HtmlOptionsCollection. */

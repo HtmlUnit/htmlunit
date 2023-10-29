@@ -254,7 +254,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Returns the {@code relList} attribute.
      * @return the {@code relList} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public DOMTokenList getRelList() {
         return new DOMTokenList(this, "rel");
     }
@@ -263,7 +263,7 @@ public class HTMLFormElement extends HTMLElement implements Function {
      * Sets the relList property.
      * @param rel attribute value
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setRelList(final Object rel) {
         if (Undefined.isUndefined(rel)) {
             setRel("undefined");

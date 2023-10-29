@@ -43,10 +43,7 @@ public class InstallTriggerTest extends WebDriverTestCase {
             FF_ESR = {"null", "object", "{\"enumerable\":true,\"configurable\":true}"})
     @HtmlUnitNYI(
             FF = {"null", "object", "{\"value\":null,\"writable\":true,\"enumerable\":true,\"configurable\":true}"},
-            FF_ESR = {"[object InstallTriggerImpl]",
-                      "object",
-                      "{\"value\":{\"SKIN\":1,\"LOCALE\":2,\"CONTENT\":4,\"PACKAGE\":7},"
-                              + "\"writable\":true,\"enumerable\":false,\"configurable\":true}"})
+            FF_ESR = {"null", "object", "{\"value\":null,\"writable\":true,\"enumerable\":true,\"configurable\":true}"})
     public void windowProperty() throws Exception {
         final String html = "<html><head>\n"
                 + "<script>\n"

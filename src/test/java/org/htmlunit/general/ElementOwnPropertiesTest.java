@@ -1099,7 +1099,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "releaseEvents(),requestAnimationFrame(),resizeBy(),resizeTo(),screen[GCE],scroll(),scrollBy(),"
                 + "scrollByLines(),scrollByPages(),scrollTo(),scrollX[GCE],scrollY[GCE],self[GCE],sessionStorage[GCE],"
                 + "setInterval(),setTimeout(),status[GSCE],stop(),top[GSCE],window[GCE]",
-            FF_ESR = "alert(),applicationCache[GCE],atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
+            FF_ESR = "alert(),atob(),blur(),btoa(),cancelAnimationFrame(),captureEvents(),"
                 + "clearInterval(),clearTimeout(),clientInformation[GCE],close(),closed[GCE],confirm(),constructor(),"
                 + "controllers[GSCE],"
                 + "crypto[GCE],devicePixelRatio[GCE],document[GCE],dump(),event[GCE],external[GCE],"
@@ -6276,7 +6276,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
                 + "requestSubmit(),reset(),submit(),target[GSCE]",
             FF_ESR = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
-                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],"
+                + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"
                 + "requestSubmit(),reset(),submit(),target[GSCE]",
             FF = "action[GSCE],checkValidity(),constructor(),elements[GCE],encoding[GSCE],enctype[GSCE],"
                 + "length[GCE],method[GSCE],name[GSCE],noValidate[GSCE],rel[GSCE],relList[GSCE],"

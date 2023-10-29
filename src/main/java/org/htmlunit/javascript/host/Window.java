@@ -821,11 +821,9 @@ public class Window extends EventTarget implements WindowOrWorkerGlobalScope, Au
         location_.jsConstructor();
         location_.initialize(this, pageToEnclose);
 
-        if (getBrowserVersion().isIE()) {
-            applicationCache_ = new ApplicationCache();
-            applicationCache_.setParentScope(this);
-            applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
-        }
+        applicationCache_ = new ApplicationCache();
+        applicationCache_.setParentScope(this);
+        applicationCache_.setPrototype(getPrototype(applicationCache_.getClass()));
 
         // like a JS new Object()
         final Context ctx = Context.getCurrentContext();

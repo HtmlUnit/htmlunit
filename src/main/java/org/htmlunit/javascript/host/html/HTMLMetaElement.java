@@ -138,7 +138,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * @return the {@code meta} attribute
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public String getMedia() {
         return getDomNodeOrDie().getAttribute("media");
     }
@@ -146,7 +146,7 @@ public class HTMLMetaElement extends HTMLElement {
     /**
      * @param media the media attribute
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setMedia(final String media) {
         getDomNodeOrDie().setAttribute("media", media);
     }
