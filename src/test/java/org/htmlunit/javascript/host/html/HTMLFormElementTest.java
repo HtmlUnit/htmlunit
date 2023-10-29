@@ -2880,7 +2880,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"", "alternate help", "prefetch", "prefetch", "not supported", "notsupported"},
-            FF_ESR = {"undefined", "undefined", "prefetch", "prefetch", "not supported", "notsupported"},
             IE = {"undefined", "undefined", "prefetch", "prefetch", "not supported", "notsupported"})
     public void readWriteRel() throws Exception {
         final String html
@@ -2910,7 +2909,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "alternate", "help"},
-            FF_ESR = "exception",
             IE = "exception")
     public void relList() throws Exception {
         final String html
@@ -2936,7 +2934,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "2", "1", "alternate", "help", "abc", "alternate help", "abc"},
-            FF_ESR = "exception",
             IE = "exception")
     public void setRelListString() throws Exception {
         final String html
@@ -2975,7 +2972,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "0", "0", "", "\\s\\s\\t"},
-            FF_ESR = "exception",
             IE = "exception")
     public void setRelListStringBlank() throws Exception {
         final String html
@@ -3006,7 +3002,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "1", "1", "null", "null", "null", "null"},
-            FF_ESR = "exception",
             IE = "exception")
     public void setRelListNull() throws Exception {
         final String html
@@ -3045,7 +3040,6 @@ public class HTMLFormElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"0", "2", "1", "1", "undefined", "undefined", "undefined", "undefined"},
-            FF_ESR = "exception",
             IE = "exception")
     public void setRelListUndefined() throws Exception {
         final String html

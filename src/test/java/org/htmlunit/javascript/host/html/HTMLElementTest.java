@@ -5311,7 +5311,6 @@ public class HTMLElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"true", "", "true", "7", "true", "seven", "false", "null"},
-            FF_ESR = {"undefined", "", "undefined", "7", "undefined", "seven", "undefined", "null"},
             IE = {"undefined", "", "undefined", "7", "undefined", "seven", "undefined", "null"})
     public void autofocus() throws Exception {
         final String html = "<html>\n"
@@ -5357,9 +5356,6 @@ public class HTMLElementTest extends WebDriverTestCase {
     @Alerts(DEFAULT = {"true", "", "true", "", "false", "null", "true", "7",
                        "true", "", "false", "null", "true", "", "false", "null",
                        "true", "", "false", "null", "false", "null"},
-            FF_ESR = {"undefined", "", "undefined", "", "undefined", "null", "undefined", "7",
-                      "true", "7", "false", "7", "true", "7", "false", "7",
-                      "no", "7", "null", "7", "undefined", "7"},
             IE = {"undefined", "", "undefined", "", "undefined", "null", "undefined", "7",
                   "true", "7", "false", "7", "true", "7", "false", "7",
                   "no", "7", "null", "7", "undefined", "7"})

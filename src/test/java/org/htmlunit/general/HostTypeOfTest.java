@@ -4165,8 +4165,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void idbMutableFile() throws Exception {
         test("IDBMutableFile");
     }
@@ -5089,10 +5088,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiAccess() throws Exception {
         test("MIDIAccess");
     }
@@ -5101,10 +5098,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiConnectionEvent() throws Exception {
         test("MIDIConnectionEvent");
     }
@@ -5113,10 +5108,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiInput() throws Exception {
         test("MIDIInput");
     }
@@ -5125,10 +5118,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiInputMap() throws Exception {
         test("MIDIInputMap");
     }
@@ -5137,10 +5128,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiMessageEvent() throws Exception {
         test("MIDIMessageEvent");
     }
@@ -5149,10 +5138,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiOutput() throws Exception {
         test("MIDIOutput");
     }
@@ -5161,10 +5148,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiOutputMap() throws Exception {
         test("MIDIOutputMap");
     }
@@ -5173,10 +5158,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void midiPort() throws Exception {
         test("MIDIPort");
     }
@@ -5476,8 +5459,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void mozRTCIceCandidate() throws Exception {
         test("mozRTCIceCandidate");
     }
@@ -5486,8 +5468,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void mozRTCPeerConnection() throws Exception {
         test("mozRTCPeerConnection");
     }
@@ -5496,8 +5477,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void mozRTCSessionDescription() throws Exception {
         test("mozRTCSessionDescription");
     }
@@ -6060,8 +6040,7 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            FF_ESR = "function")
+    @Alerts("undefined")
     public void offlineResourceList() throws Exception {
         test("OfflineResourceList");
     }
@@ -6070,10 +6049,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     @HtmlUnitNYI(CHROME = "undefined",
             EDGE = "undefined",
             FF = "undefined")
@@ -7001,10 +6978,8 @@ public class HostTypeOfTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "undefined",
-            CHROME = "function",
-            EDGE = "function",
-            FF = "function")
+    @Alerts(DEFAULT = "function",
+            IE = "undefined")
     public void rtcSctpTransport() throws Exception {
         test("RTCSctpTransport");
     }

@@ -242,9 +242,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""},
-            FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""},
             IE = "No")
-    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "true", ""})
     public void showModal() throws Exception {
         final String html =
             "<html>\n"
@@ -378,9 +376,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "true", "", "InvalidStateError", "true", ""},
-            FF_ESR = {"false", "null", "true", "", "true", ""},
             IE = "No")
-    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""})
     public void showAfterShowModal() throws Exception {
         final String html =
             "<html>\n"
@@ -472,9 +468,7 @@ public class HTMLDialogElementTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"false", "null", "true", "", "true", ""},
-            FF_ESR = {"false", "null", "true", "", "InvalidStateError", "true", ""},
             IE = "No")
-    @HtmlUnitNYI(FF_ESR = {"false", "null", "true", "", "true", ""})
     public void showModalAfterShowModal() throws Exception {
         final String html =
             "<html>\n"

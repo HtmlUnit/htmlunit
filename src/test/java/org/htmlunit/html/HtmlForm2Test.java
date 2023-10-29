@@ -1512,7 +1512,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§index.html?test",
-            FF = "null")
+            FF = "null",
+            FF_ESR = "null")
     public void submit_refererHeaderNoreferrer() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1541,7 +1542,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§index.html?test",
-            FF = "null")
+            FF = "null",
+            FF_ESR = "null")
     public void submit_refererHeaderNoreferrerCaseSensitive() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1570,7 +1572,8 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "§§URL§§index.html?test",
-            FF = "null")
+            FF = "null",
+            FF_ESR = "null")
     public void submit_refererHeaderNoreferrerGet() throws Exception {
         final String firstHtml
             = "<html><head><title>First</title></head><body>\n"
@@ -1598,7 +1601,6 @@ public class HtmlForm2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "NoReferrer",
-            FF_ESR = "undefined",
             IE = "undefined")
     public void relAttribute() throws Exception {
         final String html

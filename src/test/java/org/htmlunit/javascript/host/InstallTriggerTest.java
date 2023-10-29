@@ -40,7 +40,7 @@ public class InstallTriggerTest extends WebDriverTestCase {
     @Test
     @Alerts(DEFAULT = "undefined",
             FF = {"null", "object", "{\"enumerable\":true,\"configurable\":true}"},
-            FF_ESR = {"[object InstallTriggerImpl]", "object", "{\"enumerable\":true,\"configurable\":true}"})
+            FF_ESR = {"null", "object", "{\"enumerable\":true,\"configurable\":true}"})
     @HtmlUnitNYI(
             FF = {"null", "object", "{\"value\":null,\"writable\":true,\"enumerable\":true,\"configurable\":true}"},
             FF_ESR = {"[object InstallTriggerImpl]",

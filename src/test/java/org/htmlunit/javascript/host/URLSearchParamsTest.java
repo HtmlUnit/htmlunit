@@ -1026,7 +1026,6 @@ public class URLSearchParamsTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"4", "0", "1"},
-            FF_ESR = {"undefined", "undefined", "undefined"},
             IE = {})
     public void size() throws Exception {
         final String html =

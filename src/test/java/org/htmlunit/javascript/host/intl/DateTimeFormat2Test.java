@@ -1638,7 +1638,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2013.",
-            FF_ESR = "20.12.2013.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013\u200E.")
     public void format_sr() throws Exception {
         test("new Intl.DateTimeFormat('sr').format(date)");
@@ -1649,7 +1648,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2013.",
-            FF_ESR = "20.12.2013.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sr_ba() throws Exception {
         test("new Intl.DateTimeFormat('sr-BA').format(date)");
@@ -1660,7 +1658,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2013.",
-            FF_ESR = "20.12.2013.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sr_cs() throws Exception {
         test("new Intl.DateTimeFormat('sr-CS').format(date)");
@@ -1671,7 +1668,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2013.",
-            FF_ESR = "20.12.2013.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sr_me() throws Exception {
         test("new Intl.DateTimeFormat('sr-ME').format(date)");
@@ -1682,7 +1678,6 @@ public class DateTimeFormat2Test extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = "20. 12. 2013.",
-            FF_ESR = "20.12.2013.",
             IE = "\u200E20\u200E.\u200E12\u200E.\u200E2013")
     public void format_sr_rs() throws Exception {
         test("new Intl.DateTimeFormat('sr-RS').format(date)");

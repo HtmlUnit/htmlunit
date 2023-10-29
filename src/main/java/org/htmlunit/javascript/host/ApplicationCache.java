@@ -14,13 +14,11 @@
  */
 package org.htmlunit.javascript.host;
 
-import static org.htmlunit.javascript.configuration.SupportedBrowser.FF_ESR;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.IE;
 
 import org.htmlunit.ScriptResult;
 import org.htmlunit.javascript.configuration.JsxClass;
 import org.htmlunit.javascript.configuration.JsxConstant;
-import org.htmlunit.javascript.configuration.JsxConstructor;
 import org.htmlunit.javascript.configuration.JsxFunction;
 import org.htmlunit.javascript.configuration.JsxGetter;
 import org.htmlunit.javascript.configuration.JsxSetter;
@@ -41,7 +39,6 @@ import org.htmlunit.javascript.host.event.EventTarget;
  * @see <a href="https://developer.mozilla.org/en/nsIDOMOfflineResourceList">Mozilla Documentation</a>
  */
 @JsxClass(IE)
-@JsxClass(className = "OfflineResourceList", value = FF_ESR)
 public class ApplicationCache extends EventTarget {
 
     /** The object isn't associated with an application cache. */
@@ -62,13 +59,6 @@ public class ApplicationCache extends EventTarget {
     /** The application cache group is now obsolete. */
     @JsxConstant
     public static final short OBSOLETE = 5;
-
-    /**
-     * The constructor.
-     */
-    @JsxConstructor(FF_ESR)
-    public ApplicationCache() {
-    }
 
     /**
      * Returns the event listener to be called when fetching the application cache manifest and checking for updates.

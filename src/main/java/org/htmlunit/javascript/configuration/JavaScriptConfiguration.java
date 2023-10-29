@@ -37,7 +37,6 @@ import org.htmlunit.javascript.host.Gamepad;
 import org.htmlunit.javascript.host.GamepadButton;
 import org.htmlunit.javascript.host.History;
 import org.htmlunit.javascript.host.ImageBitmap;
-import org.htmlunit.javascript.host.InstallTrigger;
 import org.htmlunit.javascript.host.Location;
 import org.htmlunit.javascript.host.MessageChannel;
 import org.htmlunit.javascript.host.MessagePort;
@@ -71,9 +70,9 @@ import org.htmlunit.javascript.host.TouchList;
 import org.htmlunit.javascript.host.URL;
 import org.htmlunit.javascript.host.URLSearchParams;
 import org.htmlunit.javascript.host.WebSocket;
+import org.htmlunit.javascript.host.WebkitURL;
 import org.htmlunit.javascript.host.Window;
 import org.htmlunit.javascript.host.XPathExpression;
-import org.htmlunit.javascript.host.WebkitURL;
 import org.htmlunit.javascript.host.animations.Animation;
 import org.htmlunit.javascript.host.animations.AnimationEvent;
 import org.htmlunit.javascript.host.animations.KeyframeEffect;
@@ -568,7 +567,6 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
         Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
         InputDeviceCapabilities.class, InputEvent.class,
-        InstallTrigger.class,
         IntersectionObserver.class, IntersectionObserverEntry.class,
         KeyboardEvent.class, KeyframeEffect.class,
         Location.class,

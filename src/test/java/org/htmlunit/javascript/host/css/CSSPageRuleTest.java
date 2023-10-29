@@ -292,8 +292,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
      * @throws Exception if an error occurs
      */
     @Test
-    @Alerts(DEFAULT = "",
-            FF_ESR = "undefined")
+    @Alerts("")
     public void selectorTextEmpty() throws Exception {
         final String html
             = "<html><body>\n"

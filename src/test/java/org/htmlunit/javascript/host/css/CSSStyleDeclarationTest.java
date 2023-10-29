@@ -642,7 +642,6 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      */
     @Test
     @Alerts(DEFAULT = {"black", "pink", "color: pink; background: blue;"},
-            FF_ESR = {"black", "pink", "color: pink; background: blue none repeat scroll 0% 0%;"},
             IE = {"black", "pink", "background: blue; color: pink; foo: bar;"})
     @HtmlUnitNYI(CHROME = {"black", "pink", "color: pink; background: blue; foo: bar;"},
             EDGE = {"black", "pink", "color: pink; background: blue; foo: bar;"},
@@ -803,9 +802,7 @@ public class CSSStyleDeclarationTest extends WebDriverTestCase {
      * @throws Exception if the test fails
      */
     @Test
-    @Alerts(DEFAULT = "blue",
-            FF_ESR = "blue none repeat scroll 0% 0%")
-    @HtmlUnitNYI(FF_ESR = "blue")
+    @Alerts("blue")
     public void getPropertyValue() throws Exception {
         final String html = "<html><head><script>\n"
             + LOG_TITLE_FUNCTION

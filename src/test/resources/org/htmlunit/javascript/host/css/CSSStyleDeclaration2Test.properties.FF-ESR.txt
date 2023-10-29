@@ -30,7 +30,6 @@ MozFontFeatureSettings
 MozFontLanguageOverride
 MozForceBrokenImageIcon
 MozHyphens
-MozImageRegion
 MozMarginEnd
 MozMarginStart
 MozOrient
@@ -84,6 +83,7 @@ WebkitBoxOrient
 WebkitBoxPack
 WebkitBoxShadow
 WebkitBoxSizing
+WebkitClipPath
 WebkitFilter
 WebkitFlex
 WebkitFlexBasis
@@ -108,6 +108,7 @@ WebkitOrder
 WebkitPerspective
 WebkitPerspectiveOrigin
 WebkitTextFillColor
+WebkitTextSecurity
 WebkitTextSizeAdjust
 WebkitTextStroke
 WebkitTextStrokeColor
@@ -128,6 +129,7 @@ alignSelf
 all
 animation
 animation-name
+animationComposition
 animationDelay
 animationDirection
 animationDuration
@@ -138,6 +140,7 @@ animationPlayState
 animationTimingFunction
 appearance
 aspectRatio
+backdropFilter
 backfaceVisibility
 background
 backgroundAttachment
@@ -151,6 +154,7 @@ backgroundPositionX
 backgroundPositionY
 backgroundRepeat
 backgroundSize
+baselineSource
 blockSize
 border
 borderBlock
@@ -242,6 +246,15 @@ columnSpan
 columnWidth
 columns
 contain
+containIntrinsicBlockSize
+containIntrinsicHeight
+containIntrinsicInlineSize
+containIntrinsicSize
+containIntrinsicWidth
+container
+container-name
+containerName
+containerType
 content
 counterIncrement
 counterReset
@@ -276,11 +289,15 @@ fontFeatureSettings
 fontKerning
 fontLanguageOverride
 fontOpticalSizing
+fontPalette
 fontSize
 fontSizeAdjust
 fontStretch
 fontStyle
 fontSynthesis
+fontSynthesisSmallCaps
+fontSynthesisStyle
+fontSynthesisWeight
 fontVariant
 fontVariantAlternates
 fontVariantCaps
@@ -290,6 +307,7 @@ fontVariantNumeric
 fontVariantPosition
 fontVariationSettings
 fontWeight
+forcedColorAdjust
 gap
 grid
 gridArea
@@ -411,6 +429,7 @@ paddingInlineStart
 paddingLeft
 paddingRight
 paddingTop
+page
 pageBreakAfter
 pageBreakBefore
 pageBreakInside
@@ -458,6 +477,7 @@ scrollPaddingLeft
 scrollPaddingRight
 scrollPaddingTop
 scrollSnapAlign
+scrollSnapStop
 scrollSnapType
 scrollbarColor
 scrollbarGutter
@@ -549,6 +569,7 @@ webkitBoxOrient
 webkitBoxPack
 webkitBoxShadow
 webkitBoxSizing
+webkitClipPath
 webkitFilter
 webkitFlex
 webkitFlexBasis
@@ -573,6 +594,7 @@ webkitOrder
 webkitPerspective
 webkitPerspectiveOrigin
 webkitTextFillColor
+webkitTextSecurity
 webkitTextSizeAdjust
 webkitTextStroke
 webkitTextStrokeColor

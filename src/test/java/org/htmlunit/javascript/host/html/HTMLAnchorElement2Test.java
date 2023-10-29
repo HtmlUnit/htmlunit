@@ -722,8 +722,8 @@ public class HTMLAnchorElement2Test extends WebDriverTestCase {
                     "foo:||||||blabla", "file:||||||/P://", "file:||||||/P:/", "file:||||||/P:/TeMp"},
             FF = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
                   "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"},
-            FF_ESR = {":||||||", ":||||||", "mailto:||||||", "tel:||||||",
-                      "foo:||||||", "p:||||||", "p:||||||", "p:||||||"},
+            FF_ESR = {":||||||", ":||||||", "mailto:||||||foo@foo.com", "tel:||||||123456",
+                      "foo:||||||blabla", "p:||||||//", "p:||||||/", "p:||||||/TeMp"},
             IE = {"http:||||||/", "https:||||||/", "mailto:||||||foo@foo.com", "tel:||||||123456",
                   "foo:||||||blabla", "file:||||||/p://", "file:||||||/p:/", "file:||||||/p:/TeMp"})
     public void propertiesNonStandardHref() throws Exception {

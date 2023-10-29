@@ -343,7 +343,7 @@ public class HtmlEmailInputTest extends WebDriverTestCase {
                   "false-false-false-false-false-false-false-false-true-false-false",
                   "true",
                   "§§URL§§", "1"},
-            FF_ESR = {" abc@email.com",
+            FF_ESR = {"abc@email.com",
                       "false",
                       "false-false-false-false-false-false-false-false-true-false-false",
                       "true",
