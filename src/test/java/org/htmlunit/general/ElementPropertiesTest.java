@@ -592,7 +592,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "onselectionchange,onselectstart,onstalled,onsubmit,onsuspend,"
                 + "ontimeupdate,ontoggle,ontransitioncancel,ontransitionend,ontransitionrun,ontransitionstart,"
                 + "onvolumechange,onwaiting,onwheel,outerText,style,tabIndex,title",
-            FF_ESR = "accessKey,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),"
+            FF_ESR = "accessKey,autofocus,blur(),click(),contentEditable,dataset,dir,enterKeyHint,focus(),"
                 + "hidden,innerText,isContentEditable,"
                 + "lang,offsetHeight,offsetLeft,offsetParent,offsetTop,offsetWidth,onabort,"
                 + "onanimationcancel,onanimationend,onanimationiteration,onanimationstart,onblur,oncanplay,"
@@ -9385,8 +9385,8 @@ public class ElementPropertiesTest extends WebDriverTestCase {
                 + "has(),keys(),set(),size,sort(),toString(),values()",
             FF = "append(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size,sort(),toString(),values()",
-            FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),has(),keys(),set(),size,sort(),toString(),"
-                + "values()",
+            FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),"
+                + "has(),keys(),set(),size,sort(),toString(),values()",
             IE = "exception")
     @HtmlUnitNYI(CHROME = "append(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size,toString(),values()",
@@ -9395,7 +9395,7 @@ public class ElementPropertiesTest extends WebDriverTestCase {
             FF = "append(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size,toString(),values()",
             FF_ESR = "append(),delete(),entries(),forEach(),get(),getAll(),"
-                + "has(),keys(),set(),toString(),values()")
+                + "has(),keys(),set(),size,toString(),values()")
     public void urlSearchParams() throws Exception {
         testString("", "new URLSearchParams('q=URLUtils.searchParams&topic=api')");
     }

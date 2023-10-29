@@ -1451,7 +1451,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1675,7 +1676,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -1949,7 +1951,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2248,7 +2251,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2512,7 +2516,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -2609,7 +2613,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],"
                 + "ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],outerText[GCE],"
                 + "spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],"
                 + "onabort[GSCE],onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],"
@@ -2846,7 +2851,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3069,7 +3075,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3293,7 +3299,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3517,7 +3523,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -3818,7 +3824,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4141,7 +4148,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4365,7 +4373,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4589,7 +4597,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -4844,7 +4852,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5068,7 +5076,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5393,7 +5402,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5642,7 +5652,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -5918,7 +5928,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6181,7 +6191,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6518,7 +6529,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -6877,7 +6889,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7222,7 +7235,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "msPlayToPreferredSourceUri,msPlayToPrimary,name,nameProp,naturalHeight,naturalWidth,protocol,src,"
                 + "start,useMap,vrml,vspace,"
                 + "width")
-    @HtmlUnitNYI(FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+    @HtmlUnitNYI(FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -7498,7 +7512,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -7722,7 +7737,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8186,7 +8201,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8443,7 +8458,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -8825,7 +8840,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9086,7 +9101,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9328,7 +9343,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9591,7 +9606,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -9962,7 +9977,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -10427,7 +10442,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -11570,7 +11585,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],"
                 + "outerText[GCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -11783,7 +11799,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "ontoggle[GSCE],ontransitioncancel[GSCE],ontransitionend[GSCE],ontransitionrun[GSCE],"
                 + "ontransitionstart[GSCE],onvolumechange[GSCE],onwaiting[GSCE],onwheel[GSCE],outerText[GCE],"
                 + "style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],dir[GSCE],"
                 + "enterKeyHint[GSCE],focus(),hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],offsetTop[GCE],offsetWidth[GCE],onabort[GSCE],"
                 + "onanimationcancel[GSCE],onanimationend[GSCE],onanimationiteration[GSCE],onanimationstart[GSCE],"
@@ -12075,7 +12092,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12393,7 +12410,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12652,7 +12669,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -12876,7 +12894,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13119,7 +13138,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13343,7 +13362,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -13567,7 +13587,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14138,7 +14158,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14421,7 +14441,8 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],"
+                + "blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14665,7 +14686,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -14946,7 +14967,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
                 + "onsuspend[GSCE],ontimeupdate[GSCE],ontoggle[GSCE],ontransitioncancel[GSCE],"
                 + "ontransitionend[GSCE],ontransitionrun[GSCE],ontransitionstart[GSCE],onvolumechange[GSCE],"
                 + "onwaiting[GSCE],outerText[GCE],spellcheck[GSCE],style[GSCE],tabIndex[GSCE],title[GSCE]",
-            FF_ESR = "accessKey[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
+            FF_ESR = "accessKey[GSCE],autofocus[GSCE],blur(),click(),constructor(),contentEditable[GSCE],dataset[GCE],"
                 + "dir[GSCE],enterKeyHint[GSCE],focus(),"
                 + "hidden[GSCE],innerText[GSCE],isContentEditable[GCE],lang[GSCE],"
                 + "offsetHeight[GCE],offsetLeft[GCE],offsetParent[GCE],"
@@ -18412,7 +18433,7 @@ public class ElementOwnPropertiesTest extends WebDriverTestCase {
             FF = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
                 + "has(),keys(),set(),size[GCE],toString(),values()",
             FF_ESR = "append(),constructor(),delete(),entries(),forEach(),get(),getAll(),"
-                + "has(),keys(),set(),toString(),values()")
+                + "has(),keys(),set(),size[GCE],toString(),values()")
     public void urlSearchParams() throws Exception {
         testString("", "new URLSearchParams('q=URLUtils.searchParams&topic=api')");
     }

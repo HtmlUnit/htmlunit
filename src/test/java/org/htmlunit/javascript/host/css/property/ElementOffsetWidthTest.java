@@ -1802,7 +1802,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
-            FF_ESR = "145",
+            FF_ESR = "154",
             IE = "143")
     public void input() throws Exception {
         test("input");
@@ -1886,7 +1886,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
-            FF_ESR = "145",
+            FF_ESR = "154",
             IE = "143")
     public void inputPassword() throws Exception {
         loadPageVerifyTitle2(testInput("password"));
@@ -1939,7 +1939,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
-            FF_ESR = "145",
+            FF_ESR = "154",
             IE = "143")
     public void inputSelect() throws Exception {
         loadPageVerifyTitle2(testInput("select"));
@@ -1977,7 +1977,7 @@ public class ElementOffsetWidthTest extends WebDriverTestCase {
     @HtmlUnitNYI(CHROME = "173",
             EDGE = "173",
             FF = "154",
-            FF_ESR = "145",
+            FF_ESR = "154",
             IE = "143")
     public void inputText() throws Exception {
         loadPageVerifyTitle2(testInput("text"));

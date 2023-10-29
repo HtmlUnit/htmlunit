@@ -451,7 +451,7 @@ public class HTMLElement extends Element {
      * Returns the element autofocus property.
      * @return the autofocus of this element
      */
-    @JsxGetter({CHROME, EDGE, FF})
+    @JsxGetter({CHROME, EDGE, FF, FF_ESR})
     public boolean getAutofocus() {
         return getDomNodeOrDie().hasAttribute("autofocus");
     }
@@ -460,7 +460,7 @@ public class HTMLElement extends Element {
      * Sets the autofocus of this element.
      * @param newAutofocus the new autofocus of this element
      */
-    @JsxSetter({CHROME, EDGE, FF})
+    @JsxSetter({CHROME, EDGE, FF, FF_ESR})
     public void setAutofocus(final boolean newAutofocus) {
         if (newAutofocus) {
             getDomNodeOrDie().setAttribute("autofocus", "");
