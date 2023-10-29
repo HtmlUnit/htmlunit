@@ -14,7 +14,6 @@
  */
 package org.htmlunit.javascript.host.css;
 
-import static org.htmlunit.BrowserVersionFeatures.JS_CSS_OBJECT;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.CHROME;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.EDGE;
 import static org.htmlunit.javascript.configuration.SupportedBrowser.FF;
@@ -49,18 +48,6 @@ public class CSS extends HtmlUnitScriptable {
             return NOT_FOUND;
         }
         return super.get(name, start);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Object getDefaultValue(final Class<?> hint) {
-        if (getBrowserVersion().hasFeature(JS_CSS_OBJECT)
-                && (String.class.equals(hint) || hint == null)) {
-            return "[object Object]";
-        }
-        return super.getDefaultValue(hint);
     }
 
     /**

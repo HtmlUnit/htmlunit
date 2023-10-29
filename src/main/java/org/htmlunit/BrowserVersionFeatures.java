@@ -766,10 +766,6 @@ public enum BrowserVersionFeatures {
     @BrowserFeature({FF, FF_ESR})
     JS_CSSRULELIST_ENUM_ITEM_LENGTH,
 
-    /** CSS.toString returns [object Object] instead of [object CSS]. */
-    @BrowserFeature(FF_ESR)
-    JS_CSS_OBJECT,
-
     /** <code>Date.toLocaleDateString()</code> returns a short form (d.M.yyyy). */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_DATE_LOCALE_DATE_SHORT,
@@ -1507,7 +1503,7 @@ public enum BrowserVersionFeatures {
     JS_WINDOW_FRAME_BY_ID_RETURNS_WINDOW,
 
     /** Javascript InstallTrigger property set to null. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_WINDOW_INSTALL_TRIGGER_NULL,
 
     /**

@@ -363,7 +363,6 @@ import org.htmlunit.javascript.host.idb.IDBDatabase;
 import org.htmlunit.javascript.host.idb.IDBFactory;
 import org.htmlunit.javascript.host.idb.IDBIndex;
 import org.htmlunit.javascript.host.idb.IDBKeyRange;
-import org.htmlunit.javascript.host.idb.IDBMutableFile;
 import org.htmlunit.javascript.host.idb.IDBObjectStore;
 import org.htmlunit.javascript.host.idb.IDBOpenDBRequest;
 import org.htmlunit.javascript.host.idb.IDBRequest;
@@ -431,9 +430,6 @@ import org.htmlunit.javascript.host.media.presentation.Presentation;
 import org.htmlunit.javascript.host.media.presentation.PresentationAvailability;
 import org.htmlunit.javascript.host.media.presentation.PresentationConnection;
 import org.htmlunit.javascript.host.media.presentation.PresentationRequest;
-import org.htmlunit.javascript.host.media.rtc.MozRTCIceCandidate;
-import org.htmlunit.javascript.host.media.rtc.MozRTCPeerConnection;
-import org.htmlunit.javascript.host.media.rtc.MozRTCSessionDescription;
 import org.htmlunit.javascript.host.media.rtc.RTCCertificate;
 import org.htmlunit.javascript.host.media.rtc.RTCIceCandidate;
 import org.htmlunit.javascript.host.media.rtc.RTCPeerConnection;
@@ -563,7 +559,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         HTMLTitleElement.class, HTMLTrackElement.class, HTMLUListElement.class, HTMLUnknownElement.class,
         HTMLVideoElement.class,
         IDBCursor.class, IDBCursorWithValue.class, IDBDatabase.class, IDBFactory.class, IDBIndex.class,
-        IDBKeyRange.class, IDBMutableFile.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
+        IDBKeyRange.class, IDBObjectStore.class, IDBOpenDBRequest.class, IDBRequest.class,
         IDBTransaction.class, IDBVersionChangeEvent.class, IdleDeadline.class, IIRFilterNode.class,
         Image.class, ImageBitmap.class, ImageBitmapRenderingContext.class, ImageData.class,
         InputDeviceCapabilities.class, InputEvent.class,
@@ -580,8 +576,7 @@ public final class JavaScriptConfiguration extends AbstractJavaScriptConfigurati
         MessageEvent.class, MessagePort.class, MIDIAccess.class, MIDIConnectionEvent.class, MIDIInput.class,
         MIDIInputMap.class, MIDIMessageEvent.class, MIDIOutput.class, MIDIOutputMap.class, MIDIPort.class,
         MimeType.class, MimeTypeArray.class, MouseEvent.class, MouseScrollEvent.class,
-        MouseWheelEvent.class, MozRTCIceCandidate.class, MozRTCPeerConnection.class, MozRTCSessionDescription.class,
-        MSGestureEvent.class,
+        MouseWheelEvent.class, MSGestureEvent.class,
         MutationEvent.class, MutationObserver.class, MutationRecord.class, NamedNodeMap.class,
         Namespace.class, NamespaceCollection.class,
         Navigator.class, NetworkInformation.class, Node.class, NodeFilter.class, NodeIterator.class,

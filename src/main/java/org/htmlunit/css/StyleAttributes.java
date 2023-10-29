@@ -145,10 +145,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code animationComposition}. */
         ANIMATION_COMPOSITION("animationComposition", "animation-composition", chromeAndEdge("replace"),
-                ffLatest("replace")),
+                ff("replace")),
 
         /** The style property {@code animation-composition}. */
-        ANIMATION_COMPOSITION_("animation-composition", "animation-composition", ffLatest("replace")),
+        ANIMATION_COMPOSITION_("animation-composition", "animation-composition", ff("replace")),
 
         /** The style property {@code animationDelay}. */
         ANIMATION_DELAY("animationDelay", "animation-delay", ie("0s"), chromeAndEdgeAndFirefox("0s")),
@@ -233,10 +233,10 @@ public final class StyleAttributes implements Serializable {
         AZIMUTH("azimuth", "azimuth"),
 
         /** The style property {@code backdropFilter}. */
-        BACKDROP_FILTER("backdropFilter", "backdrop-filter", chromeAndEdgeNone(), ffLatest("none")),
+        BACKDROP_FILTER("backdropFilter", "backdrop-filter", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code backdrop-filter}. */
-        BACKDROP_FILTER_("backdrop-filter", "backdrop-filter", ffLatest("none")),
+        BACKDROP_FILTER_("backdrop-filter", "backdrop-filter", ff("none")),
 
         /** The style property {@code backfaceVisibility}. */
         BACKFACE_VISIBILITY("backfaceVisibility", "backface-visibility", ie("visible"),
@@ -247,7 +247,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code background}. */
         BACKGROUND("background", "background", ie(""),
-                ffEsr("rgba(0, 0, 0, 0) none repeat scroll 0% 0%"), ffLatest("none"),
+                ff("none"),
                 chromeAndEdge("rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box")),
 
         /** The style property {@code backgroundAttachment}. */
@@ -340,10 +340,10 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code baselineSource}. */
         BASELINE_SOURCE("baselineSource", "baseline-source", chromeAndEdgeAuto(),
-                ffLatest("auto")),
+                ff("auto")),
 
         /** The style property {@code baseline-source}. */
-        BASELINE_SOURCE_("baseline-source", "baseline-source", ffLatest("auto")),
+        BASELINE_SOURCE_("baseline-source", "baseline-source", ff("auto")),
 
         /** The style property {@code behavior}. */
         BEHAVIOR("behavior", "behavior"),
@@ -909,11 +909,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code columnRule}. */
         COLUMN_RULE("columnRule", "column-rule", chromeAndEdge("0px none rgb(0, 0, 0)"), ie(""),
-                ffEsr("3px none rgb(0, 0, 0)"), ffLatest("0px none rgb(0, 0, 0)")),
+                ff("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code column-rule}. */
-        COLUMN_RULE_("column-rule", "column-rule", ffEsr("3px none rgb(0, 0, 0)"),
-                ffLatest("0px none rgb(0, 0, 0)")),
+        COLUMN_RULE_("column-rule", "column-rule",
+                ff("0px none rgb(0, 0, 0)")),
 
         /** The style property {@code columnRuleColor}. */
         COLUMN_RULE_COLOR("columnRuleColor", "column-rule-color",
@@ -947,66 +947,65 @@ public final class StyleAttributes implements Serializable {
         COLUMN_WIDTH_("column-width", "column-width", ff("auto")),
 
         /** The style property {@code columns}. */
-        COLUMNS("columns", "columns", chromeAndEdge("auto auto"), ie(""),
-                ffEsr("auto auto"), ffLatest("auto")),
+        COLUMNS("columns", "columns", chromeAndEdge("auto auto"), ie(""), ff("auto")),
 
         /** The style property {@code contain}. */
         CONTAIN("contain", "contain", chromeAndEdgeNone(), ffNone()),
 
         /** The style property {@code containIntrinsicBlockSize}. */
         CONTAIN_INTRINSIC_BLOCK_SIZE("containIntrinsicBlockSize", "contain-intrinsic-block-size",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code contain-intrinsic-block-size}. */
         CONTAIN_INTRINSIC_BLOCK_SIZE_("contain-intrinsic-block-size", "contain-intrinsic-block-size",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code containIntrinsicHeight}. */
         CONTAIN_INTRINSIC_HEIGHT("containIntrinsicHeight", "contain-intrinsic-height",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code contain-intrinsic-height}. */
         CONTAIN_INTRINSIC_HEIGHT_("contain-intrinsic-height", "contain-intrinsic-height",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code containIntrinsicInlineSize}. */
         CONTAIN_INTRINSIC_INLINE_SIZE("containIntrinsicInlineSize", "contain-intrinsic-inline-size",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code contain-intrinsic-inline-size}. */
         CONTAIN_INTRINSIC_INLINE_SIZE_("contain-intrinsic-inline-size", "contain-intrinsic-inline-size",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code containIntrinsicSize}. */
         CONTAIN_INTRINSIC_SIZE("containIntrinsicSize", "contain-intrinsic-size",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code contain-intrinsic-size}. */
         CONTAIN_INTRINSIC_SIZE_("contain-intrinsic-size", "contain-intrinsic-size",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code containIntrinsicWidth}. */
         CONTAIN_INTRINSIC_WIDTH("containIntrinsicWidth", "contain-intrinsic-width",
-                chromeAndEdgeNone(), ffLatest("none")),
+                chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code contain-intrinsic-width}. */
         CONTAIN_INTRINSIC_WIDTH_("contain-intrinsic-width", "contain-intrinsic-width",
-                ffLatest("none")),
+                ff("none")),
 
         /** The style property {@code container}. */
-        CONTAINER("container", "container", chromeAndEdgeNone(), ffLatest("none")),
+        CONTAINER("container", "container", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code containerName}. */
-        CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone(), ffLatest("none")),
+        CONTAINER_NAME("containerName", "container-name", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code container-name}. */
-        CONTAINER_NAME_("container-name", "container-name", ffLatest("none")),
+        CONTAINER_NAME_("container-name", "container-name", ff("none")),
 
         /** The style property {@code containerType}. */
-        CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal(), ffLatest("normal")),
+        CONTAINER_TYPE("containerType", "container-type", chromeAndEdgeNormal(), ff("normal")),
 
         /** The style property {@code container-type}. */
-        CONTAINER_TYPE_("container-type", "container-type", ffLatest("normal")),
+        CONTAINER_TYPE_("container-type", "container-type", ff("normal")),
 
         /** The style property {@code content}. */
         CONTENT("content", "content", ie("normal"), chromeAndEdgeNormal(), ffNormal()),
@@ -1167,7 +1166,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code font}. */
         FONT("font", "font", chromeAndEdge("16px \"Times New Roman\""), ie(""),
-                ffEsr("400 16px serif"), ffLatest("16px serif")),
+                ff("16px serif")),
 
         /** The style property {@code fontDisplay}. */
         FONT_DISPLAY("fontDisplay", "font-display", chromeAndEdgeEmpty()),
@@ -1205,10 +1204,10 @@ public final class StyleAttributes implements Serializable {
         FONT_OPTICAL_SIZING_("font-optical-sizing", "font-optical-sizing", ff("auto")),
 
         /** The style property {@code fontPalette}. */
-        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdgeNormal(), ffLatest("normal")),
+        FONT_PALETTE("fontPalette", "font-palette", chromeAndEdgeNormal(), ff("normal")),
 
         /** The style property {@code font-palette}. */
-        FONT_PALETTE_("font-palette", "font-palette", ffLatest("normal")),
+        FONT_PALETTE_("font-palette", "font-palette", ff("normal")),
 
         /** The style property {@code fontSize}. */
         FONT_SIZE("fontSize", "font-size", chromeAndEdge("16px"), ff("16px"), ie("16px")),
@@ -1237,29 +1236,36 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code fontSynthesis}. */
         FONT_SYNTHESIS("fontSynthesis", "font-synthesis", chromeAndEdge("weight style small-caps"),
-                ff("weight style small-caps")),
+                ffEsr("weight style small-caps"), ffLatest("weight style small-caps position")),
 
         /** The style property {@code font-synthesis}. */
-        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ff("weight style small-caps")),
+        FONT_SYNTHESIS_("font-synthesis", "font-synthesis", ffEsr("weight style small-caps"),
+                ffLatest("weight style small-caps position")),
+
+        /** The style property {@code fontSynthesisPosition}. */
+        FONT_SYNTHESIS_POSITION("fontSynthesisPosition", "fontSynthesisPosition", ffLatest("auto")),
+
+        /** The style property {@code font-synthesis-position}. */
+        FONT_SYNTHESIS_POSITION_("font-synthesis-position", "fontSynthesisPosition", ffLatest("auto")),
 
         /** The style property {@code fontSynthesisSmallCaps}. */
         FONT_SYNTHESIS_SMALL_CAPS("fontSynthesisSmallCaps", "fontSynthesisSmallCaps",
-                chromeAndEdgeAuto(), ffLatest("auto")),
+                chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code font-synthesis-small-caps}. */
-        FONT_SYNTHESIS_SMALL_CAPS_("font-synthesis-small-caps", "fontSynthesisSmallCaps", ffLatest("auto")),
+        FONT_SYNTHESIS_SMALL_CAPS_("font-synthesis-small-caps", "fontSynthesisSmallCaps", ff("auto")),
 
         /** The style property {@code fontSynthesisStyle}. */
-        FONT_SYNTHESIS_STYLE("fontSynthesisStyle", "fontSynthesisStyle", chromeAndEdgeAuto(), ffLatest("auto")),
+        FONT_SYNTHESIS_STYLE("fontSynthesisStyle", "fontSynthesisStyle", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code font-synthesis-style}. */
-        FONT_SYNTHESIS_STYLE_("font-synthesis-style", "fontSynthesisStyle", ffLatest("auto")),
+        FONT_SYNTHESIS_STYLE_("font-synthesis-style", "fontSynthesisStyle", ff("auto")),
 
         /** The style property {@code fontSynthesisWeight}. */
-        FONT_SYNTHESIS_WEIGHT("fontSynthesisWeight", "fontSynthesisWeight", chromeAndEdgeAuto(), ffLatest("auto")),
+        FONT_SYNTHESIS_WEIGHT("fontSynthesisWeight", "fontSynthesisWeight", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code font-synthesis-weight}. */
-        FONT_SYNTHESIS_WEIGHT_("font-synthesis-weight", "fontSynthesisWeight", ffLatest("auto")),
+        FONT_SYNTHESIS_WEIGHT_("font-synthesis-weight", "fontSynthesisWeight", ff("auto")),
 
         /** The style property {@code fontVariant}. */
         FONT_VARIANT("fontVariant", "font-variant", chromeAndEdgeNormal(), ffNormal(), ie("normal")),
@@ -1319,11 +1325,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code forcedColorAdjust}. */
         FORCED_COLOR_ADJUST("forcedColorAdjust", "forced-color-adjust",
-                chromeAndEdgeAuto(), ffLatest("auto")),
+                chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code forced-color-adjust}. */
         FORCED_COLOR_ADJUST_("forced-color-adjust", "forced-color-adjust",
-                ffLatest("auto")),
+                ff("auto")),
 
         /** The style property {@code gap}. */
         GAP("gap", "gap", chromeAndEdgeNormal(), ff("normal")),
@@ -1796,13 +1802,19 @@ public final class StyleAttributes implements Serializable {
         MASK_TYPE_("mask-type", "mask-type", ff("luminance")),
 
         /** The style property {@code mathDepth}. */
-        MATH_DEPTH("mathDepth", "math-depth", chromeAndEdge("0")),
+        MATH_DEPTH("mathDepth", "math-depth", chromeAndEdge("0"), ffLatest("0")),
+
+        /** The style property {@code math-depth}. */
+        MATH_DEPTH_("math-depth", "math-depth", ffLatest("0")),
 
         /** The style property {@code mathShift}. */
         MATH_SHIFT("mathShift", "math-shift", chromeAndEdgeNormal()),
 
         /** The style property {@code mathStyle}. */
-        MATH_STYLE("mathStyle", "math-style", chromeAndEdgeNormal()),
+        MATH_STYLE("mathStyle", "math-style", chromeAndEdgeNormal(), ffLatest("normal")),
+
+        /** The style property {@code math-style}. */
+        MATH_STYLE_("math-style", "math-style", ffLatest("normal")),
 
         /** The style property {@code maxBlockSize}. */
         MAX_BLOCK_SIZE("maxBlockSize", "max-block-size", ffNone(), chromeAndEdgeNone()),
@@ -2124,12 +2136,6 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code -moz-hyphens}. */
         MOZ_HYPHENS__("-moz-hyphens", "-moz-hyphens", ff("manual")),
-
-        /** The style property {@code MozImageRegion}. */
-        MOZ_IMAGE_REGION("MozImageRegion", "-moz-image-region", ffEsr("auto")),
-
-        /** The style property {@code -moz-image-region}. */
-        MOZ_IMAGE_REGION__("-moz-image-region", "-moz-image-region", ffEsr("auto")),
 
         /** The style property {@code MozMarginEnd}. */
         MOZ_MARGIN_END("MozMarginEnd", "-moz-margin-end", ff("0px")),
@@ -2628,7 +2634,7 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code outline}. */
         OUTLINE("outline", "outline", chromeAndEdge("rgb(0, 0, 0) none 0px"), ie(""),
-                ffEsr("rgb(0, 0, 0) none 0px"), ffLatest("rgb(0, 0, 0) 0px")),
+                ff("rgb(0, 0, 0) 0px")),
 
         /** The style property {@code outlineColor}. */
         OUTLINE_COLOR("outlineColor", "outline-color", ie("transparent"), chromeAndEdge("rgb(0, 0, 0)"),
@@ -2807,7 +2813,7 @@ public final class StyleAttributes implements Serializable {
         PADDING_TOP_("padding-top", "padding-top", ff("0px")),
 
         /** The style property {@code page}. */
-        PAGE("page", "page", chromeAndEdgeAuto(), ffLatest("auto")),
+        PAGE("page", "page", chromeAndEdgeAuto(), ff("auto")),
 
         /** The style property {@code pageBreakAfter}. */
         PAGE_BREAK_AFTER("pageBreakAfter", "page-break-after", chromeAndEdgeAuto(), ff("auto"), ie("auto")),
@@ -3142,10 +3148,10 @@ public final class StyleAttributes implements Serializable {
         SCROLL_SNAP_ALIGN_("scroll-snap-align", "scroll-snap-align", ffNone()),
 
         /** The style property {@code scrollSnapStop}. */
-        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdgeNormal(), ffLatest("normal")),
+        SCROLL_SNAP_STOP("scrollSnapStop", "scroll-snap-stop", chromeAndEdgeNormal(), ff("normal")),
 
         /** The style property {@code scroll-snap-stop}. */
-        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ffLatest("normal")),
+        SCROLL_SNAP_STOP_("scroll-snap-stop", "scroll-snap-stop", ff("normal")),
 
         /** The style property {@code scrollSnapType}. */
         SCROLL_SNAP_TYPE("scrollSnapType", "scroll-snap-type", chromeAndEdgeNone(), ffNone()),
@@ -3443,11 +3449,11 @@ public final class StyleAttributes implements Serializable {
 
         /** The style property {@code textEmphasisPosition}. */
         TEXT_EMPHASIS_POSITION("textEmphasisPosition", "text-emphasis-position", chromeAndEdge("over"),
-                ffEsr("over right"), ffLatest("over")),
+                ff("over")),
 
         /** The style property {@code text-emphasis-position}. */
         TEXT_EMPHASIS_POSITION_("text-emphasis-position", "text-emphasis-position",
-                ffEsr("over right"), ffLatest("over")),
+                ff("over")),
 
         /** The style property {@code textEmphasisStyle}. */
         TEXT_EMPHASIS_STYLE("textEmphasisStyle", "text-emphasis-style", chromeAndEdgeNone(), ffNone()),
@@ -3541,10 +3547,11 @@ public final class StyleAttributes implements Serializable {
         TRANSFORM("transform", "transform", ffNone(), ie("none"), chromeAndEdgeNone()),
 
         /** The style property {@code transformBox}. */
-        TRANSFORM_BOX("transformBox", "transform-box", chromeAndEdge("view-box"), ff("border-box")),
+        TRANSFORM_BOX("transformBox", "transform-box", chromeAndEdge("view-box"), ffEsr("border-box"),
+                ffLatest("view-box")),
 
         /** The style property {@code transform-box}. */
-        TRANSFORM_BOX_("transform-box", "transform-box", ff("border-box")),
+        TRANSFORM_BOX_("transform-box", "transform-box", ffEsr("border-box"), ffLatest("view-box")),
 
         /** The style property {@code transformOrigin}. */
         TRANSFORM_ORIGIN("transformOrigin", "transform-origin",
@@ -4037,13 +4044,13 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_BOX_SIZING__("-webkit-box-sizing", "webkit-box-sizing", ff("content-box")),
 
         /** The style property {@code webkitClipPath}. */
-        WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chromeAndEdgeNone(), ffLatest("none")),
+        WEBKIT_CLIP_PATH("webkitClipPath", "webkit-clip-path", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code WebkitClipPath}. */
-        WEBKIT_CLIP_PATH_("WebkitClipPath", "webkit-clip-path", ffLatest("none")),
+        WEBKIT_CLIP_PATH_("WebkitClipPath", "webkit-clip-path", ff("none")),
 
         /** The style property {@code -webkit-clip-path}. */
-        WEBKIT_CLIP_PATH__("-webkit-clip-path", "webkit-clip-path", ffLatest("none")),
+        WEBKIT_CLIP_PATH__("-webkit-clip-path", "webkit-clip-path", ff("none")),
 
         /** The style property {@code webkitColumnBreakAfter}. */
         WEBKIT_COLUMN_BREAK_AFTER("webkitColumnBreakAfter", "webkit-column-break-after", chromeAndEdgeAuto()),
@@ -4446,13 +4453,13 @@ public final class StyleAttributes implements Serializable {
         WEBKIT_TEXT_ORIENTATION("webkitTextOrientation", "webkit-text-orientation", chromeAndEdge("vertical-right")),
 
         /** The style property {@code webkitTextSecurity}. */
-        WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chromeAndEdgeNone(), ffLatest("none")),
+        WEBKIT_TEXT_SECURITY("webkitTextSecurity", "webkit-text-security", chromeAndEdgeNone(), ff("none")),
 
         /** The style property {@code WebkitTextSecurity}. */
-        WEBKIT_TEXT_SECURITY_("WebkitTextSecurity", "webkit-text-security", ffLatest("none")),
+        WEBKIT_TEXT_SECURITY_("WebkitTextSecurity", "webkit-text-security", ff("none")),
 
         /** The style property {@code -webkit-text-security}. */
-        WEBKIT_TEXT_SECURITY__("-webkit-text-security", "webkit-text-security", ffLatest("none")),
+        WEBKIT_TEXT_SECURITY__("-webkit-text-security", "webkit-text-security", ff("none")),
 
         /** The style property {@code webkitTextSizeAdjust}. */
         WEBKIT_TEXT_SIZE_ADJUST("webkitTextSizeAdjust", "webkit-text-size-adjust", chromeAndEdgeAuto(), ff("auto")),
