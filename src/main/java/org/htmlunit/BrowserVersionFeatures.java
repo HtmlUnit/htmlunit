@@ -625,7 +625,7 @@ public enum BrowserVersionFeatures {
     JS_ANCHOR_HOSTNAME_IGNORE_BLANK,
 
     /** The anchor pathname detects url's starting with one letter as file url's. */
-    @BrowserFeature(FF)
+    @BrowserFeature({FF, FF_ESR})
     JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL,
 
     /** The anchor pathname detects url's starting with one letter as file url's
@@ -636,10 +636,6 @@ public enum BrowserVersionFeatures {
     /** The anchor pathname property returns nothing for broken http(s) url's. */
     @BrowserFeature({CHROME, EDGE, FF, FF_ESR})
     JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL,
-
-    /** The anchor pathname property returns nothing for none http(s) url's. */
-    @BrowserFeature(FF_ESR)
-    JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL,
 
     /** The anchor pathname prefixes file url's with '/'. */
     @BrowserFeature({CHROME, EDGE, IE})
@@ -745,10 +741,6 @@ public enum BrowserVersionFeatures {
     /** ClientWidth for text/password input is 143. */
     @BrowserFeature(IE)
     JS_CLIENTWIDTH_INPUT_TEXT_143,
-
-    /** ClientWidth for text/password input is 145. */
-    @BrowserFeature(FF_ESR)
-    JS_CLIENTWIDTH_INPUT_TEXT_145,
 
     /** ClientWidth for text/password input is 173. */
     @BrowserFeature({CHROME, EDGE})

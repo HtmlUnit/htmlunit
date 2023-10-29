@@ -20,7 +20,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_17;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_INPUT_18;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTHEIGHT_RADIO_CHECKBOX_10;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_143;
-import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_145;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_INPUT_TEXT_173;
 import static org.htmlunit.BrowserVersionFeatures.JS_CLIENTWIDTH_RADIO_CHECKBOX_10;
 import static org.htmlunit.css.CssStyleSheet.ABSOLUTE;
@@ -811,9 +810,6 @@ public class ComputedCSSStyleDeclaration extends CSSStyleDeclaration {
                 final BrowserVersion browserVersion = getBrowserVersion();
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_143)) {
                     return 143;
-                }
-                if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_145)) {
-                    return 145;
                 }
                 if (browserVersion.hasFeature(JS_CLIENTWIDTH_INPUT_TEXT_173)) {
                     return 173;

@@ -18,7 +18,6 @@ import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_HOSTNAME_IGNORE_BLAN
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_BROKEN_URL;
-import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PATHNAME_PREFIX_WIN_DRIVES_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_FOR_BROKEN_URL;
 import static org.htmlunit.BrowserVersionFeatures.JS_ANCHOR_PROTOCOL_COLON_UPPER_CASE_DRIVE_LETTERS;
@@ -402,11 +401,6 @@ public class HTMLAnchorElement extends HTMLElement {
         final BrowserVersion browser = getBrowserVersion();
         try {
             final URL url = getUrl();
-            if (!url.getProtocol().startsWith("http")
-                    && browser.hasFeature(JS_ANCHOR_PATHNAME_NONE_FOR_NONE_HTTP_URL)) {
-                return "";
-            }
-
             if (browser.hasFeature(JS_ANCHOR_PATHNAME_DETECT_WIN_DRIVES_URL_REPLACE)) {
                 final HtmlAnchor anchor = (HtmlAnchor) getDomNodeOrDie();
                 String href = anchor.getHrefAttribute();
