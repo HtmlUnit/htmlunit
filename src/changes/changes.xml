@@ -7,7 +7,7 @@
     </properties>
 
     <body>
-        <release version="3.7.0" date="October xx, 2023" description="Firefox 119, Firefox ESR 115, Chrome/Edge 118, Bugfixes, Documentation updates">
+        <release version="3.7.0" date="October 30, 2023" description="Firefox 119, Firefox ESR 115, Chrome/Edge 118, Bugfixes, Documentation updates">
             <action type="update" dev="rbri">
                 INCOMPATIBLE CHANGE: For this version, the processing of WebWindowListener events got many changes/fixes/improvements.
                 The main point was to let this work as stable as possible even if many WebWindowListener are registred. Also the state

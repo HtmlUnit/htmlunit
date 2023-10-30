@@ -57,9 +57,9 @@
         <section name="Where to find...">
             <p>
                 <dl>
-                    <dt>Latest release <date>October 03, 2023</date></dt>
+                    <dt>Latest release <date>October 30, 2023</date></dt>
                     <dd>
-                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.6.0">version 3.6.0</a></p>
+                        <p><a href="https://github.com/HtmlUnit/htmlunit/releases/tag/3.7.0">version 3.7.0</a></p>
                     </dd>
 
                     <dt>Source code</dt>

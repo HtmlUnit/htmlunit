@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.htmlunit</groupId>
     <artifactId>htmlunit</artifactId>
-    <version>3.7.0-SNAPSHOT</version>
+    <version>3.7.0</version>
     <name>HtmlUnit</name>
     <organization>
         <name>Gargoyle Software Inc.</name>
@@ -30,7 +30,7 @@
         <htmlunitxpath.version>3.7.0</htmlunitxpath.version>
         <htmlunitcorejs.version>3.7.0</htmlunitcorejs.version>
 
-        <htmlunitdriver.version>4.14.1-SNAPSHOT</htmlunitdriver.version>
+        <htmlunitdriver.version>4.14.1</htmlunitdriver.version>
         <selenium.version>4.14.1</selenium.version>
 
         <httpcomponents.version>4.5.14</httpcomponents.version>
