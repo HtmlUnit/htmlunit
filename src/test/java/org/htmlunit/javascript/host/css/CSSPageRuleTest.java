@@ -324,8 +324,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ":first",
             IE = "",
             FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = "undefined")
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+    @HtmlUnitNYI(FF_ESR = ":first")
     public void selectorText() throws Exception {
         final String html
             = "<html><body>\n"
@@ -357,8 +356,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
     @Alerts(DEFAULT = ":first",
             IE = "",
             FF_ESR = "exception")
-    @HtmlUnitNYI(FF_ESR = "undefined")
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+    @HtmlUnitNYI(FF_ESR = ":first")
     public void selectorTextCaseInsensitive() throws Exception {
         final String html
             = "<html><body>\n"
@@ -391,8 +389,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
-            FF_ESR = {"undefined", ":left"})
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+            FF_ESR = {":first", ":left"})
     public void selectorTextSet() throws Exception {
         final String html
             = "<html><body>\n"
@@ -427,8 +424,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
-            FF_ESR = {"undefined", "null"})
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+            FF_ESR = {":first", "null"})
     public void selectorTextSetNull() throws Exception {
         final String html
             = "<html><body>\n"
@@ -463,8 +459,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
-            FF_ESR = {"undefined", ""})
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+            FF_ESR = {":first", ""})
     public void selectorTextSetEmpty() throws Exception {
         final String html
             = "<html><body>\n"
@@ -499,8 +494,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
-            FF_ESR = {"undefined", ":grey"})
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+            FF_ESR = {":first", ":first"})
     public void selectorTextSetInvalid() throws Exception {
         final String html
             = "<html><body>\n"
@@ -535,8 +529,7 @@ public class CSSPageRuleTest extends WebDriverTestCase {
             IE = {"", "exception"},
             FF_ESR = "exception")
     @HtmlUnitNYI(IE = {"", ""},
-            FF_ESR = {"undefined", ":LeFt"})
-    // FIXME FFs do not understand selectors for page rules at all and thus ignore the complete rule during parsing
+            FF_ESR = {":first", ":left"})
     public void selectorTextSetCaseInsensitive() throws Exception {
         final String html
             = "<html><body>\n"
