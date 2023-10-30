@@ -15,6 +15,11 @@
                 some impact for the backward compatibility.
             </action>
             <action type="update" dev="rbri">
+                cssparser: Switched from JavaCC to ParserGeneratorCC (https://github.com/tulipcc/ParserGeneratorCC).
+                Based on this we have to chance to update the ParserGeneratorCC to fix some of our problems with
+                the generated code. See https://github.com/tulipcc/ParserGeneratorCC/pulls for more.
+            </action>
+            <action type="update" dev="rbri">
                 Properties ownerNode and href moved from CSSStyleSheet to StyleSheet.
             </action>
             <action type="update" dev="rbri">

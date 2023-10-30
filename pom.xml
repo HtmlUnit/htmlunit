@@ -25,10 +25,10 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <htmlunitcssparser.version>3.7.0-SNAPSHOT</htmlunitcssparser.version>
-        <htmlunitneko.version>3.6.0</htmlunitneko.version>
-        <htmlunitcorejs.version>3.7.0-SNAPSHOT</htmlunitcorejs.version>
-        <htmlunitxpath.version>3.6.0</htmlunitxpath.version>
+        <htmlunitcssparser.version>3.7.0</htmlunitcssparser.version>
+        <htmlunitneko.version>3.7.0</htmlunitneko.version>
+        <htmlunitxpath.version>3.7.0</htmlunitxpath.version>
+        <htmlunitcorejs.version>3.7.0</htmlunitcorejs.version>
 
         <htmlunitdriver.version>4.14.1-SNAPSHOT</htmlunitdriver.version>
         <selenium.version>4.14.1</selenium.version>
